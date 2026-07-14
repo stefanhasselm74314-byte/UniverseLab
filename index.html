@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#090b16">
+<link rel="manifest" href="manifest.webmanifest">
+<title>UniverseLab</title>
+<style>
+:root{color-scheme:dark;--bg:#070812;--panel:#101326;--line:#242a48;--text:#eef1ff;--muted:#9ca6c8;--accent:#8e7dff;--good:#70e1b8}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -20%,#242751 0,#090b18 45%,#05060c 100%);font:14px system-ui,-apple-system,sans-serif;color:var(--text);min-height:100dvh;overscroll-behavior:none}.app{max-width:960px;margin:auto;padding:calc(env(safe-area-inset-top) + 12px) 12px calc(env(safe-area-inset-bottom) + 18px)}header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}h1{font-size:20px;margin:0}.badge{font-size:11px;color:var(--good);border:1px solid #2e705f;border-radius:99px;padding:4px 8px}.stage{position:relative;background:#000;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 18px 50px #0008}canvas{display:block;width:100%;aspect-ratio:1/1;touch-action:none}.hud{position:absolute;left:10px;top:10px;background:#070914cc;border:1px solid #292e4c;border-radius:10px;padding:7px 9px;font-size:11px;line-height:1.45;pointer-events:none}.toolbar,.grid{display:grid;gap:8px}.toolbar{grid-template-columns:repeat(4,1fr);margin:10px 0}.grid{grid-template-columns:repeat(2,1fr)}button,select,input{width:100%;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--text);min-height:43px;padding:9px}button{font-weight:650}button.primary{background:linear-gradient(135deg,#6551e8,#8e7dff);border:0}button:active{transform:scale(.98)}section{background:#0c0f20d9;border:1px solid var(--line);border-radius:16px;padding:12px;margin-top:10px}.row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin:9px 0}.row label small{display:block;color:var(--muted);margin-top:2px}.row output{min-width:58px;text-align:right;color:#d9d4ff}.note{color:var(--muted);font-size:12px;line-height:1.45}.status{font-size:12px;color:var(--muted)}details summary{cursor:pointer;font-weight:700}@media(min-width:760px){.layout{display:grid;grid-template-columns:1.35fr .65fr;gap:12px}.grid{grid-template-columns:1fr}.toolbar{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body><main class="app">
+<header><div><h1>UniverseLab</h1><div class="status">Emergenz · Expansion · Experimente</div></div><span class="badge">MVP 0.1</span></header>
+<div class="layout"><div>
+<div class="stage"><canvas id="c" width="720" height="720"></canvas><div class="hud" id="hud"></div></div>
+<div class="toolbar"><button class="primary" id="play">▶ Start</button><button id="step">Einzelschritt</button><button id="seed">Neustart</button><button id="clear">Leeren</button></div>
+</div><div>
+<section><div class="grid">
+<select id="preset" aria-label="Preset"><option value="random">Zufallsuniversum</option><option value="bigbang">Urknall-Keim</option><option value="symmetry">Symmetriebruch</option><option value="glider">Gleiterfeld</option></select>
+<select id="rule" aria-label="Regel"><option value="B3/S23">Conway B3/S23</option><option value="B36/S23">HighLife B36/S23</option><option value="B2/S">Seeds B2/S</option><option value="B3678/S34678">Day & Night</option></select>
+</div>
+<div class="row"><label>Geschwindigkeit<small>Simulationsschritte pro Sekunde</small></label><output id="speedOut"></output></div><input id="speed" type="range" min="1" max="30" value="10">
+<div class="row"><label>Anfangsdichte<small>Anteil aktiver Zellen</small></label><output id="densityOut"></output></div><input id="density" type="range" min="1" max="60" value="22">
+<div class="row"><label>Expansion<small>Gittervergrößerung als heuristisches Modell</small></label><output id="expandOut"></output></div><input id="expand" type="range" min="0" max="100" value="18">
+<div class="row"><label>Fluktuation<small>Stochastische spontane Aktivierung</small></label><output id="noiseOut"></output></div><input id="noise" type="range" min="0" max="30" value="1">
+</section>
+<section><div class="grid"><button id="save">Speichern</button><button id="load">Laden</button><button id="export">CSV exportieren</button><button id="install" hidden>App installieren</button></div></section>
+<details><summary>Wissenschaftlicher Status</summary><p class="note">Der zelluläre Automat ist mathematisch exakt definiert. Die Gitterexpansion ist hingegen ein heuristisches Analogmodell und keine Herleitung der kosmologischen Expansion aus Einstein- oder 6D-Feldgleichungen. Ein guter visueller Verlauf ist kein physikalischer Nachweis.</p></details>
+</div></div>
+</main>
+<script>
+'use strict';
+const c=document.querySelector('#c'),ctx=c.getContext('2d',{alpha:false});
+let N=120,a=new Uint8Array(N*N),b=new Uint8Array(N*N),running=false,generation=0,last=0,acc=0,history=[];
+const $=s=>document.querySelector(s),speed=$('#speed'),density=$('#density'),expand=$('#expand'),noise=$('#noise');
+function parseRule(s){const [bb,ss]=s.split('/');return {born:new Set([...bb.slice(1)].map(Number)),survive:new Set([...ss.slice(1)].map(Number))}}
+function setN(n){n=Math.max(40,Math.min(260,n));if(n===N)return;const old=a,oldN=N;N=n;a=new Uint8Array(N*N);b=new Uint8Array(N*N);const scale=oldN/N;for(let y=0;y<N;y++)for(let x=0;x<N;x++){const ox=Math.floor(x*scale),oy=Math.floor(y*scale);a[y*N+x]=old[oy*oldN+ox]} }
+function seed(kind=$('#preset').value){a.fill(0);generation=0;history=[];const p=+density.value/100;if(kind==='random'){for(let i=0;i<a.length;i++)a[i]=Math.random()<p}else if(kind==='bigbang'){const r=N*.055,cx=N/2,cy=N/2;for(let y=0;y<N;y++)for(let x=0;x<N;x++)if((x-cx)**2+(y-cy)**2<r*r)a[y*N+x]=Math.random()<.58}else if(kind==='symmetry'){for(let y=10;y<N/2;y++)for(let x=10;x<N/2;x++)if(Math.random()<p){a[y*N+x]=1;a[y*N+(N-1-x)]=1;a[(N-1-y)*N+x]=1;a[(N-1-y)*N+(N-1-x)]=1}}else{for(let k=0;k<36;k++){const x=5+Math.floor(Math.random()*(N-10)),y=5+Math.floor(Math.random()*(N-10));[[1,0],[2,1],[0,2],[1,2],[2,2]].forEach(([dx,dy])=>a[(y+dy)*N+x+dx]=1)}}draw()}
+function step(){const r=parseRule($('#rule').value),q=+noise.value/100000;let live=0;for(let y=0;y<N;y++)for(let x=0;x<N;x++){let n=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(dx||dy)n+=a[((y+dy+N)%N)*N+(x+dx+N)%N];const i=y*N+x;b[i]=(a[i]?r.survive.has(n):r.born.has(n))||Math.random()<q?1:0;live+=b[i]}[a,b]=[b,a];generation++;const e=+expand.value;if(e&&generation%Math.max(8,Math.round(110-e))===0)setN(N+2);history.push([generation,N,live,live/(N*N)]);if(history.length>10000)history.shift();draw()}
+function draw(){const w=c.width,h=c.height;ctx.fillStyle='#02030a';ctx.fillRect(0,0,w,h);const s=w/N;for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(a[y*N+x]){const t=(x+y+generation*.15)%N/N;ctx.fillStyle=`hsl(${235+55*t} 90% ${60+20*t}%)`;ctx.fillRect(x*s,y*s,Math.ceil(s),Math.ceil(s))}const live=a.reduce((u,v)=>u+v,0);$('#hud').innerHTML=`Generation: ${generation}<br>Gitter: ${N} × ${N}<br>Aktiv: ${live.toLocaleString('de-DE')}<br>Dichte: ${(100*live/a.length).toFixed(2)} %`}
+function loop(t){const dt=Math.min(.1,(t-last)/1000||0);last=t;if(running){acc+=dt;const d=1/+speed.value;while(acc>d){step();acc-=d}}requestAnimationFrame(loop)}
+function bind(id,out,fmt){const el=$(id),o=$(out),f=()=>o.value=fmt(el.value);el.oninput=f;f()}
+bind('#speed','#speedOut',v=>v+' Hz');bind('#density','#densityOut',v=>v+' %');bind('#expand','#expandOut',v=>v==='0'?'aus':v+' %');bind('#noise','#noiseOut',v=>v==='0'?'aus':v);
+$('#play').onclick=()=>{running=!running;$('#play').textContent=running?'⏸ Pause':'▶ Start'};$('#step').onclick=step;$('#seed').onclick=()=>seed();$('#clear').onclick=()=>{a.fill(0);generation=0;history=[];draw()};$('#preset').onchange=()=>seed();
+c.addEventListener('pointerdown',paint);c.addEventListener('pointermove',e=>{if(e.buttons)paint(e)});function paint(e){const r=c.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)/r.width*N),y=Math.floor((e.clientY-r.top)/r.height*N);if(x>=0&&y>=0&&x<N&&y<N){a[y*N+x]=1;draw()}}
+$('#save').onclick=()=>localStorage.setItem('universelab',JSON.stringify({N,generation,a:[...a],settings:{speed:speed.value,density:density.value,expand:expand.value,noise:noise.value,rule:$('#rule').value,preset:$('#preset').value}}));
+$('#load').onclick=()=>{try{const d=JSON.parse(localStorage.getItem('universelab'));if(!d)return;N=d.N;generation=d.generation;a=Uint8Array.from(d.a);b=new Uint8Array(N*N);Object.entries(d.settings).forEach(([k,v])=>{const el=$('#'+k);if(el)el.value=v});['speed','density','expand','noise'].forEach(k=>$('#'+k).dispatchEvent(new Event('input')));draw()}catch(e){alert('Speicherstand konnte nicht geladen werden.')}};
+$('#export').onclick=()=>{const rows=['generation,grid_size,live_cells,density',...history.map(r=>r.join(','))];const u=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'})),a=document.createElement('a');a.href=u;a.download='universelab_timeseries.csv';a.click();URL.revokeObjectURL(u)};
+let deferred;addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;$('#install').hidden=false});$('#install').onclick=async()=>{if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;$('#install').hidden=true}};
+if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js');seed();requestAnimationFrame(loop);
+</script></body></html>
