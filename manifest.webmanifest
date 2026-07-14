@@ -1,0 +1,12 @@
+{
+  "name": "UniverseLab",
+  "short_name": "UniverseLab",
+  "description": "Mobile Simulationsumgebung für zelluläre Universen und Expansion",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070812",
+  "theme_color": "#090b16",
+  "lang": "de"
+}
