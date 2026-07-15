@@ -1,40 +1,30 @@
 # UniverseLab
 
-UniverseLab ist eine mobile, browserbasierte Simulationsumgebung für zelluläre Universen, Expansion und emergente Strukturbildung.
+UniverseLab ist eine mobile, browserbasierte Simulationsumgebung für zelluläre Universen, ΛCDM-Hintergrundentwicklung und lineare Strukturbildung.
 
 ## Status
 
-**MVP 0.4 — experimenteller Demonstrator mit ΛCDM-Epochenanalyse**
+**MVP 0.5 — experimenteller Demonstrator mit linearer Wachstumsdiagnostik**
 
-Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, physikalischer ΛCDM-Hintergrundentwicklung und heuristischer Visualisierung.
+Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, physikalischer ΛCDM-Hintergrundentwicklung, linearer Materieperturbation und heuristischer Visualisierung.
 
 ## Funktionen
 
 - Conway Game of Life und alternative Regeln
-- zufällige, symmetrische und explosive Startzustände
 - physikalischer ΛCDM-Hintergrund aus der Friedmann-Gleichung
 - RK4-Integration von `da/dτ = aE(a)`
 - einstellbare Parameter `H₀`, `Ωₘ`, `Ωᵣ`, `ΩΛ`
 - automatische Berechnung von `Ωₖ`
 - Diagramme für `ln a`, `ln E(a)` und die zeitabhängigen Dichteanteile
-- automatische Dominanzklassifikation: Strahlung, Materie, Krümmung oder Vakuumenergie
-- analytische Gleichheitswerte für Strahlung–Materie und Materie–Vakuum
+- Dominanzklassifikation und kosmologische Gleichheitszeitpunkte
 - numerische Bestimmung des Beschleunigungsbeginns aus `q(a)=0`
-- Live-Anzeige des Abbremsparameters `q(a)`
-- heuristische Gitterexpansion als separater Modus
-- lokale Speicherung des Simulationszustands und der Diagrammdaten
+- lineare Wachstumsfunktion `D(a)` mit Normierung `D(1)=1`
+- Wachstumsrate `f(a)=d ln D/d ln a`
+- Vergleich mit der Näherung `f≈Ωₘ(a)^0,55`
+- CSV-Export einschließlich `D`, `f`, `q` und Epochenstatus
 - Offline-Betrieb als Progressive Web App
-- CSV-Export einschließlich Epochen- und Beschleunigungsdaten
 
-## Start
-
-`index.html` direkt im Browser öffnen oder GitHub Pages aktivieren:
-
-1. Repository → Settings → Pages
-2. Source: `Deploy from a branch`
-3. Branch: `main`, Ordner: `/ (root)`
-
-## Implementierte Gleichungen
+## Implementierte Hintergrundgleichungen
 
 `E(a)² = Ωᵣa⁻⁴ + Ωₘa⁻³ + Ωₖa⁻² + ΩΛ`
 
@@ -44,29 +34,47 @@ Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, ph
 
 `q(a) = [2Ωᵣa⁻⁴ + Ωₘa⁻³ − 2ΩΛ] / [2E(a)²]`
 
-Strahlung–Materie-Gleichheit:
+## Lineare Strukturbildung
 
-`a_rm = Ωᵣ / Ωₘ`
+Mit `x = ln a` wird die skalenunabhängige GR-Wachstumsgleichung integriert:
 
-Materie–Vakuum-Gleichheit:
+`d²D/dx² + [2 + d ln H/dx] dD/dx − (3/2)Ωₘ(a)D = 0`
 
-`a_mΛ = (Ωₘ / ΩΛ)^(1/3)`
+Die Anfangsbedingungen im frühen materiedominierten Regime lauten näherungsweise:
 
-Der Beschleunigungsbeginn wird als Nullstelle von `q(a)` numerisch bestimmt.
+`D(a_i)=a_i`,
 
-## Wissenschaftlicher Status
+`dD/d ln a|_(a_i)=D(a_i)`.
 
-Die ΛCDM-Hintergrunddynamik, die Gleichheitsbedingungen und der Abbremsparameter sind physikalisch definiert. Die Zellautomaten-Dynamik bleibt davon getrennt. Die Abbildung des Skalenfaktors auf die sichtbare Gittergröße ist eine logarithmisch komprimierte Visualisierung und keine Herleitung kosmologischer Strukturbildung.
+Anschließend wird auf `D(1)=1` normiert. Die Wachstumsrate ist
 
-Wichtig: Materie–Vakuum-Gleichheit und Beginn der beschleunigten Expansion sind verschiedene Ereignisse. Der Beschleunigungsbeginn folgt aus `ρ + 3p = 0`, nicht aus bloßer Dichtegleichheit.
+`f(a)=d ln D/d ln a`.
 
-## Geplante Architektur
+Zum Vergleich zeigt die App die häufig verwendete ΛCDM-Näherung
 
-- `Cellular Physics`: Automaten und Emergenz
-- `Cosmology`: Expansion, Epochen und Strukturbildung
-- `Gravity`: Newton/GR/6D-Vergleich
-- `Research`: Messgrößen, CSV und Reproduzierbarkeit
-- `Visualization`: 2D, später WebGL/3D
+`f(a)≈Ωₘ(a)^γ`, mit `γ≈0,55`.
+
+## Gültigkeitsbereich
+
+Die Wachstumsrechnung ist **konditional** gültig für:
+
+- lineare, subhorizontale Materieperturbationen,
+- drucklose Materie,
+- allgemeine Relativität,
+- skalenunabhängiges Wachstum,
+- homogenen ΛCDM-Hintergrund.
+
+Nicht enthalten sind Strahlungsperturbationen, Neutrinofreiströmung, baryonische Akustik, nichtlineares Wachstum, baryonische Rückkopplung, effektive modifizierte Gravitation oder eine hergeleitete 6D-Hyperzeit-Kopplung.
+
+Die Zellautomaten-Dynamik bleibt von der kosmologischen Wachstumsrechnung getrennt. Die Abbildung des Skalenfaktors auf die sichtbare Gittergröße ist nur eine logarithmisch komprimierte Visualisierung.
+
+## Start
+
+`index.html` direkt im Browser öffnen oder GitHub Pages aktivieren:
+
+1. Repository → Settings → Pages
+2. Source: `Deploy from a branch`
+3. Branch: `main`, Ordner: `/ (root)`
 
 ## Lizenz
 
