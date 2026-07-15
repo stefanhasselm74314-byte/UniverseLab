@@ -4,7 +4,7 @@ UniverseLab ist eine mobile, browserbasierte Simulationsumgebung für zelluläre
 
 ## Status
 
-**MVP 0.3 — experimenteller Demonstrator mit ΛCDM-Diagnostik**
+**MVP 0.4 — experimenteller Demonstrator mit ΛCDM-Epochenanalyse**
 
 Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, physikalischer ΛCDM-Hintergrundentwicklung und heuristischer Visualisierung.
 
@@ -17,11 +17,14 @@ Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, ph
 - einstellbare Parameter `H₀`, `Ωₘ`, `Ωᵣ`, `ΩΛ`
 - automatische Berechnung von `Ωₖ`
 - Diagramme für `ln a`, `ln E(a)` und die zeitabhängigen Dichteanteile
-- Live-Anzeige der Beiträge von Strahlung, Materie, Krümmung und Vakuumenergie
+- automatische Dominanzklassifikation: Strahlung, Materie, Krümmung oder Vakuumenergie
+- analytische Gleichheitswerte für Strahlung–Materie und Materie–Vakuum
+- numerische Bestimmung des Beschleunigungsbeginns aus `q(a)=0`
+- Live-Anzeige des Abbremsparameters `q(a)`
 - heuristische Gitterexpansion als separater Modus
 - lokale Speicherung des Simulationszustands und der Diagrammdaten
 - Offline-Betrieb als Progressive Web App
-- erweiterter CSV-Export der kosmologischen Zeitreihe
+- CSV-Export einschließlich Epochen- und Beschleunigungsdaten
 
 ## Start
 
@@ -39,11 +42,23 @@ Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, ph
 
 `da/dτ = aE(a)`, mit `τ = H₀t`
 
-Die zeitabhängigen normierten Beiträge werden als jeweiliger Term geteilt durch `E(a)²` berechnet.
+`q(a) = [2Ωᵣa⁻⁴ + Ωₘa⁻³ − 2ΩΛ] / [2E(a)²]`
+
+Strahlung–Materie-Gleichheit:
+
+`a_rm = Ωᵣ / Ωₘ`
+
+Materie–Vakuum-Gleichheit:
+
+`a_mΛ = (Ωₘ / ΩΛ)^(1/3)`
+
+Der Beschleunigungsbeginn wird als Nullstelle von `q(a)` numerisch bestimmt.
 
 ## Wissenschaftlicher Status
 
-Die ΛCDM-Hintergrunddynamik ist physikalisch definiert und numerisch integriert. Die Zellautomaten-Dynamik ist davon getrennt. Die Abbildung des Skalenfaktors auf die sichtbare Gittergröße ist eine logarithmisch komprimierte Visualisierung und keine Herleitung kosmologischer Strukturbildung.
+Die ΛCDM-Hintergrunddynamik, die Gleichheitsbedingungen und der Abbremsparameter sind physikalisch definiert. Die Zellautomaten-Dynamik bleibt davon getrennt. Die Abbildung des Skalenfaktors auf die sichtbare Gittergröße ist eine logarithmisch komprimierte Visualisierung und keine Herleitung kosmologischer Strukturbildung.
+
+Wichtig: Materie–Vakuum-Gleichheit und Beginn der beschleunigten Expansion sind verschiedene Ereignisse. Der Beschleunigungsbeginn folgt aus `ρ + 3p = 0`, nicht aus bloßer Dichtegleichheit.
 
 ## Geplante Architektur
 
