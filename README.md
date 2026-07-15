@@ -8,6 +8,10 @@ UniverseLab ist eine mobile, browserbasierte Simulationsumgebung für zelluläre
 
 Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, physikalischer ΛCDM-Hintergrundentwicklung und heuristischer Visualisierung.
 
+Der verbindliche Architektur- und Evidenzvertrag steht in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+**Nächster Meilenstein:** MVP 0.3 – numerische Härtung, reproduzierbare Zufallszustände, validierte Grenzfälle und vollständigere Exportmetadaten.
+
 ## Funktionen
 
 - Conway Game of Life und alternative Regeln
@@ -52,6 +56,8 @@ Die ΛCDM-Hintergrunddynamik ist physikalisch definiert und numerisch integriert
 - `Gravity`: Newton/GR/6D-Vergleich
 - `Research`: Messgrößen, CSV und Reproduzierbarkeit
 - `Visualization`: 2D, später WebGL/3D
+
+Details, Abhängigkeitsregeln, Evidenzstatus und MVP-Folgeplan: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## Lizenz
 
