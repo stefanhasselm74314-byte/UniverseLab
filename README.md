@@ -12,6 +12,10 @@ Die Anwendung trennt bewusst zwischen drei Modellschichten:
 2. numerisch integrierter ΛCDM-Hintergrundexpansion,
 3. heuristischen Visualisierungs- und Kopplungsregeln.
 
+Der verbindliche Architektur- und Evidenzvertrag steht in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+**Nächster Meilenstein:** MVP 0.3 – numerische Härtung, reproduzierbare Zufallszustände, validierte Grenzfälle und vollständigere Exportmetadaten.
+
 ## Funktionen
 
 - Conway Game of Life und alternative Regeln
@@ -64,6 +68,8 @@ Ein visueller Fit oder eine stabile Zellstruktur ist daher keine Bestätigung vo
 - `Gravity`: Newton/GR/6D-Vergleich
 - `Research`: Messgrößen, CSV und Reproduzierbarkeit
 - `Visualization`: 2D, später WebGL/3D
+
+Details, Abhängigkeitsregeln, Evidenzstatus und MVP-Folgeplan: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## Lizenz
 
