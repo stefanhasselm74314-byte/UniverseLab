@@ -4,7 +4,7 @@ UniverseLab ist eine mobile, browserbasierte Simulationsumgebung für zelluläre
 
 ## Status
 
-**MVP 0.5 — numerisch gehärteter ΛCDM-Kern, Browser-Anbindung in Arbeit**
+**MVP 0.5.1 — modularer Browser-Client mit aktiver adaptiver RK45-Integration**
 
 Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, physikalischer ΛCDM-Hintergrundentwicklung und heuristischer Visualisierung.
 
@@ -12,21 +12,34 @@ Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, ph
 
 - Conway Game of Life und alternative Automatenregeln
 - zufällige, symmetrische und explosive Startzustände
+- reproduzierbare Startzustände über einen deterministischen Seed
 - ΛCDM-Hintergrund aus der Friedmann-Gleichung
-- Diagramme für `ln a`, `ln E(a)` und zeitabhängige Dichteanteile
-- Epochen- und Beschleunigungsdiagnostik
-- adaptive Dormand–Prince-RK45-Integration im DOM-freien Numerikmodul
+- adaptive Dormand–Prince-RK45-Integration als einzige kosmologische Laufzeitquelle
 - eingebetteter 5(4)-Fehlerschätzer mit adaptiver Schrittweite
 - kontrollierter Abbruch bei nicht reellem Friedmann-Zweig
-- analytische Referenztests für Strahlungs-, Materie- und de-Sitter-Grenzfälle
-- Friedmann-Closure-, Übergangs- und Seed-Reproduzierbarkeitstests
-- deterministischer Mulberry32-Zufallsgenerator
-- automatische Tests über GitHub Actions
-- lokale Speicherung, CSV-Export und Offline-Betrieb
+- Diagramme für `ln a`, `ln E(a)` und zeitabhängige Dichteanteile
+- Epochen-, Closure- und Beschleunigungsdiagnostik
+- Speicherung von Zellautomat, Kosmologie, Seed und Diagrammdaten
+- CSV-Export mit `q(a)`, Closure-Fehler und RK45-Schrittstatistik
+- Offline-Betrieb als Progressive Web App
+- automatische analytische Referenztests über GitHub Actions
+
+## Modulstruktur
+
+```text
+index.html
+src/
+  app.js
+  cellular.js
+  cosmology-controller.js
+  numerics.js
+  chart.js
+  storage.js
+```
+
+`src/numerics.js` ist die einzige Quelle für Friedmann-Terme, normierte Beiträge, Verzögerungsparameter, Epochenpunkte und RK45-Integration. `index.html` enthält keine eigene Integrationsroutine mehr.
 
 ## Numerischer Kern
-
-`src/numerics.js` enthält die zentrale Implementierung von
 
 - `friedmannTerms(a,p)`
 - `E(a,p)`
@@ -37,7 +50,7 @@ Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, ph
 - `advanceAdaptive(a,Δτ,p,options)`
 - `seededRandom(seed)`
 
-Die adaptive Integration akzeptiert einen Teilschritt nur, wenn der eingebettete lokale Fehler die kombinierte absolute und relative Toleranz erfüllt.
+Ein Teilschritt wird nur akzeptiert, wenn der eingebettete lokale Fehler die kombinierte absolute und relative Toleranz erfüllt.
 
 ## Tests
 
@@ -45,11 +58,27 @@ Die adaptive Integration akzeptiert einen Teilschritt nur, wenn der eingebettete
 npm test
 ```
 
-Die Tests vergleichen die Numerik gegen analytisch lösbare FLRW-Grenzfälle. Ein bestandener Test bestätigt die korrekte Implementierung des ΛCDM-Hintergrundmodells, nicht die physikalische Kopplung des Zellautomaten und nicht die 6D-Hyperzeit-Hypothese.
+Die Tests vergleichen die Numerik gegen analytisch lösbare Strahlungs-, Materie- und de-Sitter-Grenzfälle. Zusätzlich werden Closure, Übergangspunkte, Seed-Reproduzierbarkeit und die Syntax aller Browsermodule geprüft.
 
-## Browser-Anbindung
+Ein bestandener Test bestätigt die korrekte Implementierung des ΛCDM-Hintergrundmodells. Er bestätigt weder eine physikalische Zellautomat–Kosmologie-Kopplung noch die 6D-Hyperzeit-Hypothese.
 
-Der gegenwärtige Browser-Client in `index.html` verwendet noch die ältere monolithische Integrationsroutine. Die geprüfte RK45-Engine ist deshalb noch nicht als aktive Laufzeitquelle freigegeben. Die Verdrahtung erfolgt erst, wenn `index.html` auf ES-Module umgestellt ist und die mobilen Speicher-, Diagramm- und Offline-Pfade gemeinsam regressionsgeprüft wurden.
+## Start
+
+Die modulare Anwendung muss über HTTP(S) ausgeliefert werden.
+
+### GitHub Pages
+
+1. Repository → Settings → Pages
+2. Source: `Deploy from a branch`
+3. Branch: Zielbranch beziehungsweise nach dem Merge `main`, Ordner `/ (root)`
+
+### Lokaler Test
+
+```bash
+python -m http.server 8000
+```
+
+Danach im Browser `http://localhost:8000` öffnen. Direktes Öffnen von `index.html` über `file://` wird wegen ES-Modul- und Service-Worker-Regeln nicht unterstützt.
 
 ## Implementierte Gleichungen
 
@@ -63,15 +92,7 @@ Der gegenwärtige Browser-Client in `index.html` verwendet noch die ältere mono
 
 ## Wissenschaftlicher Status
 
-Die homogene ΛCDM-Hintergrunddynamik ist physikalisch definiert. Die Zellautomaten-Dynamik bleibt davon getrennt. Die Abbildung des Skalenfaktors auf die sichtbare Gittergröße ist eine logarithmisch komprimierte Visualisierung und keine Herleitung kosmologischer Strukturbildung.
-
-## Start
-
-`index.html` direkt im Browser öffnen oder GitHub Pages aktivieren:
-
-1. Repository → Settings → Pages
-2. Source: `Deploy from a branch`
-3. Branch: `main`, Ordner: `/ (root)`
+Die homogene ΛCDM-Hintergrunddynamik ist physikalisch definiert und numerisch getestet. Die Zellautomaten-Dynamik bleibt davon getrennt. Die Abbildung des Skalenfaktors auf die sichtbare Gittergröße ist eine logarithmisch komprimierte Visualisierung und keine Herleitung kosmologischer Strukturbildung.
 
 ## Lizenz
 
