@@ -1,2 +1,39 @@
 <!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><meta name="theme-color" content="#090b16"><link rel="manifest" href="manifest.webmanifest"><title>UniverseLab</title><style>:root{color-scheme:dark;--panel:#101326;--line:#242a48;--text
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#090b16">
+<link rel="manifest" href="manifest.webmanifest">
+<title>UniverseLab</title>
+<style>
+:root{color-scheme:dark;--panel:#101326;--line:#242a48;--text:#eef1ff;--muted:#9ca6c8;--good:#70e1b8}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -20%,#242751 0,#090b18 45%,#05060c 100%);font:14px system-ui,-apple-system,sans-serif;color:var(--text);min-height:100dvh}.app{max-width:1000px;margin:auto;padding:calc(env(safe-area-inset-top) + 12px) 12px calc(env(safe-area-inset-bottom) + 18px)}header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}h1,h2{margin:0}h1{font-size:20px}h2{font-size:14px}.badge{font-size:11px;color:var(--good);border:1px solid #2e705f;border-radius:99px;padding:4px 8px}.stage,.chartCard{position:relative;background:#000;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 18px 50px #0008}.sim{display:block;width:100%;aspect-ratio:1/1;touch-action:none}.chart{display:block;width:100%;height:260px}.hud{position:absolute;left:10px;top:10px;background:#070914dd;border:1px solid #292e4c;border-radius:10px;padding:7px 9px;font-size:11px;line-height:1.45;pointer-events:none}.toolbar,.grid{display:grid;gap:8px}.toolbar{grid-template-columns:repeat(4,1fr);margin:10px 0}.grid{grid-template-columns:repeat(2,1fr)}button,select,input{width:100%;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--text);min-height:43px;padding:9px}button{font-weight:650}button.primary{background:linear-gradient(135deg,#6551e8,#8e7dff);border:0}section,details{background:#0c0f20d9;border:1px solid var(--line);border-radius:16px;padding:12px;margin-top:10px}.row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin:9px 0}.row label small{display:block;color:var(--muted);margin-top:2px}.row output{min-width:72px;text-align:right;color:#d9d4ff}.note{color:var(--muted);font-size:12px;line-height:1.45}.status{font-size:12px;color:var(--muted)}.equation{font-family:ui-monospace,monospace;font-size:12px;color:#d9d4ff}.cosmo{display:none}.cosmo.on{display:block}.legend{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;font-size:11px;color:var(--muted)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}.metric{background:#090c1a;border:1px solid var(--line);border-radius:12px;padding:8px}.metric b{display:block;font-size:12px}.metric span{font-size:11px;color:var(--muted)}.warning{color:#ffb38a}@media(min-width:780px){.layout{display:grid;grid-template-columns:1.3fr .7fr;gap:12px}.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body><main class="app">
+<header><div><h1>UniverseLab</h1><div class="status">Emergenz · ΛCDM · adaptive Numerik</div></div><span class="badge">MVP 0.5</span></header>
+<div class="layout"><div>
+<div class="stage"><canvas id="sim" class="sim" width="720" height="720"></canvas><div class="hud" id="hud"></div></div>
+<div class="toolbar"><button class="primary" id="play">▶ Start</button><button id="step">Einzelschritt</button><button id="seedBtn">Neustart</button><button id="clear">Leeren</button></div>
+<section><h2>Kosmologische Zeitreihen</h2><div class="chartCard"><canvas id="chart" class="chart" width="720" height="360"></canvas></div><div class="legend"><span><i class="dot" style="background:#8e7dff"></i>ln a</span><span><i class="dot" style="background:#70e1b8"></i>ln E(a)</span><span><i class="dot" style="background:#ffcf6e"></i>Ωᵣ</span><span><i class="dot" style="background:#6eb6ff"></i>Ωₘ</span><span><i class="dot" style="background:#ff84c1"></i>ΩΛ</span><span><i class="dot" style="background:#ff8b72"></i>Ωₖ</span></div>
+<div class="metrics"><div class="metric"><b id="epoch">–</b><span>dominante Komponente</span></div><div class="metric"><b id="regime">–</b><span>Expansionsregime</span></div><div class="metric"><b id="qMetric">–</b><span>q(a)</span></div><div class="metric"><b id="rkMetric">–</b><span>RK45 akzeptiert/verworfen</span></div></div></section>
+</div><div>
+<section><div class="grid"><select id="preset"><option value="random">Zufallsuniversum</option><option value="bigbang">Urknall-Keim</option><option value="symmetry">Symmetriebruch</option><option value="glider">Gleiterfeld</option></select><select id="rule"><option value="B3/S23">Conway B3/S23</option><option value="B36/S23">HighLife B36/S23</option><option value="B2/S">Seeds B2/S</option><option value="B3678/S34678">Day & Night</option></select></div>
+<div class="row"><label>Geschwindigkeit<small>Automatenschritte pro Sekunde</small></label><output id="speedOut"></output></div><input id="speed" type="range" min="1" max="30" value="10">
+<div class="row"><label>Anfangsdichte</label><output id="densityOut"></output></div><input id="density" type="range" min="1" max="60" value="22">
+<div class="row"><label>Fluktuation</label><output id="noiseOut"></output></div><input id="noise" type="range" min="0" max="30" value="1">
+<div class="row"><label>Seed<small>reproduzierbare Zufallsfolge</small></label><output id="seedOut"></output></div><input id="randomSeed" type="number" value="20260717" min="0" step="1"></section>
+<section><select id="expMode"><option value="lcdm">Physikalisch: ΛCDM</option><option value="heuristic">Heuristische Gitterexpansion</option><option value="off">Expansion aus</option></select>
+<div id="lcdmBox" class="cosmo on">
+<div class="row"><label>H₀</label><output id="h0Out"></output></div><input id="h0" type="range" min="50" max="90" step="0.1" value="67.4">
+<div class="row"><label>Ωₘ</label><output id="omOut"></output></div><input id="om" type="range" min="0.05" max="0.6" step="0.001" value="0.315">
+<div class="row"><label>Ωᵣ</label><output id="orOut"></output></div><input id="or" type="range" min="0" max="0.001" step="0.000001" value="0.000092">
+<div class="row"><label>ΩΛ</label><output id="olOut"></output></div><input id="ol" type="range" min="0" max="1.2" step="0.001" value="0.684908">
+<div class="row"><label>Zeitverstärkung</label><output id="timeOut"></output></div><input id="timeScale" type="range" min="1" max="100" value="25">
+<p class="equation">E(a)² = Ωᵣa⁻⁴ + Ωₘa⁻³ + Ωₖa⁻² + ΩΛ; da/dτ = aE(a)</p></div>
+<div id="heurBox" class="cosmo"><div class="row"><label>Expansionsstärke</label><output id="expandOut"></output></div><input id="expand" type="range" min="0" max="100" value="18"></div></section>
+<section><div class="grid"><button id="save">Speichern</button><button id="load">Laden</button><button id="export">CSV exportieren</button><button id="install" hidden>App installieren</button></div><p id="error" class="note warning"></p></section>
+<details><summary>Wissenschaftlicher Status</summary><p class="note">Der ΛCDM-Hintergrund wird adaptiv mit Dormand–Prince RK45 integriert. Zellautomat und sichtbare Gitterexpansion bleiben davon getrennte beziehungsweise heuristische Modellschichten. Ein stabiler Lauf bestätigt weder Strukturbildung noch eine 6D-Hyperzeit-Theorie.</p></details>
+</div></div></main>
+<script type="module" src="./src/app.js"></script>
+</body></html>

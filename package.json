@@ -1,0 +1,12 @@
+{
+  "name": "universelab",
+  "version": "0.5.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/numerics.test.mjs && node --check src/app.js && node --check src/cellular.js && node --check src/cosmology-controller.js && node --check src/chart.js && node --check src/storage.js && node --check sw.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

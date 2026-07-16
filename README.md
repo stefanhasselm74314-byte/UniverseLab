@@ -1,35 +1,84 @@
 # UniverseLab
 
-UniverseLab ist eine mobile, browserbasierte Simulationsumgebung für zelluläre Universen, Expansion und emergente Strukturbildung.
+UniverseLab ist eine mobile, browserbasierte Simulationsumgebung für zelluläre Universen, kosmologische Expansion und emergente Strukturbildung.
 
 ## Status
 
-**MVP 0.3 — experimenteller Demonstrator mit ΛCDM-Diagnostik**
+**MVP 0.5.1 — modularer Browser-Client mit aktiver adaptiver RK45-Integration**
 
 Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, physikalischer ΛCDM-Hintergrundentwicklung und heuristischer Visualisierung.
 
-## Funktionen
+## Implementiert
 
-- Conway Game of Life und alternative Regeln
+- Conway Game of Life und alternative Automatenregeln
 - zufällige, symmetrische und explosive Startzustände
-- physikalischer ΛCDM-Hintergrund aus der Friedmann-Gleichung
-- RK4-Integration von `da/dτ = aE(a)`
-- einstellbare Parameter `H₀`, `Ωₘ`, `Ωᵣ`, `ΩΛ`
-- automatische Berechnung von `Ωₖ`
-- Diagramme für `ln a`, `ln E(a)` und die zeitabhängigen Dichteanteile
-- Live-Anzeige der Beiträge von Strahlung, Materie, Krümmung und Vakuumenergie
-- heuristische Gitterexpansion als separater Modus
-- lokale Speicherung des Simulationszustands und der Diagrammdaten
+- reproduzierbare Startzustände über einen deterministischen Seed
+- ΛCDM-Hintergrund aus der Friedmann-Gleichung
+- adaptive Dormand–Prince-RK45-Integration als einzige kosmologische Laufzeitquelle
+- eingebetteter 5(4)-Fehlerschätzer mit adaptiver Schrittweite
+- kontrollierter Abbruch bei nicht reellem Friedmann-Zweig
+- Diagramme für `ln a`, `ln E(a)` und zeitabhängige Dichteanteile
+- Epochen-, Closure- und Beschleunigungsdiagnostik
+- Speicherung von Zellautomat, Kosmologie, Seed und Diagrammdaten
+- CSV-Export mit `q(a)`, Closure-Fehler und RK45-Schrittstatistik
 - Offline-Betrieb als Progressive Web App
-- erweiterter CSV-Export der kosmologischen Zeitreihe
+- automatische analytische Referenztests über GitHub Actions
+
+## Modulstruktur
+
+```text
+index.html
+src/
+  app.js
+  cellular.js
+  cosmology-controller.js
+  numerics.js
+  chart.js
+  storage.js
+```
+
+`src/numerics.js` ist die einzige Quelle für Friedmann-Terme, normierte Beiträge, Verzögerungsparameter, Epochenpunkte und RK45-Integration. `index.html` enthält keine eigene Integrationsroutine mehr.
+
+## Numerischer Kern
+
+- `friedmannTerms(a,p)`
+- `E(a,p)`
+- `fractions(a,p)`
+- `deceleration(a,p)`
+- `dominantComponent(a,p)`
+- `equalityPoints(p)`
+- `advanceAdaptive(a,Δτ,p,options)`
+- `seededRandom(seed)`
+
+Ein Teilschritt wird nur akzeptiert, wenn der eingebettete lokale Fehler die kombinierte absolute und relative Toleranz erfüllt.
+
+## Tests
+
+```bash
+npm test
+```
+
+Die Tests vergleichen die Numerik gegen analytisch lösbare Strahlungs-, Materie- und de-Sitter-Grenzfälle. Zusätzlich werden Closure, Übergangspunkte, Seed-Reproduzierbarkeit und die Syntax aller Browsermodule geprüft.
+
+Ein bestandener Test bestätigt die korrekte Implementierung des ΛCDM-Hintergrundmodells. Er bestätigt weder eine physikalische Zellautomat–Kosmologie-Kopplung noch die 6D-Hyperzeit-Hypothese.
 
 ## Start
 
-`index.html` direkt im Browser öffnen oder GitHub Pages aktivieren:
+Die modulare Anwendung muss über HTTP(S) ausgeliefert werden.
+
+### GitHub Pages
 
 1. Repository → Settings → Pages
 2. Source: `Deploy from a branch`
-3. Branch: `main`, Ordner: `/ (root)`
+3. Branch: Zielbranch beziehungsweise nach dem Merge `main`, Ordner `/ (root)`
+
+### Lokaler Test
+
+```bash
+python -m http.server 8000
+```
+
+Danach im Browser `http://localhost:8000` öffnen. Direktes Öffnen von `index.html` über `file://` wird wegen ES-Modul- und Service-Worker-Regeln nicht unterstützt.
 
 ## Implementierte Gleichungen
 
@@ -39,19 +88,11 @@ Die Anwendung trennt bewusst zwischen mathematisch definierten Zellautomaten, ph
 
 `da/dτ = aE(a)`, mit `τ = H₀t`
 
-Die zeitabhängigen normierten Beiträge werden als jeweiliger Term geteilt durch `E(a)²` berechnet.
+`q(a) = Ωᵣ(a) + ½Ωₘ(a) − ΩΛ(a)`
 
 ## Wissenschaftlicher Status
 
-Die ΛCDM-Hintergrunddynamik ist physikalisch definiert und numerisch integriert. Die Zellautomaten-Dynamik ist davon getrennt. Die Abbildung des Skalenfaktors auf die sichtbare Gittergröße ist eine logarithmisch komprimierte Visualisierung und keine Herleitung kosmologischer Strukturbildung.
-
-## Geplante Architektur
-
-- `Cellular Physics`: Automaten und Emergenz
-- `Cosmology`: Expansion, Epochen und Strukturbildung
-- `Gravity`: Newton/GR/6D-Vergleich
-- `Research`: Messgrößen, CSV und Reproduzierbarkeit
-- `Visualization`: 2D, später WebGL/3D
+Die homogene ΛCDM-Hintergrunddynamik ist physikalisch definiert und numerisch getestet. Die Zellautomaten-Dynamik bleibt davon getrennt. Die Abbildung des Skalenfaktors auf die sichtbare Gittergröße ist eine logarithmisch komprimierte Visualisierung und keine Herleitung kosmologischer Strukturbildung.
 
 ## Lizenz
 

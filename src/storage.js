@@ -1,0 +1,4 @@
+const KEY='universelab-mvp-0.5';
+export function saveState(state){localStorage.setItem(KEY,JSON.stringify(state))}
+export function loadState(){const raw=localStorage.getItem(KEY)||localStorage.getItem('universelab');return raw?JSON.parse(raw):null}
+export function exportCsv(history){const head=['generation','grid_size','live_cells','density','scale_factor','E_of_a','tau','Omega_r_of_a','Omega_m_of_a','Omega_k_of_a','Omega_Lambda_of_a','deceleration_q','dominant_component','expansion_regime','closure_error','rk45_accepted','rk45_rejected'];const rows=[head.join(','),...history.map(r=>[r.generation,r.N,r.live,r.density,r.a,r.E,r.tau,r.Or,r.Om,r.Ok,r.Ol,r.q,r.dominant,r.regime,r.closure,r.accepted,r.rejected].join(','))];const u=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'})),a=document.createElement('a');a.href=u;a.download='universelab_mvp_0_5.csv';a.click();URL.revokeObjectURL(u)}
