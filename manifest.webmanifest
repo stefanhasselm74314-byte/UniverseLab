@@ -3,7 +3,7 @@
   "name": "UniverseLab – Interactive Cosmology Laboratory",
   "short_name": "UniverseLab",
   "description": "Interaktive Forschungs- und Lernumgebung für ΛCDM-Kosmologie, numerische Validierung, Modellvergleiche und klar gekennzeichnete Hyperzeit-Experimente.",
-  "start_url": "./portal.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
@@ -22,7 +22,7 @@
       "name": "Emergenz-Labor",
       "short_name": "Emergenz",
       "description": "Zellautomaten und heuristische Gitterexpansion öffnen",
-      "url": "./index.html"
+      "url": "./index.html?lab=1"
     },
     {
       "name": "Cosmic Journey",
