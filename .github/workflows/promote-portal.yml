@@ -1,0 +1,28 @@
+name: Promote portal to root
+
+on:
+  push:
+    paths:
+      - '.github/workflows/promote-portal.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Preserve Emergenz-Labor and promote portal
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp index.html emergence.html
+          cp portal.html index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html emergence.html
+          git commit -m "Promote research portal to root and preserve emergence lab"
+          git push
