@@ -19,7 +19,7 @@ track.className='ul-live-track';
 track.innerHTML='<i></i>';
 const caption=document.createElement('div');
 caption.className='ul-live-caption';
-caption.innerHTML='<span>frühes Universum</span><span>heute</span>';
+caption.innerHTML='<span>Strahlungsära</span><span>heute</span>';
 card.append(track,caption);
 const fill=track.firstElementChild;
 
@@ -28,7 +28,7 @@ const Or=0.000092;
 const Om=0.315;
 const Ol=0.684908;
 const Ok=1-Or-Om-Ol;
-const minA=1e-3;
+const minA=1e-5;
 const maxA=1;
 const duration=26000;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -46,7 +46,7 @@ function model(a){
   const k=Ok/a**2;
   const l=Ol;
   const e2=r+m+k+l;
-  const fr=r/e2,fm=m/e2,fk=k/e2,fl=l/e2;
+  const fr=r/e2,fm=m/e2,fl=l/e2;
   const q=.5*(2*fr+fm-2*fl);
   const epoch=fr>=fm&&fr>=fl?'Strahlungsära':fm>=fl?'Materieära':'Vakuumära';
   return{H:H0*Math.sqrt(e2),fm,fl,q,epoch};
