@@ -19,6 +19,12 @@
   },
   "shortcuts": [
     {
+      "name": "Über UniverseLab",
+      "short_name": "Über uns",
+      "description": "Mission, Team, Leitlinien und Roadmap von UniverseLab",
+      "url": "./about.html"
+    },
+    {
       "name": "Emergenz-Labor",
       "short_name": "Emergenz",
       "description": "Zellautomaten und heuristische Gitterexpansion öffnen",
