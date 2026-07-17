@@ -1,12 +1,52 @@
 {
-  "name": "UniverseLab",
+  "id": "./",
+  "name": "UniverseLab – Interactive Cosmology Laboratory",
   "short_name": "UniverseLab",
-  "description": "Mobile Simulationsumgebung für zelluläre Universen und Expansion",
-  "start_url": "./index.html",
+  "description": "Interaktive Forschungs- und Lernumgebung für ΛCDM-Kosmologie, numerische Validierung, Modellvergleiche und klar gekennzeichnete Hyperzeit-Experimente.",
+  "start_url": "./portal.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
   "background_color": "#070812",
   "theme_color": "#090b16",
-  "lang": "de"
+  "lang": "de",
+  "dir": "ltr",
+  "categories": ["education", "science", "utilities"],
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "shortcuts": [
+    {
+      "name": "Emergenz-Labor",
+      "short_name": "Emergenz",
+      "description": "Zellautomaten und heuristische Gitterexpansion öffnen",
+      "url": "./index.html"
+    },
+    {
+      "name": "Cosmic Journey",
+      "short_name": "Journey",
+      "description": "Die kosmologische Zeitreise starten",
+      "url": "./journey.html"
+    },
+    {
+      "name": "Observatory",
+      "short_name": "Observatory",
+      "description": "Kosmologische Parameter und Modellkurven untersuchen",
+      "url": "./observatory.html"
+    },
+    {
+      "name": "Validation Console",
+      "short_name": "Validierung",
+      "description": "Numerische Selbsttests und Grenzfälle ausführen",
+      "url": "./validation.html"
+    },
+    {
+      "name": "HyperLab",
+      "short_name": "HyperLab",
+      "description": "Spekulative 6D-Hyperzeit-Parameter unter Audit-Bedingungen untersuchen",
+      "url": "./hyperlab.html"
+    }
+  ]
 }
