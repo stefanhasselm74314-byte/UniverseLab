@@ -1,9 +1,9 @@
 'use strict';
-const CACHE_NAME='universelab-ui-1.6.0';
+const CACHE_NAME='universelab-ui-1.7.1';
 const APP_SHELL=[
   './',
   './index.html',
-  './index.html?lab=1',
+  './emergence.html',
   './portal.html',
   './journey.html',
   './observatory.html',
@@ -48,7 +48,6 @@ self.addEventListener('fetch',event=>{
       }catch(error){
         return await caches.match(event.request)
           ||await caches.match('./')
-          ||await caches.match('./portal.html')
           ||await caches.match('./index.html')
           ||new Response('UniverseLab ist derzeit offline und noch nicht vollständig zwischengespeichert.',{
             status:503,
