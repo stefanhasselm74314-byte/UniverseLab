@@ -2,6 +2,7 @@
 const rawPath=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 const pageKey=rawPath==='index.html'||rawPath==='portal.html'?'portal':rawPath==='emergence.html'?'emergence':rawPath.replace('.html','');
 if(rawPath==='portal.html')history.replaceState(history.state,'','./');
+document.querySelectorAll('a[href="./index.html?lab=1"],a[href="index.html?lab=1"],a[href="./index.html"][data-emergence]').forEach(a=>a.href='./emergence.html');
 
 const pages=[
   ['./','⌂','Portal','portal'],
@@ -32,5 +33,5 @@ const menu=nav.querySelector('.ul-menu'),close=overlay.querySelector('.ul-close'
 function setOpen(open){overlay.classList.toggle('open',open);menu.setAttribute('aria-expanded',String(open));document.documentElement.style.overflow=open?'hidden':'';if(open)setTimeout(()=>close.focus(),0);else menu.focus()}
 menu.onclick=()=>setOpen(true);close.onclick=()=>setOpen(false);overlay.onclick=e=>{if(e.target===overlay)setOpen(false)};
 addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))setOpen(false);if(e.key==='Tab'&&overlay.classList.contains('open')){const f=focusables(),first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}if(e.altKey&&e.key==='ArrowLeft'){e.preventDefault();history.length>1?history.back():location.assign('./')}});
-const foot=document.createElement('div');foot.className='ul-foot';foot.innerHTML='<span>UniverseLab 1.7 UI</span><span>Kanonischer Einstieg: /UniverseLab/</span>';document.body.appendChild(foot);
+const foot=document.createElement('div');foot.className='ul-foot';foot.innerHTML='<span>UniverseLab 1.7.1 UI</span><span>Kanonischer Einstieg: /UniverseLab/</span>';document.body.appendChild(foot);
 })();
