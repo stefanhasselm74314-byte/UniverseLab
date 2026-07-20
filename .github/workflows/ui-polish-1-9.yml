@@ -1,0 +1,83 @@
+name: UniverseLab UI 1.9 einmalig anwenden
+
+on:
+  push:
+    paths:
+      - '.github/workflows/ui-polish-1-9.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-shared-shell:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Gemeinsamen Header in allen Seiten aktivieren
+        shell: python
+        run: |
+          from pathlib import Path
+
+          pages = [
+              'index.html',
+              'portal.html',
+              'emergence.html',
+              'journey.html',
+              'observatory.html',
+              'compare.html',
+              'hyperlab.html',
+              'universe3d.html',
+              'validation.html',
+              'about.html',
+          ]
+          script = '<script src="./app-shell.js"></script>'
+          changed = []
+
+          for name in pages:
+              path = Path(name)
+              if not path.exists():
+                  print(f'WARNUNG: {name} fehlt')
+                  continue
+
+              text = path.read_text(encoding='utf-8')
+              if 'app-shell.js' in text:
+                  print(f'OK: {name}')
+                  continue
+
+              if '</body>' in text:
+                  text = text.replace('</body>', f'{script}</body>', 1)
+              else:
+                  text += script
+
+              path.write_text(text, encoding='utf-8')
+              changed.append(name)
+              print(f'AKTUALISIERT: {name}')
+
+          print('Geänderte Seiten:', ', '.join(changed) if changed else 'keine')
+
+      - name: Ergebnis prüfen
+        shell: bash
+        run: |
+          set -e
+          for page in index.html portal.html emergence.html journey.html observatory.html compare.html hyperlab.html universe3d.html validation.html about.html; do
+            grep -q 'app-shell.js' "$page"
+          done
+          git diff --check
+
+      - name: Änderungen speichern
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'Alle Seiten waren bereits aktuell.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html portal.html emergence.html journey.html observatory.html compare.html hyperlab.html universe3d.html validation.html about.html
+          git commit -m 'UI 1.9: gemeinsamen Header auf allen Seiten aktivieren'
+          git push
