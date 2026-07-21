@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#03040b">
-<title>UniverseLab 0.8 · 3D Cosmic Flight</title>
+<title>UniverseLab 0.8.1 · 3D Cosmic Flight</title>
 <style>
 :root{color-scheme:dark;--panel:#0b1020e8;--line:#283252;--text:#f4f6ff;--muted:#a8b1d2;--accent:#8d7cff;--good:#78e1b8}
 *{box-sizing:border-box}
@@ -45,7 +45,7 @@ button.primary{border:0;background:linear-gradient(135deg,#6551e8,#8d7cff)}
 <div class="hud">
  <div class="top">
   <div class="brand panel"><h1>UniverseLab</h1><small>3D Cosmic Flight · räumliche Kosmologie</small></div>
-  <span class="badge panel">Alpha 0.8.0</span>
+  <span class="badge panel">Alpha 0.8.1</span>
  </div>
  <div class="bottom">
   <div class="panel controls">
@@ -76,7 +76,7 @@ const mod=(x,m)=>((x%m)+m)%m;
 function rngFactory(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}}
 const rng=rngFactory(0x6d2b79f5);
 
-let centers=[],plasma=[],seeds=[],stars=[],galaxies=[],dust=[];
+let centers=[],plasma=[],seeds=[],stars=[],galaxies=[],dust=[],cmbBlobs=[];
 function buildScene(){
  const mobile=compact();
  const centerCount=mobile?11:18;
@@ -123,6 +123,8 @@ function buildScene(){
  });
  const dustCount=mobile?120:220;
  dust=Array.from({length:dustCount},()=>({x:(rng()-.5)*1800,y:(rng()-.5)*1200,z:30+rng()*3300,r:.15+rng()*.55,phase:rng()*TAU}));
+ const cmbCount=mobile?30:48;
+ cmbBlobs=Array.from({length:cmbCount},(_,i)=>({x:rng(),y:rng(),r:.09+rng()*.22,warm:i%2===0,phase:rng()*TAU,drift:(rng()-.5)*.0025}));
 }
 
 function resize(){
@@ -183,8 +185,21 @@ function background(a,s){
  else{grad.addColorStop(0,'#071b34');grad.addColorStop(.48,'#061126');grad.addColorStop(1,'#010309')}
  ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
  if(s.cmbW>.02){
-  ctx.globalAlpha=.12*s.cmbW;
-  for(let i=0;i<10;i++){ctx.fillStyle=i%2?'#ffd6a3':'#a990ff';ctx.fillRect(0,(i/10)*H+Math.sin(i*1.7)*18,W,H/11)}
+  ctx.save();
+  ctx.globalCompositeOperation='screen';
+  for(const b of cmbBlobs){
+   const x=(b.x+b.drift)%1*W;
+   const y=b.y*H;
+   const radius=b.r*Math.max(W,H);
+   const g=ctx.createRadialGradient(x,y,0,x,y,radius);
+   const c=b.warm?'255,190,135':'137,121,255';
+   g.addColorStop(0,`rgba(${c},${(.10*s.cmbW).toFixed(3)})`);
+   g.addColorStop(.45,`rgba(${c},${(.045*s.cmbW).toFixed(3)})`);
+   g.addColorStop(1,`rgba(${c},0)`);
+   ctx.fillStyle=g;
+   ctx.fillRect(x-radius,y-radius,radius*2,radius*2);
+  }
+  ctx.restore();
   ctx.globalAlpha=1;
  }
 }
