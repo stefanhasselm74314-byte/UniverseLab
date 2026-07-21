@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050816">
+<title>UniverseLab · 3D-Flug aktualisieren</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 35%,#17204b,#050816 55%,#02030a);font:16px system-ui,-apple-system,"Segoe UI",sans-serif;color:#f4f6ff}.card{width:min(520px,100%);padding:26px;border:1px solid #34406d;border-radius:20px;background:#0b1020ee;box-shadow:0 24px 80px #000a;text-align:center}.spinner{width:48px;height:48px;margin:0 auto 18px;border:5px solid #29335b;border-top-color:#8d7cff;border-radius:50%;animation:spin .8s linear infinite}h1{margin:0 0 10px;font-size:24px}p{margin:0;color:#aeb7d6;line-height:1.55}.done{color:#78e1b8}@keyframes spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.spinner{animation:none;border-top-color:#78e1b8}}
+</style>
+</head>
+<body>
+<main class="card" aria-live="polite">
+ <div class="spinner" aria-hidden="true"></div>
+ <h1>3D-Flug wird aktualisiert</h1>
+ <p id="status">Alter Offline-Cache und Service Worker werden entfernt …</p>
+</main>
+<script>
+(async()=>{
+ const status=document.querySelector('#status');
+ try{
+  if('serviceWorker' in navigator){
+   const registrations=await navigator.serviceWorker.getRegistrations();
+   await Promise.all(registrations.map(registration=>registration.unregister()));
+  }
+  if('caches' in window){
+   const keys=await caches.keys();
+   await Promise.all(keys.map(key=>caches.delete(key)));
+  }
+  status.className='done';
+  status.textContent='Aktualisierung abgeschlossen. Die neue Fassung wird geöffnet …';
+ }catch(error){
+  status.textContent='Cache-Bereinigung teilweise abgeschlossen. Die aktuelle Fassung wird jetzt direkt geladen …';
+ }
+ const version=Date.now();
+ setTimeout(()=>location.replace(`./universe3d.html?v=081-${version}`),700);
+})();
+</script>
+</body>
+</html>
