@@ -25,7 +25,7 @@
       ['./observatory.html','⌁','Observatory','observatory'],
       ['./compare.html','≋','Modelle','compare'],
       ['./hyperlab.html','◇','HyperLab','hyperlab'],
-      ['./universe3d.html','✦','3D-Flug','universe3d'],
+      ['./universe3d.html?v=082','✦','3D-Flug','universe3d'],
       ['./validation.html','✓','Validierung','validation'],
       ['./about.html','◎','Über uns','about']
     ];

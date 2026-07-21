@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#03040b">
-<title>UniverseLab 0.8.1 · 3D Cosmic Flight</title>
+<title>UniverseLab 0.8.2 · 3D Cosmic Flight</title>
 <style>
 :root{color-scheme:dark;--panel:#0b1020e8;--line:#283252;--text:#f4f6ff;--muted:#a8b1d2;--accent:#8d7cff;--good:#78e1b8}
 *{box-sizing:border-box}
@@ -45,7 +45,7 @@ button.primary{border:0;background:linear-gradient(135deg,#6551e8,#8d7cff)}
 <div class="hud">
  <div class="top">
   <div class="brand panel"><h1>UniverseLab</h1><small>3D Cosmic Flight · räumliche Kosmologie</small></div>
-  <span class="badge panel">Alpha 0.8.1</span>
+  <span class="badge panel">Alpha 0.8.2</span>
  </div>
  <div class="bottom">
   <div class="panel controls">
@@ -111,13 +111,13 @@ function buildScene(){
    hue:rng(),phase:rng()*TAU,birth:rng(),cluster:centers.indexOf(c),rare
   };
  });
- const galaxyCount=mobile?42:78;
+ const galaxyCount=mobile?22:42;
  galaxies=Array.from({length:galaxyCount},(_,i)=>{
   const c=centers[i%centers.length],satellite=i>=centers.length;
   const angle=rng()*TAU,rad=satellite?35+Math.pow(rng(),.65)*260:0;
   return{
    x:c.x+Math.cos(angle)*rad,y:c.y+Math.sin(angle)*rad*.55,z:c.z+(rng()-.5)*(satellite?420:90),
-   size:8+Math.pow(rng(),.42)*24,angle:rng()*TAU,flat:.22+rng()*.45,arms:2+(rng()*3|0),
+   size:4+Math.pow(rng(),.55)*12,angle:rng()*TAU,flat:.22+rng()*.45,arms:2+(rng()*3|0),
    hue:rng(),birth:rng(),local:rng()<.24,phase:rng()*TAU
   };
  });
@@ -274,7 +274,7 @@ function drawStars(t,a,s,v){
  ctx.globalAlpha=1;
 }
 function drawGalaxy(g,q,t,alpha,futureW){
- const base=Math.min(46,g.size*(.35+q.f*2.4));
+ const base=Math.min(compact()?17:24,g.size*(.22+q.f*1.25));
  const angle=g.angle+Math.sin(t*.00003+g.phase)*.18;
  ctx.save();ctx.translate(q.x,q.y);ctx.rotate(angle);ctx.globalCompositeOperation='lighter';
  const grad=ctx.createRadialGradient(0,0,0,0,0,base);
@@ -282,8 +282,8 @@ function drawGalaxy(g,q,t,alpha,futureW){
  grad.addColorStop(0,'#ffffff');grad.addColorStop(.12,core);grad.addColorStop(.45,core+'80');grad.addColorStop(1,'#00000000');
  ctx.globalAlpha=alpha;ctx.fillStyle=grad;ctx.beginPath();ctx.ellipse(0,0,base,base*g.flat,0,0,TAU);ctx.fill();
  if(alpha>.12&&base>6){
-  ctx.globalAlpha=alpha*.52*(1-futureW*.45);ctx.strokeStyle=core;ctx.lineWidth=Math.max(.35,base*.035);
-  for(let arm=0;arm<g.arms;arm++){
+  ctx.globalAlpha=alpha*.16*(1-futureW*.60);ctx.strokeStyle=core;ctx.lineWidth=.45;
+  for(let arm=0;arm<Math.min(2,g.arms);arm++){
    ctx.beginPath();
    for(let j=0;j<18;j++){
     const u=j/17,ang=arm*TAU/g.arms+u*TAU*1.15;
@@ -298,7 +298,7 @@ function drawGalaxy(g,q,t,alpha,futureW){
 }
 function drawGalaxies(t,a,s){
  const galaxyFrac=clamp((a-.065)/.65);
- const futureRemain=mix(1,.22,s.futureW);
+ const futureRemain=mix(1,.12,s.futureW);
  const active=Math.floor(galaxies.length*galaxyFrac*futureRemain);
  const expansion=1+s.futureW*2.8;
  const items=[];
@@ -309,7 +309,7 @@ function drawGalaxies(t,a,s){
  }
  items.sort((A,B)=>B.q.z-A.q.z);
  for(const {g,q} of items){
-  const alpha=clamp((.08+.84*q.f)*s.structureW*(1-s.futureW*.48));
+  const alpha=clamp((.035+.56*q.f)*s.structureW*(1-s.futureW*.62));
   drawGalaxy(g,q,t,alpha,s.futureW);
  }
 }
