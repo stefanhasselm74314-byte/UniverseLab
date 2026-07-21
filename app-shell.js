@@ -95,7 +95,7 @@
         .ul-tabs a{padding-inline:7px}
       }
 
-      @media(max-width:760px){
+      @media(max-width:1120px){
         :root{--ul-shell-h:50px}
         .ul-shell{gap:5px;padding-right:7px}
         .ul-menu,.ul-back{display:block}
