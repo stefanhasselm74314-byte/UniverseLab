@@ -1,0 +1,88 @@
+name: 3D-Flug 0.8.2 Galaxien verfeinern
+
+on:
+  push:
+    paths:
+      - '.github/workflows/galaxy-refinement-082.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Galaxien verfeinern
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('universe3d.html')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = [
+              ('UniverseLab 0.8.1 · 3D Cosmic Flight', 'UniverseLab 0.8.2 · 3D Cosmic Flight'),
+              ('Alpha 0.8.1', 'Alpha 0.8.2'),
+              ('const galaxyCount=mobile?42:78;', 'const galaxyCount=mobile?22:42;'),
+              ('size:8+Math.pow(rng(),.42)*24', 'size:4+Math.pow(rng(),.55)*12'),
+              ('const base=Math.min(46,g.size*(.35+q.f*2.4));', 'const base=Math.min(compact()?17:24,g.size*(.22+q.f*1.25));'),
+              ('ctx.globalAlpha=alpha*.52*(1-futureW*.45);', 'ctx.globalAlpha=alpha*.16*(1-futureW*.60);'),
+              ('ctx.lineWidth=Math.max(.35,base*.035);', 'ctx.lineWidth=.45;'),
+              ('for(let arm=0;arm<g.arms;arm++){', 'for(let arm=0;arm<Math.min(2,g.arms);arm++){'),
+              ('const futureRemain=mix(1,.22,s.futureW);', 'const futureRemain=mix(1,.12,s.futureW);'),
+              ('const alpha=clamp((.08+.84*q.f)*s.structureW*(1-s.futureW*.48));', 'const alpha=clamp((.035+.56*q.f)*s.structureW*(1-s.futureW*.62));'),
+          ]
+
+          changed = 0
+          for old, new in replacements:
+              if old in text:
+                  text = text.replace(old, new, 1)
+                  changed += 1
+              elif new not in text:
+                  raise SystemExit(f'Erwarteter Code nicht gefunden: {old}')
+
+          if changed == 0 and 'Alpha 0.8.2' not in text:
+              raise SystemExit('Keine Änderungen angewendet')
+
+          path.write_text(text, encoding='utf-8')
+
+      - name: Cache-Busting aktualisieren
+        shell: python
+        run: |
+          from pathlib import Path
+
+          shell = Path('app-shell.js')
+          text = shell.read_text(encoding='utf-8')
+          text = text.replace("['./universe3d.html','✦','3D-Flug','universe3d']", "['./universe3d.html?v=082','✦','3D-Flug','universe3d']", 1)
+          text = text.replace("['./universe3d.html?v=081','✦','3D-Flug','universe3d']", "['./universe3d.html?v=082','✦','3D-Flug','universe3d']", 1)
+          shell.write_text(text, encoding='utf-8')
+
+          refresh = Path('refresh-3d.html')
+          if refresh.exists():
+              r = refresh.read_text(encoding='utf-8')
+              r = r.replace('universe3d.html?v=081-${version}', 'universe3d.html?v=082-${version}')
+              refresh.write_text(r, encoding='utf-8')
+
+          sw = Path('sw.js')
+          s = sw.read_text(encoding='utf-8')
+          import re
+          s = re.sub(r"const CACHE_NAME='universelab-ui-[^']+';", "const CACHE_NAME='universelab-ui-1.9.5';", s, count=1)
+          sw.write_text(s, encoding='utf-8')
+
+      - name: Prüfen und speichern
+        shell: bash
+        run: |
+          grep -q 'Alpha 0.8.2' universe3d.html
+          grep -q 'const galaxyCount=mobile?22:42;' universe3d.html
+          grep -q 'universe3d.html?v=082' app-shell.js
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add universe3d.html app-shell.js refresh-3d.html sw.js
+          git commit -m '3D-Flug 0.8.2: Galaxien kleiner, seltener und natürlicher darstellen'
+          git push
