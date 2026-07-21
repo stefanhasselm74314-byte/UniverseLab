@@ -1,0 +1,71 @@
+name: CMB-Darstellung weich und isotrop machen
+
+on:
+  push:
+    paths:
+      - '.github/workflows/cmb-soft-noise-patch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: CMB-Streifen durch weiche Fluktuationen ersetzen
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('universe3d.html')
+          text = path.read_text(encoding='utf-8')
+
+          old_decl = "let centers=[],plasma=[],seeds=[],stars=[],galaxies=[],dust=[];"
+          new_decl = "let centers=[],plasma=[],seeds=[],stars=[],galaxies=[],dust=[],cmbBlobs=[];"
+          if old_decl in text:
+              text = text.replace(old_decl, new_decl, 1)
+
+          old_build = " const dustCount=mobile?120:220;\n dust=Array.from({length:dustCount},()=>({x:(rng()-.5)*1800,y:(rng()-.5)*1200,z:30+rng()*3300,r:.15+rng()*.55,phase:rng()*TAU}));"
+          new_build = " const dustCount=mobile?120:220;\n dust=Array.from({length:dustCount},()=>({x:(rng()-.5)*1800,y:(rng()-.5)*1200,z:30+rng()*3300,r:.15+rng()*.55,phase:rng()*TAU}));\n const cmbCount=mobile?30:48;\n cmbBlobs=Array.from({length:cmbCount},(_,i)=>({x:rng(),y:rng(),r:.09+rng()*.22,warm:i%2===0,phase:rng()*TAU,drift:(rng()-.5)*.0025}));"
+          if old_build in text:
+              text = text.replace(old_build, new_build, 1)
+          else:
+              raise SystemExit('buildScene-Anker nicht gefunden')
+
+          old_cmb = " if(s.cmbW>.02){\n  ctx.globalAlpha=.12*s.cmbW;\n  for(let i=0;i<10;i++){ctx.fillStyle=i%2?'#ffd6a3':'#a990ff';ctx.fillRect(0,(i/10)*H+Math.sin(i*1.7)*18,W,H/11)}\n  ctx.globalAlpha=1;\n }"
+          new_cmb = " if(s.cmbW>.02){\n  ctx.save();\n  ctx.globalCompositeOperation='screen';\n  for(const b of cmbBlobs){\n   const x=(b.x+b.drift)%1*W;\n   const y=b.y*H;\n   const radius=b.r*Math.max(W,H);\n   const g=ctx.createRadialGradient(x,y,0,x,y,radius);\n   const c=b.warm?'255,190,135':'137,121,255';\n   g.addColorStop(0,`rgba(${c},${(.10*s.cmbW).toFixed(3)})`);\n   g.addColorStop(.45,`rgba(${c},${(.045*s.cmbW).toFixed(3)})`);\n   g.addColorStop(1,`rgba(${c},0)`);\n   ctx.fillStyle=g;\n   ctx.fillRect(x-radius,y-radius,radius*2,radius*2);\n  }\n  ctx.restore();\n  ctx.globalAlpha=1;\n }"
+          if old_cmb in text:
+              text = text.replace(old_cmb, new_cmb, 1)
+          else:
+              raise SystemExit('CMB-Streifenblock nicht gefunden')
+
+          text = text.replace('Alpha 0.8.0','Alpha 0.8.1',1)
+          text = text.replace('UniverseLab 0.8 · 3D Cosmic Flight','UniverseLab 0.8.1 · 3D Cosmic Flight',1)
+          path.write_text(text, encoding='utf-8')
+
+      - name: Cache-Version erhöhen
+        shell: python
+        run: |
+          from pathlib import Path
+          path=Path('sw.js')
+          text=path.read_text(encoding='utf-8')
+          text=text.replace("const CACHE_NAME='universelab-ui-1.9.2';","const CACHE_NAME='universelab-ui-1.9.3';",1)
+          path.write_text(text,encoding='utf-8')
+
+      - name: Änderungen prüfen und speichern
+        shell: bash
+        run: |
+          grep -q 'cmbBlobs' universe3d.html
+          ! grep -q 'fillRect(0,(i/10)\*H' universe3d.html
+          grep -q 'Alpha 0.8.1' universe3d.html
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add universe3d.html sw.js
+          git commit -m '3D-Flug 0.8.1: CMB-Streifen durch weiche Fluktuationen ersetzen'
+          git push
