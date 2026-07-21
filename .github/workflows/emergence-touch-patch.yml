@@ -1,0 +1,64 @@
+name: Emergenz Touch-Zeichnen aktivieren
+
+on:
+  push:
+    paths:
+      - '.github/workflows/emergence-touch-patch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Touch-Skript einbinden und Tablet-Navigation korrigieren
+        shell: python
+        run: |
+          from pathlib import Path
+
+          page = Path('emergence.html')
+          text = page.read_text(encoding='utf-8')
+          script = '<script src="./emergence-touch.js"></script>'
+          if 'emergence-touch.js' not in text:
+              text = text.replace('</body>', f'{script}</body>', 1)
+              page.write_text(text, encoding='utf-8')
+              print('emergence-touch.js eingebunden')
+          else:
+              print('Touch-Skript bereits eingebunden')
+
+          shell = Path('app-shell.js')
+          shell_text = shell.read_text(encoding='utf-8')
+          old = '@media(max-width:760px){'
+          new = '@media(max-width:1120px){'
+          if old in shell_text:
+              shell_text = shell_text.replace(old, new, 1)
+              shell.write_text(shell_text, encoding='utf-8')
+              print('Tablet-Navigation auf kompakten Header umgestellt')
+          else:
+              print('Tablet-Breakpoint bereits angepasst oder nicht gefunden')
+
+      - name: Änderungen prüfen
+        shell: bash
+        run: |
+          grep -q 'emergence-touch.js' emergence.html
+          grep -q '@media(max-width:1120px)' app-shell.js
+          git diff --check
+
+      - name: Änderungen committen
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'Keine Änderungen erforderlich.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add emergence.html app-shell.js
+          git commit -m 'Touch-Zeichnen, Vollbild und Tablet-Navigation aktivieren'
+          git push
