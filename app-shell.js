@@ -16,11 +16,11 @@
 
     document.querySelectorAll(
       'a[href="./index.html?lab=1"],a[href="index.html?lab=1"],a[href="./index.html"][data-emergence]'
-    ).forEach(link=>{link.href='./emergence.html';});
+    ).forEach(link=>{link.href='./emergence.html?v=06';});
 
     const pages=[
       ['./','⌂','Portal','portal'],
-      ['./emergence.html','▦','UniverseLab','emergence'],
+      ['./emergence.html?v=06','▦','UniverseLab','emergence'],
       ['./journey.html?v=model1','◉','Journey','journey'],
       ['./observatory.html?v=model1','⌁','Observatory','observatory'],
       ['./compare.html?v=model1','≋','Modelle','compare'],
