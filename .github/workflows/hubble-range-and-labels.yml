@@ -1,0 +1,95 @@
+name: Hubble-Werte vereinheitlichen
+
+on:
+  push:
+    paths:
+      - '.github/workflows/hubble-range-and-labels.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Observatory und Modellvergleich angleichen
+        shell: python
+        run: |
+          from pathlib import Path
+
+          obs = Path('observatory.html')
+          text = obs.read_text(encoding='utf-8')
+          text = text.replace('UniverseLab 1.3 · Observatory','UniverseLab 1.4 · Observatory',1)
+          text = text.replace('Parameterlabor und Beobachtungsvergleich · MVP 1.3','Parameterlabor und Beobachtungsvergleich · MVP 1.4',1)
+          text = text.replace('<span>50–90 km s⁻¹ Mpc⁻¹</span>','<span>50–100 km s⁻¹ Mpc⁻¹ · heutige Expansionsrate</span>',1)
+          text = text.replace('id="H0" type="range" min="50" max="90"','id="H0" type="range" min="50" max="100"',1)
+          obs.write_text(text,encoding='utf-8')
+
+          comp = Path('compare.html')
+          text = comp.read_text(encoding='utf-8')
+          text = text.replace('UniverseLab 0.8 · Modellvergleich','UniverseLab 0.9 · Modellvergleich',1)
+          text = text.replace('MVP 0.8 Alpha','MVP 0.9 Alpha',1)
+          text = text.replace('H₀<small>km s⁻¹ Mpc⁻¹</small>','H₀<small>heutige Expansionsrate · km s⁻¹ Mpc⁻¹</small>',1)
+          text = text.replace('id="h0" type="range" min="55" max="85"','id="h0" type="range" min="50" max="100"',1)
+          comp.write_text(text,encoding='utf-8')
+
+      - name: Journey-Epochenrate erklären
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path=Path('journey.html')
+          text=path.read_text(encoding='utf-8')
+          text=text.replace('UniverseLab 1.2 · Cosmic Journey','UniverseLab 1.3 · Cosmic Journey',1)
+          text=text.replace('MVP 1.2','MVP 1.3',1)
+          old='<div class="science"><div><b id="hubble">–</b><span>H(a)</span></div>'
+          new='<div class="science"><div><b id="hubble">–</b><span id="hubbleLabel">H(a) dieser Epoche</span></div>'
+          if old not in text:
+              raise SystemExit('Journey-Hubblekarte nicht gefunden')
+          text=text.replace(old,new,1)
+          old_update="$('#hubble').textContent=H>1e6?H.toExponential(2):H.toLocaleString('de-DE',{maximumFractionDigits:1})+' km/s/Mpc';"
+          new_update="$('#hubble').textContent=H>1e6?H.toExponential(2):H.toLocaleString('de-DE',{maximumFractionDigits:1})+' km/s/Mpc';$('#hubbleLabel').textContent='H(a) dieser Epoche · '+(H/P.H0).toLocaleString('de-DE',{maximumFractionDigits:0})+' × H₀';"
+          if old_update not in text:
+              raise SystemExit('Journey-Hubbleupdate nicht gefunden')
+          text=text.replace(old_update,new_update,1)
+          path.write_text(text,encoding='utf-8')
+
+      - name: Navigation und Cache aktualisieren
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          shell=Path('app-shell.js')
+          text=shell.read_text(encoding='utf-8')
+          text=text.replace("['./journey.html','◉','Journey','journey']", "['./journey.html?v=13','◉','Journey','journey']",1)
+          text=text.replace("['./observatory.html','⌁','Observatory','observatory']", "['./observatory.html?v=14','⌁','Observatory','observatory']",1)
+          text=text.replace("['./compare.html','≋','Modelle','compare']", "['./compare.html?v=09','≋','Modelle','compare']",1)
+          shell.write_text(text,encoding='utf-8')
+
+          sw=Path('sw.js')
+          text=sw.read_text(encoding='utf-8')
+          text=re.sub(r"const CACHE_NAME='universelab-ui-[^']+';", "const CACHE_NAME='universelab-ui-2.0.2';", text, count=1)
+          sw.write_text(text,encoding='utf-8')
+
+      - name: Prüfen und speichern
+        shell: bash
+        run: |
+          grep -q 'max="100"' observatory.html
+          grep -q 'max="100"' compare.html
+          grep -q 'H(a) dieser Epoche' journey.html
+          grep -q '× H₀' journey.html
+          grep -q 'MVP 1.4' observatory.html
+          grep -q 'MVP 0.9 Alpha' compare.html
+          grep -q 'MVP 1.3' journey.html
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add observatory.html compare.html journey.html app-shell.js sw.js
+          git commit -m 'Hubble-Werte vereinheitlichen und Epochenrate klar beschriften'
+          git push
