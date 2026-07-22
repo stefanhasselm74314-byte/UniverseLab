@@ -135,3 +135,5 @@ addEventListener('keydown',event=>{
           git add universe3d.html app-shell.js refresh-3d.html sw.js
           git commit -m '3D-Flug 0.8.4: Kino-Modus und Vollbildsteuerung ergänzen'
           git push
+
+# trigger: 2
