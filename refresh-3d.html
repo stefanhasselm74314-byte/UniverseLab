@@ -28,12 +28,12 @@
    await Promise.all(keys.map(key=>caches.delete(key)));
   }
   status.className='done';
-  status.textContent='Aktualisierung abgeschlossen. Alpha 0.8.4 wird geöffnet …';
+  status.textContent='Aktualisierung abgeschlossen. Alpha 0.8.5 wird geöffnet …';
  }catch(error){
-  status.textContent='Cache-Bereinigung teilweise abgeschlossen. Alpha 0.8.4 wird jetzt direkt geladen …';
+  status.textContent='Cache-Bereinigung teilweise abgeschlossen. Alpha 0.8.5 wird jetzt direkt geladen …';
  }
  const version=Date.now();
- setTimeout(()=>location.replace(`./universe3d.html?v=084-${version}`),700);
+ setTimeout(()=>location.replace(`./universe3d.html?v=085-${version}`),700);
 })();
 </script>
 </body>
