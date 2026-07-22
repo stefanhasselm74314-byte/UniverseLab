@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME='universelab-ui-2.0.3';
+const CACHE_NAME='universelab-ui-2.0.4';
 const APP_SHELL=[
   './',
   './index.html',
