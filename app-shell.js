@@ -21,11 +21,11 @@
     const pages=[
       ['./','⌂','Portal','portal'],
       ['./emergence.html','▦','UniverseLab','emergence'],
-      ['./journey.html','◉','Journey','journey'],
-      ['./observatory.html','⌁','Observatory','observatory'],
-      ['./compare.html','≋','Modelle','compare'],
+      ['./journey.html?v=model1','◉','Journey','journey'],
+      ['./observatory.html?v=model1','⌁','Observatory','observatory'],
+      ['./compare.html?v=model1','≋','Modelle','compare'],
       ['./hyperlab.html','◇','HyperLab','hyperlab'],
-      ['./universe3d.html?v=082','✦','3D-Flug','universe3d'],
+      ['./universe3d.html?v=083','✦','3D-Flug','universe3d'],
       ['./validation.html','✓','Validierung','validation'],
       ['./about.html','◎','Über uns','about']
     ];

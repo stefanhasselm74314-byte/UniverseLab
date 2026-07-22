@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#03040b">
-<title>UniverseLab 0.8.2 · 3D Cosmic Flight</title>
+<title>UniverseLab 0.8.3 · 3D Cosmic Flight</title>
 <style>
 :root{color-scheme:dark;--panel:#0b1020e8;--line:#283252;--text:#f4f6ff;--muted:#a8b1d2;--accent:#8d7cff;--good:#78e1b8}
 *{box-sizing:border-box}
@@ -39,13 +39,14 @@ button.primary{border:0;background:linear-gradient(135deg,#6551e8,#8d7cff)}
 @media(max-height:760px) and (max-width:720px){.legend{display:none}.row{min-height:42px}.timeline{height:42px}.controls{padding:8px}.buttons{margin-top:4px}.metric{padding:5px}.top .brand small{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
+<script src="./model-state.js"></script>
 </head>
 <body>
 <canvas id="view"></canvas><div class="cross"></div>
 <div class="hud">
  <div class="top">
   <div class="brand panel"><h1>UniverseLab</h1><small>3D Cosmic Flight · räumliche Kosmologie</small></div>
-  <span class="badge panel">Alpha 0.8.2</span>
+  <span class="badge panel">Alpha 0.8.3</span>
  </div>
  <div class="bottom">
   <div class="panel controls">
@@ -66,7 +67,7 @@ const $=s=>document.querySelector(s),canvas=$('#view'),ctx=canvas.getContext('2d
 let W=0,H=0,dpr=1,last=0,running=true,network=true,cameraZ=0;
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const compact=()=>innerWidth<760;
-const P={H0:67.4,Or:9.2e-5,Om:.315,Ol:.684908};
+const P=window.UniverseLabModel.params();addEventListener('universelab:modelchange',()=>{Object.assign(P,window.UniverseLabModel.params());updateHUD()});
 const TAU=Math.PI*2;
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 const smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t)};
