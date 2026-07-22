@@ -44,10 +44,10 @@
   function save(){
     try{localStorage.setItem(KEY,JSON.stringify(state));}catch{}
   }
-  function detail(){return{...state,...params()};}
-  function notify(){
+  function detail(source='api'){return{...state,...params(),source};}
+  function notify(source='api'){
     save();
-    window.dispatchEvent(new CustomEvent('universelab:modelchange',{detail:detail()}));
+    window.dispatchEvent(new CustomEvent('universelab:modelchange',{detail:detail(source)}));
     updateUI();
   }
   function params(){
@@ -73,7 +73,7 @@
     }
     merged.updatedAt=Date.now();
     state=normalize(merged);
-    notify();
+    notify(meta.source||'api');
     return detail();
   }
   function applyPreset(id='planck'){
@@ -118,7 +118,7 @@
     const patch={};
     for(const [key,element] of Object.entries(found))patch[key]=Number(element.value);
     if(found.Om&&!found.Ol)patch.Ol=1-OR-patch.Om;
-    if(Object.keys(patch).length)set(patch,{label:'Eigenes Modell'});
+    if(Object.keys(patch).length)set(patch,{label:'Eigenes Modell',source:'input'});
   }
   function bindInputs(){
     const found=controls();
@@ -218,13 +218,13 @@
   }
 
   window.UniverseLabModel={get,params,set,applyPreset,reset,label,presets:{...presets}};
-  addEventListener('universelab:modelchange',writeInputs);
+  addEventListener('universelab:modelchange',event=>{if(event.detail?.source!=='input')writeInputs();});
   addEventListener('storage',event=>{
     if(event.key!==KEY)return;
     state=load();
     writeInputs();
     updateUI();
-    window.dispatchEvent(new CustomEvent('universelab:modelchange',{detail:detail()}));
+    window.dispatchEvent(new CustomEvent('universelab:modelchange',{detail:detail('storage')}));
   });
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
   else init();
