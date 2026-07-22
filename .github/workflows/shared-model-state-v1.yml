@@ -1,0 +1,137 @@
+name: Gemeinsamen UniverseLab-Modellzustand aktivieren
+
+on:
+  push:
+    paths:
+      - '.github/workflows/shared-model-state-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Modellmodul auf allen Seiten laden
+        shell: python
+        run: |
+          from pathlib import Path
+
+          pages=[
+            'index.html','portal.html','emergence.html','journey.html',
+            'observatory.html','compare.html','hyperlab.html','universe3d.html',
+            'validation.html','about.html'
+          ]
+          for name in pages:
+            path=Path(name)
+            if not path.exists():
+              continue
+            text=path.read_text(encoding='utf-8')
+            if './model-state.js' not in text:
+              if '</head>' not in text:
+                raise SystemExit(f'Kein head-Ende in {name}')
+              text=text.replace('</head>','<script src="./model-state.js"></script>\n</head>',1)
+            path.write_text(text,encoding='utf-8')
+
+      - name: Journey an den zentralen Modellzustand anbinden
+        shell: python
+        run: |
+          from pathlib import Path
+          path=Path('journey.html')
+          text=path.read_text(encoding='utf-8')
+          old="const P={H0:67.4,Or:0.000092,Om:0.315,Ol:0.684908,Ok:0};const H0INV_GYR=9.778/(P.H0/100);"
+          new="const P=window.UniverseLabModel.params();let H0INV_GYR=9.778/(P.H0/100);addEventListener('universelab:modelchange',()=>{Object.assign(P,window.UniverseLabModel.params());H0INV_GYR=9.778/(P.H0/100);update()});"
+          if old in text:
+            text=text.replace(old,new,1)
+          elif new not in text:
+            raise SystemExit('Journey-Parameterblock nicht gefunden')
+          text=text.replace('UniverseLab 1.1 · Cosmic Journey','UniverseLab 1.2 · Cosmic Journey',1)
+          text=text.replace('<span class="badge">MVP 1.1</span>','<span class="badge">MVP 1.2</span>',1)
+          old_status='Physikstatus: Der ΛCDM-Hintergrund nutzt Ωᵣ=9,2×10⁻⁵, Ωₘ=0,315, ΩΛ=0,684908 und H₀=67,4 km s⁻¹ Mpc⁻¹. Das Alter wird numerisch aus der Friedmann-Gleichung integriert. Epochenbeschreibungen und Hintergrundgrafik sind didaktisch.'
+          new_status='Physikstatus: Der ΛCDM-Hintergrund übernimmt H₀, Ωₘ, ΩΛ und w aus dem zentralen UniverseLab-Modell. Das Alter wird numerisch aus der Friedmann-Gleichung integriert. Epochenbeschreibungen und Hintergrundgrafik sind didaktisch.'
+          text=text.replace(old_status,new_status,1)
+          path.write_text(text,encoding='utf-8')
+
+      - name: 3D-Flug an den zentralen Modellzustand anbinden
+        shell: python
+        run: |
+          from pathlib import Path
+          path=Path('universe3d.html')
+          text=path.read_text(encoding='utf-8')
+          old="const P={H0:67.4,Or:9.2e-5,Om:.315,Ol:.684908};"
+          new="const P=window.UniverseLabModel.params();addEventListener('universelab:modelchange',()=>{Object.assign(P,window.UniverseLabModel.params());updateHUD()});"
+          if old in text:
+            text=text.replace(old,new,1)
+          elif new not in text:
+            raise SystemExit('3D-Parameterblock nicht gefunden')
+          text=text.replace('UniverseLab 0.8.2 · 3D Cosmic Flight','UniverseLab 0.8.3 · 3D Cosmic Flight',1)
+          text=text.replace('Alpha 0.8.2','Alpha 0.8.3',1)
+          path.write_text(text,encoding='utf-8')
+
+      - name: Observatory und Modellvergleich versionieren
+        shell: python
+        run: |
+          from pathlib import Path
+
+          obs=Path('observatory.html')
+          text=obs.read_text(encoding='utf-8')
+          text=text.replace('UniverseLab 1.2 · Observatory','UniverseLab 1.3 · Observatory',1)
+          text=text.replace('MVP 1.2','MVP 1.3',1)
+          obs.write_text(text,encoding='utf-8')
+
+          compare=Path('compare.html')
+          text=compare.read_text(encoding='utf-8')
+          text=text.replace('UniverseLab 0.7 · Modellvergleich','UniverseLab 0.8 · Modellvergleich',1)
+          text=text.replace('MVP 0.7 Alpha','MVP 0.8 Alpha',1)
+          compare.write_text(text,encoding='utf-8')
+
+      - name: Navigation mit Versionslinks aktualisieren
+        shell: python
+        run: |
+          from pathlib import Path
+          path=Path('app-shell.js')
+          text=path.read_text(encoding='utf-8')
+          replacements={
+            "['./journey.html','◉','Journey','journey']":"['./journey.html?v=model1','◉','Journey','journey']",
+            "['./observatory.html','⌁','Observatory','observatory']":"['./observatory.html?v=model1','⌁','Observatory','observatory']",
+            "['./compare.html','≋','Modelle','compare']":"['./compare.html?v=model1','≋','Modelle','compare']",
+            "['./universe3d.html?v=082','✦','3D-Flug','universe3d']":"['./universe3d.html?v=083','✦','3D-Flug','universe3d']",
+            "['./universe3d.html','✦','3D-Flug','universe3d']":"['./universe3d.html?v=083','✦','3D-Flug','universe3d']"
+          }
+          for old,new in replacements.items():
+            if old in text:
+              text=text.replace(old,new,1)
+          path.write_text(text,encoding='utf-8')
+
+      - name: Offline-Cache aktualisieren
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          path=Path('sw.js')
+          text=path.read_text(encoding='utf-8')
+          text=re.sub(r"const CACHE_NAME='universelab-ui-[^']+';","const CACHE_NAME='universelab-ui-2.0.0';",text,count=1)
+          if "'./model-state.js'" not in text:
+            text=text.replace("  './app-shell.js',","  './app-shell.js',\n  './model-state.js',",1)
+          path.write_text(text,encoding='utf-8')
+
+      - name: Integration prüfen und speichern
+        shell: bash
+        run: |
+          grep -q 'UniverseLabModel.params' journey.html
+          grep -q 'UniverseLabModel.params' universe3d.html
+          grep -q 'MVP 1.3' observatory.html
+          grep -q 'MVP 0.8 Alpha' compare.html
+          grep -q 'model-state.js' sw.js
+          grep -q 'model-state.js' index.html
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html portal.html emergence.html journey.html observatory.html compare.html hyperlab.html universe3d.html validation.html about.html app-shell.js sw.js
+          git commit -m 'UniverseLab 2.0: gemeinsamen Modellzustand und Presets aktivieren'
+          git push
