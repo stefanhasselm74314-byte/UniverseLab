@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050712">
-<title>UniverseLab 1.3 · Observatory</title>
+<title>UniverseLab 1.4 · Observatory</title>
 <style>
 :root{color-scheme:dark;--bg:#050712;--panel:#0d1122e8;--line:#293252;--text:#f4f6ff;--muted:#a8b0cf;--accent:#8d7cff;--good:#79e3bc;--warn:#ffd27c;--bad:#ff7b98}
 *{box-sizing:border-box;min-width:0}
@@ -74,12 +74,12 @@ h1{margin:0;font-size:20px;line-height:1.12;letter-spacing:-.02em}
 </head>
 <body>
 <main class="app">
-<header><div><h1>UniverseLab Observatory</h1><div class="sub">Parameterlabor und Beobachtungsvergleich · MVP 1.3</div></div><span class="badge">wissenschaftlicher Prototyp</span></header>
+<header><div><h1>UniverseLab Observatory</h1><div class="sub">Parameterlabor und Beobachtungsvergleich · MVP 1.4</div></div><span class="badge">wissenschaftlicher Prototyp</span></header>
 <div class="layout">
 <aside class="panel controls">
 <h2>Kosmologische Parameter</h2>
 <div class="param-grid">
-<div class="param"><label for="H0">H₀</label><div class="readout"><span>50–90 km s⁻¹ Mpc⁻¹</span><b id="vH0">67,4</b></div><input id="H0" type="range" min="50" max="90" step="0.1" value="67.4"></div>
+<div class="param"><label for="H0">H₀</label><div class="readout"><span>50–100 km s⁻¹ Mpc⁻¹ · heutige Expansionsrate</span><b id="vH0">67,4</b></div><input id="H0" type="range" min="50" max="100" step="0.1" value="67.4"></div>
 <div class="param"><label for="Om">Ωₘ</label><div class="readout"><span>Materiedichte</span><b id="vOm">0,315</b></div><input id="Om" type="range" min="0.1" max="0.6" step="0.001" value="0.315"></div>
 <div class="param"><label for="Ol">ΩΛ</label><div class="readout"><span>Vakuumenergie</span><b id="vOl">0,685</b></div><input id="Ol" type="range" min="0" max="1.2" step="0.001" value="0.685"></div>
 <div class="param"><label for="w">w</label><div class="readout"><span>Zustandsgleichung</span><b id="vw">−1,000</b></div><input id="w" type="range" min="-1.5" max="-0.3" step="0.005" value="-1"></div>
