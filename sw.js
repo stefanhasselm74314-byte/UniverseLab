@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME='universelab-ui-2.0.2';
+const CACHE_NAME='universelab-ui-2.0.3';
 const APP_SHELL=[
   './',
   './index.html',
@@ -14,6 +14,7 @@ const APP_SHELL=[
   './about.html',
   './app-shell.js',
   './model-state.js',
+  './cinema-mode.js',
   './emergence-touch.js',
   './portal-live.js',
   './manifest.webmanifest'
@@ -35,6 +36,21 @@ self.addEventListener('activate',event=>{
   );
 });
 
+async function enhanceNavigation(response,url){
+  if(!response||!response.ok||!url.pathname.endsWith('/universe3d.html'))return response;
+  const type=response.headers.get('content-type')||'';
+  if(!type.includes('text/html'))return response;
+  const html=await response.text();
+  if(html.includes('cinema-mode.js')){
+    return new Response(html,{status:response.status,statusText:response.statusText,headers:response.headers});
+  }
+  const enhanced=html.replace('</body>','<script src="./cinema-mode.js?v=084"></script></body>');
+  const headers=new Headers(response.headers);
+  headers.delete('content-length');
+  headers.set('cache-control','no-cache');
+  return new Response(enhanced,{status:response.status,statusText:response.statusText,headers});
+}
+
 self.addEventListener('fetch',event=>{
   if(event.request.method!=='GET')return;
   const url=new URL(event.request.url);
@@ -43,20 +59,22 @@ self.addEventListener('fetch',event=>{
   if(event.request.mode==='navigate'){
     event.respondWith((async()=>{
       try{
-        const response=await fetch(event.request);
+        let response=await fetch(event.request);
+        response=await enhanceNavigation(response,url);
         if(response&&response.ok){
           const cache=await caches.open(CACHE_NAME);
           cache.put(event.request,response.clone());
         }
         return response;
       }catch(error){
-        return await caches.match(event.request)
+        let fallback=await caches.match(event.request)
           ||await caches.match('./')
-          ||await caches.match('./index.html')
-          ||new Response('UniverseLab ist derzeit offline und noch nicht vollständig zwischengespeichert.',{
-            status:503,
-            headers:{'Content-Type':'text/plain; charset=utf-8'}
-          });
+          ||await caches.match('./index.html');
+        if(fallback)return await enhanceNavigation(fallback,url);
+        return new Response('UniverseLab ist derzeit offline und noch nicht vollständig zwischengespeichert.',{
+          status:503,
+          headers:{'Content-Type':'text/plain; charset=utf-8'}
+        });
       }
     })());
     return;
