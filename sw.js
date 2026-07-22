@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME='universelab-ui-2.0.4';
+const CACHE_NAME='universelab-ui-2.0.5';
 const APP_SHELL=[
   './',
   './index.html',
@@ -41,10 +41,9 @@ async function enhanceNavigation(response,url){
   const type=response.headers.get('content-type')||'';
   if(!type.includes('text/html'))return response;
   const html=await response.text();
-  if(html.includes('cinema-mode.js')){
-    return new Response(html,{status:response.status,statusText:response.statusText,headers:response.headers});
-  }
-  const enhanced=html.replace('</body>','<script src="./cinema-mode.js?v=084"></script></body>');
+  const enhanced=html.includes('cinema-mode.js')
+    ?html.replace(/cinema-mode\.js\?v=\d+/g,'cinema-mode.js?v=085')
+    :html.replace('</body>','<script src="./cinema-mode.js?v=085"></script></body>');
   const headers=new Headers(response.headers);
   headers.delete('content-length');
   headers.set('cache-control','no-cache');
