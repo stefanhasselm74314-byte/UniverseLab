@@ -25,7 +25,7 @@
       ['./observatory.html?v=model1','⌁','Observatory','observatory'],
       ['./compare.html?v=model1','≋','Modelle','compare'],
       ['./hyperlab.html','◇','HyperLab','hyperlab'],
-      ['./universe3d.html?v=084','✦','3D-Flug','universe3d'],
+      ['./universe3d.html?v=085','✦','3D-Flug','universe3d'],
       ['./validation.html','✓','Validierung','validation'],
       ['./about.html','◎','Über uns','about']
     ];
@@ -145,7 +145,7 @@
 
     if(pageKey==='universe3d'&&!document.querySelector('script[data-ul-cinema]')){
       const enhancement=document.createElement('script');
-      enhancement.src='./cinema-mode.js?v=084';
+      enhancement.src='./cinema-mode.js?v=085';
       enhancement.dataset.ulCinema='true';
       document.head.appendChild(enhancement);
     }
