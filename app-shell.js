@@ -143,6 +143,13 @@
     `;
     document.body.prepend(nav);
 
+    if(!document.querySelector('script[data-ul-snapshots]')){
+      const snapshots=document.createElement('script');
+      snapshots.src='./lab-snapshots.js?v=10';
+      snapshots.dataset.ulSnapshots='true';
+      document.head.appendChild(snapshots);
+    }
+
     if(pageKey==='universe3d'&&!document.querySelector('script[data-ul-cinema]')){
       const enhancement=document.createElement('script');
       enhancement.src='./cinema-mode.js?v=085';
