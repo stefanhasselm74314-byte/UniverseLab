@@ -7,30 +7,36 @@
     const toolbar=document.querySelector('.toolbar');
     if(!canvas||!stage||!toolbar)return;
 
-    document.title='UniverseLab 0.6 · Emergenz';
+    document.title='UniverseLab 0.7 · Emergenz';
     const badge=document.querySelector('header .badge');
-    if(badge)badge.textContent='MVP 0.6';
+    if(badge)badge.textContent='MVP 0.7';
 
     const style=document.createElement('style');
     style.id='ul-emergence-view-style';
     style.textContent=`
       #c.sim{touch-action:none;-ms-touch-action:none;overscroll-behavior:contain;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;cursor:crosshair;transform-origin:50% 50%;will-change:transform}
       #c.sim.ul-pan-mode{cursor:grab}#c.sim.ul-pan-mode:active{cursor:grabbing}
+      #c.sim.ul-scroll-mode{touch-action:pan-y pinch-zoom;-ms-touch-action:pan-y;overscroll-behavior:auto;cursor:default}
       .toolbar.ul-touch-toolbar{grid-template-columns:repeat(5,minmax(0,1fr))}
       .ul-fullscreen-button{white-space:nowrap}
       .ul-view-controls{position:absolute;z-index:4;right:10px;top:10px;display:flex;gap:5px;align-items:center;padding:4px;border:1px solid #303758;border-radius:12px;background:#070914dd;backdrop-filter:blur(12px);box-shadow:0 9px 28px #0008}
+      .ul-view-controls[hidden]{display:none!important}
       .ul-view-controls button{width:auto;min-width:36px;min-height:36px;padding:6px 8px;border-radius:9px;font-size:13px;line-height:1;background:#11162a}
-      .ul-view-controls .ul-view-mode{min-width:88px}
+      .ul-view-controls .ul-view-mode{min-width:92px}
       .ul-view-zoom{min-width:48px;color:#b9c3e4;text-align:center;font-size:10px;font-variant-numeric:tabular-nums}
+      .ul-controls-toggle{position:absolute;z-index:6;right:10px;bottom:10px;width:auto;min-width:42px;min-height:38px;padding:7px 10px;border:1px solid #3a456d;border-radius:11px;background:#0a0f20e8;color:#f5f6ff;font:750 11px system-ui;box-shadow:0 9px 28px #0008;backdrop-filter:blur(12px)}
+      .ul-mode-hint{position:absolute;z-index:4;left:10px;bottom:10px;max-width:min(72%,420px);padding:6px 9px;border:1px solid #293354;border-radius:10px;background:#070914d9;color:#b8c2e0;font:10px/1.35 system-ui;pointer-events:none}
       .stage:fullscreen,.stage.ul-fallback-fullscreen{display:grid;place-items:center;width:100vw;height:100vh;max-width:none;border:0;border-radius:0;background:#000}
       .stage:fullscreen .sim,.stage.ul-fallback-fullscreen .sim{width:min(100vw,100vh);height:min(100vw,100vh);max-width:100vw;max-height:100vh;aspect-ratio:1;object-fit:contain}
-      .stage:fullscreen .hud,.stage.ul-fallback-fullscreen .hud,.stage:fullscreen .ul-view-controls,.stage.ul-fallback-fullscreen .ul-view-controls{z-index:5}
+      .stage:fullscreen .hud,.stage.ul-fallback-fullscreen .hud,.stage:fullscreen .ul-view-controls,.stage.ul-fallback-fullscreen .ul-view-controls,.stage:fullscreen .ul-controls-toggle,.stage.ul-fallback-fullscreen .ul-controls-toggle,.stage:fullscreen .ul-mode-hint,.stage.ul-fallback-fullscreen .ul-mode-hint{z-index:20002}
       .stage.ul-fallback-fullscreen{position:fixed;z-index:20000;inset:0}
-      body.ul-draw-lock{overflow:hidden!important;touch-action:none}
+      html.ul-draw-lock,body.ul-draw-lock{overflow:hidden!important;overscroll-behavior:none!important;touch-action:none}
       @media(max-width:760px){
         .toolbar.ul-touch-toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}.ul-fullscreen-button{grid-column:1/-1}
-        .ul-view-controls{right:7px;top:7px;gap:3px;padding:3px}.ul-view-controls button{min-width:32px;min-height:32px;padding:5px;font-size:12px}.ul-view-controls .ul-view-mode{min-width:74px;font-size:10px}.ul-view-zoom{display:none}
+        .ul-view-controls{right:7px;top:7px;gap:3px;padding:3px;max-width:calc(100% - 14px);overflow-x:auto}.ul-view-controls button{min-width:32px;min-height:32px;padding:5px;font-size:12px}.ul-view-controls .ul-view-mode{min-width:82px;font-size:10px}.ul-view-zoom{display:none}
+        .ul-controls-toggle{right:7px;bottom:7px;min-height:36px}.ul-mode-hint{left:7px;bottom:7px;max-width:calc(100% - 118px)}
       }
+      @media(max-width:420px){.ul-view-controls .ul-view-reset{display:none}.ul-mode-hint{font-size:9px}}
     `;
     document.head.appendChild(style);
 
@@ -41,7 +47,7 @@
     const pointers=new Map();
     let drawPointer=null;
     let lastPoint=null;
-    let navigationMode=false;
+    let interactionMode='draw';
     let panStart=null;
     let pinchStart=null;
     let suppressUntilRelease=false;
@@ -126,6 +132,7 @@
     };
 
     const startPointer=event=>{
+      if(interactionMode==='scroll')return;
       if(event.pointerType==='mouse'&&event.button!==0)return;
       event.preventDefault();
       pointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
@@ -134,7 +141,7 @@
       if(pointers.size>=2){beginPinch();return;}
       if(suppressUntilRelease)return;
 
-      if(navigationMode){
+      if(interactionMode==='pan'){
         panStart={id:event.pointerId,x:event.clientX,y:event.clientY,viewX:view.x,viewY:view.y};
         return;
       }
@@ -144,6 +151,7 @@
     };
 
     const movePointer=event=>{
+      if(interactionMode==='scroll')return;
       if(!pointers.has(event.pointerId))return;
       event.preventDefault();
       pointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
@@ -151,7 +159,7 @@
       if(pointers.size>=2){updatePinch();return;}
       if(suppressUntilRelease)return;
 
-      if(navigationMode&&panStart?.id===event.pointerId){
+      if(interactionMode==='pan'&&panStart?.id===event.pointerId){
         view.x=panStart.viewX+event.clientX-panStart.x;
         view.y=panStart.viewY+event.clientY-panStart.y;
         applyView();
@@ -163,6 +171,7 @@
     };
 
     const stopPointer=event=>{
+      if(interactionMode==='scroll')return;
       if(!pointers.has(event.pointerId))return;
       event.preventDefault();
       pointers.delete(event.pointerId);
@@ -183,6 +192,7 @@
     });
     canvas.addEventListener('contextmenu',event=>event.preventDefault());
     canvas.addEventListener('wheel',event=>{
+      if(interactionMode==='scroll')return;
       event.preventDefault();
       zoomAt(event.deltaY<0?1.16:1/1.16,event.clientX,event.clientY);
     },{passive:false});
@@ -190,21 +200,55 @@
     const controls=document.createElement('div');
     controls.className='ul-view-controls';
     controls.setAttribute('aria-label','Ansichtssteuerung');
-    controls.innerHTML='<button type="button" class="ul-view-mode" aria-pressed="false">✎ Zeichnen</button><button type="button" class="ul-view-out" aria-label="Verkleinern">−</button><span class="ul-view-zoom">100 %</span><button type="button" class="ul-view-in" aria-label="Vergrößern">+</button><button type="button" class="ul-view-reset" aria-label="Ansicht zentrieren">◎</button>';
+    controls.innerHTML='<button type="button" class="ul-view-mode" aria-label="Interaktionsmodus wechseln">✎ Zeichnen</button><button type="button" class="ul-view-out" aria-label="Verkleinern">−</button><span class="ul-view-zoom">100 %</span><button type="button" class="ul-view-in" aria-label="Vergrößern">+</button><button type="button" class="ul-view-reset" aria-label="Ansicht zentrieren">◎</button>';
     stage.appendChild(controls);
 
+    const modeHint=document.createElement('div');
+    modeHint.className='ul-mode-hint';
+    modeHint.setAttribute('aria-live','polite');
+    stage.appendChild(modeHint);
+
     const modeButton=controls.querySelector('.ul-view-mode');
-    const setNavigationMode=active=>{
-      navigationMode=Boolean(active);
-      canvas.classList.toggle('ul-pan-mode',navigationMode);
-      modeButton.textContent=navigationMode?'✋ Ansicht':'✎ Zeichnen';
-      modeButton.setAttribute('aria-pressed',String(navigationMode));
-      drawPointer=null;lastPoint=null;panStart=null;
+    const modes=['draw','pan','scroll'];
+    const modeMeta={
+      draw:{label:'✎ Zeichnen',hint:'Ein Finger zeichnet · zwei Finger zoomen'},
+      pan:{label:'✋ Ansicht',hint:'Ein Finger verschiebt · zwei Finger zoomen'},
+      scroll:{label:'↕ Scrollen',hint:'Über die Zeichenfläche normal durch die Seite scrollen'}
     };
-    modeButton.addEventListener('click',()=>setNavigationMode(!navigationMode));
+    const setInteractionMode=mode=>{
+      interactionMode=modes.includes(mode)?mode:'draw';
+      canvas.classList.toggle('ul-pan-mode',interactionMode==='pan');
+      canvas.classList.toggle('ul-scroll-mode',interactionMode==='scroll');
+      modeButton.textContent=modeMeta[interactionMode].label;
+      modeButton.setAttribute('aria-pressed',String(interactionMode!=='draw'));
+      modeButton.dataset.mode=interactionMode;
+      modeHint.textContent=modeMeta[interactionMode].hint;
+      pointers.clear();drawPointer=null;lastPoint=null;panStart=null;pinchStart=null;suppressUntilRelease=false;
+    };
+    modeButton.addEventListener('click',()=>{
+      const next=modes[(modes.indexOf(interactionMode)+1)%modes.length];
+      setInteractionMode(next);
+    });
     controls.querySelector('.ul-view-out').addEventListener('click',()=>zoomCenter(1/1.25));
     controls.querySelector('.ul-view-in').addEventListener('click',()=>zoomCenter(1.25));
     controls.querySelector('.ul-view-reset').addEventListener('click',resetView);
+
+    const controlsToggle=document.createElement('button');
+    controlsToggle.type='button';
+    controlsToggle.className='ul-controls-toggle';
+    controlsToggle.setAttribute('aria-controls','ul-emergence-controls');
+    controls.id='ul-emergence-controls';
+    stage.appendChild(controlsToggle);
+    const setControlsVisible=visible=>{
+      controls.hidden=!visible;
+      controlsToggle.textContent=visible?'× Steuerung':'⚙ Steuerung';
+      controlsToggle.setAttribute('aria-expanded',String(visible));
+      try{localStorage.setItem('universelab:emergence:controls',visible?'1':'0');}catch{}
+    };
+    let controlsVisible=true;
+    try{controlsVisible=localStorage.getItem('universelab:emergence:controls')!=='0';}catch{}
+    setControlsVisible(controlsVisible);
+    controlsToggle.addEventListener('click',()=>setControlsVisible(controls.hidden));
 
     toolbar.classList.add('ul-touch-toolbar');
     const fullscreenButton=document.createElement('button');
@@ -221,6 +265,8 @@
       fullscreenButton.textContent=active?'✕ Vollbild verlassen':'⛶ Vollbild zeichnen';
       fullscreenButton.setAttribute('aria-pressed',String(active));
       document.body.classList.toggle('ul-draw-lock',active);
+      document.documentElement.classList.toggle('ul-draw-lock',active);
+      if(active&&interactionMode==='scroll')setInteractionMode('draw');
       requestAnimationFrame(applyView);
     };
     const leaveFullscreen=async()=>{
@@ -246,10 +292,16 @@
       if(event.key==='0')resetView();
       if(event.key==='+'||event.key==='=')zoomCenter(1.25);
       if(event.key==='-')zoomCenter(1/1.25);
-      if(event.key.toLowerCase()==='v')setNavigationMode(!navigationMode);
+      if(event.key.toLowerCase()==='v')setInteractionMode(interactionMode==='pan'?'draw':'pan');
+      if(event.key.toLowerCase()==='s')setInteractionMode(interactionMode==='scroll'?'draw':'scroll');
     });
     addEventListener('resize',()=>requestAnimationFrame(applyView));
+    addEventListener('pagehide',()=>{
+      document.body.classList.remove('ul-draw-lock');
+      document.documentElement.classList.remove('ul-draw-lock');
+    });
 
+    setInteractionMode('draw');
     applyView();
     updateFullscreenButton();
   };
