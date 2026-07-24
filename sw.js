@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME='universelab-ui-2.2.0';
+const CACHE_NAME='universelab-ui-2.2.1';
 const APP_SHELL=[
   './',
   './index.html',
@@ -19,6 +19,7 @@ const APP_SHELL=[
   './lab-snapshots.js',
   './cosmic-events.js',
   './emergence-touch.js',
+  './compare-mobile.js',
   './portal-live.js',
   './manifest.webmanifest'
 ];
@@ -54,6 +55,11 @@ async function enhanceNavigation(response,url){
     html=html.includes('emergence-touch.js')
       ?html.replace(/emergence-touch\.js\?v=\d+/g,'emergence-touch.js?v=07')
       :html.replace('</body>','<script src="./emergence-touch.js?v=07"></script></body>');
+  }
+  if(url.pathname.endsWith('/compare.html')){
+    html=html.includes('compare-mobile.js')
+      ?html.replace(/compare-mobile\.js\?v=\d+/g,'compare-mobile.js?v=21')
+      :html.replace('</body>','<script src="./compare-mobile.js?v=21"></script></body>');
   }
 
   const headers=new Headers(response.headers);
