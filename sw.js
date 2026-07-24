@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME='universelab-ui-2.2.2';
+const CACHE_NAME='universelab-ui-2.2.3';
 const APP_SHELL=[
   './',
   './index.html',
@@ -41,6 +41,35 @@ self.addEventListener('activate',event=>{
   );
 });
 
+function optimiseCompare(html){
+  html=html.replace(
+    '</head>',
+    '<style id="ul-compare-guard">html,body{max-width:100%;overflow-x:hidden}.app{max-width:100%}</style></head>'
+  );
+
+  html=html.replace(
+    "function updateAll(){updateOutputs();drawMain();updateDistances();renderTable();drawSweep();calcFormula()}",
+    "function updateAll(){updateOutputs();const active=document.querySelector('.view.active')?.id;if(active==='view-compare')drawMain();else if(active==='view-distances'||active==='view-growth')updateDistances();else if(active==='view-table')renderTable();else if(active==='view-sweep')drawSweep();else if(active==='view-formulas')calcFormula()}"
+  );
+
+  html=html.replace(
+    "ids.forEach(id=>$('#'+id).addEventListener('input',updateAll));['zProbe','tableRows','sweepMin','sweepMax','sweepZ'].forEach(id=>$('#'+id).addEventListener('input',updateAll));",
+    "let ulUpdateTimer=0;const scheduleUpdate=()=>{clearTimeout(ulUpdateTimer);ulUpdateTimer=setTimeout(updateAll,70)};ids.forEach(id=>$('#'+id).addEventListener('input',scheduleUpdate));['zProbe','tableRows','sweepMin','sweepMax','sweepZ'].forEach(id=>$('#'+id).addEventListener('input',scheduleUpdate));"
+  );
+
+  html=html.replace(
+    'requestAnimationFrame(()=>{drawMain();drawSweep()})',
+    'requestAnimationFrame(updateAll)'
+  );
+
+  html=html.replace(
+    "renderFormulaList();selectFormula('a_z');updateAll()})();",
+    "renderFormulaList();selectFormula('a_z');updateOutputs();drawMain();setTimeout(updateDistances,25);setTimeout(renderTable,90);setTimeout(drawSweep,160)})();"
+  );
+
+  return html;
+}
+
 async function enhanceNavigation(response,url){
   if(!response||!response.ok)return response;
   const type=response.headers.get('content-type')||'';
@@ -62,9 +91,10 @@ async function enhanceNavigation(response,url){
       :html.replace('</body>','<script src="./emergence-touch.js?v=07"></script></body>');
   }
   if(url.pathname.endsWith('/compare.html')){
+    html=optimiseCompare(html);
     html=html.includes('compare-mobile.js')
-      ?html.replace(/compare-mobile\.js\?v=\d+/g,'compare-mobile.js?v=21')
-      :html.replace('</body>','<script src="./compare-mobile.js?v=21"></script></body>');
+      ?html.replace(/compare-mobile\.js\?v=\d+/g,'compare-mobile.js?v=22')
+      :html.replace('</body>','<script src="./compare-mobile.js?v=22"></script></body>');
   }
 
   const headers=new Headers(response.headers);
