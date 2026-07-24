@@ -21,11 +21,11 @@
     const pages=[
       ['./','⌂','Portal','portal'],
       ['./emergence.html?v=06','▦','UniverseLab','emergence'],
-      ['./journey.html?v=model1','◉','Journey','journey'],
+      ['./journey.html?v=14','◉','Journey','journey'],
       ['./observatory.html?v=model1','⌁','Observatory','observatory'],
       ['./compare.html?v=model1','≋','Modelle','compare'],
       ['./hyperlab.html','◇','HyperLab','hyperlab'],
-      ['./universe3d.html?v=085','✦','3D-Flug','universe3d'],
+      ['./universe3d.html?v=086','✦','3D-Flug','universe3d'],
       ['./validation.html','✓','Validierung','validation'],
       ['./about.html','◎','Über uns','about']
     ];
@@ -148,6 +148,13 @@
       snapshots.src='./lab-snapshots.js?v=10';
       snapshots.dataset.ulSnapshots='true';
       document.head.appendChild(snapshots);
+    }
+
+    if((pageKey==='journey'||pageKey==='universe3d')&&!document.querySelector('script[data-ul-events]')){
+      const events=document.createElement('script');
+      events.src='./cosmic-events.js?v=14';
+      events.dataset.ulEvents='true';
+      document.head.appendChild(events);
     }
 
     if(pageKey==='universe3d'&&!document.querySelector('script[data-ul-cinema]')){
