@@ -209,7 +209,26 @@
     const select=document.getElementById('ul-model-preset');
     if(select)select.value=state.preset in presets?state.preset:'custom';
   }
+  function applyPageFixes(){
+    document.querySelectorAll('a[href="./index.html?lab=1"],a[href="index.html?lab=1"]').forEach(link=>{
+      link.href='./emergence.html';
+      link.setAttribute('aria-label','Emergenz-Labor öffnen');
+    });
+
+    if(/journey\.html$/i.test(location.pathname)){
+      document.title=document.title.replace(/UniverseLab\s+1\.3/i,'UniverseLab 1.4');
+      const badge=document.querySelector('.badge');
+      if(badge&&/MVP\s+1\.3/i.test(badge.textContent))badge.textContent='MVP 1.4';
+    }
+
+    if(/universe3d\.html$/i.test(location.pathname)){
+      document.title=document.title.replace(/UniverseLab\s+0\.8\.3/i,'UniverseLab 0.8.6');
+      const badge=document.querySelector('.badge');
+      if(badge&&/Alpha\s+0\.8\.3/i.test(badge.textContent))badge.textContent='Alpha 0.8.6';
+    }
+  }
   function init(){
+    applyPageFixes();
     addStyles();
     bindInputs();
     injectPresetBar();
