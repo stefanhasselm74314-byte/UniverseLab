@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME='universelab-ui-2.3.0';
+const CACHE_NAME='universelab-ui-2.3.1';
 const APP_SHELL=[
   './',
   './index.html',
@@ -48,8 +48,8 @@ async function enhanceNavigation(response,url){
 
   let html=await response.text();
   html=html.includes('navigation-labels.js')
-    ?html.replace(/navigation-labels\.js\?v=\d+/g,'navigation-labels.js?v=1')
-    :html.replace('</body>','<script src="./navigation-labels.js?v=1"></script></body>');
+    ?html.replace(/navigation-labels\.js\?v=\d+/g,'navigation-labels.js?v=2')
+    :html.replace('</body>','<script src="./navigation-labels.js?v=2"></script></body>');
 
   if(url.pathname.endsWith('/universe3d.html')){
     html=html.includes('cinema-mode.js')
