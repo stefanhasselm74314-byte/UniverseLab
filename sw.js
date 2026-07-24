@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME='universelab-ui-2.1.1';
+const CACHE_NAME='universelab-ui-2.1.2';
 const APP_SHELL=[
   './',
   './index.html',
@@ -40,17 +40,26 @@ self.addEventListener('activate',event=>{
 });
 
 async function enhanceNavigation(response,url){
-  if(!response||!response.ok||!url.pathname.endsWith('/universe3d.html'))return response;
+  if(!response||!response.ok)return response;
   const type=response.headers.get('content-type')||'';
   if(!type.includes('text/html'))return response;
-  const html=await response.text();
-  const enhanced=html.includes('cinema-mode.js')
-    ?html.replace(/cinema-mode\.js\?v=\d+/g,'cinema-mode.js?v=085')
-    :html.replace('</body>','<script src="./cinema-mode.js?v=085"></script></body>');
+
+  let html=await response.text();
+  if(url.pathname.endsWith('/universe3d.html')){
+    html=html.includes('cinema-mode.js')
+      ?html.replace(/cinema-mode\.js\?v=\d+/g,'cinema-mode.js?v=085')
+      :html.replace('</body>','<script src="./cinema-mode.js?v=085"></script></body>');
+  }
+  if(url.pathname.endsWith('/emergence.html')){
+    html=html.includes('emergence-touch.js')
+      ?html.replace(/emergence-touch\.js\?v=\d+/g,'emergence-touch.js?v=07')
+      :html.replace('</body>','<script src="./emergence-touch.js?v=07"></script></body>');
+  }
+
   const headers=new Headers(response.headers);
   headers.delete('content-length');
   headers.set('cache-control','no-cache');
-  return new Response(enhanced,{status:response.status,statusText:response.statusText,headers});
+  return new Response(html,{status:response.status,statusText:response.statusText,headers});
 }
 
 self.addEventListener('fetch',event=>{
