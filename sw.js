@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME='universelab-ui-2.0.6';
+const CACHE_NAME='universelab-ui-2.0.7';
 const APP_SHELL=[
   './',
   './index.html',
@@ -15,6 +15,7 @@ const APP_SHELL=[
   './app-shell.js',
   './model-state.js',
   './cinema-mode.js',
+  './lab-snapshots.js',
   './emergence-touch.js',
   './portal-live.js',
   './manifest.webmanifest'
