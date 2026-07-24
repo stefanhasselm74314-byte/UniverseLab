@@ -8,13 +8,14 @@
     document.querySelectorAll('a[href*="compare.html"]').forEach(link=>{
       const spans=link.querySelectorAll('span');
       const label=spans.length?spans[spans.length-1]:null;
-      if(label&&/^(Modelle|Modellvergleich)$/i.test(label.textContent.trim())){
+      if(label&&/^(Modelle|Modellvergleich|Vergleichsrechner)$/i.test(label.textContent.trim())){
         label.textContent='Vergleichsrechner';
-      }else if(!spans.length&&/^(Modelle|Modellvergleich)$/i.test(link.textContent.trim())){
+      }else if(!spans.length&&/^(Modelle|Modellvergleich|Vergleichsrechner)$/i.test(link.textContent.trim())){
         link.textContent='Vergleichsrechner';
       }
-      link.setAttribute('aria-label','UniverseLab Vergleichsrechner öffnen');
-      link.title='Vergleichsrechner mit interaktivem Tafelwerk';
+      link.href='./compare.html?v=230';
+      link.setAttribute('aria-label','UniverseLab Vergleichsrechner 2.1 öffnen');
+      link.title='Vergleichsrechner 2.1 mit interaktivem Tafelwerk';
     });
 
     if(/compare\.html$/i.test(location.pathname)){
