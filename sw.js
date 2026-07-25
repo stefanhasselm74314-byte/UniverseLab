@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME='universelab-ui-2.3.1';
+const CACHE_NAME='universelab-ui-2.3.2';
 const APP_SHELL=[
   './',
   './index.html',
@@ -7,8 +7,7 @@ const APP_SHELL=[
   './portal.html',
   './journey.html',
   './observatory.html',
-  './compare.html',
-  './compare-app.js',
+  './compare-safe.html',
   './hyperlab.html',
   './universe3d.html',
   './validation.html',
@@ -48,8 +47,8 @@ async function enhanceNavigation(response,url){
 
   let html=await response.text();
   html=html.includes('navigation-labels.js')
-    ?html.replace(/navigation-labels\.js\?v=\d+/g,'navigation-labels.js?v=2')
-    :html.replace('</body>','<script src="./navigation-labels.js?v=2"></script></body>');
+    ?html.replace(/navigation-labels\.js\?v=\d+/g,'navigation-labels.js?v=3')
+    :html.replace('</body>','<script src="./navigation-labels.js?v=3"></script></body>');
 
   if(url.pathname.endsWith('/universe3d.html')){
     html=html.includes('cinema-mode.js')
@@ -85,6 +84,7 @@ self.addEventListener('fetch',event=>{
         return response;
       }catch(error){
         let fallback=await caches.match(event.request)
+          ||await caches.match('./compare-safe.html')
           ||await caches.match('./')
           ||await caches.match('./index.html');
         if(fallback)return await enhanceNavigation(fallback,url);
