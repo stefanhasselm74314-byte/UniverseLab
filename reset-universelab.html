@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070914">
+<title>UniverseLab zurücksetzen</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:grid;place-items:center;padding:18px;background:radial-gradient(circle at 70% 0,#282c67,#0b1022 42%,#05070e);color:#f5f6ff;font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}.card{width:min(620px,100%);padding:26px;border:1px solid #344066;border-radius:22px;background:#0c1225;box-shadow:0 24px 80px #0009}h1{margin:0 0 10px;font-size:clamp(27px,7vw,42px)}p{color:#b7c1dc}.state{margin:18px 0;padding:12px;border:1px solid #385470;border-radius:12px;background:#0a1d2c;color:#cceeff}.ok{border-color:#37654f;background:#0b241b;color:#c4f6da}.button{display:none;width:100%;min-height:50px;border:0;border-radius:13px;background:linear-gradient(135deg,#6754ea,#907cff);color:#fff;text-decoration:none;font-weight:850;place-items:center}.button.show{display:grid}.small{font-size:11px;color:#8e9ab9}
+</style>
+</head>
+<body>
+<main class="card">
+<h1>UniverseLab wird bereinigt</h1>
+<p>Diese Seite entfernt ausschließlich den alten UniverseLab-Service-Worker und dessen Offline-Dateien. Andere Webseiten und Opera-Daten bleiben unberührt.</p>
+<div id="state" class="state">Offline-Cache und Service Worker werden entfernt …</div>
+<a id="start" class="button" href="./index.html?clean=250726">Sauberes UniverseLab öffnen</a>
+<p class="small">Nach erfolgreicher Bereinigung erscheint der Startknopf automatisch.</p>
+</main>
+<script>
+(function(){'use strict';
+var state=document.getElementById('state'),start=document.getElementById('start');
+function done(text){state.textContent=text;state.classList.add('ok');start.classList.add('show')}
+Promise.all([
+  ('serviceWorker' in navigator?navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.map(function(r){return r.unregister()}))}):Promise.resolve()),
+  ('caches' in window?caches.keys().then(function(keys){return Promise.all(keys.map(function(k){return caches.delete(k)}))}):Promise.resolve())
+]).then(function(){done('Bereinigung abgeschlossen. Der alte Ladeprozess ist entfernt.')}).catch(function(){done('Die automatische Bereinigung ist beendet. UniverseLab kann jetzt neu geöffnet werden.')});
+setTimeout(function(){if(!start.classList.contains('show'))done('Zeitlimit erreicht. Der saubere Start ist jetzt freigegeben.')},4000);
+})();
+</script>
+</body>
+</html>
