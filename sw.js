@@ -1,7 +1,23 @@
 'use strict';
-const CACHE_NAME='universelab-ui-2.4.0';
-const APP_SHELL=['./','./index.html','./emergence.html','./portal.html','./journey.html','./observatory.html','./compare.html','./compare-direct.html','./hyperlab.html','./universe3d.html','./validation.html','./guide.html','./about.html','./app-shell.js','./model-state.js','./cinema-mode.js','./lab-snapshots.js','./cosmic-events.js','./emergence-touch.js','./navigation-labels.js','./portal-live.js','./manifest.webmanifest'];
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_SHELL)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE_NAME).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
-async function enhance(response){if(!response||!response.ok)return response;const type=response.headers.get('content-type')||'';if(!type.includes('text/html'))return response;let html=await response.text();html=html.includes('navigation-labels.js')?html.replace(/navigation-labels\.js\?v=\d+/g,'navigation-labels.js?v=4'):html.replace('</body>','<script src="./navigation-labels.js?v=4"></script></body>');const headers=new Headers(response.headers);headers.delete('content-length');headers.set('cache-control','no-cache');return new Response(html,{status:response.status,statusText:response.statusText,headers})}
-self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;const url=new URL(event.request.url);if(url.origin!==self.location.origin)return;if(event.request.mode==='navigate'){event.respondWith((async()=>{try{let response=await fetch(event.request);response=await enhance(response);if(response&&response.ok){const cache=await caches.open(CACHE_NAME);cache.put(event.request,response.clone())}return response}catch{let fallback=await caches.match(event.request)||await caches.match('./compare-direct.html')||await caches.match('./')||await caches.match('./index.html');return fallback?enhance(fallback):new Response('UniverseLab offline',{status:503})}})());return}event.respondWith((async()=>{const cached=await caches.match(event.request);if(cached)return cached;try{const response=await fetch(event.request);if(response&&response.ok&&response.type!=='opaque'){const cache=await caches.open(CACHE_NAME);cache.put(event.request,response.clone())}return response}catch{return new Response('',{status:504})}})())});
+
+// UniverseLab PWA reset 2026-07-25:
+// Der frühere Network-/Cache-Worker konnte in einzelnen Opera-Installationen
+// Navigationen und Skriptanforderungen dauerhaft offen halten. Dieser Worker
+// räumt alle alten Caches auf und meldet sich anschließend selbst ab.
+
+self.addEventListener('install',event=>{
+  event.waitUntil(self.skipWaiting());
+});
+
+self.addEventListener('activate',event=>{
+  event.waitUntil((async()=>{
+    const keys=await caches.keys();
+    await Promise.all(keys.map(key=>caches.delete(key)));
+    await self.registration.unregister();
+    const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
+    clients.forEach(client=>client.postMessage({type:'UNIVERSELAB_SW_REMOVED'}));
+  })());
+});
+
+// Absichtlich kein fetch-Handler: alle Dateien werden wieder direkt
+// über GitHub Pages geladen und keine Anfrage kann im Worker hängen bleiben.
