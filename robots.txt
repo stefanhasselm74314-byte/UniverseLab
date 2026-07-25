@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /UniverseLab/
+
+Sitemap: https://stefanhasselm74314-byte.github.io/UniverseLab/sitemap.xml
