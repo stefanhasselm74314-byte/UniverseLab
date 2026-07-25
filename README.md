@@ -1,6 +1,10 @@
 # UniverseLab
 
-UniverseLab ist eine mobile, browserbasierte Simulationsumgebung für zelluläre Universen, ΛCDM-Hintergrundentwicklung und lineare Strukturbildung.
+**UniverseLab von Stefan Hasselmeyer** ist eine mobile, browserbasierte Simulations- und Lernumgebung für Kosmologie, zelluläre Universen, ΛCDM-Hintergrundentwicklung und lineare Strukturbildung.
+
+- **Live-Anwendung:** https://stefanhasselm74314-byte.github.io/UniverseLab/
+- **Quellcode:** https://github.com/stefanhasselm74314-byte/UniverseLab
+- **Entwicklung:** Stefan Hasselmeyer
 
 ## Status
 
@@ -68,6 +72,17 @@ Nicht enthalten sind Strahlungsperturbationen, Neutrinofreiströmung, baryonisch
 
 Die Zellautomaten-Dynamik bleibt von der kosmologischen Wachstumsrechnung getrennt. Die Abbildung des Skalenfaktors auf die sichtbare Gittergröße ist nur eine logarithmisch komprimierte Visualisierung.
 
+## Wissenschaftliche Einordnung
+
+UniverseLab unterscheidet sichtbar zwischen:
+
+- **etablierter Physik**,
+- **numerischer Analyse**,
+- **didaktischer oder heuristischer Modellierung**,
+- **spekulativen Hypothesen ohne Evidenzfreigabe**.
+
+Insbesondere stellt die Anwendung keine bestätigte Ableitung einer 6D-Hyperzeit-Theorie dar. Experimentelle Module dienen der Sensitivitätsanalyse, der Identifizierbarkeitsprüfung und der transparenten Darstellung offener Blocker.
+
 ## Start
 
 `index.html` direkt im Browser öffnen oder GitHub Pages aktivieren:
@@ -75,6 +90,10 @@ Die Zellautomaten-Dynamik bleibt von der kosmologischen Wachstumsrechnung getren
 1. Repository → Settings → Pages
 2. Source: `Deploy from a branch`
 3. Branch: `main`, Ordner: `/ (root)`
+
+## Auffindbarkeit
+
+Relevante Suchbegriffe: UniverseLab, Stefan Hasselmeyer, Kosmologie, Astrophysik, ΛCDM, Friedmann-Gleichung, kosmische Expansion, Strukturbildung, numerische Simulation, Hyperzeit, 6D-Modell.
 
 ## Lizenz
 
