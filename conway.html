@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b16">
+<title>Conway · Emergenz-Labor · UniverseLab</title>
+<meta name="description" content="Direktzugang zu Conways Game of Life, Zellautomaten, Mustern, Expansion und kosmologischer Emergenz in UniverseLab.">
+<style>
+:root{color-scheme:dark;--bg:#060812;--panel:#0d1325;--line:#2a3657;--text:#f4f6ff;--muted:#a9b3cf;--accent:#8d7cff;--good:#75dfb8}*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:grid;place-items:center;padding:18px;background:radial-gradient(circle at 70% -10%,#283261,#0a0e1d 38%,#05060c 78%);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}.card{width:min(720px,100%);padding:24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#111936,#090e1d);box-shadow:0 25px 80px #0009}h1{margin:0 0 8px;font-size:clamp(27px,6vw,45px)}p{color:var(--muted)}.badge{display:inline-block;padding:5px 9px;border:1px solid #34745f;border-radius:999px;color:var(--good);font-size:11px}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 14px;border:1px solid #3b486d;border-radius:11px;background:#11182d;color:#fff;text-decoration:none;font-weight:800}a.primary{border:0;background:linear-gradient(135deg,#6554e8,#917cff)}
+</style>
+</head>
+<body>
+<main class="card">
+<span class="badge">Conway B3/S23 · Zellautomat</span>
+<h1>Conway · Emergenz-Labor</h1>
+<p>Hier findest du Conways Game of Life, Gleiter, Zufallsmuster, HighLife, Seeds, Day &amp; Night sowie die getrennt gekennzeichnete Kopplung an kosmologische Expansion und Epochen.</p>
+<div class="actions"><a class="primary" id="open" href="./emergence.html?v=conway1">Labor öffnen →</a><a href="./">Zum Portal</a><a href="./guide.html#emergence">Erklärung</a></div>
+</main>
+<script>
+setTimeout(function(){location.replace('./emergence.html?v=conway1')},700);
+</script>
+</body>
+</html>
