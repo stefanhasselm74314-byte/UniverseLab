@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "HZ-LEGACY-2026-06-29",
+  "archive": {
+    "file": "hyperzeit_chat_save.zip",
+    "created_at": "2026-06-29T14:37:45",
+    "audited_at": "2026-07-27",
+    "zip_entries": 33,
+    "manifest_entries": 31,
+    "uncompressed_bytes": 45727880,
+    "complete_chat_export": false,
+    "exact_binary_duplicates": 0
+  },
+  "formula_bible": {
+    "file": "Hyperzeit_Formelbibel_v1_Professional.docx",
+    "formula_count": 64,
+    "classification": {
+      "model": 18,
+      "conditional": 10,
+      "open": 16,
+      "historical": 9,
+      "diagnostic": 8,
+      "established": 3
+    },
+    "ranges": [
+      {"ids":"H1-H18","topic":"Geometrie, Wirkung und Bulk-EOM","status":"model","assessment":"Mit S6-Q1, Signatur, Konventionen und Randbedingungen abgleichen."},
+      {"ids":"H19-H28","topic":"Zero-Modes und 6D-zu-4D-Reduktion","status":"conditional","assessment":"EFT-Schablonen; Normalisierung, KK-Spektrum und Kopplungen zweigspezifisch prüfen."},
+      {"ids":"H29-H33","topic":"Theta-Dynamik-Closure","status":"open","assessment":"Phänomenologische Closure ohne aktuelle Parentableitung."},
+      {"ids":"H34-H42","topic":"a0, MOND, MDAR und BTFR","status":"historical","assessment":"Historischer Zweig; keine aktuelle Hyperzeit-Vorhersage."},
+      {"ids":"H43-H53","topic":"Slip, Lensing, Yukawa und GW","status":"open","assessment":"Arbeitsansätze ohne geschlossene aktuelle 6D-Ableitung."},
+      {"ids":"H54-H56","topic":"generische Statistik","status":"established","assessment":"Allgemeine Statistikformeln, keine Hyperzeit-Evidenz."},
+      {"ids":"H57-H64","topic":"Likelihood-Schablonen und EFT-Bedingungen","status":"diagnostic","assessment":"Diagnostisch beziehungsweise notwendig, nicht hinreichend für Datenfreigabe oder Ghostfreiheit."}
+    ]
+  },
+  "pipeline": {
+    "legacy_declaration": ["BAO-Modul steht", "RSD/fSigma8-Modul steht", "Pantheon+/SN-Modul steht", "KiDS als S8-Proxy eingebaut"],
+    "present": ["KiDS-Such- und FITS-Inspektionscode", "drei Jupyter-Notebooks", "DESI-/CosmoSIS-Tail-Dokument"],
+    "missing": ["KiDS_Legacy_xipm.fits", "KiDS_Legacy_bandpowers.fits", "KiDS_Legacy_cosebis.fits", "COV_bandpower.dat", "COV_bandpower_blindC.dat", "n(z)-Dateien", "vollständige reale Likelihood-Konfiguration"],
+    "current_status": "historical_pipeline_note_not_validated_data_chain"
+  },
+  "notebooks": [
+    {"file":"hyperzeit_cosmology_pipeline.ipynb","cells":14,"role":"early_prototype","reuse":["solve_ivp scaffold","field evolution demo"],"status":"legacy"},
+    {"file":"hyperzeit_cosmology_pipeline_v2_full.ipynb","cells":32,"role":"main_historical_test_machine","reuse":["N=ln(a) background","distances","growth","Geff/eta/Sigma interfaces","mock likelihood","parameter scan","NPZ export"],"status":"quarantined_code"},
+    {"file":"hyperzeit_pipeline_v3_data_ready.ipynb","cells":16,"role":"small_data_demo","reuse":["LCDM background","distance modulus","chi2","H0 grid"],"status":"mock_only"}
+  ],
+  "claim_audit": [
+    {"claim":"light_radion_explains_DM_DE","status":"blocked","current":"Minimal light unscreened radion branch blocked; alternative embedding, bulk and relic branches remain open."},
+    {"claim":"MOND_exact_no_free_parameters","status":"historical","current":"a0/MOND/MDAR/BTFR relations are legacy phenomenology without current parent derivation."},
+    {"claim":"two_normal_directions_equal_DM_DE","status":"rejected_gauge_dependent","current":"Use only normal-frame invariant quantities such as B2=b_i b^i."},
+    {"claim":"positive_Z_implies_full_ghost_freedom","status":"limited","current":"Necessary EFT conditions, not sufficient for full 2T, KK and boundary ghost freedom."},
+    {"claim":"DESI_KiDS_confirm_hyperzeit_or_better_fit","status":"not_admissible","current":"K1-D not released and K1-E not admissible; no validated joint likelihood."},
+    {"claim":"one_over_f_GW_phase_prediction","status":"open","current":"No complete linearized 6D wave derivation."},
+    {"claim":"theta_drift_explains_baryogenesis","status":"open","current":"Chemical-potential building block is not a complete Sakharov-compatible model."},
+    {"claim":"hyperzeit_removes_initial_singularity","status":"open_COS-03.1","current":"Curvature invariants, geodesics, kinetic matrix and perturbations remain to be tested."},
+    {"claim":"B_sector_automatically_solves_lensing_clusters","status":"open","current":"Slip/Yukawa relations are working parametrizations, not current 6D predictions."},
+    {"claim":"physical_second_time_already_consistent","status":"fundamental_hypothesis","current":"S6-Q1 is one-time; a real second time requires constraint or projection architecture."}
+  ],
+  "deduplication": [
+    {"group":"Final_With_Lists_vs_Refs_Final","text_similarity":"100_percent_extracted_text","decision":"retain_one_legacy_reference"},
+    {"group":"hyperzeit_clean_vs_refined_A","text_similarity":"about_99.64_percent","decision":"inspect_diff_then_consolidate"},
+    {"group":"ULTRA_detail_family","text_similarity":"about_62_to_92_percent","decision":"index_as_chapter_modules"},
+    {"group":"Masterstruktur_family","structure":"126_to_132_headings","decision":"use_TITLED_FINAL_as_monograph_structure"}
+  ],
+  "import_policy": {
+    "retain": ["tagged geometry and reduction formula sources", "generic statistics", "FITS/HDU/covariance code", "background-distance-growth code scaffolds", "monograph master structure"],
+    "quarantine": ["MOND and a0 result claims", "radion DM/DE claims", "automatic lensing claims", "one-over-f GW prediction claim", "full ghost-freedom claim", "data confirmation and better-fit claims"],
+    "verify": ["all observational numbers in echte Daten.docx", "DESI vector ordering and covariance", "complete primary citations", "Ricci reduction signs and units"]
+  }
+}
