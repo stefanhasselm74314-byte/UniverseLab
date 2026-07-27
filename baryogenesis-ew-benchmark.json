@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2A-EWSPH-0.2",
+  "title": "Electroweak Sphaleron Benchmark",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2A-1": "BENCHMARK_DEFINED",
+    "COS-04.2A-2": "PASS_BENCHMARK",
+    "COS-04.2A-3": "REDUCED_INCOMPLETE",
+    "COS-04.2A-4": "MINIMAL_MODE_ACTIVE",
+    "COS-04.2A-5": "OPEN",
+    "COS-04.2B": "BLOCKED"
+  },
+  "constants": {
+    "Tc_GeV": 159.5,
+    "broken_fit_min_GeV": 130.0,
+    "symmetric_prefactor": 18.0,
+    "alphaW_default": 0.0338,
+    "broken_fit_slope_per_GeV": 0.83,
+    "broken_fit_intercept": -147.7,
+    "relaxation_alpha": 0.1015,
+    "gstar_default": 106.75,
+    "reduced_planck_mass_GeV": 2.435e18,
+    "entropy_to_photon_ratio": 7.04,
+    "sphaleron_conversion_B_over_BminusL": "28/79",
+    "equilibrium_BplusL_over_BminusL": "-23/79"
+  },
+  "equations": {
+    "symmetric_rate": "gamma_ws/T^4 = 18 alpha_W^5",
+    "broken_rate": "ln(gamma_ws/T^4) = 0.83 T/GeV - 147.7",
+    "hubble": "H = sqrt(pi^2 g*/90) T^2/Mbar_Pl",
+    "relaxation_ratio": "R_ws = gamma_ws/(0.1015 H T^3)",
+    "charge_basis": "Y_minus=Y_B-Y_L; Y_plus=Y_B+Y_L",
+    "reconstruction": "Y_B=(Y_plus+Y_minus)/2; Y_L=(Y_plus-Y_minus)/2",
+    "source_equilibrium": "Y_plus_eq=-(23/79)Y_minus+c_theta epsilon_theta(T)",
+    "transport": "dY_plus/dN=-R_ws(Y_plus-Y_plus_eq)"
+  },
+  "default_dry_run": {
+    "Ti_GeV": 300.0,
+    "Tf_GeV": 120.0,
+    "Y_B_minus_L_initial": 0.0,
+    "Y_B_plus_L_initial": 0.0,
+    "epsilon_theta_at_Tc": 1e-8,
+    "epsilon_temperature_exponent": 0.0,
+    "c_theta": 0.018,
+    "expected_freezeout_GeV_approx": 131.5,
+    "expected_eta_B_approx": 6.336e-10
+  },
+  "validity": {
+    "symmetric_rate": "T >= Tc; alpha_W held constant in the web benchmark",
+    "broken_rate": "130 GeV < T < Tc",
+    "below_130_GeV": "visible extrapolation only; no validation effect",
+    "transport": "one B+L relaxation mode with exactly conserved B-L",
+    "theta_source": "external diagnostic input; not derived from 6D"
+  },
+  "primary_sources": [
+    {
+      "title": "The Sphaleron Rate in the Minimal Standard Model",
+      "authors": "D'Onofrio, Rummukainen, Tranberg",
+      "year": 2014,
+      "doi": "10.1103/PhysRevLett.113.141602",
+      "arxiv": "1404.3565"
+    },
+    {
+      "title": "Cosmological baryon and lepton number in the presence of electroweak fermion-number violation",
+      "authors": "Harvey, Turner",
+      "year": 1990,
+      "doi": "10.1103/PhysRevD.42.3344"
+    },
+    {
+      "title": "Effective chemical potential in spontaneous baryogenesis",
+      "authors": "Dasgupta, Jain, Rangarajan",
+      "year": 2018,
+      "doi": "10.1103/PhysRevD.98.083527",
+      "arxiv": "1808.04027"
+    }
+  ]
+}
