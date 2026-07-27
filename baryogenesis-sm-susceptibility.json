@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2A-SM-SUSC-0.3",
+  "title": "Massless flavor-symmetric Standard Model susceptibility benchmark",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2A-1": "BPLUSL_BENCHMARK_DEFINED",
+    "COS-04.2A-2": "PASS_BENCHMARK",
+    "COS-04.2A-3": "PASS_MASSLESS_SM_BENCHMARK",
+    "COS-04.2A-4": "BPLUSL_MINIMAL_MODE_ACTIVE",
+    "COS-04.2A-5": "OPEN",
+    "COS-04.2B": "BLOCKED"
+  },
+  "assumptions": [
+    "electroweak-symmetric, relativistic and massless plasma benchmark",
+    "three generations combined in a flavor-symmetric sector",
+    "all Standard Model Yukawa interactions treated as equilibrated",
+    "gauge interactions equalize components inside each multiplet",
+    "total hypercharge vanishes",
+    "B-L is exactly conserved",
+    "no right-handed neutrinos or additional fields",
+    "external source couples to B+L with mu_S = dot(Theta)/f_Theta"
+  ],
+  "species": [
+    {"name":"q_L","chi_over_T2":"3","B":"1/3","L":"0","Y":"1/6","S_BplusL":"1/3"},
+    {"name":"u_R","chi_over_T2":"3/2","B":"1/3","L":"0","Y":"2/3","S_BplusL":"1/3"},
+    {"name":"d_R","chi_over_T2":"3/2","B":"1/3","L":"0","Y":"-1/3","S_BplusL":"1/3"},
+    {"name":"l_L","chi_over_T2":"1","B":"0","L":"1","Y":"-1/2","S_BplusL":"1"},
+    {"name":"e_R","chi_over_T2":"1/2","B":"0","L":"1","Y":"-1","S_BplusL":"1"},
+    {"name":"H","chi_over_T2":"2/3","B":"0","L":"0","Y":"1/2","S_BplusL":"0"}
+  ],
+  "matrix": {
+    "basis": ["B-L","Y"],
+    "A": [["13/6","4/3"],["4/3","11/6"]],
+    "determinant": "79/36",
+    "source_vector_for_muS": ["-5/6","-2/3"],
+    "lagrange_multipliers": {
+      "a": "(66 C/T^2 + 23 mu_S)/79",
+      "b": "(-48 C/T^2 + 12 mu_S)/79"
+    }
+  },
+  "equilibrium_map": {
+    "nB_over_T2": "(28/79) n_(B-L)/T^2 + (72/79) mu_S",
+    "nL_over_T2": "(-51/79) n_(B-L)/T^2 + (72/79) mu_S",
+    "nBplusL_over_T2": "(-23/79) n_(B-L)/T^2 + (144/79) mu_S",
+    "Yplus_eq": "-(23/79) Yminus + c_SM epsilon_Theta",
+    "c_SM": "(144/79)*45/(2*pi^2*g_*s)",
+    "YB_source_coefficient": "(72/79)*45/(2*pi^2*g_*s)"
+  },
+  "defaults": {
+    "gstar": 106.75,
+    "c_SM_for_Yplus": 0.03892694216359937,
+    "c_SM_for_YB": 0.019463471081799685,
+    "target_etaB": 6.1e-10,
+    "required_epsilon_Theta_approx": 4.451812675579314e-9,
+    "freezeout_GeV_approx": 131.5
+  },
+  "limitations": [
+    "thermal masses and Higgs expectation value near the electroweak crossover are omitted",
+    "temperature-dependent susceptibilities are omitted",
+    "lepton flavor differences and partial equilibration are omitted",
+    "running alpha_W and lattice-rate uncertainties are omitted in the central web curve",
+    "the basis-independent mapping from the Theta operator to the source vector is not derived",
+    "Theta backreaction, energy density, washout and isocurvature are not included"
+  ],
+  "primary_sources": [
+    {"authors":"Harvey, Turner","year":1990,"title":"Cosmological baryon and lepton number in the presence of electroweak fermion-number violation","doi":"10.1103/PhysRevD.42.3344"},
+    {"authors":"D'Onofrio, Rummukainen, Tranberg","year":2014,"title":"The Sphaleron Rate in the Minimal Standard Model","doi":"10.1103/PhysRevLett.113.141602","arxiv":"1404.3565"},
+    {"authors":"Domcke, Ema, Mukaida, Yamada","year":2020,"title":"Spontaneous Baryogenesis from Axions with Generic Couplings","doi":"10.1007/JHEP08(2020)096","arxiv":"2006.03148"},
+    {"authors":"Dasgupta, Jain, Rangarajan","year":2018,"title":"Effective chemical potential in spontaneous baryogenesis","doi":"10.1103/PhysRevD.98.083527","arxiv":"1808.04027"}
+  ]
+}
