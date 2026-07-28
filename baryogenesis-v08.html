@@ -1,0 +1,60 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#121020"><meta name="description" content="UniverseLab Baryogenese-Labor 0.8: kanonischer EFT-, Strong-Coupling-, Rückwirkungs- und Radiativitätsaudit einer extrem kleinen kinetischen Norm."><title>UniverseLab · Baryogenese-Labor 0.8</title><link rel="stylesheet" href="./baryogenesis-v08.css?v=1"></head><body>
+<nav><a href="./">← Portal</a><a href="./baryogenesis-positive-kinetics.json">Kinetik 0.7</a><a href="./hyperlab.html?v=10">HyperLab</a><a href="./tafelwerk.html?v=20">∑ Tafelwerk</a><a href="./compare-desktop.html?v=13">Vergleichsrechner</a></nav>
+<main>
+<section class="hero"><div class="eye">Hyperzeit / HPVS · COS-04.2B-1e · EFT-Kontrolle</div><h1>Baryogenese-Labor 0.8</h1><p class="lead">Version 0.8 prüft die Konsequenz der in 0.7 benötigten Normhierarchie. Nach der kanonischen Normierung φ=√Zeff·q wird zwar die gewünschte Stromkopplung stärker, zugleich werden aber generische Selbstwechselwirkungen um inverse Potenzen von Zeff verstärkt. Das Labor berechnet Strong-Coupling-Skalen, Rückwirkungs- und KK-Gates, Potentialtuning und eine transparente NDA-Schätzung der radiativen Stabilität.</p><div class="status"><span class="pill">● kanonische Normierung</span><span class="pill">● X²-Strong-Coupling</span><span class="pill">● KK- vs. M₆-Suppression</span><span class="pill">● Quartik- und Massentuning</span><span class="pill">● Stromschleifen-NDA</span><span class="pill">● gemeinsames Z-Fenster</span><span class="pill">● K1-D/K1-E geschlossen</span></div></section>
+<section class="sec"><div class="head"><div><div class="eye">Kanonischer Realitätscheck</div><h2>Warum eine kleine Norm nicht kostenlos ist</h2></div></div><div class="grid">
+<article class="card wide"><span class="tag ok">Canonical map</span><h3>Feld und Stromkopplung</h3><div class="eq">ℒ₂=−½Zeff(∂q)², &nbsp; φ=√Zeff·q<br>F₀=Mᵦ²√Vᵂ, &nbsp; feff=F₀√Zeff<br>εΘ=φ̇/(feff T)</div><p>Eine kleine kinetische Norm reduziert feff und kann die gewünschte Baryogenesequelle verstärken. Genau dieselbe Reskalierung wirkt jedoch auf jeden weiteren Operator des q-Sektors.</p></article>
+<article class="card wide"><span class="tag stop">Generic derivative EFT</span><h3>Führender shift-symmetrischer Operator</h3><div class="eq">ℒ⊃cX(∂q)⁴/Λ₀⁴<br>⇒ ℒ⊃cX(∂φ)⁴/(Zeff²Λ₀⁴)<br>Λsc=√Zeff·Λ₀/|cX|¹⁄⁴</div><p>Bei Zeff≈10⁻¹⁶ sinkt eine am KK-Maßstab unterdrückte Wechselwirkung um acht Größenordnungen im Cutoff. Der relevante Vergleich ist Λsc gegen Temperatur und Hintergrundgradient √|φ̇|.</p></article>
+<article class="card wide"><span class="tag warn">Potential sector</span><h3>Nicht geschützte Operatoren</h3><div class="eq">λq q⁴/4! ⇒ λφ=λq/Zeff²<br>½m<sub>q</sub>²q² ⇒ mφ=mq/√Zeff<br>λq≲16π²Zeff², &nbsp; mq≲√Zeff·H</div><p>Eine exakte oder sehr gute Verschiebungssymmetrie kann diese Operatoren schützen. Ohne solche Symmetrie verlangt Zeff≈10⁻¹⁶ extreme kleine Bare-Koeffizienten.</p></article>
+<article class="card wide"><span class="tag cond">Loop benchmark</span><h3>Derivative Stromschleifen</h3><div class="eq">δZJ/Zeff ~ NJ/(16π²)·(ΛJ/feff)²</div><p>Diese Formel ist nur eine NDA-Größenordnung. Sie zeigt, dass die Stromkopplung selbst nicht zwingend das größte Problem ist; gefährlicher können generische KK- oder Bulk-induzierte Selbstoperatoren sein.</p></article>
+</div></section>
+<section class="sec"><div class="warning"><b>Status-Firewall:</b> Ein berechnetes EFT-Fenster ist konditional. Es gilt nur für die eingegebenen Operatoren und Suppressionsskalen. Ein fehlender Operator darf nur dann auf null gesetzt werden, wenn eine Symmetrie oder die konkrete Parentwirkung ihn tatsächlich verbietet.</div></section>
+<section class="sec"><div class="head"><div><div class="eye">Interaktiver Strong-Coupling-Audit</div><h2>Norm, Cutoff und Radiativität</h2></div><p>Der voreingestellte natürliche Test nimmt einen O(1)-Operator (∂q)⁴ am KK-Maßstab an. Das ist bewusst der konservative, nicht geschützte Benchmark.</p></div><div class="lab">
+<section class="panel controls"><h3>Eingaben</h3>
+<label class="field"><span>Preset</span><select id="preset"><option value="kk">Generische KK-EFT</option><option value="uv">Nur UV/M₆-supprimiert</option><option value="protected">Symmetriegeschützter Stressfall</option><option value="potential">Ungeschütztes Potential</option></select></label>
+<div class="subhead">Geometrie und Quelle</div>
+<label class="field"><span>log₁₀ Zeff</span><input id="logZ" type="number" value="-16" step="0.5"></label>
+<label class="field"><span>MKK<small>GeV</small></span><input id="MKK" type="number" value="1000"></label>
+<label class="field"><span>M₆<small>GeV</small></span><input id="M6" type="number" value="2e10"></label>
+<label class="field"><span>Mᵦ<small>GeV</small></span><input id="Mb" type="number" value="2e10"></label>
+<label class="field"><span>cV in √Vᵂ=cV/MKK</span><input id="cV" type="number" value="3.544907702" step="0.01"></label>
+<label class="field"><span>T<small>GeV</small></span><input id="T" type="number" value="131.515"></label>
+<label class="field"><span>g*</span><input id="gstar" type="number" value="106.75"></label>
+<label class="field"><span>εΘ</span><input id="eps" type="number" value="4.45e-9"></label>
+<label class="field"><span>max. Ωkin</span><input id="omegaMax" type="number" value="0.01" step="0.001"></label>
+<div class="subhead">Führender X²-Operator</div>
+<label class="field"><span>Suppressionsskala Λ₀</span><select id="scaleChoice"><option value="mkk">MKK</option><option value="m6">M₆</option><option value="mb">Mᵦ</option><option value="custom">benutzerdefiniert</option></select></label>
+<label class="field"><span>Λ₀ custom<small>GeV</small></span><input id="Lambda0" type="number" value="1000"></label>
+<label class="field"><span>|cX|</span><input id="cX" type="number" value="1" step="0.1"></label>
+<label class="field"><span>Sicherheitsfaktor s<small>Λsc≥s·Eaudit</small></span><input id="safety" type="number" value="1" step="0.5"></label>
+<div class="subhead">Potential und Schleifen</div>
+<label class="field"><span>Bare-Quartik λq</span><input id="lambdaQ" type="number" value="0"></label>
+<label class="field"><span>Bare-Masse mq<small>GeV</small></span><input id="mq" type="number" value="0"></label>
+<label class="field"><span>Schleifencutoff ΛJ</span><select id="loopChoice"><option value="mkk">MKK</option><option value="m6">M₆</option><option value="mb">Mᵦ</option><option value="custom">benutzerdefiniert</option></select></label>
+<label class="field"><span>ΛJ custom<small>GeV</small></span><input id="Loop0" type="number" value="1000"></label>
+<label class="field"><span>NJ<small>NDA-Multiplizität</small></span><input id="NJ" type="number" value="12"></label>
+<div class="buttons"><button class="primary" id="run">Neu berechnen</button><button id="setBack">Z auf Ω-Gate</button></div><div class="buttons"><button id="setLambda">Λ₀,min einsetzen</button><button id="profile">Profil öffnen</button></div>
+</section>
+<section class="panel"><div class="metrics">
+<div class="metric"><b id="feff">–</b><span>feff [GeV]</span></div><div class="metric"><b id="omega">–</b><span>Ωkin</span></div><div class="metric"><b id="Eaudit">–</b><span>Eaudit [GeV]</span></div><div class="metric"><b id="Lsc">–</b><span>Λsc [GeV]</span></div>
+<div class="metric"><b id="ratio">–</b><span>s·Eaudit/Λsc</span></div><div class="metric"><b id="zBack">–</b><span>Zmax Rückwirkung</span></div><div class="metric"><b id="zStrong">–</b><span>Zmin Strong Coupling</span></div><div class="metric"><b id="cmax">–</b><span>cX,max am Λ₀</span></div>
+<div class="metric"><b id="lambdaCan">–</b><span>λφ/(16π²)</span></div><div class="metric"><b id="mqRatio">–</b><span>mφ/H</span></div><div class="metric"><b id="loopRatio">–</b><span>δZJ/Zeff</span></div><div class="metric"><b id="cKKmax">–</b><span>cX,KK,max</span></div>
+</div>
+<canvas id="chart" class="chart" width="920" height="480"></canvas><div class="legend"><span><i style="background:#7fe0b5"></i>Λsc(Z)</span><span><i style="background:#79d3ff"></i>Eaudit(Z)</span><span><i style="background:#c5afff"></i>MKK</span><span><i style="background:#ffad72"></i>aktuelles Z</span></div>
+<div class="audit"><div><b id="backAudit">–</b><span>Rückwirkung</span></div><div><b id="kkAudit">–</b><span>Nullmoden-EFT</span></div><div><b id="scAudit">–</b><span>Strong Coupling</span></div><div><b id="radAudit">–</b><span>Potential/Schleifen</span></div></div>
+<div id="window" class="window"><strong>Konsistenzfenster</strong><span>–</span></div>
+<div class="tablewrap" style="margin-top:12px"><table><thead><tr><th>Operatorannahme</th><th>Λ₀ [GeV]</th><th>Λsc aktuell</th><th>Zmin</th><th>gemeinsames Fenster mit Z≤Zback?</th></tr></thead><tbody id="scenarioRows"></tbody></table></div>
+<details><summary>Weitere abgeleitete Größen</summary><div id="more" class="eq" style="margin-top:9px">–</div></details>
+<div id="message" class="notice" style="margin-top:12px"></div>
+</section></div></section>
+<section class="sec"><div class="head"><div><div class="eye">Gate-Entscheidung</div><h2>COS-04.2B nach Version 0.8</h2></div></div><div class="tablewrap"><table><thead><tr><th>Gate</th><th>Prüfung</th><th>Status 0.8</th><th>Folgerung</th></tr></thead><tbody>
+<tr><td>COS-04.2B-1e-a</td><td>kanonische Operatorabbildung</td><td><span class="tag ok">Form geschlossen</span></td><td>alle q-Operatoren erhalten inverse Zeff-Potenzen</td></tr>
+<tr><td>COS-04.2B-1e-b</td><td>O(1)-X² am KK-Maßstab</td><td><span class="tag stop">BLOCKED</span></td><td>Λsc≈√Zeff MKK liegt für Zeff≈10⁻¹⁶ weit unter TEW</td></tr>
+<tr><td>COS-04.2B-1e-c</td><td>X² ausschließlich am M₆-Maßstab</td><td><span class="tag cond">konditionales Fenster</span></td><td>nur wenn KK-induzierte Operatoren durch Symmetrie/Sequestering extrem unterdrückt sind</td></tr>
+<tr><td>COS-04.2B-1e-d</td><td>ungeschütztes Potential</td><td><span class="tag stop">extrem feinabgestimmt</span></td><td>λq und mq müssen mit Zeff skalieren oder symmetriegeschützt verschwinden</td></tr>
+<tr><td>COS-04.2B-1e-e</td><td>radiative Stabilität der Stromkopplung</td><td><span class="tag open">NDA-abhängig</span></td><td>vollständige 6D-Schleifen- und Matchingrechnung fehlt</td></tr>
+<tr><td>COS-04.2B</td><td>vollständige 6D-Quelle</td><td><span class="tag stop">NICHT FREIGEGEBEN</span></td><td>Parentwirkung, Symmetrie und KK-Matching gemeinsam erforderlich</td></tr>
+</tbody></table></div></section>
+<section class="sec refs"><div class="head"><div><div class="eye">Maschinenlesbares Profil</div><h2>Formeln, Grenzwerte und Status</h2></div></div><div class="notice"><a href="./baryogenesis-strong-coupling.json">baryogenesis-strong-coupling.json</a> enthält die Operatorabbildung, Standardwerte, Kontrollresultate, Gate-Status und Einschränkungen.</div></section>
+</main>
+<script src="./baryogenesis-v08.js?v=1"></script></body></html>
