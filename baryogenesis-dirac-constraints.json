@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2B-DIRAC-CONSTRAINTS-1.2",
+  "title": "Reduced Dirac constraint-matrix and degree-of-freedom audit",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2B-1i-a": "PASS_FINITE_DIRAC_MATRIX_AUDIT_IMPLEMENTED",
+    "COS-04.2B-1i-b": "FIRST_CLASS_IDENTIFICATION_CONDITIONAL",
+    "COS-04.2B-1i-c": "THETA_SURVIVAL_CLASSIFICATION_DEPENDENT",
+    "COS-04.2B-1i-d": "FULL_LOCAL_FIELD_THEORY_CONSTRAINT_ALGEBRA_OPEN",
+    "COS-04.2B": "NOT_RELEASED"
+  },
+  "equations": {
+    "constraint_matrix": "C_AB={phi_A,phi_B}, C^T=-C",
+    "second_class_count": "N_second=rank(C)",
+    "nullity": "N_null=N_constraints-rank(C)",
+    "configuration_dof": "N_phys=N_conf-N_first-N_second/2",
+    "phase_space_dof": "2N_phys=2N_conf-2N_first-N_second"
+  },
+  "secured_results": {
+    "even_rank": "a finite real antisymmetric matrix has even rank",
+    "null_direction_warning": "a null vector of C is only a candidate first-class direction until closure with the Hamiltonian and boundary algebra is shown",
+    "theta_survival": "Theta may remain physical, be removed by a first-class gauge generator, or be tied into a second-class pair",
+    "ordering": "constraint classification precedes claims about propagating scalar degrees of freedom"
+  },
+  "presets": {
+    "ward": "two confirmed first-class directions and one second-class pair; Theta left as a physical candidate",
+    "second": "two independent second-class pairs; Theta explicitly assigned to a second-class pair",
+    "mixed": "rank-two matrix with unresolved null directions",
+    "singular": "near-threshold bracket tests rank sensitivity"
+  },
+  "limitations": [
+    "the matrix is finite-dimensional and not the local distribution-valued field-theory Poisson bracket kernel",
+    "primary and secondary constraints are benchmark labels rather than derived from the COS-02.2B Hamiltonian",
+    "Hamiltonian closure, boundary constraints, gauge generators and BRST charge are not constructed",
+    "rank can vary across phase space and must be checked on the physical background",
+    "no evidence effect; K1-D and K1-E remain closed"
+  ]
+}
