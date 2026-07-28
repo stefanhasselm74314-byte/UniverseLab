@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2A-FLAVOR-OP-0.4",
+  "title": "Basis-invariant operator and three-flavor Standard Model susceptibility benchmark",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2A-1": "PASS_OPERATOR_BASIS_AUDIT",
+    "COS-04.2A-2": "PASS_SPHALERON_BENCHMARK",
+    "COS-04.2A-3": "PASS_THREE_FLAVOR_MASSLESS_SM_BENCHMARK",
+    "COS-04.2A-4": "THREE_FLAVOR_RELAXATION_BENCHMARK_ACTIVE",
+    "COS-04.2A-5": "OPEN",
+    "COS-04.2B": "BLOCKED"
+  },
+  "basis_invariant_mapping": {
+    "equation": "beta_alpha = sum_i R_alpha_i c_i + s_alpha",
+    "field_rotation": "c -> c + delta_c; s -> s - R delta_c",
+    "invariant": "beta -> beta",
+    "particle_basis": ["q_L", "u_R", "d_R", "l_L", "e_R", "H"],
+    "reaction_basis": ["weak_sphaleron", "strong_sphaleron", "up_yukawa", "down_yukawa", "lepton_yukawa"],
+    "reaction_matrix": [[9,0,0,3,0,0],[2,-1,-1,0,0,0],[1,-1,0,0,0,1],[1,0,-1,0,0,-1],[0,0,0,1,-1,-1]],
+    "null_directions": {
+      "B_minus_L": ["1/3","1/3","1/3","-1","-1","0"],
+      "hypercharge": ["1/6","2/3","-1/3","-1/2","-1","1/2"]
+    }
+  },
+  "three_flavor_susceptibility": {
+    "conserved_basis": ["Delta_e=B/3-L_e","Delta_mu=B/3-L_mu","Delta_tau=B/3-L_tau","hypercharge"],
+    "species": [
+      {"id":"q","name":"q_L, three generations","w_chi_over_T2":"3","B":"1/3","Le":0,"Lmu":0,"Ltau":0,"Y":"1/6"},
+      {"id":"u","name":"u_R, three generations","w_chi_over_T2":"3/2","B":"1/3","Le":0,"Lmu":0,"Ltau":0,"Y":"2/3"},
+      {"id":"d","name":"d_R, three generations","w_chi_over_T2":"3/2","B":"1/3","Le":0,"Lmu":0,"Ltau":0,"Y":"-1/3"},
+      {"id":"le","name":"electron lepton doublet","w_chi_over_T2":"1/3","B":0,"Le":1,"Lmu":0,"Ltau":0,"Y":"-1/2"},
+      {"id":"lm","name":"muon lepton doublet","w_chi_over_T2":"1/3","B":0,"Le":0,"Lmu":1,"Ltau":0,"Y":"-1/2"},
+      {"id":"lt","name":"tau lepton doublet","w_chi_over_T2":"1/3","B":0,"Le":0,"Lmu":0,"Ltau":1,"Y":"-1/2"},
+      {"id":"ee","name":"right electron","w_chi_over_T2":"1/6","B":0,"Le":1,"Lmu":0,"Ltau":0,"Y":"-1"},
+      {"id":"em","name":"right muon","w_chi_over_T2":"1/6","B":0,"Le":0,"Lmu":1,"Ltau":0,"Y":"-1"},
+      {"id":"et","name":"right tau","w_chi_over_T2":"1/6","B":0,"Le":0,"Lmu":0,"Ltau":1,"Y":"-1"},
+      {"id":"H","name":"Higgs doublet","w_chi_over_T2":"2/3","B":0,"Le":0,"Lmu":0,"Ltau":0,"Y":"1/2"}
+    ],
+    "A_matrix": [["31/54","2/27","2/27","4/9"],["2/27","31/54","2/27","4/9"],["2/27","2/27","31/54","4/9"],["4/9","4/9","4/9","11/6"]],
+    "determinant": "79/432",
+    "equilibrium_algorithm": ["A_AB = sum_i w_i Q_iA Q_iB","lambda = A^-1 [d - epsilon_Theta Q^T W c]","x_i = mu_i/T = c_i epsilon_Theta + Q_iA lambda_A","Y_X = (sum_i w_i X_i x_i)/(2 pi^2 g_*s/45)"],
+    "symmetric_BplusL_check": {
+      "nB_over_T2": "(28/79) n_(B-L)/T^2 + (72/79) mu_S",
+      "nL_each_over_T2_for_zero_conserved_charges": "(24/79) mu_S",
+      "YB_over_epsilon_at_gstar_106_75": 0.019463471081799685
+    }
+  },
+  "transport": {
+    "sphaleron_rate_symmetric": "gamma_ws/T^4 = 18 alpha_W^5",
+    "sphaleron_rate_broken": "ln(gamma_ws/T^4) = 0.83 T/GeV - 147.7 for 130 GeV < T < Tc",
+    "hubble": "H = sqrt(pi^2 g*/90) T^2/Mbar_Pl",
+    "relaxation": "dY_B/dN = -R_ws [Y_B-Y_B_eq]",
+    "flavor_reconstruction": "Y_Lalpha = Y_B/3 - Y_Deltaalpha",
+    "crossover_treatment": "massless central matrix plus user-visible stress envelope only"
+  },
+  "default_dry_run": {
+    "source_preset": "B+L current",
+    "Ti_GeV": 300,
+    "Tf_GeV": 120,
+    "gstar": 106.75,
+    "alphaW": 0.0338,
+    "epsilon_Theta_at_Tc": 4.45e-9,
+    "crossover_stress_fraction": 0.15,
+    "Y_Delta_e": 0,
+    "Y_Delta_mu": 0,
+    "Y_Delta_tau": 0,
+    "freezeout_GeV_approx": 131.515,
+    "etaB_central_approx": 6.0975e-10,
+    "etaB_stress_low_approx": 5.3869e-10,
+    "etaB_stress_high_approx": 6.8082e-10
+  },
+  "limitations": [
+    "thermal masses and Higgs expectation value across the electroweak crossover are not inserted",
+    "the crossover band is a sensitivity stress test, not a literature uncertainty curve",
+    "partial equilibration rates are not evolved species by species",
+    "running alpha_W and lattice-rate errors are not propagated",
+    "the concrete Theta operator and its 6D origin are not derived",
+    "Theta backreaction, friction, energy density and isocurvature are not included"
+  ],
+  "primary_sources": [
+    {"authors":"Domcke, Ema, Mukaida, Yamada","year":2020,"title":"Spontaneous Baryogenesis from Axions with Generic Couplings","doi":"10.1007/JHEP08(2020)096","arxiv":"2006.03148"},
+    {"authors":"Harvey, Turner","year":1990,"title":"Cosmological baryon and lepton number in the presence of electroweak fermion-number violation","doi":"10.1103/PhysRevD.42.3344"},
+    {"authors":"D'Onofrio, Rummukainen, Tranberg","year":2014,"title":"The Sphaleron Rate in the Minimal Standard Model","doi":"10.1103/PhysRevLett.113.141602","arxiv":"1404.3565"},
+    {"authors":"Bodeker, Sangel","year":2015,"title":"Order g^2 susceptibilities in the symmetric phase of the Standard Model","doi":"10.1088/1475-7516/2015/04/040","arxiv":"1501.03151"},
+    {"authors":"Laine, Meyer","year":2015,"title":"Standard Model thermodynamics across the electroweak crossover","doi":"10.1088/1475-7516/2015/07/035","arxiv":"1503.04935"}
+  ]
+}
