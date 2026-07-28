@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2A-OPERATOR-BASIS-0.4",
+  "title": "Basis-independent source projection in the reduced Standard Model susceptibility benchmark",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2A-1B": "PASS_REDUCED_SM_BENCHMARK",
+    "COS-04.2A-1C": "OPEN_PHYSICAL_OPERATOR_MAPPING",
+    "COS-04.2A-2": "PASS_SPHALERON_BENCHMARK",
+    "COS-04.2A-3": "PASS_MASSLESS_SM_BENCHMARK",
+    "COS-04.2A-4": "BPLUSL_MINIMAL_MODE_ACTIVE",
+    "COS-04.2A-5": "OPEN",
+    "COS-04.2B": "BLOCKED"
+  },
+  "species_order": ["q_L", "u_R", "d_R", "l_L", "e_R", "H"],
+  "susceptibility_over_T2": ["3", "3/2", "3/2", "1", "1/2", "2/3"],
+  "charges": {
+    "B": ["1/3", "1/3", "1/3", "0", "0", "0"],
+    "L": ["0", "0", "0", "1", "1", "0"],
+    "B_minus_L": ["1/3", "1/3", "1/3", "-1", "-1", "0"],
+    "hypercharge": ["1/6", "2/3", "-1/3", "-1/2", "-1", "1/2"]
+  },
+  "projection": {
+    "metric": "<x,y>_chi = sum_i chi_i x_i y_i",
+    "constraint_matrix_Q": "Q=(B-L,Y)",
+    "formula": "P = I - Q (Q^T chi Q)^(-1) Q^T chi",
+    "physical_source": "S_phys=P S",
+    "observable_coefficient": "K_X(S)=<X,S_phys>_chi",
+    "basis_equivalence": "S ~ S + lambda(B-L) + kappa Y"
+  },
+  "constraint_gram_matrix": {
+    "A": [["13/6", "4/3"], ["4/3", "11/6"]],
+    "determinant": "79/36"
+  },
+  "exact_preset_coefficients": {
+    "B_plus_L": {"K_B": "72/79", "K_L": "72/79", "K_BplusL": "144/79"},
+    "B": {"K_B": "36/79", "K_L": "36/79", "K_BplusL": "72/79"},
+    "L": {"K_B": "36/79", "K_L": "36/79", "K_BplusL": "72/79"},
+    "B_minus_L": {"K_B": "0", "K_L": "0", "K_BplusL": "0"},
+    "hypercharge": {"K_B": "0", "K_L": "0", "K_BplusL": "0"},
+    "q_L": {"K_B": "54/79", "K_L": "54/79", "K_BplusL": "108/79"},
+    "u_R": {"K_B": "63/158", "K_L": "63/158", "K_BplusL": "63/79"},
+    "d_R": {"K_B": "45/158", "K_L": "45/158", "K_BplusL": "45/79"},
+    "l_L": {"K_B": "25/79", "K_L": "25/79", "K_BplusL": "50/79"},
+    "e_R": {"K_B": "11/79", "K_L": "11/79", "K_BplusL": "22/79"},
+    "H": {"K_B": "2/79", "K_L": "2/79", "K_BplusL": "4/79"}
+  },
+  "transport": {
+    "equilibrium_source": "Y_plus_eq = -(23/79)Y_minus + [45 K_BplusL/(2 pi^2 g_*s)] epsilon_Theta",
+    "equation": "dY_plus/dN = -R_ws(T)(Y_plus-Y_plus_eq)",
+    "epsilon_Theta": "dot(Theta)/(f_Theta T)",
+    "basis_invariance_test": "K_X(S)=K_X(S+lambda(B-L)+kappa Y)"
+  },
+  "default_dry_run": {
+    "source": "B+L",
+    "Ti_GeV": 300,
+    "Tf_GeV": 120,
+    "gstar": 106.75,
+    "alphaW": 0.0338,
+    "epsilon_Theta_at_Tc": 4.45e-9,
+    "target_etaB": 6.1e-10,
+    "expected_freezeout_GeV_approx": 131.5
+  },
+  "limitations": [
+    "The projection is exact only inside the massless flavor-symmetric reduced Standard Model benchmark.",
+    "Thermal masses, Higgs expectation value and temperature-dependent susceptibilities near the electroweak crossover are omitted.",
+    "The physical gauge- and anomaly-consistent mapping from a defined Theta mode to a Standard Model source vector is not derived.",
+    "Theta backreaction, energy density, isocurvature and the 6D origin remain open."
+  ],
+  "primary_source": {
+    "authors": "Domcke, Ema, Mukaida, Yamada",
+    "title": "Spontaneous Baryogenesis from Axions with Generic Couplings",
+    "journal": "JHEP 08 (2020) 096",
+    "doi": "10.1007/JHEP08(2020)096",
+    "arxiv": "2006.03148"
+  }
+}
