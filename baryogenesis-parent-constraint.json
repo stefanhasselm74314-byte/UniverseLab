@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2B-PARENT-CONSTRAINT-1.1",
+  "title": "Gauge-fixed reduced parent-action constraint and Schur-complement audit",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2B-1h-a": "PASS_ALGEBRAIC_CONSTRAINT_ELIMINATION_IMPLEMENTED",
+    "COS-04.2B-1h-b": "POST_CONSTRAINT_GHOST_GATE_PARAMETER_DEPENDENT",
+    "COS-04.2B-1h-c": "WARD_PROTECTED_THETA_NULL_DIRECTION_CONDITIONAL",
+    "COS-04.2B-1h-d": "FULL_DIRAC_BRST_ANALYSIS_OPEN",
+    "COS-04.2B": "NOT_RELEASED"
+  },
+  "dynamic_fields": ["Theta","radion","flux_scalar","metric_scalar"],
+  "constraint_variables": ["lapse_shift_combination","brane_constraint_combination"],
+  "block_reduction": {
+    "kinetic": "K_eff=K_QQ-B D^-1 B^T",
+    "mass": "M_eff=M_QQ-C E^-1 C^T",
+    "rule": "constraint blocks must be invertible and the reduced kinetic matrix must be positive definite"
+  },
+  "secured_results": {
+    "ordering": "constraints must be eliminated before canonical diagonalization",
+    "ghost_warning": "positive K_QQ does not imply positive K_eff",
+    "tachyon_warning": "mass constraint mixing can generate a negative Schur-complement eigenvalue",
+    "ward_condition": "a protected massless Theta mode requires a common null direction of the reduced mass matrix and dangerous vertices"
+  },
+  "presets": {
+    "protected": "invertible positive constraint blocks, exact Theta Ward null direction and vanishing dangerous vertex",
+    "kinetic": "constraint kinetic couplings make K_eff indefinite",
+    "mass": "constraint mass mixing generates a tachyonic reduced Theta direction",
+    "generic": "moderate block mixing with nonzero induced Wilson indicator"
+  },
+  "limitations": [
+    "the matrices are benchmark inputs rather than second variations of the COS-02.2B parent action",
+    "the algebraic Schur audit is not a complete Dirac constraint classification",
+    "BRST ghosts, gauge-fixing determinants and boundary constraint algebras are not implemented",
+    "tensor, vector, brane-bending and higher KK sectors remain omitted",
+    "no evidence effect; K1-D and K1-E remain closed"
+  ]
+}
