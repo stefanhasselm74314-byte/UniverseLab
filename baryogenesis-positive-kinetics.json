@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2B-POSITIVE-KINETICS-0.7",
+  "title": "Positive bulk and brane kinetic zero-mode benchmark",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2B-1d-a": "PASS_POSITIVE_NORM_THEOREM_IN_ISOLATED_SCALAR_SECTOR",
+    "COS-04.2B-1d-b": "BLOCKED_POSITIVE_BRANE_KINETIC_ENHANCEMENT",
+    "COS-04.2B-1d-c": "BLOCKED_POSITIVE_Z6_AS_COORDINATE_LOCALIZATION_OF_MINIMAL_ZERO_MODE",
+    "COS-04.2B-1d-d": "GLOBAL_KINETIC_SUPPRESSION_MATHEMATICALLY_OPEN_EFT_UNCONTROLLED",
+    "COS-04.2B-1d-e": "NEGATIVE_BRANE_KINETIC_QUARANTINED",
+    "COS-04.2B": "NOT_RELEASED"
+  },
+  "assumptions": [
+    "one physical time and a positive-definite compact internal two-space",
+    "axisymmetric scalar sector",
+    "massless minimal zero mode with natural boundary conditions unless explicitly varied",
+    "positive position-dependent bulk kinetic coefficient Z6(theta)",
+    "dimensionless localized kinetic coefficient Zb_hat=Zb/R^2",
+    "brane current coupling evaluated at theta_b",
+    "the baryogenesis source requirement epsilon_Theta is imported from the 0.4 transport benchmark"
+  ],
+  "action_and_norm": {
+    "bulk_kinetic": "S_bulk=-1/2 integral d6x sqrt(-g6) Z6(theta) g^MN partial_M Theta partial_N Theta",
+    "brane_kinetic": "S_brane=-1/2 integral d4x sqrt(-gamma) Z_b gamma^munu partial_mu Theta partial_nu Theta",
+    "zero_mode_norm": "D0=integral dtheta dchi exp(2A) sqrt(g2) Z6 + Zb_hat exp(2A_b)",
+    "warped_volume": "J=integral dtheta dchi exp(2A) sqrt(g2)",
+    "effective_kinetic_average": "Z_eff=D0/J",
+    "normalized_zero_mode": "f0=1/sqrt(D0)",
+    "brane_overlap": "xi0=abs(f0(theta_b))*sqrt(J)=1/sqrt(Z_eff)",
+    "effective_coupling": "f_eff=M_b^2 sqrt(V_W)/xi0"
+  },
+  "secured_results": {
+    "positive_norm": "Z6(theta)>0 and Zb_hat>=0 make the isolated scalar norm matrix positive",
+    "constant_zero_mode": "for mu6=0 and natural boundary conditions the exact zero mode remains coordinate-constant for arbitrary positive Z6(theta)",
+    "positive_bkt_monotonicity": "d xi0/d Zb_hat < 0 for Zb_hat>=0",
+    "local_profile_result": "a local positive kinetic well or bump modifies the normalization density and excited modes but not the coordinate profile of the exact minimal zero mode",
+    "enhancement_condition": "large xi0 requires a small global weighted kinetic average Z_eff rather than geometric zero-mode localization"
+  },
+  "default_control": {
+    "geometry": "round sphere",
+    "theta_cap": 3.141592653589793,
+    "beta": 1,
+    "warp_amplitude": 0,
+    "mu6_R": 0,
+    "brane_position_fraction": 0.98,
+    "log10_Zbase": 0,
+    "local_exponent_amplitude": 0,
+    "local_width_fraction": 0.1,
+    "Zb_hat": 0,
+    "M_KK_GeV": 1000,
+    "M_b_GeV": 2.0e10,
+    "freezeout_temperature_GeV": 131.515,
+    "gstar": 106.75,
+    "epsilon_Theta": 4.45e-9,
+    "Omega_kin_max": 0.01
+  },
+  "expected_control_diagnostics": {
+    "lambda_0": 0,
+    "lambda_1": 2,
+    "xi_0": 1,
+    "Z_eff": 1,
+    "f_eff_GeV_approx": 1.4179630807244128e18,
+    "Omega_kin_approx": 3.2773507266443832e13,
+    "required_xi_from_backreaction_approx": 5.724815042116543e7,
+    "required_Z_eff_max_approx": 3.051244994532156e-16,
+    "coupling_gate": false
+  },
+  "positive_brane_kinetic_example": {
+    "Zb_hat": 10,
+    "xi_0_approx": 0.746232,
+    "Z_eff_approx": 1.795775,
+    "interpretation": "positive localized kinetic energy suppresses the brane coupling"
+  },
+  "global_suppression_example": {
+    "log10_Zbase": -16,
+    "Zb_hat": 0,
+    "xi_0_approx": 1.0e8,
+    "Z_eff_approx": 1.0e-16,
+    "Omega_kin_approx": 0.003277,
+    "backreaction_gate": true,
+    "interpretation": "the numerical coupling gate is met only through an extreme canonical normalization hierarchy; this is not localization and has no release effect"
+  },
+  "quarantine": {
+    "negative_brane_kinetic": "negative Zb_hat may increase the normalized brane amplitude but can make the generalized norm matrix indefinite and generate a kinetic ghost",
+    "rule": "no result obtained from an indefinite or near-singular norm matrix may be used as a physical bridge"
+  },
+  "limitations": [
+    "the background A(theta), cap data and Z6(theta) are benchmark inputs rather than solutions of a common parent action",
+    "metric, flux, radion and scalar perturbations are not mixed",
+    "the EFT cutoff after extreme canonical normalization is not calculated",
+    "loop corrections and nonlinear interactions are not included",
+    "the codimension-two brane is represented by a localized norm contribution in a Ritz benchmark",
+    "no evidence effect; K1-D and K1-E remain closed"
+  ],
+  "primary_sources": [
+    {
+      "authors": "F. del Aguila, M. Perez-Victoria, J. Santiago",
+      "year": 2003,
+      "title": "Bulk fields with general brane kinetic terms",
+      "arxiv": "hep-th/0302023"
+    },
+    {
+      "authors": "F. del Aguila, M. Perez-Victoria, J. Santiago",
+      "year": 2003,
+      "title": "Bulk fields with brane terms",
+      "arxiv": "hep-ph/0310352"
+    },
+    {
+      "authors": "Heng Guo, Yong-Tao Lu, Cai-Ling Wang, Yue Sun",
+      "year": 2023,
+      "title": "Localization of scalar field on the brane-world by coupling with gravity",
+      "arxiv": "2310.01451"
+    }
+  ]
+}
