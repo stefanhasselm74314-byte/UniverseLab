@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2B-6D-BRIDGE-0.5",
+  "title": "Conditional 6D-to-4D baryogenesis source bridge audit",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2B-1": "ZERO_MODE_FORMULA_CLOSED_PROFILE_NOT_DERIVED",
+    "COS-04.2B-2": "GRAVITY_MATCH_DIAGNOSTIC",
+    "COS-04.2B-3": "BRANE_OVERLAP_MAP_DERIVED_INPUT_NOT_IDENTIFIED",
+    "COS-04.2B-4": "BACKREACTION_PARAMETER_DEPENDENT",
+    "COS-04.2B-5": "THETA_EOM_OPEN",
+    "COS-04.2B-6": "ISOCURVATURE_RESPONSE_MODEL_REQUIRED",
+    "COS-04.2B": "NOT_RELEASED"
+  },
+  "assumptions": [
+    "one physical time and positive-signature compact internal two-space",
+    "effectively factorized warped metric ds6^2=e^(2A)g4+g2",
+    "a scalar candidate mode Theta(x,y)=f0(y)q(x)+heavy modes",
+    "brane-localized derivative current coupling suppressed by M_b^2",
+    "radiation domination at electroweak sphaleron freeze-out",
+    "the required epsilon_Theta is imported from the 0.4 Standard Model transport benchmark",
+    "isocurvature uses the editable response ansatz d ln eta_B/d phi_*=kappa_iso/f_eff"
+  ],
+  "equations": {
+    "zero_mode_norm": "Z0=integral d2y sqrt(g2) e^(2A) Z6 f0^2 > 0",
+    "canonical_field": "phi=sqrt(Z0) q",
+    "warped_volume_root": "sqrt(V_W)=c_V R sqrt(w_V)",
+    "planck_matching": "Mbar_4^2=M_6^4 V_W",
+    "effective_coupling": "f_eff=M_b^2 sqrt(V_W) sqrt(Z0)/xi",
+    "required_drift": "dot(phi)=epsilon_Theta f_eff T",
+    "radiation_density": "rho_rad=(pi^2/30) g_* T^4",
+    "kinetic_fraction": "Omega_kin=dot(phi)^2/(2 rho_rad)",
+    "backreaction_upper_bound": "f_eff_max=sqrt(2 Omega_max rho_rad)/(|epsilon_Theta| T)",
+    "isocurvature_power": "P_SB=(kappa_iso H_*/(2 pi f_eff))^2",
+    "isocurvature_fraction": "beta_iso=P_SB/(A_s+P_SB)",
+    "isocurvature_lower_bound": "f_eff_min=kappa_iso H_*/[2 pi sqrt(beta_max A_s/(1-beta_max))]",
+    "periods_per_hubble": "N_period=|epsilon_Theta|T/(2 pi H)",
+    "source_scaling": "epsilon_Theta proportional T^m implies ddot(phi)=-(m+1)H dot(phi)",
+    "potential_slope_without_current_backreaction": "|V'_req|=|2-m| H |dot(phi)|"
+  },
+  "default_natural_benchmark": {
+    "geometry": "square_torus",
+    "c_V": 6.283185307179586,
+    "M_KK_GeV": 1000.0,
+    "warp_volume_factor": 1.0,
+    "M6_GeV": 2.0e10,
+    "M_b_GeV": 2.0e10,
+    "Z0": 1.0,
+    "xi": 1.0,
+    "freezeout_temperature_GeV": 131.515,
+    "gstar": 106.75,
+    "epsilon_Theta": 4.45e-9,
+    "source_temperature_exponent": 0.0,
+    "Omega_kin_max": 0.01,
+    "H_star_GeV": 1.0e8,
+    "kappa_iso": 1.0,
+    "A_s": 2.1e-9,
+    "beta_iso_max": 0.01
+  },
+  "expected_default_diagnostics": {
+    "M4_pred_GeV_approx": 2.513e18,
+    "gravity_match_ratio_approx": 1.032,
+    "f_eff_GeV_approx": 2.513e18,
+    "dot_phi_required_GeV2_approx": 1.471e12,
+    "Omega_kin_approx": 1.03e14,
+    "f_eff_max_from_backreaction_GeV_approx": 2.48e10,
+    "f_eff_min_from_isocurvature_GeV_approx": 3.46e12,
+    "periods_per_hubble_approx": 3.83e6,
+    "critical_H_star_for_any_window_GeV_approx": 7.17e5,
+    "combined_window": false
+  },
+  "interpretation": {
+    "natural_benchmark": "gravity matching can be near the observed reduced Planck scale while the derivative source requires catastrophic kinetic backreaction if M_b=M6 and xi=1",
+    "tension": "under the illustrative kappa_iso/f_eff response and H_*=1e8 GeV, the isocurvature lower bound lies above the backreaction upper bound",
+    "not_a_no_go": "the tension is conditional and can change with a different source operator, localized wavefunction, lower inflationary scale, noncanonical dynamics, transient production, or a fully coupled current backreaction"
+  },
+  "limitations": [
+    "no explicit S6-Q1 background solution or zero-mode eigenfunction is inserted",
+    "the overlap xi and brane scale M_b are not derived from a parent action",
+    "warping, caps and deficit angles are compressed into one volume factor",
+    "the Theta potential and coupled equation of motion are not solved",
+    "current backreaction and entropy production are omitted",
+    "the isocurvature response coefficient is a transparent benchmark assumption rather than a derived transfer function",
+    "the 0.5 result has no evidence effect and does not release K1-D or K1-E"
+  ]
+}
