@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2B-KK-MATCHING-0.9",
+  "title": "Explicit spherical KK overlap and heavy-mode matching audit",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2B-1f-a": "PASS_HOMOGENEOUS_CUBIC_S2_SELECTION_RULE",
+    "COS-04.2B-1f-b": "DIRECT_GENERIC_QUARTIC_NOT_SUPPRESSED",
+    "COS-04.2B-1f-c": "INHOMOGENEOUS_OPERATOR_PROFILES_PARAMETER_DEPENDENT",
+    "COS-04.2B-1f-d": "PASS_SCALE_INVARIANT_CONDITION_AUDIT_IMPLEMENTED",
+    "COS-04.2B-1f-e": "FULL_KK_MATCHING_NOT_RELEASED",
+    "COS-04.2B": "NOT_RELEASED"
+  },
+  "geometry": "round positive-signature S2 control geometry",
+  "modes": {
+    "definition": "f_l=sqrt((2l+1)/(4pi)) P_l(cos theta)",
+    "eigenvalues": "lambda_l=l(l+1)",
+    "normalization": "integral dOmega f_l f_m=delta_lm"
+  },
+  "operator_profiles": {
+    "cubic": "W3=1+a2 P2+a4 P4",
+    "quartic": "W4=1+b2 P2"
+  },
+  "overlaps": {
+    "cubic": "C_00n=integral dOmega W3 f0^2 fn",
+    "quartic": "C_0000=integral dOmega W4 f0^4",
+    "exchange_indicator": "c_hat_exchange=sum_(n>0) g3^2 C_00n^2/lambda_n",
+    "total_indicator": "c_hat_KK=c4 C_0000+c_hat_exchange"
+  },
+  "secured_results": {
+    "homogeneous_cubic_selection_rule": "for W3=1, C_00n=0 for every n>0 by orthogonality",
+    "direct_quartic": "for W4=1, C_0000=1/(4pi), so cubic orthogonality does not remove a direct quartic operator",
+    "profile_breaking": "a Legendre component P_L in W3 activates the corresponding C_00L",
+    "condition_audit": "the norm matrix is diagnosed with lambda_min, lambda_max, kappa and lambda_min/lambda_max rather than an absolute Cholesky pivot alone"
+  },
+  "default_homogeneous_benchmark": {
+    "l_max": 12,
+    "quadrature_steps": 1200,
+    "a2": 0,
+    "a4": 0,
+    "b2": 0,
+    "g3": 1,
+    "c4": 1,
+    "Z_base": 1,
+    "z2": 0,
+    "relative_singularity_threshold": 1e-12,
+    "robustness_factor": 10
+  },
+  "expected_homogeneous_diagnostics": {
+    "C_002": 0,
+    "C_004": 0,
+    "C_0000": 0.07957747154594767,
+    "exchange_indicator": 0,
+    "total_indicator": 0.07957747154594767,
+    "limit_from_0_8": 3.3427110946928156e-29,
+    "limit_ratio": 2.3806266617624215e+27,
+    "selection_rule": true,
+    "generic_quartic_gate": false
+  },
+  "p2_breaking_example": {
+    "a2": 0.1,
+    "C_002_analytic": 0.012615662610100803,
+    "exchange_from_l2_approx": 0.000026525823848649234,
+    "interpretation": "small internal inhomogeneity activates a calculable heavy-mode exchange contribution"
+  },
+  "protected_example": {
+    "W3": "homogeneous",
+    "c4": 0,
+    "total_indicator": 0,
+    "interpretation": "the reduced scalar benchmark passes only because both the cubic selection rule and an assumed symmetry-forbidden direct quartic are imposed"
+  },
+  "robustness": {
+    "safety_factor_10": "the conditional M6-scale window of version 0.8 disappears for a one-decade cutoff separation at the default M6",
+    "required_KK_coefficient_limit": 3.3427110946928156e-29
+  },
+  "limitations": [
+    "the reduced matching indicator is not a complete dimensionful 4D Wilson coefficient",
+    "only axisymmetric scalar Legendre modes on the round S2 are included",
+    "metric, flux, radion, cap and brane-bending exchanges are omitted",
+    "the cubic and quartic parent vertices are benchmark inputs rather than derived from COS-02.2B",
+    "a vanishing direct quartic requires an explicit symmetry or topological selection rule",
+    "no evidence effect; K1-D and K1-E remain closed"
+  ]
+}
