@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2B-MIXED-SECTOR-1.0",
+  "title": "Reduced scalar-radion-flux-metric mixing and heavy-exchange audit",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2B-1g-a": "PASS_REDUCED_4X4_CANONICAL_AUDIT_IMPLEMENTED",
+    "COS-04.2B-1g-b": "GEOMETRIC_HEAVY_EXCHANGE_PARAMETER_DEPENDENT",
+    "COS-04.2B-1g-c": "PROTECTED_MIXED_SECTOR_CONDITIONAL",
+    "COS-04.2B-1g-d": "PARENT_DERIVATION_OPEN",
+    "COS-04.2B": "NOT_RELEASED"
+  },
+  "fields": ["Theta", "radion", "flux_scalar", "metric_scalar"],
+  "quadratic_action": "L2=-1/2 dPhi^T K dPhi-1/2 Phi^T M2 Phi",
+  "canonicalization": "K=L L^T; M2_can=L^-1 M2 L^-T",
+  "heavy_exchange": {
+    "vector": "g_H=(g_radion,g_flux,g_metric)",
+    "indicator": "c_hat_geo=g_H^T (M_H^2)^-1 g_H",
+    "total": "c_hat_total=c4+c_hat_geo",
+    "comparison_limit": 3.3427110946928156e-29
+  },
+  "presets": {
+    "decoupled": {"interpretation": "exact reduced control with a pure massless Theta direction and no induced geometric operator"},
+    "mild": {"interpretation": "small kinetic and mass mixing plus small heavy vertices"},
+    "generic": {"interpretation": "order-one geometric vertices and a generic direct quartic; expected to fail the 0.8 Wilson-coefficient gate"},
+    "protected": {"interpretation": "all dangerous heavy vertices and direct quartic set to zero as an explicit symmetry input"}
+  },
+  "secured_results": {
+    "kinetic_gate": "K must be positive definite before any physical interpretation",
+    "tachyon_gate": "all eigenvalues of the canonically normalized mass matrix must be nonnegative",
+    "source_identity": "the light eigenvector must be predominantly Theta for the imported baryogenesis source interpretation",
+    "generic_exchange": "nonzero radion, flux or metric heavy vertices generically induce an effective operator even when the pure scalar C00n selection rule holds",
+    "protected_case": "a passing reduced benchmark requires the dangerous vertices and direct quartic to be forbidden, not merely numerically set small"
+  },
+  "limitations": [
+    "matrix elements are benchmark inputs rather than derived from the COS-02.2B parent background",
+    "the heavy-exchange indicator is reduced and not a complete dimensionful Wilson coefficient",
+    "tensor, vector, brane-bending and higher KK sectors are omitted",
+    "gauge fixing and constraint elimination of the full 6D perturbation system are not implemented",
+    "no evidence effect; K1-D and K1-E remain closed"
+  ]
+}
