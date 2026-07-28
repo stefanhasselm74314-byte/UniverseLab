@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "COS-04.2B-EIGENMODE-0.6",
+  "title": "Positive-signature compact 2D scalar eigenmode benchmark",
+  "status": "diagnostic_not_released",
+  "gates": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "COS-04.2B-1a": "PASS_S2_SOLVER_CONTROL",
+    "COS-04.2B-1b": "PASS_MINIMAL_MASSLESS_ZERO_MODE",
+    "COS-04.2B-1c": "BLOCKED_WARP_ONLY_LOCALIZATION_IN_MINIMAL_BRANCH",
+    "COS-04.2B-1d": "NONMINIMAL_BULK_BOUNDARY_TERMS_OPEN",
+    "COS-04.2B-2": "PARENT_BACKGROUND_OPEN",
+    "COS-04.2B": "NOT_RELEASED"
+  },
+  "metric": "ds6^2=e^(2A(theta)) g_mn dx^m dx^n + R^2[dtheta^2+beta^2 sin^2(theta)dchi^2]",
+  "sector": "axisymmetric scalar modes m_chi=0 on a positive-definite compact internal two-space",
+  "sturm_liouville": {
+    "equation": "-d/dtheta[p f_n'] + q f_n = lambda_n w f_n",
+    "p": "2 pi beta exp(4A) sin(theta)",
+    "w": "2 pi beta exp(2A) sin(theta)",
+    "q": "2 pi beta exp(4A) sin(theta) (mu_6 R)^2",
+    "mass": "m_n^2=lambda_n/R^2",
+    "boundary_origin": "regularity at theta=0",
+    "boundary_cap": "f'(theta_cap)+b_R f(theta_cap)=0",
+    "normalization": "integral dtheta dchi exp(2A) sqrt(g2) f_n f_m = delta_nm"
+  },
+  "overlap": {
+    "definition": "xi_n=|f_n(theta_b)| sqrt(V_W)",
+    "effective_coupling": "f_eff,n=M_b^2 sqrt(V_W)/xi_n",
+    "minimal_zero_mode_theorem": "for mu_6=0 and natural/Neumann boundary conditions on a connected compact domain, f_0 is constant and xi_0=1",
+    "consequence": "warping alone changes the normalization weight and warped volume but not the coordinate profile of the exact minimal zero mode"
+  },
+  "exact_sphere_control": {
+    "parameters": {"theta_cap":"pi","beta":1,"A":0,"mu_6_R":0,"b_R":0},
+    "eigenvalues": [0,2,6,12,20],
+    "eigenfunctions": "axisymmetric spherical harmonics proportional to P_l(cos theta)",
+    "zero_mode": "f_0=1/sqrt(4 pi)",
+    "xi_0": 1
+  },
+  "default_web_benchmark": {
+    "geometry": "round sphere control",
+    "theta_cap_rad": 3.141592653589793,
+    "beta": 1,
+    "warp_amplitude": 0,
+    "mu_6_R": 0,
+    "Robin_b_R": 0,
+    "brane_position_fraction": 0.98,
+    "Ritz_basis_size": 10,
+    "M_KK_GeV": 1000,
+    "M_b_GeV": 2.0e10,
+    "freezeout_temperature_GeV": 131.515,
+    "gstar": 106.75,
+    "epsilon_Theta": 4.45e-9,
+    "Omega_kin_max": 0.01
+  },
+  "expected_default_diagnostics": {
+    "lambda_0": 0,
+    "lambda_1": 2,
+    "lambda_2": 6,
+    "lambda_3": 12,
+    "sqrt_VW_GeV_inverse": 0.003544907701811032,
+    "xi_0": 1,
+    "xi_1_near_south_pole_approx": 1.7286,
+    "f_eff_zero_mode_GeV_approx": 1.4179630807244128e18,
+    "required_xi_from_backreaction_approx": 5.72e7,
+    "minimal_localization_gate": false
+  },
+  "interpretation": {
+    "secured_result": "the exact massless Neumann zero mode of the minimal scalar branch is constant and cannot provide the large brane enhancement required by the 0.5 natural benchmark",
+    "nonminimal_options": "bulk mass, position-dependent kinetic functions, brane kinetic terms or Robin interactions may alter the lightest profile but must be checked for nonzero mass, tachyons, ghosts and consistency with the parent action",
+    "not_a_global_no_go": "the result blocks warp-only localization of the minimal scalar zero mode, not every possible higher-dimensional baryogenesis operator"
+  },
+  "limitations": [
+    "the background warp profile and cap geometry are benchmark inputs rather than solutions of COS-02.2B",
+    "only the axisymmetric scalar sector is solved",
+    "metric, flux, radion and scalar perturbations are not mixed",
+    "brane kinetic terms and position-dependent Z_6 are not included",
+    "the Ritz solver is a low-dimensional diagnostic, not a spectral proof for arbitrary singular backgrounds",
+    "no evidence effect; K1-D and K1-E remain closed"
+  ]
+}
