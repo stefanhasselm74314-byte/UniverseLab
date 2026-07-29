@@ -1,0 +1,21 @@
+:root{--ul-space-1:4px;--ul-space-2:7px;--ul-space-3:10px;--ul-space-4:14px;--ul-space-5:20px;--ul-space-6:28px}
+/* UniverseLab 2.0 · globaler vertikaler Rhythmus */
+main,.app{padding-top:var(--ul-space-4)!important;padding-bottom:36px!important}
+.hero{padding:var(--ul-space-5)!important}
+.sec,.section{margin-top:var(--ul-space-5)!important}
+.section-head{margin-top:var(--ul-space-6)!important;margin-bottom:var(--ul-space-3)!important}
+.head{margin-bottom:var(--ul-space-2)!important}
+.grid,.lab,.summary,.audit,.calc-grid,.branch-grid,.legend{gap:var(--ul-space-2)!important}
+.card,.panel,.calc,.branch,.status article,.summary article,.legend div,.dev{padding:var(--ul-space-3)!important;min-height:0!important}
+h1{margin-top:var(--ul-space-2)!important;margin-bottom:var(--ul-space-3)!important}
+h2,h3{margin-top:0!important;margin-bottom:var(--ul-space-2)!important}
+p{margin-bottom:var(--ul-space-2)!important}
+.status,.statusline,.facts{gap:var(--ul-space-1)!important;margin-top:var(--ul-space-2)!important}
+.pill,.tag{padding-block:3px!important}
+.warning,.notice,.firewall,.window,.equation,.eq,output{padding:var(--ul-space-2)!important;margin-top:var(--ul-space-2)!important;margin-bottom:var(--ul-space-2)!important}
+.tablewrap{margin-top:var(--ul-space-2)!important}
+th,td{padding:6px!important}
+.actions,.buttons,.links,.branch-controls{gap:var(--ul-space-2)!important;margin-top:var(--ul-space-2)!important;margin-bottom:var(--ul-space-2)!important}
+button,.button,input,select,.actions a,.links a{min-height:40px!important}
+.footer{margin-top:var(--ul-space-4)!important}
+@media(max-width:700px){main,.app{padding:8px 7px 28px!important}.hero{padding:12px!important;border-radius:13px!important}.sec,.section{margin-top:10px!important}.section-head{margin:16px 0 7px!important}.card,.panel,.calc,.branch,.status article,.summary article,.legend div,.dev{padding:9px!important;min-height:0!important}.grid,.lab,.summary,.audit,.calc-grid,.branch-grid,.legend{gap:6px!important}h1{margin:4px 0 7px!important}h2,h3,p{margin-bottom:6px!important}.status,.statusline,.facts{margin-top:6px!important}.warning,.notice,.firewall,.window,.equation,.eq,output{padding:8px!important;margin:6px 0!important}.tablewrap{margin-top:6px!important}th,td{padding:5px!important}.footer{margin-top:12px!important}}
