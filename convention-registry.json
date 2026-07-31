@@ -1,0 +1,109 @@
+{
+  "schema": "universelab.conventions.v1",
+  "version": "2026-07-31",
+  "scope": "Canonical conventions for current controlled calculations. Branch-specific deviations require explicit rederivation.",
+  "units": {
+    "system": "natural",
+    "c": 1,
+    "hbar": 1,
+    "length_mass_relation": "[L]=[M]^-1"
+  },
+  "indices": {
+    "six_dimensional": {"symbols": ["A", "B", "C", "D"], "range": "0..5"},
+    "four_dimensional": {"symbols": ["mu", "nu", "rho", "sigma"], "range": "0..3"},
+    "observed_spatial": {"symbols": ["i", "j", "k"], "range": "1..3"},
+    "internal_two_space": {"symbols": ["m", "n", "p"], "range": "4..5"},
+    "spatial_five_slice": {"symbols": ["I", "J", "K"], "range": "1..5"}
+  },
+  "branches": {
+    "HZT-M0-S6": {
+      "coordinates": "X^A=(t,x^1,x^2,x^3,y^1,y^2)",
+      "signature": "(-,+,+,+,+,+)",
+      "time_directions": 1,
+      "internal_dimensions": 2,
+      "internal_signature": "positive_definite",
+      "status": "CONTROLLED_WORKING_BRANCH"
+    },
+    "HZT-M0-P5": {
+      "coordinates": "branch_specific_projection_or_quotient_coordinates",
+      "signature": "NOT_GLOBALLY_FIXED",
+      "rule": "No S6 equation may be transferred without explicit reduction and sign audit.",
+      "status": "CONDITIONAL_CONTROL_BRANCH"
+    },
+    "HZT-Full": {
+      "coordinates": "fundamental_multitime_coordinates_not_yet_fixed",
+      "candidate_signature_examples": ["(-,-,+,+,+,+)", "(-,-,-,+,+,+)"],
+      "rule": "Examples are not adopted conventions. The physical signature, constraints and inner product remain open.",
+      "status": "NOT_CONSTRUCTED"
+    }
+  },
+  "metric_and_curvature": {
+    "levi_civita_connection": "Gamma^A_BC = 1/2 g^{AD}(partial_B g_DC + partial_C g_DB - partial_D g_BC)",
+    "riemann": "R^A_BCD = partial_C Gamma^A_DB - partial_D Gamma^A_CB + Gamma^A_CE Gamma^E_DB - Gamma^A_DE Gamma^E_CB",
+    "ricci": "R_BD = R^A_BAD",
+    "scalar": "R = g^{AB} R_AB",
+    "einstein": "G_AB = R_AB - 1/2 g_AB R",
+    "warning": "Every imported source must be converted to this sign convention before comparison."
+  },
+  "gravity": {
+    "einstein_hilbert_action": "S_EH = (1/(2 kappa_6^2)) integral d^6X sqrt(|g_6|) (R_6 - 2 Lambda_6)",
+    "kappa_relation": "kappa_6^2 = 8 pi G_6",
+    "dimensions": {
+      "kappa_6_squared": "L^4 = M^-4",
+      "G_6": "L^4",
+      "Lambda_6": "L^-2 = M^2",
+      "six_dimensional_energy_density": "L^-6 = M^6"
+    },
+    "boundary_rule": "The appropriate Gibbons-Hawking-York and cap/brane boundary terms must be included before variation."
+  },
+  "minisuperspace": {
+    "line_element": "ds_6^2 = -N(t)^2 dt^2 + a(t)^2 gamma_ij dx^i dx^j + b(t)^2 h_mn dy^m dy^n",
+    "hubble_external": "H_a = dot(a)/(N a)",
+    "hubble_internal": "H_b = dot(b)/(N b)",
+    "curvatures": {"R_gamma": "6 k_a", "R_h": "2 k_b"},
+    "spatial_volume": "V_5 proportional to a^3 b^2",
+    "extrinsic_curvature_trace": "K = 3 H_a + 2 H_b",
+    "kinetic_combination": "K_IJ K^IJ - K^2 = -6 H_a^2 - 12 H_a H_b - 2 H_b^2",
+    "gauge_rule": "N may be set to one only after delta S / delta N = 0 has been derived."
+  },
+  "fields": {
+    "canonical_real_scalar_dimension_6d": "[Phi]=M^2",
+    "abelian_field_strength": "F_AB = partial_A A_B - partial_B A_A",
+    "yang_mills_field_strength": "F^a_AB = partial_A A^a_B - partial_B A^a_A + f^a_bc A^b_A A^c_B",
+    "flux_ansatz_internal": "F_mn = q sqrt(h) epsilon_mn",
+    "flux_energy_scaling": "rho_F proportional to b^-4"
+  },
+  "four_dimensional_reduction": {
+    "unwarped_planck_mass": "M_4^2 = V_2 b^2 M_6^4",
+    "variation_of_G": "D_t G_4 / G_4 = -2 H_b",
+    "validity_condition": "E, H, k/a much smaller than m_radion and m_KK",
+    "warning": "Warping, localized profiles and nonlocal bulk response modify these relations."
+  },
+  "stability_vocabulary": {
+    "ghost": "negative eigenvalue of the reduced physical kinetic matrix after constraint elimination",
+    "gradient_instability": "negative physical squared propagation speed in the relevant regime",
+    "tachyon": "negative physical mass squared outside an explicitly allowed instability timescale",
+    "strong_coupling": "canonical normalization lowers the interaction cutoff to or below the claimed regime of validity",
+    "background_stability_is_not_full_stability": true
+  },
+  "status_vocabulary": {
+    "DERIVED": "Analytically follows from the stated action and assumptions.",
+    "CONDITIONAL": "Follows only after an explicitly named additional assumption.",
+    "DIAGNOSTIC": "Useful for numerical or algebraic QA; no evidence effect.",
+    "OPEN": "Required derivation is missing.",
+    "BLOCKED": "The precisely tested mechanism fails a stated gate.",
+    "REJECTED": "The precisely defined branch is excluded within its assumptions.",
+    "QUARANTINED": "May be stress-tested but cannot feed physical claims.",
+    "NOT_RELEASED": "Required bridge has not passed its release criteria.",
+    "NOT_ADMISSIBLE": "Likelihood/evidence interpretation is forbidden at the current gate."
+  },
+  "numerical_rules": [
+    "Every input and output carries units or an explicit dimensionless declaration.",
+    "Every solver includes analytic limits and regression reference values.",
+    "Every ODE solver includes step-size convergence or adaptive error control.",
+    "Every generalized eigenproblem reports conditioning and norm definiteness.",
+    "Failure states are explicit and never silently converted to finite outputs.",
+    "A stable numerical result has no evidence effect without a released physical map."
+  ],
+  "transfer_rule": "No formula, spectrum, sign, degree-of-freedom count or observable map may be transferred between S6, P5 and HZT-Full without explicit rederivation under the target signature, boundary conditions and constraint algebra."
+}
