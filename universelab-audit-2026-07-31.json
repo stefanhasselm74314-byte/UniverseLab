@@ -1,0 +1,400 @@
+{
+  "schema": "universelab.audit.v1",
+  "title": "UniverseLab Gesamt-Audit",
+  "audit_date": "2026-07-31",
+  "project": "Hyperzeit / HPVS / UniverseLab",
+  "governance": {
+    "architecture": ["HPVS", "HZT-M0-S6", "HZT-M0-P5", "HZT-Full"],
+    "control_core": "S6-Q1 / RB0-heavy-GR-quiet",
+    "k1_d": "NOT_RELEASED",
+    "k1_e": "NOT_ADMISSIBLE",
+    "evidence_effect_of_diagnostic_runs": "NONE",
+    "rules": [
+      "technical_execution_is_not_physical_identification",
+      "numerical_stability_is_not_ghost_freedom",
+      "good_fit_is_not_confirmation",
+      "literature_compatibility_is_not_derivation",
+      "gauge_fixing_must_follow_constraint_derivation"
+    ]
+  },
+  "integrated_method_sources": [
+    {
+      "id": "SRC-QT1",
+      "title": "Quantentheorie 1",
+      "author": "Carsten Timm",
+      "type": "university_lecture_notes",
+      "use": ["Hilbert spaces", "self-adjointness", "unitary evolution", "tensor products", "controlled approximations"],
+      "scope": "nonrelativistic_quantum_mechanics_foundation_only"
+    },
+    {
+      "id": "SRC-RAY2022",
+      "title": "Emergence and Breakdown of Quantum Scale Symmetry",
+      "author": "Shouryya Ray",
+      "type": "doctoral_dissertation",
+      "use": ["renormalization group", "fixed points", "critical exponents", "emergent Lorentz symmetry", "truncation audits"],
+      "scope": "methodological_reference_not_hpvs_evidence"
+    },
+    {
+      "id": "SRC-NEUKAMM",
+      "title": "Nonlinear Elasticity",
+      "author": "Stefan Neukamm",
+      "type": "university_lecture_notes",
+      "use": ["direct method", "weak convergence", "lower semicontinuity", "Gamma convergence", "homogenization"],
+      "scope": "lorentzian_gravity_requires_separate_constraint_and_gauge_treatment"
+    },
+    {
+      "id": "SRC-DATHE2016",
+      "title": "Analogiebetrachtungen von Neutrinos und Antineutrinos und Koinzidenzanalyse von Computersimulationen des COBRA-Experiments",
+      "author": "Luise Dathe",
+      "type": "student_research_project",
+      "use": ["signal topology", "background rejection", "coincidence analysis", "Poisson counting"],
+      "scope": "experimental_workflow_example_not_6d_theory_source"
+    },
+    {
+      "id": "SRC-ARLT2012",
+      "title": "Simulation der Restdichte von supersymmetrischen Dark Matter Kandidaten",
+      "author": "Sören Arlt",
+      "type": "student_research_project",
+      "use": ["Boltzmann freeze-out workflow", "ODE solver example", "parameter scans"],
+      "scope": "toy_model_with_known_timescale_and_thermal_average_errors"
+    }
+  ],
+  "quality_gates": [
+    {
+      "id": "QF-01",
+      "name": "Physical Hilbert Space",
+      "requires": ["positive physical norm", "self-adjoint physical Hamiltonian", "unitary evolution", "well-defined operator domains"],
+      "status": "OPEN"
+    },
+    {
+      "id": "MT-01",
+      "name": "Multi-time integrability",
+      "equation": "partial_a H_b - partial_b H_a + (i/hbar)[H_a,H_b] = 0",
+      "requires": ["path-independent evolution", "constraint or gauge reduction to physical time"],
+      "status": "OPEN"
+    },
+    {
+      "id": "RG-01",
+      "name": "Renormalization-group closure",
+      "requires": ["dimensionless coupling basis", "beta functions", "fixed points", "stability matrix", "truncation comparison"],
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "RED-01",
+      "name": "Controlled 6D to 4D reduction",
+      "requires": ["parent action", "boundary terms", "compactness or mode control", "limit theorem or controlled EFT expansion", "error estimate"],
+      "status": "INCOMPLETE"
+    },
+    {
+      "id": "CON-01",
+      "name": "Dirac-Bergmann-BRST constraint closure",
+      "requires": ["primary constraints", "secondary constraints", "Poisson algebra", "first/second class split", "gauge generator", "BRST charge or equivalent reduction"],
+      "status": "INCOMPLETE"
+    },
+    {
+      "id": "PERT-01",
+      "name": "Full perturbation stability",
+      "requires": ["scalar sector", "vector sector", "tensor sector", "ghost check", "gradient check", "tachyon check", "strong-coupling estimate"],
+      "status": "OPEN"
+    },
+    {
+      "id": "OBS-01",
+      "name": "Observable likelihood chain",
+      "requires": ["signal model", "instrument response", "background or nuisance model", "selection function", "covariance", "likelihood", "coverage tests"],
+      "status": "NOT_RELEASED"
+    },
+    {
+      "id": "NUM-01",
+      "name": "Numerical verification",
+      "requires": ["unit checks", "analytic limits", "step-size convergence", "adaptive solver", "stiffness detection", "independent implementation comparison"],
+      "status": "PARTIAL"
+    }
+  ],
+  "issues": [
+    {
+      "id": "GOV-001",
+      "severity": "CRITICAL",
+      "area": "governance",
+      "title": "No single authoritative project manifest",
+      "status": "OPEN",
+      "impact": "Status counts, page versions, gate decisions and branch names can drift between pages.",
+      "acceptance": "Create one versioned manifest consumed by Navigator, HyperLab, audit pages and machine-readable exports."
+    },
+    {
+      "id": "GOV-002",
+      "severity": "HIGH",
+      "area": "governance",
+      "title": "Hard-coded status summaries are not derived from audit data",
+      "status": "OPEN",
+      "impact": "Numbers such as blocker counts and next-step counts can become stale.",
+      "acceptance": "Render all summary counts from the central manifest or audit JSON."
+    },
+    {
+      "id": "SCI-001",
+      "severity": "CRITICAL",
+      "area": "theory",
+      "title": "Fundamental parent action is incomplete",
+      "status": "OPEN",
+      "impact": "No unique map from fundamental parameters to the reduced matrices or observables.",
+      "acceptance": "Specify bulk, flux, scalar, brane/cap, boundary and gauge-fixing terms with dimensions and sign conventions."
+    },
+    {
+      "id": "SCI-002",
+      "severity": "CRITICAL",
+      "area": "theory",
+      "title": "Boundary, cap and localized source variation is incomplete",
+      "status": "OPEN",
+      "impact": "Junction conditions and reduced source terms are not guaranteed to follow from one variational principle.",
+      "acceptance": "Derive all bulk equations, boundary terms and junction conditions from the same action."
+    },
+    {
+      "id": "SCI-003",
+      "severity": "CRITICAL",
+      "area": "constraints",
+      "title": "Complete constraint algebra and physical degree-of-freedom count are missing",
+      "status": "OPEN",
+      "impact": "Negative directions, zero modes and apparent particles cannot yet be classified physically.",
+      "acceptance": "Close the primary/secondary constraint algebra and identify the reduced physical phase space."
+    },
+    {
+      "id": "SCI-004",
+      "severity": "CRITICAL",
+      "area": "stability",
+      "title": "Scalar, vector and tensor perturbations are not jointly derived",
+      "status": "OPEN",
+      "impact": "Background stability does not imply perturbative ghost or gradient stability.",
+      "acceptance": "Derive and diagonalize all perturbation sectors after constraints, including boundary conditions."
+    },
+    {
+      "id": "SCI-005",
+      "severity": "CRITICAL",
+      "area": "quantum",
+      "title": "Physical Hilbert space and unitary evolution are undefined for HZT-Full",
+      "status": "OPEN",
+      "impact": "Multiple time directions may produce negative norms, path-dependent evolution or an unbounded Hamiltonian.",
+      "acceptance": "Construct the physical inner product, self-adjoint generators and a gauge/BRST reduction satisfying MT-01."
+    },
+    {
+      "id": "SCI-006",
+      "severity": "HIGH",
+      "area": "quantum",
+      "title": "No RG or UV-completion audit",
+      "status": "NOT_STARTED",
+      "impact": "Strong-coupling and cutoff claims cannot be quantified consistently.",
+      "acceptance": "Define a coupling basis, beta functions, fixed-point candidates and truncation sensitivity."
+    },
+    {
+      "id": "SCI-007",
+      "severity": "HIGH",
+      "area": "reduction",
+      "title": "The 6D to 4D limit lacks an error-controlled reduction theorem",
+      "status": "OPEN",
+      "impact": "Formal integration over internal coordinates may miss boundary layers, light modes or nonlocal bulk response.",
+      "acceptance": "Provide a controlled EFT expansion and, where mathematically applicable, compactness/homogenization or Gamma-limit arguments."
+    },
+    {
+      "id": "SCI-008",
+      "severity": "CRITICAL",
+      "area": "observables",
+      "title": "Fundamental-to-observable forward map remains unreleased",
+      "status": "NOT_RELEASED",
+      "impact": "Cosmological data cannot identify the 6D theory.",
+      "acceptance": "Derive background and perturbation observables from fundamental parameters with nuisance structure and validity limits."
+    },
+    {
+      "id": "SCI-009",
+      "severity": "HIGH",
+      "area": "baryogenesis",
+      "title": "No complete baryogenesis mechanism",
+      "status": "OPEN",
+      "impact": "Zero modes or derivative couplings alone do not establish the observed asymmetry.",
+      "acceptance": "Demonstrate charge violation or transfer, C/CP violation, non-equilibrium dynamics, washout control and the observed yield."
+    },
+    {
+      "id": "SCI-010",
+      "severity": "HIGH",
+      "area": "dark_matter",
+      "title": "No identified stable relic with production history",
+      "status": "OPEN",
+      "impact": "A geometric or KK candidate is not yet a dark-matter prediction.",
+      "acceptance": "Specify the species, symmetry, mass spectrum, interactions, Boltzmann network and observational constraints."
+    },
+    {
+      "id": "DATA-001",
+      "severity": "HIGH",
+      "area": "data",
+      "title": "DESI DR2 BAO likelihood and covariance are not integrated",
+      "status": "OPEN",
+      "acceptance": "Load the official DR2 measurement vector, covariance and public Cobaya likelihood with provenance hashes."
+    },
+    {
+      "id": "DATA-002",
+      "severity": "HIGH",
+      "area": "data",
+      "title": "KiDS-Legacy supersedes the older KiDS-1000 proxy workflow",
+      "status": "OPEN",
+      "acceptance": "Use the KiDS-Legacy data vector, covariance, redshift distributions, angular cuts, ordering and nuisance model."
+    },
+    {
+      "id": "DATA-003",
+      "severity": "HIGH",
+      "area": "data",
+      "title": "Pantheon+ full covariance and calibration separation are not integrated",
+      "status": "OPEN",
+      "acceptance": "Load distances, statistical and systematic covariance, redshift conventions and optional SH0ES calibration separately."
+    },
+    {
+      "id": "DATA-004",
+      "severity": "MEDIUM",
+      "area": "data",
+      "title": "Local gravity and time-varying Planck-mass tests are absent",
+      "status": "OPEN",
+      "acceptance": "Add Lunar Laser Ranging, Solar-System and laboratory constraints with a model-specific map to Gdot/G."
+    },
+    {
+      "id": "DATA-005",
+      "severity": "MEDIUM",
+      "area": "data",
+      "title": "Standard-siren propagation tests are absent",
+      "status": "OPEN",
+      "acceptance": "Derive and test the ratio dL_GW/dL_EM from the tensor propagation equation before fitting sirens."
+    },
+    {
+      "id": "WEB-001",
+      "severity": "HIGH",
+      "area": "web",
+      "title": "Navigation and cache-version parameters drift between pages",
+      "status": "OPEN",
+      "impact": "Different entry points can open different revisions of the same module.",
+      "acceptance": "Generate navigation from a central manifest and use one release version."
+    },
+    {
+      "id": "WEB-002",
+      "severity": "MEDIUM",
+      "area": "web",
+      "title": "Multiple iframe wrappers create nested navigation and styling layers",
+      "status": "OPEN",
+      "impact": "Back navigation, accessibility, focus, cache invalidation and CSS consistency become fragile.",
+      "acceptance": "Consolidate wrappers or move common navigation and styles into shared modules."
+    },
+    {
+      "id": "WEB-003",
+      "severity": "HIGH",
+      "area": "web",
+      "title": "CSS and UI semantics are duplicated across monolithic HTML files",
+      "status": "OPEN",
+      "impact": "Fixes do not propagate globally and pseudo-buttons can reappear.",
+      "acceptance": "Adopt shared ActionButton, InfoCard, MetricCard, StatusBadge, FormulaBox and AuditCard components."
+    },
+    {
+      "id": "WEB-004",
+      "severity": "MEDIUM",
+      "area": "accessibility",
+      "title": "Automated keyboard, contrast, focus and semantic tests are missing",
+      "status": "OPEN",
+      "acceptance": "Add axe or equivalent checks, keyboard navigation tests and reduced-motion validation to CI."
+    },
+    {
+      "id": "WEB-005",
+      "severity": "MEDIUM",
+      "area": "web",
+      "title": "No automated internal-link and HTML validation gate",
+      "status": "OPEN",
+      "acceptance": "Run link checking, HTML validation, JSON schema validation and JavaScript syntax tests on every change."
+    },
+    {
+      "id": "DOC-001",
+      "severity": "HIGH",
+      "area": "documentation",
+      "title": "Equations lack stable IDs, derivation links and source provenance",
+      "status": "OPEN",
+      "acceptance": "Assign immutable equation IDs and map each to assumptions, derivation, references, tests and status."
+    },
+    {
+      "id": "DOC-002",
+      "severity": "MEDIUM",
+      "area": "documentation",
+      "title": "Literature catalogue is incomplete and partly outdated",
+      "status": "IN_PROGRESS",
+      "acceptance": "Maintain a versioned bibliography with DOI/arXiv, source role, model scope and superseded data releases."
+    },
+    {
+      "id": "NUM-001",
+      "severity": "HIGH",
+      "area": "numerics",
+      "title": "Solver validation is not uniform across laboratories",
+      "status": "OPEN",
+      "acceptance": "Require analytic benchmarks, dimension checks, convergence studies, condition numbers and failure-state tests for every solver."
+    },
+    {
+      "id": "NUM-002",
+      "severity": "MEDIUM",
+      "area": "numerics",
+      "title": "No centralized unit and convention registry",
+      "status": "OPEN",
+      "acceptance": "Store dimensions, unit systems, metric and curvature conventions in a machine-readable registry and validate inputs."
+    }
+  ],
+  "roadmap": [
+    {
+      "phase": "P0",
+      "name": "Governance freeze",
+      "priority": 1,
+      "deliverables": ["project-manifest.json", "convention-registry.json", "central status renderer", "release version policy"]
+    },
+    {
+      "phase": "P1",
+      "name": "Site consolidation and QA",
+      "priority": 2,
+      "deliverables": ["shared UI components", "navigation manifest", "link/HTML/accessibility CI", "wrapper reduction"]
+    },
+    {
+      "phase": "P2",
+      "name": "Parent action and boundary closure",
+      "priority": 3,
+      "deliverables": ["bulk action", "cap/brane action", "boundary terms", "junction conditions", "dimension audit"]
+    },
+    {
+      "phase": "P3",
+      "name": "Constraint and perturbation closure",
+      "priority": 4,
+      "deliverables": ["Dirac-Bergmann algebra", "gauge generator", "BRST or equivalent", "scalar/vector/tensor quadratic action", "strong-coupling audit"]
+    },
+    {
+      "phase": "P4",
+      "name": "Controlled reduction and EFT",
+      "priority": 5,
+      "deliverables": ["4D Einstein-frame action", "mode normalization", "KK truncation error", "nonlocal bulk kernel", "RG/cutoff analysis"]
+    },
+    {
+      "phase": "P5",
+      "name": "Forward model",
+      "priority": 6,
+      "deliverables": ["H(z)", "distance observables", "growth", "lensing", "GW propagation", "Gdot/G"]
+    },
+    {
+      "phase": "P6",
+      "name": "Data and likelihood integration",
+      "priority": 7,
+      "deliverables": ["DESI DR2", "KiDS-Legacy", "Pantheon+", "local gravity", "standard sirens", "mock recovery tests"]
+    },
+    {
+      "phase": "P7",
+      "name": "Release and external review",
+      "priority": 8,
+      "deliverables": ["English manuscript", "German full version", "reproducibility archive", "citation bundle", "independent review checklist"]
+    }
+  ],
+  "recommended_next_actions": [
+    "Create project-manifest.json and convention-registry.json.",
+    "Replace stale KiDS-1000 references with KiDS-Legacy while preserving historical notes.",
+    "Add DESI DR2 official BAO and likelihood provenance.",
+    "Create equation-source-test registry.",
+    "Add Physical Hilbert Space and multi-time integrability audit pages.",
+    "Add RG fixed-point and truncation audit template.",
+    "Add controlled-reduction plan based on EFT error bounds and applicable Gamma-convergence ideas.",
+    "Standardize numerical verification requirements across all labs.",
+    "Consolidate navigation and cache versions.",
+    "Run a full link, HTML, JSON, accessibility and mobile-layout CI audit."
+  ]
+}
