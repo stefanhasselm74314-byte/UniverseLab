@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "Wenn Sie UniverseLab oder die Hyperzeit/HPVS-Materialien verwenden, zitieren Sie bitte diese Software und die konkret verwendete Release-Version."
+title: "UniverseLab: Interaktives Kosmologie- und Hyperzeit-Forschungslabor"
+type: software
+authors:
+  - family-names: "Hasselmeyer"
+    given-names: "Stefan"
+version: "2.1-audit"
+date-released: "2026-07-31"
+url: "https://stefanhasselm74314-byte.github.io/UniverseLab/"
+repository-code: "https://github.com/stefanhasselm74314-byte/UniverseLab"
+abstract: >-
+  UniverseLab ist eine webbasierte Forschungs- und Dokumentationsplattform für
+  etablierte Kosmologie, numerische Validierung und klar gekennzeichnete
+  experimentelle Hyperzeit/HPVS-Modelle. Release 2.1-audit ergänzt einen
+  Materialatlas, einen Methoden- und QA-Katalog, ein Konventionsregister,
+  ein Projektmanifest sowie einen wissenschaftlichen und technischen Master-Audit.
+keywords:
+  - cosmology
+  - higher-dimensional gravity
+  - Kaluza-Klein theory
+  - flux compactification
+  - brane cosmology
+  - constraint analysis
+  - scientific software
+  - Hyperzeit
+  - HPVS
+license: "NOASSERTION"
