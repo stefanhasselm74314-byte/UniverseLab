@@ -1,0 +1,113 @@
+{
+  "schema": "universelab.project-manifest.v1",
+  "release": "2.1-audit",
+  "release_date": "2026-07-31",
+  "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
+  "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
+  "project": {
+    "name": "UniverseLab",
+    "research_program": "Hyperzeit / HPVS",
+    "author": "Stefan Hasselmeyer",
+    "language_primary": "de",
+    "language_planned": ["de", "en"]
+  },
+  "architecture": {
+    "governing_document": "MD-0",
+    "levels": [
+      {
+        "id": "HPVS",
+        "role": "foundations_program",
+        "status": "OPEN_RESEARCH_PROGRAM"
+      },
+      {
+        "id": "HZT-M0-S6",
+        "role": "primary_controlled_forward_model_candidate",
+        "signature": "(-,+,+,+,+,+)",
+        "status": "RETAINED_AND_INCOMPLETE"
+      },
+      {
+        "id": "HZT-M0-P5",
+        "role": "projection_quotient_and_uplift_control_branch",
+        "status": "CONDITIONAL"
+      },
+      {
+        "id": "HZT-Full",
+        "role": "fundamental_multitime_candidate",
+        "status": "NOT_CONSTRUCTED"
+      }
+    ],
+    "control_core": "S6-Q1 / RB0-heavy-GR-quiet"
+  },
+  "gates": {
+    "K1-A": "PASS",
+    "K1-B_C": "CONDITIONAL",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "diagnostic_evidence_effect": "NONE"
+  },
+  "governance_rules": [
+    "technical_execution_is_not_physical_identification",
+    "numerical_stability_is_not_ghost_freedom",
+    "good_fit_is_not_confirmation",
+    "literature_compatibility_is_not_derivation",
+    "gauge_fixing_follows_constraint_derivation",
+    "rejected_applies_only_to_the_precisely_tested_mechanism"
+  ],
+  "canonical_pages": [
+    {"id":"portal","path":"index.html","live":"./","class":"public_interface","status":"ACTIVE"},
+    {"id":"navigator","path":"navigator-app.html","live":"./navigator-app.html?v=3","class":"scientific_navigation","status":"ACTIVE"},
+    {"id":"hyperlab","path":"hyperlab.html","live":"./hyperlab.html?v=10","class":"status_and_diagnostics","status":"ACTIVE"},
+    {"id":"material","path":"hyperzeit-material-v2.html","live":"./hyperzeit-material-v2.html?v=2","class":"literature_derivations_visuals","status":"ACTIVE"},
+    {"id":"methods","path":"hyperzeit-methods.html","live":"./hyperzeit-methods.html?v=1","class":"methods_and_quality_gates","status":"ACTIVE"},
+    {"id":"audit","path":"universelab-audit-2026-07-31.html","live":"./universelab-audit-2026-07-31.html?v=1","class":"master_audit","status":"ACTIVE"},
+    {"id":"bibliography","path":"hyperzeit-bibliography.json","live":"./hyperzeit-bibliography.json?v=1","class":"machine_readable_bibliography","status":"ACTIVE"},
+    {"id":"audit_data","path":"universelab-audit-2026-07-31.json","live":"./universelab-audit-2026-07-31.json?v=1","class":"machine_readable_audit","status":"ACTIVE"},
+    {"id":"source","path":"source.html","live":"./source.html?v=2","class":"developer_hub","status":"ACTIVE"},
+    {"id":"baryogenesis","path":"baryogenesis.html","live":"./baryogenesis.html?v=16","class":"research_lab","status":"ACTIVE"},
+    {"id":"comparison","path":"compare-safe.html","live":"./compare-safe.html?v=safe2","class":"calculator","status":"ACTIVE"},
+    {"id":"validation","path":"validation.html","live":"./validation.html","class":"numerical_validation","status":"ACTIVE"},
+    {"id":"legacy","path":"legacy.html","live":"./legacy.html?v=1","class":"historical_audit","status":"ACTIVE"}
+  ],
+  "data_releases": [
+    {
+      "id": "DESI-DR2-BAO",
+      "reference": "arXiv:2503.14738",
+      "status": "MATERIAL_IDENTIFIED_NOT_INTEGRATED",
+      "required": ["measurement_vector", "covariance", "ordering", "likelihood", "provenance_hashes"]
+    },
+    {
+      "id": "DESI-DR2-LYA",
+      "reference": "arXiv:2503.14739",
+      "status": "MATERIAL_IDENTIFIED_NOT_INTEGRATED",
+      "required": ["measurement_vector", "covariance", "cross_correlations", "likelihood"]
+    },
+    {
+      "id": "KiDS-Legacy",
+      "reference": "arXiv:2503.19441",
+      "status": "SUPERSEDES_KIDS1000_FOR_NEW_ANALYSES",
+      "required": ["data_vector", "covariance", "n_of_z", "scale_cuts", "ordering", "nuisance_model"]
+    },
+    {
+      "id": "PantheonPlus",
+      "reference": "arXiv:2202.04077",
+      "status": "MATERIAL_IDENTIFIED_NOT_INTEGRATED",
+      "required": ["distance_data", "statistical_covariance", "systematic_covariance", "redshift_conventions", "calibration_separation"]
+    }
+  ],
+  "central_registries": {
+    "conventions": "convention-registry.json",
+    "audit": "universelab-audit-2026-07-31.json",
+    "bibliography": "hyperzeit-bibliography.json",
+    "project_manifest": "project-manifest.json"
+  },
+  "next_release_blockers": [
+    "complete_parent_action",
+    "boundary_and_junction_variation",
+    "constraint_algebra_closure",
+    "scalar_vector_tensor_perturbations",
+    "physical_hilbert_space_for_multitime_branch",
+    "controlled_6d_to_4d_reduction",
+    "fundamental_to_observable_forward_map",
+    "data_likelihood_provenance"
+  ]
+}
