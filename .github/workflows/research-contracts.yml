@@ -3,6 +3,7 @@ name: Research contracts
 on:
   pull_request:
     paths:
+      - "governance/**"
       - "registry/**"
       - "science/hzt-m0/md2s/**"
       - "tools/verify_md2s_recovery_package_v0_1.py"
@@ -12,6 +13,7 @@ on:
     branches:
       - main
     paths:
+      - "governance/**"
       - "registry/**"
       - "science/hzt-m0/md2s/**"
       - "tools/verify_md2s_recovery_package_v0_1.py"
@@ -45,6 +47,7 @@ jobs:
           python -m json.tool registry/research-continuation-manifest-v0.1.json >/dev/null
           python -m json.tool science/hzt-m0/md2s/R0_ARTIFACT_INVENTORY_v0.1.json >/dev/null
           python -m json.tool science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json >/dev/null
+          python -m json.tool science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json >/dev/null
 
       - name: Run MD-2S verifier tests
         run: python -m unittest -v tests/test_verify_md2s_recovery_package_v0_1.py
