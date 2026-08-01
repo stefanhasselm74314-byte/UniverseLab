@@ -97,7 +97,7 @@ def update_index(text: str) -> tuple[str, list[str]]:
 
 
 def update_subpage(path: Path, text: str) -> tuple[str, list[str]]:
-    if path.name == "research-status.html" or "research-status.html" in text:
+    if path.name in {"portal.html", "research-status.html"} or "research-status.html" in text:
         return text, []
     updated, changed = add_after_first_matching_anchor(
         text,
