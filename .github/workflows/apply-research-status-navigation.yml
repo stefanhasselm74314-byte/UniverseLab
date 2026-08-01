@@ -1,14 +1,6 @@
-name: Apply research status navigation
+name: Research status navigation contract
 
 on:
-  push:
-    branches:
-      - agent/research-status-navigation
-    paths:
-      - "tools/update_research_status_navigation.py"
-      - ".github/workflows/apply-research-status-navigation.yml"
-      - "*.html"
-      - "sitemap.xml"
   pull_request:
     branches:
       - main
@@ -17,40 +9,33 @@ on:
       - ".github/workflows/apply-research-status-navigation.yml"
       - "*.html"
       - "sitemap.xml"
+  push:
+    branches:
+      - main
+      - agent/research-status-navigation
+    paths:
+      - "tools/update_research_status_navigation.py"
+      - ".github/workflows/apply-research-status-navigation.yml"
+      - "*.html"
+      - "sitemap.xml"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  apply:
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+  validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Resolve target branch
-        run: echo "TARGET_BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" >> "$GITHUB_ENV"
-
-      - name: Checkout branch
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref || github.ref_name }}
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Apply idempotent navigation migration
-        run: python tools/update_research_status_navigation.py --write
+      - name: Compile synchronizer
+        run: python -m py_compile tools/update_research_status_navigation.py
 
-      - name: Commit generated navigation changes
-        run: |
-          if git diff --quiet; then
-            echo "Navigation already synchronized."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html portal.html observatory.html journey.html compare-safe.html hyperlab.html universe3d.html validation.html guide.html sitemap.xml
-          git commit -m "Synchronize research status navigation [nav-sync]"
-          git push origin HEAD:"$TARGET_BRANCH"
+      - name: Verify navigation and sitemap synchronization
+        run: python tools/update_research_status_navigation.py --check
