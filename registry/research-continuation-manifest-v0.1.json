@@ -100,7 +100,7 @@
     {
       "id": "WP-4",
       "title": "UniverseLab registry and P0 verifier",
-      "status": "IN_PROGRESS_RESEARCH_CONTRACT_CI_PENDING_LATEST_COMMIT",
+      "status": "IN_PROGRESS_RESEARCH_CONTRACT_CI_PASS_RUN_26",
       "implemented": [
         "central source register",
         "claim register",
@@ -161,7 +161,7 @@
     "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
     "B1_4O": "NOT_EXECUTABLE",
     "GW_DOSSIER": "CONDITIONAL_PHENOMENOLOGY_REPRODUCIBILITY_OPEN",
-    "RESEARCH_CONTRACT_CI": "PENDING_LATEST_COMMIT"
+    "RESEARCH_CONTRACT_CI": "PASS_RUN_26"
   },
   "forbidden_shortcuts": [
     "physical identification from technical execution",
