@@ -1,0 +1,102 @@
+{
+  "schema": "universelab.research-continuation-manifest.v0.1",
+  "date": "2026-08-01",
+  "program": "UniverseLab Research Continuation Program",
+  "owner": "Stefan Hasselmeyer",
+  "governance": "MD-0 v3.1.1",
+  "architecture": [
+    "HPVS",
+    "HZT-M0-S6",
+    "HZT-M0-P5",
+    "HZT-Full"
+  ],
+  "program_status": "ACTIVE",
+  "evidence_effect": "NONE",
+  "artifacts": {
+    "program_specification": "governance/UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.1.md",
+    "chat_source_register": "registry/chat-source-register-v0.1.json",
+    "claim_register": "registry/claim-register-v0.1.json",
+    "md2s_recovery_contract": "science/hzt-m0/md2s/MD2S_RECOVERY_CONTRACT_v0.1.md",
+    "existing_md2s_recovery_profile": "md2s-artifact-recovery-rank-audit-v0.1.json",
+    "existing_parent_profile": "hzt-s6-parent-action-v0.1.json",
+    "project_manifest": "project-manifest.json",
+    "conventions": "convention-registry.json"
+  },
+  "work_packages": [
+    {
+      "id": "WP-1",
+      "title": "Chat, document and artifact canonization",
+      "status": "IN_PROGRESS",
+      "deliverables": [
+        "stable chat and export IDs",
+        "hash deduplication",
+        "source-of-truth mapping",
+        "supersession graph",
+        "claim migration register"
+      ],
+      "exit_gate": "Every active claim has a primary source or an explicit OPEN migration task."
+    },
+    {
+      "id": "WP-2",
+      "title": "MD-2S artifact recovery",
+      "status": "IN_PROGRESS_SPECIFICATION_COMPLETE_EXECUTION_OPEN",
+      "phases": [
+        "R0 archive search",
+        "R1 reproducible rebuild",
+        "R2 one-sided boundary export",
+        "R3 SCI-001/SCI-002 gate execution",
+        "R4 B1.4O rank and conditioning audit"
+      ],
+      "exit_gate": "A provenance-complete solver package reproduces the declared A0 benchmarks and exports all residuals and oriented boundary data."
+    },
+    {
+      "id": "WP-3",
+      "title": "B1.4O rank and identifiability audit",
+      "status": "BLOCKED_BY_WP-2",
+      "exit_gate": "Rank, singular spectrum, condition number, null spaces and physical admissibility are decided."
+    },
+    {
+      "id": "WP-4",
+      "title": "UniverseLab registry and P0 verifier",
+      "status": "IN_PROGRESS",
+      "exit_gate": "Runtime pages consume central registries and CI detects status, link, version and provenance drift."
+    },
+    {
+      "id": "WP-5",
+      "title": "Quadratic perturbation and ghost audit",
+      "status": "BLOCKED_BY_BACKGROUND_AND_JUNCTION_GATES",
+      "exit_gate": "Physical scalar, vector and tensor degrees of freedom and their kinetic, gradient and mass matrices are derived and audited."
+    },
+    {
+      "id": "WP-6",
+      "title": "Controlled forward engine",
+      "status": "BLOCKED_BY_WP-5",
+      "exit_gate": "A reproducible 6D-to-4D map produces model observables with declared validity regimes."
+    },
+    {
+      "id": "WP-7",
+      "title": "Observational inference",
+      "status": "BLOCKED_BY_WP-6",
+      "exit_gate": "Versioned likelihood runs with data provenance, covariance, nuisance model and model comparison outputs."
+    }
+  ],
+  "current_gate_state": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "SCI-001": "PARTIAL",
+    "SCI-002": "PARTIAL",
+    "MD2S_ARTIFACT_RECOVERY": "OPEN",
+    "MD2S_BACKGROUND_REPRODUCTION": "NOT_STARTED",
+    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
+    "B1_4O": "NOT_EXECUTABLE"
+  },
+  "forbidden_shortcuts": [
+    "physical identification from technical execution",
+    "ghost-free claim from numerical stability",
+    "6D confirmation from an effective fit",
+    "junction reconstruction from global benchmark values",
+    "data likelihood before a released forward map",
+    "HZT-Full promotion before a consistent constraint structure"
+  ],
+  "next_machine_action": "Create the R0 archive inventory and populate candidate solver artifact hashes without changing physical gate status."
+}
