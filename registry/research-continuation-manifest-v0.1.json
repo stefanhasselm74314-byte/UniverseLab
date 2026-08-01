@@ -25,8 +25,11 @@
     "bridge_integration_audit": "science/hzt-m0/bridge/MD2F_H_I_INTEGRATION_AUDIT_v0.1.md",
     "md2n_q_package_rigor_audit": "science/hzt-m0/bridge/MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
     "md2p_corr_overlap_derivation": "science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
+    "mds01_spectral_derivation": "science/hzt-m0/bridge/MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md",
     "overlap_bridge_utility": "tools/hzt_m0_overlap_bridge_v0_1.py",
     "overlap_bridge_tests": "tests/test_hzt_m0_overlap_bridge_v0_1.py",
+    "spectral_bridge_utility": "tools/hzt_m0_spectral_bridge_v0_1.py",
+    "spectral_bridge_tests": "tests/test_hzt_m0_spectral_bridge_v0_1.py",
     "gw_dossier_rigor_audit": "science/gw/GW_FALSIFICATION_DOSSIER_RIGOR_AUDIT_v0.1.md",
     "md2s_package_verifier": "tools/verify_md2s_recovery_package_v0_1.py",
     "md2s_package_verifier_tests": "tests/test_verify_md2s_recovery_package_v0_1.py",
@@ -82,7 +85,10 @@
       "status": "BLOCKED_BY_WP-2_AND_PHYSICAL_BRIDGE_RELEASE",
       "bridge_findings": [
         "k_c=m/omega_c and A(k)=exp[-(k/k_c)^2] are conditionally derived",
-        "m requires an internal eigenvalue problem and boundary conditions",
+        "MDS-01 has the conditional spectral form m_n=Xi_n(...)/R_chi; Xi_n is a constant only in a scale-free self-similar operator",
+        "the numerical Xi_n requires the frozen quadratic operator, field sector, domain, normalization and boundary conditions",
+        "the locked MD-2Q values imply xi_eff=m_eff R_chi=0.05176470588235294 and do not match the ordinary first flat-disk Dirichlet or first massive Neumann scalar roots",
+        "m_eff may therefore be a phenomenological response scale, a boundary-tuned light mode or a scale from a different operator; its physical identity remains open",
         "omega_c and eta remain physically unmapped",
         "s should be derived, fixed or excluded",
         "kappa_6 normalization requires the warped-volume reduction and normalized profiles",
@@ -93,14 +99,14 @@
         "all controls entering observables only through the scalar x generate a local Jacobian block of rank at most one",
         "at x=ln(2), d eta_bulk/dx vanishes and the x-only Jacobian block has rank zero at linear order",
         "MD-2Q condition number 1.0 is the automatic result of a nonzero one-column Jacobian and supplies no full-rank evidence",
-        "MD-2P-corr/MD-2Q do not close MDS-01, MDS-02 or MDS-05"
+        "MD-2P-corr/MD-2Q do not close MDS-02 or MDS-05"
       ],
       "exit_gate": "Rank, singular spectrum, condition number, null spaces and physical admissibility are decided for release-qualified physical parameters and independent observable shapes."
     },
     {
       "id": "WP-4",
       "title": "UniverseLab registry and P0 verifier",
-      "status": "IN_PROGRESS_RESEARCH_CONTRACT_CI_PASS_RUN_26",
+      "status": "IN_PROGRESS_RESEARCH_CONTRACT_CI_PASS_RUN_31",
       "implemented": [
         "central source register",
         "claim register",
@@ -109,6 +115,7 @@
         "read-only MD-2S recovery package verifier",
         "synthetic PASS, tamper-FAIL and missing-file tests",
         "independent quadrature, asymptotic, derivative and rank-bound tests for the MD-2P-corr overlap bridge",
+        "dependency-free Bessel-series, root, inverse-radius-scaling and MD-2Q spectral benchmark tests for MDS-01",
         "GitHub Actions validation workflow"
       ],
       "exit_gate": "Runtime pages consume central registries and CI detects status, link, version, mathematical-contract and provenance drift."
@@ -145,7 +152,9 @@
     "MD2S_R1_MODEL_FREEZE": "ACTIVE",
     "MD2S_SOLVER_IMPLEMENTATION": "BLOCKED_BY_MODEL_FREEZE",
     "MD2S_BACKGROUND_REPRODUCTION": "NOT_STARTED",
-    "BRIDGE_MDS_01": "CONDITIONAL_ON_INTERNAL_SPECTRUM_MD2Q_DOES_NOT_CLOSE",
+    "BRIDGE_MDS_01_FORM": "CONDITIONAL_SPECTRAL_THEOREM_M_EQUALS_XI_OVER_R",
+    "BRIDGE_MDS_01_NUMERICAL_XI": "OPEN_REQUIRES_MD2S_QUADRATIC_OPERATOR_AND_BOUNDARY_CONDITIONS",
+    "BRIDGE_MDS_01_MD2Q_FLAT_STANDARD_MODE_MATCH": "REJECTED_FOR_LOCKED_EFFECTIVE_VALUES",
     "BRIDGE_MDS_02": "OPEN_CRITICAL_MD2Q_BYPASSES_BY_FIXING_SCALE",
     "BRIDGE_MDS_03": "OPEN_MD2P_CORR_PARTITION_MIXING_IS_EFFECTIVE_NOT_6D_DERIVED",
     "BRIDGE_MDS_04": "FIXED_EFFECTIVE_S_EQUALS_2_IN_MD2Q",
@@ -161,7 +170,7 @@
     "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
     "B1_4O": "NOT_EXECUTABLE",
     "GW_DOSSIER": "CONDITIONAL_PHENOMENOLOGY_REPRODUCIBILITY_OPEN",
-    "RESEARCH_CONTRACT_CI": "PASS_RUN_26"
+    "RESEARCH_CONTRACT_CI": "PASS_RUN_31"
   },
   "forbidden_shortcuts": [
     "physical identification from technical execution",
@@ -178,7 +187,9 @@
     "treating eta_bulk=beta_0*q*(1-q) as a 6D-derived bridge without a parent-action reduction",
     "treating the flat q=1-exp(-x) formula as the warped MD-2S overlap without deriving the correct measure and normalized modes",
     "counting multiple physical controls as independently identifiable when they enter only through one scalar x",
+    "treating m and R_chi as independent K1 directions after a spectral bridge is imposed",
+    "identifying m_eff with a KK mass without deriving the relevant operator and boundary conditions",
     "claiming MDS-05 closure from mere kappa_6 dependence without deriving the four-dimensional normalization"
   ],
-  "next_machine_action": "Complete MF-001 through MF-007 and derive the warped overlap q_W from the recovered MD-2S metric and normalized modes; in parallel derive the internal eigenvalue and warped-volume bridges required for MDS-01 and MDS-05."
+  "next_machine_action": "Complete MF-001 through MF-007, derive the warped overlap q_W and the exact MDS-01 fluctuation operator from the recovered MD-2S action, then close the warped-volume normalization bridge MDS-05."
 }
