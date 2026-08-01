@@ -1,0 +1,41 @@
+name: Research status navigation contract
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "tools/update_research_status_navigation.py"
+      - ".github/workflows/apply-research-status-navigation.yml"
+      - "*.html"
+      - "sitemap.xml"
+  push:
+    branches:
+      - main
+      - agent/research-status-navigation
+    paths:
+      - "tools/update_research_status_navigation.py"
+      - ".github/workflows/apply-research-status-navigation.yml"
+      - "*.html"
+      - "sitemap.xml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile synchronizer
+        run: python -m py_compile tools/update_research_status_navigation.py
+
+      - name: Verify navigation and sitemap synchronization
+        run: python tools/update_research_status_navigation.py --check
