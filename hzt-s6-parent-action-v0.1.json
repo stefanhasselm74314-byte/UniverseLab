@@ -1,0 +1,78 @@
+{
+  "schema": "hzt.s6.parent-action.v0.1",
+  "date": "2026-08-01",
+  "branch": "HZT-M0-S6",
+  "control_core": "S6-Q1 / RB0-heavy-GR-quiet",
+  "signature": "(-,+,+,+,+,+)",
+  "status": "variational_skeleton_defined_background_revalidation_open",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "evidence_effect": "NONE"
+  },
+  "field_dimensions_M": {
+    "g_AB": 0,
+    "M6": 1,
+    "Lambda6": 2,
+    "phi": 2,
+    "U": 6,
+    "A_A": 2,
+    "F_AB": 3,
+    "Z_F": 0,
+    "K_ab": 1,
+    "lambda_cap": 5,
+    "sigma": 0,
+    "Z_sigma": 3,
+    "q_sigma": -1
+  },
+  "action_sectors": {
+    "bulk_Einstein_Hilbert": "included",
+    "bulk_cosmological_constant": "included",
+    "bulk_scalar": "included",
+    "bulk_Maxwell_flux": "included",
+    "GHY_each_region": "included",
+    "cap_tension": "included",
+    "cap_winding_phase": "conditional",
+    "Gauss_Bonnet": "excluded_from_v0.1_core",
+    "four_form_baryogenesis": "quarantined_optional",
+    "Regge_Teitelboim": "separate_parent_branch"
+  },
+  "junction_gates": {
+    "pure_tension_condition": "A_Sigma == L_Sigma",
+    "required_anisotropy": "Y_sigma = M6^4 (L_Sigma - A_Sigma)",
+    "positive_winding_gate": "Y_sigma >= 0",
+    "metric_components_required": [
+      "mu_nu",
+      "chi_chi"
+    ],
+    "additional_required": [
+      "scalar_matching",
+      "gauge_matching",
+      "flux_quantization",
+      "smooth_pole_regularity",
+      "rr_constraint"
+    ]
+  },
+  "equations": [
+    {"id":"HZT-S6-PAR-v0.1-EQ-001","role":"core_action","status":"DEFINED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-002","role":"cap_lagrangian","status":"DEFINED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-003","role":"einstein_equation","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-004","role":"scalar_equation","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-005","role":"maxwell_equation","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-006","role":"surface_stress","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-007","role":"israel_outward_sum","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-008","role":"scalar_matching","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-009","role":"gauge_matching","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-010","role":"cap_phase_equation","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-011","role":"warped_background","status":"DEFINED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-012","role":"maxwell_first_integral","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-013","role":"background_munu","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-014","role":"background_rr_constraint","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-015","role":"background_chichi","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-016","role":"background_scalar","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-017","role":"junction_4d","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-018","role":"junction_internal","status":"DERIVED"},
+    {"id":"HZT-S6-PAR-v0.1-EQ-019","role":"anisotropy_closure","status":"DERIVED"}
+  ],
+  "next_block": "SCI-001/002-v0.2-MD2S-background-substitution"
+}
