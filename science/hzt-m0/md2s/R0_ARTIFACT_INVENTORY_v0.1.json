@@ -1,0 +1,113 @@
+{
+  "schema": "universelab.md2s-r0-artifact-inventory.v0.1",
+  "date": "2026-08-01",
+  "scope": "R0 search for original MD-2S executable solver, parameters, profiles, one-sided boundary data, residual logs and provenance manifests",
+  "status": "INCONCLUSIVE_ARCHIVE_SEARCH_REPOSITORY_NEGATIVE",
+  "evidence_effect": "NONE",
+  "search_channels": [
+    {
+      "channel": "UniverseLab GitHub repository",
+      "status": "SEARCHED",
+      "result": "No executable MD-2S solver, notebook, one-sided derivative export or residual log identified in the indexed repository content.",
+      "limitations": "Repository code search returned no matches for benchmark numbers and common solver terms; index coverage may be incomplete."
+    },
+    {
+      "channel": "UniverseLab commit history",
+      "status": "SEARCHED",
+      "result": "Found documentation, parent-action profiles, substitution preflight, artifact-recovery profile and navigator pages; no original solver artifact was identified.",
+      "limitations": "Commit inspection was targeted to recent MD-2S and SCI-001/SCI-002 commits."
+    },
+    {
+      "channel": "ChatGPT File Library",
+      "status": "TECHNICAL_FAILURE",
+      "result": "Targeted MD-2S artifact searches failed with RetrievalClientResponseError during this R0 pass.",
+      "limitations": "The negative result is not interpretable as absence; File Library search must be repeated."
+    },
+    {
+      "channel": "Known exported account and UniverseLab documents",
+      "status": "PARTIALLY_REVIEWED",
+      "result": "Available summaries and audit documents report global benchmark values and missing reproducibility artifacts.",
+      "limitations": "Full byte-level archive traversal and hash inventory remain open."
+    }
+  ],
+  "identified_artifacts": [
+    {
+      "artifact_id": "MD2S-DOC-RECOVERY-JSON-001",
+      "path": "md2s-artifact-recovery-rank-audit-v0.1.json",
+      "class": "DIAGNOSTIC_PROFILE",
+      "status": "AVAILABLE",
+      "executable": false,
+      "contains_boundary_data": false,
+      "contains_residual_logs": false
+    },
+    {
+      "artifact_id": "MD2S-DOC-SUBSTITUTION-JSON-001",
+      "path": "md2s-background-substitution-v0.2.json",
+      "class": "PREFLIGHT_PROFILE",
+      "status": "AVAILABLE",
+      "executable": false,
+      "contains_boundary_data": false,
+      "contains_residual_logs": false
+    },
+    {
+      "artifact_id": "MD2S-DOC-RECOVERY-HTML-001",
+      "path": "md2s-artifact-recovery-rank-audit-v0.1.html",
+      "class": "HUMAN_READABLE_DIAGNOSTIC",
+      "status": "AVAILABLE",
+      "executable": false,
+      "contains_boundary_data": false,
+      "contains_residual_logs": false
+    },
+    {
+      "artifact_id": "SCI-PARENT-JSON-001",
+      "path": "hzt-s6-parent-action-v0.1.json",
+      "class": "PARENT_ACTION_PROFILE",
+      "status": "AVAILABLE",
+      "executable": false,
+      "contains_boundary_data": false,
+      "contains_residual_logs": false
+    },
+    {
+      "artifact_id": "SCI-PARENT-GATE-HTML-001",
+      "path": "hzt-parent-action-gate-v0.1.html",
+      "class": "INTERACTIVE_GATE",
+      "status": "AVAILABLE_DIAGNOSTIC",
+      "executable": "FORM_INPUT_ONLY",
+      "contains_boundary_data": false,
+      "contains_residual_logs": false
+    }
+  ],
+  "known_benchmarks": {
+    "sqrt_K4_rho_cap": 1.1196329253611,
+    "kappa6_squared_lambda_eff_over_4sqrtK4": 0.8931498683204,
+    "K4_rho_cap_squared": 1.2535778875527,
+    "V_W": 0.5318111250097,
+    "R_circle_at_K4_beta_1": 0.6661500466003,
+    "Xi_cap_reported": 0.9999999998535
+  },
+  "missing_mandatory_artifacts": [
+    "original solver source or notebook",
+    "complete field-equation implementation",
+    "parameter and normalization file",
+    "initial guess or shooting data",
+    "radial mesh or collocation configuration",
+    "full solution profiles",
+    "oriented one-sided cap data",
+    "bulk and constraint residual logs",
+    "convergence study",
+    "software environment lock",
+    "SHA-256 provenance manifest"
+  ],
+  "r0_decision": {
+    "repository_component": "NEGATIVE",
+    "file_library_component": "INCONCLUSIVE_TECHNICAL_FAILURE",
+    "overall": "R0_NOT_CLOSED",
+    "physical_gate_change": false
+  },
+  "next_actions": [
+    "Repeat File Library search after retrieval service recovery.",
+    "Search uploaded ZIP and ChatGPT export packages by filename, extension and benchmark number.",
+    "Inspect any MD-2S, B1.4N or Global Hybrid Background notebooks and code files multimodally where necessary.",
+    "If no provenance-complete solver is recovered, activate R1 rebuild under MD2S_RECOVERY_CONTRACT_v0.1.md."
+  ]
+}
