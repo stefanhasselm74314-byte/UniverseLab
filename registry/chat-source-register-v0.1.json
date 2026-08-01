@@ -1,0 +1,142 @@
+{
+  "schema": "universelab.chat-source-register.v0.1",
+  "date": "2026-08-01",
+  "owner": "Stefan Hasselmeyer",
+  "scope": "UniverseLab project chats and available exported artifacts relevant to HPVS, HZT-M0, HZT-Full and UniverseLab software",
+  "coverage_status": "PARTIAL_BUT_EXTENSIVE",
+  "epistemic_limit": "Complete relative to accessible project context, File Library exports and repository artifacts; deleted, never-exported or inaccessible chats are not reconstructed.",
+  "source_classes": [
+    {
+      "source_id": "SRC-CHAT-PROJECT-CONTEXT",
+      "class": "PROJECT_CHAT_CONTEXT",
+      "status": "ACTIVE_PROVENANCE",
+      "role": "Recent decisions, accepted constraints and current work architecture",
+      "primary_source_allowed": false
+    },
+    {
+      "source_id": "SRC-UL-DEV-DOCX",
+      "class": "EXPORTED_CHAT_DOCUMENT",
+      "title": "UniverseLab-Weiterentwicklung.docx",
+      "status": "PROVENANCE_AND_TECHNICAL_HISTORY",
+      "role": "UniverseLab architecture, numerical hardening, mobile/PWA development and repository history",
+      "primary_source_allowed": false
+    },
+    {
+      "source_id": "SRC-CONWAY-PDF",
+      "class": "EXPORTED_CHAT_DOCUMENT",
+      "title": "Conways-Spiel-des-Lebens.pdf",
+      "status": "PROVENANCE",
+      "role": "Origin of UniverseLab from cellular automata and later separation of heuristic visualization from physics",
+      "primary_source_allowed": false
+    },
+    {
+      "source_id": "SRC-OMEGA-ACCOUNT-20260725",
+      "class": "ACCOUNT_AUDIT",
+      "title": "Omega_Gesamtanalyse_ChatGPT_Account_Stefan_2026-07-25.docx",
+      "status": "CONDITIONAL_AUDIT",
+      "role": "Fragmentation, provenance, reproducibility and source-of-truth diagnosis",
+      "primary_source_allowed": false
+    },
+    {
+      "source_id": "SRC-GITHUB-UNIVERSELAB",
+      "class": "VERSION_CONTROLLED_REPOSITORY",
+      "repository": "stefanhasselm74314-byte/UniverseLab",
+      "status": "PRIMARY_FOR_CODE_AND_RELEASE_STATE",
+      "primary_source_allowed": true
+    },
+    {
+      "source_id": "SRC-MD0",
+      "class": "GOVERNING_DOCUMENT",
+      "title": "MD-0 v3.1.1 Constitutional Compliance Edition",
+      "status": "CANONICAL_GOVERNANCE",
+      "primary_source_allowed": true
+    }
+  ],
+  "canonical_decisions": [
+    {
+      "decision_id": "DEC-ARCH-001",
+      "statement": "The governing architecture is HPVS -> HZT-M0-S6/HZT-M0-P5 -> HZT-Full.",
+      "status": "CANONICAL",
+      "source_of_truth": "MD-0 plus project-manifest.json"
+    },
+    {
+      "decision_id": "DEC-ARCH-002",
+      "statement": "UniverseLab is the operational integration layer, not the physical theory itself.",
+      "status": "CANONICAL",
+      "source_of_truth": "UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.1.md"
+    },
+    {
+      "decision_id": "DEC-EVID-001",
+      "statement": "Technical execution is not physical identification; numerical stability is not ghost freedom; good fit is not theory confirmation.",
+      "status": "CANONICAL",
+      "source_of_truth": "MD-0 and project-manifest.json"
+    },
+    {
+      "decision_id": "DEC-GATE-001",
+      "statement": "K1-D remains NOT RELEASED and K1-E remains NOT ADMISSIBLE.",
+      "status": "CANONICAL",
+      "source_of_truth": "project-manifest.json"
+    },
+    {
+      "decision_id": "DEC-SCI-001",
+      "statement": "No further branch-level phenomenology is promoted before SCI-001/SCI-002 parent and boundary closure and MD-2S recovery.",
+      "status": "ACTIVE_CONSTRAINT",
+      "source_of_truth": "Research continuation program and parent closure profiles"
+    },
+    {
+      "decision_id": "DEC-MD2S-001",
+      "statement": "Global A0 benchmarks do not determine one-sided boundary derivatives or the two-junction verdict.",
+      "status": "CANONICAL",
+      "source_of_truth": "md2s-artifact-recovery-rank-audit-v0.1.json"
+    },
+    {
+      "decision_id": "DEC-NOGO-001",
+      "statement": "The light unscreened radion route is blocked by excessive coupling in the tested minimal realization.",
+      "status": "BLOCKED_TESTED_MECHANISM",
+      "source_of_truth": "HZT-M0 audit corpus"
+    },
+    {
+      "decision_id": "DEC-NOGO-002",
+      "statement": "The intrinsic RB0 chameleon route is rejected in the tested minimal realization because it behaves anti-chameleon-like.",
+      "status": "REJECTED_TESTED_MECHANISM",
+      "source_of_truth": "HZT-M0 audit corpus"
+    },
+    {
+      "decision_id": "DEC-NOGO-003",
+      "statement": "The minimal cubic EGB Vainshtein route vanishes for two internal dimensions in the tested construction.",
+      "status": "REJECTED_TESTED_MECHANISM",
+      "source_of_truth": "HZT-M0 audit corpus"
+    },
+    {
+      "decision_id": "DEC-NOGO-004",
+      "statement": "Two normal directions cannot be interpreted as two independent physical fluids because of the SO(2) normal-bundle gauge freedom.",
+      "status": "REJECTED_INTERPRETATION",
+      "source_of_truth": "D2N audit corpus"
+    },
+    {
+      "decision_id": "DEC-DATA-001",
+      "statement": "DESI, Pantheon+, KiDS/DES, RSD, SPARC and GW likelihoods become theory tests only after a released model-dependent forward map.",
+      "status": "CANONICAL",
+      "source_of_truth": "MD-0 evidence rules and project-manifest.json"
+    },
+    {
+      "decision_id": "DEC-SOFT-001",
+      "statement": "The current delivery target is a mobile-first browser/PWA research platform; native clients remain optional later targets.",
+      "status": "CANONICAL_CURRENT_PLATFORM",
+      "source_of_truth": "Repository runtime and resolved chat history"
+    },
+    {
+      "decision_id": "DEC-SOFT-002",
+      "statement": "Cellular automata are mathematical and heuristic demonstrators and are not identified with real cosmological structure formation.",
+      "status": "CANONICAL",
+      "source_of_truth": "README.md and architecture documents"
+    }
+  ],
+  "unresolved_inventory_tasks": [
+    "Ingest the newest full ChatGPT export when available.",
+    "Assign stable IDs to every UniverseLab project chat.",
+    "Hash-deduplicate repeated PDF and DOCX exports.",
+    "Map each chat-derived claim to a canonical document, code artifact or OPEN migration task.",
+    "Mark superseded UI and architecture proposals explicitly."
+  ]
+}
