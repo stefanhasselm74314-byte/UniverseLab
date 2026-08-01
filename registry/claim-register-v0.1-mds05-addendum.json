@@ -1,0 +1,41 @@
+{
+  "schema": "universelab.claim-register.addendum.v0.1",
+  "parent_register": "registry/claim-register-v0.1.json",
+  "date": "2026-08-01",
+  "scope": "MDS-05 warp-volume and four-dimensional gravitational normalization",
+  "claims": [
+    {
+      "claim_id": "MDS05-FORM-001",
+      "claim": "For the canonical HZT-M0-S6 bulk Einstein-Hilbert term and metric ds6^2=exp(2A)g4+g2, the inherited four-dimensional coefficient is M4_bulk_squared=V_W/kappa6_squared with V_W=integral d2y sqrt(g2) exp(2A).",
+      "status": "CONDITIONAL",
+      "claim_class": "DIMENSIONAL_REDUCTION_RESULT",
+      "primary_source": "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md",
+      "evidence_effect": "UPGRADES_MDS05_FORM_ONLY",
+      "dependencies": [
+        "canonical bulk Einstein-Hilbert action",
+        "HZT-M0-S6 signature and metric ansatz",
+        "fixed four-dimensional frame",
+        "no unregistered nonminimal curvature coupling"
+      ],
+      "falsification_or_change_rule": "Higher-curvature, nonminimal or localized Einstein-Hilbert terms require a new reduction and modify the coefficient."
+    },
+    {
+      "claim_id": "MDS05-NUM-001",
+      "claim": "The historical MD-2S value V_W=0.5318111250097 cannot currently determine kappa4 because its angular factor, dimensional rescaling and four-dimensional frame normalization are not documented.",
+      "status": "OPEN",
+      "claim_class": "NORMALIZATION_PROVENANCE",
+      "primary_source": "md2s-background-substitution-v0.2.json and MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md",
+      "evidence_effect": "BLOCKS_NUMERICAL_MDS05_RELEASE",
+      "falsification_or_change_rule": "A provenance-complete original definition or a reproducible recomputation with explicit chi period, units and frame closes this ambiguity."
+    },
+    {
+      "claim_id": "MDS05-POS-001",
+      "claim": "Positive V_W and positive kappa6_squared imply a positive bulk four-dimensional Einstein-Hilbert coefficient, but do not prove full tensor, scalar or vector ghost freedom.",
+      "status": "PROVEN",
+      "claim_class": "SCOPE_FIREWALL",
+      "primary_source": "MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md",
+      "evidence_effect": "PREVENTS_FALSE_STABILITY_PROMOTION",
+      "falsification_or_change_rule": "The first clause is algebraic in the minimal core; the second can only be superseded by a complete constraint-reduced quadratic stability audit."
+    }
+  ]
+}
