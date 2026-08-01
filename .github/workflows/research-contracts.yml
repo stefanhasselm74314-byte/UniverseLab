@@ -69,7 +69,9 @@ jobs:
           python -m json.tool registry/source-intake-2026-08-01-batch03-md2nq.json >/dev/null
           python -m json.tool registry/forensic-attachment-recovery-targets-v0.1.json >/dev/null
           python -m json.tool registry/claim-register-v0.1.json >/dev/null
+          python -m json.tool registry/claim-register-v0.1-mds05-addendum.json >/dev/null
           python -m json.tool registry/research-continuation-manifest-v0.1.json >/dev/null
+          python -m json.tool registry/research-continuation-manifest-v0.1-mds05-addendum.json >/dev/null
           python -m json.tool registry/mds05-warp-volume-contract-v0.1.json >/dev/null
           python -m json.tool science/hzt-m0/md2s/R0_ARTIFACT_INVENTORY_v0.1.json >/dev/null
           python -m json.tool science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json >/dev/null
