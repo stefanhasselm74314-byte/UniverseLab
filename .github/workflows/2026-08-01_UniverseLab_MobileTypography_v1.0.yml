@@ -35,7 +35,7 @@ jobs:
         run: |
           python -m py_compile tools/2026-08-01_apply_mobile_typography_v1.0.py
           python -m py_compile tests/2026-08-01_test_mobile_typography_v1.0.py
-          python -m unittest -v tests/2026-08-01_test_mobile_typography_v1.0.py
+          python tests/2026-08-01_test_mobile_typography_v1.0.py -v
 
       - name: Apply shared typography link
         run: python tools/2026-08-01_apply_mobile_typography_v1.0.py --apply
