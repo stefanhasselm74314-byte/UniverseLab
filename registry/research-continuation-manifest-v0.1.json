@@ -17,6 +17,11 @@
     "chat_source_register": "registry/chat-source-register-v0.1.json",
     "claim_register": "registry/claim-register-v0.1.json",
     "md2s_recovery_contract": "science/hzt-m0/md2s/MD2S_RECOVERY_CONTRACT_v0.1.md",
+    "md2s_r0_inventory": "science/hzt-m0/md2s/R0_ARTIFACT_INVENTORY_v0.1.json",
+    "md2s_r1_model_freeze": "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
+    "md2s_package_verifier": "tools/verify_md2s_recovery_package_v0_1.py",
+    "md2s_package_verifier_tests": "tests/test_verify_md2s_recovery_package_v0_1.py",
+    "research_contract_ci": ".github/workflows/research-contracts.yml",
     "existing_md2s_recovery_profile": "md2s-artifact-recovery-rank-audit-v0.1.json",
     "existing_parent_profile": "hzt-s6-parent-action-v0.1.json",
     "project_manifest": "project-manifest.json",
@@ -38,14 +43,17 @@
     },
     {
       "id": "WP-2",
-      "title": "MD-2S artifact recovery",
-      "status": "IN_PROGRESS_SPECIFICATION_COMPLETE_EXECUTION_OPEN",
+      "title": "MD-2S artifact recovery and reproducible rebuild",
+      "status": "R0_INDEXED_CORPUS_NEGATIVE_R1_MODEL_FREEZE_ACTIVE",
       "phases": [
-        "R0 archive search",
-        "R1 reproducible rebuild",
-        "R2 one-sided boundary export",
-        "R3 SCI-001/SCI-002 gate execution",
-        "R4 B1.4O rank and conditioning audit"
+        "R0 archive search: negative in accessible indexed corpus, forensic unmatched-binary search remains open",
+        "R1.0 source reconstruction and model freeze: active",
+        "R1.1 symbolic derivation and equation dependency audit: blocked",
+        "R1.2 independent numerical BVP implementations: blocked",
+        "R1.3 A0 benchmark reproduction and convergence study: blocked",
+        "R2 one-sided boundary export: blocked",
+        "R3 SCI-001/SCI-002 gate execution: blocked",
+        "R4 B1.4O rank and conditioning audit: blocked"
       ],
       "exit_gate": "A provenance-complete solver package reproduces the declared A0 benchmarks and exports all residuals and oriented boundary data."
     },
@@ -58,7 +66,15 @@
     {
       "id": "WP-4",
       "title": "UniverseLab registry and P0 verifier",
-      "status": "IN_PROGRESS",
+      "status": "IN_PROGRESS_RESEARCH_CONTRACT_CI_PASS",
+      "implemented": [
+        "central source register",
+        "claim register",
+        "research continuation manifest",
+        "read-only MD-2S recovery package verifier",
+        "synthetic PASS, tamper-FAIL and missing-file tests",
+        "GitHub Actions validation workflow"
+      ],
       "exit_gate": "Runtime pages consume central registries and CI detects status, link, version and provenance drift."
     },
     {
@@ -85,10 +101,14 @@
     "K1-E": "NOT_ADMISSIBLE",
     "SCI-001": "PARTIAL",
     "SCI-002": "PARTIAL",
-    "MD2S_ARTIFACT_RECOVERY": "OPEN",
+    "MD2S_R0_INDEXED_CORPUS": "NEGATIVE",
+    "MD2S_R0_UNMATCHED_EXPORT_BINARIES": "FORENSICALLY_OPEN",
+    "MD2S_R1_MODEL_FREEZE": "ACTIVE",
+    "MD2S_SOLVER_IMPLEMENTATION": "BLOCKED_BY_MODEL_FREEZE",
     "MD2S_BACKGROUND_REPRODUCTION": "NOT_STARTED",
     "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
-    "B1_4O": "NOT_EXECUTABLE"
+    "B1_4O": "NOT_EXECUTABLE",
+    "RESEARCH_CONTRACT_CI": "PASS"
   },
   "forbidden_shortcuts": [
     "physical identification from technical execution",
@@ -96,7 +116,8 @@
     "6D confirmation from an effective fit",
     "junction reconstruction from global benchmark values",
     "data likelihood before a released forward map",
-    "HZT-Full promotion before a consistent constraint structure"
+    "HZT-Full promotion before a consistent constraint structure",
+    "using the COS-01.1 homogeneous cosmological minisuperspace equations as the MD-2S static radial BVP"
   ],
-  "next_machine_action": "Create the R0 archive inventory and populate candidate solver artifact hashes without changing physical gate status."
+  "next_machine_action": "Complete MF-001 through MF-007 by extracting and reconciling the exact MD-2S bulk action, localized action, radial equations, centre series, junction system, parameter contract and benchmark definitions before solver implementation."
 }
