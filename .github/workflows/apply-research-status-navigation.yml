@@ -9,18 +9,30 @@ on:
       - ".github/workflows/apply-research-status-navigation.yml"
       - "*.html"
       - "sitemap.xml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "tools/update_research_status_navigation.py"
+      - ".github/workflows/apply-research-status-navigation.yml"
+      - "*.html"
+      - "sitemap.xml"
 
 permissions:
   contents: write
 
 jobs:
   apply:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
+      - name: Resolve target branch
+        run: echo "TARGET_BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" >> "$GITHUB_ENV"
+
       - name: Checkout branch
         uses: actions/checkout@v4
         with:
-          ref: agent/research-status-navigation
+          ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
 
       - name: Set up Python
@@ -41,4 +53,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html portal.html observatory.html journey.html compare-safe.html hyperlab.html universe3d.html validation.html guide.html sitemap.xml
           git commit -m "Synchronize research status navigation [nav-sync]"
-          git push origin HEAD:agent/research-status-navigation
+          git push origin HEAD:"$TARGET_BRANCH"
