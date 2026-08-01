@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UniverseLab · SCI-001/002 Parent- und Junction-Gate v0.1</title>
+<style>
+:root{color-scheme:dark;--bg:#05080d;--panel:#101923;--line:#355067;--text:#f4fbff;--muted:#aebdca;--ok:#83e1b6;--warn:#ffe17f;--bad:#ff839e}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% -15%,#334d62,#081019 48%,#040609 90%);color:var(--text);font:14px/1.5 system-ui,sans-serif}
+main{width:min(1300px,100%);margin:auto;padding:18px 12px 60px}.hero,.panel,.metric,.gate{border:1px solid var(--line);border-radius:17px;background:#101923e8;padding:15px}.hero{padding:24px;background:linear-gradient(135deg,#244d62,#101923 60%,#43294f)}
+h1{font-size:clamp(30px,6vw,56px);line-height:1;margin:8px 0}.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:390px 1fr;gap:12px;margin-top:12px}label{display:grid;grid-template-columns:1fr 145px;gap:8px;align-items:center;margin:8px 0}input,button{width:100%;min-height:38px;border:1px solid var(--line);border-radius:9px;background:#071019;color:#fff;padding:7px 9px}button{font-weight:850;cursor:pointer;background:linear-gradient(135deg,#277e9d,#8554d1)}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.metric b{display:block;font:800 14px ui-monospace,monospace;word-break:break-word}.metric span{color:var(--muted);font-size:10px}
+#gates{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.tag{display:inline-block;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:900}.pass{background:#16372d;color:var(--ok)}.open{background:#413511;color:var(--warn)}.fail{background:#421725;color:var(--bad)}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){label{grid-template-columns:1fr 105px}.metrics,#gates{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<section class="hero">
+<div class="muted">Hyperzeit / HPVS · HZT-M0-S6 · SCI-001/SCI-002</div>
+<h1>Parent- und Junction-Gate v0.1</h1>
+<p class="muted">Prüft die zwei unabhängigen Kappen-Junctions. Größen sind in einer konsistenten gemeinsamen Einheit einzugeben.</p>
+</section>
+<div class="grid">
+<section class="panel">
+<label><span>M₆</span><input id="m6" value="1"></label>
+<label><span>𝒜Σ = Σ nʳA′</span><input id="as" value="1"></label>
+<label><span>ℒΣ = Σ nʳL′/L</span><input id="ls" value="1"></label>
+<label><span>vorgegebenes Yσ<br><small>leer = benötigten Wert berechnen</small></span><input id="ys" value=""></label>
+<button id="run">Junctions prüfen</button>
+</section>
+<section>
+<div class="metrics">
+<div class="metric"><b id="yreq">–</b><span>benötigtes Yσ</span></div>
+<div class="metric"><b id="lam4">–</b><span>λ aus 4D-Junction</span></div>
+<div class="metric"><b id="lamchi">–</b><span>λ aus χ-Junction</span></div>
+<div class="metric"><b id="pure">–</b><span>Reine-Spannungs-Residual</span></div>
+<div class="metric"><b id="r4">–</b><span>4D-Residual</span></div>
+<div class="metric"><b id="rchi">–</b><span>χ-Residual</span></div>
+</div>
+<div id="gates"></div>
+</section>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const fmt=x=>Number.isFinite(x)?((Math.abs(x)>0&&Math.abs(x)<1e-4)||Math.abs(x)>1e6?x.toExponential(6):x.toLocaleString('de-DE',{maximumFractionDigits:8})):'–';
+function calc(){
+ const m6=+$('m6').value,A=+$('as').value,L=+$('ls').value,raw=$('ys').value.trim(),m64=Math.pow(m6,4);
+ const Y=raw===''?m64*(L-A):+raw;
+ const lambdaChi=4*m64*A+.5*Y;
+ const lambda4=m64*(3*A+L)-.5*Y;
+ const r4=m64*(-3*A-L)-(-lambda4-.5*Y);
+ const rc=m64*(-4*A)-(-lambdaChi+.5*Y);
+ const pure=A-L;
+ $('yreq').textContent=fmt(Y);$('lam4').textContent=fmt(lambda4);$('lamchi').textContent=fmt(lambdaChi);$('pure').textContent=fmt(pure);$('r4').textContent=fmt(r4);$('rchi').textContent=fmt(rc);
+ const tol=1e-9*Math.max(1,Math.abs(lambda4),Math.abs(lambdaChi),Math.abs(Y));
+ const gates=[
+ ['Reine Spannung',Math.abs(pure)<=1e-9*Math.max(1,Math.abs(A),Math.abs(L))?'PASS':'FAIL',Math.abs(pure)<=1e-9*Math.max(1,Math.abs(A),Math.abs(L))?'pass':'fail'],
+ ['Positive Windingenergie',Y>=0?'PASS':'FAIL',Y>=0?'pass':'fail'],
+ ['Beide Junctions',Math.abs(r4)<=tol&&Math.abs(rc)<=tol?'PASS':'FAIL',Math.abs(r4)<=tol&&Math.abs(rc)<=tol?'pass':'fail'],
+ ['Gauss-Bonnet','NICHT IN v0.1','open'],
+ ['MD-2S-Einsetzung','OPEN','open'],
+ ['K1-D / K1-E','CLOSED','fail']
+ ];
+ $('gates').innerHTML=gates.map(g=>`<div class="gate"><span class="tag ${g[2]}">${g[1]}</span> <b>${g[0]}</b></div>`).join('');
+}
+$('run').onclick=calc;document.querySelectorAll('input').forEach(e=>e.addEventListener('change',calc));calc();
+</script>
+</main></body></html>
