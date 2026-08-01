@@ -108,7 +108,7 @@
     },
     {
       "claim_id": "MD2P-CORR-002",
-      "claim": "The MD-2P-corr amplitude closure eta_bulk=beta_0 q(1-q) is not derived from the current 6D parent action and does not close MDS-01, MDS-02 or MDS-05.",
+      "claim": "The MD-2P-corr amplitude closure eta_bulk=beta_0 q(1-q) is not derived from the current 6D parent action and does not itself close MDS-01, MDS-02 or MDS-05.",
       "status": "OPEN",
       "claim_class": "PHYSICAL_BRIDGE_STATUS",
       "primary_source": "MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md and MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
@@ -153,6 +153,47 @@
       "primary_source": "MD2P_CORR_OVERLAP_DERIVATION_v0.1.md and test_hzt_m0_overlap_bridge_v0_1.py",
       "evidence_effect": "EXCLUDES_FALSE_MULTI_PARAMETER_RANK_CLAIMS",
       "falsification_or_change_rule": "The theorem applies to the stated factorized observable dependence; independent shape or channel responses define a different Jacobian structure."
+    },
+    {
+      "claim_id": "MDS01-SPECTRAL-001",
+      "claim": "For a self-adjoint scale-free internal eigenproblem whose geometry and boundary data are self-similar under r=R_chi y, the mode masses obey m_n=xi_n/R_chi with dimensionless xi_n fixed by the rescaled operator and boundary conditions.",
+      "status": "CONDITIONAL",
+      "claim_class": "SPECTRAL_SCALING_THEOREM",
+      "primary_source": "MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md",
+      "evidence_effect": "UPGRADES_MDS01_FORM_ONLY",
+      "dependencies": [
+        "self-adjoint fluctuation operator",
+        "positive mode inner-product weight",
+        "self-similar geometry",
+        "dimensionless boundary contract",
+        "no unresolved independent length or mass scale"
+      ],
+      "falsification_or_change_rule": "Additional dimensional scales replace constant xi_n by a spectral function Xi_n of dimensionless ratios."
+    },
+    {
+      "claim_id": "MDS01-PHYS-001",
+      "claim": "The numerical HZT-M0 coefficient xi_m and the identification of the damping parameter m with a KK, radion or response-pole mass remain open until the quadratic operator, mode sector, normalization and cap/brane boundary conditions are derived.",
+      "status": "OPEN",
+      "claim_class": "PHYSICAL_MODE_IDENTIFICATION",
+      "primary_source": "MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md",
+      "evidence_effect": "BLOCKS_K1D_M_VARIATION",
+      "falsification_or_change_rule": "A frozen quadratic action and reproducible spectral calculation can release a specific mode identification and xi_m."
+    },
+    {
+      "claim_id": "MDS01-MD2Q-001",
+      "claim": "At the locked MD-2Q effective point, xi_eff=m_eff R_chi=0.05176470588235294, which is incompatible with the ordinary first axisymmetric flat-disk scalar Dirichlet root 2.4048255577 and first massive Neumann root 3.8317059702 at the same R_chi.",
+      "status": "NUMERICALLY_CONFIRMED",
+      "claim_class": "REFERENCE_SPECTRAL_MISMATCH",
+      "primary_source": "MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md and test_hzt_m0_spectral_bridge_v0_1.py",
+      "evidence_effect": "REJECTS_ONLY_STANDARD_FLAT_DISK_MODE_IDENTIFICATION",
+      "limitations": [
+        "mixed effective and Mpc unit convention in MD-2Q",
+        "warping and potentials not included",
+        "Robin or localized near-zero modes not excluded",
+        "R_chi may not equal the spectral radius",
+        "m_eff may not be an eigenmass"
+      ],
+      "falsification_or_change_rule": "The comparison does not constrain a different warped operator, boundary-tuned light state or independently defined EFT response scale."
     },
     {
       "claim_id": "MD2Q-NUM-001",
