@@ -1,0 +1,161 @@
+{
+  "schema": "universelab.md2s-r1-source-reconstruction-ledger.v0.1",
+  "date": "2026-08-01",
+  "status": "ACTIVE_PARTIAL_RECONSTRUCTION",
+  "evidence_effect": "NONE",
+  "purpose": "Separate source-backed MD-2S content from reported results, inferred conventions and currently unavailable historical solver details.",
+  "tracks": {
+    "legacy_reproduction": {
+      "id": "MD2S-R1-L",
+      "goal": "Reproduce the historical A0 and B1.4N calculations with the original equations and conventions if they can be recovered.",
+      "authority": "reproduction target only",
+      "may_define_current_canon": false
+    },
+    "canonical_rebuild": {
+      "id": "MD2S-R1-C",
+      "goal": "Derive a new reproducible static radial background solver from the current SCI-001/SCI-002 parent action and explicit current conventions.",
+      "authority": "candidate current implementation after governance approval",
+      "may_reuse_legacy_benchmarks": "only as labelled regression diagnostics when model identity is established"
+    }
+  },
+  "ledger": [
+    {
+      "item_id": "SR-001",
+      "content": "Static axial metric ansatz ds6^2 = exp(2A(r)) gbar_munu dx^mu dx^nu + dr^2 + L(r)^2 dchi^2 with Rbar_munu = 3 K4 gbar_munu.",
+      "classification": "HIGH_CONFIDENCE_MODEL_STRUCTURE",
+      "source_status": "present in project manifest/status corpus",
+      "track": ["MD2S-R1-L", "MD2S-R1-C"]
+    },
+    {
+      "item_id": "SR-002",
+      "content": "A0 is reported as a constant-scalar de-Sitter branch, with a commonly cited potential convention V(phi)=Lambda6+beta phi^2 and beta>=0.",
+      "classification": "REPORTED_CONVENTION_NOT_PRIMARY_SOURCE_VERIFIED",
+      "source_status": "summary/provenance available; exact historical action line not recovered",
+      "track": ["MD2S-R1-L"],
+      "release_use": "BLOCKED"
+    },
+    {
+      "item_id": "SR-003",
+      "content": "At K4=beta=1 the reported A0 benchmark set is sqrt(K4) rho_cap=1.1196329253611, kappa6^2 lambda_eff/(4 sqrt(K4))=0.8931498683204, K4 rho_cap^2=1.2535778875527, V_W=0.5318111250097, R_circle=0.6661500466003 and Xi_cap approximately 0.9999999998535.",
+      "classification": "REPORTED_NUMERICAL_BENCHMARKS",
+      "source_status": "repeated consistently in archive audit and repository diagnostics",
+      "track": ["MD2S-R1-L"],
+      "release_use": "REGRESSION_TARGET_ONLY"
+    },
+    {
+      "item_id": "SR-004",
+      "content": "The A0 background is described as analytically closed with a reported numerical reproduction.",
+      "classification": "REPORTED_RESULT_NOT_INDEPENDENTLY_REPRODUCIBLE",
+      "source_status": "archive audit report available; equations and executable solver absent",
+      "track": ["MD2S-R1-L"]
+    },
+    {
+      "item_id": "SR-005",
+      "content": "The physical radius distinction R_circle != rho_cap approximately R_K is part of the archived interpretation.",
+      "classification": "REPORTED_GEOMETRIC_INTERPRETATION",
+      "source_status": "archive audit report",
+      "track": ["MD2S-R1-L"]
+    },
+    {
+      "item_id": "SR-006",
+      "content": "The A0 point is not weakly curved because K4 rho_cap^2 approximately 1.2536 is not much smaller than one.",
+      "classification": "DIRECT_INFERENCE_FROM_REPORTED_BENCHMARK",
+      "source_status": "dimensionless benchmark available",
+      "track": ["MD2S-R1-L"],
+      "validity": "applies to the reported A0 normalization point"
+    },
+    {
+      "item_id": "SR-007",
+      "content": "MD-2S-B1.4N reports that the unrestricted linear system is algebraically solvable using a conical centre mode, while no global solution exists with fixed smooth centre and only minimal cap controls.",
+      "classification": "REPORTED_NEGATIVE_RESULT_NOT_INDEPENDENTLY_REPRODUCIBLE",
+      "source_status": "archive audit and project-status provenance",
+      "track": ["MD2S-R1-L"]
+    },
+    {
+      "item_id": "SR-008",
+      "content": "An additional independent geometric control is required before the B1.4O response-rank audit can be executed.",
+      "classification": "REPORTED_AUDIT_CONCLUSION",
+      "source_status": "archive audit and repository recovery profile",
+      "track": ["MD2S-R1-L", "MD2S-R1-C"]
+    },
+    {
+      "item_id": "SR-009",
+      "content": "The exact historical independent radial ODE set, Hamiltonian constraint and algebraic dependency map are unavailable in the accessible indexed corpus.",
+      "classification": "MISSING_PRIMARY_TECHNICAL_SOURCE",
+      "source_status": "NOT_FOUND",
+      "track": ["MD2S-R1-L"],
+      "blocks": ["legacy solver implementation", "independent A0 verification"]
+    },
+    {
+      "item_id": "SR-010",
+      "content": "The exact historical cap/localized action and oriented junction conventions are unavailable.",
+      "classification": "MISSING_PRIMARY_TECHNICAL_SOURCE",
+      "source_status": "NOT_FOUND",
+      "track": ["MD2S-R1-L"],
+      "blocks": ["legacy two-sided boundary reconstruction", "pure-tension verdict"]
+    },
+    {
+      "item_id": "SR-011",
+      "content": "The definitions and integration conventions for V_W, R_circle, Xi_cap and lambda_eff are not all available as primary equations.",
+      "classification": "MISSING_BENCHMARK_DEFINITIONS",
+      "source_status": "PARTIAL",
+      "track": ["MD2S-R1-L"],
+      "blocks": ["unambiguous benchmark comparison"]
+    },
+    {
+      "item_id": "SR-012",
+      "content": "The current SCI-001/SCI-002 files define a later Einstein-Maxwell-scalar parent skeleton with GHY and cap/brane structure, but model identity with the historical A0 solver has not been established.",
+      "classification": "CURRENT_CANON_CANDIDATE_WITH_IDENTITY_GAP",
+      "source_status": "repository source available",
+      "track": ["MD2S-R1-C"],
+      "blocks": ["using A0 numbers as mandatory current-model predictions"]
+    },
+    {
+      "item_id": "SR-013",
+      "content": "The COS-01.1 lapse-preserving minisuperspace equations describe homogeneous time evolution of a(t) and b(t), not the static radial MD-2S cap BVP.",
+      "classification": "PROBLEM_CLASS_SEPARATION",
+      "source_status": "2026-07-31 project-status export",
+      "track": ["MD2S-R1-L", "MD2S-R1-C"],
+      "forbidden_use": "substitution for missing MD-2S radial equations"
+    },
+    {
+      "item_id": "SR-014",
+      "content": "Statements that a ghost-free region exists are at most scoped to tested reduced sectors; full scalar-vector-tensor and HZT-Full ghost freedom remain open.",
+      "classification": "SCOPE_CORRECTION",
+      "source_status": "project-status and MD-0 evidence discipline",
+      "track": ["MD2S-R1-C"]
+    }
+  ],
+  "unresolved_collisions": [
+    {
+      "collision_id": "COL-001",
+      "topic": "historical versus current parent action",
+      "description": "The current SCI-001/SCI-002 parent skeleton cannot be assumed identical to the missing historical A0 action.",
+      "required_resolution": "explicit model identity proof or separate versioned model IDs"
+    },
+    {
+      "collision_id": "COL-002",
+      "topic": "reported analytic closure versus missing derivation",
+      "description": "A0 analytic closure is reported, but the accessible archive does not contain the complete derivation or executable reproduction artifacts.",
+      "required_resolution": "recover derivation or rederive independently from a frozen action"
+    },
+    {
+      "collision_id": "COL-003",
+      "topic": "benchmark normalization",
+      "description": "K4=beta=1 is quoted, but the dimensional rescaling and all benchmark functional definitions are not frozen.",
+      "required_resolution": "dimensionless variable and observable dictionary"
+    }
+  ],
+  "recommended_decision": {
+    "status": "PROPOSED",
+    "decision": "Maintain separate legacy-reproduction and current-canonical-rebuild model IDs until equation-level identity is proven.",
+    "reason": "This prevents benchmark fitting from silently defining the parent theory and preserves the historical negative results as reproducibility targets."
+  },
+  "next_source_tasks": [
+    "Locate or reconstruct the original long MD-2S chat/PDF sections containing the A0 field equations and definitions.",
+    "Extract exact equations with page/message provenance into an equation ledger.",
+    "Compare every historical term against the current hzt-s6-parent-action-v0.1.json conventions.",
+    "Assign distinct model IDs if any action, sign, boundary or normalization difference remains.",
+    "Do not start official solver coding until MF-001 through MF-007 are closed for the selected track."
+  ]
+}
