@@ -24,6 +24,9 @@
     "md2s_r1_source_ledger": "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
     "bridge_integration_audit": "science/hzt-m0/bridge/MD2F_H_I_INTEGRATION_AUDIT_v0.1.md",
     "md2n_q_package_rigor_audit": "science/hzt-m0/bridge/MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
+    "md2p_corr_overlap_derivation": "science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
+    "overlap_bridge_utility": "tools/hzt_m0_overlap_bridge_v0_1.py",
+    "overlap_bridge_tests": "tests/test_hzt_m0_overlap_bridge_v0_1.py",
     "gw_dossier_rigor_audit": "science/gw/GW_FALSIFICATION_DOSSIER_RIGOR_AUDIT_v0.1.md",
     "md2s_package_verifier": "tools/verify_md2s_recovery_package_v0_1.py",
     "md2s_package_verifier_tests": "tests/test_verify_md2s_recovery_package_v0_1.py",
@@ -84,16 +87,20 @@
         "s should be derived, fixed or excluded",
         "kappa_6 normalization requires the warped-volume reduction and normalized profiles",
         "MD-2N raw two-column condition number 1.8957468008439005 is reproduced but is parameterization-dependent and non-evidential",
-        "MD-2P-corr eta_bulk=beta_0 q(1-q) is a bounded effective ansatz rather than a derived 6D bridge",
+        "MD-2P-corr q=1-exp(-x) is exactly the normalized cumulative overlap of a radial Gaussian on a flat two-dimensional internal space under an explicit measure/profile/cutoff contract",
+        "the full warped MD-2S replacement is q_W(R)=integral_0^R L(r) exp[p A(r)] W(r) dr divided by the corresponding complete-domain integral",
+        "eta_bulk=beta_0 q(1-q) has a precise partition-variance interpretation but remains an effective closure rather than a derived 6D interaction",
+        "all controls entering observables only through the scalar x generate a local Jacobian block of rank at most one",
+        "at x=ln(2), d eta_bulk/dx vanishes and the x-only Jacobian block has rank zero at linear order",
         "MD-2Q condition number 1.0 is the automatic result of a nonzero one-column Jacobian and supplies no full-rank evidence",
         "MD-2P-corr/MD-2Q do not close MDS-01, MDS-02 or MDS-05"
       ],
-      "exit_gate": "Rank, singular spectrum, condition number, null spaces and physical admissibility are decided for release-qualified physical parameters."
+      "exit_gate": "Rank, singular spectrum, condition number, null spaces and physical admissibility are decided for release-qualified physical parameters and independent observable shapes."
     },
     {
       "id": "WP-4",
       "title": "UniverseLab registry and P0 verifier",
-      "status": "IN_PROGRESS_RESEARCH_CONTRACT_CI_PASS",
+      "status": "IN_PROGRESS_RESEARCH_CONTRACT_CI_PENDING_LATEST_COMMIT",
       "implemented": [
         "central source register",
         "claim register",
@@ -101,9 +108,10 @@
         "uploaded source intake registers",
         "read-only MD-2S recovery package verifier",
         "synthetic PASS, tamper-FAIL and missing-file tests",
+        "independent quadrature, asymptotic, derivative and rank-bound tests for the MD-2P-corr overlap bridge",
         "GitHub Actions validation workflow"
       ],
-      "exit_gate": "Runtime pages consume central registries and CI detects status, link, version and provenance drift."
+      "exit_gate": "Runtime pages consume central registries and CI detects status, link, version, mathematical-contract and provenance drift."
     },
     {
       "id": "WP-5",
@@ -139,17 +147,21 @@
     "MD2S_BACKGROUND_REPRODUCTION": "NOT_STARTED",
     "BRIDGE_MDS_01": "CONDITIONAL_ON_INTERNAL_SPECTRUM_MD2Q_DOES_NOT_CLOSE",
     "BRIDGE_MDS_02": "OPEN_CRITICAL_MD2Q_BYPASSES_BY_FIXING_SCALE",
-    "BRIDGE_MDS_03": "OPEN_MD2P_CORR_IS_ALTERNATIVE_EFFECTIVE_ANSATZ",
+    "BRIDGE_MDS_03": "OPEN_MD2P_CORR_PARTITION_MIXING_IS_EFFECTIVE_NOT_6D_DERIVED",
     "BRIDGE_MDS_04": "FIXED_EFFECTIVE_S_EQUALS_2_IN_MD2Q",
     "BRIDGE_MDS_05": "OPEN_FORMAL_SKELETON_DEPENDS_ON_MD2S",
+    "MD2P_CORR_Q": "CONDITIONAL_EXACT_FLAT_2D_GAUSSIAN_OVERLAP",
+    "MD2P_CORR_Q_WARPED": "OPEN_REQUIRES_MD2S_PROFILES_AND_MODE_NORMALIZATION",
+    "MD2P_CORR_ETA": "EFFECTIVE_PARTITION_VARIANCE_CLOSURE_NOT_DERIVED",
+    "MD2P_CORR_X_ONLY_LOCAL_RANK": "AT_MOST_ONE_AND_ZERO_AT_X_EQUALS_LN2",
     "MD2N": "QUARANTINED_TECHNICAL_BASELINE_RECOMPUTED",
     "MD2O": "PROVENANCE_CORRECTION_ACCEPTED",
-    "MD2P_CORR": "BOUNDED_EFFECTIVE_BRIDGE_CANDIDATE_NOT_DERIVED",
+    "MD2P_CORR": "PARTIALLY_DERIVED_OVERLAP_EFFECTIVE_AMPLITUDE_NOT_RELEASED",
     "MD2Q": "QUARANTINED_ONE_CONTROL_DRY_RUN_RECOMPUTED",
     "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
     "B1_4O": "NOT_EXECUTABLE",
     "GW_DOSSIER": "CONDITIONAL_PHENOMENOLOGY_REPRODUCIBILITY_OPEN",
-    "RESEARCH_CONTRACT_CI": "PASS"
+    "RESEARCH_CONTRACT_CI": "PENDING_LATEST_COMMIT"
   },
   "forbidden_shortcuts": [
     "physical identification from technical execution",
@@ -164,7 +176,9 @@
     "using Delta-rho or R_unique forecasts as experimental evidence",
     "interpreting a one-column Jacobian condition number of one as good physical conditioning",
     "treating eta_bulk=beta_0*q*(1-q) as a 6D-derived bridge without a parent-action reduction",
+    "treating the flat q=1-exp(-x) formula as the warped MD-2S overlap without deriving the correct measure and normalized modes",
+    "counting multiple physical controls as independently identifiable when they enter only through one scalar x",
     "claiming MDS-05 closure from mere kappa_6 dependence without deriving the four-dimensional normalization"
   ],
-  "next_machine_action": "Complete MF-001 through MF-007 by extracting and reconciling the exact MD-2S bulk action, localized action, radial equations, centre series, junction system, parameter contract and benchmark definitions; then derive the internal eigenvalue and warped-volume bridges needed for MDS-01 and MDS-05."
+  "next_machine_action": "Complete MF-001 through MF-007 and derive the warped overlap q_W from the recovered MD-2S metric and normalized modes; in parallel derive the internal eigenvalue and warped-volume bridges required for MDS-01 and MDS-05."
 }
