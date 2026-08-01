@@ -1,0 +1,93 @@
+{
+  "schema": "hzt.m0.mds05-warp-volume-bridge.v0.1",
+  "date": "2026-08-01",
+  "branch": "HZT-M0-S6",
+  "parent_action": "hzt-s6-parent-action-v0.1.json",
+  "conventions": "convention-registry.json",
+  "status": "DERIVED_CONDITIONAL_NUMERICAL_VALUE_OPEN",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "evidence_effect": "NONE"
+  },
+  "core_relation": {
+    "warp_volume": "V_W = integral d^2y sqrt(g_2) exp(2A)",
+    "axisymmetric": "V_W = Delta_chi * sum_s integral_{I_s} dr_s L_s exp(2A_s)",
+    "bulk_M4_squared": "M4_bulk_squared = V_W / kappa6_squared = M6^4 V_W",
+    "bulk_kappa4_squared": "kappa4_squared = kappa6_squared / V_W",
+    "bulk_G4": "G4 = kappa6_squared / (8 pi V_W)"
+  },
+  "dimensions_natural_units": {
+    "kappa6_squared": "L^4",
+    "V_W": "L^2",
+    "M4_squared": "L^-2",
+    "kappa4_squared": "L^2",
+    "G4": "L^2"
+  },
+  "canonical_parent_v0_1": {
+    "localized_5d_EH_terms": "ABSENT",
+    "localized_4d_EH_terms": "ABSENT",
+    "nonminimal_curvature_couplings": "ABSENT",
+    "localized_contributions_default": 0
+  },
+  "optional_extensions_not_in_parent_v0_1": {
+    "cap5d": "Delta M4_squared = Delta_chi M5_cubed L_sigma exp(2 A_sigma)",
+    "brane4d": "Delta M4_squared = M4_local_squared exp(2 A_sigma)"
+  },
+  "frame_gate": {
+    "required": true,
+    "reason": "A constant shift of A accompanied by a rescaling of g4 leaves g6 invariant but changes the g4-frame coefficient.",
+    "examples": [
+      "A(r_observer)=0",
+      "explicit induced Jordan/Einstein frame"
+    ]
+  },
+  "legacy_md2s_benchmark": {
+    "reported_value": 0.5318111250097,
+    "repository_classification": "known_dimensionless_benchmarks",
+    "open_questions": [
+      "Does the value mean K4*V_W?",
+      "Is Delta_chi=2pi already included?",
+      "Which four-dimensional frame fixes the additive constant of A?"
+    ],
+    "candidate_if_K4_equals_1": {
+      "full_dimensionless_volume": 0.5318111250097,
+      "per_radian_then_full_2pi": 3.341467846855593
+    },
+    "verdict": "AMBIGUOUS_NORMALIZATION_NOT_USABLE_FOR_KAPPA4_RELEASE"
+  },
+  "required_inputs": [
+    "kappa6_squared",
+    "A_profiles_all_regions",
+    "L_profiles_all_regions",
+    "nonoverlapping_region_domains",
+    "chi_period",
+    "four_dimensional_frame",
+    "units_or_dimensionless_rescaling",
+    "localized_EH_terms_explicitly_zero_or_specified",
+    "provenance_hashes",
+    "quadrature_convergence_settings"
+  ],
+  "release_gates": [
+    "reproducible_MD2S_background",
+    "complete_profiles",
+    "chi_period_and_deficit_angle_contract",
+    "unambiguous_V_W_definition",
+    "fixed_4d_frame",
+    "localized_curvature_terms_closed",
+    "quadrature_convergence",
+    "positive_total_M4_squared",
+    "tensor_zero_mode_norm_matches_background_coefficient",
+    "heavy_mode_GR_limit_checked"
+  ],
+  "non_claims": [
+    "positive_M4_squared_is_not_full_ghost_freedom",
+    "background_normalization_is_not_tensor_spectrum_closure",
+    "benchmark_match_is_not_physical_identification",
+    "MDS05_does_not_release_K1D_or_K1E"
+  ],
+  "implementation": {
+    "tool": "tools/hzt_m0_warp_volume_bridge_v0_1.py",
+    "tests": "tests/test_hzt_m0_warp_volume_bridge_v0_1.py"
+  }
+}
