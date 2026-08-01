@@ -1,0 +1,65 @@
+name: UniverseLab dated file naming contract
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate-file-names:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout complete history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/2026-08-01_validate_file_naming_v1.0.py
+          python -m py_compile tests/2026-08-01_test_file_naming_v1.0.py
+
+      - name: Validate machine-readable naming policy
+        run: |
+          python -m json.tool registry/2026-08-01_UniverseLab_FileNamingPolicy_v1.0.json >/dev/null
+
+      - name: Run naming-contract tests
+        run: |
+          python tests/2026-08-01_test_file_naming_v1.0.py
+
+      - name: Collect added and renamed destination paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+            if [[ -z "${BASE_SHA}" || "${BASE_SHA}" =~ ^0+$ ]]; then
+              BASE_SHA="$(git rev-list --max-parents=0 HEAD)"
+            fi
+          fi
+          HEAD_SHA="${GITHUB_SHA}"
+          git diff --name-status --find-renames "${BASE_SHA}" "${HEAD_SHA}" \
+            | awk -F '\t' '
+                $1 == "A" { print $2 }
+                $1 ~ /^R[0-9]+$/ { print $3 }
+              ' \
+            > /tmp/universelab-added-or-renamed-paths.txt
+          echo "Paths subject to UL-FNS-v1.0:"
+          cat /tmp/universelab-added-or-renamed-paths.txt
+
+      - name: Enforce dated file naming contract
+        run: |
+          python tools/2026-08-01_validate_file_naming_v1.0.py \
+            --policy registry/2026-08-01_UniverseLab_FileNamingPolicy_v1.0.json \
+            --paths-file /tmp/universelab-added-or-renamed-paths.txt
