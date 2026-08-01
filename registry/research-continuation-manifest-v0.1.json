@@ -3,7 +3,7 @@
   "date": "2026-08-01",
   "program": "UniverseLab Research Continuation Program",
   "owner": "Stefan Hasselmeyer",
-  "governance": "MD-0 v3.1.1",
+  "governance": "MD-0 v3.1.1 by project declaration; latest byte-verified uploaded source in batch is MD-0 v3.0",
   "architecture": [
     "HPVS",
     "HZT-M0-S6",
@@ -15,10 +15,14 @@
   "artifacts": {
     "program_specification": "governance/UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.1.md",
     "chat_source_register": "registry/chat-source-register-v0.1.json",
+    "uploaded_source_batch": "registry/source-intake-2026-08-01-batch02.json",
     "claim_register": "registry/claim-register-v0.1.json",
     "md2s_recovery_contract": "science/hzt-m0/md2s/MD2S_RECOVERY_CONTRACT_v0.1.md",
     "md2s_r0_inventory": "science/hzt-m0/md2s/R0_ARTIFACT_INVENTORY_v0.1.json",
     "md2s_r1_model_freeze": "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
+    "md2s_r1_source_ledger": "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
+    "bridge_integration_audit": "science/hzt-m0/bridge/MD2F_H_I_INTEGRATION_AUDIT_v0.1.md",
+    "gw_dossier_rigor_audit": "science/gw/GW_FALSIFICATION_DOSSIER_RIGOR_AUDIT_v0.1.md",
     "md2s_package_verifier": "tools/verify_md2s_recovery_package_v0_1.py",
     "md2s_package_verifier_tests": "tests/test_verify_md2s_recovery_package_v0_1.py",
     "research_contract_ci": ".github/workflows/research-contracts.yml",
@@ -31,7 +35,14 @@
     {
       "id": "WP-1",
       "title": "Chat, document and artifact canonization",
-      "status": "IN_PROGRESS",
+      "status": "IN_PROGRESS_SOURCE_BATCH_02_INGESTED",
+      "implemented": [
+        "stable source IDs and SHA-256 hashes for the uploaded batch",
+        "constitution predecessor relations",
+        "MD-2F -> MD-2H -> MD-2I audit-chain relation",
+        "chat-export temporal coverage and attachment-payload limitation",
+        "explicit distinction between project-declared MD-0 v3.1.1 and byte-verified uploaded MD-0 v3.0"
+      ],
       "deliverables": [
         "stable chat and export IDs",
         "hash deduplication",
@@ -60,8 +71,15 @@
     {
       "id": "WP-3",
       "title": "B1.4O rank and identifiability audit",
-      "status": "BLOCKED_BY_WP-2",
-      "exit_gate": "Rank, singular spectrum, condition number, null spaces and physical admissibility are decided."
+      "status": "BLOCKED_BY_WP-2_AND_PHYSICAL_BRIDGE_RELEASE",
+      "bridge_findings": [
+        "k_c=m/omega_c and A(k)=exp[-(k/k_c)^2] are conditionally derived",
+        "m requires an internal eigenvalue problem and boundary conditions",
+        "omega_c and eta remain physically unmapped",
+        "s should be derived, fixed or excluded",
+        "kappa_6 normalization requires the warped-volume reduction and normalized profiles"
+      ],
+      "exit_gate": "Rank, singular spectrum, condition number, null spaces and physical admissibility are decided for release-qualified physical parameters."
     },
     {
       "id": "WP-4",
@@ -71,6 +89,7 @@
         "central source register",
         "claim register",
         "research continuation manifest",
+        "uploaded source intake register",
         "read-only MD-2S recovery package verifier",
         "synthetic PASS, tamper-FAIL and missing-file tests",
         "GitHub Actions validation workflow"
@@ -86,13 +105,15 @@
     {
       "id": "WP-6",
       "title": "Controlled forward engine",
-      "status": "BLOCKED_BY_WP-5",
+      "status": "BLOCKED_BY_WP-5_AND_BRIDGE_EQUATIONS",
       "exit_gate": "A reproducible 6D-to-4D map produces model observables with declared validity regimes."
     },
     {
       "id": "WP-7",
       "title": "Observational inference",
       "status": "BLOCKED_BY_WP-6",
+      "gw_lab_status": "EFFECTIVE_DIAGNOSTIC_FORECAST_ONLY",
+      "gw_audit_note": "The uploaded dossier defines useful Delta-rho, Fisher and R_unique diagnostics, but its existence/uniqueness proofs and 6D-to-waveform bridge are incomplete and its numerical results are not independently reproducible from the uploaded document alone.",
       "exit_gate": "Versioned likelihood runs with data provenance, covariance, nuisance model and model comparison outputs."
     }
   ],
@@ -102,12 +123,19 @@
     "SCI-001": "PARTIAL",
     "SCI-002": "PARTIAL",
     "MD2S_R0_INDEXED_CORPUS": "NEGATIVE",
+    "MD2S_R0_2025_CHAT_EXPORT": "NEGATIVE_AND_PREDATES_MD2S_WORK",
     "MD2S_R0_UNMATCHED_EXPORT_BINARIES": "FORENSICALLY_OPEN",
     "MD2S_R1_MODEL_FREEZE": "ACTIVE",
     "MD2S_SOLVER_IMPLEMENTATION": "BLOCKED_BY_MODEL_FREEZE",
     "MD2S_BACKGROUND_REPRODUCTION": "NOT_STARTED",
+    "BRIDGE_MDS_01": "CONDITIONAL_ON_INTERNAL_SPECTRUM",
+    "BRIDGE_MDS_02": "OPEN_CRITICAL",
+    "BRIDGE_MDS_03": "OPEN",
+    "BRIDGE_MDS_04": "FIX_OR_EXCLUDE_CANDIDATE",
+    "BRIDGE_MDS_05": "FORMAL_SKELETON_DEPENDS_ON_MD2S",
     "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
     "B1_4O": "NOT_EXECUTABLE",
+    "GW_DOSSIER": "CONDITIONAL_PHENOMENOLOGY_REPRODUCIBILITY_OPEN",
     "RESEARCH_CONTRACT_CI": "PASS"
   },
   "forbidden_shortcuts": [
@@ -117,7 +145,10 @@
     "junction reconstruction from global benchmark values",
     "data likelihood before a released forward map",
     "HZT-Full promotion before a consistent constraint structure",
-    "using the COS-01.1 homogeneous cosmological minisuperspace equations as the MD-2S static radial BVP"
+    "using the COS-01.1 homogeneous cosmological minisuperspace equations as the MD-2S static radial BVP",
+    "using an assumed Green function as a proof of existence",
+    "interpreting many global PCA components as intrinsic dimension above the number of model parameters",
+    "using Delta-rho or R_unique forecasts as experimental evidence"
   ],
-  "next_machine_action": "Complete MF-001 through MF-007 by extracting and reconciling the exact MD-2S bulk action, localized action, radial equations, centre series, junction system, parameter contract and benchmark definitions before solver implementation."
+  "next_machine_action": "Complete MF-001 through MF-007 by extracting and reconciling the exact MD-2S bulk action, localized action, radial equations, centre series, junction system, parameter contract and benchmark definitions; then derive the internal eigenvalue and warped-volume bridges needed for MDS-01 and MDS-05."
 }
