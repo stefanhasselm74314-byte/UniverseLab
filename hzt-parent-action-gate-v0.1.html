@@ -19,7 +19,7 @@ h1{font-size:clamp(30px,6vw,56px);line-height:1;margin:8px 0}.muted{color:var(--
 <section class="hero">
 <div class="muted">Hyperzeit / HPVS · HZT-M0-S6 · SCI-001/SCI-002</div>
 <h1>Parent- und Junction-Gate v0.1</h1>
-<p class="muted">Prüft die zwei unabhängigen Kappen-Junctions. Größen sind in einer konsistenten gemeinsamen Einheit einzugeben.</p>
+<p class="muted">Prüft die zwei unabhängigen Kappen-Junctions. Größen sind in einer konsistenten gemeinsamen Einheit einzugeben. Das Ergebnis ist diagnostisch; die MD-2S-Hintergrundsubstitution ist noch offen.</p>
 </section>
 <div class="grid">
 <section class="panel">
@@ -60,7 +60,8 @@ function calc(){
  ['Beide Junctions',Math.abs(r4)<=tol&&Math.abs(rc)<=tol?'PASS':'FAIL',Math.abs(r4)<=tol&&Math.abs(rc)<=tol?'pass':'fail'],
  ['Gauss-Bonnet','NICHT IN v0.1','open'],
  ['MD-2S-Einsetzung','OPEN','open'],
- ['K1-D / K1-E','CLOSED','fail']
+ ['K1-D','NOT RELEASED','fail'],
+ ['K1-E','NOT ADMISSIBLE','fail']
  ];
  $('gates').innerHTML=gates.map(g=>`<div class="gate"><span class="tag ${g[2]}">${g[1]}</span> <b>${g[0]}</b></div>`).join('');
 }
