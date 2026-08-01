@@ -1,0 +1,50 @@
+name: Research contracts
+
+on:
+  pull_request:
+    paths:
+      - "registry/**"
+      - "science/hzt-m0/md2s/**"
+      - "tools/verify_md2s_recovery_package_v0_1.py"
+      - "tests/test_verify_md2s_recovery_package_v0_1.py"
+      - ".github/workflows/research-contracts.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "registry/**"
+      - "science/hzt-m0/md2s/**"
+      - "tools/verify_md2s_recovery_package_v0_1.py"
+      - "tests/test_verify_md2s_recovery_package_v0_1.py"
+      - ".github/workflows/research-contracts.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile Python
+        run: |
+          python -m py_compile tools/verify_md2s_recovery_package_v0_1.py
+          python -m py_compile tests/test_verify_md2s_recovery_package_v0_1.py
+
+      - name: Validate JSON registries
+        run: |
+          python -m json.tool registry/chat-source-register-v0.1.json >/dev/null
+          python -m json.tool registry/claim-register-v0.1.json >/dev/null
+          python -m json.tool registry/research-continuation-manifest-v0.1.json >/dev/null
+          python -m json.tool science/hzt-m0/md2s/R0_ARTIFACT_INVENTORY_v0.1.json >/dev/null
+          python -m json.tool science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json >/dev/null
+
+      - name: Run MD-2S verifier tests
+        run: python -m unittest -v tests/test_verify_md2s_recovery_package_v0_1.py
