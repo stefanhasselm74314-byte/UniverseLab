@@ -2,32 +2,38 @@
   "schema": "universelab.md2s-r0-artifact-inventory.v0.1",
   "date": "2026-08-01",
   "scope": "R0 search for original MD-2S executable solver, parameters, profiles, one-sided boundary data, residual logs and provenance manifests",
-  "status": "INCONCLUSIVE_ARCHIVE_SEARCH_REPOSITORY_NEGATIVE",
+  "status": "NEGATIVE_IN_AVAILABLE_INDEXED_CORPUS_FORENSICALLY_OPEN",
   "evidence_effect": "NONE",
   "search_channels": [
     {
       "channel": "UniverseLab GitHub repository",
-      "status": "SEARCHED",
-      "result": "No executable MD-2S solver, notebook, one-sided derivative export or residual log identified in the indexed repository content.",
-      "limitations": "Repository code search returned no matches for benchmark numbers and common solver terms; index coverage may be incomplete."
+      "status": "SEARCHED_NEGATIVE",
+      "result": "No executable MD-2S solver, notebook, one-sided derivative export or residual log was identified in the indexed repository content or the targeted MD-2S/SCI-001/SCI-002 commit history.",
+      "limitations": "Repository code-search coverage may be incomplete; the result is limited to accessible repository and commit content."
     },
     {
-      "channel": "UniverseLab commit history",
-      "status": "SEARCHED",
-      "result": "Found documentation, parent-action profiles, substitution preflight, artifact-recovery profile and navigator pages; no original solver artifact was identified.",
-      "limitations": "Commit inspection was targeted to recent MD-2S and SCI-001/SCI-002 commits."
+      "channel": "Hyper.zip analysis corpus",
+      "status": "SEARCHED_NEGATIVE",
+      "result": "The archive contains 40 PDF files and no Python, notebook, CSV, JSON, solver-input, solver-output, residual-log or SHA-256 run-manifest artifact. The chat PDFs refer to such packages, but the packages themselves are absent.",
+      "limitations": "The PDFs preserve development history and reported numerical results, not executable computation."
     },
     {
-      "channel": "ChatGPT File Library",
-      "status": "TECHNICAL_FAILURE",
-      "result": "Targeted MD-2S artifact searches failed with RetrievalClientResponseError during this R0 pass.",
-      "limitations": "The negative result is not interpretable as absence; File Library search must be repeated."
+      "channel": "ChatGPT File Library indexed content",
+      "status": "SEARCHED_NO_MD2S_SOLVER_FOUND",
+      "result": "Targeted searches recovered the Hyper.zip analysis, the 2026-07-31 Hyperzeit project-status HTML export, MD-0 documents, export manifests and unrelated later COS-04 Python tools. No MD-2S background solver, one-sided cap export or residual package was identified.",
+      "limitations": "File search is semantic/index based and is not a byte-level traversal of every stored binary."
     },
     {
-      "channel": "Known exported account and UniverseLab documents",
-      "status": "PARTIALLY_REVIEWED",
-      "result": "Available summaries and audit documents report global benchmark values and missing reproducibility artifacts.",
-      "limitations": "Full byte-level archive traversal and hash inventory remain open."
+      "channel": "ChatGPT account export integrity report",
+      "status": "REVIEWED_WITH_COVERAGE_GAP",
+      "result": "The export contains 1109 File-Library records, but 711 records lack an exactly same-named binary match in the exported binary inventory. Therefore absence from the indexed corpus does not prove global non-existence.",
+      "limitations": "The unmatched records require a separate byte-level mapping of the combined export and File-Library metadata."
+    },
+    {
+      "channel": "Split-export SHA-256 manifest",
+      "status": "AVAILABLE",
+      "result": "All 27 split parts and the combined export are hash-registered. The combined archive chatgpt_export_combined.zip has SHA-256 851def1c10dc3dbcc2041eff14422794d1c39e6330b8cd2a636fab4630dd7d00.",
+      "limitations": "The hash proves identity of the export archive, not the presence of an MD-2S solver inside it."
     }
   ],
   "identified_artifacts": [
@@ -75,6 +81,24 @@
       "executable": "FORM_INPUT_ONLY",
       "contains_boundary_data": false,
       "contains_residual_logs": false
+    },
+    {
+      "artifact_id": "PROV-HYPER-ZIP-ANALYSIS-001",
+      "title": "Hyper_ZIP_Analysebericht_2026-07-12.md",
+      "class": "ARCHIVE_AUDIT",
+      "status": "AVAILABLE_PROVENANCE",
+      "executable": false,
+      "contains_boundary_data": false,
+      "contains_residual_logs": false
+    },
+    {
+      "artifact_id": "PROV-HZT-STATUS-HTML-20260731",
+      "title": "hy---Hyperzeit-Projektstatus-Update-2026-07-31.html",
+      "class": "CHAT_EXPORT_PROVENANCE",
+      "status": "AVAILABLE_PROVENANCE",
+      "executable": false,
+      "contains_boundary_data": false,
+      "contains_residual_logs": false
     }
   ],
   "known_benchmarks": {
@@ -84,6 +108,13 @@
     "V_W": 0.5318111250097,
     "R_circle_at_K4_beta_1": 0.6661500466003,
     "Xi_cap_reported": 0.9999999998535
+  },
+  "latest_archived_md2s_result": {
+    "workpackage": "MD-2S-B1.4N",
+    "status": "REPORTED_NOT_INDEPENDENTLY_REPRODUCIBLE_FROM_AVAILABLE_ARCHIVE",
+    "result": "The unrestricted linear system is algebraically solvable only by using a conical centre mode. With a fixed smooth centre and the minimal cap controls, no global solution was found; an additional independent geometric control is required.",
+    "successor": "MD-2S-B1.4O additional geometric control rank audit",
+    "successor_result_available": false
   },
   "missing_mandatory_artifacts": [
     "original solver source or notebook",
@@ -100,14 +131,17 @@
   ],
   "r0_decision": {
     "repository_component": "NEGATIVE",
-    "file_library_component": "INCONCLUSIVE_TECHNICAL_FAILURE",
-    "overall": "R0_NOT_CLOSED",
+    "hyper_zip_component": "NEGATIVE_EXECUTABLE_ARTIFACTS_ABSENT",
+    "indexed_file_library_component": "NEGATIVE_FOR_MD2S_SOLVER",
+    "unmapped_export_binary_component": "OPEN_711_RECORDS_WITHOUT_EXACT_BINARY_MATCH",
+    "overall": "NEGATIVE_IN_AVAILABLE_INDEXED_CORPUS_FORENSICALLY_OPEN",
+    "r1_rebuild_authorized": true,
     "physical_gate_change": false
   },
   "next_actions": [
-    "Repeat File Library search after retrieval service recovery.",
-    "Search uploaded ZIP and ChatGPT export packages by filename, extension and benchmark number.",
-    "Inspect any MD-2S, B1.4N or Global Hybrid Background notebooks and code files multimodally where necessary.",
-    "If no provenance-complete solver is recovered, activate R1 rebuild under MD2S_RECOVERY_CONTRACT_v0.1.md."
+    "Start R1 model freeze and reproducible rebuild without waiting for the unresolved 711-record binary mapping.",
+    "Keep a parallel forensic search open for the unmatched export/File-Library records and ingest any recovered solver package as an independent reproduction target.",
+    "Do not infer one-sided boundary data or junction residuals from the global benchmark values.",
+    "Run the package verifier on every recovered or newly built MD-2S run directory."
   ]
 }
