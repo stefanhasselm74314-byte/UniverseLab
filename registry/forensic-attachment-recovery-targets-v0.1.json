@@ -1,0 +1,140 @@
+{
+  "schema": "universelab.forensic-attachment-recovery-targets.v0.1",
+  "date": "2026-08-01",
+  "source_archive": "Zip_analysis_pack.zip",
+  "source_archive_sha256": "e54dc0dc1d933855dff7c3eb36e42e83a64a318a3cdcdfffb4a58373229ef6e2",
+  "purpose": "Preserve exact historical attachment identifiers for later File-Library or export-binary recovery.",
+  "temporal_scope": "All listed attachments are from conversations updated no later than 2025-12-17 and therefore predate the 2026 MD-2S/B1.4N/B1.4O work.",
+  "targets": [
+    {
+      "target_id": "FORENSIC-001",
+      "filename": "Hassi_Hyperzeit_Master_Archive.zip",
+      "attachment_id": "file-DyLDKA4qnUUchqDAze7MtX",
+      "bytes": 13183652,
+      "source_conversation_id": "69198025-adec-832c-acd6-58deffc6fbb9",
+      "source_title": "Sonnensystem Geschwindigkeitserhöhung",
+      "reported_contents": [
+        "Hassi_Hyperzeit_Theory_Manuscripts.zip",
+        "Hassi_Hyperzeit_Presentations_All.zip",
+        "Hassi_Hyperzeit_Figures_Plots.zip",
+        "Hassi_Hyperzeit_Data_Tables.zip"
+      ],
+      "recovery_priority": "HIGH_FOR_2025_PROJECT_HISTORY_LOW_FOR_MD2S_SOLVER",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-002",
+      "filename": "Hassi_Hyperzeit_Theory_Manuscripts.zip",
+      "attachment_id": "file-QLSqtxDQTrtFgxT4SoK338",
+      "source_conversation_id": "691c75e7-0178-832b-b344-90a2e3a4a5e3",
+      "source_title": "Portal UI Optimierung",
+      "recovery_priority": "HIGH_FOR_CANONICAL_HISTORY",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-003",
+      "filename": "Hassi_Hyperzeit_Presentations_All.zip",
+      "attachment_id": "file-YMDn7qLpkuduJghvux8LKd",
+      "source_conversation_id": "691c75e7-0178-832b-b344-90a2e3a4a5e3",
+      "source_title": "Portal UI Optimierung",
+      "recovery_priority": "LOW_FOR_PHYSICAL_DERIVATION",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-004",
+      "filename": "Hassi_Hyperzeit_Figures_Plots.zip",
+      "attachment_id": "file-TLz6fttbCGsk55hRZJ3Fa6",
+      "source_conversation_id": "691c75e7-0178-832b-b344-90a2e3a4a5e3",
+      "source_title": "Portal UI Optimierung",
+      "recovery_priority": "MEDIUM_FOR_FIGURE_PROVENANCE",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-005",
+      "filename": "Hassi_Hyperzeit_Data_Tables.zip",
+      "attachment_id": "file-4rCUKwuDTz5Z2ycpTWYxHS",
+      "source_conversation_id": "691c75e7-0178-832b-b344-90a2e3a4a5e3",
+      "source_title": "Portal UI Optimierung",
+      "recovery_priority": "HIGH_FOR_NUMERICAL_PROVENANCE_LOW_FOR_MD2S_2026",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-006",
+      "filename": "Hyperzeit_Docs.zip",
+      "attachment_id": "file-3a1ds89SWNfcRa88BpPCeh",
+      "bytes": 64599237,
+      "source_conversation_id": "69020d60-a69c-832e-8d8f-4207a2eaed3b",
+      "source_title": "Analyse Hyperzeit-Theorie",
+      "recovery_priority": "HIGH_FOR_EARLY_DOCUMENT_CANON",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-007",
+      "filename": "Hyperzeit_PDF1.zip",
+      "attachment_id": "file-QLqj74ay6k3KsLN2bjPigr",
+      "bytes": 34603787,
+      "source_conversation_id": "69020d60-a69c-832e-8d8f-4207a2eaed3b",
+      "source_title": "Analyse Hyperzeit-Theorie",
+      "recovery_priority": "MEDIUM_FOR_DOCUMENT_HISTORY",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-008",
+      "filename": "Hyperzeit_PDF2.zip",
+      "attachment_id": "file-JQsCrAvusm5ggDUTPEVykN",
+      "bytes": 18844566,
+      "source_conversation_id": "69020d60-a69c-832e-8d8f-4207a2eaed3b",
+      "source_title": "Analyse Hyperzeit-Theorie",
+      "recovery_priority": "MEDIUM_FOR_DOCUMENT_HISTORY",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-009",
+      "filename": "_Gemini - Analyse sämtlicher Papers2.33-Dateien.zip",
+      "attachment_id": "file-RiHhN44fCrERL7zdUHJuTp",
+      "bytes": 3246192,
+      "source_conversation_id": "69020d60-a69c-832e-8d8f-4207a2eaed3b",
+      "source_title": "Analyse Hyperzeit-Theorie",
+      "recovery_priority": "LOW_FOR_PRIMARY_THEORY_HIGH_FOR_EXTERNAL_REVIEW_HISTORY",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-010",
+      "filename": "Hyperzeit_Figures_Tables_v1.zip",
+      "attachment_ids": [
+        "file-Q2oYJSEdf56VMEDba3bVUZ",
+        "file-HBGFw5sMspBTqaLhWVKS2Y"
+      ],
+      "bytes": 943032,
+      "source_conversation_ids": [
+        "69020d60-a69c-832e-8d8f-4207a2eaed3b",
+        "6904ac08-32d8-832e-a30b-8e97d8388ff5"
+      ],
+      "recovery_priority": "MEDIUM_FOR_FIGURE_TABLE_PROVENANCE",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-011",
+      "filename": "Neuste1.zip",
+      "attachment_id": "file-9rbjCidhpNSqtZBXeFwKKq",
+      "bytes": 58007561,
+      "source_conversation_id": "6904ac08-32d8-832e-a30b-8e97d8388ff5",
+      "source_title": "Hyperzeit-Optionen analysieren",
+      "recovery_priority": "HIGH_FOR_LATE_2025_DOCUMENT_STATE",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    },
+    {
+      "target_id": "FORENSIC-012",
+      "filename": "Neuste2.zip",
+      "attachment_id": "file-3fsaGZ2qoymA3xhYMrZfF1",
+      "bytes": 55782629,
+      "source_conversation_id": "6904ac08-32d8-832e-a30b-8e97d8388ff5",
+      "source_title": "Hyperzeit-Optionen analysieren",
+      "recovery_priority": "HIGH_FOR_LATE_2025_DOCUMENT_STATE",
+      "status": "BINARY_NOT_IN_CURRENT_ANALYSIS_ZIP"
+    }
+  ],
+  "recovery_rule": "Recovered binaries must be SHA-256 hashed, unpacked in a quarantined directory, inventoried recursively and classified as primary source, derived artifact, generated presentation or duplicate. Their 2025 temporal scope prevents them from being treated as the missing 2026 MD-2S solver without explicit contrary metadata.",
+  "current_retrieval_status": "FILE_LIBRARY_SEARCH_SERVICE_ERROR",
+  "physical_gate_effect": "NONE"
+}
