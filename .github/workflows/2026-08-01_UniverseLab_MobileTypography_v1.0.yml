@@ -1,57 +1,72 @@
-name: UniverseLab mobile typography migration
+name: UniverseLab mobile typography contract
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/mobile-typography-v1
+      - main
     paths:
       - "assets/2026-08-01_UniverseLab_MobileTypography_v1.0.css"
       - "tools/2026-08-01_apply_mobile_typography_v1.0.py"
       - "tests/2026-08-01_test_mobile_typography_v1.0.py"
       - ".github/workflows/2026-08-01_UniverseLab_MobileTypography_v1.0.yml"
-  pull_request:
+      - "index.html"
+      - "observatory.html"
+      - "journey.html"
+      - "compare-safe.html"
+      - "hyperlab.html"
+      - "universe3d.html"
+      - "validation.html"
+      - "guide.html"
+      - "research-status.html"
+      - "emergence.html"
+  push:
     branches:
       - main
+    paths:
+      - "assets/2026-08-01_UniverseLab_MobileTypography_v1.0.css"
+      - "tools/2026-08-01_apply_mobile_typography_v1.0.py"
+      - "tests/2026-08-01_test_mobile_typography_v1.0.py"
+      - ".github/workflows/2026-08-01_UniverseLab_MobileTypography_v1.0.yml"
+      - "index.html"
+      - "observatory.html"
+      - "journey.html"
+      - "compare-safe.html"
+      - "hyperlab.html"
+      - "universe3d.html"
+      - "validation.html"
+      - "guide.html"
+      - "research-status.html"
+      - "emergence.html"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  migrate-and-validate:
+  validate-mobile-typography:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout branch
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: agent/mobile-typography-v1
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Compile and test migration
+      - name: Compile contract tools
         run: |
           python -m py_compile tools/2026-08-01_apply_mobile_typography_v1.0.py
           python -m py_compile tests/2026-08-01_test_mobile_typography_v1.0.py
-          python tests/2026-08-01_test_mobile_typography_v1.0.py -v
 
-      - name: Apply shared typography link
-        run: python tools/2026-08-01_apply_mobile_typography_v1.0.py --apply
+      - name: Run migration contract tests
+        run: python tests/2026-08-01_test_mobile_typography_v1.0.py -v
 
-      - name: Verify applied contract
+      - name: Verify active page links
         run: python tools/2026-08-01_apply_mobile_typography_v1.0.py --check
 
-      - name: Commit migrated pages
+      - name: Verify minimum mobile typography targets
         shell: bash
         run: |
-          if git diff --quiet; then
-            echo "No migration changes required."
-            exit 0
-          fi
-          git config user.name "UniverseLab CI"
-          git config user.email "actions@users.noreply.github.com"
-          git add index.html observatory.html journey.html compare-safe.html hyperlab.html universe3d.html validation.html guide.html research-status.html emergence.html
-          git commit -m "Apply shared mobile typography to active pages"
-          git push origin HEAD:agent/mobile-typography-v1
+          grep -F 'font-size: 17px !important' assets/2026-08-01_UniverseLab_MobileTypography_v1.0.css
+          grep -F 'min-height: 50px !important' assets/2026-08-01_UniverseLab_MobileTypography_v1.0.css
+          grep -F 'font-size: 15px !important' assets/2026-08-01_UniverseLab_MobileTypography_v1.0.css
