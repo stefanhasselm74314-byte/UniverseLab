@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import math
 import pathlib
+import sys
 import unittest
 
 
@@ -15,6 +16,7 @@ SPEC = importlib.util.spec_from_file_location("hzt_m0_overlap_bridge_v0_1", MODU
 if SPEC is None or SPEC.loader is None:
     raise RuntimeError(f"Cannot import {MODULE_PATH}")
 MODULE = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = MODULE
 SPEC.loader.exec_module(MODULE)
 
 
