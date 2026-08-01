@@ -103,7 +103,17 @@ def update_subpage(path: Path, text: str) -> tuple[str, list[str]]:
         return text, []
     updated, changed = add_after_first_matching_anchor(
         text,
-        ("hyperlab.html", "portal.html", "index.html"),
+        (
+            "hyperlab.html",
+            "portal.html",
+            "index.html",
+            "journey.html",
+            "guide.html",
+            "compare-safe.html",
+            "compare.html",
+            "observatory.html",
+            "validation.html",
+        ),
     )
     if not changed:
         raise RuntimeError(f"No safe navigation anchor found in {path.name}")
