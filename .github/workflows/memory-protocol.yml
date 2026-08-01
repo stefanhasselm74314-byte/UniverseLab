@@ -1,0 +1,56 @@
+name: UniverseLab memory protocol
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "governance/UNIVERSELAB_MEMORY_PROTOCOL_v1.0.md"
+      - "registry/session-checkpoint-latest.json"
+      - "registry/decision-log.jsonl"
+      - "prompts/UNIVERSELAB_CHAT_BOOTSTRAP_v1.0.md"
+      - "tools/validate_memory_protocol.py"
+      - "tests/test_memory_protocol.py"
+      - ".github/workflows/memory-protocol.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "governance/UNIVERSELAB_MEMORY_PROTOCOL_v1.0.md"
+      - "registry/session-checkpoint-latest.json"
+      - "registry/decision-log.jsonl"
+      - "prompts/UNIVERSELAB_CHAT_BOOTSTRAP_v1.0.md"
+      - "tools/validate_memory_protocol.py"
+      - "tests/test_memory_protocol.py"
+      - ".github/workflows/memory-protocol.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout complete history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/validate_memory_protocol.py
+          python -m py_compile tests/test_memory_protocol.py
+
+      - name: Validate checkpoint JSON
+        run: python -m json.tool registry/session-checkpoint-latest.json >/dev/null
+
+      - name: Run memory protocol tests
+        run: python -m unittest -v tests/test_memory_protocol.py
+
+      - name: Enforce memory and privacy contract
+        run: python tools/validate_memory_protocol.py
