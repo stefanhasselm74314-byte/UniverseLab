@@ -1,0 +1,88 @@
+{
+  "schema": "universelab.md2s-artifact-recovery-rank-audit.v0.1",
+  "date": "2026-08-01",
+  "branch": "HZT-M0-S6 / MD-2S / B1.4O",
+  "status": "RECOVERY_REQUIRED_BEFORE_RANK_AUDIT",
+  "evidence_effect": "NONE",
+  "source_findings": {
+    "global_benchmark_values_available": true,
+    "one_sided_boundary_derivatives_available": false,
+    "original_solver_available": false,
+    "solver_outputs_available": false,
+    "residual_logs_available": false,
+    "hash_manifest_available": false
+  },
+  "known_benchmarks": {
+    "sqrt_K4_rho_cap": 1.1196329253611,
+    "kappa6_squared_lambda_eff_over_4sqrtK4": 0.8931498683204,
+    "K4_rho_cap_squared": 1.2535778875527,
+    "V_W": 0.5318111250097,
+    "R_circle_at_K4_beta_1": 0.6661500466003
+  },
+  "junction_target": {
+    "umbilicity_residual": "U_umb = A_prime - L_prime/L",
+    "pure_tension_condition": "U_umb = 0 after signed two-sided sum",
+    "required_anisotropy": "Y_sigma = M6^4 (L_sigma - A_sigma)"
+  },
+  "rank_audit": {
+    "control_vector": [
+      "delta_rho_cap_over_rho_cap",
+      "delta_Lambda_layer_over_Lambda_ref",
+      "delta_Lambda6_over_Lambda_ref",
+      "delta_gamma_boundary_times_R_cap",
+      "additional_geometric_control_if_derived"
+    ],
+    "target_vector": [
+      "delta_beta_over_beta",
+      "delta_Xi",
+      "delta_U_umb",
+      "delta_m0_squared_times_R_cap_squared"
+    ],
+    "response_matrix": "R_ai = partial y_a / partial c_i",
+    "mandatory_tests": {
+      "full_row_rank": "OPEN",
+      "condition_number": "OPEN",
+      "smooth_center_without_conical_mode": "OPEN",
+      "stability_m0_squared_nonnegative": "OPEN",
+      "off_shell_tube_validity": "OPEN",
+      "physical_admissibility": "OPEN",
+      "regulator_discretization_robustness": "OPEN"
+    }
+  },
+  "recovery_plan": [
+    {
+      "phase": "R0",
+      "task": "search original archives for solver, CSV, JSON, residual logs and manifests",
+      "acceptance": "at least one executable solver artifact plus parameter and output provenance"
+    },
+    {
+      "phase": "R1",
+      "task": "reconstruct the MD-2S background BVP if R0 fails",
+      "acceptance": "reproduce all published A0 benchmarks within declared tolerances"
+    },
+    {
+      "phase": "R2",
+      "task": "export one-sided cap data",
+      "acceptance": "A_prime, L, L_prime, phi_prime, A_chi, Q, Z_F and oriented normals on both sides"
+    },
+    {
+      "phase": "R3",
+      "task": "run SCI-001/002 v0.2 two-junction, scalar, gauge, flux and constraint gates",
+      "acceptance": "machine-readable residual report with tolerances"
+    },
+    {
+      "phase": "R4",
+      "task": "run B1.4O response-rank audit",
+      "acceptance": "rank, singular values, condition number and physical admissibility decision"
+    }
+  ],
+  "current_gates": {
+    "artifact_recovery": "OPEN",
+    "background_reproduction": "NOT_STARTED",
+    "boundary_export": "BLOCKED",
+    "two_junction_verdict": "NOT_EXECUTABLE",
+    "B1_4O_rank_audit": "NOT_EXECUTABLE",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  }
+}
