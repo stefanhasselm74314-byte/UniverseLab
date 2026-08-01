@@ -83,6 +83,48 @@
       "falsification_or_change_rule": "A reproducible response matrix with declared controls, targets and tolerances changes the status to EXECUTABLE."
     },
     {
+      "claim_id": "MD2N-NUM-001",
+      "claim": "The MD-2N reduced effective diagnostic map is technically executable and its delivered raw two-column Jacobian condition number is 1.8957468008439005.",
+      "status": "NUMERICALLY_CONFIRMED",
+      "claim_class": "QUARANTINED_DIAGNOSTIC",
+      "primary_source": "MD2N.zip plus MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
+      "evidence_effect": "NONE",
+      "limitations": [
+        "effective locked parameters",
+        "no physical P_phys-to-P_mod release",
+        "no covariance weighting",
+        "condition number depends on parameter chart and scaling"
+      ],
+      "falsification_or_change_rule": "A byte-identical source package that fails to reproduce the delivered Jacobian or a corrected package with governed versioning supersedes the numerical value."
+    },
+    {
+      "claim_id": "MD2P-CORR-001",
+      "claim": "The MD-2P-corr formula eta_bulk=beta_0 q(1-q), q=1-exp(-x), is bounded by beta_0/4 and vanishes in both x->0 and x->infinity limits.",
+      "status": "PROVEN",
+      "claim_class": "MATHEMATICAL_PROPERTY_OF_EFFECTIVE_ANSATZ",
+      "primary_source": "MD2N.zip plus MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
+      "evidence_effect": "ANSATZ_PROPERTY_ONLY",
+      "falsification_or_change_rule": "The statement follows algebraically for beta_0>=0 and x>=0; changing the candidate formula creates a new claim."
+    },
+    {
+      "claim_id": "MD2P-CORR-002",
+      "claim": "The MD-2P-corr bounded formula is not derived from the current 6D parent action and does not close MDS-01, MDS-02 or MDS-05.",
+      "status": "OPEN",
+      "claim_class": "PHYSICAL_BRIDGE_STATUS",
+      "primary_source": "MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
+      "evidence_effect": "BLOCKS_PHYSICAL_IDENTIFICATION",
+      "falsification_or_change_rule": "A complete parent-action reduction deriving q, beta_0, the spectral scale and the four-dimensional normalization may upgrade or replace this claim."
+    },
+    {
+      "claim_id": "MD2Q-NUM-001",
+      "claim": "The MD-2Q one-control dry run reproduces eta_bulk=0.024267488339526102 at the locked point; its reported condition number of one is a one-column linear-algebra identity and not evidence of full physical conditioning.",
+      "status": "NUMERICALLY_CONFIRMED",
+      "claim_class": "QUARANTINED_DIAGNOSTIC",
+      "primary_source": "MD2N.zip plus MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
+      "evidence_effect": "NONE",
+      "falsification_or_change_rule": "A multi-column released physical Jacobian with explicit parameter metric is required for a conditioning claim."
+    },
+    {
       "claim_id": "HZT-NOGO-RADION-001",
       "claim": "A light unscreened radion is phenomenologically blocked in the tested minimal realization because its coupling is too strong.",
       "status": "BLOCKED",
