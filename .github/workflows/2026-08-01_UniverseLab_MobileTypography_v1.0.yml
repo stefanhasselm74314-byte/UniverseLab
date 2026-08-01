@@ -9,6 +9,9 @@ on:
       - "tools/2026-08-01_apply_mobile_typography_v1.0.py"
       - "tests/2026-08-01_test_mobile_typography_v1.0.py"
       - ".github/workflows/2026-08-01_UniverseLab_MobileTypography_v1.0.yml"
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
