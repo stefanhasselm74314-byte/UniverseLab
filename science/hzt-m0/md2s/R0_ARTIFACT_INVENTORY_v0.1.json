@@ -12,6 +12,12 @@
       "limitations": "Repository code-search coverage may be incomplete; the result is limited to accessible repository and commit content."
     },
     {
+      "channel": "Zip_analysis_pack.zip direct byte-level archive inspection",
+      "status": "SEARCHED_NEGATIVE_AND_TEMPORALLY_PRE_MD2S",
+      "result": "The package contains 141 conversations, including 69 Hyperzeit-classified conversations, with the latest update on 2025-12-17. Exact message-text searches found no MD-2S, B1.4N, B1.4O or registered A0 benchmark values. The package therefore predates the 2026 MD-2S work and cannot contain its later solver run unless an older attachment binary were separately preserved.",
+      "limitations": "The export preserves attachment metadata names but not the referenced historical attachment binaries. Negative message-text search is not a global proof of non-existence outside the archive."
+    },
+    {
       "channel": "Hyper.zip analysis corpus",
       "status": "SEARCHED_NEGATIVE",
       "result": "The archive contains 40 PDF files and no Python, notebook, CSV, JSON, solver-input, solver-output, residual-log or SHA-256 run-manifest artifact. The chat PDFs refer to such packages, but the packages themselves are absent.",
@@ -92,6 +98,16 @@
       "contains_residual_logs": false
     },
     {
+      "artifact_id": "PROV-CHAT-EXPORT-20251217",
+      "title": "Zip_analysis_pack.zip",
+      "sha256": "e54dc0dc1d933855dff7c3eb36e42e83a64a318a3cdcdfffb4a58373229ef6e2",
+      "class": "CHAT_EXPORT_ANALYSIS_PACKAGE",
+      "status": "AVAILABLE_PROVENANCE_PRE_MD2S",
+      "executable": false,
+      "contains_boundary_data": false,
+      "contains_residual_logs": false
+    },
+    {
       "artifact_id": "PROV-HZT-STATUS-HTML-20260731",
       "title": "hy---Hyperzeit-Projektstatus-Update-2026-07-31.html",
       "class": "CHAT_EXPORT_PROVENANCE",
@@ -131,6 +147,7 @@
   ],
   "r0_decision": {
     "repository_component": "NEGATIVE",
+    "chat_export_2025_component": "NEGATIVE_AND_PREDATES_MD2S",
     "hyper_zip_component": "NEGATIVE_EXECUTABLE_ARTIFACTS_ABSENT",
     "indexed_file_library_component": "NEGATIVE_FOR_MD2S_SOLVER",
     "unmapped_export_binary_component": "OPEN_711_RECORDS_WITHOUT_EXACT_BINARY_MATCH",
@@ -139,7 +156,7 @@
     "physical_gate_change": false
   },
   "next_actions": [
-    "Start R1 model freeze and reproducible rebuild without waiting for the unresolved 711-record binary mapping.",
+    "Continue R1 model freeze and reproducible rebuild without waiting for the unresolved 711-record binary mapping.",
     "Keep a parallel forensic search open for the unmatched export/File-Library records and ingest any recovered solver package as an independent reproduction target.",
     "Do not infer one-sided boundary data or junction residuals from the global benchmark values.",
     "Run the package verifier on every recovered or newly built MD-2S run directory."
