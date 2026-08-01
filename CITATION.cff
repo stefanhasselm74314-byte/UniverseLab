@@ -5,22 +5,27 @@ type: software
 authors:
   - family-names: "Hasselmeyer"
     given-names: "Stefan"
-version: "2.1-audit"
-date-released: "2026-07-31"
+version: "2.1-audit-parent-v0.1"
+date-released: "2026-08-01"
 url: "https://stefanhasselm74314-byte.github.io/UniverseLab/"
 repository-code: "https://github.com/stefanhasselm74314-byte/UniverseLab"
 abstract: >-
   UniverseLab ist eine webbasierte Forschungs- und Dokumentationsplattform für
   etablierte Kosmologie, numerische Validierung und klar gekennzeichnete
-  experimentelle Hyperzeit/HPVS-Modelle. Release 2.1-audit ergänzt einen
-  Materialatlas, einen Methoden- und QA-Katalog, ein Konventionsregister,
-  ein Projektmanifest sowie einen wissenschaftlichen und technischen Master-Audit.
+  experimentelle Hyperzeit/HPVS-Modelle. Diese Version ergänzt den Audit-Release
+  um die verifizierte P0-Analyse, einen experimentellen Runtime-Loader sowie
+  SCI-001/SCI-002 v0.1 mit kanonischer Einstein-Maxwell-Skalar-Parentwirkung,
+  GHY-Abschluss und vollständigem metrischem, skalarem und Gauge-Matching.
+  Die MD-2S-Hintergrundsubstitution ist offen; K1-D bleibt nicht freigegeben
+  und K1-E unzulässig.
 keywords:
   - cosmology
   - higher-dimensional gravity
   - Kaluza-Klein theory
   - flux compactification
   - brane cosmology
+  - boundary variation
+  - junction conditions
   - constraint analysis
   - scientific software
   - Hyperzeit
