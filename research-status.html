@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aktueller Forschungs- und Gate-Status von UniverseLab, HPVS und HZT-M0.">
+  <title>UniverseLab · Forschungsstatus</title>
+  <style>
+    :root{color-scheme:dark;--bg:#07101f;--panel:#0d1a2f;--line:#203451;--text:#edf4ff;--muted:#a9b8cf;--ok:#62d6a7;--warn:#ffd166;--block:#ff7b7b;--accent:#7db6ff}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0,#14264a 0,transparent 34%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.55}
+    main{width:min(1120px,calc(100% - 32px));margin:auto;padding:28px 0 72px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:28px}.brand{font-weight:800;letter-spacing:.04em}.back{color:var(--accent);text-decoration:none;border:1px solid var(--line);padding:9px 13px;border-radius:12px}.hero,.card{background:linear-gradient(180deg,rgba(18,36,66,.94),rgba(10,23,43,.94));border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 55px rgba(0,0,0,.24)}.hero{padding:28px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:var(--accent);font-size:.78rem;font-weight:800}h1{font-size:clamp(2rem,6vw,4.5rem);line-height:1.02;margin:.45rem 0 1rem}.lead{max-width:820px;color:var(--muted);font-size:1.08rem}.stamp{margin-top:18px;color:var(--muted);font-size:.9rem}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:18px}.card{grid-column:span 6;padding:20px}.card.wide{grid-column:span 12}.status{display:inline-flex;gap:8px;align-items:center;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:#132641;border:1px solid var(--line)}.ok{color:var(--ok)}.warn{color:var(--warn)}.block{color:var(--block)}h2{margin:.8rem 0 .55rem;font-size:1.25rem}.card p,.card li{color:var(--muted)}ul{padding-left:1.15rem;margin:.6rem 0}.gates{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.gate{border:1px solid var(--line);border-radius:14px;padding:13px;background:#0a172b}.gate b{display:block}.gate span{font-size:.8rem;color:var(--muted)}code{color:#cce0ff;background:#091527;border:1px solid #1d3352;border-radius:6px;padding:.08rem .35rem}.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.links a{color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:11px;padding:9px 11px;background:#0a172b}.note{border-left:3px solid var(--warn);padding-left:13px}.footer{margin-top:28px;color:var(--muted);font-size:.86rem}@media(max-width:760px){.card{grid-column:span 12}.gates{grid-template-columns:repeat(2,minmax(0,1fr))}.top{align-items:flex-start}.hero{padding:21px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="top"><div class="brand">UL · UniverseLab</div><a class="back" href="./">Zur Startseite</a></div>
+  <section class="hero">
+    <div class="eyebrow">Research Continuation Program · Stand 1. August 2026</div>
+    <h1>Forschungsstatus</h1>
+    <p class="lead">UniverseLab verbindet Theorie, mathematische Ableitung, reproduzierbare Numerik, Observablen und Evidenzkontrolle. Diese Seite zeigt den tatsächlichen Arbeitsstand – einschließlich Blockern, No-Gos und noch nicht freigegebenen Brücken.</p>
+    <div class="gates">
+      <div class="gate"><b class="block">K1-D</b><span>NOT RELEASED</span></div>
+      <div class="gate"><b class="block">K1-E</b><span>NOT ADMISSIBLE</span></div>
+      <div class="gate"><b class="warn">MD-2S</b><span>R1 Model Freeze aktiv</span></div>
+      <div class="gate"><b class="ok">Research QA</b><span>CI und Verifiertests aktiv</span></div>
+    </div>
+    <div class="stamp">Architektur: HPVS → HZT-M0-S6 / HZT-M0-P5 → HZT-Full</div>
+  </section>
+
+  <div class="grid">
+    <article class="card">
+      <span class="status warn">konditional</span>
+      <h2>MD-2P-corr Überlappung</h2>
+      <p><code>q=1−exp(−x)</code> ist exakt als normierter Gauß-Überlapp auf einem flachen zweidimensionalen Innenraum herleitbar. Für die reale MD-2S-Geometrie muss der Warp- und Modenüberlapp <code>q_W</code> aus <code>A(r)</code>, <code>L(r)</code> und normierten Profilen berechnet werden.</p>
+    </article>
+    <article class="card">
+      <span class="status warn">effektiver Ansatz</span>
+      <h2>Amplitude η<sub>bulk</sub></h2>
+      <p><code>η_bulk=β₀q(1−q)</code> besitzt eine klare Partitionsvarianz-Semantik und korrekte Grenzfälle, ist aber weiterhin nicht aus der vollständigen 6D-Wirkung abgeleitet.</p>
+    </article>
+    <article class="card">
+      <span class="status warn">Spektralbrücke</span>
+      <h2>MDS-01: Rχ → m</h2>
+      <p><code>m_n=Ξ_n/Rχ</code> folgt konditional aus dem internen Eigenwertproblem. Der numerische Koeffizient <code>Ξ_n</code> bleibt offen, bis Operator, Randbedingungen, Warping, Flux und Modensektor eingefroren sind.</p>
+    </article>
+    <article class="card">
+      <span class="status block">blockiert</span>
+      <h2>MD-2S und B1.4O</h2>
+      <p>Der historische Solver, einseitige Randdaten und Residuenpakete wurden im verfügbaren Korpus nicht gefunden. Der Neuaufbau beginnt erst nach vollständigem Model Freeze. Das Zwei-Junction-Urteil und der B1.4O-Rangaudit sind deshalb noch nicht ausführbar.</p>
+    </article>
+    <article class="card wide">
+      <span class="status ok">numerisch bestätigt · ohne Evidenzwirkung</span>
+      <h2>MD-2N bis MD-2Q</h2>
+      <ul>
+        <li>MD-2N: Roh-Jacobi-Konditionszahl <code>1,8957468008439005</code> reproduziert.</li>
+        <li>MD-2O: die abweichende Zahl etwa <code>89575</code> bleibt als Provenienzfehler verworfen.</li>
+        <li>MD-2Q: <code>κ=1</code> ist bei einer nichtverschwindenden Einspalten-Jacobimatrix algebraisch trivial und kein Vollrangnachweis.</li>
+        <li>Kontrollen, die nur über einen Skalar <code>x</code> wirken, erzeugen lokal höchstens Rang 1; bei <code>x=ln 2</code> Rang 0 auf linearer Ordnung.</li>
+      </ul>
+    </article>
+    <article class="card wide">
+      <span class="status block">Evidenzgrenze</span>
+      <h2>Was die Daten derzeit nicht leisten dürfen</h2>
+      <p class="note">DESI, Pantheon+, KiDS/DES, RSD, SPARC oder GW-Forecasts können HZT-M0 erst testen, nachdem eine hergeleitete und freigegebene Kette <code>P_phys → P_mod → Observablen</code> vorliegt. Guter Fit, technische Ausführbarkeit und numerische Stabilität sind keine Theoriebestätigung.</p>
+      <div class="links">
+        <a href="registry/research-continuation-manifest-v0.1.json">Research Manifest</a>
+        <a href="registry/claim-register-v0.1.json">Claim Register</a>
+        <a href="science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md">Überlappungsherleitung</a>
+        <a href="science/hzt-m0/bridge/MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md">Spektralbrücke MDS-01</a>
+        <a href="science/hzt-m0/md2s/MD2S_RECOVERY_CONTRACT_v0.1.md">MD-2S Recovery Contract</a>
+      </div>
+    </article>
+  </div>
+  <div class="footer">Statuskennzeichnung: bewiesen · numerisch bestätigt · konditional · heuristisch · offen · blockiert. Keine physikalische Gate-Freigabe wurde durch diese Aktualisierung verändert.</div>
+</main>
+</body>
+</html>
