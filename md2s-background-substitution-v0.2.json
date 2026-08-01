@@ -1,0 +1,86 @@
+{
+  "schema": "universelab.md2s-background-substitution.v0.2",
+  "status": "PREFLIGHT_BLOCKED_MISSING_BOUNDARY_DATA",
+  "branch": "HZT-M0-S6 / S6-Q1 / MD-2S A0",
+  "source_scope": {
+    "repository_search": "no derivative or one-sided cap data found",
+    "archive_report": "global benchmark values only",
+    "evidence_effect": "NONE"
+  },
+  "known_dimensionless_benchmarks": {
+    "sqrt_K4_rho_cap": 1.1196329253611,
+    "kappa6_squared_lambda_eff_over_4sqrtK4": 0.8931498683204,
+    "K4_rho_cap_squared": 1.2535778875527,
+    "V_W": 0.5318111250097,
+    "R_circle_at_K4_beta_1": 0.6661500466003,
+    "Xi_cap_reported": 0.9999999998535
+  },
+  "required_boundary_data": {
+    "r_sigma": null,
+    "M6": null,
+    "K4": null,
+    "bulk": {
+      "normal_r": null,
+      "A_prime": null,
+      "L": null,
+      "L_prime": null,
+      "phi": null,
+      "phi_prime": null,
+      "A_chi": null,
+      "Q": null,
+      "Z_F": null
+    },
+    "cap": {
+      "normal_r": null,
+      "A_prime": null,
+      "L": null,
+      "L_prime": null,
+      "phi": null,
+      "phi_prime": null,
+      "A_chi": null,
+      "Q": null,
+      "Z_F": null
+    },
+    "cap_source": {
+      "lambda": null,
+      "lambda_phi_derivative": null,
+      "Z_sigma": null,
+      "Z_sigma_phi_derivative": null,
+      "q_sigma": null,
+      "winding_n": null
+    }
+  },
+  "derived_quantities": {
+    "A_sigma": "sum_s normal_r_s * A_prime_s",
+    "L_sigma": "sum_s normal_r_s * L_prime_s / L_s",
+    "Y_sigma_required": "M6^4 * (L_sigma - A_sigma)",
+    "pure_tension_residual": "A_sigma - L_sigma",
+    "lambda_from_munu": "M6^4*(3*A_sigma + L_sigma) - Y_sigma/2",
+    "lambda_from_chichi": "4*M6^4*A_sigma + Y_sigma/2",
+    "scalar_residual": "sum_s normal_r_s*phi_prime_s + lambda_phi + 0.5*Z_sigma_phi*X_sigma",
+    "gauge_residual": "sum_s normal_r_s*Z_F_s*F^{r chi}_s - q_sigma*Z_sigma*D^chi sigma"
+  },
+  "gates": {
+    "data_completeness": "FAIL",
+    "normal_orientation_contract": "OPEN",
+    "metric_two_junction_test": "NOT_EXECUTABLE",
+    "pure_tension_verdict": "OPEN",
+    "positive_winding_test": "OPEN",
+    "scalar_matching": "OPEN",
+    "gauge_matching": "OPEN",
+    "flux_continuity_quantization": "OPEN",
+    "radial_constraint_residual": "OPEN",
+    "pole_regularity": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "required_provenance": [
+    "original solver or analytic solution file",
+    "coordinate convention and radial orientation",
+    "one-sided limits at r=r_sigma",
+    "units or dimensionless normalization",
+    "parameter vector and commit/hash",
+    "residual tolerances"
+  ],
+  "next_action": "recover original MD-2S solution artifacts or rerun the background BVP to export one-sided cap data"
+}
