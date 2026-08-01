@@ -1,0 +1,37 @@
+{
+  "schema": "universelab.research-continuation-manifest.addendum.v0.1",
+  "parent_manifest": "registry/research-continuation-manifest-v0.1.json",
+  "date": "2026-08-01",
+  "work_package": "WP-3",
+  "topic": "MDS-05 warped-volume normalization bridge",
+  "status": "FORM_DERIVED_NUMERICAL_RELEASE_OPEN",
+  "artifacts": {
+    "derivation": "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md",
+    "machine_contract": "registry/mds05-warp-volume-contract-v0.1.json",
+    "claim_addendum": "registry/claim-register-v0.1-mds05-addendum.json",
+    "utility": "tools/hzt_m0_warp_volume_bridge_v0_1.py",
+    "tests": "tests/test_hzt_m0_warp_volume_bridge_v0_1.py",
+    "ci": ".github/workflows/research-contracts.yml"
+  },
+  "bridge_state": {
+    "formal_relation": "DERIVED_CONDITIONAL",
+    "numerical_value": "OPEN",
+    "legacy_V_W": "AMBIGUOUS_NORMALIZATION",
+    "localized_EH_terms_in_parent_v0_1": "ABSENT",
+    "four_dimensional_frame": "OPEN",
+    "tensor_zero_mode_crosscheck": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "implemented_tests": [
+    "flat_disk_volume",
+    "constant_warped_cylinder",
+    "multi_region_additivity",
+    "length_rescaling",
+    "optional_localized_EH_terms",
+    "M4_kappa4_G4_normalization",
+    "legacy_benchmark_ambiguity",
+    "fail_closed_invalid_inputs"
+  ],
+  "next_machine_action": "Recover or rebuild MD-2S A(r) and L(r), freeze chi-period and four-dimensional frame conventions, recompute V_W with convergence control, and compare the result with the tensor zero-mode norm."
+}
