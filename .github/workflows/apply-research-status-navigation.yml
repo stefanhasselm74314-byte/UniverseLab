@@ -1,0 +1,44 @@
+name: Apply research status navigation
+
+on:
+  push:
+    branches:
+      - agent/research-status-navigation
+    paths:
+      - "tools/update_research_status_navigation.py"
+      - ".github/workflows/apply-research-status-navigation.yml"
+      - "*.html"
+      - "sitemap.xml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/research-status-navigation
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Apply idempotent navigation migration
+        run: python tools/update_research_status_navigation.py --write
+
+      - name: Commit generated navigation changes
+        run: |
+          if git diff --quiet; then
+            echo "Navigation already synchronized."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html portal.html observatory.html journey.html compare-safe.html hyperlab.html universe3d.html validation.html guide.html sitemap.xml
+          git commit -m "Synchronize research status navigation [nav-sync]"
+          git push origin HEAD:agent/research-status-navigation
