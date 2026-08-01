@@ -9,7 +9,9 @@ on:
       - "science/hzt-m0/bridge/**"
       - "science/gw/**"
       - "tools/verify_md2s_recovery_package_v0_1.py"
+      - "tools/hzt_m0_overlap_bridge_v0_1.py"
       - "tests/test_verify_md2s_recovery_package_v0_1.py"
+      - "tests/test_hzt_m0_overlap_bridge_v0_1.py"
       - ".github/workflows/research-contracts.yml"
   push:
     branches:
@@ -21,7 +23,9 @@ on:
       - "science/hzt-m0/bridge/**"
       - "science/gw/**"
       - "tools/verify_md2s_recovery_package_v0_1.py"
+      - "tools/hzt_m0_overlap_bridge_v0_1.py"
       - "tests/test_verify_md2s_recovery_package_v0_1.py"
+      - "tests/test_hzt_m0_overlap_bridge_v0_1.py"
       - ".github/workflows/research-contracts.yml"
 
 permissions:
@@ -42,7 +46,9 @@ jobs:
       - name: Compile Python
         run: |
           python -m py_compile tools/verify_md2s_recovery_package_v0_1.py
+          python -m py_compile tools/hzt_m0_overlap_bridge_v0_1.py
           python -m py_compile tests/test_verify_md2s_recovery_package_v0_1.py
+          python -m py_compile tests/test_hzt_m0_overlap_bridge_v0_1.py
 
       - name: Validate JSON registries
         run: |
@@ -60,7 +66,10 @@ jobs:
         run: |
           test -f science/hzt-m0/bridge/MD2F_H_I_INTEGRATION_AUDIT_v0.1.md
           test -f science/hzt-m0/bridge/MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md
+          test -f science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md
           test -f science/gw/GW_FALSIFICATION_DOSSIER_RIGOR_AUDIT_v0.1.md
 
-      - name: Run MD-2S verifier tests
-        run: python -m unittest -v tests/test_verify_md2s_recovery_package_v0_1.py
+      - name: Run research contract tests
+        run: |
+          python -m unittest -v tests/test_verify_md2s_recovery_package_v0_1.py
+          python -m unittest -v tests/test_hzt_m0_overlap_bridge_v0_1.py
