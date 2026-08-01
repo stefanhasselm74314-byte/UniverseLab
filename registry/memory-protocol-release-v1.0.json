@@ -3,7 +3,7 @@
   "release": "UL-MEM-v1.0",
   "date": "2026-08-01",
   "privacy_classification": "PUBLIC_SANITIZED",
-  "status": "CANDIDATE_PENDING_CI",
+  "status": "ACTIVE_VALIDATED",
   "artifacts": [
     "governance/UNIVERSELAB_MEMORY_PROTOCOL_v1.0.md",
     "registry/session-checkpoint-latest.json",
