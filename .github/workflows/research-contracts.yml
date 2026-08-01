@@ -48,6 +48,7 @@ jobs:
         run: |
           python -m json.tool registry/chat-source-register-v0.1.json >/dev/null
           python -m json.tool registry/source-intake-2026-08-01-batch02.json >/dev/null
+          python -m json.tool registry/source-intake-2026-08-01-batch03-md2nq.json >/dev/null
           python -m json.tool registry/forensic-attachment-recovery-targets-v0.1.json >/dev/null
           python -m json.tool registry/claim-register-v0.1.json >/dev/null
           python -m json.tool registry/research-continuation-manifest-v0.1.json >/dev/null
@@ -58,6 +59,7 @@ jobs:
       - name: Check required research audit files
         run: |
           test -f science/hzt-m0/bridge/MD2F_H_I_INTEGRATION_AUDIT_v0.1.md
+          test -f science/hzt-m0/bridge/MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md
           test -f science/gw/GW_FALSIFICATION_DOSSIER_RIGOR_AUDIT_v0.1.md
 
       - name: Run MD-2S verifier tests
