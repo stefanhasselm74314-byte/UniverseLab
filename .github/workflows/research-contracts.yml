@@ -11,9 +11,11 @@ on:
       - "tools/verify_md2s_recovery_package_v0_1.py"
       - "tools/hzt_m0_overlap_bridge_v0_1.py"
       - "tools/hzt_m0_spectral_bridge_v0_1.py"
+      - "tools/hzt_m0_warp_volume_bridge_v0_1.py"
       - "tests/test_verify_md2s_recovery_package_v0_1.py"
       - "tests/test_hzt_m0_overlap_bridge_v0_1.py"
       - "tests/test_hzt_m0_spectral_bridge_v0_1.py"
+      - "tests/test_hzt_m0_warp_volume_bridge_v0_1.py"
       - ".github/workflows/research-contracts.yml"
   push:
     branches:
@@ -27,9 +29,11 @@ on:
       - "tools/verify_md2s_recovery_package_v0_1.py"
       - "tools/hzt_m0_overlap_bridge_v0_1.py"
       - "tools/hzt_m0_spectral_bridge_v0_1.py"
+      - "tools/hzt_m0_warp_volume_bridge_v0_1.py"
       - "tests/test_verify_md2s_recovery_package_v0_1.py"
       - "tests/test_hzt_m0_overlap_bridge_v0_1.py"
       - "tests/test_hzt_m0_spectral_bridge_v0_1.py"
+      - "tests/test_hzt_m0_warp_volume_bridge_v0_1.py"
       - ".github/workflows/research-contracts.yml"
 
 permissions:
@@ -52,9 +56,11 @@ jobs:
           python -m py_compile tools/verify_md2s_recovery_package_v0_1.py
           python -m py_compile tools/hzt_m0_overlap_bridge_v0_1.py
           python -m py_compile tools/hzt_m0_spectral_bridge_v0_1.py
+          python -m py_compile tools/hzt_m0_warp_volume_bridge_v0_1.py
           python -m py_compile tests/test_verify_md2s_recovery_package_v0_1.py
           python -m py_compile tests/test_hzt_m0_overlap_bridge_v0_1.py
           python -m py_compile tests/test_hzt_m0_spectral_bridge_v0_1.py
+          python -m py_compile tests/test_hzt_m0_warp_volume_bridge_v0_1.py
 
       - name: Validate JSON registries
         run: |
@@ -63,7 +69,10 @@ jobs:
           python -m json.tool registry/source-intake-2026-08-01-batch03-md2nq.json >/dev/null
           python -m json.tool registry/forensic-attachment-recovery-targets-v0.1.json >/dev/null
           python -m json.tool registry/claim-register-v0.1.json >/dev/null
+          python -m json.tool registry/claim-register-v0.1-mds05-addendum.json >/dev/null
           python -m json.tool registry/research-continuation-manifest-v0.1.json >/dev/null
+          python -m json.tool registry/research-continuation-manifest-v0.1-mds05-addendum.json >/dev/null
+          python -m json.tool registry/mds05-warp-volume-contract-v0.1.json >/dev/null
           python -m json.tool science/hzt-m0/md2s/R0_ARTIFACT_INVENTORY_v0.1.json >/dev/null
           python -m json.tool science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json >/dev/null
           python -m json.tool science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json >/dev/null
@@ -74,6 +83,7 @@ jobs:
           test -f science/hzt-m0/bridge/MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md
           test -f science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md
           test -f science/hzt-m0/bridge/MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md
+          test -f science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md
           test -f science/gw/GW_FALSIFICATION_DOSSIER_RIGOR_AUDIT_v0.1.md
 
       - name: Run research contract tests
@@ -81,3 +91,4 @@ jobs:
           python -m unittest -v tests/test_verify_md2s_recovery_package_v0_1.py
           python -m unittest -v tests/test_hzt_m0_overlap_bridge_v0_1.py
           python -m unittest -v tests/test_hzt_m0_spectral_bridge_v0_1.py
+          python -m unittest -v tests/test_hzt_m0_warp_volume_bridge_v0_1.py
