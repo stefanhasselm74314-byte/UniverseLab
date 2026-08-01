@@ -1,0 +1,172 @@
+{
+  "schema": "universelab.md2s-r1-model-freeze-gate.v0.1",
+  "date": "2026-08-01",
+  "branch": "HZT-M0-S6 / MD-2S",
+  "status": "R1_AUTHORIZED_MODEL_FREEZE_REQUIRED_BEFORE_SOLVER_CODE",
+  "evidence_effect": "NONE",
+  "scope": "Freeze the exact static radial MD-2S background model before implementing a replacement boundary-value solver.",
+  "separation_rules": [
+    "The COS-01.1 homogeneous cosmological minisuperspace system with a(t) and b(t) is not the MD-2S static radial cap boundary-value problem.",
+    "The global A0 benchmark values are reproduction targets, not sufficient equations or boundary data.",
+    "The later SCI-001/SCI-002 parent-action skeleton constrains the rebuild but does not by itself specify the historical A0 solver normalization.",
+    "No parameter may be chosen solely to reproduce one benchmark unless it is declared as a fitted or shooting parameter before execution."
+  ],
+  "frozen_or_high_confidence_inputs": {
+    "metric_ansatz": "ds6^2 = exp(2A(r)) gbar_munu dx^mu dx^nu + dr^2 + L(r)^2 dchi^2",
+    "four_curvature": "Rbar_munu = 3 K4 gbar_munu",
+    "coordinate_roles": {
+      "r": "radial internal coordinate with length dimension",
+      "chi": "dimensionless angular coordinate with explicit period still to be frozen",
+      "A": "dimensionless warp factor",
+      "L": "internal circumference radius with length dimension"
+    },
+    "known_benchmarks": {
+      "sqrt_K4_rho_cap": 1.1196329253611,
+      "kappa6_squared_lambda_eff_over_4sqrtK4": 0.8931498683204,
+      "K4_rho_cap_squared": 1.2535778875527,
+      "V_W": 0.5318111250097,
+      "R_circle_at_K4_beta_1": 0.6661500466003,
+      "Xi_cap_reported": 0.9999999998535
+    },
+    "latest_archived_result": "MD-2S-B1.4N reports no global solution with fixed smooth centre and only the minimal cap controls; the unrestricted algebraic solution uses a conical centre mode.",
+    "next_audit": "MD-2S-B1.4O additional geometric control rank audit"
+  },
+  "mandatory_freeze_items": [
+    {
+      "id": "MF-001",
+      "item": "Exact six-dimensional bulk action",
+      "required": [
+        "Einstein-Hilbert normalization",
+        "Lambda6 sign convention",
+        "scalar kinetic normalization",
+        "exact potential V(phi)",
+        "gauge/flux kinetic function Z_F(phi)",
+        "flux ansatz and charge normalization"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "MF-002",
+      "item": "Exact cap/brane/localized action",
+      "required": [
+        "GHY convention",
+        "localized tension/potential",
+        "localized phase or winding sector",
+        "localized kinetic functions",
+        "orientation convention"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "MF-003",
+      "item": "Reduced radial equations",
+      "required": [
+        "independent ODE set",
+        "radial Hamiltonian constraint",
+        "algebraic definitions",
+        "equation dependency map",
+        "dimensions and normalization of every term"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "MF-004",
+      "item": "Smooth-centre series",
+      "required": [
+        "chi period",
+        "deficit-angle convention",
+        "series coefficients through the order needed to initialize the solver",
+        "regularity of curvature and flux invariants",
+        "identification of the forbidden conical rescue mode"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "MF-005",
+      "item": "Cap and second-side boundary system",
+      "required": [
+        "location rho_cap",
+        "oriented normals",
+        "metric junction equations",
+        "scalar matching",
+        "gauge and flux matching",
+        "global flux quantization or continuity",
+        "pure-tension and winding residual definitions"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "MF-006",
+      "item": "Parameter contract",
+      "required": [
+        "symbol",
+        "physical meaning",
+        "dimension",
+        "dimensionless normalization",
+        "fixed/scanned/shot role",
+        "allowed domain",
+        "primary source"
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "MF-007",
+      "item": "Benchmark definitions",
+      "required": [
+        "integral definition of V_W",
+        "definition of R_circle",
+        "definition of Xi_cap",
+        "definition and extraction of lambda_eff",
+        "declared tolerances for every reproduction target"
+      ],
+      "status": "OPEN"
+    }
+  ],
+  "source_priority": [
+    "ratified MD-0 for governance only",
+    "canonical SCI-001/SCI-002 parent-action files for current variational conventions",
+    "historical MD-2S derivation text for reconstruction targets",
+    "reported benchmark tables for numerical regression only",
+    "chat prose as provenance, never as sole release authority"
+  ],
+  "entry_gate": {
+    "solver_implementation_allowed": false,
+    "condition": "MF-001 through MF-007 must each have a versioned source-backed specification and no unresolved sign or normalization collision.",
+    "exception": "A symbolic sandbox may be used to compare candidate conventions, but its output must be labeled diagnostic and cannot populate the official benchmark or junction files."
+  },
+  "r1_subphases": [
+    {
+      "id": "R1.0",
+      "title": "Source reconstruction and convention freeze",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "R1.1",
+      "title": "Symbolic derivation and dependency audit",
+      "status": "BLOCKED_BY_R1.0"
+    },
+    {
+      "id": "R1.2",
+      "title": "Independent numerical BVP implementations",
+      "status": "BLOCKED_BY_R1.1",
+      "requirement": "At least two numerically distinct implementations or one implementation plus an independent residual evaluator."
+    },
+    {
+      "id": "R1.3",
+      "title": "A0 benchmark reproduction and convergence study",
+      "status": "BLOCKED_BY_R1.2"
+    }
+  ],
+  "gate_state": {
+    "R0": "NEGATIVE_IN_AVAILABLE_INDEXED_CORPUS_FORENSICALLY_OPEN",
+    "R1_0": "ACTIVE",
+    "R1_1": "BLOCKED",
+    "R1_2": "BLOCKED",
+    "R1_3": "BLOCKED",
+    "R2_BOUNDARY_EXPORT": "BLOCKED",
+    "R3_SCI_001_002": "BLOCKED",
+    "R4_B1_4O": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  }
+}

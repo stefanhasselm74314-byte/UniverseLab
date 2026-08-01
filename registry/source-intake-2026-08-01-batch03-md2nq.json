@@ -1,0 +1,150 @@
+{
+  "schema": "universelab.source-intake.v0.1",
+  "date": "2026-08-01",
+  "batch_id": "SOURCE-INTAKE-2026-08-01-BATCH03-MD2NQ",
+  "owner": "Stefan Hasselmeyer",
+  "source": {
+    "filename": "MD2N.zip",
+    "sha256": "28f91e7081cc3dca0f1e225c6e203e2d66af53298a4202f956fae69322dadba3",
+    "size_bytes": 257868843,
+    "class": "NESTED_RESEARCH_PACKAGE",
+    "repository_upload": false,
+    "reason_not_uploaded": "Large user source archive; only hashes, metadata and audit conclusions are registered."
+  },
+  "share_link": {
+    "url": "https://chatgpt.com/share/6a6de1a4-c6cc-83eb-bf9d-76877441e56d",
+    "status": "UNRETRIEVABLE_IN_CURRENT_WEB_ENVIRONMENT",
+    "content_used": false,
+    "rule": "The link is retained as a provenance pointer only; no content is inferred from an inaccessible share page."
+  },
+  "top_level_inventory": {
+    "entries_total": 53,
+    "files_total": 35,
+    "major_modules": [
+      "MD-2N",
+      "MD-2O",
+      "MD-2P-corr",
+      "MD-2Q"
+    ],
+    "embedded_chain_identified": [
+      "MD-2A",
+      "MD-2B",
+      "MD-2C",
+      "MD-2D",
+      "MD-2E",
+      "MD-2F",
+      "MD-2G",
+      "MD-2H",
+      "MD-2I",
+      "MD-2K",
+      "MD-2L",
+      "MD-2M",
+      "MD-2N",
+      "MD-2O",
+      "MD-2P-corr",
+      "MD-2Q"
+    ],
+    "missing_or_stubbed_chain_members": [
+      {
+        "artifact": "MD-2J",
+        "status": "STATUS_STUB_ONLY",
+        "available_content": "MD2J_reported_status_input.md",
+        "missing": "full report and package"
+      },
+      {
+        "artifact": "MD-2P original",
+        "status": "ABSENT",
+        "available_content": "rejection statement and original formula quoted in MD-2P-corr",
+        "missing": "original report, code and run package"
+      },
+      {
+        "artifact": "MD-2R",
+        "status": "NOT_PRESENT_EXPECTED_SUCCESSOR",
+        "available_content": "next-step reference in MD-2Q",
+        "missing": "review and K1-D re-audit decision"
+      }
+    ]
+  },
+  "semantic_duplicates": [
+    {
+      "pair": [
+        "MD2N/HZT_M0_MD2N_Reduced_Effective_Diagnostic_Dry_Run_Execution_v0_1_PACKAGE.zip",
+        "MD2N/MD2N_PACKAGE.zip"
+      ],
+      "status": "CONTENT_IDENTICAL_AFTER_ROOT_PREFIX_NORMALIZATION"
+    },
+    {
+      "pair": [
+        "MD2O/MD2O_BRIDGE_UPDATE_PACKAGE.zip",
+        "MD2O/MD2O_HZT_M0_Bridge_Update_Decision_v0_1_PACKAGE.zip"
+      ],
+      "status": "CONTENT_IDENTICAL_AFTER_ROOT_PREFIX_NORMALIZATION"
+    },
+    {
+      "pair": [
+        "MD2Q/HZT_M0_MD2Q_Unified_Physical_Dry_Run_Execution_v0_1_PACKAGE.zip",
+        "MD2Q/MD2Q_UNIFIED_DRYRUN_PACKAGE.zip"
+      ],
+      "status": "CONTENT_IDENTICAL_AFTER_ROOT_PREFIX_NORMALIZATION"
+    },
+    {
+      "pair": [
+        "MD2P_CORR_CORE/LONGNAME_CORE",
+        "MD2P_CORR_CORE/SHORTNAME_CORE"
+      ],
+      "status": "FILE_CONTENT_IDENTICAL_EXCEPT_LOCAL_ANALYSIS_PYCACHE"
+    }
+  ],
+  "code_audit": {
+    "unique_python_files": 12,
+    "syntax_compile": "PASS_ALL",
+    "direct_execution": {
+      "pass": 11,
+      "expected_cli_argument_exit": 1,
+      "failed_unexpected": 0
+    },
+    "end_to_end_regeneration": "FAIL_NOT_PROVIDED",
+    "reason": "The included scripts define functions and limited smoke tests but do not regenerate all CSV, PNG, DOCX and PDF outputs from a single locked environment and run manifest."
+  },
+  "numerical_reproduction": {
+    "MD2N": {
+      "status": "INDEPENDENTLY_RECOMPUTED_FROM_INCLUDED_FORMULA",
+      "jacobian_shape": [128, 2],
+      "raw_jacobian_singular_values": [7.30945429, 3.85571232],
+      "raw_jacobian_condition_number": 1.8957468008439005,
+      "column_normalized_condition_number": 1.7795781906224486,
+      "log_parameter_condition_number": 2.4217659275380234,
+      "interpretation": "Condition number is diagnostic and parameterization-dependent; no covariance weighting or physical release map is present."
+    },
+    "MD2Q": {
+      "status": "INDEPENDENTLY_RECOMPUTED_FROM_INCLUDED_FORMULA",
+      "jacobian_shape": [128, 1],
+      "condition_number": 1.0,
+      "singular_value": 0.019269555273774337,
+      "eta_bulk_at_lambda_4_25": 0.024267488339526102,
+      "interpretation": "A nonzero one-column matrix has 2-norm condition number 1 by construction; this is not evidence of good multi-parameter conditioning."
+    }
+  },
+  "manifest_audit": {
+    "status": "PARTIAL_FAIL",
+    "strengths": [
+      "Most package file sizes and paths are enumerated.",
+      "Nested provenance packages preserve much of the audit chain."
+    ],
+    "defects": [
+      "No cryptographic hashes are present in module manifests.",
+      "Several manifests record MANIFEST.csv itself with size zero although the file is nonzero.",
+      "MD-2P-corr manifests list large reference ZIP files that are absent from both long-name and short-name cores.",
+      "No environment lock or full run command regenerates the delivered numerical and report artifacts."
+    ]
+  },
+  "scientific_status": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "MD2N": "QUARANTINED_TECHNICAL_BASELINE",
+    "MD2P_corr": "EFFECTIVE_BRIDGE_ANSATZ_DEFINITION_ONLY",
+    "MD2Q": "QUARANTINED_ONE_CONTROL_DRY_RUN",
+    "evidence_effect": "NONE"
+  },
+  "primary_audit_artifact": "science/hzt-m0/bridge/MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md"
+}
