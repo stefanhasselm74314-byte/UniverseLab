@@ -54,6 +54,8 @@ def clone_anchor(anchor: str, href: str, text: str) -> str:
 
 def href_matches(href: str, filename: str) -> bool:
     clean = href.split("?", 1)[0].split("#", 1)[0]
+    if filename == "index.html" and clean in {"", ".", "./", "/", "/UniverseLab", "/UniverseLab/"}:
+        return True
     return clean in {filename, f"./{filename}", f"/{filename}", f"/UniverseLab/{filename}"}
 
 
