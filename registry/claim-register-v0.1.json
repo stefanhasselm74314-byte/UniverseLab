@@ -108,12 +108,51 @@
     },
     {
       "claim_id": "MD2P-CORR-002",
-      "claim": "The MD-2P-corr bounded formula is not derived from the current 6D parent action and does not close MDS-01, MDS-02 or MDS-05.",
+      "claim": "The MD-2P-corr amplitude closure eta_bulk=beta_0 q(1-q) is not derived from the current 6D parent action and does not close MDS-01, MDS-02 or MDS-05.",
       "status": "OPEN",
       "claim_class": "PHYSICAL_BRIDGE_STATUS",
-      "primary_source": "MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
+      "primary_source": "MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md and MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
       "evidence_effect": "BLOCKS_PHYSICAL_IDENTIFICATION",
-      "falsification_or_change_rule": "A complete parent-action reduction deriving q, beta_0, the spectral scale and the four-dimensional normalization may upgrade or replace this claim."
+      "falsification_or_change_rule": "A complete parent-action reduction deriving the interaction closure, beta_0, the spectral scale and the four-dimensional normalization may upgrade or replace this claim."
+    },
+    {
+      "claim_id": "MD2P-CORR-Q-001",
+      "claim": "Under a flat two-dimensional polar measure, a radial Gaussian overlap density exp(-gamma r^2), a sharp disk cutoff R_chi and full-plane normalization, the cumulative overlap is exactly q=1-exp(-gamma R_chi^2).",
+      "status": "CONDITIONAL",
+      "claim_class": "EXACT_RESULT_UNDER_DECLARED_GEOMETRIC_ASSUMPTIONS",
+      "primary_source": "MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
+      "evidence_effect": "UPGRADES_Q_SEMANTICS_ONLY",
+      "dependencies": [
+        "flat or locally flat two-dimensional measure",
+        "Gaussian normalized profile product",
+        "sharp radial partition",
+        "complete-domain normalization"
+      ],
+      "falsification_or_change_rule": "The physical applicability is rejected if the MD-2S reduction produces a materially different measure, warp weighting, mode profile, domain or boundary partition."
+    },
+    {
+      "claim_id": "MD2P-CORR-WARP-001",
+      "claim": "The physical MD-2S overlap must be computed from the warped measure and normalized profiles as q_W(R)=integral_0^R L(r) exp[p A(r)] W(r) dr divided by the corresponding complete-domain integral.",
+      "status": "OPEN",
+      "claim_class": "CANONICAL_REPLACEMENT_TARGET",
+      "primary_source": "MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
+      "evidence_effect": "BLOCKS_PROMOTION_OF_FLAT_APPROXIMATION",
+      "dependencies": [
+        "recovered MD-2S A(r) and L(r)",
+        "normalized mode profiles",
+        "warp exponent from the reduced action",
+        "declared radial domain"
+      ],
+      "falsification_or_change_rule": "Once the reduced action fixes the measure and modes, the generic expression is replaced by the explicit normalized overlap functional."
+    },
+    {
+      "claim_id": "MD2P-CORR-RANK-001",
+      "claim": "For observables depending on a parameter subset only through one scalar x and eta_bulk(x), the corresponding local Jacobian block has rank at most one; at x=ln(2) it has rank zero at linear order because d eta_bulk/dx=0.",
+      "status": "PROVEN",
+      "claim_class": "LOCAL_IDENTIFIABILITY_THEOREM",
+      "primary_source": "MD2P_CORR_OVERLAP_DERIVATION_v0.1.md and test_hzt_m0_overlap_bridge_v0_1.py",
+      "evidence_effect": "EXCLUDES_FALSE_MULTI_PARAMETER_RANK_CLAIMS",
+      "falsification_or_change_rule": "The theorem applies to the stated factorized observable dependence; independent shape or channel responses define a different Jacobian structure."
     },
     {
       "claim_id": "MD2Q-NUM-001",
