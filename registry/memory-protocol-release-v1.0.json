@@ -1,0 +1,18 @@
+{
+  "schema": "universelab.memory-protocol-release.v1",
+  "release": "UL-MEM-v1.0",
+  "date": "2026-08-01",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "status": "ACTIVE_VALIDATED",
+  "artifacts": [
+    "governance/UNIVERSELAB_MEMORY_PROTOCOL_v1.0.md",
+    "registry/session-checkpoint-latest.json",
+    "registry/decision-log.jsonl",
+    "prompts/UNIVERSELAB_CHAT_BOOTSTRAP_v1.0.md",
+    "tools/validate_memory_protocol.py",
+    "tests/test_memory_protocol.py",
+    ".github/workflows/memory-protocol.yml"
+  ],
+  "public_content_rule": "Research state and provenance only; no raw conversations or private user data.",
+  "physical_gate_effect": "NONE"
+}

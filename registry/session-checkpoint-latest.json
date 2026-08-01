@@ -1,0 +1,121 @@
+{
+  "schema": "universelab.session-checkpoint.v1",
+  "checkpoint_id": "UL-CHK-20260801-001",
+  "timestamp": "2026-08-01T16:57:00+02:00",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "basis_commit": "8526df70698f506abed1b92bfd80e493b281f87d",
+  "architecture": [
+    "HPVS",
+    "HZT-M0-S6",
+    "HZT-M0-P5",
+    "HZT-Full"
+  ],
+  "current_goal": "Reconstruct or rebuild the MD-2S background profiles and close the numerical MDS-05 normalization without bypassing boundary, frame or provenance gates.",
+  "current_workstream": "WP-2_MD2S_RECOVERY_AND_CONTROLLED_6D_TO_4D_REDUCTION",
+  "gate_state": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "SCI-001": "PARTIAL",
+    "SCI-002": "PARTIAL",
+    "MD2S_R0_INDEXED_CORPUS": "NEGATIVE",
+    "MD2S_R0_UNMATCHED_EXPORT_BINARIES": "FORENSICALLY_OPEN",
+    "MD2S_R1_MODEL_FREEZE": "ACTIVE",
+    "MD2S_SOLVER": "NOT_REPRODUCED",
+    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
+    "B1_4O": "NOT_EXECUTABLE",
+    "MDS01_FORM": "DERIVED_CONDITIONAL",
+    "MDS01_NUMERICAL_MODE_IDENTITY": "OPEN",
+    "MDS05_FORM": "DERIVED_CONDITIONAL",
+    "MDS05_NUMERICAL_VALUE": "OPEN",
+    "HISTORICAL_V_W_NORMALIZATION": "AMBIGUOUS"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-MDS05-001",
+      "statement": "For the minimal HZT-M0-S6 Einstein-Hilbert sector, the bulk four-dimensional normalization is M4_bulk_squared = V_W / kappa6_squared with V_W equal to the warped internal two-volume.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "FORMAL_REDUCTION_ONLY",
+      "sources": [
+        "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md",
+        "registry/mds05-warp-volume-contract-v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MDS05-002",
+      "statement": "The archived value V_W = 0.5318111250097 cannot yet determine kappa4 because its angle-factor, dimensional normalization and four-dimensional frame convention are unresolved.",
+      "status": "OPEN_AMBIGUITY_CONFIRMED",
+      "evidence_effect": "BLOCKS_NUMERICAL_NORMALIZATION",
+      "sources": [
+        "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md",
+        "md2s-background-substitution-v0.2.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MDS01-001",
+      "statement": "For a scale-free self-adjoint internal eigenproblem, mode masses have the conditional form m_n = Xi_n / R_chi; the numerical Xi_n and physical mode identity remain open.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "FORM_ONLY",
+      "sources": [
+        "science/hzt-m0/bridge/MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md"
+      ]
+    },
+    {
+      "result_id": "UL-RES-OVERLAP-001",
+      "statement": "The flat two-dimensional Gaussian cumulative overlap q = 1 - exp(-gamma R_chi_squared) is exact under its declared measure, profile and cutoff assumptions; the warped MD-2S overlap remains open.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "UPGRADES_FLAT_OVERLAP_SEMANTICS_ONLY",
+      "sources": [
+        "science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md"
+      ]
+    }
+  ],
+  "open_blockers": [
+    {
+      "blocker_id": "UL-BLK-MD2S-001",
+      "statement": "No provenance-complete executable MD-2S solver package with profiles, residuals, one-sided boundary data and hashes is currently recovered.",
+      "sources": [
+        "science/hzt-m0/md2s/R0_ARTIFACT_INVENTORY_v0.1.json",
+        "science/hzt-m0/md2s/MD2S_RECOVERY_CONTRACT_v0.1.md"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-MD2S-002",
+      "statement": "The cap system cannot be closed from a single effective tension value; both metric junction components and scalar, gauge, flux and pole conditions are required.",
+      "sources": [
+        "hzt-s6-parent-action-v0.1.json",
+        "md2s-background-substitution-v0.2.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-MDS05-001",
+      "statement": "The numerical warped volume requires reproduced A(r), L(r), the angular period or deficit convention, a fixed four-dimensional frame and convergence-tested integration.",
+      "sources": [
+        "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md"
+      ]
+    }
+  ],
+  "active_assumptions": [
+    "The controlled reduction branch is HZT-M0-S6 with one physical time and a positive-definite internal two-space.",
+    "The current MDS-05 derivation uses the canonical minimal bulk Einstein-Hilbert term and does not include nonminimal curvature couplings or localized Einstein-Hilbert terms unless explicitly added.",
+    "All numerical promotion requires the MD-2S profile, boundary, frame, unit and provenance contracts to be closed first."
+  ],
+  "forbidden_inferences": [
+    "Do not infer physical identification from technical execution.",
+    "Do not infer ghost freedom from a positive M4_squared or numerical stability.",
+    "Do not infer a numerical kappa4 from the historical V_W value while its normalization is ambiguous.",
+    "Do not infer a released 6D prediction from MD-2N through MD-2Q diagnostic dry runs.",
+    "Do not change K1-D or K1-E without the governed release chain."
+  ],
+  "entry_points": [
+    "governance/UNIVERSELAB_MEMORY_PROTOCOL_v1.0.md",
+    "project-manifest.json",
+    "convention-registry.json",
+    "registry/claim-register-v0.1.json",
+    "registry/research-continuation-manifest-v0.1.json",
+    "registry/decision-log.jsonl",
+    "science/hzt-m0/md2s/MD2S_RECOVERY_CONTRACT_v0.1.md",
+    "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md"
+  ],
+  "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
+  "next_exact_action": "Freeze the remaining MD-2S model and boundary conventions, then derive and implement the reproducible radial background equations needed to export A(r), L(r), one-sided cap data, residuals and the unambiguous warped volume."
+}
