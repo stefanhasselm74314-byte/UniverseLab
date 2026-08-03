@@ -48,7 +48,11 @@
       "validity_regime": "UniverseLab project governance from G0 v1.0 onward",
       "dependencies": ["MD-0", "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"],
       "forbidden_inference": "No physical claim or gate release follows from the organizational split.",
-      "upgrade_condition": "Only a later versioned MD-0-compatible governance decision may supersede the track structure."
+      "upgrade_condition": "Only a later versioned MD-0-compatible governance decision may supersede the track structure.",
+      "sources": [
+        "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+        "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md"
+      ]
     },
     {
       "result_id": "UL-RES-G0-A0-001",
@@ -58,7 +62,11 @@
       "validity_regime": "available historical source corpus as of 2026-08-03",
       "dependencies": ["registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"],
       "forbidden_inference": "No NUMERICALLY_CONFIRMED label and no transfer into C-PHYS or C1-V.",
-      "upgrade_condition": "Source-identical historical reconstruction and benchmark reproduction under declared tolerances."
+      "upgrade_condition": "Source-identical historical reconstruction and benchmark reproduction under declared tolerances.",
+      "sources": [
+        "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json",
+        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"
+      ]
     },
     {
       "result_id": "UL-RES-G0-C1V-001",
@@ -68,34 +76,57 @@
       "validity_regime": "declared C1-V equations, parameters, topology and manufactured anchor",
       "dependencies": ["registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json"],
       "forbidden_inference": "No GR-like IR background, stability, physical branch, historical identity or K1 release.",
-      "upgrade_condition": "A separate governed verification-to-physics bridge after C-PHYS derivation."
+      "upgrade_condition": "A separate governed verification-to-physics bridge after C-PHYS derivation.",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json",
+        "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"
+      ]
     }
   ],
   "open_blockers": [
     {
       "blocker_id": "UL-BLK-R1-L-001",
       "track_id": "MD2S-R1-L",
-      "statement": "Historical primary action, exact conventions, original solver, boundary exports, tolerances and provenance-complete A0/B1.4 run package remain missing."
+      "statement": "Historical primary action, exact conventions, original solver, boundary exports, tolerances and provenance-complete A0/B1.4 run package remain missing.",
+      "sources": [
+        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
+        "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"
+      ]
     },
     {
       "blocker_id": "UL-BLK-C-PHYS-001",
       "track_id": "MD2S-R1-C-PHYS",
-      "statement": "The current physical parent action, localized sectors, parameter roles, topology, gauge lattice and complete variational boundary system are not yet fully frozen."
+      "statement": "The current physical parent action, localized sectors, parameter roles, topology, gauge lattice and complete variational boundary system are not yet fully frozen.",
+      "sources": [
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json",
+        "hzt-s6-parent-action-v0.1.json"
+      ]
     },
     {
       "blocker_id": "UL-BLK-C1-V3-001",
       "track_id": "HZT-M0-S6-C1-V",
-      "statement": "A pre-registered symmetric predictor-only test has not yet demonstrated a visible O(delta^2) residual window."
+      "statement": "A pre-registered symmetric predictor-only test has not yet demonstrated a visible O(delta^2) residual window.",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json"
+      ]
     },
     {
       "blocker_id": "UL-BLK-C1-V4-001",
       "track_id": "HZT-M0-S6-C1-V",
-      "statement": "The continuum residual operator, function spaces, kernel, cokernel, Fredholm index and discretization-to-continuum convergence are not defined or proven."
+      "statement": "The continuum residual operator, function spaces, kernel, cokernel, Fredholm index and discretization-to-continuum convergence are not defined or proven.",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json",
+        "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+      ]
     },
     {
       "blocker_id": "UL-BLK-STAB-001",
       "track_id": "MD2S-R1-C-PHYS",
-      "statement": "Quadratic scalar-vector-tensor action, kinetic positivity, gradient stability and mass-spectrum stability remain open."
+      "statement": "Quadratic scalar-vector-tensor action, kinetic positivity, gradient stability and mass-spectrum stability remain open.",
+      "sources": [
+        "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json"
+      ]
     }
   ],
   "active_assumptions": [
