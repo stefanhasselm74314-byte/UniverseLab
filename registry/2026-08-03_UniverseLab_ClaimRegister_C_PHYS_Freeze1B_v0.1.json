@@ -1,0 +1,63 @@
+{
+  "schema": "universelab.claim-register.c-phys-freeze-1b.v0.1",
+  "date": "2026-08-03",
+  "track_id": "MD2S-R1-C-PHYS",
+  "block": "C-PHYS-R1.0-FREEZE-1B",
+  "model_family_id": "C-PHYS-ME1",
+  "claims": [
+    {
+      "claim_id": "C-PHYS-F1B-CLAIM-001",
+      "statement": "C-PHYS-ME1 is defined by U(phi)=1/2 m_phi^2 phi^2 with m_phi^2>0, Z_F(phi)=1, lambda(phi)=M6^5 tau exp(alpha phi/M6^2) with tau>0 and alpha>0, Z_sigma(phi)=M6^3 z_sigma with z_sigma>0, scalar domain phi/M6^2 in R, and q_ref=1/M6.",
+      "status": "CONDITIONAL",
+      "classification": "VERSIONED_MODEL_SELECTION_NOT_DERIVATION",
+      "evidence_effect": "MODEL_DEFINITION_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": "The current canonical MD2S-R1-C-PHYS two-disk U(1) minimal Einstein-Maxwell-scalar-plus-cap branch after Freeze-1A.",
+      "dependencies": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json",
+        "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
+      ],
+      "forbidden_inference": "This model definition is not a derivation from observations, C1-V or historical A0 material and does not establish a background solution, stability, identifiability or a release gate.",
+      "upgrade_condition": "A later versioned block must freeze one benchmark parameter tuple, integer sector and dimensionless normalization before any numerical preflight."
+    },
+    {
+      "claim_id": "C-PHYS-F1B-CLAIM-002",
+      "statement": "The C-PHYS-ME1 function-level audit removes the exact U0-Lambda6 and alpha-sign redundancies and leaves five continuous dimensionless model parameters: Lambda6_hat, mu_phi_sq, tau, alpha and z_sigma.",
+      "status": "PROVEN",
+      "classification": "PARAMETERIZATION_AND_DIMENSION_AUDIT",
+      "evidence_effect": "FORMAL_MODEL_ACCOUNTING_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": "The exact C-PHYS-ME1 function family and the already frozen canonical scalar, Maxwell, angular, frame and charge conventions.",
+      "dependencies": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json"
+      ],
+      "forbidden_inference": "A five-parameter accounting result is not a proof of structural or practical identifiability.",
+      "upgrade_condition": "Construct and rank the governed model-to-residual and later model-to-observable Jacobians under a fixed benchmark instance."
+    },
+    {
+      "claim_id": "C-PHYS-F1B-CLAIM-003",
+      "statement": "U is bounded below and Z_F, lambda and Z_sigma are strictly positive on the declared scalar domain.",
+      "status": "PROVEN",
+      "classification": "FUNCTION_LEVEL_POSITIVITY_AUDIT",
+      "evidence_effect": "INPUT_HYGIENE_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": "mu_phi_sq>0, tau>0, alpha>0, z_sigma>0 and real varphi.",
+      "dependencies": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json"
+      ],
+      "forbidden_inference": "Function-level positivity is not perturbative ghost freedom, gradient stability, mass stability or background stability.",
+      "upgrade_condition": "Derive and audit the complete quadratic scalar-vector-tensor action on a solved governed background."
+    }
+  ],
+  "gate_state": {
+    "R1.0": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "R1.0_substate": "FUNCTION_FAMILY_FROZEN_BENCHMARK_INSTANCE_OPEN",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}
