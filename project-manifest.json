@@ -1,7 +1,7 @@
 {
   "schema": "universelab.project-manifest.v1",
-  "release": "2.1-audit-parent-v0.1",
-  "release_date": "2026-08-01",
+  "release": "2.2-g0-three-track-v1.0",
+  "release_date": "2026-08-03",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
   "project": {
@@ -13,12 +13,19 @@
   },
   "architecture": {
     "governing_document": "MD-0",
+    "program_chain": ["HPVS", "HZT-M0", "HZT-Full"],
     "levels": [
       {"id":"HPVS","role":"foundations_program","status":"OPEN_RESEARCH_PROGRAM"},
-      {"id":"HZT-M0-S6","role":"primary_controlled_forward_model_candidate","signature":"(-,+,+,+,+,+)","status":"RETAINED_AND_INCOMPLETE"},
+      {"id":"HZT-M0-S6","role":"primary_controlled_forward_model_branch","signature":"(-,+,+,+,+,+)","status":"RETAINED_AND_INCOMPLETE"},
       {"id":"HZT-M0-P5","role":"projection_quotient_and_uplift_control_branch","status":"CONDITIONAL"},
       {"id":"HZT-Full","role":"fundamental_multitime_candidate","status":"NOT_CONSTRUCTED"}
     ],
+    "research_tracks": [
+      {"id":"MD2S-R1-L","role":"historical_legacy_reproduction","status":"BLOCKED_BY_MISSING_PRIMARY_SOURCES"},
+      {"id":"MD2S-R1-C-PHYS","role":"current_canonical_physical_rebuild","status":"MODEL_FREEZE_INCOMPLETE"},
+      {"id":"HZT-M0-S6-C1-V","role":"manufactured_verification_sandbox","status":"CONDITIONAL","classification":"MANUFACTURED_VERIFICATION_MODEL"}
+    ],
+    "track_migration_rule": "No result, parameter, equation, status or evidence label migrates between tracks without an explicit versioned model-identity or verification-to-physics bridge.",
     "control_core": "S6-Q1 / RB0-heavy-GR-quiet"
   },
   "gates": {
@@ -26,6 +33,9 @@
     "K1-B_C": "CONDITIONAL",
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
+    "R1.1": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "physical_evidence_effect": "NONE",
     "diagnostic_evidence_effect": "NONE",
     "GOV-001": "PARTIAL",
     "NUM-002": "PARTIAL",
@@ -36,11 +46,18 @@
     "technical_execution_is_not_physical_identification",
     "numerical_stability_is_not_ghost_freedom",
     "good_fit_is_not_confirmation",
+    "parameter_adjustment_is_not_6d_derivation",
+    "discrete_jacobian_rank_is_not_continuum_invertibility",
+    "local_tangent_is_not_finite_nonlinear_solution_family",
+    "background_regularity_is_not_perturbative_stability",
+    "two_backend_agreement_is_not_independent_physical_confirmation",
     "literature_compatibility_is_not_derivation",
     "gauge_fixing_follows_constraint_derivation",
+    "visualization_has_no_status_authority",
     "rejected_applies_only_to_the_precisely_tested_mechanism",
     "single_reconstructed_lambda_eff_does_not_close_a_cap_solution",
-    "metric_scalar_gauge_and_global_flux_matching_must_be_checked_together"
+    "metric_scalar_gauge_and_global_flux_matching_must_be_checked_together",
+    "c1_verifies_tools_before_nature"
   ],
   "canonical_pages": [
     {"id":"portal","path":"index.html","live":"./","class":"public_interface","status":"ACTIVE"},
@@ -71,7 +88,24 @@
     "required_anisotropy": "Y_sigma = M6^4 (L_Sigma - A_Sigma)",
     "positive_winding_gate": "Y_sigma >= 0",
     "gauss_bonnet": "NOT_CLOSED_IN_V0_1",
-    "next_block": "SCI-001/SCI-002 v0.2 MD-2S background substitution and two-junction verdict"
+    "next_block": "MD2S-R1-C-PHYS exact parent-action and model-freeze closure"
+  },
+  "c1_verification": {
+    "track_id": "HZT-M0-S6-C1-V",
+    "classification": "MANUFACTURED_VERIFICATION_MODEL",
+    "anchor_classification": "EXACT_MANUFACTURED_VERIFICATION_BACKGROUND",
+    "anchor_k4": 0.25,
+    "low_curvature_interpretation": "FORBIDDEN",
+    "phases": {
+      "C1-V0": "PASS",
+      "C1-V1": "PASS_DIAGNOSTIC",
+      "C1-V2": "PASS_DIAGNOSTIC",
+      "C1-V3": "PARTIAL",
+      "C1-V4": "NOT_STARTED"
+    },
+    "physical_identity": "NOT_ESTABLISHED",
+    "historical_A0_identity": "NOT_CLAIMED",
+    "physical_evidence_effect": "NONE"
   },
   "data_releases": [
     {"id":"DESI-DR2-BAO","reference":"arXiv:2503.14738","status":"MATERIAL_IDENTIFIED_NOT_INTEGRATED","required":["measurement_vector","covariance","ordering","likelihood","provenance_hashes"]},
@@ -84,21 +118,27 @@
     "audit": "universelab-audit-2026-07-31.json",
     "bibliography": "hyperzeit-bibliography.json",
     "project_manifest": "project-manifest.json",
-    "parent_action": "hzt-s6-parent-action-v0.1.json"
+    "parent_action": "hzt-s6-parent-action-v0.1.json",
+    "three_track_contract": "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "claim_register_base": "registry/claim-register-v0.1.json",
+    "claim_register_g0": "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json",
+    "research_continuation": "registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json",
+    "r1_three_track_gate": "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json",
+    "session_checkpoint": "registry/session-checkpoint-latest.json"
   },
   "next_release_blockers": [
+    "legacy_primary_source_recovery",
+    "c_phys_exact_parent_action_and_model_freeze",
+    "continuum_boundary_value_operator",
+    "continuum_discrete_convergence",
+    "scalar_vector_tensor_perturbations",
+    "ghost_gradient_and_mass_stability",
+    "controlled_6d_to_4d_reduction",
+    "fundamental_to_observable_forward_map",
+    "data_likelihood_provenance",
     "runtime_manifest_consumption",
     "central_status_renderer",
     "single_cache_release_version",
-    "byte_reproducible_release_lock",
-    "md2s_background_substitution",
-    "two_component_junction_verdict",
-    "scalar_gauge_flux_and_pole_revalidation",
-    "constraint_algebra_closure",
-    "scalar_vector_tensor_perturbations",
-    "physical_hilbert_space_for_multitime_branch",
-    "controlled_6d_to_4d_reduction",
-    "fundamental_to_observable_forward_map",
-    "data_likelihood_provenance"
+    "byte_reproducible_release_lock"
   ]
 }
