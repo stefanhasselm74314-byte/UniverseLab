@@ -1,0 +1,44 @@
+{
+  "schema": "universelab.c-phys-m1-operator-2a-status.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-OPERATOR-2A",
+  "status": "PASS_FORMAL_OPERATOR_STRUCTURE",
+  "overall_track_status": "ACTIVE_BOUNDARY_TRACE_AND_FUNCTION_SPACE_CLOSURE_REMAINING",
+  "results": {
+    "specialized_independent_residuals": "DERIVED_EXACT_FOR_M1",
+    "constraint_propagation": "PROVEN_SYMBOLIC_CONDITIONAL",
+    "higher_pole_series": "DERIVED_TO_A4_F4_G4_L5",
+    "interior_principal_rank": "PASS_FOR_ELL_POSITIVE",
+    "pole_regularization": "PARITY_FACTORIZATION_REQUIRED",
+    "linearized_boundary_trace_map": "NOT_CONSTRUCTED",
+    "complementing_boundary_condition": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED"
+  },
+  "canonical_sources": [
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md",
+    "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py",
+    "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py"
+  ],
+  "gate_state": {
+    "R1.0": "ACTIVE_BOUNDARY_TRACE_AND_FUNCTION_SPACE_CLOSURE_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "CONTINUUM_BVP_OPERATOR": "SPECIALIZED_FORMAL_OPERATOR_DEFINED",
+    "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "OFFICIAL_MD2S_SOLVER": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "PHYSICAL_EVIDENCE_EFFECT": "NONE"
+  },
+  "next_block": {
+    "id": "C-PHYS-R1.0-OPERATOR-2B",
+    "title": "Freeze weighted pole-regular function spaces and the linearized boundary trace contract"
+  }
+}
