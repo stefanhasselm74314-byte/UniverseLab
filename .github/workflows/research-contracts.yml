@@ -5,17 +5,21 @@ on:
     paths:
       - "governance/**"
       - "registry/**"
-      - "science/hzt-m0/md2s/**"
-      - "science/hzt-m0/bridge/**"
-      - "science/gw/**"
+      - "prompts/**"
+      - "science/**"
+      - "*.html"
+      - "*.json"
+      - "*.md"
       - "tools/verify_md2s_recovery_package_v0_1.py"
       - "tools/hzt_m0_overlap_bridge_v0_1.py"
       - "tools/hzt_m0_spectral_bridge_v0_1.py"
       - "tools/hzt_m0_warp_volume_bridge_v0_1.py"
+      - "tools/validate_public_repository_privacy.py"
       - "tests/test_verify_md2s_recovery_package_v0_1.py"
       - "tests/test_hzt_m0_overlap_bridge_v0_1.py"
       - "tests/test_hzt_m0_spectral_bridge_v0_1.py"
       - "tests/test_hzt_m0_warp_volume_bridge_v0_1.py"
+      - "tests/test_public_repository_privacy.py"
       - ".github/workflows/research-contracts.yml"
   push:
     branches:
@@ -23,17 +27,21 @@ on:
     paths:
       - "governance/**"
       - "registry/**"
-      - "science/hzt-m0/md2s/**"
-      - "science/hzt-m0/bridge/**"
-      - "science/gw/**"
+      - "prompts/**"
+      - "science/**"
+      - "*.html"
+      - "*.json"
+      - "*.md"
       - "tools/verify_md2s_recovery_package_v0_1.py"
       - "tools/hzt_m0_overlap_bridge_v0_1.py"
       - "tools/hzt_m0_spectral_bridge_v0_1.py"
       - "tools/hzt_m0_warp_volume_bridge_v0_1.py"
+      - "tools/validate_public_repository_privacy.py"
       - "tests/test_verify_md2s_recovery_package_v0_1.py"
       - "tests/test_hzt_m0_overlap_bridge_v0_1.py"
       - "tests/test_hzt_m0_spectral_bridge_v0_1.py"
       - "tests/test_hzt_m0_warp_volume_bridge_v0_1.py"
+      - "tests/test_public_repository_privacy.py"
       - ".github/workflows/research-contracts.yml"
 
 permissions:
@@ -57,10 +65,12 @@ jobs:
           python -m py_compile tools/hzt_m0_overlap_bridge_v0_1.py
           python -m py_compile tools/hzt_m0_spectral_bridge_v0_1.py
           python -m py_compile tools/hzt_m0_warp_volume_bridge_v0_1.py
+          python -m py_compile tools/validate_public_repository_privacy.py
           python -m py_compile tests/test_verify_md2s_recovery_package_v0_1.py
           python -m py_compile tests/test_hzt_m0_overlap_bridge_v0_1.py
           python -m py_compile tests/test_hzt_m0_spectral_bridge_v0_1.py
           python -m py_compile tests/test_hzt_m0_warp_volume_bridge_v0_1.py
+          python -m py_compile tests/test_public_repository_privacy.py
 
       - name: Validate JSON registries
         run: |
@@ -77,6 +87,10 @@ jobs:
           python -m json.tool science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json >/dev/null
           python -m json.tool science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json >/dev/null
 
+      - name: Public repository privacy gate
+        run: |
+          python tools/validate_public_repository_privacy.py .
+
       - name: Check required research audit files
         run: |
           test -f science/hzt-m0/bridge/MD2F_H_I_INTEGRATION_AUDIT_v0.1.md
@@ -92,3 +106,4 @@ jobs:
           python -m unittest -v tests/test_hzt_m0_overlap_bridge_v0_1.py
           python -m unittest -v tests/test_hzt_m0_spectral_bridge_v0_1.py
           python -m unittest -v tests/test_hzt_m0_warp_volume_bridge_v0_1.py
+          python -m unittest -v tests/test_public_repository_privacy.py
