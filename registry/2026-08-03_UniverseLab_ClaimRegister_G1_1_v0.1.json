@@ -1,0 +1,58 @@
+{
+  "schema": "universelab.claim-register.g1-1.v0.1",
+  "date": "2026-08-03",
+  "canonical_resolution_order": [
+    "registry/claim-register-v0.1.json",
+    "registry/claim-register-v0.1-mds05-addendum.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.1.json"
+  ],
+  "resolution_rule": "This addendum adds a new diagnostic claim and does not supersede physical, historical, continuum or stability claims.",
+  "claims": [
+    {
+      "claim_id": "C1-V-CLAIM-005",
+      "claim": "The uncorrected local C1-V lambda0_hat predictor exhibits a visible quadratic normalized-residual regime for the preregistered symmetric steps, fixed fit window and tested finite discretizations.",
+      "status": "NUMERICALLY_CONFIRMED",
+      "qualifier": "DIAGNOSTIC",
+      "track_id": "HZT-M0-S6-C1-V",
+      "claim_class": "LOCAL_DISCRETE_PREDICTOR_ORDER_QA",
+      "evidence_effect": "DISCRETE_PREDICTOR_QA_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": [
+        "declared C1-V manufactured model",
+        "exact manufactured anchor",
+        "lambda0_hat local tangent",
+        "preregistered signed steps",
+        "fixed fit window 0.04, 0.02, 0.01, 0.005",
+        "RK4 steps 400 and 800",
+        "implicit-midpoint/Richardson base steps 50 and 100",
+        "declared normalized residual scaling"
+      ],
+      "dependencies": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json",
+        "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorEvaluations_v0.1.csv",
+        "tools/2026-08-03_hzt_m0_s6_c1_v_g1_1_symmetric_predictor_v0.1.py"
+      ],
+      "forbidden_inference": [
+        "No nonlinear solution or finite solution family.",
+        "No continuum invertibility or implicit-function theorem.",
+        "No global branch existence, uniqueness or turning point.",
+        "No perturbative stability or ghost freedom.",
+        "No historical A0 identity or physical C1 identity.",
+        "No K1-D, K1-E, R1.1 or official-solver transition."
+      ],
+      "upgrade_condition": "G1.2 may establish only a local second-order discrete response diagnostic using two independent second-derivative methods. Continuum or physical promotion requires later separate gates."
+    }
+  ],
+  "gate_state": {
+    "G1.1": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED",
+    "R1.1": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}
