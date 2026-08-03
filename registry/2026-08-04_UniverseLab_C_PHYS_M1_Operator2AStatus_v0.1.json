@@ -1,0 +1,81 @@
+{
+  "schema": "universelab.c-phys-m1-operator-2a-status.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-OPERATOR-2A",
+  "classification": "FORMAL_CONTINUUM_OPERATOR_CLOSURE_NOT_SOLVER_EXECUTION",
+  "status": "PASS_FORMAL_OPERATOR_STRUCTURE",
+  "evidence_effect": "FORMAL_OPERATOR_STRUCTURE_ONLY",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "canonical_sources": [
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ARegularityTracePreflight_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md",
+    "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py",
+    "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_trace_v0.1.py"
+  ],
+  "closed_results": {
+    "independent_specialized_ODE_system": "CLOSED_FOR_M1",
+    "rr_constraint_off_shell_identity": "PROVEN_EXACT_SYMBOLIC",
+    "rr_constraint_on_shell_propagation": "PROVEN_CONDITIONAL_ON_INDEPENDENT_SYSTEM",
+    "rr_constraint_BVP_role": "PROPAGATED_QA_NOT_ENDPOINT_RESIDUAL",
+    "higher_pole_series": "DERIVED_THROUGH_A4_ELL5_VARPHI4_ACHI4",
+    "pole_local_invariant_building_blocks": "FINITE_FORMAL_LIMITS",
+    "interior_principal_matrix": "FULL_RANK_FOR_ELL_POSITIVE",
+    "cap_second_order_profile_transmission": "PASS_PRINCIPAL_LEVEL_CONDITIONAL_ON_ELL_CAP_POSITIVE",
+    "gauge_profile_transport": "CLOSED_BY_REGULAR_POLE_GAUGES_FOR_FIXED_q_N_q_S"
+  },
+  "open_results": {
+    "weighted_domain_and_target_spaces": "OPEN",
+    "operator_closedness_and_density": "OPEN",
+    "full_parameter_augmented_endpoint_trace_map": "NOT_CONSTRUCTED",
+    "kernel_and_cokernel": "NOT_COMPUTED",
+    "complementing_boundary_condition_for_full_augmented_operator": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "existence_and_uniqueness": "NOT_PROVEN",
+    "perturbative_stability": "OPEN",
+    "ghost_freedom": "OPEN"
+  },
+  "numerical_QA": {
+    "symbolic_engine": "sympy==1.13.3",
+    "constraint_identity": "PASS",
+    "eight_pole_coefficient_equations": "PASS",
+    "pole_invariant_expansions": "PASS",
+    "principal_determinant": "4*ell",
+    "cap_metric_derivative_determinant": "-4/ell_cap",
+    "regression_tests": "PASS",
+    "read_only_CI": "PASS"
+  },
+  "gate_state": {
+    "R1.0": "ACTIVE_BOUNDARY_TRACE_AND_FUNCTION_SPACE_CLOSURE_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "structural_BVP_count": "SQUARE_CONDITIONAL",
+    "continuum_BVP_operator": "SPECIALIZED_FORMAL_OPERATOR_DEFINED",
+    "principal_profile_transmission": "PASS_CONDITIONAL",
+    "full_linearized_boundary_trace": "NOT_CONSTRUCTED",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "No physical background solution is established.",
+    "No full complementing-boundary theorem follows from the principal profile preflight.",
+    "No Fredholm property, kernel/cokernel result or continuum Jacobian rank is established.",
+    "No stability or ghost-freedom result follows from pole regularity.",
+    "No R1.1, R1.2, solver, K1-D or K1-E transition follows."
+  ],
+  "next_block": {
+    "id": "C-PHYS-R1.0-OPERATOR-2B",
+    "title": "Freeze weighted pole-regular function spaces and the linearized boundary trace contract",
+    "execution_type": "FORMAL_FUNCTION_SPACE_AND_TRACE_CONTRACT_NO_BACKGROUND_SOLVE"
+  }
+}
