@@ -1,17 +1,18 @@
 {
   "schema": "universelab.session-checkpoint.v1",
-  "checkpoint_id": "UL-CHK-20260801-001",
-  "timestamp": "2026-08-01T16:57:00+02:00",
+  "checkpoint_id": "UL-CHK-20260803-001",
+  "timestamp": "2026-08-03T05:40:00+02:00",
   "privacy_classification": "PUBLIC_SANITIZED",
-  "basis_commit": "8526df70698f506abed1b92bfd80e493b281f87d",
+  "basis_commit": "e8a520ec9a52c0d554452f18d474ee4d8c1a1b3a",
+  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.1.json",
   "architecture": [
     "HPVS",
     "HZT-M0-S6",
     "HZT-M0-P5",
     "HZT-Full"
   ],
-  "current_goal": "Reconstruct or rebuild the MD-2S background profiles and close the numerical MDS-05 normalization without bypassing boundary, frame or provenance gates.",
-  "current_workstream": "WP-2_MD2S_RECOVERY_AND_CONTROLLED_6D_TO_4D_REDUCTION",
+  "current_goal": "Close the remaining MD-2S model-freeze items at equation level, derive the oriented cap and junction system, and only then authorize symbolic dependency audit or solver work.",
+  "current_workstream": "WP-2_MD2S_MODEL_FREEZE_AND_CONTROLLED_6D_TO_4D_REDUCTION",
   "gate_state": {
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
@@ -20,7 +21,15 @@
     "MD2S_R0_INDEXED_CORPUS": "NEGATIVE",
     "MD2S_R0_UNMATCHED_EXPORT_BINARIES": "FORENSICALLY_OPEN",
     "MD2S_R1_MODEL_FREEZE": "ACTIVE",
-    "MD2S_SOLVER": "NOT_REPRODUCED",
+    "MD2S_MF-001_EXACT_BULK_ACTION": "OPEN",
+    "MD2S_MF-002_EXACT_LOCALIZED_ACTION": "OPEN",
+    "MD2S_MF-003_RADIAL_EQUATIONS": "PARTIAL_CONDITIONAL",
+    "MD2S_MF-004_SMOOTH_CENTER_SERIES": "PARTIAL_CONDITIONAL",
+    "MD2S_MF-005_CAP_JUNCTION_SYSTEM": "OPEN",
+    "MD2S_MF-006_PARAMETER_CONTRACT": "OPEN",
+    "MD2S_MF-007_BENCHMARK_DEFINITIONS": "PARTIAL",
+    "MD2S_R1_1_SYMBOLIC_DEPENDENCY_AUDIT": "BLOCKED",
+    "MD2S_SOLVER": "NOT_AUTHORIZED",
     "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
     "B1_4O": "NOT_EXECUTABLE",
     "MDS01_FORM": "DERIVED_CONDITIONAL",
@@ -30,6 +39,26 @@
     "HISTORICAL_V_W_NORMALIZATION": "AMBIGUOUS"
   },
   "verified_results": [
+    {
+      "result_id": "UL-RES-MD2S-RAD-001",
+      "statement": "For the current HZT-M0-S6 Einstein-Maxwell-scalar action skeleton, the static axial metric yields explicit external, radial and internal Einstein equations, a Maxwell first integral, a scalar equation and a radial Hamiltonian constraint.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "FORMAL_BACKGROUND_STRUCTURE_ONLY",
+      "sources": [
+        "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md",
+        "registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MD2S-RAD-002",
+      "statement": "The generic smooth-center expansion fixes the leading coefficients a2, c2 and p2 once the local action functions, flux constant and angular period are supplied; a nonzero deficit angle identifies the conical center mode.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "CENTER_REGULARITY_STRUCTURE_ONLY",
+      "sources": [
+        "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.1.json"
+      ]
+    },
     {
       "result_id": "UL-RES-MDS05-001",
       "statement": "For the minimal HZT-M0-S6 Einstein-Hilbert sector, the bulk four-dimensional normalization is M4_bulk_squared = V_W / kappa6_squared with V_W equal to the warped internal two-volume.",
@@ -72,14 +101,22 @@
   "open_blockers": [
     {
       "blocker_id": "UL-BLK-MD2S-001",
-      "statement": "No provenance-complete executable MD-2S solver package with profiles, residuals, one-sided boundary data and hashes is currently recovered.",
+      "statement": "The exact bulk functions V(phi), Z_phi(phi), Z_F(phi), their normalization and the relation between explicit Lambda6 and the reported historical potential convention remain unfrozen.",
       "sources": [
-        "science/hzt-m0/md2s/R0_ARTIFACT_INVENTORY_v0.1.json",
-        "science/hzt-m0/md2s/MD2S_RECOVERY_CONTRACT_v0.1.md"
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.1.json",
+        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"
       ]
     },
     {
       "blocker_id": "UL-BLK-MD2S-002",
+      "statement": "The exact GHY, cap, tension, winding, scalar and gauge localized action with oriented normal convention is not yet frozen.",
+      "sources": [
+        "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
+        "hzt-s6-parent-action-v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-MD2S-003",
       "statement": "The cap system cannot be closed from a single effective tension value; both metric junction components and scalar, gauge, flux and pole conditions are required.",
       "sources": [
         "hzt-s6-parent-action-v0.1.json",
@@ -96,14 +133,17 @@
   ],
   "active_assumptions": [
     "The controlled reduction branch is HZT-M0-S6 with one physical time and a positive-definite internal two-space.",
-    "The current MDS-05 derivation uses the canonical minimal bulk Einstein-Hilbert term and does not include nonminimal curvature couplings or localized Einstein-Hilbert terms unless explicitly added.",
-    "All numerical promotion requires the MD-2S profile, boundary, frame, unit and provenance contracts to be closed first."
+    "The current radial equation ledger keeps Lambda6 and V(phi) separate until the historical and current action conventions are reconciled.",
+    "The magnetic branch uses Q = exp(4A) Z_F F_rchi/L and requires positive Z_F in the tested domain.",
+    "Official solver work remains forbidden until MF-001 through MF-007 are source-backed and collision-free."
   ],
   "forbidden_inferences": [
+    "Do not identify the conditional current-canon radial equations with the missing historical A0 solver without an equation-level model identity proof.",
+    "Do not use the leading center series as a complete boundary-value solution.",
+    "Do not treat a freely varied L_prime(0) at fixed angular period as a smooth center; it activates a conical defect.",
     "Do not infer physical identification from technical execution.",
-    "Do not infer ghost freedom from a positive M4_squared or numerical stability.",
+    "Do not infer ghost freedom from background regularity, positive M4_squared or numerical stability.",
     "Do not infer a numerical kappa4 from the historical V_W value while its normalization is ambiguous.",
-    "Do not infer a released 6D prediction from MD-2N through MD-2Q diagnostic dry runs.",
     "Do not change K1-D or K1-E without the governed release chain."
   ],
   "entry_points": [
@@ -113,9 +153,12 @@
     "registry/claim-register-v0.1.json",
     "registry/research-continuation-manifest-v0.1.json",
     "registry/decision-log.jsonl",
-    "science/hzt-m0/md2s/MD2S_RECOVERY_CONTRACT_v0.1.md",
-    "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md"
+    "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.1.json",
+    "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md",
+    "registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json"
   ],
   "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
-  "next_exact_action": "Freeze the remaining MD-2S model and boundary conventions, then derive and implement the reproducible radial background equations needed to export A(r), L(r), one-sided cap data, residuals and the unambiguous warped volume."
+  "next_exact_action": "Freeze MF-001 and MF-002 at equation level, resolve the explicit Lambda6 versus historical V(phi) convention, and derive the fully oriented metric, scalar, gauge and flux cap-junction system for MF-005."
 }
