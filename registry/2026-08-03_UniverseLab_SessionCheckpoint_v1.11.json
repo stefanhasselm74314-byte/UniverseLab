@@ -1,0 +1,176 @@
+{
+  "schema": "universelab.session-checkpoint.v1",
+  "checkpoint_id": "UL-CHK-20260803-011",
+  "timestamp": "2026-08-03T23:56:00+02:00",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "basis_commit": "b83c1fc315542b77346364506786d3bc180de50d",
+  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.11.json",
+  "supersedes": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.10.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"],
+  "sources": [
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json",
+    "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1B_Status_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeLedger_v0.1.md",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"
+  ],
+  "current_goal": "Freeze one explicit C-PHYS-ME1 benchmark parameter tuple, integer sector and dimensionless normalization without executing a physical solver.",
+  "current_workstream": "PRIMARY_C_PHYS_FREEZE_1C_WITH_PARALLEL_C1_V_G1_2_DIAGNOSTIC",
+  "current_workstreams": [
+    {
+      "track_id": "MD2S-R1-C-PHYS",
+      "priority": "PRIMARY",
+      "next_block": "C-PHYS-R1.0-FREEZE-1C"
+    },
+    {
+      "track_id": "HZT-M0-S6-C1-V",
+      "priority": "PARALLEL_DIAGNOSTIC_ONLY",
+      "next_block": "G1.2_LOCAL_SECOND_ORDER_DISCRETE_RESPONSE_DIAGNOSTIC"
+    }
+  ],
+  "governance_principle": "C-PHYS-ME1 is a versioned model postulate selected by minimality and consistency; it is not derived from C1-V, historical A0 material or observations.",
+  "gate_state": {
+    "MD2S-R1-L": "BLOCKED_BY_MISSING_PRIMARY_SOURCES",
+    "MD2S-R1-C-PHYS": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "HZT-M0-S6-C1-V": "MANUFACTURED_VERIFICATION_MODEL",
+    "R1.0": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "R1.0_SUBSTATE": "FUNCTION_FAMILY_FROZEN_BENCHMARK_INSTANCE_OPEN",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "STRUCTURAL_BVP_COUNT": "SQUARE_FUNCTIONALLY_SPECIALIZED_CONDITIONAL",
+    "CONTINUUM_BVP_OPERATOR": "SCAFFOLD_ONLY",
+    "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
+    "G1.1": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED",
+    "HISTORICAL_A0_BENCHMARKS": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
+    "HISTORICAL_A0_IDENTITY": "NOT_ESTABLISHED",
+    "C1_PHYSICAL_IDENTITY": "NOT_ESTABLISHED",
+    "NONLINEAR_SOLUTION_FAMILY": "NOT_ESTABLISHED",
+    "PERTURBATIVE_STABILITY": "OPEN",
+    "GHOST_FREEDOM": "OPEN",
+    "OFFICIAL_MD2S_SOLVER": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "PHYSICAL_EVIDENCE_EFFECT": "NONE",
+    "PUBLIC_PRIVACY_GATE": "PASS"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-G0-TRACK-001",
+      "statement": "The MD-2S program is separated into historical legacy reproduction, current canonical physical rebuild and manufactured C1 verification tracks.",
+      "status": "PROVEN",
+      "evidence_effect": "GOVERNANCE_ONLY",
+      "sources": [
+        "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C-PHYS-OP-001",
+      "statement": "The generic static radial system and continuum-operator interface are derived conditionally from the current minimal parent action.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "FORMAL_PARENT_ACTION_AND_OPERATOR_STRUCTURE_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C-PHYS-FREEZE-1A-001",
+      "statement": "The angular, orientation, patch, flux, charge-lattice, frame and parameter-role conventions are frozen conditionally on the two-disk U(1) topology.",
+      "status": "PROVEN_CONDITIONAL_ON_TWO_DISK_U1_TOPOLOGY",
+      "evidence_effect": "FORMAL_GLOBAL_STRUCTURE_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C-PHYS-FREEZE-1B-001",
+      "statement": "C-PHYS-ME1 selects the exact functions U=1/2 m_phi^2 phi^2, Z_F=1, lambda=M6^5 tau exp(alpha phi/M6^2), Z_sigma=M6^3 z_sigma, scalar domain R and q_ref=1/M6 as a minimal versioned model family.",
+      "status": "CONDITIONAL",
+      "evidence_effect": "MODEL_DEFINITION_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeLedger_v0.1.md",
+        "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1B_Status_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C1V-G11-001",
+      "statement": "The preregistered uncorrected local C1-V predictor exhibits a quadratic normalized-residual regime in the tested finite discretizations.",
+      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
+      "evidence_effect": "DISCRETE_PREDICTOR_QA_ONLY",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"
+      ]
+    }
+  ],
+  "open_blockers": [
+    {
+      "blocker_id": "UL-BLK-R1-L-001",
+      "track_id": "MD2S-R1-L",
+      "statement": "The provenance-complete historical A0 action, solver and run package remain missing.",
+      "sources": [
+        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-BENCHMARK-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "No concrete C-PHYS-ME1 continuous parameter tuple, integer sector or dimensionless residual normalization has yet been frozen.",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-OPERATOR-002",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "Constraint propagation, complementing boundary conditions, Fredholm property and continuum Jacobian remain open.",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+        "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C1-V3-G12-001",
+      "track_id": "HZT-M0-S6-C1-V",
+      "statement": "The local second-order discrete C1-V response remains uncomputed.",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-STAB-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "The scalar-vector-tensor quadratic action and all stability conditions remain open.",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
+      ]
+    }
+  ],
+  "active_assumptions": [
+    "The internal topology is represented by two smooth disks with one regular U(1) gauge patch per pole.",
+    "C-PHYS-ME1 uses varphi=phi/M6^2 on all real numbers.",
+    "The exact function family is a new postulate rather than a derivation.",
+    "M6*q_ref=1 is a physical model normalization after Maxwell and angular conventions are fixed.",
+    "No solver or physical release follows from the function-family selection."
+  ],
+  "forbidden_inferences": [
+    "Do not infer a solved physical background from C-PHYS-ME1.",
+    "Do not infer historical A0 identity or C1-V model identity.",
+    "Do not infer ghost freedom from positive U, Z_F, lambda or Z_sigma.",
+    "Do not infer Fredholm, continuum rank, stability, K1-D or K1-E release.",
+    "Do not treat model-family parameters as shooting unknowns."
+  ],
+  "entry_points": [
+    "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeLedger_v0.1.md",
+    "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1B_Status_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
+  ],
+  "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
+  "next_exact_action": "Execute C-PHYS-R1.0-FREEZE-1C: preregister one C-PHYS-ME1 continuous parameter tuple, one integer sector, dimensionless variables, residual scales and hierarchy assumptions. Do not execute a physical BVP solver. G1.2 remains parallel diagnostic only."
+}
