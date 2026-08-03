@@ -1,0 +1,62 @@
+{
+  "schema": "universelab.hzt-m0-s6-c1-v-backend-tangent-contract.v0.2",
+  "date": "2026-08-03",
+  "track_id": "HZT-M0-S6-C1-V",
+  "model_id": "HZT-M0-S6-C1-V",
+  "supersedes": "registry/2026-08-03_MD2S_C1_IndependentBackendContinuationContract_v0.1.json",
+  "classification": "MANUFACTURED_VERIFICATION_MODEL",
+  "status": "NUMERICALLY_CONFIRMED",
+  "qualifier": "DIAGNOSTIC",
+  "physical_evidence_effect": "NONE",
+  "historical_A0_identity": "NOT_CLAIMED",
+  "physical_identity": "NOT_ESTABLISHED",
+  "verification_phases": {
+    "C1-V2": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL"
+  },
+  "independent_backend": {
+    "integration_method": "implicit_midpoint",
+    "order_raise": "Richardson endpoint extrapolation",
+    "sensitivity_method": "symmetric finite differences of the complete residual map",
+    "classification": "NUMERICALLY_DISTINCT_BACKEND_QA",
+    "not_independent_physical_confirmation": true
+  },
+  "validated_results": {
+    "independent_rank": 8,
+    "independent_condition_number": 221.95557605113822,
+    "independent_to_reference_jacobian_relative_frobenius": 7.406169931198177e-10,
+    "continuation_parameter": "lambda0_hat",
+    "local_first_tangent_only": true,
+    "relative_tangent_difference": 9.77747552550672e-10,
+    "linear_closure_infinity_norm": 1.1102230246251565e-16
+  },
+  "validity_regime": [
+    "declared C1-V manufactured anchor",
+    "declared residual chart and scaling",
+    "pre-registered finite discretizations",
+    "local first derivative at lambda0_hat=0"
+  ],
+  "dependencies": [
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json",
+    "registry/2026-08-03_MD2S_C1_IndependentBackendContinuationContract_v0.1.json",
+    "tools/2026-08-03_md2s_c1_independent_backend_continuation_v0.1.py",
+    "tests/2026-08-03_test_md2s_c1_independent_backend_continuation_v0.1.py"
+  ],
+  "forbidden_inference": [
+    "Agreement of two backends is not independent physical confirmation.",
+    "The local tangent is not a finite nonlinear solution family.",
+    "No continuum implicit-function theorem follows from the discrete calculations.",
+    "No turning point, branch existence, uniqueness, stability or self-tuning claim is permitted.",
+    "No K1-D or K1-E transition is permitted."
+  ],
+  "upgrade_condition": "Complete C1-V3 predictor-order and second-response verification, followed separately by C1-V4 continuum-operator comparison.",
+  "continuum_implicit_function_theorem": "NOT_PROVEN",
+  "nonlinear_solution_family": "NOT_ESTABLISHED",
+  "root_corrector": "NOT_IMPLEMENTED",
+  "official_solver_authorized": false,
+  "R1.1": "BLOCKED",
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE"
+}

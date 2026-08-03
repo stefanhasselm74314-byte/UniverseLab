@@ -1,0 +1,96 @@
+{
+  "schema": "universelab.claim-register.g0.v1.0",
+  "date": "2026-08-03",
+  "canonical_resolution_order": [
+    "registry/claim-register-v0.1.json",
+    "registry/claim-register-v0.1-mds05-addendum.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"
+  ],
+  "resolution_rule": "Later explicit supersession entries override earlier status and evidence labels for the same claim_id; historical entries remain immutable provenance.",
+  "status_vocabulary": [
+    "PROVEN",
+    "NUMERICALLY_CONFIRMED",
+    "CONDITIONAL",
+    "HEURISTIC",
+    "OPEN",
+    "BLOCKED",
+    "REJECTED_TESTED_MECHANISM",
+    "FALSIFIED",
+    "NOT_RELEASED",
+    "NOT_ADMISSIBLE",
+    "SUPERSEDED"
+  ],
+  "superseded_claims": {
+    "MD2S-BG-001": {
+      "prior_status": "NUMERICALLY_CONFIRMED",
+      "status": "OPEN",
+      "canonical_label": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
+      "claim": "The archived historical MD-2S A0 benchmark values are reported reproduction targets. Their original solver, complete equations, conventions, boundary exports and provenance-complete run package have not been independently reproduced.",
+      "track_id": "MD2S-R1-L",
+      "evidence_effect": "NONE",
+      "validity_regime": "historical source inventory available as of 2026-08-03",
+      "dependencies": [
+        "historical primary action",
+        "historical solver",
+        "historical conventions",
+        "provenance-complete benchmark run"
+      ],
+      "forbidden_inference": "No NUMERICALLY_CONFIRMED label and no transfer into C-PHYS or C1-V.",
+      "upgrade_condition": "A source-identical historical reconstruction reproduces the benchmark values under declared tolerances."
+    }
+  },
+  "claims": [
+    {
+      "claim_id": "C1-V-CLAIM-001",
+      "claim": "The C1 unit-two-sphere background is an exact manufactured verification solution of the declared C1-V equations.",
+      "status": "PROVEN",
+      "qualifier": "CONDITIONAL_ON_C1_V_MODEL",
+      "track_id": "HZT-M0-S6-C1-V",
+      "claim_class": "MANUFACTURED_VERIFICATION_BACKGROUND",
+      "evidence_effect": "NUMERICAL_IMPLEMENTATION_QA_ONLY",
+      "validity_regime": "declared C1-V equations and parameter contract",
+      "dependencies": ["C1-V model contract", "declared two-patch topology", "declared manufactured parameter point"],
+      "forbidden_inference": "No physical HZT-M0 background identity, no GR-like IR interpretation and no historical A0 identity.",
+      "upgrade_condition": "Not promotable to physics without an explicit verification-to-physics bridge and C-PHYS derivation."
+    },
+    {
+      "claim_id": "C1-V-CLAIM-002",
+      "claim": "The discretized C1-V IVP-to-residual Jacobian has rank eight at the manufactured anchor for the declared residual scaling and tested discretizations.",
+      "status": "NUMERICALLY_CONFIRMED",
+      "qualifier": "DIAGNOSTIC",
+      "track_id": "HZT-M0-S6-C1-V",
+      "claim_class": "DISCRETE_JACOBIAN_QA",
+      "evidence_effect": "DISCRETE_QA_ONLY",
+      "validity_regime": "declared C1-V model, anchor, residual chart, finite grids and rank threshold",
+      "dependencies": ["RK4 AD contract", "fixed residual scaling", "manufactured anchor"],
+      "forbidden_inference": "No continuum invertibility, no physical branch, no stability and no K1-D release.",
+      "upgrade_condition": "Continuum operator analysis plus controlled discretization-to-continuum convergence."
+    },
+    {
+      "claim_id": "C1-V-CLAIM-003",
+      "claim": "Two numerically distinct backends reproduce the same local discrete Jacobian and first lambda0 continuation tangent at the C1-V manufactured anchor.",
+      "status": "NUMERICALLY_CONFIRMED",
+      "qualifier": "DIAGNOSTIC",
+      "track_id": "HZT-M0-S6-C1-V",
+      "claim_class": "BACKEND_CROSSCHECK",
+      "evidence_effect": "BACKEND_CROSSCHECK_ONLY",
+      "validity_regime": "declared C1-V anchor and pre-registered numerical tolerances",
+      "dependencies": ["RK4 forward-mode AD backend", "implicit midpoint finite-difference backend"],
+      "forbidden_inference": "No independent physical confirmation, no continuum IFT and no finite nonlinear solution family.",
+      "upgrade_condition": "C1-V3 and C1-V4 completion within the verification track only."
+    },
+    {
+      "claim_id": "C1-V-CLAIM-004",
+      "claim": "C1-V is not identified with historical A0 and is not a released physical HZT-M0 background.",
+      "status": "OPEN",
+      "identity_label": "NOT_CLAIMED",
+      "track_id": "HZT-M0-S6-C1-V",
+      "claim_class": "PHYSICAL_IDENTITY_FIREWALL",
+      "evidence_effect": "NONE",
+      "validity_regime": "all current C1-V artifacts",
+      "dependencies": ["three-track governance contract"],
+      "forbidden_inference": "No migration of C1-V parameters, background or numerical rank into C-PHYS.",
+      "upgrade_condition": "Only a separate governed model-identity and verification-to-physics bridge could create a new claim."
+    }
+  ]
+}

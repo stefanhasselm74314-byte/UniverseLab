@@ -1,0 +1,81 @@
+{
+  "schema": "universelab.md2s-r1-three-track-gate.v1.0",
+  "date": "2026-08-03",
+  "supersedes": "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
+  "governance_contract": "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+  "status": "G0_SYNCHRONIZED_EXECUTION_BLOCKED",
+  "evidence_effect": "NONE",
+  "legacy_track": {
+    "track_id": "MD2S-R1-L",
+    "status": "BLOCKED_BY_MISSING_PRIMARY_SOURCES",
+    "scope": "historical A0 and B1.4N/B1.4O reproduction only",
+    "allowed_sources": "historical primary sources with provenance",
+    "benchmark_status": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
+    "required_items": [
+      "historical six-dimensional action",
+      "historical potentials and couplings",
+      "historical sign and normalization conventions",
+      "historical radial equations and Hamilton constraint",
+      "historical pole series",
+      "historical cap or brane action and oriented junctions",
+      "historical angular period, gauge patches and flux quantization",
+      "historical benchmark definitions, solver parameters and tolerances"
+    ],
+    "forbidden_substitution": "No current C-PHYS or C1-V assumption may fill a historical source gap."
+  },
+  "physical_rebuild_track": {
+    "track_id": "MD2S-R1-C-PHYS",
+    "status": "MODEL_FREEZE_INCOMPLETE",
+    "scope": "current canonical physical rebuild from SCI-001/SCI-002",
+    "required_sequence": {
+      "R1.0": "source reconstruction and current model freeze",
+      "R1.1": "symbolic physical derivation and dependency audit",
+      "R1.2": "independent physical BVP solvers",
+      "R1.3": "benchmark reproduction only after model-identity assessment"
+    },
+    "current_phase_status": {
+      "R1.0": "ACTIVE",
+      "R1.1": "BLOCKED",
+      "R1.2": "BLOCKED",
+      "R1.3": "BLOCKED"
+    },
+    "entry_gate": "Complete parent action, variation, boundary terms, parameter roles, topology, gauge and flux conventions.",
+    "solver_authorized": false
+  },
+  "verification_track": {
+    "track_id": "HZT-M0-S6-C1-V",
+    "classification": "MANUFACTURED_VERIFICATION_MODEL",
+    "excluded_from_physical_r1_path": true,
+    "phases": {
+      "C1-V0": "PASS",
+      "C1-V1": "PASS_DIAGNOSTIC",
+      "C1-V2": "PASS_DIAGNOSTIC",
+      "C1-V3": "PARTIAL",
+      "C1-V4": "NOT_STARTED"
+    },
+    "physical_evidence_effect": "NONE",
+    "official_solver_authorized": false
+  },
+  "physical_r1_path": {
+    "R1.0": "MD2S-R1-L source recovery plus MD2S-R1-C-PHYS model freeze, kept source-distinct",
+    "R1.1": "MD2S-R1-C-PHYS symbolic physical derivation and dependency audit",
+    "R1.2": "MD2S-R1-C-PHYS independent physical BVP solvers",
+    "R1.3": "MD2S-R1-L historical benchmark reproduction only after identity proof"
+  },
+  "cross_track_firewall": [
+    "C1-V equations and parameters are not historical reconstruction evidence.",
+    "C1-V numerical rank is not an R1.1 physical operator result.",
+    "C-PHYS equations are not historical A0 equations unless identity is proven.",
+    "Historical benchmark values cannot define C-PHYS parameters by reverse fitting.",
+    "No track status migration without a versioned bridge decision."
+  ],
+  "gate_state": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "R1.1": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
+    "B1_4O": "NOT_EXECUTABLE",
+    "physical_evidence_effect": "NONE"
+  }
+}

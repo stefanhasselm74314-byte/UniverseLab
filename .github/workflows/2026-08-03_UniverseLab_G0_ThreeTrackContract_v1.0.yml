@@ -1,0 +1,94 @@
+name: UniverseLab G0 three-track governance contract
+
+on:
+  pull_request:
+    paths:
+      - "project-manifest.json"
+      - "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+      - "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md"
+      - "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"
+      - "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"
+      - "registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json"
+      - "registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json"
+      - "registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json"
+      - "registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json"
+      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.7.json"
+      - "registry/session-checkpoint-latest.json"
+      - "registry/decision-log.jsonl"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json"
+      - "tools/2026-08-03_validate_g0_three_track_sync_v1.0.py"
+      - "tests/2026-08-03_test_g0_three_track_sync_v1.0.py"
+      - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "project-manifest.json"
+      - "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+      - "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md"
+      - "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"
+      - "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"
+      - "registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json"
+      - "registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json"
+      - "registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json"
+      - "registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json"
+      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.7.json"
+      - "registry/session-checkpoint-latest.json"
+      - "registry/decision-log.jsonl"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json"
+      - "tools/2026-08-03_validate_g0_three_track_sync_v1.0.py"
+      - "tests/2026-08-03_test_g0_three_track_sync_v1.0.py"
+      - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-g0-three-track-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON artifacts
+        run: |
+          python -m json.tool project-manifest.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.7.json >/dev/null
+          python -m json.tool registry/session-checkpoint-latest.json >/dev/null
+          python -m json.tool science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json >/dev/null
+
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.0.py
+          python -m py_compile tests/2026-08-03_test_g0_three_track_sync_v1.0.py
+
+      - name: Run G0 regression tests
+        run: python tests/2026-08-03_test_g0_three_track_sync_v1.0.py
+
+      - name: Enforce fail-closed G0 contract
+        run: python tools/2026-08-03_validate_g0_three_track_sync_v1.0.py --json
+
+      - name: Verify immutable release gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"K1-D": "NOT_RELEASED"' project-manifest.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' project-manifest.json
+          grep -q '"R1.1": "BLOCKED"' project-manifest.json
+          grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' project-manifest.json
+          grep -q '"physical_evidence_effect": "NONE"' project-manifest.json
+          grep -q 'REPORTED_NOT_INDEPENDENTLY_REPRODUCED' registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json
+          grep -q 'MANUFACTURED_VERIFICATION_MODEL' registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json
+          grep -q 'NOT_PROVEN' registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json
+          grep -q 'NOT_ESTABLISHED' registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json
