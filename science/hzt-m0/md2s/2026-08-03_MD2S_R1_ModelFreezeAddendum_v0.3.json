@@ -1,0 +1,133 @@
+{
+  "schema": "universelab.md2s-r1-model-freeze-addendum.v0.3",
+  "date": "2026-08-03",
+  "supersedes_addendum": "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.2.json",
+  "base_gate": "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
+  "status": "ACTIVE_PARTIAL_STRUCTURAL_FREEZE",
+  "evidence_effect": "NONE",
+  "solver_authorized": false,
+  "new_sources": [
+    "science/hzt-m0/md2s/2026-08-03_MD2S_ParameterAngularFluxDependencyLedger_v0.1.md",
+    "registry/2026-08-03_MD2S_ParameterAngularFluxContract_v0.1.json",
+    "registry/2026-08-03_MD2S_SymbolicDependencyGraph_v0.1.json"
+  ],
+  "freeze_items": {
+    "MF-001": {
+      "status": "PARTIAL_STRUCTURAL_FREEZE",
+      "closed": [
+        "Einstein-Hilbert normalization and geometric Lambda placement",
+        "separation of Lambda_geom from U(phi)",
+        "bulk scalar and Maxwell sign structure",
+        "field dimensions and minimum positivity domains"
+      ],
+      "open": [
+        "exact U(phi)",
+        "exact Z_phi(phi)",
+        "exact Z_F(phi)",
+        "historical A0 action identity"
+      ]
+    },
+    "MF-002": {
+      "status": "PARTIAL_STRUCTURAL_FREEZE",
+      "closed": [
+        "GHY outward-normal structure",
+        "localized tension plus gauge-covariant winding structure",
+        "surface stress tensor",
+        "scalar and local gauge variations",
+        "dimensions of lambda, Z_sigma and q_sigma"
+      ],
+      "open": [
+        "exact lambda(phi)",
+        "exact Z_sigma(phi)",
+        "additional localized operators",
+        "q_sigma normalization and minimal-charge identity"
+      ]
+    },
+    "MF-003": {
+      "status": "PARTIAL_CONDITIONAL",
+      "source": "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md"
+    },
+    "MF-004": {
+      "status": "PARTIAL_CONDITIONAL",
+      "closed": [
+        "leading smooth-centre series structure",
+        "period-dependent smooth-pole condition",
+        "conical-defect diagnostic"
+      ],
+      "open": [
+        "adopted Delta_chi convention",
+        "full higher-order centre series for selected functions"
+      ]
+    },
+    "MF-005": {
+      "status": "PARTIAL_CONDITIONAL",
+      "closed": [
+        "outward-normal sum convention",
+        "induced continuity contract",
+        "two independent metric junction equations",
+        "scalar matching with Z_phi",
+        "local gauge matching",
+        "phase equation"
+      ],
+      "open": [
+        "global flux quantization normalization",
+        "gauge-patch transition function",
+        "complete second-region geometry",
+        "numerical one-sided data and tolerances"
+      ]
+    },
+    "MF-006": {
+      "status": "PARTIAL_STRUCTURAL_FREEZE",
+      "closed": [
+        "natural-unit dimension table",
+        "dimensionless angular coordinate with explicit positive period",
+        "integer winding and flux sectors",
+        "gauge-invariant winding combination",
+        "angular-coordinate reparametrization rules",
+        "structural global flux equation",
+        "parameter-domain and frame-redundancy rules",
+        "directed symbolic dependency graph"
+      ],
+      "open": [
+        "numerical parameter values",
+        "exact functional forms",
+        "q_sigma and q_ref normalization",
+        "adopted angular period",
+        "gauge bundle transition data",
+        "independent BVP parameter count",
+        "dimensionless solver map",
+        "residual tolerances"
+      ]
+    },
+    "MF-007": {
+      "status": "PARTIAL",
+      "open": [
+        "unambiguous V_W definition",
+        "R_circle definition",
+        "Xi_cap definition",
+        "lambda_eff definition",
+        "source-backed tolerances"
+      ]
+    }
+  },
+  "symbolic_dependency_audit": {
+    "graph_structure": "DEFINED",
+    "graph_execution": "BLOCKED_BY_OPEN_P0_P1_NODES",
+    "R1_1_release": "BLOCKED",
+    "reason": "The graph is acyclic and source-linked, but the functional forms, charge lattice, angular adoption, gauge patches, frame and second-region boundary geometry remain open."
+  },
+  "governance": {
+    "R1_0": "ACTIVE",
+    "R1_1": "BLOCKED",
+    "R1_2": "BLOCKED",
+    "R1_3": "BLOCKED",
+    "R2_BOUNDARY_EXPORT": "BLOCKED",
+    "R3_SCI_001_002": "BLOCKED",
+    "R4_B1_4O": "BLOCKED",
+    "MD2S_SOLVER": "NOT_AUTHORIZED",
+    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_exact_action": "Resolve the five open functional forms and their parameter domains, choose and document the angular and charge-lattice conventions, specify the complete second region and frame condition, then perform the BVP degree-count and symbolic rank preflight before any official solver implementation."
+}
