@@ -1,0 +1,95 @@
+{
+  "schema": "universelab.three-track-governance.v1.0",
+  "date": "2026-08-03",
+  "decision_id": "UL-DEC-0014",
+  "governing_document": "MD-0 v3.1.1 by project declaration",
+  "architecture": {
+    "program_chain": ["HPVS", "HZT-M0", "HZT-Full"],
+    "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"]
+  },
+  "principle": "C1 prueft zunaechst unsere Werkzeuge, nicht die Natur.",
+  "tracks": [
+    {
+      "track_id": "MD2S-R1-L",
+      "name": "historical legacy reproduction",
+      "status": "BLOCKED_BY_MISSING_PRIMARY_SOURCES",
+      "purpose": "Reconstruct the historical A0 and B1.4N/B1.4O model only from historically evidenced primary sources.",
+      "source_rule": "historical_primary_sources_only",
+      "benchmark_label": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
+      "forbidden": [
+        "replace missing historical equations with current assumptions",
+        "call historical A0 benchmarks NUMERICALLY_CONFIRMED before model identity and reproduction",
+        "import C1-V equations or parameters"
+      ],
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "track_id": "MD2S-R1-C-PHYS",
+      "name": "current canonical physical rebuild",
+      "status": "MODEL_FREEZE_INCOMPLETE",
+      "purpose": "Derive a reproducible physically motivated static 6D background from the current SCI-001/SCI-002 parent action.",
+      "required_sequence": [
+        "parent_action",
+        "variation",
+        "boundary_terms",
+        "background_equations",
+        "boundary_value_problem",
+        "background_family",
+        "perturbations",
+        "four_dimensional_reduction",
+        "observables"
+      ],
+      "historical_comparison_rule": "requires_equation_and_convention_identity",
+      "physical_evidence_effect": "NONE_UNTIL_GOVERNED_RELEASE"
+    },
+    {
+      "track_id": "HZT-M0-S6-C1-V",
+      "former_id": "HZT-M0-S6-C1",
+      "name": "manufactured numerical verification sandbox",
+      "classification": "MANUFACTURED_VERIFICATION_MODEL",
+      "status": "CONDITIONAL",
+      "purpose": "Verify equations, scaling, pole series, gauge patches, residuals, integrators, sensitivities, discrete Jacobians and local numerical response.",
+      "anchor_classification": "EXACT_MANUFACTURED_VERIFICATION_BACKGROUND",
+      "k4_anchor": 0.25,
+      "low_curvature_interpretation": "FORBIDDEN",
+      "physical_identity": "NOT_ESTABLISHED",
+      "historical_A0_identity": "NOT_CLAIMED",
+      "physical_evidence_effect": "NONE",
+      "K1-D_effect": "NONE",
+      "K1-E_effect": "NONE",
+      "phases": {
+        "C1-V0": "PASS",
+        "C1-V1": "PASS_DIAGNOSTIC",
+        "C1-V2": "PASS_DIAGNOSTIC",
+        "C1-V3": "PARTIAL",
+        "C1-V4": "NOT_STARTED"
+      },
+      "forbidden": [
+        "interpret manufactured anchor as a released Hyperzeit background",
+        "infer continuum invertibility from discrete rank",
+        "infer finite nonlinear branch from local tangent",
+        "infer stability or ghost freedom from background integration",
+        "migrate q_sigma=q_ref or other C1 simplifications into C-PHYS without derivation"
+      ]
+    }
+  ],
+  "migration_firewall": {
+    "default": "NO_CROSS_TRACK_MIGRATION",
+    "legacy_to_physical": "requires_model_identity_bridge",
+    "verification_to_physics": "requires_explicit_verification_to_physics_bridge",
+    "physical_to_legacy": "forbidden_without_historical_source_identity",
+    "status_transfer": "forbidden_without_versioned_gate_decision"
+  },
+  "gate_state": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "R1.1": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "physical_evidence_effect": "NONE"
+  },
+  "upgrade_conditions": {
+    "MD2S-R1-L": "provenance-complete historical primary sources and identical reproduction",
+    "MD2S-R1-C-PHYS": "complete model freeze, continuum BVP, perturbative stability and governed 6D-to-4D reduction",
+    "HZT-M0-S6-C1-V": "verification phases may advance only within C1-V; physical promotion requires a separate bridge"
+  }
+}
