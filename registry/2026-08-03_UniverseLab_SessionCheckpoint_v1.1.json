@@ -4,7 +4,6 @@
   "timestamp": "2026-08-03T05:40:00+02:00",
   "privacy_classification": "PUBLIC_SANITIZED",
   "basis_commit": "e8a520ec9a52c0d554452f18d474ee4d8c1a1b3a",
-  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.1.json",
   "architecture": [
     "HPVS",
     "HZT-M0-S6",
@@ -153,7 +152,6 @@
     "registry/claim-register-v0.1.json",
     "registry/research-continuation-manifest-v0.1.json",
     "registry/decision-log.jsonl",
-    "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.1.json",
     "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
     "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.1.json",
     "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md",
