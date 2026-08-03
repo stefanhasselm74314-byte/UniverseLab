@@ -1,0 +1,80 @@
+{
+  "schema": "universelab.md2s-r1-model-freeze-addendum.v0.1",
+  "date": "2026-08-03",
+  "supersedes": null,
+  "extends": "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
+  "track": "MD2S-R1-C",
+  "status": "ACTIVE_PARTIAL_FREEZE_PROGRESS",
+  "evidence_effect": "NONE",
+  "updates": [
+    {
+      "freeze_id": "MF-003",
+      "old_status": "OPEN",
+      "new_status": "PARTIAL_CONDITIONAL",
+      "closed_scope": [
+        "generic radial Einstein equations for the current action skeleton",
+        "Maxwell first integral",
+        "radial Hamiltonian constraint",
+        "one valid independent evolution set",
+        "Bianchi dependency identity",
+        "term dimensions at the unscaled level"
+      ],
+      "remaining_scope": [
+        "exact V(phi)",
+        "exact Z_phi(phi)",
+        "exact Z_F(phi)",
+        "dimensionless solver-variable map",
+        "model-identity comparison with historical A0"
+      ],
+      "source": "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md"
+    },
+    {
+      "freeze_id": "MF-004",
+      "old_status": "OPEN",
+      "new_status": "PARTIAL_CONDITIONAL",
+      "closed_scope": [
+        "generic even/odd smooth-centre series",
+        "leading a2, c2 and p2 coefficients",
+        "regular flux behaviour",
+        "explicit conical-deficit diagnostic"
+      ],
+      "remaining_scope": [
+        "frozen Delta_chi",
+        "historical deficit-angle convention",
+        "higher-order coefficients required by the selected solver",
+        "curvature-invariant series through the solver start order"
+      ],
+      "source": "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md"
+    },
+    {
+      "freeze_id": "MF-007",
+      "old_status": "OPEN",
+      "new_status": "PARTIAL",
+      "closed_scope": [
+        "current-canon formal definition of warped volume from MDS-05"
+      ],
+      "remaining_scope": [
+        "historical V_W convention",
+        "R_circle definition",
+        "Xi_cap definition",
+        "lambda_eff extraction",
+        "benchmark tolerances"
+      ],
+      "source": "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md"
+    }
+  ],
+  "unchanged": {
+    "MF-001": "OPEN",
+    "MF-002": "OPEN",
+    "MF-005": "OPEN",
+    "MF-006": "OPEN",
+    "R1_0": "ACTIVE",
+    "R1_1": "BLOCKED",
+    "R1_2": "BLOCKED",
+    "R1_3": "BLOCKED",
+    "solver_implementation_allowed": false,
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_exact_action": "Freeze MF-001 and MF-002 at equation level, resolve the Lambda6 versus historical V(phi) convention, then derive the oriented cap/junction system for MF-005."
+}
