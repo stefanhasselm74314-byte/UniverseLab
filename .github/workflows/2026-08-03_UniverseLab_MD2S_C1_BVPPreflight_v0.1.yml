@@ -1,0 +1,74 @@
+name: UniverseLab MD-2S C1 BVP preflight
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json"
+      - "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_C1_ModelAndBVPPreflightLedger_v0.1.md"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.4.json"
+      - "tools/2026-08-03_validate_md2s_c1_bvp_preflight_v0.1.py"
+      - "tests/2026-08-03_test_md2s_c1_bvp_preflight_v0.1.py"
+      - ".github/workflows/2026-08-03_UniverseLab_MD2S_C1_BVPPreflight_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json"
+      - "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_C1_ModelAndBVPPreflightLedger_v0.1.md"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.4.json"
+      - "tools/2026-08-03_validate_md2s_c1_bvp_preflight_v0.1.py"
+      - "tests/2026-08-03_test_md2s_c1_bvp_preflight_v0.1.py"
+      - ".github/workflows/2026-08-03_UniverseLab_MD2S_C1_BVPPreflight_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-md2s-c1-bvp-preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON artifacts
+        run: |
+          python -m json.tool registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json >/dev/null
+          python -m json.tool science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.4.json >/dev/null
+
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/2026-08-03_validate_md2s_c1_bvp_preflight_v0.1.py
+          python -m py_compile tests/2026-08-03_test_md2s_c1_bvp_preflight_v0.1.py
+
+      - name: Run C1 preflight tests
+        run: python tests/2026-08-03_test_md2s_c1_bvp_preflight_v0.1.py
+
+      - name: Enforce C1 model and BVP contract
+        run: python tools/2026-08-03_validate_md2s_c1_bvp_preflight_v0.1.py --pretty
+
+      - name: Verify governance firewall
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          model = json.loads(Path("registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json").read_text())
+          pre = json.loads(Path("registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json").read_text())
+          add = json.loads(Path("science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.4.json").read_text())
+
+          assert model["historical_A0_identity"] == "NOT_CLAIMED"
+          assert model["solver_authorized"] is False
+          assert pre["solver_authorized"] is False
+          assert pre["next_execution_gate"]["R1.1"] == "BLOCKED"
+          assert add["governance"]["R1_1"] == "BLOCKED"
+          assert add["governance"]["MD2S_SOLVER"] == "NOT_AUTHORIZED"
+          assert add["governance"]["K1-D"] == "NOT_RELEASED"
+          assert add["governance"]["K1-E"] == "NOT_ADMISSIBLE"
+          PY
