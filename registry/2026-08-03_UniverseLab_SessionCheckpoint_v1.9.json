@@ -1,0 +1,173 @@
+{
+  "schema": "universelab.session-checkpoint.v1",
+  "checkpoint_id": "UL-CHK-20260803-009",
+  "timestamp": "2026-08-03T22:42:00+02:00",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "basis_commit": "c1925bb0f5baa74717a0eeff9f842421da47bbcd",
+  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.9.json",
+  "supersedes": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.8.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"],
+  "sources": [
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json",
+    "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorLedger_v0.1.md"
+  ],
+  "current_goal": "Advance the physical MD2S-R1-C-PHYS model freeze through C-PHYS-R1.0-FREEZE-1 while allowing G1.2 only as a separately preregistered C1-V diagnostic side track.",
+  "current_workstreams": [
+    {
+      "track_id": "MD2S-R1-C-PHYS",
+      "priority": "PRIMARY",
+      "next_block": "C-PHYS-R1.0-FREEZE-1"
+    },
+    {
+      "track_id": "HZT-M0-S6-C1-V",
+      "priority": "PARALLEL_DIAGNOSTIC_ONLY",
+      "next_block": "G1.2_LOCAL_SECOND_ORDER_DISCRETE_RESPONSE_DIAGNOSTIC"
+    }
+  ],
+  "governance_principle": "C1 prueft zunaechst unsere Werkzeuge, nicht die Natur; C-PHYS bestimmt, was aus der aktuellen Parentwirkung physikalisch folgen kann.",
+  "gate_state": {
+    "MD2S-R1-L": "BLOCKED_BY_MISSING_PRIMARY_SOURCES",
+    "MD2S-R1-C-PHYS": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "HZT-M0-S6-C1-V": "MANUFACTURED_VERIFICATION_MODEL",
+    "R1.0": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "CONTINUUM_BVP_OPERATOR": "SCAFFOLD_ONLY",
+    "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
+    "C1-V0": "PASS",
+    "C1-V1": "PASS_DIAGNOSTIC",
+    "C1-V2": "PASS_DIAGNOSTIC",
+    "G1.1": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED",
+    "HISTORICAL_A0_BENCHMARKS": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
+    "HISTORICAL_A0_IDENTITY": "NOT_ESTABLISHED",
+    "C1_PHYSICAL_IDENTITY": "NOT_ESTABLISHED",
+    "NONLINEAR_SOLUTION_FAMILY": "NOT_ESTABLISHED",
+    "PERTURBATIVE_STABILITY": "OPEN",
+    "GHOST_FREEDOM": "OPEN",
+    "OFFICIAL_MD2S_SOLVER": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "PHYSICAL_EVIDENCE_EFFECT": "NONE",
+    "PUBLIC_PRIVACY_GATE": "PASS"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-G0-TRACK-001",
+      "statement": "The MD-2S program is separated into historical legacy reproduction, current canonical physical rebuild and manufactured C1 verification tracks, with a fail-closed migration firewall.",
+      "status": "PROVEN",
+      "evidence_effect": "GOVERNANCE_ONLY",
+      "sources": [
+        "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+        "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C-PHYS-OP-001",
+      "statement": "The generic static radial Einstein-Maxwell-scalar system, leading smooth-pole series, generic two-sided cap residual structure and continuum-operator interface have been derived conditionally from the current minimal SCI-001/SCI-002 parent action.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "FORMAL_PARENT_ACTION_AND_OPERATOR_STRUCTURE_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C1V-G11-001",
+      "statement": "The uncorrected local C1-V lambda0_hat predictor exhibits a visible quadratic normalized-residual regime for the preregistered symmetric steps, fixed fit window and tested finite discretizations.",
+      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
+      "evidence_effect": "DISCRETE_PREDICTOR_QA_ONLY",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json",
+        "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json",
+        "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorEvaluations_v0.1.csv"
+      ]
+    },
+    {
+      "result_id": "UL-RES-G0-A0-001",
+      "statement": "Historical A0 benchmark values are reported but not independently reproduced because the source-identical historical action, solver and complete run package are missing.",
+      "status": "OPEN",
+      "evidence_effect": "NONE",
+      "sources": [
+        "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json",
+        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"
+      ]
+    }
+  ],
+  "open_blockers": [
+    {
+      "blocker_id": "UL-BLK-R1-L-001",
+      "track_id": "MD2S-R1-L",
+      "statement": "Historical primary action, exact conventions, original solver, boundary exports, tolerances and provenance-complete A0/B1.4 run package remain missing."
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-FREEZE-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "Exact U(phi), Z_F(phi), lambda(phi), Z_sigma(phi), q_sigma, q_ref and the charge lattice are not frozen."
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-GLOBAL-002",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "Gauge-patch transition, normal-orientation table, angular-period convention, four-dimensional frame condition and final parameter roles remain open."
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-OPERATOR-003",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "Square BVP count, constraint-dependency proof, complementing boundary conditions, Fredholm property and continuum Jacobian remain open."
+    },
+    {
+      "blocker_id": "UL-BLK-C1-V3-G12-001",
+      "track_id": "HZT-M0-S6-C1-V",
+      "statement": "The local second-order discrete response has not yet been preregistered, computed and cross-checked by directed AD and independent symmetric finite differences."
+    },
+    {
+      "blocker_id": "UL-BLK-STAB-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "Quadratic scalar-vector-tensor action, kinetic positivity, gradient stability and mass-spectrum stability remain open."
+    }
+  ],
+  "active_assumptions": [
+    "The minimal current SCI-001/SCI-002 branch fixes the scalar kinetic normalization Z_phi=1.",
+    "G1.1 changes only the discrete C1-V predictor QA status.",
+    "The G1.1 fit window and signed steps were not changed after observing the run.",
+    "NUMERICALLY_CONFIRMED_DIAGNOSTIC is the canonical atomic primary status for C1-V-CLAIM-005.",
+    "C1-V remains excluded from the physical R1.1-R1.3 release chain.",
+    "No nonlinear corrector, finite continuation, branch tracking or official solver is authorized."
+  ],
+  "forbidden_inferences": [
+    "Do not infer a physical background solution from the C-PHYS operator scaffold.",
+    "Do not infer a square, Fredholm or invertible continuum BVP before model and boundary closure.",
+    "Do not infer a nonlinear solution or finite branch from the G1.1 predictor test.",
+    "Do not infer physical model identity from the manufactured C1-V anchor.",
+    "Do not infer perturbative stability or ghost freedom.",
+    "Do not change R1.1, K1-D, K1-E or solver authorization without a versioned gate decision."
+  ],
+  "entry_points": [
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json",
+    "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorEvaluations_v0.1.csv",
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+  ],
+  "artifact_hashes": {
+    "g1_1_preregistration_sha256": "f70bb585a0bd91b196deaaafae64976dffdd0c930b3258184a99eef2fd4e45d2",
+    "g1_1_evaluator_sha256": "39eea878699558c48ff7e7daf5829e50301a253062f54f6ee2584e27fb3a38e1",
+    "g1_1_reference_backend_sha256": "bb270082d8e19684eaaefd305c78b0e5184535251bcf604c4ec1e9167c68c947",
+    "g1_1_independent_backend_sha256": "685322f556eab3aa0045497605575f912d13a284fe860fd5184cadfd1caa2dbd",
+    "g1_1_parameter_sha256": "d23a01b6f024858bff071edd6b258df7a5e97441f887514b58369a9293ff73ce",
+    "g1_1_evaluation_csv_sha256": "1ca5b14c5b1a91ce3fb917e6fced12d8431600a15ba83fb3b476b3833c044505",
+    "g1_1_full_run_json_sha256": "b0c3f72a207a5e2581c334f77c89092cf5e9f1439797e385ab5c4329fe5b8269"
+  },
+  "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
+  "next_exact_action": "Execute C-PHYS-R1.0-FREEZE-1 as the primary block. G1.2 may proceed only as a separately preregistered local second-order C1-V diagnostic and may not delay or replace the C-PHYS model-freeze closure."
+}
