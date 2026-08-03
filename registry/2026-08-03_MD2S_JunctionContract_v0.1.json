@@ -1,0 +1,99 @@
+{
+  "schema": "universelab.md2s-junction-contract.v0.1",
+  "date": "2026-08-03",
+  "branch": "HZT-M0-S6 / MD-2S / canonical rebuild",
+  "status": "PARTIAL_CONDITIONAL",
+  "evidence_effect": "NONE",
+  "solver_authorized": false,
+  "source_ledger": "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+  "bulk_action": {
+    "structure": "(R-2 Lambda_geom)/(2 kappa6^2) - 1/2 Z_phi(phi)(partial phi)^2 - U(phi) - 1/4 Z_F(phi)F^2",
+    "Lambda_geom_dimension": "M^2",
+    "U_dimension": "M^6",
+    "vacuum_density_combination": "Lambda_geom/kappa6^2 + U(phi)",
+    "historical_Lambda_identity": "OPEN"
+  },
+  "localized_action": {
+    "structure": "-int_Sigma sqrt(|h|)[lambda(phi)+1/2 Z_sigma(phi) X_sigma]",
+    "X_sigma": "h^ab D_a sigma D_b sigma",
+    "D_a_sigma": "partial_a sigma - q_sigma A_a",
+    "static_winding": "sigma=n chi",
+    "Y_sigma": "Z_sigma X_sigma",
+    "functional_forms": "OPEN"
+  },
+  "orientation": {
+    "normal_rule": "outward normal from each region",
+    "israel_form": "sum_s(K_ab^(s)-K_s h_ab)=kappa6^2 S_ab",
+    "jump_translation_requires_explicit_map": true
+  },
+  "continuity_requirements": [
+    "A_plus=A_minus",
+    "L_plus=L_minus>0",
+    "phi_plus=phi_minus",
+    "A_chi_plus=A_chi_minus modulo gauge"
+  ],
+  "definitions": {
+    "A_Sigma": "sum_s n_r_s A_prime_s",
+    "L_Sigma": "sum_s n_r_s L_prime_s/L_s",
+    "X_sigma_static": "(n-q_sigma A_chi)^2/L^2",
+    "Y_sigma_static": "Z_sigma (n-q_sigma A_chi)^2/L^2"
+  },
+  "metric_equations": {
+    "R_4d": "-(3 A_Sigma+L_Sigma)+kappa6^2(lambda+Y_sigma/2)",
+    "R_chi": "-4 A_Sigma+kappa6^2(lambda-Y_sigma/2)",
+    "Y_required": "(L_Sigma-A_Sigma)/kappa6^2",
+    "lambda_required": "(7 A_Sigma+L_Sigma)/(2 kappa6^2)",
+    "pure_tension_condition": "A_Sigma=L_Sigma",
+    "positive_winding_gate": "L_Sigma-A_Sigma>=0 when Z_sigma>=0"
+  },
+  "scalar_equation": {
+    "residual": "sum_s Z_phi_s n_r_s phi_prime_s + lambda_phi + 0.5 Z_sigma_phi X_sigma",
+    "canonical_Z_phi_required": true
+  },
+  "gauge_equation": {
+    "residual_field_form": "sum_s n_A_s Z_F_s F_s^(A chi)-q_sigma Z_sigma D^chi sigma",
+    "residual_Q_form": "exp(-4A)/L sum_s n_r_s Q_s - q_sigma Z_sigma(n-q_sigma A_chi)/L^2",
+    "global_flux_quantization_separate": true
+  },
+  "phase_equation": "D_a(Z_sigma D^a sigma)=0",
+  "mandatory_residual_channels": [
+    "continuity_A",
+    "continuity_L",
+    "continuity_phi",
+    "continuity_A_chi_mod_gauge",
+    "metric_4d",
+    "metric_chi",
+    "scalar",
+    "gauge",
+    "phase",
+    "global_flux",
+    "rr_constraint_left",
+    "rr_constraint_right"
+  ],
+  "freeze_effect": {
+    "MF-001": "PARTIAL_STRUCTURAL_FREEZE",
+    "MF-002": "PARTIAL_STRUCTURAL_FREEZE",
+    "MF-005": "PARTIAL_CONDITIONAL",
+    "R1.1": "BLOCKED",
+    "MD2S_SOLVER": "NOT_AUTHORIZED",
+    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "open_items": [
+    "U(phi), Z_phi(phi), Z_F(phi)",
+    "lambda(phi), Z_sigma(phi)",
+    "q_sigma and winding/gauge-patch convention",
+    "angular period and global flux quantization",
+    "second-region geometry and parameters",
+    "historical A0 model identity",
+    "dimensionless solver variables and tolerances"
+  ],
+  "forbidden_inferences": [
+    "No historical model identity from structural similarity",
+    "No single-tension fit replaces two metric junction equations",
+    "No global flux verdict from local gauge matching",
+    "No solver release from algebraic junction closure",
+    "No K1-D or K1-E transition"
+  ]
+}
