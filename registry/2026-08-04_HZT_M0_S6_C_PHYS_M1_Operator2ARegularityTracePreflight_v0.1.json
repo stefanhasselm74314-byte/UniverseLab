@@ -1,0 +1,111 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.operator-2a-regularity-trace-preflight.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-OPERATOR-2A",
+  "classification": "FORMAL_REGULARITY_AND_PRINCIPAL_TRACE_PREFLIGHT",
+  "status": "PASS_CONDITIONAL_AT_PRINCIPAL_PROFILE_LEVEL_FULL_TRACE_INVERTIBILITY_OPEN",
+  "evidence_effect": "FORMAL_OPERATOR_STRUCTURE_ONLY",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json"
+  ],
+  "pole_regular_invariant_expansions": {
+    "ell_x_over_ell": "1/x+2*l3*x+(4*l5-2*l3^2)*x^3+O(x^5)",
+    "ell_xx_over_ell": "6*l3+(20*l5-6*l3^2)*x^2+O(x^4)",
+    "A_x_ell_x_over_ell": "2*a2+(4*a4+4*a2*l3)*x^2+O(x^4)",
+    "varphi_x_squared": "4*f2^2*x^2+O(x^4)",
+    "rho_F": "R0*[1+(-8*a2+2*a_F*f2)*x^2+O(x^4)]",
+    "orthonormal_flux": "F_xchi/ell=q_s*exp(-4*A+2*a_F*varphi)=q_s*exp(-4*A0+2*a_F*varphi0)+O(x^2)",
+    "gauge_potential": "a_chi=g2*x^2+O(x^4)",
+    "internal_gaussian_curvature": "-ell_xx/ell=-6*l3+O(x^2)",
+    "status": "FINITE_POLE_LIMITS_FOR_ALL_LISTED_LOCAL_BUILDING_BLOCKS"
+  },
+  "principal_triangularization": {
+    "original_second_order_matrix": "[[4,0,0],[3*ell,1,0],[0,0,ell]]",
+    "row_operations": [
+      "E_A -> E_A/4",
+      "E_ell -> E_ell-(3*ell/4)*E_A",
+      "E_varphi -> E_varphi/ell"
+    ],
+    "triangularized_matrix": "identity_3",
+    "validity_condition": "ell>0",
+    "gauge_transport_principal_coefficient": "1",
+    "status": "FULL_INTERIOR_NORMAL_FORM"
+  },
+  "cap_principal_transmission": {
+    "cap_radius_condition": "ell_cap>0",
+    "value_continuity_conditions": [
+      "delta_A_N-delta_A_S=0",
+      "delta_ell_N-delta_ell_S=0",
+      "delta_varphi_N-delta_varphi_S=0"
+    ],
+    "metric_derivative_variables": [
+      "delta_A_N_x+delta_A_S_x",
+      "delta_ell_N_x+delta_ell_S_x"
+    ],
+    "metric_derivative_matrix": [
+      ["-3", "-1/ell_cap"],
+      ["-4", "0"]
+    ],
+    "metric_derivative_determinant": "-4/ell_cap",
+    "scalar_derivative_condition": "delta_varphi_N_x+delta_varphi_S_x=0",
+    "equivalent_principal_conditions": [
+      "continuity plus outward-normal derivative sum for A",
+      "continuity plus outward-normal derivative sum for ell",
+      "continuity plus outward-normal derivative sum for varphi"
+    ],
+    "status": "PASS_CONDITIONAL_ON_ELL_CAP_POSITIVE"
+  },
+  "gauge_profile_closure": {
+    "bulk_order": "first_order_transport_per_side",
+    "pole_conditions": [
+      "a_chi_N(0)=0",
+      "a_chi_S(0)=0"
+    ],
+    "profile_principal_status": "CLOSED_BY_REGULAR_POLE_GAUGES_ONCE_q_N_AND_q_S_ARE_FIXED",
+    "cap_patch_residual_role": "FINITE_DIMENSIONAL_AUGMENTED_RESIDUAL_FOR_q_N_q_S_AND_ENDPOINT_TRACES",
+    "local_gauge_junction_role": "FINITE_DIMENSIONAL_AUGMENTED_RESIDUAL_NOT_AN_EXTRA_PROFILE_PRINCIPAL_CONDITION",
+    "double_counting_forbidden": true
+  },
+  "scope_limit": {
+    "proved": [
+      "listed pole-local invariant building blocks have finite limits",
+      "interior profile equations admit an invertible principal triangularization for ell>0",
+      "the six second-order cap principal transmission conditions have full rank for ell_cap>0",
+      "the first-order gauge profiles are closed at profile level by regular pole gauges"
+    ],
+    "not_proved": [
+      "closedness or density of the full weighted operator domain",
+      "invertibility of the full parameter-augmented endpoint trace map",
+      "kernel or cokernel dimension",
+      "Fredholm property",
+      "continuum Jacobian rank",
+      "existence or uniqueness of a physical background",
+      "stability or ghost freedom"
+    ],
+    "clarification": "The principal profile-level transmission test is necessary structural QA. It is not the full complementing-boundary or Fredholm theorem for the regular-singular augmented BVP."
+  },
+  "gate_state": {
+    "R1.0": "ACTIVE_BOUNDARY_TRACE_AND_FUNCTION_SPACE_CLOSURE_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "continuum_BVP_operator": "SPECIALIZED_FORMAL_OPERATOR_DEFINED",
+    "principal_profile_transmission": "PASS_CONDITIONAL",
+    "full_linearized_boundary_trace": "NOT_CONSTRUCTED",
+    "complementing_boundary_condition": "NOT_PROVEN_FOR_FULL_AUGMENTED_OPERATOR",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_block": "C-PHYS-R1.0-OPERATOR-2B"
+}
