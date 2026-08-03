@@ -1,0 +1,60 @@
+name: HZT-M0-S6 C-PHYS-M1 function freeze
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeLedger_v0.1.md"
+      - "tools/2026-08-03_validate_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py"
+      - "tests/2026-08-03_test_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py"
+      - ".github/workflows/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreeze_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeLedger_v0.1.md"
+      - "tools/2026-08-03_validate_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py"
+      - "tests/2026-08-03_test_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py"
+      - ".github/workflows/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreeze_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-c-phys-m1-function-freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON artifact
+        run: |
+          python -m json.tool registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json >/dev/null
+
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/2026-08-03_validate_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py
+          python -m py_compile tests/2026-08-03_test_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py
+
+      - name: Run regression tests
+        run: python tests/2026-08-03_test_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py
+
+      - name: Enforce fail-closed model contract
+        run: python tools/2026-08-03_validate_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py --json
+
+      - name: Verify immutable release firewalls
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"classification": "VERSIONED_PHYSICAL_CANDIDATE_MODEL_SELECTION_NOT_DERIVATION"' registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json
+          grep -q '"R1.1": "BLOCKED"' registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json
+          grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json
