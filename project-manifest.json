@@ -87,7 +87,7 @@
     {"id":"parent_gate","path":"hzt-parent-action-gate-v0.1.html","live":"./hzt-parent-action-gate-v0.1.html?v=1","class":"junction_checker","status":"ACTIVE_DIAGNOSTIC"},
     {"id":"parent_profile","path":"hzt-s6-parent-action-v0.1.json","live":"./hzt-s6-parent-action-v0.1.json?v=1","class":"machine_readable_parent_profile","status":"ACTIVE_CONDITIONAL"},
     {"id":"runtime_loader","path":"universelab-runtime-loader-v0.1.js","live":"./universelab-runtime-loader-v0.1.js","class":"runtime_registry_loader","status":"EXPERIMENTAL_NOT_MIGRATED"},
-    {"id":"p0_verification","path":"UniverseLab_2.1_P0_Verification_Report.md","live":"https://github.com/stefanhasselm74314-byte.github.io/UniverseLab/blob/main/UniverseLab_2.1_P0_Verification_Report.md","class":"repository_verification","status":"ACTIVE"},
+    {"id":"p0_verification","path":"UniverseLab_2.1_P0_Verification_Report.md","live":"https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/UniverseLab_2.1_P0_Verification_Report.md","class":"repository_verification","status":"ACTIVE"},
     {"id":"bibliography","path":"hyperzeit-bibliography.json","live":"./hyperzeit-bibliography.json?v=1","class":"machine_readable_bibliography","status":"ACTIVE"},
     {"id":"audit_data","path":"universelab-audit-2026-07-31.json","live":"./universelab-audit-2026-07-31.json?v=1","class":"historical_machine_readable_audit","status":"ARCHIVED_REFERENCE"},
     {"id":"source","path":"source.html","live":"./source.html?v=20260803","class":"developer_and_governance_hub","status":"ACTIVE"},
