@@ -1,0 +1,295 @@
+{
+  "schema": "universelab.md2s-r1-c-phys.parent-action-operator-entry.v0.1",
+  "date": "2026-08-03",
+  "track_id": "MD2S-R1-C-PHYS",
+  "phase": "R1.0",
+  "block": "C-PHYS-PARENT-OPERATOR-ENTRY-0.1",
+  "status": "CONTINUUM_OPERATOR_SCAFFOLD_DEFINED_MODEL_FREEZE_INCOMPLETE",
+  "evidence_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "purpose": "Derive the source-backed generic static radial equations and define the continuum BVP operator interface without pretending that the still-open action functions, charge lattice, patch rule, frame condition or parameter roles are frozen.",
+  "canonical_sources": [
+    "hzt-s6-parent-action-v0.1.json",
+    "sci-001-002-parent-closure-v0.1.html",
+    "registry/2026-08-03_MD2S_ParameterAngularFluxContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json",
+    "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+  ],
+  "track_firewall": {
+    "historical_A0_identity": "NOT_CLAIMED",
+    "C1_V_equations_used_as_physical_source": false,
+    "legacy_benchmarks_used_to_fix_parameters": false,
+    "verification_to_physics_bridge": "NOT_DEFINED"
+  },
+  "parent_action": {
+    "formula": "S=sum_s int_Ms sqrt(-g)[M6^4/2(R-2 Lambda6)-1/2 (d phi)^2-U(phi)-1/4 Z_F(phi) F^2]+M6^4 sum_s int_Sigma sqrt(-h) K_s+int_Sigma sqrt(-h)[-lambda(phi)-1/2 Z_sigma(phi) h^{ab}D_a sigma D_b sigma]",
+    "D_a_sigma": "partial_a sigma-q_sigma A_a",
+    "Einstein_Hilbert_normalization": "FROZEN_BY_SCI_001_V0_1",
+    "Lambda6_sign_convention": "FROZEN_BY_SCI_001_V0_1",
+    "scalar_kinetic_function": "Z_phi=1_FROZEN_FOR_THIS_MINIMAL_BRANCH",
+    "Maxwell_normalization": "FROZEN_BY_SCI_001_V0_1",
+    "GHY_convention": "STRUCTURALLY_FROZEN_ORIENTATION_DATA_REQUIRED",
+    "cap_sector": "STRUCTURALLY_FROZEN_FUNCTIONS_AND_CHARGES_OPEN",
+    "Gauss_Bonnet": "EXCLUDED_FROM_THIS_CONTRACT"
+  },
+  "background_ansatz": {
+    "metric": "ds6^2=exp(2A_s(r)) gbar_munu dx^mu dx^nu+dr^2+L_s(r)^2 dchi^2",
+    "four_curvature": "Rbar_munu=3 K4 gbar_munu",
+    "scalar": "phi=phi_s(r)",
+    "gauge": "A=A_chi_s(r) dchi",
+    "domains": "r in [0,rho_s] for s=N,S, each local coordinate increasing from a smooth pole to the common cap",
+    "angular_period": "Delta_chi>0",
+    "interior_condition": "L_s(r)>0 for 0<r<=rho_s"
+  },
+  "maxwell_first_integral": {
+    "formula": "F_rchi_s=Q_s L_s exp(-4A_s)/Z_F(phi_s)",
+    "flux_density": "rho_F_s=Q_s^2 exp(-8A_s)/(2 Z_F(phi_s))",
+    "status": "DERIVED_CONDITIONAL_ON_PARENT_ACTION"
+  },
+  "regularized_bulk_equations": {
+    "E_A": "4 A_s''+10(A_s')^2-6 K4 exp(-2A_s)+Lambda6+M6^(-4)[1/2(phi_s')^2+U(phi_s)-rho_F_s]=0",
+    "E_L": "L_s''+3A_s''L_s+6(A_s')^2L_s+3A_s'L_s'-3K4 exp(-2A_s)L_s+Lambda6 L_s+M6^(-4)L_s[1/2(phi_s')^2+U(phi_s)+rho_F_s]=0",
+    "E_phi": "L_s phi_s''+(4A_s'L_s+L_s')phi_s'-L_s U_,phi(phi_s)-L_s rho_F_s partial_phi ln Z_F(phi_s)=0",
+    "E_gauge": "A_chi_s'-Q_s L_s exp(-4A_s)/Z_F(phi_s)=0",
+    "derivation_basis": "chi-chi Einstein equation, mu-nu Einstein equation, scalar equation and Maxwell first integral",
+    "status": "DERIVED_GENERIC_NOT_MODEL_CLOSED"
+  },
+  "radial_constraint": {
+    "C_rr_regularized": "M6^4 L_s[-6K4 exp(-2A_s)+6(A_s')^2+Lambda6]+4M6^4 A_s'L_s'-L_s[1/2(phi_s')^2-U(phi_s)+rho_F_s]=0",
+    "role": "propagated QA channel after a symbolic Bianchi-dependency proof",
+    "dependency_proof": "OPEN",
+    "must_not_be_double_counted": true
+  },
+  "smooth_pole_contract": {
+    "alpha": "2 pi/Delta_chi",
+    "conditions": [
+      "L_s(0)=0",
+      "L_s'(0)=alpha",
+      "A_s'(0)=0",
+      "phi_s'(0)=0",
+      "A_chi_s(0)=0 in a regular local pole gauge"
+    ],
+    "series": {
+      "A_s": "A0_s+a2_s r^2+O(r^4)",
+      "L_s": "alpha r+l3_s r^3+O(r^5)",
+      "phi_s": "phi0_s+f2_s r^2+O(r^4)",
+      "A_chi_s": "g2_s r^2+O(r^4)"
+    },
+    "leading_coefficients": {
+      "rho_F0_s": "Q_s^2 exp(-8A0_s)/(2 Z_F(phi0_s))",
+      "a2_s": "[6K4 exp(-2A0_s)-Lambda6+M6^(-4)(-U(phi0_s)+rho_F0_s)]/8",
+      "f2_s": "[U_,phi(phi0_s)+rho_F0_s partial_phi ln Z_F(phi0_s)]/4",
+      "g2_s": "Q_s alpha exp(-4A0_s)/(2 Z_F(phi0_s))",
+      "l3_s": "alpha[3K4 exp(-2A0_s)-12a2_s-Lambda6+M6^(-4)(-U(phi0_s)-rho_F0_s)]/6"
+    },
+    "higher_order_series": "OPEN_BEFORE_NUMERICAL_INITIALIZATION",
+    "curvature_and_flux_invariant_audit": "OPEN"
+  },
+  "cap_and_global_system": {
+    "induced_field_continuity": [
+      "A_N(rho_N)-A_S(rho_S)=0",
+      "L_N(rho_N)-L_S(rho_S)=0",
+      "phi_N(rho_N)-phi_S(rho_S)=0"
+    ],
+    "oriented_derivative_sums": {
+      "A_Sigma": "sum_s n_s A_s'(rho_s)",
+      "L_Sigma": "sum_s n_s L_s'(rho_s)/L_Sigma_radius",
+      "phi_Sigma": "sum_s n_s phi_s'(rho_s)"
+    },
+    "winding": {
+      "d_chi": "2 pi N_sigma/Delta_chi-q_sigma A_chi_Sigma",
+      "X_sigma": "d_chi^2/L_Sigma_radius^2",
+      "Y_sigma": "Z_sigma(phi_Sigma) X_sigma"
+    },
+    "junction_residuals": {
+      "R_4d": "M6^4(-3 A_Sigma-L_Sigma)+lambda(phi_Sigma)+Y_sigma/2=0",
+      "R_chi": "-4M6^4 A_Sigma+lambda(phi_Sigma)-Y_sigma/2=0",
+      "R_scalar": "phi_Sigma+lambda_,phi(phi_Sigma)+Z_sigma_,phi(phi_Sigma) X_sigma/2=0",
+      "R_gauge": "sum_s n_s Q_s exp(-4A_s(rho_s))/L_Sigma_radius-q_sigma Z_sigma(phi_Sigma)d_chi/L_Sigma_radius^2=0"
+    },
+    "anisotropy_identity": "Y_sigma=M6^4(L_Sigma-A_Sigma)",
+    "pure_tension_gate": "Y_sigma=0 implies A_Sigma=L_Sigma",
+    "global_flux": "Phi_F=Delta_chi sum_s int_0^rho_s dr Q_s L_s exp(-4A_s)/Z_F(phi_s)",
+    "flux_quantization": "q_ref Phi_F-2 pi N_F=0",
+    "gauge_patch_transition_rule": "OPEN",
+    "q_ref_equals_q_sigma": "NOT_ASSUMED",
+    "normal_orientation_table": "REQUIRED_BEFORE_EXECUTION"
+  },
+  "continuum_operator_scaffold": {
+    "symbol": "R_CPHYS",
+    "map": "R_CPHYS: X_reg x P_frozen -> Y_bulk x R^n_boundary",
+    "profile_unknowns_per_side": [
+      "A_s",
+      "L_s",
+      "phi_s",
+      "A_chi_s"
+    ],
+    "global_shooting_or_eigen_unknown_candidates": [
+      "rho_N",
+      "rho_S",
+      "K4",
+      "Q_N",
+      "Q_S"
+    ],
+    "fixed_action_data_required": [
+      "M6",
+      "Lambda6",
+      "U(phi)",
+      "Z_F(phi)",
+      "lambda(phi)",
+      "Z_sigma(phi)",
+      "q_sigma",
+      "q_ref",
+      "Delta_chi",
+      "N_sigma",
+      "N_F"
+    ],
+    "boundary_components": [
+      "smooth pole conditions",
+      "induced metric and scalar continuity",
+      "gauge patch transition",
+      "two metric junctions",
+      "scalar junction",
+      "local gauge junction",
+      "global flux quantization",
+      "one explicit four-dimensional frame condition"
+    ],
+    "square_count": "OPEN_UNTIL_PARAMETER_ROLES_FRAME_AND_PATCH_RULE_ARE_FROZEN",
+    "Freholm_status": "NOT_PROVEN",
+    "continuum_Jacobian": "NOT_CONSTRUCTED",
+    "implicit_function_theorem": "NOT_ADMISSIBLE"
+  },
+  "regular_function_space_candidate": {
+    "coordinate_normalization": "x_s=r/rho_s in [0,1] after rho_s is declared as an unknown or fixed datum",
+    "pole_factorization": [
+      "A_s=A0_s+r^2 a_tilde_s(r^2)",
+      "phi_s=phi0_s+r^2 f_tilde_s(r^2)",
+      "L_s=alpha r+r^3 l_tilde_s(r^2)",
+      "A_chi_s=r^2 g_tilde_s(r^2)"
+    ],
+    "candidate_profile_space": "weighted C^(2,alpha) pole-regular profiles for A,L,phi and weighted C^(1,alpha) for A_chi",
+    "target_space": "weighted C^(0,alpha) bulk residuals plus finite-dimensional boundary residuals",
+    "status": "CANDIDATE_NOT_RATIFIED",
+    "required_before_ratification": [
+      "principal-part and complementing-boundary-condition audit",
+      "gauge and frame quotient definition",
+      "constraint dependency proof",
+      "cap trace regularity audit"
+    ]
+  },
+  "model_freeze_closure_matrix": {
+    "MF-001": {
+      "status": "PARTIAL_STRUCTURAL_FREEZE",
+      "closed": [
+        "Einstein-Hilbert normalization",
+        "Lambda6 sign convention",
+        "canonical scalar kinetic normalization Z_phi=1",
+        "Maxwell normalization and first-integral structure"
+      ],
+      "open": [
+        "exact U(phi)",
+        "exact Z_F(phi)",
+        "allowed field domain"
+      ]
+    },
+    "MF-002": {
+      "status": "PARTIAL_STRUCTURAL_FREEZE",
+      "closed": [
+        "GHY sector",
+        "cap tension plus winding-phase structure",
+        "formal metric scalar and gauge junction forms"
+      ],
+      "open": [
+        "exact lambda(phi)",
+        "exact Z_sigma(phi)",
+        "q_sigma normalization",
+        "normal orientation table"
+      ]
+    },
+    "MF-003": {
+      "status": "PARTIAL_DERIVED_CONDITIONAL",
+      "closed": [
+        "generic radial evolution equations",
+        "regularized rr constraint expression"
+      ],
+      "open": [
+        "symbolic equation-dependency and Bianchi propagation proof",
+        "model-specialized independent ODE set",
+        "dimensionless normalization"
+      ]
+    },
+    "MF-004": {
+      "status": "PARTIAL_DERIVED_CONDITIONAL",
+      "closed": [
+        "leading smooth-pole parity and coefficients"
+      ],
+      "open": [
+        "adopted Delta_chi",
+        "higher-order initialization series",
+        "curvature and flux invariant regularity proof",
+        "forbidden conical-mode projector"
+      ]
+    },
+    "MF-005": {
+      "status": "PARTIAL_DERIVED_CONDITIONAL",
+      "closed": [
+        "generic two-sided metric scalar and gauge junction residuals",
+        "generic global flux residual"
+      ],
+      "open": [
+        "gauge patch transition",
+        "charge lattice",
+        "complete orientation table",
+        "final independent residual count"
+      ]
+    },
+    "MF-006": {
+      "status": "PARTIAL_STRUCTURAL_FREEZE",
+      "open": [
+        "fixed versus scanned versus shooting roles",
+        "four-dimensional frame condition",
+        "q_ref and q_sigma relation"
+      ]
+    },
+    "MF-007": {
+      "status": "PARTIAL",
+      "closed": [
+        "current-model warped volume skeleton V_W=Delta_chi sum_s int exp(2A_s)L_s dr"
+      ],
+      "open": [
+        "current R_circle definition",
+        "current Xi_cap definition if retained",
+        "lambda_eff extraction",
+        "historical-to-current observable identity"
+      ]
+    }
+  },
+  "gate_state": {
+    "R1.0": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "continuum_BVP_operator": "SCAFFOLD_ONLY",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "perturbative_stability": "OPEN",
+    "ghost_freedom": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "No physical background solution is established.",
+    "No square BVP is established before parameter, frame and patch closure.",
+    "No Fredholm or implicit-function theorem follows from this scaffold.",
+    "No C1-V result migrates into C-PHYS.",
+    "No historical A0 identity is claimed.",
+    "No solver, K1-D, K1-E, stability or ghost-freedom release is permitted."
+  ],
+  "next_block": {
+    "id": "C-PHYS-R1.0-FREEZE-1",
+    "title": "Freeze exact action functions, charge lattice, patch transition, orientation table, frame condition and parameter roles",
+    "track_id": "MD2S-R1-C-PHYS",
+    "execution_type": "SOURCE_AND_GOVERNANCE_CLOSURE_ONLY"
+  }
+}
