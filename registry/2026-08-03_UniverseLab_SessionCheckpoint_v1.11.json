@@ -1,9 +1,9 @@
 {
   "schema": "universelab.session-checkpoint.v1",
   "checkpoint_id": "UL-CHK-20260803-011",
-  "timestamp": "2026-08-03T23:56:00+02:00",
+  "timestamp": "2026-08-03T23:48:00+02:00",
   "privacy_classification": "PUBLIC_SANITIZED",
-  "basis_commit": "b83c1fc315542b77346364506786d3bc180de50d",
+  "basis_commit": "11d79da056f2399caf4857701b7d9b39b2c94ec5",
   "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.11.json",
   "supersedes": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.10.json",
   "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
@@ -14,7 +14,10 @@
     "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
     "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json",
     "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1B_Status_v0.1.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_C_PHYS_Freeze1B_v0.1.json",
     "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeLedger_v0.1.md",
+    "registry/decision-log.jsonl",
+    "project-manifest.json",
     "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"
   ],
   "current_goal": "Freeze one explicit C-PHYS-ME1 benchmark parameter tuple, integer sector and dimensionless normalization without executing a physical solver.",
@@ -94,7 +97,8 @@
       "sources": [
         "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json",
         "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeLedger_v0.1.md",
-        "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1B_Status_v0.1.json"
+        "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1B_Status_v0.1.json",
+        "registry/2026-08-03_UniverseLab_ClaimRegister_C_PHYS_Freeze1B_v0.1.json"
       ]
     },
     {
@@ -168,8 +172,11 @@
     "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json",
     "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeLedger_v0.1.md",
     "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1B_Status_v0.1.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_C_PHYS_Freeze1B_v0.1.json",
     "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
-    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+    "registry/decision-log.jsonl",
+    "project-manifest.json"
   ],
   "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
   "next_exact_action": "Execute C-PHYS-R1.0-FREEZE-1C: preregister one C-PHYS-ME1 continuous parameter tuple, one integer sector, dimensionless variables, residual scales and hierarchy assumptions. Do not execute a physical BVP solver. G1.2 remains parallel diagnostic only."
