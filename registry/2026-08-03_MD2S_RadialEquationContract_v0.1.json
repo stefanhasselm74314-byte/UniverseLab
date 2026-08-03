@@ -1,0 +1,78 @@
+{
+  "schema": "universelab.md2s-radial-equation-contract.v0.1",
+  "date": "2026-08-03",
+  "branch": "HZT-M0-S6 / MD-2S / canonical rebuild",
+  "status": "PARTIAL_CONDITIONAL",
+  "evidence_effect": "NONE",
+  "solver_implementation_allowed": false,
+  "source_files": [
+    "hzt-s6-parent-action-v0.1.json",
+    "convention-registry.json",
+    "science/hzt-m0/md2s/MD2S_RECOVERY_CONTRACT_v0.1.md",
+    "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md"
+  ],
+  "metric": {
+    "ansatz": "ds6^2=exp(2A(r))*gbar_munu dx^mu dx^nu+dr^2+L(r)^2 dchi^2",
+    "four_curvature": "Rbar_munu=3*K4*gbar_munu",
+    "signature": "(-,+,+,+,+,+)"
+  },
+  "matter": {
+    "scalar": "phi(r)",
+    "flux": "F_rchi=f(r)",
+    "maxwell_first_integral": "Q=exp(4A)*Z_F*F_rchi/L",
+    "magnetic_energy_density": "M=Q^2*exp(-8A)/Z_F",
+    "positivity_requirements": ["Z_phi>0", "Z_F>0"]
+  },
+  "equations": {
+    "external_einstein": "3App+6Ap^2+3Ap*Lp/L+Lpp/L-3K4*exp(-2A)+Lambda6-kappa6_sq*(-0.5*Z_phi*phip^2-V-0.5*M)=0",
+    "radial_constraint": "6Ap^2+4Ap*Lp/L-6K4*exp(-2A)+Lambda6-kappa6_sq*(0.5*Z_phi*phip^2-V+0.5*M)=0",
+    "internal_einstein": "4App+10Ap^2-6K4*exp(-2A)+Lambda6-kappa6_sq*(-0.5*Z_phi*phip^2-V+0.5*M)=0",
+    "scalar": "Z_phi*(phipp+(4Ap+Lp/L)*phip)+0.5*Z_phi_phi*phip^2-V_phi-0.5*Z_F_phi*B_sq=0",
+    "bianchi_dependency": "Er_prime+4Ap*(Er-E4)+(Lp/L)*(Er-Echi)=0"
+  },
+  "center_series": {
+    "forms": {
+      "A": "A0+a2*r^2+O(r^4)",
+      "L": "ell1*r*(1+c2*r^2+O(r^4))",
+      "phi": "phi0+p2*r^2+O(r^4)"
+    },
+    "smoothness": "Delta_chi*ell1=2*pi",
+    "deficit_angle": "delta=2*pi-Delta_chi*ell1",
+    "coefficients": {
+      "Kc": "K4*exp(-2A0)",
+      "M0": "Q^2*exp(-8A0)/Z_F0",
+      "B0_sq": "Q^2*exp(-8A0)/Z_F0^2",
+      "a2": "(6*Kc-Lambda6-kappa6_sq*V0+0.5*kappa6_sq*M0)/8",
+      "c2": "kappa6_sq*V0/12-5*kappa6_sq*M0/24-Kc+Lambda6/12",
+      "p2": "(V_phi0+0.5*Z_F_phi0*B0_sq)/(4*Z_phi0)"
+    }
+  },
+  "freeze_effect": {
+    "MF-001": "OPEN",
+    "MF-002": "OPEN",
+    "MF-003": "PARTIAL_CONDITIONAL",
+    "MF-004": "PARTIAL_CONDITIONAL",
+    "MF-005": "OPEN",
+    "MF-006": "OPEN",
+    "MF-007": "PARTIAL"
+  },
+  "unresolved_inputs": [
+    "exact V(phi)",
+    "exact Z_phi(phi)",
+    "exact Z_F(phi)",
+    "Lambda6 versus historical potential convention",
+    "flux charge and quantization normalization",
+    "Delta_chi",
+    "cap and localized action",
+    "oriented junction convention",
+    "dimensionless solver variables",
+    "benchmark functional definitions and tolerances"
+  ],
+  "governance": {
+    "R1_0": "ACTIVE",
+    "R1_1": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  }
+}
