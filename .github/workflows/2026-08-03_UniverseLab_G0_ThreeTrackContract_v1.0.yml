@@ -4,55 +4,25 @@ on:
   pull_request:
     paths:
       - "project-manifest.json"
-      - "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
-      - "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md"
-      - "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"
-      - "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"
-      - "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json"
-      - "registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json"
-      - "registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json"
-      - "registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json"
-      - "registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json"
-      - "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"
-      - "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
-      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.7.json"
-      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.9.json"
-      - "registry/session-checkpoint-latest.json"
       - "registry/decision-log.jsonl"
-      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json"
-      - "tools/2026-08-03_validate_g0_three_track_sync_v1.0.py"
-      - "tools/2026-08-03_validate_g0_three_track_sync_v1.1.py"
-      - "tools/2026-08-03_validate_g0_three_track_sync_v1.2.py"
-      - "tests/2026-08-03_test_g0_three_track_sync_v1.0.py"
-      - "tests/2026-08-03_test_g0_three_track_sync_v1.1.py"
-      - "tests/2026-08-03_test_g0_three_track_sync_v1.2.py"
+      - "registry/session-checkpoint-latest.json"
+      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.10.json"
+      - "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json"
+      - "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json"
+      - "tools/2026-08-03_validate_g0_three_track_sync_v1.3.py"
+      - "tests/2026-08-03_test_g0_three_track_sync_v1.3.py"
       - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
   push:
     branches: [main]
     paths:
       - "project-manifest.json"
-      - "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
-      - "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md"
-      - "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"
-      - "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"
-      - "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json"
-      - "registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json"
-      - "registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json"
-      - "registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json"
-      - "registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json"
-      - "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"
-      - "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
-      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.7.json"
-      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.9.json"
-      - "registry/session-checkpoint-latest.json"
       - "registry/decision-log.jsonl"
-      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json"
-      - "tools/2026-08-03_validate_g0_three_track_sync_v1.0.py"
-      - "tools/2026-08-03_validate_g0_three_track_sync_v1.1.py"
-      - "tools/2026-08-03_validate_g0_three_track_sync_v1.2.py"
-      - "tests/2026-08-03_test_g0_three_track_sync_v1.0.py"
-      - "tests/2026-08-03_test_g0_three_track_sync_v1.1.py"
-      - "tests/2026-08-03_test_g0_three_track_sync_v1.2.py"
+      - "registry/session-checkpoint-latest.json"
+      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.10.json"
+      - "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json"
+      - "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json"
+      - "tools/2026-08-03_validate_g0_three_track_sync_v1.3.py"
+      - "tests/2026-08-03_test_g0_three_track_sync_v1.3.py"
       - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
 
 permissions:
@@ -77,30 +47,26 @@ jobs:
           python -m json.tool registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json >/dev/null
           python -m json.tool registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json >/dev/null
           python -m json.tool registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json >/dev/null
-          python -m json.tool registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json >/dev/null
-          python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json >/dev/null
-          python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json >/dev/null
-          python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json >/dev/null
           python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json >/dev/null
           python -m json.tool registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json >/dev/null
-          python -m json.tool registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.9.json >/dev/null
+          python -m json.tool registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.10.json >/dev/null
           python -m json.tool registry/session-checkpoint-latest.json >/dev/null
-          python -m json.tool science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json >/dev/null
 
-      - name: Compile validator and tests
+      - name: Compile validators and tests
         run: |
           python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.0.py
           python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.1.py
           python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.2.py
-          python -m py_compile tests/2026-08-03_test_g0_three_track_sync_v1.0.py
-          python -m py_compile tests/2026-08-03_test_g0_three_track_sync_v1.1.py
-          python -m py_compile tests/2026-08-03_test_g0_three_track_sync_v1.2.py
+          python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.3.py
+          python -m py_compile tests/2026-08-03_test_g0_three_track_sync_v1.3.py
 
-      - name: Run consolidated regression tests
-        run: python tests/2026-08-03_test_g0_three_track_sync_v1.2.py
+      - name: Run Freeze-1A canonical regression tests
+        run: python tests/2026-08-03_test_g0_three_track_sync_v1.3.py
 
-      - name: Enforce fail-closed consolidated contract
-        run: python tools/2026-08-03_validate_g0_three_track_sync_v1.2.py --json
+      - name: Enforce fail-closed Freeze-1A contract
+        run: python tools/2026-08-03_validate_g0_three_track_sync_v1.3.py --json
 
       - name: Verify immutable release gates
         shell: bash
@@ -109,13 +75,9 @@ jobs:
           grep -q '"K1-D": "NOT_RELEASED"' project-manifest.json
           grep -q '"K1-E": "NOT_ADMISSIBLE"' project-manifest.json
           grep -q '"R1.1": "BLOCKED"' project-manifest.json
+          grep -q '"R1.2": "BLOCKED"' project-manifest.json
           grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' project-manifest.json
           grep -q '"physical_evidence_effect": "NONE"' project-manifest.json
-          grep -q '"CONTINUUM_BVP_OPERATOR": "SCAFFOLD_ONLY"' project-manifest.json
-          grep -q '"g1_1_primary_status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC"' project-manifest.json
-          grep -q 'REPORTED_NOT_INDEPENDENTLY_REPRODUCED' registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json
-          grep -q '"status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC"' registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json
-          grep -q '"status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC"' registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json
-          grep -q 'MANUFACTURED_VERIFICATION_MODEL' registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json
-          grep -q 'NOT_PROVEN' registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json
-          grep -q 'NOT_ESTABLISHED' registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json
+          grep -q '"R1.0_SUBSTATE": "ACTIVE_FUNCTION_FREEZE_REMAINING"' project-manifest.json
+          grep -q '"STRUCTURAL_BVP_COUNT": "SQUARE_CONDITIONAL"' project-manifest.json
+          grep -q '"next_block": "C-PHYS-R1.0-FREEZE-1B"' project-manifest.json
