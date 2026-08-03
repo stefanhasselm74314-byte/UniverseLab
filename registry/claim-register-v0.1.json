@@ -1,14 +1,19 @@
 {
-  "schema": "universelab.claim-register.v0.1",
-  "date": "2026-08-01",
+  "schema": "universelab.claim-register.v0.2",
+  "date": "2026-08-03",
+  "privacy_classification": "PUBLIC_SANITIZED",
   "status_vocabulary": [
     "PROVEN",
+    "PROVEN_CONDITIONAL_ON_MODEL",
     "NUMERICALLY_CONFIRMED",
+    "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
+    "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
     "CONDITIONAL",
     "HEURISTIC",
     "OPEN",
     "BLOCKED",
     "REJECTED_TESTED_MECHANISM",
+    "NOT_CLAIMED",
     "NOT_RELEASED",
     "NOT_ADMISSIBLE",
     "SUPERSEDED"
@@ -19,7 +24,7 @@
       "claim": "MD-0 governs project status, release logic and evidence discipline.",
       "status": "PROVEN",
       "claim_class": "GOVERNANCE",
-      "primary_source": "MD-0 v3.1.1",
+      "primary_source": "MD-0 v3.1.1 by project declaration",
       "evidence_effect": "GOVERNANCE_ONLY",
       "falsification_or_change_rule": "Only a ratified MD-0 amendment can supersede this claim."
     },
@@ -48,25 +53,30 @@
     },
     {
       "claim_id": "MD2S-BG-001",
-      "claim": "The archived MD-2S global A0 benchmark values describe a candidate background geometry but do not close the local two-sided junction system.",
-      "status": "NUMERICALLY_CONFIRMED",
-      "claim_class": "BACKGROUND_DIAGNOSTIC",
-      "primary_source": "md2s-artifact-recovery-rank-audit-v0.1.json",
-      "evidence_effect": "DIAGNOSTIC_ONLY",
-      "falsification_or_change_rule": "A recovered solver package showing that the benchmark set uniquely fixes all required oriented one-sided boundary data would supersede the second clause."
+      "claim": "The archived MD-2S global A0 benchmark values are reported candidate-background data and do not close the local two-sided junction system.",
+      "status": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
+      "claim_class": "HISTORICAL_BACKGROUND_PROVENANCE",
+      "primary_source": "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
+      "evidence_effect": "REGRESSION_TARGET_ONLY",
+      "limitations": [
+        "historical executable solver not recovered",
+        "historical action identity not established",
+        "benchmark functional definitions remain partially unresolved"
+      ],
+      "falsification_or_change_rule": "A provenance-complete equation-identical historical reconstruction with declared tolerances may upgrade the numerical status."
     },
     {
       "claim_id": "MD2S-ART-001",
-      "claim": "The executable MD-2S solver, full boundary exports, residual logs and hash manifest are not present in the currently recovered archive set.",
+      "claim": "The executable historical MD-2S solver, full boundary exports, residual logs and hash manifest are not present in the currently established source corpus.",
       "status": "OPEN",
       "claim_class": "ARTIFACT_AVAILABILITY",
-      "primary_source": "md2s-artifact-recovery-rank-audit-v0.1.json",
-      "evidence_effect": "BLOCKS_EXECUTION",
-      "falsification_or_change_rule": "Discovery of a provenance-complete executable package changes the status to RECOVERED."
+      "primary_source": "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
+      "evidence_effect": "BLOCKS_HISTORICAL_REPRODUCTION",
+      "falsification_or_change_rule": "Discovery of a provenance-complete executable package changes the status to recovered and triggers a separate identity audit."
     },
     {
       "claim_id": "SCI-001-002-001",
-      "claim": "The Einstein-Maxwell-scalar parent skeleton with GHY and cap/brane terms is defined, while MD-2S background substitution and the full two-junction verdict remain open.",
+      "claim": "The Einstein-Maxwell-scalar parent skeleton with GHY and cap/brane terms is defined, while full physical model closure, background substitution and the two-junction verdict remain open.",
       "status": "CONDITIONAL",
       "claim_class": "VARIATIONAL_CLOSURE",
       "primary_source": "hzt-s6-parent-action-v0.1.json",
@@ -75,19 +85,19 @@
     },
     {
       "claim_id": "B1.4O-001",
-      "claim": "The B1.4O response-rank audit is formally specified but not executable without a recovered or rebuilt MD-2S solver and boundary export.",
+      "claim": "The B1.4O response-rank audit is formally specified but not executable without a release-qualified physical MD-2S solver and boundary export.",
       "status": "BLOCKED",
       "claim_class": "IDENTIFIABILITY_AUDIT",
-      "primary_source": "md2s-artifact-recovery-rank-audit-v0.1.json",
+      "primary_source": "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
       "evidence_effect": "NONE",
-      "falsification_or_change_rule": "A reproducible response matrix with declared controls, targets and tolerances changes the status to EXECUTABLE."
+      "falsification_or_change_rule": "A reproducible response matrix with declared physical controls, targets and tolerances changes the status to executable."
     },
     {
       "claim_id": "MD2N-NUM-001",
       "claim": "The MD-2N reduced effective diagnostic map is technically executable and its delivered raw two-column Jacobian condition number is 1.8957468008439005.",
-      "status": "NUMERICALLY_CONFIRMED",
+      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
       "claim_class": "QUARANTINED_DIAGNOSTIC",
-      "primary_source": "MD2N.zip plus MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
+      "primary_source": "science/hzt-m0/bridge/MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
       "evidence_effect": "NONE",
       "limitations": [
         "effective locked parameters",
@@ -95,14 +105,14 @@
         "no covariance weighting",
         "condition number depends on parameter chart and scaling"
       ],
-      "falsification_or_change_rule": "A byte-identical source package that fails to reproduce the delivered Jacobian or a corrected package with governed versioning supersedes the numerical value."
+      "falsification_or_change_rule": "A corrected governed package or failed byte-identical reproduction supersedes the numerical value."
     },
     {
       "claim_id": "MD2P-CORR-001",
       "claim": "The MD-2P-corr formula eta_bulk=beta_0 q(1-q), q=1-exp(-x), is bounded by beta_0/4 and vanishes in both x->0 and x->infinity limits.",
       "status": "PROVEN",
       "claim_class": "MATHEMATICAL_PROPERTY_OF_EFFECTIVE_ANSATZ",
-      "primary_source": "MD2N.zip plus MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
+      "primary_source": "science/hzt-m0/bridge/MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
       "evidence_effect": "ANSATZ_PROPERTY_ONLY",
       "falsification_or_change_rule": "The statement follows algebraically for beta_0>=0 and x>=0; changing the candidate formula creates a new claim."
     },
@@ -111,16 +121,16 @@
       "claim": "The MD-2P-corr amplitude closure eta_bulk=beta_0 q(1-q) is not derived from the current 6D parent action and does not itself close MDS-01, MDS-02 or MDS-05.",
       "status": "OPEN",
       "claim_class": "PHYSICAL_BRIDGE_STATUS",
-      "primary_source": "MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md and MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
+      "primary_source": "science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
       "evidence_effect": "BLOCKS_PHYSICAL_IDENTIFICATION",
-      "falsification_or_change_rule": "A complete parent-action reduction deriving the interaction closure, beta_0, the spectral scale and the four-dimensional normalization may upgrade or replace this claim."
+      "falsification_or_change_rule": "A complete parent-action reduction deriving the interaction closure, beta_0, spectral scale and four-dimensional normalization may upgrade or replace this claim."
     },
     {
       "claim_id": "MD2P-CORR-Q-001",
       "claim": "Under a flat two-dimensional polar measure, a radial Gaussian overlap density exp(-gamma r^2), a sharp disk cutoff R_chi and full-plane normalization, the cumulative overlap is exactly q=1-exp(-gamma R_chi^2).",
       "status": "CONDITIONAL",
       "claim_class": "EXACT_RESULT_UNDER_DECLARED_GEOMETRIC_ASSUMPTIONS",
-      "primary_source": "MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
+      "primary_source": "science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
       "evidence_effect": "UPGRADES_Q_SEMANTICS_ONLY",
       "dependencies": [
         "flat or locally flat two-dimensional measure",
@@ -135,10 +145,10 @@
       "claim": "The physical MD-2S overlap must be computed from the warped measure and normalized profiles as q_W(R)=integral_0^R L(r) exp[p A(r)] W(r) dr divided by the corresponding complete-domain integral.",
       "status": "OPEN",
       "claim_class": "CANONICAL_REPLACEMENT_TARGET",
-      "primary_source": "MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
+      "primary_source": "science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
       "evidence_effect": "BLOCKS_PROMOTION_OF_FLAT_APPROXIMATION",
       "dependencies": [
-        "recovered MD-2S A(r) and L(r)",
+        "release-qualified physical background A(r) and L(r)",
         "normalized mode profiles",
         "warp exponent from the reduced action",
         "declared radial domain"
@@ -150,7 +160,7 @@
       "claim": "For observables depending on a parameter subset only through one scalar x and eta_bulk(x), the corresponding local Jacobian block has rank at most one; at x=ln(2) it has rank zero at linear order because d eta_bulk/dx=0.",
       "status": "PROVEN",
       "claim_class": "LOCAL_IDENTIFIABILITY_THEOREM",
-      "primary_source": "MD2P_CORR_OVERLAP_DERIVATION_v0.1.md and test_hzt_m0_overlap_bridge_v0_1.py",
+      "primary_source": "science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
       "evidence_effect": "EXCLUDES_FALSE_MULTI_PARAMETER_RANK_CLAIMS",
       "falsification_or_change_rule": "The theorem applies to the stated factorized observable dependence; independent shape or channel responses define a different Jacobian structure."
     },
@@ -159,7 +169,7 @@
       "claim": "For a self-adjoint scale-free internal eigenproblem whose geometry and boundary data are self-similar under r=R_chi y, the mode masses obey m_n=xi_n/R_chi with dimensionless xi_n fixed by the rescaled operator and boundary conditions.",
       "status": "CONDITIONAL",
       "claim_class": "SPECTRAL_SCALING_THEOREM",
-      "primary_source": "MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md",
+      "primary_source": "science/hzt-m0/bridge/MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md",
       "evidence_effect": "UPGRADES_MDS01_FORM_ONLY",
       "dependencies": [
         "self-adjoint fluctuation operator",
@@ -175,16 +185,16 @@
       "claim": "The numerical HZT-M0 coefficient xi_m and the identification of the damping parameter m with a KK, radion or response-pole mass remain open until the quadratic operator, mode sector, normalization and cap/brane boundary conditions are derived.",
       "status": "OPEN",
       "claim_class": "PHYSICAL_MODE_IDENTIFICATION",
-      "primary_source": "MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md",
+      "primary_source": "science/hzt-m0/bridge/MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md",
       "evidence_effect": "BLOCKS_K1D_M_VARIATION",
       "falsification_or_change_rule": "A frozen quadratic action and reproducible spectral calculation can release a specific mode identification and xi_m."
     },
     {
       "claim_id": "MDS01-MD2Q-001",
-      "claim": "At the locked MD-2Q effective point, xi_eff=m_eff R_chi=0.05176470588235294, which is incompatible with the ordinary first axisymmetric flat-disk scalar Dirichlet root 2.4048255577 and first massive Neumann root 3.8317059702 at the same R_chi.",
-      "status": "NUMERICALLY_CONFIRMED",
+      "claim": "At the locked MD-2Q effective point, xi_eff=m_eff R_chi=0.05176470588235294 is incompatible with the ordinary first axisymmetric flat-disk scalar Dirichlet root and first massive Neumann root at the same R_chi.",
+      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
       "claim_class": "REFERENCE_SPECTRAL_MISMATCH",
-      "primary_source": "MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md and test_hzt_m0_spectral_bridge_v0_1.py",
+      "primary_source": "science/hzt-m0/bridge/MD2I_MDS01_SPECTRAL_BRIDGE_DERIVATION_v0.1.md",
       "evidence_effect": "REJECTS_ONLY_STANDARD_FLAT_DISK_MODE_IDENTIFICATION",
       "limitations": [
         "mixed effective and Mpc unit convention in MD-2Q",
@@ -197,12 +207,59 @@
     },
     {
       "claim_id": "MD2Q-NUM-001",
-      "claim": "The MD-2Q one-control dry run reproduces eta_bulk=0.024267488339526102 at the locked point; its reported condition number of one is a one-column linear-algebra identity and not evidence of full physical conditioning.",
-      "status": "NUMERICALLY_CONFIRMED",
+      "claim": "The MD-2Q one-control dry run reproduces eta_bulk=0.024267488339526102 at the locked point; its condition number of one is a one-column linear-algebra identity and not evidence of full physical conditioning.",
+      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
       "claim_class": "QUARANTINED_DIAGNOSTIC",
-      "primary_source": "MD2N.zip plus MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
+      "primary_source": "science/hzt-m0/bridge/MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
       "evidence_effect": "NONE",
-      "falsification_or_change_rule": "A multi-column released physical Jacobian with explicit parameter metric is required for a conditioning claim."
+      "falsification_or_change_rule": "A multi-column released physical Jacobian with an explicit parameter metric is required for a conditioning claim."
+    },
+    {
+      "claim_id": "C1-V-MODEL-001",
+      "claim": "HZT-M0-S6-C1-V is a newly defined manufactured numerical verification model and is not identified with the historical A0 model or a released physical HZT-M0 background.",
+      "status": "PROVEN_CONDITIONAL_ON_MODEL",
+      "claim_class": "MODEL_SCOPE_AND_IDENTITY_FIREWALL",
+      "primary_source": "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json",
+      "evidence_effect": "VERIFICATION_SCOPE_ONLY",
+      "falsification_or_change_rule": "A governed equation-level identity proof or a separately released physical model contract is required to change the identity status."
+    },
+    {
+      "claim_id": "C1-V-ANCHOR-001",
+      "claim": "The unit-two-sphere two-patch C1 background is an exact manufactured verification solution of the declared C1 bulk, pole, patch and cap equations.",
+      "status": "PROVEN_CONDITIONAL_ON_MODEL",
+      "claim_class": "MANUFACTURED_VERIFICATION_BACKGROUND",
+      "primary_source": "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json",
+      "evidence_effect": "NUMERICAL_IMPLEMENTATION_QA_ONLY",
+      "limitations": [
+        "not a historical A0 reproduction",
+        "not a low-curvature physical release",
+        "no stability or ghost-freedom implication"
+      ],
+      "falsification_or_change_rule": "Failure of any declared C1 equation or boundary residual at the analytic profiles invalidates the anchor claim."
+    },
+    {
+      "claim_id": "C1-V-JAC-001",
+      "claim": "The declared discretized C1 IVP-to-residual map has a step-converged rank-eight Jacobian at the manufactured anchor and reproduces the known scalar-shift rank-seven control surface.",
+      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
+      "claim_class": "DISCRETE_SENSITIVITY_QA",
+      "primary_source": "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json",
+      "evidence_effect": "DISCRETE_QA_ONLY",
+      "falsification_or_change_rule": "A failed reproducibility, convergence or symmetry-control test supersedes this diagnostic claim."
+    },
+    {
+      "claim_id": "C1-V-BACKEND-001",
+      "claim": "Two numerically distinct C1 backends reproduce the same local discrete Jacobian and first lambda0 tangent within their declared tolerances.",
+      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
+      "claim_class": "BACKEND_CROSSCHECK",
+      "primary_source": "registry/2026-08-03_MD2S_C1_IndependentBackendContinuationContract_v0.1.json",
+      "evidence_effect": "BACKEND_QA_ONLY",
+      "limitations": [
+        "no continuum implicit-function theorem",
+        "no finite nonlinear branch",
+        "no perturbative stability",
+        "no physical evidence effect"
+      ],
+      "falsification_or_change_rule": "A failed independent reproduction or tolerance audit supersedes the diagnostic agreement."
     },
     {
       "claim_id": "HZT-NOGO-RADION-001",
@@ -211,7 +268,7 @@
       "claim_class": "TESTED_MECHANISM",
       "primary_source": "HZT-M0 radion audit corpus",
       "evidence_effect": "EXCLUDES_TESTED_MINIMAL_ROUTE",
-      "falsification_or_change_rule": "A distinct derived screening or sequestering mechanism with a stable action and acceptable local constraints would define a new claim, not reverse this tested result."
+      "falsification_or_change_rule": "A distinct derived screening or sequestering mechanism with a stable action and acceptable local constraints defines a new mechanism."
     },
     {
       "claim_id": "HZT-NOGO-CHAM-001",
