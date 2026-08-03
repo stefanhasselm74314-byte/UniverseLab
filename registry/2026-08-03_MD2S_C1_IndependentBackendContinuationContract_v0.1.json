@@ -1,0 +1,127 @@
+{
+  "schema": "universelab.md2s-c1-independent-backend-continuation.v0.1",
+  "date": "2026-08-03",
+  "model_id": "HZT-M0-S6-C1",
+  "status": "INDEPENDENT_BACKEND_AND_LINEAR_TANGENT_PREFLIGHT_PASS_EXECUTION_BLOCKED",
+  "evidence_effect": "NONE",
+  "historical_A0_identity": "NOT_CLAIMED",
+  "official_solver_authorized": false,
+  "reference_contract": "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json",
+  "independent_backend": {
+    "integration_method": "implicit_midpoint",
+    "order_base": 2,
+    "order_raise": "Richardson endpoint extrapolation (4*y_2N-y_N)/3",
+    "effective_order_at_smooth_anchor": 4,
+    "center_start": "independently implemented regular pole series at epsilon=1e-5",
+    "internal_step_solve": "Newton iteration on each midpoint step",
+    "internal_state_jacobian": "symmetric finite difference",
+    "base_steps_per_region": 100,
+    "fine_steps_per_region": 200,
+    "not_reused_from_reference": [
+      "RK4 integrator",
+      "forward-mode dual-number sensitivity propagation",
+      "reference residual evaluation implementation"
+    ]
+  },
+  "independent_sensitivity": {
+    "method": "symmetric finite difference of the complete extrapolated implicit-midpoint IVP-to-residual map",
+    "shooting_relative_step": 2e-6,
+    "parameter_absolute_step": 1e-6,
+    "jacobian_shape": [8, 8],
+    "residual_scales": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0]
+  },
+  "pre_registered_tolerances": {
+    "independent_anchor_max_normalized_residual_50_base_steps": "<=1e-8",
+    "independent_anchor_max_normalized_residual_100_base_steps": "<=1e-9",
+    "independent_jacobian_relative_change_50_to_100": "<=5e-8",
+    "independent_to_reference_jacobian_relative_frobenius": "<=2e-8",
+    "independent_to_reference_singular_spectrum_max_relative": "<=2e-7",
+    "independent_rank": 8,
+    "condition_number_warning": ">=1e6",
+    "condition_number_block": ">=1e10",
+    "linear_tangent_closure_infinity_norm": "<=1e-10",
+    "independent_to_reference_tangent_relative_norm": "<=2e-7",
+    "symmetric_tangent_mismatch": "<=1e-8"
+  },
+  "validated_reference_results": {
+    "independent_anchor_max_normalized_residual": {
+      "50_base_steps": 9.560929730164828e-9,
+      "100_base_steps": 5.976472921013429e-10
+    },
+    "independent_jacobian_relative_change_50_to_100": 1.2005132839301583e-8,
+    "independent_to_reference_jacobian_relative_frobenius": 7.406169931198177e-10,
+    "independent_singular_values_100_base_steps": [
+      15.445751940961904,
+      3.316270636392083,
+      2.56270218861096,
+      2.0469827410550114,
+      1.8950229976695812,
+      0.9950371704375954,
+      0.4734642621859795,
+      0.0695893845775842
+    ],
+    "independent_rank": 8,
+    "independent_condition_number": 221.95557605113822
+  },
+  "continuation_contract": {
+    "parameter": "lambda0_hat",
+    "anchor_value": 0.0,
+    "direction": "positive",
+    "selection_reason": "linear localized cap-tension deformation that preserves the fixed topological sectors and does not alter the bulk differential equations at fixed shooting data",
+    "parameter_residual_derivative": [0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0],
+    "definition": "dX/dlambda0_hat=-J_X^(-1)*R_lambda0_hat",
+    "shooting_order": [
+      "varphi_N_0",
+      "q_N",
+      "A_S_0",
+      "varphi_S_0",
+      "q_S",
+      "rho_N",
+      "rho_S",
+      "k4"
+    ],
+    "independent_linear_tangent": [
+      0.0,
+      0.42500000006888516,
+      4.932056456840224e-18,
+      0.0,
+      -0.4250000000688851,
+      -0.45725017596484013,
+      -0.45725017632914333,
+      0.047916666649957695
+    ],
+    "reference_AD_linear_tangent": [
+      0.0,
+      0.42499999989264786,
+      -2.858123635731421e-17,
+      0.0,
+      -0.42499999989264786,
+      -0.4572501755829883,
+      -0.4572501755951605,
+      0.04791666667522105
+    ],
+    "relative_tangent_difference": 9.77747552550672e-10,
+    "linear_closure_infinity_norm": 1.1102230246251565e-16,
+    "interpretation": "local first derivative at the exact anchor only; not a finite-step prediction and not evidence for a nonlinear solution branch"
+  },
+  "forbidden_operations": [
+    "nonlinear Newton corrector on the eight boundary residuals",
+    "finite continuation step presented as a solved background",
+    "branch tracking",
+    "turning-point search",
+    "basin-of-attraction study",
+    "official BVP execution",
+    "K1-D or K1-E transition"
+  ],
+  "governance": {
+    "independent_backend_crosscheck": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
+    "linear_implicit_function_tangent": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
+    "continuum_implicit_function_theorem_application": "NOT_PROVEN",
+    "nonlinear_solution_family": "NOT_EXPLORED",
+    "C1_ROOT_SOLVER": "NOT_IMPLEMENTED",
+    "C1_OFFICIAL_SOLVER": "NOT_AUTHORIZED",
+    "R1.1": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  }
+}
