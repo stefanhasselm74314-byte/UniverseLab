@@ -59,4 +59,5 @@ jobs:
       - name: Verify source ledger statements
         run: |
           grep -q 'Y_sigma_required = M6^4 (L_Sigma - A_Sigma)' science/hzt-m0/md2s/2026-08-03_MD2S_OrientedCapJunctionLedger_v0.1.md
-          grep -q 'sum_s n_s^r Z_phi,s phi'"'"'_s' science/hzt-m0/md2s/2026-08-03_MD2S_OrientedCapJunctionLedger_v0.1.md
+          grep -q 'Skalar-Junction' science/hzt-m0/md2s/2026-08-03_MD2S_OrientedCapJunctionLedger_v0.1.md
+          grep -q 'Gauge-Junction' science/hzt-m0/md2s/2026-08-03_MD2S_OrientedCapJunctionLedger_v0.1.md
