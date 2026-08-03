@@ -276,7 +276,7 @@ parameter SHA-256:
 d23a01b6f024858bff071edd6b258df7a5e97441f887514b58369a9293ff73ce
 
 evaluation CSV SHA-256:
-50eef27f5a59617a98e890927ef67d72bfab7c055fcd6a6e3402a37fd8c1e917
+1ca5b14c5b1a91ce3fb917e6fced12d8431600a15ba83fb3b476b3833c044505
 ```
 
 ## 12. Standardisierter Blockabschluss
