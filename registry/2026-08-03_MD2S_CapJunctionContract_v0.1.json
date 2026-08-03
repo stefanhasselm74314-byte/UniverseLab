@@ -1,0 +1,106 @@
+{
+  "schema": "universelab.md2s-cap-junction-contract.v0.1",
+  "date": "2026-08-03",
+  "branch": "HZT-M0-S6 / MD-2S / canonical rebuild",
+  "status": "DERIVED_CONDITIONAL_NUMERICALLY_BLOCKED",
+  "evidence_effect": "NONE",
+  "source_ledger": "science/hzt-m0/md2s/2026-08-03_MD2S_OrientedCapJunctionLedger_v0.1.md",
+  "conventions": {
+    "M6_fourth": "1/kappa6_squared",
+    "normal_convention": "outward unit normal from each adjacent region",
+    "israel_equation": "M6^4 sum_s(K^a_b-K delta^a_b)_s=S^a_b",
+    "localized_action": "-int sqrt|h| [lambda(phi)+0.5 Z_sigma(phi) D_a sigma D^a sigma]",
+    "covariant_phase_derivative": "D_a sigma=partial_a sigma-q_sigma A_a"
+  },
+  "oriented_sums": {
+    "A_Sigma": "sum_s n_r_s A_prime_s",
+    "L_Sigma": "sum_s n_r_s L_prime_s/L_s"
+  },
+  "winding": {
+    "d_chi": "n-q_sigma A_chi",
+    "X_sigma": "d_chi^2/L_Sigma_induced^2",
+    "Y_sigma": "Z_sigma X_sigma",
+    "healthy_minimal_gate": "Z_sigma>=0 and Y_sigma>=0"
+  },
+  "equations": [
+    {
+      "id": "EQ-MD2S-JNC-001",
+      "role": "metric_4d",
+      "equation": "-M6^4(3 A_Sigma+L_Sigma)+lambda+Y_sigma/2=0",
+      "status": "DERIVED_CONDITIONAL"
+    },
+    {
+      "id": "EQ-MD2S-JNC-002",
+      "role": "metric_chi",
+      "equation": "-4 M6^4 A_Sigma+lambda-Y_sigma/2=0",
+      "status": "DERIVED_CONDITIONAL"
+    },
+    {
+      "id": "EQ-MD2S-JNC-003",
+      "role": "anisotropy_closure",
+      "equation": "Y_sigma-M6^4(L_Sigma-A_Sigma)=0",
+      "status": "DERIVED"
+    },
+    {
+      "id": "EQ-MD2S-JNC-004",
+      "role": "scalar_matching",
+      "equation": "sum_s n_r_s Z_phi_s phi_prime_s+lambda_phi+0.5 Z_sigma_phi X_sigma=0",
+      "status": "DERIVED_CONDITIONAL"
+    },
+    {
+      "id": "EQ-MD2S-JNC-005",
+      "role": "gauge_matching",
+      "equation": "sum_s n_r_s Z_F_s F_s^(r chi)-q_sigma Z_sigma D^chi sigma=0",
+      "status": "DERIVED_CONDITIONAL"
+    },
+    {
+      "id": "EQ-MD2S-JNC-006",
+      "role": "localized_phase",
+      "equation": "D_a(Z_sigma D^a sigma)=0",
+      "status": "DERIVED_CONDITIONAL"
+    }
+  ],
+  "derived_relations": {
+    "Y_sigma_required": "M6^4(L_Sigma-A_Sigma)",
+    "lambda_required": "0.5 M6^4(7 A_Sigma+L_Sigma)",
+    "pure_tension_gate": "A_Sigma=L_Sigma",
+    "pure_tension_lambda": "4 M6^4 A_Sigma",
+    "positive_winding_gate": "L_Sigma-A_Sigma>=0"
+  },
+  "continuity_requirements": [
+    "common induced four-dimensional metric frame",
+    "continuous L at the shell",
+    "continuous phi unless an explicit double-layer source is added",
+    "gauge-covariant patch consistency for A_chi and winding"
+  ],
+  "required_numeric_inputs": [
+    "one-sided A and A_prime",
+    "one-sided L and L_prime",
+    "one-sided phi and phi_prime",
+    "one-sided Z_phi, Z_F and F_rchi",
+    "outward normal sign for each side",
+    "lambda, lambda_phi, Z_sigma, Z_sigma_phi, q_sigma and d_chi",
+    "global flux and gauge-patch convention",
+    "predeclared residual tolerances"
+  ],
+  "freeze_state": {
+    "MF-001": "PARTIAL_CONDITIONAL",
+    "MF-002": "PARTIAL_CONDITIONAL",
+    "MF-003": "PARTIAL_CONDITIONAL",
+    "MF-004": "PARTIAL_CONDITIONAL",
+    "MF-005_FORM": "DERIVED_CONDITIONAL",
+    "MF-005_NUMERICAL": "BLOCKED",
+    "MF-006": "OPEN",
+    "MF-007": "PARTIAL",
+    "R1.1": "BLOCKED",
+    "OFFICIAL_SOLVER_IMPLEMENTATION": "FORBIDDEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "open_collisions": [
+    "exact Lambda6 versus historical V(phi) convention",
+    "exact localized functions and possible additional cap terms",
+    "historical A0 action identity",
+    "global flux quantization and winding normalization"
+  ]
+}
