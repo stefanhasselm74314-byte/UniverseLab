@@ -1,0 +1,264 @@
+/* UniverseLab model picker v1.0
+ * Created: 2026-08-03
+ * Scope: replace the native Observatory preset popup with a themed accessible dialog.
+ */
+
+.ul-native-preset-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.ul-model-picker-trigger {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid #3c4770;
+  border-radius: 13px;
+  background:
+    linear-gradient(135deg, rgba(105, 201, 255, .12), rgba(141, 124, 255, .17)),
+    #0b1124;
+  color: #f5f6ff;
+  box-shadow: inset 0 -2px 0 rgba(121, 227, 188, .65), 0 8px 28px rgba(0, 0, 0, .22);
+  font: 800 1rem/1.25 system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ul-model-picker-trigger:hover,
+.ul-model-picker-trigger:focus-visible {
+  border-color: #79e3bc;
+  outline: 2px solid rgba(121, 227, 188, .28);
+  outline-offset: 2px;
+}
+
+.ul-model-picker-trigger-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ul-model-picker-trigger-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(184, 169, 255, .52);
+  color: #c8bcff;
+  background: rgba(141, 124, 255, .12);
+  font-size: 14px;
+}
+
+.ul-model-picker-layer {
+  position: fixed;
+  z-index: 13000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: max(16px, env(safe-area-inset-top)) 14px max(16px, env(safe-area-inset-bottom));
+  background: rgba(2, 4, 12, .72);
+  backdrop-filter: blur(14px) saturate(120%);
+}
+
+.ul-model-picker-layer[hidden] {
+  display: none;
+}
+
+.ul-model-picker-dialog {
+  width: min(620px, 100%);
+  max-height: min(760px, calc(100dvh - 32px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(137, 124, 255, .43);
+  border-radius: 25px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(105, 201, 255, .12), transparent 34%),
+    linear-gradient(160deg, rgba(17, 24, 49, .985), rgba(7, 10, 24, .99));
+  color: #f4f6ff;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, .76), 0 0 46px rgba(111, 90, 255, .18);
+}
+
+.ul-model-picker-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 18px 15px;
+  border-bottom: 1px solid #2d3659;
+}
+
+.ul-model-picker-head-copy {
+  min-width: 0;
+}
+
+.ul-model-picker-kicker {
+  display: block;
+  margin-bottom: 3px;
+  color: #8edfc4;
+  font: 850 .79rem/1.25 system-ui, sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.ul-model-picker-title {
+  margin: 0;
+  font: 850 clamp(1.55rem, 6vw, 2.15rem)/1.1 system-ui, -apple-system, "Segoe UI", sans-serif;
+  letter-spacing: -.025em;
+}
+
+.ul-model-picker-close {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #3b456e;
+  border-radius: 13px;
+  background: #11182e;
+  color: #fff;
+  font: 400 1.6rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.ul-model-picker-close:hover,
+.ul-model-picker-close:focus-visible {
+  border-color: #8d7cff;
+  outline: 2px solid rgba(141, 124, 255, .28);
+  outline-offset: 2px;
+}
+
+.ul-model-picker-list {
+  display: grid;
+  gap: 9px;
+  padding: 13px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.ul-model-picker-option {
+  width: 100%;
+  min-height: 76px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 15px;
+  border: 1px solid #2e385c;
+  border-radius: 16px;
+  background: linear-gradient(150deg, rgba(16, 23, 45, .96), rgba(9, 13, 29, .96));
+  color: #f5f6ff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ul-model-picker-option:hover,
+.ul-model-picker-option:focus-visible {
+  border-color: #5a6796;
+  background: linear-gradient(150deg, rgba(21, 31, 60, .98), rgba(12, 17, 37, .98));
+  outline: none;
+}
+
+.ul-model-picker-option[aria-checked="true"] {
+  border-color: #9b88ff;
+  background:
+    linear-gradient(90deg, rgba(105, 201, 255, .1), rgba(141, 124, 255, .17)),
+    #10172d;
+  box-shadow: inset 4px 0 0 #79e3bc, 0 0 24px rgba(141, 124, 255, .14);
+}
+
+.ul-model-picker-option-copy {
+  min-width: 0;
+}
+
+.ul-model-picker-option-title {
+  display: block;
+  margin-bottom: 5px;
+  font: 820 1.16rem/1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.ul-model-picker-option-meta {
+  display: block;
+  color: #aeb8d7;
+  font: 650 .88rem/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.ul-model-picker-radio {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #929bb9;
+  background: #090d1b;
+  box-shadow: inset 0 0 0 5px #090d1b;
+}
+
+.ul-model-picker-option[aria-checked="true"] .ul-model-picker-radio {
+  border-color: #c7baff;
+  background: #8d7cff;
+  box-shadow: inset 0 0 0 5px #10162b, 0 0 18px rgba(141, 124, 255, .55);
+}
+
+.ul-model-picker-foot {
+  padding: 12px 17px 15px;
+  border-top: 1px solid #273151;
+  color: #a9b3d1;
+  font: 650 .84rem/1.45 system-ui, sans-serif;
+}
+
+@media (max-width: 520px) {
+  .ul-model-picker-layer {
+    align-items: end;
+    padding-inline: 8px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+
+  .ul-model-picker-dialog {
+    max-height: calc(100dvh - 64px);
+    border-radius: 24px 24px 17px 17px;
+  }
+
+  .ul-model-picker-head {
+    padding: 16px 15px 13px;
+  }
+
+  .ul-model-picker-list {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .ul-model-picker-option {
+    min-height: 72px;
+    padding: 12px 14px;
+  }
+
+  .ul-model-picker-option-title {
+    font-size: 1.1rem;
+  }
+
+  .ul-model-picker-option-meta {
+    font-size: .84rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ul-model-picker-layer,
+  .ul-model-picker-dialog {
+    scroll-behavior: auto;
+  }
+}
