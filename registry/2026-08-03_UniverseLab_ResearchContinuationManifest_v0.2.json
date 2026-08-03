@@ -1,0 +1,100 @@
+{
+  "schema": "universelab.research-continuation-manifest.v0.2",
+  "date": "2026-08-03",
+  "program": "UniverseLab Research Continuation Program",
+  "owner": "Stefan Hasselmeyer",
+  "governance": "MD-0 v3.1.1 by project declaration",
+  "supersedes": [
+    "governance/UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.1.md",
+    "registry/research-continuation-manifest-v0.1.json"
+  ],
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"],
+  "program_status": "ACTIVE_G0_SYNCHRONIZED",
+  "evidence_effect": "NONE",
+  "tracks": {
+    "MD2S-R1-L": {
+      "role": "historical legacy reproduction",
+      "status": "BLOCKED_BY_MISSING_PRIMARY_SOURCES",
+      "benchmark_status": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED"
+    },
+    "MD2S-R1-C-PHYS": {
+      "role": "current canonical physical rebuild",
+      "status": "MODEL_FREEZE_INCOMPLETE"
+    },
+    "HZT-M0-S6-C1-V": {
+      "role": "manufactured verification sandbox",
+      "classification": "MANUFACTURED_VERIFICATION_MODEL",
+      "status": "CONDITIONAL",
+      "physical_evidence_effect": "NONE"
+    }
+  },
+  "physical_r1_phases": {
+    "R1.0": "SOURCE_RECONSTRUCTION_AND_MODEL_FREEZE_ACTIVE",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "R1.3": "BLOCKED"
+  },
+  "c1_verification_phases": {
+    "C1-V0": "PASS",
+    "C1-V1": "PASS_DIAGNOSTIC",
+    "C1-V2": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED"
+  },
+  "artifacts": {
+    "program_specification": "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md",
+    "three_track_contract": "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "g0_audit": "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md",
+    "claim_register_base": "registry/claim-register-v0.1.json",
+    "claim_register_g0": "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json",
+    "physical_r1_gate": "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json",
+    "c1_v_model": "registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json",
+    "c1_v_jacobian": "registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json",
+    "c1_v_backend": "registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json",
+    "project_manifest": "project-manifest.json",
+    "session_checkpoint": "registry/session-checkpoint-latest.json"
+  },
+  "track_migration_rule": "No result, parameter, equation, status or evidence label migrates between tracks without an explicit versioned model-identity or verification-to-physics bridge.",
+  "open_pr_disposition": {
+    "PR-1": {
+      "decision": "SUPERSEDE",
+      "reason": "Architecture proposal is 293 commits behind main; useful evidence and visualization dependency rules are migrated into G0 canonical governance."
+    },
+    "PR-2": {
+      "decision": "REBASE_AND_REPLACE",
+      "reason": "MVP numerics branch is 290 commits behind main, based on a non-main branch and conflicts with current runtime files; any retained numerics must be reimplemented from current main."
+    }
+  },
+  "current_gate_state": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "R1.1": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "physical_evidence_effect": "NONE",
+    "historical_A0_identity": "NOT_ESTABLISHED",
+    "C1_physical_identity": "NOT_ESTABLISHED",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "nonlinear_solution_family": "NOT_ESTABLISHED",
+    "perturbative_stability": "OPEN",
+    "ghost_freedom": "OPEN"
+  },
+  "forbidden_shortcuts": [
+    "technical execution to physical identification",
+    "numerical stability to ghost freedom",
+    "fit to theory confirmation",
+    "parameter adjustment to 6D derivation",
+    "discrete Jacobian rank to continuum invertibility",
+    "local tangent to finite nonlinear solution family",
+    "background regularity to perturbative stability",
+    "two-backend agreement to independent physical confirmation",
+    "C1-V parameter transfer into C-PHYS without derivation",
+    "historical benchmark promotion without identical historical reproduction"
+  ],
+  "next_recommended_block": {
+    "gate": "G1.1",
+    "track_id": "HZT-M0-S6-C1-V",
+    "title": "Symmetric predictor-only residual-order test",
+    "restriction": "No nonlinear corrector, branch tracking or physical interpretation."
+  }
+}
