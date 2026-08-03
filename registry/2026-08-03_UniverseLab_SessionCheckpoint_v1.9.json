@@ -18,6 +18,7 @@
     "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorLedger_v0.1.md"
   ],
   "current_goal": "Advance the physical MD2S-R1-C-PHYS model freeze through C-PHYS-R1.0-FREEZE-1 while allowing G1.2 only as a separately preregistered C1-V diagnostic side track.",
+  "current_workstream": "PRIMARY_C_PHYS_FREEZE_WITH_PARALLEL_C1_V_G1_2_DIAGNOSTIC",
   "current_workstreams": [
     {
       "track_id": "MD2S-R1-C-PHYS",
@@ -105,32 +106,56 @@
     {
       "blocker_id": "UL-BLK-R1-L-001",
       "track_id": "MD2S-R1-L",
-      "statement": "Historical primary action, exact conventions, original solver, boundary exports, tolerances and provenance-complete A0/B1.4 run package remain missing."
+      "statement": "Historical primary action, exact conventions, original solver, boundary exports, tolerances and provenance-complete A0/B1.4 run package remain missing.",
+      "sources": [
+        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
+        "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"
+      ]
     },
     {
       "blocker_id": "UL-BLK-C-PHYS-FREEZE-001",
       "track_id": "MD2S-R1-C-PHYS",
-      "statement": "Exact U(phi), Z_F(phi), lambda(phi), Z_sigma(phi), q_sigma, q_ref and the charge lattice are not frozen."
+      "statement": "Exact U(phi), Z_F(phi), lambda(phi), Z_sigma(phi), q_sigma, q_ref and the charge lattice are not frozen.",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md"
+      ]
     },
     {
       "blocker_id": "UL-BLK-C-PHYS-GLOBAL-002",
       "track_id": "MD2S-R1-C-PHYS",
-      "statement": "Gauge-patch transition, normal-orientation table, angular-period convention, four-dimensional frame condition and final parameter roles remain open."
+      "statement": "Gauge-patch transition, normal-orientation table, angular-period convention, four-dimensional frame condition and final parameter roles remain open.",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+        "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+      ]
     },
     {
       "blocker_id": "UL-BLK-C-PHYS-OPERATOR-003",
       "track_id": "MD2S-R1-C-PHYS",
-      "statement": "Square BVP count, constraint-dependency proof, complementing boundary conditions, Fredholm property and continuum Jacobian remain open."
+      "statement": "Square BVP count, constraint-dependency proof, complementing boundary conditions, Fredholm property and continuum Jacobian remain open.",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md"
+      ]
     },
     {
       "blocker_id": "UL-BLK-C1-V3-G12-001",
       "track_id": "HZT-M0-S6-C1-V",
-      "statement": "The local second-order discrete response has not yet been preregistered, computed and cross-checked by directed AD and independent symmetric finite differences."
+      "statement": "The local second-order discrete response has not yet been preregistered, computed and cross-checked by directed AD and independent symmetric finite differences.",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json",
+        "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+      ]
     },
     {
       "blocker_id": "UL-BLK-STAB-001",
       "track_id": "MD2S-R1-C-PHYS",
-      "statement": "Quadratic scalar-vector-tensor action, kinetic positivity, gradient stability and mass-spectrum stability remain open."
+      "statement": "Quadratic scalar-vector-tensor action, kinetic positivity, gradient stability and mass-spectrum stability remain open.",
+      "sources": [
+        "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md",
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
+      ]
     }
   ],
   "active_assumptions": [
