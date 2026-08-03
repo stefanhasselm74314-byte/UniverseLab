@@ -1,0 +1,170 @@
+{
+  "schema": "universelab.session-checkpoint.v1",
+  "checkpoint_id": "UL-CHK-20260803-008",
+  "timestamp": "2026-08-03T22:20:20+02:00",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "basis_commit": "e200606f51ae6eb0bba62d8c4230e77cb611b978",
+  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.8.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"],
+  "sources": [
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorLedger_v0.1.md"
+  ],
+  "current_goal": "Pre-register G1.2 as a local second-order discrete response diagnostic using directed AD and an independent symmetric finite-difference method, without nonlinear continuation or physical interpretation.",
+  "current_workstream": "G1_2_C1_V_LOCAL_SECOND_ORDER_DIAGNOSTIC",
+  "governance_principle": "C1 prueft zunaechst unsere Werkzeuge, nicht die Natur.",
+  "gate_state": {
+    "MD2S-R1-L": "BLOCKED_BY_MISSING_PRIMARY_SOURCES",
+    "MD2S-R1-C-PHYS": "MODEL_FREEZE_INCOMPLETE",
+    "HZT-M0-S6-C1-V": "MANUFACTURED_VERIFICATION_MODEL",
+    "C1-V0": "PASS",
+    "C1-V1": "PASS_DIAGNOSTIC",
+    "C1-V2": "PASS_DIAGNOSTIC",
+    "G1.1": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED",
+    "HISTORICAL_A0_BENCHMARKS": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
+    "HISTORICAL_A0_IDENTITY": "NOT_ESTABLISHED",
+    "C1_PHYSICAL_IDENTITY": "NOT_ESTABLISHED",
+    "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
+    "NONLINEAR_SOLUTION_FAMILY": "NOT_ESTABLISHED",
+    "PERTURBATIVE_STABILITY": "OPEN",
+    "GHOST_FREEDOM": "OPEN",
+    "R1.1": "BLOCKED",
+    "OFFICIAL_MD2S_SOLVER": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "PHYSICAL_EVIDENCE_EFFECT": "NONE",
+    "PUBLIC_PRIVACY_GATE": "PASS"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-G0-TRACK-001",
+      "statement": "The MD-2S program is separated into historical legacy reproduction, current canonical physical rebuild and manufactured C1 verification tracks, with a fail-closed migration firewall.",
+      "status": "PROVEN",
+      "evidence_effect": "GOVERNANCE_ONLY",
+      "sources": [
+        "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+        "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md"
+      ]
+    },
+    {
+      "result_id": "UL-RES-G0-A0-001",
+      "statement": "Historical A0 benchmark values are reported but not independently reproduced because the source-identical historical action, solver and complete run package are missing.",
+      "status": "OPEN",
+      "evidence_effect": "NONE",
+      "sources": [
+        "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json",
+        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-G0-C1V-001",
+      "statement": "C1-V is a manufactured verification model whose exact sphere anchor tests tools rather than physical Hyperzeit identity.",
+      "status": "CONDITIONAL",
+      "evidence_effect": "NUMERICAL_QA_ONLY",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json",
+        "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C1V-G11-001",
+      "statement": "The uncorrected local C1-V lambda0_hat predictor exhibits a visible quadratic normalized-residual regime for the preregistered symmetric steps, fixed fit window and tested finite discretizations.",
+      "status": "NUMERICALLY_CONFIRMED",
+      "evidence_effect": "DISCRETE_PREDICTOR_QA_ONLY",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorLedger_v0.1.md",
+        "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorEvaluations_v0.1.csv"
+      ]
+    }
+  ],
+  "open_blockers": [
+    {
+      "blocker_id": "UL-BLK-R1-L-001",
+      "track_id": "MD2S-R1-L",
+      "statement": "Historical primary action, exact conventions, original solver, boundary exports, tolerances and provenance-complete A0/B1.4 run package remain missing.",
+      "sources": [
+        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
+        "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "The current physical parent action, localized sectors, parameter roles, topology, gauge lattice and complete variational boundary system are not yet fully frozen.",
+      "sources": [
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json",
+        "hzt-s6-parent-action-v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C1-V3-G12-001",
+      "track_id": "HZT-M0-S6-C1-V",
+      "statement": "The local second-order discrete response has not yet been computed and cross-checked by directed AD and independent symmetric finite differences.",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json",
+        "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C1-V4-001",
+      "track_id": "HZT-M0-S6-C1-V",
+      "statement": "The continuum residual operator, function spaces, kernel, cokernel, Fredholm index and discretization-to-continuum convergence are not defined or proven.",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json",
+        "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-STAB-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "Quadratic scalar-vector-tensor action, kinetic positivity, gradient stability and mass-spectrum stability remain open.",
+      "sources": [
+        "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json"
+      ]
+    }
+  ],
+  "active_assumptions": [
+    "G1.1 changes only the discrete C1-V predictor QA status.",
+    "The fixed fit window was not changed after observing the run.",
+    "Operational PASS_DIAGNOSTIC qualifies the primary status NUMERICALLY_CONFIRMED and does not replace the canonical status vocabulary.",
+    "C1-V remains excluded from the physical R1.1-R1.3 release chain.",
+    "No nonlinear corrector, finite continuation, branch tracking or official solver is authorized."
+  ],
+  "forbidden_inferences": [
+    "Do not infer a nonlinear solution or finite branch from the G1.1 predictor test.",
+    "Do not infer continuum invertibility or a continuum implicit-function theorem.",
+    "Do not infer physical model identity from the manufactured C1-V anchor.",
+    "Do not infer perturbative stability or ghost freedom.",
+    "Do not infer independent physical confirmation from two-backend agreement.",
+    "Do not change R1.1, K1-D, K1-E or solver authorization without a versioned gate decision."
+  ],
+  "entry_points": [
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorLedger_v0.1.md",
+    "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorEvaluations_v0.1.csv",
+    "tools/2026-08-03_hzt_m0_s6_c1_v_g1_1_symmetric_predictor_v0.1.py",
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+  ],
+  "artifact_hashes": {
+    "preregistration_sha256": "f70bb585a0bd91b196deaaafae64976dffdd0c930b3258184a99eef2fd4e45d2",
+    "evaluator_sha256": "39eea878699558c48ff7e7daf5829e50301a253062f54f6ee2584e27fb3a38e1",
+    "reference_backend_sha256": "bb270082d8e19684eaaefd305c78b0e5184535251bcf604c4ec1e9167c68c947",
+    "independent_backend_sha256": "685322f556eab3aa0045497605575f912d13a284fe860fd5184cadfd1caa2dbd",
+    "parameter_sha256": "d23a01b6f024858bff071edd6b258df7a5e97441f887514b58369a9293ff73ce",
+    "evaluation_csv_sha256": "50eef27f5a59617a98e890927ef67d72bfab7c055fcd6a6e3402a37fd8c1e917",
+    "full_run_json_sha256": "b0c3f72a207a5e2581c334f77c89092cf5e9f1439797e385ab5c4329fe5b8269"
+  },
+  "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
+  "next_exact_action": "Execute only G1.2 in HZT-M0-S6-C1-V after preregistering directed AD and independent symmetric finite-difference second-derivative methods, tolerances and comparison norms. Do not run a nonlinear corrector or finite continuation."
+}
