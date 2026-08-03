@@ -1,0 +1,85 @@
+name: MD2S-R1-C-PHYS minimal EFT Freeze-1B
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json"
+      - "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1B_Status_v0.1.json"
+      - "registry/2026-08-03_UniverseLab_ClaimRegister_C_PHYS_Freeze1B_v0.1.json"
+      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.11.json"
+      - "registry/session-checkpoint-latest.json"
+      - "registry/decision-log.jsonl"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeLedger_v0.1.md"
+      - "project-manifest.json"
+      - "tools/2026-08-03_validate_md2s_r1_c_phys_minimal_eft_freeze_v0.1.py"
+      - "tests/2026-08-03_test_md2s_r1_c_phys_minimal_eft_freeze_v0.1.py"
+      - ".github/workflows/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFreeze_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json"
+      - "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1B_Status_v0.1.json"
+      - "registry/2026-08-03_UniverseLab_ClaimRegister_C_PHYS_Freeze1B_v0.1.json"
+      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.11.json"
+      - "registry/session-checkpoint-latest.json"
+      - "registry/decision-log.jsonl"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeLedger_v0.1.md"
+      - "project-manifest.json"
+      - "tools/2026-08-03_validate_md2s_r1_c_phys_minimal_eft_freeze_v0.1.py"
+      - "tests/2026-08-03_test_md2s_r1_c_phys_minimal_eft_freeze_v0.1.py"
+      - ".github/workflows/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFreeze_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-c-phys-freeze-1b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON artifacts
+        run: |
+          python -m json.tool registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_C_PHYS_Freeze1B_Status_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_ClaimRegister_C_PHYS_Freeze1B_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.11.json >/dev/null
+          python -m json.tool registry/session-checkpoint-latest.json >/dev/null
+          python -m json.tool project-manifest.json >/dev/null
+
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/2026-08-03_validate_md2s_r1_c_phys_minimal_eft_freeze_v0.1.py
+          python -m py_compile tests/2026-08-03_test_md2s_r1_c_phys_minimal_eft_freeze_v0.1.py
+
+      - name: Run Freeze-1B regression tests
+        run: python tests/2026-08-03_test_md2s_r1_c_phys_minimal_eft_freeze_v0.1.py
+
+      - name: Run fail-closed contract validator
+        run: python tools/2026-08-03_validate_md2s_r1_c_phys_minimal_eft_freeze_v0.1.py --json
+
+      - name: Enforce release firewall
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          contract = json.loads(Path("registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json").read_text())
+          gate = contract["gate_state"]
+          assert contract["solver_authorized"] is False
+          assert contract["physical_evidence_effect"] == "NONE"
+          assert gate["R1.1"] == "BLOCKED"
+          assert gate["R1.2"] == "BLOCKED"
+          assert gate["official_MD2S_solver"] == "NOT_AUTHORIZED"
+          assert gate["continuum_BVP_Jacobian"] == "NOT_PROVEN"
+          assert gate["K1-D"] == "NOT_RELEASED"
+          assert gate["K1-E"] == "NOT_ADMISSIBLE"
+          assert contract["model_instance_rule"]["benchmark_instance_selected"] is False
+          assert contract["parameter_identifiability_budget"]["fit_authorized"] is False
+          PY
