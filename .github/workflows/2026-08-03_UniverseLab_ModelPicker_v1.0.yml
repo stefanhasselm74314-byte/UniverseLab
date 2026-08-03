@@ -1,0 +1,58 @@
+name: UniverseLab model picker contract
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "observatory.html"
+      - "assets/2026-08-03_UniverseLab_ModelPicker_v1.0.css"
+      - "assets/2026-08-03_UniverseLab_ModelPicker_v1.0.js"
+      - "tools/2026-08-03_apply_model_picker_v1.0.py"
+      - "tests/2026-08-03_test_model_picker_v1.0.py"
+      - ".github/workflows/2026-08-03_UniverseLab_ModelPicker_v1.0.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "observatory.html"
+      - "assets/2026-08-03_UniverseLab_ModelPicker_v1.0.css"
+      - "assets/2026-08-03_UniverseLab_ModelPicker_v1.0.js"
+      - "tools/2026-08-03_apply_model_picker_v1.0.py"
+      - "tests/2026-08-03_test_model_picker_v1.0.py"
+      - ".github/workflows/2026-08-03_UniverseLab_ModelPicker_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-model-picker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile contract tools
+        run: |
+          python -m py_compile tools/2026-08-03_apply_model_picker_v1.0.py
+          python -m py_compile tests/2026-08-03_test_model_picker_v1.0.py
+
+      - name: Run model picker tests
+        run: python tests/2026-08-03_test_model_picker_v1.0.py -v
+
+      - name: Verify Observatory asset links
+        run: python tools/2026-08-03_apply_model_picker_v1.0.py --check
+
+      - name: Verify UI and accessibility contract
+        shell: bash
+        run: |
+          grep -F 'role="dialog"' assets/2026-08-03_UniverseLab_ModelPicker_v1.0.js
+          grep -F 'aria-modal="true"' assets/2026-08-03_UniverseLab_ModelPicker_v1.0.js
+          grep -F "event.key==='Escape'" assets/2026-08-03_UniverseLab_ModelPicker_v1.0.js
+          grep -F '.ul-model-picker-option[aria-checked="true"]' assets/2026-08-03_UniverseLab_ModelPicker_v1.0.css
+          grep -F '2026-08-03_UniverseLab_ModelPicker_v1.0.js' observatory.html
