@@ -1,0 +1,72 @@
+{
+  "schema": "universelab.md2s-r1-model-freeze-addendum.v0.5",
+  "date": "2026-08-03",
+  "branch": "HZT-M0-S6-C1",
+  "status": "DIAGNOSTIC_JACOBIAN_PREFLIGHT_PASS_EXECUTION_BLOCKED",
+  "evidence_effect": "NONE",
+  "canonical_sources": [
+    "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json",
+    "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json",
+    "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md"
+  ],
+  "newly_closed_for_c1": {
+    "reference_scale": "mu6=(kappa6_sq)^(-1/4)",
+    "dimensionless_variable_map": "FROZEN_FOR_DIAGNOSTIC_PREFLIGHT",
+    "dimensionless_radial_equations": "DERIVED_CONDITIONAL_ON_C1",
+    "fixed_residual_scales": "PRE_REGISTERED",
+    "preflight_tolerances": "PRE_REGISTERED",
+    "analytic_anchor": "EXACT_CONTINUUM_BACKGROUND_DERIVED",
+    "discretized_forward_mode_AD_jacobian": "RANK_8_STEP_CONVERGED_AT_ANCHOR",
+    "shift_null_regression": "RANK_7_REPRODUCED"
+  },
+  "analytic_anchor_summary": {
+    "geometry": "unit S2 in two smooth disk patches",
+    "profiles": "A=0, ell=sin(x), varphi=0, a_chi_s=sign_s*0.5*(1-cos(x))",
+    "cap": "rho_N=rho_S=pi/2",
+    "k4": 0.25,
+    "q_N": 0.5,
+    "q_S": -0.5,
+    "localized_interface": "zero stress and zero winding energy at anchor",
+    "all_eight_continuum_residuals": "ZERO"
+  },
+  "jacobian_summary": {
+    "map": "fixed-step RK4 IVP data to eight normalized cap residuals",
+    "method": "dense forward-mode automatic differentiation",
+    "rank_800_steps": 8,
+    "sigma_min_800_steps": 0.0695893845582763,
+    "condition_number_800_steps": 221.95557616755255,
+    "relative_change_400_to_800": 2.863079188994937e-12,
+    "classification": "NUMERICALLY_CONFIRMED_DIAGNOSTIC_DISCRETE_MAP_ONLY"
+  },
+  "remaining_blockers": [
+    "continuum BVP Jacobian rank is not analytically proven",
+    "no nonlinear continuation away from the exact anchor",
+    "no adaptive solver or independent integration backend",
+    "no solution-family existence or uniqueness result",
+    "no perturbative scalar-vector-tensor stability analysis",
+    "no ghost-freedom result",
+    "no historical A0 model identity"
+  ],
+  "gate_state": {
+    "C1_MODEL": "CANDIDATE_MODEL_DEFINED_NOT_RELEASED",
+    "C1_ANALYTIC_ANCHOR": "DERIVED",
+    "C1_DISCRETE_AD_JACOBIAN": "RANK_8_STEP_CONVERGED_DIAGNOSTIC",
+    "C1_CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
+    "C1_NONLINEAR_CONTINUATION": "NOT_EXECUTED",
+    "C1_ROOT_SOLVER": "NOT_IMPLEMENTED",
+    "C1_OFFICIAL_SOLVER": "NOT_AUTHORIZED",
+    "HISTORICAL_A0_IDENTITY": "NOT_CLAIMED",
+    "R1.1": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "No continuum-rank proof from the discrete AD Jacobian",
+    "No existence or uniqueness theorem from one exact anchor",
+    "No solver release from step convergence",
+    "No stability or ghost-freedom claim from background rank",
+    "No historical A0 identity",
+    "No K1-D or K1-E transition"
+  ]
+}
