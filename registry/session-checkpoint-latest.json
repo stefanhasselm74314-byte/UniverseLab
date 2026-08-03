@@ -1,111 +1,128 @@
 {
   "schema": "universelab.session-checkpoint.v1",
-  "checkpoint_id": "UL-CHK-20260803-006",
-  "timestamp": "2026-08-03T16:13:00+02:00",
+  "checkpoint_id": "UL-CHK-20260803-007",
+  "timestamp": "2026-08-03T17:38:00+02:00",
   "privacy_classification": "PUBLIC_SANITIZED",
-  "basis_commit": "f8a11309ecd395f975c27e11b3f36aeb49d920eb",
-  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.6.json",
-  "architecture": ["HPVS", "HZT-M0-S6", "HZT-M0-P5", "HZT-Full"],
-  "current_goal": "Validate the local C1 lambda0 continuation geometry beyond first order using predictor-only symmetric parameter steps and a second-order curvature derivation, without executing a nonlinear corrector or claiming a finite solved branch.",
-  "current_workstream": "WP-2_MD2S_C1_PREDICTOR_REMAINDER_AND_SECOND_ORDER_CURVATURE_PREFLIGHT",
+  "basis_commit": "c320291b8f2e1de74fca7999040bafec914ba9bb",
+  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.7.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"],
+  "current_goal": "Complete C1-V3 with a pre-registered symmetric predictor-only residual-order test before any second local derivative is attempted.",
+  "current_workstream": "G1_C1_V_VERIFICATION_COMPLETION",
+  "governance_principle": "C1 prueft zunaechst unsere Werkzeuge, nicht die Natur.",
   "gate_state": {
+    "MD2S-R1-L": "BLOCKED_BY_MISSING_PRIMARY_SOURCES",
+    "MD2S-R1-C-PHYS": "MODEL_FREEZE_INCOMPLETE",
+    "HZT-M0-S6-C1-V": "MANUFACTURED_VERIFICATION_MODEL",
+    "C1-V0": "PASS",
+    "C1-V1": "PASS_DIAGNOSTIC",
+    "C1-V2": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED",
+    "HISTORICAL_A0_BENCHMARKS": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
+    "HISTORICAL_A0_IDENTITY": "NOT_ESTABLISHED",
+    "C1_PHYSICAL_IDENTITY": "NOT_ESTABLISHED",
+    "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
+    "NONLINEAR_SOLUTION_FAMILY": "NOT_ESTABLISHED",
+    "PERTURBATIVE_STABILITY": "OPEN",
+    "GHOST_FREEDOM": "OPEN",
+    "R1.1": "BLOCKED",
+    "OFFICIAL_MD2S_SOLVER": "NOT_AUTHORIZED",
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
-    "SCI-001": "PARTIAL",
-    "SCI-002": "PARTIAL",
-    "MD2S_R1_MODEL_FREEZE": "ACTIVE",
-    "MD2S_C1_MODEL": "CANDIDATE_MODEL_DEFINED_NOT_RELEASED",
-    "MD2S_C1_HISTORICAL_A0_IDENTITY": "NOT_CLAIMED",
-    "MD2S_C1_ANALYTIC_ANCHOR": "DERIVED",
-    "MD2S_C1_REFERENCE_DISCRETE_AD_JACOBIAN": "RANK_8_STEP_CONVERGED_DIAGNOSTIC",
-    "MD2S_C1_INDEPENDENT_BACKEND": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
-    "MD2S_C1_INDEPENDENT_JACOBIAN": "RANK_8_STEP_CONVERGED_DIAGNOSTIC",
-    "MD2S_C1_BACKEND_AGREEMENT": "PASS",
-    "MD2S_C1_LINEAR_LAMBDA0_TANGENT": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
-    "MD2S_C1_CONTINUUM_IMPLICIT_FUNCTION_THEOREM": "NOT_PROVEN",
-    "MD2S_C1_NONLINEAR_CONTINUATION": "NOT_EXECUTED",
-    "MD2S_C1_ROOT_CORRECTOR": "NOT_IMPLEMENTED",
-    "MD2S_C1_OFFICIAL_SOLVER": "NOT_AUTHORIZED",
-    "MD2S_R1_1_SYMBOLIC_DEPENDENCY_AUDIT": "BLOCKED",
-    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
-    "B1_4O": "NOT_EXECUTABLE",
-    "MDS01_FORM": "DERIVED_CONDITIONAL",
-    "MDS01_NUMERICAL_MODE_IDENTITY": "OPEN",
-    "MDS05_FORM": "DERIVED_CONDITIONAL",
-    "MDS05_NUMERICAL_VALUE": "OPEN"
+    "PHYSICAL_EVIDENCE_EFFECT": "NONE"
   },
   "verified_results": [
     {
-      "result_id": "UL-RES-MD2S-C1-IND-001",
-      "statement": "A separately implemented Richardson-extrapolated implicit-midpoint backend reproduces the exact C1 anchor with maximum normalized residual 5.976472921013429e-10 at 100 base steps per region.",
-      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
-      "evidence_effect": "INDEPENDENT_INTEGRATION_QA_ONLY",
-      "sources": ["registry/2026-08-03_MD2S_C1_IndependentBackendContinuationContract_v0.1.json", "tools/2026-08-03_md2s_c1_independent_backend_continuation_v0.1.py"]
+      "result_id": "UL-RES-G0-TRACK-001",
+      "statement": "The MD-2S program is formally separated into historical legacy reproduction, current canonical physical rebuild and manufactured C1 verification tracks, with a fail-closed migration firewall.",
+      "status": "PROVEN",
+      "evidence_effect": "GOVERNANCE_ONLY",
+      "validity_regime": "UniverseLab project governance from G0 v1.0 onward",
+      "dependencies": ["MD-0", "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"],
+      "forbidden_inference": "No physical claim or gate release follows from the organizational split.",
+      "upgrade_condition": "Only a later versioned MD-0-compatible governance decision may supersede the track structure."
     },
     {
-      "result_id": "UL-RES-MD2S-C1-IND-002",
-      "statement": "The independent symmetric-finite-difference Jacobian has rank eight, condition number 221.95557605113822 and relative Frobenius difference 7.406169931198177e-10 from the RK4 forward-mode-AD reference Jacobian.",
-      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
-      "evidence_effect": "TWO_BACKEND_JACOBIAN_QA_ONLY",
-      "sources": ["registry/2026-08-03_MD2S_C1_IndependentBackendContinuationContract_v0.1.json", "science/hzt-m0/md2s/2026-08-03_MD2S_C1_IndependentBackendContinuationLedger_v0.1.md"]
+      "result_id": "UL-RES-G0-A0-001",
+      "statement": "Historical A0 benchmark values are classified as reported and not independently reproduced because the source-identical historical action, solver and complete run package are missing.",
+      "status": "OPEN",
+      "evidence_effect": "NONE",
+      "validity_regime": "available historical source corpus as of 2026-08-03",
+      "dependencies": ["registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"],
+      "forbidden_inference": "No NUMERICALLY_CONFIRMED label and no transfer into C-PHYS or C1-V.",
+      "upgrade_condition": "Source-identical historical reconstruction and benchmark reproduction under declared tolerances."
     },
     {
-      "result_id": "UL-RES-MD2S-C1-TAN-001",
-      "statement": "For continuation parameter lambda0_hat, the local tangent dX/dlambda0_hat=-J_X^{-1}R_lambda0_hat closes to infinity norm 1.1102230246251565e-16 and agrees between the two backends to relative norm 9.77747552550672e-10.",
-      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
-      "evidence_effect": "LOCAL_LINEAR_RESPONSE_ONLY",
-      "sources": ["registry/2026-08-03_MD2S_C1_IndependentBackendContinuationContract_v0.1.json", "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.6.json"]
+      "result_id": "UL-RES-G0-C1V-001",
+      "statement": "The former C1 candidate is reclassified as HZT-M0-S6-C1-V, a manufactured verification model whose exact sphere anchor tests tools rather than physical Hyperzeit identity.",
+      "status": "CONDITIONAL",
+      "evidence_effect": "NUMERICAL_QA_ONLY",
+      "validity_regime": "declared C1-V equations, parameters, topology and manufactured anchor",
+      "dependencies": ["registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json"],
+      "forbidden_inference": "No GR-like IR background, stability, physical branch, historical identity or K1 release.",
+      "upgrade_condition": "A separate governed verification-to-physics bridge after C-PHYS derivation."
     }
   ],
   "open_blockers": [
     {
-      "blocker_id": "UL-BLK-MD2S-C1-010",
-      "statement": "The continuum Jacobian and functional-analytic hypotheses required for a continuum implicit-function theorem remain unproven.",
-      "sources": ["science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.6.json"]
+      "blocker_id": "UL-BLK-R1-L-001",
+      "track_id": "MD2S-R1-L",
+      "statement": "Historical primary action, exact conventions, original solver, boundary exports, tolerances and provenance-complete A0/B1.4 run package remain missing."
     },
     {
-      "blocker_id": "UL-BLK-MD2S-C1-011",
-      "statement": "No predictor-only finite-step remainder scaling or second-order local branch curvature has yet been derived.",
-      "sources": ["registry/2026-08-03_MD2S_C1_IndependentBackendContinuationContract_v0.1.json"]
+      "blocker_id": "UL-BLK-C-PHYS-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "The current physical parent action, localized sectors, parameter roles, topology, gauge lattice and complete variational boundary system are not yet fully frozen."
     },
     {
-      "blocker_id": "UL-BLK-MD2S-C1-012",
-      "statement": "No nonlinear corrector, branch tracking, turning-point analysis, adaptive BVP solver, existence result or uniqueness result exists away from the exact anchor.",
-      "sources": ["science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.6.json"]
+      "blocker_id": "UL-BLK-C1-V3-001",
+      "track_id": "HZT-M0-S6-C1-V",
+      "statement": "A pre-registered symmetric predictor-only test has not yet demonstrated a visible O(delta^2) residual window."
     },
     {
-      "blocker_id": "UL-BLK-MD2S-C1-STAB-001",
-      "statement": "Scalar-vector-tensor perturbations, kinetic positivity, gradient stability and ghost freedom remain uncomputed for C1.",
-      "sources": ["science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.6.json"]
+      "blocker_id": "UL-BLK-C1-V4-001",
+      "track_id": "HZT-M0-S6-C1-V",
+      "statement": "The continuum residual operator, function spaces, kernel, cokernel, Fredholm index and discretization-to-continuum convergence are not defined or proven."
     },
     {
-      "blocker_id": "UL-BLK-MD2S-HIST-001",
-      "statement": "C1 remains a newly defined candidate and is not identified with the missing historical A0 action, solver or benchmark normalization.",
-      "sources": ["registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json", "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"]
+      "blocker_id": "UL-BLK-STAB-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "Quadratic scalar-vector-tensor action, kinetic positivity, gradient stability and mass-spectrum stability remain open."
     }
   ],
   "active_assumptions": [
-    "The independent backend cross-check is diagnostic and discrete, not a continuum theorem.",
-    "lambda0_hat is the only governed local continuation parameter in this block.",
-    "The reported tangent is a first derivative at the exact anchor and is not a finite-step solution.",
-    "No nonlinear corrector, root solve or official solver execution is authorized."
+    "The G0 block changes governance and classification only; it does not alter prior numerical values.",
+    "Operational phase labels such as PASS_DIAGNOSTIC qualify but do not replace the canonical scientific status vocabulary.",
+    "C1-V remains excluded from the physical R1.1-R1.3 release chain.",
+    "No nonlinear corrector, finite continuation, branch tracking or official solver is authorized."
   ],
   "forbidden_inferences": [
-    "Do not infer a finite nonlinear solution branch from the local tangent.",
-    "Do not infer continuum implicit-function-theorem validity from two discrete backends.",
-    "Do not treat backend agreement or moderate conditioning as stability or ghost freedom.",
-    "Do not identify C1 with the historical A0 model or benchmarks.",
-    "Do not change R1.1, K1-D or K1-E without the governed release chain."
+    "Do not infer historical reproduction from reported benchmark tables.",
+    "Do not infer physical model identity from the manufactured C1-V anchor.",
+    "Do not infer continuum invertibility from discrete Jacobian rank.",
+    "Do not infer a finite nonlinear branch from the local first tangent.",
+    "Do not infer perturbative stability or ghost freedom from regular background integration.",
+    "Do not infer independent physical confirmation from two-backend numerical agreement.",
+    "Do not change R1.1, K1-D, K1-E or solver authorization without a versioned gate decision."
   ],
   "entry_points": [
-    "governance/UNIVERSELAB_MEMORY_PROTOCOL_v1.0.md",
-    "registry/decision-log.jsonl",
-    "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.6.json",
-    "registry/2026-08-03_MD2S_C1_IndependentBackendContinuationContract_v0.1.json",
-    "science/hzt-m0/md2s/2026-08-03_MD2S_C1_IndependentBackendContinuationLedger_v0.1.md",
-    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.6.json",
-    "tools/2026-08-03_md2s_c1_independent_backend_continuation_v0.1.py"
+    "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md",
+    "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md",
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json",
+    "registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json",
+    "tools/2026-08-03_validate_g0_three_track_sync_v1.0.py"
   ],
+  "artifact_hashes": {
+    "validator_sha256": "b89ced5a6ed58fb73cdc159f198143888c06c2670f2ff2e644239ebc753f6704",
+    "validator_test_sha256": "8b768adc7c6309046712429c552f90dfae6c815f8045bb94de606936af0f31f8",
+    "c1_v_parameter_hash": "d23a01b6f024858bff071edd6b258df7a5e97441f887514b58369a9293ff73ce"
+  },
   "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
-  "next_exact_action": "Pre-register symmetric predictor-only lambda0_hat steps, verify O(delta_lambda0^2) residual scaling and two-backend agreement, then derive the second-order local curvature X''(0) from directional residual derivatives without applying a nonlinear corrector or presenting any finite predictor as a solved background."
+  "next_exact_action": "Execute only G1.1 in HZT-M0-S6-C1-V: pre-register symmetric lambda0_hat predictor steps, resolutions, norms, numerical floor and fit window, then test for a visible O(delta^2) residual regime without nonlinear correction or physical interpretation."
 }
