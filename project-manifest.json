@@ -1,6 +1,6 @@
 {
   "schema": "universelab.project-manifest.v1",
-  "release": "2.2-g0-three-track-v1.0",
+  "release": "2.2-g0-three-track-public-sanitized-v1.2",
   "release_date": "2026-08-03",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
@@ -40,7 +40,8 @@
     "GOV-001": "PARTIAL",
     "NUM-002": "PARTIAL",
     "SCI-001": "PARTIAL",
-    "SCI-002": "PARTIAL"
+    "SCI-002": "PARTIAL",
+    "PUBLIC_PRIVACY_GATE": "PASS"
   },
   "governance_rules": [
     "technical_execution_is_not_physical_identification",
@@ -57,27 +58,29 @@
     "rejected_applies_only_to_the_precisely_tested_mechanism",
     "single_reconstructed_lambda_eff_does_not_close_a_cap_solution",
     "metric_scalar_gauge_and_global_flux_matching_must_be_checked_together",
-    "c1_verifies_tools_before_nature"
+    "c1_verifies_tools_before_nature",
+    "public_provenance_excludes_conversation_attachment_and_detailed_account_identifiers"
   ],
   "canonical_pages": [
     {"id":"portal","path":"index.html","live":"./","class":"public_interface","status":"ACTIVE"},
+    {"id":"research_status","path":"research-status.html","live":"./research-status.html?v=20260803","class":"canonical_public_status","status":"ACTIVE"},
     {"id":"navigator","path":"navigator-app.html","live":"./navigator-app.html?v=4","class":"scientific_navigation","status":"ACTIVE"},
-    {"id":"hyperlab","path":"hyperlab.html","live":"./hyperlab.html?v=10","class":"status_and_diagnostics","status":"ACTIVE"},
+    {"id":"hyperlab","path":"hyperlab.html","live":"./hyperlab.html?v=10","class":"status_and_diagnostics","status":"ACTIVE_DIAGNOSTIC"},
     {"id":"material","path":"hyperzeit-material-v2.html","live":"./hyperzeit-material-v2.html?v=2","class":"literature_derivations_visuals","status":"ACTIVE"},
     {"id":"methods","path":"hyperzeit-methods.html","live":"./hyperzeit-methods.html?v=1","class":"methods_and_quality_gates","status":"ACTIVE"},
-    {"id":"audit","path":"universelab-audit-2026-07-31.html","live":"./universelab-audit-2026-07-31.html?v=1","class":"master_audit","status":"ACTIVE"},
+    {"id":"audit","path":"universelab-audit-2026-07-31.html","live":"./universelab-audit-2026-07-31.html?v=1","class":"historical_master_audit","status":"ARCHIVED_REFERENCE"},
     {"id":"parent_closure","path":"sci-001-002-parent-closure-v0.1.html","live":"./sci-001-002-parent-closure-v0.1.html?v=1","class":"parent_action_and_boundary_closure","status":"ACTIVE_DIAGNOSTIC"},
     {"id":"parent_gate","path":"hzt-parent-action-gate-v0.1.html","live":"./hzt-parent-action-gate-v0.1.html?v=1","class":"junction_checker","status":"ACTIVE_DIAGNOSTIC"},
-    {"id":"parent_profile","path":"hzt-s6-parent-action-v0.1.json","live":"./hzt-s6-parent-action-v0.1.json?v=1","class":"machine_readable_parent_profile","status":"ACTIVE"},
+    {"id":"parent_profile","path":"hzt-s6-parent-action-v0.1.json","live":"./hzt-s6-parent-action-v0.1.json?v=1","class":"machine_readable_parent_profile","status":"ACTIVE_CONDITIONAL"},
     {"id":"runtime_loader","path":"universelab-runtime-loader-v0.1.js","live":"./universelab-runtime-loader-v0.1.js","class":"runtime_registry_loader","status":"EXPERIMENTAL_NOT_MIGRATED"},
     {"id":"p0_verification","path":"UniverseLab_2.1_P0_Verification_Report.md","live":"https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/UniverseLab_2.1_P0_Verification_Report.md","class":"repository_verification","status":"ACTIVE"},
     {"id":"bibliography","path":"hyperzeit-bibliography.json","live":"./hyperzeit-bibliography.json?v=1","class":"machine_readable_bibliography","status":"ACTIVE"},
-    {"id":"audit_data","path":"universelab-audit-2026-07-31.json","live":"./universelab-audit-2026-07-31.json?v=1","class":"machine_readable_audit","status":"ACTIVE"},
-    {"id":"source","path":"source.html","live":"./source.html?v=3","class":"developer_hub","status":"ACTIVE"},
-    {"id":"baryogenesis","path":"baryogenesis.html","live":"./baryogenesis.html?v=16","class":"research_lab","status":"OUTDATED_PUBLIC_ENTRY"},
-    {"id":"comparison","path":"compare-safe.html","live":"./compare-safe.html?v=safe2","class":"calculator","status":"ACTIVE"},
-    {"id":"validation","path":"validation.html","live":"./validation.html","class":"numerical_validation","status":"ACTIVE"},
-    {"id":"legacy","path":"legacy.html","live":"./legacy.html?v=1","class":"historical_audit","status":"ACTIVE"}
+    {"id":"audit_data","path":"universelab-audit-2026-07-31.json","live":"./universelab-audit-2026-07-31.json?v=1","class":"historical_machine_readable_audit","status":"ARCHIVED_REFERENCE"},
+    {"id":"source","path":"source.html","live":"./source.html?v=20260803","class":"developer_and_governance_hub","status":"ACTIVE"},
+    {"id":"baryogenesis","path":"baryogenesis.html","live":"./baryogenesis.html?v=20260803","class":"archived_research_lab","status":"ARCHIVED_DIAGNOSTIC_ENTRY"},
+    {"id":"comparison","path":"compare-safe.html","live":"./compare-safe.html?v=safe2","class":"calculator","status":"ACTIVE_DIAGNOSTIC"},
+    {"id":"validation","path":"validation.html","live":"./validation.html","class":"numerical_validation","status":"ACTIVE_DIAGNOSTIC"},
+    {"id":"legacy","path":"legacy.html","live":"./legacy.html?v=1","class":"historical_audit","status":"ACTIVE_ARCHIVE"}
   ],
   "parent_action_v0_1": {
     "schema": "hzt.s6.parent-action.v0.1",
@@ -107,6 +110,16 @@
     "historical_A0_identity": "NOT_CLAIMED",
     "physical_evidence_effect": "NONE"
   },
+  "public_privacy": {
+    "classification": "PUBLIC_SANITIZED",
+    "contract": "registry/2026-08-03_UniverseLab_PublicPrivacyContract_v1.0.json",
+    "decision": "registry/2026-08-03_UniverseLab_PublicPrivacyDecision_v1.0.json",
+    "validator": "tools/2026-08-03_validate_public_repository_privacy_v1.0.py",
+    "tests": "tests/2026-08-03_test_public_repository_privacy_v1.0.py",
+    "mode": "READ_ONLY_FAIL_CLOSED",
+    "ci_status": "PASS",
+    "history_rewrite": "SEPARATE_PROPORTIONALITY_DECISION_REQUIRED"
+  },
   "data_releases": [
     {"id":"DESI-DR2-BAO","reference":"arXiv:2503.14738","status":"MATERIAL_IDENTIFIED_NOT_INTEGRATED","required":["measurement_vector","covariance","ordering","likelihood","provenance_hashes"]},
     {"id":"DESI-DR2-LYA","reference":"arXiv:2503.14739","status":"MATERIAL_IDENTIFIED_NOT_INTEGRATED","required":["measurement_vector","covariance","cross_correlations","likelihood"]},
@@ -124,7 +137,9 @@
     "claim_register_g0": "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json",
     "research_continuation": "registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json",
     "r1_three_track_gate": "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json",
-    "session_checkpoint": "registry/session-checkpoint-latest.json"
+    "session_checkpoint": "registry/session-checkpoint-latest.json",
+    "public_privacy_contract": "registry/2026-08-03_UniverseLab_PublicPrivacyContract_v1.0.json",
+    "public_privacy_decision": "registry/2026-08-03_UniverseLab_PublicPrivacyDecision_v1.0.json"
   },
   "next_release_blockers": [
     "legacy_primary_source_recovery",
