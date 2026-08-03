@@ -1,0 +1,271 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.function-freeze.v0.1",
+  "date": "2026-08-03",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-FREEZE-1B",
+  "classification": "VERSIONED_PHYSICAL_CANDIDATE_MODEL_SELECTION_NOT_DERIVATION",
+  "status": "EXACT_FUNCTION_FAMILY_FROZEN_OPERATOR_CLOSURE_REMAINING",
+  "evidence_effect": "MODEL_DEFINITION_ONLY",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "purpose": "Select the smallest nontrivial exact bulk and cap function family compatible with the frozen C-PHYS parent action, dimensions, positivity requirements and information budget, without claiming derivation, background existence or physical confirmation.",
+  "dependencies": [
+    "hzt-s6-parent-action-v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"
+  ],
+  "track_firewall": {
+    "historical_A0_identity": "NOT_CLAIMED",
+    "C1_V_identity": "NOT_CLAIMED",
+    "C1_V_parameter_values_migrated": false,
+    "C1_V_numerical_results_used": false,
+    "selection_basis": "INDEPENDENT_MINIMALITY_POSITIVITY_AND_REDUNDANCY_AUDIT",
+    "verification_to_physics_bridge": "NOT_DEFINED"
+  },
+  "field_and_unit_conventions": {
+    "M6_dimension": "M^1",
+    "phi_dimension": "M^2",
+    "varphi_definition": "varphi=phi/M6^2",
+    "scalar_domain": "R",
+    "scalar_origin": "phi=0 is the unique minimum of U and the normalization point of Z_F",
+    "canonical_scalar_kinetic": "Z_phi=1",
+    "dimensionless_radial_coordinate": "x=M6*r",
+    "dimensionless_internal_radius": "ell=M6*L",
+    "dimensionless_gauge_potential": "a_chi=A_chi/M6",
+    "dimensionless_flux_constant": "q_s=Q_s/M6^3",
+    "dimensionless_curvatures": [
+      "k4=K4/M6^2",
+      "Lambda_hat=Lambda6/M6^2"
+    ]
+  },
+  "exact_functions": {
+    "U": {
+      "formula": "U(phi)=0.5*mhat_phi_sq*M6^6*varphi^2",
+      "dimension": "M^6",
+      "parameters": {
+        "mhat_phi_sq": "strictly_positive_dimensionless"
+      },
+      "derivatives": {
+        "U_at_0": "0",
+        "dU_dphi": "mhat_phi_sq*M6^4*varphi",
+        "d2U_dphi2": "mhat_phi_sq*M6^2"
+      },
+      "properties": [
+        "C_infinity_on_R",
+        "bounded_below_by_zero",
+        "unique_global_minimum_at_phi_zero",
+        "no_constant_term_to_avoid_double_counting_Lambda6"
+      ]
+    },
+    "Z_F": {
+      "formula": "Z_F(phi)=exp(-2*a_F*varphi)",
+      "dimension": "1",
+      "parameters": {
+        "a_F": "strictly_positive_dimensionless_in_active_branch"
+      },
+      "derivatives": {
+        "Z_F_at_0": "1",
+        "d_ln_Z_F_dphi": "-2*a_F/M6^2",
+        "d2_ln_Z_F_dphi2": "0"
+      },
+      "properties": [
+        "C_infinity_on_R",
+        "strictly_positive_for_all_finite_phi",
+        "nontrivial_bulk_scalar_flux_coupling",
+        "gauge_normalization_fixed_by_Z_F_at_0_equal_1"
+      ]
+    },
+    "lambda": {
+      "formula": "lambda(phi)=lambda_hat*M6^5",
+      "dimension": "M^5",
+      "parameters": {
+        "lambda_hat": "finite_real_dimensionless_fixed_per_model_instance"
+      },
+      "derivatives": {
+        "d_lambda_dphi": "0",
+        "d2_lambda_dphi2": "0"
+      },
+      "properties": [
+        "C_infinity_on_R",
+        "no_local_scalar_source_from_cap_tension",
+        "sign_sector_recorded_per_model_instance"
+      ]
+    },
+    "Z_sigma": {
+      "formula": "Z_sigma(phi)=z_sigma_hat*M6^3",
+      "dimension": "M^3",
+      "parameters": {
+        "z_sigma_hat": "strictly_positive_dimensionless"
+      },
+      "derivatives": {
+        "d_Z_sigma_dphi": "0",
+        "d2_Z_sigma_dphi2": "0"
+      },
+      "properties": [
+        "C_infinity_on_R",
+        "strictly_positive_on_active_winding_branch",
+        "no_local_scalar_source_from_winding_coefficient"
+      ]
+    }
+  },
+  "charge_normalization": {
+    "q_ref": "q_hat/M6",
+    "q_hat_domain": "strictly_positive_dimensionless",
+    "q_sigma": "m_sigma*q_ref",
+    "m_sigma_domain": "positive_integer",
+    "gauge_rescaling_status": "FIXED_BY_MAXWELL_NORMALIZATION_AND_Z_F_AT_0_EQUAL_1",
+    "q_hat_can_be_set_to_one_without_model_change": false
+  },
+  "dimensionless_model_parameter_vector": {
+    "ordered_parameters": [
+      "Lambda_hat",
+      "mhat_phi_sq",
+      "a_F",
+      "lambda_hat",
+      "z_sigma_hat",
+      "q_hat"
+    ],
+    "count": 6,
+    "domains": {
+      "Lambda_hat": "real",
+      "mhat_phi_sq": "strictly_positive",
+      "a_F": "strictly_positive_in_active_branch",
+      "lambda_hat": "real",
+      "z_sigma_hat": "strictly_positive",
+      "q_hat": "strictly_positive"
+    },
+    "dimensional_reconstruction_parameter": "M6_strictly_positive",
+    "fixed_within_one_model_instance": true,
+    "silent_promotion_to_shooting_variables": false
+  },
+  "discrete_sector": {
+    "N_F": "integer",
+    "N_sigma": "integer",
+    "m_sigma": "positive_integer",
+    "fixed_per_BVP_run": true,
+    "sector_change_requires_new_run_label": true
+  },
+  "redundancy_audit": {
+    "scalar_shift": "REMOVED_BY_U_MINIMUM_AT_PHI_ZERO_AND_Z_F_NORMALIZATION_AT_ZERO",
+    "scalar_rescaling": "REMOVED_BY_CANONICAL_KINETIC_NORMALIZATION_Z_PHI_EQUAL_1",
+    "scalar_reflection": "a_F_positive_selects_one_representative_of_phi_to_minus_phi_equivalence",
+    "bulk_vacuum_constant": "ASSIGNED_ONLY_TO_Lambda6_BECAUSE_U_AT_ZERO_EQUALS_ZERO",
+    "gauge_field_rescaling": "REMOVED_BY_MAXWELL_NORMALIZATION_AND_Z_F_AT_ZERO_EQUAL_1",
+    "warp_additive_shift": "REMOVED_BY_FREEZE_1A_FRAME_A_N_AT_ZERO_EQUAL_0",
+    "angular_rescaling": "REMOVED_BY_FREEZE_1A_Delta_chi_equal_2pi"
+  },
+  "nested_control_limits": {
+    "a_F_to_zero": {
+      "classification": "DECLARED_DECOUPLING_CONTROL_NOT_ACTIVE_C_PHYS_M1",
+      "effect": "Z_F_to_1_and_bulk_scalar_flux_source_vanishes",
+      "does_not_establish_C1_V_identity": true
+    },
+    "mhat_phi_sq_to_zero": {
+      "classification": "BOUNDARY_OF_PARAMETER_DOMAIN_NOT_ACTIVE_MODEL",
+      "risk": "scalar_shift_or_long_range_mode_and_loss_of_heavy_scalar_control"
+    },
+    "z_sigma_hat_to_zero": {
+      "classification": "BOUNDARY_OF_ACTIVE_WINDING_BRANCH",
+      "risk": "loss_of_cap_anisotropy_support"
+    }
+  },
+  "dimensionless_specialization": {
+    "rho_F_s": "0.5*q_s^2*exp(-8*A_s+2*a_F*varphi_s)",
+    "bulk_equations": {
+      "E_A": "4*A_s_xx+10*A_s_x^2-6*k4*exp(-2*A_s)+Lambda_hat+0.5*varphi_s_x^2+0.5*mhat_phi_sq*varphi_s^2-rho_F_s=0",
+      "E_ell": "ell_s_xx+3*A_s_xx*ell_s+6*A_s_x^2*ell_s+3*A_s_x*ell_s_x-3*k4*exp(-2*A_s)*ell_s+Lambda_hat*ell_s+ell_s*(0.5*varphi_s_x^2+0.5*mhat_phi_sq*varphi_s^2+rho_F_s)=0",
+      "E_varphi": "ell_s*varphi_s_xx+(4*A_s_x*ell_s+ell_s_x)*varphi_s_x-ell_s*mhat_phi_sq*varphi_s+2*a_F*ell_s*rho_F_s=0",
+      "E_gauge": "a_chi_s_x-q_s*ell_s*exp(-4*A_s+2*a_F*varphi_s)=0"
+    },
+    "rr_constraint": "ell_s*(-6*k4*exp(-2*A_s)+6*A_s_x^2+Lambda_hat)+4*A_s_x*ell_s_x-ell_s*(0.5*varphi_s_x^2-0.5*mhat_phi_sq*varphi_s^2+rho_F_s)=0",
+    "pole_coefficients": {
+      "a2_s": "(6*k4*exp(-2*A0_s)-Lambda_hat-0.5*mhat_phi_sq*varphi0_s^2+rho_F0_s)/8",
+      "f2_s": "(mhat_phi_sq*varphi0_s-2*a_F*rho_F0_s)/4",
+      "g2_s": "0.5*q_s*exp(-4*A0_s+2*a_F*varphi0_s)",
+      "l3_s": "(3*k4*exp(-2*A0_s)-12*a2_s-Lambda_hat-0.5*mhat_phi_sq*varphi0_s^2-rho_F0_s)/6"
+    },
+    "cap_quantities": {
+      "d_chi": "N_sigma-m_sigma*q_hat*a_chi_Sigma",
+      "Y_hat_sigma": "z_sigma_hat*d_chi^2/ell_Sigma^2",
+      "R_4d": "-3*A_hat_Sigma-L_hat_Sigma+lambda_hat+0.5*Y_hat_sigma=0",
+      "R_chi": "-4*A_hat_Sigma+lambda_hat-0.5*Y_hat_sigma=0",
+      "R_scalar": "varphi_N_x_at_cap+varphi_S_x_at_cap=0",
+      "R_gauge": "sum_s[q_s*exp(-4*A_s_at_cap)/ell_Sigma]-m_sigma*q_hat*z_sigma_hat*d_chi/ell_Sigma^2=0",
+      "R_patch": "a_chi_N_at_cap-a_chi_S_at_cap-N_F/q_hat=0"
+    }
+  },
+  "parameter_identifiability_budget": {
+    "model_shape_parameters": 6,
+    "dimensional_anchor_parameters": 1,
+    "continuous_BVP_unknowns": 8,
+    "independent_boundary_residuals": 8,
+    "background_level_identifiability": "OPEN",
+    "known_combination_risks": [
+      "bulk_flux_enters_through_q_s_squared_times_exp_2aFvarphi",
+      "cap_anisotropy_enters_through_z_sigma_hat_times_d_chi_squared",
+      "local_gauge_matching_contains_m_sigma*q_hat*z_sigma_hat*d_chi",
+      "M6_drops_out_of_dimensionless_background_and_requires_dimensional_reconstruction_or_4d_matching"
+    ],
+    "required_later": [
+      "continuum_Jacobian_with_respect_to_BVP_unknowns",
+      "sensitivity_matrix_with_respect_to_model_parameters",
+      "rank_and_prior_robustness_audit",
+      "controlled_6d_to_4d_normalization"
+    ],
+    "K1_D_effect": "NONE"
+  },
+  "selection_rationale": {
+    "accepted": [
+      "quadratic_U_is_the_unique_one_parameter_C_infinity_stabilizing_choice_after_removing_the_constant_term",
+      "exponential_Z_F_is_exact_strictly_positive_and_provides_one_nontrivial_bulk_scalar_flux_slope",
+      "constant_lambda_and_Z_sigma_minimize_cap_parameters_and_remove_local_scalar_forcing",
+      "all_function_derivatives_required_by_background_and_linearization_exist_globally"
+    ],
+    "deferred_or_rejected_for_M1": [
+      "linear_Z_F_can_cross_zero",
+      "constant_Z_F_is_only_the_declared_decoupling_control",
+      "linear_lambda_adds_an_unbounded_cap_slope_and_is_not_required_for_minimal_nontriviality",
+      "exponential_lambda_or_Z_sigma_adds_two_more_scalar slopes_before_identifiability_is_established",
+      "quartic_or_multiminimum_U_adds_parameters_and_branch structure not required for the first physical candidate"
+    ]
+  },
+  "gate_state": {
+    "FUNCTION_SELECTION": "PASS_POSTULATED_MODEL_FAMILY",
+    "MF_001_BULK_FUNCTIONS": "FROZEN_FOR_C_PHYS_M1",
+    "MF_002_CAP_FUNCTIONS": "FROZEN_FOR_C_PHYS_M1",
+    "R1.0": "ACTIVE_OPERATOR_CLOSURE_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "structural_BVP_count": "SQUARE_CONDITIONAL",
+    "continuum_BVP_operator": "SCAFFOLD_ONLY",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "perturbative_stability": "OPEN",
+    "ghost_freedom": "OPEN",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "No claim that the selected functions are uniquely derived from Hyperzeit first principles.",
+    "No historical A0 or C1-V model identity.",
+    "No numerical parameter values are inherited from C1-V or historical benchmarks.",
+    "No background existence, uniqueness, Fredholm, continuum-invertibility or stability claim.",
+    "No solver authorization and no K1-D or K1-E transition."
+  ],
+  "next_block": {
+    "id": "C-PHYS-R1.0-OPERATOR-2A",
+    "title": "Specialize the independent continuum equations and prove rr-constraint propagation",
+    "required_output": [
+      "symbolic Bianchi dependency identity",
+      "independent ODE set",
+      "higher-order pole series",
+      "constraint propagation test",
+      "principal-part and complementing-boundary-condition preflight"
+    ]
+  }
+}
