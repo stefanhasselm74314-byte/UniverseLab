@@ -1,0 +1,195 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.operator-2a.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-OPERATOR-2A",
+  "classification": "FORMAL_CONTINUUM_OPERATOR_CLOSURE_NOT_SOLVER_EXECUTION",
+  "status": "DIFFERENTIAL_OPERATOR_AND_CONSTRAINT_PROPAGATION_CLOSED_BOUNDARY_TRACE_INVERTIBILITY_OPEN",
+  "evidence_effect": "FORMAL_OPERATOR_STRUCTURE_ONLY",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"
+  ],
+  "track_firewall": {
+    "historical_A0_identity": "NOT_CLAIMED",
+    "C1_V_equations_used": false,
+    "C1_V_parameters_used": false,
+    "alternative_ME1_model_used": false,
+    "verification_to_physics_bridge": "NOT_DEFINED"
+  },
+  "dimensionless_variables": {
+    "x": "M6*r",
+    "ell": "M6*L",
+    "varphi": "phi/M6^2",
+    "a_chi": "A_chi/M6",
+    "q_s": "Q_s/M6^3",
+    "k4": "K4/M6^2",
+    "Lambda_hat": "Lambda6/M6^2"
+  },
+  "flux_density": {
+    "rho_F": "0.5*q_s^2*exp(-8*A+2*a_F*varphi)",
+    "derivative_identity": "rho_F_x=rho_F*(-8*A_x+2*a_F*varphi_x)",
+    "status": "DERIVED_FROM_M1_MAXWELL_FIRST_INTEGRAL"
+  },
+  "independent_bulk_residuals": {
+    "E_A": "4*A_xx+10*A_x^2-6*k4*exp(-2*A)+Lambda_hat+0.5*varphi_x^2+0.5*mhat_phi_sq*varphi^2-rho_F",
+    "E_ell": "ell_xx+3*A_xx*ell+6*A_x^2*ell+3*A_x*ell_x-3*k4*exp(-2*A)*ell+Lambda_hat*ell+ell*(0.5*varphi_x^2+0.5*mhat_phi_sq*varphi^2+rho_F)",
+    "E_varphi": "ell*varphi_xx+(4*A_x*ell+ell_x)*varphi_x-ell*mhat_phi_sq*varphi+2*a_F*ell*rho_F",
+    "E_gauge": "a_chi_x-q_s*ell*exp(-4*A+2*a_F*varphi)",
+    "status": "SPECIALIZED_EXACT_FOR_C_PHYS_M1"
+  },
+  "radial_constraint": {
+    "C_rr": "ell*(-6*k4*exp(-2*A)+6*A_x^2+Lambda_hat)+4*A_x*ell_x-ell*(0.5*varphi_x^2-0.5*mhat_phi_sq*varphi^2+rho_F)",
+    "off_shell_identity": "C_rr_x+4*A_x*C_rr=ell_x*E_A+4*A_x*E_ell-varphi_x*E_varphi",
+    "on_shell_identity": "C_rr_x=-4*A_x*C_rr",
+    "integrated_form": "C_rr(x)=C_rr(x0)*exp[-4*(A(x)-A(x0))]",
+    "conditions": [
+      "M1 Maxwell first integral holds so rho_F_x=rho_F*(-8*A_x+2*a_F*varphi_x)",
+      "profiles are differentiable on the open interval",
+      "the pole-regular limit satisfies C_rr=0 through the leading series equations"
+    ],
+    "status": "PROVEN_SYMBOLIC_CONDITIONAL_ON_INDEPENDENT_SYSTEM",
+    "BVP_role": "PROPAGATED_QA_CHANNEL_NOT_ADDITIONAL_ENDPOINT_RESIDUAL"
+  },
+  "pole_series": {
+    "ansatz": {
+      "A": "A0+a2*x^2+a4*x^4+O(x^6)",
+      "ell": "x+l3*x^3+l5*x^5+O(x^7)",
+      "varphi": "varphi0+f2*x^2+f4*x^4+O(x^6)",
+      "a_chi": "g2*x^2+g4*x^4+O(x^6)"
+    },
+    "definitions": {
+      "K0": "k4*exp(-2*A0)",
+      "R0": "0.5*q_s^2*exp(-8*A0+2*a_F*varphi0)",
+      "G2": "0.5*q_s*exp(-4*A0+2*a_F*varphi0)"
+    },
+    "leading_coefficients": {
+      "a2": "(6*K0-Lambda_hat-0.5*mhat_phi_sq*varphi0^2+R0)/8",
+      "f2": "(mhat_phi_sq*varphi0-2*a_F*R0)/4",
+      "l3": "(3*K0-12*a2-Lambda_hat-0.5*mhat_phi_sq*varphi0^2-R0)/6",
+      "g2": "G2"
+    },
+    "higher_coefficients": {
+      "a4": "-K0*a2/4-R0*a2/6+R0*a_F*f2/24-5*a2^2/6-f2^2/24-mhat_phi_sq*varphi0*f2/48",
+      "f4": "R0*a_F*a2-R0*a_F^2*f2/4-R0*a_F*l3/8-a2*f2-f2*l3/2+mhat_phi_sq*f2/16+mhat_phi_sq*varphi0*l3/16",
+      "g4": "g2*(-2*a2+a_F*f2+l3/2)",
+      "l5": "-3*K0*(2*a2-l3)/20-Lambda_hat*l3/20-R0*(-8*a2+2*a_F*f2+l3)/20-6*a2^2/5-6*a2*l3/5-12*a4/5-f2^2/10-mhat_phi_sq*varphi0*f2/20-mhat_phi_sq*varphi0^2*l3/40"
+    },
+    "status": "DERIVED_AND_SYMBOLICALLY_REGRESSION_TESTED",
+    "numerical_initialization_authorized": false
+  },
+  "principal_part": {
+    "profile_order": [
+      "A",
+      "ell",
+      "varphi",
+      "a_chi"
+    ],
+    "highest_derivative_order": [
+      2,
+      2,
+      2,
+      1
+    ],
+    "principal_matrix": [
+      [
+        "4",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "3*ell",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "ell",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "determinant": "4*ell",
+    "interior_domain": "ell>0",
+    "interior_status": "FULL_RANK",
+    "pole_status": "REGULAR_SINGULAR_BECAUSE_ELL_TO_ZERO",
+    "pole_resolution": "Use parity-factorized variables A=A0+x^2*Atilde(x^2), ell=x+x^3*elltilde(x^2), varphi=varphi0+x^2*vtilde(x^2), a_chi=x^2*gtilde(x^2).",
+    "status": "PASS_INTERIOR_CONDITIONAL_POLE_FACTORIZATION_REQUIRED"
+  },
+  "boundary_operator_audit": {
+    "independent_cap_residuals": [
+      "R_A",
+      "R_ell",
+      "R_varphi",
+      "R_patch",
+      "R_4d",
+      "R_chi",
+      "R_scalar",
+      "R_gauge_local"
+    ],
+    "structural_count": "EIGHT_CONTINUOUS_UNKNOWNS_EIGHT_RESIDUALS",
+    "PDE_Lopatinskii_language": "NOT_DIRECTLY_APPLICABLE_WITHOUT_QUALIFICATION_TO_THIS_ONE_DIMENSIONAL_REGULAR_SINGULAR_ODE_BVP",
+    "relevant_next_test": "Construct the linearized pole-regular endpoint trace map at an actual candidate background and test kernel, cokernel, determinant/singular spectrum and parameter augmentation.",
+    "background_available": false,
+    "linearized_trace_map_constructed": false,
+    "complementing_boundary_status": "NOT_PROVEN",
+    "Fredholm_status": "NOT_PROVEN",
+    "continuum_Jacobian": "NOT_CONSTRUCTED"
+  },
+  "operator_status": {
+    "differential_expression": "CLOSED_FOR_M1",
+    "constraint_dependency": "PROVEN_SYMBOLIC",
+    "pole_domain": "FORMALLY_DEFINED_BY_PARITY_FACTORIZATION",
+    "boundary_trace_map": "OPEN_PENDING_BACKGROUND",
+    "continuum_operator": "SPECIALIZED_FORMAL_OPERATOR_DEFINED",
+    "closed_operator_on_Banach_spaces": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "implicit_function_theorem": "NOT_ADMISSIBLE"
+  },
+  "gate_state": {
+    "R1.0": "ACTIVE_BOUNDARY_TRACE_AND_FUNCTION_SPACE_CLOSURE_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "structural_BVP_count": "SQUARE_CONDITIONAL",
+    "continuum_BVP_operator": "SPECIALIZED_FORMAL_OPERATOR_DEFINED",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "Constraint propagation does not prove existence or uniqueness of a background.",
+    "Interior principal rank does not prove a closed Fredholm boundary operator.",
+    "Higher pole series do not authorize a numerical solver.",
+    "A square endpoint count does not prove trace-map invertibility.",
+    "No R1.1, R1.2, solver, K1-D or K1-E release follows."
+  ],
+  "next_block": {
+    "id": "C-PHYS-R1.0-OPERATOR-2B",
+    "title": "Freeze weighted pole-regular function spaces and the linearized boundary trace contract",
+    "required_output": [
+      "precise domain and target Banach spaces",
+      "trace regularity at both poles and cap",
+      "closedness/density audit",
+      "linearized boundary operator template",
+      "kernel and cokernel test protocol",
+      "background prerequisite declaration"
+    ]
+  }
+}
