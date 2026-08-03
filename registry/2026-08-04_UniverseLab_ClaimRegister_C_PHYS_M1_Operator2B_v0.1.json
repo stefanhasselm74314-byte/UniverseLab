@@ -1,0 +1,78 @@
+{
+  "schema": "universelab.claim-register.c-phys-m1-operator-2b.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-OPERATOR-2B",
+  "claims": [
+    {
+      "claim_id": "C-PHYS-M1-OP2B-CLAIM-001",
+      "statement": "The fixed tau=y^2 affine chart with little-Holder profile spaces encodes the frozen smooth-pole parity conditions and defines a dense smooth profile core on two fixed unit intervals.",
+      "status": "PROVEN_CONDITIONAL",
+      "evidence_effect": "FORMAL_FUNCTION_SPACE_STRUCTURE_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": "Fixed 0<alpha_H<1, rho_N>0, rho_S>0, positive Lhat_s on [0,1], and the frozen M1 pole conventions.",
+      "dependencies": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md"
+      ],
+      "forbidden_inference": "The function-space chart does not establish a physical background, numerical well-posedness, Fredholmness or stability.",
+      "upgrade_condition": "A later block must preregister and construct a candidate background before the linearized operator can be evaluated."
+    },
+    {
+      "claim_id": "C-PHYS-M1-OP2B-CLAIM-002",
+      "statement": "After the declared regularization, the M1 bulk map G=(F_bulk,B) is a smooth Banach-space map on the positive admissible set and its fixed-background derivative is a bounded linear map between the declared spaces.",
+      "status": "PROVEN_CONDITIONAL",
+      "evidence_effect": "FORMAL_NONLINEAR_OPERATOR_TEMPLATE_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": "The exact M1 functions, fixed tau chart, little-Holder spaces, positive Lhat cone and fixed model and sector coefficients.",
+      "dependencies": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+        "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py"
+      ],
+      "forbidden_inference": "Smoothness and bounded derivative do not prove that G^{-1}(0) is nonempty or that the derivative is Fredholm or invertible.",
+      "upgrade_condition": "Evaluate the derivative only at a separately accepted candidate background and then perform kernel, cokernel and continuum-convergence audits."
+    },
+    {
+      "claim_id": "C-PHYS-M1-OP2B-CLAIM-003",
+      "statement": "The complete parameter-augmented linearized cap boundary operator is frozen as an 8 by 22 symbolic trace template, while its numerical matrix, rank, kernel and cokernel remain uncomputed.",
+      "status": "CONDITIONAL",
+      "evidence_effect": "LINEARIZED_TRACE_TEMPLATE_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": "The eight frozen M1 cap residuals, fourteen profile traces and eight continuous augmented parameter variations.",
+      "dependencies": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json"
+      ],
+      "forbidden_inference": "An 8 by 22 symbolic template and a square nonlinear BVP count are not a trace-rank, implicit-function or Fredholm result.",
+      "upgrade_condition": "Construct M_B at an accepted W_star and establish rank convergence after bulk linearized elimination using independent discretizations."
+    },
+    {
+      "claim_id": "C-PHYS-M1-OP2B-CLAIM-004",
+      "statement": "The little-Holder profile domain has a dense smooth core and the fixed-background bounded linearization has closed graph in the bounded-map sense; no unbounded single-ambient-space realization or Fredholm property is claimed.",
+      "status": "PROVEN_CONDITIONAL",
+      "evidence_effect": "DENSITY_AND_BOUNDED_GRAPH_CLOSEDNESS_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": "A fixed W_star in the admissible open set and the declared X-to-Y Banach-space realization.",
+      "dependencies": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json"
+      ],
+      "forbidden_inference": "Bounded-graph closedness does not imply Fredholmness, index zero, compact resolvent or invertibility.",
+      "upgrade_condition": "A separate unbounded realization and theorem are required for stronger closed-operator or Fredholm claims."
+    }
+  ],
+  "gate_state": {
+    "R1.0": "ACTIVE_BACKGROUND_PREREQUISITE_AND_FREDHOLM_ANALYSIS_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "continuum_BVP_operator": "FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED",
+    "full_linearized_boundary_trace_template": "DEFINED_NOT_EVALUATED",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}
