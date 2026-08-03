@@ -1,6 +1,6 @@
 {
   "schema": "universelab.project-manifest.v1",
-  "release": "2.2-g0-three-track-public-sanitized-v1.1",
+  "release": "2.2-g0-three-track-public-sanitized-v1.2",
   "release_date": "2026-08-03",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
@@ -41,7 +41,7 @@
     "NUM-002": "PARTIAL",
     "SCI-001": "PARTIAL",
     "SCI-002": "PARTIAL",
-    "PUBLIC_PRIVACY_GATE": "IMPLEMENTED_PENDING_BRANCH_CI"
+    "PUBLIC_PRIVACY_GATE": "PASS"
   },
   "governance_rules": [
     "technical_execution_is_not_physical_identification",
@@ -117,6 +117,7 @@
     "validator": "tools/2026-08-03_validate_public_repository_privacy_v1.0.py",
     "tests": "tests/2026-08-03_test_public_repository_privacy_v1.0.py",
     "mode": "READ_ONLY_FAIL_CLOSED",
+    "ci_status": "PASS",
     "history_rewrite": "SEPARATE_PROPORTIONALITY_DECISION_REQUIRED"
   },
   "data_releases": [
@@ -141,7 +142,6 @@
     "public_privacy_decision": "registry/2026-08-03_UniverseLab_PublicPrivacyDecision_v1.0.json"
   },
   "next_release_blockers": [
-    "public_privacy_ci_pass",
     "legacy_primary_source_recovery",
     "c_phys_exact_parent_action_and_model_freeze",
     "continuum_boundary_value_operator",
