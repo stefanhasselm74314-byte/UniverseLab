@@ -1,0 +1,63 @@
+name: UniverseLab MD-2S C1 dimensionless Jacobian
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json"
+      - "tools/2026-08-03_md2s_c1_dimensionless_jacobian_v0.1.py"
+      - "tests/2026-08-03_test_md2s_c1_dimensionless_jacobian_v0.1.py"
+      - ".github/workflows/2026-08-03_UniverseLab_MD2S_C1_DimensionlessJacobian_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json"
+      - "tools/2026-08-03_md2s_c1_dimensionless_jacobian_v0.1.py"
+      - "tests/2026-08-03_test_md2s_c1_dimensionless_jacobian_v0.1.py"
+      - ".github/workflows/2026-08-03_UniverseLab_MD2S_C1_DimensionlessJacobian_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-md2s-c1-dimensionless-jacobian:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON artifacts
+        run: |
+          python -m json.tool registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json >/dev/null
+          python -m json.tool science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json >/dev/null
+
+      - name: Compile evaluator and tests
+        run: |
+          python -m py_compile tools/2026-08-03_md2s_c1_dimensionless_jacobian_v0.1.py
+          python -m py_compile tests/2026-08-03_test_md2s_c1_dimensionless_jacobian_v0.1.py
+
+      - name: Run C1 dimensionless Jacobian tests
+        run: python tests/2026-08-03_test_md2s_c1_dimensionless_jacobian_v0.1.py
+
+      - name: Enforce diagnostic preflight
+        run: python tools/2026-08-03_md2s_c1_dimensionless_jacobian_v0.1.py --mode validate
+
+      - name: Verify governance firewall
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"solver_authorized": false' registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json
+          grep -q '"C1_CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN"' science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json
+          grep -q '"C1_OFFICIAL_SOLVER": "NOT_AUTHORIZED"' science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json
+          grep -q '"R1.1": "BLOCKED"' registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json
