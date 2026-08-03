@@ -1,0 +1,82 @@
+{
+  "schema": "universelab.c-phys-m1-operator-2b-status.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-OPERATOR-2B",
+  "classification": "FORMAL_FUNCTION_SPACE_AND_TRACE_CONTRACT_NO_BACKGROUND_SOLVE",
+  "status": "PASS_FORMAL_FUNCTION_SPACE_AND_TRACE_TEMPLATE",
+  "evidence_effect": "FORMAL_FUNCTIONAL_ANALYTIC_STRUCTURE_ONLY",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "canonical_sources": [
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md",
+    "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py",
+    "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py"
+  ],
+  "closed_results": {
+    "fixed_tau_pole_chart": "FROZEN",
+    "little_Holder_profile_spaces": "FROZEN",
+    "bulk_target_spaces": "FROZEN",
+    "ambient_profile_spaces": "FROZEN",
+    "positive_admissible_set": "FROZEN",
+    "regularized_bulk_operator": "DEFINED_C_INFINITY",
+    "pole_and_cap_trace_continuity": "PROVEN",
+    "nonlinear_operator_template": "DEFINED",
+    "linearized_boundary_trace_template": "DEFINED_NOT_EVALUATED",
+    "bounded_linearized_operator_template": "DEFINED",
+    "smooth_core_density": "PROVEN_BY_SPACE_DEFINITION",
+    "kernel_cokernel_protocol": "FROZEN_NOT_EXECUTED"
+  },
+  "open_results": {
+    "candidate_M1_background": "NOT_ESTABLISHED",
+    "numeric_boundary_matrix_M_B": "NOT_CONSTRUCTED",
+    "full_trace_rank": "NOT_PROVEN",
+    "kernel": "NOT_COMPUTED",
+    "cokernel": "NOT_COMPUTED",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "existence_and_uniqueness": "NOT_PROVEN",
+    "conditioning": "OPEN",
+    "perturbative_stability": "OPEN",
+    "ghost_freedom": "OPEN"
+  },
+  "numerical_QA": {
+    "symbolic_engine": "sympy==1.13.3",
+    "fixed_chart_derivative_identities": "PASS_EXACT_SYMBOLIC",
+    "endpoint_trace_identities": "PASS_EXACT_SYMBOLIC",
+    "cap_principal_determinant": "-4/ell_cap",
+    "regression_tests": "PASS",
+    "read_only_CI": "PASS"
+  },
+  "gate_state": {
+    "R1.0": "ACTIVE_BACKGROUND_PREREQUISITE_AND_FREDHOLM_ANALYSIS_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "continuum_BVP_operator": "FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED",
+    "weighted_function_spaces": "FROZEN",
+    "full_linearized_boundary_trace_template": "DEFINED_NOT_EVALUATED",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "No candidate background or physical solution is established.",
+    "No numerical boundary-trace rank follows from the 8 by 22 symbolic template.",
+    "No kernel, cokernel, Fredholm index or continuum Jacobian rank is established.",
+    "Bounded-map closedness is not an unbounded Fredholm realization.",
+    "No R1.1, R1.2, solver, K1-D or K1-E transition follows."
+  ],
+  "next_block": {
+    "id": "C-PHYS-R1.0-BACKGROUND-3A",
+    "title": "Preregister one candidate-background construction protocol without claiming existence",
+    "execution_type": "BACKGROUND_METHOD_PREREGISTRATION_NO_PHYSICAL_RELEASE"
+  }
+}

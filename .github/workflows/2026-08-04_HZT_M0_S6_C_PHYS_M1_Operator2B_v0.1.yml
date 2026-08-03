@@ -1,0 +1,75 @@
+name: HZT-M0-S6 C-PHYS-M1 Operator-2B
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md"
+      - "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2B_v0.1.txt"
+      - "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py"
+      - "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py"
+      - ".github/workflows/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2B_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md"
+      - "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2B_v0.1.txt"
+      - "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py"
+      - "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py"
+      - ".github/workflows/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2B_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-operator-2b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install exact symbolic dependency
+        run: |
+          python -m pip install --disable-pip-version-check \
+            -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2B_v0.1.txt
+
+      - name: Validate contract JSON
+        run: |
+          python -m json.tool registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json >/dev/null
+
+      - name: Compile verifier and tests
+        run: |
+          python -m py_compile tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py
+          python -m py_compile tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py
+
+      - name: Run exact chart and trace verification
+        run: python tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py --json
+
+      - name: Run regression tests
+        run: python tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py
+
+      - name: Enforce evidence and release firewall
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE=registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json
+          grep -q '"R1.1": "BLOCKED"' "$FILE"
+          grep -q '"R1.2": "BLOCKED"' "$FILE"
+          grep -q '"full_linearized_boundary_trace_template": "DEFINED_NOT_EVALUATED"' "$FILE"
+          grep -q '"full_linearized_boundary_trace_rank": "NOT_PROVEN"' "$FILE"
+          grep -q '"Fredholm_property": "NOT_PROVEN"' "$FILE"
+          grep -q '"continuum_BVP_Jacobian": "NOT_PROVEN"' "$FILE"
+          grep -q '"physical_background": "NOT_ESTABLISHED"' "$FILE"
+          grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' "$FILE"
+          grep -q '"K1-D": "NOT_RELEASED"' "$FILE"
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' "$FILE"
+          grep -q '"physical_evidence_effect": "NONE"' "$FILE"
+          grep -q '"numeric_matrix_constructed": false' "$FILE"
+          grep -q '"current_execution": "NOT_EXECUTED"' "$FILE"
