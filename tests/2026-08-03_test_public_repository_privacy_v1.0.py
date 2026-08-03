@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -10,6 +11,7 @@ MODULE_PATH = Path(__file__).resolve().parents[1] / "tools" / "2026-08-03_valida
 SPEC = importlib.util.spec_from_file_location("public_privacy", MODULE_PATH)
 assert SPEC and SPEC.loader
 public_privacy = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = public_privacy
 SPEC.loader.exec_module(public_privacy)
 
 
