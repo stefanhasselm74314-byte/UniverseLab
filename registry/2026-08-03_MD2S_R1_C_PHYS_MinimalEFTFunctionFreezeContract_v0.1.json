@@ -1,0 +1,281 @@
+{
+  "schema": "universelab.md2s-r1-c-phys.minimal-eft-function-freeze.v0.1",
+  "date": "2026-08-03",
+  "track_id": "MD2S-R1-C-PHYS",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-FREEZE-1B",
+  "model_family_id": "C-PHYS-ME1",
+  "classification": "VERSIONED_MODEL_SELECTION_NOT_DERIVATION",
+  "status": "MINIMAL_EFT_FUNCTION_FAMILY_SELECTED_BENCHMARK_INSTANCE_OPEN",
+  "evidence_effect": "MODEL_DEFINITION_ONLY",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "purpose": "Select one exact minimal Einstein-Maxwell-scalar-plus-cap EFT function family, scalar domain and charge normalization for the current canonical physical rebuild without importing C1-V parameters, unreproduced historical benchmarks or observational fits.",
+  "dependencies": [
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json",
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"
+  ],
+  "track_firewall": {
+    "historical_A0_identity": "NOT_CLAIMED",
+    "historical_parameter_values_used": false,
+    "C1_V_parameter_values_migrated": false,
+    "C1_V_functional_forms_migrated": false,
+    "observational_fit_used_to_select_functions": false,
+    "selection_basis": "minimality, regularity, positivity, redundancy removal and explicit identifiability budget",
+    "verification_to_physics_bridge": "NOT_DEFINED"
+  },
+  "field_normalization_and_domain": {
+    "canonical_scalar_kinetic": "-1/2 g^MN partial_M phi partial_N phi",
+    "phi_dimension": "M^2",
+    "dimensionless_scalar": "varphi=phi/M6^2",
+    "scalar_domain_phi": "all real numbers",
+    "scalar_domain_varphi": "R",
+    "domain_status": "FROZEN",
+    "reason": "All selected functions are C-infinity and nonsingular for every real varphi, so no artificial field cutoff is introduced."
+  },
+  "exact_functions": {
+    "U": {
+      "formula": "U(phi)=1/2*m_phi^2*phi^2",
+      "equivalent_dimensionless_formula": "U(phi)=M6^6*(1/2*mu_phi_sq*varphi^2)",
+      "coefficient_relation": "mu_phi_sq=m_phi^2/M6^2",
+      "function_dimension": "M^6",
+      "coefficient_dimensions": {
+        "m_phi^2": "M^2",
+        "mu_phi_sq": "dimensionless"
+      },
+      "coefficient_domain": "mu_phi_sq>0",
+      "derivatives": {
+        "U_phi": "m_phi^2*phi",
+        "U_phiphi": "m_phi^2"
+      },
+      "regularity": "C-infinity on R",
+      "boundedness": "U>=0 with unique minimum at phi=0",
+      "selection_reason": "Lowest-degree bounded potential compatible with the fixed canonical scalar normalization. The constant term is omitted because it is exactly redundant with Lambda6; positive mass removes the scalar-shift zero-mode surface from the active family."
+    },
+    "Z_F": {
+      "formula": "Z_F(phi)=1",
+      "function_dimension": "dimensionless",
+      "coefficient_domain": "no additional coefficient",
+      "derivatives": {
+        "Z_F_phi": "0",
+        "partial_phi_ln_Z_F": "0"
+      },
+      "regularity": "C-infinity on R",
+      "positivity": "strictly positive",
+      "selection_reason": "Canonical constant Maxwell kinetic function is the minimal positive choice and adds no untested scalar-flux coupling."
+    },
+    "lambda": {
+      "formula": "lambda(phi)=M6^5*tau*exp(alpha*varphi)",
+      "function_dimension": "M^5",
+      "coefficient_dimensions": {
+        "tau": "dimensionless",
+        "alpha": "dimensionless"
+      },
+      "coefficient_domains": {
+        "tau": "tau>0",
+        "alpha": "alpha>0"
+      },
+      "derivatives": {
+        "lambda_phi": "M6^3*tau*alpha*exp(alpha*varphi)",
+        "lambda_phiphi": "M6*tau*alpha^2*exp(alpha*varphi)"
+      },
+      "regularity": "C-infinity on R",
+      "positivity": "strictly positive with infimum zero",
+      "selection_reason": "Two-parameter positive cap tension with a nonzero scalar source and no independent higher Taylor coefficients. It relates value, slope and curvature rather than introducing three unrelated local cap coefficients."
+    },
+    "Z_sigma": {
+      "formula": "Z_sigma(phi)=M6^3*z_sigma",
+      "function_dimension": "M^3",
+      "coefficient_dimensions": {
+        "z_sigma": "dimensionless"
+      },
+      "coefficient_domain": "z_sigma>0",
+      "derivatives": {
+        "Z_sigma_phi": "0",
+        "Z_sigma_phiphi": "0"
+      },
+      "regularity": "C-infinity on R",
+      "positivity": "strictly positive",
+      "selection_reason": "Lowest-complexity positive winding coefficient. Scalar dependence is excluded until demanded by a later versioned model extension."
+    }
+  },
+  "charge_normalization": {
+    "q_ref": "1/M6",
+    "dimensionless_q_ref": "M6*q_ref=1",
+    "domain": "strictly positive",
+    "status": "FROZEN_AS_MODEL_POSTULATE",
+    "not_a_coordinate_convention": true,
+    "reason": "Delta_chi and Maxwell normalization are already frozen, so q_ref cannot be removed by angular or gauge-field rescaling. The choice defines the minimal C-PHYS-ME1 charge unit.",
+    "cap_charge": "q_sigma=m_sigma/M6",
+    "m_sigma_domain": "positive integer"
+  },
+  "specialized_parent_data": {
+    "bulk_flux_density": "rho_F_s=Q_s^2*exp(-8*A_s)/2",
+    "bulk_scalar_equation": "L_s*phi_s''+(4*A_s'*L_s+L_s')*phi_s'-L_s*m_phi^2*phi_s=0",
+    "cap_common_scalar": "phi_cap=phi_N(rho_N)=phi_S(rho_S)",
+    "oriented_scalar_derivative_sum": "Phi_Sigma=sum_s n_s*phi_s'(rho_s)",
+    "cap_scalar_residual": "R_scalar=Phi_Sigma+M6^3*tau*alpha*exp(alpha*phi_cap/M6^2)=0",
+    "winding_energy": "Y_sigma=M6^3*z_sigma*d_chi^2/L_cap^2",
+    "gauge_invariant_winding": "d_chi=N_sigma-(m_sigma/M6)*A_chi_cap",
+    "patch_residual": "R_patch=A_chi_N(rho_N)-A_chi_S(rho_S)-N_F*M6=0",
+    "patch_flux_counting": "R_patch and global flux are one condition under the frozen two-patch convention"
+  },
+  "minimality_and_redundancy_audit": {
+    "removed_exact_redundancies": [
+      "A constant U0 is omitted because M6^4*Lambda6+U0 enters as one bulk vacuum-energy combination.",
+      "The sign of alpha is fixed positive because phi->-phi maps alpha->-alpha while U is even and Z_F and Z_sigma are constant.",
+      "The additive warp redundancy is already removed by A_N(0)=0.",
+      "Angular rescaling is already removed by Delta_chi=2*pi.",
+      "Patch and flux residuals are counted once."
+    ],
+    "not_redundant_after_frozen_normalizations": [
+      "mu_phi_sq cannot be absorbed because the scalar kinetic term is canonical.",
+      "alpha cannot be absorbed because the scalar normalization is canonical.",
+      "tau cannot be removed after the scalar origin is fixed by the minimum of U.",
+      "z_sigma cannot be absorbed because the cap phase periodicity and charge lattice are fixed.",
+      "q_ref is a physical model normalization after the Maxwell and angular conventions are fixed."
+    ],
+    "excluded_extensions": [
+      "U quartic and higher powers",
+      "nonconstant Z_F",
+      "independent polynomial cap-tension coefficients",
+      "nonconstant Z_sigma",
+      "Gauss-Bonnet terms",
+      "additional bulk fields",
+      "C1-V parameter import"
+    ]
+  },
+  "positivity_and_boundedness_audit": {
+    "U_bounded_below": true,
+    "Z_F_strictly_positive": true,
+    "lambda_strictly_positive": true,
+    "Z_sigma_strictly_positive": true,
+    "no_function_singularity_on_scalar_domain": true,
+    "background_ghost_freedom_proven": false,
+    "perturbative_stability_proven": false,
+    "clarification": "Function-level positivity is necessary input hygiene only and is not a proof of the full perturbative kinetic matrix."
+  },
+  "parameter_identifiability_budget": {
+    "dimension_setting_scale": {
+      "parameter": "M6",
+      "role": "positive external unit and gravitational scale",
+      "dimensionless_background_identifiability": "NOT_IDENTIFIABLE_SEPARATELY",
+      "required_external_bridge": "four-dimensional normalization and observable map"
+    },
+    "continuous_dimensionless_model_parameters": [
+      "Lambda6_hat=Lambda6/M6^2",
+      "mu_phi_sq=m_phi^2/M6^2",
+      "tau",
+      "alpha",
+      "z_sigma"
+    ],
+    "continuous_model_parameter_count": 5,
+    "fixed_dimensionless_normalizations": [
+      "Z_F=1",
+      "M6*q_ref=1",
+      "Delta_chi=2*pi",
+      "Z_phi=1"
+    ],
+    "fixed_discrete_labels_per_model_run": [
+      "N_F in Z",
+      "N_sigma in Z",
+      "m_sigma in Z_positive"
+    ],
+    "continuous_shooting_or_eigen_unknowns": [
+      "phi_N(0)",
+      "Q_N",
+      "A_S(0)",
+      "phi_S(0)",
+      "Q_S",
+      "rho_N",
+      "rho_S",
+      "K4"
+    ],
+    "continuous_shooting_unknown_count": 8,
+    "independent_boundary_residual_count": 8,
+    "structural_count": "SQUARE_FUNCTIONALLY_SPECIALIZED_CONDITIONAL",
+    "known_sampling_structure": [
+      "Bulk profiles sample Lambda6_hat and mu_phi_sq over both radial regions.",
+      "Cap junctions sample tau*exp(alpha*varphi_cap), alpha and z_sigma through local combinations.",
+      "A single background may exhibit strong tau-alpha-varphi_cap correlation even though no exact algebraic redundancy remains.",
+      "Integer sectors are labels, not differentiable fit parameters."
+    ],
+    "not_yet_established": [
+      "continuum structural identifiability",
+      "continuum Jacobian rank",
+      "practical identifiability",
+      "conditioning",
+      "parameter posterior",
+      "observable identifiability"
+    ],
+    "fit_authorized": false
+  },
+  "model_instance_rule": {
+    "one_instance_requires": [
+      "one fixed tuple (Lambda6_hat,mu_phi_sq,tau,alpha,z_sigma)",
+      "one fixed discrete sector (N_F,N_sigma,m_sigma)",
+      "one declared numerical precision and dimensionless normalization"
+    ],
+    "parameter_scans": "Each scan point is a separately labeled model instance; model parameters must never be promoted silently to shooting unknowns.",
+    "benchmark_instance_selected": false
+  },
+  "closed_items": [
+    "exact U(phi)",
+    "exact Z_F(phi)",
+    "exact lambda(phi)",
+    "exact Z_sigma(phi)",
+    "scalar domain R",
+    "q_ref=1/M6 normalization",
+    "coefficient dimensions and domains",
+    "function-level positivity and boundedness audit",
+    "exact-redundancy audit",
+    "five-parameter continuous model-family budget"
+  ],
+  "open_items": [
+    "benchmark continuous parameter tuple",
+    "benchmark discrete sector",
+    "dimensionless specialized operator normalization",
+    "constraint propagation proof",
+    "principal-symbol and complementing-boundary-condition audit",
+    "Fredholm property",
+    "continuum Jacobian construction and rank",
+    "physical background existence",
+    "perturbative stability and ghost freedom",
+    "four-dimensional observable bridge"
+  ],
+  "gate_state": {
+    "R1.0": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "R1.0_substate": "FUNCTION_FAMILY_FROZEN_BENCHMARK_INSTANCE_OPEN",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "structural_BVP_count": "SQUARE_FUNCTIONALLY_SPECIALIZED_CONDITIONAL",
+    "continuum_BVP_operator": "SCAFFOLD_ONLY",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "The selected functions are a postulate, not a derivation from data, C1-V or historical A0 material.",
+    "Function-level positivity is not perturbative ghost freedom or stability.",
+    "A square functionally specialized count is not existence, uniqueness, Fredholm property or continuum invertibility.",
+    "No physical background has been solved.",
+    "No parameter fit or observable prediction is authorized.",
+    "No R1.1, R1.2, solver, K1-D or K1-E release follows."
+  ],
+  "next_block": {
+    "id": "C-PHYS-R1.0-FREEZE-1C",
+    "title": "Freeze one benchmark model instance, discrete sector and dimensionless normalization",
+    "execution_type": "PREREGISTERED_MODEL_INSTANCE_DEFINITION_NO_SOLVER",
+    "required_output": [
+      "fixed dimensionless continuous parameter tuple",
+      "fixed integer sector",
+      "dimensionless variables and residual scales",
+      "naturalness and hierarchy ledger",
+      "pre-solver regularity and identifiability preflight"
+    ]
+  }
+}
