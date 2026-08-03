@@ -1,0 +1,112 @@
+{
+  "schema": "universelab.c-phys-freeze-1b-status.v0.1",
+  "date": "2026-08-03",
+  "track_id": "MD2S-R1-C-PHYS",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-FREEZE-1B",
+  "model_family_id": "C-PHYS-ME1",
+  "classification": "VERSIONED_MODEL_SELECTION_NOT_DERIVATION",
+  "status": "PASS_MODEL_DEFINITION_ONLY",
+  "overall_track_status": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+  "R1_0_substate": "FUNCTION_FAMILY_FROZEN_BENCHMARK_INSTANCE_OPEN",
+  "evidence_effect": "MODEL_DEFINITION_ONLY",
+  "physical_evidence_effect": "NONE",
+  "result": {
+    "U_phi": "FROZEN_QUADRATIC_POSITIVE_MASS",
+    "Z_F_phi": "FROZEN_CONSTANT_ONE",
+    "lambda_phi": "FROZEN_POSITIVE_EXPONENTIAL",
+    "Z_sigma_phi": "FROZEN_POSITIVE_CONSTANT",
+    "scalar_domain": "FROZEN_ALL_REAL",
+    "q_ref_normalization": "FROZEN_q_ref_EQUALS_1_OVER_M6",
+    "continuous_dimensionless_model_parameter_count": 5,
+    "structural_BVP_count": "SQUARE_FUNCTIONALLY_SPECIALIZED_CONDITIONAL",
+    "benchmark_instance": "OPEN",
+    "physical_background": "NOT_SOLVED"
+  },
+  "canonical_sources": [
+    "registry/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_MinimalEFTFunctionFreezeLedger_v0.1.md",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
+  ],
+  "selected_functions": {
+    "U": "U(phi)=1/2*m_phi^2*phi^2 with m_phi^2/M6^2>0",
+    "Z_F": "Z_F(phi)=1",
+    "lambda": "lambda(phi)=M6^5*tau*exp(alpha*phi/M6^2) with tau>0 and alpha>0",
+    "Z_sigma": "Z_sigma(phi)=M6^3*z_sigma with z_sigma>0"
+  },
+  "model_parameter_budget": {
+    "dimension_setting_scale": "M6>0",
+    "continuous_dimensionless_parameters": [
+      "Lambda6_hat",
+      "mu_phi_sq",
+      "tau",
+      "alpha",
+      "z_sigma"
+    ],
+    "count": 5,
+    "fixed_normalizations": [
+      "Z_phi=1",
+      "Z_F=1",
+      "Delta_chi=2*pi",
+      "M6*q_ref=1"
+    ],
+    "discrete_labels_per_run": [
+      "N_F",
+      "N_sigma",
+      "m_sigma"
+    ]
+  },
+  "closed_items": [
+    "exact U(phi)",
+    "exact Z_F(phi)",
+    "exact lambda(phi)",
+    "exact Z_sigma(phi)",
+    "scalar domain R",
+    "q_ref=1/M6 normalization",
+    "coefficient dimensions and domains",
+    "exact-redundancy audit",
+    "function-level positivity and boundedness audit",
+    "continuous model-family identifiability budget"
+  ],
+  "remaining_model_freeze_items": [
+    "one benchmark continuous parameter tuple",
+    "one benchmark integer sector",
+    "dimensionless variable and residual normalization",
+    "naturalness and hierarchy assumptions"
+  ],
+  "remaining_mathematical_gates": [
+    "constraint propagation proof",
+    "principal symbol and complementing boundary-condition audit",
+    "Fredholm property",
+    "continuum Jacobian construction and rank",
+    "physical background existence",
+    "perturbative stability and ghost freedom"
+  ],
+  "gate_state": {
+    "R1.0": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "R1.0_substate": "FUNCTION_FAMILY_FROZEN_BENCHMARK_INSTANCE_OPEN",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "structural_BVP_count": "SQUARE_FUNCTIONALLY_SPECIALIZED_CONDITIONAL",
+    "continuum_BVP_operator": "SCAFFOLD_ONLY",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "No historical A0 reconstruction.",
+    "No C1-V migration.",
+    "No observational derivation or parameter fit.",
+    "No physical background solution.",
+    "No perturbative stability or ghost-freedom result.",
+    "No solver, R1.1, R1.2, K1-D or K1-E release."
+  ],
+  "next_block": {
+    "id": "C-PHYS-R1.0-FREEZE-1C",
+    "title": "Freeze one benchmark model instance, discrete sector and dimensionless normalization",
+    "classification": "PREREGISTERED_MODEL_INSTANCE_DEFINITION_NO_SOLVER"
+  }
+}
