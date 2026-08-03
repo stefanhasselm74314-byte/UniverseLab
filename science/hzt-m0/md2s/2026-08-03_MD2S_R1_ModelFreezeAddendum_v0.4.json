@@ -1,0 +1,56 @@
+{
+  "schema": "universelab.md2s-r1-model-freeze-addendum.v0.4",
+  "date": "2026-08-03",
+  "supersedes_addendum": "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.3.json",
+  "status": "ACTIVE_CANDIDATE_BRANCH_PREFLIGHT",
+  "evidence_effect": "NONE",
+  "official_solver_authorized": false,
+  "candidate_model": {
+    "model_id": "HZT-M0-S6-C1",
+    "definition_status": "CANDIDATE_FROZEN_FOR_PREFLIGHT",
+    "historical_A0_identity": "NOT_CLAIMED",
+    "source": "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json"
+  },
+  "overall_reconstruction_status": {
+    "MF-001": "PARTIAL_STRUCTURAL_FREEZE",
+    "MF-002": "PARTIAL_STRUCTURAL_FREEZE",
+    "MF-003": "PARTIAL_CONDITIONAL",
+    "MF-004": "PARTIAL_CONDITIONAL",
+    "MF-005": "PARTIAL_CONDITIONAL",
+    "MF-006": "PARTIAL_STRUCTURAL_FREEZE",
+    "MF-007": "PARTIAL"
+  },
+  "candidate_specific_status": {
+    "C1_MF-001_FUNCTIONS": "CANDIDATE_FROZEN",
+    "C1_MF-002_LOCALIZED_FUNCTIONS": "CANDIDATE_FROZEN",
+    "C1_MF-006_PARAMETER_AND_CHARGE_CONTRACT": "CANDIDATE_FROZEN",
+    "C1_TOPOLOGY": "CANDIDATE_FROZEN",
+    "C1_FRAME_AND_GAUGE_PATCH": "CANDIDATE_FROZEN",
+    "C1_BVP_DEGREE_COUNT": "STRUCTURAL_PREFLIGHT_PASS",
+    "C1_MAX_STRUCTURAL_RANK": 8,
+    "C1_ACTUAL_JACOBIAN_RANK": "OPEN",
+    "C1_BACKGROUND_EXISTENCE": "OPEN",
+    "C1_NUMERICAL_CONDITIONING": "OPEN",
+    "C1_STABILITY": "OPEN"
+  },
+  "bvp_count": {
+    "continuous_unknowns": 8,
+    "independent_residuals": 8,
+    "K4_role": "eigenvalue",
+    "fixed_K4_variant": "generically_codimension_one"
+  },
+  "rank_risks": [
+    "m_phi_sq=0 and lambda1=0 creates a scalar shift symmetry",
+    "fixing K4 without promoting one model parameter leaves one equation surplus",
+    "structural rank does not establish actual Jacobian rank"
+  ],
+  "governance": {
+    "R1_1": "BLOCKED",
+    "R1_1_PREFLIGHT": "STRUCTURAL_PASS_ONLY",
+    "MD2S_SOLVER": "NOT_AUTHORIZED",
+    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_exact_action": "Define the dimensionless C1 variable map, normalized residual scales and tolerances, derive an analytic seed or continuation anchor, then construct the actual symbolic or automatic-differentiation Jacobian without yet running an official global BVP solver."
+}
