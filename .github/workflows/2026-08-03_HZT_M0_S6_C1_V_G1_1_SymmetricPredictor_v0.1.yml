@@ -4,7 +4,12 @@ on:
   pull_request:
     paths:
       - "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json"
+      - "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json"
+      - "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.1.json"
+      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.8.json"
+      - "registry/session-checkpoint-latest.json"
       - "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorLedger_v0.1.md"
+      - "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorEvaluations_v0.1.csv"
       - "tools/2026-08-03_hzt_m0_s6_c1_v_g1_1_symmetric_predictor_v0.1.py"
       - "tests/2026-08-03_test_hzt_m0_s6_c1_v_g1_1_symmetric_predictor_v0.1.py"
       - "tools/2026-08-03_md2s_c1_dimensionless_jacobian_v0.1.py"
@@ -14,7 +19,12 @@ on:
     branches: [main]
     paths:
       - "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json"
+      - "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json"
+      - "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.1.json"
+      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.8.json"
+      - "registry/session-checkpoint-latest.json"
       - "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorLedger_v0.1.md"
+      - "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorEvaluations_v0.1.csv"
       - "tools/2026-08-03_hzt_m0_s6_c1_v_g1_1_symmetric_predictor_v0.1.py"
       - "tests/2026-08-03_test_hzt_m0_s6_c1_v_g1_1_symmetric_predictor_v0.1.py"
       - "tools/2026-08-03_md2s_c1_dimensionless_jacobian_v0.1.py"
@@ -37,15 +47,20 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Validate preregistration JSON
-        run: python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json >/dev/null
+      - name: Validate registered JSON artifacts
+        run: |
+          python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.8.json >/dev/null
+          python -m json.tool registry/session-checkpoint-latest.json >/dev/null
 
       - name: Compile evaluator and tests
         run: |
           python -m py_compile tools/2026-08-03_hzt_m0_s6_c1_v_g1_1_symmetric_predictor_v0.1.py
           python -m py_compile tests/2026-08-03_test_hzt_m0_s6_c1_v_g1_1_symmetric_predictor_v0.1.py
 
-      - name: Run contract tests
+      - name: Run result contract tests
         run: python tests/2026-08-03_test_hzt_m0_s6_c1_v_g1_1_symmetric_predictor_v0.1.py
 
       - name: Execute preregistered predictor-only diagnostic
@@ -83,29 +98,36 @@ jobs:
               )
           for key, value in data["checks"].items():
               print("CHECK", key, "=", value)
+          print("G1.1 =", data["gate_state"]["G1.1"])
           print("C1-V3 =", data["gate_state"]["C1-V3"])
           print("K1-D =", data["gate_state"]["K1-D"])
           print("K1-E =", data["gate_state"]["K1-E"])
           print("PHYSICAL_EVIDENCE_EFFECT =", data["gate_state"]["physical_evidence_effect"])
           PY
 
-      - name: Enforce execution firewall
+      - name: Enforce execution firewall and recorded result
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          data = json.loads(Path("artifacts/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictor_Run_v0.1.json").read_text())
-          assert data["nonlinear_corrector_implemented"] is False
-          assert data["root_solver_implemented"] is False
-          assert data["branch_tracking_implemented"] is False
-          assert data["second_derivative_computed"] is False
-          assert data["gate_state"]["C1-V3"] == "PARTIAL"
-          assert data["gate_state"]["C1-V4"] == "NOT_STARTED"
-          assert data["gate_state"]["R1.1"] == "BLOCKED"
-          assert data["gate_state"]["official_MD2S_solver"] == "NOT_AUTHORIZED"
-          assert data["gate_state"]["K1-D"] == "NOT_RELEASED"
-          assert data["gate_state"]["K1-E"] == "NOT_ADMISSIBLE"
-          assert data["gate_state"]["physical_evidence_effect"] == "NONE"
+          run = json.loads(Path("artifacts/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictor_Run_v0.1.json").read_text())
+          recorded = json.loads(Path("registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json").read_text())
+          assert run["status"] == "PASS_DIAGNOSTIC"
+          assert run["result_status"] == "NUMERICALLY_CONFIRMED"
+          assert all(run["checks"].values())
+          assert recorded["phase_result"] == "PASS_DIAGNOSTIC"
+          assert recorded["status"] == "NUMERICALLY_CONFIRMED"
+          assert run["nonlinear_corrector_implemented"] is False
+          assert run["root_solver_implemented"] is False
+          assert run["branch_tracking_implemented"] is False
+          assert run["second_derivative_computed"] is False
+          assert run["gate_state"]["C1-V3"] == "PARTIAL"
+          assert run["gate_state"]["C1-V4"] == "NOT_STARTED"
+          assert run["gate_state"]["R1.1"] == "BLOCKED"
+          assert run["gate_state"]["official_MD2S_solver"] == "NOT_AUTHORIZED"
+          assert run["gate_state"]["K1-D"] == "NOT_RELEASED"
+          assert run["gate_state"]["K1-E"] == "NOT_ADMISSIBLE"
+          assert run["gate_state"]["physical_evidence_effect"] == "NONE"
           PY
 
       - name: Upload diagnostic run artifact
