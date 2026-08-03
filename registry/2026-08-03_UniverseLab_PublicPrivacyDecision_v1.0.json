@@ -1,0 +1,18 @@
+{
+  "schema": "universelab.decision.v1",
+  "decision_id": "UL-DEC-0015",
+  "date": "2026-08-03",
+  "topic": "public_repository_privacy_remediation",
+  "decision": "Public UniverseLab provenance retains only sanitized scientific and governance information. Conversation identifiers, attachment identifiers, personalized private archive names, raw dialogue and detailed account-export metadata are prohibited. A repository-wide read-only fail-closed privacy scan is required for affected public changes.",
+  "status": "ACTIVE",
+  "reason": "The previous memory validator covered only a narrow file set and did not prevent unnecessary account and archive metadata from remaining in a public repository.",
+  "sources": [
+    "governance/UNIVERSELAB_MEMORY_PROTOCOL_v1.0.md",
+    "registry/2026-08-03_UniverseLab_PublicPrivacyContract_v1.0.json",
+    "tools/validate_public_repository_privacy.py",
+    "tests/test_public_repository_privacy.py"
+  ],
+  "evidence_effect": "SOFTWARE_QUALITY_AND_PRIVACY_GATE",
+  "physical_evidence_effect": "NONE",
+  "supersedes": null
+}
