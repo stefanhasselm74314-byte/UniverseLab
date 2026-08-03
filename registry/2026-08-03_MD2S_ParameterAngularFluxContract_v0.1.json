@@ -1,0 +1,140 @@
+{
+  "schema": "universelab.md2s-parameter-angular-flux-contract.v0.1",
+  "date": "2026-08-03",
+  "branch": "HZT-M0-S6 / MD-2S / canonical rebuild",
+  "status": "PARTIAL_STRUCTURAL_FREEZE",
+  "evidence_effect": "NONE",
+  "solver_authorized": false,
+  "source_ledger": "science/hzt-m0/md2s/2026-08-03_MD2S_ParameterAngularFluxDependencyLedger_v0.1.md",
+  "coordinate_contract": {
+    "r_dimension": "M^-1",
+    "chi_dimension": "1",
+    "chi_period": "Delta_chi",
+    "Delta_chi_domain": ">0",
+    "metric_internal": "dr^2+L(r)^2 dchi^2",
+    "L_dimension": "M^-1"
+  },
+  "dimensions": {
+    "kappa6_squared": "M^-4",
+    "Lambda_geom": "M^2",
+    "K4": "M^2",
+    "phi": "M^2",
+    "U": "M^6",
+    "Z_phi": "1",
+    "Z_F": "1",
+    "lambda": "M^5",
+    "Z_sigma": "M^3",
+    "sigma": "1",
+    "q_sigma": "M^-1",
+    "q_ref": "M^-1",
+    "A_chi": "M",
+    "F_rchi": "M^2",
+    "Q": "M^3",
+    "Phi_F": "M",
+    "rho_cap": "M^-1",
+    "A_Sigma": "M",
+    "L_Sigma": "M",
+    "X_sigma": "M^2",
+    "Y_sigma": "M^5"
+  },
+  "domains": {
+    "kappa6_squared": "strictly_positive",
+    "Delta_chi": "strictly_positive",
+    "Z_phi": "strictly_positive_on_background_domain",
+    "Z_F": "strictly_positive_on_background_domain",
+    "Z_sigma": "nonnegative_for_minimal_healthy_winding_branch",
+    "N_sigma": "integer",
+    "N_F": "integer",
+    "normal_r": "plus_or_minus_one",
+    "L_interior": "strictly_positive"
+  },
+  "functional_requirements": {
+    "background_minimum": "C1",
+    "linearization_minimum": "C2_when_second_function_derivatives_enter",
+    "exact_U": "OPEN",
+    "exact_Z_phi": "OPEN",
+    "exact_Z_F": "OPEN",
+    "exact_lambda": "OPEN",
+    "exact_Z_sigma": "OPEN"
+  },
+  "winding_contract": {
+    "single_valuedness": "sigma(chi+Delta_chi)-sigma(chi)=2 pi N_sigma",
+    "gradient": "partial_chi sigma=2 pi N_sigma/Delta_chi",
+    "gauge_invariant_d_chi": "2 pi N_sigma/Delta_chi-q_sigma A_chi",
+    "X_sigma": "d_chi^2/L^2",
+    "Y_sigma": "Z_sigma X_sigma",
+    "Delta_chi_2pi_specialization": "partial_chi sigma=N_sigma"
+  },
+  "angular_reparametrization": {
+    "map": "chi_new=c chi with c>0",
+    "Delta_chi_new": "c Delta_chi",
+    "L_new": "L/c",
+    "A_chi_new": "A_chi/c",
+    "F_rchi_new": "F_rchi/c",
+    "d_chi_new": "d_chi/c",
+    "invariants": [
+      "X_sigma",
+      "F_rchi/L",
+      "Q",
+      "Phi_F"
+    ]
+  },
+  "local_gauge_matching": {
+    "field_form": "sum_s n_r_s Z_F_s F_s^(r chi)-q_sigma Z_sigma D^chi sigma=0",
+    "Q_form": "exp(-4A)/L sum_s n_r_s Q_s-q_sigma Z_sigma d_chi/L^2=0",
+    "does_not_imply_global_flux_quantization": true
+  },
+  "global_flux_contract": {
+    "flux": "Phi_F=Delta_chi sum_s integral_Is dr Q_s L_s exp(-4A_s)/Z_F_s",
+    "quantization": "q_ref Phi_F=2 pi N_F",
+    "residual": "R_flux=q_ref Phi_F-2 pi N_F",
+    "q_ref_equals_q_sigma": "OPEN_REQUIRES_MINIMAL_CHARGE_PROOF",
+    "gauge_patch_transition_rule": "OPEN"
+  },
+  "pole_contract": {
+    "smoothness": "Delta_chi abs(L_prime_at_pole)=2 pi",
+    "deficit": "delta=2 pi-Delta_chi abs(L_prime_at_pole)",
+    "orientation_must_be_explicit": true
+  },
+  "frame_contract": {
+    "A_additive_constant": "FRAME_REDUNDANCY_UNTIL_FIXED",
+    "must_not_double_count_A0": true,
+    "exact_frame_condition": "OPEN"
+  },
+  "freeze_effect": {
+    "MF-001": "PARTIAL_STRUCTURAL_FREEZE",
+    "MF-002": "PARTIAL_STRUCTURAL_FREEZE",
+    "MF-003": "PARTIAL_CONDITIONAL",
+    "MF-004": "PARTIAL_CONDITIONAL",
+    "MF-005": "PARTIAL_CONDITIONAL",
+    "MF-006": "PARTIAL_STRUCTURAL_FREEZE",
+    "MF-007": "PARTIAL",
+    "R1.1": "BLOCKED",
+    "MD2S_SOLVER": "NOT_AUTHORIZED",
+    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "open_items": [
+    "exact U(phi)",
+    "exact Z_phi(phi)",
+    "exact Z_F(phi)",
+    "exact lambda(phi)",
+    "exact Z_sigma(phi)",
+    "q_sigma normalization",
+    "q_ref and charge lattice",
+    "adopted Delta_chi convention",
+    "gauge patch transition function",
+    "complete second-region geometry",
+    "four-dimensional frame condition",
+    "dimensionless solver variables",
+    "residual tolerances"
+  ],
+  "forbidden_inferences": [
+    "No identification q_ref=q_sigma without a minimal-charge proof",
+    "No global flux verdict from local gauge matching",
+    "No physical parameter count before frame and gauge redundancies are removed",
+    "No solver release from the parameter schema",
+    "No K1-D or K1-E transition"
+  ]
+}
