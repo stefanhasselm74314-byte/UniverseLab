@@ -1,0 +1,79 @@
+{
+  "schema": "universelab.hzt-m0-s6-c1-v-model-contract.v0.2",
+  "date": "2026-08-03",
+  "track_id": "HZT-M0-S6-C1-V",
+  "model_id": "HZT-M0-S6-C1-V",
+  "former_model_id": "HZT-M0-S6-C1",
+  "supersedes": "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json",
+  "classification": "MANUFACTURED_VERIFICATION_MODEL",
+  "status": "CONDITIONAL",
+  "verification_phase": "C1-V0",
+  "verification_phase_status": "PASS",
+  "physical_status": "NOT_RELEASED",
+  "physical_identity": "NOT_ESTABLISHED",
+  "historical_A0_identity": "NOT_CLAIMED",
+  "physical_evidence_effect": "NONE",
+  "purpose": "Numerical and mathematical implementation QA for the declared manufactured equations, topology, patches, residuals and sensitivity tools.",
+  "bulk_functions": {
+    "U": "U0+0.5*m_phi_sq*(phi-phi_star)^2",
+    "Z_phi": "1",
+    "Z_F": "1"
+  },
+  "localized_functions": {
+    "lambda": "lambda0+lambda1*(phi-phi_star)",
+    "Z_sigma": "z_sigma0"
+  },
+  "parameter_dimensions": {
+    "kappa6_sq": "M^-4",
+    "Lambda_geom": "M^2",
+    "U0": "M^6",
+    "m_phi_sq": "M^2",
+    "phi_star": "M^2",
+    "lambda0": "M^5",
+    "lambda1": "M^3",
+    "z_sigma0": "M^3",
+    "q0": "M^-1",
+    "K4": "M^2"
+  },
+  "verification_simplifications": {
+    "Delta_chi": "2*pi",
+    "q_sigma": "q0",
+    "q_ref": "q0",
+    "charge_identity_status": "C1_V_SIMPLIFICATION_NOT_DERIVED",
+    "transfer_to_C_PHYS": "FORBIDDEN_WITHOUT_DERIVATION"
+  },
+  "topology": "S2 represented by two smooth disks and two regular gauge patches",
+  "anchor": {
+    "classification": "EXACT_MANUFACTURED_VERIFICATION_BACKGROUND",
+    "profiles": {
+      "A": "0",
+      "ell": "sin(x)",
+      "varphi": "0",
+      "a_chi_N": "0.5*(1-cos(x))",
+      "a_chi_S": "-0.5*(1-cos(x))"
+    },
+    "k4": 0.25,
+    "curvature_regime": "NOT_PARAMETRICALLY_LOW_CURVATURE",
+    "GR_like_IR_interpretation": "FORBIDDEN"
+  },
+  "parameter_hash": {
+    "algorithm": "sha256_canonical_json",
+    "value": "d23a01b6f024858bff071edd6b258df7a5e97441f887514b58369a9293ff73ce"
+  },
+  "dependencies": [
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json",
+    "registry/2026-08-03_MD2S_JunctionContract_v0.1.json",
+    "registry/2026-08-03_MD2S_ParameterAngularFluxContract_v0.1.json"
+  ],
+  "forbidden_inference": [
+    "No historical A0 identity.",
+    "No released physical HZT-M0 background.",
+    "No weak-curvature or GR-like IR interpretation from k4=1/4.",
+    "No stability, ghost-freedom, K1-D or K1-E claim."
+  ],
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE",
+  "R1.1": "BLOCKED",
+  "official_solver_authorized": false
+}
