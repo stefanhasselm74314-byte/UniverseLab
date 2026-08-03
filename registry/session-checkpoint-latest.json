@@ -1,18 +1,18 @@
 {
   "schema": "universelab.session-checkpoint.v1",
-  "checkpoint_id": "UL-CHK-20260803-002",
-  "timestamp": "2026-08-03T06:35:00+02:00",
+  "checkpoint_id": "UL-CHK-20260803-003",
+  "timestamp": "2026-08-03T08:20:00+02:00",
   "privacy_classification": "PUBLIC_SANITIZED",
-  "basis_commit": "63e7a8206896e6cc59942972e718ed32be1c163a",
-  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.2.json",
+  "basis_commit": "be07ab9cdb10b8f75e96d3efb61b0e22f7fb44af",
+  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.3.json",
   "architecture": [
     "HPVS",
     "HZT-M0-S6",
     "HZT-M0-P5",
     "HZT-Full"
   ],
-  "current_goal": "Freeze the remaining MD-2S bulk, localized and parameter functions, define angular and global flux conventions, then construct the symbolic dependency map required before any official boundary-value solver work.",
-  "current_workstream": "WP-2_MD2S_FUNCTIONAL_FREEZE_AND_SYMBOLIC_DEPENDENCY_AUDIT",
+  "current_goal": "Resolve the source-backed functional forms, charge lattice, angular adoption, frame condition and complete second-region geometry, then perform the BVP degree-count and symbolic rank preflight required before R1.1 may be opened.",
+  "current_workstream": "WP-2_MD2S_FUNCTIONAL_IDENTITY_AND_BVP_PREFLIGHT",
   "gate_state": {
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
@@ -26,8 +26,9 @@
     "MD2S_MF-003_RADIAL_EQUATIONS": "PARTIAL_CONDITIONAL",
     "MD2S_MF-004_SMOOTH_CENTER_SERIES": "PARTIAL_CONDITIONAL",
     "MD2S_MF-005_CAP_JUNCTION_SYSTEM": "PARTIAL_CONDITIONAL",
-    "MD2S_MF-006_PARAMETER_CONTRACT": "OPEN",
+    "MD2S_MF-006_PARAMETER_CONTRACT": "PARTIAL_STRUCTURAL_FREEZE",
     "MD2S_MF-007_BENCHMARK_DEFINITIONS": "PARTIAL",
+    "MD2S_SYMBOLIC_DEPENDENCY_GRAPH": "STRUCTURE_DEFINED_EXECUTION_BLOCKED",
     "MD2S_R1_1_SYMBOLIC_DEPENDENCY_AUDIT": "BLOCKED",
     "MD2S_SOLVER": "NOT_AUTHORIZED",
     "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
@@ -39,6 +40,46 @@
     "HISTORICAL_V_W_NORMALIZATION": "AMBIGUOUS"
   },
   "verified_results": [
+    {
+      "result_id": "UL-RES-MD2S-PAR-001",
+      "statement": "For a dimensionless angular coordinate chi with period Delta_chi, the coordinate components have dimensions A_chi=M, F_rchi=M^2 and Q=M^3 while the orthonormal magnetic field F_rchi/L has dimension M^3.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "DIMENSION_AND_COORDINATE_CONTRACT_ONLY",
+      "sources": [
+        "science/hzt-m0/md2s/2026-08-03_MD2S_ParameterAngularFluxDependencyLedger_v0.1.md",
+        "registry/2026-08-03_MD2S_ParameterAngularFluxContract_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MD2S-PAR-002",
+      "statement": "The periodic localized phase obeys sigma(chi+Delta_chi)-sigma(chi)=2 pi N_sigma and enters through the gauge-invariant combination d_chi=2 pi N_sigma/Delta_chi-q_sigma A_chi.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "WINDING_STRUCTURE_ONLY",
+      "sources": [
+        "science/hzt-m0/md2s/2026-08-03_MD2S_ParameterAngularFluxDependencyLedger_v0.1.md",
+        "registry/2026-08-03_MD2S_ParameterAngularFluxContract_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MD2S-PAR-003",
+      "statement": "The structural global U(1) condition is q_ref Phi_F=2 pi N_F; q_ref cannot be identified with q_sigma unless the localized phase is proven to carry the minimal reference charge.",
+      "status": "DERIVED_CONDITIONAL_NORMALIZATION_OPEN",
+      "evidence_effect": "GLOBAL_FLUX_FORM_ONLY",
+      "sources": [
+        "science/hzt-m0/md2s/2026-08-03_MD2S_ParameterAngularFluxDependencyLedger_v0.1.md",
+        "registry/2026-08-03_MD2S_ParameterAngularFluxContract_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MD2S-GRAPH-001",
+      "statement": "The MD-2S dependency pipeline has been encoded as an acyclic P0-to-P6 graph with explicit R1.1 blockers, but graph execution remains blocked by unresolved model, charge, frame, topology and numerical-contract nodes.",
+      "status": "STRUCTURE_DEFINED_EXECUTION_BLOCKED",
+      "evidence_effect": "DEPENDENCY_QA_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_SymbolicDependencyGraph_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.3.json"
+      ]
+    },
     {
       "result_id": "UL-RES-MD2S-JUN-001",
       "statement": "The current canonical rebuild separates the geometric cosmological constant Lambda_geom in the Einstein-Hilbert sector from the scalar energy density U(phi), preventing silent vacuum-energy double counting.",
@@ -60,16 +101,6 @@
       ]
     },
     {
-      "result_id": "UL-RES-MD2S-JUN-003",
-      "statement": "The scalar junction retains the regional Z_phi factors and the local gauge equation is separate from global flux quantization.",
-      "status": "DERIVED_CONDITIONAL",
-      "evidence_effect": "FORMAL_MATCHING_STRUCTURE_ONLY",
-      "sources": [
-        "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
-        "registry/2026-08-03_MD2S_JunctionContract_v0.1.json"
-      ]
-    },
-    {
       "result_id": "UL-RES-MD2S-RAD-001",
       "statement": "For the current HZT-M0-S6 Einstein-Maxwell-scalar action skeleton, the static axial metric yields explicit external, radial and internal Einstein equations, a Maxwell first integral, a scalar equation and a radial Hamiltonian constraint.",
       "status": "DERIVED_CONDITIONAL",
@@ -77,16 +108,6 @@
       "sources": [
         "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md",
         "registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json"
-      ]
-    },
-    {
-      "result_id": "UL-RES-MD2S-RAD-002",
-      "statement": "The generic smooth-center expansion fixes the leading coefficients once the local action functions, flux constant and angular period are supplied; a nonzero deficit angle identifies the conical center mode.",
-      "status": "DERIVED_CONDITIONAL",
-      "evidence_effect": "CENTER_REGULARITY_STRUCTURE_ONLY",
-      "sources": [
-        "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md",
-        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.1.json"
       ]
     },
     {
@@ -98,46 +119,36 @@
         "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md",
         "registry/mds05-warp-volume-contract-v0.1.json"
       ]
-    },
-    {
-      "result_id": "UL-RES-MDS05-002",
-      "statement": "The archived value V_W=0.5318111250097 cannot determine kappa4 because its angle factor, dimensional normalization and four-dimensional frame convention remain unresolved.",
-      "status": "OPEN_AMBIGUITY_CONFIRMED",
-      "evidence_effect": "BLOCKS_NUMERICAL_NORMALIZATION",
-      "sources": [
-        "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md",
-        "md2s-background-substitution-v0.2.json"
-      ]
     }
   ],
   "open_blockers": [
     {
       "blocker_id": "UL-BLK-MD2S-001",
-      "statement": "The exact functional forms and parameter domains of U(phi), Z_phi(phi), Z_F(phi), lambda(phi) and Z_sigma(phi) remain unfrozen.",
+      "statement": "The exact functional forms and parameter domains of U(phi), Z_phi(phi), Z_F(phi), lambda(phi) and Z_sigma(phi) remain source-unresolved.",
       "sources": [
-        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.2.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.3.json",
         "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"
       ]
     },
     {
       "blocker_id": "UL-BLK-MD2S-002",
-      "statement": "The angular period, winding and gauge-patch convention, q_sigma normalization and global flux quantization remain open.",
+      "statement": "The q_sigma normalization, reference charge q_ref, charge lattice, adopted Delta_chi and gauge-patch transition function remain open.",
       "sources": [
-        "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
-        "registry/2026-08-03_MD2S_JunctionContract_v0.1.json"
+        "science/hzt-m0/md2s/2026-08-03_MD2S_ParameterAngularFluxDependencyLedger_v0.1.md",
+        "registry/2026-08-03_MD2S_ParameterAngularFluxContract_v0.1.json"
       ]
     },
     {
       "blocker_id": "UL-BLK-MD2S-003",
-      "statement": "The complete second-region geometry, numerical one-sided boundary data and normalized junction tolerances are absent, so the two-junction verdict remains non-executable.",
+      "statement": "The complete second-region geometry, four-dimensional frame condition, independent BVP parameter count, dimensionless map and normalized residual tolerances are absent.",
       "sources": [
-        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.2.json",
-        "md2s-background-substitution-v0.2.json"
+        "registry/2026-08-03_MD2S_SymbolicDependencyGraph_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.3.json"
       ]
     },
     {
       "blocker_id": "UL-BLK-MDS05-001",
-      "statement": "The numerical warped volume requires reproduced A(r), L(r), the angular period or deficit convention, a fixed four-dimensional frame and convergence-tested integration.",
+      "statement": "The numerical warped volume requires reproduced A(r), L(r), an adopted angular period or deficit convention, a fixed four-dimensional frame and convergence-tested integration.",
       "sources": [
         "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md"
       ]
@@ -145,18 +156,20 @@
   ],
   "active_assumptions": [
     "The controlled reduction branch is HZT-M0-S6 with one physical time and a positive-definite internal two-space.",
+    "The angular coordinate chi is dimensionless and periodic with an explicitly recorded positive Delta_chi.",
     "Lambda_geom and U(phi) are distinct current-canon symbols until historical model identity is proven.",
+    "q_ref and q_sigma remain distinct until a minimal-charge proof is supplied.",
     "Each region uses its own outward spacelike normal in the Israel sum.",
-    "The localized structural candidate is tension plus gauge-covariant winding energy.",
-    "Official solver work remains forbidden until all MF-001 through MF-007 requirements are source-backed and collision-free."
+    "Official solver work remains forbidden until all open P0 and P1 nodes and the BVP count are source-backed."
   ],
   "forbidden_inferences": [
-    "Do not identify the structural current-canon cap action with the missing historical A0 action.",
-    "Do not replace the two metric junction equations with one fitted effective tension.",
+    "Do not identify q_ref with q_sigma without a minimal-charge and bundle-normalization proof.",
     "Do not infer global flux quantization from the local gauge junction.",
+    "Do not count the additive warp constant A0 as both a frame choice and a physical shooting parameter.",
+    "Do not infer BVP solvability from an acyclic dependency graph.",
+    "Do not identify the current structural functions with the missing historical A0 functions.",
     "Do not infer a two-junction verdict without complete one-sided data and orientations.",
-    "Do not use algebraic junction closure as solver or physical release.",
-    "Do not infer ghost freedom from background regularity, positive normalization or numerical stability.",
+    "Do not infer ghost freedom from positivity domains, background regularity or numerical stability.",
     "Do not change K1-D or K1-E without the governed release chain."
   ],
   "entry_points": [
@@ -166,14 +179,17 @@
     "registry/claim-register-v0.1.json",
     "registry/research-continuation-manifest-v0.1.json",
     "registry/decision-log.jsonl",
-    "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.2.json",
+    "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.3.json",
     "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
-    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.2.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.3.json",
     "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md",
     "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_ParameterAngularFluxDependencyLedger_v0.1.md",
     "registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json",
-    "registry/2026-08-03_MD2S_JunctionContract_v0.1.json"
+    "registry/2026-08-03_MD2S_JunctionContract_v0.1.json",
+    "registry/2026-08-03_MD2S_ParameterAngularFluxContract_v0.1.json",
+    "registry/2026-08-03_MD2S_SymbolicDependencyGraph_v0.1.json"
   ],
   "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
-  "next_exact_action": "Freeze the functional forms and parameter domains for MF-001, MF-002 and MF-006, define the angular period and global flux quantization, then build the source-backed symbolic dependency map required to decide whether R1.1 may be opened."
+  "next_exact_action": "Resolve or explicitly version the five functional forms and their parameter domains, choose the angular and charge-lattice conventions, specify the frame and complete second region, then perform a formal BVP degree-count and symbolic rank preflight before considering R1.1 release."
 }
