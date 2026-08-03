@@ -1,0 +1,66 @@
+name: UniverseLab MD-2S radial equation contract
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.1.json"
+      - "registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json"
+      - "tools/2026-08-03_hzt_m0_md2s_radial_equations_v0.1.py"
+      - "tests/2026-08-03_test_md2s_radial_equations_v0.1.py"
+      - ".github/workflows/2026-08-03_UniverseLab_MD2S_RadialEquationContract_v0.1.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.1.json"
+      - "registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json"
+      - "tools/2026-08-03_hzt_m0_md2s_radial_equations_v0.1.py"
+      - "tests/2026-08-03_test_md2s_radial_equations_v0.1.py"
+      - ".github/workflows/2026-08-03_UniverseLab_MD2S_RadialEquationContract_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-md2s-radial-equations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON contracts
+        run: |
+          python -m json.tool registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json >/dev/null
+          python -m json.tool science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.1.json >/dev/null
+
+      - name: Compile reference implementation and tests
+        run: |
+          python -m py_compile tools/2026-08-03_hzt_m0_md2s_radial_equations_v0.1.py
+          python -m py_compile tests/2026-08-03_test_md2s_radial_equations_v0.1.py
+
+      - name: Run radial equation tests
+        run: python tests/2026-08-03_test_md2s_radial_equations_v0.1.py -v
+
+      - name: Verify governance firewall
+        shell: bash
+        run: |
+          grep -F '"solver_implementation_allowed": false' registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json
+          grep -F '"MF-003": "PARTIAL_CONDITIONAL"' registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json
+          grep -F '"MF-004": "PARTIAL_CONDITIONAL"' registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json
+          grep -F '"K1-D": "NOT_RELEASED"' registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json
+          grep -F '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json
+          grep -F 'OFFICIAL_SOLVER_IMPLEMENTATION = FORBIDDEN' science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md
+
+      - name: Run existing MD-2S recovery checks
+        run: |
+          python -m py_compile tools/verify_md2s_recovery_package_v0_1.py
+          python tests/test_verify_md2s_recovery_package_v0_1.py -v
