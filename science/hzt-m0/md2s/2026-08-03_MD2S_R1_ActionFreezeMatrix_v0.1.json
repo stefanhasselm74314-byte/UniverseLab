@@ -1,0 +1,100 @@
+{
+  "schema": "universelab.md2s-r1-action-freeze-matrix.v0.1",
+  "date": "2026-08-03",
+  "status": "ACTIVE_PARTIAL_FREEZE",
+  "evidence_effect": "NONE",
+  "bulk_action": {
+    "einstein_hilbert_normalization": {
+      "value": "1/(2 kappa6_squared)",
+      "status": "FROZEN_CURRENT_CANON"
+    },
+    "signature": {
+      "value": "(-,+,+,+,+,+)",
+      "status": "FROZEN_CURRENT_CANON"
+    },
+    "Lambda6_term": {
+      "value": "-Lambda6/kappa6_squared in the Lagrangian density",
+      "status": "FROZEN_CURRENT_CANON"
+    },
+    "scalar_kinetic_form": {
+      "value": "-0.5 Z_phi(phi) (partial phi)^2",
+      "status": "FROZEN_FORM_FUNCTION_OPEN"
+    },
+    "scalar_potential": {
+      "value": "-V(phi)",
+      "status": "FUNCTION_OPEN",
+      "collision": "historical statement V=Lambda6+beta phi^2 may double-count Lambda6 in current convention"
+    },
+    "maxwell_form": {
+      "value": "-0.25 Z_F(phi) F_AB F^AB",
+      "status": "FROZEN_FORM_FUNCTION_OPEN"
+    },
+    "flux_normalization": {
+      "value": null,
+      "status": "OPEN"
+    }
+  },
+  "boundary_and_localized_action": {
+    "GHY": {
+      "value": "M6^4 sum_s int_Sigma sqrt|h| K_s with outward normals",
+      "status": "FROZEN_CONDITIONAL_CURRENT_CANON"
+    },
+    "minimal_cap_action": {
+      "value": "-int_Sigma sqrt|h| [lambda(phi)+0.5 Z_sigma(phi) D_a sigma D^a sigma]",
+      "status": "DERIVED_CONDITIONAL_FROM_REGISTERED_JUNCTIONS"
+    },
+    "phase_covariant_derivative": {
+      "value": "D_a sigma=partial_a sigma-q_sigma A_a",
+      "status": "FROZEN_FORM_NORMALIZATION_OPEN"
+    },
+    "lambda_function": {
+      "value": null,
+      "status": "OPEN"
+    },
+    "Z_sigma_function": {
+      "value": null,
+      "status": "OPEN"
+    },
+    "q_sigma_normalization": {
+      "value": null,
+      "status": "OPEN"
+    },
+    "additional_localized_curvature_or_topological_terms": {
+      "value": null,
+      "status": "NOT_EXCLUDED_SOURCE_SEARCH_OPEN"
+    }
+  },
+  "junction_convention": {
+    "normal_orientation": "outward from each region",
+    "metric_equation": "M6^4 sum_s(K^a_b-K delta^a_b)=S^a_b",
+    "scalar_equation": "sum_s n_r Z_phi phi_prime+lambda_phi+0.5 Z_sigma_phi X_sigma=0",
+    "gauge_equation": "sum_s n_r Z_F F^(r chi)-q_sigma Z_sigma D^chi sigma=0",
+    "status": "DERIVED_CONDITIONAL"
+  },
+  "freeze_summary": {
+    "MF-001": "PARTIAL_CONDITIONAL",
+    "MF-002": "PARTIAL_CONDITIONAL",
+    "MF-005_FORM": "DERIVED_CONDITIONAL",
+    "MF-005_NUMERICAL": "BLOCKED",
+    "solver_implementation_allowed": false
+  },
+  "required_to_close_MF-001": [
+    "source-backed V(phi)",
+    "source-backed Z_phi(phi)",
+    "source-backed Z_F(phi)",
+    "Lambda6 versus V convention decision",
+    "flux charge and quantization normalization"
+  ],
+  "required_to_close_MF-002": [
+    "source-backed lambda(phi)",
+    "source-backed Z_sigma(phi)",
+    "source-backed q_sigma and winding convention",
+    "explicit decision on additional localized terms",
+    "gauge-patch and global flux contract"
+  ],
+  "governance": {
+    "R1.1": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  }
+}
