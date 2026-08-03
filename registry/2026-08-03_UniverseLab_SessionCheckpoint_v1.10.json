@@ -1,0 +1,173 @@
+{
+  "schema": "universelab.session-checkpoint.v1",
+  "checkpoint_id": "UL-CHK-20260803-010",
+  "timestamp": "2026-08-03T23:08:00+02:00",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "basis_commit": "b7adee8cdc2b3c6f472bc15061b9a48189bb3ac6",
+  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.10.json",
+  "supersedes": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.9.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"],
+  "sources": [
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeLedger_v0.1.md",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json"
+  ],
+  "current_goal": "Select and justify the exact minimal C-PHYS EFT functions and scalar domain after closing the global angular, orientation, patch, charge-lattice, frame and parameter-role conventions.",
+  "current_workstream": "PRIMARY_C_PHYS_FREEZE_1B_WITH_PARALLEL_C1_V_G1_2_DIAGNOSTIC",
+  "current_workstreams": [
+    {
+      "track_id": "MD2S-R1-C-PHYS",
+      "priority": "PRIMARY",
+      "next_block": "C-PHYS-R1.0-FREEZE-1B"
+    },
+    {
+      "track_id": "HZT-M0-S6-C1-V",
+      "priority": "PARALLEL_DIAGNOSTIC_ONLY",
+      "next_block": "G1.2_LOCAL_SECOND_ORDER_DISCRETE_RESPONSE_DIAGNOSTIC"
+    }
+  ],
+  "governance_principle": "C-PHYS model selection must be labeled as a new versioned postulate, never as a derivation from C1-V or unreproduced historical benchmarks.",
+  "gate_state": {
+    "MD2S-R1-L": "BLOCKED_BY_MISSING_PRIMARY_SOURCES",
+    "MD2S-R1-C-PHYS": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "HZT-M0-S6-C1-V": "MANUFACTURED_VERIFICATION_MODEL",
+    "R1.0": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "R1.0_SUBSTATE": "ACTIVE_FUNCTION_FREEZE_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "STRUCTURAL_BVP_COUNT": "SQUARE_CONDITIONAL",
+    "CONTINUUM_BVP_OPERATOR": "SCAFFOLD_ONLY",
+    "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
+    "G1.1": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED",
+    "HISTORICAL_A0_BENCHMARKS": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
+    "HISTORICAL_A0_IDENTITY": "NOT_ESTABLISHED",
+    "C1_PHYSICAL_IDENTITY": "NOT_ESTABLISHED",
+    "NONLINEAR_SOLUTION_FAMILY": "NOT_ESTABLISHED",
+    "PERTURBATIVE_STABILITY": "OPEN",
+    "GHOST_FREEDOM": "OPEN",
+    "OFFICIAL_MD2S_SOLVER": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "PHYSICAL_EVIDENCE_EFFECT": "NONE",
+    "PUBLIC_PRIVACY_GATE": "PASS"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-G0-TRACK-001",
+      "statement": "The MD-2S program is separated into historical legacy reproduction, current canonical physical rebuild and manufactured C1 verification tracks.",
+      "status": "PROVEN",
+      "evidence_effect": "GOVERNANCE_ONLY",
+      "sources": [
+        "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+        "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C-PHYS-OP-001",
+      "statement": "The generic static radial system and continuum-operator interface are derived conditionally from the current minimal parent action.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "FORMAL_PARENT_ACTION_AND_OPERATOR_STRUCTURE_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C-PHYS-FREEZE-1A-001",
+      "statement": "The angular convention, regional normal and global orientation tables, regular gauge patches, U(1) transition, oriented flux, charge-lattice structure, four-dimensional frame, parameter roles and conditional eight-by-eight structural BVP count are frozen.",
+      "status": "PROVEN_CONDITIONAL_ON_TWO_DISK_U1_TOPOLOGY",
+      "evidence_effect": "FORMAL_GLOBAL_STRUCTURE_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeLedger_v0.1.md",
+        "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C1V-G11-001",
+      "statement": "The preregistered uncorrected local C1-V predictor exhibits a quadratic normalized-residual regime in the tested finite discretizations.",
+      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
+      "evidence_effect": "DISCRETE_PREDICTOR_QA_ONLY",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json",
+        "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json"
+      ]
+    }
+  ],
+  "open_blockers": [
+    {
+      "blocker_id": "UL-BLK-R1-L-001",
+      "track_id": "MD2S-R1-L",
+      "statement": "The provenance-complete historical A0 action, solver and run package remain missing.",
+      "sources": [
+        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
+        "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-FUNCTIONS-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "Exact U(phi), Z_F(phi), lambda(phi), Z_sigma(phi), the scalar domain and the numerical q_ref normalization remain unselected.",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+        "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-OPERATOR-002",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "Constraint propagation, complementing boundary conditions, Fredholm property and continuum Jacobian remain open.",
+      "sources": [
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+        "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C1-V3-G12-001",
+      "track_id": "HZT-M0-S6-C1-V",
+      "statement": "The local second-order discrete C1-V response remains uncomputed.",
+      "sources": [
+        "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json",
+        "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-STAB-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "The scalar-vector-tensor quadratic action and all stability conditions remain open.",
+      "sources": [
+        "governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md",
+        "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
+      ]
+    }
+  ],
+  "active_assumptions": [
+    "The internal topology is represented by two smooth disks with one regular U(1) gauge patch per pole.",
+    "Delta_chi=2*pi is a coordinate convention.",
+    "q_sigma=m_sigma*q_ref with positive integer m_sigma is the charge-lattice relation.",
+    "The exact EFT functions will be a new explicit model selection, not a derivation from C1-V.",
+    "No solver or physical release follows from the conditional square count."
+  ],
+  "forbidden_inferences": [
+    "Do not infer a solved physical background from the frozen global conventions.",
+    "Do not count patch and global flux as independent residuals in the frozen two-patch convention.",
+    "Do not set q_sigma=q_ref unless m_sigma=1 is explicitly selected.",
+    "Do not infer Fredholm, stability, K1-D or K1-E release."
+  ],
+  "entry_points": [
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeLedger_v0.1.md",
+    "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"
+  ],
+  "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
+  "next_exact_action": "Execute C-PHYS-R1.0-FREEZE-1B as an explicit minimal EFT model-selection and identifiability-budget block. G1.2 remains parallel diagnostic only."
+}
