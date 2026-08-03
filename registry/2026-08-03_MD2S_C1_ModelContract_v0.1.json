@@ -1,0 +1,104 @@
+{
+  "schema": "universelab.md2s-c1-model-contract.v0.1",
+  "date": "2026-08-03",
+  "model_id": "HZT-M0-S6-C1",
+  "title": "Minimal quadratic constant-coupling two-patch cap candidate",
+  "status": "CANDIDATE_MODEL_DEFINED_NOT_RELEASED",
+  "evidence_effect": "NONE",
+  "historical_A0_identity": "NOT_CLAIMED",
+  "solver_authorized": false,
+  "source_basis": [
+    "registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json",
+    "registry/2026-08-03_MD2S_JunctionContract_v0.1.json",
+    "registry/2026-08-03_MD2S_ParameterAngularFluxContract_v0.1.json",
+    "registry/2026-08-03_MD2S_SymbolicDependencyGraph_v0.1.json"
+  ],
+  "bulk_functions": {
+    "U": "U0+0.5*m_phi_sq*(phi-phi_star)^2",
+    "Z_phi": "1",
+    "Z_F": "1"
+  },
+  "localized_functions": {
+    "lambda": "lambda0+lambda1*(phi-phi_star)",
+    "Z_sigma": "z_sigma0"
+  },
+  "parameter_dimensions": {
+    "kappa6_sq": "M^-4",
+    "Lambda_geom": "M^2",
+    "U0": "M^6",
+    "m_phi_sq": "M^2",
+    "phi_star": "M^2",
+    "lambda0": "M^5",
+    "lambda1": "M^3",
+    "z_sigma0": "M^3",
+    "q0": "M^-1",
+    "K4": "M^2"
+  },
+  "parameter_domains": {
+    "kappa6_sq": "strictly_positive",
+    "Lambda_geom": "real",
+    "U0": "real",
+    "m_phi_sq": "nonnegative",
+    "phi_star": "real",
+    "lambda0": "real",
+    "lambda1": "real",
+    "z_sigma0": "strictly_positive",
+    "q0": "strictly_positive",
+    "K4": "eigenvalue_not_prescribed_in_square_bvp"
+  },
+  "coordinate_and_charge_conventions": {
+    "chi_dimension": "1",
+    "Delta_chi": "2*pi",
+    "q_sigma": "q0",
+    "q_ref": "q0",
+    "charge_identity_status": "C1_MODEL_POSTULATE_NOT_DERIVED",
+    "N_sigma": "integer_fixed_sector",
+    "N_F": "integer_fixed_sector"
+  },
+  "topology_and_regions": {
+    "internal_topology": "S2_as_two_smooth_disks_glued_at_one_codimension1_cap",
+    "regions": ["N", "S"],
+    "local_coordinates": "r_s in [0,rho_s], increasing from smooth pole to common cap",
+    "outward_normal_at_cap": "n_s^r=+1 in each local coordinate",
+    "shared_bulk_functions": true,
+    "shared_bulk_parameters": true
+  },
+  "pole_conditions": {
+    "A_prime_s_0": 0,
+    "L_s_0": 0,
+    "L_prime_s_0": 1,
+    "phi_prime_s_0": 0,
+    "A_chi_s_0": 0,
+    "meaning": "smooth pole in Delta_chi=2*pi convention and regular local gauge"
+  },
+  "frame_and_patch": {
+    "frame_condition": "A_N(0)=0",
+    "regular_patch_gauges": [
+      "A_chi_N(0)=0",
+      "A_chi_S(0)=0"
+    ],
+    "flux_orientation": "Phi_F=2*pi*(A_chi_N(rho_N)-A_chi_S(rho_S))",
+    "patch_relation": "A_chi_N(rho_N)-A_chi_S(rho_S)=N_F/q0"
+  },
+  "rank_risk_surfaces": [
+    {
+      "id": "C1-RISK-SCALAR-SHIFT",
+      "condition": "m_phi_sq=0 and lambda1=0",
+      "effect": "continuous scalar shift symmetry; expected Jacobian null direction unless another scalar datum is fixed"
+    },
+    {
+      "id": "C1-RISK-FIXED-K4",
+      "condition": "K4 prescribed while all model parameters are fixed",
+      "effect": "eight residuals versus seven continuous shooting unknowns; generically codimension-one overdetermined"
+    }
+  ],
+  "governance": {
+    "candidate_definition": "FROZEN_FOR_PREFLIGHT",
+    "historical_model_identity": "OPEN",
+    "R1.1": "BLOCKED",
+    "MD2S_SOLVER": "NOT_AUTHORIZED",
+    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  }
+}
