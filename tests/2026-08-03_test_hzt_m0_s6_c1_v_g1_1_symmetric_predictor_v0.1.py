@@ -14,7 +14,6 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 TOOL = ROOT / "tools" / "2026-08-03_hzt_m0_s6_c1_v_g1_1_symmetric_predictor_v0.1.py"
 RESULT = ROOT / "registry" / "2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json"
 CSV = ROOT / "science" / "hzt-m0" / "md2s" / "2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorEvaluations_v0.1.csv"
-DATED_CHECKPOINT = ROOT / "registry" / "2026-08-03_UniverseLab_SessionCheckpoint_v1.8.json"
 LATEST_CHECKPOINT = ROOT / "registry" / "session-checkpoint-latest.json"
 
 spec = importlib.util.spec_from_file_location("c1_v_g1_1_predictor", TOOL)
@@ -131,11 +130,13 @@ class G11PredictorContractTests(unittest.TestCase):
             self.recorded["hashes"]["evaluation_csv_sha256"],
         )
 
-    def test_checkpoint_alias_matches_dated_snapshot(self) -> None:
-        self.assertEqual(
-            json.loads(LATEST_CHECKPOINT.read_text(encoding="utf-8")),
-            json.loads(DATED_CHECKPOINT.read_text(encoding="utf-8")),
-        )
+    def test_checkpoint_alias_matches_declared_snapshot(self) -> None:
+        latest = json.loads(LATEST_CHECKPOINT.read_text(encoding="utf-8"))
+        snapshot_path = latest.get("canonical_snapshot")
+        self.assertIsInstance(snapshot_path, str)
+        snapshot = ROOT / snapshot_path
+        self.assertTrue(snapshot.is_file())
+        self.assertEqual(latest, json.loads(snapshot.read_text(encoding="utf-8")))
 
     def test_release_gates_remain_closed(self) -> None:
         gate = self.recorded["gate_state"]

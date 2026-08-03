@@ -1,0 +1,96 @@
+{
+  "schema": "universelab.hzt-m0-s6-c1-v.g1-1-symmetric-predictor-result.v0.2",
+  "date": "2026-08-03",
+  "track_id": "HZT-M0-S6-C1-V",
+  "model_id": "HZT-M0-S6-C1-V",
+  "block": "G1.1",
+  "phase": "C1-V3",
+  "run_id": "C1V-G1.1-20260803-001",
+  "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
+  "phase_result": "PASS_DIAGNOSTIC",
+  "classification": "MANUFACTURED_VERIFICATION_MODEL",
+  "claim": "The uncorrected local C1-V lambda0_hat predictor exhibits a visible quadratic normalized-residual regime for the preregistered finite discretizations, symmetric steps and fixed fit window.",
+  "evidence_effect": "DISCRETE_PREDICTOR_QA_ONLY",
+  "physical_evidence_effect": "NONE",
+  "supersedes": {
+    "artifact": "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json",
+    "scope": "PRIMARY_STATUS_LABEL_ONLY",
+    "prior_status": "NUMERICALLY_CONFIRMED",
+    "prior_qualifier": "DIAGNOSTIC",
+    "reason": "The diagnostic restriction must be inseparable from the primary machine-readable status so downstream readers cannot discard the qualifier."
+  },
+  "numerical_result_unchanged": true,
+  "preregistration_unchanged": true,
+  "preregistration": {
+    "contract": "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json",
+    "hash_sha256_canonical_json": "f70bb585a0bd91b196deaaafae64976dffdd0c930b3258184a99eef2fd4e45d2",
+    "fit_window": [0.04, 0.02, 0.01, 0.005],
+    "signed_steps": [0.08, 0.04, 0.02, 0.01, 0.005, 0.0025, 0.00125],
+    "post_run_window_substitution": false
+  },
+  "aggregate_results": {
+    "slope_minimum": 2.0000000309710653,
+    "slope_maximum": 2.0096470056832327,
+    "halving_ratio_minimum": 3.9983112940859806,
+    "halving_ratio_maximum": 4.046981559180092,
+    "minimum_fit_floor_separation": 748.1326597445042,
+    "minimum_small_probe_floor_separation": 47.22430577411399,
+    "maximum_signed_pair_relative_asymmetry": 0.022519410170857505,
+    "maximum_reference_resolution_relative_difference": 4.084570885803319e-07,
+    "maximum_independent_resolution_relative_difference": 0.0006276802969871953,
+    "maximum_fine_backend_relative_difference": 4.175883538687651e-05,
+    "tangent_relative_difference": 9.097179491887701e-10,
+    "linear_closure_infinity_norm": 1.1102230246251565e-16
+  },
+  "acceptance_checks": {
+    "all_registered_sign_resolution_fits": true,
+    "signed_pair_symmetry": true,
+    "same_backend_resolution_agreement": true,
+    "fine_backend_agreement": true,
+    "tangent_agreement": true,
+    "linear_closure": true,
+    "predictor_only": true,
+    "nonlinear_corrector_absent": true,
+    "second_derivative_absent": true
+  },
+  "canonical_evidence": {
+    "full_result_v0_1": "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.1.json",
+    "evaluation_table": "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorEvaluations_v0.1.csv",
+    "ledger": "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorLedger_v0.1.md",
+    "workflow_run_id": 30849219480,
+    "workflow_artifact_id": 8869907449,
+    "workflow_artifact_zip_sha256": "efa1fab69b56ba7073f1d73a7b56e739aed91965298e8e29962632fea94c24aa",
+    "full_run_json_sha256": "b0c3f72a207a5e2581c334f77c89092cf5e9f1439797e385ab5c4329fe5b8269",
+    "evaluation_csv_sha256": "1ca5b14c5b1a91ce3fb917e6fced12d8431600a15ba83fb3b476b3833c044505"
+  },
+  "validity_regime": [
+    "declared C1-V manufactured model and exact manufactured anchor",
+    "lambda0_hat local tangent at the anchor",
+    "preregistered signed steps and fixed fit window",
+    "declared normalized residual scaling",
+    "tested finite RK4 and implicit-midpoint/Richardson discretizations"
+  ],
+  "forbidden_inference": [
+    "No nonlinear solution or finite solution family.",
+    "No continuum invertibility or implicit-function theorem.",
+    "No global branch existence, uniqueness or turning point.",
+    "No perturbative stability or ghost freedom.",
+    "No historical A0 identity or physical C1 identity.",
+    "No K1-D, K1-E, R1.1 or official-solver transition."
+  ],
+  "gate_state": {
+    "G1.1": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED",
+    "nonlinear_solution_family": "NOT_ESTABLISHED",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "perturbative_stability": "OPEN",
+    "ghost_freedom": "OPEN",
+    "R1.1": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "upgrade_condition": "G1.2 may begin only as a local second-order discrete response diagnostic using directed AD second derivatives and an independent symmetric finite-difference method."
+}
