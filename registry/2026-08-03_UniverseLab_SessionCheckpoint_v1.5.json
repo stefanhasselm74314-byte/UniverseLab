@@ -5,13 +5,8 @@
   "privacy_classification": "PUBLIC_SANITIZED",
   "basis_commit": "1320380af66480c2ebc9770a1f2acadc6e6468f9",
   "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.5.json",
-  "architecture": [
-    "HPVS",
-    "HZT-M0-S6",
-    "HZT-M0-P5",
-    "HZT-Full"
-  ],
-  "current_goal": "Independently cross-check the exact HZT-M0-S6-C1 anchor and its discrete forward-mode-AD Jacobian with a second integration and sensitivity backend, then define one governed continuation parameter and derive the implicit-function tangent before any nonlinear corrector or root solve is considered.",
+  "architecture": ["HPVS", "HZT-M0-S6", "HZT-M0-P5", "HZT-Full"],
+  "current_goal": "Independently cross-check the exact HZT-M0-S6-C1 anchor and discrete forward-mode-AD Jacobian with a second integration and sensitivity backend, then derive one governed implicit-function continuation tangent before any nonlinear corrector or root solve.",
   "current_workstream": "WP-2_MD2S_C1_INDEPENDENT_BACKEND_AND_LINEAR_CONTINUATION_PREFLIGHT",
   "gate_state": {
     "K1-D": "NOT_RELEASED",
@@ -19,13 +14,6 @@
     "SCI-001": "PARTIAL",
     "SCI-002": "PARTIAL",
     "MD2S_R1_MODEL_FREEZE": "ACTIVE",
-    "MD2S_MF-001_EXACT_BULK_ACTION": "PARTIAL_STRUCTURAL_FREEZE",
-    "MD2S_MF-002_EXACT_LOCALIZED_ACTION": "PARTIAL_STRUCTURAL_FREEZE",
-    "MD2S_MF-003_RADIAL_EQUATIONS": "PARTIAL_CONDITIONAL",
-    "MD2S_MF-004_SMOOTH_CENTER_SERIES": "PARTIAL_CONDITIONAL",
-    "MD2S_MF-005_CAP_JUNCTION_SYSTEM": "PARTIAL_CONDITIONAL",
-    "MD2S_MF-006_PARAMETER_CONTRACT": "PARTIAL_STRUCTURAL_FREEZE",
-    "MD2S_MF-007_BENCHMARK_DEFINITIONS": "PARTIAL",
     "MD2S_C1_MODEL": "CANDIDATE_MODEL_DEFINED_NOT_RELEASED",
     "MD2S_C1_HISTORICAL_A0_IDENTITY": "NOT_CLAIMED",
     "MD2S_C1_BVP_COUNT": "STRUCTURAL_PREFLIGHT_PASS",
@@ -53,125 +41,73 @@
   "verified_results": [
     {
       "result_id": "UL-RES-MD2S-C1-DIM-001",
-      "statement": "The C1 reference scale mu6=(kappa6_sq)^(-1/4), the complete dimensionless variable map, the dimensionless radial equations and fixed positive residual scales are derived and pre-registered for diagnostic use.",
+      "statement": "The C1 reference scale mu6=(kappa6_sq)^(-1/4), complete dimensionless variable map, radial equations and fixed positive residual scales are derived and pre-registered for diagnostic use.",
       "status": "DERIVED_CONDITIONAL_ON_C1",
       "evidence_effect": "FORMAL_DIMENSIONLESS_REDUCTION_ONLY",
-      "sources": [
-        "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json",
-        "science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md"
-      ]
+      "sources": ["registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json", "science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md"]
     },
     {
       "result_id": "UL-RES-MD2S-C1-ANCHOR-001",
-      "statement": "C1 admits an exact analytic background with A=0, ell=sin(x), varphi=0, opposite half-unit magnetic charges, two regular gauge patches and a common cap at x=pi/2; all eight continuum cap residuals vanish exactly.",
+      "statement": "C1 admits an exact analytic unit-two-sphere background in two regular gauge patches; all eight continuum cap residuals vanish exactly.",
       "status": "DERIVED",
       "evidence_effect": "EXACT_CANDIDATE_BACKGROUND_ONLY",
-      "sources": [
-        "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json",
-        "science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md"
-      ]
+      "sources": ["registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json", "science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md"]
     },
     {
       "result_id": "UL-RES-MD2S-C1-JAC-001",
-      "statement": "Forward-mode automatic differentiation through the complete fixed-step RK4 IVP-to-normalized-residual map yields rank eight at the exact C1 anchor, sigma_min=0.0695893845582763 and condition number 221.95557616755255 at 800 steps per region.",
+      "statement": "Forward-mode AD through the complete fixed-step RK4 IVP-to-residual map gives rank eight at the exact anchor, sigma_min=0.0695893845582763, condition number 221.95557616755255 and relative Jacobian change 2.863079188994937e-12 between 400 and 800 steps.",
       "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
       "evidence_effect": "DISCRETIZED_JACOBIAN_QA_ONLY",
-      "sources": [
-        "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json",
-        "tools/2026-08-03_md2s_c1_dimensionless_jacobian_v0.1.py",
-        "tests/2026-08-03_test_md2s_c1_dimensionless_jacobian_v0.1.py"
-      ]
+      "sources": ["registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json", "tools/2026-08-03_md2s_c1_dimensionless_jacobian_v0.1.py", "tests/2026-08-03_test_md2s_c1_dimensionless_jacobian_v0.1.py"]
     },
     {
       "result_id": "UL-RES-MD2S-C1-JAC-002",
-      "statement": "The relative Frobenius change of the discrete Jacobian between 400 and 800 RK4 steps is 2.863079188994937e-12, while the maximum normalized anchor residual decreases from 1.5936623892532058e-09 at 100 steps to 3.899701742082573e-13 at 800 steps.",
-      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
-      "evidence_effect": "STEP_CONVERGENCE_QA_ONLY",
-      "sources": [
-        "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json",
-        "science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md"
-      ]
-    },
-    {
-      "result_id": "UL-RES-MD2S-C1-JAC-003",
-      "statement": "On the analytic scalar-shift surface m2=0 and lambda1=0, the same AD pipeline reproduces rank seven with one exact null singular direction.",
+      "statement": "On m2=0 and lambda1=0, the AD pipeline reproduces rank seven with one exact scalar-shift null direction.",
       "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
       "evidence_effect": "NULL_DIRECTION_REGRESSION_ONLY",
-      "sources": [
-        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json",
-        "tests/2026-08-03_test_md2s_c1_dimensionless_jacobian_v0.1.py"
-      ]
-    },
-    {
-      "result_id": "UL-RES-MDS05-001",
-      "statement": "For the minimal HZT-M0-S6 Einstein-Hilbert sector, the formal relation M4_bulk_squared=V_W/kappa6_squared remains DERIVED_CONDITIONAL; the historical numerical V_W normalization remains unresolved and is not replaced by the C1 anchor.",
-      "status": "DERIVED_CONDITIONAL_NUMERICAL_OPEN",
-      "evidence_effect": "FORMAL_REDUCTION_ONLY",
-      "sources": [
-        "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md",
-        "registry/mds05-warp-volume-contract-v0.1.json"
-      ]
+      "sources": ["science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json", "tests/2026-08-03_test_md2s_c1_dimensionless_jacobian_v0.1.py"]
     }
   ],
   "open_blockers": [
     {
       "blocker_id": "UL-BLK-MD2S-C1-006",
-      "statement": "The exact anchor and rank-eight discrete Jacobian have not yet been cross-checked by an independent integration and sensitivity backend.",
-      "sources": [
-        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json"
-      ]
+      "statement": "The exact anchor and rank-eight discrete Jacobian lack an independent integration and sensitivity backend cross-check.",
+      "sources": ["science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json"]
     },
     {
       "blocker_id": "UL-BLK-MD2S-C1-007",
-      "statement": "No governed continuation parameter, parameter derivative, implicit-function tangent or nonlinear continuation family has been constructed.",
-      "sources": [
-        "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json"
-      ]
+      "statement": "No governed continuation parameter, parameter derivative, implicit-function tangent or nonlinear continuation family exists.",
+      "sources": ["registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json"]
     },
     {
       "blocker_id": "UL-BLK-MD2S-C1-008",
-      "statement": "Step-converged full rank of the discrete map is not an analytic proof of the continuum BVP Jacobian rank, existence or uniqueness away from the exact anchor.",
-      "sources": [
-        "science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md"
-      ]
-    },
-    {
-      "blocker_id": "UL-BLK-MD2S-C1-009",
-      "statement": "No adaptive root corrector, independent solver backend, branch tracking, turning-point test or basin-of-attraction study exists; official solver execution remains unauthorized.",
-      "sources": [
-        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json"
-      ]
+      "statement": "Full rank of the step-converged discrete map is not an analytic proof of continuum BVP rank, existence or uniqueness away from the anchor.",
+      "sources": ["science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md"]
     },
     {
       "blocker_id": "UL-BLK-MD2S-C1-STAB-001",
       "statement": "Scalar-vector-tensor perturbations, kinetic positivity, gradient stability and ghost freedom remain uncomputed for C1.",
-      "sources": [
-        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json"
-      ]
+      "sources": ["science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json"]
     },
     {
       "blocker_id": "UL-BLK-MD2S-HIST-001",
-      "statement": "C1 remains a newly defined candidate and is not identified with the missing historical A0 action, solver or benchmark normalization.",
-      "sources": [
-        "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json",
-        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"
-      ]
+      "statement": "C1 is not identified with the missing historical A0 action, solver or benchmark normalization.",
+      "sources": ["registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json", "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"]
     }
   ],
   "active_assumptions": [
-    "HZT-M0-S6-C1 is a new candidate branch and not a historical reconstruction.",
-    "The exact analytic anchor is a unit two-sphere represented by two smooth disk regions and two regular gauge patches.",
-    "The eight residual scales are fixed before differentiation and do not depend on the evaluated solution.",
-    "The reported Jacobian is the exact forward-mode derivative of the declared fixed-step RK4 computational map, not an analytic continuum operator theorem.",
-    "The rr equations remain propagated QA channels rather than additional endpoint residuals.",
-    "No root finding or nonlinear continuation has been authorized."
+    "HZT-M0-S6-C1 is a new candidate branch, not a historical reconstruction.",
+    "The exact anchor is a unit two-sphere represented by two smooth disk regions and regular gauge patches.",
+    "Residual scales are fixed before differentiation and are solution-independent.",
+    "The reported Jacobian is the exact forward-mode derivative of the declared fixed-step RK4 computational map, not a continuum operator theorem.",
+    "No root finding or nonlinear continuation is authorized."
   ],
   "forbidden_inferences": [
-    "Do not infer continuum Jacobian rank from the discrete AD rank alone.",
-    "Do not infer a nontrivial solution family, uniqueness or a finite basin of attraction from one exact anchor.",
-    "Do not identify the C1 anchor with the historical A0 model or its benchmarks.",
-    "Do not treat step convergence or moderate conditioning as perturbative stability or ghost freedom.",
-    "Do not implement or run an official root solver before the independent-backend and continuation contracts are governed.",
+    "Do not infer continuum Jacobian rank from discrete AD rank alone.",
+    "Do not infer a nontrivial solution family, uniqueness or basin of attraction from one exact anchor.",
+    "Do not identify C1 with the historical A0 model or benchmarks.",
+    "Do not treat step convergence or moderate conditioning as stability or ghost freedom.",
+    "Do not implement or run an official root solver before independent-backend and continuation contracts are governed.",
     "Do not change K1-D or K1-E without the governed release chain."
   ],
   "entry_points": [
@@ -181,12 +117,9 @@
     "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json",
     "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json",
     "registry/2026-08-03_MD2S_C1_DimensionlessJacobianContract_v0.1.json",
-    "science/hzt-m0/md2s/2026-08-03_MD2S_C1_ModelAndBVPPreflightLedger_v0.1.md",
     "science/hzt-m0/md2s/2026-08-03_MD2S_C1_DimensionlessSeedJacobianLedger_v0.1.md",
-    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json",
-    "tools/2026-08-03_md2s_c1_dimensionless_jacobian_v0.1.py",
-    "tests/2026-08-03_test_md2s_c1_dimensionless_jacobian_v0.1.py"
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.5.json"
   ],
   "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
-  "next_exact_action": "Implement a second independent, non-RK4 integration and sensitivity backend for the exact C1 anchor; compare residuals and Jacobians under pre-registered tolerances; then select one explicit continuation parameter and compute the linear implicit-function tangent dX/dp=-J^{-1}R_p without executing a nonlinear corrector or official root solve."
+  "next_exact_action": "Implement a second independent non-RK4 integration and sensitivity backend; compare anchor residuals and Jacobians under pre-registered tolerances; then select one explicit continuation parameter and compute dX/dp=-J^{-1}R_p without a nonlinear corrector or official root solve."
 }
