@@ -6,12 +6,11 @@ on:
       - "project-manifest.json"
       - "registry/decision-log.jsonl"
       - "registry/session-checkpoint-latest.json"
-      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.11.json"
-      - "registry/2026-08-03_UniverseLab_C_PHYS_M1_FunctionFreezeStatus_v0.1.json"
-      - "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json"
-      - "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json"
-      - "tools/2026-08-03_validate_g0_three_track_sync_v1.4.py"
-      - "tests/2026-08-03_test_g0_three_track_sync_v1.4.py"
+      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.12.json"
+      - "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2A_Status_v0.1.json"
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json"
+      - "tools/2026-08-04_validate_g0_three_track_sync_v1.5.py"
+      - "tests/2026-08-04_test_g0_three_track_sync_v1.5.py"
       - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
   push:
     branches: [main]
@@ -19,12 +18,11 @@ on:
       - "project-manifest.json"
       - "registry/decision-log.jsonl"
       - "registry/session-checkpoint-latest.json"
-      - "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.11.json"
-      - "registry/2026-08-03_UniverseLab_C_PHYS_M1_FunctionFreezeStatus_v0.1.json"
-      - "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json"
-      - "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json"
-      - "tools/2026-08-03_validate_g0_three_track_sync_v1.4.py"
-      - "tests/2026-08-03_test_g0_three_track_sync_v1.4.py"
+      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.12.json"
+      - "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2A_Status_v0.1.json"
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json"
+      - "tools/2026-08-04_validate_g0_three_track_sync_v1.5.py"
+      - "tests/2026-08-04_test_g0_three_track_sync_v1.5.py"
       - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
 
 permissions:
@@ -47,36 +45,30 @@ jobs:
         run: |
           python -m json.tool project-manifest.json >/dev/null
           python -m json.tool registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json >/dev/null
-          python -m json.tool registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json >/dev/null
-          python -m json.tool registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json >/dev/null
-          python -m json.tool registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json >/dev/null
-          python -m json.tool registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json >/dev/null
-          python -m json.tool registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json >/dev/null
-          python -m json.tool registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json >/dev/null
           python -m json.tool registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json >/dev/null
-          python -m json.tool registry/2026-08-03_UniverseLab_C_PHYS_M1_FunctionFreezeStatus_v0.1.json >/dev/null
-          python -m json.tool registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.11.json >/dev/null
+          python -m json.tool registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2A_Status_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.12.json >/dev/null
           python -m json.tool registry/session-checkpoint-latest.json >/dev/null
 
       - name: Compile validators and tests
         run: |
           python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.0.py
-          python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.1.py
-          python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.2.py
-          python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.3.py
-          python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.4.py
-          python -m py_compile tests/2026-08-03_test_g0_three_track_sync_v1.4.py
-          python -m py_compile tools/2026-08-03_validate_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py
-          python -m py_compile tests/2026-08-03_test_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py
+          python -m py_compile tools/2026-08-04_validate_g0_three_track_sync_v1.5.py
+          python -m py_compile tests/2026-08-04_test_g0_three_track_sync_v1.5.py
+          python -m py_compile tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py
+          python -m py_compile tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py
 
-      - name: Run C-PHYS-M1 canonical regression tests
-        run: python tests/2026-08-03_test_g0_three_track_sync_v1.4.py
+      - name: Run Operator-2A canonical regression tests
+        run: python tests/2026-08-04_test_g0_three_track_sync_v1.5.py
 
-      - name: Revalidate exact M1 function contract
-        run: python tests/2026-08-03_test_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py
+      - name: Revalidate Operator-2A exact symbolic contract
+        run: |
+          python -m pip install --disable-pip-version-check sympy==1.13.3
+          python tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py
 
-      - name: Enforce fail-closed M1 canonical contract
-        run: python tools/2026-08-03_validate_g0_three_track_sync_v1.4.py --json
+      - name: Enforce fail-closed Operator-2A canonical contract
+        run: python tools/2026-08-04_validate_g0_three_track_sync_v1.5.py --json
 
       - name: Verify immutable release gates
         shell: bash
@@ -88,8 +80,9 @@ jobs:
           grep -q '"R1.2": "BLOCKED"' project-manifest.json
           grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' project-manifest.json
           grep -q '"physical_evidence_effect": "NONE"' project-manifest.json
-          grep -q '"FUNCTION_SELECTION": "PASS_POSTULATED_MODEL_FAMILY"' project-manifest.json
-          grep -q '"R1.0": "ACTIVE_OPERATOR_CLOSURE_REMAINING"' project-manifest.json
+          grep -q '"CONTINUUM_BVP_OPERATOR": "SPECIALIZED_FORMAL_OPERATOR_DEFINED"' project-manifest.json
+          grep -q '"CONSTRAINT_PROPAGATION": "PROVEN_SYMBOLIC_CONDITIONAL"' project-manifest.json
+          grep -q '"BOUNDARY_TRACE_MAP": "NOT_CONSTRUCTED"' project-manifest.json
+          grep -q '"COMPLEMENTING_BOUNDARY_CONDITION": "NOT_PROVEN"' project-manifest.json
           grep -q '"PHYSICAL_BACKGROUND": "NOT_ESTABLISHED"' project-manifest.json
-          grep -q '"STRUCTURAL_BVP_COUNT": "SQUARE_CONDITIONAL"' project-manifest.json
-          grep -q '"next_block": "C-PHYS-R1.0-OPERATOR-2A"' project-manifest.json
+          grep -q '"next_block": "C-PHYS-R1.0-OPERATOR-2B"' project-manifest.json
