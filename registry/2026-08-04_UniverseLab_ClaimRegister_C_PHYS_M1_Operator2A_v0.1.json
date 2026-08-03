@@ -1,0 +1,67 @@
+{
+  "schema": "universelab.claim-register.c-phys-m1-operator-2a.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-OPERATOR-2A",
+  "claims": [
+    {
+      "claim_id": "C-PHYS-M1-OP2A-CLAIM-001",
+      "statement": "For the specialized M1 independent bulk system, the regularized rr constraint satisfies C_rr,x+4 A_x C_rr=ell_x E_A+4 A_x E_ell-varphi_x E_varphi and therefore propagates homogeneously on shell.",
+      "status": "PROVEN",
+      "evidence_effect": "FORMAL_OPERATOR_STRUCTURE_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": "Open radial intervals with differentiable M1 profiles and the exact M1 Maxwell first-integral derivative identity.",
+      "dependencies": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
+        "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py"
+      ],
+      "forbidden_inference": "Constraint propagation is not background existence, uniqueness, stability or full boundary-operator invertibility.",
+      "upgrade_condition": "Retain the constraint as a numerical QA channel after a separately authorized background method exists."
+    },
+    {
+      "claim_id": "C-PHYS-M1-OP2A-CLAIM-002",
+      "statement": "The smooth-pole M1 series is algebraically determined through x^4 for A, varphi and a_chi and through x^5 for ell; the listed local curvature, scalar and flux building blocks have finite pole limits.",
+      "status": "DERIVED_CONDITIONAL",
+      "evidence_effect": "FORMAL_REGULARITY_STRUCTURE_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": "The M1 active parameter domain, smooth-pole parity ansatz and exact coefficient relations in the Operator-2A contract.",
+      "dependencies": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ARegularityTracePreflight_v0.1.json",
+        "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py",
+        "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_trace_v0.1.py"
+      ],
+      "forbidden_inference": "Formal pole regularity is not authorization for numerical initialization and is not a global regularity or stability theorem.",
+      "upgrade_condition": "Freeze weighted pole-regular spaces and later validate convergence under an authorized numerical method."
+    },
+    {
+      "claim_id": "C-PHYS-M1-OP2A-CLAIM-003",
+      "statement": "The M1 interior principal profile matrix has determinant 4 ell, and the six second-order cap principal transmission conditions have full rank for ell_cap>0; the metric derivative block has determinant -4/ell_cap.",
+      "status": "PROVEN_CONDITIONAL",
+      "evidence_effect": "PRINCIPAL_PROFILE_TRANSMISSION_QA_ONLY",
+      "physical_evidence_effect": "NONE",
+      "validity_regime": "Interior ell>0, cap ell_cap>0, frozen local outward normals and the M1 constant cap functions.",
+      "dependencies": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ARegularityTracePreflight_v0.1.json",
+        "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_trace_v0.1.py"
+      ],
+      "forbidden_inference": "Principal profile-level full rank is not invertibility of the full parameter-augmented endpoint trace map, a complementing-boundary theorem for the regular-singular operator, or a Fredholm result.",
+      "upgrade_condition": "Define weighted domain and target spaces and construct the full linearized trace template in Operator-2B; actual kernel/cokernel tests require a declared candidate background."
+    }
+  ],
+  "gate_state": {
+    "R1.0": "ACTIVE_BOUNDARY_TRACE_AND_FUNCTION_SPACE_CLOSURE_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "continuum_BVP_operator": "SPECIALIZED_FORMAL_OPERATOR_DEFINED",
+    "full_linearized_boundary_trace": "NOT_CONSTRUCTED",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}
