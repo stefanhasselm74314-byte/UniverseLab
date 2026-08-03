@@ -1,0 +1,175 @@
+{
+  "schema": "universelab.session-checkpoint.v1",
+  "checkpoint_id": "UL-CHK-20260803-004",
+  "timestamp": "2026-08-03T11:34:00+02:00",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "basis_commit": "40af443e09810509f3ec3160987ad025b85f2688",
+  "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.4.json",
+  "architecture": [
+    "HPVS",
+    "HZT-M0-S6",
+    "HZT-M0-P5",
+    "HZT-Full"
+  ],
+  "current_goal": "Define the dimensionless HZT-M0-S6-C1 variable map, normalized residual scales and tolerances, derive an analytic seed or continuation anchor, and construct the actual symbolic or automatic-differentiation Jacobian before any global BVP execution is considered.",
+  "current_workstream": "WP-2_MD2S_C1_DIMENSIONLESS_AND_ACTUAL_JACOBIAN_PREFLIGHT",
+  "gate_state": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "SCI-001": "PARTIAL",
+    "SCI-002": "PARTIAL",
+    "MD2S_R1_MODEL_FREEZE": "ACTIVE",
+    "MD2S_MF-001_EXACT_BULK_ACTION": "PARTIAL_STRUCTURAL_FREEZE",
+    "MD2S_MF-002_EXACT_LOCALIZED_ACTION": "PARTIAL_STRUCTURAL_FREEZE",
+    "MD2S_MF-003_RADIAL_EQUATIONS": "PARTIAL_CONDITIONAL",
+    "MD2S_MF-004_SMOOTH_CENTER_SERIES": "PARTIAL_CONDITIONAL",
+    "MD2S_MF-005_CAP_JUNCTION_SYSTEM": "PARTIAL_CONDITIONAL",
+    "MD2S_MF-006_PARAMETER_CONTRACT": "PARTIAL_STRUCTURAL_FREEZE",
+    "MD2S_MF-007_BENCHMARK_DEFINITIONS": "PARTIAL",
+    "MD2S_C1_MODEL": "CANDIDATE_MODEL_DEFINED_NOT_RELEASED",
+    "MD2S_C1_HISTORICAL_A0_IDENTITY": "NOT_CLAIMED",
+    "MD2S_C1_BVP_COUNT": "STRUCTURAL_PREFLIGHT_PASS",
+    "MD2S_C1_MAX_STRUCTURAL_RANK": 8,
+    "MD2S_C1_ACTUAL_JACOBIAN_RANK": "OPEN",
+    "MD2S_C1_GLOBAL_BACKGROUND": "NOT_COMPUTED",
+    "MD2S_C1_SOLVER": "NOT_AUTHORIZED",
+    "MD2S_R1_1_SYMBOLIC_DEPENDENCY_AUDIT": "BLOCKED",
+    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
+    "B1_4O": "NOT_EXECUTABLE",
+    "MDS01_FORM": "DERIVED_CONDITIONAL",
+    "MDS01_NUMERICAL_MODE_IDENTITY": "OPEN",
+    "MDS05_FORM": "DERIVED_CONDITIONAL",
+    "MDS05_NUMERICAL_VALUE": "OPEN",
+    "HISTORICAL_V_W_NORMALIZATION": "AMBIGUOUS"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-MD2S-C1-001",
+      "statement": "HZT-M0-S6-C1 is a newly versioned candidate with U(phi)=U0+0.5*m_phi_sq*(phi-phi_star)^2, Z_phi=Z_F=1, lambda(phi)=lambda0+lambda1*(phi-phi_star), constant positive Z_sigma, Delta_chi=2*pi and q_sigma=q_ref=q0 as an explicit C1 postulate.",
+      "status": "CANDIDATE_DEFINITION_FROZEN_FOR_PREFLIGHT",
+      "evidence_effect": "NONE",
+      "sources": [
+        "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_C1_ModelAndBVPPreflightLedger_v0.1.md"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MD2S-C1-002",
+      "statement": "After smooth-pole conditions, regular local gauges and the global warp-frame condition, the two-region C1 problem has eight continuous shooting unknowns when K4 is treated as an eigenvalue.",
+      "status": "STRUCTURAL_DEGREE_COUNT_DERIVED",
+      "evidence_effect": "BVP_QA_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_C1_ModelAndBVPPreflightLedger_v0.1.md"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MD2S-C1-003",
+      "statement": "The eight independent C1 residuals admit a complete bipartite matching to the eight shooting unknowns, giving maximum structural rank eight and no combinatorial rank obstruction in the declared dependency pattern.",
+      "status": "STRUCTURAL_PREFLIGHT_PASS",
+      "evidence_effect": "DEPENDENCY_QA_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json",
+        "tools/2026-08-03_validate_md2s_c1_bvp_preflight_v0.1.py"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MD2S-C1-004",
+      "statement": "Fixing K4 while all C1 model parameters remain fixed leaves eight residuals and seven continuous unknowns, so the problem is generically codimension one.",
+      "status": "STRUCTURAL_COUNT_RESULT",
+      "evidence_effect": "BVP_QA_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MD2S-C1-005",
+      "statement": "The parameter surface m_phi_sq=0 and lambda1=0 restores a continuous scalar shift symmetry and is expected to contain a Jacobian null direction unless an additional scalar datum is fixed.",
+      "status": "ANALYTIC_RANK_RISK_IDENTIFIED",
+      "evidence_effect": "PREFLIGHT_WARNING_ONLY",
+      "sources": [
+        "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json",
+        "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-MDS05-001",
+      "statement": "For the minimal HZT-M0-S6 Einstein-Hilbert sector, the bulk four-dimensional normalization remains M4_bulk_squared=V_W/kappa6_squared, while the numerical C1 warped volume has not been computed.",
+      "status": "DERIVED_CONDITIONAL_NUMERICAL_OPEN",
+      "evidence_effect": "FORMAL_REDUCTION_ONLY",
+      "sources": [
+        "science/hzt-m0/bridge/MD2I_MDS05_WARP_VOLUME_BRIDGE_DERIVATION_v0.1.md",
+        "registry/mds05-warp-volume-contract-v0.1.json"
+      ]
+    }
+  ],
+  "open_blockers": [
+    {
+      "blocker_id": "UL-BLK-MD2S-C1-001",
+      "statement": "The C1 dimensionless variables, reference scale, residual normalization and pre-registered tolerances are not yet defined.",
+      "sources": [
+        "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json",
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.4.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-MD2S-C1-002",
+      "statement": "No analytic C1 seed, continuation anchor or independently verified global background profile exists.",
+      "sources": [
+        "science/hzt-m0/md2s/2026-08-03_MD2S_C1_ModelAndBVPPreflightLedger_v0.1.md"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-MD2S-C1-003",
+      "statement": "Maximum structural rank eight does not determine the actual symbolic or numerical Jacobian rank, determinant, singular values or conditioning at a solution.",
+      "sources": [
+        "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-MD2S-C1-004",
+      "statement": "Constraint propagation, step-size convergence, background existence, uniqueness and stability remain untested; official BVP execution is therefore unauthorized.",
+      "sources": [
+        "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.4.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-MD2S-HIST-001",
+      "statement": "C1 is not identified with the missing historical A0 action, solver or benchmark normalization.",
+      "sources": [
+        "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json",
+        "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"
+      ]
+    }
+  ],
+  "active_assumptions": [
+    "HZT-M0-S6-C1 is a new candidate branch and not a historical reconstruction.",
+    "The C1 internal topology is two smooth disks glued at one codimension-one cap.",
+    "Delta_chi=2*pi and q_sigma=q_ref=q0 are C1 model definitions, not general theorems.",
+    "K4 is treated as an eigenvalue in the square eight-by-eight BVP count.",
+    "The global flux condition is encoded once by the two-patch relation and is not double counted.",
+    "The rr equations remain propagated numerical QA channels rather than extra endpoint residuals."
+  ],
+  "forbidden_inferences": [
+    "Do not identify C1 with the historical A0 model or use historical A0 benchmarks as C1 predictions.",
+    "Do not interpret structural rank eight as actual Jacobian rank eight.",
+    "Do not infer existence, uniqueness or numerical conditioning from the square BVP count.",
+    "Do not run an official global solver before dimensionless variables, tolerances, a seed and an actual Jacobian contract are approved.",
+    "Do not infer ghost freedom or perturbative stability from background counting or coupling positivity.",
+    "Do not change K1-D or K1-E without the governed release chain."
+  ],
+  "entry_points": [
+    "governance/UNIVERSELAB_MEMORY_PROTOCOL_v1.0.md",
+    "registry/decision-log.jsonl",
+    "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.4.json",
+    "registry/2026-08-03_MD2S_C1_ModelContract_v0.1.json",
+    "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_C1_ModelAndBVPPreflightLedger_v0.1.md",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.4.json",
+    "registry/2026-08-03_MD2S_RadialEquationContract_v0.1.json",
+    "registry/2026-08-03_MD2S_JunctionContract_v0.1.json",
+    "registry/2026-08-03_MD2S_ParameterAngularFluxContract_v0.1.json"
+  ],
+  "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
+  "next_exact_action": "Derive and validate the dimensionless C1 equations and residual scales, define fail-closed tolerances, construct an analytic symmetric seed or continuation anchor, and generate the actual symbolic or automatic-differentiation 8-by-8 Jacobian without authorizing a global BVP solve."
+}
