@@ -1,0 +1,182 @@
+{
+  "schema": "universelab.hzt-m0-s6-c1-v.g1-1-symmetric-predictor-result.v0.1",
+  "date": "2026-08-03",
+  "run_id": "C1V-G1.1-20260803-001",
+  "track_id": "HZT-M0-S6-C1-V",
+  "model_id": "HZT-M0-S6-C1-V",
+  "classification": "MANUFACTURED_VERIFICATION_MODEL",
+  "block": "G1.1",
+  "phase": "C1-V3",
+  "status": "NUMERICALLY_CONFIRMED",
+  "qualifier": "DIAGNOSTIC",
+  "phase_result": "PASS_DIAGNOSTIC",
+  "claim": "The uncorrected local C1-V lambda0_hat predictor exhibits a visible quadratic normalized-residual regime for the preregistered finite discretizations, symmetric steps and fixed fit window.",
+  "evidence_effect": "DISCRETE_PREDICTOR_QA_ONLY",
+  "physical_evidence_effect": "NONE",
+  "preregistration": {
+    "contract": "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorContract_v0.1.json",
+    "hash_sha256_canonical_json": "f70bb585a0bd91b196deaaafae64976dffdd0c930b3258184a99eef2fd4e45d2",
+    "fit_window": [0.04, 0.02, 0.01, 0.005],
+    "signed_steps": [0.08, 0.04, 0.02, 0.01, 0.005, 0.0025, 0.00125],
+    "post_run_window_substitution": false
+  },
+  "backends": {
+    "reference": {
+      "method": "fixed-step RK4 with forward-mode AD tangent",
+      "steps": [400, 800],
+      "anchor_floors": {
+        "400": 6.22606480260101e-12,
+        "800": 3.8990772416312213e-13
+      }
+    },
+    "independent": {
+      "method": "implicit midpoint plus Richardson extrapolation with symmetric finite-difference tangent",
+      "base_steps": [50, 100],
+      "anchor_floors": {
+        "50": 9.560929730164828e-09,
+        "100": 5.976472921013429e-10
+      }
+    }
+  },
+  "tangent_crosscheck": {
+    "reference_tangent": [0.0, 0.4250000000000119, 0.0, 0.0, -0.4250000000000119, -0.4572501756126084, -0.45725017561283865, 0.0479166666666657],
+    "independent_tangent": [0.0, 0.42500000006888516, 0.0, 0.0, -0.42500000006888516, -0.4572501759648402, -0.4572501763291433, 0.04791666664995769],
+    "relative_difference": 9.097179491887701e-10,
+    "linear_closure_infinity_norm": 1.1102230246251565e-16,
+    "pass": true
+  },
+  "fit_results": [
+    {
+      "backend": "reference",
+      "resolution": 400,
+      "sign": -1,
+      "slope": 2.0096468206149023,
+      "halving_ratios": [4.046981481625122, 4.023245073053861, 4.011560789547396],
+      "pass": true
+    },
+    {
+      "backend": "reference",
+      "resolution": 400,
+      "sign": 1,
+      "slope": 2.000302417010183,
+      "halving_ratios": [4.001571712272147, 4.000682118200045, 4.000314122010169],
+      "pass": true
+    },
+    {
+      "backend": "reference",
+      "resolution": 800,
+      "sign": -1,
+      "slope": 2.0096470056832327,
+      "halving_ratios": [4.046981559180092, 4.023245381154203, 4.0115620184019365],
+      "pass": true
+    },
+    {
+      "backend": "reference",
+      "resolution": 800,
+      "sign": 1,
+      "slope": 2.0003026020751102,
+      "halving_ratios": [4.00157178874674, 4.00068242434999, 4.000315347894856],
+      "pass": true
+    },
+    {
+      "backend": "independent",
+      "resolution": 50,
+      "sign": -1,
+      "slope": 2.009343762858732,
+      "halving_ratios": [4.046854128460089, 4.022739905799847, 4.00955023303405],
+      "pass": true
+    },
+    {
+      "backend": "independent",
+      "resolution": 50,
+      "sign": 1,
+      "slope": 2.0000000309710653,
+      "halving_ratios": [4.001446961676984, 4.000181990654395, 3.9983112940859806],
+      "pass": true
+    },
+    {
+      "backend": "independent",
+      "resolution": 100,
+      "sign": -1,
+      "slope": 2.009628119701671,
+      "halving_ratios": [4.0469737324140995, 4.023214043558037, 4.011436392877568],
+      "pass": true
+    },
+    {
+      "backend": "independent",
+      "resolution": 100,
+      "sign": 1,
+      "slope": 2.0002836832481345,
+      "halving_ratios": [4.001563919105385, 4.000651035598943, 4.0001902041505595],
+      "pass": true
+    }
+  ],
+  "aggregate_results": {
+    "slope_minimum": 2.0000000309710653,
+    "slope_maximum": 2.0096470056832327,
+    "halving_ratio_minimum": 3.9983112940859806,
+    "halving_ratio_maximum": 4.046981559180092,
+    "minimum_fit_floor_separation": 748.1326597445042,
+    "minimum_small_probe_floor_separation": 47.22430577411399,
+    "maximum_signed_pair_relative_asymmetry": 0.022519410170857505,
+    "maximum_reference_resolution_relative_difference": 4.084570885803319e-07,
+    "maximum_independent_resolution_relative_difference": 0.0006276802969871953,
+    "maximum_fine_backend_relative_difference": 4.175883538687651e-05
+  },
+  "acceptance_checks": {
+    "all_registered_sign_resolution_fits": true,
+    "signed_pair_symmetry": true,
+    "same_backend_resolution_agreement": true,
+    "fine_backend_agreement": true,
+    "tangent_agreement": true,
+    "linear_closure": true,
+    "predictor_only": true,
+    "nonlinear_corrector_absent": true,
+    "second_derivative_absent": true
+  },
+  "artifacts": {
+    "evaluation_table": "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorEvaluations_v0.1.csv",
+    "ledger": "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorLedger_v0.1.md",
+    "workflow_run_id": 30849219480,
+    "workflow_artifact_id": 8869907449,
+    "workflow_artifact_zip_sha256": "efa1fab69b56ba7073f1d73a7b56e739aed91965298e8e29962632fea94c24aa",
+    "full_run_json_sha256": "b0c3f72a207a5e2581c334f77c89092cf5e9f1439797e385ab5c4329fe5b8269"
+  },
+  "hashes": {
+    "evaluator_code_sha256": "39eea878699558c48ff7e7daf5829e50301a253062f54f6ee2584e27fb3a38e1",
+    "reference_code_sha256": "bb270082d8e19684eaaefd305c78b0e5184535251bcf604c4ec1e9167c68c947",
+    "independent_code_sha256": "685322f556eab3aa0045497605575f912d13a284fe860fd5184cadfd1caa2dbd",
+    "parameter_sha256": "d23a01b6f024858bff071edd6b258df7a5e97441f887514b58369a9293ff73ce",
+    "evaluation_csv_sha256": "1ca5b14c5b1a91ce3fb917e6fced12d8431600a15ba83fb3b476b3833c044505"
+  },
+  "validity_regime": [
+    "declared C1-V manufactured model and exact manufactured anchor",
+    "lambda0_hat local tangent at the anchor",
+    "preregistered signed steps and fixed fit window",
+    "declared normalized residual scaling",
+    "tested finite RK4 and implicit-midpoint/Richardson discretizations"
+  ],
+  "forbidden_inference": [
+    "No nonlinear solution was computed.",
+    "No finite or global branch was established.",
+    "No continuum implicit-function theorem or continuum invertibility was established.",
+    "No existence, uniqueness, turning-point, self-tuning, perturbative-stability or ghost-freedom claim is permitted.",
+    "No historical A0 identity or physical C1 identity is established.",
+    "No K1-D, K1-E, R1.1 or official-solver status change follows."
+  ],
+  "gate_state": {
+    "G1.1": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED",
+    "nonlinear_solution_family": "NOT_ESTABLISHED",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "perturbative_stability": "OPEN",
+    "ghost_freedom": "OPEN",
+    "R1.1": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "upgrade_condition": "G1.2 may begin only as a local second-order discrete response diagnostic using directed AD second derivatives and an independent symmetric finite-difference method."
+}

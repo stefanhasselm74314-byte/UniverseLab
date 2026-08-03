@@ -1,0 +1,105 @@
+{
+  "schema": "universelab.hzt-m0-s6-c1-v.g1-1-symmetric-predictor.v0.1",
+  "date": "2026-08-03",
+  "run_id": "C1V-G1.1-20260803-001",
+  "track_id": "HZT-M0-S6-C1-V",
+  "model_id": "HZT-M0-S6-C1-V",
+  "classification": "MANUFACTURED_VERIFICATION_MODEL",
+  "phase": "C1-V3",
+  "block": "G1.1",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "purpose": "Test whether the uncorrected local lambda0_hat predictor has a visible quadratic normalized-residual regime at the manufactured C1-V anchor.",
+  "parameter": {
+    "symbol": "lambda0_hat",
+    "anchor": 0.0,
+    "dimensionless": true
+  },
+  "predictor": {
+    "formula": "X_pred(delta)=X0+delta*X_prime_0",
+    "nonlinear_corrector": false,
+    "root_solver": false,
+    "branch_tracking": false,
+    "second_derivative": false
+  },
+  "symmetric_step_magnitudes": [
+    0.08,
+    0.04,
+    0.02,
+    0.01,
+    0.005,
+    0.0025,
+    0.00125
+  ],
+  "signed_steps_rule": "evaluate both +delta and -delta for every registered magnitude",
+  "windows": {
+    "large_step_probe": [0.08],
+    "asymptotic_fit": [0.04, 0.02, 0.01, 0.005],
+    "small_step_floor_probe": [0.0025, 0.00125]
+  },
+  "backends": {
+    "reference": {
+      "method": "fixed-step RK4 residual map",
+      "tangent": "forward-mode AD discrete tangent",
+      "steps": [400, 800]
+    },
+    "independent": {
+      "method": "implicit midpoint with Richardson endpoint extrapolation",
+      "tangent": "symmetric finite-difference discrete tangent",
+      "base_steps": [50, 100]
+    }
+  },
+  "residual_measure": {
+    "primary_norm": "infinity_norm_of_declared_normalized_residual_vector",
+    "secondary_norm": "euclidean_norm_of_declared_normalized_residual_vector",
+    "residual_scaling": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0]
+  },
+  "numerical_floor": {
+    "estimator": "max(anchor_residual_infinity_norm,1e-13)",
+    "asymptotic_separation_factor": 100.0,
+    "eligibility_rule": "fit-point residual must exceed 100 times the backend-resolution anchor floor"
+  },
+  "acceptance_corridor": {
+    "minimum_consecutive_fit_magnitudes": 4,
+    "loglog_slope": [1.8, 2.2],
+    "halving_ratio_R_delta_over_R_half_delta": [3.2, 4.8],
+    "maximum_signed_pair_relative_asymmetry": 0.2,
+    "maximum_same_backend_resolution_relative_difference": 0.1,
+    "maximum_fine_backend_relative_difference": 0.1,
+    "tangent_relative_difference_maximum": 1e-7,
+    "linear_closure_infinity_norm_maximum": 1e-10
+  },
+  "pass_rule": "All registered fit magnitudes must remain above the numerical floor, both signs at both resolutions of both backends must have slopes and halving ratios inside the corridor, signed-pair asymmetry and resolution differences must pass, and the two fine backends must agree. No post-run fit-window substitution is permitted.",
+  "reported_transition_regimes": [
+    "large-step higher-order contamination probe",
+    "registered quadratic intermediate fit window",
+    "small-step numerical-floor probe"
+  ],
+  "parameter_hash": "d23a01b6f024858bff071edd6b258df7a5e97441f887514b58369a9293ff73ce",
+  "dependencies": [
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_ModelContract_v0.2.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_DimensionlessJacobianContract_v0.2.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_BackendTangentContract_v0.2.json",
+    "tools/2026-08-03_md2s_c1_dimensionless_jacobian_v0.1.py",
+    "tools/2026-08-03_md2s_c1_independent_backend_continuation_v0.1.py"
+  ],
+  "evidence_effect": "DISCRETE_PREDICTOR_QA_ONLY",
+  "physical_evidence_effect": "NONE",
+  "forbidden_inference": [
+    "No nonlinear solution is computed.",
+    "No finite branch is established.",
+    "No continuum implicit-function theorem is established.",
+    "No global existence, uniqueness, turning point, self-tuning or stability claim is permitted.",
+    "No historical A0 identity or physical C1 identity is claimed.",
+    "No K1-D, K1-E, R1.1 or solver-authorization change is permitted."
+  ],
+  "gate_state": {
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED",
+    "R1.1": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}
