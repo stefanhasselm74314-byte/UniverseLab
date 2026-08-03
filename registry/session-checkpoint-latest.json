@@ -7,6 +7,13 @@
   "canonical_snapshot": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.7.json",
   "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
   "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"],
+  "sources": [
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json",
+    "registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json",
+    "governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md"
+  ],
   "current_goal": "Complete C1-V3 with a pre-registered symmetric predictor-only residual-order test before any second local derivative is attempted.",
   "current_workstream": "G1_C1_V_VERIFICATION_COMPLETION",
   "governance_principle": "C1 prueft zunaechst unsere Werkzeuge, nicht die Natur.",
