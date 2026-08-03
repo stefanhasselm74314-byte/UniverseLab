@@ -1,0 +1,210 @@
+{
+  "schema": "universelab.md2s-c1-bvp-preflight.v0.1",
+  "date": "2026-08-03",
+  "model_id": "HZT-M0-S6-C1",
+  "status": "STRUCTURAL_PREFLIGHT_PASS_EXECUTION_BLOCKED",
+  "evidence_effect": "NONE",
+  "solver_authorized": false,
+  "continuous_unknowns_square_bvp": [
+    "phi_N_0",
+    "Q_N",
+    "A_S_0",
+    "phi_S_0",
+    "Q_S",
+    "rho_N",
+    "rho_S",
+    "K4"
+  ],
+  "fixed_by_frame_or_regular_gauge": [
+    "A_N_0=0",
+    "A_chi_N_0=0",
+    "A_chi_S_0=0"
+  ],
+  "discrete_fixed_sectors": [
+    "N_sigma",
+    "N_F"
+  ],
+  "count_derivation": {
+    "regular_free_data_per_region": [
+      "A_s_0",
+      "phi_s_0",
+      "Q_s"
+    ],
+    "two_region_regular_data_count": 6,
+    "cap_location_count": 2,
+    "global_frame_redundancy_removed": 1,
+    "K4_eigenvalue_added": 1,
+    "continuous_unknown_count": 8
+  },
+  "independent_residuals": [
+    {
+      "id": "R_A",
+      "equation": "A_N(rho_N)-A_S(rho_S)"
+    },
+    {
+      "id": "R_L",
+      "equation": "L_N(rho_N)-L_S(rho_S)"
+    },
+    {
+      "id": "R_phi",
+      "equation": "phi_N(rho_N)-phi_S(rho_S)"
+    },
+    {
+      "id": "R_patch",
+      "equation": "A_chi_N(rho_N)-A_chi_S(rho_S)-N_F/q0"
+    },
+    {
+      "id": "R_4d",
+      "equation": "-(3*A_Sigma+L_Sigma)+kappa6_sq*(lambda+Y_sigma/2)"
+    },
+    {
+      "id": "R_chi",
+      "equation": "-4*A_Sigma+kappa6_sq*(lambda-Y_sigma/2)"
+    },
+    {
+      "id": "R_scalar",
+      "equation": "phi_N_prime+phi_S_prime+lambda1"
+    },
+    {
+      "id": "R_gauge",
+      "equation": "exp(-4*A)/L*(Q_N+Q_S)-q0*z_sigma0*d_chi/L^2"
+    }
+  ],
+  "not_counted_as_independent_boundary_residuals": {
+    "phase_equation": "automatic for the static homogeneous winding ansatz",
+    "rr_constraints": "initial constraints and propagated QA channels, not extra endpoint conditions",
+    "global_flux": "encoded once by the gauge-patch relation in this two-regular-patch convention"
+  },
+  "structural_dependency_edges": {
+    "R_A": [
+      "A_S_0",
+      "rho_N",
+      "rho_S",
+      "K4",
+      "phi_N_0",
+      "Q_N",
+      "phi_S_0",
+      "Q_S"
+    ],
+    "R_L": [
+      "rho_N",
+      "rho_S",
+      "K4",
+      "phi_N_0",
+      "Q_N",
+      "A_S_0",
+      "phi_S_0",
+      "Q_S"
+    ],
+    "R_phi": [
+      "phi_N_0",
+      "phi_S_0",
+      "rho_N",
+      "rho_S",
+      "K4",
+      "Q_N",
+      "Q_S"
+    ],
+    "R_patch": [
+      "Q_N",
+      "Q_S",
+      "rho_N",
+      "rho_S",
+      "A_S_0",
+      "K4"
+    ],
+    "R_4d": [
+      "rho_N",
+      "rho_S",
+      "K4",
+      "A_S_0",
+      "phi_N_0",
+      "Q_N",
+      "phi_S_0",
+      "Q_S"
+    ],
+    "R_chi": [
+      "K4",
+      "rho_N",
+      "rho_S",
+      "A_S_0",
+      "phi_N_0",
+      "Q_N",
+      "phi_S_0",
+      "Q_S"
+    ],
+    "R_scalar": [
+      "phi_N_0",
+      "phi_S_0",
+      "rho_N",
+      "rho_S",
+      "K4",
+      "A_S_0"
+    ],
+    "R_gauge": [
+      "Q_N",
+      "Q_S",
+      "rho_N",
+      "rho_S",
+      "A_S_0",
+      "K4"
+    ]
+  },
+  "declared_perfect_matching": {
+    "R_A": "A_S_0",
+    "R_L": "rho_N",
+    "R_phi": "phi_N_0",
+    "R_patch": "Q_N",
+    "R_4d": "rho_S",
+    "R_chi": "K4",
+    "R_scalar": "phi_S_0",
+    "R_gauge": "Q_S"
+  },
+  "structural_rank": {
+    "row_count": 8,
+    "column_count": 8,
+    "maximum_bipartite_matching": 8,
+    "interpretation": "no combinatorial rank obstruction in the declared dependency pattern",
+    "not_proven": [
+      "nonzero numerical Jacobian determinant at a solution",
+      "existence or uniqueness of a global background",
+      "conditioning",
+      "stability",
+      "historical A0 identity"
+    ]
+  },
+  "fixed_K4_variant": {
+    "continuous_unknown_count": 7,
+    "residual_count": 8,
+    "generic_codimension": 1,
+    "required_resolution": "promote exactly one declared model parameter to continuation or tuning variable, or release one independent target condition"
+  },
+  "rank_risk_surfaces": [
+    {
+      "id": "C1-RISK-SCALAR-SHIFT",
+      "condition": "m_phi_sq=0 and lambda1=0",
+      "expected_effect": "one continuous scalar-shift null direction"
+    },
+    {
+      "id": "C1-RISK-FIXED-K4",
+      "condition": "K4 fixed and no model parameter promoted",
+      "expected_effect": "one-equation surplus"
+    }
+  ],
+  "next_execution_gate": {
+    "required": [
+      "dimensionless variable map",
+      "residual normalization and tolerances",
+      "analytic seed or local continuation point",
+      "actual symbolic or automatic-differentiation Jacobian",
+      "constraint propagation test"
+    ],
+    "R1.1": "BLOCKED",
+    "MD2S_SOLVER": "NOT_AUTHORIZED"
+  },
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "evidence_effect": "NONE"
+  }
+}
