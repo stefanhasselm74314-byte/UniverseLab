@@ -1,71 +1,41 @@
 {
-  "schema": "universelab.source-intake.v0.1",
+  "schema": "universelab.public-source-intake.v0.2",
   "intake_date": "2026-08-01",
-  "batch_id": "SOURCE-BATCH-20260801-02",
-  "owner": "Stefan Hasselmeyer",
-  "scope": "Uploaded Constitution, HZT-M0 bridge, GW dossier and chat-export analysis artifacts",
-  "epistemic_rule": "The intake records what the uploaded bytes support. It does not infer missing files, later versions or unprovided numerical artifacts.",
-  "files": [
+  "sanitized_date": "2026-08-03",
+  "batch_id": "SOURCE-BATCH-20260801-02-PUBLIC",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "scope": "Sanitized provenance for governance, HZT-M0 bridge, GW-dossier and historical archive-analysis artifacts.",
+  "epistemic_rule": "This public intake records only scientifically relevant support and limitations. Private filenames, account-export statistics, exact archive metadata and personal identifiers are excluded.",
+  "sources": [
     {
-      "source_id": "SRC-EXPORT-ZIP-20251217",
-      "filename": "Zip_analysis_pack.zip",
-      "bytes": 57204163,
-      "sha256": "e54dc0dc1d933855dff7c3eb36e42e83a64a318a3cdcdfffb4a58373229ef6e2",
-      "class": "CHAT_EXPORT_ANALYSIS_PACKAGE",
-      "status": "INGESTED_METADATA_AND_TEXT_INDEX",
-      "coverage": {
-        "conversation_count": 141,
-        "hyperzeit_conversation_count": 69,
-        "create_time_utc_min": "2025-09-09T22:10:38.913007+00:00",
-        "create_time_utc_max": "2025-12-17T08:11:05.079111+00:00",
-        "update_time_utc_max": "2025-12-17T08:53:48.476020+00:00"
-      },
+      "source_id": "SRC-HISTORICAL-ARCHIVE-INDEX",
+      "class": "PRIVATE_ARCHIVE_ANALYSIS_SUMMARY",
+      "status": "SANITIZED_FINDINGS_ONLY",
+      "temporal_scope": "predates the 2026 MD-2S/B1.4N/B1.4O work",
       "findings": [
-        "The export predates the 2026 MD-2S/B1.4N/B1.4O work.",
-        "No exact occurrence of the registered MD-2S A0 benchmark numbers was found in the message text.",
-        "No message-text occurrence of MD-2S, B1.4N or B1.4O was found.",
-        "Attachment metadata names many historical files, but the corresponding binary payloads are not contained in this ZIP package."
+        "No complete historical MD-2S solver package was established from the audited material.",
+        "No exact occurrence of the registered historical A0 benchmark set was established in the reviewed message text.",
+        "Attachment metadata alone is not a recovered scientific artifact."
       ],
-      "limitations": "Negative text search does not prove that an attachment binary never existed outside this export."
+      "limitations": "A negative result in the reviewed archive does not prove that no separate historical binary ever existed."
     },
     {
       "source_id": "SRC-MD0-V3-0-UPLOAD",
-      "filename": "WICHTIG_NICHT_LOESCHEN_Hyperzeit_Project_Constitution_MD0_v3.0.docx",
-      "bytes": 48286,
-      "sha256": "95c13ba9bf007b2721a1e623af485d02fc6277f8bb0cf37271a960d3c7f56845",
       "class": "GOVERNING_DOCUMENT",
       "document_id": "MD-0",
       "version": "3.0",
       "document_date": "2026-06-29",
-      "status": "LATEST_UPLOADED_NORMATIVE_VERSION",
-      "governance_effect": "Defines HPVS -> HZT-M0 -> HZT-Full, Forward Engine = Map + Jacobian + Semantic Layer, K1-first ordering and evidence discipline.",
-      "version_note": "The repository program references MD-0 v3.1.1, but a v3.1.1 source file is not present in this upload batch. Do not silently downgrade or claim byte-level verification of v3.1.1."
+      "status": "BYTE_VERIFIED_UPLOADED_VERSION",
+      "governance_effect": "Defines the architecture, Forward Engine concept, K1-first ordering and evidence discipline.",
+      "version_note": "The project declares MD-0 v3.1.1 as current canon; byte-level verification of that later source remains separately documented."
     },
     {
-      "source_id": "SRC-MD0-LIVING-V1-0-UPLOAD",
-      "filename": "WICHTIG_NICHT_LOESCHEN_Hyperzeit_Project_Constitution_Living_v1.0.docx",
-      "bytes": 37724,
-      "sha256": "025bccd0b14801cad7a766667549d568808c3b7f5ecf2594f37098eb18394c15",
-      "class": "GOVERNANCE_PREDECESSOR",
-      "version": "1.0",
-      "status": "SUPERSEDED_BY_MD0_V3_0_FOR_THIS_BATCH",
-      "retention": "PRESERVE_AS_PROJECT_HISTORY"
-    },
-    {
-      "source_id": "SRC-CONSTITUTION-V1-0-UPLOAD",
-      "filename": "WICHTIG_NICHT_LOESCHEN_Hyperzeit_Project_Constitution_v1.0.docx",
-      "bytes": 37401,
-      "sha256": "8da2268f654c2edf6966051f5e64de19754c5895fc62e4df2ecae75e08d0da58",
-      "class": "GOVERNANCE_PREDECESSOR",
-      "version": "1.0",
-      "status": "SUPERSEDED_BY_MD0_V3_0_FOR_THIS_BATCH",
-      "retention": "PRESERVE_AS_PROJECT_HISTORY"
+      "source_id": "SRC-MD0-PREDECESSORS",
+      "class": "GOVERNANCE_PREDECESSORS",
+      "status": "SUPERSEDED_PRESERVED_AS_PROJECT_HISTORY"
     },
     {
       "source_id": "SRC-MD2F-V0-1-UPLOAD",
-      "filename": "MD-2F_HZT-M0_Physical_Parameter_Mapping_Resolution_v0.1.docx",
-      "bytes": 41566,
-      "sha256": "b72e7d8049907619e1c6ae8e0b479c8cb6fadd636188c5704c8811eb4bc73018",
       "class": "HZT_M0_AUDIT_DOCUMENT",
       "document_id": "MD-2F",
       "version": "0.1",
@@ -74,49 +44,35 @@
     },
     {
       "source_id": "SRC-MD2H-V0-1-UPLOAD",
-      "filename": "MD-2H_HZT-M0_Physical_Mapping_Derivation_and_Bridge_Equations_v0.1.docx",
-      "bytes": 44442,
-      "sha256": "ca371868d9a8c634f6efb386f97c80fc91bf4923b7b51458b0cba02a9d768cd7",
       "class": "HZT_M0_AUDIT_DOCUMENT",
       "document_id": "MD-2H",
       "version": "0.1",
       "status": "BRIDGE_EQUATION_FRAMEWORK_DEFINED_NOT_RELEASED",
-      "release_effect": "Only k_c=m/omega_c and A(k)=exp[-(k/k_c)^2] are derived conditionally; physical origins remain open."
+      "release_effect": "Only the declared mathematical forms are conditionally derived; physical origins remain open."
     },
     {
       "source_id": "SRC-MD2I-V0-1-UPLOAD",
-      "filename": "MD-2I_HZT-M0_Bridge_Equation_Hardening_and_Minimal_Derivation_Set_v0.1.docx",
-      "bytes": 43602,
-      "sha256": "1e55c5ca269ec89a68395fa0cc8598ac4fbf0b31a38814ec9797c0faa83e170e",
       "class": "HZT_M0_AUDIT_DOCUMENT",
       "document_id": "MD-2I",
       "version": "0.1",
       "status": "MINIMAL_DERIVATION_SET_DEFINED_NOT_COMPLETED",
-      "release_effect": "K1-D remains locked until MDS-01 through MDS-05 are derived, released with physical semantics, fixed or excluded according to the declared rules."
+      "release_effect": "K1-D remains locked until the declared bridge set is physically derived, fixed or excluded."
     },
     {
       "source_id": "SRC-GW-DOSSIER-UPLOAD",
-      "filename": "Hyperzeit-GW-Falsifikationsdossier.docx",
-      "bytes": 5306797,
-      "sha256": "7aeb7f27b6d5748ac1d1aa3b777c85cb436ba1f95ed03feac77b80390f870d7f",
       "class": "GW_THEORY_AND_PHENOMENOLOGY_DOSSIER",
       "status": "REQUIRES_RIGOR_AND_REPRODUCIBILITY_AUDIT",
       "supported_scope": "Defines a dynamic-threshold GW phenomenology, forecast metrics and explicit open risks.",
       "unsupported_promotions": [
         "No complete 6D-to-waveform derivation is supplied.",
         "Reported numerical audit results are not reproducible from the document alone.",
-        "Several operator existence, uniqueness and positivity statements require stronger proofs than supplied."
+        "Operator existence, uniqueness and positivity statements require separate proof."
       ]
     }
   ],
   "supersession_edges": [
     {
-      "from": "SRC-CONSTITUTION-V1-0-UPLOAD",
-      "to": "SRC-MD0-V3-0-UPLOAD",
-      "relation": "SUPERSEDED_BY"
-    },
-    {
-      "from": "SRC-MD0-LIVING-V1-0-UPLOAD",
+      "from": "SRC-MD0-PREDECESSORS",
       "to": "SRC-MD0-V3-0-UPLOAD",
       "relation": "SUPERSEDED_BY"
     },
@@ -134,7 +90,7 @@
   "gate_effect": {
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
-    "MD2S_R0": "NO_SOLVER_RECOVERED_FROM_THIS_BATCH",
+    "MD2S_R0": "NO_PROVENANCE_COMPLETE_SOLVER_RECOVERED_FROM_THIS_BATCH",
     "GW_PHENOMENOLOGY": "DIAGNOSTIC_FORECAST_ONLY",
     "physical_evidence_change": false
   }
