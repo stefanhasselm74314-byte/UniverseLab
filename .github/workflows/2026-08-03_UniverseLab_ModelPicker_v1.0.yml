@@ -1,0 +1,57 @@
+name: UniverseLab model picker migration
+
+on:
+  push:
+    branches:
+      - agent/model-picker-modal-v1
+    paths:
+      - "assets/2026-08-03_UniverseLab_ModelPicker_v1.0.css"
+      - "assets/2026-08-03_UniverseLab_ModelPicker_v1.0.js"
+      - "tools/2026-08-03_apply_model_picker_v1.0.py"
+      - "tests/2026-08-03_test_model_picker_v1.0.py"
+      - ".github/workflows/2026-08-03_UniverseLab_ModelPicker_v1.0.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  migrate-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/model-picker-modal-v1
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile contract tools
+        run: |
+          python -m py_compile tools/2026-08-03_apply_model_picker_v1.0.py
+          python -m py_compile tests/2026-08-03_test_model_picker_v1.0.py
+
+      - name: Run model picker tests
+        run: python tests/2026-08-03_test_model_picker_v1.0.py -v
+
+      - name: Apply model picker assets
+        run: python tools/2026-08-03_apply_model_picker_v1.0.py --apply
+
+      - name: Verify applied contract
+        run: python tools/2026-08-03_apply_model_picker_v1.0.py --check
+
+      - name: Commit Observatory migration
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No migration changes required."
+            exit 0
+          fi
+          git config user.name "UniverseLab CI"
+          git config user.email "actions@users.noreply.github.com"
+          git add observatory.html
+          git commit -m "Apply themed model picker to Observatory"
+          git push origin HEAD:agent/model-picker-modal-v1
