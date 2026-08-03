@@ -56,7 +56,7 @@ class CPhysFreeze1BTests(unittest.TestCase):
 
     def test_parameter_budget_is_exactly_five(self) -> None:
         budget = self.contract["parameter_identifiability_budget"]
-        self.assertEqual(budget["continuous_dimensionless_model_parameter_count"], 5)
+        self.assertEqual(budget["continuous_model_parameter_count"], 5)
         self.assertEqual(len(budget["continuous_dimensionless_model_parameters"]), 5)
         self.assertEqual(budget["continuous_shooting_unknown_count"], 8)
         self.assertEqual(budget["independent_boundary_residual_count"], 8)
