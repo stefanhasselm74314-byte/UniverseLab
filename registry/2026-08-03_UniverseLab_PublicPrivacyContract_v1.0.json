@@ -31,8 +31,8 @@
   ],
   "enforcement": {
     "mode": "READ_ONLY_FAIL_CLOSED",
-    "validator": "tools/validate_public_repository_privacy.py",
-    "tests": "tests/test_public_repository_privacy.py",
+    "validator": "tools/2026-08-03_validate_public_repository_privacy_v1.0.py",
+    "tests": "tests/2026-08-03_test_public_repository_privacy_v1.0.py",
     "workflow": ".github/workflows/research-contracts.yml",
     "failure_effect": "MERGE_BLOCKING_QA_FAILURE"
   },
