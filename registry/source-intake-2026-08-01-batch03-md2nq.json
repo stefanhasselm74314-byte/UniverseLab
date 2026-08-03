@@ -1,54 +1,34 @@
 {
-  "schema": "universelab.source-intake.v0.1",
-  "date": "2026-08-01",
+  "schema": "universelab.source-intake.v0.2-public-sanitized",
+  "date": "2026-08-03",
   "batch_id": "SOURCE-INTAKE-2026-08-01-BATCH03-MD2NQ",
-  "owner": "Stefan Hasselmeyer",
+  "privacy_classification": "PUBLIC_SANITIZED",
   "source": {
-    "filename": "MD2N.zip",
+    "source_id": "SRC-MD2NQ-RESEARCH-PACKAGE",
     "sha256": "28f91e7081cc3dca0f1e225c6e203e2d66af53298a4202f956fae69322dadba3",
     "size_bytes": 257868843,
     "class": "NESTED_RESEARCH_PACKAGE",
     "repository_upload": false,
-    "reason_not_uploaded": "Large user source archive; only hashes, metadata and audit conclusions are registered."
+    "reason_not_uploaded": "Large research source package; only scientific hashes, metadata and audit conclusions are public."
   },
-  "share_link": {
-    "url": "https://chatgpt.com/share/6a6de1a4-c6cc-83eb-bf9d-76877441e56d",
-    "status": "UNRETRIEVABLE_IN_CURRENT_WEB_ENVIRONMENT",
+  "private_link_policy": {
+    "status": "EXCLUDED_FROM_PUBLIC_REGISTRY",
     "content_used": false,
-    "rule": "The link is retained as a provenance pointer only; no content is inferred from an inaccessible share page."
+    "rule": "Private or session-bound sharing links are not retained as public provenance."
   },
   "top_level_inventory": {
     "entries_total": 53,
     "files_total": 35,
-    "major_modules": [
-      "MD-2N",
-      "MD-2O",
-      "MD-2P-corr",
-      "MD-2Q"
-    ],
+    "major_modules": ["MD-2N", "MD-2O", "MD-2P-corr", "MD-2Q"],
     "embedded_chain_identified": [
-      "MD-2A",
-      "MD-2B",
-      "MD-2C",
-      "MD-2D",
-      "MD-2E",
-      "MD-2F",
-      "MD-2G",
-      "MD-2H",
-      "MD-2I",
-      "MD-2K",
-      "MD-2L",
-      "MD-2M",
-      "MD-2N",
-      "MD-2O",
-      "MD-2P-corr",
-      "MD-2Q"
+      "MD-2A", "MD-2B", "MD-2C", "MD-2D", "MD-2E", "MD-2F", "MD-2G", "MD-2H",
+      "MD-2I", "MD-2K", "MD-2L", "MD-2M", "MD-2N", "MD-2O", "MD-2P-corr", "MD-2Q"
     ],
     "missing_or_stubbed_chain_members": [
       {
         "artifact": "MD-2J",
         "status": "STATUS_STUB_ONLY",
-        "available_content": "MD2J_reported_status_input.md",
+        "available_content": "reported-status stub",
         "missing": "full report and package"
       },
       {
@@ -67,32 +47,20 @@
   },
   "semantic_duplicates": [
     {
-      "pair": [
-        "MD2N/HZT_M0_MD2N_Reduced_Effective_Diagnostic_Dry_Run_Execution_v0_1_PACKAGE.zip",
-        "MD2N/MD2N_PACKAGE.zip"
-      ],
+      "pair": ["MD-2N long-name package", "MD-2N short-name package"],
       "status": "CONTENT_IDENTICAL_AFTER_ROOT_PREFIX_NORMALIZATION"
     },
     {
-      "pair": [
-        "MD2O/MD2O_BRIDGE_UPDATE_PACKAGE.zip",
-        "MD2O/MD2O_HZT_M0_Bridge_Update_Decision_v0_1_PACKAGE.zip"
-      ],
+      "pair": ["MD-2O bridge package", "MD-2O decision package"],
       "status": "CONTENT_IDENTICAL_AFTER_ROOT_PREFIX_NORMALIZATION"
     },
     {
-      "pair": [
-        "MD2Q/HZT_M0_MD2Q_Unified_Physical_Dry_Run_Execution_v0_1_PACKAGE.zip",
-        "MD2Q/MD2Q_UNIFIED_DRYRUN_PACKAGE.zip"
-      ],
+      "pair": ["MD-2Q long-name package", "MD-2Q short-name package"],
       "status": "CONTENT_IDENTICAL_AFTER_ROOT_PREFIX_NORMALIZATION"
     },
     {
-      "pair": [
-        "MD2P_CORR_CORE/LONGNAME_CORE",
-        "MD2P_CORR_CORE/SHORTNAME_CORE"
-      ],
-      "status": "FILE_CONTENT_IDENTICAL_EXCEPT_LOCAL_ANALYSIS_PYCACHE"
+      "pair": ["MD-2P-corr long-name core", "MD-2P-corr short-name core"],
+      "status": "FILE_CONTENT_IDENTICAL_EXCEPT_LOCAL_ANALYSIS_CACHE"
     }
   ],
   "code_audit": {
@@ -104,7 +72,7 @@
       "failed_unexpected": 0
     },
     "end_to_end_regeneration": "FAIL_NOT_PROVIDED",
-    "reason": "The included scripts define functions and limited smoke tests but do not regenerate all CSV, PNG, DOCX and PDF outputs from a single locked environment and run manifest."
+    "reason": "The included scripts define functions and limited smoke tests but do not regenerate all delivered outputs from one locked environment and run manifest."
   },
   "numerical_reproduction": {
     "MD2N": {
@@ -133,8 +101,8 @@
     ],
     "defects": [
       "No cryptographic hashes are present in module manifests.",
-      "Several manifests record MANIFEST.csv itself with size zero although the file is nonzero.",
-      "MD-2P-corr manifests list large reference ZIP files that are absent from both long-name and short-name cores.",
+      "Several manifests contain internally inconsistent self-size entries.",
+      "Some large referenced packages are absent from the delivered cores.",
       "No environment lock or full run command regenerates the delivered numerical and report artifacts."
     ]
   },
