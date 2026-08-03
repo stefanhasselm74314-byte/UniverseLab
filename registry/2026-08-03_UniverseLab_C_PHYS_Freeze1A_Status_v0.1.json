@@ -1,0 +1,75 @@
+{
+  "schema": "universelab.c-phys-freeze-1a-status.v0.1",
+  "date": "2026-08-03",
+  "track_id": "MD2S-R1-C-PHYS",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-FREEZE-1A",
+  "status": "PASS_FORMAL_GLOBAL_STRUCTURE",
+  "overall_track_status": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+  "R1_0_substate": "ACTIVE_FUNCTION_FREEZE_REMAINING",
+  "result": {
+    "angular_convention": "FROZEN",
+    "orientation_table": "FROZEN",
+    "regular_gauge_patches": "FROZEN",
+    "patch_flux_equivalence": "FROZEN",
+    "charge_lattice_structure": "FROZEN_NUMERICAL_UNIT_OPEN",
+    "four_dimensional_frame": "FROZEN",
+    "parameter_roles": "FROZEN_CONDITIONAL_ON_FUNCTION_SELECTION",
+    "structural_BVP_count": "SQUARE_CONDITIONAL",
+    "exact_function_selection": "OPEN"
+  },
+  "canonical_sources": [
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeLedger_v0.1.md",
+    "tools/2026-08-03_validate_md2s_r1_c_phys_global_convention_freeze_v0.1.py",
+    "tests/2026-08-03_test_md2s_r1_c_phys_global_convention_freeze_v0.1.py"
+  ],
+  "closed_items": [
+    "Delta_chi=2*pi coordinate convention",
+    "smooth-pole derivative signs",
+    "local outward normal signs",
+    "global two-form orientation signs",
+    "regular pole gauges",
+    "U(1) transition function",
+    "oriented flux formula",
+    "patch-flux equivalence and single counting",
+    "q_sigma=m_sigma*q_ref charge-lattice structure",
+    "A_N(0)=0 four-dimensional frame",
+    "continuous, discrete and model-parameter roles",
+    "conditional eight-by-eight structural BVP count"
+  ],
+  "remaining_model_freeze_items": [
+    "exact U(phi)",
+    "exact Z_F(phi)",
+    "exact lambda(phi)",
+    "exact Z_sigma(phi)",
+    "declared scalar field domain",
+    "numerical q_ref scale or normalization"
+  ],
+  "remaining_mathematical_gates": [
+    "constraint propagation proof",
+    "principal symbol and complementing boundary-condition audit",
+    "Fredholm property",
+    "continuum Jacobian construction and rank",
+    "physical background existence",
+    "perturbative stability and ghost freedom"
+  ],
+  "gate_state": {
+    "R1.0": "ACTIVE_MODEL_FREEZE_INCOMPLETE",
+    "R1.0_substate": "ACTIVE_FUNCTION_FREEZE_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "structural_BVP_count": "SQUARE_CONDITIONAL",
+    "continuum_BVP_operator": "SCAFFOLD_ONLY",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_block": {
+    "id": "C-PHYS-R1.0-FREEZE-1B",
+    "title": "Select and justify the exact minimal EFT functions and scalar domain",
+    "classification": "VERSIONED_MODEL_SELECTION_NOT_DERIVATION"
+  }
+}
