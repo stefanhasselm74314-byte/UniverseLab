@@ -1,0 +1,93 @@
+{
+  "schema": "universelab.md2s-r1-model-freeze-addendum.v0.2",
+  "date": "2026-08-03",
+  "supersedes_addendum": "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ModelFreezeAddendum_v0.1.json",
+  "base_gate": "science/hzt-m0/md2s/R1_MODEL_FREEZE_GATE_v0.1.json",
+  "status": "ACTIVE_PARTIAL_STRUCTURAL_FREEZE",
+  "evidence_effect": "NONE",
+  "solver_authorized": false,
+  "new_sources": [
+    "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+    "registry/2026-08-03_MD2S_JunctionContract_v0.1.json"
+  ],
+  "freeze_items": {
+    "MF-001": {
+      "status": "PARTIAL_STRUCTURAL_FREEZE",
+      "closed": [
+        "Einstein-Hilbert normalization and explicit geometric Lambda placement",
+        "separation of Lambda_geom from scalar energy density U(phi)",
+        "bulk scalar and Maxwell sign structure",
+        "field dimensions and variational equations"
+      ],
+      "open": [
+        "exact U(phi)",
+        "exact Z_phi(phi)",
+        "exact Z_F(phi)",
+        "historical A0 action identity",
+        "flux charge and quantization normalization"
+      ]
+    },
+    "MF-002": {
+      "status": "PARTIAL_STRUCTURAL_FREEZE",
+      "closed": [
+        "GHY sign with outward spacelike normal on each region",
+        "localized tension plus gauge-covariant winding action",
+        "surface stress tensor",
+        "scalar and gauge variations"
+      ],
+      "open": [
+        "exact lambda(phi)",
+        "exact Z_sigma(phi)",
+        "q_sigma normalization",
+        "winding and gauge-patch convention",
+        "second-region localized content"
+      ]
+    },
+    "MF-003": {
+      "status": "PARTIAL_CONDITIONAL",
+      "source": "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md"
+    },
+    "MF-004": {
+      "status": "PARTIAL_CONDITIONAL",
+      "source": "science/hzt-m0/md2s/2026-08-03_MD2S_CanonicalRadialEquationLedger_v0.1.md"
+    },
+    "MF-005": {
+      "status": "PARTIAL_CONDITIONAL",
+      "closed": [
+        "outward-normal sum convention",
+        "induced-metric continuity contract",
+        "independent 4D and chi metric junction equations",
+        "anisotropy closure Y_sigma=(L_Sigma-A_Sigma)/kappa6^2",
+        "scalar matching with Z_phi factors",
+        "local gauge/flux matching",
+        "phase equation and residual channels"
+      ],
+      "open": [
+        "numerical one-sided boundary data",
+        "global flux quantization",
+        "complete second-side geometry",
+        "dimensionless residual normalization",
+        "tolerances and benchmark targets"
+      ]
+    },
+    "MF-006": {
+      "status": "OPEN"
+    },
+    "MF-007": {
+      "status": "PARTIAL"
+    }
+  },
+  "governance": {
+    "R1_0": "ACTIVE",
+    "R1_1": "BLOCKED",
+    "R1_2": "BLOCKED",
+    "R1_3": "BLOCKED",
+    "R2_BOUNDARY_EXPORT": "BLOCKED",
+    "R3_SCI_001_002": "BLOCKED",
+    "R4_B1_4O": "BLOCKED",
+    "TWO_JUNCTION_VERDICT": "NOT_EXECUTABLE",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_exact_action": "Freeze the functional forms and parameter domains for MF-001, MF-002 and MF-006, define global flux and angular conventions, then construct a source-backed symbolic dependency map before any official BVP solver is implemented."
+}
