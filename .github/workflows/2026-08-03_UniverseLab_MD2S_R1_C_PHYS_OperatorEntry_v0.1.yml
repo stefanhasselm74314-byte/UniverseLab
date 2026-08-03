@@ -1,0 +1,65 @@
+name: MD2S R1 C-PHYS parent-action operator entry
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md"
+      - "tools/2026-08-03_validate_md2s_r1_c_phys_operator_entry_v0.1.py"
+      - "tests/2026-08-03_test_md2s_r1_c_phys_operator_entry_v0.1.py"
+      - ".github/workflows/2026-08-03_UniverseLab_MD2S_R1_C_PHYS_OperatorEntry_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md"
+      - "tools/2026-08-03_validate_md2s_r1_c_phys_operator_entry_v0.1.py"
+      - "tests/2026-08-03_test_md2s_r1_c_phys_operator_entry_v0.1.py"
+      - ".github/workflows/2026-08-03_UniverseLab_MD2S_R1_C_PHYS_OperatorEntry_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-c-phys-operator-entry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate contract JSON
+        run: python -m json.tool registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json >/dev/null
+
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/2026-08-03_validate_md2s_r1_c_phys_operator_entry_v0.1.py
+          python -m py_compile tests/2026-08-03_test_md2s_r1_c_phys_operator_entry_v0.1.py
+
+      - name: Run regression tests
+        run: python tests/2026-08-03_test_md2s_r1_c_phys_operator_entry_v0.1.py -v
+
+      - name: Enforce fail-closed operator-entry contract
+        run: python tools/2026-08-03_validate_md2s_r1_c_phys_operator_entry_v0.1.py --json
+
+      - name: Verify immutable scientific gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          CONTRACT=registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json
+          grep -q '"track_id": "MD2S-R1-C-PHYS"' "$CONTRACT"
+          grep -q '"R1.1": "BLOCKED"' "$CONTRACT"
+          grep -q '"R1.2": "BLOCKED"' "$CONTRACT"
+          grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' "$CONTRACT"
+          grep -q '"continuum_BVP_operator": "SCAFFOLD_ONLY"' "$CONTRACT"
+          grep -q '"continuum_BVP_Jacobian": "NOT_PROVEN"' "$CONTRACT"
+          grep -q '"K1-D": "NOT_RELEASED"' "$CONTRACT"
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' "$CONTRACT"
+          grep -q '"physical_evidence_effect": "NONE"' "$CONTRACT"
+          grep -q '"q_ref_equals_q_sigma": "NOT_ASSUMED"' "$CONTRACT"
+          grep -q '"gauge_patch_transition_rule": "OPEN"' "$CONTRACT"
