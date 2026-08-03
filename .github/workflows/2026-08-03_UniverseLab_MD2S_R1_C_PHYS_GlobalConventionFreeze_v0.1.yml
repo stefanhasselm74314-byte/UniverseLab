@@ -1,0 +1,62 @@
+name: MD2S R1 C-PHYS global convention freeze
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeLedger_v0.1.md"
+      - "tools/2026-08-03_validate_md2s_r1_c_phys_global_convention_freeze_v0.1.py"
+      - "tests/2026-08-03_test_md2s_r1_c_phys_global_convention_freeze_v0.1.py"
+      - ".github/workflows/2026-08-03_UniverseLab_MD2S_R1_C_PHYS_GlobalConventionFreeze_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeLedger_v0.1.md"
+      - "tools/2026-08-03_validate_md2s_r1_c_phys_global_convention_freeze_v0.1.py"
+      - "tests/2026-08-03_test_md2s_r1_c_phys_global_convention_freeze_v0.1.py"
+      - ".github/workflows/2026-08-03_UniverseLab_MD2S_R1_C_PHYS_GlobalConventionFreeze_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-global-convention-freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON
+        run: python -m json.tool registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json >/dev/null
+
+      - name: Compile
+        run: |
+          python -m py_compile tools/2026-08-03_validate_md2s_r1_c_phys_global_convention_freeze_v0.1.py
+          python -m py_compile tests/2026-08-03_test_md2s_r1_c_phys_global_convention_freeze_v0.1.py
+
+      - name: Run regression tests
+        run: python tests/2026-08-03_test_md2s_r1_c_phys_global_convention_freeze_v0.1.py -v
+
+      - name: Enforce fail-closed contract
+        run: python tools/2026-08-03_validate_md2s_r1_c_phys_global_convention_freeze_v0.1.py --json
+
+      - name: Verify immutable gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          C=registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json
+          grep -q '"R1.1": "BLOCKED"' "$C"
+          grep -q '"R1.2": "BLOCKED"' "$C"
+          grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' "$C"
+          grep -q '"K1-D": "NOT_RELEASED"' "$C"
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' "$C"
+          grep -q '"physical_evidence_effect": "NONE"' "$C"
+          grep -q '"exact_forms": "OPEN_REQUIRES_VERSIONED_MODEL_SELECTION"' "$C"
+          grep -q '"q_ref_equals_q_sigma": "ONLY_IF_m_sigma_EQUALS_1"' "$C"
