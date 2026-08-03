@@ -17,7 +17,9 @@ on:
       - "registry/decision-log.jsonl"
       - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json"
       - "tools/2026-08-03_validate_g0_three_track_sync_v1.0.py"
+      - "tools/2026-08-03_validate_g0_three_track_sync_v1.1.py"
       - "tests/2026-08-03_test_g0_three_track_sync_v1.0.py"
+      - "tests/2026-08-03_test_g0_three_track_sync_v1.1.py"
       - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
   push:
     branches: [main]
@@ -36,7 +38,9 @@ on:
       - "registry/decision-log.jsonl"
       - "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json"
       - "tools/2026-08-03_validate_g0_three_track_sync_v1.0.py"
+      - "tools/2026-08-03_validate_g0_three_track_sync_v1.1.py"
       - "tests/2026-08-03_test_g0_three_track_sync_v1.0.py"
+      - "tests/2026-08-03_test_g0_three_track_sync_v1.1.py"
       - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
 
 permissions:
@@ -71,13 +75,15 @@ jobs:
       - name: Compile validator and tests
         run: |
           python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.0.py
+          python -m py_compile tools/2026-08-03_validate_g0_three_track_sync_v1.1.py
           python -m py_compile tests/2026-08-03_test_g0_three_track_sync_v1.0.py
+          python -m py_compile tests/2026-08-03_test_g0_three_track_sync_v1.1.py
 
       - name: Run G0 regression tests
-        run: python tests/2026-08-03_test_g0_three_track_sync_v1.0.py
+        run: python tests/2026-08-03_test_g0_three_track_sync_v1.1.py
 
       - name: Enforce fail-closed G0 contract
-        run: python tools/2026-08-03_validate_g0_three_track_sync_v1.0.py --json
+        run: python tools/2026-08-03_validate_g0_three_track_sync_v1.1.py --json
 
       - name: Verify immutable release gates
         shell: bash
