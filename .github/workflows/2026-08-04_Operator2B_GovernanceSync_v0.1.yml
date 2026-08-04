@@ -6,7 +6,9 @@ on:
       - "agent/operator-2b-governance-sync-v0-1"
     paths:
       - "tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py"
-      - "tests/2026-08-04_test_g0_three_track_sync_v1.6.py"
+      - "tools/2026-08-04_validate_g0_three_track_sync_v1.7.py"
+      - "tests/2026-08-04_test_g0_three_track_sync_v1.7.py"
+      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
       - ".github/workflows/2026-08-04_Operator2B_GovernanceSync_v0.1.yml"
       - "project-manifest.json"
       - "registry/session-checkpoint-latest.json"
@@ -16,7 +18,9 @@ on:
       - main
     paths:
       - "tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py"
-      - "tests/2026-08-04_test_g0_three_track_sync_v1.6.py"
+      - "tools/2026-08-04_validate_g0_three_track_sync_v1.7.py"
+      - "tests/2026-08-04_test_g0_three_track_sync_v1.7.py"
+      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
       - ".github/workflows/2026-08-04_Operator2B_GovernanceSync_v0.1.yml"
       - "project-manifest.json"
       - "registry/session-checkpoint-latest.json"
@@ -32,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout branch
+      - name: Checkout branch with full history
         uses: actions/checkout@v4
         with:
           ref: agent/operator-2b-governance-sync-v0-1
@@ -46,11 +50,12 @@ jobs:
       - name: Apply narrow governance migration
         run: python tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py --apply
 
-      - name: Validate synchronized G0 state
+      - name: Validate synchronized G0 and memory state
         run: |
           python tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py --check
-          python tools/2026-08-04_validate_g0_three_track_sync_v1.6.py --json
-          python tests/2026-08-04_test_g0_three_track_sync_v1.6.py
+          python tools/2026-08-04_validate_g0_three_track_sync_v1.7.py --json
+          python tests/2026-08-04_test_g0_three_track_sync_v1.7.py
+          python tools/validate_memory_protocol.py
 
       - name: Commit synchronized pointers
         shell: bash
@@ -63,5 +68,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add project-manifest.json registry/session-checkpoint-latest.json registry/decision-log.jsonl
-          git commit -m "Synchronize Operator-2B governance pointers"
+          git commit -m "Advance Operator-2B governance checkpoint to v1.15"
           git push origin HEAD:agent/operator-2b-governance-sync-v0-1
