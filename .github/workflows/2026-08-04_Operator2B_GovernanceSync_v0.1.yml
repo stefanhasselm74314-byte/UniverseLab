@@ -6,6 +6,7 @@ on:
       - "agent/operator-2b-governance-sync-v0-1"
     paths:
       - "tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py"
+      - "tests/2026-08-04_test_g0_three_track_sync_v1.6.py"
       - ".github/workflows/2026-08-04_Operator2B_GovernanceSync_v0.1.yml"
       - "project-manifest.json"
       - "registry/session-checkpoint-latest.json"
@@ -15,6 +16,7 @@ on:
       - main
     paths:
       - "tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py"
+      - "tests/2026-08-04_test_g0_three_track_sync_v1.6.py"
       - ".github/workflows/2026-08-04_Operator2B_GovernanceSync_v0.1.yml"
       - "project-manifest.json"
       - "registry/session-checkpoint-latest.json"
