@@ -1,0 +1,36 @@
+name: Temporary Background-3A assembly canonical synchronization
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  synchronize:
+    if: ${{ github.head_ref == 'agent/background-3a-assembly-status-sync-v1-0' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Apply Background-3A assembly canonical synchronization
+        run: python tools/2026-08-04_apply_background3a_assembly_canonical_sync_v1.0.py
+      - name: Commit canonical JSON state and remove temporary script
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'UniverseLab Sync Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add project-manifest.json registry/decision-log.jsonl registry/session-checkpoint-latest.json registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.19.json
+          git rm tools/2026-08-04_apply_background3a_assembly_canonical_sync_v1.0.py
+          git commit -m '[background3a-assembly-sync] Canonicalize CP01R1 assembly correction'
+          git push origin HEAD:${{ github.head_ref }}
