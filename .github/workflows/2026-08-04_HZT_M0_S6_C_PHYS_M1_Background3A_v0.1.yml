@@ -1,0 +1,67 @@
+name: HZT-M0-S6 C-PHYS-M1 Background-3A preregistration
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationLedger_v0.1.md"
+      - "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3a_v0.1.py"
+      - "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3a_v0.1.py"
+      - ".github/workflows/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3A_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationLedger_v0.1.md"
+      - "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3a_v0.1.py"
+      - "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3a_v0.1.py"
+      - ".github/workflows/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3A_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-background-3a-preregistration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate contract JSON
+        run: python -m json.tool registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationContract_v0.1.json >/dev/null
+
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3a_v0.1.py
+          python -m py_compile tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3a_v0.1.py
+
+      - name: Run fail-closed preregistration validator
+        run: python tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3a_v0.1.py --json
+
+      - name: Run negative regression tests
+        run: python tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3a_v0.1.py
+
+      - name: Prove no solver implementation or execution is present
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE=registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationContract_v0.1.json
+          grep -q '"status": "PREREGISTERED_NOT_EXECUTED"' "$FILE"
+          grep -q '"solver_authorized": false' "$FILE"
+          grep -q '"current_execution": "NOT_EXECUTED"' "$FILE"
+          grep -q '"nonlinear_solver_run": false' "$FILE"
+          grep -q '"parameter_scan": false' "$FILE"
+          grep -q '"trace_matrix_evaluated": false' "$FILE"
+          grep -q '"Fredholm_claimed": false' "$FILE"
+          grep -q '"physical_confirmation_claimed": false' "$FILE"
+          grep -q '"R1.1": "BLOCKED"' "$FILE"
+          grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' "$FILE"
+          grep -q '"K1-D": "NOT_RELEASED"' "$FILE"
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' "$FILE"
+          grep -q '"physical_evidence_effect": "NONE"' "$FILE"
