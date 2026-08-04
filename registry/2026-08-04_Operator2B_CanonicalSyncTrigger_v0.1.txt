@@ -1,2 +1,0 @@
-one-shot canonical synchronization trigger
-retry after workflow-permission correction
