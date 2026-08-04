@@ -1,0 +1,35 @@
+name: Temporary Operator-2B canonical synchronization
+
+on:
+  push:
+    branches:
+      - agent/operator2b-canonical-sync-run
+
+permissions:
+  contents: write
+
+jobs:
+  synchronize:
+    if: ${{ !contains(github.event.head_commit.message, '[operator2b-sync]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/operator2b-canonical-sync-run
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply canonical synchronization
+        run: python tools/2026-08-04_apply_operator2b_canonical_sync_v1.0.py
+      - name: Commit synchronized state and remove temporary machinery
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'UniverseLab Sync Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add project-manifest.json registry/decision-log.jsonl registry/session-checkpoint-latest.json registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json .github/workflows/2026-08-04_UniverseLab_G0_ThreeTrackContract_v1.6.yml
+          git rm tools/2026-08-04_apply_operator2b_canonical_sync_v1.0.py
+          git rm .github/workflows/2026-08-04_Temporary_Operator2B_CanonicalSync_v1.0.yml
+          git commit -m '[operator2b-sync] Canonicalize Operator-2B state and remove temporary machinery'
+          git push origin HEAD:agent/operator2b-canonical-sync-run
