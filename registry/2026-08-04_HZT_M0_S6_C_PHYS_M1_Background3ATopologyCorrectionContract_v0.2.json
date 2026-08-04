@@ -1,0 +1,131 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3a-topology-correction.v0.2",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-BACKGROUND-3A-CORRECTION-0.2",
+  "classification": "APPEND_ONLY_MODEL_IDENTITY_CORRECTION_NO_SOLVER_EXECUTION",
+  "status": "ACTIVE_CANONICAL_CORRECTION",
+  "evidence_effect": "NUMERICAL_PROTOCOL_AND_MODEL_IDENTITY_CORRECTION_ONLY",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "corrects_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationContract_v0.1.json",
+  "corrected_field": "frozen_mathematical_problem.topological_inputs",
+  "defect": {
+    "v0_1_value": [
+      "N_F",
+      "m_N",
+      "m_S",
+      "n_N",
+      "n_S"
+    ],
+    "classification": "UNSUPPORTED_REGIONAL_DUPLICATION_OF_ONE_LOCALIZED_CAP_PHASE",
+    "cause": "The v0.1 preregistration expanded the single localized cap phase into regional winding and charge labels although the current parent action contains one common cap field sigma.",
+    "detected_before_run_input_freeze": true,
+    "solver_or_result_affected": false
+  },
+  "canonical_source_chain": [
+    {
+      "source": "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+      "statement": "The common cap action contains one sigma field with D_a sigma=partial_a sigma-q_sigma A_a and one winding integer N_sigma."
+    },
+    {
+      "source": "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+      "statement": "The fixed discrete sector is N_F, N_sigma and m_sigma; q_sigma=m_sigma*q_ref."
+    },
+    {
+      "source": "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+      "statement": "The M1 cap quantities use d_chi=N_sigma-m_sigma*q_hat*a_chi_Sigma."
+    },
+    {
+      "source": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+      "statement": "The discrete sector of one operator instance is N_F, N_sigma and m_sigma."
+    }
+  ],
+  "canonical_effective_topological_input": {
+    "ordered_vector": [
+      "N_F",
+      "N_sigma",
+      "m_sigma"
+    ],
+    "count": 3,
+    "domains": {
+      "N_F": "integer",
+      "N_sigma": "integer",
+      "m_sigma": "positive_integer"
+    },
+    "roles": {
+      "N_F": "bulk U(1) bundle and flux sector",
+      "N_sigma": "winding number of the one common localized cap phase",
+      "m_sigma": "positive charge-lattice multiplier with q_sigma=m_sigma*q_ref"
+    },
+    "fixed_per_run": true,
+    "sector_change_requires_new_run_id": true
+  },
+  "canonical_cap_combination": {
+    "dimensionless_winding": "d_chi=N_sigma-m_sigma*q_hat*a_chi_Sigma",
+    "winding_energy": "Y_hat_sigma=z_sigma_hat*d_chi^2/ell_Sigma^2",
+    "patch_sector": "R_patch=a_chi_N-a_chi_S-N_F/q_hat=0",
+    "patch_and_flux_counted_once": true
+  },
+  "forbidden_regional_expansion": {
+    "forbidden_labels": [
+      "m_N",
+      "m_S",
+      "n_N",
+      "n_S"
+    ],
+    "reason": "The north and south charts describe two bulk regions joined at one common cap; they do not define two independent localized sigma fields in the active M1 parent action.",
+    "future_two_cap_phase_extension": "REQUIRES_NEW_PARENT_ACTION_NEW_MODEL_ID_AND_NEW_BOUNDARY_OPERATOR"
+  },
+  "inheritance_from_v0_1": {
+    "unchanged": [
+      "tau chart and regularized profile variables",
+      "eight augmented continuous unknowns",
+      "six external M1 model coefficients",
+      "Chebyshev-Lobatto node levels 24,32,48,64,96",
+      "damped Newton trust-region method limits",
+      "seven deterministic seeds",
+      "residual and convergence thresholds",
+      "positivity and admissibility gates",
+      "independent-backend requirement",
+      "fail-closed result classes",
+      "mandatory run artifacts",
+      "all execution and evidence firewalls"
+    ],
+    "override_rule": "Only frozen_mathematical_problem.topological_inputs and every derived topological-input count are replaced by the three-component canonical vector in this correction."
+  },
+  "effective_background_3a_status": {
+    "status": "PREREGISTERED_NOT_EXECUTED_CORRECTED_TO_SINGLE_CAP_PHASE",
+    "method_frozen": true,
+    "topology_schema_frozen": true,
+    "exact_run_input_frozen": false,
+    "current_execution": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED"
+  },
+  "gate_state": {
+    "BACKGROUND_3A": "PREREGISTERED_NOT_EXECUTED_CORRECTED_TO_SINGLE_CAP_PHASE",
+    "BACKGROUND_TOPOLOGY_SCHEMA": "FROZEN_SINGLE_CAP_PHASE",
+    "BACKGROUND_RUN_INPUT": "NOT_FROZEN",
+    "BACKGROUND_SOLVER_EXECUTION": "FORBIDDEN_PENDING_BACKGROUND_3B_AND_LATER_GATE",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_allowed_block": "C-PHYS-R1.0-BACKGROUND-3B_RUN_INPUT_FREEZE_ONLY",
+  "background_3b_requirement": "Background-3B must freeze exactly one ordered integer vector (N_F,N_sigma,m_sigma) and must reject all regionalized five-integer substitutes.",
+  "forbidden_inferences": [
+    "No solver execution or numerical result occurred before this correction.",
+    "The correction does not prove existence, uniqueness, Fredholmness, stability or physical viability.",
+    "The correction does not authorize regional cap charges or windings.",
+    "No physical or release gate changes."
+  ]
+}
