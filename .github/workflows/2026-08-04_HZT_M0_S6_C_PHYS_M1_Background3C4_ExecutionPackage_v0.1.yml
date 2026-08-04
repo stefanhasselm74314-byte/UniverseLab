@@ -1,0 +1,72 @@
+name: HZT-M0-S6 C-PHYS-M1 Background-3C4 execution package
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerLedger_v0.1.md"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_execution_runner_v0.1.py"
+      - "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3c4_v0.1.py"
+      - "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3c4_v0.1.py"
+      - ".github/workflows/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4_ExecutionPackage_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_execution_runner_v0.1.py"
+      - "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3c4_v0.1.py"
+      - "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3c4_v0.1.py"
+
+permissions:
+  contents: read
+
+jobs:
+  audit-execution-package-no-solver-calls:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+      VECLIB_MAXIMUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt
+      - name: Validate JSON and compile sources
+        run: |
+          python -m json.tool registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json >/dev/null
+          python -m py_compile tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_execution_runner_v0.1.py
+          python -m py_compile tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3c4_v0.1.py
+          python -m py_compile tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3c4_v0.1.py
+      - name: Audit package without backend import
+        run: python tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_execution_runner_v0.1.py audit --json
+      - name: Self-test writer and interruption protocol in temp only
+        run: python tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_execution_runner_v0.1.py self-test --json
+      - name: Run fail-closed validator and regression tests
+        run: |
+          python tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3c4_v0.1.py --json
+          python tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3c4_v0.1.py
+      - name: Prove run path is denied before solver and artifact creation
+        run: |
+          set +e
+          python tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_execution_runner_v0.1.py run --json > /tmp/bg3c4-run.json
+          code=$?
+          set -e
+          test "$code" -eq 73
+          grep -q '"solver_calls": 0' /tmp/bg3c4-run.json
+          grep -q '"result_artifact_created": false' /tmp/bg3c4-run.json
+          test ! -e registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
+          test ! -d artifacts/hzt-m0/md2s/background3c/HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1
+      - name: Enforce evidence firewalls
+        run: |
+          grep -q '"execution_authorized": false' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json
+          grep -q '"R1.1": "BLOCKED"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json
