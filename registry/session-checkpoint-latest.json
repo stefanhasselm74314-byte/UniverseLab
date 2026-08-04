@@ -1,24 +1,198 @@
 {
   "schema": "universelab.session-checkpoint.v1",
-  "checkpoint_id": "UL-CHK-20260804-012",
-  "timestamp": "2026-08-04T00:25:00+02:00",
+  "checkpoint_id": "UL-CHK-20260804-014",
+  "timestamp": "2026-08-04T01:26:00+02:00",
   "privacy_classification": "PUBLIC_SANITIZED",
-  "basis_commit": "b758ed52ecd11b3c1077f18398a6122cc523bfa1",
-  "canonical_snapshot": "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.12.json",
-  "supersedes": "registry/2026-08-03_UniverseLab_SessionCheckpoint_v1.11.json",
-  "architecture": ["HPVS","HZT-M0","HZT-Full"],
-  "controlled_branches": ["HZT-M0-S6","HZT-M0-P5"],
-  "sources": ["registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json","registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json","registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json","science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md","tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py","registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"],
-  "current_goal": "Freeze the weighted pole-regular domain and target spaces and define the linearized M1 endpoint trace operator without claiming invertibility before a candidate background exists.",
-  "current_workstream": "PRIMARY_C_PHYS_M1_OPERATOR_2B_WITH_PARALLEL_C1_V_G1_2_DIAGNOSTIC",
-  "current_workstreams": [{"track_id":"MD2S-R1-C-PHYS","model_id":"HZT-M0-S6-C-PHYS-M1","priority":"PRIMARY","next_block":"C-PHYS-R1.0-OPERATOR-2B"},{"track_id":"HZT-M0-S6-C1-V","priority":"PARALLEL_DIAGNOSTIC_ONLY","next_block":"G1.2_LOCAL_SECOND_ORDER_DISCRETE_RESPONSE_DIAGNOSTIC"}],
-  "governance_principle": "A specialized differential expression and propagated constraint do not establish a closed Fredholm boundary operator, a background solution, stability or physical evidence.",
-  "gate_state": {"MD2S-R1-L":"BLOCKED_BY_MISSING_PRIMARY_SOURCES","MD2S-R1-C-PHYS":"ACTIVE_BOUNDARY_TRACE_AND_FUNCTION_SPACE_CLOSURE_REMAINING","C_PHYS_MODEL_ID":"HZT-M0-S6-C-PHYS-M1","HZT-M0-S6-C1-V":"MANUFACTURED_VERIFICATION_MODEL","FUNCTION_SELECTION":"PASS_POSTULATED_MODEL_FAMILY","MF_001_BULK_FUNCTIONS":"FROZEN_FOR_C_PHYS_M1","MF_002_CAP_FUNCTIONS":"FROZEN_FOR_C_PHYS_M1","R1.0":"ACTIVE_BOUNDARY_TRACE_AND_FUNCTION_SPACE_CLOSURE_REMAINING","R1.1":"BLOCKED","R1.2":"BLOCKED","STRUCTURAL_BVP_COUNT":"SQUARE_CONDITIONAL","CONTINUUM_BVP_OPERATOR":"SPECIALIZED_FORMAL_OPERATOR_DEFINED","CONSTRAINT_PROPAGATION":"PROVEN_SYMBOLIC_CONDITIONAL","INTERIOR_PRINCIPAL_RANK":"PASS_FOR_ELL_POSITIVE","HIGHER_POLE_SERIES":"DERIVED_TO_A4_F4_G4_L5","BOUNDARY_TRACE_MAP":"NOT_CONSTRUCTED","COMPLEMENTING_BOUNDARY_CONDITION":"NOT_PROVEN","FREDHOLM_PROPERTY":"NOT_PROVEN","CONTINUUM_BVP_JACOBIAN":"NOT_PROVEN","PHYSICAL_BACKGROUND":"NOT_ESTABLISHED","G1.1":"PASS_DIAGNOSTIC","C1-V3":"PARTIAL","C1-V4":"NOT_STARTED","HISTORICAL_A0_BENCHMARKS":"REPORTED_NOT_INDEPENDENTLY_REPRODUCED","HISTORICAL_A0_IDENTITY":"NOT_ESTABLISHED","C1_PHYSICAL_IDENTITY":"NOT_ESTABLISHED","NONLINEAR_SOLUTION_FAMILY":"NOT_ESTABLISHED","PERTURBATIVE_STABILITY":"OPEN","GHOST_FREEDOM":"OPEN","OFFICIAL_MD2S_SOLVER":"NOT_AUTHORIZED","K1-D":"NOT_RELEASED","K1-E":"NOT_ADMISSIBLE","PHYSICAL_EVIDENCE_EFFECT":"NONE","PUBLIC_PRIVACY_GATE":"PASS"},
-  "verified_results": [{"result_id":"UL-RES-G0-TRACK-001","statement":"The MD-2S program is separated into historical legacy reproduction, current canonical physical rebuild and manufactured C1 verification tracks.","status":"PROVEN","evidence_effect":"GOVERNANCE_ONLY","sources":["registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json","governance/2026-08-03_UNIVERSELAB_G0_GovernanceAudit_v1.0.md"]},{"result_id":"UL-RES-C-PHYS-M1-FUNCTIONS-001","statement":"HZT-M0-S6-C-PHYS-M1 is defined by the frozen six-parameter exact function family.","status":"PASS_POSTULATED_MODEL_FAMILY","evidence_effect":"MODEL_DEFINITION_ONLY","sources":["registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json","registry/2026-08-03_UniverseLab_C_PHYS_M1_FunctionFreezeStatus_v0.1.json"]},{"result_id":"UL-RES-C-PHYS-M1-OP2A-001","statement":"The specialized M1 differential residuals obey the exact off-shell identity C_rr,x+4 A_x C_rr=ell_x E_A+4 A_x E_ell-varphi_x E_varphi; therefore C_rr propagates on the independent bulk system.","status":"PROVEN_SYMBOLIC_CONDITIONAL","evidence_effect":"FORMAL_OPERATOR_STRUCTURE_ONLY","sources":["registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json","science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md","tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py"]},{"result_id":"UL-RES-C-PHYS-M1-OP2A-002","statement":"The smooth-pole expansion is derived through A,varphi,a_chi order x^4 and ell order x^5 and the interior principal determinant is 4 ell.","status":"DERIVED_AND_SYMBOLICALLY_REGRESSION_TESTED","evidence_effect":"FORMAL_REGULARITY_AND_PRINCIPAL_PART_ONLY","sources":["registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json","tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py","tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py"]},{"result_id":"UL-RES-C1V-G11-001","statement":"The preregistered uncorrected local C1-V predictor exhibits a quadratic normalized-residual regime in the tested finite discretizations.","status":"NUMERICALLY_CONFIRMED_DIAGNOSTIC","evidence_effect":"DISCRETE_PREDICTOR_QA_ONLY","sources":["registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json","registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json"]}],
-  "open_blockers": [{"blocker_id":"UL-BLK-R1-L-001","track_id":"MD2S-R1-L","statement":"The provenance-complete historical A0 action, solver and run package remain missing.","sources":["science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json","registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json"]},{"blocker_id":"UL-BLK-C-PHYS-OPERATOR-2B-001","track_id":"MD2S-R1-C-PHYS","statement":"The weighted pole-regular Banach domain, target space, trace regularity and linearized endpoint boundary operator remain unfrozen.","sources":["registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json"]},{"blocker_id":"UL-BLK-C-PHYS-CONTINUUM-002","track_id":"MD2S-R1-C-PHYS","statement":"Closedness, density, Fredholm property, continuum Jacobian, kernel, cokernel, existence, uniqueness and conditioning remain unproven.","sources":["registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json","registry/2026-08-03_UniverseLab_C_PHYS_M1_FunctionFreezeStatus_v0.1.json"]},{"blocker_id":"UL-BLK-C-PHYS-BACKGROUND-003","track_id":"MD2S-R1-C-PHYS","statement":"No candidate M1 background exists at which the linearized endpoint trace map can be evaluated.","sources":["registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json"]},{"blocker_id":"UL-BLK-C-PHYS-IDENTIFIABILITY-004","track_id":"MD2S-R1-C-PHYS","statement":"The six model-shape parameters and dimensional anchor have not passed sensitivity-rank, prior-robustness or six-to-four-dimensional normalization audits.","sources":["registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json"]},{"blocker_id":"UL-BLK-C1-V3-G12-001","track_id":"HZT-M0-S6-C1-V","statement":"The local second-order discrete C1-V response remains uncomputed.","sources":["registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"]},{"blocker_id":"UL-BLK-STAB-001","track_id":"MD2S-R1-C-PHYS","statement":"The scalar-vector-tensor quadratic action and all ghost, gradient and mass-spectrum stability conditions remain open.","sources":["governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md","registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json"]}],
-  "active_assumptions": ["HZT-M0-S6-C-PHYS-M1 remains a postulated candidate model family rather than a derived or confirmed theory.","The independent local M1 system is E_A, E_ell, E_varphi and E_gauge; C_rr is a propagated QA constraint.","The internal profile satisfies ell>0 on each open radial interval and the poles use parity-factorized regular variables.","The eight model-shape and shooting roles remain separated as declared in Freeze-1A and Freeze-1B.","No boundary trace invertibility can be claimed before a candidate background exists."],
-  "forbidden_inferences": ["Do not infer background existence or uniqueness from constraint propagation.","Do not infer a Fredholm operator from interior principal rank.","Do not use the higher pole series as solver authorization.","Do not infer trace-map invertibility from the square structural count.","Do not infer perturbative stability, ghost freedom, K1-D or K1-E release."],
-  "entry_points": ["registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json","science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md","tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2a_v0.1.py","registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json","registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"],
+  "basis_commit": "5f07795bf0336d887723fb87bbde52484529e821",
+  "canonical_snapshot": "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.14.json",
+  "supersedes": "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.13.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"],
+  "sources": [
+    "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ARegularityTracePreflight_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+    "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json",
+    "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md",
+    "registry/decision-log.jsonl",
+    "project-manifest.json",
+    "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"
+  ],
+  "current_goal": "Preregister one controlled C-PHYS-M1 candidate-background construction protocol without claiming existence, uniqueness, stability or physical confirmation.",
+  "current_workstream": "PRIMARY_C_PHYS_M1_BACKGROUND_3A_WITH_PARALLEL_C1_V_G1_2_DIAGNOSTIC",
+  "current_workstreams": [
+    {
+      "track_id": "MD2S-R1-C-PHYS",
+      "model_id": "HZT-M0-S6-C-PHYS-M1",
+      "priority": "PRIMARY",
+      "next_block": "C-PHYS-R1.0-BACKGROUND-3A"
+    },
+    {
+      "track_id": "HZT-M0-S6-C1-V",
+      "priority": "PARALLEL_DIAGNOSTIC_ONLY",
+      "next_block": "G1.2_LOCAL_SECOND_ORDER_DISCRETE_RESPONSE_DIAGNOSTIC"
+    }
+  ],
+  "governance_principle": "A frozen function-space and trace template does not establish a nonempty solution set, trace rank, Fredholm property, stability or physical evidence.",
+  "gate_state": {
+    "MD2S-R1-L": "BLOCKED_BY_MISSING_PRIMARY_SOURCES",
+    "MD2S-R1-C-PHYS": "ACTIVE_BACKGROUND_PREREQUISITE_AND_FREDHOLM_ANALYSIS_REMAINING",
+    "C_PHYS_MODEL_ID": "HZT-M0-S6-C-PHYS-M1",
+    "HZT-M0-S6-C1-V": "MANUFACTURED_VERIFICATION_MODEL",
+    "FUNCTION_SELECTION": "PASS_POSTULATED_MODEL_FAMILY",
+    "MF_001_BULK_FUNCTIONS": "FROZEN_FOR_C_PHYS_M1",
+    "MF_002_CAP_FUNCTIONS": "FROZEN_FOR_C_PHYS_M1",
+    "OPERATOR_2A": "PASS_FORMAL_OPERATOR_STRUCTURE",
+    "OPERATOR_2B": "PASS_FORMAL_FUNCTION_SPACE_AND_TRACE_TEMPLATE",
+    "R1.0": "ACTIVE_BACKGROUND_PREREQUISITE_AND_FREDHOLM_ANALYSIS_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "STRUCTURAL_BVP_COUNT": "SQUARE_CONDITIONAL",
+    "CONTINUUM_BVP_OPERATOR": "FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED",
+    "WEIGHTED_FUNCTION_SPACES": "FROZEN",
+    "FULL_LINEARIZED_BOUNDARY_TRACE_TEMPLATE": "DEFINED_NOT_EVALUATED",
+    "FULL_LINEARIZED_BOUNDARY_TRACE_RANK": "NOT_PROVEN",
+    "FREDHOLM_PROPERTY": "NOT_PROVEN",
+    "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "G1.1": "PASS_DIAGNOSTIC",
+    "C1-V3": "PARTIAL",
+    "C1-V4": "NOT_STARTED",
+    "HISTORICAL_A0_BENCHMARKS": "REPORTED_NOT_INDEPENDENTLY_REPRODUCED",
+    "HISTORICAL_A0_IDENTITY": "NOT_ESTABLISHED",
+    "C1_PHYSICAL_IDENTITY": "NOT_ESTABLISHED",
+    "NONLINEAR_SOLUTION_FAMILY": "NOT_ESTABLISHED",
+    "PERTURBATIVE_STABILITY": "OPEN",
+    "GHOST_FREEDOM": "OPEN",
+    "OFFICIAL_MD2S_SOLVER": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "PHYSICAL_EVIDENCE_EFFECT": "NONE",
+    "PUBLIC_PRIVACY_GATE": "PASS"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-G0-TRACK-001",
+      "statement": "The MD-2S program remains separated into historical legacy reproduction, current canonical physical rebuild and manufactured C1 verification tracks.",
+      "status": "PROVEN",
+      "evidence_effect": "GOVERNANCE_ONLY",
+      "sources": ["registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json"]
+    },
+    {
+      "result_id": "UL-RES-C-PHYS-M1-OP2B-001",
+      "statement": "The fixed tau pole chart and little-Holder profile, target and ambient spaces encode the smooth-pole class and provide a dense smooth core.",
+      "status": "PROVEN_CONDITIONAL",
+      "evidence_effect": "FORMAL_FUNCTION_SPACE_STRUCTURE_ONLY",
+      "sources": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+        "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C-PHYS-M1-OP2B-002",
+      "statement": "The regularized M1 bulk and boundary expressions define a smooth nonlinear Banach-space map on the positive admissible set.",
+      "status": "PROVEN_CONDITIONAL",
+      "evidence_effect": "FORMAL_NONLINEAR_OPERATOR_TEMPLATE_ONLY",
+      "sources": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+        "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C-PHYS-M1-OP2B-003",
+      "statement": "The full parameter-augmented cap derivative is frozen as an 8 by 22 symbolic trace template, not as an evaluated matrix or rank result.",
+      "status": "CONDITIONAL",
+      "evidence_effect": "LINEARIZED_TRACE_TEMPLATE_ONLY",
+      "sources": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+        "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C-PHYS-M1-OP2B-004",
+      "statement": "For a fixed admissible background symbol W_star the bounded linearization has closed graph in the bounded-map sense; no unbounded realization or Fredholm property is established.",
+      "status": "PROVEN_CONDITIONAL",
+      "evidence_effect": "DENSITY_AND_BOUNDED_GRAPH_CLOSEDNESS_ONLY",
+      "sources": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-C1V-G11-001",
+      "statement": "The preregistered uncorrected local C1-V predictor exhibits a quadratic normalized-residual regime in the tested finite discretizations.",
+      "status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
+      "evidence_effect": "DISCRETE_PREDICTOR_QA_ONLY",
+      "sources": ["registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"]
+    }
+  ],
+  "open_blockers": [
+    {
+      "blocker_id": "UL-BLK-R1-L-001",
+      "track_id": "MD2S-R1-L",
+      "statement": "The provenance-complete historical A0 action, solver and run package remain missing.",
+      "sources": ["science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json"]
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-BACKGROUND-3A-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "No governed M1 candidate-background construction protocol, fixed model-sector instance, residual norm, convergence plan or fail-closed acceptance criterion has yet been preregistered.",
+      "sources": [
+        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-CONTINUUM-002",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "The numerical full trace rank, kernel, cokernel, Fredholm property, continuum Jacobian, existence, uniqueness and conditioning remain unproven.",
+      "sources": [
+        "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-IDENTIFIABILITY-003",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "The six model-shape parameters and dimensional anchor have not passed sensitivity-rank, prior-robustness or six-to-four-dimensional normalization audits.",
+      "sources": ["registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json"]
+    },
+    {
+      "blocker_id": "UL-BLK-C1-V3-G12-001",
+      "track_id": "HZT-M0-S6-C1-V",
+      "statement": "The local second-order discrete C1-V response remains uncomputed.",
+      "sources": ["registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json"]
+    },
+    {
+      "blocker_id": "UL-BLK-STAB-001",
+      "track_id": "MD2S-R1-C-PHYS",
+      "statement": "The scalar-vector-tensor quadratic action and all ghost, gradient and mass-spectrum stability conditions remain open.",
+      "sources": ["registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json"]
+    }
+  ],
+  "active_assumptions": [
+    "HZT-M0-S6-C-PHYS-M1 remains a versioned physical candidate family, not a confirmed theory.",
+    "A fixed little-Holder exponent alpha_H lies strictly between zero and one and is unrelated to model couplings.",
+    "The admissible set has rho_N>0, rho_S>0 and Lhat_s>0 on the fixed interval.",
+    "No numerical trace or linearized operator is evaluated before a separately governed W_star exists.",
+    "BACKGROUND-3A is method preregistration only and does not authorize a solver run."
+  ],
+  "forbidden_inferences": [
+    "Do not infer that the solution set G^{-1}(0) is nonempty.",
+    "Do not infer trace rank from the 8 by 22 symbolic template.",
+    "Do not infer Fredholmness or invertibility from bounded-map closedness.",
+    "Do not infer physical background, stability or ghost freedom.",
+    "Do not change R1.1, R1.2, solver authorization, K1-D or K1-E without a later versioned gate decision."
+  ],
+  "entry_points": [
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+    "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json",
+    "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md",
+    "tools/2026-08-04_verify_hzt_m0_s6_c_phys_m1_operator_2b_v0.1.py",
+    "project-manifest.json",
+    "registry/decision-log.jsonl"
+  ],
   "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
-  "next_exact_action": "Execute C-PHYS-R1.0-OPERATOR-2B: freeze the weighted pole-regular domain and target spaces and define the linearized endpoint trace contract. G1.2 remains parallel diagnostic only."
+  "next_exact_action": "Execute only C-PHYS-R1.0-BACKGROUND-3A: preregister a fixed M1 model-sector instance, numerical method, residual norms, chart implementation, constraint thresholds, convergence plan and fail-closed candidate-background acceptance criteria. Do not execute the solver or claim existence, uniqueness, stability or physical confirmation. G1.2 remains parallel diagnostic only."
 }
