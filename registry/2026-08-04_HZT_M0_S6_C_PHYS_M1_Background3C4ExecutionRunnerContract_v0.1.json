@@ -1,0 +1,104 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c4-execution-runner-contract.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C4_EXECUTION_RUNNER_IMPLEMENTATION_ONLY",
+  "classification": "SOURCE_BOUND_EXECUTION_PACKAGE_IMPLEMENTATION_NO_SOLVER_EXECUTION",
+  "status": "IMPLEMENTED_AUDIT_ONLY_EXECUTION_NOT_AUTHORIZED",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+  "run_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+  "supersedes_nothing": true,
+  "dependencies": [
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C3ExecutionAuthorizationReview_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResultSchema_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json"
+  ],
+  "runner_path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_execution_runner_v0.1.py",
+  "source_binding": {
+    "algorithm": "sha256(canonical_json(relative_path_to_sha256_file_digest_map))",
+    "path_inventory_is_closed": true,
+    "future_grant_must_bind_exact_digest": true,
+    "grant_may_not_use_branch_name_or_floating_ref": true
+  },
+  "commands": {
+    "audit": {
+      "allowed": true,
+      "imports_numerical_backends": false,
+      "solver_calls": 0,
+      "artifact_effect": "NONE"
+    },
+    "self-test": {
+      "allowed": true,
+      "uses_only_os_temporary_directory": true,
+      "imports_numerical_backends": false,
+      "solver_calls": 0,
+      "repository_artifact_effect": "NONE"
+    },
+    "run": {
+      "allowed": false,
+      "absence_of_future_grant_exit_code": 73,
+      "checks_grant_before_backend_import": true,
+      "checks_grant_before_output_directory_creation": true
+    }
+  },
+  "components": {
+    "source_hash_bound_runner": "IMPLEMENTED_NOT_EXECUTED",
+    "environment_attestation": "IMPLEMENTED_NOT_EXECUTED",
+    "resource_enforcement": "IMPLEMENTED_NOT_EXECUTED",
+    "atomic_result_writer": "IMPLEMENTED_NOT_EXECUTED",
+    "classification_engine": "IMPLEMENTED_NOT_EXECUTED",
+    "interruption_protocol": "IMPLEMENTED_NOT_EXECUTED",
+    "primary_root_adapter": "IMPLEMENTED_NOT_EXECUTED",
+    "independent_root_adapter": "IMPLEMENTED_NOT_EXECUTED",
+    "grant_verifier": "IMPLEMENTED_NOT_EXECUTED"
+  },
+  "resource_enforcement": {
+    "single_thread_environment": true,
+    "posix_address_space_limit_preexec": true,
+    "posix_cpu_limit_preexec": true,
+    "wall_clock_alarm_context": true,
+    "no_adaptive_resource_increase": true,
+    "no_network": true,
+    "no_gpu": true,
+    "no_randomness": true
+  },
+  "artifact_protocol": {
+    "final_path": "artifacts/hzt-m0/md2s/background3c/<run_id>/<authorization_decision_id>/",
+    "overwrite": false,
+    "staging_sibling_directory": true,
+    "fsync_before_atomic_rename": true,
+    "all_json_canonicalized": true,
+    "sha256_manifest": true,
+    "interrupted_run_never_uses_final_path": true
+  },
+  "authorization_firewall": {
+    "future_grant_path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json",
+    "future_grant_present": false,
+    "execution_authorized": false,
+    "grant_created_by_this_block": false,
+    "automatic_execution_after_merge": false,
+    "solver_execution": false,
+    "target_a_F_one_quarter_solve": false,
+    "result_artifact_created": false
+  },
+  "gate_state": {
+    "BACKGROUND_3C4_EXECUTION_PACKAGE": "IMPLEMENTED_AUDIT_ONLY_NO_EXECUTION",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "execution_authorized": false,
+  "physical_evidence_effect": "NONE",
+  "next_allowed_block": "C-PHYS-R1.0-BACKGROUND-3C5_EXECUTION_PACKAGE_AUTHORIZATION_REVIEW_ONLY"
+}
