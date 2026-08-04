@@ -55,7 +55,7 @@ class G0Operator2BSynchronizationTests(unittest.TestCase):
         self.assertEqual(gates["OPERATOR_2A"], "PASS_FORMAL_OPERATOR_STRUCTURE")
         self.assertEqual(
             self.manifest["c_phys_operator_entry"]["constraint_dependency_proof"],
-            "PROVEN_EXACT_SYMBOLIC",
+            "PROVEN_SYMBOLIC_CONDITIONAL",
         )
 
     def test_operator_2b_spaces_are_frozen(self) -> None:
