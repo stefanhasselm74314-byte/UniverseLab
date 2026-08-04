@@ -1,0 +1,63 @@
+name: HZT-M0-S6 C-PHYS-M1 Background-3C2 independent backend
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CIndependentBackendContract_v0.1.json"
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CDualBackendPackageContract_v0.1.json"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_dual_backend_gate_v0.1.py"
+      - "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3c2_v0.1.py"
+      - "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3c2_v0.1.py"
+      - ".github/workflows/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C2_IndependentBackend_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CIndependentBackendContract_v0.1.json"
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CDualBackendPackageContract_v0.1.json"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_dual_backend_gate_v0.1.py"
+      - "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3c2_v0.1.py"
+      - "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3c2_v0.1.py"
+      - ".github/workflows/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C2_IndependentBackend_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  audit-independent-backend-no-root-solve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt
+      - name: Validate contracts and compile sources
+        run: |
+          python -m json.tool registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CIndependentBackendContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CDualBackendPackageContract_v0.1.json >/dev/null
+          python -m py_compile tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py
+          python -m py_compile tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_dual_backend_gate_v0.1.py
+          python -m py_compile tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3c2_v0.1.py
+          python -m py_compile tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3c2_v0.1.py
+      - name: Run dual-backend control audit
+        run: |
+          python tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_dual_backend_gate_v0.1.py audit --json
+          python tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3c2_v0.1.py --json
+      - name: Run fail-closed regression tests
+        run: python tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3c2_v0.1.py
+      - name: Enforce no-root and evidence firewalls
+        run: |
+          test ! -e registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
+          test ! -d artifacts/hzt-m0/md2s/background3c/HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1
+          grep -q '"BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CDualBackendPackageContract_v0.1.json
+          grep -q '"BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CDualBackendPackageContract_v0.1.json
+          grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CDualBackendPackageContract_v0.1.json
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CDualBackendPackageContract_v0.1.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CDualBackendPackageContract_v0.1.json
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CDualBackendPackageContract_v0.1.json
