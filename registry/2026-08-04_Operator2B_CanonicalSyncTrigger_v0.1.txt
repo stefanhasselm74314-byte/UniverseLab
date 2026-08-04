@@ -1,0 +1,2 @@
+one-shot canonical synchronization trigger
+final durable basis-commit correction
