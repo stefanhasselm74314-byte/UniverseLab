@@ -12,6 +12,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER_PATH = ROOT / "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_execution_runner_v0.1.py"
 CONTRACT_PATH = ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json"
+AUDIT_RESULT_PATH = ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionPackageAuditResult_v0.1.json"
 GRANT_PATH = ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json"
 ARTIFACT_ROOT = ROOT / "artifacts/hzt-m0/md2s/background3c/HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1"
 
@@ -28,6 +29,7 @@ def load_module():
 
 def validate() -> dict:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
+    recorded = json.loads(AUDIT_RESULT_PATH.read_text(encoding="utf-8"))
     runner = load_module()
     audit = runner.audit_package()
     self_test = runner.self_test()
@@ -47,6 +49,17 @@ def validate() -> dict:
     assert audit["result_artifact_created"] is False
     assert re.fullmatch(r"[0-9a-f]{64}", audit["package_manifest_sha256"])
 
+    assert recorded["status"] == audit["status"]
+    assert recorded["run_id"] == audit["run_id"]
+    assert recorded["run_payload_sha256"] == audit["run_payload_sha256"]
+    assert recorded["package_manifest_sha256"] == audit["package_manifest_sha256"]
+    assert recorded["source_count"] == audit["source_count"]
+    assert recorded["call_counters"]["primary_root_calls"] == 0
+    assert recorded["call_counters"]["independent_root_calls"] == 0
+    assert recorded["call_counters"]["independent_jacobian_calls"] == 0
+    assert recorded["authorization_state"]["execution_authorized"] is False
+    assert recorded["physical_evidence_effect"] == "NONE"
+
     assert self_test["status"] == "PASS_EXECUTION_PACKAGE_SELF_TEST_NO_SOLVER_CALLS"
     assert self_test["primary_root_calls"] == 0
     assert self_test["independent_root_calls"] == 0
@@ -58,6 +71,7 @@ def validate() -> dict:
         "audit_status": audit["status"],
         "self_test_status": self_test["status"],
         "package_manifest_sha256": audit["package_manifest_sha256"],
+        "recorded_result_match": True,
         "grant_present": False,
         "solver_calls": 0,
         "result_artifact_created": False,
