@@ -1,21 +1,7 @@
-name: Operator-2B governance synchronization
+name: Operator-2B governance synchronization contract
 
 on:
-  push:
-    branches:
-      - "agent/operator-2b-governance-sync-v0-1"
-    paths:
-      - "tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py"
-      - "tools/2026-08-04_validate_g0_three_track_sync_v1.7.py"
-      - "tests/2026-08-04_test_g0_three_track_sync_v1.7.py"
-      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
-      - ".github/workflows/2026-08-04_Operator2B_GovernanceSync_v0.1.yml"
-      - "project-manifest.json"
-      - "registry/session-checkpoint-latest.json"
-      - "registry/decision-log.jsonl"
   pull_request:
-    branches:
-      - main
     paths:
       - "tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py"
       - "tools/2026-08-04_validate_g0_three_track_sync_v1.7.py"
@@ -25,21 +11,29 @@ on:
       - "project-manifest.json"
       - "registry/session-checkpoint-latest.json"
       - "registry/decision-log.jsonl"
-  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py"
+      - "tools/2026-08-04_validate_g0_three_track_sync_v1.7.py"
+      - "tests/2026-08-04_test_g0_three_track_sync_v1.7.py"
+      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
+      - ".github/workflows/2026-08-04_Operator2B_GovernanceSync_v0.1.yml"
+      - "project-manifest.json"
+      - "registry/session-checkpoint-latest.json"
+      - "registry/decision-log.jsonl"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  synchronize:
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+  validate-synchronization:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout branch with full history
+      - name: Checkout complete history
         uses: actions/checkout@v4
         with:
-          ref: agent/operator-2b-governance-sync-v0-1
           fetch-depth: 0
 
       - name: Set up Python
@@ -47,33 +41,30 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Merge current main without rewriting history
-        shell: bash
+      - name: Compile synchronization contracts
         run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git merge --no-edit origin/main
+          python -m py_compile tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py
+          python -m py_compile tools/2026-08-04_validate_g0_three_track_sync_v1.7.py
+          python -m py_compile tests/2026-08-04_test_g0_three_track_sync_v1.7.py
 
-      - name: Apply narrow governance migration
-        run: python tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py --apply
-
-      - name: Validate synchronized G0 and memory state
+      - name: Verify canonical pointers without mutation
         run: |
           python tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py --check
           python tools/2026-08-04_validate_g0_three_track_sync_v1.7.py --json
           python tests/2026-08-04_test_g0_three_track_sync_v1.7.py
           python tools/validate_memory_protocol.py
 
-      - name: Commit pointers if needed and push branch
+      - name: Enforce immutable evidence firewall
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if ! git diff --quiet; then
-            git add project-manifest.json registry/session-checkpoint-latest.json registry/decision-log.jsonl
-            git commit -m "Advance Operator-2B governance checkpoint to v1.15"
-          fi
-          git push origin HEAD:agent/operator-2b-governance-sync-v0-1
+          grep -q '"checkpoint_id": "UL-CHK-20260804-015"' registry/session-checkpoint-latest.json
+          grep -q '"R1.1": "BLOCKED"' project-manifest.json
+          grep -q '"R1.2": "BLOCKED"' project-manifest.json
+          grep -q '"FULL_LINEARIZED_BOUNDARY_TRACE_RANK": "NOT_PROVEN"' project-manifest.json
+          grep -q '"FREDHOLM_PROPERTY": "NOT_PROVEN"' project-manifest.json
+          grep -q '"PHYSICAL_BACKGROUND": "NOT_ESTABLISHED"' project-manifest.json
+          grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' project-manifest.json
+          grep -q '"K1-D": "NOT_RELEASED"' project-manifest.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' project-manifest.json
+          grep -q '"physical_evidence_effect": "NONE"' project-manifest.json
