@@ -47,6 +47,15 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Merge current main without rewriting history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git merge --no-edit origin/main
+
       - name: Apply narrow governance migration
         run: python tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py --apply
 
@@ -57,16 +66,14 @@ jobs:
           python tests/2026-08-04_test_g0_three_track_sync_v1.7.py
           python tools/validate_memory_protocol.py
 
-      - name: Commit synchronized pointers
+      - name: Commit pointers if needed and push branch
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet; then
-            echo "No synchronization commit required."
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add project-manifest.json registry/session-checkpoint-latest.json registry/decision-log.jsonl
-          git commit -m "Advance Operator-2B governance checkpoint to v1.15"
+          if ! git diff --quiet; then
+            git add project-manifest.json registry/session-checkpoint-latest.json registry/decision-log.jsonl
+            git commit -m "Advance Operator-2B governance checkpoint to v1.15"
+          fi
           git push origin HEAD:agent/operator-2b-governance-sync-v0-1
