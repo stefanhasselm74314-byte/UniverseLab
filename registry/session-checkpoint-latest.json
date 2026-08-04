@@ -3,7 +3,7 @@
   "checkpoint_id": "UL-CHK-20260804-015",
   "timestamp": "2026-08-04T04:55:00+02:00",
   "privacy_classification": "PUBLIC_SANITIZED",
-  "basis_commit": "9fcc6f33c1062d0bbea3b2adf64c9830a4a5ad32",
+  "basis_commit": "9c2cbb44a841f0a63f5f1d3c5fc92a96eb1ffbc6",
   "canonical_snapshot": "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json",
   "supersedes": "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.14.json",
   "architecture": [
@@ -214,5 +214,5 @@
   ],
   "private_memory_policy": "NOT_STORED_IN_PUBLIC_REPOSITORY",
   "next_exact_action": "Execute only C-PHYS-R1.0-BACKGROUND-3A: preregister a fixed M1 model-sector instance, numerical method, residual norms, chart implementation, constraint thresholds, convergence plan and fail-closed candidate-background acceptance criteria. Do not execute the solver or claim existence, uniqueness, stability or physical confirmation. G1.2 remains parallel diagnostic only.",
-  "correction_note": "v1.14 contained the Operator-2B scientific state but was not installed as the stable alias and referenced a nonexistent v1.13. v1.15 is the first canonical alias-backed Operator-2B checkpoint and supersedes v1.14 append-only."
+  "correction_note": "v1.14 contained the Operator-2B scientific state but was not installed as the stable alias and referenced a nonexistent v1.13. v1.15 is the first canonical alias-backed Operator-2B checkpoint; its basis_commit is the durable PR #39 merge commit."
 }
