@@ -31,6 +31,8 @@ jobs:
           git config user.email 'actions@users.noreply.github.com'
           git add project-manifest.json registry/decision-log.jsonl registry/session-checkpoint-latest.json registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json
           git rm tools/2026-08-04_apply_operator2b_canonical_sync_v1.0.py
-          git rm -f registry/2026-08-04_Operator2B_CanonicalSyncTrigger_v0.1.txt
+          if [ -f registry/2026-08-04_Operator2B_CanonicalSyncTrigger_v0.1.txt ]; then
+            git rm registry/2026-08-04_Operator2B_CanonicalSyncTrigger_v0.1.txt
+          fi
           git commit -m '[operator2b-sync] Canonicalize Operator-2B state'
           git push origin HEAD:${{ github.head_ref }}
