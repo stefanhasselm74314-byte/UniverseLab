@@ -1,0 +1,245 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3a-preregistration.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-BACKGROUND-3A",
+  "classification": "NUMERICAL_METHOD_PREREGISTRATION_NO_SOLVER_EXECUTION",
+  "status": "PREREGISTERED_NOT_EXECUTED",
+  "evidence_effect": "NUMERICAL_PROTOCOL_DEFINITION_ONLY",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+    "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
+  ],
+  "purpose": "Define one deterministic and fail-closed construction protocol for a future numerical C-PHYS-M1 candidate background. This contract neither supplies a parameter instance nor executes a nonlinear solve.",
+  "frozen_mathematical_problem": {
+    "regional_coordinate": "tau in [0,1] for each of N and S",
+    "regional_profile_variables": [
+      "u_A_s(tau)",
+      "u_ell_s(tau)",
+      "u_varphi_s(tau)",
+      "u_g_s(tau)"
+    ],
+    "augmented_unknown_vector": [
+      "varphi_N_0",
+      "q_N",
+      "A_S_0",
+      "varphi_S_0",
+      "q_S",
+      "rho_N",
+      "rho_S",
+      "k4"
+    ],
+    "external_model_coefficients": [
+      "Lambda_hat",
+      "mhat_phi_sq",
+      "a_F",
+      "lambda_hat",
+      "z_sigma_hat",
+      "q_hat"
+    ],
+    "topological_inputs": [
+      "N_F",
+      "m_N",
+      "m_S",
+      "n_N",
+      "n_S"
+    ],
+    "operator": "G=(F_bulk,B): U_adm -> Y_bulk x R^8",
+    "bulk_residual_order": [
+      "F_A_N",
+      "F_ell_N",
+      "F_varphi_N",
+      "F_gauge_N",
+      "F_A_S",
+      "F_ell_S",
+      "F_varphi_S",
+      "F_gauge_S"
+    ],
+    "boundary_residual_order": [
+      "R_A",
+      "R_ell",
+      "R_varphi",
+      "R_patch",
+      "R_4D",
+      "R_chi",
+      "R_scalar",
+      "R_gauge"
+    ],
+    "rr_constraint_role": "INDEPENDENT_PROPAGATED_QA_CHANNEL_NOT_NONLINEAR_RESIDUAL",
+    "model_parameters_are_shooting_variables": false
+  },
+  "future_run_input_contract": {
+    "required_before_execution": [
+      "exact six-component M1 parameter vector",
+      "exact five-component integer/topological sector",
+      "fixed Holder exponent alpha_H",
+      "fixed deterministic seed-set identifier",
+      "software commit hash",
+      "dependency lock hash",
+      "all tolerances and mesh levels from this preregistration"
+    ],
+    "parameter_source_labels_allowed": [
+      "CONTROL_POINT",
+      "THEORETICAL_PRIOR_POINT",
+      "PREDECLARED_GRID_POINT"
+    ],
+    "parameter_source_labels_forbidden": [
+      "BEST_FIT",
+      "OBSERVATIONALLY_CONFIRMED",
+      "DERIVED_FROM_C1_V",
+      "HISTORICAL_A0_RECONSTRUCTION"
+    ],
+    "post_hoc_parameter_change_under_same_run_id": false,
+    "missing_input_action": "ABORT_BEFORE_SOLVER_INITIALIZATION"
+  },
+  "primary_discretization": {
+    "method": "CHEBYSHEV_LOBATTO_COLLOCATION_IN_TAU",
+    "regional_node_counts": [24, 32, 48, 64, 96],
+    "derivative_construction": "barycentric Chebyshev differentiation matrices on [0,1]",
+    "profile_unknown_layout": "four regularized profiles per region at all collocation nodes plus eight augmented variables",
+    "endpoint_treatment": "bulk equations at interior nodes; pole regularity encoded by affine tau chart; eight cap/global conditions supplied by B",
+    "floating_point": "IEEE_754_BINARY64_PRIMARY",
+    "higher_precision_audit": "80_BIT_OR_GREATER_REQUIRED_FOR_ANY_BORDERLINE_ACCEPTANCE",
+    "adaptive_mesh_or_order_selection": false,
+    "reason": "Fixed node levels prevent post-result mesh tuning and permit direct convergence auditing."
+  },
+  "nonlinear_method": {
+    "classification": "FUTURE_CANDIDATE_METHOD_NOT_CURRENTLY_AUTHORIZED",
+    "method": "DAMPED_NEWTON_TRUST_REGION",
+    "jacobian": "algorithmic differentiation or exact complex-step equivalent declared before execution",
+    "linear_solver": "rank-revealing QR primary with SVD diagnostic",
+    "maximum_newton_iterations_per_mesh": 60,
+    "maximum_backtracking_steps": 20,
+    "armijo_parameter": 0.0001,
+    "minimum_step_fraction": 9.5367431640625e-07,
+    "trust_region_initial_radius": 1.0,
+    "trust_region_minimum_radius": 1e-12,
+    "stagnation_window_iterations": 6,
+    "stagnation_relative_improvement_floor": 0.001,
+    "failure_action": "RETURN_NO_CANDIDATE_UNDER_PREREGISTERED_PROTOCOL"
+  },
+  "deterministic_seed_protocol": {
+    "seed_set_size": 7,
+    "seed_generation": "fixed low-order parity-chart coefficient templates generated solely from the frozen run-input hash",
+    "seed_amplitude_multipliers": [0.0, 0.125, -0.125, 0.25, -0.25, 0.5, -0.5],
+    "seed_ordering": "as listed",
+    "random_seed_use": false,
+    "warm_start_across_parameter_points": false,
+    "mesh_prolongation": "accepted lower-order candidate interpolated to the next preregistered node level",
+    "multiple_converged_candidates": "retain and report every distinct candidate; no lowest-residual cherry-pick",
+    "distinctness_threshold": "max normalized profile-plus-augmented-vector distance greater than 1e-6"
+  },
+  "normalization_and_norms": {
+    "bulk_component_scaling": "unit dimensionless scaling; every component also reported separately",
+    "boundary_component_scaling": "unit dimensionless scaling; every component also reported separately",
+    "bulk_norm": "maximum absolute collocation residual over all regions, components and enforced bulk nodes",
+    "boundary_norm": "maximum absolute value over the eight ordered boundary residuals",
+    "constraint_norm": "maximum absolute normalized C_rr value evaluated at all collocation nodes",
+    "profile_difference_norm": "maximum absolute difference after interpolation to the finer common tau grid",
+    "augmented_difference_norm": "maximum absolute component difference",
+    "combined_candidate_distance": "maximum of profile_difference_norm and augmented_difference_norm"
+  },
+  "acceptance_thresholds": {
+    "bulk_residual_max": 1e-10,
+    "boundary_residual_max": 1e-10,
+    "rr_constraint_max": 1e-9,
+    "fine_mesh_profile_difference_max": 1e-8,
+    "fine_mesh_augmented_difference_max": 1e-9,
+    "independent_backend_candidate_distance_max": 1e-7,
+    "minimum_rho_N": 0.0001,
+    "minimum_rho_S": 0.0001,
+    "minimum_interior_ell_margin": 1e-8,
+    "minimum_cap_ell_margin": 1e-8,
+    "minimum_positive_winding_margin": -1e-12,
+    "maximum_reported_discrete_condition_number_without_high_precision_audit": 1000000000000.0,
+    "all_thresholds_must_pass_simultaneously": true
+  },
+  "convergence_requirements": {
+    "required_successful_levels": [48, 64, 96],
+    "residual_monotonicity": "bulk, boundary and constraint norms may not increase from N=48 to 64 or from 64 to 96 by more than a factor 1.25",
+    "fine_pair": [64, 96],
+    "fine_pair_profile_requirement": "profile_difference_norm <= 1e-8",
+    "fine_pair_augmented_requirement": "augmented_difference_norm <= 1e-9",
+    "spectral_coefficient_audit": "last eight modal coefficients of each profile must decrease overall and their maximum magnitude must be below 1e-9 at N=96",
+    "single_mesh_acceptance_forbidden": true
+  },
+  "independent_backend_requirement": {
+    "required_for_candidate_status": true,
+    "allowed_backend": "fourth-order finite-difference or independent Lobatto collocation implementation with separately coded residual assembly",
+    "shared_source_code_for_residual_assembly": false,
+    "required_grid_resolution": "at least 2x129 finite-difference points or equivalent",
+    "candidate_distance_threshold": 1e-7,
+    "agreement_interpretation": "NUMERICAL_CROSSCHECK_ONLY_NOT_INDEPENDENT_PHYSICAL_CONFIRMATION"
+  },
+  "admissibility_gates": {
+    "rho_N_positive": true,
+    "rho_S_positive": true,
+    "ell_positive_on_open_intervals": true,
+    "ell_cap_positive": true,
+    "finite_all_profiles_and_first_required_derivatives": true,
+    "M1_active_domain_respected": true,
+    "charge_lattice_and_patch_sector_respected": true,
+    "positive_winding_gate": "Y_sigma >= -1e-12 on both caps",
+    "no_nan_or_infinity": true,
+    "failure_of_any_gate": "REJECT_NUMERICAL_CANDIDATE"
+  },
+  "predeclared_result_classes": {
+    "all_acceptance_gates_pass": "NUMERICAL_CANDIDATE_BACKGROUND_DIAGNOSTIC",
+    "solver_converges_but_one_or_more_acceptance_gates_fail": "NUMERICAL_ROOT_REJECTED_BY_QA",
+    "no_seed_converges": "NO_CANDIDATE_FOUND_UNDER_PREREGISTERED_PROTOCOL",
+    "multiple_distinct_candidates_pass": "MULTIPLE_NUMERICAL_CANDIDATE_BACKGROUNDS_DIAGNOSTIC",
+    "input_contract_incomplete": "NOT_EXECUTED_INPUT_CONTRACT_FAILURE",
+    "interpretation_limit": "None of these classes proves continuum existence, uniqueness, Fredholmness, stability or physical viability."
+  },
+  "mandatory_run_artifacts": [
+    "immutable run-input JSON",
+    "parameter and topology hashes",
+    "software and dependency hashes",
+    "per-seed convergence log",
+    "per-mesh residual table",
+    "all eight boundary residuals",
+    "rr-constraint profile",
+    "profile and augmented-variable convergence table",
+    "spectral-tail table",
+    "discrete singular values and condition estimates labeled diagnostic",
+    "independent-backend comparison",
+    "machine-readable final classification",
+    "forbidden-inference statement"
+  ],
+  "execution_firewall": {
+    "current_execution": "NOT_EXECUTED",
+    "nonlinear_solver_run": false,
+    "parameter_scan": false,
+    "observational_fit": false,
+    "trace_matrix_evaluated": false,
+    "trace_rank_claimed": false,
+    "Fredholm_claimed": false,
+    "continuum_Jacobian_claimed": false,
+    "existence_or_uniqueness_claimed": false,
+    "stability_claimed": false,
+    "physical_confirmation_claimed": false
+  },
+  "gate_state": {
+    "BACKGROUND_3A": "PREREGISTERED_NOT_EXECUTED",
+    "R1.0": "ACTIVE_BACKGROUND_PREREQUISITE_AND_FREDHOLM_ANALYSIS_REMAINING",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_allowed_block_after_merge": "C-PHYS-R1.0-BACKGROUND-3B_RUN_INPUT_FREEZE_ONLY",
+  "forbidden_next_action": "Do not execute the solver until a separate versioned Background-3B run-input contract freezes one exact parameter and topology instance."
+}
