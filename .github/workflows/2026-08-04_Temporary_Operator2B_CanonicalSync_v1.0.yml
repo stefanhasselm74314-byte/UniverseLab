@@ -1,0 +1,35 @@
+name: Temporary Operator-2B canonical synchronization
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  synchronize:
+    if: ${{ github.head_ref == 'agent/operator2b-canonical-sync-run' && !contains(github.event.pull_request.title, '[SYNC COMPLETE]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply checkpoint provenance correction
+        run: python tools/2026-08-04_apply_operator2b_canonical_sync_v1.0.py
+      - name: Commit corrected JSON state and remove temporary script
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'UniverseLab Sync Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add registry/session-checkpoint-latest.json registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json
+          git rm tools/2026-08-04_apply_operator2b_canonical_sync_v1.0.py
+          git commit -m '[operator2b-sync] Correct durable checkpoint basis commit'
+          git push origin HEAD:${{ github.head_ref }}
