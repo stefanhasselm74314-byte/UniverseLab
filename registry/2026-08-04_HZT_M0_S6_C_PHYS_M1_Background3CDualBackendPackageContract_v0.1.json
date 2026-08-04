@@ -1,0 +1,79 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c-dual-backend-package.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C2_INDEPENDENT_BACKEND_AND_EXECUTION_PACKAGE",
+  "classification": "AUDIT_ONLY_DUAL_BACKEND_PACKAGE_NO_SOLVER_EXECUTION",
+  "status": "DUAL_BACKEND_PACKAGE_PRESENT_PENDING_CI_EXECUTION_NOT_AUTHORIZED",
+  "evidence_effect": "DUAL_SOFTWARE_CONTROL_BACKGROUND_QA_ONLY",
+  "physical_evidence_effect": "NONE",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+  "run_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+  "primary_backend": {
+    "contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CImplementationContract_v0.2.json",
+    "audit_result": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CPrimaryImplementationAuditResult_v0.1.json",
+    "status": "PASS_AUDITED_NO_EXECUTION"
+  },
+  "independent_backend": {
+    "contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CIndependentBackendContract_v0.1.json",
+    "source": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py",
+    "source_git_blob_sha": "bed68e11a3682d8b140b6db0cbe71fd696c3ff34",
+    "status": "PRESENT_PENDING_CI"
+  },
+  "dual_gate": {
+    "path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_dual_backend_gate_v0.1.py",
+    "git_blob_sha": "947dc7173ee6c5b9ec69930ec61b654438abf991",
+    "audit_command": "python tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_dual_backend_gate_v0.1.py audit --json",
+    "run_command": "python tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_dual_backend_gate_v0.1.py run --json",
+    "run_expected_exit_code": 73,
+    "direct_independent_backend_exit_code": 73
+  },
+  "control_comparison": {
+    "background": "EXACT_A_F_ZERO_BULK_AND_PATCH_CONTROL_BOUNDARY_INEXACT",
+    "primary_representation": "TAU_CHEBYSHEV_COLLOCATION",
+    "independent_representation": "X_SPACE_DOP853_WITH_HIGHER_POLE_SERIES",
+    "cutoffs": [0.001, 0.0005, 0.00025],
+    "profile_error_limit": 2e-8,
+    "constraint_error_limit": 2e-10,
+    "boundary_exact_distance_limit": 2e-8,
+    "primary_independent_boundary_distance_limit": 2e-8,
+    "nonzero_cap_defects_must_remain_visible": true
+  },
+  "execution_authorization": {
+    "current_denial": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.1.json",
+    "future_grant": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json",
+    "future_grant_present": false,
+    "authorized": false,
+    "current_package_is_execution_runner": false,
+    "result_artifact_creation_allowed": false
+  },
+  "audit_execution_limits": {
+    "primary_newton_calls": 0,
+    "independent_shooting_jacobian_calls": 0,
+    "independent_shooting_root_calls": 0,
+    "allowed_independent_control_integrations": 6,
+    "target_model_integrations": 0,
+    "result_artifacts": 0
+  },
+  "gate_state": {
+    "BACKGROUND_3C_PRIMARY_IMPLEMENTATION": "PASS_AUDITED_NO_EXECUTION",
+    "BACKGROUND_3C_INDEPENDENT_BACKEND": "PRESENT_PENDING_CI",
+    "BACKGROUND_3C_DUAL_BACKEND_PACKAGE": "PRESENT_PENDING_CI",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_IMPLEMENTATION": "PRIMARY_AND_INDEPENDENT_PRESENT_PENDING_DUAL_AUDIT",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_block": "C-PHYS-R1.0-BACKGROUND-3C3_EXECUTION_AUTHORIZATION_REVIEW_ONLY"
+}
