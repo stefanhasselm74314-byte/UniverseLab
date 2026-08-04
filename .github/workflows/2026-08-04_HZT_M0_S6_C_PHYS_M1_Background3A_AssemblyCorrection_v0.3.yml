@@ -1,0 +1,66 @@
+name: HZT-M0-S6 C-PHYS-M1 Background-3A assembly correction
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3AAssemblyCorrectionContract_v0.3.json"
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json"
+      - "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3AAssemblyCorrectionLedger_v0.3.md"
+      - "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py"
+      - "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py"
+      - ".github/workflows/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3A_AssemblyCorrection_v0.3.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3AAssemblyCorrectionContract_v0.3.json"
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json"
+      - "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3AAssemblyCorrectionLedger_v0.3.md"
+      - "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py"
+      - "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py"
+      - ".github/workflows/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3A_AssemblyCorrection_v0.3.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-assembly-correction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout complete history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON artifacts
+        run: |
+          python -m json.tool registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3AAssemblyCorrectionContract_v0.3.json >/dev/null
+          python -m json.tool registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json >/dev/null
+
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py
+          python -m py_compile tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py
+
+      - name: Recompute square count and CP01R1 hash
+        run: python tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py --json
+
+      - name: Run fail-closed negative tests
+        run: python tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py
+
+      - name: Enforce no-execution and evidence firewall
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"BACKGROUND_3B_CP01": "SUPERSEDED_BEFORE_EXECUTION"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3AAssemblyCorrectionContract_v0.3.json
+          grep -q '"BACKGROUND_RUN_INPUT": "FROZEN_CP01R1"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json
+          grep -q '"BACKGROUND_SOLVER_IMPLEMENTATION": "NOT_PRESENT"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json
+          grep -q '"BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json
