@@ -10,6 +10,15 @@ on:
       - "project-manifest.json"
       - "registry/session-checkpoint-latest.json"
       - "registry/decision-log.jsonl"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py"
+      - ".github/workflows/2026-08-04_Operator2B_GovernanceSync_v0.1.yml"
+      - "project-manifest.json"
+      - "registry/session-checkpoint-latest.json"
+      - "registry/decision-log.jsonl"
   workflow_dispatch:
 
 permissions:
@@ -17,6 +26,7 @@ permissions:
 
 jobs:
   synchronize:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
