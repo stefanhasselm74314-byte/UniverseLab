@@ -1,0 +1,50 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c-resource-policy.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C1_PRIMARY_IMPLEMENTATION_AUDIT",
+  "classification": "FUTURE_QUARANTINED_EXECUTION_RESOURCE_POLICY",
+  "status": "FROZEN_EXECUTION_NOT_AUTHORIZED",
+  "physical_evidence_effect": "NONE",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+  "execution_environment": {
+    "python": "3.12.x",
+    "dependency_lock": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt",
+    "floating_point_primary": "IEEE_754_BINARY64",
+    "thread_count": 1,
+    "gpu_allowed": false,
+    "network_access": false,
+    "external_services": false,
+    "randomness": false
+  },
+  "resource_limits": {
+    "maximum_wall_clock_seconds_total": 21600,
+    "maximum_wall_clock_seconds_per_seed_per_level": 1800,
+    "maximum_memory_bytes": 8589934592,
+    "maximum_cpu_threads": 1,
+    "maximum_result_bytes": 1073741824,
+    "timeout_action": "CLASSIFY_NOT_EXECUTED_OR_NO_CANDIDATE_FOR_AFFECTED_STAGE_AND_PRESERVE_COMPLETE_LOG",
+    "memory_limit_action": "ABORT_WITH_IMPLEMENTATION_FAILURE_NO_RETRY_WITH_CHANGED_METHOD"
+  },
+  "execution_order": {
+    "primary_node_counts": [24, 32, 48, 64, 96],
+    "seed_order": [0, 1, 2, 3, 4, 5, 6],
+    "independent_backend_after_primary_candidate_only": true,
+    "parallel_seed_execution": false,
+    "adaptive_resource_increase": false
+  },
+  "reproducibility": {
+    "environment_record_required": true,
+    "cpu_and_blas_metadata_required": true,
+    "dependency_versions_required": true,
+    "implementation_hashes_required": true,
+    "run_payload_hash_required": true,
+    "authorization_decision_required": true
+  },
+  "current_state": {
+    "execution_authorized": false,
+    "resource_budget_consumed": false,
+    "output_path_created": false
+  }
+}
