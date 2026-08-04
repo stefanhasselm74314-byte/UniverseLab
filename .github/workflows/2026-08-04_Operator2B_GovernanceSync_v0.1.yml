@@ -1,70 +1,14 @@
-name: Operator-2B governance synchronization contract
+name: Operator-2B governance synchronization contract (historical)
 
 on:
-  pull_request:
-    paths:
-      - "tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py"
-      - "tools/2026-08-04_validate_g0_three_track_sync_v1.7.py"
-      - "tests/2026-08-04_test_g0_three_track_sync_v1.7.py"
-      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
-      - ".github/workflows/2026-08-04_Operator2B_GovernanceSync_v0.1.yml"
-      - "project-manifest.json"
-      - "registry/session-checkpoint-latest.json"
-      - "registry/decision-log.jsonl"
-  push:
-    branches: [main]
-    paths:
-      - "tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py"
-      - "tools/2026-08-04_validate_g0_three_track_sync_v1.7.py"
-      - "tests/2026-08-04_test_g0_three_track_sync_v1.7.py"
-      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
-      - ".github/workflows/2026-08-04_Operator2B_GovernanceSync_v0.1.yml"
-      - "project-manifest.json"
-      - "registry/session-checkpoint-latest.json"
-      - "registry/decision-log.jsonl"
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  validate-synchronization:
+  historical-notice:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
-      - name: Checkout complete history
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Compile synchronization contracts
-        run: |
-          python -m py_compile tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py
-          python -m py_compile tools/2026-08-04_validate_g0_three_track_sync_v1.7.py
-          python -m py_compile tests/2026-08-04_test_g0_three_track_sync_v1.7.py
-
-      - name: Verify canonical pointers without mutation
-        run: |
-          python tools/2026-08-04_apply_operator_2b_governance_sync_v0.1.py --check
-          python tools/2026-08-04_validate_g0_three_track_sync_v1.7.py --json
-          python tests/2026-08-04_test_g0_three_track_sync_v1.7.py
-          python tools/validate_memory_protocol.py
-
-      - name: Enforce immutable evidence firewall
-        shell: bash
-        run: |
-          set -euo pipefail
-          grep -q '"checkpoint_id": "UL-CHK-20260804-015"' registry/session-checkpoint-latest.json
-          grep -q '"R1.1": "BLOCKED"' project-manifest.json
-          grep -q '"R1.2": "BLOCKED"' project-manifest.json
-          grep -q '"FULL_LINEARIZED_BOUNDARY_TRACE_RANK": "NOT_PROVEN"' project-manifest.json
-          grep -q '"FREDHOLM_PROPERTY": "NOT_PROVEN"' project-manifest.json
-          grep -q '"PHYSICAL_BACKGROUND": "NOT_ESTABLISHED"' project-manifest.json
-          grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' project-manifest.json
-          grep -q '"K1-D": "NOT_RELEASED"' project-manifest.json
-          grep -q '"K1-E": "NOT_ADMISSIBLE"' project-manifest.json
-          grep -q '"physical_evidence_effect": "NONE"' project-manifest.json
+      - name: Historical contract notice
+        run: echo 'Operator-2B synchronization is superseded by the Background-3A canonical state and stable G0 validator v1.8.'
