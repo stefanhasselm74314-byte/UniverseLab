@@ -67,13 +67,13 @@ def test_topology_change_breaks_run_hash() -> None:
     expect_failure(lambda: MOD.verify_run_payload(changed), "recomputed run payload hash")
 
 
-def test_regional_topology_labels_are_rejected() -> None:
+def test_regional_topology_labels_break_immutable_run_payload() -> None:
     contract, _, _, _ = base_payloads()
     changed = copy.deepcopy(contract)
     run = changed["frozen_run_payload"]
     run["topological_sector_ordered"] = {"N_F": 1, "m_N": 1, "m_S": 1, "n_N": 1, "n_S": 1}
     changed["frozen_run_payload_sha256"] = MOD.canonical_json_sha256(run)
-    expect_failure(lambda: MOD.verify_run_payload(changed), "single-cap topology sector")
+    expect_failure(lambda: MOD.verify_run_payload(changed), "recorded run payload hash")
 
 
 def test_dependency_hash_drift_is_rejected() -> None:
@@ -141,7 +141,7 @@ def main() -> int:
     test_repository_contract_passes()
     test_parameter_change_breaks_run_hash()
     test_topology_change_breaks_run_hash()
-    test_regional_topology_labels_are_rejected()
+    test_regional_topology_labels_break_immutable_run_payload()
     test_dependency_hash_drift_is_rejected()
     test_seed_hash_drift_is_rejected()
     test_seed_solution_overclaim_is_rejected()
