@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Synchronize canonical governance pointers with merged Operator-2B artifacts.
+"""Synchronize Operator-2B governance pointers with checkpoint v1.15.
 
-The migration is intentionally narrow and idempotent. It updates only:
-- project-manifest.json
-- registry/session-checkpoint-latest.json
-- registry/decision-log.jsonl
+The scientific Operator-2B state is already frozen. This migration is limited
+to provenance and canonical pointer hygiene:
 
-It does not alter scientific equations, claims, status artifacts or release gates.
+- project-manifest.json -> checkpoint snapshot v1.15
+- registry/session-checkpoint-latest.json -> byte-identical v1.15 alias
+- registry/decision-log.jsonl -> verify append-only UL-DEC-0022
+
+It never changes equations, scientific claims, evidence effects or release gates.
 """
 
 from __future__ import annotations
@@ -14,12 +16,14 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import re
+import subprocess
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "project-manifest.json"
 CHECKPOINT_ALIAS = ROOT / "registry/session-checkpoint-latest.json"
-CHECKPOINT_V114 = ROOT / "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.14.json"
+CHECKPOINT_V115 = ROOT / "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
 DECISION_LOG = ROOT / "registry/decision-log.jsonl"
 
 REQUIRED = [
@@ -29,46 +33,12 @@ REQUIRED = [
     ROOT / "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md",
     ROOT / "tools/2026-08-04_validate_g0_three_track_sync_v1.6.py",
     ROOT / "tests/2026-08-04_test_g0_three_track_sync_v1.6.py",
+    CHECKPOINT_V115,
 ]
-
-DECISION_0022 = {
-    "decision_id": "UL-DEC-0022",
-    "date": "2026-08-04",
-    "topic": "md2s_c_phys_m1_operator_2b",
-    "decision": (
-        "For the active HZT-M0-S6-C-PHYS-M1 candidate family, the fixed "
-        "tau=y^2 pole chart, little-Holder profile and target spaces, positive "
-        "admissible set, regularized smooth nonlinear operator, continuous cap "
-        "traces, 8 by 22 parameter-augmented linearized boundary-trace template, "
-        "dense smooth core and future kernel/cokernel protocol are accepted as "
-        "formal functional-analytic structure. No candidate background, numerical "
-        "trace matrix, rank, kernel, cokernel, Fredholm property, continuum "
-        "Jacobian, stability or release gate is established."
-    ),
-    "status": "ACTIVE",
-    "reason": (
-        "Exact symbolic verification confirms the fixed-chart derivative identities, "
-        "removal of negative tau powers from the regularized residuals, endpoint "
-        "trace formulas and cap principal determinant. Little-Holder spaces provide "
-        "a dense smooth core and the fixed-background derivative is bounded between "
-        "the declared Banach spaces. These are necessary operator-domain and trace "
-        "definitions, not existence or invertibility results."
-    ),
-    "sources": [
-        "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
-        "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md",
-        "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json",
-        "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json",
-        "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.14.json",
-        "project-manifest.json",
-    ],
-    "evidence_effect": "FORMAL_FUNCTIONAL_ANALYTIC_STRUCTURE_ONLY",
-    "supersedes": None,
-}
 
 
 class SyncError(RuntimeError):
-    pass
+    """Raised when the narrow synchronization cannot proceed safely."""
 
 
 def require(condition: bool, message: str) -> None:
@@ -86,173 +56,125 @@ def read_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def update_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
-    require(manifest.get("schema") == "universelab.project-manifest.v1", "manifest schema drift")
+def validate_basis_commit(commit: Any) -> None:
+    require(
+        isinstance(commit, str) and re.fullmatch(r"[0-9a-f]{40}", commit) is not None,
+        "checkpoint v1.15 basis_commit must be a lowercase 40-character SHA-1",
+    )
+    if (ROOT / ".git").exists():
+        result = subprocess.run(
+            ["git", "-C", str(ROOT), "cat-file", "-e", f"{commit}^{{commit}}"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        require(result.returncode == 0, f"checkpoint v1.15 basis_commit is absent: {commit}")
 
-    manifest["release"] = "2.7-c-phys-m1-operator-2b-v0.1"
-    manifest["release_date"] = "2026-08-04"
 
-    tracks = manifest["architecture"]["research_tracks"]
-    require([item["id"] for item in tracks] == [
-        "MD2S-R1-L", "MD2S-R1-C-PHYS", "HZT-M0-S6-C1-V"
-    ], "three-track ordering drift")
-    physical_track = tracks[1]
-    physical_track["status"] = "ACTIVE_BACKGROUND_PREREQUISITE_AND_FREDHOLM_ANALYSIS_REMAINING"
-    physical_track["active_model"] = "HZT-M0-S6-C-PHYS-M1"
+def validate_checkpoint_v115() -> str:
+    checkpoint = read_json(CHECKPOINT_V115)
+    require(checkpoint.get("checkpoint_id") == "UL-CHK-20260804-015", "checkpoint v1.15 id drift")
+    require(
+        checkpoint.get("canonical_snapshot")
+        == "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json",
+        "checkpoint v1.15 canonical path drift",
+    )
+    require(
+        checkpoint.get("supersedes")
+        == "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.14.json",
+        "checkpoint v1.15 supersedes drift",
+    )
+    correction = checkpoint.get("provenance_correction")
+    require(isinstance(correction, dict), "checkpoint v1.15 provenance correction missing")
+    require(correction.get("scientific_state_changed") is False, "scientific-state correction overclaim")
+    require(correction.get("gate_state_changed") is False, "gate-state correction overclaim")
+    require(
+        correction.get("evidence_effect") == "GOVERNANCE_PROVENANCE_ONLY",
+        "checkpoint v1.15 correction evidence drift",
+    )
+    validate_basis_commit(checkpoint.get("basis_commit"))
 
-    gates = manifest["gates"]
-    gates.update({
-        "OPERATOR_2A": "PASS_FORMAL_OPERATOR_STRUCTURE",
+    gates = checkpoint.get("gate_state", {})
+    expected = {
         "OPERATOR_2B": "PASS_FORMAL_FUNCTION_SPACE_AND_TRACE_TEMPLATE",
-        "R1.0": "ACTIVE_BACKGROUND_PREREQUISITE_AND_FREDHOLM_ANALYSIS_REMAINING",
         "R1.1": "BLOCKED",
         "R1.2": "BLOCKED",
-        "official_MD2S_solver": "NOT_AUTHORIZED",
-        "CONTINUUM_BVP_OPERATOR": "FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED",
-        "WEIGHTED_FUNCTION_SPACES": "FROZEN",
-        "FULL_LINEARIZED_BOUNDARY_TRACE_TEMPLATE": "DEFINED_NOT_EVALUATED",
         "FULL_LINEARIZED_BOUNDARY_TRACE_RANK": "NOT_PROVEN",
         "FREDHOLM_PROPERTY": "NOT_PROVEN",
         "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
         "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+        "OFFICIAL_MD2S_SOLVER": "NOT_AUTHORIZED",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "PHYSICAL_EVIDENCE_EFFECT": "NONE",
+    }
+    for key, value in expected.items():
+        require(gates.get(key) == value, f"checkpoint v1.15 gate drift: {key}")
+    return CHECKPOINT_V115.read_text(encoding="utf-8")
+
+
+def update_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
+    require(manifest.get("schema") == "universelab.project-manifest.v1", "manifest schema drift")
+    require(
+        manifest.get("release") == "2.7-c-phys-m1-operator-2b-v0.1",
+        "manifest must already represent Operator-2B release 2.7",
+    )
+    gates = manifest.get("gates", {})
+    expected = {
+        "OPERATOR_2B": "PASS_FORMAL_FUNCTION_SPACE_AND_TRACE_TEMPLATE",
+        "R1.1": "BLOCKED",
+        "R1.2": "BLOCKED",
+        "FULL_LINEARIZED_BOUNDARY_TRACE_RANK": "NOT_PROVEN",
+        "FREDHOLM_PROPERTY": "NOT_PROVEN",
+        "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
+        "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+        "official_MD2S_solver": "NOT_AUTHORIZED",
         "K1-D": "NOT_RELEASED",
         "K1-E": "NOT_ADMISSIBLE",
         "physical_evidence_effect": "NONE",
-    })
+    }
+    for key, value in expected.items():
+        require(gates.get(key) == value, f"manifest gate drift: {key}")
 
-    rules = manifest.setdefault("governance_rules", [])
-    for rule in [
-        "formal_function_space_definition_is_not_solution_existence",
-        "symbolic_trace_template_is_not_numeric_trace_rank",
-        "bounded_map_closed_graph_is_not_fredholmness",
-    ]:
-        if rule not in rules:
-            rules.append(rule)
-
-    parent = manifest["parent_action_v0_1"]
-    parent["status"] = "M1_FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED_BACKGROUND_OPEN"
-    parent["active_model"] = "HZT-M0-S6-C-PHYS-M1"
-    parent["next_block"] = "C-PHYS-R1.0-BACKGROUND-3A"
-
-    entry = manifest["c_phys_operator_entry"]
-    entry.update({
-        "model_id": "HZT-M0-S6-C-PHYS-M1",
-        "status": "PASS_FORMAL_FUNCTION_SPACE_AND_TRACE_TEMPLATE_BACKGROUND_OPEN",
-        "continuum_operator": "FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED",
-        "weighted_function_spaces": "FROZEN",
-        "full_linearized_boundary_trace_template": "DEFINED_NOT_EVALUATED",
-        "full_linearized_boundary_trace_rank": "NOT_PROVEN",
-        "Fredholm_property": "NOT_PROVEN",
-        "continuum_BVP_Jacobian": "NOT_PROVEN",
-        "physical_background": "NOT_ESTABLISHED",
-        "solver_authorized": False,
-        "operator_2b_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
-        "operator_2b_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md",
-        "operator_2b_status": "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json",
-        "operator_2b_claim_register": "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json",
-        "function_space_chart": "tau=y^2 on two fixed unit intervals",
-        "regional_profile_space": "h^{2,alpha_H}^3 x h^{1,alpha_H}",
-        "regional_bulk_target": "h^{0,alpha_H}^4",
-        "augmented_boundary_template_shape": "8 x 22",
-        "remaining_operator_items": [
-            "candidate M1 background protocol and construction",
-            "numeric evaluation of the full parameter-augmented endpoint trace",
-            "trace rank convergence",
-            "kernel and cokernel",
-            "Fredholm property",
-            "continuum Jacobian",
-            "physical background existence and uniqueness",
-            "conditioning and robustness",
-        ],
-        "physical_evidence_effect": "NONE",
-        "next_block": "C-PHYS-R1.0-BACKGROUND-3A",
-    })
-
-    fixed = entry.setdefault("fixed_minimal_structure", [])
-    for item in [
-        "fixed tau pole-regular affine chart",
-        "little-Holder profile target and ambient spaces",
-        "regularized smooth nonlinear bulk-boundary operator template",
-        "continuous 14-component profile cap trace",
-        "8 by 22 parameter-augmented boundary derivative template",
-        "dense smooth core and bounded-map closed-graph statement",
-        "future kernel and cokernel protocol",
-    ]:
-        if item not in fixed:
-            fixed.append(item)
-
-    cphys = manifest["c_phys_m1"]
-    cphys["background_existence"] = "NOT_ESTABLISHED"
-    cphys["physical_evidence_effect"] = "NONE"
-    cphys["next_block"] = "C-PHYS-R1.0-BACKGROUND-3A"
-
-    registries = manifest["central_registries"]
-    registries.update({
-        "c_phys_m1_operator_2b_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
-        "c_phys_m1_operator_2b_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md",
-        "c_phys_m1_operator_2b_status": "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json",
-        "claim_register_c_phys_m1_operator_2b": "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json",
-        "session_checkpoint_snapshot": "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.14.json",
-    })
-
-    manifest["workstream_priority"] = [
-        "MD2S-R1-C-PHYS:C-PHYS-R1.0-BACKGROUND-3A",
-        "HZT-M0-S6-C1-V:G1.2_PARALLEL_DIAGNOSTIC_ONLY",
-    ]
-    manifest["next_release_blockers"] = [
-        "legacy_primary_source_recovery",
-        "c_phys_candidate_background_protocol_and_construction",
-        "c_phys_numeric_parameter_augmented_trace_matrix",
-        "c_phys_trace_rank_kernel_and_cokernel",
-        "continuum_Fredholm_and_jacobian_analysis",
-        "continuum_discrete_convergence",
-        "c_phys_parameter_identifiability_and_6d_to_4d_normalization",
-        "scalar_vector_tensor_perturbations",
-        "ghost_gradient_and_mass_stability",
-        "fundamental_to_observable_forward_map",
-        "data_likelihood_provenance",
-        "runtime_manifest_consumption",
-        "central_status_renderer",
-        "single_cache_release_version",
-        "byte_reproducible_release_lock",
-    ]
+    registries = manifest.get("central_registries")
+    require(isinstance(registries, dict), "manifest central_registries missing")
+    registries["session_checkpoint_snapshot"] = (
+        "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
+    )
     return manifest
 
 
-def update_decision_log() -> str:
+def validate_decision_log() -> str:
     require(DECISION_LOG.is_file(), "missing decision log")
-    raw_lines = [line for line in DECISION_LOG.read_text(encoding="utf-8").splitlines() if line.strip()]
-    decisions = [json.loads(line) for line in raw_lines]
-    ids = [item.get("decision_id") for item in decisions]
+    text = DECISION_LOG.read_text(encoding="utf-8")
+    entries = [json.loads(line) for line in text.splitlines() if line.strip()]
+    ids = [item.get("decision_id") for item in entries]
     require(len(ids) == len(set(ids)), "duplicate decision ids")
-    if "UL-DEC-0022" in ids:
-        existing = decisions[ids.index("UL-DEC-0022")]
-        require(existing == DECISION_0022, "existing UL-DEC-0022 differs from canonical entry")
-    else:
-        require(ids and ids[-1] == "UL-DEC-0021", "decision log must end at UL-DEC-0021 before append")
-        decisions.append(DECISION_0022)
-    return "\n".join(json.dumps(item, ensure_ascii=False, separators=(",", ":")) for item in decisions) + "\n"
+    require(ids and ids[-1] == "UL-DEC-0022", "decision log must end at UL-DEC-0022")
+    decision = entries[-1]
+    require(decision.get("status") == "ACTIVE", "UL-DEC-0022 must remain active")
+    require(
+        decision.get("evidence_effect") == "FORMAL_FUNCTIONAL_ANALYTIC_STRUCTURE_ONLY",
+        "UL-DEC-0022 evidence drift",
+    )
+    require(decision.get("supersedes") is None, "UL-DEC-0022 must remain additive")
+    return text
 
 
 def expected_outputs() -> dict[Path, str]:
     for path in REQUIRED:
         require(path.is_file(), f"missing merged Operator-2B artifact: {path.relative_to(ROOT)}")
-    checkpoint = read_json(CHECKPOINT_V114)
-    require(checkpoint.get("checkpoint_id") == "UL-CHK-20260804-014", "checkpoint v1.14 id drift")
-    require(
-        checkpoint.get("canonical_snapshot")
-        == "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.14.json",
-        "checkpoint v1.14 canonical path drift",
-    )
+    checkpoint_text = validate_checkpoint_v115()
     manifest = update_manifest(read_json(MANIFEST))
+    decision_text = validate_decision_log()
     return {
         MANIFEST: json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
-        CHECKPOINT_ALIAS: CHECKPOINT_V114.read_text(encoding="utf-8"),
-        DECISION_LOG: update_decision_log(),
+        CHECKPOINT_ALIAS: checkpoint_text,
+        DECISION_LOG: decision_text,
     }
 
 
-def apply(check_only: bool) -> list[str]:
+def apply(*, check_only: bool) -> list[str]:
     changed: list[str] = []
     for path, expected in expected_outputs().items():
         current = path.read_text(encoding="utf-8") if path.exists() else ""
@@ -284,7 +206,7 @@ def main() -> int:
         for path in changed:
             print(f"- {path}")
     else:
-        print("PASS: Operator-2B governance pointers are synchronized")
+        print("PASS: Operator-2B governance pointers are synchronized to checkpoint v1.15")
     return 0
 
 
