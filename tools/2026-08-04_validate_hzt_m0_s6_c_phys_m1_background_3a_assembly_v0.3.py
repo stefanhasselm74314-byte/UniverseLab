@@ -49,7 +49,7 @@ def validate_assembly(method: dict[str, Any], topology: dict[str, Any], assembly
     require(method["frozen_mathematical_problem"]["augmented_unknown_vector"] == [
         "varphi_N_0", "q_N", "A_S_0", "varphi_S_0", "q_S", "rho_N", "rho_S", "k4"
     ], "augmented variable order drift")
-    require(topology["corrected_topological_inputs"] == ["N_F", "N_sigma", "m_sigma"], "topology correction drift")
+    require(topology["canonical_effective_topological_input"]["ordered_vector"] == ["N_F", "N_sigma", "m_sigma"], "topology correction drift")
     require(assembly["status"] == "PREREGISTERED_NOT_EXECUTED_SQUARE_ASSEMBLY_CORRECTED", "assembly status drift")
     count = assembly["counting_audit"]
     require(count["profile_unknowns"] == "8*N", "profile count drift")
