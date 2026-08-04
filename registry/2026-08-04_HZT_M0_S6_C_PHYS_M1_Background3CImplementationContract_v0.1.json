@@ -1,0 +1,141 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c-implementation.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C_EXECUTION_IMPLEMENTATION_AND_AUTHORIZATION_GATE",
+  "classification": "QUARANTINED_DIAGNOSTIC_IMPLEMENTATION_NO_EXECUTION",
+  "status": "IMPLEMENTATION_PRESENT_EXECUTION_NOT_AUTHORIZED",
+  "evidence_effect": "SOFTWARE_IMPLEMENTATION_AND_ALGEBRA_QA_ONLY",
+  "physical_evidence_effect": "NONE",
+  "official_solver_authorized": false,
+  "diagnostic_execution_authorized": false,
+  "implementation_source": {
+    "canonical_entry_point": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_solver_v0.2.py",
+    "canonical_entry_point_git_blob_sha": "60ccdbcb2cab8dc8a0cba7a023ce43498343021f",
+    "canonical_entry_point_commit": "d13e0983a0ffaaf3f1431fb955e378dc5a6239f1",
+    "numerical_kernel": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_solver_v0.1.py",
+    "numerical_kernel_git_blob_sha": "b35b34dc364f175fc8d6285fab20d18ae5921337",
+    "numerical_kernel_commit": "670023c7117a5d42a73d6b9e722338d185a93809",
+    "direct_kernel_entry_for_execution": "FORBIDDEN",
+    "dependency_lock": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt",
+    "dependency_lock_git_blob_sha": "2c3a8126fc5ec23bd82f0e99d6922610d9250bfc"
+  },
+  "frozen_inputs": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01",
+    "run_input_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.1.json",
+    "run_payload_sha256": "345b457a97750c6f98d3003825777d56faf9a7a0ae8bd8564cf2fd3f7f19ece6",
+    "seed_specification": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json",
+    "seed_specification_sha256": "b6e692bf53838f40a896def0e200360de3e94826cb20a331438afc1b1cf44334",
+    "method_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationContract_v0.1.json",
+    "topology_correction": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3ATopologyCorrectionContract_v0.2.json",
+    "model_parameter_source": "frozen_run_payload.model_parameters_ordered",
+    "topological_sector_source": "frozen_run_payload.topological_sector_ordered",
+    "node_schedule_source": "primary_discretization.regional_node_counts",
+    "node_count_to_polynomial_degree": "degree=node_count-1"
+  },
+  "implemented_primary_backend": {
+    "method": "CHEBYSHEV_LOBATTO_COLLOCATION_IN_TAU",
+    "regional_profiles": ["u_A","u_ell","u_varphi","u_g"],
+    "augmented_variables": ["varphi_N_0","q_N","A_S_0","varphi_S_0","q_S","rho_N","rho_S","k4"],
+    "regularized_bulk_residuals": ["F_A","F_ell","F_varphi","F_gauge"],
+    "boundary_residuals": ["R_A","R_ell","R_varphi","R_patch","R_4D","R_chi","R_scalar","R_gauge"],
+    "constraint_channel": "C_rr_QA_ONLY_NOT_NONLINEAR_RESIDUAL",
+    "jacobian": "COMPLEX_STEP_COMPONENTWISE_WITH_FIXED_RESIDUAL_SCALE",
+    "linear_step": "SVD_STABILIZED_LEAST_SQUARES",
+    "nonlinear_step": "DAMPED_NEWTON_WITH_BACKTRACKING_AND_TRUST_RADIUS",
+    "seed_count": 7,
+    "randomness": "NONE"
+  },
+  "off_shell_boundary_extension": {
+    "ell_sigma": "(ell_N_cap+ell_S_cap)/2",
+    "d_chi_patch": "N_sigma-m_sigma*q_hat*a_chi_S_cap",
+    "reason": "The nonlinear residual must remain defined away from exact continuity while reproducing the frozen single-cap-phase equations on the matching surface.",
+    "on_shell_reduction": "When R_ell=0 the averaged ell_sigma equals the common cap radius; when R_patch=0 the south regular patch carries the frozen winding combination.",
+    "evidence_limit": "This implementation convention is not a proof of convergence, uniqueness or physical preference."
+  },
+  "audit_capabilities": {
+    "allowed": [
+      "Chebyshev differentiation polynomial exactness check",
+      "state-vector dimension and ordering check",
+      "canonical 3A and 3B schema binding check",
+      "exact a_F=0 control-seed residual assembly check",
+      "explicit nonzero cap-defect check",
+      "seven-seed construction check",
+      "authorization refusal check"
+    ],
+    "forbidden": [
+      "Newton iteration",
+      "continuation",
+      "independent backend shooting",
+      "result artifact creation",
+      "candidate background classification",
+      "trace rank or Fredholm evaluation"
+    ],
+    "audit_command": "python tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_solver_v0.2.py audit --json"
+  },
+  "execution_command": {
+    "command": "python tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_solver_v0.2.py run --json",
+    "current_expected_exit_code": 73,
+    "current_expected_status": "NOT_AUTHORIZED",
+    "authorization_artifact": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.1.json",
+    "authorization_artifact_status": "NOT_GRANTED"
+  },
+  "blocking_prerequisites": {
+    "independent_backend_implementation": "NOT_PRESENT",
+    "machine_readable_result_schema": "NOT_FROZEN",
+    "output_path_and_no_overwrite_policy": "NOT_FROZEN",
+    "resource_budget": "NOT_FROZEN",
+    "separate_append_only_execution_decision": "NOT_PRESENT",
+    "execution_authorization": "NOT_GRANTED"
+  },
+  "current_execution_state": {
+    "audit_executed": false,
+    "newton_executed": false,
+    "continuation_executed": false,
+    "shooting_executed": false,
+    "trace_matrix_evaluated": false,
+    "result_artifact_created": false,
+    "candidate_background_created": false
+  },
+  "gate_state": {
+    "BACKGROUND_3A": "PREREGISTERED_NOT_EXECUTED_CORRECTED_TO_SINGLE_CAP_PHASE",
+    "BACKGROUND_3B": "RUN_INPUT_FROZEN_EXECUTION_NOT_AUTHORIZED",
+    "BACKGROUND_3C_IMPLEMENTATION": "PRESENT_PENDING_CI",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "background_existence": "NOT_PROVEN",
+    "background_uniqueness": "NOT_PROVEN",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "perturbative_stability": "OPEN",
+    "ghost_freedom": "OPEN",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "Implementation presence is not solver authorization.",
+    "A passing algebra audit is not a numerical background result.",
+    "The exact control seed remains boundary-inexact and is not the target-model solution.",
+    "No existence, uniqueness, trace-rank, Fredholm, continuum-Jacobian, stability or physical claim follows.",
+    "No result artifact may be created while authorization remains NOT_GRANTED."
+  ],
+  "next_block": {
+    "id": "C-PHYS-R1.0-BACKGROUND-3C2_INDEPENDENT_BACKEND_AND_EXECUTION_PACKAGE",
+    "execution_type": "IMPLEMENTATION_ONLY_NO_SOLVER_RUN",
+    "required_outputs": [
+      "independently coded residual assembly and backend",
+      "machine-readable result schema",
+      "immutable output path and no-overwrite rule",
+      "resource and timeout budget",
+      "updated denied authorization audit"
+    ]
+  }
+}
