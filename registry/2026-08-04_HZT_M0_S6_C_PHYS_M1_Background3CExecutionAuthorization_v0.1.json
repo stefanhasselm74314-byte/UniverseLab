@@ -1,0 +1,53 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c-execution-authorization.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C_EXECUTION_AUTHORIZATION_GATE",
+  "classification": "SEPARATE_EXECUTION_AUTHORIZATION_GATE",
+  "status": "NOT_GRANTED",
+  "authorized": false,
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01",
+  "implementation_git_blob_sha": "b35b34dc364f175fc8d6285fab20d18ae5921337",
+  "implementation_source": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_solver_v0.1.py",
+  "implementation_commit": "670023c7117a5d42a73d6b9e722338d185a93809",
+  "run_input_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.1.json",
+  "run_input_payload_sha256": "345b457a97750c6f98d3003825777d56faf9a7a0ae8bd8564cf2fd3f7f19ece6",
+  "seed_specification_sha256": "b6e692bf53838f40a896def0e200360de3e94826cb20a331438afc1b1cf44334",
+  "authorization_prerequisites": {
+    "implementation_contract_ci": "PASS_REQUIRED",
+    "audit_subcommand": "PASS_REQUIRED",
+    "run_subcommand_refusal": "PASS_REQUIRED",
+    "independent_backend_implementation": "NOT_PRESENT_BLOCKING",
+    "result_schema_and_output_path": "NOT_FROZEN_BLOCKING",
+    "resource_budget": "NOT_FROZEN_BLOCKING",
+    "separate_append_only_decision": "REQUIRED_NOT_PRESENT"
+  },
+  "grant_rule": "A grant requires a new versioned authorization artifact and append-only decision after every prerequisite is closed. This v0.1 file may never be edited in place to GRANTED.",
+  "current_effect": {
+    "audit_command_allowed": true,
+    "run_command_allowed": false,
+    "newton_execution_allowed": false,
+    "shooting_execution_allowed": false,
+    "result_artifact_creation_allowed": false,
+    "candidate_background_classification_allowed": false
+  },
+  "gate_state": {
+    "BACKGROUND_3C_IMPLEMENTATION": "PRESENT_PENDING_CI",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "background_existence": "NOT_PROVEN",
+    "background_uniqueness": "NOT_PROVEN",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "physical_evidence_effect": "NONE"
+}
