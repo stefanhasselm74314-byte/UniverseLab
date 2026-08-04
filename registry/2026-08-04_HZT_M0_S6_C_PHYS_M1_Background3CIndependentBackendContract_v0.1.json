@@ -1,0 +1,85 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c-independent-backend.v0.1",
+  "date": "2026-08-04",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "phase": "R1.0",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C2_INDEPENDENT_BACKEND_AND_EXECUTION_PACKAGE",
+  "classification": "INDEPENDENT_X_SPACE_BACKEND_NO_NONLINEAR_EXECUTION",
+  "status": "INDEPENDENT_BACKEND_PRESENT_PENDING_CI_EXECUTION_NOT_AUTHORIZED",
+  "evidence_effect": "INDEPENDENT_SOFTWARE_AND_CONTROL_BACKGROUND_QA_ONLY",
+  "physical_evidence_effect": "NONE",
+  "source": {
+    "path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py",
+    "git_blob_sha": "bed68e11a3682d8b140b6db0cbe71fd696c3ff34",
+    "imports_primary_residual": false,
+    "wraps_primary_residual": false,
+    "direct_invocation": "FORBIDDEN_EXIT_73"
+  },
+  "frozen_input_binding": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+    "run_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+    "topology": ["N_F=1", "N_sigma=1", "m_sigma=1"]
+  },
+  "independent_formulation": {
+    "coordinate": "physical_dimensionless_x",
+    "state_order": ["A", "A_x", "ell", "ell_x", "varphi", "varphi_x", "a_chi"],
+    "shooting_unknown_order": [
+      "varphi_N_0", "q_N", "A_S_0", "varphi_S_0",
+      "q_S", "rho_N", "rho_S", "k4"
+    ],
+    "bulk_equations": "SEPARATELY_CODED_FIRST_ORDER_M1_SYSTEM",
+    "radial_constraint": "SEPARATELY_CODED_QA_CHANNEL",
+    "cap_residuals": "SEPARATELY_CODED_EIGHT_COMPONENT_VECTOR",
+    "pole_initialization": "A4_ELL5_VARPHI4_A_CHI4_FROM_OPERATOR2A",
+    "integrator": "SCIPY_SOLVE_IVP_DOP853",
+    "relative_tolerance": 1e-11,
+    "absolute_tolerance": 1e-13,
+    "control_cutoffs": [0.001, 0.0005, 0.00025],
+    "control_sample_count": 513,
+    "future_shooting_jacobian": "CENTERED_FINITE_DIFFERENCE_RELATIVE_STEP_1E_MINUS_6",
+    "future_root_method": "NOT_IMPLEMENTED_OR_EXECUTED_IN_3C2_AUDIT"
+  },
+  "audit_scope": {
+    "allowed": [
+      "AST and source-token independence audit",
+      "DOP853 integration of exact a_F=0 control background",
+      "profile comparison with exact control functions",
+      "radial-constraint comparison",
+      "all eight cap-residual comparisons",
+      "cutoff convergence table",
+      "primary-independent boundary-vector comparison"
+    ],
+    "forbidden": [
+      "shooting Jacobian evaluation",
+      "shooting root iteration",
+      "target a_F=1/4 solve",
+      "parameter or topology scan",
+      "result artifact creation"
+    ]
+  },
+  "current_execution_state": {
+    "control_integration_audit_executed": false,
+    "shooting_jacobian_executed": false,
+    "shooting_root_executed": false,
+    "target_background_solve_executed": false,
+    "result_artifact_created": false
+  },
+  "gate_state": {
+    "BACKGROUND_3C_PRIMARY_IMPLEMENTATION": "PASS_AUDITED_NO_EXECUTION",
+    "BACKGROUND_3C_INDEPENDENT_BACKEND": "PRESENT_PENDING_CI",
+    "BACKGROUND_3C_DUAL_BACKEND_PACKAGE": "PRESENT_PENDING_CI",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_block": "C-PHYS-R1.0-BACKGROUND-3C3_EXECUTION_AUTHORIZATION_REVIEW_ONLY"
+}
