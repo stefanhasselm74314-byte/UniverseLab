@@ -1,4 +1,4 @@
-name: UniverseLab G0 three-track governance v1.6
+name: UniverseLab G0 three-track governance v1.7
 
 on:
   pull_request:
@@ -6,12 +6,12 @@ on:
       - "project-manifest.json"
       - "registry/decision-log.jsonl"
       - "registry/session-checkpoint-latest.json"
-      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.14.json"
+      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
       - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json"
       - "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json"
       - "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json"
-      - "tools/2026-08-04_validate_g0_three_track_sync_v1.6.py"
-      - "tests/2026-08-04_test_g0_three_track_sync_v1.6.py"
+      - "tools/2026-08-04_validate_g0_three_track_sync_v1.7.py"
+      - "tests/2026-08-04_test_g0_three_track_sync_v1.7.py"
       - ".github/workflows/2026-08-04_UniverseLab_G0_ThreeTrackContract_v1.6.yml"
   push:
     branches: [main]
@@ -19,12 +19,12 @@ on:
       - "project-manifest.json"
       - "registry/decision-log.jsonl"
       - "registry/session-checkpoint-latest.json"
-      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.14.json"
+      - "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json"
       - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json"
       - "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json"
       - "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json"
-      - "tools/2026-08-04_validate_g0_three_track_sync_v1.6.py"
-      - "tests/2026-08-04_test_g0_three_track_sync_v1.6.py"
+      - "tools/2026-08-04_validate_g0_three_track_sync_v1.7.py"
+      - "tests/2026-08-04_test_g0_three_track_sync_v1.7.py"
       - ".github/workflows/2026-08-04_UniverseLab_G0_ThreeTrackContract_v1.6.yml"
 
 permissions:
@@ -35,8 +35,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout
+      - name: Checkout complete history
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -49,19 +51,19 @@ jobs:
           python -m json.tool registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json >/dev/null
           python -m json.tool registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json >/dev/null
           python -m json.tool registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json >/dev/null
-          python -m json.tool registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.14.json >/dev/null
+          python -m json.tool registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json >/dev/null
           python -m json.tool registry/session-checkpoint-latest.json >/dev/null
 
       - name: Compile validator and tests
         run: |
           python -m py_compile tools/2026-08-04_validate_g0_three_track_sync_v1.6.py
-          python -m py_compile tests/2026-08-04_test_g0_three_track_sync_v1.6.py
+          python -m py_compile tools/2026-08-04_validate_g0_three_track_sync_v1.7.py
+          python -m py_compile tests/2026-08-04_test_g0_three_track_sync_v1.7.py
 
-      - name: Run canonical regression tests
-        run: python tests/2026-08-04_test_g0_three_track_sync_v1.6.py
-
-      - name: Run fail-closed synchronization validator
-        run: python tools/2026-08-04_validate_g0_three_track_sync_v1.6.py --json
+      - name: Run provenance-safe canonical regression
+        run: |
+          python tests/2026-08-04_test_g0_three_track_sync_v1.7.py
+          python tools/2026-08-04_validate_g0_three_track_sync_v1.7.py --json
 
       - name: Enforce immutable release firewall
         shell: bash

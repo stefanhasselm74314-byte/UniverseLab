@@ -1,6 +1,6 @@
 {
   "schema": "universelab.project-manifest.v1",
-  "release": "2.6-c-phys-m1-operator-2a-v0.1",
+  "release": "2.7-c-phys-m1-operator-2b-v0.1",
   "release_date": "2026-08-04",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
@@ -9,21 +9,59 @@
     "research_program": "Hyperzeit / HPVS",
     "author": "Stefan Hasselmeyer",
     "language_primary": "de",
-    "language_planned": ["de", "en"]
+    "language_planned": [
+      "de",
+      "en"
+    ]
   },
   "architecture": {
     "governing_document": "MD-0",
-    "program_chain": ["HPVS", "HZT-M0", "HZT-Full"],
+    "program_chain": [
+      "HPVS",
+      "HZT-M0",
+      "HZT-Full"
+    ],
     "levels": [
-      {"id":"HPVS","role":"foundations_program","status":"OPEN_RESEARCH_PROGRAM"},
-      {"id":"HZT-M0-S6","role":"primary_controlled_forward_model_branch","signature":"(-,+,+,+,+,+)","status":"RETAINED_AND_INCOMPLETE"},
-      {"id":"HZT-M0-P5","role":"projection_quotient_and_uplift_control_branch","status":"CONDITIONAL"},
-      {"id":"HZT-Full","role":"fundamental_multitime_candidate","status":"NOT_CONSTRUCTED"}
+      {
+        "id": "HPVS",
+        "role": "foundations_program",
+        "status": "OPEN_RESEARCH_PROGRAM"
+      },
+      {
+        "id": "HZT-M0-S6",
+        "role": "primary_controlled_forward_model_branch",
+        "signature": "(-,+,+,+,+,+)",
+        "status": "RETAINED_AND_INCOMPLETE"
+      },
+      {
+        "id": "HZT-M0-P5",
+        "role": "projection_quotient_and_uplift_control_branch",
+        "status": "CONDITIONAL"
+      },
+      {
+        "id": "HZT-Full",
+        "role": "fundamental_multitime_candidate",
+        "status": "NOT_CONSTRUCTED"
+      }
     ],
     "research_tracks": [
-      {"id":"MD2S-R1-L","role":"historical_legacy_reproduction","status":"BLOCKED_BY_MISSING_PRIMARY_SOURCES"},
-      {"id":"MD2S-R1-C-PHYS","role":"current_canonical_physical_rebuild","status":"ACTIVE_BOUNDARY_TRACE_AND_FUNCTION_SPACE_CLOSURE_REMAINING","active_model":"HZT-M0-S6-C-PHYS-M1"},
-      {"id":"HZT-M0-S6-C1-V","role":"manufactured_verification_sandbox","status":"CONDITIONAL","classification":"MANUFACTURED_VERIFICATION_MODEL"}
+      {
+        "id": "MD2S-R1-L",
+        "role": "historical_legacy_reproduction",
+        "status": "BLOCKED_BY_MISSING_PRIMARY_SOURCES"
+      },
+      {
+        "id": "MD2S-R1-C-PHYS",
+        "role": "current_canonical_physical_rebuild",
+        "status": "ACTIVE_BACKGROUND_PREREQUISITE_AND_FREDHOLM_ANALYSIS_REMAINING",
+        "active_model": "HZT-M0-S6-C-PHYS-M1"
+      },
+      {
+        "id": "HZT-M0-S6-C1-V",
+        "role": "manufactured_verification_sandbox",
+        "status": "CONDITIONAL",
+        "classification": "MANUFACTURED_VERIFICATION_MODEL"
+      }
     ],
     "track_migration_rule": "No result, parameter, equation, status or evidence label migrates between tracks without an explicit versioned model-identity or verification-to-physics bridge.",
     "control_core": "S6-Q1 / RB0-heavy-GR-quiet"
@@ -36,12 +74,12 @@
     "FUNCTION_SELECTION": "PASS_POSTULATED_MODEL_FAMILY",
     "MF_001_BULK_FUNCTIONS": "FROZEN_FOR_C_PHYS_M1",
     "MF_002_CAP_FUNCTIONS": "FROZEN_FOR_C_PHYS_M1",
-    "R1.0": "ACTIVE_BOUNDARY_TRACE_AND_FUNCTION_SPACE_CLOSURE_REMAINING",
+    "R1.0": "ACTIVE_BACKGROUND_PREREQUISITE_AND_FREDHOLM_ANALYSIS_REMAINING",
     "R1.1": "BLOCKED",
     "R1.2": "BLOCKED",
     "official_MD2S_solver": "NOT_AUTHORIZED",
     "STRUCTURAL_BVP_COUNT": "SQUARE_CONDITIONAL",
-    "CONTINUUM_BVP_OPERATOR": "SPECIALIZED_FORMAL_OPERATOR_DEFINED",
+    "CONTINUUM_BVP_OPERATOR": "FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED",
     "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
     "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
     "G1.1": "PASS_DIAGNOSTIC",
@@ -58,7 +96,13 @@
     "INTERIOR_PRINCIPAL_RANK": "PASS_FOR_ELL_POSITIVE",
     "HIGHER_POLE_SERIES": "DERIVED_TO_A4_F4_G4_L5",
     "BOUNDARY_TRACE_MAP": "NOT_CONSTRUCTED",
-    "COMPLEMENTING_BOUNDARY_CONDITION": "NOT_PROVEN"
+    "COMPLEMENTING_BOUNDARY_CONDITION": "NOT_PROVEN",
+    "OPERATOR_2A": "PASS_FORMAL_OPERATOR_STRUCTURE",
+    "OPERATOR_2B": "PASS_FORMAL_FUNCTION_SPACE_AND_TRACE_TEMPLATE",
+    "WEIGHTED_FUNCTION_SPACES": "FROZEN",
+    "FULL_LINEARIZED_BOUNDARY_TRACE_TEMPLATE": "DEFINED_NOT_EVALUATED",
+    "FULL_LINEARIZED_BOUNDARY_TRACE_RANK": "NOT_PROVEN",
+    "FREDHOLM_PROPERTY": "NOT_PROVEN"
   },
   "governance_rules": [
     "technical_execution_is_not_physical_identification",
@@ -80,33 +124,150 @@
     "patch_and_flux_are_counted_once_in_the_regular_two_patch_convention",
     "c1_verifies_tools_before_nature",
     "diagnostic_status_must_be_atomic_in_machine_readable_primary_fields",
-    "public_provenance_excludes_conversation_attachment_and_detailed_account_identifiers"
+    "public_provenance_excludes_conversation_attachment_and_detailed_account_identifiers",
+    "formal_function_space_definition_is_not_solution_existence",
+    "symbolic_trace_template_is_not_numeric_trace_rank",
+    "bounded_map_closed_graph_is_not_fredholmness"
   ],
   "canonical_pages": [
-    {"id":"portal","path":"index.html","live":"./","class":"public_interface","status":"ACTIVE"},
-    {"id":"research_status","path":"research-status.html","live":"./research-status.html?v=20260803","class":"canonical_public_status","status":"ACTIVE"},
-    {"id":"navigator","path":"navigator-app.html","live":"./navigator-app.html?v=4","class":"scientific_navigation","status":"ACTIVE"},
-    {"id":"hyperlab","path":"hyperlab.html","live":"./hyperlab.html?v=10","class":"status_and_diagnostics","status":"ACTIVE_DIAGNOSTIC"},
-    {"id":"material","path":"hyperzeit-material-v2.html","live":"./hyperzeit-material-v2.html?v=2","class":"literature_derivations_visuals","status":"ACTIVE"},
-    {"id":"methods","path":"hyperzeit-methods.html","live":"./hyperzeit-methods.html?v=1","class":"methods_and_quality_gates","status":"ACTIVE"},
-    {"id":"audit","path":"universelab-audit-2026-07-31.html","live":"./universelab-audit-2026-07-31.html?v=1","class":"historical_master_audit","status":"ARCHIVED_REFERENCE"},
-    {"id":"parent_closure","path":"sci-001-002-parent-closure-v0.1.html","live":"./sci-001-002-parent-closure-v0.1.html?v=1","class":"parent_action_and_boundary_closure","status":"ACTIVE_DIAGNOSTIC"},
-    {"id":"parent_gate","path":"hzt-parent-action-gate-v0.1.html","live":"./hzt-parent-action-gate-v0.1.html?v=1","class":"junction_checker","status":"ACTIVE_DIAGNOSTIC"},
-    {"id":"parent_profile","path":"hzt-s6-parent-action-v0.1.json","live":"./hzt-s6-parent-action-v0.1.json?v=1","class":"machine_readable_parent_profile","status":"ACTIVE_CONDITIONAL"},
-    {"id":"runtime_loader","path":"universelab-runtime-loader-v0.1.js","live":"./universelab-runtime-loader-v0.1.js","class":"runtime_registry_loader","status":"EXPERIMENTAL_NOT_MIGRATED"},
-    {"id":"p0_verification","path":"UniverseLab_2.1_P0_Verification_Report.md","live":"https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/UniverseLab_2.1_P0_Verification_Report.md","class":"repository_verification","status":"ACTIVE"},
-    {"id":"bibliography","path":"hyperzeit-bibliography.json","live":"./hyperzeit-bibliography.json?v=1","class":"machine_readable_bibliography","status":"ACTIVE"},
-    {"id":"audit_data","path":"universelab-audit-2026-07-31.json","live":"./universelab-audit-2026-07-31.json?v=1","class":"historical_machine_readable_audit","status":"ARCHIVED_REFERENCE"},
-    {"id":"source","path":"source.html","live":"./source.html?v=20260803","class":"developer_and_governance_hub","status":"ACTIVE"},
-    {"id":"baryogenesis","path":"baryogenesis.html","live":"./baryogenesis.html?v=20260803","class":"archived_research_lab","status":"ARCHIVED_DIAGNOSTIC_ENTRY"},
-    {"id":"comparison","path":"compare-safe.html","live":"./compare-safe.html?v=safe2","class":"calculator","status":"ACTIVE_DIAGNOSTIC"},
-    {"id":"validation","path":"validation.html","live":"./validation.html","class":"numerical_validation","status":"ACTIVE_DIAGNOSTIC"},
-    {"id":"legacy","path":"legacy.html","live":"./legacy.html?v=1","class":"historical_audit","status":"ACTIVE_ARCHIVE"}
+    {
+      "id": "portal",
+      "path": "index.html",
+      "live": "./",
+      "class": "public_interface",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "research_status",
+      "path": "research-status.html",
+      "live": "./research-status.html?v=20260803",
+      "class": "canonical_public_status",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "navigator",
+      "path": "navigator-app.html",
+      "live": "./navigator-app.html?v=4",
+      "class": "scientific_navigation",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "hyperlab",
+      "path": "hyperlab.html",
+      "live": "./hyperlab.html?v=10",
+      "class": "status_and_diagnostics",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "material",
+      "path": "hyperzeit-material-v2.html",
+      "live": "./hyperzeit-material-v2.html?v=2",
+      "class": "literature_derivations_visuals",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "methods",
+      "path": "hyperzeit-methods.html",
+      "live": "./hyperzeit-methods.html?v=1",
+      "class": "methods_and_quality_gates",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "audit",
+      "path": "universelab-audit-2026-07-31.html",
+      "live": "./universelab-audit-2026-07-31.html?v=1",
+      "class": "historical_master_audit",
+      "status": "ARCHIVED_REFERENCE"
+    },
+    {
+      "id": "parent_closure",
+      "path": "sci-001-002-parent-closure-v0.1.html",
+      "live": "./sci-001-002-parent-closure-v0.1.html?v=1",
+      "class": "parent_action_and_boundary_closure",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "parent_gate",
+      "path": "hzt-parent-action-gate-v0.1.html",
+      "live": "./hzt-parent-action-gate-v0.1.html?v=1",
+      "class": "junction_checker",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "parent_profile",
+      "path": "hzt-s6-parent-action-v0.1.json",
+      "live": "./hzt-s6-parent-action-v0.1.json?v=1",
+      "class": "machine_readable_parent_profile",
+      "status": "ACTIVE_CONDITIONAL"
+    },
+    {
+      "id": "runtime_loader",
+      "path": "universelab-runtime-loader-v0.1.js",
+      "live": "./universelab-runtime-loader-v0.1.js",
+      "class": "runtime_registry_loader",
+      "status": "EXPERIMENTAL_NOT_MIGRATED"
+    },
+    {
+      "id": "p0_verification",
+      "path": "UniverseLab_2.1_P0_Verification_Report.md",
+      "live": "https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/UniverseLab_2.1_P0_Verification_Report.md",
+      "class": "repository_verification",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "bibliography",
+      "path": "hyperzeit-bibliography.json",
+      "live": "./hyperzeit-bibliography.json?v=1",
+      "class": "machine_readable_bibliography",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "audit_data",
+      "path": "universelab-audit-2026-07-31.json",
+      "live": "./universelab-audit-2026-07-31.json?v=1",
+      "class": "historical_machine_readable_audit",
+      "status": "ARCHIVED_REFERENCE"
+    },
+    {
+      "id": "source",
+      "path": "source.html",
+      "live": "./source.html?v=20260803",
+      "class": "developer_and_governance_hub",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "baryogenesis",
+      "path": "baryogenesis.html",
+      "live": "./baryogenesis.html?v=20260803",
+      "class": "archived_research_lab",
+      "status": "ARCHIVED_DIAGNOSTIC_ENTRY"
+    },
+    {
+      "id": "comparison",
+      "path": "compare-safe.html",
+      "live": "./compare-safe.html?v=safe2",
+      "class": "calculator",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "validation",
+      "path": "validation.html",
+      "live": "./validation.html",
+      "class": "numerical_validation",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "legacy",
+      "path": "legacy.html",
+      "live": "./legacy.html?v=1",
+      "class": "historical_audit",
+      "status": "ACTIVE_ARCHIVE"
+    }
   ],
   "parent_action_v0_1": {
     "schema": "hzt.s6.parent-action.v0.1",
     "branch": "HZT-M0-S6",
-    "status": "M1_DIFFERENTIAL_OPERATOR_SPECIALIZED_CONSTRAINT_PROPAGATION_PROVEN_BOUNDARY_TRACE_OPEN",
+    "status": "M1_FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED_BACKGROUND_OPEN",
     "minimal_core": "Einstein-Maxwell-scalar plus GHY and cap phase/tension",
     "scalar_kinetic": "Z_phi=1",
     "pure_tension_condition": "A_Sigma == L_Sigma",
@@ -114,16 +275,16 @@
     "positive_winding_gate": "Y_sigma >= 0",
     "gauss_bonnet": "EXCLUDED_FROM_MINIMAL_C_PHYS_CONTRACT",
     "active_model": "HZT-M0-S6-C-PHYS-M1",
-    "next_block": "C-PHYS-R1.0-OPERATOR-2B"
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3A"
   },
   "c_phys_operator_entry": {
     "track_id": "MD2S-R1-C-PHYS",
     "model_id": "HZT-M0-S6-C-PHYS-M1",
     "phase": "R1.0",
-    "status": "M1_DIFFERENTIAL_OPERATOR_CLOSED_BOUNDARY_TRACE_INVERTIBILITY_OPEN",
+    "status": "PASS_FORMAL_FUNCTION_SPACE_AND_TRACE_TEMPLATE_BACKGROUND_OPEN",
     "radial_system": "DERIVED_CONDITIONAL",
     "function_selection": "PASS_POSTULATED_MODEL_FAMILY",
-    "continuum_operator": "SPECIALIZED_FORMAL_OPERATOR_DEFINED",
+    "continuum_operator": "FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED",
     "continuum_BVP_Jacobian": "NOT_PROVEN",
     "constraint_dependency_proof": "PROVEN_SYMBOLIC_CONDITIONAL",
     "physical_background": "NOT_ESTABLISHED",
@@ -137,39 +298,98 @@
     "function_ledger": "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeLedger_v0.1.md",
     "function_status": "registry/2026-08-03_UniverseLab_C_PHYS_M1_FunctionFreezeStatus_v0.1.json",
     "fixed_minimal_structure": [
-      "Einstein-Hilbert normalization","Lambda6 sign convention","Z_phi=1","Maxwell normalization","GHY sector","cap tension plus winding structure","Delta_chi=2*pi","local boundary normals n_N=n_S=+1","global two-form orientations epsilon_N=+1 and epsilon_S=-1","regular pole gauges and U(1) patch transition","oriented patch-flux equivalence","q_sigma=m_sigma*q_ref charge lattice","A_N(0)=0 frame","continuous discrete and model-parameter roles","conditional eight-by-eight structural BVP count","U=0.5*mhat_phi_sq*M6^6*varphi^2","Z_F=exp(-2*a_F*varphi)","lambda=lambda_hat*M6^5","Z_sigma=z_sigma_hat*M6^3","scalar domain R","q_ref=q_hat/M6"
+      "Einstein-Hilbert normalization",
+      "Lambda6 sign convention",
+      "Z_phi=1",
+      "Maxwell normalization",
+      "GHY sector",
+      "cap tension plus winding structure",
+      "Delta_chi=2*pi",
+      "local boundary normals n_N=n_S=+1",
+      "global two-form orientations epsilon_N=+1 and epsilon_S=-1",
+      "regular pole gauges and U(1) patch transition",
+      "oriented patch-flux equivalence",
+      "q_sigma=m_sigma*q_ref charge lattice",
+      "A_N(0)=0 frame",
+      "continuous discrete and model-parameter roles",
+      "conditional eight-by-eight structural BVP count",
+      "U=0.5*mhat_phi_sq*M6^6*varphi^2",
+      "Z_F=exp(-2*a_F*varphi)",
+      "lambda=lambda_hat*M6^5",
+      "Z_sigma=z_sigma_hat*M6^3",
+      "scalar domain R",
+      "q_ref=q_hat/M6",
+      "fixed tau pole-regular affine chart",
+      "little-Holder profile target and ambient spaces",
+      "regularized smooth nonlinear bulk-boundary operator template",
+      "continuous 14-component profile cap trace",
+      "8 by 22 parameter-augmented boundary derivative template",
+      "dense smooth core and bounded-map closed-graph statement",
+      "future kernel and cokernel protocol"
     ],
     "open_model_freeze_items": [],
     "remaining_operator_items": [
-      "weighted pole-regular Banach domain and target spaces",
-      "linearized boundary trace operator template",
-      "closedness and density audit",
-      "kernel and cokernel analysis at a candidate background",
+      "candidate M1 background protocol and construction",
+      "numeric evaluation of the full parameter-augmented endpoint trace",
+      "trace rank convergence",
+      "kernel and cokernel",
       "Fredholm property",
       "continuum Jacobian",
-      "physical background existence and uniqueness"
+      "physical background existence and uniqueness",
+      "conditioning and robustness"
     ],
     "historical_A0_identity": "NOT_CLAIMED",
     "C1_V_source_migration": "FORBIDDEN",
     "physical_evidence_effect": "NONE",
-    "next_block": "C-PHYS-R1.0-OPERATOR-2B",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3A",
     "operator_2a_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
-    "operator_2a_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md"
+    "operator_2a_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md",
+    "weighted_function_spaces": "FROZEN",
+    "full_linearized_boundary_trace_template": "DEFINED_NOT_EVALUATED",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "operator_2b_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+    "operator_2b_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md",
+    "operator_2b_status": "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json",
+    "operator_2b_claim_register": "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json",
+    "function_space_chart": "tau=y^2 on two fixed unit intervals",
+    "regional_profile_space": "h^{2,alpha_H}^3 x h^{1,alpha_H}",
+    "regional_bulk_target": "h^{0,alpha_H}^4",
+    "augmented_boundary_template_shape": "8 x 22"
   },
   "c_phys_m1": {
     "model_id": "HZT-M0-S6-C-PHYS-M1",
     "classification": "VERSIONED_PHYSICAL_CANDIDATE_MODEL_SELECTION_NOT_DERIVATION",
     "status": "PASS_POSTULATED_MODEL_FAMILY",
     "scalar_domain": "R",
-    "functions": {"U":"0.5*mhat_phi_sq*M6^6*varphi^2","Z_F":"exp(-2*a_F*varphi)","lambda":"lambda_hat*M6^5","Z_sigma":"z_sigma_hat*M6^3"},
-    "dimensionless_parameter_vector": ["Lambda_hat","mhat_phi_sq","a_F","lambda_hat","z_sigma_hat","q_hat"],
+    "functions": {
+      "U": "0.5*mhat_phi_sq*M6^6*varphi^2",
+      "Z_F": "exp(-2*a_F*varphi)",
+      "lambda": "lambda_hat*M6^5",
+      "Z_sigma": "z_sigma_hat*M6^3"
+    },
+    "dimensionless_parameter_vector": [
+      "Lambda_hat",
+      "mhat_phi_sq",
+      "a_F",
+      "lambda_hat",
+      "z_sigma_hat",
+      "q_hat"
+    ],
     "parameter_count": 6,
     "dimensional_anchor": "M6",
-    "active_domains": {"mhat_phi_sq":"strictly_positive","a_F":"strictly_positive","z_sigma_hat":"strictly_positive","q_hat":"strictly_positive","Lambda_hat":"real","lambda_hat":"real"},
+    "active_domains": {
+      "mhat_phi_sq": "strictly_positive",
+      "a_F": "strictly_positive",
+      "z_sigma_hat": "strictly_positive",
+      "q_hat": "strictly_positive",
+      "Lambda_hat": "real",
+      "lambda_hat": "real"
+    },
     "localized_scalar_source": "ABSENT_BY_MODEL_SELECTION",
     "background_existence": "NOT_ESTABLISHED",
     "physical_evidence_effect": "NONE",
-    "next_block": "C-PHYS-R1.0-OPERATOR-2B",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3A",
     "operator_2a_status": "PASS_FORMAL_OPERATOR_STRUCTURE",
     "constraint_propagation": "PROVEN_SYMBOLIC_CONDITIONAL",
     "interior_principal_rank": "PASS_FOR_ELL_POSITIVE",
@@ -181,7 +401,14 @@
     "anchor_classification": "EXACT_MANUFACTURED_VERIFICATION_BACKGROUND",
     "anchor_k4": 0.25,
     "low_curvature_interpretation": "FORBIDDEN",
-    "phases": {"C1-V0":"PASS","C1-V1":"PASS_DIAGNOSTIC","C1-V2":"PASS_DIAGNOSTIC","G1.1":"PASS_DIAGNOSTIC","C1-V3":"PARTIAL","C1-V4":"NOT_STARTED"},
+    "phases": {
+      "C1-V0": "PASS",
+      "C1-V1": "PASS_DIAGNOSTIC",
+      "C1-V2": "PASS_DIAGNOSTIC",
+      "G1.1": "PASS_DIAGNOSTIC",
+      "C1-V3": "PARTIAL",
+      "C1-V4": "NOT_STARTED"
+    },
     "g1_1_primary_status": "NUMERICALLY_CONFIRMED_DIAGNOSTIC",
     "g1_1_result": "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json",
     "g1_1_claim_register": "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json",
@@ -201,14 +428,106 @@
     "history_rewrite": "SEPARATE_PROPORTIONALITY_DECISION_REQUIRED"
   },
   "data_releases": [
-    {"id":"DESI-DR2-BAO","reference":"arXiv:2503.14738","status":"MATERIAL_IDENTIFIED_NOT_INTEGRATED","required":["measurement_vector","covariance","ordering","likelihood","provenance_hashes"]},
-    {"id":"DESI-DR2-LYA","reference":"arXiv:2503.14739","status":"MATERIAL_IDENTIFIED_NOT_INTEGRATED","required":["measurement_vector","covariance","cross_correlations","likelihood"]},
-    {"id":"KiDS-Legacy","reference":"arXiv:2503.19441","status":"SUPERSEDES_KIDS1000_FOR_NEW_ANALYSES","required":["data_vector","covariance","n_of_z","scale_cuts","ordering","nuisance_model"]},
-    {"id":"PantheonPlus","reference":"arXiv:2202.04077","status":"MATERIAL_IDENTIFIED_NOT_INTEGRATED","required":["distance_data","statistical_covariance","systematic_covariance","redshift_conventions","calibration_separation"]}
+    {
+      "id": "DESI-DR2-BAO",
+      "reference": "arXiv:2503.14738",
+      "status": "MATERIAL_IDENTIFIED_NOT_INTEGRATED",
+      "required": [
+        "measurement_vector",
+        "covariance",
+        "ordering",
+        "likelihood",
+        "provenance_hashes"
+      ]
+    },
+    {
+      "id": "DESI-DR2-LYA",
+      "reference": "arXiv:2503.14739",
+      "status": "MATERIAL_IDENTIFIED_NOT_INTEGRATED",
+      "required": [
+        "measurement_vector",
+        "covariance",
+        "cross_correlations",
+        "likelihood"
+      ]
+    },
+    {
+      "id": "KiDS-Legacy",
+      "reference": "arXiv:2503.19441",
+      "status": "SUPERSEDES_KIDS1000_FOR_NEW_ANALYSES",
+      "required": [
+        "data_vector",
+        "covariance",
+        "n_of_z",
+        "scale_cuts",
+        "ordering",
+        "nuisance_model"
+      ]
+    },
+    {
+      "id": "PantheonPlus",
+      "reference": "arXiv:2202.04077",
+      "status": "MATERIAL_IDENTIFIED_NOT_INTEGRATED",
+      "required": [
+        "distance_data",
+        "statistical_covariance",
+        "systematic_covariance",
+        "redshift_conventions",
+        "calibration_separation"
+      ]
+    }
   ],
   "central_registries": {
-    "conventions":"convention-registry.json","audit":"universelab-audit-2026-07-31.json","bibliography":"hyperzeit-bibliography.json","project_manifest":"project-manifest.json","parent_action":"hzt-s6-parent-action-v0.1.json","three_track_contract":"registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json","claim_register_base":"registry/claim-register-v0.1.json","claim_register_g0":"registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json","claim_register_g1_1":"registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json","research_continuation":"registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json","r1_three_track_gate":"science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json","c_phys_operator_contract":"registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json","c_phys_operator_ledger":"science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md","c_phys_global_convention_contract":"registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json","c_phys_global_convention_ledger":"science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeLedger_v0.1.md","c_phys_freeze_1a_status":"registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json","c_phys_m1_function_contract":"registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json","c_phys_m1_function_ledger":"science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeLedger_v0.1.md","c_phys_m1_function_status":"registry/2026-08-03_UniverseLab_C_PHYS_M1_FunctionFreezeStatus_v0.1.json","c1_g1_1_result":"registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json","session_checkpoint":"registry/session-checkpoint-latest.json","session_checkpoint_snapshot":"registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.12.json","public_privacy_contract":"registry/2026-08-03_UniverseLab_PublicPrivacyContract_v1.0.json","public_privacy_decision":"registry/2026-08-03_UniverseLab_PublicPrivacyDecision_v1.0.json","c_phys_m1_operator_2a_contract":"registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json","c_phys_m1_operator_2a_ledger":"science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md"
+    "conventions": "convention-registry.json",
+    "audit": "universelab-audit-2026-07-31.json",
+    "bibliography": "hyperzeit-bibliography.json",
+    "project_manifest": "project-manifest.json",
+    "parent_action": "hzt-s6-parent-action-v0.1.json",
+    "three_track_contract": "registry/2026-08-03_UniverseLab_ThreeTrackContract_v1.0.json",
+    "claim_register_base": "registry/claim-register-v0.1.json",
+    "claim_register_g0": "registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json",
+    "claim_register_g1_1": "registry/2026-08-03_UniverseLab_ClaimRegister_G1_1_v0.2.json",
+    "research_continuation": "registry/2026-08-03_UniverseLab_ResearchContinuationManifest_v0.2.json",
+    "r1_three_track_gate": "science/hzt-m0/md2s/2026-08-03_MD2S_R1_ThreeTrackGate_v1.0.json",
+    "c_phys_operator_contract": "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+    "c_phys_operator_ledger": "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md",
+    "c_phys_global_convention_contract": "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "c_phys_global_convention_ledger": "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeLedger_v0.1.md",
+    "c_phys_freeze_1a_status": "registry/2026-08-03_UniverseLab_C_PHYS_Freeze1A_Status_v0.1.json",
+    "c_phys_m1_function_contract": "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "c_phys_m1_function_ledger": "science/hzt-m0/md2s/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeLedger_v0.1.md",
+    "c_phys_m1_function_status": "registry/2026-08-03_UniverseLab_C_PHYS_M1_FunctionFreezeStatus_v0.1.json",
+    "c1_g1_1_result": "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json",
+    "session_checkpoint": "registry/session-checkpoint-latest.json",
+    "session_checkpoint_snapshot": "registry/2026-08-04_UniverseLab_SessionCheckpoint_v1.15.json",
+    "public_privacy_contract": "registry/2026-08-03_UniverseLab_PublicPrivacyContract_v1.0.json",
+    "public_privacy_decision": "registry/2026-08-03_UniverseLab_PublicPrivacyDecision_v1.0.json",
+    "c_phys_m1_operator_2a_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
+    "c_phys_m1_operator_2a_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md",
+    "c_phys_m1_operator_2b_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+    "c_phys_m1_operator_2b_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceLedger_v0.1.md",
+    "c_phys_m1_operator_2b_status": "registry/2026-08-04_UniverseLab_C_PHYS_M1_Operator2B_Status_v0.1.json",
+    "claim_register_c_phys_m1_operator_2b": "registry/2026-08-04_UniverseLab_ClaimRegister_C_PHYS_M1_Operator2B_v0.1.json"
   },
-  "workstream_priority": ["MD2S-R1-C-PHYS:C-PHYS-R1.0-OPERATOR-2B","HZT-M0-S6-C1-V:G1.2_PARALLEL_DIAGNOSTIC_ONLY"],
-  "next_release_blockers": ["legacy_primary_source_recovery","c_phys_weighted_function_space_freeze","c_phys_linearized_boundary_trace_contract","c_phys_closedness_density_and_fredholm_audit","continuum_jacobian_and_background_existence","continuum_discrete_convergence","c_phys_parameter_identifiability_and_6d_to_4d_normalization","scalar_vector_tensor_perturbations","ghost_gradient_and_mass_stability","fundamental_to_observable_forward_map","data_likelihood_provenance","runtime_manifest_consumption","central_status_renderer","single_cache_release_version","byte_reproducible_release_lock"]
+  "workstream_priority": [
+    "MD2S-R1-C-PHYS:C-PHYS-R1.0-BACKGROUND-3A",
+    "HZT-M0-S6-C1-V:G1.2_PARALLEL_DIAGNOSTIC_ONLY"
+  ],
+  "next_release_blockers": [
+    "legacy_primary_source_recovery",
+    "c_phys_candidate_background_protocol_and_construction",
+    "c_phys_numeric_parameter_augmented_trace_matrix",
+    "c_phys_trace_rank_kernel_and_cokernel",
+    "continuum_Fredholm_and_jacobian_analysis",
+    "continuum_discrete_convergence",
+    "c_phys_parameter_identifiability_and_6d_to_4d_normalization",
+    "scalar_vector_tensor_perturbations",
+    "ghost_gradient_and_mass_stability",
+    "fundamental_to_observable_forward_map",
+    "data_likelihood_provenance",
+    "runtime_manifest_consumption",
+    "central_status_renderer",
+    "single_cache_release_version",
+    "byte_reproducible_release_lock"
+  ]
 }
