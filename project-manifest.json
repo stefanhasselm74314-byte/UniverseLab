@@ -1,6 +1,6 @@
 {
   "schema": "universelab.project-manifest.v1",
-  "release": "2.20-c-phys-m1-background-3c9-authorization-denied-v0.1",
+  "release": "2.21-c-phys-m1-background-3c10-real-backend-control-audited-v0.1",
   "release_date": "2026-08-05",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
@@ -53,7 +53,7 @@
       {
         "id": "MD2S-R1-C-PHYS",
         "role": "current_canonical_physical_rebuild",
-        "status": "ACTIVE_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_REMAINING",
+        "status": "ACTIVE_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_REMAINING",
         "active_model": "HZT-M0-S6-C-PHYS-M1"
       },
       {
@@ -74,7 +74,7 @@
     "FUNCTION_SELECTION": "PASS_POSTULATED_MODEL_FAMILY",
     "MF_001_BULK_FUNCTIONS": "FROZEN_FOR_C_PHYS_M1",
     "MF_002_CAP_FUNCTIONS": "FROZEN_FOR_C_PHYS_M1",
-    "R1.0": "ACTIVE_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_REMAINING",
+    "R1.0": "ACTIVE_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_REMAINING",
     "R1.1": "BLOCKED",
     "R1.2": "BLOCKED",
     "official_MD2S_solver": "NOT_AUTHORIZED",
@@ -109,7 +109,7 @@
     "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
     "BACKGROUND_TOPOLOGY_SCHEMA": "FROZEN_SINGLE_CAP_PHASE",
     "BACKGROUND_3B": "RUN_INPUT_FROZEN_CP01R1_EXECUTION_NOT_AUTHORIZED",
-    "BACKGROUND_SOLVER_IMPLEMENTATION": "PHYSICAL_ADAPTER_AUDITED_MANUFACTURED_CONTROLS_ONLY_REAL_BACKEND_CONTROL_RELEASE_REMAINING",
+    "BACKGROUND_SOLVER_IMPLEMENTATION": "REAL_BACKEND_AF0_CONTROL_RELEASE_AUDITED_AUTHORIZATION_REVIEW_REMAINING",
     "BACKGROUND_3C_PRIMARY_IMPLEMENTATION": "PASS_AUDITED_NO_EXECUTION",
     "BACKGROUND_3C_INDEPENDENT_BACKEND": "PASS_CONTROL_AUDIT_NO_ROOT_SOLVE",
     "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
@@ -121,7 +121,11 @@
     "BACKGROUND_3C7_AUTHORIZATION_REVIEW": "DENIED_PHYSICAL_BACKEND_ADAPTER_AND_SINGLE_USE_GRANT_RELEASE_ABSENT",
     "BACKGROUND_3C8_PHYSICAL_EXECUTION_ADAPTER": "PASS_AUDITED_MANUFACTURED_CONTROLS_ONLY",
     "BACKGROUND_3C9_AUTHORIZATION_REVIEW": "DENIED_REAL_BACKEND_ADAPTER_TRANSACTION_AND_OPERATIVE_SINGLE_USE_GRANT_RELEASE_ABSENT",
-    "BACKGROUND_3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE": "NOT_STARTED"
+    "BACKGROUND_3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE": "PASS_AUDITED_AF0_CONTROL_ONLY",
+    "BACKGROUND_3C10_R1": "FAIL_CLOSED_PRIMARY_UNIFORM_BULK_THRESHOLD_AT_N96",
+    "BACKGROUND_3C10_R2": "FAIL_CLOSED_CANDIDATE_JSON_KEY_ORDER_MISTAKEN_FOR_VECTOR_ORDER",
+    "BACKGROUND_3C10_R3": "PASS_REAL_BACKEND_AF0_CONTROL_RELEASE_NO_TARGET_SOLVE",
+    "BACKGROUND_3C11_AUTHORIZATION_REVIEW": "NOT_STARTED"
   },
   "governance_rules": [
     "technical_execution_is_not_physical_identification",
@@ -294,13 +298,13 @@
     "positive_winding_gate": "Y_sigma >= 0",
     "gauss_bonnet": "EXCLUDED_FROM_MINIMAL_C_PHYS_CONTRACT",
     "active_model": "HZT-M0-S6-C-PHYS-M1",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY"
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY"
   },
   "c_phys_operator_entry": {
     "track_id": "MD2S-R1-C-PHYS",
     "model_id": "HZT-M0-S6-C-PHYS-M1",
     "phase": "R1.0",
-    "status": "BACKGROUND_3C9_AUTHORIZATION_DENIED_REAL_BACKEND_CONTROL_RELEASE_REMAINING",
+    "status": "BACKGROUND_3C10_REAL_BACKEND_AF0_CONTROL_AUDITED_AUTHORIZATION_REVIEW_REMAINING",
     "radial_system": "DERIVED_CONDITIONAL",
     "function_selection": "PASS_POSTULATED_MODEL_FAMILY",
     "continuum_operator": "FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED",
@@ -360,7 +364,7 @@
     "historical_A0_identity": "NOT_CLAIMED",
     "C1_V_source_migration": "FORBIDDEN",
     "physical_evidence_effect": "NONE",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY",
     "operator_2a_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
     "operator_2a_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md",
     "weighted_function_spaces": "FROZEN",
@@ -408,7 +412,7 @@
     "localized_scalar_source": "ABSENT_BY_MODEL_SELECTION",
     "background_existence": "NOT_ESTABLISHED",
     "physical_evidence_effect": "NONE",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY",
     "operator_2a_status": "PASS_FORMAL_OPERATOR_STRUCTURE",
     "constraint_propagation": "PROVEN_SYMBOLIC_CONDITIONAL",
     "interior_principal_rank": "PASS_FOR_ELL_POSITIVE",
@@ -518,7 +522,7 @@
     "c_phys_m1_function_status": "registry/2026-08-03_UniverseLab_C_PHYS_M1_FunctionFreezeStatus_v0.1.json",
     "c1_g1_1_result": "registry/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictorResult_v0.2.json",
     "session_checkpoint": "registry/session-checkpoint-latest.json",
-    "session_checkpoint_snapshot": "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.28.json",
+    "session_checkpoint_snapshot": "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.29.json",
     "public_privacy_contract": "registry/2026-08-03_UniverseLab_PublicPrivacyContract_v1.0.json",
     "public_privacy_decision": "registry/2026-08-03_UniverseLab_PublicPrivacyDecision_v1.0.json",
     "c_phys_m1_operator_2a_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
@@ -553,7 +557,14 @@
     "c_phys_m1_background_3c8_audit_result": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json",
     "c_phys_m1_background_3c8_ledger": "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterLedger_v0.1.md",
     "c_phys_m1_background_3c9_review": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C9PhysicalAdapterAuthorizationReview_v0.1.json",
-    "c_phys_m1_background_3c9_ledger": "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C9AuthorizationReviewLedger_v0.1.md"
+    "c_phys_m1_background_3c9_ledger": "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C9AuthorizationReviewLedger_v0.1.md",
+    "background_3c10_contract_r1": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.1.json",
+    "background_3c10_failure_r1": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json",
+    "background_3c10_contract_r2": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.2.json",
+    "background_3c10_failure_r2": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json",
+    "background_3c10_contract_r3": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json",
+    "background_3c10_audit_result_r3": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json",
+    "background_3c10_ledger_r3": "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.3.md"
   },
   "workstream_priority": [
     "MD2S-R1-C-PHYS:C-PHYS-R1.0-BACKGROUND-3C4_EXECUTION_RUNNER_IMPLEMENTATION_ONLY",
@@ -611,7 +622,7 @@
     "current_execution": "NOT_EXECUTED",
     "physical_background": "NOT_ESTABLISHED",
     "physical_evidence_effect": "NONE",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY",
     "canonical_correction": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3ATopologyCorrectionContract_v0.2.json",
     "canonical_correction_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3ATopologyCorrectionLedger_v0.2.md",
     "topological_input_order": [
@@ -670,7 +681,7 @@
     "dependency_lock": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3B_v0.1.txt",
     "validator": "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py",
     "tests": "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY"
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY"
   },
   "c_phys_background_3c": {
     "track_id": "MD2S-R1-C-PHYS",
@@ -712,7 +723,7 @@
     "dependency_lock": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt",
     "validator": "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3c_v0.2.py",
     "tests": "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3c_v0.2.py",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY",
     "dual_backend_package": "PASS_AUDITED_NO_EXECUTION",
     "independent_source": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py",
     "independent_source_git_blob_sha": "bed68e11a3682d8b140b6db0cbe71fd696c3ff34",
@@ -743,5 +754,68 @@
     "classification_engine": "NOT_IMPLEMENTED",
     "interruption_protocol": "NOT_IMPLEMENTED"
   },
-  "next_block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY"
+  "next_block": "C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY",
+  "background_3c10": {
+    "track_id": "MD2S-R1-C-PHYS",
+    "model_id": "HZT-M0-S6-C-PHYS-M1",
+    "classification": "SOFTWARE_REAL_BACKEND_ANALYTIC_CONTROL_TRANSACTION_QA_ONLY",
+    "status": "PASS_AUDITED_AF0_CONTROL_ONLY",
+    "active_control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R3",
+    "append_only_failures": {
+      "R1": "FAIL_CLOSED_PRIMARY_UNIFORM_BULK_THRESHOLD_AT_N96",
+      "R2": "FAIL_CLOSED_CANDIDATE_JSON_KEY_ORDER_MISTAKEN_FOR_VECTOR_ORDER"
+    },
+    "package_manifest_sha256": "a7b48c88061e00cc3dc44dd00a2a17855a7f8c65dd228f725101fde9a1839eb4",
+    "source_count": 24,
+    "candidate_sha256": "6a00f71f4904574841d17eaebba7f8318fc136d477ab6fd324f3354f1b33e400",
+    "model_a_F": 0.0,
+    "frozen_target_a_F": "1/4_NOT_EXECUTED",
+    "primary_node_counts": [
+      24,
+      48,
+      96
+    ],
+    "independent_pole_cutoffs": [
+      0.001,
+      0.0005,
+      0.00025
+    ],
+    "independent_integration_call_count": 6,
+    "json_mapping_key_order_semantic": false,
+    "handoff_vector_order_source": "EXPLICIT_CANDIDATE_FIELDS_CONTRACT",
+    "primary_newton_calls": 0,
+    "shooting_jacobian_calls": 0,
+    "nonlinear_root_calls": 0,
+    "cp01r1_attempts": 0,
+    "target_a_F_one_quarter_solves": 0,
+    "operative_grants": 0,
+    "physical_result_artifacts": 0,
+    "continuum_convergence_inference_allowed": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_evidence_effect": "NONE",
+    "audit_result": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-C-PHYS-M1-BG3C10-001",
+      "statement": "The actual primary and independent M1 backend modules completed the exact analytic a_F=0 control transaction across isolated process boundaries with an explicit SHA-256-bound eight-field handoff, six DOP853 regional integrations, timeout and signal controls, and zero Newton, shooting-Jacobian, nonlinear-root, CP01R1, grant or physical-result operations. R1 and R2 remain immutable fail-closed records.",
+      "status": "PASS_AUDITED_AF0_CONTROL_ONLY",
+      "evidence_effect": "SOFTWARE_REAL_BACKEND_ANALYTIC_CONTROL_TRANSACTION_QA_ONLY",
+      "physical_evidence_effect": "NONE",
+      "package_manifest_sha256": "a7b48c88061e00cc3dc44dd00a2a17855a7f8c65dd228f725101fde9a1839eb4",
+      "candidate_sha256": "6a00f71f4904574841d17eaebba7f8318fc136d477ab6fd324f3354f1b33e400",
+      "sources": [
+        "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.1.json",
+        "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json",
+        "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.2.json",
+        "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json",
+        "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json",
+        "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json",
+        "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.1.md",
+        "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.2.md",
+        "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.3.md"
+      ]
+    }
+  ]
 }
