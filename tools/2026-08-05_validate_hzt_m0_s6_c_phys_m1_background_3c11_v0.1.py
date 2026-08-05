@@ -148,10 +148,17 @@ def validate() -> dict:
     assert failure_r1["status"] == "FAIL_CLOSED_PRIMARY_UNIFORM_BULK_THRESHOLD_AT_N96"
     assert failure_r2["status"] == "FAIL_CLOSED_CANDIDATE_JSON_KEY_ORDER_MISTAKEN_FOR_VECTOR_ORDER"
 
+    assert run_input["status"] == "RUN_INPUT_FROZEN_CP01R1_EXECUTION_NOT_AUTHORIZED"
+    assert run_input["solver_authorized"] is False
     assert run_input["frozen_run_payload"]["run_id"] == "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1"
     assert run_input["frozen_run_payload"]["model_parameters_ordered"]["a_F"] == "1/4"
-    assert run_input["current_state"]["execution_authorized"] is False
-    assert run_input["current_state"]["solver_executed"] is False
+    assert run_input["frozen_run_payload"]["solver_implementation_commit"] == "NOT_PRESENT_EXECUTION_FORBIDDEN"
+    assert run_input["execution_firewall"]["current_execution"] == "NOT_EXECUTED"
+    assert run_input["execution_firewall"]["solver_initialization"] is False
+    assert run_input["execution_firewall"]["nonlinear_solver_run"] is False
+    assert run_input["execution_firewall"]["background_candidate_created"] is False
+    assert run_input["gate_state"]["BACKGROUND_SOLVER_EXECUTION"] == "NOT_AUTHORIZED"
+    assert run_input["gate_state"]["physical_background"] == "NOT_ESTABLISHED"
 
     assert manifest["release"] == "2.21-c-phys-m1-background-3c10-real-backend-control-audited-v0.1"
     assert manifest["gates"]["BACKGROUND_3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE"] == "PASS_AUDITED_AF0_CONTROL_ONLY"
