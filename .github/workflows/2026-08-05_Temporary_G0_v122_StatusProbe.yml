@@ -1,0 +1,39 @@
+name: Temporary G0 v1.22 status probe
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    if: ${{ github.head_ref == 'agent/background-3c11-status-sync-v1-0' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python - <<'PY'
+          import importlib.util, json, pathlib, sys
+          root=pathlib.Path.cwd()
+          path=root/'tools/2026-08-05_validate_g0_three_track_sync_v1.22.py'
+          spec=importlib.util.spec_from_file_location('g0_probe_module',path)
+          module=importlib.util.module_from_spec(spec)
+          sys.modules[spec.name]=module
+          spec.loader.exec_module(module)
+          review=json.loads((root/'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json').read_text(encoding='utf-8'))
+          actual=review['status']; expected=module.DENIAL
+          print('actual_repr=',repr(actual))
+          print('expected_repr=',repr(expected))
+          print('actual_type=',type(actual).__name__,'expected_type=',type(expected).__name__)
+          print('actual_len=',len(actual),'expected_len=',len(expected))
+          print('actual_bytes=',actual.encode().hex())
+          print('expected_bytes=',expected.encode().hex())
+          print('equal=',actual==expected)
+          assert actual==expected
+          PY
