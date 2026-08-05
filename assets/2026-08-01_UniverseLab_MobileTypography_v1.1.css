@@ -4,6 +4,8 @@
  * Scope: readability and touch targets only; no canvas/image resolution changes.
  */
 
+@import url("./2026-08-05_UniverseLab_DesktopCompact_v1.0.css");
+
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;

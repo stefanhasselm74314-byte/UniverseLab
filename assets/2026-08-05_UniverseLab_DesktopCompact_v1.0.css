@@ -1,0 +1,396 @@
+/* UniverseLab desktop compact density layer v1.0
+ * Created: 2026-08-05
+ * Scope: desktop and DeX layout density only.
+ * Mobile typography and touch targets at <=720px remain governed by the
+ * existing MobileTypography contracts.
+ */
+
+@media (min-width: 721px) {
+  body {
+    line-height: 1.48 !important;
+  }
+
+  .shell,
+  .ul-shell {
+    min-height: 48px !important;
+    padding-block: 5px !important;
+  }
+
+  .shell a,
+  .ul-shell a,
+  .nav a,
+  .ul-nav a {
+    min-height: 36px !important;
+    padding: 6px 9px !important;
+  }
+
+  .hero {
+    padding: 20px 22px !important;
+    border-radius: 18px !important;
+    box-shadow: 0 12px 36px #0005 !important;
+  }
+
+  .hero h1,
+  h1 {
+    margin-top: 5px !important;
+    margin-bottom: 8px !important;
+    font-size: clamp(2.2rem, 4.3vw, 3.65rem) !important;
+    line-height: 1.02 !important;
+  }
+
+  .lead {
+    font-size: clamp(0.98rem, 1.3vw, 1.14rem) !important;
+    line-height: 1.48 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .panel,
+  .card,
+  .quick-card,
+  .chapter,
+  .calc,
+  .branch,
+  .gate,
+  .metric,
+  .stat,
+  .audit > div,
+  .summary > article {
+    border-radius: 13px !important;
+  }
+
+  .panel,
+  .card,
+  .calc {
+    padding: 12px 14px !important;
+  }
+
+  .grid,
+  .grid2,
+  .grid3,
+  .quick-grid,
+  .summary,
+  .audit,
+  .branch-grid,
+  .calc-grid,
+  .metrics,
+  .param-grid,
+  .form-grid {
+    gap: 9px !important;
+  }
+
+  .section {
+    margin-top: 16px !important;
+  }
+
+  .section-head {
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+    gap: 12px !important;
+  }
+
+  .section-head h2,
+  h2 {
+    margin-top: 0 !important;
+    margin-bottom: 6px !important;
+    font-size: clamp(1.3rem, 2.2vw, 1.85rem) !important;
+    line-height: 1.14 !important;
+  }
+
+  h3 {
+    margin-bottom: 5px !important;
+  }
+
+  p,
+  ul,
+  ol {
+    margin-bottom: 9px !important;
+  }
+
+  button,
+  .button,
+  a.button,
+  select,
+  input:not([type="range"]),
+  textarea {
+    min-height: 38px !important;
+    padding: 7px 10px !important;
+  }
+
+  input[type="range"] {
+    min-height: 26px !important;
+    height: 26px !important;
+  }
+
+  .tabs,
+  .tools {
+    padding: 7px !important;
+    gap: 6px !important;
+  }
+
+  .tag,
+  .pill,
+  .badge,
+  .decision,
+  .state {
+    padding-block: 4px !important;
+  }
+
+  .equation,
+  .formula-box,
+  pre {
+    margin-block: 7px !important;
+    padding: 9px 10px !important;
+    line-height: 1.55 !important;
+  }
+
+  .links,
+  .actions,
+  .status-row,
+  .statusline,
+  .branch-controls {
+    gap: 6px !important;
+  }
+}
+
+/* Comparison calculator: use the available desktop width instead of tall cards. */
+@media (min-width: 901px) {
+  .app:has(.param-grid) {
+    width: min(1480px, calc(100% - 32px)) !important;
+    padding: 12px 0 42px !important;
+  }
+
+  .app:has(.param-grid) .top {
+    margin-bottom: 7px !important;
+  }
+
+  .app:has(.param-grid) .hero {
+    padding: 16px 19px !important;
+  }
+
+  .app:has(.param-grid) .tabs {
+    margin: 7px 0 !important;
+  }
+
+  .app:has(.param-grid) .panel {
+    margin-top: 7px !important;
+  }
+
+  .app:has(.param-grid) .param-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    margin-top: 8px !important;
+  }
+
+  .app:has(.param-grid) .field {
+    padding: 7px 9px !important;
+    border-radius: 10px !important;
+  }
+
+  .app:has(.param-grid) .field input[type="range"] {
+    height: 23px !important;
+    min-height: 23px !important;
+  }
+
+  .app:has(.param-grid) .actions {
+    grid-template-columns: repeat(2, minmax(150px, 190px)) !important;
+    justify-content: end !important;
+    margin-top: 7px !important;
+  }
+
+  .app:has(.param-grid) .chart {
+    height: 285px !important;
+  }
+
+  .app:has(.param-grid) .metrics {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    margin-top: 7px !important;
+  }
+
+  .app:has(.param-grid) .metric,
+  .app:has(.param-grid) .compare-card {
+    padding: 8px 9px !important;
+  }
+}
+
+@media (min-width: 1240px) {
+  .app:has(.param-grid) .param-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Public research status: keep hero and gates above the fold together with track cards. */
+@media (min-width: 901px) {
+  body > main:has(.gates) {
+    width: min(1380px, calc(100% - 40px)) !important;
+    padding: 14px 0 42px !important;
+  }
+
+  main:has(.gates) .top {
+    margin-bottom: 9px !important;
+  }
+
+  main:has(.gates) .hero {
+    padding: 17px 20px !important;
+  }
+
+  main:has(.gates) .hero h1 {
+    font-size: clamp(2.5rem, 4vw, 3.65rem) !important;
+    margin: 4px 0 7px !important;
+  }
+
+  main:has(.gates) .gates {
+    gap: 7px !important;
+    margin-top: 9px !important;
+  }
+
+  main:has(.gates) .gate {
+    padding: 8px 10px !important;
+  }
+
+  main:has(.gates) .grid {
+    gap: 10px !important;
+    margin-top: 10px !important;
+  }
+
+  main:has(.gates) .card {
+    padding: 13px 15px !important;
+  }
+
+  main:has(.gates) .card h2 {
+    margin: 6px 0 4px !important;
+  }
+
+  main:has(.gates) .footer {
+    margin-top: 14px !important;
+  }
+}
+
+/* Handbuch: compact hero/search stack and show all quick links in one desktop row. */
+@media (min-width: 901px) {
+  .app:has(.quick-grid) {
+    width: min(1280px, calc(100% - 36px)) !important;
+    padding: 14px 0 44px !important;
+  }
+
+  .app:has(.quick-grid) .hero {
+    padding: 20px 22px !important;
+  }
+
+  .app:has(.quick-grid) .hero h1 {
+    font-size: clamp(2.6rem, 4.6vw, 3.8rem) !important;
+    margin: 5px 0 8px !important;
+  }
+
+  .app:has(.quick-grid) .actions {
+    margin-top: 12px !important;
+  }
+
+  .app:has(.quick-grid) .tools {
+    top: 48px !important;
+    margin: 8px 0 !important;
+    padding: 7px !important;
+  }
+
+  .app:has(.quick-grid) .tools input {
+    min-height: 38px !important;
+  }
+
+  .app:has(.quick-grid) .quick-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    margin: 8px 0 !important;
+  }
+
+  .app:has(.quick-grid) .quick-card {
+    padding: 10px 12px !important;
+  }
+
+  .app:has(.quick-grid) .chapter {
+    margin: 7px 0 !important;
+    border-radius: 14px !important;
+  }
+
+  .app:has(.quick-grid) .chapter > summary {
+    padding: 11px 14px !important;
+    font-size: 1rem !important;
+  }
+
+  .app:has(.quick-grid) .content {
+    padding: 4px 14px 14px !important;
+  }
+
+  .app:has(.quick-grid) .card,
+  .app:has(.quick-grid) .callout,
+  .app:has(.quick-grid) .term,
+  .app:has(.quick-grid) .steps li {
+    padding: 9px 11px !important;
+  }
+
+  .app:has(.quick-grid) th,
+  .app:has(.quick-grid) td {
+    padding: 7px 9px !important;
+  }
+}
+
+@media (min-width: 1240px) {
+  .app:has(.quick-grid) .quick-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  }
+}
+
+/* HyperLab: denser status dashboard while preserving the scientific hierarchy. */
+@media (min-width: 901px) {
+  .app:has(.branch-grid) {
+    width: min(1480px, calc(100% - 36px)) !important;
+    padding: 13px 0 44px !important;
+  }
+
+  .app:has(.branch-grid) .hero {
+    padding: 17px 20px !important;
+  }
+
+  .app:has(.branch-grid) .hero h1 {
+    font-size: clamp(2.5rem, 4vw, 3.55rem) !important;
+  }
+
+  .app:has(.branch-grid) .statusline {
+    margin-top: 9px !important;
+  }
+
+  .app:has(.branch-grid) .summary {
+    margin-top: 9px !important;
+  }
+
+  .app:has(.branch-grid) .summary article,
+  .app:has(.branch-grid) .audit > div {
+    padding: 9px 10px !important;
+  }
+
+  .app:has(.branch-grid) .section {
+    margin-top: 14px !important;
+  }
+
+  .app:has(.branch-grid) .card {
+    padding: 11px 12px !important;
+  }
+
+  .app:has(.branch-grid) .branch {
+    padding: 9px 10px !important;
+  }
+
+  .app:has(.branch-grid) .calc {
+    padding: 11px 12px !important;
+  }
+
+  .app:has(.branch-grid) .calc label {
+    margin: 5px 0 !important;
+  }
+
+  .app:has(.branch-grid) .road {
+    padding: 8px 10px !important;
+  }
+}
+
+@media (min-width: 1240px) {
+  .app:has(.branch-grid) .branch-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}

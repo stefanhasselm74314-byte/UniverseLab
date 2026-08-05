@@ -1,0 +1,44 @@
+name: UniverseLab desktop compact UI v1.0
+
+on:
+  pull_request:
+    paths:
+      - "assets/2026-08-05_UniverseLab_DesktopCompact_v1.0.css"
+      - "assets/2026-08-01_UniverseLab_MobileTypography_v1.0.css"
+      - "assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css"
+      - "tests/2026-08-05_UniverseLab_DesktopCompact_v1.0.py"
+      - ".github/workflows/2026-08-05_UniverseLab_DesktopCompact_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "assets/2026-08-05_UniverseLab_DesktopCompact_v1.0.css"
+      - "assets/2026-08-01_UniverseLab_MobileTypography_v1.0.css"
+      - "assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css"
+      - "tests/2026-08-05_UniverseLab_DesktopCompact_v1.0.py"
+      - ".github/workflows/2026-08-05_UniverseLab_DesktopCompact_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-desktop-compact-ui:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate compact density and mobile isolation
+        run: python tests/2026-08-05_UniverseLab_DesktopCompact_v1.0.py
+      - name: Confirm affected public pages use a compact entry point
+        run: |
+          grep -q 'MobileTypography_v1.1.css' compare-safe.html
+          grep -q 'MobileTypography_v1.1.css' research-status.html
+          grep -q 'MobileTypography_v1.1.css' guide.html
+          grep -q 'MobileTypography_v1.1.css' hyperlab.html
+      - name: Confirm no content or application logic changed
+        run: |
+          git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD | tee /tmp/ui-files.txt
+          test "$(grep -Ec '\.(html|js|json)$' /tmp/ui-files.txt || true)" -eq 0
+          test "$(grep -Ec '^assets/.*\.css$|^tests/.*\.py$|^\.github/workflows/.*\.yml$' /tmp/ui-files.txt)" -eq "$(wc -l < /tmp/ui-files.txt)"
