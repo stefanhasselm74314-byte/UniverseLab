@@ -1,0 +1,169 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c8-physical-execution-adapter-contract.v0.1",
+  "date": "2026-08-05",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C8_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_ONLY",
+  "classification": "SOURCE_BOUND_PHYSICAL_ADAPTER_CONTROL_RELEASE_ONLY",
+  "status": "IMPLEMENTED_PENDING_AUDIT_PHYSICAL_EXECUTION_NOT_AUTHORIZED",
+  "physical_evidence_effect": "NONE",
+  "physical_execution_authorized": false,
+  "cp01r1_execution_authorized": false,
+  "operative_grant_creation_allowed": false,
+  "canonical_entry_point": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_physical_execution_adapter_v0.1.py",
+  "manufactured_worker": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_manufactured_backend_worker_v0.1.py",
+  "dependencies": [
+    "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C7IntegratedReleaseAuthorizationReview_v0.1.json",
+    "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseAuditResult_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResultSchema_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json"
+  ],
+  "immutable_run_binding": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+    "run_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+    "seed_set_id": "M1-BG3B-CP01-SEEDS-01",
+    "seed_spec_sha256": "b6e4319cc29736799a0b46320002e51cd17b70b724a6b4c6e86567a316996161",
+    "seed_count": 7,
+    "seed_multipliers_ordered": ["0", "1/8", "-1/8", "1/4", "-1/4", "1/2", "-1/2"],
+    "node_counts_ordered": [24, 32, 48, 64, 96],
+    "degree_rule": "degree=node_count-1",
+    "schedule_order": "seed_major_then_node_count",
+    "expected_schedule_entries": 35
+  },
+  "physical_backend_bindings": {
+    "primary": {
+      "source_path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py",
+      "base_source_path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py",
+      "expected_exports": [
+        "model_from_payload",
+        "sector_from_payload",
+        "seven_seeds",
+        "damped_newton",
+        "residual",
+        "unpack_state"
+      ],
+      "import_during_3c8_controls": false,
+      "call_during_3c8_controls": false
+    },
+    "independent": {
+      "source_path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py",
+      "expected_exports": [
+        "model_from_payload",
+        "sector_from_payload",
+        "shooting_residual",
+        "centered_fd_jacobian",
+        "integrate_region",
+        "cap_residuals"
+      ],
+      "import_during_3c8_controls": false,
+      "call_during_3c8_controls": false
+    }
+  },
+  "adapter_transaction": [
+    "validate_immutable_run_payload_seed_and_schedule_bindings",
+    "reproduce_closed_source_manifest_and_adapter_digest",
+    "verify_real_backend_exports_by_ast_without_import",
+    "issue_manufactured_control_capability_only",
+    "consume_control_capability_once_with_replay_rejection",
+    "serialize_full_seed_and_node_schedule",
+    "launch_manufactured_primary_stub_in_resource_limited_subprocess",
+    "validate_primary_stub_schedule_echo_and_candidate_handoff",
+    "launch_manufactured_independent_stub_in_resource_limited_subprocess",
+    "validate_candidate_handoff_digest_and_independent_response",
+    "construct_and_validate_nonphysical_result_schema_preview",
+    "classify_control_transaction",
+    "write_external_temporary_control_artifact_atomically",
+    "clean_abort_without_final_artifact_on_timeout_or_signal"
+  ],
+  "allowed_control_cases": [
+    "manufactured_success",
+    "manufactured_disagreement",
+    "manufactured_timeout",
+    "manufactured_signal"
+  ],
+  "expected_control_classifications": {
+    "manufactured_success": "CONTROL_ADAPTER_TRANSACTION_PASS",
+    "manufactured_disagreement": "CONTROL_ADAPTER_DISAGREEMENT_REJECTED_AS_EXPECTED",
+    "manufactured_timeout": "CONTROL_ADAPTER_TIMEOUT_CLEAN_ABORT",
+    "manufactured_signal": "CONTROL_ADAPTER_SIGNAL_CLEAN_ABORT"
+  },
+  "manufactured_capability": {
+    "scope": "MANUFACTURED_ADAPTER_CONTROL_ONLY",
+    "physical_authorized": false,
+    "single_consumption_required": true,
+    "replay_rejected": true,
+    "repository_persistence_allowed": false,
+    "may_be_converted_to_operative_grant": false
+  },
+  "resource_control": {
+    "worker_cpu_seconds": 2,
+    "worker_address_space_bytes": 536870912,
+    "worker_file_bytes": 1048576,
+    "worker_open_files": 32,
+    "stage_timeout_seconds": 1.0,
+    "termination_grace_seconds": 0.25,
+    "maximum_captured_stream_bytes": 1048576,
+    "maximum_control_artifact_bytes": 2097152,
+    "parallel_workers": 1,
+    "network_access": false,
+    "randomness": false
+  },
+  "artifact_policy": {
+    "repository_artifact_creation_allowed": false,
+    "physical_result_path_creation_allowed": false,
+    "control_output_root_must_be_external_temporary_directory": true,
+    "overwrite_existing_final_path": false,
+    "atomic_directory_rename_required": true,
+    "result_schema_preview_is_physical_result": false,
+    "partial_or_interrupted_final_artifact_allowed": false
+  },
+  "package_source_paths": [
+    "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json",
+    "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_manufactured_backend_worker_v0.1.py",
+    "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_physical_execution_adapter_v0.1.py",
+    "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C7IntegratedReleaseAuthorizationReview_v0.1.json",
+    "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseAuditResult_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResultSchema_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py"
+  ],
+  "execution_firewall": {
+    "physical_run_command": "HARD_DENY_EXIT_73",
+    "real_backend_dynamic_import": false,
+    "primary_newton_calls": 0,
+    "independent_shooting_calls": 0,
+    "shooting_jacobian_calls": 0,
+    "cp01r1_attempts": 0,
+    "target_a_F_one_quarter_solves": 0,
+    "operative_grant_present": false,
+    "physical_result_artifact_present": false
+  },
+  "gate_state": {
+    "BACKGROUND_3C6_INTEGRATED_CONTROL_RELEASE": "PASS_AUDITED_CONTROL_ONLY",
+    "BACKGROUND_3C7_AUTHORIZATION_REVIEW": "DENIED_PHYSICAL_BACKEND_ADAPTER_AND_SINGLE_USE_GRANT_RELEASE_ABSENT",
+    "BACKGROUND_3C8_PHYSICAL_ADAPTER": "PENDING_AUDIT",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "A manufactured adapter transaction is not a CP01R1 execution.",
+    "AST source binding is not a physical backend run.",
+    "A result-schema preview is not a physical result artifact.",
+    "Replay-safe manufactured capability handling is not an operative grant.",
+    "No background existence uniqueness stability ghost-freedom or evidence result follows."
+  ],
+  "next_allowed_block_after_successful_audit": "C-PHYS-R1.0-BACKGROUND-3C9_PHYSICAL_ADAPTER_AUTHORIZATION_REVIEW_ONLY"
+}
