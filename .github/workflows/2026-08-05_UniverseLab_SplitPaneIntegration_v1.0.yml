@@ -1,0 +1,40 @@
+name: UniverseLab split-pane integration v1.0
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "assets/2026-08-05_UniverseLab_SplitPane_v1.0.css"
+      - "assets/2026-08-05_UniverseLab_SplitPane_v1.0.js"
+      - "tools/2026-08-05_integrate_universelab_split_pane_v1.0.py"
+      - ".github/workflows/2026-08-05_UniverseLab_SplitPaneIntegration_v1.0.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  integrate-split-pane:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Apply idempotent integration
+        run: python tools/2026-08-05_integrate_universelab_split_pane_v1.0.py
+      - name: Commit integrated pages when needed
+        run: |
+          if git diff --quiet; then
+            echo "Split-pane integration already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add observatory.html tafelwerk.html
+          git commit -m "Integrate resizable split panes into Observatory and Tafelwerk"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
