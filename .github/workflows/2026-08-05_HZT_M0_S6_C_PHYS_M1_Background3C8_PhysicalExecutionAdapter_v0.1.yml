@@ -41,9 +41,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate contracts and compile sources
+      - name: Validate contracts results and compile sources
         run: |
           python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json >/dev/null
           python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_manufactured_backend_worker_v0.1.py
           python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_physical_execution_adapter_v0.1.py
           python -m py_compile tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py
@@ -68,7 +69,7 @@ jobs:
           grep -q '"physical_backend_imported":false' "$root/$control_id/result.json"
           grep -q '"physical_solver_calls":0' "$root/$control_id/result.json"
           rm -rf "$root"
-      - name: Run fail-closed validator and regression tests
+      - name: Revalidate frozen audit result and regression tests
         run: |
           python tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py --json
           python tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py
@@ -94,7 +95,9 @@ jobs:
           grep -q '"cp01r1_execution_authorized": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json
           grep -q '"operative_grant_creation_allowed": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json
           grep -q '"real_backend_dynamic_import": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json
-          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json
-          grep -q '"R1.1": "BLOCKED"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json
-          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json
-          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json
+          grep -q '"package_manifest_sha256": "497d6da51d0d7f436ae7cf24d8c4acad93d5e2423ab9eb717ec016c776e27613"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json
+          grep -q '"schedule_sha256": "95001986dc93818f0fea3124cf9ddcd63eb136f8d206f6200a4e8c0cf6d54927"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json
+          grep -q '"R1.1": "BLOCKED"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json
