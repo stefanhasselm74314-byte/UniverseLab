@@ -6,14 +6,14 @@ on:
       - "project-manifest.json"
       - "registry/decision-log.jsonl"
       - "registry/session-checkpoint-latest.json"
-      - "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.29.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json"
+      - "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
       - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json"
       - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
-      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py"
-      - "tools/2026-08-05_validate_g0_three_track_sync_v1.21.py"
-      - "tests/2026-08-05_test_g0_three_track_sync_v1.21.py"
+      - "tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c11_v0.1.py"
+      - "tools/2026-08-05_validate_g0_three_track_sync_v1.22.py"
+      - "tests/2026-08-05_test_g0_three_track_sync_v1.22.py"
       - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
   push:
     branches: [main]
@@ -21,29 +21,24 @@ on:
       - "project-manifest.json"
       - "registry/decision-log.jsonl"
       - "registry/session-checkpoint-latest.json"
-      - "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.29.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json"
+      - "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
       - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json"
       - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
-      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py"
-      - "tools/2026-08-05_validate_g0_three_track_sync_v1.21.py"
-      - "tests/2026-08-05_test_g0_three_track_sync_v1.21.py"
+      - "tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c11_v0.1.py"
+      - "tools/2026-08-05_validate_g0_three_track_sync_v1.22.py"
+      - "tests/2026-08-05_test_g0_three_track_sync_v1.22.py"
       - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
 
 permissions:
   contents: read
 
 jobs:
-  validate-g0-background-3c10-r3-state:
+  validate-g0-background-3c11-state:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      OMP_NUM_THREADS: "1"
-      OPENBLAS_NUM_THREADS: "1"
-      MKL_NUM_THREADS: "1"
-      NUMEXPR_NUM_THREADS: "1"
-      VECLIB_MAXIMUM_THREADS: "1"
       PYTHONHASHSEED: "0"
     steps:
       - uses: actions/checkout@v4
@@ -55,69 +50,47 @@ jobs:
       - name: Validate canonical JSON artifacts
         run: |
           python -m json.tool project-manifest.json >/dev/null
-          python -m json.tool registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.29.json >/dev/null
+          python -m json.tool registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json >/dev/null
           python -m json.tool registry/session-checkpoint-latest.json >/dev/null
-          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json >/dev/null
           python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json >/dev/null
           python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json >/dev/null
-          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json >/dev/null
-      - name: Compile canonical validators and release adapters
+      - name: Compile canonical validators and tests
         run: |
-          python -m py_compile tools/2026-08-05_validate_g0_three_track_sync_v1.21.py
-          python -m py_compile tests/2026-08-05_test_g0_three_track_sync_v1.21.py
-          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.1.py
-          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.2.py
-          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.3.py
-          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.1.py
-          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.2.py
-          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py
-      - name: Run canonical G0 v1.21 gate
+          python -m py_compile tools/2026-08-05_validate_g0_three_track_sync_v1.22.py
+          python -m py_compile tests/2026-08-05_test_g0_three_track_sync_v1.22.py
+          python -m py_compile tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c11_v0.1.py
+          python -m py_compile tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c11_v0.1.py
+      - name: Run canonical G0 v1.22 gate
         run: |
-          python tools/2026-08-05_validate_g0_three_track_sync_v1.21.py --json
-          python tests/2026-08-05_test_g0_three_track_sync_v1.21.py
-      - name: Bind persistent R3 audit to closed package without backend import
+          python tools/2026-08-05_validate_g0_three_track_sync_v1.22.py --json
+          python tests/2026-08-05_test_g0_three_track_sync_v1.22.py
+      - name: Revalidate Background-3C11 authorization denial
         run: |
-          python - <<'PY'
-          import importlib.util, json, pathlib, sys
-          root = pathlib.Path.cwd()
-          path = root / 'tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py'
-          spec = importlib.util.spec_from_file_location('bg3c10_g0_binding', path)
-          module = importlib.util.module_from_spec(spec)
-          sys.modules[spec.name] = module
-          spec.loader.exec_module(module)
-          live = module.static_audit()
-          frozen = json.loads((root / 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json').read_text(encoding='utf-8'))
-          assert live['package_manifest_sha256'] == frozen['closed_package']['package_manifest_sha256'] == 'a7b48c88061e00cc3dc44dd00a2a17855a7f8c65dd228f725101fde9a1839eb4'
-          assert live['source_count'] == frozen['closed_package']['source_count'] == 24
-          assert live['worker_launches'] == 0
-          assert live['cp01r1_attempts'] == 0
-          assert live['target_root_solves'] == 0
-          assert live['operative_grants'] == 0
-          assert live['physical_results'] == 0
-          assert live['parent_imports_numerical_backend'] is False
-          PY
+          python tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c11_v0.1.py --json
+          python tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c11_v0.1.py
       - name: Verify immutable no-execution and nested-drift firewalls
         run: |
+          test ! -e tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c12_target_path_release_v0.1.py
+          test ! -e registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C12SingleUseGrantContract_v0.1.json
           test ! -e registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
           test ! -e registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
           test ! -d artifacts/hzt-m0/md2s/background3c/HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1
-          grep -q '"release": "2.21-c-phys-m1-background-3c10-real-backend-control-audited-v0.1"' project-manifest.json
-          grep -q '"BACKGROUND_3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE": "PASS_AUDITED_AF0_CONTROL_ONLY"' project-manifest.json
+          grep -q '"release": "2.22-c-phys-m1-background-3c11-authorization-denied-v0.1"' project-manifest.json
           grep -q '"BACKGROUND_3C10_R1": "FAIL_CLOSED_PRIMARY_UNIFORM_BULK_THRESHOLD_AT_N96"' project-manifest.json
           grep -q '"BACKGROUND_3C10_R2": "FAIL_CLOSED_CANDIDATE_JSON_KEY_ORDER_MISTAKEN_FOR_VECTOR_ORDER"' project-manifest.json
           grep -q '"BACKGROUND_3C10_R3": "PASS_REAL_BACKEND_AF0_CONTROL_RELEASE_NO_TARGET_SOLVE"' project-manifest.json
-          grep -q '"BACKGROUND_3C11_AUTHORIZATION_REVIEW": "NOT_STARTED"' project-manifest.json
+          grep -q '"BACKGROUND_3C11_AUTHORIZATION_REVIEW": "DENIED_OPERATIVE_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_ABSENT"' project-manifest.json
+          grep -q '"BACKGROUND_3C12_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE": "NOT_STARTED"' project-manifest.json
           grep -q '"BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED"' project-manifest.json
           grep -q '"BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED"' project-manifest.json
+          grep -q '"PHYSICAL_BACKGROUND": "NOT_ESTABLISHED"' project-manifest.json
           grep -q '"R1.1": "BLOCKED"' project-manifest.json
           grep -q '"R1.2": "BLOCKED"' project-manifest.json
           grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' project-manifest.json
-          grep -q '"FULL_LINEARIZED_BOUNDARY_TRACE_RANK": "NOT_PROVEN"' project-manifest.json
-          grep -q '"FREDHOLM_PROPERTY": "NOT_PROVEN"' project-manifest.json
-          grep -q '"CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN"' project-manifest.json
-          grep -q '"PHYSICAL_BACKGROUND": "NOT_ESTABLISHED"' project-manifest.json
           grep -q '"K1-D": "NOT_RELEASED"' project-manifest.json
           grep -q '"K1-E": "NOT_ADMISSIBLE"' project-manifest.json
           grep -q '"physical_evidence_effect": "NONE"' project-manifest.json
-          ! grep -q 'C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY' project-manifest.json
-          ! grep -q 'ACTIVE_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_REMAINING' project-manifest.json
+          ! grep -q 'C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY' project-manifest.json
+          ! grep -q 'ACTIVE_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_REMAINING' project-manifest.json
