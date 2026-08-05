@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseContract_v0.1.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseAuditResult_v0.1.json"
       - "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseLedger_v0.1.md"
       - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_synthetic_worker_v0.1.py"
       - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.1.py"
@@ -15,6 +16,7 @@ on:
     branches: [main]
     paths:
       - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseContract_v0.1.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseAuditResult_v0.1.json"
       - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_synthetic_worker_v0.1.py"
       - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.1.py"
       - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.2.py"
@@ -40,9 +42,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate contracts and compile sources
+      - name: Validate contracts results and compile sources
         run: |
           python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseAuditResult_v0.1.json >/dev/null
           python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_synthetic_worker_v0.1.py
           python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.1.py
           python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.2.py
@@ -66,7 +69,7 @@ jobs:
           grep -q '"final_classification":"CONTROL_TRANSACTION_PASS"' "$root/$control_id/result.json"
           grep -q '"physical_evidence_effect":"NONE"' "$root/$control_id/result.json"
           rm -rf "$root"
-      - name: Run fail-closed validator and regression tests
+      - name: Revalidate frozen audit result and regression tests
         run: |
           python tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c6_v0.1.py --json
           python tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c6_v0.1.py
@@ -94,3 +97,5 @@ jobs:
           grep -q '"R1.1": "BLOCKED"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseContract_v0.1.json
           grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseContract_v0.1.json
           grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseContract_v0.1.json
+          grep -q '"package_manifest_sha256": "297272556025d86eadad2c8f18caaa4f48fd643c295c8c7dc384be5606b9d147"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseAuditResult_v0.1.json
+          grep -q '"status": "PASS_INTEGRATED_CONTROL_RELEASE_AUDIT_NO_PHYSICAL_EXECUTION"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseAuditResult_v0.1.json
