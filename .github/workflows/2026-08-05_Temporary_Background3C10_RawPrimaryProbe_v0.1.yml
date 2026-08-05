@@ -1,0 +1,46 @@
+name: Temporary Background-3C10 raw primary probe
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  raw-primary-probe:
+    if: ${{ github.head_ref == 'agent/background-3c10-real-backend-control-v0-1' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+      VECLIB_MAXIMUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt
+      - name: Print raw primary a_F=0 control records
+        run: |
+          python - <<'PY'
+          import importlib.util, json, pathlib, sys
+          root = pathlib.Path.cwd()
+          path = root / 'tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.1.py'
+          spec = importlib.util.spec_from_file_location('bg3c10_probe_release', path)
+          module = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = module
+          spec.loader.exec_module(module)
+          payload = module.load_json(module.RUN_INPUT_PATH)['frozen_run_payload']
+          request = module.worker_envelope('primary_control', payload)
+          request['node_counts'] = [24, 48, 96]
+          result = module.launch_worker(request)
+          print(json.dumps(result, indent=2, sort_keys=True))
+          if result['returncode'] != 0:
+              raise SystemExit(1)
+          PY
