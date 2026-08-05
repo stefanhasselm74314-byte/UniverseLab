@@ -15,7 +15,7 @@
   "dependencies": [
     "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json",
     "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionPackageAuditResult_v0.1.json",
-    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C5ExecutionAuthorizationReview_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C5ExecutionPackageAuthorizationReview_v0.1.json",
     "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json",
     "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResultSchema_v0.1.json"
   ],
@@ -88,7 +88,7 @@
     "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.1.py",
     "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.2.py",
     "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionPackageAuditResult_v0.1.json",
-    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C5ExecutionAuthorizationReview_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C5ExecutionPackageAuthorizationReview_v0.1.json",
     "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json",
     "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResultSchema_v0.1.json"
   ],
