@@ -1,0 +1,189 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c10-real-backend-adapter-control-contract.v0.3",
+  "date": "2026-08-05",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY",
+  "classification": "CORRECTED_REAL_BACKEND_ANALYTIC_CONTROL_RELEASE_WITH_EXPLICIT_VECTOR_ORDER",
+  "status": "IMPLEMENTED_PENDING_AUDIT_REAL_BACKEND_ANALYTIC_CONTROLS_ONLY",
+  "physical_evidence_effect": "NONE",
+  "supersedes_for_future_control_execution": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.2.json",
+  "failure_chain": [
+    "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json",
+    "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json"
+  ],
+  "control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R3",
+  "previous_control_runs": [
+    {
+      "run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R1",
+      "status": "FAIL_CLOSED_PRIMARY_UNIFORM_BULK_THRESHOLD_AT_N96",
+      "may_be_reclassified_as_pass": false,
+      "may_be_reused": false
+    },
+    {
+      "run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R2",
+      "status": "FAIL_CLOSED_CANDIDATE_JSON_KEY_ORDER_MISTAKEN_FOR_VECTOR_ORDER",
+      "may_be_reclassified_as_pass": false,
+      "may_be_reused": false
+    }
+  ],
+  "frozen_physical_run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+  "frozen_run_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+  "correction_reason": {
+    "r2_candidate_field_set_was_complete": true,
+    "r2_candidate_digest_was_valid": true,
+    "canonical_json_sorted_mapping_keys": true,
+    "r2_incorrectly_treated_mapping_key_order_as_vector_order": true,
+    "vector_order_now_reconstructed_from_explicit_contract": true,
+    "acceptance_threshold_changed_from_r2": false,
+    "model_parameters_changed": false,
+    "topological_sector_changed": false,
+    "analytic_control_changed": false,
+    "mesh_schedule_changed": false,
+    "independent_cutoff_schedule_changed": false,
+    "new_run_id_required": true
+  },
+  "control_override": {
+    "a_F": 0.0,
+    "target_a_F": "1/4_FORBIDDEN",
+    "classification": "EXACT_ANALYTIC_CONTROL_NOT_TARGET_BACKGROUND"
+  },
+  "real_backend_bindings": {
+    "primary_adapter": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py",
+    "primary_base": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py",
+    "independent": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py",
+    "worker_base_v0_1": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.1.py",
+    "worker_adapter_v0_2": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.2.py",
+    "worker": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.3.py",
+    "release_base_v0_1": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.1.py",
+    "release_adapter_v0_2": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.2.py",
+    "release": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py"
+  },
+  "primary_control": {
+    "node_counts": [24, 48, 96],
+    "state_constructor": "control_seed_state",
+    "allowed_calls": [
+      "model_from_payload",
+      "sector_from_payload",
+      "control_seed_state",
+      "residual",
+      "unpack_state"
+    ],
+    "forbidden_calls": [
+      "damped_newton",
+      "complex_step_jacobian",
+      "rrqr_step"
+    ],
+    "acceptance": {
+      "bulk_residual_inf_max_by_node_count": {
+        "24": 1e-9,
+        "48": 1e-9,
+        "96": 3e-8
+      },
+      "constraint_inf_max": 1e-10,
+      "boundary_exact_distance_max": 5e-10,
+      "candidate_parameter_cross_mesh_distance_max": 1e-13,
+      "n96_bulk_channel_classification": "HIGH_ORDER_DIFFERENTIATION_ROUNDOFF_ENVELOPE_CONTROL_ONLY",
+      "bulk_monotonic_convergence_required": false,
+      "continuum_convergence_inference_allowed": false
+    }
+  },
+  "independent_control": {
+    "pole_cutoffs": [0.001, 0.0005, 0.00025],
+    "sample_count": 513,
+    "allowed_calls": [
+      "model_from_payload",
+      "sector_from_payload",
+      "shooting_residual",
+      "exact_control_profile"
+    ],
+    "forbidden_calls": [
+      "centered_fd_jacobian",
+      "least_squares",
+      "root"
+    ],
+    "acceptance": {
+      "profile_error_inf_max": 2e-8,
+      "constraint_inf_max": 2e-10,
+      "boundary_exact_distance_max": 2e-8,
+      "primary_independent_boundary_distance_max": 2e-8,
+      "integration_call_count": 6,
+      "shooting_jacobian_call_count": 0
+    }
+  },
+  "handoff_contract": {
+    "candidate_fields": [
+      "varphi_N_0",
+      "q_N",
+      "A_S_0",
+      "varphi_S_0",
+      "q_S",
+      "rho_N",
+      "rho_S",
+      "k4"
+    ],
+    "json_object_key_order_semantic": false,
+    "decoded_field_set_must_match_exactly": true,
+    "missing_fields_rejected": true,
+    "unknown_fields_rejected": true,
+    "vector_reconstruction_order": "candidate_fields",
+    "canonical_json_sha256_required": true,
+    "canonical_json_sort_keys": true,
+    "tampered_digest_rejected": true,
+    "single_control_transaction_scope": true
+  },
+  "process_controls": {
+    "python_hash_seed": 0,
+    "thread_count": 1,
+    "network_allowed": false,
+    "randomness_allowed": false,
+    "stage_timeout_seconds": 8,
+    "termination_grace_seconds": 2,
+    "worker_address_space_bytes": 4294967296,
+    "worker_cpu_seconds": 30,
+    "worker_file_bytes": 16777216,
+    "worker_open_files": 64,
+    "maximum_captured_stream_bytes": 8388608,
+    "timeout_probe_imports_real_primary_before_blocking": true,
+    "signal_probe_imports_real_independent_before_signal": true
+  },
+  "artifact_policy": {
+    "external_temporary_root_only": true,
+    "repository_artifact_creation_allowed": false,
+    "physical_result_path_creation_allowed": false,
+    "atomic_directory_rename": true,
+    "overwrite_existing_path": false,
+    "result_schema_preview_only": true
+  },
+  "hard_firewalls": {
+    "cp01r1_execution_authorized": false,
+    "target_a_F_one_quarter_solve_authorized": false,
+    "primary_newton_target_solve_authorized": false,
+    "independent_shooting_root_solve_authorized": false,
+    "shooting_jacobian_authorized": false,
+    "operative_grant_creation_authorized": false,
+    "physical_result_artifact_authorized": false,
+    "parameter_scan_authorized": false,
+    "topology_scan_authorized": false
+  },
+  "gate_state": {
+    "BACKGROUND_3C10_R1": "FAIL_CLOSED_CONTROL_THRESHOLD_CONTRACT_CORRECTION_REQUIRED",
+    "BACKGROUND_3C10_R2": "FAIL_CLOSED_SERIALIZATION_INTERFACE_CORRECTION_REQUIRED",
+    "BACKGROUND_3C10_R3": "IMPLEMENTED_PENDING_AUDIT",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "The corrected mapping-order semantics do not change the physical model.",
+    "A passing R3 control is not CP01R1 authorization or a physical background result.",
+    "No continuum convergence, existence, stability, ghost freedom, K1-D, K1-E or evidence result follows."
+  ],
+  "next_block_if_pass": "C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY"
+}
