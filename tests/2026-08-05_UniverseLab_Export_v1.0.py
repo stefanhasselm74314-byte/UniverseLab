@@ -39,7 +39,9 @@ def main() -> None:
         "window.print()",
         "new Blob",
         "navigator.clipboard",
-        "application",
+        "standaloneHtml",
+        "markdownOf",
+        "plainTextOf",
     ):
         require(js, token, "export capability")
 
@@ -96,7 +98,7 @@ def main() -> None:
     if chapter_count < 4:
         raise AssertionError(f"guide chapter detection unexpectedly low: {chapter_count}")
 
-    # Integration must remain content-preserving: exactly the head tags and body metadata are expected.
+    # Integration must remain enabled and content-preserving.
     for relative in PAGES:
         text = (ROOT / relative).read_text(encoding="utf-8")
         if "data-ul-export=\"off\"" in text:
