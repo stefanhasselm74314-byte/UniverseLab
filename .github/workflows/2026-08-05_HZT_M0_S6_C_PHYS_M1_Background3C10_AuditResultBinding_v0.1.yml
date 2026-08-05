@@ -1,0 +1,86 @@
+name: HZT-M0-S6 C-PHYS-M1 Background-3C10 R3 audit-result binding
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py"
+      - ".github/workflows/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10_AuditResultBinding_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py"
+      - ".github/workflows/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10_AuditResultBinding_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  bind-persistent-r3-audit-result:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate JSON records
+        run: |
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json >/dev/null
+      - name: Reproduce closed package and bind persistent result
+        run: |
+          python - <<'PY'
+          import importlib.util, json, pathlib, sys
+          root = pathlib.Path.cwd()
+          release_path = root / 'tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py'
+          result_path = root / 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json'
+          spec = importlib.util.spec_from_file_location('bg3c10_binding', release_path)
+          module = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = module
+          spec.loader.exec_module(module)
+          live = module.static_audit()
+          frozen = json.loads(result_path.read_text(encoding='utf-8'))
+          assert frozen['status'] == 'PASS_REAL_BACKEND_AF0_CONTROL_RELEASE_NO_TARGET_SOLVE'
+          assert frozen['control_run_id'] == module.CONTROL_RUN_ID
+          assert frozen['closed_package']['package_manifest_sha256'] == live['package_manifest_sha256']
+          assert frozen['closed_package']['source_count'] == live['source_count'] == 24
+          assert frozen['closed_package']['primary_source_sha256'] == live['primary_source_sha256']
+          assert frozen['closed_package']['primary_base_source_sha256'] == live['primary_base_source_sha256']
+          assert frozen['closed_package']['independent_source_sha256'] == live['independent_source_sha256']
+          assert frozen['append_only_correction_chain']['r1_status'] == live['r1_failure_status']
+          assert frozen['append_only_correction_chain']['r2_status'] == live['r2_failure_status']
+          assert frozen['handoff_control']['json_mapping_key_order_semantic'] is False
+          assert frozen['handoff_control']['handoff_vector_order_source'] == 'EXPLICIT_CANDIDATE_FIELDS_CONTRACT'
+          assert frozen['execution_firewall'] == {
+              'cp01r1_attempts': 0,
+              'target_a_F_one_quarter_solves': 0,
+              'primary_newton_calls': 0,
+              'shooting_jacobian_calls': 0,
+              'nonlinear_root_calls': 0,
+              'operative_grants_created': 0,
+              'physical_result_artifacts_created': 0,
+              'physical_run_cli_exit_73': 'PASS',
+          }
+          assert frozen['physical_evidence_effect'] == 'NONE'
+          print(json.dumps({
+              'status': 'PASS_R3_AUDIT_RESULT_BOUND_TO_CLOSED_PACKAGE',
+              'package_manifest_sha256': live['package_manifest_sha256'],
+              'source_count': live['source_count'],
+              'physical_evidence_effect': 'NONE',
+          }, indent=2, sort_keys=True))
+          PY
+      - name: Enforce no execution artifacts
+        run: |
+          test ! -e registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
+          test ! -e registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
+          test ! -d artifacts/hzt-m0/md2s/background3c/HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1
