@@ -1,0 +1,53 @@
+name: UniverseLab export v1.0
+
+on:
+  pull_request:
+    paths:
+      - "assets/2026-08-05_UniverseLab_Export_v1.0.css"
+      - "assets/2026-08-05_UniverseLab_Export_v1.0.js"
+      - "guide.html"
+      - "tafelwerk.html"
+      - "research-status.html"
+      - "hyperlab.html"
+      - "tests/2026-08-05_UniverseLab_Export_v1.0.py"
+      - "tools/2026-08-05_integrate_universelab_export_v1.0.py"
+      - ".github/workflows/2026-08-05_UniverseLab_Export_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "assets/2026-08-05_UniverseLab_Export_v1.0.css"
+      - "assets/2026-08-05_UniverseLab_Export_v1.0.js"
+      - "guide.html"
+      - "tafelwerk.html"
+      - "research-status.html"
+      - "hyperlab.html"
+      - "tests/2026-08-05_UniverseLab_Export_v1.0.py"
+      - ".github/workflows/2026-08-05_UniverseLab_Export_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check JavaScript syntax
+        run: node --check assets/2026-08-05_UniverseLab_Export_v1.0.js
+      - name: Validate formats, print isolation and page integration
+        run: python tests/2026-08-05_UniverseLab_Export_v1.0.py
+      - name: Prove integration is idempotent
+        run: |
+          python tools/2026-08-05_integrate_universelab_export_v1.0.py
+          git diff --exit-code -- guide.html tafelwerk.html research-status.html hyperlab.html
+      - name: Confirm no external runtime dependency
+        run: |
+          ! grep -E 'https?://|XMLHttpRequest|sendBeacon|WebSocket|EventSource|fetch\(' assets/2026-08-05_UniverseLab_Export_v1.0.js
+          ! grep -E '@import|https?://' assets/2026-08-05_UniverseLab_Export_v1.0.css
