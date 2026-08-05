@@ -7,6 +7,7 @@ import importlib.util
 import json
 from pathlib import Path
 import re
+import signal
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,7 @@ RELEASE_PATH = ROOT / "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real
 CONTRACT_PATH = ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.1.json"
 REVIEW_PATH = ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C9PhysicalAdapterAuthorizationReview_v0.1.json"
 AUDIT_3C8_PATH = ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json"
+RUN_INPUT_PATH = ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json"
 GRANT_PATHS = (
     ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json",
     ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json",
@@ -36,6 +38,33 @@ def load_release():
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def validate_real_import_termination_probes(release) -> dict:
+    payload = load_json(RUN_INPUT_PATH)["frozen_run_payload"]
+
+    timeout_request = release.worker_envelope("timeout_probe", payload)
+    timeout_request["sleep_seconds"] = 30.0
+    timeout_result = release.launch_worker(timeout_request, timeout_seconds=7.0)
+    assert timeout_result["timed_out"] is True
+    assert timeout_result["returncode"] in (-signal.SIGTERM, -signal.SIGKILL)
+    assert isinstance(timeout_result["stdout"], dict)
+    assert timeout_result["stdout"]["status"] == "REAL_PRIMARY_IMPORTED_TIMEOUT_PROBE_READY"
+    assert timeout_result["stdout"]["newton_call_count"] == 0
+
+    signal_request = release.worker_envelope("signal_probe", payload)
+    signal_result = release.launch_worker(signal_request)
+    assert signal_result["timed_out"] is False
+    assert signal_result["returncode"] == -signal.SIGTERM
+    assert isinstance(signal_result["stdout"], dict)
+    assert signal_result["stdout"]["status"] == "REAL_INDEPENDENT_IMPORTED_SIGNAL_PROBE_READY"
+    assert signal_result["stdout"]["shooting_jacobian_call_count"] == 0
+
+    return {
+        "primary_timeout_import_attested": True,
+        "independent_signal_import_attested": True,
+        "probe_worker_launches": 2,
+    }
 
 
 def validate() -> dict:
@@ -108,6 +137,8 @@ def validate() -> dict:
     assert result["physical_result_artifacts_created"] == 0
     assert result["physical_evidence_effect"] == "NONE"
 
+    import_probes = validate_real_import_termination_probes(release)
+
     denial = release.denied_physical_run()
     assert denial["status"] == "NOT_AUTHORIZED"
     assert denial["physical_backend_imported"] is False
@@ -130,6 +161,9 @@ def validate() -> dict:
         "worker_launch_count": result["worker_launch_count"],
         "real_backend_control_processes": result["real_backend_control_processes"],
         "independent_integration_call_count": result["independent"]["integration_call_count"],
+        "primary_timeout_import_attested": import_probes["primary_timeout_import_attested"],
+        "independent_signal_import_attested": import_probes["independent_signal_import_attested"],
+        "additional_probe_worker_launches": import_probes["probe_worker_launches"],
         "primary_newton_calls": 0,
         "shooting_jacobian_calls": 0,
         "nonlinear_root_calls": 0,
