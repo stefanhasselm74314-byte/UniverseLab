@@ -1,0 +1,116 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c6-integrated-execution-release.v0.1",
+  "date": "2026-08-05",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C6_INTEGRATED_EXECUTION_RELEASE_IMPLEMENTATION_ONLY",
+  "classification": "SYNTHETIC_AND_ANALYTIC_END_TO_END_CONTROL_RELEASE_ONLY",
+  "status": "IMPLEMENTED_PENDING_AUDIT_EXECUTION_NOT_AUTHORIZED",
+  "canonical_entry_point": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.2.py",
+  "internal_transaction_engine": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.1.py",
+  "physical_evidence_effect": "NONE",
+  "physical_execution_authorized": false,
+  "cp01r1_execution_authorized": false,
+  "supersedes": null,
+  "dependencies": [
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionRunnerContract_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionPackageAuditResult_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C5ExecutionPackageAuthorizationReview_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResultSchema_v0.1.json"
+  ],
+  "control_scope": {
+    "allowed_cases": [
+      "analytic_success",
+      "synthetic_reject",
+      "synthetic_timeout",
+      "synthetic_signal"
+    ],
+    "allowed_run_id_prefix": "HZT-M0-S6-C-PHYS-M1-BG3C6-CONTROL-",
+    "forbidden_run_ids": [
+      "HZT-M0-S6-C-PHYS-M1-BG3B-CP01",
+      "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1"
+    ],
+    "physical_parameter_payload_allowed": false,
+    "primary_backend_import_allowed": false,
+    "independent_backend_import_allowed": false,
+    "newton_allowed": false,
+    "shooting_jacobian_allowed": false,
+    "shooting_root_allowed": false,
+    "target_a_F_one_quarter_allowed": false
+  },
+  "transaction_order": [
+    "validate_control_scope",
+    "verify_closed_source_inventory_and_package_digest",
+    "attest_environment",
+    "create_no_overwrite_sibling_staging_directory",
+    "launch_single_synthetic_worker_subprocess_with_resource_limits",
+    "enforce_stage_and_total_timeouts",
+    "capture_exit_signal_stdout_stderr_and_worker_payload",
+    "validate_and_classify_control_output",
+    "write_canonical_result_and_sha256_manifest",
+    "fsync_and_atomic_rename_for_committable_controls",
+    "remove_staging_on_timeout_signal_or_failure"
+  ],
+  "resource_control": {
+    "worker_cpu_seconds": 2,
+    "worker_address_space_bytes": 536870912,
+    "worker_file_bytes": 1048576,
+    "worker_open_files": 32,
+    "stage_timeout_seconds": 1.0,
+    "termination_grace_seconds": 0.25,
+    "maximum_captured_stream_bytes": 262144,
+    "maximum_worker_payload_bytes": 262144,
+    "maximum_final_artifact_bytes": 1048576,
+    "parallel_workers": 1,
+    "network_access": false,
+    "randomness": false
+  },
+  "artifact_policy": {
+    "repository_artifact_creation_allowed": false,
+    "control_output_root_must_be_external_temporary_directory": true,
+    "overwrite_existing_final_path": false,
+    "staging_is_sibling_of_final": true,
+    "atomic_directory_rename_required": true,
+    "result_filename": "result.json",
+    "manifest_filename": "artifact-manifest.json",
+    "partial_or_interrupted_final_artifact_allowed": false
+  },
+  "expected_control_classifications": {
+    "analytic_success": "CONTROL_TRANSACTION_PASS",
+    "synthetic_reject": "CONTROL_TRANSACTION_REJECTED_AS_EXPECTED",
+    "synthetic_timeout": "CONTROL_TRANSACTION_TIMEOUT_CLEAN_ABORT",
+    "synthetic_signal": "CONTROL_TRANSACTION_SIGNAL_CLEAN_ABORT"
+  },
+  "package_source_paths": [
+    "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseContract_v0.1.json",
+    "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_synthetic_worker_v0.1.py",
+    "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.1.py",
+    "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.2.py",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C4ExecutionPackageAuditResult_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C5ExecutionPackageAuthorizationReview_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResultSchema_v0.1.json"
+  ],
+  "authorization_firewall": {
+    "append_only_cp01r1_grant_present": false,
+    "control_release_is_cp01r1_grant": false,
+    "control_release_may_be_reused_for_physical_execution": false,
+    "next_review_may_automatically_execute_cp01r1": false,
+    "required_next_block": "C-PHYS-R1.0-BACKGROUND-3C7_INTEGRATED_RELEASE_AUTHORIZATION_REVIEW_ONLY"
+  },
+  "gate_state": {
+    "BACKGROUND_3C4_EXECUTION_PACKAGE": "PASS_AUDITED_NO_EXECUTION",
+    "BACKGROUND_3C5_AUTHORIZATION_REVIEW": "DENIED_INTEGRATED_EXECUTION_RELEASE_INCOMPLETE",
+    "BACKGROUND_3C6_INTEGRATED_CONTROL_RELEASE": "PENDING_AUDIT",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}
