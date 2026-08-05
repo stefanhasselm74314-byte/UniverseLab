@@ -6,7 +6,7 @@ on:
       - "assets/2026-08-05_UniverseLab_DesktopCompact_v1.0.css"
       - "assets/2026-08-01_UniverseLab_MobileTypography_v1.0.css"
       - "assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css"
-      - "tests/2026-08-05_test_universelab_desktop_compact_v1_0.py"
+      - "tests/2026-08-05_UniverseLab_DesktopCompact_v1.0.py"
       - ".github/workflows/2026-08-05_UniverseLab_DesktopCompact_v1.0.yml"
   push:
     branches: [main]
@@ -14,7 +14,7 @@ on:
       - "assets/2026-08-05_UniverseLab_DesktopCompact_v1.0.css"
       - "assets/2026-08-01_UniverseLab_MobileTypography_v1.0.css"
       - "assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css"
-      - "tests/2026-08-05_test_universelab_desktop_compact_v1_0.py"
+      - "tests/2026-08-05_UniverseLab_DesktopCompact_v1.0.py"
       - ".github/workflows/2026-08-05_UniverseLab_DesktopCompact_v1.0.yml"
 
 permissions:
@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Validate compact density and mobile isolation
-        run: python tests/2026-08-05_test_universelab_desktop_compact_v1_0.py
+        run: python tests/2026-08-05_UniverseLab_DesktopCompact_v1.0.py
       - name: Confirm affected public pages use a compact entry point
         run: |
           grep -q 'MobileTypography_v1.1.css' compare-safe.html
