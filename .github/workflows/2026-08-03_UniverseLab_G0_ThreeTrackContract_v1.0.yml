@@ -6,15 +6,12 @@ on:
       - "project-manifest.json"
       - "registry/decision-log.jsonl"
       - "registry/session-checkpoint-latest.json"
-      - "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.27.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json"
-      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_physical_execution_adapter_v0.1.py"
-      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_manufactured_backend_worker_v0.1.py"
-      - "tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py"
-      - "tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py"
-      - "tools/2026-08-05_validate_g0_three_track_sync_v1.19.py"
-      - "tests/2026-08-05_test_g0_three_track_sync_v1.19.py"
+      - "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.28.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C9PhysicalAdapterAuthorizationReview_v0.1.json"
+      - "tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c9_v0.1.py"
+      - "tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c9_v0.1.py"
+      - "tools/2026-08-05_validate_g0_three_track_sync_v1.20.py"
+      - "tests/2026-08-05_test_g0_three_track_sync_v1.20.py"
       - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
   push:
     branches: [main]
@@ -22,22 +19,19 @@ on:
       - "project-manifest.json"
       - "registry/decision-log.jsonl"
       - "registry/session-checkpoint-latest.json"
-      - "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.27.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json"
-      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_physical_execution_adapter_v0.1.py"
-      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_manufactured_backend_worker_v0.1.py"
-      - "tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py"
-      - "tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py"
-      - "tools/2026-08-05_validate_g0_three_track_sync_v1.19.py"
-      - "tests/2026-08-05_test_g0_three_track_sync_v1.19.py"
+      - "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.28.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C9PhysicalAdapterAuthorizationReview_v0.1.json"
+      - "tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c9_v0.1.py"
+      - "tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c9_v0.1.py"
+      - "tools/2026-08-05_validate_g0_three_track_sync_v1.20.py"
+      - "tests/2026-08-05_test_g0_three_track_sync_v1.20.py"
       - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
 
 permissions:
   contents: read
 
 jobs:
-  validate-g0-background-3c8-state:
+  validate-g0-background-3c9-state:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
@@ -57,34 +51,31 @@ jobs:
       - name: Validate canonical JSON artifacts
         run: |
           python -m json.tool project-manifest.json >/dev/null
-          python -m json.tool registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.27.json >/dev/null
+          python -m json.tool registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.28.json >/dev/null
           python -m json.tool registry/session-checkpoint-latest.json >/dev/null
-          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json >/dev/null
-          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C9PhysicalAdapterAuthorizationReview_v0.1.json >/dev/null
       - name: Compile validators and tests
         run: |
-          python -m py_compile tools/2026-08-05_validate_g0_three_track_sync_v1.19.py
-          python -m py_compile tests/2026-08-05_test_g0_three_track_sync_v1.19.py
-          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_manufactured_backend_worker_v0.1.py
-          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_physical_execution_adapter_v0.1.py
-          python -m py_compile tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py
-          python -m py_compile tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py
-      - name: Run canonical G0 v1.19 gate
+          python -m py_compile tools/2026-08-05_validate_g0_three_track_sync_v1.20.py
+          python -m py_compile tests/2026-08-05_test_g0_three_track_sync_v1.20.py
+          python -m py_compile tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c9_v0.1.py
+          python -m py_compile tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c9_v0.1.py
+      - name: Run canonical G0 v1.20 gate
         run: |
-          python tools/2026-08-05_validate_g0_three_track_sync_v1.19.py --json
-          python tests/2026-08-05_test_g0_three_track_sync_v1.19.py
-      - name: Revalidate Background-3C8 physical adapter controls
+          python tools/2026-08-05_validate_g0_three_track_sync_v1.20.py --json
+          python tests/2026-08-05_test_g0_three_track_sync_v1.20.py
+      - name: Revalidate Background-3C9 authorization review
         run: |
-          python tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py --json
-          python tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c8_v0.1.py
+          python tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c9_v0.1.py --json
+          python tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c9_v0.1.py
       - name: Verify immutable no-execution evidence and nested-drift firewalls
         run: |
           test ! -e registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
           test ! -e registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
           test ! -d artifacts/hzt-m0/md2s/background3c/HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1
-          grep -q '"release": "2.19-c-phys-m1-background-3c8-physical-adapter-audited-v0.1"' project-manifest.json
-          grep -q '"BACKGROUND_3C8_PHYSICAL_EXECUTION_ADAPTER": "PASS_AUDITED_MANUFACTURED_CONTROLS_ONLY"' project-manifest.json
-          grep -q '"BACKGROUND_3C9_AUTHORIZATION_REVIEW": "NOT_STARTED"' project-manifest.json
+          grep -q '"release": "2.20-c-phys-m1-background-3c9-authorization-denied-v0.1"' project-manifest.json
+          grep -q '"BACKGROUND_3C9_AUTHORIZATION_REVIEW": "DENIED_REAL_BACKEND_ADAPTER_TRANSACTION_AND_OPERATIVE_SINGLE_USE_GRANT_RELEASE_ABSENT"' project-manifest.json
+          grep -q '"BACKGROUND_3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE": "NOT_STARTED"' project-manifest.json
           grep -q '"BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED"' project-manifest.json
           grep -q '"BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED"' project-manifest.json
           grep -q '"R1.1": "BLOCKED"' project-manifest.json
@@ -97,8 +88,6 @@ jobs:
           grep -q '"K1-D": "NOT_RELEASED"' project-manifest.json
           grep -q '"K1-E": "NOT_ADMISSIBLE"' project-manifest.json
           grep -q '"physical_evidence_effect": "NONE"' project-manifest.json
-          grep -q '"package_manifest_sha256": "497d6da51d0d7f436ae7cf24d8c4acad93d5e2423ab9eb717ec016c776e27613"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json
-          grep -q '"schedule_sha256": "95001986dc93818f0fea3124cf9ddcd63eb136f8d206f6200a4e8c0cf6d54927"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json
-          ! grep -q 'C-PHYS-R1.0-BACKGROUND-3C8_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_ONLY' project-manifest.json
-          ! grep -q 'ACTIVE_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_REMAINING' project-manifest.json
-          ! grep -q '"BACKGROUND_3C8_PHYSICAL_EXECUTION_ADAPTER": "NOT_STARTED"' project-manifest.json
+          ! grep -q 'C-PHYS-R1.0-BACKGROUND-3C9_PHYSICAL_ADAPTER_AUTHORIZATION_REVIEW_ONLY' project-manifest.json
+          ! grep -q 'ACTIVE_PHYSICAL_ADAPTER_AUTHORIZATION_REVIEW_REMAINING' project-manifest.json
+          ! grep -q '"BACKGROUND_3C9_AUTHORIZATION_REVIEW": "NOT_STARTED"' project-manifest.json
