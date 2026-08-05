@@ -1,0 +1,169 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c10-real-backend-adapter-control-audit-result.v0.3",
+  "date": "2026-08-05",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY",
+  "classification": "SOFTWARE_REAL_BACKEND_ANALYTIC_CONTROL_TRANSACTION_QA_ONLY",
+  "status": "PASS_REAL_BACKEND_AF0_CONTROL_RELEASE_NO_TARGET_SOLVE",
+  "physical_evidence_effect": "NONE",
+  "control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R3",
+  "audited_branch_head": "c5bf1e3e77c3245edd714fca5b05c86451df827b",
+  "workflow_run_id": 30993796695,
+  "workflow_job_id": 92265893548,
+  "workflow_artifact": {
+    "name": "2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10_R3_Validation_v0.3",
+    "artifact_id": 8925255573,
+    "zip_sha256": "85d92ae19d9f2437daa67a3e50bda7be5061228efe4c64172fe95389a578c24e",
+    "retention_days": 30,
+    "repository_result_is_independent_of_artifact_retention": true
+  },
+  "closed_package": {
+    "package_manifest_sha256": "a7b48c88061e00cc3dc44dd00a2a17855a7f8c65dd228f725101fde9a1839eb4",
+    "source_count": 24,
+    "primary_source_sha256": "8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92",
+    "primary_base_source_sha256": "830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599",
+    "independent_source_sha256": "a8afd7b548366acf9f5ac72e91bcf07372913cc21a8790d86d0a989a89f03e7b",
+    "worker_source_sha256": "261cfa4acb73cfd1565b25129e217cc8b4b0ebdab09689ef5204d7bcae7b4b33",
+    "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f"
+  },
+  "append_only_correction_chain": {
+    "r1_status": "FAIL_CLOSED_PRIMARY_UNIFORM_BULK_THRESHOLD_AT_N96",
+    "r1_static_package_manifest_sha256": "fab0e16ecf8eaeaf99e428e552231894724fc5f22344d19952e2f4564caa73a3",
+    "r2_status": "FAIL_CLOSED_CANDIDATE_JSON_KEY_ORDER_MISTAKEN_FOR_VECTOR_ORDER",
+    "r2_static_package_manifest_sha256": "db88a3ef3443776981753767a4452ae7b59afe05d6a1172f5c8e6debf8cf9fb6",
+    "r1_preserved": true,
+    "r2_preserved": true,
+    "prior_failures_reclassified_as_pass": false
+  },
+  "primary_control": {
+    "status": "PASS_REAL_PRIMARY_AF0_CONTROL_NO_NEWTON",
+    "model_a_F": 0.0,
+    "node_records": [
+      {
+        "node_count": 24,
+        "bulk_residual_inf": 6.845900235585844e-11,
+        "constraint_inf": 1.3877787807814457e-17,
+        "boundary_exact_distance": 1.0458300891968975e-13,
+        "bulk_classification": "STANDARD_CONTROL_ENVELOPE"
+      },
+      {
+        "node_count": 48,
+        "bulk_residual_inf": 1.929132270594991e-10,
+        "constraint_inf": 1.3877787807814457e-17,
+        "boundary_exact_distance": 2.744471316873387e-13,
+        "bulk_classification": "STANDARD_CONTROL_ENVELOPE"
+      },
+      {
+        "node_count": 96,
+        "bulk_residual_inf": 1.7027736345931466e-8,
+        "constraint_inf": 1.3877787807814457e-17,
+        "boundary_exact_distance": 1.084909939663703e-12,
+        "bulk_classification": "HIGH_ORDER_DIFFERENTIATION_ROUNDOFF_ENVELOPE_CONTROL_ONLY"
+      }
+    ],
+    "candidate": {
+      "varphi_N_0": 0.0,
+      "q_N": 0.2792407799438735,
+      "A_S_0": 0.0,
+      "varphi_S_0": 0.0,
+      "q_S": -0.2792407799438735,
+      "rho_N": 2.101916493295789,
+      "rho_S": 2.101916493295789,
+      "k4": 0.1601687155680281
+    },
+    "candidate_sha256": "6a00f71f4904574841d17eaebba7f8318fc136d477ab6fd324f3354f1b33e400",
+    "candidate_cross_mesh_distance": 0.0,
+    "newton_call_count": 0
+  },
+  "handoff_control": {
+    "canonical_json_sha256_verified": true,
+    "json_mapping_key_order_semantic": false,
+    "handoff_vector_order_source": "EXPLICIT_CANDIDATE_FIELDS_CONTRACT",
+    "missing_field_rejected": true,
+    "unknown_field_rejected": true,
+    "tampered_digest_rejected": true
+  },
+  "independent_control": {
+    "status": "PASS_REAL_INDEPENDENT_AF0_CONTROL_NO_ROOT",
+    "model_a_F": 0.0,
+    "integration_call_count": 6,
+    "shooting_jacobian_call_count": 0,
+    "nonlinear_root_call_count": 0,
+    "cutoff_records": [
+      {
+        "epsilon": 0.001,
+        "profile_error_inf": 6.661338147750939e-16,
+        "constraint_inf": 2.0816681711721685e-17,
+        "boundary_exact_distance": 8.881784197001252e-16,
+        "primary_independent_boundary_distance": 1.085798118083403e-12
+      },
+      {
+        "epsilon": 0.0005,
+        "profile_error_inf": 4.440892098500626e-16,
+        "constraint_inf": 2.0816681711721685e-17,
+        "boundary_exact_distance": 2.220446049250313e-16,
+        "primary_independent_boundary_distance": 1.085131984268628e-12
+      },
+      {
+        "epsilon": 0.00025,
+        "profile_error_inf": 4.440892098500626e-16,
+        "constraint_inf": 2.0816681711721685e-17,
+        "boundary_exact_distance": 1.1102230246251565e-16,
+        "primary_independent_boundary_distance": 1.084909939663703e-12
+      }
+    ]
+  },
+  "process_and_artifact_controls": {
+    "worker_launch_count_per_self_test": 5,
+    "real_backend_control_processes": 4,
+    "additional_validator_probe_worker_launches": 2,
+    "real_primary_import_before_timeout_attested": true,
+    "real_independent_import_before_signal_attested": true,
+    "timeout_cleanup": "PASS",
+    "signal_cleanup": "PASS",
+    "external_atomic_control_artifact": "PASS_TEMPORARY_EXTERNAL_DIRECTORY_ONLY",
+    "no_overwrite_firewall": true,
+    "result_schema_preview_fields_complete": true,
+    "result_schema_preview_sha256": "f25119ff4d179902a420e70ec967c900db502912dddbbd8c72868a24aaf96232",
+    "result_schema_preview_is_physical_result": false,
+    "physical_result_artifact_created": false
+  },
+  "execution_firewall": {
+    "cp01r1_attempts": 0,
+    "target_a_F_one_quarter_solves": 0,
+    "primary_newton_calls": 0,
+    "shooting_jacobian_calls": 0,
+    "nonlinear_root_calls": 0,
+    "operative_grants_created": 0,
+    "physical_result_artifacts_created": 0,
+    "physical_run_cli_exit_73": "PASS"
+  },
+  "gate_state": {
+    "BACKGROUND_3C10_REAL_BACKEND_CONTROL_RELEASE": "PASS_AUDITED_AF0_CONTROL_ONLY",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "background_existence": "NOT_PROVEN",
+    "background_uniqueness": "NOT_PROVEN",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "perturbative_stability": "OPEN",
+    "ghost_freedom": "OPEN",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "R3 is an analytic a_F=0 software control and not a CP01R1 execution.",
+    "The control handoff is not a physical background candidate.",
+    "The mesh-specific bulk envelope is not continuum convergence evidence.",
+    "Real-backend control agreement is not physical confirmation.",
+    "No background existence, uniqueness, Fredholm, stability, ghost-freedom, K1-D, K1-E or physical evidence result follows."
+  ],
+  "next_allowed_block": "C-PHYS-R1.0-BACKGROUND-3C11_REAL_BACKEND_CONTROL_RELEASE_AUTHORIZATION_REVIEW_ONLY"
+}

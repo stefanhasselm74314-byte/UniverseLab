@@ -1,0 +1,137 @@
+name: HZT-M0-S6 C-PHYS-M1 Background-3C10 R3 real-backend controls
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.1.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.2.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
+      - "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.1.md"
+      - "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.2.md"
+      - "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.3.md"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.1.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.2.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.3.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.1.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.2.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py"
+      - "tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c10_v0.3.py"
+      - "tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c10_v0.3.py"
+      - ".github/workflows/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10_RealBackendControl_v0.3.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.1.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.2.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
+      - "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.1.md"
+      - "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.2.md"
+      - "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.3.md"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.1.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.2.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.3.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.1.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.2.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py"
+      - "tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c10_v0.3.py"
+      - "tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c10_v0.3.py"
+      - ".github/workflows/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10_RealBackendControl_v0.3.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  audit-r3-real-backend-controls:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+      VECLIB_MAXIMUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt
+      - name: Validate append-only correction chain and compile sources
+        run: |
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json >/dev/null
+          if test -e registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json; then
+            python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json >/dev/null
+          fi
+          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.1.py
+          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.2.py
+          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.3.py
+          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.1.py
+          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.2.py
+          python -m py_compile tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py
+          python -m py_compile tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c10_v0.3.py
+          python -m py_compile tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c10_v0.3.py
+      - name: Audit R3 closed package without backend import
+        run: python tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py audit --json
+      - name: Execute R3 real-backend analytic controls only
+        run: python tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py self-test --json
+      - name: Run R3 fail-closed validator and regression tests
+        run: |
+          python tools/2026-08-05_validate_hzt_m0_s6_c_phys_m1_background_3c10_v0.3.py --json | tee /tmp/background3c10-r3-validation.json
+          python tests/2026-08-05_test_hzt_m0_s6_c_phys_m1_background_3c10_v0.3.py
+      - name: Prove physical target run remains denied
+        run: |
+          set +e
+          python tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py run --json > /tmp/background3c10-r3-denial.json
+          code=$?
+          set -e
+          test "$code" -eq 73
+          grep -q '"status": "NOT_AUTHORIZED"' /tmp/background3c10-r3-denial.json
+          grep -q '"control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R3"' /tmp/background3c10-r3-denial.json
+          grep -q '"r1_failure_preserved": true' /tmp/background3c10-r3-denial.json
+          grep -q '"r2_failure_preserved": true' /tmp/background3c10-r3-denial.json
+          grep -q '"physical_backend_imported": false' /tmp/background3c10-r3-denial.json
+          grep -q '"solver_calls": 0' /tmp/background3c10-r3-denial.json
+          grep -q '"cp01r1_attempted": false' /tmp/background3c10-r3-denial.json
+          grep -q '"target_a_F_one_quarter_solve": false' /tmp/background3c10-r3-denial.json
+          grep -q '"operative_grant_created": false' /tmp/background3c10-r3-denial.json
+          grep -q '"result_artifact_created": false' /tmp/background3c10-r3-denial.json
+      - name: Enforce immutable governance firewalls
+        run: |
+          test ! -e registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
+          test ! -e registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
+          test ! -d artifacts/hzt-m0/md2s/background3c/HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1
+          grep -q '"status": "FAIL_CLOSED_PRIMARY_UNIFORM_BULK_THRESHOLD_AT_N96"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json
+          grep -q '"status": "FAIL_CLOSED_CANDIDATE_JSON_KEY_ORDER_MISTAKEN_FOR_VECTOR_ORDER"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json
+          grep -q '"json_object_key_order_semantic": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"vector_reconstruction_order": "candidate_fields"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"bulk_monotonic_convergence_required": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"continuum_convergence_inference_allowed": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"cp01r1_execution_authorized": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"target_a_F_one_quarter_solve_authorized": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"primary_newton_target_solve_authorized": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"independent_shooting_root_solve_authorized": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"operative_grant_creation_authorized": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"physical_result_artifact_authorized": false' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"R1.1": "BLOCKED"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"R1.2": "BLOCKED"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+      - name: Upload nonphysical R3 validation record
+        uses: actions/upload-artifact@v4
+        with:
+          name: 2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10_R3_Validation_v0.3
+          path: /tmp/background3c10-r3-validation.json
+          retention-days: 30

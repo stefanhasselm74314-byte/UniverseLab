@@ -1,0 +1,96 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c10-real-backend-adapter-control-failure-result.v0.2",
+  "date": "2026-08-05",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY",
+  "classification": "FAIL_CLOSED_SERIALIZATION_INTERFACE_CORRECTION_REQUIRED",
+  "status": "FAIL_CLOSED_CANDIDATE_JSON_KEY_ORDER_MISTAKEN_FOR_VECTOR_ORDER",
+  "physical_evidence_effect": "NONE",
+  "control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R2",
+  "audited_branch_head": "148834ca5baabedcfb4db39d03cbf4da22e36513",
+  "workflow_run_id": 30993036778,
+  "workflow_job_id": 92263415531,
+  "static_package_manifest_sha256": "db88a3ef3443776981753767a4452ae7b59afe05d6a1172f5c8e6debf8cf9fb6",
+  "failure_stage": "CANDIDATE_HANDOFF_VALIDATION_BEFORE_INDEPENDENT_IMPORT",
+  "failure_reason": "Canonical JSON serialization sorted object keys, while the R2 worker incorrectly required the decoded mapping insertion order to equal the explicit eight-component vector order.",
+  "primary_stage": {
+    "status": "PASS_REAL_PRIMARY_AF0_CONTROL_NO_NEWTON",
+    "candidate_sha256": "6a00f71f4904574841d17eaebba7f8318fc136d477ab6fd324f3354f1b33e400",
+    "candidate_cross_mesh_distance": 0.0,
+    "newton_call_count": 0,
+    "node_counts": [24, 48, 96]
+  },
+  "execution_counts_at_failure": {
+    "worker_launches": 2,
+    "real_primary_worker_launches": 1,
+    "independent_handoff_validation_worker_launches": 1,
+    "real_independent_backend_imports": 0,
+    "independent_integrations": 0,
+    "primary_newton_calls": 0,
+    "shooting_jacobian_calls": 0,
+    "nonlinear_root_calls": 0,
+    "cp01r1_attempts": 0,
+    "target_a_F_one_quarter_solves": 0,
+    "operative_grants_created": 0,
+    "physical_result_artifacts_created": 0
+  },
+  "separate_raw_probe": {
+    "workflow_run_id": 30993177868,
+    "workflow_job_id": 92263872288,
+    "branch_head": "e4466be95358434a13067b9f296c2b858aa3e7ae",
+    "worker_returncode": 2,
+    "worker_status": "CONTROL_FAILURE",
+    "worker_error": "candidate field order drift",
+    "candidate_fields_after_canonical_json_decode": [
+      "A_S_0",
+      "k4",
+      "q_N",
+      "q_S",
+      "rho_N",
+      "rho_S",
+      "varphi_N_0",
+      "varphi_S_0"
+    ],
+    "contractual_vector_order": [
+      "varphi_N_0",
+      "q_N",
+      "A_S_0",
+      "varphi_S_0",
+      "q_S",
+      "rho_N",
+      "rho_S",
+      "k4"
+    ]
+  },
+  "interface_assessment": {
+    "candidate_field_set_complete": true,
+    "candidate_digest_valid": true,
+    "json_object_key_order_semantic": false,
+    "vector_order_defined_by_explicit_contract": true,
+    "independent_backend_failure": false,
+    "physical_failure_inference_allowed": false,
+    "acceptance_threshold_changed": false,
+    "model_or_topology_changed": false
+  },
+  "disposition": {
+    "r2_reuse_for_acceptance_forbidden": true,
+    "r2_reclassification_as_pass_forbidden": true,
+    "new_control_run_id_required": true,
+    "corrected_serialization_contract_required": true,
+    "next_control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R3"
+  },
+  "gate_state": {
+    "BACKGROUND_3C10_R1": "FAIL_CLOSED_CONTROL_THRESHOLD_CONTRACT_CORRECTION_REQUIRED",
+    "BACKGROUND_3C10_R2": "FAIL_CLOSED_SERIALIZATION_INTERFACE_CORRECTION_REQUIRED",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}

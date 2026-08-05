@@ -1,0 +1,86 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c10-real-backend-adapter-control-failure-result.v0.1",
+  "date": "2026-08-05",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE_IMPLEMENTATION_ONLY",
+  "classification": "FAIL_CLOSED_CONTROL_PREREGISTRATION_CORRECTION_REQUIRED",
+  "status": "FAIL_CLOSED_PRIMARY_UNIFORM_BULK_THRESHOLD_AT_N96",
+  "physical_evidence_effect": "NONE",
+  "control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R1",
+  "audited_branch_head": "2519de36d5afcb7b94cb1f8a09025799fcbb591d",
+  "workflow_run_id": 30992127604,
+  "workflow_job_id": 92260481016,
+  "static_package_manifest_sha256": "fab0e16ecf8eaeaf99e428e552231894724fc5f22344d19952e2f4564caa73a3",
+  "failure_stage": "PRIMARY_REAL_BACKEND_ANALYTIC_AF0_CONTROL",
+  "failure_reason": "The preregistered uniform bulk residual threshold 1e-9 was exceeded at node_count 96 before candidate handoff or independent-backend execution.",
+  "execution_counts_at_failure": {
+    "real_primary_worker_launches": 1,
+    "real_independent_worker_launches": 0,
+    "primary_newton_calls": 0,
+    "shooting_jacobian_calls": 0,
+    "nonlinear_root_calls": 0,
+    "cp01r1_attempts": 0,
+    "target_a_F_one_quarter_solves": 0,
+    "operative_grants_created": 0,
+    "physical_result_artifacts_created": 0
+  },
+  "separate_raw_probe": {
+    "workflow_run_id": 30992237880,
+    "workflow_job_id": 92260829926,
+    "branch_head": "2e416a82b73f026bb51bcfa09c7041a695936252",
+    "classification": "READ_ONLY_RAW_PRIMARY_CONTROL_PROBE_AFTER_FAIL_CLOSED_R1",
+    "model_a_F": 0.0,
+    "newton_call_count": 0,
+    "candidate_sha256": "6a00f71f4904574841d17eaebba7f8318fc136d477ab6fd324f3354f1b33e400",
+    "candidate_cross_mesh_distance": 0.0,
+    "node_records": [
+      {
+        "node_count": 24,
+        "bulk_residual_inf": 6.845900235585844e-11,
+        "constraint_inf": 1.3877787807814457e-17,
+        "boundary_exact_distance": 1.0458300891968975e-13
+      },
+      {
+        "node_count": 48,
+        "bulk_residual_inf": 1.929132270594991e-10,
+        "constraint_inf": 1.3877787807814457e-17,
+        "boundary_exact_distance": 2.744471316873387e-13
+      },
+      {
+        "node_count": 96,
+        "bulk_residual_inf": 1.7027736345931466e-8,
+        "constraint_inf": 1.3877787807814457e-17,
+        "boundary_exact_distance": 1.084909939663703e-12
+      }
+    ]
+  },
+  "diagnostic_assessment": {
+    "uniform_threshold_was_justified_before_run": false,
+    "constraint_channel_remained_machine_precision": true,
+    "boundary_channel_remained_below_original_threshold": true,
+    "candidate_handoff_parameters_were_mesh_identical": true,
+    "n96_bulk_growth_is_consistent_with_high_order_differentiation_roundoff": true,
+    "roundoff_mechanism_proven": false,
+    "continuum_convergence_inference_allowed": false,
+    "physical_failure_inference_allowed": false
+  },
+  "disposition": {
+    "r1_reuse_for_acceptance_forbidden": true,
+    "new_control_run_id_required": true,
+    "corrected_contract_required": true,
+    "next_control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R2"
+  },
+  "gate_state": {
+    "BACKGROUND_3C10_R1": "FAIL_CLOSED_CONTROL_THRESHOLD_CONTRACT_CORRECTION_REQUIRED",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}
