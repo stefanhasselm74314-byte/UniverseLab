@@ -1,0 +1,48 @@
+name: Temporary Background-3C11 canonical synchronization
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  synchronize:
+    if: ${{ github.head_ref == 'agent/background-3c11-status-sync-v1-0' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Apply Background-3C11 canonical synchronization
+        run: python tools/2026-08-05_apply_background3c11_canonical_sync_v1.0.py
+      - name: Validate synchronized files
+        run: |
+          python -m json.tool project-manifest.json >/dev/null
+          python -m json.tool registry/session-checkpoint-latest.json >/dev/null
+          python -m json.tool registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json >/dev/null
+          cmp registry/session-checkpoint-latest.json registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          decisions=[json.loads(x) for x in Path('registry/decision-log.jsonl').read_text(encoding='utf-8').splitlines() if x.strip()]
+          selected=[x for x in decisions if x.get('decision_id')=='UL-DEC-0037']
+          assert len(selected)==1
+          assert selected[0]['physical_evidence_effect']=='NONE'
+          PY
+      - name: Commit canonical state and remove temporary script
+        run: |
+          git config user.name 'UniverseLab Sync Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add project-manifest.json registry/decision-log.jsonl registry/session-checkpoint-latest.json registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json
+          git rm tools/2026-08-05_apply_background3c11_canonical_sync_v1.0.py
+          git commit -m '[background3c11-sync] Canonicalize target-path authorization denial'
+          git push origin HEAD:${{ github.head_ref }}
