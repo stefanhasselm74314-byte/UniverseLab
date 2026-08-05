@@ -73,12 +73,14 @@ h1{margin:0;font-size:20px;line-height:1.12;letter-spacing:-.02em}
 <script src="./model-state.js"></script>
 <link rel="stylesheet" href="./assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css">
 <link rel="stylesheet" href="./assets/2026-08-03_UniverseLab_ModelPicker_v1.0.css">
+<link rel="stylesheet" href="./assets/2026-08-05_UniverseLab_SplitPane_v1.0.css">
+<script src="./assets/2026-08-05_UniverseLab_SplitPane_v1.0.js" defer></script>
 </head>
 <body>
 <main class="app">
 <header><div><h1>UniverseLab Observatory</h1><div class="sub">Parameterlabor und Beobachtungsvergleich · MVP 1.4</div></div><span class="badge">wissenschaftlicher Prototyp</span></header>
-<div class="layout">
-<aside class="panel controls">
+<div class="layout" data-ul-split data-ul-split-key="observatory" data-ul-split-label="Parameter" data-ul-split-default="300" data-ul-split-min="240" data-ul-split-max="520" data-ul-split-end-min="520">
+<aside class="panel controls" data-ul-pane="start">
 <h2>Kosmologische Parameter</h2>
 <div class="param-grid">
 <div class="param"><label for="H0">H₀</label><div class="readout"><span>50–100 km s⁻¹ Mpc⁻¹ · heutige Expansionsrate</span><b id="vH0">67,4</b></div><input id="H0" type="range" min="50" max="100" step="0.1" value="67.4"></div>
@@ -91,7 +93,7 @@ h1{margin:0;font-size:20px;line-height:1.12;letter-spacing:-.02em}
 <div class="nav"><a class="button" href="./portal.html">Portal</a><a class="button" href="./research-status.html">Forschungsstatus</a><a class="button" href="./hyperlab.html">HyperLab</a></div>
 <div class="status"><strong>Status:</strong> Die Kurven sind modellbasierte ΛCDM/wCDM-Berechnungen. Eingebaute Messpunkte sind didaktische Beispielwerte und kein vollständiger Likelihood-Fit.</div>
 </aside>
-<section class="panel">
+<section class="panel" data-ul-pane="end">
 <div class="tabs"><button class="active" data-mode="hz">H(z)</button><button data-mode="mu">Hubble-Diagramm</button><button data-mode="growth">Wachstum</button><button data-mode="bao">BAO</button><button data-mode="gw">GW-Fenster</button></div>
 <div class="legend" id="legend"></div>
 <div class="chartwrap"><canvas id="chart"></canvas></div>
