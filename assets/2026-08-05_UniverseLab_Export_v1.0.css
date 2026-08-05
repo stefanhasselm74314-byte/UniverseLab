@@ -1,0 +1,295 @@
+/* UniverseLab export and print layer v1.0
+ * Formats: browser print/PDF, Markdown, TXT, standalone HTML, clipboard.
+ * Scope: text-oriented public pages. No network requests or telemetry.
+ */
+
+.ul-export-widget {
+  position: fixed;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 1200;
+  display: grid;
+  justify-items: end;
+  gap: 7px;
+  font: 13px/1.35 system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #f5f7ff;
+}
+
+.ul-export-toggle {
+  min-height: 42px;
+  padding: 8px 14px;
+  border: 1px solid #5f6da3;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #5f51db, #8872ff);
+  color: #fff;
+  font: 850 13px/1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
+  box-shadow: 0 12px 34px #0009;
+  cursor: pointer;
+}
+
+.ul-export-panel {
+  width: min(350px, calc(100vw - 24px));
+  padding: 12px;
+  border: 1px solid #3c4973;
+  border-radius: 15px;
+  background: #090e1bf2;
+  box-shadow: 0 18px 55px #000c;
+  backdrop-filter: blur(18px);
+}
+
+.ul-export-panel[hidden] {
+  display: none !important;
+}
+
+.ul-export-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+
+.ul-export-head strong {
+  font-size: 14px;
+}
+
+.ul-export-close {
+  width: 32px;
+  min-height: 32px;
+  padding: 0;
+  border: 1px solid #3b466d;
+  border-radius: 9px;
+  background: #11172a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ul-export-panel label {
+  display: grid;
+  gap: 4px;
+  color: #b5bfdc;
+  font-size: 11px;
+}
+
+.ul-export-panel select {
+  width: 100%;
+  min-height: 38px;
+  padding: 7px 9px;
+  border: 1px solid #3d4b77;
+  border-radius: 9px;
+  background: #080d19;
+  color: #fff;
+  font: 700 12px/1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.ul-export-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.ul-export-actions button {
+  min-height: 40px;
+  padding: 7px 9px;
+  border: 1px solid #3b4976;
+  border-radius: 10px;
+  background: #11182b;
+  color: #fff;
+  font: 800 12px/1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
+  cursor: pointer;
+}
+
+.ul-export-actions button:hover,
+.ul-export-actions button:focus-visible {
+  border-color: #8e7cff;
+  background: #1b2140;
+}
+
+.ul-export-actions .primary {
+  border-color: #7667ec;
+  background: #292354;
+}
+
+.ul-export-note,
+.ul-export-status {
+  margin: 8px 0 0;
+  color: #9eabc9;
+  font-size: 10.5px;
+}
+
+.ul-export-status {
+  min-height: 1.4em;
+  color: #80e1bd;
+}
+
+#ul-export-print-root {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .ul-export-widget {
+    right: max(8px, env(safe-area-inset-right));
+    bottom: max(8px, env(safe-area-inset-bottom));
+  }
+
+  .ul-export-toggle {
+    min-height: 48px;
+    padding-inline: 16px;
+    font-size: 15px;
+  }
+
+  .ul-export-panel {
+    width: min(390px, calc(100vw - 16px));
+    padding: 13px;
+  }
+
+  .ul-export-panel select,
+  .ul-export-actions button {
+    min-height: 48px;
+    font-size: 14px;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 16mm 15mm 18mm;
+}
+
+@media print {
+  html,
+  body {
+    overflow: visible !important;
+    width: auto !important;
+    min-height: auto !important;
+    background: #fff !important;
+    color: #111 !important;
+    font: 10.5pt/1.46 Georgia, "Times New Roman", serif !important;
+  }
+
+  body.ul-export-printing > *:not(#ul-export-print-root) {
+    display: none !important;
+  }
+
+  body.ul-export-printing #ul-export-print-root {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  #ul-export-print-root .ul-export-document-head {
+    margin-bottom: 12mm;
+    padding-bottom: 6mm;
+    border-bottom: 1px solid #777;
+  }
+
+  #ul-export-print-root .ul-export-document-head h1 {
+    margin: 0 0 3mm !important;
+    color: #000 !important;
+    font: 700 24pt/1.1 Georgia, "Times New Roman", serif !important;
+  }
+
+  #ul-export-print-root .ul-export-document-head p {
+    margin: 1.5mm 0 !important;
+    color: #444 !important;
+    font-size: 9pt !important;
+  }
+
+  #ul-export-print-root h1,
+  #ul-export-print-root h2,
+  #ul-export-print-root h3,
+  #ul-export-print-root h4 {
+    break-after: avoid-page;
+    page-break-after: avoid;
+    color: #000 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+  }
+
+  #ul-export-print-root h2 {
+    margin: 9mm 0 3mm !important;
+    padding-bottom: 1.5mm;
+    border-bottom: 0.4pt solid #aaa;
+    font-size: 16pt !important;
+  }
+
+  #ul-export-print-root h3 {
+    margin: 6mm 0 2mm !important;
+    font-size: 13pt !important;
+  }
+
+  #ul-export-print-root p,
+  #ul-export-print-root li,
+  #ul-export-print-root td,
+  #ul-export-print-root th {
+    color: #111 !important;
+    font-size: 10.5pt !important;
+  }
+
+  #ul-export-print-root a {
+    color: #111 !important;
+    text-decoration: underline;
+  }
+
+  #ul-export-print-root pre,
+  #ul-export-print-root code,
+  #ul-export-print-root .equation,
+  #ul-export-print-root .eq,
+  #ul-export-print-root .formula-box {
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere;
+    border: 0.5pt solid #aaa !important;
+    background: #f4f4f4 !important;
+    color: #000 !important;
+    font: 8.5pt/1.4 "Courier New", monospace !important;
+  }
+
+  #ul-export-print-root table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 4mm 0 !important;
+  }
+
+  #ul-export-print-root th,
+  #ul-export-print-root td {
+    padding: 2mm !important;
+    border: 0.5pt solid #999 !important;
+    background: #fff !important;
+  }
+
+  #ul-export-print-root img,
+  #ul-export-print-root svg {
+    max-width: 100% !important;
+    height: auto !important;
+    break-inside: avoid-page;
+  }
+
+  #ul-export-print-root article,
+  #ul-export-print-root section,
+  #ul-export-print-root .card,
+  #ul-export-print-root .callout,
+  #ul-export-print-root .term,
+  #ul-export-print-root .audit {
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  #ul-export-print-root details,
+  #ul-export-print-root .chapter,
+  #ul-export-print-root .card,
+  #ul-export-print-root .callout,
+  #ul-export-print-root table,
+  #ul-export-print-root pre {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  #ul-export-print-root .ul-export-page-break {
+    break-before: page;
+    page-break-before: always;
+  }
+}
