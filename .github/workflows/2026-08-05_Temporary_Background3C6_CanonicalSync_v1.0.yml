@@ -1,4 +1,4 @@
-name: Temporary Background-3C6 canonical synchronization
+name: Temporary Background-3C6 manifest drift correction
 
 on:
   pull_request:
@@ -22,13 +22,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Apply Background-3C6 canonical synchronization
-        run: python tools/2026-08-05_apply_background3c6_canonical_sync_v1.0.py
-      - name: Commit canonical state and remove temporary script
+      - name: Correct nested Background-3C6 manifest drift
+        run: python tools/2026-08-05_apply_background3c6_manifest_drift_correction_v1.0.py
+      - name: Commit corrected manifest and remove temporary script
         run: |
           git config user.name 'UniverseLab Sync Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add project-manifest.json registry/decision-log.jsonl registry/session-checkpoint-latest.json registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.25.json
-          git rm tools/2026-08-05_apply_background3c6_canonical_sync_v1.0.py
-          git commit -m '[background3c6-sync] Canonicalize integrated control release audit'
+          git add project-manifest.json
+          git rm tools/2026-08-05_apply_background3c6_manifest_drift_correction_v1.0.py
+          git commit -m '[background3c6-sync] Correct nested manifest status drift'
           git push origin HEAD:${{ github.head_ref }}
