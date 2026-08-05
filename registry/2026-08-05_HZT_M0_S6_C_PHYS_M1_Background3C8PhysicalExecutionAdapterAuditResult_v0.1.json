@@ -1,0 +1,133 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c8-physical-execution-adapter-audit-result.v0.1",
+  "date": "2026-08-05",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C8_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_ONLY",
+  "classification": "SOFTWARE_PHYSICAL_ADAPTER_BINDING_AND_MANUFACTURED_TRANSACTION_QA_ONLY",
+  "status": "PASS_PHYSICAL_ADAPTER_AUDIT_MANUFACTURED_CONTROLS_ONLY",
+  "physical_evidence_effect": "NONE",
+  "audited_branch_head": "c79e3dc6bd10bd6bdcb1dc2665ebe687babbafd7",
+  "contract": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json",
+  "canonical_entry_point": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_physical_execution_adapter_v0.1.py",
+  "manufactured_worker": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_manufactured_backend_worker_v0.1.py",
+  "package_manifest_sha256": "497d6da51d0d7f436ae7cf24d8c4acad93d5e2423ab9eb717ec016c776e27613",
+  "source_count": 12,
+  "immutable_run_binding": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+    "run_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+    "seed_set_id": "M1-BG3B-CP01-SEEDS-01",
+    "seed_spec_sha256": "b6e4319cc29736799a0b46320002e51cd17b70b724a6b4c6e86567a316996161",
+    "schedule_entry_count": 35,
+    "schedule_sha256": "95001986dc93818f0fea3124cf9ddcd63eb136f8d206f6200a4e8c0cf6d54927",
+    "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f"
+  },
+  "real_backend_source_binding": {
+    "physical_backend_imported": false,
+    "primary_source_sha256": "8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92",
+    "primary_base_source_sha256": "830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599",
+    "independent_source_sha256": "a8afd7b548366acf9f5ac72e91bcf07372913cc21a8790d86d0a989a89f03e7b",
+    "primary_exports_verified": [
+      "damped_newton",
+      "model_from_payload",
+      "residual",
+      "sector_from_payload",
+      "seven_seeds",
+      "unpack_state"
+    ],
+    "independent_exports_verified": [
+      "cap_residuals",
+      "centered_fd_jacobian",
+      "integrate_region",
+      "model_from_payload",
+      "sector_from_payload",
+      "shooting_residual"
+    ]
+  },
+  "static_audit": {
+    "inspected_control_modules": 18,
+    "inspected_control_call_names": 103,
+    "forbidden_modules": [],
+    "forbidden_calls": [],
+    "stub_subprocess_launches_during_static_audit": 0
+  },
+  "control_results": {
+    "manufactured_success": "CONTROL_ADAPTER_TRANSACTION_PASS",
+    "manufactured_disagreement": "CONTROL_ADAPTER_DISAGREEMENT_REJECTED_AS_EXPECTED",
+    "manufactured_timeout": "CONTROL_ADAPTER_TIMEOUT_CLEAN_ABORT",
+    "manufactured_signal": "CONTROL_ADAPTER_SIGNAL_CLEAN_ABORT"
+  },
+  "transaction_counts": {
+    "manufactured_subprocess_launches": 6,
+    "committed_external_control_artifacts": 2,
+    "clean_abort_controls_without_final_artifact": 2,
+    "primary_physical_root_calls": 0,
+    "independent_physical_root_calls": 0,
+    "shooting_jacobian_calls": 0,
+    "cp01r1_attempts": 0,
+    "target_a_F_one_quarter_solves": 0,
+    "operative_grants_created": 0,
+    "repository_physical_result_artifacts": 0
+  },
+  "verified_paths": {
+    "run_payload_seed_and_schedule_binding": "PASS",
+    "real_backend_ast_export_binding_without_import": "PASS",
+    "manufactured_primary_schedule_transaction": "PASS",
+    "candidate_handoff_sha256": "PASS",
+    "manufactured_independent_agreement_control": "PASS",
+    "manufactured_disagreement_rejection": "PASS",
+    "result_schema_preview_field_completeness": "PASS_CONTROL_ONLY",
+    "manufactured_capability_single_consumption": "PASS",
+    "manufactured_capability_replay_rejection": "PASS",
+    "stage_timeout_termination": "PASS_CLEAN_ABORT",
+    "worker_signal_termination": "PASS_CLEAN_ABORT",
+    "no_overwrite": "PASS",
+    "external_output_root_only": "PASS",
+    "atomic_directory_rename": "PASS",
+    "physical_cli_exit_73": "PASS"
+  },
+  "audit_environment": {
+    "runner_os": "Ubuntu 24.04.4 LTS",
+    "runner_architecture": "x86_64",
+    "python": "CPython 3.12.13",
+    "thread_count": 1,
+    "network_policy": "FORBIDDEN_BY_MANUFACTURED_WORKER_DESIGN",
+    "randomness": false
+  },
+  "authorization_state": {
+    "physical_execution_authorized": false,
+    "cp01r1_execution_authorized": false,
+    "operative_grant_creation_allowed": false,
+    "operative_grant_present": false,
+    "physical_result_path_present": false,
+    "next_review_may_automatically_execute": false
+  },
+  "gate_state": {
+    "BACKGROUND_3C8_PHYSICAL_ADAPTER": "PASS_AUDITED_MANUFACTURED_CONTROLS_ONLY",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "background_existence": "NOT_PROVEN",
+    "background_uniqueness": "NOT_PROVEN",
+    "full_linearized_boundary_trace_rank": "NOT_PROVEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "continuum_BVP_Jacobian": "NOT_PROVEN",
+    "perturbative_stability": "OPEN",
+    "ghost_freedom": "OPEN",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "The adapter audit is not a CP01R1 execution authorization.",
+    "Static backend source binding is not a real backend import or call.",
+    "Manufactured primary and independent agreement is not physical backend agreement.",
+    "The result-schema preview is not a physical result artifact.",
+    "Replay-safe manufactured capability handling is not an operative grant.",
+    "No continuum existence uniqueness stability ghost-freedom K1-D K1-E or physical evidence result follows."
+  ],
+  "next_allowed_block": "C-PHYS-R1.0-BACKGROUND-3C9_PHYSICAL_ADAPTER_AUTHORIZATION_REVIEW_ONLY"
+}
