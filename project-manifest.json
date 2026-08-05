@@ -1,6 +1,6 @@
 {
   "schema": "universelab.project-manifest.v1",
-  "release": "2.17-c-phys-m1-background-3c6-integrated-control-release-audited-v0.1",
+  "release": "2.18-c-phys-m1-background-3c7-authorization-denied-v0.1",
   "release_date": "2026-08-05",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
@@ -53,7 +53,7 @@
       {
         "id": "MD2S-R1-C-PHYS",
         "role": "current_canonical_physical_rebuild",
-        "status": "ACTIVE_INTEGRATED_RELEASE_AUTHORIZATION_REVIEW_REMAINING",
+        "status": "ACTIVE_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_REMAINING",
         "active_model": "HZT-M0-S6-C-PHYS-M1"
       },
       {
@@ -74,7 +74,7 @@
     "FUNCTION_SELECTION": "PASS_POSTULATED_MODEL_FAMILY",
     "MF_001_BULK_FUNCTIONS": "FROZEN_FOR_C_PHYS_M1",
     "MF_002_CAP_FUNCTIONS": "FROZEN_FOR_C_PHYS_M1",
-    "R1.0": "ACTIVE_INTEGRATED_RELEASE_AUTHORIZATION_REVIEW_REMAINING",
+    "R1.0": "ACTIVE_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_REMAINING",
     "R1.1": "BLOCKED",
     "R1.2": "BLOCKED",
     "official_MD2S_solver": "NOT_AUTHORIZED",
@@ -109,7 +109,7 @@
     "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
     "BACKGROUND_TOPOLOGY_SCHEMA": "FROZEN_SINGLE_CAP_PHASE",
     "BACKGROUND_3B": "RUN_INPUT_FROZEN_CP01R1_EXECUTION_NOT_AUTHORIZED",
-    "BACKGROUND_SOLVER_IMPLEMENTATION": "INTEGRATED_CONTROL_RELEASE_AUDITED_PHYSICAL_EXECUTION_NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_IMPLEMENTATION": "INTEGRATED_CONTROL_RELEASE_AUDITED_PHYSICAL_ADAPTER_MISSING",
     "BACKGROUND_3C_PRIMARY_IMPLEMENTATION": "PASS_AUDITED_NO_EXECUTION",
     "BACKGROUND_3C_INDEPENDENT_BACKEND": "PASS_CONTROL_AUDIT_NO_ROOT_SOLVE",
     "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
@@ -118,7 +118,8 @@
     "BACKGROUND_3C4_EXECUTION_PACKAGE": "PASS_AUDITED_NO_EXECUTION",
     "BACKGROUND_3C5_AUTHORIZATION_REVIEW": "DENIED_INTEGRATED_EXECUTION_RELEASE_INCOMPLETE",
     "BACKGROUND_3C6_EXECUTION_RELEASE": "PASS_AUDITED_CONTROL_ONLY",
-    "BACKGROUND_3C7_AUTHORIZATION_REVIEW": "NOT_STARTED"
+    "BACKGROUND_3C7_AUTHORIZATION_REVIEW": "DENIED_PHYSICAL_BACKEND_ADAPTER_AND_SINGLE_USE_GRANT_RELEASE_ABSENT",
+    "BACKGROUND_3C8_PHYSICAL_EXECUTION_ADAPTER": "NOT_STARTED"
   },
   "governance_rules": [
     "technical_execution_is_not_physical_identification",
@@ -291,13 +292,13 @@
     "positive_winding_gate": "Y_sigma >= 0",
     "gauss_bonnet": "EXCLUDED_FROM_MINIMAL_C_PHYS_CONTRACT",
     "active_model": "HZT-M0-S6-C-PHYS-M1",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C7_INTEGRATED_RELEASE_AUTHORIZATION_REVIEW_ONLY"
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C8_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_ONLY"
   },
   "c_phys_operator_entry": {
     "track_id": "MD2S-R1-C-PHYS",
     "model_id": "HZT-M0-S6-C-PHYS-M1",
     "phase": "R1.0",
-    "status": "BACKGROUND_3C6_CONTROL_RELEASE_AUDITED_AUTHORIZATION_REVIEW_REMAINING",
+    "status": "BACKGROUND_3C7_AUTHORIZATION_DENIED_PHYSICAL_ADAPTER_IMPLEMENTATION_REMAINING",
     "radial_system": "DERIVED_CONDITIONAL",
     "function_selection": "PASS_POSTULATED_MODEL_FAMILY",
     "continuum_operator": "FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED",
@@ -357,7 +358,7 @@
     "historical_A0_identity": "NOT_CLAIMED",
     "C1_V_source_migration": "FORBIDDEN",
     "physical_evidence_effect": "NONE",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C7_INTEGRATED_RELEASE_AUTHORIZATION_REVIEW_ONLY",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C8_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_ONLY",
     "operator_2a_contract": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2AContract_v0.1.json",
     "operator_2a_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2ALedger_v0.1.md",
     "weighted_function_spaces": "FROZEN",
@@ -405,7 +406,7 @@
     "localized_scalar_source": "ABSENT_BY_MODEL_SELECTION",
     "background_existence": "NOT_ESTABLISHED",
     "physical_evidence_effect": "NONE",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C7_INTEGRATED_RELEASE_AUTHORIZATION_REVIEW_ONLY",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C8_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_ONLY",
     "operator_2a_status": "PASS_FORMAL_OPERATOR_STRUCTURE",
     "constraint_propagation": "PROVEN_SYMBOLIC_CONDITIONAL",
     "interior_principal_rank": "PASS_FOR_ELL_POSITIVE",
@@ -603,7 +604,7 @@
     "current_execution": "NOT_EXECUTED",
     "physical_background": "NOT_ESTABLISHED",
     "physical_evidence_effect": "NONE",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C7_INTEGRATED_RELEASE_AUTHORIZATION_REVIEW_ONLY",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C8_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_ONLY",
     "canonical_correction": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3ATopologyCorrectionContract_v0.2.json",
     "canonical_correction_ledger": "science/hzt-m0/md2s/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3ATopologyCorrectionLedger_v0.2.md",
     "topological_input_order": [
@@ -662,7 +663,7 @@
     "dependency_lock": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3B_v0.1.txt",
     "validator": "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py",
     "tests": "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3a_assembly_v0.3.py",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C7_INTEGRATED_RELEASE_AUTHORIZATION_REVIEW_ONLY"
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C8_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_ONLY"
   },
   "c_phys_background_3c": {
     "track_id": "MD2S-R1-C-PHYS",
@@ -704,7 +705,7 @@
     "dependency_lock": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt",
     "validator": "tools/2026-08-04_validate_hzt_m0_s6_c_phys_m1_background_3c_v0.2.py",
     "tests": "tests/2026-08-04_test_hzt_m0_s6_c_phys_m1_background_3c_v0.2.py",
-    "next_block": "C-PHYS-R1.0-BACKGROUND-3C7_INTEGRATED_RELEASE_AUTHORIZATION_REVIEW_ONLY",
+    "next_block": "C-PHYS-R1.0-BACKGROUND-3C8_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_ONLY",
     "dual_backend_package": "PASS_AUDITED_NO_EXECUTION",
     "independent_source": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py",
     "independent_source_git_blob_sha": "bed68e11a3682d8b140b6db0cbe71fd696c3ff34",
@@ -735,5 +736,5 @@
     "classification_engine": "NOT_IMPLEMENTED",
     "interruption_protocol": "NOT_IMPLEMENTED"
   },
-  "next_block": "C-PHYS-R1.0-BACKGROUND-3C7_INTEGRATED_RELEASE_AUTHORIZATION_REVIEW_ONLY"
+  "next_block": "C-PHYS-R1.0-BACKGROUND-3C8_PHYSICAL_EXECUTION_ADAPTER_IMPLEMENTATION_ONLY"
 }
