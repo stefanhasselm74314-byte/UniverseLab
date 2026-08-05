@@ -12,6 +12,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 ENTRY_PATH = ROOT / "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c6_integrated_release_v0.2.py"
 CONTRACT_PATH = ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseContract_v0.1.json"
+AUDIT_RESULT_PATH = ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C6IntegratedExecutionReleaseAuditResult_v0.1.json"
 PHYSICAL_GRANT_PATH = ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json"
 PHYSICAL_ARTIFACT_ROOT = ROOT / "artifacts/hzt-m0/md2s/background3c/HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1"
 
@@ -28,6 +29,7 @@ def load_entry():
 
 def validate() -> dict:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
+    recorded = json.loads(AUDIT_RESULT_PATH.read_text(encoding="utf-8"))
     entry = load_entry()
     audit = entry.audit_release()
     self_test = entry.BASE.self_test()
@@ -44,11 +46,29 @@ def validate() -> dict:
     assert contract["control_scope"]["shooting_root_allowed"] is False
     assert contract["control_scope"]["target_a_F_one_quarter_allowed"] is False
 
+    assert recorded["status"] == "PASS_INTEGRATED_CONTROL_RELEASE_AUDIT_NO_PHYSICAL_EXECUTION"
+    assert recorded["physical_evidence_effect"] == "NONE"
+    assert recorded["source_count"] == len(contract["package_source_paths"])
+    assert recorded["control_results"] == contract["expected_control_classifications"]
+    assert recorded["transaction_counts"]["registered_control_subprocess_launches"] == 4
+    assert recorded["transaction_counts"]["committed_control_artifacts_in_temporary_storage"] == 2
+    assert recorded["transaction_counts"]["clean_abort_controls_without_final_artifact"] == 2
+    assert recorded["transaction_counts"]["primary_root_calls"] == 0
+    assert recorded["transaction_counts"]["independent_root_calls"] == 0
+    assert recorded["transaction_counts"]["shooting_jacobian_calls"] == 0
+    assert recorded["transaction_counts"]["cp01r1_attempts"] == 0
+    assert recorded["authorization_state"]["physical_execution_authorized"] is False
+    assert recorded["authorization_state"]["cp01r1_execution_authorized"] is False
+    assert recorded["authorization_state"]["append_only_physical_grant_present"] is False
+
     assert audit["status"] == "PASS_INTEGRATED_CONTROL_RELEASE_AUDIT_NO_PHYSICAL_EXECUTION"
     assert re.fullmatch(r"[0-9a-f]{64}", audit["package_manifest_sha256"])
-    assert audit["source_count"] == len(contract["package_source_paths"])
-    assert audit["forbidden_modules"] == []
-    assert audit["forbidden_calls"] == []
+    assert audit["package_manifest_sha256"] == recorded["package_manifest_sha256"]
+    assert audit["source_count"] == recorded["source_count"]
+    assert audit["inspected_modules"] == recorded["static_audit"]["inspected_modules"]
+    assert audit["inspected_call_names"] == recorded["static_audit"]["inspected_call_names"]
+    assert audit["forbidden_modules"] == recorded["static_audit"]["forbidden_modules"] == []
+    assert audit["forbidden_calls"] == recorded["static_audit"]["forbidden_calls"] == []
     assert audit["subprocess_launch_count"] == 0
     assert audit["primary_root_calls"] == 0
     assert audit["independent_root_calls"] == 0
@@ -59,7 +79,7 @@ def validate() -> dict:
 
     expected = contract["expected_control_classifications"]
     assert self_test["status"] == "PASS_INTEGRATED_CONTROL_RELEASE_SELF_TEST"
-    assert self_test["classifications"] == expected
+    assert self_test["classifications"] == expected == recorded["control_results"]
     assert self_test["committed_control_artifacts"] == 2
     assert self_test["clean_abort_controls"] == 2
     assert self_test["subprocess_launches"] == 4
@@ -81,6 +101,7 @@ def validate() -> dict:
         "status": "PASS",
         "audit_status": audit["status"],
         "self_test_status": self_test["status"],
+        "recorded_result_status": recorded["status"],
         "package_manifest_sha256": audit["package_manifest_sha256"],
         "control_classifications": self_test["classifications"],
         "subprocess_launches": self_test["subprocess_launches"],
