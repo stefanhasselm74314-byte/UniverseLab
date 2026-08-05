@@ -1,0 +1,47 @@
+name: Temporary G0 v1.22.1 workflow patch
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  patch:
+    if: ${{ github.head_ref == 'agent/background-3c11-status-sync-v1-0' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Patch stable G0 workflow to v1.22.1
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path=Path('.github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml')
+          text=path.read_text(encoding='utf-8')
+          text=text.replace('tools/2026-08-05_validate_g0_three_track_sync_v1.22.py','tools/2026-08-05_validate_g0_three_track_sync_v1.22.1.py')
+          text=text.replace('tests/2026-08-05_test_g0_three_track_sync_v1.22.py','tests/2026-08-05_test_g0_three_track_sync_v1.22.1.py')
+          text=text.replace('Run canonical G0 v1.22 gate','Run canonical G0 v1.22.1 gate')
+          path.write_text(text,encoding='utf-8')
+          assert 'v1.22.1.py' in text
+          assert 'validate_g0_three_track_sync_v1.22.py' not in text
+          assert 'test_g0_three_track_sync_v1.22.py' not in text
+          PY
+      - name: Commit patch and remove temporary workflows
+        run: |
+          git config user.name 'UniverseLab Sync Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add .github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml
+          test ! -e .github/workflows/2026-08-05_Temporary_Background3C11_CanonicalSync_v1.0.yml || git rm .github/workflows/2026-08-05_Temporary_Background3C11_CanonicalSync_v1.0.yml
+          test ! -e .github/workflows/2026-08-05_Temporary_G0_v122_StatusProbe.yml || git rm .github/workflows/2026-08-05_Temporary_G0_v122_StatusProbe.yml
+          git rm .github/workflows/2026-08-05_Temporary_G0_v1221_WorkflowPatch.yml
+          git commit -m '[g0] Activate diagnostic canonical gate v1.22.1'
+          git push origin HEAD:${{ github.head_ref }}
