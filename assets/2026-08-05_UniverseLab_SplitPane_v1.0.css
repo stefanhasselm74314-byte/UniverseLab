@@ -1,0 +1,192 @@
+/* UniverseLab split-pane workspace v1.0
+ * Desktop/DeX only. Mobile layouts remain stacked.
+ */
+
+:root {
+  --ul-split-accent: var(--accent, #8d7cff);
+  --ul-split-line: var(--line, #344263);
+  --ul-split-panel: var(--panel, #0d1122);
+  --ul-split-muted: var(--muted, #a8b0cf);
+}
+
+@media (min-width: 901px) {
+  .app:has([data-ul-split-key="observatory"]),
+  .app:has([data-ul-split-key="tafelwerk"]) {
+    width: min(1480px, calc(100% - 28px)) !important;
+    max-width: none !important;
+  }
+
+  .ul-split-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 38px;
+    margin: 8px 0 6px;
+    padding: 5px 7px;
+    border: 1px solid var(--ul-split-line);
+    border-radius: 11px;
+    background: color-mix(in srgb, var(--ul-split-panel) 92%, transparent);
+    box-shadow: 0 8px 24px #0003;
+  }
+
+  .ul-split-controls button {
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 30px !important;
+    padding: 5px 9px !important;
+    border: 1px solid var(--ul-split-line) !important;
+    border-radius: 8px !important;
+    background: color-mix(in srgb, var(--ul-split-panel) 82%, #fff 3%) !important;
+    color: inherit !important;
+    font: 750 11px/1.15 system-ui, sans-serif !important;
+    cursor: pointer;
+  }
+
+  .ul-split-controls button:hover,
+  .ul-split-controls button:focus-visible {
+    border-color: var(--ul-split-accent) !important;
+    outline: 2px solid color-mix(in srgb, var(--ul-split-accent) 45%, transparent);
+    outline-offset: 1px;
+  }
+
+  .ul-split-hint,
+  .ul-split-status {
+    color: var(--ul-split-muted);
+    font-size: 10.5px;
+    line-height: 1.25;
+  }
+
+  .ul-split-status {
+    margin-left: auto;
+    padding: 4px 7px;
+    border-radius: 999px;
+    background: #0002;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  [data-ul-split].ul-split-ready {
+    --ul-split-start: 320px;
+    display: grid !important;
+    grid-template-columns: minmax(0, var(--ul-split-start)) 12px minmax(0, 1fr) !important;
+    gap: 0 !important;
+    align-items: stretch !important;
+    position: relative;
+  }
+
+  [data-ul-split].ul-split-ready > [data-ul-pane] {
+    min-width: 0 !important;
+    transition: opacity 120ms ease, border-color 120ms ease;
+  }
+
+  .ul-splitter {
+    position: relative;
+    z-index: 6;
+    min-width: 12px;
+    min-height: 150px;
+    cursor: col-resize;
+    touch-action: none;
+    outline: 0;
+  }
+
+  .ul-splitter::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 50%;
+    width: 3px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ul-split-line) 78%, transparent);
+    box-shadow: 0 0 0 1px #0004;
+    transition: width 120ms ease, background 120ms ease, box-shadow 120ms ease;
+  }
+
+  .ul-splitter::after {
+    content: "⋮";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 42px;
+    border: 1px solid var(--ul-split-line);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ul-split-panel) 94%, #000 6%);
+    color: var(--ul-split-muted);
+    font: 900 18px/1 system-ui, sans-serif;
+    letter-spacing: -4px;
+  }
+
+  .ul-splitter:hover::before,
+  .ul-splitter:focus-visible::before,
+  body.ul-split-dragging .ul-splitter::before {
+    width: 5px;
+    background: var(--ul-split-accent);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--ul-split-accent) 65%, transparent);
+  }
+
+  .ul-splitter:focus-visible::after {
+    border-color: var(--ul-split-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ul-split-accent) 28%, transparent);
+  }
+
+  [data-ul-split].ul-split-collapsed {
+    grid-template-columns: 0 34px minmax(0, 1fr) !important;
+  }
+
+  [data-ul-split].ul-split-collapsed > [data-ul-pane="start"] {
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
+  }
+
+  [data-ul-split].ul-split-collapsed .ul-splitter {
+    cursor: pointer;
+  }
+
+  body.ul-split-dragging,
+  body.ul-split-dragging * {
+    cursor: col-resize !important;
+    user-select: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .ul-split-controls,
+  .ul-splitter {
+    display: none !important;
+  }
+
+  [data-ul-split].ul-split-ready,
+  [data-ul-split].ul-split-collapsed {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  [data-ul-split] > [data-ul-pane="start"] {
+    display: block !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    padding-left: revert !important;
+    padding-right: revert !important;
+    border-left-width: revert !important;
+    border-right-width: revert !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ul-split] > [data-ul-pane] {
+    transition: none !important;
+  }
+}
