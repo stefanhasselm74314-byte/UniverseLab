@@ -225,11 +225,22 @@ def independent_control(request: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def write_readiness(payload: dict[str, Any]) -> None:
+    sys.stdout.buffer.write(canonical_bytes(payload))
+    sys.stdout.buffer.flush()
+
+
 def timeout_probe(request: dict[str, Any]) -> dict[str, Any]:
     validate_envelope(request)
     module = load_module("background3c10_primary_timeout_probe", PRIMARY_PATH)
     if module.NEWTON_CALL_COUNT != 0:
         raise ControlFailure("Newton counter nonzero in timeout probe")
+    write_readiness({
+        "status": "REAL_PRIMARY_IMPORTED_TIMEOUT_PROBE_READY",
+        "source_sha256": sha256_file(PRIMARY_PATH),
+        "newton_call_count": int(module.NEWTON_CALL_COUNT),
+        "physical_evidence_effect": "NONE",
+    })
     time.sleep(float(request.get("sleep_seconds", 30.0)))
     return {"status": "UNEXPECTED_TIMEOUT_PROBE_COMPLETION"}
 
@@ -239,6 +250,12 @@ def signal_probe(request: dict[str, Any]) -> dict[str, Any]:
     module = load_module("background3c10_independent_signal_probe", INDEPENDENT_PATH)
     if module.SHOOTING_JACOBIAN_CALL_COUNT != 0:
         raise ControlFailure("Jacobian counter nonzero in signal probe")
+    write_readiness({
+        "status": "REAL_INDEPENDENT_IMPORTED_SIGNAL_PROBE_READY",
+        "source_sha256": sha256_file(INDEPENDENT_PATH),
+        "shooting_jacobian_call_count": int(module.SHOOTING_JACOBIAN_CALL_COUNT),
+        "physical_evidence_effect": "NONE",
+    })
     os.kill(os.getpid(), signal.SIGTERM)
     return {"status": "UNEXPECTED_SIGNAL_PROBE_COMPLETION"}
 
