@@ -13,6 +13,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 ADAPTER_PATH = ROOT / "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_physical_execution_adapter_v0.1.py"
 CONTRACT_PATH = ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterContract_v0.1.json"
+AUDIT_RESULT_PATH = ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C8PhysicalExecutionAdapterAuditResult_v0.1.json"
 REVIEW_PATH = ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C7IntegratedReleaseAuthorizationReview_v0.1.json"
 OPERATIVE_GRANT_PATH = ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json"
 PHYSICAL_ARTIFACT_ROOT = ROOT / "artifacts/hzt-m0/md2s/background3c/HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1"
@@ -34,6 +35,7 @@ def load_adapter():
 
 def validate() -> dict:
     contract = load_json(CONTRACT_PATH)
+    frozen = load_json(AUDIT_RESULT_PATH)
     review = load_json(REVIEW_PATH)
     adapter = load_adapter()
     audit = adapter.audit_release()
@@ -53,16 +55,35 @@ def validate() -> dict:
     assert contract["artifact_policy"]["repository_artifact_creation_allowed"] is False
     assert contract["artifact_policy"]["physical_result_path_creation_allowed"] is False
 
+    assert frozen["status"] == "PASS_PHYSICAL_ADAPTER_AUDIT_MANUFACTURED_CONTROLS_ONLY"
+    assert frozen["physical_evidence_effect"] == "NONE"
+    assert frozen["contract"] == str(CONTRACT_PATH.relative_to(ROOT))
+    assert frozen["canonical_entry_point"] == str(ADAPTER_PATH.relative_to(ROOT))
+    assert frozen["source_count"] == len(contract["package_source_paths"])
+    assert frozen["authorization_state"]["physical_execution_authorized"] is False
+    assert frozen["authorization_state"]["cp01r1_execution_authorized"] is False
+    assert frozen["authorization_state"]["operative_grant_creation_allowed"] is False
+    assert frozen["authorization_state"]["operative_grant_present"] is False
+    assert frozen["authorization_state"]["physical_result_path_present"] is False
+
     assert review["status"] == "DENIED_PHYSICAL_BACKEND_ADAPTER_AND_SINGLE_USE_GRANT_RELEASE_ABSENT"
     assert review["authorization_decision"]["authorized"] is False
 
     assert audit["status"] == "PASS_PHYSICAL_ADAPTER_STATIC_AUDIT_NO_PHYSICAL_EXECUTION"
     assert re.fullmatch(r"[0-9a-f]{64}", audit["package_manifest_sha256"])
-    assert audit["source_count"] == len(contract["package_source_paths"])
+    assert audit["package_manifest_sha256"] == frozen["package_manifest_sha256"]
+    assert audit["source_count"] == frozen["source_count"]
     assert audit["run_binding"]["schedule_entry_count"] == 35
-    assert re.fullmatch(r"[0-9a-f]{64}", audit["run_binding"]["schedule_sha256"])
-    assert audit["forbidden_modules"] == []
-    assert audit["forbidden_calls"] == []
+    assert audit["run_binding"]["schedule_sha256"] == frozen["immutable_run_binding"]["schedule_sha256"]
+    assert audit["run_binding"]["run_payload_sha256"] == frozen["immutable_run_binding"]["run_payload_sha256"]
+    assert audit["run_binding"]["seed_spec_sha256"] == frozen["immutable_run_binding"]["seed_spec_sha256"]
+    assert audit["backend_binding"]["primary_source_sha256"] == frozen["real_backend_source_binding"]["primary_source_sha256"]
+    assert audit["backend_binding"]["primary_base_source_sha256"] == frozen["real_backend_source_binding"]["primary_base_source_sha256"]
+    assert audit["backend_binding"]["independent_source_sha256"] == frozen["real_backend_source_binding"]["independent_source_sha256"]
+    assert audit["backend_binding"]["primary_exports_verified"] == frozen["real_backend_source_binding"]["primary_exports_verified"]
+    assert audit["backend_binding"]["independent_exports_verified"] == frozen["real_backend_source_binding"]["independent_exports_verified"]
+    assert audit["forbidden_modules"] == frozen["static_audit"]["forbidden_modules"] == []
+    assert audit["forbidden_calls"] == frozen["static_audit"]["forbidden_calls"] == []
     assert audit["stub_subprocess_launches"] == 0
     assert audit["primary_physical_root_calls"] == 0
     assert audit["independent_physical_root_calls"] == 0
@@ -74,9 +95,10 @@ def validate() -> dict:
 
     assert self_test["status"] == "PASS_PHYSICAL_ADAPTER_MANUFACTURED_END_TO_END_CONTROLS"
     assert self_test["classifications"] == contract["expected_control_classifications"]
-    assert self_test["manufactured_subprocess_launches"] == 6
-    assert self_test["committed_external_control_artifacts"] == 2
-    assert self_test["clean_abort_controls"] == 2
+    assert self_test["classifications"] == frozen["control_results"]
+    assert self_test["manufactured_subprocess_launches"] == frozen["transaction_counts"]["manufactured_subprocess_launches"] == 6
+    assert self_test["committed_external_control_artifacts"] == frozen["transaction_counts"]["committed_external_control_artifacts"] == 2
+    assert self_test["clean_abort_controls"] == frozen["transaction_counts"]["clean_abort_controls_without_final_artifact"] == 2
     assert self_test["capability_replay_rejected"] is True
     assert self_test["primary_physical_root_calls"] == 0
     assert self_test["independent_physical_root_calls"] == 0
@@ -104,6 +126,7 @@ def validate() -> dict:
     return {
         "status": "PASS",
         "audit_status": audit["status"],
+        "frozen_audit_status": frozen["status"],
         "self_test_status": self_test["status"],
         "package_manifest_sha256": audit["package_manifest_sha256"],
         "schedule_sha256": audit["run_binding"]["schedule_sha256"],
