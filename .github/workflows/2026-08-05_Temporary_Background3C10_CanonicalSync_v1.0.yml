@@ -30,7 +30,14 @@ jobs:
           python -m json.tool registry/session-checkpoint-latest.json >/dev/null
           python -m json.tool registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.29.json >/dev/null
           cmp registry/session-checkpoint-latest.json registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.29.json
-          test "$(grep -c '"'"'decision_id'"'"':'"'"'UL-DEC-0036'"'"'' registry/decision-log.jsonl)" -eq 1
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          decisions = [json.loads(line) for line in Path('registry/decision-log.jsonl').read_text(encoding='utf-8').splitlines() if line.strip()]
+          selected = [item for item in decisions if item.get('decision_id') == 'UL-DEC-0036']
+          assert len(selected) == 1
+          assert selected[0]['physical_evidence_effect'] == 'NONE'
+          PY
       - name: Commit canonical state and remove temporary script
         run: |
           git config user.name 'UniverseLab Sync Bot'
