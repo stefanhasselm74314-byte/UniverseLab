@@ -1,0 +1,47 @@
+name: UniverseLab comparison split-pane v1.1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "compare-safe.html"
+      - "compare-desktop.html"
+      - "assets/2026-08-06_UniverseLab_SplitPane_v1.1.css"
+      - "assets/2026-08-05_UniverseLab_SplitPane_v1.0.js"
+      - "tests/2026-08-06_UniverseLab_CompareSplitPane_v1.1.py"
+      - ".github/workflows/2026-08-06_UniverseLab_CompareSplitPane_v1.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "compare-safe.html"
+      - "compare-desktop.html"
+      - "assets/2026-08-06_UniverseLab_SplitPane_v1.1.css"
+      - "assets/2026-08-05_UniverseLab_SplitPane_v1.0.js"
+      - "tests/2026-08-06_UniverseLab_CompareSplitPane_v1.1.py"
+      - ".github/workflows/2026-08-06_UniverseLab_CompareSplitPane_v1.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-comparison-split-pane:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate comparison workspace contract
+        run: python tests/2026-08-06_UniverseLab_CompareSplitPane_v1.1.py
+      - name: Validate stable split controller syntax
+        run: node --check assets/2026-08-05_UniverseLab_SplitPane_v1.0.js
+      - name: Confirm no scientific data or research files changed
+        if: github.event_name == 'pull_request'
+        run: |
+          git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD | tee /tmp/changed.txt
+          test "$(grep -Ec '\.(csv|json|ipynb|md|tex|docx|pdf)$' /tmp/changed.txt || true)" -eq 0
+          test "$(grep -Ec '^science/|^registry/' /tmp/changed.txt || true)" -eq 0
