@@ -1,0 +1,100 @@
+/* UniverseLab split-pane workspace v1.1
+ * Extends v1.0 with the comparison calculator parameter workspace.
+ */
+
+@import url("./2026-08-05_UniverseLab_SplitPane_v1.0.css");
+
+@media (min-width: 901px) {
+  .app:has([data-ul-split-key="compare-safe"]) {
+    width: min(1500px, calc(100% - 28px)) !important;
+    max-width: none !important;
+  }
+
+  [data-ul-split-key="compare-safe"] {
+    margin-top: 8px;
+    align-items: start !important;
+  }
+
+  [data-ul-split-key="compare-safe"] > [data-ul-pane="start"] {
+    position: sticky;
+    top: 58px;
+    max-height: calc(100vh - 70px);
+    overflow: auto;
+    margin-top: 0 !important;
+    scrollbar-width: thin;
+  }
+
+  [data-ul-split-key="compare-safe"] > [data-ul-pane="start"] summary {
+    position: sticky;
+    top: -13px;
+    z-index: 2;
+    margin: -13px -13px 8px;
+    padding: 11px 13px 9px;
+    border-bottom: 1px solid var(--line, #2a3657);
+    background: color-mix(in srgb, var(--panel, #0d1325) 96%, transparent);
+    cursor: default;
+  }
+
+  [data-ul-split-key="compare-safe"] > [data-ul-pane="start"] summary::marker {
+    content: "";
+  }
+
+  [data-ul-split-key="compare-safe"] .param-grid {
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
+  }
+
+  [data-ul-split-key="compare-safe"] .field {
+    padding: 8px 9px !important;
+  }
+
+  [data-ul-split-key="compare-safe"] .actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  [data-ul-split-key="compare-safe"] > [data-ul-pane="end"] {
+    min-width: 0;
+  }
+
+  [data-ul-split-key="compare-safe"] > [data-ul-pane="end"] > .view.active {
+    display: grid;
+    gap: 10px;
+  }
+
+  [data-ul-split-key="compare-safe"] > [data-ul-pane="end"] .panel:first-child {
+    margin-top: 0 !important;
+  }
+
+  [data-ul-split-key="compare-safe"] .chart {
+    height: min(42vh, 390px) !important;
+    min-height: 280px;
+  }
+}
+
+@media (min-width: 1280px) {
+  [data-ul-split-key="compare-safe"] > [data-ul-pane="end"] #view-compare.active {
+    grid-template-columns: minmax(0, 1.45fr) minmax(310px, .55fr);
+    align-items: start;
+  }
+
+  [data-ul-split-key="compare-safe"] > [data-ul-pane="end"] #view-compare.active > .panel {
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 900px) {
+  [data-ul-split-key="compare-safe"] > [data-ul-pane="start"] {
+    position: static !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  [data-ul-split-key="compare-safe"] > [data-ul-pane="start"] summary {
+    position: static;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+}
