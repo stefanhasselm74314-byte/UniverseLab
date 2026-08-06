@@ -1,0 +1,40 @@
+name: UniverseLab comparison split-pane integration v1.1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "compare-safe.html"
+      - "assets/2026-08-06_UniverseLab_SplitPane_v1.1.css"
+      - "tools/2026-08-06_integrate_compare_split_pane_v1.1.py"
+      - ".github/workflows/2026-08-06_UniverseLab_CompareSplitPaneIntegration_v1.1.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  integrate-compare-split-pane:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Apply idempotent integration
+        run: python tools/2026-08-06_integrate_compare_split_pane_v1.1.py
+      - name: Commit integrated comparison page when needed
+        run: |
+          if git diff --quiet; then
+            echo "Comparison split-pane integration already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add compare-safe.html
+          git commit -m "Integrate resizable parameter pane into comparison calculator"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
