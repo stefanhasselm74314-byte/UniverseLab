@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json"
 MANIFEST = ROOT / "solver-hub-manifest.json"
-DASHBOARD = ROOT / "solver-development.html"
+DASHBOARD = ROOT / "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html"
 HUB = ROOT / "solver-hub.html"
 README = ROOT / "README_SOLVER_HUB.md"
 
@@ -82,6 +82,8 @@ def main() -> None:
         for section in REQUIRED_SECTIONS:
             if section not in text:
                 fail(f"{solver['id']} roadmap missing section: {section}")
+        if solver["id"] not in text.splitlines()[0]:
+            fail(f"roadmap title is not bound to {solver['id']}")
 
     # Upstream/downstream edges must be reciprocal.
     for solver in solvers:
@@ -116,7 +118,7 @@ def main() -> None:
         fail("hub manifest roadmap count drift")
     if dev.get("registry") != REGISTRY.relative_to(ROOT).as_posix():
         fail("hub manifest registry path drift")
-    if dev.get("dashboard") != "solver-development.html":
+    if dev.get("dashboard") != DASHBOARD.relative_to(ROOT).as_posix():
         fail("hub manifest dashboard drift")
     if manifest.get("governance", {}).get("physical_evidence_effect") != "NONE":
         fail("hub manifest evidence drift")
@@ -126,7 +128,7 @@ def main() -> None:
     readme = README.read_text(encoding="utf-8")
     if REGISTRY.name not in dashboard:
         fail("dashboard is not bound to the registry")
-    if "solver-development.html" not in hub:
+    if DASHBOARD.name not in hub:
         fail("Solver Hub does not link the development dashboard")
     if "14 Solver" not in hub or "14 Solver" not in dashboard:
         fail("14-solver program not visibly declared")
