@@ -40,4 +40,4 @@ Kein anderer Solver. Upstream ist die kanonische Parentwirkung, Konventionsregis
 Ein numerisch stabiler Lauf allein beweist weder Existenz/Eindeutigkeit im Kontinuum noch Ghostfreiheit.
 
 ## Downstream
-ULSH-02 Junction, ULSH-03 Rank, ULSH-07 KK, ULSH-08 Radion, ULSH-09 Flux, ULSH-10 Cosmology.
+ULSH-02 Junction, ULSH-03 Rank, ULSH-04 Constraint, ULSH-05 S/V/T Perturbation, ULSH-07 KK, ULSH-08 Radion, ULSH-09 Flux und ULSH-10 Cosmology.
