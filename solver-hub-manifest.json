@@ -1,0 +1,43 @@
+{
+  "schema": "universelab.solver-hub.v1",
+  "name": "UniverseLab Solver Hub",
+  "short_name": "ULSH",
+  "version": "1.0.0-alpha1",
+  "status": "ARCHITECTURE_DEFINED_MD2S_KERNEL_INITIALIZED",
+  "release_date": "2026-08-07",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "rules": [
+      "technical_execution_is_not_physical_identification",
+      "numerical_stability_is_not_ghost_freedom",
+      "good_fit_is_not_confirmation",
+      "all_solvers_must_emit_provenance_and_residuals",
+      "all_branch_transfers_require_rederivation"
+    ]
+  },
+  "solver_contract": {
+    "required_inputs": ["parameter_vector", "convention_id", "units_or_dimensionless_normalization", "tolerances", "provenance"],
+    "required_outputs": ["solution", "residuals", "boundary_export", "solver_diagnostics", "provenance", "status"],
+    "required_diagnostics": ["absolute_residual", "relative_residual", "mesh_or_step_convergence", "condition_information_where_applicable", "hashes"]
+  },
+  "modules": [
+    {"id":"MD2S-BVP","name":"HZT-M0-S6 MD-2S Background BVP Solver","status":"INITIAL_SCAFFOLD","priority":0},
+    {"id":"MD2S-JUNCTION","name":"MD-2S Junction Analyzer","status":"PROTOTYPE_EXISTS","priority":1},
+    {"id":"MD2S-RANK","name":"MD-2S B1.4O Rank Audit","status":"PREFLIGHT_DEFINED","priority":2},
+    {"id":"CONSTRAINT","name":"Constraint / Dirac-Bergmann Solver","status":"PLANNED","priority":3},
+    {"id":"PERTURBATION","name":"Scalar-Vector-Tensor Perturbation Solver","status":"PLANNED","priority":4},
+    {"id":"GHOST","name":"Ghost / Kinetic-Matrix Audit","status":"PLANNED","priority":5},
+    {"id":"KK","name":"Kaluza-Klein Spectrum Solver","status":"PLANNED","priority":6},
+    {"id":"RADION","name":"Radion Stability Solver","status":"PLANNED","priority":7},
+    {"id":"FLUX","name":"Flux and Quantization Solver","status":"PLANNED","priority":8},
+    {"id":"COSMO","name":"Background Cosmology Solver","status":"PLANNED","priority":9},
+    {"id":"LIKELIHOOD","name":"Likelihood and Data Pipeline","status":"PLANNED","priority":10},
+    {"id":"BARYO","name":"Baryogenesis Transport Solver","status":"PLANNED","priority":11},
+    {"id":"GW","name":"Gravitational-Wave Solver","status":"PLANNED","priority":12},
+    {"id":"MOND","name":"MOND / RAR Diagnostic Solver","status":"PLANNED","priority":13}
+  ],
+  "md2s_required_fields": ["A", "A_prime", "L", "L_prime", "phi", "phi_prime", "A_chi", "Q", "Z_F"],
+  "md2s_required_boundary_export": ["r_sigma", "normal_r_bulk", "normal_r_cap", "A_prime_bulk", "A_prime_cap", "L_bulk", "L_cap", "L_prime_bulk", "L_prime_cap", "phi_prime_bulk", "phi_prime_cap", "A_chi_bulk", "A_chi_cap", "Q_bulk", "Q_cap", "Z_F_bulk", "Z_F_cap"],
+  "next_gate": "RECONSTRUCT_OR_RECOVER_MD2S_BACKGROUND_AND_EXPORT_ONE_SIDED_BOUNDARY_DATA"
+}
