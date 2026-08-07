@@ -41,6 +41,18 @@ jobs:
         run: python tests/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.py
       - name: Validate JSON syntax
         run: python -m json.tool registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json >/dev/null
+      - name: Validate dashboard inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path("2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html").read_text(encoding="utf-8")
+          scripts = re.findall(r"<script>(.*?)</script>", html, flags=re.S)
+          if len(scripts) != 1:
+              raise SystemExit(f"expected exactly one inline dashboard script, found {len(scripts)}")
+          Path("/tmp/ulsh-dashboard.js").write_text(scripts[0], encoding="utf-8")
+          PY
+          node --check /tmp/ulsh-dashboard.js
       - name: Confirm no execution-capable solver code was added
         run: |
           git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD | tee /tmp/ulsh-files.txt
