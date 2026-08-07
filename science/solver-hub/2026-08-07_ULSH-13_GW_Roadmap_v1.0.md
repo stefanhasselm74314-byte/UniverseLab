@@ -7,7 +7,7 @@ Hyperzeit-spezifische Gravitationswellensignale aus einem freigegebenen stabilen
 `PLANNED` mit partieller konzeptioneller Vorarbeit zu Tensorpropagation und Phasenübergangs-GW-Signaturen.
 
 ## Upstream
-ULSH-05 S/V/T Perturbation, ULSH-06 Ghost/Stability, ULSH-10 Cosmology und für Phasenübergangsquellen ULSH-12 Baryogenesis.
+ULSH-05 S/V/T Perturbation, ULSH-06 Ghost/Stability, ULSH-07 KK, ULSH-10 Cosmology und für Phasenübergangsquellen ULSH-12 Baryogenesis.
 
 ## Fehlende Theorie-/Vertragsarbeit
 1. Freigegebene Tensorwirkung und physische Tensorvariablen.
