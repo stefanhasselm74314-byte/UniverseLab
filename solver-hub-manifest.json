@@ -2,18 +2,21 @@
   "schema": "universelab.solver-hub.v1",
   "name": "UniverseLab Solver Hub",
   "short_name": "ULSH",
-  "version": "1.0.0-alpha1",
-  "status": "ARCHITECTURE_DEFINED_MD2S_KERNEL_INITIALIZED",
+  "version": "1.0.0-alpha2",
+  "status": "ARCHITECTURE_DEFINED_ROADMAPS_FROZEN_MD2S_KERNEL_INITIALIZED",
   "release_date": "2026-08-07",
   "governance": {
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
     "rules": [
       "technical_execution_is_not_physical_identification",
       "numerical_stability_is_not_ghost_freedom",
       "good_fit_is_not_confirmation",
       "all_solvers_must_emit_provenance_and_residuals",
-      "all_branch_transfers_require_rederivation"
+      "all_branch_transfers_require_rederivation",
+      "planning_status_is_not_solver_release",
+      "downstream_execution_requires_upstream_gate_release"
     ]
   },
   "solver_contract": {
@@ -21,21 +24,29 @@
     "required_outputs": ["solution", "residuals", "boundary_export", "solver_diagnostics", "provenance", "status"],
     "required_diagnostics": ["absolute_residual", "relative_residual", "mesh_or_step_convergence", "condition_information_where_applicable", "hashes"]
   },
+  "development_program": {
+    "version": "1.0.0",
+    "status": "PLANNING_BASELINE_NO_EXECUTION_EFFECT",
+    "dashboard": "solver-development.html",
+    "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+    "roadmap_count": 14,
+    "readiness_is": "planning_and_implementation_maturity_only"
+  },
   "modules": [
-    {"id":"MD2S-BVP","name":"HZT-M0-S6 MD-2S Background BVP Solver","status":"INITIAL_SCAFFOLD","priority":0},
-    {"id":"MD2S-JUNCTION","name":"MD-2S Junction Analyzer","status":"PROTOTYPE_EXISTS","priority":1},
-    {"id":"MD2S-RANK","name":"MD-2S B1.4O Rank Audit","status":"PREFLIGHT_DEFINED","priority":2},
-    {"id":"CONSTRAINT","name":"Constraint / Dirac-Bergmann Solver","status":"PLANNED","priority":3},
-    {"id":"PERTURBATION","name":"Scalar-Vector-Tensor Perturbation Solver","status":"PLANNED","priority":4},
-    {"id":"GHOST","name":"Ghost / Kinetic-Matrix Audit","status":"PLANNED","priority":5},
-    {"id":"KK","name":"Kaluza-Klein Spectrum Solver","status":"PLANNED","priority":6},
-    {"id":"RADION","name":"Radion Stability Solver","status":"PLANNED","priority":7},
-    {"id":"FLUX","name":"Flux and Quantization Solver","status":"PLANNED","priority":8},
-    {"id":"COSMO","name":"Background Cosmology Solver","status":"PLANNED","priority":9},
-    {"id":"LIKELIHOOD","name":"Likelihood and Data Pipeline","status":"PLANNED","priority":10},
-    {"id":"BARYO","name":"Baryogenesis Transport Solver","status":"PLANNED","priority":11},
-    {"id":"GW","name":"Gravitational-Wave Solver","status":"PLANNED","priority":12},
-    {"id":"MOND","name":"MOND / RAR Diagnostic Solver","status":"PLANNED","priority":13}
+    {"id":"MD2S-BVP","roadmap_id":"ULSH-01","name":"HZT-M0-S6 MD-2S Background BVP Solver","status":"INITIAL_SCAFFOLD","planning_maturity":"DETAILED","priority":0},
+    {"id":"MD2S-JUNCTION","roadmap_id":"ULSH-02","name":"MD-2S Junction Analyzer","status":"PROTOTYPE_EXISTS","planning_maturity":"DETAILED","priority":1},
+    {"id":"MD2S-RANK","roadmap_id":"ULSH-03","name":"MD-2S B1.4O Rank Audit","status":"PREFLIGHT_DEFINED","planning_maturity":"DETAILED","priority":2},
+    {"id":"CONSTRAINT","roadmap_id":"ULSH-04","name":"Constraint / Dirac-Bergmann Solver","status":"PLANNED","planning_maturity":"ARCHITECTURE_ONLY","priority":3},
+    {"id":"PERTURBATION","roadmap_id":"ULSH-05","name":"Scalar-Vector-Tensor Perturbation Solver","status":"PLANNED","planning_maturity":"ARCHITECTURE_ONLY","priority":4},
+    {"id":"GHOST","roadmap_id":"ULSH-06","name":"Ghost / Kinetic-Matrix Audit","status":"PLANNED","planning_maturity":"ARCHITECTURE_ONLY","priority":5},
+    {"id":"KK","roadmap_id":"ULSH-07","name":"Kaluza-Klein Spectrum Solver","status":"PLANNED","planning_maturity":"ARCHITECTURE_ONLY","priority":6},
+    {"id":"RADION","roadmap_id":"ULSH-08","name":"Radion Stability Solver","status":"PLANNED","planning_maturity":"ARCHITECTURE_ONLY","priority":7},
+    {"id":"FLUX","roadmap_id":"ULSH-09","name":"Flux and Quantization Solver","status":"PLANNED","planning_maturity":"PARTIAL_CONCEPTUAL","priority":8},
+    {"id":"COSMO","roadmap_id":"ULSH-10","name":"Background Cosmology Solver","status":"PLANNED","planning_maturity":"PARTIAL_CONCEPTUAL","priority":9},
+    {"id":"LIKELIHOOD","roadmap_id":"ULSH-11","name":"Likelihood and Data Pipeline","status":"PLANNED","planning_maturity":"PARTIAL_INFRASTRUCTURE","priority":10},
+    {"id":"BARYO","roadmap_id":"ULSH-12","name":"Baryogenesis Transport Solver","status":"PLANNED","planning_maturity":"PARTIAL_CONCEPTUAL","priority":11},
+    {"id":"GW","roadmap_id":"ULSH-13","name":"Gravitational-Wave Solver","status":"PLANNED","planning_maturity":"PARTIAL_CONCEPTUAL","priority":12},
+    {"id":"MOND","roadmap_id":"ULSH-14","name":"MOND / RAR Diagnostic Solver","status":"PLANNED","planning_maturity":"PARTIAL_CONCEPTUAL","priority":13}
   ],
   "md2s_required_fields": ["A", "A_prime", "L", "L_prime", "phi", "phi_prime", "A_chi", "Q", "Z_F"],
   "md2s_required_boundary_export": ["r_sigma", "normal_r_bulk", "normal_r_cap", "A_prime_bulk", "A_prime_cap", "L_bulk", "L_cap", "L_prime_bulk", "L_prime_cap", "phi_prime_bulk", "phi_prime_cap", "A_chi_bulk", "A_chi_cap", "Q_bulk", "Q_cap", "Z_F_bulk", "Z_F_cap"],
