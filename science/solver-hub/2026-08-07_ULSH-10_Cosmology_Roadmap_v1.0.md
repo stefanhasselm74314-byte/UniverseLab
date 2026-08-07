@@ -7,7 +7,7 @@ Aus freigegebenen 6D-Parametern und einem stabilen Hintergrund eine physikalisch
 `PLANNED` mit partieller konzeptioneller und Datenpipeline-Vorarbeit. Die fundamentale K1-D-Brücke ist nicht freigegeben.
 
 ## Upstream
-ULSH-01 BVP, ULSH-02 Junction, ULSH-03 Rank, ULSH-05 Perturbation, ULSH-06 Ghost/Stability und ULSH-09 Flux.
+ULSH-01 BVP, ULSH-02 Junction, ULSH-03 Rank, ULSH-05 Perturbation, ULSH-06 Ghost/Stability, ULSH-07 KK, ULSH-08 Radion und ULSH-09 Flux.
 
 ## Fehlende Theorie-/Vertragsarbeit
 1. Ratifizierte 6D→4D-Reduktion und Parameterabbildung festlegen.
