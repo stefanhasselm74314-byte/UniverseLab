@@ -18,14 +18,7 @@
     ]
   },
   "readiness_vocabulary": ["DEFINED", "PARTIAL", "MISSING", "BLOCKED", "NOT_APPLICABLE"],
-  "readiness_dimensions": [
-    "derivation",
-    "equation_set",
-    "boundary_or_initial_data",
-    "numerical_method",
-    "control_validation",
-    "physical_release"
-  ],
+  "readiness_dimensions": ["derivation", "equation_set", "boundary_or_initial_data", "numerical_method", "control_validation", "physical_release"],
   "solvers": [
     {
       "id": "ULSH-01",
@@ -35,7 +28,7 @@
       "planning_maturity": "DETAILED",
       "roadmap_path": "science/solver-hub/2026-08-07_ULSH-01_MD2S-BVP_Roadmap_v1.0.md",
       "upstream": [],
-      "downstream": ["ULSH-02", "ULSH-03", "ULSH-07", "ULSH-08", "ULSH-09", "ULSH-10"],
+      "downstream": ["ULSH-02", "ULSH-03", "ULSH-04", "ULSH-05", "ULSH-07", "ULSH-08", "ULSH-09", "ULSH-10"],
       "readiness": {"derivation":"PARTIAL","equation_set":"PARTIAL","boundary_or_initial_data":"PARTIAL","numerical_method":"DEFINED","control_validation":"DEFINED","physical_release":"BLOCKED"},
       "primary_blockers": ["canonical physical target equation-set release", "authorized a_F=1/4 target path", "continuum convergence and physical background establishment"],
       "release_gate": "REPRODUCIBLE_PHYSICAL_MD2S_BACKGROUND_WITH_ONE_SIDED_BOUNDARY_EXPORT"
@@ -87,7 +80,7 @@
       "planning_maturity": "ARCHITECTURE_ONLY",
       "roadmap_path": "science/solver-hub/2026-08-07_ULSH-05_SVT-Perturbation_Roadmap_v1.0.md",
       "upstream": ["ULSH-01", "ULSH-04"],
-      "downstream": ["ULSH-06", "ULSH-10", "ULSH-13"],
+      "downstream": ["ULSH-06", "ULSH-08", "ULSH-10", "ULSH-13"],
       "readiness": {"derivation":"MISSING","equation_set":"MISSING","boundary_or_initial_data":"MISSING","numerical_method":"PARTIAL","control_validation":"MISSING","physical_release":"BLOCKED"},
       "primary_blockers": ["quadratic action S^(2)", "gauge-invariant S/V/T variables", "constraint-eliminated perturbation equations and boundary conditions"],
       "release_gate": "GAUGE_CONTROLLED_QUADRATIC_PERTURBATION_SYSTEM_WITH_REPRODUCIBLE_MODE_EVOLUTION"
@@ -151,7 +144,7 @@
       "hub_status": "PLANNED",
       "planning_maturity": "PARTIAL_CONCEPTUAL",
       "roadmap_path": "science/solver-hub/2026-08-07_ULSH-10_Cosmology_Roadmap_v1.0.md",
-      "upstream": ["ULSH-01", "ULSH-02", "ULSH-03", "ULSH-05", "ULSH-06", "ULSH-09"],
+      "upstream": ["ULSH-01", "ULSH-02", "ULSH-03", "ULSH-05", "ULSH-06", "ULSH-07", "ULSH-08", "ULSH-09"],
       "downstream": ["ULSH-11", "ULSH-12", "ULSH-13", "ULSH-14"],
       "readiness": {"derivation":"PARTIAL","equation_set":"MISSING","boundary_or_initial_data":"MISSING","numerical_method":"PARTIAL","control_validation":"PARTIAL","physical_release":"BLOCKED"},
       "primary_blockers": ["ratified 6D-to-4D physical parameter map", "released stable perturbation sector", "fundamental forward map to H, growth and lensing observables"],
@@ -190,7 +183,7 @@
       "hub_status": "PLANNED",
       "planning_maturity": "PARTIAL_CONCEPTUAL",
       "roadmap_path": "science/solver-hub/2026-08-07_ULSH-13_GW_Roadmap_v1.0.md",
-      "upstream": ["ULSH-05", "ULSH-06", "ULSH-10", "ULSH-12"],
+      "upstream": ["ULSH-05", "ULSH-06", "ULSH-07", "ULSH-10", "ULSH-12"],
       "downstream": [],
       "readiness": {"derivation":"PARTIAL","equation_set":"PARTIAL","boundary_or_initial_data":"MISSING","numerical_method":"PARTIAL","control_validation":"PARTIAL","physical_release":"BLOCKED"},
       "primary_blockers": ["released stable tensor sector", "source model selection", "observable transfer to detector-frame spectrum"],
