@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - "solver-hub.html"
-      - "solver-development.html"
+      - "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html"
       - "solver-hub-manifest.json"
       - "README_SOLVER_HUB.md"
       - "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json"
@@ -15,7 +15,7 @@ on:
     branches: [main]
     paths:
       - "solver-hub.html"
-      - "solver-development.html"
+      - "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html"
       - "solver-hub-manifest.json"
       - "README_SOLVER_HUB.md"
       - "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json"
