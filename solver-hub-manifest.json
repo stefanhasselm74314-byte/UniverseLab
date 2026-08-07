@@ -27,7 +27,7 @@
   "development_program": {
     "version": "1.0.0",
     "status": "PLANNING_BASELINE_NO_EXECUTION_EFFECT",
-    "dashboard": "solver-development.html",
+    "dashboard": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
     "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
     "roadmap_count": 14,
     "readiness_is": "planning_and_implementation_maturity_only"
