@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stefanhasselm74314-byte.github.io/UniverseLab/md2s_solver_input_schema.json",
+  "title": "HZT-M0-S6 MD-2S BVP Solver Input",
+  "type": "object",
+  "required": ["equation_set_id", "convention_id", "domain", "parameters", "solver", "provenance"],
+  "properties": {
+    "equation_set_id": {"type": "string", "minLength": 1},
+    "convention_id": {"type": "string", "const": "HZT-M0-S6-SCI001002-v0.1"},
+    "domain": {
+      "type": "object",
+      "required": ["r_left", "r_right", "r_sigma"],
+      "properties": {
+        "r_left": {"type": "number"},
+        "r_right": {"type": "number"},
+        "r_sigma": {"type": "number"}
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "description": "No physics defaults. Every parameter used by the rederived equation set must be explicit.",
+      "additionalProperties": {"type": "number"}
+    },
+    "normals": {
+      "type": "object",
+      "required": ["bulk", "cap"],
+      "properties": {
+        "bulk": {"enum": [-1, 1]},
+        "cap": {"enum": [-1, 1]}
+      }
+    },
+    "solver": {
+      "type": "object",
+      "required": ["mesh_points", "tol", "bc_tol", "max_nodes"],
+      "properties": {
+        "mesh_points": {"type": "integer", "minimum": 20},
+        "tol": {"type": "number", "exclusiveMinimum": 0},
+        "bc_tol": {"type": "number", "exclusiveMinimum": 0},
+        "max_nodes": {"type": "integer", "minimum": 100}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source_commit", "equation_derivation", "created_utc"],
+      "properties": {
+        "source_commit": {"type": "string", "minLength": 7},
+        "equation_derivation": {"type": "string", "minLength": 1},
+        "created_utc": {"type": "string", "format": "date-time"}
+      }
+    }
+  }
+}
