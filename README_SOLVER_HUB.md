@@ -22,7 +22,7 @@ Seit 2026-08-07 besitzt jeder der 14 kanonischen Solver eine eigene versionierte
 
 Dashboard:
 
-`solver-development.html`
+`2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html`
 
 Maschinenlesbare Registry:
 
