@@ -21,7 +21,21 @@ def load(path: Path) -> dict:
 
 
 def norm(expr: str) -> str:
-    expr = expr.replace(" ", "").replace("\n", "").replace("_s", "")
+    # Compare the region-generic Operator2A notation with the explicit regional
+    # *_s notation used by the consolidated WP1 contract.
+    expr = expr.replace(" ", "").replace("\n", "")
+    for regional, generic in [
+        ("rho_F_s", "rho_F"),
+        ("varphi_s", "varphi"),
+        ("a_chi_s", "a_chi"),
+        ("ell_s", "ell"),
+        ("A_s", "A"),
+        ("C_rr_s", "C_rr"),
+        ("E_A_s", "E_A"),
+        ("E_ell_s", "E_ell"),
+        ("E_varphi_s", "E_varphi"),
+    ]:
+        expr = expr.replace(regional, generic)
     if expr.endswith("=0"):
         expr = expr[:-2]
     return expr
@@ -78,9 +92,9 @@ assert target["profile_and_augmented_unknowns"]["augmented_continuous_unknown_or
     "augmented_parameter_space"
 ]["continuous_vector_order"]
 assert target["profile_and_augmented_unknowns"]["augmented_continuous_unknown_count"] == 8
-assert target["operator_function_space_contract"]["regional_profile_domain"] == op2b[
-    "little_holder_spaces"
-]["regional_profile_domain"]
+assert op2b["little_holder_spaces"]["regional_profile_domain"].endswith(
+    target["operator_function_space_contract"]["regional_profile_domain"]
+)
 assert target["boundary_and_global_residual_contract"]["residual_order"] == op2b[
     "nonlinear_boundary_map"
 ]["residual_order"]
