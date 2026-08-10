@@ -1,0 +1,50 @@
+name: ULSH-01 MD2S-BVP WP1 Target Boundary Contract v1.0
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "registry/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryContract_v1.0.json"
+      - "science/hzt-m0/md2s/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryLedger_v1.0.md"
+      - "tests/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryContract_v1.0.py"
+      - ".github/workflows/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryContract_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryContract_v1.0.json"
+      - "science/hzt-m0/md2s/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryLedger_v1.0.md"
+      - "tests/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryContract_v1.0.py"
+      - ".github/workflows/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryContract_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate ULSH-01 WP1 contract
+        run: python tests/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryContract_v1.0.py
+      - name: Validate JSON syntax
+        run: python -m json.tool registry/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryContract_v1.0.json >/dev/null
+      - name: Enforce specification-only scope
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+          fi
+          git diff --name-only "$BASE"...HEAD | tee /tmp/ulsh01-wp1-files.txt
+          if grep -E '\.(py|js)$' /tmp/ulsh01-wp1-files.txt | grep -v '^tests/'; then
+            echo "Unexpected executable implementation file in WP1 specification-only PR"
+            exit 1
+          fi
+          ! grep -R -n -E '"solver_authorized"[[:space:]]*:[[:space:]]*true|"physical_target_solve_authorized"[[:space:]]*:[[:space:]]*true|"cp01r1_authorized"[[:space:]]*:[[:space:]]*true|"K1-D"[[:space:]]*:[[:space:]]*"RELEASED"|"K1-E"[[:space:]]*:[[:space:]]*"ADMISSIBLE"|"physical_evidence_effect"[[:space:]]*:[[:space:]]*"(POSITIVE|EVIDENCE)"' \
+            registry/2026-08-10_ULSH-01_MD2S-BVP_WP1_TargetBoundaryContract_v1.0.json
