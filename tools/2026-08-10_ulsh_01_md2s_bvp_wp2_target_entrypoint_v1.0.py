@@ -35,9 +35,11 @@ PRIMARY_PATH = ROOT / "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primar
 PRIMARY_BASE_PATH = ROOT / "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py"
 INDEPENDENT_PATH = ROOT / "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py"
 
-PRIMARY_SHA256 = "13b289fbde886240d993e90d4906776e7f33926dd19a37e24402172045162f26"
-PRIMARY_BASE_SHA256 = "114d00ba10ba1df2f061f022254f5fd1a29b206e1ecf3413eeb062281dc43745"
-INDEPENDENT_SHA256 = "d271a6b9f4783060832b20655700c415098012afa9880fc0b046a94ecbcef217"
+# Raw file SHA-256 digests. The historical 3C10 normalized implementation
+# digests are preserved separately in the WP2 contract for provenance.
+PRIMARY_SHA256 = "8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92"
+PRIMARY_BASE_SHA256 = "830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599"
+INDEPENDENT_SHA256 = "a8afd7b548366acf9f5ac72e91bcf07372913cc21a8790d86d0a989a89f03e7b"
 
 
 class TargetContractError(RuntimeError):
