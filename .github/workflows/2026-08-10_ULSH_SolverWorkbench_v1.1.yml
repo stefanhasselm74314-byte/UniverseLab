@@ -1,0 +1,52 @@
+name: ULSH Solver Workbench v1.1
+
+on:
+  pull_request:
+    paths:
+      - "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html"
+      - "solver-hub.html"
+      - "solver-hub-manifest.json"
+      - "tests/2026-08-10_ULSH_SolverWorkbench_v1.1.py"
+      - ".github/workflows/2026-08-10_ULSH_SolverWorkbench_v1.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html"
+      - "solver-hub.html"
+      - "solver-hub-manifest.json"
+      - "tests/2026-08-10_ULSH_SolverWorkbench_v1.1.py"
+      - ".github/workflows/2026-08-10_ULSH_SolverWorkbench_v1.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate workbench presentation-only contract
+        run: python tests/2026-08-10_ULSH_SolverWorkbench_v1.1.py
+      - name: Validate JSON syntax
+        run: python -m json.tool solver-hub-manifest.json >/dev/null
+      - name: Validate inline workbench JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path('2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html').read_text(encoding='utf-8')
+          scripts = re.findall(r'<script>(.*?)</script>', html, flags=re.S)
+          if len(scripts) != 1:
+              raise SystemExit(f'expected one inline script, got {len(scripts)}')
+          Path('/tmp/ulsh-workbench-v1.1.js').write_text(scripts[0], encoding='utf-8')
+          PY
+          node --check /tmp/ulsh-workbench-v1.1.js
+      - name: Confirm scope contains no solver implementation or research state files
+        run: |
+          git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD | tee /tmp/ulsh-workbench-files.txt
+          test "$(grep -Ec '^science/|^registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json$|\.py$' /tmp/ulsh-workbench-files.txt || true)" -eq 1
+          grep -qx 'tests/2026-08-10_ULSH_SolverWorkbench_v1.1.py' /tmp/ulsh-workbench-files.txt
