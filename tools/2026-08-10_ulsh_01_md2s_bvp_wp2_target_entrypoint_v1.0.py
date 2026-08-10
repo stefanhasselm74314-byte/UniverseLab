@@ -19,18 +19,11 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 RUN_ID = "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1"
 FROZEN_PAYLOAD_SHA256 = "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302"
+SEED_SET_ID = "M1-BG3B-CP01-SEEDS-01"
 SEED_SPEC_SHA256 = "b6e4319cc29736799a0b46320002e51cd17b70b724a6b4c6e86567a316996161"
 DEPENDENCY_LOCK_SHA256 = "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f"
 EXPECTED_A_F = Fraction(1, 4)
-SEED_IDS = (
-    "S0_ANALYTIC_CONTINUATION",
-    "S1_SYMMETRIC_ZERO",
-    "S2_SMALL_DEF_N",
-    "S3_SMALL_DEF_S",
-    "S4_K4_LOW",
-    "S5_K4_HIGH",
-    "S6_MIXED",
-)
+SEED_MULTIPLIERS = ("0", "1/8", "-1/8", "1/4", "-1/4", "1/2", "-1/2")
 NODE_COUNTS = (24, 32, 48, 64, 96)
 PLANNED_ENTRY_COUNT = 35
 
@@ -106,27 +99,32 @@ def frozen_payload() -> dict[str, Any]:
         raise TargetContractError("run_id drift")
     if parse_fraction(payload["model_parameters_ordered"]["a_F"]) != EXPECTED_A_F:
         raise TargetContractError("a_F must remain exactly 1/4")
-    if payload.get("seed_spec_sha256") != SEED_SPEC_SHA256:
-        raise TargetContractError("seed specification digest drift")
+    if payload.get("seed_set_id") != SEED_SET_ID or payload.get("seed_spec_sha256") != SEED_SPEC_SHA256:
+        raise TargetContractError("seed-set binding drift")
     if payload.get("dependency_lock_sha256") != DEPENDENCY_LOCK_SHA256:
         raise TargetContractError("dependency lock digest drift")
     return payload
+
+
+def seed_slot_id(seed_index: int) -> str:
+    return f"{SEED_SET_ID}:S{seed_index}"
 
 
 def build_schedule() -> list[dict[str, Any]]:
     """Return the immutable seed-major 7 x 5 schedule; no solver import/call."""
     schedule: list[dict[str, Any]] = []
     ordinal = 0
-    for seed_index, seed_id in enumerate(SEED_IDS):
+    for seed_index, multiplier in enumerate(SEED_MULTIPLIERS):
         previous_id: str | None = None
         for node_count in NODE_COUNTS:
             ordinal += 1
-            entry_id = f"CP01R1-E{ordinal:02d}-{seed_id}-N{node_count}"
+            entry_id = f"CP01R1-E{ordinal:02d}-S{seed_index}-N{node_count}"
             schedule.append({
                 "ordinal": ordinal,
                 "entry_id": entry_id,
+                "seed_set_id": SEED_SET_ID,
                 "seed_index": seed_index,
-                "seed_id": seed_id,
+                "seed_multiplier": multiplier,
                 "node_count": node_count,
                 "continuation_from_entry_id": previous_id,
             })
@@ -145,9 +143,13 @@ def validate_schedule_against_sources() -> dict[str, Any]:
     seed_spec = load_json(SEED_SPEC_PATH)
     prereg = load_json(PREREG_PATH)
     resource = load_json(RESOURCE_POLICY_PATH)
-    declared_seed_ids = tuple(seed["seed_id"] for seed in seed_spec.get("seeds_ordered", []))
-    if declared_seed_ids != SEED_IDS:
-        raise TargetContractError("seed order differs from frozen seven-seed schedule")
+    declared_multipliers = tuple(seed_spec["seed_generation"]["multipliers_in_order"])
+    if seed_spec.get("seed_set_id") != SEED_SET_ID:
+        raise TargetContractError("seed-set id drift")
+    if declared_multipliers != SEED_MULTIPLIERS:
+        raise TargetContractError("seven-seed multiplier order drift")
+    if seed_spec["seed_generation"]["seed_count"] != 7:
+        raise TargetContractError("seed specification count drift")
     if tuple(prereg["primary_discretization"]["regional_node_counts"]) != NODE_COUNTS:
         raise TargetContractError("mesh hierarchy differs from frozen five-level schedule")
     if prereg["deterministic_seed_protocol"]["seed_set_size"] != 7:
@@ -162,7 +164,8 @@ def validate_schedule_against_sources() -> dict[str, Any]:
     return {
         "run_id": payload["run_id"],
         "a_F": "1/4",
-        "seed_count": len(SEED_IDS),
+        "seed_set_id": SEED_SET_ID,
+        "seed_count": len(SEED_MULTIPLIERS),
         "node_counts": list(NODE_COUNTS),
         "planned_entry_count": len(schedule),
         "schedule_sha256": sha256_bytes(canonical_json_bytes(schedule)),
@@ -217,11 +220,7 @@ def _validate_capability(capability: TargetExecutionCapability) -> None:
         raise TargetExecutionDenied("capability is bound to another run")
     if capability.schedule_sha256 != schedule_sha256():
         raise TargetExecutionDenied("capability schedule digest mismatch")
-    for value in (
-        capability.grant_sha256,
-        capability.transaction_contract_sha256,
-        capability.release_authorization_sha256,
-    ):
+    for value in (capability.grant_sha256, capability.transaction_contract_sha256, capability.release_authorization_sha256):
         if len(value) != 64 or any(ch not in "0123456789abcdef" for ch in value):
             raise TargetExecutionDenied("capability contains an invalid SHA-256 binding")
 
@@ -232,9 +231,7 @@ def _prolongate_state(primary: Any, state: Any, old_n: int, new_n: int):
     old_regions, parameters = primary.unpack_state(state, old_n)
     old_tau = primary.chebyshev_lobatto(old_n).tau
     new_tau = primary.chebyshev_lobatto(new_n).tau
-    new_regions = []
-    for region in old_regions:
-        new_regions.append([np.interp(new_tau, old_tau, field) for field in region])
+    new_regions = [[np.interp(new_tau, old_tau, field) for field in region] for region in old_regions]
     return primary.pack_state(new_regions, parameters.copy())
 
 
@@ -251,7 +248,6 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
     validate_schedule_against_sources()
     validate_backend_hashes()
 
-    # Numerical imports happen only after every capability/source check above.
     primary = _dynamic_import(PRIMARY_PATH, "ulsh_wp2_primary_cp01r1")
     independent = _dynamic_import(INDEPENDENT_PATH, "ulsh_wp2_independent_cp01r1")
     import numpy as np
@@ -261,22 +257,20 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
     primary_sector = primary.sector_from_payload(payload)
     independent_model = independent.model_from_payload(payload, control_a_F=False)
     independent_sector = independent.sector_from_payload(payload)
-    if abs(float(primary_model.a_F) - 0.25) > 0.0 or abs(float(independent_model.a_F) - 0.25) > 0.0:
+    if float(primary_model.a_F) != 0.25 or float(independent_model.a_F) != 0.25:
         raise TargetContractError("backend model construction changed a_F")
 
     prereg = load_json(PREREG_PATH)
     nonlinear = prereg["nonlinear_method"]
     thresholds = prereg["acceptance_thresholds"]
-    schedule = build_schedule()
     results: list[dict[str, Any]] = []
-    continuation: dict[str, tuple[int, Any]] = {}
+    continuation: dict[int, tuple[int, Any]] = {}
 
-    for entry in schedule:
-        seed_id = entry["seed_id"]
+    for entry in build_schedule():
         seed_index = int(entry["seed_index"])
         node_count = int(entry["node_count"])
-        if seed_id in continuation:
-            old_n, old_state = continuation[seed_id]
+        if seed_index in continuation:
+            old_n, old_state = continuation[seed_index]
             initial = _prolongate_state(primary, old_state, old_n, node_count)
         else:
             initial = primary.seven_seeds(node_count)[seed_index]
@@ -306,7 +300,7 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
             and primary_bc <= float(thresholds["boundary_residual_max"])
         )
         if primary_candidate:
-            continuation[seed_id] = (node_count, primary_state.copy())
+            continuation[seed_index] = (node_count, primary_state.copy())
 
         independent_record: dict[str, Any] | None = None
         if primary_candidate:
@@ -334,17 +328,18 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
                 gtol=float(thresholds["bulk_residual_max"]),
             )
             independent_inf = float(np.max(np.abs(independent_result.fun)))
-            agreement_scalar = float(np.max(np.abs(np.asarray(independent_result.x) - shooting_initial)))
             independent_record = {
                 "converged": bool(independent_result.success),
                 "residual_inf": independent_inf,
                 "nfev": int(independent_result.nfev),
-                "agreement_augmented_linf": agreement_scalar,
+                "agreement_augmented_linf": float(np.max(np.abs(np.asarray(independent_result.x) - shooting_initial))),
             }
 
         results.append({
             "entry_id": entry["entry_id"],
-            "seed_id": seed_id,
+            "seed_id": seed_slot_id(seed_index),
+            "seed_index": seed_index,
+            "seed_multiplier": entry["seed_multiplier"],
             "node_count": node_count,
             "primary": {
                 "converged": bool(primary_result.get("converged")),
@@ -368,7 +363,6 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
 
 
 def main() -> int:
-    # Deliberately audit-only: physical execution has no direct CLI entry point.
     print(json.dumps(audit_target(), indent=2, sort_keys=True))
     return 0
 
