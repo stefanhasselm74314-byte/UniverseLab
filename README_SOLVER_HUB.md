@@ -42,6 +42,46 @@ Jede Roadmap enthält denselben Entwicklungsvertrag:
 
 Die Readiness-Matrix verwendet bewusst keine pseudo-genauen Prozentwerte. Die Zustände `DEFINED`, `PARTIAL`, `MISSING`, `BLOCKED` und `NOT_APPLICABLE` beschreiben Planungs- und Implementierungsreife, nicht wissenschaftliche Evidenz.
 
+## Solver Workbench v1.1
+
+Die Workbench vom 2026-08-10 ist eine reine Präsentations- und Arbeitsansicht über der eingefrorenen v1.0-Roadmapquelle.
+
+Workbench:
+
+`2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html`
+
+Sie visualisiert Root-Priorität, Entwicklungsphasen, Blocker, Suche und nächste Planungsbausteine. Sie verändert weder die v1.0-Registry noch einen Solverstatus und erzeugt keine Ausführungsfreigabe.
+
+## Master Build Order v1.0
+
+Seit 2026-08-10 übersetzt der Master Build Order die 14 Roadmaps zusätzlich in eine gemeinsame, maschinenlesbare Arbeitsreihenfolge.
+
+Dashboard:
+
+`2026-08-10_ULSH_MasterBuildOrder_v1.0.html`
+
+Maschinenlesbare Registry:
+
+`registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json`
+
+Dokument:
+
+`science/solver-hub/2026-08-10_ULSH_MasterBuildOrder_v1.0.md`
+
+Firewall:
+
+`science/solver-hub/2026-08-10_ULSH_MasterBuildOrder_Firewall_v1.0.md`
+
+Der Build Order definiert:
+
+- 56 Work Packages, vier pro Solver,
+- vier kritische Pfade,
+- drei zulässige vorbereitende Parallel-Lanes,
+- `ULSH-01` als primären kritischen Pfad,
+- eine harte Trennung zwischen vorbereitender Arbeit, Implementierung, Validierung und separater Release-Entscheidung.
+
+Ein Work Package darf vorbereitet oder abgeschlossen werden, ohne dass daraus automatisch eine physische Solverfreigabe folgt. Physische Downstream-Ausführung bleibt an separat freigegebene Upstream-Gates gebunden.
+
 ## Kanonischer erster Solver
 
 `HZT-M0-S6_MD-2S_Background_BVP_Solver_v1.0`
@@ -128,4 +168,4 @@ Nur die ersten drei Blöcke besitzen derzeit konkrete Solver-Vorarbeiten. Einige
 
 Der nächste harte Gate bleibt die reproduzierbare MD-2S-Hintergrundlösung mit vollständigem einseitigem Randexport. Erst danach sind das Zwei-Junction-Urteil und der B1.4O-Rankaudit physisch numerisch ausführbar.
 
-Das Solver Development Program ändert diesen Status nicht; es verhindert lediglich, dass Downstream-Solver ohne ihre notwendigen Upstream-Grundlagen begonnen oder überinterpretiert werden.
+Solver Development Program, Workbench und Master Build Order ändern diesen Status nicht. Sie definieren und visualisieren ausschließlich, welche Herleitungen, Eingaben, Kontrollen, Work Packages und Gates vor einer späteren Freigabe erfüllt werden müssen.

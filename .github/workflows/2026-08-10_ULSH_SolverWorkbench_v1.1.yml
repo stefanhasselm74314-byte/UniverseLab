@@ -4,18 +4,30 @@ on:
   pull_request:
     paths:
       - "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html"
+      - "2026-08-10_ULSH_MasterBuildOrder_v1.0.html"
       - "solver-hub.html"
       - "solver-hub-manifest.json"
+      - "README_SOLVER_HUB.md"
+      - "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json"
+      - "science/solver-hub/2026-08-10_ULSH_MasterBuildOrder*_v1.0.md"
       - "tests/2026-08-10_ULSH_SolverWorkbench_v1.1.py"
+      - "tests/2026-08-10_ULSH_MasterBuildOrder_v1.0.py"
       - ".github/workflows/2026-08-10_ULSH_SolverWorkbench_v1.1.yml"
+      - ".github/workflows/2026-08-10_ULSH_MasterBuildOrder_v1.0.yml"
   push:
     branches: [main]
     paths:
       - "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html"
+      - "2026-08-10_ULSH_MasterBuildOrder_v1.0.html"
       - "solver-hub.html"
       - "solver-hub-manifest.json"
+      - "README_SOLVER_HUB.md"
+      - "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json"
+      - "science/solver-hub/2026-08-10_ULSH_MasterBuildOrder*_v1.0.md"
       - "tests/2026-08-10_ULSH_SolverWorkbench_v1.1.py"
+      - "tests/2026-08-10_ULSH_MasterBuildOrder_v1.0.py"
       - ".github/workflows/2026-08-10_ULSH_SolverWorkbench_v1.1.yml"
+      - ".github/workflows/2026-08-10_ULSH_MasterBuildOrder_v1.0.yml"
 
 permissions:
   contents: read
@@ -33,8 +45,17 @@ jobs:
           python-version: "3.12"
       - name: Validate workbench presentation-only contract
         run: python tests/2026-08-10_ULSH_SolverWorkbench_v1.1.py
+      - name: Validate Master Build Order when present
+        run: |
+          if [[ -f tests/2026-08-10_ULSH_MasterBuildOrder_v1.0.py ]]; then
+            python tests/2026-08-10_ULSH_MasterBuildOrder_v1.0.py
+          fi
       - name: Validate JSON syntax
-        run: python -m json.tool solver-hub-manifest.json >/dev/null
+        run: |
+          python -m json.tool solver-hub-manifest.json >/dev/null
+          if [[ -f registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json ]]; then
+            python -m json.tool registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json >/dev/null
+          fi
       - name: Validate inline workbench JavaScript syntax
         run: |
           python - <<'PY'
@@ -47,8 +68,20 @@ jobs:
           Path('/tmp/ulsh-workbench-v1.1.js').write_text(scripts[0], encoding='utf-8')
           PY
           node --check /tmp/ulsh-workbench-v1.1.js
-      - name: Confirm scope contains no solver implementation or research state files
+      - name: Confirm planning-only scope and frozen baseline protection
         run: |
           git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD | tee /tmp/ulsh-workbench-files.txt
-          test "$(grep -Ec '^science/|^registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json$|\.py$' /tmp/ulsh-workbench-files.txt || true)" -eq 1
-          grep -qx 'tests/2026-08-10_ULSH_SolverWorkbench_v1.1.py' /tmp/ulsh-workbench-files.txt
+          forbidden_exec="$(grep -E '\.(py|ipynb)$' /tmp/ulsh-workbench-files.txt | grep -v '^tests/' || true)"
+          if [[ -n "$forbidden_exec" ]]; then
+            echo "Execution-capable code outside tests is forbidden in ULSH planning changes:"
+            echo "$forbidden_exec"
+            exit 1
+          fi
+          if grep -qx 'registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json' /tmp/ulsh-workbench-files.txt; then
+            echo "Frozen v1.0 roadmap registry must not be modified by a presentation/build-order PR."
+            exit 1
+          fi
+          if grep -E '^science/solver-hub/2026-08-07_ULSH-.*_Roadmap_v1\.0\.md$' /tmp/ulsh-workbench-files.txt; then
+            echo "Frozen v1.0 solver roadmaps must not be modified by a presentation/build-order PR."
+            exit 1
+          fi
