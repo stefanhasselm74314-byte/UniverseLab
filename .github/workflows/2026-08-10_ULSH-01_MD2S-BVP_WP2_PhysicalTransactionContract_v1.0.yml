@@ -53,5 +53,10 @@ jobs:
         run: |
           test ! -e registry/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalSolveReleaseAuthorization_v1.0.json
           test ! -e registry/2026-08-10_ULSH-01_MD2S-BVP_WP2_SingleUseExecutionGrant_v1.0.json
-          ! grep -F 'transaction_v1.0.py execute' .github/workflows/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionContract_v1.0.yml
-          ! grep -F 'execute_physical_schedule(' .github/workflows/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionContract_v1.0.yml
+          python - <<'PY'
+          from pathlib import Path
+          workflow = Path('.github/workflows/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionContract_v1.0.yml').read_text()
+          run_lines = [line.strip() for line in workflow.splitlines() if line.lstrip().startswith('run:')]
+          forbidden = (' transaction_v1.0.py execute', 'execute_physical_schedule(')
+          assert not any(token in line for line in run_lines for token in forbidden), run_lines
+          PY
