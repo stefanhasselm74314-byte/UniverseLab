@@ -9,8 +9,10 @@ MASTER = ROOT / "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json"
 BASELINE = ROOT / "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json"
 PAGE = ROOT / "2026-08-10_ULSH_MasterBuildOrder_v1.0.html"
 DOC = ROOT / "science/solver-hub/2026-08-10_ULSH_MasterBuildOrder_v1.0.md"
+FIREWALL = ROOT / "science/solver-hub/2026-08-10_ULSH_MasterBuildOrder_Firewall_v1.0.md"
 HUB = ROOT / "solver-hub.html"
 README = ROOT / "README_SOLVER_HUB.md"
+WORKBENCH = ROOT / "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html"
 
 
 def fail(message: str) -> None:
@@ -36,7 +38,7 @@ def main() -> None:
     ids = [s["id"] for s in solvers]
     base_ids = [s["id"] for s in baseline_solvers]
     if ids != base_ids:
-        fail("master solver order/identity must match roadmap baseline")
+        fail("master solver order/identity must match frozen roadmap baseline")
     if len(set(ids)) != 14:
         fail("duplicate solver ID")
 
@@ -66,6 +68,9 @@ def main() -> None:
         if any(x not in ids for x in seq):
             fail(f"unknown solver in critical path {path.get('id')}")
 
+    lanes = master.get("parallel_preparatory_lanes", [])
+    if [x.get("lane") for x in lanes] != ["P1", "P2", "P3"]:
+        fail("preparatory lane set/order drift")
     if master.get("next_primary_focus") != "ULSH-01":
         fail("ULSH-01 must remain the primary critical-path focus")
 
@@ -86,23 +91,37 @@ def main() -> None:
         if sid not in doc:
             fail(f"master document missing {sid}")
 
+    firewall = FIREWALL.read_text(encoding="utf-8")
+    for token in ["K1-D = NOT_RELEASED", "K1-E = NOT_ADMISSIBLE", "physical evidence effect = NONE", "CP01R1"]:
+        if token not in firewall:
+            fail(f"master firewall missing: {token}")
+
+    if not WORKBENCH.exists():
+        fail("Solver Workbench v1.1 must coexist with Master Build Order")
+
     hub = HUB.read_text(encoding="utf-8")
-    if "2026-08-10_ULSH_MasterBuildOrder_v1.0.html" not in hub:
-        fail("Solver Hub does not link the Master Build Order")
-    if "ULSH v1.0-alpha3" not in hub or "56" not in hub:
-        fail("Solver Hub build-order summary drift")
+    for token in [
+        "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html",
+        "2026-08-10_ULSH_MasterBuildOrder_v1.0.html",
+        "56",
+        "WORKBENCH + BUILD ORDER",
+    ]:
+        if token not in hub:
+            fail(f"Solver Hub coexistence binding missing: {token}")
 
     readme = README.read_text(encoding="utf-8")
     for token in [
+        "## Solver Workbench v1.1",
         "## Master Build Order v1.0",
         "2026-08-10_ULSH_MasterBuildOrder_v1.0.html",
         "56 Work Packages",
     ]:
         if token not in readme:
-            fail(f"README master-build-order binding missing: {token}")
+            fail(f"README planning-layer binding missing: {token}")
 
     print("PASS: ULSH Master Build Order v1.0")
-    print("solvers=14 work_packages=56 critical_paths=4 primary=ULSH-01")
+    print("solvers=14 work_packages=56 critical_paths=4 lanes=3 primary=ULSH-01")
+    print("workbench_v1.1=preserved baseline_v1.0=frozen")
     print("K1-D=NOT_RELEASED K1-E=NOT_ADMISSIBLE physical_evidence_effect=NONE")
 
 
