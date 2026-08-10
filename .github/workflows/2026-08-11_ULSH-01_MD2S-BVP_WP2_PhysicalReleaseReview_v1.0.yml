@@ -1,0 +1,63 @@
+name: ULSH-01 WP2 physical release review no-solve
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReview_v1.0.json"
+      - "tools/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReviewAudit_v1.0.py"
+      - "tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReviewTest_v1.0.py"
+      - "science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReviewLedger_v1.0.md"
+      - ".github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReview_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReview_v1.0.json"
+      - "tools/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReviewAudit_v1.0.py"
+      - "tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReviewTest_v1.0.py"
+      - "science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReviewLedger_v1.0.md"
+      - ".github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReview_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  blocked-release-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile review sources
+        run: |
+          python -m py_compile tools/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReviewAudit_v1.0.py
+          python -m py_compile tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReviewTest_v1.0.py
+
+      - name: Validate review JSON
+        run: python -m json.tool registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReview_v1.0.json >/dev/null
+
+      - name: Reproduce release blockers without solver calls
+        run: python tools/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReviewAudit_v1.0.py >/tmp/ulsh_wp2_rr.json
+
+      - name: Run release-review tests
+        run: python tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReviewTest_v1.0.py -v
+
+      - name: Hard no-release no-grant no-solve firewall
+        run: |
+          test ! -e registry/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalSolveReleaseAuthorization_v1.0.json
+          test ! -e registry/2026-08-10_ULSH-01_MD2S-BVP_WP2_SingleUseExecutionGrant_v1.0.json
+          python - <<'PY'
+          from pathlib import Path
+          workflow = Path('.github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalReleaseReview_v1.0.yml').read_text()
+          run_lines = [line.strip() for line in workflow.splitlines() if line.lstrip().startswith('run:')]
+          forbidden = (
+              'transaction_v1.0.py execute',
+              'execute_physical_schedule(',
+              'damped_newton(',
+              'shooting_residual(',
+              'least_squares(',
+              'solve_ivp(',
+          )
+          assert not any(token in line for line in run_lines for token in forbidden), run_lines
+          PY
