@@ -1,0 +1,46 @@
+name: ULSH Master Build Order v1.0
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json"
+      - "science/solver-hub/2026-08-10_ULSH_MasterBuildOrder_v1.0.md"
+      - "2026-08-10_ULSH_MasterBuildOrder_v1.0.html"
+      - "tests/2026-08-10_ULSH_MasterBuildOrder_v1.0.py"
+      - ".github/workflows/2026-08-10_ULSH_MasterBuildOrder_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json"
+      - "science/solver-hub/2026-08-10_ULSH_MasterBuildOrder_v1.0.md"
+      - "2026-08-10_ULSH_MasterBuildOrder_v1.0.html"
+      - "tests/2026-08-10_ULSH_MasterBuildOrder_v1.0.py"
+      - ".github/workflows/2026-08-10_ULSH_MasterBuildOrder_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate master build order
+        run: python tests/2026-08-10_ULSH_MasterBuildOrder_v1.0.py
+      - name: Validate JSON syntax
+        run: python -m json.tool registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json >/dev/null
+      - name: Confirm planning-only scope
+        run: |
+          git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD | tee /tmp/ulsh-build-order-files.txt
+          if grep -E '\.(py|js)$' /tmp/ulsh-build-order-files.txt | grep -v '^tests/'; then
+            echo "Unexpected executable implementation file in planning-only PR"
+            exit 1
+          fi
+          ! grep -R -n -E 'K1-D[" ]*:[" ]*"?RELEASED|K1-E[" ]*:[" ]*"?ADMISSIBLE|physical_evidence_effect[" ]*:[" ]*"?(POSITIVE|EVIDENCE)' registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json science/solver-hub/2026-08-10_ULSH_MasterBuildOrder_v1.0.md

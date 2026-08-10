@@ -1,0 +1,173 @@
+{
+  "schema": "universelab.ulsh.master-build-order.v1",
+  "version": "1.0.0",
+  "date": "2026-08-10",
+  "status": "PLANNING_EXECUTION_ORDER_NO_SOLVER_EXECUTION",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "rules": [
+      "work_package_completion_is_not_solver_release",
+      "upstream_physical_gate_required_before_downstream_physical_execution",
+      "preparatory_derivation_may_precede_upstream_release_but_cannot_claim_physical_validation",
+      "numerical_control_pass_is_not_physical_identification",
+      "all_physical_release_decisions_require_separate_review"
+    ]
+  },
+  "critical_paths": [
+    {"id":"CP-A","name":"Background -> Junction -> Rank -> Cosmology -> Likelihood","sequence":["ULSH-01","ULSH-02","ULSH-03","ULSH-10","ULSH-11"]},
+    {"id":"CP-B","name":"Background -> Constraints -> Perturbations -> Ghost/Stability -> Cosmology/GW","sequence":["ULSH-01","ULSH-04","ULSH-05","ULSH-06","ULSH-10","ULSH-13"]},
+    {"id":"CP-C","name":"Background -> Internal modes/Flux -> Phenomenology","sequence":["ULSH-01","ULSH-07","ULSH-09","ULSH-10","ULSH-12","ULSH-13"]},
+    {"id":"CP-D","name":"Background -> Constraints/Radion -> Cosmology -> MOND/RAR","sequence":["ULSH-01","ULSH-04","ULSH-08","ULSH-10","ULSH-14"]}
+  ],
+  "parallel_preparatory_lanes": [
+    {"lane":"P1","solvers":["ULSH-04"],"scope":"Hamiltonian/constraint derivation only; no physical DOF claim before released background."},
+    {"lane":"P2","solvers":["ULSH-07","ULSH-09"],"scope":"operator/quantization contracts and manufactured controls only."},
+    {"lane":"P3","solvers":["ULSH-12","ULSH-14"],"scope":"source/quasistatic derivation skeletons only; no phenomenological fit claims."}
+  ],
+  "solvers": [
+    {
+      "id":"ULSH-01","module_id":"MD2S-BVP","upstream":[],"priority":"ACTIVE_CRITICAL_PATH",
+      "work_packages":[
+        "WP1 Targetgleichungs- und Randbedingungsvertrag aus kanonischem M1 schließen",
+        "WP2 physische BVP-Transaktion gegen eingefrorenen Target-Payload freigabefähig machen",
+        "WP3 unabhängige Backend-Gegenprüfung und Mesh/Residual-Konvergenz ausführen",
+        "WP4 einseitigen Bulk/Cap-Randexport samt Provenienz einfrieren"
+      ],
+      "release_gate":"REPRODUCIBLE_PHYSICAL_MD2S_BACKGROUND_WITH_ONE_SIDED_BOUNDARY_EXPORT"
+    },
+    {
+      "id":"ULSH-02","module_id":"MD2S-JUNCTION","upstream":["ULSH-01"],"priority":"AFTER_ULSH_01_GATE",
+      "work_packages":[
+        "WP1 Randexport-Schema inklusive orientierter Normalen verifizieren",
+        "WP2 beide Junction-Gleichungen und Pure-Tension-Residual auswerten",
+        "WP3 Y_sigma_required und Vorzeichen-/Orientierungskontrollen reproduzieren",
+        "WP4 Zwei-Junction-Konsistenzurteil mit Provenienz einfrieren"
+      ],
+      "release_gate":"TWO_JUNCTION_RESIDUALS_AND_REQUIRED_Y_SIGMA_REPRODUCED_FROM_RELEASED_BACKGROUND"
+    },
+    {
+      "id":"ULSH-03","module_id":"MD2S-RANK","upstream":["ULSH-01","ULSH-02"],"priority":"AFTER_ULSH_02_GATE",
+      "work_packages":[
+        "WP1 vollständige linearisierte Randantwort ableiten",
+        "WP2 Parameterperturbationen, Antwortmatrix und Skalierungen einfrieren",
+        "WP3 SVD/RRQR/Rang-/Konditionskontrollen über mehrere Diskretisierungen ausführen",
+        "WP4 diskreten Rang strikt von Kontinuumsinvertierbarkeit abgrenzen"
+      ],
+      "release_gate":"REPRODUCIBLE_RESPONSE_MATRIX_WITH_RANK_SINGULAR_VALUES_CONDITIONING_AND_CONTINUUM_SCOPE"
+    },
+    {
+      "id":"ULSH-04","module_id":"CONSTRAINT","upstream":["ULSH-01"],"priority":"PREPARATORY_DERIVATION_ADMISSIBLE",
+      "work_packages":[
+        "WP1 ADM-/Hamilton-Zerlegung und kanonische Variablen ableiten",
+        "WP2 Primär-, Sekundär- und höhere Zwänge sowie Poisson-Algebra schließen",
+        "WP3 first-/second-class Klassifikation und Gauge-Generatoren implementieren",
+        "WP4 physischen Freiheitsgrad-Count auf freigegebenem Hintergrund validieren"
+      ],
+      "release_gate":"CLOSED_CONSTRAINT_ALGEBRA_AND_PHYSICAL_DOF_COUNT_ON_RELEASED_BACKGROUND"
+    },
+    {
+      "id":"ULSH-05","module_id":"PERTURBATION","upstream":["ULSH-01","ULSH-04"],"priority":"PREPARATORY_DERIVATION_ONLY",
+      "work_packages":[
+        "WP1 quadratische Wirkung S^(2) vollständig herleiten",
+        "WP2 gauge-invariante S/V/T-Variablen und Randbedingungen definieren",
+        "WP3 Constraints eliminieren und gekoppelte Modengleichungen implementieren",
+        "WP4 GR-/Kontrollgrenzen sowie Auflösungs- und Residualtests validieren"
+      ],
+      "release_gate":"GAUGE_CONTROLLED_QUADRATIC_PERTURBATION_SYSTEM_WITH_REPRODUCIBLE_MODE_EVOLUTION"
+    },
+    {
+      "id":"ULSH-06","module_id":"GHOST","upstream":["ULSH-04","ULSH-05"],"priority":"BLOCKED_BY_CONSTRAINT_AND_PERTURBATION",
+      "work_packages":[
+        "WP1 physische kinetische Matrix nach Constraint-Elimination konstruieren",
+        "WP2 Schur-Komplement und kanonische Normierung prüfen",
+        "WP3 Ghost-, Gradient- und Tachyonkriterien implementieren",
+        "WP4 Eigenwert-/Konditionsrobustheit über zulässige Variablenbasen testen"
+      ],
+      "release_gate":"POSITIVE_PHYSICAL_KINETIC_SECTOR_AND_ACCEPTABLE_GRADIENT_TACHYON_GATES_WITH_SCOPE"
+    },
+    {
+      "id":"ULSH-07","module_id":"KK","upstream":["ULSH-01"],"priority":"PREPARATORY_OPERATOR_WORK_ADMISSIBLE",
+      "work_packages":[
+        "WP1 sektorspezifischen Sturm-Liouville-Operator herleiten",
+        "WP2 Endpunktbedingungen, Maß und Normierung einfrieren",
+        "WP3 Eigenwert-/Eigenmodenlöser mit Orthogonalitätskontrollen implementieren",
+        "WP4 Spektrum gegen Gitter-/Basisverfeinerung und bekannte Grenzfälle validieren"
+      ],
+      "release_gate":"CONVERGED_KK_EIGENSPECTRUM_WITH_NORMALIZED_MODES_AND_BOUNDARY_PROVENANCE"
+    },
+    {
+      "id":"ULSH-08","module_id":"RADION","upstream":["ULSH-01","ULSH-04","ULSH-05"],"priority":"BLOCKED_FOR_PHYSICAL_RELEASE",
+      "work_packages":[
+        "WP1 kanonische physische Radion-/Skalarmode isolieren",
+        "WP2 constraint-bereinigten Massenoperator und Materiekopplung ableiten",
+        "WP3 Normalisierung und Stabilitätsdiagnostik implementieren",
+        "WP4 schweren stabilisierten Radion bestätigen oder Zweig explizit ausschließen"
+      ],
+      "release_gate":"STABILIZED_HEAVY_RADION_OR_EXPLICIT_EXCLUSION_WITH_COUPLING_AND_MODE_NORMALIZATION"
+    },
+    {
+      "id":"ULSH-09","module_id":"FLUX","upstream":["ULSH-01"],"priority":"PREPARATORY_QUANTIZATION_WORK_ADMISSIBLE",
+      "work_packages":[
+        "WP1 globalen Flux-/Quantisierungsvertrag und Topologiebedingungen schließen",
+        "WP2 Regularitäts- und Randdaten für Fluxsektor einfrieren",
+        "WP3 Fluxmoden/Metastabilitätsoperator implementieren",
+        "WP4 Quantisierung, Regularität und Mode-Diagnostik reproduzierbar validieren"
+      ],
+      "release_gate":"GLOBAL_REGULAR_FLUX_CONFIGURATION_WITH_QUANTIZATION_AND_REPRODUCIBLE_MODE_DIAGNOSTICS"
+    },
+    {
+      "id":"ULSH-10","module_id":"COSMO","upstream":["ULSH-01","ULSH-02","ULSH-03","ULSH-05","ULSH-06","ULSH-07","ULSH-08","ULSH-09"],"priority":"BLOCKED_BY_FOUNDATIONAL_GATES",
+      "work_packages":[
+        "WP1 ratifizierte 6D-zu-4D-Parameterabbildung schließen",
+        "WP2 Hintergrund-, Wachstum- und Lensing-Gleichungen ableiten",
+        "WP3 Forward-Map zu H(z), Distanzen, fSigma8, mu, Sigma und eta implementieren",
+        "WP4 Kontrollgrenzen und K1-D-Identifizierbarkeitsvoraussetzungen validieren"
+      ],
+      "release_gate":"K1_D_ELIGIBLE_PHYSICAL_FORWARD_MAP_WITH_BACKGROUND_GROWTH_LENSING_OUTPUTS"
+    },
+    {
+      "id":"ULSH-11","module_id":"LIKELIHOOD","upstream":["ULSH-10"],"priority":"BLOCKED_UNTIL_K1_D",
+      "work_packages":[
+        "WP1 Daten-, Kovarianz-, Prior- und Nuisanceverträge einfrieren",
+        "WP2 Likelihood-Schnittstellen für freigegebene Observablen implementieren",
+        "WP3 synthetische Coverage-/Calibration-/Recovery-Tests durchführen",
+        "WP4 K1-E-Zulässigkeit separat prüfen; Fit niemals als Bestätigung klassifizieren"
+      ],
+      "release_gate":"K1_E_ADMISSIBLE_LIKELIHOOD_WITH_FROZEN_DATA_COVARIANCE_PRIORS_AND_PROVENANCE"
+    },
+    {
+      "id":"ULSH-12","module_id":"BARYO","upstream":["ULSH-09","ULSH-10"],"priority":"PREPARATORY_SOURCE_DERIVATION_ONLY",
+      "work_packages":[
+        "WP1 konkrete CP-verletzende Quelle aus Parent-/Fluxdynamik ableiten",
+        "WP2 Nichtgleichgewichts-Übergang und Reaktions-/Diffusionsraten einfrieren",
+        "WP3 gekoppeltes Transportnetz implementieren",
+        "WP4 Baryonasymmetrie mit Quellen-/Raten-/Numerik-Sensitivität validieren"
+      ],
+      "release_gate":"CLOSED_TRANSPORT_NETWORK_WITH_DERIVED_SOURCE_AND_REPRODUCIBLE_BARYON_ASYMMETRY_OUTPUT"
+    },
+    {
+      "id":"ULSH-13","module_id":"GW","upstream":["ULSH-05","ULSH-06","ULSH-07","ULSH-10","ULSH-12"],"priority":"BLOCKED_FOR_PHYSICAL_RELEASE",
+      "work_packages":[
+        "WP1 Quellklasse explizit auswählen und Tensorsektor binden",
+        "WP2 Propagations-/Quellengleichungen und Transferfunktionen ableiten",
+        "WP3 Spektrum bis zum Beobachterframe implementieren",
+        "WP4 Stabilitäts-, Quellen- und Detektorband-Sensitivität validieren"
+      ],
+      "release_gate":"SOURCE_SPECIFIC_GW_SPECTRUM_WITH_STABLE_TENSOR_PROPAGATION_AND_OBSERVABLE_PROVENANCE"
+    },
+    {
+      "id":"ULSH-14","module_id":"MOND","upstream":["ULSH-04","ULSH-08","ULSH-10"],"priority":"PREPARATORY_QUASISTATIC_DERIVATION_ONLY",
+      "work_packages":[
+        "WP1 quasistatischen Schwachfeldgrenzfall aus Parentwirkung ableiten",
+        "WP2 Materiekopplung, Screening und nichtlokale Bulkantwort schließen",
+        "WP3 a0-Normalisierung aus Parentparametern statt freiem Fit herleiten",
+        "WP4 RAR/MOND-Observablen erst danach implementieren und gegen Daten diagnostizieren"
+      ],
+      "release_gate":"DERIVED_A0_AND_QUASISTATIC_RAR_MAP_WITHOUT_FREE_ACCELERATION_SCALE"
+    }
+  ],
+  "next_primary_focus": "ULSH-01",
+  "next_primary_reason": "All physical downstream chains depend directly or indirectly on a released MD2S background; parallel work is limited to preparatory derivation and contracts."
+}
