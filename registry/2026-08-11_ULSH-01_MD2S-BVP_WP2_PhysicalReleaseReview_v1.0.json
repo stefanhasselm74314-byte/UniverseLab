@@ -1,0 +1,135 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp2-physical-release-review.v1",
+  "version": "1.0.0",
+  "date": "2026-08-11",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP2-RR",
+  "reviewed_baseline_commit": "437b4e14edb65ae6abf7362d6247fe285026bf6b",
+  "reviewed_run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+  "reviewed_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+  "review_scope": "PHYSICAL_RELEASE_READINESS_ONLY_NO_SOLVE_NO_GRANT",
+  "review_status": "BLOCKED_WP2_PHYSICAL_RELEASE_REVIEW_NO_SOLVE",
+  "release_decision": "DO_NOT_CREATE_PHYSICAL_SOLVE_RELEASE_OR_SINGLE_USE_GRANT",
+  "physical_solve_authorized": false,
+  "physical_solve_executed": false,
+  "physical_evidence_effect": "NONE",
+  "reviewed_source_blobs": {
+    "wp2_contract": "f384801d5693c35a93863c59fa413121061dfdb0",
+    "target_entrypoint": "ea02d02f61e8c072c1191577c1bf7660038ad516",
+    "transaction_guard": "110ca418cfed89f9661018c499342a0cd3bc6821",
+    "wp2_test": "e5e572b1658233c9cf035d04c630013c9523648a",
+    "wp2_workflow": "de270bb88d5490f6510d6afc6b0919e8a4a267c6",
+    "wp2_ledger": "b9f9129accd598e6d4c5cdc92ff4c47ec5831b0b",
+    "resource_policy": "954a9730d3fa34864df7168555912ebba2dd6c3d",
+    "result_schema": "b1fdf45aa9fb3d585e73795e9294dfa0c185fc39",
+    "preregistration": "9789101e0a168580b6906eb21edad5a5db2b64ce"
+  },
+  "prerequisite_ci_evidence": [
+    {
+      "workflow": "ULSH-01 WP2 physical transaction no-solve contract",
+      "run_id": 31402294613,
+      "baseline_commit": "437b4e14edb65ae6abf7362d6247fe285026bf6b",
+      "conclusion": "success"
+    },
+    {
+      "workflow": "Research contracts",
+      "run_id": 31402294359,
+      "baseline_commit": "437b4e14edb65ae6abf7362d6247fe285026bf6b",
+      "conclusion": "success"
+    },
+    {
+      "workflow": "UniverseLab dated file naming contract",
+      "run_id": 31402294515,
+      "baseline_commit": "437b4e14edb65ae6abf7362d6247fe285026bf6b",
+      "conclusion": "success"
+    }
+  ],
+  "confirmed_strengths": [
+    "CP01R1 run id and frozen payload digest are source-bound",
+    "a_F remains exactly 1/4 and the historical a_F=0 control override is excluded from the target path",
+    "the deterministic 7-seed x 5-node-level schedule is fixed at 35 planned primary entries",
+    "primary, primary-base and independent backend raw-file hashes are checked before future execution",
+    "dependency, resource and result-schema sources are content-addressed",
+    "release authorization and single-use grant artifacts are absent",
+    "single-use spend uses exclusive creation and permanent replay denial",
+    "WP2 audit and CI paths execute zero numerical solver calls"
+  ],
+  "blocking_findings": [
+    {
+      "id": "RR-B01",
+      "classification": "BLOCKER",
+      "title": "PER_SEED_PER_LEVEL_TIMEOUT_NOT_ENFORCED",
+      "required_by": "Background3CResourcePolicy_v0.1.maximum_wall_clock_seconds_per_seed_per_level=1800",
+      "observed": "WP2 transaction enforces only the total wall-clock alarm; the 1800 s per seed/per node-level limit is not applied around each planned schedule entry.",
+      "risk": "A single preregistered stage can violate the frozen resource envelope while the transaction still remains under the six-hour total budget.",
+      "closure_condition": "Add deterministic per-entry timeout enforcement with the frozen timeout_action and no retry/method change."
+    },
+    {
+      "id": "RR-B02",
+      "classification": "BLOCKER",
+      "title": "MAXIMUM_RESULT_BYTES_NOT_ENFORCED",
+      "required_by": "Background3CResourcePolicy_v0.1.maximum_result_bytes=1073741824",
+      "observed": "WP2 binds the 1 GiB result budget in the contract but does not enforce it while staging or committing execution artifacts.",
+      "risk": "A future execution could exceed the preregistered result budget without fail-closed classification.",
+      "closure_condition": "Enforce a cumulative artifact byte budget before atomic commit and preserve a classified partial/failure record without replay."
+    },
+    {
+      "id": "RR-B03",
+      "classification": "BLOCKER",
+      "title": "MANDATORY_RESULT_AND_QA_ARTIFACT_CLOSURE_MISSING",
+      "required_by": "Background3APreregistrationContract_v0.1.mandatory_run_artifacts and Background3CResultSchema_v0.1.required fields",
+      "observed": "The current target returns a compact raw matrix record. It does not preserve enough state and QA channels to instantiate all required primary_backend, independent_backend, candidate_inventory and acceptance_audit fields after the solve.",
+      "missing_or_not_closed": [
+        "per-seed/per-level convergence history in final schema form",
+        "all eight boundary residuals per retained root",
+        "rr-constraint profile/norm",
+        "profile and augmented-variable convergence tables",
+        "last-eight spectral coefficient audit at N=96",
+        "diagnostic singular-value/condition data sufficient for the declared result schema",
+        "candidate profile artifacts and their SHA-256 digests",
+        "full admissibility gates",
+        "machine-readable final classification under the frozen vocabulary"
+      ],
+      "risk": "A physical solve could consume the single-use grant and then produce an evidentially unusable raw output that cannot be reconstructed into the preregistered result record.",
+      "closure_condition": "Capture the mandatory channels during execution and atomically instantiate or losslessly stage a schema-complete result package before any release is granted."
+    },
+    {
+      "id": "RR-B04",
+      "classification": "BLOCKER",
+      "title": "MACHINE_ATTESTATION_INCOMPLETE_FOR_FROZEN_REPRODUCIBILITY_POLICY",
+      "required_by": "Background3CResourcePolicy_v0.1.reproducibility.cpu_and_blas_metadata_required=true",
+      "observed": "WP2 runtime attestation records Python, dependency versions, thread environment and logical core count, but not a positive CPU identity record and BLAS/LAPACK implementation metadata.",
+      "risk": "The future physical execution would not satisfy the frozen machine-environment provenance requirement.",
+      "closure_condition": "Record CPU/platform identity plus NumPy/SciPy BLAS/LAPACK configuration in the immutable runtime attestation."
+    }
+  ],
+  "nonblocking_findings": [
+    {
+      "id": "RR-W01",
+      "classification": "WARNING",
+      "title": "DEPENDENCY_LOCK_PATH_SEMANTIC_ALIAS",
+      "observed": "WP2 names the Background3B dependency-lock path whereas the frozen Resource Policy names Background3C. Both files currently resolve to the same Git blob 2c3a8126fc5ec23bd82f0e99d6922610d9250bfc and therefore the same bytes.",
+      "required_action": "Normalize the canonical path during hardening to avoid future semantic drift even though no present dependency-byte mismatch exists."
+    },
+    {
+      "id": "RR-W02",
+      "classification": "WARNING",
+      "title": "RAW_QUARANTINE_PATH_REQUIRES_EXPLICIT_PROMOTION_PROTOCOL",
+      "observed": "WP2 stages future raw execution outside the repository, while the frozen Result Schema defines a canonical immutable artifacts/hzt-m0/md2s/background3c/<run_id>/<authorization_decision_id>/ package.",
+      "required_action": "Define an explicit lossless promotion/packaging step or make the external transaction directory mirror the canonical result package before release."
+    }
+  ],
+  "evidence_hygiene": {
+    "technical_transaction_readiness_is_physical_identification": false,
+    "release_review_is_solver_authorization": false,
+    "successful_ci_is_background_existence": false,
+    "future_numerical_convergence_is_continuum_existence_proof": false,
+    "future_two_backend_agreement_is_physical_confirmation": false,
+    "future_numerical_stability_is_ghost_freedom": false,
+    "K1_D_effect": "NONE",
+    "K1_E_effect": "NONE"
+  },
+  "next_allowed_action": "ULSH-01_WP2_HARDENING_CLOSE_RR-B01_THROUGH_RR-B04_NO_SOLVE",
+  "forbidden_next_action": "DO_NOT_GENERATE_RELEASE_AUTHORIZATION_OR_SINGLE_USE_GRANT_UNTIL_ALL_BLOCKERS_ARE_CLOSED_AND_RE_REVIEWED"
+}
