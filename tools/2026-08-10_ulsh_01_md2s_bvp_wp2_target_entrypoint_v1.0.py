@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """ULSH-01 / WP2 source-bound entry point for the frozen CP01R1 physical BVP.
 
-Audit/schedule operations are non-numerical.  Numerical backends are imported
+Audit/schedule operations are non-numerical. Numerical backends are imported
 only by execute_physical_schedule() after a transaction capability has already
-passed the WP2 grant/release firewall.  This module has no direct solve CLI.
+passed the WP2 grant/release firewall. This module has no direct solve CLI.
 """
 from __future__ import annotations
 
@@ -37,6 +37,7 @@ PLANNED_ENTRY_COUNT = 35
 RUN_INPUT_PATH = ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json"
 PREREG_PATH = ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationContract_v0.1.json"
 SEED_SPEC_PATH = ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json"
+RESOURCE_POLICY_PATH = ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json"
 PRIMARY_PATH = ROOT / "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py"
 PRIMARY_BASE_PATH = ROOT / "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py"
 INDEPENDENT_PATH = ROOT / "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py"
@@ -74,11 +75,11 @@ def sha256_bytes(data: bytes) -> str:
 
 
 def sha256_file(path: Path) -> str:
-    h = hashlib.sha256()
+    digest = hashlib.sha256()
     with path.open("rb") as stream:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            h.update(chunk)
-    return h.hexdigest()
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -89,9 +90,7 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def parse_fraction(value: Any) -> Fraction:
-    if isinstance(value, str):
-        return Fraction(value)
-    return Fraction(value)
+    return Fraction(value) if isinstance(value, str) else Fraction(value)
 
 
 def frozen_payload() -> dict[str, Any]:
@@ -145,17 +144,24 @@ def validate_schedule_against_sources() -> dict[str, Any]:
     payload = frozen_payload()
     seed_spec = load_json(SEED_SPEC_PATH)
     prereg = load_json(PREREG_PATH)
+    resource = load_json(RESOURCE_POLICY_PATH)
     declared_seed_ids = tuple(seed["seed_id"] for seed in seed_spec.get("seeds_ordered", []))
     if declared_seed_ids != SEED_IDS:
         raise TargetContractError("seed order differs from frozen seven-seed schedule")
-    if tuple(prereg["solver_protocol"]["mesh_hierarchy"]["regional_node_counts"]) != NODE_COUNTS:
+    if tuple(prereg["primary_discretization"]["regional_node_counts"]) != NODE_COUNTS:
         raise TargetContractError("mesh hierarchy differs from frozen five-level schedule")
-    if prereg["solver_protocol"]["seed_policy"]["seed_count"] != 7:
+    if prereg["deterministic_seed_protocol"]["seed_set_size"] != 7:
         raise TargetContractError("preregistered seed count drift")
+    if tuple(resource["execution_order"]["primary_node_counts"]) != NODE_COUNTS:
+        raise TargetContractError("resource-policy node order drift")
+    if tuple(resource["execution_order"]["seed_order"]) != tuple(range(7)):
+        raise TargetContractError("resource-policy seed order drift")
+    if resource["execution_order"]["independent_backend_after_primary_candidate_only"] is not True:
+        raise TargetContractError("independent-backend dispatch policy drift")
     schedule = build_schedule()
     return {
         "run_id": payload["run_id"],
-        "a_F": str(EXPECTED_A_F),
+        "a_F": "1/4",
         "seed_count": len(SEED_IDS),
         "node_counts": list(NODE_COUNTS),
         "planned_entry_count": len(schedule),
@@ -233,15 +239,16 @@ def _prolongate_state(primary: Any, state: Any, old_n: int, new_n: int):
 
 
 def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str, Any]:
-    """Execute CP01R1 only after the WP2 transaction has issued a valid capability.
+    """Execute CP01R1 only after the WP2 transaction issued a valid capability.
 
-    This function is intentionally never called by WP2 CI/audit.  It contains
-    no parameter substitution, no control a_F override, no random retry, and no
-    surrogate fallback.  The immutable 35-entry schedule is the outer plan;
-    each planned entry records primary and independent backend channels.
+    WP2 CI/audit never calls this function. The 35-entry outer schedule remains
+    unchanged. The independent backend is invoked only after a primary numerical
+    candidate, exactly as frozen by the resource policy. No parameter substitution,
+    random retry, adaptive mesh insertion, surrogate or control fallback exists.
     """
     _validate_capability(capability)
     payload = frozen_payload()
+    validate_schedule_against_sources()
     validate_backend_hashes()
 
     # Numerical imports happen only after every capability/source check above.
@@ -254,12 +261,16 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
     primary_sector = primary.sector_from_payload(payload)
     independent_model = independent.model_from_payload(payload, control_a_F=False)
     independent_sector = independent.sector_from_payload(payload)
-    if Fraction(str(primary_model.a_F)) != EXPECTED_A_F or Fraction(str(independent_model.a_F)) != EXPECTED_A_F:
+    if abs(float(primary_model.a_F) - 0.25) > 0.0 or abs(float(independent_model.a_F) - 0.25) > 0.0:
         raise TargetContractError("backend model construction changed a_F")
 
+    prereg = load_json(PREREG_PATH)
+    nonlinear = prereg["nonlinear_method"]
+    thresholds = prereg["acceptance_thresholds"]
     schedule = build_schedule()
     results: list[dict[str, Any]] = []
     continuation: dict[str, tuple[int, Any]] = {}
+
     for entry in schedule:
         seed_id = entry["seed_id"]
         seed_index = int(entry["seed_index"])
@@ -271,41 +282,65 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
             initial = primary.seven_seeds(node_count)[seed_index]
 
         primary_result = primary.damped_newton(
-            initial, node_count, primary_model, primary_sector,
-            maximum_iterations=40,
-            residual_tolerance=1.0e-9,
-            step_tolerance=1.0e-9,
+            initial,
+            node_count,
+            primary_model,
+            primary_sector,
+            maximum_iterations=int(nonlinear["maximum_newton_iterations_per_mesh"]),
+            maximum_backtracking_steps=int(nonlinear["maximum_backtracking_steps"]),
+            armijo_parameter=float(nonlinear["armijo_parameter"]),
+            minimum_step_fraction=float(nonlinear["minimum_step_fraction"]),
+            trust_radius_initial=float(nonlinear["trust_region_initial_radius"]),
+            trust_radius_minimum=float(nonlinear["trust_region_minimum_radius"]),
+            residual_tolerance=float(thresholds["bulk_residual_max"]),
+            stagnation_window_iterations=int(nonlinear["stagnation_window_iterations"]),
+            stagnation_relative_improvement_floor=float(nonlinear["stagnation_relative_improvement_floor"]),
         )
         primary_state = np.asarray(primary_result["state"], dtype=float)
         primary_residual, primary_detail = primary.residual(primary_state, node_count, primary_model, primary_sector)
         primary_inf = float(np.max(np.abs(primary_residual)))
         primary_bc = float(np.max(np.abs(primary_detail["boundary"])))
-        if bool(primary_result.get("converged")):
+        primary_candidate = (
+            bool(primary_result.get("converged"))
+            and primary_inf <= float(thresholds["bulk_residual_max"])
+            and primary_bc <= float(thresholds["boundary_residual_max"])
+        )
+        if primary_candidate:
             continuation[seed_id] = (node_count, primary_state.copy())
 
-        _regions, shooting_initial = primary.unpack_state(primary_state, node_count)
-        shooting_initial = np.asarray(shooting_initial, dtype=float)
+        independent_record: dict[str, Any] | None = None
+        if primary_candidate:
+            _regions, shooting_initial = primary.unpack_state(primary_state, node_count)
+            shooting_initial = np.asarray(shooting_initial, dtype=float)
 
-        def independent_residual(vector):
-            values, _ = independent.shooting_residual(
-                vector, independent_model, independent_sector,
-                epsilon=1.0e-6,
-                sample_count=max(257, 4 * node_count + 1),
+            def independent_residual(vector):
+                values, _ = independent.shooting_residual(
+                    vector,
+                    independent_model,
+                    independent_sector,
+                    epsilon=1.0e-6,
+                    sample_count=max(257, 4 * node_count + 1),
+                )
+                return values
+
+            independent_result = least_squares(
+                independent_residual,
+                shooting_initial,
+                jac=lambda x: independent.centered_fd_jacobian(independent_residual, x, relative_step=1.0e-6),
+                method="trf",
+                max_nfev=int(nonlinear["maximum_newton_iterations_per_mesh"]),
+                ftol=float(thresholds["bulk_residual_max"]),
+                xtol=float(thresholds["bulk_residual_max"]),
+                gtol=float(thresholds["bulk_residual_max"]),
             )
-            return values
-
-        independent_result = least_squares(
-            independent_residual,
-            shooting_initial,
-            jac=lambda x: independent.centered_fd_jacobian(independent_residual, x, relative_step=1.0e-6),
-            method="trf",
-            max_nfev=40,
-            ftol=1.0e-9,
-            xtol=1.0e-9,
-            gtol=1.0e-9,
-        )
-        independent_inf = float(np.max(np.abs(independent_result.fun)))
-        agreement_scalar = float(np.max(np.abs(np.asarray(independent_result.x) - shooting_initial)))
+            independent_inf = float(np.max(np.abs(independent_result.fun)))
+            agreement_scalar = float(np.max(np.abs(np.asarray(independent_result.x) - shooting_initial)))
+            independent_record = {
+                "converged": bool(independent_result.success),
+                "residual_inf": independent_inf,
+                "nfev": int(independent_result.nfev),
+                "agreement_augmented_linf": agreement_scalar,
+            }
 
         results.append({
             "entry_id": entry["entry_id"],
@@ -313,17 +348,13 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
             "node_count": node_count,
             "primary": {
                 "converged": bool(primary_result.get("converged")),
+                "candidate_under_local_residual_gate": primary_candidate,
                 "failure": primary_result.get("failure"),
                 "residual_inf": primary_inf,
-                "four_bc_inf": primary_bc,
+                "boundary_inf": primary_bc,
                 "iterations": len(primary_result.get("history", [])),
             },
-            "independent": {
-                "converged": bool(independent_result.success) and independent_inf <= 1.0e-8,
-                "residual_inf": independent_inf,
-                "nfev": int(independent_result.nfev),
-            },
-            "agreement_scalar": agreement_scalar,
+            "independent": independent_record,
         })
 
     return {
@@ -332,7 +363,7 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
         "schedule_sha256": schedule_sha256(),
         "planned_schedule_entries": PLANNED_ENTRY_COUNT,
         "matrix_entries": results,
-        "physical_evidence_effect": "NONE_PENDING_QA_AND_RELEASE_CHAIN",
+        "physical_evidence_effect": "NONE_PENDING_FULL_QA_CLASSIFICATION",
     }
 
 
