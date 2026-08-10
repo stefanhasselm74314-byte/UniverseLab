@@ -5,23 +5,33 @@ on:
     paths:
       - "solver-hub.html"
       - "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html"
+      - "2026-08-10_ULSH_MasterBuildOrder_v1.0.html"
       - "solver-hub-manifest.json"
       - "README_SOLVER_HUB.md"
       - "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json"
+      - "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json"
       - "science/solver-hub/2026-08-07_ULSH-*_Roadmap_v1.0.md"
+      - "science/solver-hub/2026-08-10_ULSH_MasterBuildOrder*_v1.0.md"
       - "tests/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.py"
+      - "tests/2026-08-10_ULSH_MasterBuildOrder_v1.0.py"
       - ".github/workflows/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.yml"
+      - ".github/workflows/2026-08-10_ULSH_MasterBuildOrder_v1.0.yml"
   push:
     branches: [main]
     paths:
       - "solver-hub.html"
       - "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html"
+      - "2026-08-10_ULSH_MasterBuildOrder_v1.0.html"
       - "solver-hub-manifest.json"
       - "README_SOLVER_HUB.md"
       - "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json"
+      - "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json"
       - "science/solver-hub/2026-08-07_ULSH-*_Roadmap_v1.0.md"
+      - "science/solver-hub/2026-08-10_ULSH_MasterBuildOrder*_v1.0.md"
       - "tests/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.py"
+      - "tests/2026-08-10_ULSH_MasterBuildOrder_v1.0.py"
       - ".github/workflows/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.yml"
+      - ".github/workflows/2026-08-10_ULSH_MasterBuildOrder_v1.0.yml"
 
 permissions:
   contents: read
@@ -37,11 +47,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate registry, roadmaps and dependency graph
+      - name: Validate frozen registry, roadmaps and dependency graph
         run: python tests/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.py
+      - name: Validate Master Build Order
+        run: python tests/2026-08-10_ULSH_MasterBuildOrder_v1.0.py
       - name: Validate JSON syntax
-        run: python -m json.tool registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json >/dev/null
-      - name: Validate dashboard inline JavaScript syntax
+        run: |
+          python -m json.tool registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json >/dev/null
+      - name: Validate baseline dashboard inline JavaScript syntax
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -53,6 +67,18 @@ jobs:
           Path("/tmp/ulsh-dashboard.js").write_text(scripts[0], encoding="utf-8")
           PY
           node --check /tmp/ulsh-dashboard.js
+      - name: Validate Master Build Order inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path("2026-08-10_ULSH_MasterBuildOrder_v1.0.html").read_text(encoding="utf-8")
+          scripts = re.findall(r"<script>(.*?)</script>", html, flags=re.S)
+          if len(scripts) != 1:
+              raise SystemExit(f"expected exactly one master-build script, found {len(scripts)}")
+          Path("/tmp/ulsh-master-build-order.js").write_text(scripts[0], encoding="utf-8")
+          PY
+          node --check /tmp/ulsh-master-build-order.js
       - name: Confirm no execution-capable solver code was added
         run: |
           git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD | tee /tmp/ulsh-files.txt
