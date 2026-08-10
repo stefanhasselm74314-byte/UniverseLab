@@ -2,9 +2,9 @@
   "schema": "universelab.solver-hub.v1",
   "name": "UniverseLab Solver Hub",
   "short_name": "ULSH",
-  "version": "1.0.0-alpha2",
-  "status": "ARCHITECTURE_DEFINED_ROADMAPS_FROZEN_MD2S_KERNEL_INITIALIZED",
-  "release_date": "2026-08-07",
+  "version": "1.0.0-alpha3",
+  "status": "ARCHITECTURE_DEFINED_ROADMAP_WORKBENCH_ACTIVE_MD2S_KERNEL_INITIALIZED",
+  "release_date": "2026-08-10",
   "governance": {
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
@@ -25,12 +25,15 @@
     "required_diagnostics": ["absolute_residual", "relative_residual", "mesh_or_step_convergence", "condition_information_where_applicable", "hashes"]
   },
   "development_program": {
-    "version": "1.0.0",
-    "status": "PLANNING_BASELINE_NO_EXECUTION_EFFECT",
-    "dashboard": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+    "baseline_version": "1.0.0",
+    "workbench_version": "1.1.0",
+    "status": "PLANNING_BASELINE_FROZEN_WORKBENCH_ACTIVE_NO_EXECUTION_EFFECT",
+    "baseline_dashboard": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+    "dashboard": "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html",
     "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
     "roadmap_count": 14,
-    "readiness_is": "planning_and_implementation_maturity_only"
+    "readiness_is": "planning_and_implementation_maturity_only",
+    "workbench_effect": "presentation_and_dependency_work_queue_only"
   },
   "modules": [
     {"id":"MD2S-BVP","roadmap_id":"ULSH-01","name":"HZT-M0-S6 MD-2S Background BVP Solver","status":"INITIAL_SCAFFOLD","planning_maturity":"DETAILED","priority":0},
