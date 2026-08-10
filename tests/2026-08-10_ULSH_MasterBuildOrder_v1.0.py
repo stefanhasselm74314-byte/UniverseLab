@@ -9,6 +9,8 @@ MASTER = ROOT / "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json"
 BASELINE = ROOT / "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json"
 PAGE = ROOT / "2026-08-10_ULSH_MasterBuildOrder_v1.0.html"
 DOC = ROOT / "science/solver-hub/2026-08-10_ULSH_MasterBuildOrder_v1.0.md"
+HUB = ROOT / "solver-hub.html"
+README = ROOT / "README_SOLVER_HUB.md"
 
 
 def fail(message: str) -> None:
@@ -83,6 +85,21 @@ def main() -> None:
     for sid in ids:
         if sid not in doc:
             fail(f"master document missing {sid}")
+
+    hub = HUB.read_text(encoding="utf-8")
+    if "2026-08-10_ULSH_MasterBuildOrder_v1.0.html" not in hub:
+        fail("Solver Hub does not link the Master Build Order")
+    if "ULSH v1.0-alpha3" not in hub or "56" not in hub:
+        fail("Solver Hub build-order summary drift")
+
+    readme = README.read_text(encoding="utf-8")
+    for token in [
+        "## Master Build Order v1.0",
+        "2026-08-10_ULSH_MasterBuildOrder_v1.0.html",
+        "56 Work Packages",
+    ]:
+        if token not in readme:
+            fail(f"README master-build-order binding missing: {token}")
 
     print("PASS: ULSH Master Build Order v1.0")
     print("solvers=14 work_packages=56 critical_paths=4 primary=ULSH-01")
