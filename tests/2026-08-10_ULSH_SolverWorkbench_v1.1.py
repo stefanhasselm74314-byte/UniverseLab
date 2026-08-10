@@ -52,13 +52,15 @@ def main() -> None:
             fail(f"no release gate for {solver.get('id')}")
 
     program = manifest.get("development_program", {})
-    if program.get("baseline_version") != "1.0.0":
-        fail("manifest baseline version drift")
+    if program.get("version") != "1.0.0":
+        fail("frozen baseline version drift")
+    if program.get("dashboard") != "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html":
+        fail("frozen baseline dashboard drift")
     if program.get("workbench_version") != "1.1.0":
         fail("manifest workbench version drift")
     if program.get("registry") != "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json":
         fail("workbench no longer uses frozen v1.0 registry")
-    if program.get("dashboard") != "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html":
+    if program.get("workbench_dashboard") != "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html":
         fail("manifest workbench dashboard drift")
     if program.get("workbench_effect") != "presentation_and_dependency_work_queue_only":
         fail("workbench effect is no longer presentation-only")
