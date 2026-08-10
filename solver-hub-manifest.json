@@ -25,14 +25,14 @@
     "required_diagnostics": ["absolute_residual", "relative_residual", "mesh_or_step_convergence", "condition_information_where_applicable", "hashes"]
   },
   "development_program": {
-    "baseline_version": "1.0.0",
-    "workbench_version": "1.1.0",
+    "version": "1.0.0",
     "status": "PLANNING_BASELINE_FROZEN_WORKBENCH_ACTIVE_NO_EXECUTION_EFFECT",
-    "baseline_dashboard": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
-    "dashboard": "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html",
+    "dashboard": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
     "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
     "roadmap_count": 14,
     "readiness_is": "planning_and_implementation_maturity_only",
+    "workbench_version": "1.1.0",
+    "workbench_dashboard": "2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html",
     "workbench_effect": "presentation_and_dependency_work_queue_only"
   },
   "modules": [
