@@ -69,13 +69,19 @@ Der Independent-Backend wird gemäß eingefrorener Resource Policy **nur nach ei
 
 ## 4. Backend-Bindings
 
+WP2 unterscheidet strikt zwischen **Raw-File-SHA-256** und den historischen, in 3C10 dokumentierten **normalisierten Implementation-Digests**. Für die operative Source-Bindung gilt der Raw-File-Digest zusammen mit dem Git-Blob.
+
 ### Primary Adapter
 
 Pfad:
 
 `tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py`
 
-SHA-256:
+Raw-File-SHA-256:
+
+`8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92`
+
+Historischer 3C10 Implementation-Digest:
 
 `13b289fbde886240d993e90d4906776e7f33926dd19a37e24402172045162f26`
 
@@ -89,7 +95,11 @@ Pfad:
 
 `tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py`
 
-SHA-256:
+Raw-File-SHA-256:
+
+`830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599`
+
+Historischer 3C10 Implementation-Digest:
 
 `114d00ba10ba1df2f061f022254f5fd1a29b206e1ecf3413eeb062281dc43745`
 
@@ -103,7 +113,11 @@ Pfad:
 
 `tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py`
 
-SHA-256:
+Raw-File-SHA-256:
+
+`a8afd7b548366acf9f5ac72e91bcf07372913cc21a8790d86d0a989a89f03e7b`
+
+Historischer 3C10 Implementation-Digest:
 
 `d271a6b9f4783060832b20655700c415098012afa9880fc0b046a94ecbcef217`
 
@@ -161,7 +175,7 @@ Eigenschaften:
 - Auditpfad importiert keine numerischen Backends.
 - Keine direkte Solve-CLI.
 - Schedule wird aus den eingefrorenen Quellen rekonstruiert und gehasht.
-- Backend-SHA-256 werden vor jeder späteren Ausführung erneut geprüft.
+- Backend-Raw-File-SHA-256 werden vor jeder späteren Ausführung erneut geprüft.
 - `a_F=1/4` wird vor und nach der Backend-Modellkonstruktion geprüft.
 - Numerical imports erfolgen erst nach validierter `TargetExecutionCapability`.
 - kein `a_F=0`-Override,
