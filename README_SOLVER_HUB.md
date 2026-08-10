@@ -42,6 +42,32 @@ Jede Roadmap enthält denselben Entwicklungsvertrag:
 
 Die Readiness-Matrix verwendet bewusst keine pseudo-genauen Prozentwerte. Die Zustände `DEFINED`, `PARTIAL`, `MISSING`, `BLOCKED` und `NOT_APPLICABLE` beschreiben Planungs- und Implementierungsreife, nicht wissenschaftliche Evidenz.
 
+## Master Build Order v1.0
+
+Seit 2026-08-10 übersetzt der Master Build Order die 14 Roadmaps in eine gemeinsame, maschinenlesbare Arbeitsreihenfolge.
+
+Dashboard:
+
+`2026-08-10_ULSH_MasterBuildOrder_v1.0.html`
+
+Maschinenlesbare Registry:
+
+`registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json`
+
+Dokument:
+
+`science/solver-hub/2026-08-10_ULSH_MasterBuildOrder_v1.0.md`
+
+Der Build Order definiert:
+
+- 56 Work Packages, vier pro Solver,
+- vier kritische Pfade,
+- drei zulässige vorbereitende Parallel-Lanes,
+- `ULSH-01` als primären kritischen Pfad,
+- eine harte Trennung zwischen vorbereitender Arbeit, Implementierung, Validierung und separater Release-Entscheidung.
+
+Ein Work Package darf vorbereitet oder abgeschlossen werden, ohne dass daraus automatisch eine physische Solverfreigabe folgt. Physische Downstream-Ausführung bleibt an separat freigegebene Upstream-Gates gebunden.
+
 ## Kanonischer erster Solver
 
 `HZT-M0-S6_MD-2S_Background_BVP_Solver_v1.0`
@@ -128,4 +154,4 @@ Nur die ersten drei Blöcke besitzen derzeit konkrete Solver-Vorarbeiten. Einige
 
 Der nächste harte Gate bleibt die reproduzierbare MD-2S-Hintergrundlösung mit vollständigem einseitigem Randexport. Erst danach sind das Zwei-Junction-Urteil und der B1.4O-Rankaudit physisch numerisch ausführbar.
 
-Das Solver Development Program ändert diesen Status nicht; es verhindert lediglich, dass Downstream-Solver ohne ihre notwendigen Upstream-Grundlagen begonnen oder überinterpretiert werden.
+Das Solver Development Program und der Master Build Order ändern diesen Status nicht; sie verhindern lediglich, dass Downstream-Solver ohne ihre notwendigen Upstream-Grundlagen begonnen oder überinterpretiert werden.
