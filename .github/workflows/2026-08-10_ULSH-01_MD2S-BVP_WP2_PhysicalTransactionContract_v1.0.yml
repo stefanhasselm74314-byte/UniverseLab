@@ -6,7 +6,7 @@ on:
       - "registry/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionContract_v1.0.json"
       - "tools/2026-08-10_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.0.py"
       - "tools/2026-08-10_ulsh_01_md2s_bvp_wp2_transaction_v1.0.py"
-      - "tests/2026-08-10_test_ulsh_01_md2s_bvp_wp2_physical_transaction_v1_0.py"
+      - "tests/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionTest_v1.0.py"
       - "science/hzt-m0/md2s/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionLedger_v1.0.md"
       - ".github/workflows/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionContract_v1.0.yml"
   push:
@@ -15,7 +15,7 @@ on:
       - "registry/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionContract_v1.0.json"
       - "tools/2026-08-10_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.0.py"
       - "tools/2026-08-10_ulsh_01_md2s_bvp_wp2_transaction_v1.0.py"
-      - "tests/2026-08-10_test_ulsh_01_md2s_bvp_wp2_physical_transaction_v1_0.py"
+      - "tests/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionTest_v1.0.py"
       - "science/hzt-m0/md2s/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionLedger_v1.0.md"
       - ".github/workflows/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionContract_v1.0.yml"
 
@@ -35,7 +35,7 @@ jobs:
         run: |
           python -m py_compile tools/2026-08-10_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.0.py
           python -m py_compile tools/2026-08-10_ulsh_01_md2s_bvp_wp2_transaction_v1.0.py
-          python -m py_compile tests/2026-08-10_test_ulsh_01_md2s_bvp_wp2_physical_transaction_v1_0.py
+          python -m py_compile tests/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionTest_v1.0.py
 
       - name: Validate WP2 contract JSON
         run: python -m json.tool registry/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionContract_v1.0.json >/dev/null
@@ -47,7 +47,7 @@ jobs:
         run: python tools/2026-08-10_ulsh_01_md2s_bvp_wp2_transaction_v1.0.py audit >/tmp/ulsh_wp2_transaction_audit.json
 
       - name: Run WP2 no-solve tests
-        run: python tests/2026-08-10_test_ulsh_01_md2s_bvp_wp2_physical_transaction_v1_0.py -v
+        run: python tests/2026-08-10_ULSH-01_MD2S-BVP_WP2_PhysicalTransactionTest_v1.0.py -v
 
       - name: Hard execution firewall
         run: |
