@@ -1,0 +1,120 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp2-hardening-rereview.v1",
+  "version": "1.0.0",
+  "date": "2026-08-11",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP2-RR2",
+  "reviewed_hardening_merge_commit": "6a79ee11268f37df6ba98b4d64807bef9550f8db",
+  "reviewed_current_main_commit": "b10f3fb3029e1092b6aa8a7a9875f869f734d78d",
+  "reviewed_run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+  "reviewed_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+  "review_scope": "INDEPENDENT_RELEASE_READINESS_REREVIEW_OF_WP2_HARDENING_NO_SOLVE_NO_GRANT",
+  "review_status": "BLOCKED_WP2_RR2_NEW_RELEASE_BLOCKERS_FOUND_NO_SOLVE",
+  "release_decision": "DO_NOT_CREATE_PHYSICAL_SOLVE_RELEASE_OR_SINGLE_USE_GRANT",
+  "physical_solve_authorized": false,
+  "physical_solve_executed": false,
+  "physical_evidence_effect": "NONE",
+  "reviewed_source_blobs": {
+    "hardening_contract": "ddbe12afbb6e06bfe7f3fbccb250ef1d45246236",
+    "hardened_target_entrypoint": "304592405f843822e142110ba6a65fc845579489",
+    "hardened_transaction": "a181056cb93b69c0c6c436a05b2bea838de25bda",
+    "hardening_test": "c0b69d39b971dc00154406c084f6ff9c56569bca",
+    "hardening_workflow": "f4d84ea280316b2ba05156c145c17a7b45c8ef8d",
+    "resource_policy": "954a9730d3fa34864df7168555912ebba2dd6c3d",
+    "result_schema": "b1fdf45aa9fb3d585e73795e9294dfa0c185fc39",
+    "preregistration": "9789101e0a168580b6906eb21edad5a5db2b64ce"
+  },
+  "baseline_integrity": {
+    "hardening_files_changed_between_6a79ee1_and_b10f3fb": false,
+    "intervening_main_changes_are_ui_compare_sweep_only": true,
+    "review_uses_current_main_bytes": true
+  },
+  "original_RR_blocker_rereview": {
+    "RR-B01": {
+      "status": "VERIFIED_CLOSED_IN_ORIGINAL_SCOPE",
+      "finding": "A POSIX setitimer stage guard is applied to each immutable seed/node entry, with no same-grant retry or method change after timeout."
+    },
+    "RR-B02": {
+      "status": "VERIFIED_CLOSED_IN_ORIGINAL_SCOPE",
+      "finding": "BoundedStagingWriter enforces a cumulative 1 GiB content-byte ceiling and a final staged-package byte check before atomic promotion."
+    },
+    "RR-B03": {
+      "status": "VERIFIED_CLOSED_IN_ORIGINAL_SCOPE",
+      "finding": "The hardened target captures the previously missing primary, independent-backend, constraint, convergence, spectral, diagnostic, admissibility and candidate-profile channels, and the transaction binds candidate profile digests before result.json commit."
+    },
+    "RR-B04": {
+      "status": "VERIFIED_CLOSED_IN_ORIGINAL_SCOPE",
+      "finding": "Runtime attestation records CPU/platform identity and NumPy/SciPy BLAS/LAPACK configuration with exact dependency versions."
+    }
+  },
+  "new_blocking_findings": [
+    {
+      "id": "RR2-B01",
+      "classification": "BLOCKER",
+      "title": "IMMUTABLE_EXISTING_OUTPUT_PATH_CHECK_OCCURS_AFTER_SOLVER_EXECUTION",
+      "required_by": "Background3CResultSchema_v0.1 immutable_output_policy.existing_path_action=ABORT_BEFORE_SOLVER_INITIALIZATION",
+      "observed": "The hardened transaction calls target.execute_physical_schedule(capability) before it constructs and checks result_dir.exists(). Therefore an already-existing immutable output path can consume the single-use grant and execute the physical solver before the collision is detected.",
+      "risk": "A run forbidden by the frozen immutable-output policy could consume the unique grant and numerical resource budget before failing for a condition that must be detected before solver initialization.",
+      "closure_condition": "Derive every transaction/canonical output path from the validated grant before grant spend and solver import; fail closed on any collision before solver initialization."
+    },
+    {
+      "id": "RR2-B02",
+      "classification": "BLOCKER",
+      "title": "ONE_THREAD_RESOURCE_LIMIT_NOT_FAIL_CLOSED_BEFORE_BLAS_INITIALIZATION",
+      "required_by": "Background3CResourcePolicy_v0.1 execution_environment.thread_count=1 and resource_limits.maximum_cpu_threads=1",
+      "observed": "validate_runtime() builds BLAS/LAPACK metadata by importing NumPy/SciPy before enforce_process_limits() sets thread environment variables. validate_runtime also accepts the thread variables as UNSET. A BLAS runtime can therefore initialize a multi-thread pool before the later environment assignment to 1.",
+      "risk": "The future physical solve is not guaranteed to obey the frozen one-CPU-thread execution envelope even though the attestation/CI path passes.",
+      "closure_condition": "Require the thread-control environment to equal 1 before importing NumPy/SciPy or any numerical backend, and positively attest the effective numerical thread-pool limit before grant spend."
+    },
+    {
+      "id": "RR2-B03",
+      "classification": "BLOCKER",
+      "title": "TOTAL_WALL_CLOCK_LIMIT_NOT_CONTINUOUSLY_ENFORCED_DURING_TARGET_FINALIZATION",
+      "required_by": "Background3CResourcePolicy_v0.1 resource_limits.maximum_wall_clock_seconds_total=21600",
+      "observed": "Per-entry timers constrain the 35 schedule entries, but the target performs _finalize(...) after the schedule loop without an active total wall-clock timer. execution_elapsed_wall_clock_seconds is measured only after finalization; the transaction can detect a negative remaining packaging budget only after the total limit has already been exceeded.",
+      "risk": "The frozen maximum total wall-clock duration is an accounting check rather than a hard upper bound during the target finalization phase.",
+      "closure_condition": "Maintain one independent total-deadline guard across schedule execution, target finalization and immutable result packaging, while retaining the nested per-entry deadline semantics."
+    },
+    {
+      "id": "RR2-B04",
+      "classification": "BLOCKER",
+      "title": "PREREGISTERED_HIGH_PRECISION_BORDERLINE_AUDIT_PATH_ABSENT",
+      "required_by": "Background3APreregistrationContract_v0.1 primary_discretization.higher_precision_audit=80_BIT_OR_GREATER_REQUIRED_FOR_ANY_BORDERLINE_ACCEPTANCE",
+      "observed": "The hardened target can classify a binary64 N=96 candidate as NUMERICAL_CANDIDATE_BACKGROUND_DIAGNOSTIC using the frozen threshold gates, but there is no 80-bit-or-greater re-evaluation path or fail-closed borderline classification before acceptance.",
+      "risk": "A numerically borderline candidate could be accepted without satisfying a preregistered precision requirement.",
+      "closure_condition": "Define a non-post-hoc borderline band before execution and implement an 80-bit-or-greater audit for candidates entering that band, or fail closed to a non-accepted classification when the audit is unavailable."
+    }
+  ],
+  "new_nonblocking_findings": [
+    {
+      "id": "RR2-W01",
+      "classification": "WARNING",
+      "title": "EXTERNAL_QUARANTINE_DIRECTORY_IS_NONCANONICAL",
+      "observed": "The hardened transaction commits the external quarantine package under results/<grant_nonce>, while the frozen result schema names artifacts/hzt-m0/md2s/background3c/<run_id>/<authorization_decision_id>/. The manifest records a future byte-for-byte promotion target, but no promotion transaction is yet implemented.",
+      "required_action": "During the next hardening pass, derive a quarantine hierarchy that mirrors run_id/authorization_decision_id and add an audited byte-for-byte promotion verifier or explicitly freeze the quarantine-to-canonical mapping."
+    }
+  ],
+  "confirmed_firewalls": {
+    "release_authorization_artifact_present": false,
+    "single_use_grant_artifact_present": false,
+    "rr2_ci_may_execute_physical_solver": false,
+    "rr2_ci_solver_calls": 0,
+    "physical_solve_authorized": false,
+    "physical_solve_executed": false,
+    "physical_evidence_effect": "NONE"
+  },
+  "evidence_hygiene": {
+    "original_hardening_closure_is_release_authorization": false,
+    "successful_ci_is_background_existence": false,
+    "future_numerical_convergence_is_continuum_existence_proof": false,
+    "future_two_backend_agreement_is_physical_confirmation": false,
+    "future_binary64_stability_is_ghost_freedom": false,
+    "K1_D_effect": "NONE",
+    "K1_E_effect": "NONE"
+  },
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE",
+  "next_allowed_action": "ULSH-01_WP2_H2_CLOSE_RR2-B01_THROUGH_RR2-B04_NO_SOLVE",
+  "forbidden_next_action": "DO_NOT_CREATE_RELEASE_AUTHORIZATION_GRANT_OR_RUN_CP01R1_UNTIL_RR2_BLOCKERS_ARE_CLOSED_AND_REREVIEWED"
+}
