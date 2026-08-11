@@ -1,0 +1,81 @@
+name: ULSH-01 WP2-H2 RR2 closure no-solve
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2Contract_v1.0.json"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.2.py"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.2.py"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.3.py"
+      - "tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2Test_v1.0.py"
+      - "science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2Ledger_v1.0.md"
+      - ".github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2Contract_v1.0.json"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.2.py"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.2.py"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.3.py"
+      - "tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2Test_v1.0.py"
+      - "science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2Ledger_v1.0.md"
+      - ".github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2_v1.0.yml"
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+  NUMEXPR_NUM_THREADS: "1"
+  VECLIB_MAXIMUM_THREADS: "1"
+
+jobs:
+  h2-no-solve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen Background3C dependencies
+        run: python -m pip install -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt
+
+      - name: Compile H2 sources and tests
+        run: |
+          python -m py_compile tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.2.py
+          python -m py_compile tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.2.py
+          python -m py_compile tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.3.py
+          python -m py_compile tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2Test_v1.0.py
+
+      - name: Validate H2 contract JSON
+        run: python -m json.tool registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2Contract_v1.0.json >/dev/null
+
+      - name: H2 target audit only
+        run: python tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.2.py >/tmp/ulsh_wp2_h2_target_audit.json
+
+      - name: H2 transaction audit only
+        run: python tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.3.py audit >/tmp/ulsh_wp2_h2_transaction_audit.json
+
+      - name: Run H2 no-solve tests
+        run: python tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2Test_v1.0.py -v
+
+      - name: Hard release and execution firewall
+        run: |
+          test ! -e registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalSolveReleaseAuthorization_v1.2.json
+          test ! -e registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_SingleUseExecutionGrant_v1.2.json
+          python - <<'PY'
+          from pathlib import Path
+          workflow = Path('.github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2_v1.0.yml').read_text(encoding='utf-8')
+          run_lines = [line.strip() for line in workflow.splitlines() if line.lstrip().startswith('run:')]
+          forbidden = ('transaction_v1.3.py execute', 'execute_physical_schedule(')
+          assert not any(token in line for line in run_lines for token in forbidden), run_lines
+          contract = Path('registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_H2Contract_v1.0.json').read_text(encoding='utf-8')
+          assert '"physical_solve_authorized": false' in contract
+          assert '"physical_solve_executed": false' in contract
+          assert '"physical_evidence_effect": "NONE"' in contract
+          print('PASS_H2_HARD_FIREWALL_NO_SOLVE')
+          PY
