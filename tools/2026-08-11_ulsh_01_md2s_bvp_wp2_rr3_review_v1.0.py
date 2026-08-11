@@ -73,25 +73,30 @@ def verify_review_basis() -> dict[str, str]:
 
 def verify_h2_rr2_closures(h2_target: str, tx_base: str, tx: str, contract: dict[str, Any]) -> dict[str, bool]:
     closure = contract.get("rr2_blocker_closure", {})
+    execute_marker = "def execute(transaction_root"
+    if execute_marker not in tx:
+        raise RR3ReviewFailure("cannot locate H2 transaction execute function")
+    body = tx[tx.index(execute_marker):]
     checks = {
         "RR2-B01_pre_solver_output_collision": (
             set(closure) == {"RR2-B01", "RR2-B02", "RR2-B03", "RR2-B04"}
-            and "pre_solver_output_collision_guard" in tx
-            and tx.index("pre_solver_output_collision_guard") < tx.index("strict_startup_environment")
-            and tx.index("pre_solver_output_collision_guard") < tx.index("claim_single_use_grant")
+            and "pre_solver_output_collision_guard" in body
+            and body.index("pre_solver_output_collision_guard") < body.index("strict_startup_environment")
+            and body.index("pre_solver_output_collision_guard") < body.index("claim_single_use_grant")
         ),
         "RR2-B02_fail_closed_one_thread": (
             'if value != "1"' in tx_base
             and "effective_blas_thread_attestation" in tx
             and "reported_threads" in tx
-            and tx.index("effective_blas_thread_attestation()") < tx.index("claim_single_use_grant")
+            and 'runtime["effective_blas_threads"] = effective_blas_thread_attestation()' in body
+            and body.index('runtime["effective_blas_threads"] = effective_blas_thread_attestation()') < body.index("claim_single_use_grant")
         ),
         "RR2-B03_continuous_total_deadline": (
             "def total_transaction_wall_clock_limit" in tx
-            and "with total_transaction_wall_clock_limit" in tx
-            and tx.index("with total_transaction_wall_clock_limit") < tx.index("supervised_target_execution")
-            and tx.index("with total_transaction_wall_clock_limit") < tx.index("package_schema_complete_result")
-            and tx.index("with total_transaction_wall_clock_limit") < tx.index("os.replace(staging, result_dir)")
+            and "with total_transaction_wall_clock_limit" in body
+            and body.index("with total_transaction_wall_clock_limit") < body.index("supervised_target_execution")
+            and body.index("with total_transaction_wall_clock_limit") < body.index("package_schema_complete_result")
+            and body.index("with total_transaction_wall_clock_limit") < body.index("os.replace(staging, result_dir)")
         ),
         "RR2-B04_high_precision_gate": (
             "ALL_OTHERWISE_PASSING_CANDIDATES" in h2_target
