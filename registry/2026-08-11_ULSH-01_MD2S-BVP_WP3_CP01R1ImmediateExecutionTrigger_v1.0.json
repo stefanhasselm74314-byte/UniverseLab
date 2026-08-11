@@ -1,0 +1,44 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-cp01r1-immediate-execution-trigger.v1",
+  "version": "1.0.0",
+  "date": "2026-08-11",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP3-IMMEDIATE-EXECUTION",
+  "classification": "OPERATOR_TRIGGER_FOR_FRESH_RECHECK_EXACT_H3_RELEASE_SINGLE_USE_GRANT_AND_IMMEDIATE_CP01R1",
+  "operator_intent": "ISSUE_EXACT_H3_RELEASE_AND_SINGLE_USE_GRANT_AFTER_FRESH_RECHECK_THEN_START_CP01R1_IMMEDIATELY",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+  "frozen_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+  "wp3_release_decision": {
+    "path": "registry/2026-08-11_ULSH-01_MD2S-BVP_WP3_CP01R1ReleaseDecision_v1.0.json",
+    "git_blob_sha1": "e9fabf7387868784a1e168845113338c7fe05414",
+    "required_status": "PASS_ELIGIBLE_FOR_EXACT_H3_SINGLE_USE_RELEASE_ISSUANCE_NO_EXECUTION"
+  },
+  "required_sequence": [
+    "FRESH_RECHECK",
+    "ISSUE_EXACT_H3_RELEASE_AUTHORIZATION",
+    "ISSUE_EXACT_SINGLE_USE_GRANT",
+    "VALIDATE_EXACT_BINDINGS",
+    "SPEND_GRANT_ONCE",
+    "START_CP01R1"
+  ],
+  "frozen_execution_scope": {
+    "seed_count": 7,
+    "node_counts": [24, 32, 48, 64, 96],
+    "planned_primary_entries": 35,
+    "target_a_F": "1/4",
+    "parameter_mutation_allowed": false,
+    "topology_mutation_allowed": false,
+    "random_restart_allowed": false,
+    "adaptive_mesh_insertion_allowed": false,
+    "surrogate_or_control_fallback_allowed": false,
+    "independent_backend_required_after_primary_candidate": true
+  },
+  "fail_closed": true,
+  "trigger_itself_is_release_authorization": false,
+  "trigger_itself_is_single_use_grant": false,
+  "trigger_itself_establishes_physical_background": false,
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE",
+  "physical_evidence_effect_before_execution": "NONE"
+}
