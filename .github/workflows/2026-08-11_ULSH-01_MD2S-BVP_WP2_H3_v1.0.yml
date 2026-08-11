@@ -1,0 +1,46 @@
+name: ULSH-01 WP2-H3 RR3 blocker closure no-solve
+
+on:
+  push:
+    paths:
+      - 'tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py'
+      - 'registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Contract_v1.0.json'
+      - 'tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Test_v1.0.py'
+      - 'science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Ledger_v1.0.md'
+      - '.github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3_v1.0.yml'
+  pull_request:
+    paths:
+      - 'tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py'
+      - 'registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Contract_v1.0.json'
+      - 'tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Test_v1.0.py'
+      - 'science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Ledger_v1.0.md'
+      - '.github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  h3-no-solve:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile H3 source and tests
+        run: |
+          python -m py_compile tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py
+          python -m py_compile tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Test_v1.0.py
+      - name: Validate H3 contract JSON
+        run: python -m json.tool registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Contract_v1.0.json >/dev/null
+      - name: H3 audit only
+        run: python tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py audit >/tmp/ulsh_wp2_h3_audit.json
+      - name: Run H3 no-solve regressions
+        run: python tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Test_v1.0.py
+      - name: Hard release and execution firewall
+        shell: bash
+        run: |
+          test ! -e registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalSolveReleaseAuthorization_v1.3.json
+          test ! -e registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_SingleUseExecutionGrant_v1.3.json
+          ! grep -R --line-number --fixed-strings 'physical_evidence_effect = "POSITIVE"' tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Contract_v1.0.json
+          ! grep -R --line-number --fixed-strings 'CP01R1 = EXECUTED' science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Ledger_v1.0.md
