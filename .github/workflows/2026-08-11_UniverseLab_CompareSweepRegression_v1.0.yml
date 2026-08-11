@@ -1,0 +1,49 @@
+name: UniverseLab compare parameter sweep regression
+
+on:
+  pull_request:
+    paths:
+      - "compare-direct.html"
+      - "compare.html"
+      - "tests/2026-08-11_UniverseLab_CompareSweepRegression_v1.0.py"
+      - ".github/workflows/2026-08-11_UniverseLab_CompareSweepRegression_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "compare-direct.html"
+      - "compare.html"
+      - "tests/2026-08-11_UniverseLab_CompareSweepRegression_v1.0.py"
+      - ".github/workflows/2026-08-11_UniverseLab_CompareSweepRegression_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  compare-sweep-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run numerical and static sweep regression
+        run: python tests/2026-08-11_UniverseLab_CompareSweepRegression_v1.0.py
+
+      - name: Extract inline calculator JavaScript
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path('compare-direct.html').read_text(encoding='utf-8')
+          blocks = re.findall(r'<script>(.*?)</script>', html, flags=re.S|re.I)
+          assert blocks, 'no inline script found'
+          Path('/tmp/compare-direct.js').write_text('\n'.join(blocks), encoding='utf-8')
+          PY
+
+      - name: JavaScript syntax check
+        run: node --check /tmp/compare-direct.js
+
+      - name: Cache-bust contract
+        run: |
+          grep -F 'compare-direct.html?v=23' compare.html
