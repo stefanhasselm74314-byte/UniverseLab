@@ -12,7 +12,7 @@
   "frozen_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
   "wp2_rr4_basis": {
     "path": "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR4Review_v1.0.json",
-    "git_blob_sha1": "7d69a71dbd7b5d22da0668a1666f61e87f0d4668",
+    "git_blob_sha1": "7d69a7187962f2b5be817d10dc9b2dac0d099b05",
     "required_review_status": "PASS_WP2_RR4_H3_RELEASE_READINESS_VERIFIED_NO_SOLVE",
     "required_wp2_status": "CLOSED_RELEASE_READY_NO_EXECUTION",
     "new_release_blockers_required": {}
