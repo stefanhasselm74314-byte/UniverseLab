@@ -1,0 +1,61 @@
+name: ULSH-01 WP2-RR3 H2 re-review no-solve
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3Review_v1.0.json"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_rr3_review_v1.0.py"
+      - "tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3ReviewTest_v1.0.py"
+      - "science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3ReviewLedger_v1.0.md"
+      - ".github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3Review_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3Review_v1.0.json"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_rr3_review_v1.0.py"
+      - "tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3ReviewTest_v1.0.py"
+      - "science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3ReviewLedger_v1.0.md"
+      - ".github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3Review_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  rr3-no-solve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile RR3 reviewer and tests
+        run: |
+          python -m py_compile tools/2026-08-11_ulsh_01_md2s_bvp_wp2_rr3_review_v1.0.py
+          python -m py_compile tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3ReviewTest_v1.0.py
+
+      - name: Validate RR3 review JSON
+        run: python -m json.tool registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3Review_v1.0.json >/dev/null
+
+      - name: Reproduce RR3 independent review
+        run: python tools/2026-08-11_ulsh_01_md2s_bvp_wp2_rr3_review_v1.0.py >/tmp/ulsh_wp2_rr3_review.json
+
+      - name: Run RR3 no-solve tests
+        run: python tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3ReviewTest_v1.0.py -v
+
+      - name: Hard release and solver firewall
+        run: |
+          test ! -e registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalSolveReleaseAuthorization_v1.2.json
+          test ! -e registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_SingleUseExecutionGrant_v1.2.json
+          python - <<'PY'
+          from pathlib import Path
+          reviewer = Path('tools/2026-08-11_ulsh_01_md2s_bvp_wp2_rr3_review_v1.0.py').read_text(encoding='utf-8')
+          workflow = Path('.github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR3Review_v1.0.yml').read_text(encoding='utf-8')
+          assert 'import numpy' not in reviewer
+          assert 'import scipy' not in reviewer
+          forbidden = 'execute' + '_physical_schedule('
+          assert forbidden not in reviewer
+          run_lines = [line.strip() for line in workflow.splitlines() if line.lstrip().startswith('run:')]
+          assert not any('transaction_v1.3.py execute' in line for line in run_lines)
+          print('PASS_RR3_HARD_FIREWALL_NO_SOLVE')
+          PY
