@@ -55,7 +55,7 @@
     },
     "wp2_h2_target": {
       "path": "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.2.py",
-      "git_blob_sha1": "93cb0288fbc158a1b80350864198cedfe5e9f274"
+      "git_blob_sha1": "db2f4a0ea1ac374209e52b21fdc72de23e5f419d"
     },
     "wp2_h2_transaction_base": {
       "path": "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.2.py",
@@ -110,7 +110,7 @@
     "RR2-B04": {
       "title": "PREREGISTERED_HIGH_PRECISION_BORDERLINE_AUDIT_PATH_ABSENT",
       "status": "IMPLEMENTED_PENDING_RR3",
-      "implementation": "A conservative predeclared borderline policy treats every otherwise-passing N=96 candidate as requiring >=80-bit residual re-evaluation. The target reconstructs the regularized N=96 state and recomputes the primary bulk equations, all eight boundary residuals and propagated rr constraint using numpy.longdouble. It requires at least a 64-bit significand (x87 80-bit extended or better). Missing precision, missing profile state, nonfinite values or threshold failure converts the candidate to NUMERICAL_ROOT_REJECTED_BY_QA fail-closed.",
+      "implementation": "A conservative predeclared borderline policy treats every otherwise-passing N=96 candidate as requiring >=80-bit residual re-evaluation. The target reconstructs the regularized N=96 state and recomputes the primary bulk equations, all eight boundary residuals and propagated rr constraint using numpy.longdouble, with long-double Chebyshev nodes generated from long-double arccos(-1) rather than a binary64 pi seed. It requires at least a 64-bit significand (x87 80-bit extended or better). Missing precision, missing profile state, nonfinite values or threshold failure converts the candidate to NUMERICAL_ROOT_REJECTED_BY_QA fail-closed.",
       "borderline_policy": "ALL_OTHERWISE_PASSING_CANDIDATES",
       "post_hoc_band_selection": false,
       "minimum_significand_bits": 64,
