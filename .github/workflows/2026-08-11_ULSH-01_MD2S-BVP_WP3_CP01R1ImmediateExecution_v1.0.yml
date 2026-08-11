@@ -1,0 +1,47 @@
+name: ULSH-01 WP3 CP01R1 immediate execution
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - registry/2026-08-11_ULSH-01_MD2S-BVP_WP3_CP01R1ImmediateExecutionTrigger_v1.0.json
+
+permissions:
+  contents: read
+
+jobs:
+  cp01r1:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    env:
+      PYTHONHASHSEED: '0'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      NUMEXPR_NUM_THREADS: '1'
+      VECLIB_MAXIMUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact dependencies
+        run: python -m pip install -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt
+      - name: Fresh recheck and issue exact H3 release and grant
+        run: python tools/2026-08-11_ulsh_01_md2s_bvp_wp3_cp01r1_issue_and_execute_v1.0.py --summary "$RUNNER_TEMP/cp01r1-issuance-summary.json"
+      - name: Execute frozen CP01R1 once
+        run: python tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py execute --transaction-root "$RUNNER_TEMP/ulsh01-cp01r1"
+      - name: Upload CP01R1 transaction artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ULSH-01-CP01R1-physical-transaction
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/cp01r1-issuance-summary.json
+            ${{ runner.temp }}/ulsh01-cp01r1/**
+            registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalSolveReleaseAuthorization_v1.3.json
+            registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_SingleUseExecutionGrant_v1.3.json
