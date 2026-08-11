@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import ast
 import importlib.util
 from pathlib import Path
 import sys
@@ -43,13 +44,23 @@ class HardeningReReviewTest(unittest.TestCase):
         self.assertFalse(REVIEWER.RELEASE_PATH.exists())
         self.assertFalse(REVIEWER.GRANT_PATH.exists())
 
-    def test_reviewer_has_no_numerical_backend_import_or_solve_call(self):
+    def test_reviewer_has_no_numerical_import_or_solver_call_ast(self):
         source = REVIEWER_PATH.read_text(encoding="utf-8")
-        self.assertNotIn("import numpy", source)
-        self.assertNotIn("import scipy", source)
-        self.assertNotIn("damped_newton(", source)
-        self.assertNotIn("shooting_residual(", source)
-        self.assertNotIn("execute_physical_schedule(", source)
+        tree = ast.parse(source)
+        imported_roots: set[str] = set()
+        called_names: set[str] = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                imported_roots.update(alias.name.split(".", 1)[0] for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imported_roots.add(node.module.split(".", 1)[0])
+            elif isinstance(node, ast.Call):
+                if isinstance(node.func, ast.Name):
+                    called_names.add(node.func.id)
+                elif isinstance(node.func, ast.Attribute):
+                    called_names.add(node.func.attr)
+        self.assertTrue({"numpy", "scipy"}.isdisjoint(imported_roots))
+        self.assertTrue({"damped_newton", "shooting_residual", "execute_physical_schedule"}.isdisjoint(called_names))
 
 
 if __name__ == "__main__":
