@@ -1,0 +1,56 @@
+name: ULSH-01 WP3-D3 CP01R2 physical binding review no-execution
+
+on:
+  push:
+    branches: [main, ulsh-01-wp3-d3-cp01r2-physical-binding]
+  pull_request:
+    paths:
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json'
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReleaseReadinessReview_v1.0.json'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_cp01r2_physical_target_binding_v1.0.py'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_independent_release_readiness_review_v1.0.py'
+      - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReviewTest_v1.0.py'
+      - '.github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReview_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  binding-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate D3 JSON
+        run: |
+          python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReleaseReadinessReview_v1.0.json >/dev/null
+      - name: Compile D3 tools and tests
+        run: |
+          python -m py_compile tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_cp01r2_physical_target_binding_v1.0.py
+          python -m py_compile tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_independent_release_readiness_review_v1.0.py
+          python -m py_compile tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReviewTest_v1.0.py
+      - name: Run physical target binding audit
+        run: python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_cp01r2_physical_target_binding_v1.0.py
+      - name: Run independent release-readiness review
+        run: python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_independent_release_readiness_review_v1.0.py
+      - name: Run D3 regression tests
+        run: python tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReviewTest_v1.0.py
+      - name: Hard no-execution and no-issuance firewall
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(find registry -maxdepth 1 -type f \( -name '*CP01R2*ReleaseAuthorization*.json' -o -name '*CP01R2*ExecutionGrant*.json' \) -print -quit)"
+          python - <<'PY'
+          import importlib.util, pathlib, sys
+          p=pathlib.Path('tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_cp01r2_physical_target_binding_v1.0.py')
+          s=importlib.util.spec_from_file_location('d3fw',p); m=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m)
+          for f in (m.issue_release_authorization,m.issue_execution_grant,m.execute_physical_schedule):
+              try: f()
+              except m.PhysicalExecutionDenied: pass
+              else: raise SystemExit('forbidden D3 entry point did not fail closed')
+          print('PASS_D3_HARD_FIREWALL_NO_EXECUTION')
+          PY
