@@ -106,10 +106,13 @@ def identify_new_blockers(target: str, transaction: str, prereg: dict[str, Any],
     if result_schema["immutable_output_policy"]["existing_path_action"] != "ABORT_BEFORE_SOLVER_INITIALIZATION":
         raise ReviewFailure("frozen immutable-output policy drift")
 
-    # RR2-B02: NumPy/SciPy BLAS metadata import happens in validate_runtime before
-    # enforce_process_limits; UNSET thread-control variables are accepted.
+    # RR2-B02: inspect the *calls in execute()*, not the earlier function
+    # definitions. validate_runtime imports NumPy/SciPy for BLAS metadata before
+    # the later enforce_process_limits call; UNSET thread controls are accepted.
+    runtime_call = transaction.index("    runtime = validate_runtime()")
+    enforce_call = transaction.index("        enforce_process_limits()", runtime_call)
     b02 = (
-        transaction.index("runtime = validate_runtime()") < transaction.index("enforce_process_limits()")
+        runtime_call < enforce_call
         and 'if value not in {"UNSET", "1"}' in transaction
         and '"blas_lapack": _blas_lapack_metadata()' in transaction
     )
