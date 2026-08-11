@@ -1,0 +1,91 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-cp01r1-release-decision.v1",
+  "version": "1.0.0",
+  "date": "2026-08-11",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP3-RELEASE-DECISION",
+  "classification": "SEPARATE_CP01R1_SINGLE_USE_RELEASE_DECISION_NO_GRANT_NO_SOLVE",
+  "decision_status": "PASS_ELIGIBLE_FOR_EXACT_H3_SINGLE_USE_RELEASE_ISSUANCE_NO_EXECUTION",
+  "reviewed_main_commit": "001a098e4b16c434a6fffe4dbaa3a3c4cf2dfa7f",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+  "frozen_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+  "wp2_rr4_basis": {
+    "path": "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_RR4Review_v1.0.json",
+    "git_blob_sha1": "7d69a71dbd7b5d22da0668a1666f61e87f0d4668",
+    "required_review_status": "PASS_WP2_RR4_H3_RELEASE_READINESS_VERIFIED_NO_SOLVE",
+    "required_wp2_status": "CLOSED_RELEASE_READY_NO_EXECUTION",
+    "new_release_blockers_required": {}
+  },
+  "h3_basis": {
+    "contract_path": "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_H3Contract_v1.0.json",
+    "contract_git_blob_sha1": "a09067d749493fa14c61fc8a7678ca353a005566",
+    "transaction_path": "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py",
+    "transaction_git_blob_sha1": "2dd09d9ade6d6ae69c1949833e88b2af49c13710",
+    "source_bundle_sha256": "022b1ede18d217c3278445ea1cfd65fad475d28a6ebaa7327cc9c46904c877cd"
+  },
+  "frozen_execution_scope": {
+    "seed_set_id": "M1-BG3B-CP01-SEEDS-01",
+    "seed_count": 7,
+    "node_counts": [24, 32, 48, 64, 96],
+    "planned_primary_entries": 35,
+    "target_a_F": "1/4",
+    "parameter_mutation_allowed": false,
+    "topology_mutation_allowed": false,
+    "random_restart_allowed": false,
+    "adaptive_mesh_insertion_allowed": false,
+    "surrogate_or_control_fallback_allowed": false,
+    "independent_backend_required_after_primary_candidate": true
+  },
+  "release_decision": {
+    "eligible_to_issue_exact_h3_release_authorization": true,
+    "eligible_to_issue_exact_h3_single_use_grant": true,
+    "release_authorization_created_by_this_decision": false,
+    "single_use_grant_created_by_this_decision": false,
+    "reason_for_separate_issuance_act": "The H3 grant has a maximum one-hour start-validity window and exact content-addressed bindings. Issuance is intentionally deferred until the operator explicitly initiates the physical transaction so the grant is not stale before execution and source drift can be rechecked immediately before issuance.",
+    "grant_maximum_start_validity_seconds": 3600,
+    "grant_must_be_spent_once": true,
+    "replay_allowed": false,
+    "retry_with_same_grant_after_failure_or_crash": false
+  },
+  "mandatory_pre_issuance_rechecks": {
+    "main_commit_or_reviewed_source_bundle_unchanged": true,
+    "rr4_pass_still_current": true,
+    "h3_contract_and_transaction_blobs_exact": true,
+    "frozen_payload_exact": true,
+    "schedule_exact_7_by_5": true,
+    "dependency_lock_exact": true,
+    "resource_policy_exact": true,
+    "result_schema_exact": true,
+    "release_and_grant_paths_absent_before_new_issuance": true,
+    "runtime_and_effective_blas_attestation_required_before_grant_spend": true,
+    "immutable_result_path_collision_check_required_before_grant_spend": true
+  },
+  "decision_boundary": {
+    "this_decision_is_not_a_release_authorization": true,
+    "this_decision_is_not_a_single_use_grant": true,
+    "this_decision_does_not_authorize_solver_execution_by_itself": true,
+    "physical_solve_authorized": false,
+    "physical_solve_executed": false,
+    "CP01R1": "NOT_EXECUTED",
+    "physical_background_established": false,
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "scientific_interpretation_firewall": {
+    "successful_transaction_would_establish_at_most": "REPRODUCIBLE_NUMERICAL_BACKGROUND_CANDIDATE_SUBJECT_TO_PREREGISTERED_QA",
+    "would_not_by_itself_establish": [
+      "continuum existence",
+      "uniqueness",
+      "Fredholm property",
+      "continuum Jacobian invertibility",
+      "perturbative stability",
+      "ghost freedom",
+      "physical identification",
+      "observational confirmation of HZT-M0"
+    ]
+  },
+  "next_allowed_action": "ULSH-01_WP3_ISSUE_EXACT_H3_RELEASE_AUTHORIZATION_AND_SINGLE_USE_GRANT_FOR_IMMEDIATE_CP01R1_TRANSACTION",
+  "forbidden_next_action": "DO_NOT_RUN_CP01R1_FROM_THIS_DECISION_ALONE"
+}
