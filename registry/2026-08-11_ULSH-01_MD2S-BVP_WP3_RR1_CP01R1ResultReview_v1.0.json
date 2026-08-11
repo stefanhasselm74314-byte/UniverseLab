@@ -1,0 +1,122 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-rr1-cp01r1-result-review.v1",
+  "version": "1.0.0",
+  "date": "2026-08-11",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP3-RR1",
+  "classification": "INDEPENDENT_POST_EXECUTION_RESULT_REVIEW_NO_RERUN",
+  "review_status": "PASS_TRANSACTION_COMPLETE_NEGATIVE_NUMERICAL_OUTCOME_NO_CANDIDATE_UNDER_PREREGISTERED_PROTOCOL",
+  "reviewed_main_commit": "63af440955431f8a1315ec29271887c5ae2d442b",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+  "workflow_run": {
+    "id": 31495350499,
+    "attempt": 1,
+    "job_id": 93791542174,
+    "workflow_conclusion": "success",
+    "transaction_step_conclusion": "success",
+    "artifact_preservation_conclusion": "success"
+  },
+  "artifact_binding": {
+    "artifact_id": 9104240692,
+    "artifact_name": "ULSH-01-CP01R1-physical-transaction-31495350499-attempt-1",
+    "artifact_size_bytes": 535431,
+    "artifact_sha256": "ddbec713207748bcdedc50486624effa14924a92beb476a746641f314f9843e8",
+    "artifact_expires_at": "2026-11-09T13:16:41Z",
+    "result_sha256": "8562ba77cb0aeda87aceee3b7be301c06e948070beebc8916769c38d99b45ec8",
+    "artifact_manifest_sha256": "f85a077a9327708f194596a0873b608c404a8c81a2b72c08df3a11b9608c3e07"
+  },
+  "grant_state": {
+    "authorization_decision_id": "UL-DEC-CP01R1-31495350499-1",
+    "grant_nonce": "45672df450b1d4c05f9e34fcbe7f8271",
+    "grant_sha256": "764cb65f12071ad756fdbe5112f4b9fb1556830a1ef1801309311c29b47bd0da",
+    "release_authorization_sha256": "ce3dc84134198867f08804cc56063f12c2cc67189ec643fe1f2c54166ee8e9fa",
+    "grant_spent": true,
+    "replay_permitted": false,
+    "durable_state": "SUCCEEDED"
+  },
+  "execution_summary": {
+    "execution_started_utc": "2026-08-11T13:17:11Z",
+    "execution_finished_utc": "2026-08-11T14:00:00.126588Z",
+    "supervised_target_elapsed_wall_clock_seconds": 2569.4414038080004,
+    "planned_entries": 35,
+    "completed_entries": 35,
+    "stage_timeout_count": 0,
+    "total_budget_exhausted": false,
+    "candidate_count": 0,
+    "final_classification": "NO_CANDIDATE_FOUND_UNDER_PREREGISTERED_PROTOCOL",
+    "independent_backend_candidate_comparisons": 0,
+    "higher_precision_candidate_audits": 0
+  },
+  "failure_inventory": {
+    "MAXIMUM_ITERATIONS": 30,
+    "TRUST_RADIUS_BELOW_MINIMUM": 4,
+    "RRQR_RANK_DEFICIENT": 1
+  },
+  "n96_review": {
+    "all_seven_seeds_reached_n96_entry": true,
+    "all_seven_seeds_have_n96_local_root": false,
+    "n96_local_root_count": 0,
+    "final_residual_inf_range": [1.1252699553439607, 1.408873406960302],
+    "bulk_residual_max_range": [0.08565211463424711, 0.3117277526801311],
+    "rr_constraint_max_range": [0.03720489534301271, 0.19243579947531864],
+    "dominant_boundary_residual_all_seeds": "R_4D",
+    "R_4D_abs_range": [1.1252699553439607, 1.408873406960302],
+    "discrete_condition_number_range": [81963245749.55908, 35491772430341.63],
+    "condition_number_above_1e12_seed_count": 2
+  },
+  "discrete_rank_observations": [
+    {"entry_id": "CP01R1-E15-S2-N96", "observed_rank": 775, "square_dimension": 776, "terminal_failure": "RRQR_RANK_DEFICIENT"},
+    {"entry_id": "CP01R1-E19-S3-N64", "observed_rank": 519, "square_dimension": 520, "terminal_failure": "TRUST_RADIUS_BELOW_MINIMUM"},
+    {"entry_id": "CP01R1-E35-S6-N96", "observed_rank": 775, "square_dimension": 776, "terminal_failure": "TRUST_RADIUS_BELOW_MINIMUM"}
+  ],
+  "gate_comparison": {
+    "boundary_residual_limit": 1e-10,
+    "bulk_residual_limit": 1e-10,
+    "rr_constraint_limit": 1e-9,
+    "n96_observed_values_are_many_orders_above_acceptance_limits": true,
+    "fine_mesh_gate_reached": false,
+    "spectral_tail_gate_reached": false,
+    "independent_backend_gate_reached": false,
+    "higher_precision_acceptance_gate_reached": false
+  },
+  "scientific_interpretation": {
+    "established": [
+      "the exact frozen CP01R1 transaction executed reproducibly to completion",
+      "none of the seven preregistered seeds produced a qualifying N=96 local numerical root under the exact frozen protocol",
+      "the preregistered CP01R1 candidate-existence claim is negative for this protocol and seed set"
+    ],
+    "not_established": [
+      "nonexistence of a continuum M1 BVP solution",
+      "nonexistence outside the preregistered seed basins",
+      "uniqueness or nonuniqueness",
+      "Fredholm property",
+      "continuum Jacobian invertibility",
+      "perturbative stability",
+      "ghost freedom",
+      "physical identification",
+      "observational falsification of HZT-M0"
+    ],
+    "primary_diagnostic_signal": "Persistent O(1) R_4D boundary mismatch dominates the N=96 residual for every seed; bulk and propagated rr residuals also remain far above preregistered thresholds. This is a diagnostic obstruction, not a proof of continuum nonexistence.",
+    "secondary_diagnostic_signals": [
+      "high discrete conditioning at fine meshes",
+      "three final discrete rank-deficiency observations across the 35-entry matrix",
+      "trust-region stagnation in four entries",
+      "no candidate reached the independent-backend or >=80-bit acceptance stages"
+    ]
+  },
+  "governance_state": {
+    "WP3": "NOT_CLOSED_NO_CANDIDATE_AVAILABLE_FOR_REQUIRED_CROSSCHECK_AND_CONVERGENCE_GATES",
+    "WP4": "BLOCKED_NO_ACCEPTED_BACKGROUND_EXPORT",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_allowed_action": "ULSH-01_WP3_D1_CP01R1_FAILURE_MODE_DIAGNOSIS_AND_CP01R2_PROTOCOL_DESIGN_NO_EXECUTION",
+  "forbidden_next_actions": [
+    "DO_NOT_RERUN_CP01R1_WITH_THE_SPENT_GRANT",
+    "DO_NOT_TREAT_NO_CANDIDATE_AS_CONTINUUM_NONEXISTENCE_OR_MODEL_FALSIFICATION",
+    "DO_NOT_ADVANCE_TO_WP4_OR_K1-D",
+    "DO_NOT_CHANGE_PARAMETERS_SEEDS_OR_SOLVER_AND_CALL_THE_RESULT_CP01R1"
+  ]
+}
