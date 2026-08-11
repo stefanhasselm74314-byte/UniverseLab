@@ -1,0 +1,169 @@
+{
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "baseline_main_commit": "e54f331aec1e15716331bdebdad948a69d1a8db4",
+  "classification": "POST_CP01R1_FAILURE_MODE_DIAGNOSIS_AND_CP01R2_PROTOCOL_DESIGN_NO_EXECUTION",
+  "cp01r1_diagnosis": {
+    "D1_F01": {
+      "evidence": [
+        "All recorded Newton iterations across all 35 entries have step_2 equal to the active trust radius under the frozen diagnostic tolerance.",
+        "All 30 MAXIMUM_ITERATIONS entries have zero rejected Newton steps; they continue making accepted but trust-capped progress until the iteration limit.",
+        "The CP01R1 kernel expands the radius only when an accepted full-factor step reduces residual below 0.25 of its current value; this >=75% single-step reduction condition was not met in the recorded slow-progress regime."
+      ],
+      "label": "TRUST_REGION_CAP_STARVATION",
+      "not_proved": "Does not prove that scaled trust-region Newton will find a root.",
+      "status": "STRONG_NUMERICAL_PLUS_SOURCE_DIAGNOSTIC"
+    },
+    "D1_F02": {
+      "evidence": [
+        "The runtime stores a continuation state only when primary_candidate is already true.",
+        "CP01R1 had zero primary candidates, therefore no coarse terminal state was prolonged; every mesh started from its same-index fresh seven_seeds(node_count) state."
+      ],
+      "label": "NO_PROGRESS_CONTINUATION_OCCURRED",
+      "not_proved": "Does not prove that coarse-to-fine progress continuation will reach the desired basin.",
+      "status": "ESTABLISHED_IMPLEMENTATION_BEHAVIOR"
+    },
+    "D1_F03": {
+      "evidence": [
+        "R_4D is the dominant N=96 boundary residual for all seven seeds.",
+        "N=96 |R_4D| spans 1.1252699553439607 to 1.408873406960302 versus the unchanged 1e-10 boundary acceptance limit."
+      ],
+      "label": "PERSISTENT_R4D_JUNCTION_OBSTRUCTION",
+      "not_proved": "Cannot distinguish physical boundary incompatibility from failure to approach a root because no local root neighborhood was reached.",
+      "status": "ESTABLISHED_DISCRETE_DIAGNOSTIC_ONLY"
+    },
+    "D1_F04": {
+      "evidence": [
+        "Median final discrete condition estimates rise from 4.511e8 at N=24 to 2.864e11 at N=96.",
+        "Final rank deficit appears once at N=64 and twice at N=96."
+      ],
+      "label": "FINE_MESH_CONDITIONING_DEGRADATION",
+      "not_proved": "Discrete conditioning/rank does not establish continuum Jacobian rank or Fredholm properties.",
+      "status": "ESTABLISHED_DISCRETE_DIAGNOSTIC_ONLY"
+    },
+    "D1_F05": {
+      "evidence": [
+        "The canonical seed adapter uses amplitude scale 1/20 and multipliers with maximum absolute value 1/2, i.e. a maximum scalar displacement coefficient 0.025 along one fixed direction.",
+        "Across all 35 fresh starts the initial residual infinity norm spans only 1.6265939343090037 to 1.62829175487399."
+      ],
+      "label": "SEED_BASIN_COVERAGE_NARROW",
+      "not_proved": "Does not establish that a root exists outside these basins.",
+      "status": "ESTABLISHED_PROTOCOL_SCOPE_WITH_HEURISTIC_IMPLICATION"
+    }
+  },
+  "cp01r2_protocol_design": {
+    "candidate_and_qa_gates": {
+      "admissibility": "UNCHANGED",
+      "condition_gate": "UNCHANGED",
+      "fine_mesh_augmented_difference": "UNCHANGED",
+      "fine_mesh_profile_difference": "UNCHANGED",
+      "higher_precision_audit": "UNCHANGED_AND_MANDATORY_FOR_OTHERWISE_PASSING_CANDIDATE",
+      "independent_backend": "UNCHANGED_AND_MANDATORY_AFTER_PRIMARY_CANDIDATE",
+      "local_root_gate": "UNCHANGED_CP01R1_BULK_AND_BOUNDARY_LIMITS",
+      "required_meshes": [48, 64, 96],
+      "residual_monotonicity": "UNCHANGED",
+      "rr_constraint": "UNCHANGED",
+      "spectral_tail": "UNCHANGED"
+    },
+    "physical_sector_freeze": {
+      "a_F": "1/4",
+      "acceptance_thresholds": "IDENTICAL_TO_CP01R1",
+      "model_parameters": "IDENTICAL_TO_CP01R1",
+      "physical_equations_and_boundary_residuals": "IDENTICAL_TO_CP01R1",
+      "topological_sector": "IDENTICAL_TO_CP01R1"
+    },
+    "primary_nonlinear_method": {
+      "acceptance": "trial must be admissible, lower original residual_inf, and rho>=0.1; deterministic 0.5 backtracking up to 20 steps if needed",
+      "column_equilibration": "c_j=max(||J[:,j]||_2,1e-12); solve in z-coordinates with dx=diag(1/c_j) dz",
+      "complex_step_jacobian": "RETAINED",
+      "linear_solver": "SVD minimum-norm solve of W J diag(1/c) with relative singular cutoff 1e-12; record raw and scaled ranks/condition estimates at every iteration",
+      "maximum_iterations_per_mesh": 120,
+      "merit_for_acceptance": "ORIGINAL_UNSCALED residual infinity norm; scaling can never satisfy an acceptance gate",
+      "model_reduction_ratio": "rho=(0.5||r||_2^2-0.5||r_trial||_2^2)/(0.5||r||_2^2-0.5||r+J dx||_2^2), denominator must be positive",
+      "name": "ETRN-01_EQUILIBRATED_TRUST_REGION_NEWTON",
+      "radius_update": "rho<0.25 => x0.25; rho>0.75 and ||dz||>=0.8*Delta => x2 up to 64; otherwise unchanged",
+      "rank_deficiency_policy": "Transient scaled rank deficiency uses the preregistered truncated-SVD minimum-norm step and is recorded; final candidate remains subject to unchanged condition/high-precision QA and cannot be promoted by rank regularization.",
+      "row_equilibration": "w_i=1/max(||J_scaled[i,:]||_2,1e-12); row scaling is linear-solve preconditioning only",
+      "stagnation_relative_improvement_floor": 0.0001,
+      "stagnation_window_iterations": 12,
+      "trust_norm": "Euclidean norm in z-coordinates",
+      "trust_radius_initial": 1.0,
+      "trust_radius_maximum": 64.0,
+      "trust_radius_minimum": 1e-12
+    },
+    "progress_continuation": {
+      "N24_initialization": "same fresh CP01R1 seed for that seed index",
+      "N_gt_24_initialization": "Prolongate the immediately preceding mesh terminal state only if it is finite, admissible, not timed out, and final original residual_inf <= 0.90 * that stage initial original residual_inf; otherwise use the same-index fresh CP01R1 seed at that mesh.",
+      "interpretation": "This is deterministic basin continuation, not an acceptance relaxation; only original equations and original acceptance gates can create a candidate."
+    },
+    "purpose": "Test the leading algorithmic failure hypothesis while holding the physical sector fixed; do not broaden parameter or topology space in CP01R2.",
+    "required_pre_execution_implementation_tests": [
+      "Synthetic linear/scaled systems verify trust radius can expand under high-quality clipped progress without requiring a 75% residual drop.",
+      "Scaling transforms must preserve a zero of the original residual equations; acceptance is computed only on original residuals.",
+      "Deterministic progress-continuation branch selection is reproducible and never uses random/adaptive states.",
+      "Raw and scaled rank/condition channels are both captured.",
+      "No physical solve capability exists in implementation-review CI."
+    ],
+    "resource_envelope_design": {
+      "network_denied_during_solver": true,
+      "per_seed_per_level_wall_clock_seconds": 1800,
+      "single_thread_fail_closed": true,
+      "total_wall_clock_seconds": 21600
+    },
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R2",
+    "seed_and_mesh_freeze": {
+      "adaptive_mesh_insertion": false,
+      "homotopy_or_parameter_loading": false,
+      "node_counts": [24, 32, 48, 64, 96],
+      "parameter_scan": false,
+      "random_restarts": false,
+      "seed_order": [0, 1, 2, 3, 4, 5, 6],
+      "seed_set": "IDENTICAL_SEVEN_CP01R1_SEEDS"
+    },
+    "state": "DESIGNED_NOT_AUTHORIZED_NOT_EXECUTED"
+  },
+  "date": "2026-08-12",
+  "deferred_if_cp01r2_negative": [
+    "Do not widen physical parameters/topology inside CP01R2.",
+    "Only after a separately reviewed negative CP01R2 may a later protocol consider wider deterministic basin seeds or an exact-endpoint numerical homotopy."
+  ],
+  "forbidden_actions": [
+    "DO_NOT_RERUN_CP01R1",
+    "DO_NOT_EXECUTE_CP01R2_FROM_THIS_DESIGN_ARTIFACT",
+    "DO_NOT_LOOSEN_ACCEPTANCE_THRESHOLDS",
+    "DO_NOT_CHANGE_PHYSICAL_PARAMETERS_OR_TOPOLOGY_IN_CP01R2",
+    "DO_NOT_ADD_RANDOM_RESTARTS_OR_ADAPTIVE_MESHES",
+    "DO_NOT_TREAT_R4D_OBSTRUCTION_AS_CONTINUUM_NONEXISTENCE",
+    "DO_NOT_ADVANCE_TO_WP4_K1D_K1E"
+  ],
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP3": "OPEN_DIAGNOSIS_COMPLETE_CP01R2_DESIGNED_NOT_AUTHORIZED",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE",
+    "physical_solve_authorized": false,
+    "physical_solve_executed": false
+  },
+  "next_allowed_action": "ULSH-01_WP3_D2_CP01R2_IMPLEMENTATION_AND_INDEPENDENT_PROTOCOL_REVIEW_NO_EXECUTION",
+  "root_cause_ranking": [
+    {"cause": "trust-region geometry/scale starvation plus an expansion rule that is too restrictive for clipped slow progress", "confidence": "HIGH_DIAGNOSTIC_NOT_CAUSAL_PROOF", "rank": 1},
+    {"cause": "absence of progress-based coarse-to-fine continuation once local-root gate is unmet", "confidence": "HIGH_IMPLEMENTATION_FACT_MEDIUM_CAUSAL", "rank": 2},
+    {"cause": "fine-mesh ill-conditioning and transient/final rank loss", "confidence": "HIGH_DIAGNOSTIC_MEDIUM_CAUSAL", "rank": 3},
+    {"cause": "narrow one-direction seed-basin coverage", "confidence": "HIGH_SCOPE_FACT_LOW_TO_MEDIUM_CAUSAL", "rank": 4},
+    {"cause": "actual incompatibility of the frozen physical junction sector", "confidence": "OPEN_NOT_ESTABLISHED", "rank": 5}
+  ],
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-d1-failure-diagnosis-cp01r2-protocol.v1",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "source_bindings": {
+    "cp01r1_primary_kernel_base": {"git_blob_sha1": "d451be299d0ca93a7dc4587782675b7adab5cfd7", "path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py"},
+    "cp01r1_primary_seed_adapter": {"git_blob_sha1": "e232537ab80f099b0b3a914c509041c13825e950", "path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py"},
+    "cp01r1_target_h1": {"git_blob_sha1": "304592405f843822e142110ba6a65fc845579489", "path": "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.1.py"},
+    "cp01r1_target_h2": {"git_blob_sha1": "db2f4a0ea1ac374209e52b21fdc72de23e5f419d", "path": "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.2.py"},
+    "cp01r1_transaction_h3": {"git_blob_sha1": "2dd09d9ade6d6ae69c1949833e88b2af49c13710", "path": "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py"},
+    "diagnostic_matrix": {"git_blob_sha1": "f1ba347e0a97fbbc7664c79144100a0ad94ccb8d", "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D1_CP01R1FailureDiagnosticMatrix_v1.0.json", "source_result_sha256": "8562ba77cb0aeda87aceee3b7be301c06e948070beebc8916769c38d99b45ec8"},
+    "wp3_rr1_review": {"git_blob_sha1": "7faa1602f1cc4a96463984a6d1a25b1b16d3c88f", "path": "registry/2026-08-11_ULSH-01_MD2S-BVP_WP3_RR1_CP01R1ResultReview_v1.0.json"}
+  },
+  "status": "PASS_WP3_D1_FAILURE_MODE_DIAGNOSIS_CP01R2_PROTOCOL_DESIGNED_NO_EXECUTION",
+  "version": "1.0.0",
+  "work_package": "WP3-D1"
+}
