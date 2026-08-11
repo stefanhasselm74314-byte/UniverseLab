@@ -32,5 +32,5 @@ jobs:
         run: python tests/2026-08-11_ULSH-01_MD2S-BVP_WP3_RR1_CP01R1ResultReviewTest_v1.0.py
       - name: Hard no-rerun firewall
         run: |
-          test ! -e registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_SingleUseExecutionGrant_v1.3.json || true
+          test ! -e registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_SingleUseExecutionGrant_v1.3.json
           grep -q 'DO_NOT_RERUN_CP01R1_WITH_THE_SPENT_GRANT' registry/2026-08-11_ULSH-01_MD2S-BVP_WP3_RR1_CP01R1ResultReview_v1.0.json
