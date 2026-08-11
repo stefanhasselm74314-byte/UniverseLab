@@ -138,8 +138,10 @@ def _assert_preconditions_and_gates() -> None:
         raise D3BindingError("D1 precondition drift")
     if d1["cp01r2_protocol_design"]["state"] != "DESIGNED_NOT_AUTHORIZED_NOT_EXECUTED":
         raise D3BindingError("D1 CP01R2 state drift")
-    if d2["status"] != "PASS_WP3_D2_CP01R2_ETRN01_IMPLEMENTED_AND_REVIEWED_NO_EXECUTION":
-        raise D3BindingError("D2 implementation status drift")
+    if d2["classification"] != "CP01R2_ETRN01_IMPLEMENTATION_AND_INDEPENDENT_PROTOCOL_REVIEW_NO_EXECUTION":
+        raise D3BindingError("D2 implementation classification drift")
+    if d2["implementation_state"] != "IMPLEMENTED_FOR_REVIEW_NOT_PHYSICALLY_BOUND_NOT_AUTHORIZED_NOT_EXECUTED":
+        raise D3BindingError("D2 implementation state drift")
     if d2_review["review_status"] != "PASS_WP3_D2_INDEPENDENT_PROTOCOL_REVIEW_NO_EXECUTION":
         raise D3BindingError("D2 independent review drift")
 
