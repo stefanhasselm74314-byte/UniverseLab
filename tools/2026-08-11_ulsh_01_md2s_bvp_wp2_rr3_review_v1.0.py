@@ -121,16 +121,22 @@ def identify_new_release_blockers(h1_target: str, h1_tx: str, h2_tx: str, prereg
         json.dumps({"sentinel": math.inf}, allow_nan=False)
     except ValueError:
         strict_json_rejects_inf = True
-    sentinel_markers = (
-        'pair_values[key] = {"profile": math.inf, "augmented": math.inf}',
-        "independent_distance = math.inf",
-        "Y_sigma = float(model.z_sigma_hat) * d_chi**2 / ell_sigma**2 if ell_sigma > 0.0 else -math.inf",
+    nonfinite_paths_present = (
+        "pair_values[key]" in h1_target
+        and '"profile": math.inf' in h1_target
+        and '"augmented": math.inf' in h1_target
+        and "independent_distance = math.inf" in h1_target
+        and "-math.inf" in h1_target
+    )
+    no_candidate_is_preregistered = (
+        "NO_CANDIDATE_FOUND_UNDER_PREREGISTERED_PROTOCOL"
+        in prereg["predeclared_result_classes"].values()
     )
     b01 = (
         strict_json_rejects_inf
-        and all(marker in h1_target for marker in sentinel_markers)
+        and nonfinite_paths_present
         and "allow_nan=False" in h1_tx
-        and '"NO_CANDIDATE_FOUND_UNDER_PREREGISTERED_PROTOCOL"' in prereg["predeclared_result_classes"].values()
+        and no_candidate_is_preregistered
     )
 
     # RR3-B02: the hard total SIGALRM remains active during atomic staging->result
