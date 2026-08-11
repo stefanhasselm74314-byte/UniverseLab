@@ -125,14 +125,17 @@ class WP2H2Test(unittest.TestCase):
         self.assertIn("ALL_OTHERWISE_PASSING_CANDIDATES", source)
         self.assertIn("np.longdouble", source)
         self.assertIn("mantissa_bits < 64", source)
+        self.assertIn("pi = np.arccos(np.longdouble(-1))", source)
+        self.assertNotIn("str(math.pi)", source)
         self.assertIn("candidate[\"classification\"] = REJECT_CLASS", source)
         self.assertNotIn("BEST_FIT", source)
 
     def test_no_execute_call_in_test_source(self):
         source = Path(__file__).read_text(encoding="utf-8")
-        forbidden = "execute" + "_physical_schedule("
-        self.assertNotIn(forbidden, source)
-        self.assertNotIn("TX.execute(", source)
+        forbidden_target = "execute" + "_physical_schedule("
+        forbidden_tx = "TX." + "execute("
+        self.assertNotIn(forbidden_target, source)
+        self.assertNotIn(forbidden_tx, source)
 
 
 if __name__ == "__main__":
