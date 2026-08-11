@@ -14,7 +14,8 @@
     "d2_implementation_contract": {"path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D2_CP01R2ImplementationContract_v1.0.json", "git_blob_sha1": "fe6928a532da28510522fb034ae7a7573ffa0cb8"},
     "d2_etrn01": {"path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d2_cp01r2_etrn_v1.0.py", "git_blob_sha1": "fd109330d44f504d89597c05f1dbfa638e0969bb"},
     "d2_independent_review": {"path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D2_CP01R2IndependentProtocolReview_v1.0.json", "git_blob_sha1": "2734b120ffa9a481a092f87190605df24d02bcb0"},
-    "physical_run_input_freeze": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json", "git_blob_sha1": "3547523a6524cb240399f4c0cbc3fdc0b128a0c0"},
+    "cp01r2_run_input_freeze": {"path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json", "git_blob_sha1": "471f40a517140cc2a2d609f4828fd1004c4861e2", "frozen_payload_sha256": "d4ed6f947c906006e39e74f4c4e1e430019d1e094e86e4ee90946ab77de10c75"},
+    "parent_cp01r1_run_input_freeze": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json", "git_blob_sha1": "3547523a6524cb240399f4c0cbc3fdc0b128a0c0", "frozen_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302"},
     "preregistration": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationContract_v0.1.json", "git_blob_sha1": "9789101e0a168580b6906eb21edad5a5db2b64ce"},
     "seed_specification": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json", "git_blob_sha1": "17c4b9c24f3c6c1dc672f6c8f1964b5ad4412075"},
     "resource_policy": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json", "git_blob_sha1": "954a9730d3fa34864df7168555912ebba2dd6c3d"},
@@ -26,15 +27,19 @@
     "qa_precision_reference": {"path": "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.2.py", "git_blob_sha1": "db2f4a0ea1ac374209e52b21fdc72de23e5f419d", "function": "_apply_precision_gate"}
   },
   "physical_sector_freeze": {
-    "frozen_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+    "cp01r2_frozen_payload_sha256": "d4ed6f947c906006e39e74f4c4e1e430019d1e094e86e4ee90946ab77de10c75",
+    "parent_cp01r1_frozen_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
     "a_F": "1/4",
     "model_parameters": "IDENTICAL_TO_CP01R1",
+    "dimensional_anchor": "IDENTICAL_TO_CP01R1",
     "topological_sector": "IDENTICAL_TO_CP01R1",
+    "alpha_H": "IDENTICAL_TO_CP01R1",
     "physical_equations": "IDENTICAL_TO_CP01R1",
     "boundary_residuals": ["R_A", "R_ell", "R_varphi", "R_patch", "R_4D", "R_chi", "R_scalar", "R_gauge"],
     "seed_set": "IDENTICAL_SEVEN_CP01R1_SEEDS",
     "node_counts": [24, 32, 48, 64, 96],
-    "planned_entries": 35
+    "planned_entries": 35,
+    "metadata_change_only": "run_id/classification/numerical-method bindings differ; physical content and scientific gates do not"
   },
   "etrn01_physical_binding": {
     "initial_state": "primary_seed_adapter.seven_seeds(node_count)[seed_index]",
@@ -42,8 +47,8 @@
     "detail_fn": "primary_kernel_base.residual(state,node_count,model,sector)[1]",
     "jacobian_fn": "primary_kernel_base.complex_step_jacobian(state,node_count,model,sector)",
     "admissible_fn": "primary_kernel_base.admissible(state,node_count)",
-    "model_builder": "primary_kernel_base.model_from_payload(frozen_payload,control_a_F=False)",
-    "sector_builder": "primary_kernel_base.sector_from_payload(frozen_payload)",
+    "model_builder": "primary_kernel_base.model_from_payload(cp01r2_frozen_payload,control_a_F=False)",
+    "sector_builder": "primary_kernel_base.sector_from_payload(cp01r2_frozen_payload)",
     "progress_prolongation": "deterministic _prolongate_state semantics from the bound reference; eligible only under the D1 10-percent original-residual progress rule",
     "acceptance_merit": "ORIGINAL_UNSCALED_RESIDUAL_INFINITY_NORM_ONLY",
     "scaling_role": "LINEAR_SOLVE_PRECONDITIONING_ONLY",
@@ -78,18 +83,19 @@
   },
   "release_readiness_gates": {
     "D3_G01_D1_D2_CANONICAL_PRECONDITIONS": "PASS",
-    "D3_G02_PHYSICAL_SECTOR_EXACT_BINDING": "PASS",
-    "D3_G03_ETRN01_TO_PHYSICAL_RESIDUAL_INTERFACE": "PASS",
-    "D3_G04_PROGRESS_CONTINUATION_BINDING": "PASS",
-    "D3_G05_INDEPENDENT_BACKEND_BINDING": "PASS",
-    "D3_G06_ACCEPTANCE_QA_FIREWALL": "PASS",
-    "D3_G07_RESOURCE_ENVELOPE_FREEZE": "PASS",
-    "D3_G08_NO_EXECUTION_NO_RELEASE_NO_GRANT": "PASS"
+    "D3_G02_CP01R2_IMMUTABLE_RUN_INPUT_REBOUND": "PASS",
+    "D3_G03_PHYSICAL_SECTOR_EXACT_BINDING": "PASS",
+    "D3_G04_ETRN01_TO_PHYSICAL_RESIDUAL_INTERFACE": "PASS",
+    "D3_G05_PROGRESS_CONTINUATION_BINDING": "PASS",
+    "D3_G06_INDEPENDENT_BACKEND_BINDING": "PASS",
+    "D3_G07_ACCEPTANCE_QA_FIREWALL": "PASS",
+    "D3_G08_RESOURCE_ENVELOPE_FREEZE": "PASS",
+    "D3_G09_NO_EXECUTION_NO_RELEASE_NO_GRANT": "PASS"
   },
   "release_readiness_interpretation": {
     "target_binding_layer": "READY_FOR_SEPARATE_TRANSACTION_LAYER_IMPLEMENTATION",
     "physical_execution": "NOT_READY_NOT_AUTHORIZED",
-    "reason": "WP3-D3 binds the method to the exact physical target and freezes QA/resources, but deliberately does not implement or issue the single-use CP01R2 transaction authorization/grant layer."
+    "reason": "WP3-D3 binds ETRN-01 to an immutable CP01R2 run input and the exact physical target, while preserving all scientific QA and resource constraints. It deliberately does not implement or issue the single-use CP01R2 transaction authorization/grant layer."
   },
   "governance": {
     "WP3": "OPEN_CP01R2_PHYSICAL_TARGET_BOUND_TRANSACTION_LAYER_PENDING",
