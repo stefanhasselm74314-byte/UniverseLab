@@ -1,0 +1,117 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-d3-cp01r2-physical-target-binding.v1",
+  "version": "1.0.0",
+  "date": "2026-08-12",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP3-D3",
+  "classification": "CP01R2_PHYSICAL_TARGET_BINDING_AND_RELEASE_READINESS_REVIEW_NO_EXECUTION",
+  "status": "PASS_D3_BINDING_DEFINED_PENDING_TRANSACTION_LAYER_NO_EXECUTION",
+  "baseline_main_commit": "24f79b13d7e398e54fa049b394e0fd89ce3f68f8",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R2",
+  "source_bindings": {
+    "d1_protocol": {"path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D1_CP01R1FailureDiagnosis_CP01R2Protocol_v1.0.json", "git_blob_sha1": "7f89a61ace7a54182ade2cc97cb38558496e9f68"},
+    "d2_implementation_contract": {"path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D2_CP01R2ImplementationContract_v1.0.json", "git_blob_sha1": "fe6928a532da28510522fb034ae7a7573ffa0cb8"},
+    "d2_etrn01": {"path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d2_cp01r2_etrn_v1.0.py", "git_blob_sha1": "fd109330d44f504d89597c05f1dbfa638e0969bb"},
+    "d2_independent_review": {"path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D2_CP01R2IndependentProtocolReview_v1.0.json", "git_blob_sha1": "2734b120ffa9a481a092f87190605df24d02bcb0"},
+    "cp01r2_run_input_freeze": {"path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json", "git_blob_sha1": "471f40a517140cc2a2d609f4828fd1004c4861e2", "frozen_payload_sha256": "d4ed6f947c906006e39e74f4c4e1e430019d1e094e86e4ee90946ab77de10c75"},
+    "parent_cp01r1_run_input_freeze": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json", "git_blob_sha1": "3547523a6524cb240399f4c0cbc3fdc0b128a0c0", "frozen_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302"},
+    "preregistration": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationContract_v0.1.json", "git_blob_sha1": "9789101e0a168580b6906eb21edad5a5db2b64ce"},
+    "seed_specification": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json", "git_blob_sha1": "17c4b9c24f3c6c1dc672f6c8f1964b5ad4412075"},
+    "resource_policy": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json", "git_blob_sha1": "954a9730d3fa34864df7168555912ebba2dd6c3d"},
+    "result_schema": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResultSchema_v0.1.json", "git_blob_sha1": "b1fdf45aa9fb3d585e73795e9294dfa0c185fc39"},
+    "primary_seed_adapter": {"path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py", "git_blob_sha1": "e232537ab80f099b0b3a914c509041c13825e950", "raw_sha256": "8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92"},
+    "primary_kernel_base": {"path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py", "git_blob_sha1": "d451be299d0ca93a7dc4587782675b7adab5cfd7", "raw_sha256": "830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599"},
+    "independent_backend": {"path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py", "git_blob_sha1": "bed68e11a3682d8b140b6db0cbe71fd696c3ff34", "raw_sha256": "a8afd7b548366acf9f5ac72e91bcf07372913cc21a8790d86d0a989a89f03e7b"},
+    "prolongation_reference": {"path": "tools/2026-08-10_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.0.py", "git_blob_sha1": "ea02d02f61e8c072c1191577c1bf7660038ad516", "function": "_prolongate_state"},
+    "qa_precision_reference": {"path": "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.2.py", "git_blob_sha1": "db2f4a0ea1ac374209e52b21fdc72de23e5f419d", "function": "_apply_precision_gate"}
+  },
+  "physical_sector_freeze": {
+    "cp01r2_frozen_payload_sha256": "d4ed6f947c906006e39e74f4c4e1e430019d1e094e86e4ee90946ab77de10c75",
+    "parent_cp01r1_frozen_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+    "a_F": "1/4",
+    "model_parameters": "IDENTICAL_TO_CP01R1",
+    "dimensional_anchor": "IDENTICAL_TO_CP01R1",
+    "topological_sector": "IDENTICAL_TO_CP01R1",
+    "alpha_H": "IDENTICAL_TO_CP01R1",
+    "physical_equations": "IDENTICAL_TO_CP01R1",
+    "boundary_residuals": ["R_A", "R_ell", "R_varphi", "R_patch", "R_4D", "R_chi", "R_scalar", "R_gauge"],
+    "seed_set": "IDENTICAL_SEVEN_CP01R1_SEEDS",
+    "node_counts": [24, 32, 48, 64, 96],
+    "planned_entries": 35,
+    "metadata_change_only": "run_id/classification/numerical-method bindings differ; physical content and scientific gates do not"
+  },
+  "etrn01_physical_binding": {
+    "initial_state": "primary_seed_adapter.seven_seeds(node_count)[seed_index]",
+    "residual_fn": "primary_kernel_base.residual(state,node_count,model,sector)[0]",
+    "detail_fn": "primary_kernel_base.residual(state,node_count,model,sector)[1]",
+    "jacobian_fn": "primary_kernel_base.complex_step_jacobian(state,node_count,model,sector)",
+    "admissible_fn": "primary_kernel_base.admissible(state,node_count)",
+    "model_builder": "primary_kernel_base.model_from_payload(cp01r2_frozen_payload,control_a_F=False)",
+    "sector_builder": "primary_kernel_base.sector_from_payload(cp01r2_frozen_payload)",
+    "progress_prolongation": "deterministic _prolongate_state semantics from the bound reference; eligible only under the D1 10-percent original-residual progress rule",
+    "acceptance_merit": "ORIGINAL_UNSCALED_RESIDUAL_INFINITY_NORM_ONLY",
+    "scaling_role": "LINEAR_SOLVE_PRECONDITIONING_ONLY",
+    "rank_regularization_role": "NUMERICAL_STEP_CONSTRUCTION_ONLY_NOT_CANDIDATE_PROMOTION"
+  },
+  "independent_backend_binding": {
+    "dispatch": "ONLY_AFTER_PRIMARY_LOCAL_CANDIDATE",
+    "residual": "independent_backend.shooting_residual",
+    "jacobian": "independent_backend.centered_fd_jacobian",
+    "distance_gate": "UNCHANGED_FROM_CP01R1_PREREGISTRATION",
+    "interpretation": "NUMERICAL_CROSSCHECK_ONLY_NOT_PHYSICAL_IDENTIFICATION"
+  },
+  "acceptance_and_qa_freeze": {
+    "all_scientific_thresholds": "BYTE_SOURCE_BOUND_TO_CP01R1_PREREGISTRATION_AND_UNCHANGED",
+    "required_meshes": [48, 64, 96],
+    "rr_constraint": "UNCHANGED",
+    "fine_mesh_profile_difference": "UNCHANGED",
+    "fine_mesh_augmented_difference": "UNCHANGED",
+    "residual_monotonicity": "UNCHANGED",
+    "spectral_tail": "UNCHANGED",
+    "condition_gate": "UNCHANGED",
+    "independent_backend": "MANDATORY_AFTER_PRIMARY_CANDIDATE",
+    "higher_precision_audit": "MANDATORY_FOR_EVERY_OTHERWISE_PASSING_CANDIDATE",
+    "result_schema": "UNCHANGED"
+  },
+  "resource_freeze": {
+    "per_seed_per_level_wall_clock_seconds": 1800,
+    "total_wall_clock_seconds": 21600,
+    "single_thread_fail_closed": true,
+    "network_denied_during_solver": true,
+    "result_size_limit_bytes": 1073741824
+  },
+  "release_readiness_gates": {
+    "D3_G01_D1_D2_CANONICAL_PRECONDITIONS": "PASS",
+    "D3_G02_CP01R2_IMMUTABLE_RUN_INPUT_REBOUND": "PASS",
+    "D3_G03_PHYSICAL_SECTOR_EXACT_BINDING": "PASS",
+    "D3_G04_ETRN01_TO_PHYSICAL_RESIDUAL_INTERFACE": "PASS",
+    "D3_G05_PROGRESS_CONTINUATION_BINDING": "PASS",
+    "D3_G06_INDEPENDENT_BACKEND_BINDING": "PASS",
+    "D3_G07_ACCEPTANCE_QA_FIREWALL": "PASS",
+    "D3_G08_RESOURCE_ENVELOPE_FREEZE": "PASS",
+    "D3_G09_NO_EXECUTION_NO_RELEASE_NO_GRANT": "PASS"
+  },
+  "release_readiness_interpretation": {
+    "target_binding_layer": "READY_FOR_SEPARATE_TRANSACTION_LAYER_IMPLEMENTATION",
+    "physical_execution": "NOT_READY_NOT_AUTHORIZED",
+    "reason": "WP3-D3 binds ETRN-01 to an immutable CP01R2 run input and the exact physical target, while preserving all scientific QA and resource constraints. It deliberately does not implement or issue the single-use CP01R2 transaction authorization/grant layer."
+  },
+  "governance": {
+    "WP3": "OPEN_CP01R2_PHYSICAL_TARGET_BOUND_TRANSACTION_LAYER_PENDING",
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_solve_authorized": false,
+    "physical_solve_executed": false,
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_actions": [
+    "DO_NOT_EXECUTE_CP01R2",
+    "DO_NOT_CREATE_CP01R2_RELEASE_AUTHORIZATION_OR_EXECUTION_GRANT_IN_WP3_D3",
+    "DO_NOT_RELAX_ANY_CP01R1_ACCEPTANCE_THRESHOLD",
+    "DO_NOT_CHANGE_PHYSICAL_PARAMETERS_TOPOLOGY_SEEDS_OR_MESHES",
+    "DO_NOT_ADVANCE_TO_WP4_K1D_K1E"
+  ],
+  "next_allowed_action": "ULSH-01_WP3_D4_CP01R2_TRANSACTION_AND_SINGLE_USE_RELEASE_FIREWALL_IMPLEMENTATION_PLUS_INDEPENDENT_REVIEW_NO_EXECUTION"
+}
