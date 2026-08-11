@@ -1,0 +1,94 @@
+name: ULSH-01 WP2 release hardening no-solve
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_HardeningContract_v1.0.json"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.1.py"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.1.py"
+      - "tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_HardeningTest_v1.0.py"
+      - "science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_HardeningLedger_v1.0.md"
+      - ".github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_Hardening_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_HardeningContract_v1.0.json"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.1.py"
+      - "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.1.py"
+      - "tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_HardeningTest_v1.0.py"
+      - "science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP2_HardeningLedger_v1.0.md"
+      - ".github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_Hardening_v1.0.yml"
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+  NUMEXPR_NUM_THREADS: "1"
+  VECLIB_MAXIMUM_THREADS: "1"
+
+jobs:
+  hardening-no-solve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frozen Background3C dependencies
+        run: python -m pip install -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt
+
+      - name: Compile hardened sources
+        run: |
+          python -m py_compile tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.1.py
+          python -m py_compile tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.1.py
+          python -m py_compile tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_HardeningTest_v1.0.py
+
+      - name: Validate hardening contract JSON
+        run: python -m json.tool registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_HardeningContract_v1.0.json >/dev/null
+
+      - name: Hardened target audit only
+        run: python tools/2026-08-11_ulsh_01_md2s_bvp_wp2_target_entrypoint_v1.1.py >/tmp/ulsh_wp2h_target_audit.json
+
+      - name: Hardened transaction audit only
+        run: python tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.1.py audit >/tmp/ulsh_wp2h_transaction_audit.json
+
+      - name: Run WP2-H no-solve tests
+        run: python tests/2026-08-11_ULSH-01_MD2S-BVP_WP2_HardeningTest_v1.0.py -v
+
+      - name: Verify CPU and BLAS LAPACK runtime attestation
+        run: |
+          python - <<'PY'
+          import importlib.util, pathlib, sys
+          path = pathlib.Path('tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.1.py')
+          spec = importlib.util.spec_from_file_location('wp2h_runtime_probe', path)
+          module = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = module
+          spec.loader.exec_module(module)
+          att = module.validate_runtime()
+          assert att['cpu_identity']['machine']
+          text = (att['blas_lapack']['numpy_config'] + '\n' + att['blas_lapack']['scipy_config']).lower()
+          assert 'blas' in text or 'lapack' in text
+          assert att['dependencies_observed'] == att['dependencies_expected']
+          print('PASS_RUNTIME_ATTESTATION_NO_SOLVE')
+          PY
+
+      - name: Hard release and execution firewall
+        run: |
+          test ! -e registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_PhysicalSolveReleaseAuthorization_v1.1.json
+          test ! -e registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_SingleUseExecutionGrant_v1.1.json
+          python - <<'PY'
+          from pathlib import Path
+          workflow = Path('.github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP2_Hardening_v1.0.yml').read_text(encoding='utf-8')
+          run_lines = [line.strip() for line in workflow.splitlines() if line.lstrip().startswith('run:')]
+          forbidden = ('transaction_v1.1.py execute', 'execute_physical_schedule(')
+          assert not any(token in line for line in run_lines for token in forbidden), run_lines
+          contract = Path('registry/2026-08-11_ULSH-01_MD2S-BVP_WP2_HardeningContract_v1.0.json').read_text(encoding='utf-8')
+          assert '"physical_solve_authorized": false' in contract
+          assert '"physical_solve_executed": false' in contract
+          assert '"physical_evidence_effect": "NONE"' in contract
+          PY
