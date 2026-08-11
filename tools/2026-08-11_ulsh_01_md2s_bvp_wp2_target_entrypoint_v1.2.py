@@ -79,7 +79,7 @@ def _longdouble_grid(node_count: int, np: Any) -> tuple[Any, Any, Any]:
         raise H2PrecisionAuditError("node_count must be >=3")
     degree = node_count - 1
     j = np.arange(node_count, dtype=np.longdouble)
-    pi = np.longdouble(str(math.pi))
+    pi = np.arccos(np.longdouble(-1))
     x_desc = np.cos(pi * j / np.longdouble(degree))
     tau_desc = (x_desc + np.longdouble(1)) / np.longdouble(2)
     weights_desc = np.where((np.arange(node_count) % 2) == 0, np.longdouble(1), np.longdouble(-1)).astype(np.longdouble)
