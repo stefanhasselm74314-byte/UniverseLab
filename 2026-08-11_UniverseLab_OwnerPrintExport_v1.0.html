@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071018">
+<title>UniverseLab · Owner Print Export</title>
+<style>
+:root{color-scheme:dark;--bg:#050a10;--panel:#0b1821;--line:#28495a;--text:#eef9ff;--muted:#9db5c2;--cyan:#75dcff;--green:#73dfb1;--amber:#ffd078;--red:#ff8aa2}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% -15%,#173c50,#061018 45%,#02070a 88%);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}main{width:min(1180px,100%);margin:auto;padding:18px 10px 50px}.hero,.panel{border:1px solid var(--line);border-radius:16px;background:var(--panel)}.hero{padding:18px;background:linear-gradient(135deg,#12394b,#091821 60%,#221d3f)}h1{margin:4px 0 8px;font-size:clamp(30px,6vw,52px);line-height:1.02}.eyebrow{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#a8eaff}.lead{max-width:900px;color:#c5d8e2}.note{margin-top:10px;padding:10px;border:1px solid #6a5630;border-radius:10px;background:#2a2112;color:#ffe0a8}.panel{margin-top:12px;padding:12px}.toolbar{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.toolbar button{min-height:42px;border:1px solid var(--line);border-radius:9px;background:#102733;color:#fff;font-weight:850;cursor:pointer}.toolbar button.primary{background:#17475b;border-color:#5a9db8}.toolbar button.good{background:#173f34;border-color:#4c937b}.toolbar button.warn{background:#4b3916;border-color:#92702a}.toolbar button:disabled{opacity:.45;cursor:not-allowed}.status{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.chip{padding:5px 8px;border:1px solid var(--line);border-radius:999px;background:#08161e;color:#cbe0e8;font-size:11px}.chip b{color:#fff}.filters{display:grid;grid-template-columns:1fr auto auto;gap:7px;margin-top:10px}.filters input{min-height:40px;border:1px solid var(--line);border-radius:9px;background:#07151d;color:#fff;padding:8px}.filters label{display:flex;align-items:center;gap:6px;padding:0 8px;border:1px solid var(--line);border-radius:9px;background:#08161e}.list{display:grid;gap:6px;margin-top:10px}.row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:9px;align-items:start;padding:9px;border:1px solid #203e4c;border-radius:10px;background:#07151d}.row input{margin-top:4px}.title{font-weight:850}.path{margin-top:2px;color:var(--muted);font:11px ui-monospace,SFMono-Regular,Consolas,monospace;word-break:break-all}.tags{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}.tag{padding:2px 6px;border-radius:5px;background:#173846;color:#bcecff;font-size:9px;font-weight:850}.tag.archive{background:#3d2d15;color:#ffd89c}.tag.canonical{background:#173a31;color:#9ce6c9}.empty{padding:18px;text-align:center;color:var(--muted)}#gate{display:none}.danger{border-color:#734354;background:#2b1520;color:#ffd4df}.progressbar{height:8px;margin-top:10px;border-radius:999px;overflow:hidden;background:#172832}.progressbar>div{height:100%;width:0;background:linear-gradient(90deg,#4db6dc,#72dfb1);transition:width .15s ease}@media(max-width:760px){.toolbar{grid-template-columns:1fr 1fr}.filters{grid-template-columns:1fr}.row{grid-template-columns:auto minmax(0,1fr)}.tags{grid-column:2;justify-content:flex-start}}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+<div class="eyebrow">UniverseLab · privater Werkzeugbereich</div>
+<h1>Seiten drucken & exportieren</h1>
+<p class="lead">Dieser unverkettete Owner-Hub sammelt die öffentlich erreichbaren UniverseLab-HTML-Seiten, lässt sie auswählen und erzeugt daraus ein einheitliches A4-Druckdokument. Im Browser kannst du es direkt drucken oder über „Als PDF speichern“ archivieren.</p>
+<div class="note"><b>Nur für deinen Gebrauch gedacht:</b> Diese Seite wird nicht in die öffentliche Navigation aufgenommen. Weil GitHub Pages öffentlich ist, ist <code>?owner=1</code> aber keine echte Zugangssperre, sondern nur ein versteckter Owner-Modus.</div>
+</section>
+
+<section id="gate" class="panel danger">
+<b>Owner-Modus nicht aktiv.</b><br>Öffne diese Seite mit <code>?owner=1</code>.
+</section>
+
+<section id="app" class="panel" hidden>
+<div class="toolbar">
+<button id="discover" class="primary">Seiten suchen</button>
+<button id="all">Alle auswählen</button>
+<button id="none">Keine auswählen</button>
+<button id="canonical">Nur kanonisch</button>
+<button id="print" class="good" disabled>Drucken / PDF</button>
+<button id="html" class="warn" disabled>HTML-Archiv</button>
+</div>
+<div class="status">
+<span class="chip">Gefunden: <b id="found">0</b></span>
+<span class="chip">Ausgewählt: <b id="selected">0</b></span>
+<span class="chip">Kanonisch: <b id="canonCount">0</b></span>
+<span class="chip">Status: <b id="state">bereit</b></span>
+</div>
+<div class="progressbar"><div id="bar"></div></div>
+<div class="filters">
+<input id="search" type="search" placeholder="Seite filtern …">
+<label><input id="includeArchive" type="checkbox" checked> Archive anzeigen</label>
+<label><input id="crawlLinks" type="checkbox" checked> Links mit durchsuchen</label>
+</div>
+<div id="list" class="list"><div class="empty">Noch keine Seiten eingelesen.</div></div>
+</section>
+</main>
+<script>
+(() => {
+  const params = new URLSearchParams(location.search);
+  const ownerMode = params.get('owner') === '1';
+  const app = document.getElementById('app');
+  const gate = document.getElementById('gate');
+  if (!ownerMode) { gate.style.display = 'block'; return; }
+  app.hidden = false;
+
+  const EXPORT_PATH = '/UniverseLab/2026-08-11_UniverseLab_OwnerPrintExport_v1.0.html';
+  const BASE_PATH = '/UniverseLab/';
+  const MAX_PAGES = 250;
+  const state = { pages: new Map(), canonical: new Set(), selected: new Set(), crawling: false };
+  const $ = id => document.getElementById(id);
+  const setState = text => $('state').textContent = text;
+  const setBar = value => $('bar').style.width = Math.max(0, Math.min(100, value)) + '%';
+
+  function normalizeUrl(href, base = location.href) {
+    try {
+      const u = new URL(href, base);
+      if (u.origin !== location.origin) return null;
+      if (!u.pathname.startsWith(BASE_PATH)) return null;
+      if (u.pathname === EXPORT_PATH) return null;
+      const rel = u.pathname.slice(BASE_PATH.length);
+      if (rel && !rel.endsWith('.html') && !rel.endsWith('/')) return null;
+      u.search = ''; u.hash = '';
+      return u;
+    } catch { return null; }
+  }
+
+  async function fetchText(url) {
+    const r = await fetch(url, {cache:'no-store'});
+    if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+    return r.text();
+  }
+
+  async function seedFromManifest() {
+    try {
+      const r = await fetch('./project-manifest.json', {cache:'no-store'});
+      if (!r.ok) return [];
+      const manifest = await r.json();
+      const pages = Array.isArray(manifest.canonical_pages) ? manifest.canonical_pages : [];
+      const out = [];
+      for (const p of pages) {
+        if (!p || typeof p.path !== 'string' || !p.path.endsWith('.html')) continue;
+        const u = normalizeUrl('./' + p.path);
+        if (!u) continue;
+        state.canonical.add(u.pathname);
+        out.push({url:u, meta:p});
+      }
+      return out;
+    } catch { return []; }
+  }
+
+  function pageRecord(url, title='', meta=null) {
+    return {
+      url: url.href,
+      pathname: url.pathname,
+      title: title || url.pathname.split('/').pop() || 'UniverseLab Portal',
+      status: meta?.status || '',
+      className: meta?.class || '',
+      canonical: state.canonical.has(url.pathname),
+      ok: true
+    };
+  }
+
+  async function discoverPages() {
+    if (state.crawling) return;
+    state.crawling = true;
+    $('discover').disabled = true;
+    setState('suche …'); setBar(2);
+    state.pages.clear(); state.selected.clear(); state.canonical.clear();
+
+    const queue = [];
+    const queued = new Set();
+    const enqueue = (url, meta=null) => {
+      if (!url || queued.has(url.pathname) || queued.size >= MAX_PAGES) return;
+      queued.add(url.pathname); queue.push({url, meta});
+    };
+
+    enqueue(normalizeUrl('./'));
+    for (const seed of await seedFromManifest()) enqueue(seed.url, seed.meta);
+
+    let done = 0;
+    while (queue.length && done < MAX_PAGES) {
+      const item = queue.shift();
+      try {
+        const html = await fetchText(item.url.href);
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const title = (doc.querySelector('title')?.textContent || doc.querySelector('h1')?.textContent || '').trim();
+        const rec = pageRecord(item.url, title, item.meta);
+        state.pages.set(item.url.pathname, rec);
+        state.selected.add(item.url.pathname);
+
+        if ($('crawlLinks').checked) {
+          for (const el of doc.querySelectorAll('a[href], iframe[src]')) {
+            const raw = el.getAttribute(el.hasAttribute('href') ? 'href' : 'src');
+            const next = normalizeUrl(raw, item.url.href);
+            if (next) enqueue(next);
+          }
+        }
+      } catch (err) {
+        state.pages.set(item.url.pathname, {...pageRecord(item.url, '', item.meta), ok:false, error:String(err)});
+      }
+      done++;
+      setBar(Math.min(95, 5 + done / Math.max(done + queue.length, 1) * 90));
+      setState(`${done} geprüft`);
+    }
+    setBar(100); setState('fertig');
+    state.crawling = false; $('discover').disabled = false;
+    render(); updateButtons();
+    setTimeout(() => setBar(0), 900);
+  }
+
+  function visiblePages() {
+    const q = $('search').value.trim().toLowerCase();
+    const includeArchive = $('includeArchive').checked;
+    return [...state.pages.values()].filter(p => {
+      if (!includeArchive && /ARCHIV/i.test(p.status)) return false;
+      if (!q) return true;
+      return `${p.title} ${p.pathname} ${p.status} ${p.className}`.toLowerCase().includes(q);
+    }).sort((a,b) => (b.canonical-a.canonical) || a.title.localeCompare(b.title,'de'));
+  }
+
+  function render() {
+    const rows = visiblePages();
+    $('found').textContent = state.pages.size;
+    $('canonCount').textContent = [...state.pages.values()].filter(p => p.canonical).length;
+    const host = $('list'); host.textContent = '';
+    if (!rows.length) { host.innerHTML = '<div class="empty">Keine passenden Seiten.</div>'; return; }
+    for (const p of rows) {
+      const row = document.createElement('label'); row.className = 'row';
+      const box = document.createElement('input'); box.type='checkbox'; box.checked=state.selected.has(p.pathname); box.disabled=!p.ok;
+      box.addEventListener('change', () => { box.checked ? state.selected.add(p.pathname) : state.selected.delete(p.pathname); updateButtons(); });
+      const text = document.createElement('div');
+      const t = document.createElement('div'); t.className='title'; t.textContent=p.title + (p.ok?'':' · nicht ladbar');
+      const path = document.createElement('div'); path.className='path'; path.textContent=p.pathname.replace(BASE_PATH,'./');
+      text.append(t,path);
+      const tags = document.createElement('div'); tags.className='tags';
+      if (p.canonical) { const s=document.createElement('span'); s.className='tag canonical'; s.textContent='KANONISCH'; tags.append(s); }
+      if (/ARCHIV/i.test(p.status)) { const s=document.createElement('span'); s.className='tag archive'; s.textContent='ARCHIV'; tags.append(s); }
+      if (p.status) { const s=document.createElement('span'); s.className='tag'; s.textContent=p.status; tags.append(s); }
+      row.append(box,text,tags); host.append(row);
+    }
+    updateButtons();
+  }
+
+  function updateButtons() {
+    $('selected').textContent = state.selected.size;
+    $('print').disabled = state.selected.size===0;
+    $('html').disabled = state.selected.size===0;
+  }
+
+  function absolutize(root, baseUrl) {
+    for (const el of root.querySelectorAll('[src],[href]')) {
+      for (const attr of ['src','href']) {
+        if (!el.hasAttribute(attr)) continue;
+        const raw = el.getAttribute(attr);
+        if (!raw || raw.startsWith('#') || raw.startsWith('data:') || raw.startsWith('mailto:') || raw.startsWith('javascript:')) continue;
+        try { el.setAttribute(attr, new URL(raw, baseUrl).href); } catch {}
+      }
+    }
+  }
+
+  function cleanContent(doc, baseUrl) {
+    const source = doc.querySelector('main') || doc.body;
+    const clone = source.cloneNode(true);
+    clone.querySelectorAll('script,nav,button,input,select,textarea,iframe,video,audio,noscript').forEach(n => n.remove());
+    clone.querySelectorAll('[hidden],.hidden,.app-shell,.mobile-nav,.bottom-nav').forEach(n => n.remove());
+    clone.querySelectorAll('details').forEach(d => d.open = true);
+    clone.querySelectorAll('canvas').forEach(c => {
+      const note=document.createElement('div'); note.className='interactive-note'; note.textContent='Interaktive Canvas-Grafik – siehe Originalseite.'; c.replaceWith(note);
+    });
+    clone.querySelectorAll('*').forEach(el => {
+      for (const a of [...el.attributes]) if (/^on/i.test(a.name)) el.removeAttribute(a.name);
+    });
+    absolutize(clone, baseUrl);
+    return clone.innerHTML;
+  }
+
+  async function buildBook() {
+    const chosen = [...state.selected].map(k => state.pages.get(k)).filter(Boolean);
+    const sections=[]; let i=0;
+    setState('Export wird gebaut …'); setBar(2);
+    for (const p of chosen) {
+      try {
+        const html=await fetchText(p.url);
+        const doc=new DOMParser().parseFromString(html,'text/html');
+        const title=(doc.querySelector('title')?.textContent || p.title).trim();
+        sections.push(`<article class="source-page"><header class="source-head"><div class="kicker">UniverseLab Export · ${i+1}/${chosen.length}</div><h1>${escapeHtml(title)}</h1><div class="source-url">${escapeHtml(p.url)}</div></header><div class="source-body">${cleanContent(doc,p.url)}</div></article>`);
+      } catch (err) {
+        sections.push(`<article class="source-page"><h1>${escapeHtml(p.title)}</h1><p>Seite konnte nicht exportiert werden: ${escapeHtml(String(err))}</p></article>`);
+      }
+      i++; setBar(5 + i/chosen.length*90);
+    }
+    const stamp=new Date().toLocaleString('de-DE');
+    const book=`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>UniverseLab Gesamtexport</title><style>
+@page{size:A4;margin:12mm}*{box-sizing:border-box}html{background:#fff;color:#111}body{margin:0;font:10.5pt/1.42 Arial,Helvetica,sans-serif;color:#111;background:#fff}a{color:#111;text-decoration:underline;overflow-wrap:anywhere}img,svg{max-width:100%!important;height:auto!important;break-inside:avoid}table{width:100%!important;border-collapse:collapse!important;font-size:9pt;break-inside:auto}th,td{border:1px solid #999!important;padding:4px!important;vertical-align:top}tr{break-inside:avoid}pre,.eq,code{white-space:pre-wrap!important;overflow-wrap:anywhere;background:#f4f4f4!important;color:#111!important;border:1px solid #bbb!important}h1,h2,h3,h4{color:#111!important;break-after:avoid}p,li{orphans:3;widows:3}.source-page{break-before:page;min-height:1px}.source-page:first-child{break-before:auto}.source-head{padding-bottom:6mm;margin-bottom:6mm;border-bottom:2px solid #111}.source-head h1{font-size:20pt;margin:1mm 0 2mm}.kicker{font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.source-url{font:7.5pt ui-monospace,monospace;overflow-wrap:anywhere;color:#555}.source-body{width:100%!important;max-width:none!important;margin:0!important;padding:0!important;background:#fff!important;color:#111!important}.source-body *{max-width:100%}.source-body section,.source-body article,.source-body div{box-shadow:none!important}.interactive-note{padding:5mm;border:1px dashed #777;background:#f6f6f6;color:#555;font-style:italic;break-inside:avoid}.export-cover{display:grid;place-items:center;min-height:240mm;text-align:center}.export-cover h1{font-size:30pt;margin:0}.export-cover p{font-size:12pt}.screen-only{display:none}@media print{.source-page{break-before:page}}
+</style></head><body><section class="export-cover"><div><h1>UniverseLab</h1><p>Gesamtexport für Ausdruck / PDF</p><p>${chosen.length} Seiten · erstellt ${escapeHtml(stamp)}</p></div></section>${sections.join('\n')}</body></html>`;
+    setBar(100); setState('Export fertig'); setTimeout(()=>setBar(0),800); return book;
+  }
+
+  function escapeHtml(value) { return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  async function printBook() {
+    const win=window.open('', '_blank');
+    if (!win) { alert('Popup wurde blockiert. Bitte Popups für UniverseLab erlauben.'); return; }
+    win.document.write('<p style="font-family:system-ui;padding:20px">UniverseLab Export wird vorbereitet …</p>');
+    const book=await buildBook();
+    win.document.open(); win.document.write(book); win.document.close();
+    setTimeout(() => { win.focus(); win.print(); }, 450);
+  }
+
+  async function downloadBook() {
+    const book=await buildBook();
+    const blob=new Blob([book],{type:'text/html;charset=utf-8'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download=`UniverseLab_Gesamtexport_${new Date().toISOString().slice(0,10)}.html`;
+    document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  }
+
+  $('discover').addEventListener('click', discoverPages);
+  $('all').addEventListener('click', () => { for (const p of state.pages.values()) if(p.ok) state.selected.add(p.pathname); render(); });
+  $('none').addEventListener('click', () => { state.selected.clear(); render(); });
+  $('canonical').addEventListener('click', () => { state.selected.clear(); for(const p of state.pages.values()) if(p.ok&&p.canonical) state.selected.add(p.pathname); render(); });
+  $('print').addEventListener('click', printBook);
+  $('html').addEventListener('click', downloadBook);
+  $('search').addEventListener('input', render);
+  $('includeArchive').addEventListener('change', render);
+  $('crawlLinks').addEventListener('change', () => {});
+  discoverPages();
+})();
+</script>
+</body>
+</html>
