@@ -11,7 +11,6 @@ from __future__ import annotations
 
 from pathlib import Path
 import math
-import re
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "compare-direct.html"
@@ -45,9 +44,10 @@ def main() -> None:
     assert "cv('#schart',[{c:'#68cfff',d}],lo,hi)" in html
     assert "x-Achse: tatsächlicher Parameterwert" in html
 
-    match = re.search(r"function sweep\(\)\{(.*?)\}function table", html, re.S)
-    assert match, "sweep() block not found"
-    sweep = match.group(1)
+    start_marker = "function sweep(){"
+    end_marker = "function table(){"
+    assert start_marker in html and end_marker in html, "sweep/table markers not found"
+    sweep = html.split(start_marker, 1)[1].split(end_marker, 1)[0]
     assert "q(z,pp,2)" not in sweep
     assert "mu(z,pp,2)" not in sweep
     assert "age(pp,2)" not in sweep
