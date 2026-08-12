@@ -1,0 +1,56 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-d6h1-cp01r2-checkpoint-schema.v1",
+  "version": "1.0.0",
+  "date": "2026-08-12",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R2",
+  "purpose": "DURABLE_PER_ENTRY_WRITE_AHEAD_RESULT_CLOSURE",
+  "checkpoint_document_schema": "universelab.ulsh-01.md2s-bvp.cp01r2-entry-checkpoint.v1",
+  "required_fields": [
+    "schema",
+    "run_id",
+    "run_payload_sha256",
+    "schedule_sha256",
+    "ordinal",
+    "entry_id",
+    "seed_index",
+    "node_count",
+    "previous_checkpoint_sha256",
+    "recorded_utc",
+    "record",
+    "json_safe_nonfinite_replacements"
+  ],
+  "ordering": {
+    "ordinal_start": 1,
+    "ordinal_end": 35,
+    "strictly_increasing": true,
+    "one_checkpoint_per_schedule_entry": true,
+    "advance_to_next_entry_requires_durable_checkpoint": true
+  },
+  "durability": {
+    "write_mode": "CREATE_EXCLUSIVE_TEMP_THEN_ATOMIC_RENAME",
+    "file_fsync_required": true,
+    "directory_fsync_required": true,
+    "state_pointer_atomic_update_required": true,
+    "overwrite_permitted": false,
+    "replay_permitted": false
+  },
+  "hash_chain": {
+    "algorithm": "SHA-256",
+    "first_previous_checkpoint_sha256": null,
+    "subsequent_previous_checkpoint_sha256_must_equal_prior_checkpoint_sha256": true,
+    "checkpoint_sha256_is_hash_of_canonical_strict_json_bytes": true
+  },
+  "nonfinite_policy": "NONFINITE_DIAGNOSTIC_VALUES_TO_NULL_WITH_EXPLICIT_PATH_PROVENANCE_NEVER_TO_FINITE_MEASUREMENT",
+  "recovery": {
+    "scan_order": "ordinal_filename_order",
+    "fail_on_gap": true,
+    "fail_on_duplicate": true,
+    "fail_on_chain_mismatch": true,
+    "partial_prefix_is_recoverable_after_later_failure": true
+  },
+  "scientific_interpretation": {
+    "checkpoint_is_not_candidate_acceptance": true,
+    "checkpoint_is_not_physical_confirmation": true,
+    "checkpoint_preserves_executed_numerical_record_only": true
+  }
+}
