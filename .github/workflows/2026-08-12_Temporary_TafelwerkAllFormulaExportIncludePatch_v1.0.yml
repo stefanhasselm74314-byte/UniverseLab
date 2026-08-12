@@ -1,0 +1,39 @@
+name: Temporary Tafelwerk all-formula export include patch
+
+on:
+  push:
+    branches: [ui-tafelwerk-export-all-formulas]
+    paths:
+      - 'tools/2026-08-12_patch_tafelwerk_all_export_include_v1.0.py'
+      - '.github/workflows/2026-08-12_Temporary_TafelwerkAllFormulaExportIncludePatch_v1.0.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui-tafelwerk-export-all-formulas
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Patch Tafelwerk include
+        run: python tools/2026-08-12_patch_tafelwerk_all_export_include_v1.0.py
+      - name: Commit patched page if needed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- tafelwerk.html; then
+            echo 'No page patch required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tafelwerk.html
+          git commit -m 'Tafelwerk: load all-formula export module'
+          git push origin HEAD:ui-tafelwerk-export-all-formulas
