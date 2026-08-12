@@ -17,17 +17,19 @@
     "d2_independent_protocol_review": {
       "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D2_CP01R2IndependentProtocolReview_v1.0.json",
       "git_blob_sha1": "2734b120ffa9a481a092f87190605df24d02bcb0",
-      "required_status": "PASS_WP3_D2_INDEPENDENT_PROTOCOL_REVIEW_NO_EXECUTION"
+      "required_review_status": "PASS_WP3_D2_INDEPENDENT_PROTOCOL_REVIEW_NO_EXECUTION"
     },
     "d3_run_input_freeze": {
       "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json",
       "git_blob_sha1": "471f40a517140cc2a2d609f4828fd1004c4861e2",
-      "required_status": "PASS_D3_RUN_INPUT_FROZEN_NO_EXECUTION"
+      "required_status": "FROZEN_CP01R2_NOT_AUTHORIZED_NOT_EXECUTED"
     },
     "d3_physical_binding_review": {
       "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReleaseReadinessReview_v1.0.json",
       "git_blob_sha1": "2e311f00d91dbd918401251052ba67bd23ab384a",
-      "required_status": "BLOCKED_WP3_D3_NEW_RELEASE_BLOCKERS_FOUND_NO_EXECUTION"
+      "required_physical_target_binding_status": "PASS_SOURCE_CONTRACT_BOUND_NO_EXECUTION",
+      "required_release_readiness_status": "BLOCKED_CP01R2_TRANSACTION_SUPERVISOR_AND_IMMUTABLE_RESULT_CLOSURE_NOT_YET_REBOUND",
+      "historical_blockers_closed_later_by": "WP3-D3H1-RR1"
     },
     "d3h1_transaction_hardening": {
       "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2TransactionHardeningContract_v1.0.json",
@@ -37,7 +39,7 @@
     "d3h1_independent_rr1": {
       "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_RR1_IndependentReview_v1.0.json",
       "git_blob_sha1": "e240cb9b7fb4990575a99c3f436640b7fd91cb8b",
-      "required_status": "PASS_WP3_D3H1_RR1_D3_BLOCKERS_VERIFIED_CLOSED_NO_EXECUTION"
+      "required_review_status": "PASS_WP3_D3H1_RR1_D3_BLOCKERS_VERIFIED_CLOSED_NO_EXECUTION"
     }
   },
   "source_bindings": {
