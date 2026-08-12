@@ -1,0 +1,173 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-d6h1-cp01r2-hardening-contract.v1",
+  "version": "1.0.0",
+  "date": "2026-08-12",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP3-D6H1",
+  "classification": "CP01R2_FINALIZATION_AND_DURABLE_PER_ENTRY_WRITE_AHEAD_HARDENING_NO_EXECUTION",
+  "status": "PASS_D6H1_IMPLEMENTED_NO_EXECUTION_PENDING_INDEPENDENT_REVIEW",
+  "baseline_main_commit": "468bd328f9ee3636c7c21f0af3fa634ca7627f67",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R2",
+  "run_payload_sha256": "e8b8e82d2cb1472d91c387a40c8f84024c2549a3dcc2c897df5561f7bf721b36",
+  "schedule_sha256": "929f59d018cc511f36c98ef26a8614ed495fe699a067b1b33e6c5b53efaf8e0b",
+  "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f",
+  "failed_attempt_basis": {
+    "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6_CP01R2FailedExecutionReview_v1.0.json",
+    "git_blob_sha1": "7e017e67d3aeeec2469ea007ca87604ea7dabe03",
+    "required_review_status": "BLOCKED_WP3_D6_CP01R2_RESULT_REVIEW_FINALIZATION_DEFECT_NO_REPLAY",
+    "failed_github_actions_run_id": 31573154936,
+    "spent_grant_nonce": "feff4d8455f0589ea72743db57eceb72",
+    "spent_grant_replay_permitted": false,
+    "failed_attempt_numerical_outcome": "INDETERMINATE_UNPRESERVED_DUE_FINALIZATION_FAILURE"
+  },
+  "source_bindings": {
+    "d6_failed_execution_review": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6_CP01R2FailedExecutionReview_v1.0.json",
+      "git_blob_sha1": "7e017e67d3aeeec2469ea007ca87604ea7dabe03"
+    },
+    "d3_run_input_freeze": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json",
+      "git_blob_sha1": "471f40a517140cc2a2d609f4828fd1004c4861e2"
+    },
+    "d2_etrn01": {
+      "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d2_cp01r2_etrn_v1.0.py",
+      "git_blob_sha1": "fd109330d44f504d89597c05f1dbfa638e0969bb"
+    },
+    "d3h1_target_base": {
+      "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_target_v1.0.py",
+      "git_blob_sha1": "199815ac9e4014cc0d68fde71d634cdac24516ce"
+    },
+    "d6h1_hardened_target": {
+      "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_target_v1.1.py",
+      "git_blob_sha1": "ad1dd5201ca7399bc283a24a38b18df55f3b7e75"
+    },
+    "d3h1_transaction_base": {
+      "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.0.py",
+      "git_blob_sha1": "315cfb4eae8c07efb66d264d66a601d5f888ce38"
+    },
+    "d6h1_hardened_transaction": {
+      "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_transaction_v1.2.py",
+      "git_blob_sha1": "080aab132948d095716a9d0675518b82088cd9b3"
+    },
+    "d6h1_checkpoint_schema": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2CheckpointSchema_v1.0.json",
+      "git_blob_sha1": "339f579c8b3d9f1ffffca04e79a5acf817a3c2eb"
+    },
+    "cp01r2_result_schema": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2ResultSchema_v1.0.json",
+      "git_blob_sha1": "54bf49acdfcca128e3b909d6e479b1178c77c276"
+    },
+    "resource_policy": {
+      "path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json",
+      "git_blob_sha1": "954a9730d3fa34864df7168555912ebba2dd6c3d"
+    }
+  },
+  "D6_blocker_closure_claims": {
+    "D6-B01": {
+      "status": "IMPLEMENTED_PENDING_INDEPENDENT_REVIEW",
+      "closure": "CP01R2 total N96 terminal-state classification is explicit. A persisted N96 progress state without a local root is conservatively omitted only from the inherited CP01R1 candidate-finalizer view, while its real terminal state and numerical matrix record remain durably preserved. Root states are never removed."
+    },
+    "D6-B02": {
+      "status": "IMPLEMENTED_PENDING_INDEPENDENT_REVIEW",
+      "closure": "Every completed, timed-out or skipped schedule entry is strict-JSON projected, atomically created, fsynced, SHA-256 chained and state-pointer committed before schedule advance. After the 35-entry loop, finalization reconstructs matrix entries, terminal states, residual details and independent-backend summaries from the durable checkpoint chain rather than the transient in-memory matrix. The transaction writes checkpoint-recovery.json even if the target fails."
+    }
+  },
+  "finalizer_semantics": {
+    "N96_TIMEOUT_NO_RETRY": "timeout record at N96",
+    "N96_SKIPPED_AFTER_TIMEOUT_NO_RETRY": "N96 skipped because an earlier seed stage timed out",
+    "NO_N96_TERMINAL_STATE": "no N96 terminal state was durably recovered",
+    "N96_TERMINAL_STATE_NO_LOCAL_ROOT": "N96 terminal progress state exists but local residual/root gate is false",
+    "N96_LOCAL_ROOT_PRESENT_PENDING_QA": "local root exists before full QA classification",
+    "N96_LOCAL_ROOT_REJECTED_BY_QA": "local root exists but frozen QA rejects it",
+    "N96_LOCAL_ROOT_ACCEPTED_DIAGNOSTIC_CANDIDATE": "local root passes frozen numerical QA and remains diagnostic only"
+  },
+  "checkpoint_invariants": {
+    "planned_entry_count": 35,
+    "one_checkpoint_per_entry": true,
+    "write_before_next_schedule_entry": true,
+    "strict_json_allow_nan_false": true,
+    "nonfinite_diagnostic_projection": "null plus exact path/kind/reason; never finite substitution",
+    "completed_entry_terminal_state_vector_preserved": true,
+    "atomic_checkpoint_create": "exclusive temp create + fsync + atomic rename + directory fsync",
+    "checkpoint_overwrite_permitted": false,
+    "checkpoint_hash_chain": "SHA-256 previous-checkpoint digest",
+    "atomic_state_pointer": true,
+    "recovery_fails_on_gap_duplicate_or_chain_mismatch": true,
+    "finalizer_consumes_recovered_checkpoint_matrix": true,
+    "transaction_failure_recovery_summary": "checkpoint-recovery.json in spent grant directory",
+    "checkpoint_is_candidate_acceptance": false,
+    "checkpoint_is_physical_evidence": false
+  },
+  "unchanged_scientific_scope": {
+    "physical_equations": "UNCHANGED",
+    "model_parameters": "UNCHANGED",
+    "a_F": "1/4",
+    "topology": "UNCHANGED",
+    "seeds": 7,
+    "node_counts": [24, 32, 48, 64, 96],
+    "schedule_entries": 35,
+    "etrn01_method": "UNCHANGED",
+    "progress_continuation_rule": "UNCHANGED",
+    "raw_acceptance_thresholds": "UNCHANGED",
+    "independent_backend_requirement": "UNCHANGED",
+    "higher_precision_audit": "UNCHANGED"
+  },
+  "grant_protocol": {
+    "release_schema": "universelab.ulsh-01.md2s-bvp.cp01r2-physical-solve-release-authorization.v1",
+    "grant_schema": "universelab.ulsh-01.md2s-bvp.cp01r2-single-use-execution-grant.v1",
+    "future_release_path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2_PhysicalSolveReleaseAuthorization_v2.0.json",
+    "future_grant_path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2_SingleUseExecutionGrant_v2.0.json",
+    "nonce_format": "128-256 bit lowercase hexadecimal",
+    "maximum_validity_seconds": 3600,
+    "single_use": true,
+    "atomic_spend": "O_CREAT|O_EXCL spent.json plus fsync before target import/solve",
+    "replay_permitted_after_any_spend": false,
+    "failure_or_crash_requires_fresh_grant": true,
+    "no_retry": true,
+    "no_scan": true,
+    "no_fallback": true,
+    "no_parameter_or_topology_mutation": true
+  },
+  "no_execution_firewall": {
+    "old_d5_grant_spent": true,
+    "old_d5_grant_replay_permitted": false,
+    "future_release_authorization_present": false,
+    "future_single_use_grant_present": false,
+    "physical_solve_authorized": false,
+    "physical_solve_executed": false,
+    "audit_solver_calls": 0,
+    "physical_evidence_effect": "NONE"
+  },
+  "required_independent_review_fixtures": [
+    "N96 terminal state present without local root does not crash and is classified N96_TERMINAL_STATE_NO_LOCAL_ROOT",
+    "N96 local root rejected by frozen QA receives deterministic rejected classification",
+    "N96 accepted diagnostic candidate receives deterministic accepted classification",
+    "missing N96 state receives deterministic missing-state classification",
+    "N96 timeout and skipped-after-timeout paths are deterministic",
+    "three-or-more synthetic checkpoints recover in exact order with a valid SHA-256 chain",
+    "duplicate checkpoint write fails closed",
+    "checkpoint gap or chain mutation fails closed",
+    "nonfinite diagnostic checkpoint values become null with exact provenance",
+    "synthetic post-loop finalizer failure leaves every previously checkpointed entry recoverable",
+    "audit imports no numerical backend and performs zero solver calls"
+  ],
+  "governance": {
+    "WP3": "OPEN_CP01R2_D6H1_HARDENING_PENDING_INDEPENDENT_REVIEW",
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_actions": [
+    "DO_NOT_RERUN_D5_ACTIONS_RUN_31573154936",
+    "DO_NOT_REPLAY_D5_GRANT_NONCE_FEFF4D8455F0589EA72743DB57ECEB72",
+    "DO_NOT_ISSUE_D6H1_FUTURE_RELEASE_OR_GRANT_DURING_HARDENING",
+    "DO_NOT_EXECUTE_CP01R2_DURING_D6H1",
+    "DO_NOT_CHANGE_PHYSICAL_PARAMETERS_TOPOLOGY_SEEDS_MESHES_THRESHOLDS_OR_ETRN01",
+    "DO_NOT_CLASSIFY_THE_FAILED_D5_NUMERICAL_OUTCOME",
+    "DO_NOT_ADVANCE_TO_WP4_K1D_OR_K1E"
+  ],
+  "next_if_independent_review_passes": "ULSH-01_WP3_D6R1_CP01R2_FRESH_RELEASE_DECISION_NO_EXECUTION",
+  "next_if_independent_review_blocks": "ULSH-01_WP3_D6H2_CP01R2_RESULT_HARDENING_NO_EXECUTION"
+}

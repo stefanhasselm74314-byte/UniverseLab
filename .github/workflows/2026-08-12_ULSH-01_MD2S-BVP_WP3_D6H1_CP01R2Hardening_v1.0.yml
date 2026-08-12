@@ -1,0 +1,80 @@
+name: ULSH-01 WP3-D6H1 CP01R2 finalization and checkpoint hardening no-execution
+
+on:
+  push:
+    paths:
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2CheckpointSchema_v1.0.json'
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningContract_v1.0.json'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_target_v1.1.py'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_transaction_v1.2.py'
+      - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningTest_v1.0.py'
+      - 'science/hzt-m0/md2s/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningLedger_v1.0.md'
+      - '.github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2Hardening_v1.0.yml'
+  pull_request:
+    paths:
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2CheckpointSchema_v1.0.json'
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningContract_v1.0.json'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_target_v1.1.py'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_transaction_v1.2.py'
+      - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningTest_v1.0.py'
+      - 'science/hzt-m0/md2s/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningLedger_v1.0.md'
+      - '.github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2Hardening_v1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  d6h1-hardening:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout complete history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate hardening JSON
+        run: |
+          python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2CheckpointSchema_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningContract_v1.0.json >/dev/null
+
+      - name: Compile target transaction and tests
+        run: |
+          python -m py_compile tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_target_v1.1.py
+          python -m py_compile tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_transaction_v1.2.py
+          python -m py_compile tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningTest_v1.0.py
+
+      - name: Audit hardened target without numerical imports
+        run: python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_target_v1.1.py
+
+      - name: Audit hardened transaction without execution
+        run: python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_transaction_v1.2.py
+
+      - name: Run deterministic D6H1 hardening fixtures
+        run: python tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningTest_v1.0.py
+
+      - name: Hard no-execution no-issuance no-replay firewall
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2_PhysicalSolveReleaseAuthorization_v2.0.json
+          test ! -e registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2_SingleUseExecutionGrant_v2.0.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d6=json.loads(Path('registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6_CP01R2FailedExecutionReview_v1.0.json').read_text())
+          c=json.loads(Path('registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningContract_v1.0.json').read_text())
+          assert d6['grant_and_governance_disposition']['runtime_grant_spent'] is True
+          assert d6['grant_and_governance_disposition']['runtime_grant_replay_permitted'] is False
+          assert c['no_execution_firewall']['physical_solve_executed'] is False
+          assert c['no_execution_firewall']['physical_evidence_effect'] == 'NONE'
+          assert c['D6_blocker_closure_claims']['D6-B01']['status'] == 'IMPLEMENTED_PENDING_INDEPENDENT_REVIEW'
+          assert c['D6_blocker_closure_claims']['D6-B02']['status'] == 'IMPLEMENTED_PENDING_INDEPENDENT_REVIEW'
+          print('PASS_D6H1_HARD_FIREWALL_NO_EXECUTION_NO_REPLAY')
+          PY
