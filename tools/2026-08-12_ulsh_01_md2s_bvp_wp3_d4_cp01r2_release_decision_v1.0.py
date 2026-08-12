@@ -9,7 +9,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import subprocess
-import sys
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -85,18 +84,31 @@ def audit() -> dict[str, Any]:
         require(actual == expected_blob, f"source drift: {relative_path}: {actual} != {expected_blob}")
         observed_blobs[relative_path] = actual
 
-    required_statuses = {
-        "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D2_CP01R2IndependentProtocolReview_v1.0.json": "PASS_WP3_D2_INDEPENDENT_PROTOCOL_REVIEW_NO_EXECUTION",
-        "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json": "PASS_D3_RUN_INPUT_FROZEN_NO_EXECUTION",
-        "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReleaseReadinessReview_v1.0.json": "BLOCKED_WP3_D3_NEW_RELEASE_BLOCKERS_FOUND_NO_EXECUTION",
-        "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2TransactionHardeningContract_v1.0.json": "PASS_D3H1_IMPLEMENTED_NO_EXECUTION_PENDING_INDEPENDENT_REVIEW",
-        "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_RR1_IndependentReview_v1.0.json": "PASS_WP3_D3H1_RR1_D3_BLOCKERS_VERIFIED_CLOSED_NO_EXECUTION",
-    }
-    for relative_path, expected in required_statuses.items():
-        actual = document_status(load_json(ROOT / relative_path))
-        require(actual == expected, f"predecessor status mismatch: {relative_path}: {actual!r}")
+    d2 = load_json(ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D2_CP01R2IndependentProtocolReview_v1.0.json")
+    require(d2.get("review_status") == "PASS_WP3_D2_INDEPENDENT_PROTOCOL_REVIEW_NO_EXECUTION", "D2 independent protocol review is not PASS")
+    require(all(v == "PASS" for v in d2.get("review_gates", {}).values()), "D2 review gates are not all PASS")
+
+    d3_freeze = load_json(ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json")
+    require(d3_freeze.get("status") == "FROZEN_CP01R2_NOT_AUTHORIZED_NOT_EXECUTED", "D3 run input is not frozen")
+    frozen = d3_freeze.get("frozen_run_payload", {})
+    require(frozen.get("run_id") == EXPECTED_RUN_ID, "D3 frozen run id mismatch")
+    require(d3_freeze.get("frozen_run_payload_sha256") == EXPECTED_PAYLOAD_SHA256, "D3 frozen payload hash mismatch")
+    require(d3_freeze.get("schedule_sha256") == EXPECTED_SCHEDULE_SHA256, "D3 frozen schedule hash mismatch")
+    identity = d3_freeze.get("physical_identity_check", {})
+    require(identity and all(identity.values()), "D3 physical-identity freeze has a failed invariant")
+
+    d3_review = load_json(ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReleaseReadinessReview_v1.0.json")
+    require(d3_review.get("physical_target_binding_status") == "PASS_SOURCE_CONTRACT_BOUND_NO_EXECUTION", "D3 physical target binding did not pass")
+    require(d3_review.get("release_readiness_status") == "BLOCKED_CP01R2_TRANSACTION_SUPERVISOR_AND_IMMUTABLE_RESULT_CLOSURE_NOT_YET_REBOUND", "D3 historical readiness blocker state drifted")
+    d3_gates = d3_review.get("review_gates", {})
+    require(d3_gates.get("D3-RB09_EXACT_CP01R2_TRANSACTION_SUPERVISOR_BINDING") == "BLOCKED", "D3 historical B01 gate mismatch")
+    require(d3_gates.get("D3-RB10_CP01R2_IMMUTABLE_RESULT_COMMIT_AND_ARTIFACT_CLOSURE") == "BLOCKED", "D3 historical B02 gate mismatch")
+
+    h1 = load_json(ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2TransactionHardeningContract_v1.0.json")
+    require(document_status(h1) == "PASS_D3H1_IMPLEMENTED_NO_EXECUTION_PENDING_INDEPENDENT_REVIEW", "D3H1 hardening status mismatch")
 
     rr1 = load_json(ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_RR1_IndependentReview_v1.0.json")
+    require(rr1.get("review_status") == "PASS_WP3_D3H1_RR1_D3_BLOCKERS_VERIFIED_CLOSED_NO_EXECUTION", "D3H1 RR1 is not PASS")
     require(rr1.get("new_release_blockers") == [], "RR1 has unresolved/new release blockers")
     disposition = rr1.get("D3_blocker_disposition", {})
     require(disposition.get("D3-B01", {}).get("status") == "VERIFIED_CLOSED", "D3-B01 not independently closed")
@@ -143,6 +155,9 @@ def audit() -> dict[str, Any]:
         "decision_id": EXPECTED_DECISION_ID,
         "run_id": EXPECTED_RUN_ID,
         "predecessor_blob_bindings_verified": len(observed_blobs),
+        "d2_review": "PASS",
+        "d3_run_input": "FROZEN",
+        "d3_historical_blockers": "PRESERVED_AS_REVIEW_PROVENANCE",
         "rr1_review_gates": "8/8_PASS",
         "d3_blockers": {"D3-B01": "VERIFIED_CLOSED", "D3-B02": "VERIFIED_CLOSED"},
         "release_authorization_present": False,
