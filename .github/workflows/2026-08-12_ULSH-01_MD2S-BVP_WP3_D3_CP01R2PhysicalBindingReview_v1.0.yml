@@ -3,6 +3,12 @@ name: ULSH-01 WP3-D3 CP01R2 physical binding review no-execution
 on:
   push:
     branches: [main, ulsh-01-wp3-d3-cp01r2-physical-binding]
+    paths:
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json'
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReleaseReadinessReview_v1.0.json'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_cp01r2_physical_target_binding_v1.0.py'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_independent_release_readiness_review_v1.0.py'
+      - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReviewTest_v1.0.py'
   pull_request:
     paths:
       - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json'
@@ -10,7 +16,7 @@ on:
       - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_cp01r2_physical_target_binding_v1.0.py'
       - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_independent_release_readiness_review_v1.0.py'
       - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReviewTest_v1.0.py'
-      - '.github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReview_v1.0.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read
