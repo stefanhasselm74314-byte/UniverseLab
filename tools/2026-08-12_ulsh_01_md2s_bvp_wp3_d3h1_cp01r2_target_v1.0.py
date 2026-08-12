@@ -189,7 +189,7 @@ def _enforce_memory_limit(maximum_memory_bytes: int) -> None:
         raise TargetContractError("physical execution requires POSIX RLIMIT_AS memory enforcement")
     import resource
     requested = int(maximum_memory_bytes)
-    current_soft, current_hard = resource.getrlimit(resource.RLIMIT_AS)
+    _soft, current_hard = resource.getrlimit(resource.RLIMIT_AS)
     infinity = resource.RLIM_INFINITY
     if current_hard not in (infinity, -1) and current_hard < requested:
         raise TargetContractError(f"host RLIMIT_AS hard limit {current_hard} is below frozen requirement {requested}")
@@ -232,8 +232,9 @@ def _etrn_provenance(entries: list[dict[str, Any]]) -> dict[str, Any]:
             "continuation_source_entry_id": record.get("continuation_source_entry_id"),
             "stage_initial_residual_inf": record.get("stage_initial_residual_inf"),
             "stage_final_residual_inf": record.get("stage_final_residual_inf"),
+            "continuation_admissible": record.get("continuation_admissible"),
             "eligible_for_next_mesh": record.get("eligible_for_next_mesh", False),
-            "continuation_rule": "finite_and_admissible_and_not_timed_out_and_final<=0.90*initial",
+            "continuation_rule": "finite_and_primary_admissible_and_not_timed_out_and_final<=0.90*initial",
         })
         for row in record.get("newton_history", []):
             raw_history.append({
@@ -288,6 +289,7 @@ def audit_target() -> dict[str, Any]:
         "legacy_qa_reused_source_bound": True,
         "higher_precision_qa_reused_source_bound": True,
         "memory_limit_enforced_before_numerical_import": True,
+        "progress_continuation_uses_primary_domain_admissibility_not_boundary_acceptance": True,
         "solver_imported": False,
         "solver_calls": 0,
         "physical_solve_authorized": False,
@@ -371,11 +373,12 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
                 constraint_inf = float(max(np.max(np.abs(detail["north"].constraint)), np.max(np.abs(detail["south"].constraint))))
                 local_candidate = bool(result.get("converged") and bulk_inf <= float(thresholds["bulk_residual_max"]) and boundary_inf <= float(thresholds["boundary_residual_max"]))
                 diagnostic = legacy._diagnostic_jacobian(primary, state, node_count, model, sector)
-                admissibility = legacy._admissibility(primary, state, node_count, detail, model, sector, thresholds)
+                legacy_admissibility = legacy._admissibility(primary, state, node_count, detail, model, sector, thresholds)
+                continuation_admissible = bool(primary.admissible(state, node_count))
                 eligible = etrn.progress_continuation_eligible(
                     initial=initial_inf, final=final_inf,
                     finite=bool(np.all(np.isfinite(state))),
-                    admissible=bool(admissibility["all_pass"]), timed_out=False,
+                    admissible=continuation_admissible, timed_out=False,
                 )
                 previous_terminal[seed_index] = {
                     "entry_id": entry["entry_id"], "node_count": node_count,
@@ -428,6 +431,7 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
                     "continuation_source_entry_id": continuation_source,
                     "stage_initial_residual_inf": initial_inf,
                     "stage_final_residual_inf": final_inf,
+                    "continuation_admissible": continuation_admissible,
                     "eligible_for_next_mesh": eligible,
                     "primary": {"converged": bool(result.get("converged")), "candidate_under_local_residual_gate": local_candidate, "failure": result.get("failure")},
                     "failure": result.get("failure"),
@@ -439,6 +443,7 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
                     "diagnostic": legacy._to_builtin(diagnostic),
                     "newton_history": legacy._to_builtin(result.get("history", [])),
                     "independent": independent_record,
+                    "legacy_full_qa_admissibility": legacy._to_builtin(legacy_admissibility),
                     "elapsed_wall_clock_seconds": time.monotonic() - stage_started,
                 })
         except legacy.StageTimeoutError as exc:
@@ -451,7 +456,8 @@ def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str
                 "initialization_source": initialization_source,
                 "continuation_source_entry_id": continuation_source,
                 "stage_initial_residual_inf": initial_inf,
-                "stage_final_residual_inf": None, "eligible_for_next_mesh": False,
+                "stage_final_residual_inf": None, "continuation_admissible": False,
+                "eligible_for_next_mesh": False,
                 "elapsed_wall_clock_seconds": time.monotonic() - stage_started,
             })
 
