@@ -8,7 +8,7 @@
   if (window.__UNIVERSELAB_TAFELWERK_ALL_EXPORT_V1__) return;
   window.__UNIVERSELAB_TAFELWERK_ALL_EXPORT_V1__ = true;
 
-  const VERSION = '1.0';
+  const VERSION = '1.1';
   const STATUS_KEYS = ['established', 'derived', 'model', 'diagnostic', 'open', 'blocked', 'historical'];
   const $ = id => document.getElementById(id);
   const text = id => ($(id)?.textContent || '').trim();
@@ -170,6 +170,130 @@
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
+  function downloadBlob(blob, extension) {
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = `${fileStem()}.${extension}`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  const CRC32_TABLE = (() => {
+    const table = new Uint32Array(256);
+    for (let n = 0; n < 256; n += 1) {
+      let c = n;
+      for (let k = 0; k < 8; k += 1) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+      table[n] = c >>> 0;
+    }
+    return table;
+  })();
+
+  function crc32(bytes) {
+    let crc = 0xFFFFFFFF;
+    for (const byte of bytes) crc = CRC32_TABLE[(crc ^ byte) & 0xFF] ^ (crc >>> 8);
+    return (crc ^ 0xFFFFFFFF) >>> 0;
+  }
+
+  function le16(value) {
+    const out = new Uint8Array(2);
+    new DataView(out.buffer).setUint16(0, value & 0xFFFF, true);
+    return out;
+  }
+
+  function le32(value) {
+    const out = new Uint8Array(4);
+    new DataView(out.buffer).setUint32(0, value >>> 0, true);
+    return out;
+  }
+
+  function joinBytes(parts) {
+    const total = parts.reduce((sum, part) => sum + part.length, 0);
+    const out = new Uint8Array(total);
+    let offset = 0;
+    for (const part of parts) {
+      out.set(part, offset);
+      offset += part.length;
+    }
+    return out;
+  }
+
+  function dosDateTime(date = new Date()) {
+    const year = Math.max(1980, Math.min(2107, date.getFullYear()));
+    const time = ((date.getHours() & 0x1F) << 11) | ((date.getMinutes() & 0x3F) << 5) | ((Math.floor(date.getSeconds() / 2)) & 0x1F);
+    const day = ((year - 1980) << 9) | (((date.getMonth() + 1) & 0x0F) << 5) | (date.getDate() & 0x1F);
+    return { time, day };
+  }
+
+  function zipBlob(entries) {
+    const encoder = new TextEncoder();
+    const utf8Flag = 0x0800;
+    const version = 20;
+    const now = dosDateTime();
+    const localParts = [];
+    const centralParts = [];
+    let localOffset = 0;
+
+    for (const entry of entries) {
+      const nameBytes = encoder.encode(entry.name);
+      const dataBytes = typeof entry.content === 'string' ? encoder.encode(entry.content) : entry.content;
+      if (!(dataBytes instanceof Uint8Array)) throw new TypeError(`ZIP entry ${entry.name} is not text or Uint8Array.`);
+      const crc = crc32(dataBytes);
+      const size = dataBytes.length;
+      const localHeader = joinBytes([
+        le32(0x04034b50), le16(version), le16(utf8Flag), le16(0), le16(now.time), le16(now.day),
+        le32(crc), le32(size), le32(size), le16(nameBytes.length), le16(0), nameBytes
+      ]);
+      localParts.push(localHeader, dataBytes);
+
+      const centralHeader = joinBytes([
+        le32(0x02014b50), le16(version), le16(version), le16(utf8Flag), le16(0), le16(now.time), le16(now.day),
+        le32(crc), le32(size), le32(size), le16(nameBytes.length), le16(0), le16(0), le16(0), le16(0),
+        le32(0), le32(localOffset), nameBytes
+      ]);
+      centralParts.push(centralHeader);
+      localOffset += localHeader.length + size;
+    }
+
+    if (entries.length > 0xFFFF) throw new Error('ZIP-Dateigrenze überschritten.');
+    const centralDirectory = joinBytes(centralParts);
+    const end = joinBytes([
+      le32(0x06054b50), le16(0), le16(0), le16(entries.length), le16(entries.length),
+      le32(centralDirectory.length), le32(localOffset), le16(0)
+    ]);
+    return new Blob([...localParts, centralDirectory, end], { type: 'application/zip' });
+  }
+
+  function zipBundle(records) {
+    const stem = fileStem();
+    const json = `${JSON.stringify(payload(records), null, 2)}\n`;
+    const readme = [
+      'UniverseLab Mathematisches Tafelwerk 2.0 — Komplettpaket',
+      `Erzeugt: ${new Date().toLocaleString('de-DE')}`,
+      `Formeln: ${records.length}`,
+      '',
+      'Enthalten:',
+      `- ${stem}.html — eigenständige, druckbare Vollfassung`,
+      `- ${stem}.md — Markdown-Vollfassung`,
+      `- ${stem}.json — strukturierter Maschinenexport`,
+      `- ${stem}.csv — tabellarischer Export`,
+      '',
+      'Für PDF: die HTML-Datei im Browser öffnen und Drucken → Als PDF speichern wählen.',
+      'Der ZIP-Container verwendet gespeicherte ZIP-Einträge (ohne Kompression), CRC32 und UTF-8-Dateinamen.',
+      ''
+    ].join('\n');
+    const entries = [
+      { name: `${stem}.html`, content: htmlOf(records) },
+      { name: `${stem}.md`, content: markdownOf(records) },
+      { name: `${stem}.json`, content: json },
+      { name: `${stem}.csv`, content: csvOf(records) },
+      { name: 'README.txt', content: readme }
+    ];
+    downloadBlob(zipBlob(entries), 'zip');
+  }
+
   function csvCell(value) {
     return `"${String(value ?? '').replace(/"/g, '""')}"`;
   }
@@ -278,11 +402,12 @@
 
     const note = document.createElement('p');
     note.className = 'ul-export-note';
-    note.textContent = 'Exportiert immer den vollständigen Formelkatalog — unabhängig von Suche, Kategorie, Status oder „nur berechenbar“. Die aktuelle Auswahl wird danach wiederhergestellt.';
+    note.textContent = 'Exportiert immer den vollständigen Formelkatalog — unabhängig von Suche, Kategorie, Status oder „nur berechenbar“. ZIP bündelt HTML, Markdown, JSON und CSV in einer Datei. Die aktuelle Auswahl wird danach wiederhergestellt.';
 
     const actions = document.createElement('div');
     actions.className = 'ul-export-actions';
     const definitions = [
+      ['zip', 'Alle Formeln · ZIP (Komplettpaket)'],
       ['print', 'Alle Formeln · PDF/Drucken'],
       ['html', 'Alle Formeln · HTML'],
       ['markdown', 'Alle Formeln · Markdown'],
@@ -310,7 +435,8 @@
       [...actions.querySelectorAll('button')].forEach(item => { item.disabled = true; });
       try {
         const records = collectAllFormulaRecords();
-        if (action === 'print') printAll(records);
+        if (action === 'zip') zipBundle(records);
+        else if (action === 'print') printAll(records);
         else if (action === 'html') download(htmlOf(records), 'text/html', 'html');
         else if (action === 'markdown') download(markdownOf(records), 'text/markdown', 'md');
         else if (action === 'json') download(`${JSON.stringify(payload(records), null, 2)}\n`, 'application/json', 'json');
