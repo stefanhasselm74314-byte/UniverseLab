@@ -1,0 +1,102 @@
+{
+  "schema": "universelab.hzt-m0.lensing.data-systematics.false-anomaly-control.v1",
+  "version": "1.0.0",
+  "date": "2026-08-12",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "case_id": "HZT-M0-LENS-DS-A1-MACSJ0308-20260812-A",
+  "classification": "LENSING_DATA_SYSTEMATICS_FALSE_ANOMALY_CONTROL",
+  "status": "REGISTERED_METHODS_CONTROL_NO_HZT_EVIDENCE",
+  "object": {
+    "label": "A1",
+    "foreground_cluster": "MACS J0308.9+2645",
+    "foreground_cluster_redshift": 0.356,
+    "catalogue_label": 244,
+    "projected_radius_arcsec": 50.9,
+    "catalogue_length_arcsec": 3.9,
+    "isophotal_span_arcsec": 5.1,
+    "axis_ratio_approx": 6.5,
+    "tangential_misalignment_deg": 1.4
+  },
+  "sources": {
+    "primary_scientific": {
+      "kind": "arXiv_current_manuscript",
+      "arxiv_id": "2607.12129",
+      "url": "https://arxiv.org/abs/2607.12129",
+      "current_title": "Discovery of a gravitational arc candidate at z_phot approximately 1.4 in MACS J0308.9+2645 from a catalogue-based search of JWST imaging",
+      "source_role": "PRIMARY_SCIENTIFIC_SOURCE"
+    },
+    "secondary_media": {
+      "kind": "science_news_article",
+      "url": "https://www.universetoday.com/articles/astronomers-find-a-new-object-from-the-early-universe-using-webb-data",
+      "title": "Astronomers Find a New Object from the Early Universe Using Webb Data",
+      "published_utc_date": "2026-08-07",
+      "source_role": "SECONDARY_CONTEXT_ONLY"
+    }
+  },
+  "false_anomaly_sequence": {
+    "initial_catalogue_photometric_redshift_approx": 4.4,
+    "initial_interpretation": "APPARENT_HIGH_REDSHIFT_EARLY_UNIVERSE_CANDIDATE",
+    "initial_interpretation_status": "FALSIFIED_AS_PHOTOMETRIC_SYSTEMATIC_WITHIN_CURRENT_ANALYSIS",
+    "failure_mode": [
+      "aper_total point-source-oriented catalogue photometry applied to a source flagged extended",
+      "severe flux loss for the extended arc",
+      "wavelength-dependent captured fraction inducing a spurious red continuum",
+      "photometric-redshift fitting translating the spurious colour into an apparent high-redshift solution"
+    ],
+    "f200w_flux_capture_fraction_approx": 0.03,
+    "f200w_aper_total_abmag": 24.53,
+    "f200w_isophotal_abmag": 20.87
+  },
+  "corrected_interpretation": {
+    "extended_source_methods_agree": true,
+    "six_band_eazy_redshift": 1.53,
+    "six_band_16_84_percent_interval": [1.22, 1.74],
+    "six_band_probability_z_gt_3": 0.0001,
+    "adopted_photometric_redshift_approx": 1.4,
+    "plausible_redshift_range": [1.2, 1.7],
+    "redshift_status": "CONDITIONAL_PHOTOMETRIC_PENDING_SPECTROSCOPY",
+    "hubble_f435w_detection": "INDEPENDENTLY_EXCLUDES_Z_APPROX_4P4_LYMAN_DROPOUT_INTERPRETATION",
+    "lensing_model_consistency": "AT_Z_APPROX_1P4_SINGLE_IMAGE_NO_COUNTERIMAGE_IS_EXPECTED",
+    "lensing_nature_status": "STRONG_GRAVITATIONAL_ARC_CANDIDATE_NOT_YET_DEFINITIVE",
+    "required_confirmation": [
+      "spatially resolved spectroscopy",
+      "dedicated JWST-era lens model"
+    ]
+  },
+  "universelab_methodological_use": {
+    "bucket": "Lensing/Data-Systematics/False-Anomaly-Control",
+    "control_rule": "CATALOGUE_RESULT_IS_NOT_PHYSICAL_IDENTIFICATION",
+    "high_z_gate": [
+      "verify source morphology and catalogue-photometry applicability",
+      "repeat with morphology-aware extended-source photometry",
+      "use matched apertures or equivalent wavelength-consistent measurements",
+      "cross-check independent instruments and bands",
+      "check dropout/Lyman-break consistency",
+      "check lens-model counterimage predictions when applicable",
+      "require spectroscopy before promoting a photometric anomaly to a physical anomaly"
+    ]
+  },
+  "hzt_relevance": {
+    "direct_hzt_evidence": "NONE",
+    "early_universe_anomaly_for_hzt": "NO",
+    "current_modified_gravity_test": "NO",
+    "future_lensing_test_value": "CONDITIONAL",
+    "possible_future_observable_context": ["Phi+Psi", "Sigma", "eta"],
+    "promotion_requires": "SEPARATE_PRE_REGISTERED_LENSING_FORWARD_MODEL_AND_OBSERVATIONAL_TEST"
+  },
+  "governance_firewall": {
+    "solver_state_modified": false,
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "DO_NOT_CLASSIFY_A1_AS_A_ROBUST_EXTREME_EARLY_UNIVERSE_OBJECT",
+    "DO_NOT_TREAT_PHOTOMETRIC_REDSHIFT_AS_SPECTROSCOPIC_CONFIRMATION",
+    "DO_NOT_TREAT_THE_LENSING_CANDIDATE_STATUS_AS_DEFINITIVE_LENS_IDENTIFICATION",
+    "DO_NOT_TREAT_CORRECTED_PHOTOMETRY_AS_EVIDENCE_FOR_HZT_OR_MODIFIED_GRAVITY",
+    "DO_NOT_ADVANCE_WP4_K1D_OR_K1E_FROM_THIS_CASE",
+    "DO_NOT_USE_THIS_METHODS_CONTROL_AS_PHYSICAL_EVIDENCE"
+  ]
+}
