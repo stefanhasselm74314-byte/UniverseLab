@@ -1,0 +1,156 @@
+{
+  "schema": "universelab.ai-for-physics.aip-lens-01-null-n2.bridge-contract.v1",
+  "version": "0.1.0",
+  "date": "2026-08-12",
+  "bridge_id": "AIP-LENS-01-NULL-N2-BRIDGE",
+  "parent_protocol": "AIP-LENS-01-NULL-N2-PROTOCOL-FREEZE",
+  "parent_protocol_path": "registry/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N2_ProtocolFreeze_v0.1.json",
+  "baseline_main_sha": "6c5baa48447b61117010ba67010756c584201224",
+  "status": "BRIDGE_CONTRACT_DEFINED_EXECUTABLE_VALIDATION_ONLY_PHYSICAL_SIMULATOR_NOT_YET_VALIDATED_NO_REAL_DATA_EXECUTION",
+  "purpose": "Define the physics and data-semantics bridge from cosmological parameters to KiDS-1000 fiducial COSEBIs without touching real KiDS measurements.",
+  "observable_semantics": {
+    "real_data_target": "KIDS1000_DR4_FIDUCIAL_COSEBIS",
+    "simulation_output_required": "THE_SAME_COSEBIS_OBSERVABLE_VECTOR_SEMANTICS_AS_THE_FROZEN_REAL_DATA_CONTROL",
+    "n1_toy_feature_reuse": "FORBIDDEN",
+    "published_posterior_as_training_target": "FORBIDDEN"
+  },
+  "forward_chain": [
+    {
+      "stage": "COSMOLOGY_TO_MATTER_POWER",
+      "input": ["Omega_m", "Omega_b", "h", "n_s", "amplitude_parameter", "neutrino_sector", "nuisance_configuration"],
+      "output": "P_delta(k,z)",
+      "requirement": "Use a declared physical matter-power implementation consistent with the frozen KiDS reference configuration; any emulator must be independently validated against its authoritative engine over the full training domain."
+    },
+    {
+      "stage": "MATTER_POWER_TO_TOMOGRAPHIC_SHEAR_POWER",
+      "input": ["P_delta(k,z)", "source_nz", "background_distances", "intrinsic_alignment_model", "baryonic_or_scale_policy"],
+      "output": "C_ell_ij",
+      "equation": "C_ell^{ij}=integral dchi [q_i(chi) q_j(chi)/chi^2] P_delta((ell+1/2)/chi,z(chi)) plus declared IA terms",
+      "approximation": "Limber/extended-Limber choice must match the frozen reference implementation or be quantitatively cross-validated before authorization."
+    },
+    {
+      "stage": "SHEAR_POWER_TO_CORRELATION_FUNCTIONS",
+      "input": "C_ell_ij",
+      "output": ["xi_plus_ij(theta)", "xi_minus_ij(theta)"],
+      "equation": "xi_plus/minus(theta)=(1/2pi) integral d ell ell C_ell J_0/J_4(ell theta)",
+      "requirement": "Angular conventions, theta units, binning and numerical quadrature must be frozen and regression-tested."
+    },
+    {
+      "stage": "CORRELATION_FUNCTIONS_TO_COSEBIS",
+      "input": ["xi_plus_ij(theta)", "xi_minus_ij(theta)", "COSEBI_filter_basis"],
+      "output": ["E_n_ij", "B_n_ij"],
+      "equation": "E_n=(1/2) integral_{theta_min}^{theta_max} dtheta theta [T_plus_n xi_plus + T_minus_n xi_minus]; B_n uses the corresponding sign change",
+      "requirement": "Filter basis, theta interval, mode ordering and tomography ordering must be bitwise or numerically bound to the KiDS-1000 fiducial COSEBIs semantics before real-data execution."
+    }
+  ],
+  "authoritative_reference_route": {
+    "implementation_family": "KCAP/CosmoSIS configuration distributed with the KiDS-1000 cosmic-shear products",
+    "role": "AUTHORITATIVE_REPRODUCTION_REFERENCE",
+    "real_data_opened_in_this_bridge": false,
+    "released_posterior_chains_opened_in_this_bridge": false,
+    "exact_reference_configuration_values_frozen_here": false,
+    "reason": "This bridge stage defines the interface and validation obligations only; exact released configuration files must be hashed and frozen in a later implementation freeze before physical validation."
+  },
+  "required_parameter_and_nuisance_binding": {
+    "cosmology": ["Omega_m", "Omega_b", "h", "n_s", "amplitude_parameter", "neutrino_sector"],
+    "survey_and_nuisance": [
+      "source_redshift_distributions",
+      "source_redshift_uncertainty",
+      "multiplicative_shear_calibration",
+      "intrinsic_alignments",
+      "shape_noise_or_covariance_treatment",
+      "baryonic_feedback_or_explicit_scale_policy",
+      "survey_geometry_mask_or_reference_statistic_window"
+    ],
+    "rule": "The exact parameterization and priors must be copied from and hashed against the frozen reference configuration before any N2 execution authorization."
+  },
+  "simulation_training_contract": {
+    "real_measurements_in_training": false,
+    "real_measurements_in_calibration": false,
+    "published_best_fit_as_label": false,
+    "training_source": "PHYSICS_BASED_SIMULATIONS_OR_A_SEPARATELY_VALIDATED_SURROGATE_ONLY",
+    "required_independent_partitions": ["TRAIN", "VALIDATION", "CALIBRATION", "FINAL_SIM_TEST", "OOD_STRESS"],
+    "split_leakage": "FORBIDDEN",
+    "coverage_required": ["68_PERCENT", "95_PERCENT"],
+    "baseline_required": "NON_ML_REFERENCE_INFERENCE_OR_SUMMARY_PIPELINE"
+  },
+  "transfer_and_domain_shift": {
+    "required_pre_real_data_checks": [
+      "physical-engine cross-check on a declared cosmology grid",
+      "observable-vector ordering check",
+      "tomography ordering check",
+      "units and angular-range check",
+      "covariance-normalized residual check",
+      "source-nz perturbation stress",
+      "intrinsic-alignment stress",
+      "baryonic-or-scale-policy stress",
+      "shape-noise stress",
+      "mask-or-window consistency",
+      "simulation-to-reference-distribution shift diagnostic",
+      "predeclared OOD abstention threshold"
+    ],
+    "abstention_rule": "If the real-data feature vector falls outside the validated simulation support under the frozen OOD rule, the ML result must abstain and no cosmological interpretation is allowed."
+  },
+  "physical_validation_gates": {
+    "B0_contract_completeness": "PASS_BY_THIS_STAGE_IF_CI_GREEN",
+    "B1_reference_config_hash_freeze": "PENDING",
+    "B2_forward_engine_implementation": "PENDING",
+    "B3_cross_engine_or_reference_grid_validation": "PENDING",
+    "B4_cosebis_semantic_equivalence": "PENDING",
+    "B5_independent_simulation_calibration_coverage": "PENDING",
+    "B6_domain_shift_and_ood_validation": "PENDING",
+    "B7_independent_bridge_review": "PENDING",
+    "real_data_execution_authorization": "BLOCKED_UNTIL_B1_THROUGH_B7_PASS"
+  },
+  "acceptance_metrics_to_freeze_before_physical_run": {
+    "reference_grid_relative_error": "TO_BE_PREDECLARED_BEFORE_B3_EXECUTION",
+    "cosebis_vector_tolerance": "TO_BE_PREDECLARED_BEFORE_B4_EXECUTION",
+    "coverage_tolerance": "TO_BE_PREDECLARED_BEFORE_B5_EXECUTION",
+    "domain_shift_threshold": "TO_BE_PREDECLARED_BEFORE_B6_EXECUTION",
+    "ood_false_accept_rate": "TO_BE_PREDECLARED_BEFORE_B6_EXECUTION"
+  },
+  "execution_state": {
+    "bridge_contract_defined": true,
+    "physical_forward_engine_executed": false,
+    "physical_simulator_validated": false,
+    "real_dataset_downloaded": false,
+    "real_dataset_opened": false,
+    "new_ml_model_trained": false,
+    "real_data_inference_performed": false,
+    "execution_authorized": false,
+    "next_candidate": "AIP-LENS-01-NULL-N2-BRIDGE-IMPLEMENTATION-FREEZE"
+  },
+  "gate_disposition": {
+    "AIP-G0": "PRESERVED",
+    "AIP-G1": "N1_SYNTHETIC_RATIFIED_ONLY",
+    "AIP-G2": "NOT_PASSED_BRIDGE_CONTRACT_ONLY_NO_PHYSICAL_SIMULATOR_VALIDATION",
+    "AIP-G3": "N1_TOY_NUMERICAL_FIDELITY_ONLY",
+    "AIP-G4": "N1_TOY_CALIBRATION_OOD_ONLY",
+    "AIP-G5": "N1_SYNTHETIC_TRUTH_RETURN_ONLY",
+    "AIP-G6": "NOT_TESTED_REAL_DATA_EXECUTION_BLOCKED",
+    "AIP-G7": "NOT_REACHED"
+  },
+  "governance_firewall": {
+    "hzt_comparison": false,
+    "hzt_parameters_used": false,
+    "solver_state_modified": false,
+    "likelihood_modified": false,
+    "physical_parameters_modified": false,
+    "topology_modified": false,
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_BRIDGE_CONTRACT_AS_PHYSICAL_SIMULATOR_VALIDATION",
+    "NO_DIRECT_N1_TOY_WEIGHTS_ON_KIDS_DATA",
+    "NO_REAL_KIDS_DATA_ACCESS_FROM_THIS_STAGE",
+    "NO_REAL_DATA_EXECUTION_FROM_THIS_STAGE",
+    "NO_AIP_G2_PASS_FROM_CONTRACT_ONLY",
+    "NO_N2_RESULT_AS_HZT_SUPPORT_OR_EVIDENCE",
+    "NO_N2_TO_K1D_RELEASE",
+    "NO_N2_TO_K1E_ADMISSIBILITY",
+    "NO_N2_TO_WP4_RELEASE"
+  ]
+}

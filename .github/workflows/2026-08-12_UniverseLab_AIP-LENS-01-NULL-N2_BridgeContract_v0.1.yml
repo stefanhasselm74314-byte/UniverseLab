@@ -1,0 +1,39 @@
+name: UniverseLab AIP-LENS-01-NULL-N2 Bridge Contract v0.1
+
+on:
+  pull_request:
+    paths:
+      - science/ai-for-physics/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N2_BridgeContract_v0.1.md
+      - registry/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N2_BridgeContract_v0.1.json
+      - tools/2026-08-12_validate_aip_lens_01_null_n2_bridge_contract_v0.1.py
+      - tests/2026-08-12_test_aip_lens_01_null_n2_bridge_contract_v0.1.py
+      - .github/workflows/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N2_BridgeContract_v0.1.yml
+  push:
+    branches: [main]
+    paths:
+      - science/ai-for-physics/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N2_BridgeContract_v0.1.md
+      - registry/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N2_BridgeContract_v0.1.json
+      - tools/2026-08-12_validate_aip_lens_01_null_n2_bridge_contract_v0.1.py
+      - tests/2026-08-12_test_aip_lens_01_null_n2_bridge_contract_v0.1.py
+      - .github/workflows/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N2_BridgeContract_v0.1.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate-bridge-contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile bridge sources
+        run: |
+          python -m py_compile \
+            tools/2026-08-12_validate_aip_lens_01_null_n2_bridge_contract_v0.1.py \
+            tests/2026-08-12_test_aip_lens_01_null_n2_bridge_contract_v0.1.py
+      - name: Validate bridge registry
+        run: python tools/2026-08-12_validate_aip_lens_01_null_n2_bridge_contract_v0.1.py
+      - name: Run bridge regression suite
+        run: python tests/2026-08-12_test_aip_lens_01_null_n2_bridge_contract_v0.1.py
