@@ -1,0 +1,176 @@
+{
+  "schema": "universelab.ai-for-physics.aip-lens-01-null-n2.protocol-freeze.v1",
+  "version": "0.1.0",
+  "date": "2026-08-12",
+  "protocol_id": "AIP-LENS-01-NULL-N2-PROTOCOL-FREEZE",
+  "parent_review": "AIP-LENS-01-NULL-N1-RESULT-REVIEW",
+  "parent_review_path": "registry/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N1_ResultReview_v0.1.json",
+  "baseline_main_sha": "fec2a378e3765610af7ad5852b5f834ca196cb39",
+  "status": "FROZEN_REAL_DATA_TARGET_IDENTIFIED_EXECUTION_BLOCKED_PENDING_PHYSICAL_SIMULATOR_FEATURE_BRIDGE_AND_SEPARATE_AUTHORIZATION",
+  "purpose": "Freeze a reproducible KiDS-1000 DR4 real-data control target and governance boundary before any real-data execution.",
+  "real_data_control_class": "PUBLISHED_REPRODUCTION_CONTROL_NOT_DISCOVERY_BLIND",
+  "dataset": {
+    "dataset_id": "KIDS1000_DR4_COSMIC_SHEAR_ASGARI2021",
+    "survey": "Kilo-Degree Survey",
+    "release": "KiDS-1000 / KiDS-DR4",
+    "product_family": "KiDS-1000 cosmic shear cosmology data products",
+    "official_release_page": "https://kids.strw.leidenuniv.nl/DR4/KiDS-1000_cosmicshear.php",
+    "official_weak_lensing_index": "https://kids.strw.leidenuniv.nl/DR4/lensing.php",
+    "official_package_filename": "KiDS1000_cosmic_shear_data_release.tgz",
+    "paper": {
+      "title": "KiDS-1000 Cosmology: Cosmic shear constraints and comparison between two point statistics",
+      "arxiv": "2007.15633v2",
+      "journal": "A&A 645, A104 (2021)",
+      "doi": "10.1051/0004-6361/202039070"
+    },
+    "survey_area_deg2": 1006,
+    "declared_package_contents": [
+      "Multinest posterior chains",
+      "FITS data vectors",
+      "FITS covariance matrices",
+      "FITS source-redshift distributions",
+      "redshift-distribution uncertainty covariance",
+      "CosmoSIS configuration files for KCAP",
+      "plotting support"
+    ],
+    "usage_terms": {
+      "formal_open_license_claimed": false,
+      "official_statement": "Independent analyses are welcomed subject to required KiDS acknowledgement and relevant KiDS-1000 citations.",
+      "publication_acknowledgement_required": true
+    }
+  },
+  "frozen_observable_scope": {
+    "primary_statistic": "COSEBIs",
+    "role": "FIDUCIAL_KIDS1000_COSMIC_SHEAR_CONTROL",
+    "secondary_diagnostics_only": ["two-point shear correlation functions", "band powers"],
+    "targets": ["S8", "Omega_m"],
+    "definition": "S8 = sigma8 * sqrt(Omega_m / 0.3)",
+    "real_data_inputs_allowed_after_authorization": [
+      "published COSEBIs data vector",
+      "published covariance",
+      "published source redshift distributions",
+      "published redshift-distribution covariance",
+      "frozen survey/mask/geometry metadata required by the reference pipeline"
+    ],
+    "forbidden_inputs_during_method_construction": [
+      "published posterior chains as training labels",
+      "published best-fit cosmological parameters as training labels",
+      "real-data residuals used for hyperparameter tuning",
+      "real-data residuals used for threshold tuning"
+    ]
+  },
+  "reference_non_ml_baseline": {
+    "type": "KIDS1000_FIDUCIAL_COSEBIS_REFERENCE_PIPELINE",
+    "implementation_family": "KCAP/CosmoSIS as distributed with the KiDS-1000 data products",
+    "role": "AUTHORITATIVE_REAL_DATA_REPRODUCTION_BASELINE",
+    "published_reference_S8": "0.759 +0.024/-0.021",
+    "use_of_published_reference": "POST_EXECUTION_COMPARISON_ONLY",
+    "baseline_must_be_reproduced_before_ml_real_data_claim": true
+  },
+  "blinding_and_leakage_control": {
+    "strict_discovery_blinding_possible": false,
+    "reason": "The KiDS-1000 result is public and its cosmological constraints are already published; N2 is therefore a reproduction/control exercise, not a discovery-blind test.",
+    "procedural_controls": [
+      "No training or calibration on real KiDS measurements",
+      "No hyperparameter or threshold tuning on real KiDS outputs",
+      "No use of released posterior chains until the frozen prediction is sealed",
+      "All model selection must be completed on simulations or synthetic controls",
+      "Any human prior knowledge of the published result must be declared in the final review"
+    ]
+  },
+  "n1_to_n2_transfer_firewall": {
+    "n1_generator_class": "DECLARED_TOY_SYNTHETIC_WEAK_LENSING_INSPIRED_SUMMARY_MODEL",
+    "n1_physical_simulator": false,
+    "n1_feature_semantics_compatible_with_kids_cosebis": false,
+    "n1_weights_reusable_on_real_kids_data": false,
+    "n1_model_direct_application_to_real_data": "FORBIDDEN",
+    "reason": "N1 features are toy summary features and are not a physically defined transformation of KiDS COSEBIs or shear observables.",
+    "required_bridge": "AIP-LENS-01-NULL-N2-BRIDGE",
+    "bridge_requirements": [
+      "physics-based weak-lensing forward simulator or validated surrogate tied to the frozen observable definition",
+      "same observable semantics for simulation and KiDS real data",
+      "survey geometry/mask handling",
+      "shape-noise model",
+      "photometric-redshift uncertainty propagation",
+      "intrinsic-alignment nuisance treatment",
+      "baryonic/model-systematics treatment or explicit scale cuts",
+      "calibration and coverage tests on independent simulations",
+      "simulation-to-real domain-shift diagnostics",
+      "OOD/abstention policy defined before real-data access"
+    ]
+  },
+  "systematics_and_null_tests": {
+    "required": [
+      "B-mode/null statistic check where supported by released products",
+      "tomographic-bin stability",
+      "scale/statistic stability",
+      "redshift-distribution perturbation check",
+      "intrinsic-alignment sensitivity",
+      "covariance consistency",
+      "simulation-to-real feature-distribution shift",
+      "OOD abstention audit",
+      "non-ML baseline reproduction"
+    ],
+    "failure_policy": "ANY_UNEXPLAINED_MATERIAL_FAILURE_BLOCKS_INTERPRETATION_AND_PROMOTION"
+  },
+  "result_schema_freeze": {
+    "required_fields": [
+      "dataset_id",
+      "dataset_package_sha256",
+      "code_commit_sha",
+      "bridge_contract_sha256",
+      "preprocessing_manifest_sha256",
+      "reference_baseline_result",
+      "ml_result_if_authorized",
+      "calibration_metrics",
+      "coverage_metrics",
+      "ood_status",
+      "systematics_results",
+      "execution_classification",
+      "governance_disposition"
+    ],
+    "result_promotion_requires_separate_review": true
+  },
+  "execution_state": {
+    "dataset_downloaded_by_this_protocol": false,
+    "real_data_opened_by_this_protocol": false,
+    "new_model_trained_by_this_protocol": false,
+    "real_data_inference_performed": false,
+    "execution_authorized": false,
+    "next_candidate": "AIP-LENS-01-NULL-N2-BRIDGE",
+    "subsequent_required_gate": "AIP-LENS-01-NULL-N2-EXECUTION-AUTHORIZATION"
+  },
+  "gate_disposition": {
+    "AIP-G0": "PRESERVED",
+    "AIP-G1": "N1_SYNTHETIC_RATIFIED_ONLY",
+    "AIP-G2": "PHYSICAL_SIMULATOR_VALIDATION_NOT_YET_PASSED",
+    "AIP-G3": "N1_TOY_NUMERICAL_FIDELITY_ONLY",
+    "AIP-G4": "N1_TOY_CALIBRATION_OOD_ONLY",
+    "AIP-G5": "N1_SYNTHETIC_TRUTH_RETURN_ONLY",
+    "AIP-G6": "NOT_TESTED_REAL_DATA_EXECUTION_BLOCKED",
+    "AIP-G7": "NOT_REACHED"
+  },
+  "governance_firewall": {
+    "hzt_comparison": false,
+    "hzt_parameters_used": false,
+    "solver_state_modified": false,
+    "likelihood_modified": false,
+    "physical_parameters_modified": false,
+    "topology_modified": false,
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_N2_PROTOCOL_FREEZE_AS_REAL_DATA_VALIDATION",
+    "NO_DIRECT_N1_TOY_MODEL_APPLICATION_TO_KIDS_REAL_DATA",
+    "NO_PUBLISHED_KIDS_RESULT_AS_TRAINING_TARGET",
+    "NO_REAL_DATA_HYPERPARAMETER_TUNING",
+    "NO_REAL_DATA_EXECUTION_WITHOUT_N2_BRIDGE_AND_SEPARATE_AUTHORIZATION",
+    "NO_N2_CONTROL_RESULT_AS_HZT_SUPPORT_OR_EVIDENCE",
+    "NO_N2_TO_K1D_RELEASE",
+    "NO_N2_TO_K1E_ADMISSIBILITY",
+    "NO_N2_TO_WP4_RELEASE"
+  ]
+}
