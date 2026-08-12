@@ -1,0 +1,48 @@
+name: ULSH-01 WP3-D8 CP01R2 preflight no execution
+
+on:
+  pull_request:
+    paths:
+      - tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d8_cp01r2_issue_and_execute_v2.0.py
+      - registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D8_CP01R2ImmediateExecutionTrigger_v2.0.json
+      - tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D8_CP01R2PreflightTest_v2.0.py
+      - .github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D8_CP01R2Preflight_v2.0.yml
+      - .github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D8_CP01R2ImmediateExecution_v2.0.yml
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    name: d8-static-audit-no-execution
+    runs-on: ubuntu-24.04
+    env:
+      PYTHONHASHSEED: '0'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      NUMEXPR_NUM_THREADS: '1'
+      VECLIB_MAXIMUM_THREADS: '1'
+      BLIS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile D8 and hardened transaction path
+        run: |
+          python -m py_compile \
+            tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d8_cp01r2_issue_and_execute_v2.0.py \
+            tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_transaction_v1.2.py \
+            tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_target_v1.1.py \
+            tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D8_CP01R2PreflightTest_v2.0.py
+      - name: Validate trigger JSON
+        run: python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D8_CP01R2ImmediateExecutionTrigger_v2.0.json >/dev/null
+      - name: Run audit-only issuer
+        run: python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d8_cp01r2_issue_and_execute_v2.0.py --audit
+      - name: Run D8 no-execution regression
+        run: python tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D8_CP01R2PreflightTest_v2.0.py
+      - name: Hard no-issuance firewall in PR
+        run: |
+          test ! -e registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2_PhysicalSolveReleaseAuthorization_v2.0.json
+          test ! -e registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2_SingleUseExecutionGrant_v2.0.json

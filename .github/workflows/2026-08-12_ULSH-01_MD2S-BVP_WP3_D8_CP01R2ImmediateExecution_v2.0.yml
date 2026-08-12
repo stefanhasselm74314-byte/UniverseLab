@@ -1,0 +1,92 @@
+name: ULSH-01 WP3-D8 CP01R2 fresh single-use physical execution
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D8_CP01R2ImmediateExecutionTrigger_v2.0.json
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ulsh-01-wp3-d8-cp01r2-fresh-single-use-physical-transaction
+  cancel-in-progress: false
+
+jobs:
+  cp01r2-d8:
+    name: exact-fresh-single-use-cp01r2-d8
+    runs-on: ubuntu-24.04
+    timeout-minutes: 370
+    env:
+      PYTHONHASHSEED: '0'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      NUMEXPR_NUM_THREADS: '1'
+      VECLIB_MAXIMUM_THREADS: '1'
+      BLIS_NUM_THREADS: '1'
+      PIP_NO_INPUT: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+    steps:
+      - name: Refuse workflow rerun before any issuance
+        run: |
+          test "${GITHUB_RUN_ATTEMPT}" = "1" || { echo "D8 authorizes one first-attempt transaction only; reruns are forbidden." >&2; exit 79; }
+          test "${GITHUB_EVENT_NAME}" = "push" || { echo "D8 physical execution requires the trigger push to main." >&2; exit 79; }
+          test "${GITHUB_REF}" = "refs/heads/main" || { echo "D8 physical execution requires main." >&2; exit 79; }
+
+      - name: Checkout exact triggering main commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Attest checkout equals triggering SHA
+        run: |
+          test "$(git rev-parse HEAD)" = "${GITHUB_SHA}" || { echo "checkout/GITHUB_SHA mismatch" >&2; exit 79; }
+
+      - name: Set up frozen Python major-minor
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile issuer and hardened CP01R2 path
+        run: |
+          python -m py_compile \
+            tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d8_cp01r2_issue_and_execute_v2.0.py \
+            tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_transaction_v1.2.py \
+            tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_target_v1.1.py \
+            tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.0.py
+
+      - name: Install exact frozen numerical dependencies
+        run: |
+          python -m pip install --no-input --disable-pip-version-check \
+            -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3B_v0.1.txt
+
+      - name: Fresh runtime recheck and issue v2 release plus fresh single-use grant
+        run: |
+          set -Eeuo pipefail
+          python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d8_cp01r2_issue_and_execute_v2.0.py \
+            --issue-summary "${RUNNER_TEMP}/cp01r2-d8-issuance-summary.json"
+
+      - name: Spend fresh grant once and execute hardened 7x5 CP01R2 transaction
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "${RUNNER_TEMP}/ulsh01-cp01r2-d8"
+          python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_transaction_v1.2.py \
+            --execute \
+            --transaction-root "${RUNNER_TEMP}/ulsh01-cp01r2-d8" \
+            2>&1 | tee "${RUNNER_TEMP}/cp01r2-d8-execution.log"
+
+      - name: Preserve issuance, durable checkpoints, recovery and immutable result package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ULSH-01-CP01R2-D8-physical-transaction-${{ github.run_id }}-attempt-${{ github.run_attempt }}
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/cp01r2-d8-issuance-summary.json
+            ${{ runner.temp }}/cp01r2-d8-execution.log
+            ${{ runner.temp }}/ulsh01-cp01r2-d8/**
+            registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2_PhysicalSolveReleaseAuthorization_v2.0.json
+            registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2_SingleUseExecutionGrant_v2.0.json
