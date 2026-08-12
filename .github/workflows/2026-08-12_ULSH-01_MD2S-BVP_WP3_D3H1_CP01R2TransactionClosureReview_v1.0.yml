@@ -1,0 +1,56 @@
+name: ULSH-01 WP3-D3H1 CP01R2 transaction closure review no-execution
+on:
+  push:
+    paths:
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_*.json'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_*.py'
+      - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_*.py'
+      - '.github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2TransactionClosureReview_v1.0.yml'
+  pull_request:
+    paths:
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_*.json'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_*.py'
+      - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_*.py'
+      - '.github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2TransactionClosureReview_v1.0.yml'
+permissions:
+  contents: read
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  NUMEXPR_NUM_THREADS: '1'
+  VECLIB_MAXIMUM_THREADS: '1'
+  BLIS_NUM_THREADS: '1'
+jobs:
+  closure-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate contracts
+        run: |
+          python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2ResultSchema_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2TransactionHardeningContract_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_RR1_IndependentReview_v1.0.json >/dev/null
+      - name: Compile
+        run: |
+          python -m py_compile tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_target_v1.0.py
+          python -m py_compile tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.0.py
+          python -m py_compile tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.1.py
+          python -m py_compile tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_rr1_review_v1.0.py
+          python -m py_compile tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_RR1_TransactionClosureTest_v1.0.py
+      - name: Target audit
+        run: python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_target_v1.0.py
+      - name: Transaction preflight
+        run: python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.1.py
+      - name: Independent review
+        run: python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_rr1_review_v1.0.py
+      - name: Regression test
+        run: python tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_RR1_TransactionClosureTest_v1.0.py
+      - name: Confirm future issuance artifacts absent
+        run: |
+          test ! -e registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_PhysicalSolveReleaseAuthorization_v1.0.json
+          test ! -e registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_SingleUseExecutionGrant_v1.0.json
