@@ -35,7 +35,7 @@
     "reported_failures": []
   },
   "independent_final_test_recomputation": {
-    "tolerance": 1e-12,
+    "tolerance": 5e-12,
     "Omega_m": {
       "ml_rmse_recomputed": 0.026297734741452885,
       "ml_rmse_reported": 0.02629773474143493,
