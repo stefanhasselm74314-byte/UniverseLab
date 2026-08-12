@@ -18,7 +18,8 @@
     "d2_etrn01": {"path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d2_cp01r2_etrn_v1.0.py", "git_blob_sha1": "fd109330d44f504d89597c05f1dbfa638e0969bb"},
     "d3_physical_target_binding": {"path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_cp01r2_physical_target_binding_v1.0.py", "git_blob_sha1": "63d5540efa39fddf79c68bbac1c796244b17586b"},
     "cp01r2_execution_target": {"path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_target_v1.0.py", "git_blob_sha1": "199815ac9e4014cc0d68fde71d634cdac24516ce"},
-    "cp01r2_transaction_supervisor": {"path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.0.py", "git_blob_sha1": "315cfb4eae8c07efb66d264d66a601d5f888ce38"},
+    "cp01r2_transaction_supervisor": {"path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.1.py", "git_blob_sha1": "07d1532be17e5d5d81c96ad4438c3195ca4653aa"},
+    "cp01r2_transaction_base": {"path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.0.py", "git_blob_sha1": "315cfb4eae8c07efb66d264d66a601d5f888ce38"},
     "cp01r2_result_schema": {"path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2ResultSchema_v1.0.json", "git_blob_sha1": "54bf49acdfcca128e3b909d6e479b1178c77c276"},
     "resource_policy": {"path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json", "git_blob_sha1": "954a9730d3fa34864df7168555912ebba2dd6c3d"},
     "cp01r1_h3_provenance_reference": {"path": "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py", "git_blob_sha1": "2dd09d9ade6d6ae69c1949833e88b2af49c13710"}
