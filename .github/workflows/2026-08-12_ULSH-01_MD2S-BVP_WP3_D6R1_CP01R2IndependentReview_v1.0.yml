@@ -1,0 +1,58 @@
+name: ULSH-01 WP3-D6R1 CP01R2 independent hardening review no-execution
+
+on:
+  push:
+    paths:
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReview_v1.0.json'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6r1_cp01r2_independent_review_v1.0.py'
+      - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReviewTest_v1.0.py'
+      - 'science/hzt-m0/md2s/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReviewLedger_v1.0.md'
+      - '.github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReview_v1.0.yml'
+  pull_request:
+    paths:
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReview_v1.0.json'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6r1_cp01r2_independent_review_v1.0.py'
+      - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReviewTest_v1.0.py'
+      - 'science/hzt-m0/md2s/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReviewLedger_v1.0.md'
+      - '.github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReview_v1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact review source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate review JSON
+        run: python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReview_v1.0.json >/dev/null
+
+      - name: Compile independent reviewer and regression harness
+        run: |
+          python -m py_compile tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6r1_cp01r2_independent_review_v1.0.py
+          python -m py_compile tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReviewTest_v1.0.py
+
+      - name: Run independent D6R1 review
+        run: python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6r1_cp01r2_independent_review_v1.0.py
+
+      - name: Run independent D6R1 regression harness
+        run: python tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6R1_CP01R2IndependentReviewTest_v1.0.py
+
+      - name: Hard no-execution and no-issuance firewall
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2_PhysicalSolveReleaseAuthorization_v2.0.json
+          test ! -e registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2_SingleUseExecutionGrant_v2.0.json
+          echo 'PASS_D6R1_HARD_FIREWALL_NO_EXECUTION_NO_ISSUANCE'
