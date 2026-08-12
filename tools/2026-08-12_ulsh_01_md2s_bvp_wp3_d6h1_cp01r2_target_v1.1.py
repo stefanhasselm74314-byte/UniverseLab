@@ -9,7 +9,8 @@ D6-B01: legacy CP01R1 finalization is normalized for the CP01R2-valid state
          "N=96 terminal progress state exists but no local root exists".
 D6-B02: every schedule record is atomically fsync'ed as a strict-JSON,
          SHA-256 chained write-ahead checkpoint before advancing to the next
-         schedule entry.
+         schedule entry. Post-loop finalization is rebuilt from those durable
+         checkpoints rather than from the transient in-memory matrix.
 
 Audit is the default path and imports no numerical backend. Physical execution
 requires the exact transaction capability plus an explicit checkpoint root.
@@ -100,7 +101,6 @@ def _strict_json_projection(value: Any, path: str = "$") -> tuple[Any, list[dict
 
 
 def _atomic_create_bytes(path: Path, data: bytes) -> None:
-    """Create one immutable checkpoint path, fsync it, then fsync the directory."""
     path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists():
         raise TargetContractError(f"checkpoint overwrite/replay forbidden: {path}")
@@ -143,12 +143,7 @@ def checkpoint_entry(
     previous_checkpoint_sha256: str | None,
     terminal_state: Any | None = None,
 ) -> str:
-    """Durably write one schedule record before the target advances.
-
-    The checkpoint contains the complete matrix record plus, for completed
-    numerical stages, the terminal state vector needed to reconstruct the
-    numerical terminal point if later finalization fails.
-    """
+    """Durably write one schedule record before the target advances."""
     ordinal = int(record["ordinal"])
     entry_id = str(record["entry_id"])
     payload_record = dict(record)
@@ -190,10 +185,11 @@ def checkpoint_entry(
 
 
 def recover_checkpoint_prefix(checkpoint_root: Path) -> dict[str, Any]:
-    """Verify the durable contiguous prefix and its SHA-256 chain."""
+    """Verify the durable contiguous prefix, frozen schedule identity and chain."""
     if not checkpoint_root.is_dir():
         return {"count": 0, "chain_head_sha256": None, "records": []}
     files = sorted(checkpoint_root.glob("entry-*.json"))
+    schedule = BASE.build_schedule()
     expected_ordinal = 1
     previous: str | None = None
     recovered: list[dict[str, Any]] = []
@@ -201,8 +197,14 @@ def recover_checkpoint_prefix(checkpoint_root: Path) -> dict[str, Any]:
         raw = path.read_bytes()
         digest = hashlib.sha256(raw).hexdigest()
         document = json.loads(raw.decode("utf-8"))
+        if expected_ordinal > len(schedule):
+            raise TargetContractError("checkpoint count exceeds frozen 35-entry schedule")
+        expected = schedule[expected_ordinal - 1]
         if int(document.get("ordinal", -1)) != expected_ordinal:
             raise TargetContractError(f"checkpoint ordinal gap/duplicate at {path.name}")
+        for key in ("entry_id", "seed_index", "node_count"):
+            if document.get(key) != expected[key]:
+                raise TargetContractError(f"checkpoint frozen-schedule mismatch for {key} at {path.name}")
         if document.get("previous_checkpoint_sha256") != previous:
             raise TargetContractError(f"checkpoint chain mismatch at {path.name}")
         if document.get("schema") != CHECKPOINT_DOCUMENT_SCHEMA:
@@ -257,14 +259,7 @@ def prepare_legacy_finalize_views(
     internal_states: dict[tuple[int, int], Any],
     internal_details: dict[tuple[int, int], dict[str, Any]],
 ) -> tuple[dict[tuple[int, int], Any], dict[tuple[int, int], dict[str, Any]], dict[int, str]]:
-    """Make CP01R2 non-root progress states safe for the inherited finalizer.
-
-    Legacy CP01R1 `_finalize` assumes N=96 state presence implies a local root.
-    CP01R2 intentionally stores progress-continuation terminal states even when
-    they are not roots. For only that non-root case, copies passed into the
-    legacy finalizer omit the N=96 state/detail. The durable checkpoint retains
-    the actual terminal state and matrix record. Root states are never removed.
-    """
+    """Normalize only the CP01R2-valid non-root N=96 progress-state case."""
     states = dict(internal_states)
     details = dict(internal_details)
     n96_records = _n96_record_by_seed(entries)
@@ -281,6 +276,45 @@ def prepare_legacy_finalize_views(
     return states, details, terminal
 
 
+def finalization_inputs_from_checkpoints(
+    recovered: dict[str, Any],
+    primary: Any,
+    model: Any,
+    sector: Any,
+    np: Any,
+) -> tuple[
+    list[dict[str, Any]],
+    dict[tuple[int, int], Any],
+    dict[tuple[int, int], dict[str, Any]],
+    dict[tuple[int, int], dict[str, Any]],
+]:
+    """Rebuild the finalizer inputs from durable checkpoints, not transient lists."""
+    entries: list[dict[str, Any]] = []
+    states: dict[tuple[int, int], Any] = {}
+    details: dict[tuple[int, int], dict[str, Any]] = {}
+    independent_records: dict[tuple[int, int], dict[str, Any]] = {}
+    for document in recovered["records"]:
+        record = dict(document["record"])
+        terminal_vector = record.pop("write_ahead_terminal_state", None)
+        seed_index = int(record["seed_index"])
+        node_count = int(record["node_count"])
+        key = (seed_index, node_count)
+        entries.append(record)
+        if terminal_vector is not None:
+            if any(value is None for value in terminal_vector):
+                raise TargetContractError(f"checkpoint terminal state contains nonfinite-null sentinel: {record['entry_id']}")
+            state = np.asarray(terminal_vector, dtype=float)
+            states[key] = state
+            _residual, detail = primary.residual(state, node_count, model, sector)
+            details[key] = detail
+        independent_record = record.get("independent")
+        if isinstance(independent_record, dict):
+            independent_records[key] = independent_record
+    if len(entries) != int(recovered["count"]):
+        raise TargetContractError("recovered entry cardinality mismatch")
+    return entries, states, details, independent_records
+
+
 def finalize_cp01r2_safe(
     entries: list[dict[str, Any]],
     internal_states: dict[tuple[int, int], Any],
@@ -295,16 +329,17 @@ def finalize_cp01r2_safe(
     safe_states, safe_details, terminal = prepare_legacy_finalize_views(entries, internal_states, internal_details)
     finalized = legacy._finalize(entries, safe_states, safe_details, independent_records, primary, model, sector, thresholds)
     finalized = BASE._replace_cp01r1_tokens(finalized)
+    n96_records = _n96_record_by_seed(entries)
     rows = finalized.get("per_seed_acceptance", [])
     for row in rows:
         seed_index = int(row["seed_index"])
         base_classification = row.get("classification")
-        record = _n96_record_by_seed(entries).get(seed_index)
+        record = n96_records.get(seed_index)
         has_state = (seed_index, 96) in internal_states
         row["cp01r2_terminal_state_classification"] = cp01r2_terminal_state_classification(
             record, has_state, str(base_classification) if base_classification is not None else None
         )
-        row["n96_terminal_state_present_in_execution_memory"] = has_state
+        row["n96_terminal_state_present_in_durable_checkpoint"] = has_state
         row["n96_nonroot_state_excluded_from_legacy_candidate_finalizer"] = bool(
             has_state and not bool((record or {}).get("primary", {}).get("candidate_under_local_residual_gate"))
         )
@@ -332,6 +367,7 @@ def audit_target() -> dict[str, Any]:
         "D6-B02": "IMPLEMENTED_PENDING_INDEPENDENT_REVIEW",
         "legacy_finalizer_nonroot_n96_normalization": True,
         "durable_per_entry_checkpoint_before_schedule_advance": True,
+        "finalization_consumes_recovered_checkpoint_matrix": True,
         "checkpoint_hash_chain": "SHA-256",
         "checkpoint_terminal_state_capture": True,
         "solver_imported": False,
@@ -350,7 +386,7 @@ def execute_physical_schedule(
     BASE._verify_sources()
     if git_blob_sha1(CHECKPOINT_SCHEMA_PATH) != EXPECTED_CHECKPOINT_SCHEMA_BLOB:
         raise TargetContractError("checkpoint schema drift before execution")
-    if checkpoint_root.exists() and any(checkpoint_root.iterdir()):
+    if checkpoint_root.exists() and (not checkpoint_root.is_dir() or any(checkpoint_root.iterdir())):
         raise TargetContractError("checkpoint root must be absent or empty before a new single-use execution")
     checkpoint_root.mkdir(parents=True, exist_ok=True)
     _fsync_directory(checkpoint_root.parent)
@@ -391,8 +427,8 @@ def execute_physical_schedule(
         previous_checkpoint_sha256 = checkpoint_entry(
             checkpoint_root, record, previous_checkpoint_sha256, terminal_state=terminal_state
         )
-        recovered = recover_checkpoint_prefix(checkpoint_root)
-        if int(recovered["count"]) != len(entries):
+        recovered_prefix = recover_checkpoint_prefix(checkpoint_root)
+        if int(recovered_prefix["count"]) != len(entries):
             raise TargetContractError("checkpoint prefix is not durable before schedule advance")
 
     for entry in BASE.build_schedule():
@@ -599,18 +635,21 @@ def execute_physical_schedule(
             f"full schedule completed in memory but durable checkpoint count is {recovered['count']} != {PLANNED_ENTRY_COUNT}"
         )
 
+    persisted_entries, persisted_states, persisted_details, persisted_independent = finalization_inputs_from_checkpoints(
+        recovered, primary, model, sector, np
+    )
     finalized = finalize_cp01r2_safe(
-        entries,
-        internal_states,
-        internal_details,
-        independent_records,
+        persisted_entries,
+        persisted_states,
+        persisted_details,
+        persisted_independent,
         primary,
         model,
         sector,
         thresholds,
         legacy,
     )
-    finalized["primary_backend"].update(BASE._etrn_provenance(entries))
+    finalized["primary_backend"].update(BASE._etrn_provenance(persisted_entries))
     raw = {
         "schema": "universelab.ulsh-01.md2s-bvp.cp01r2-result.v1",
         "run_id": RUN_ID,
@@ -621,21 +660,24 @@ def execute_physical_schedule(
         "execution_started_utc": execution_started_utc,
         "execution_finished_utc": datetime.now(timezone.utc).isoformat(),
         "planned_schedule_entries": PLANNED_ENTRY_COUNT,
-        "matrix_entries": entries,
-        "stage_timeout_count": sum(record.get("status") == "TIMED_OUT_NO_RETRY" for record in entries),
+        "matrix_entries": persisted_entries,
+        "stage_timeout_count": sum(
+            record.get("status") == "TIMED_OUT_NO_RETRY" for record in persisted_entries
+        ),
         "execution_elapsed_wall_clock_seconds": time.monotonic() - start,
         "write_ahead_checkpoint_audit": {
             "durable_checkpoint_count": recovered["count"],
             "chain_head_sha256": recovered["chain_head_sha256"],
             "full_schedule_prefix_durable_before_finalization": True,
             "terminal_state_included_for_completed_entries": True,
+            "finalization_inputs_rebuilt_from_checkpoint_records": True,
         },
         **finalized,
         "forbidden_inferences": FORBIDDEN_INFERENCES,
         "physical_evidence_effect": "NONE",
     }
     raw = precision._apply_precision_gate(raw)
-    raw["primary_backend"].update(BASE._etrn_provenance(entries))
+    raw["primary_backend"].update(BASE._etrn_provenance(persisted_entries))
     return raw
 
 
