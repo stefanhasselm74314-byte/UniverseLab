@@ -1,0 +1,60 @@
+name: ULSH-01 WP3-D4 CP01R2 release decision no-execution
+
+on:
+  push:
+    paths:
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecision_v1.0.json'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d4_cp01r2_release_decision_v1.0.py'
+      - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecisionTest_v1.0.py'
+      - 'science/hzt-m0/md2s/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecisionLedger_v1.0.md'
+      - '.github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecision_v1.0.yml'
+  pull_request:
+    paths:
+      - 'registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecision_v1.0.json'
+      - 'tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d4_cp01r2_release_decision_v1.0.py'
+      - 'tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecisionTest_v1.0.py'
+      - 'science/hzt-m0/md2s/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecisionLedger_v1.0.md'
+      - '.github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecision_v1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-decision-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate decision JSON
+        run: python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecision_v1.0.json >/dev/null
+
+      - name: Compile no-execution auditor and test
+        run: |
+          python -m py_compile tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d4_cp01r2_release_decision_v1.0.py
+          python -m py_compile tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecisionTest_v1.0.py
+
+      - name: Audit D4 decision and predecessor source bindings
+        run: python tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d4_cp01r2_release_decision_v1.0.py
+
+      - name: Run D4 no-execution regression test
+        run: python tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecisionTest_v1.0.py
+
+      - name: Confirm runtime authorization and grant remain absent
+        shell: bash
+        run: |
+          set -euo pipefail
+          release='registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_PhysicalSolveReleaseAuthorization_v1.0.json'
+          grant='registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_SingleUseExecutionGrant_v1.0.json'
+          test ! -e "$release"
+          test ! -e "$grant"
+          echo 'PASS: D4 contains a governance release decision only; no runtime authorization/grant exists.'
