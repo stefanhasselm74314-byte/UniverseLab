@@ -23,7 +23,6 @@ import re
 import shutil
 import subprocess
 import sys
-import time
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,7 +39,7 @@ TARGET = ROOT / "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_target_v1.0.p
 H3_REFERENCE = ROOT / "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py"
 RELEASE_PATH = ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_PhysicalSolveReleaseAuthorization_v1.0.json"
 GRANT_PATH = ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_SingleUseExecutionGrant_v1.0.json"
-EXPECTED_TARGET_BLOB = "83d28c07189f343877b9d26b20d2fe24b5575bbd"
+EXPECTED_TARGET_BLOB = "84021144aa7979f453fe4c2315ad8d56c02da04e"
 EXPECTED_RESULT_SCHEMA_BLOB = "54bf49acdfcca128e3b909d6e479b1178c77c276"
 NONCE_RE = re.compile(r"^[0-9a-f]{32,64}$")
 THREAD_ENV_KEYS = (
@@ -503,6 +502,7 @@ def execute(transaction_root: Path) -> dict[str, Any]:
     runtime = runtime_attestation()
     limits = load_json(RESOURCE)["resource_limits"]
     maximum_result_bytes = int(limits["maximum_result_bytes"])
+    maximum_memory_bytes = int(limits["maximum_memory_bytes"])
     total_seconds = int(limits["maximum_wall_clock_seconds_total"])
     stage_seconds = int(limits["maximum_wall_clock_seconds_per_seed_per_level"])
     grant_dir = claim_single_use_grant(transaction_root, grant, grant_sha)
@@ -518,6 +518,7 @@ def execute(transaction_root: Path) -> dict[str, Any]:
         "physical_solve_authorized": True,
         "maximum_wall_clock_seconds_total": total_seconds,
         "maximum_wall_clock_seconds_per_seed_per_level": stage_seconds,
+        "maximum_memory_bytes": maximum_memory_bytes,
     }
     package: dict[str, Any] | None = None
     try:
