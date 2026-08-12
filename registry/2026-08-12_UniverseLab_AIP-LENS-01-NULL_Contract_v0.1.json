@@ -1,0 +1,128 @@
+{
+  "schema": "universelab.ai-for-physics.aip-lens-01-null.contract.v1",
+  "version": "0.1.0",
+  "date": "2026-08-12",
+  "pilot_id": "AIP-LENS-01-NULL",
+  "parent_framework": "UL-AIP-v0.1",
+  "status": "PILOT_PROTOCOL_FROZEN_NOT_EXECUTED",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "canonical_protocol": "science/ai-for-physics/2026-08-12_UniverseLab_AIP-LENS-01-NULL_Protocol_v0.1.md",
+  "purpose": "Baseline weak-lensing ML null reproduction with calibration, coverage, provenance, OOD and authoritative-return controls before any HZT comparison.",
+  "targets": {
+    "required": ["Omega_m", "S8"],
+    "optional_diagnostic": ["sigma8"],
+    "definition": {
+      "S8": "sigma8 * sqrt(Omega_m / 0.3)"
+    },
+    "hzt_parameters_allowed": false
+  },
+  "stages": {
+    "N0": {
+      "name": "protocol_and_provenance_freeze",
+      "status": "AUTHORIZED_BY_THIS_CONTRACT"
+    },
+    "N1": {
+      "name": "synthetic_mock_null_reproduction",
+      "status": "NOT_AUTHORIZED_REQUIRES_SEPARATE_EXECUTABLE_CONTRACT"
+    },
+    "N2": {
+      "name": "real_data_control_application",
+      "status": "BLOCKED_UNTIL_N1_PASS"
+    }
+  },
+  "required_partitions": [
+    "TRAIN",
+    "VALIDATION",
+    "CALIBRATION",
+    "FINAL_TEST",
+    "OOD_STRESS"
+  ],
+  "split_firewall": {
+    "final_test_touched_before_freeze": false,
+    "cross_partition_realization_lineage_allowed": false,
+    "cross_partition_augmentation_lineage_allowed": false,
+    "metadata_target_leakage_allowed": false
+  },
+  "allowed_input_classes": [
+    "shear_maps_or_catalog_derived_map_products",
+    "convergence_kappa_maps",
+    "tomographic_bins",
+    "mask_and_geometry_channels",
+    "controlled_noise_realizations"
+  ],
+  "mandatory_systematics_provenance": [
+    "mask_and_survey_geometry",
+    "noise_model",
+    "baryonic_prescription_if_used",
+    "intrinsic_alignment_model_if_used",
+    "photo_z_uncertainty_if_used",
+    "shear_calibration_systematics_if_used"
+  ],
+  "minimum_metrics": [
+    "target_bias",
+    "rmse_or_equivalent_scale_aware_error",
+    "coverage_68_if_probabilistic",
+    "coverage_95_if_probabilistic",
+    "calibration_diagnostics",
+    "nuisance_residual_dependence",
+    "parameter_space_stratified_performance",
+    "ood_detection_or_abstention",
+    "declared_non_ml_baseline_comparison"
+  ],
+  "gate_state": {
+    "AIP-G0": "FROZEN_BY_PROTOCOL",
+    "AIP-G1": "REQUIREMENTS_DEFINED_NOT_PASSED",
+    "AIP-G2": "REQUIREMENTS_DEFINED_NOT_PASSED",
+    "AIP-G3": "REQUIREMENTS_DEFINED_NOT_PASSED",
+    "AIP-G4": "REQUIREMENTS_DEFINED_NOT_PASSED",
+    "AIP-G5": "REQUIREMENTS_DEFINED_NOT_PASSED",
+    "AIP-G6": "REQUIREMENTS_DEFINED_NOT_PASSED",
+    "AIP-G7": "SEPARATE_REVIEW_REQUIRED"
+  },
+  "fail_closed_conditions": [
+    "TRAIN_TEST_LEAKAGE_OR_UNCERTAIN_LINEAGE",
+    "UNDOCUMENTED_PREPROCESSING",
+    "MISSING_SIMULATOR_PROVENANCE",
+    "TARGET_LEAKAGE",
+    "CALIBRATION_OR_COVERAGE_FAILURE",
+    "MATERIAL_OOD_FAILURE_WITHOUT_ABSTENTION",
+    "SIMULATOR_FINGERPRINT_EXPLOITATION",
+    "MATERIAL_SYSTEMATICS_STRESS_DEGRADATION",
+    "BASELINE_REPRODUCTION_FAILURE",
+    "NULL_PILOT_SCORE_INTERPRETED_AS_HZT_EVIDENCE"
+  ],
+  "next_candidate": {
+    "id": "AIP-LENS-01-NULL-N1",
+    "status": "NOT_AUTHORIZED",
+    "intent": "small reproducible baseline-model weak-lensing mock execution with frozen grid, split, simple baseline and calibration/OOD checks"
+  },
+  "source_context": [
+    "https://physics.mit.edu/research-areas/strong-interaction-and-nuclear-theory/",
+    "https://iaifi.org/domain-research.html#astrophysics",
+    "https://iaifi.org/domain-research.html#experimental-physics",
+    "https://iaifi.org/domain-research.html#foundational-ai",
+    "https://iaifi.org/papers-theory.html",
+    "https://iaifi.org/domain-research.html#theoretical-physics"
+  ],
+  "governance_firewall": {
+    "model_training": false,
+    "model_execution": false,
+    "hzt_comparison": false,
+    "solver_state_modified": false,
+    "likelihood_modified": false,
+    "physical_parameters_modified": false,
+    "topology_modified": false,
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_promotions": [
+    "NO_NULL_PILOT_TO_HZT_EVIDENCE",
+    "NO_NULL_PILOT_TO_K1D_RELEASE",
+    "NO_NULL_PILOT_TO_K1E_ADMISSIBILITY",
+    "NO_NULL_PILOT_TO_WP4_RELEASE",
+    "NO_SYNTHETIC_SUCCESS_AS_REAL_DATA_VALIDATION",
+    "NO_POINT_ESTIMATE_ONLY_PASS_BEYOND_AIP_G3"
+  ]
+}
