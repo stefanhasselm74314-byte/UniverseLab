@@ -14,6 +14,7 @@ import hashlib
 import importlib.util
 import json
 import math
+import os
 from pathlib import Path
 import pickle
 import sys
@@ -84,6 +85,7 @@ class TargetExecutionCapability:
     physical_solve_authorized: bool
     maximum_wall_clock_seconds_total: int
     maximum_wall_clock_seconds_per_seed_per_level: int
+    maximum_memory_bytes: int
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -178,6 +180,23 @@ def _validate_capability(capability: TargetExecutionCapability) -> None:
         raise TargetExecutionDenied("total timeout capability drift")
     if capability.maximum_wall_clock_seconds_per_seed_per_level != int(limits["maximum_wall_clock_seconds_per_seed_per_level"]):
         raise TargetExecutionDenied("stage timeout capability drift")
+    if capability.maximum_memory_bytes != int(limits["maximum_memory_bytes"]):
+        raise TargetExecutionDenied("memory limit capability drift")
+
+
+def _enforce_memory_limit(maximum_memory_bytes: int) -> None:
+    if os.name != "posix":
+        raise TargetContractError("physical execution requires POSIX RLIMIT_AS memory enforcement")
+    import resource
+    requested = int(maximum_memory_bytes)
+    current_soft, current_hard = resource.getrlimit(resource.RLIMIT_AS)
+    infinity = resource.RLIM_INFINITY
+    if current_hard not in (infinity, -1) and current_hard < requested:
+        raise TargetContractError(f"host RLIMIT_AS hard limit {current_hard} is below frozen requirement {requested}")
+    resource.setrlimit(resource.RLIMIT_AS, (requested, requested))
+    observed_soft, observed_hard = resource.getrlimit(resource.RLIMIT_AS)
+    if observed_soft != requested or observed_hard != requested:
+        raise TargetContractError(f"failed to enforce exact RLIMIT_AS={requested}: {(observed_soft, observed_hard)}")
 
 
 def _prolongate_state(primary: Any, state: Any, old_n: int, new_n: int):
@@ -268,6 +287,7 @@ def audit_target() -> dict[str, Any]:
         "etrn01_result_provenance_capture": True,
         "legacy_qa_reused_source_bound": True,
         "higher_precision_qa_reused_source_bound": True,
+        "memory_limit_enforced_before_numerical_import": True,
         "solver_imported": False,
         "solver_calls": 0,
         "physical_solve_authorized": False,
@@ -279,6 +299,7 @@ def audit_target() -> dict[str, Any]:
 def execute_physical_schedule(capability: TargetExecutionCapability) -> dict[str, Any]:
     _validate_capability(capability)
     _verify_sources()
+    _enforce_memory_limit(capability.maximum_memory_bytes)
     payload = frozen_payload()
 
     etrn = dynamic_import(D2_ETRN, "ulsh_cp01r2_etrn")
