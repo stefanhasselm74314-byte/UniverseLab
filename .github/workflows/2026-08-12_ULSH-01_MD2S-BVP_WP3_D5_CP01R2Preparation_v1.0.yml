@@ -1,0 +1,73 @@
+name: ULSH-01 WP3-D5 CP01R2 preparation no-execution
+
+on:
+  pull_request:
+    paths:
+      - registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D5_CP01R2ImmediateExecutionTrigger_v1.0.json
+      - tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d5_cp01r2_issue_and_execute_v1.0.py
+      - science/hzt-m0/md2s/2026-08-12_ULSH-01_MD2S-BVP_WP3_D5_CP01R2ImmediateExecutionLedger_v1.0.md
+      - .github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D5_CP01R2ImmediateExecution_v1.0.yml
+      - .github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D5_CP01R2Preparation_v1.0.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate trigger JSON and compile runtime code
+        run: |
+          python -m json.tool registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D5_CP01R2ImmediateExecutionTrigger_v1.0.json >/dev/null
+          python -m py_compile \
+            tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d5_cp01r2_issue_and_execute_v1.0.py \
+            tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.1.py \
+            tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.0.py
+
+      - name: Static governance and exact binding audit without issuance
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib
+          root = pathlib.Path('.')
+          def load(p): return json.loads((root/p).read_text())
+          def blob(p):
+              b=(root/p).read_bytes(); return hashlib.sha1(f'blob {len(b)}\0'.encode()+b).hexdigest()
+          trigger=load('registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D5_CP01R2ImmediateExecutionTrigger_v1.0.json')
+          d4p='registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D4_CP01R2ReleaseDecision_v1.0.json'
+          rr1p='registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_RR1_IndependentReview_v1.0.json'
+          d4=load(d4p); rr1=load(rr1p)
+          assert blob(d4p)=='a50a9f44947e816d732320b832c4220b97e75b8f'
+          assert blob(rr1p)=='e240cb9b7fb4990575a99c3f436640b7fd91cb8b'
+          assert d4['status']=='PASS_WP3_D4_CP01R2_SINGLE_USE_RELEASE_AUTHORIZED_NO_EXECUTION'
+          assert d4['decision_id']=='ULSH-01-WP3-D4-CP01R2-RELEASE-DEC-20260812-A'
+          assert d4['decision']['release_physical_solve'] is True
+          assert d4['decision']['authorization_scope']=='SINGLE_USE_CP01R2_ONLY'
+          assert rr1['review_status']=='PASS_WP3_D3H1_RR1_D3_BLOCKERS_VERIFIED_CLOSED_NO_EXECUTION'
+          assert rr1['new_release_blockers']==[]
+          assert all(v=='PASS' for v in rr1['review_gates'].values())
+          assert trigger['operator_intent']=='ISSUE_EXACT_CP01R2_RELEASE_AND_FRESH_SINGLE_USE_GRANT_AFTER_MANDATORY_RECHECK_THEN_START_CP01R2_IMMEDIATELY'
+          assert trigger['governance_release_decision_id']==d4['decision_id']
+          assert trigger['run_id']==d4['run_id']
+          assert trigger['run_payload_sha256']==d4['run_payload_sha256']
+          assert trigger['schedule_sha256']==d4['schedule_sha256']
+          assert trigger['runtime_issuance']['issuer_selected_validity_seconds'] <= d4['decision']['grant_validity_seconds']
+          print('PASS_WP3_D5_STATIC_PREPARATION_AUDIT_NO_ISSUANCE_NO_EXECUTION')
+          PY
+
+      - name: Confirm runtime authorization and grant are not committed
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_PhysicalSolveReleaseAuthorization_v1.0.json
+          test ! -e registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_SingleUseExecutionGrant_v1.0.json
+          echo 'PASS: no long-lived runtime authorization or grant is committed.'
