@@ -31,11 +31,11 @@
     },
     "cp01r2_execution_target": {
       "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_target_v1.0.py",
-      "git_blob_sha1": "83d28c07189f343877b9d26b20d2fe24b5575bbd"
+      "git_blob_sha1": "84021144aa7979f453fe4c2315ad8d56c02da04e"
     },
     "cp01r2_transaction_supervisor": {
       "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.0.py",
-      "git_blob_sha1": "2133a77ad01b5f7d1e4c94cb07b9ca5f7cf93b8c"
+      "git_blob_sha1": "9f4cac7601192467f81916e1dec70de2d2884bec"
     },
     "cp01r2_result_schema": {
       "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2ResultSchema_v1.0.json",
@@ -72,6 +72,8 @@
     "machine_attestation": "platform, machine, processor, Python, NumPy, SciPy, thread environment, longdouble mantissa and NumPy BLAS/LAPACK configuration captured",
     "per_seed_per_level_wall_clock_seconds": 1800,
     "total_wall_clock_seconds": 21600,
+    "maximum_memory_bytes": 8589934592,
+    "memory_enforcement": "exact POSIX RLIMIT_AS=8 GiB in the target child before any NumPy/SciPy/physical backend import; fail closed if unavailable",
     "total_timeout_supervision": "parent subprocess hard timeout encloses target schedule, finalization and transient result production; target retains per-stage SIGALRM limits",
     "maximum_result_bytes": 1073741824,
     "network_during_solver": false,
