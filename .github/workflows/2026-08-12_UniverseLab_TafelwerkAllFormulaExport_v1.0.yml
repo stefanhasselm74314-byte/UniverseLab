@@ -1,0 +1,35 @@
+name: UniverseLab Tafelwerk all-formula export
+
+on:
+  push:
+    paths:
+      - 'tafelwerk.html'
+      - 'assets/2026-08-12_UniverseLab_TafelwerkAllFormulaExport_v1.0.js'
+      - 'tests/2026-08-12_UniverseLab_TafelwerkAllFormulaExportTest_v1.0.py'
+      - '.github/workflows/2026-08-12_UniverseLab_TafelwerkAllFormulaExport_v1.0.yml'
+  pull_request:
+    paths:
+      - 'tafelwerk.html'
+      - 'assets/2026-08-12_UniverseLab_TafelwerkAllFormulaExport_v1.0.js'
+      - 'tests/2026-08-12_UniverseLab_TafelwerkAllFormulaExportTest_v1.0.py'
+      - '.github/workflows/2026-08-12_UniverseLab_TafelwerkAllFormulaExport_v1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  all-formula-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: JavaScript syntax check
+        run: node --check assets/2026-08-12_UniverseLab_TafelwerkAllFormulaExport_v1.0.js
+      - name: Compile regression test
+        run: python -m py_compile tests/2026-08-12_UniverseLab_TafelwerkAllFormulaExportTest_v1.0.py
+      - name: Run all-formula export regression test
+        run: python tests/2026-08-12_UniverseLab_TafelwerkAllFormulaExportTest_v1.0.py
