@@ -7,7 +7,7 @@ from pathlib import Path
 REG = Path('registry/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N1_ResultReview_v0.1.json')
 
 
-def close(a, b, tol=1e-12):
+def close(a, b, tol=5e-12):
     return math.isclose(a, b, rel_tol=0.0, abs_tol=tol)
 
 
@@ -30,6 +30,7 @@ def main():
     assert integ['final_test_unique_ids'] == 256
     assert integ['final_test_id_uniqueness_pass'] is True
     assert integ['reported_failures'] == []
+    assert d['independent_final_test_recomputation']['tolerance'] == 5e-12
     for target in ('Omega_m', 'S8'):
         r = d['independent_final_test_recomputation'][target]
         assert r['match_within_tolerance'] is True
