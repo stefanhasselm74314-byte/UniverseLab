@@ -10,9 +10,11 @@ are absent.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager, redirect_stdout
 from datetime import datetime, timezone
 import hashlib
 import importlib.util
+import io
 import json
 import math
 import os
@@ -21,8 +23,10 @@ import pickle
 import platform
 import re
 import shutil
+import signal
 import subprocess
 import sys
+import time
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,16 +34,16 @@ RUN_ID = "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R2"
 RUN_PAYLOAD_SHA256 = "e8b8e82d2cb1472d91c387a40c8f84024c2549a3dcc2c897df5561f7bf721b36"
 SCHEDULE_SHA256 = "929f59d018cc511f36c98ef26a8614ed495fe699a067b1b33e6c5b53efaf8e0b"
 DEPENDENCY_LOCK_SHA256 = "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f"
+PLANNED_ENTRY_COUNT = 35
 CONTRACT = ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2TransactionHardeningContract_v1.0.json"
 RESULT_SCHEMA = ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2ResultSchema_v1.0.json"
 D3_REVIEW = ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReleaseReadinessReview_v1.0.json"
-RUN_INPUT = ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json"
 RESOURCE = ROOT / "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json"
 TARGET = ROOT / "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_target_v1.0.py"
 H3_REFERENCE = ROOT / "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.4.py"
 RELEASE_PATH = ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_PhysicalSolveReleaseAuthorization_v1.0.json"
 GRANT_PATH = ROOT / "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_SingleUseExecutionGrant_v1.0.json"
-EXPECTED_TARGET_BLOB = "84021144aa7979f453fe4c2315ad8d56c02da04e"
+EXPECTED_TARGET_BLOB = "199815ac9e4014cc0d68fde71d634cdac24516ce"
 EXPECTED_RESULT_SCHEMA_BLOB = "54bf49acdfcca128e3b909d6e479b1178c77c276"
 NONCE_RE = re.compile(r"^[0-9a-f]{32,64}$")
 THREAD_ENV_KEYS = (
@@ -188,22 +192,21 @@ def validate_release_and_grant(now: datetime | None = None) -> tuple[dict[str, A
         raise AuthorizationDenied("release authorization is not exact GRANTED")
     if grant.get("schema") != protocol["grant_schema"]:
         raise AuthorizationDenied("grant schema mismatch")
-    if release.get("run_id") != RUN_ID or grant.get("run_id") != RUN_ID:
-        raise AuthorizationDenied("run_id binding mismatch")
-    if release.get("run_payload_sha256") != RUN_PAYLOAD_SHA256 or grant.get("run_payload_sha256") != RUN_PAYLOAD_SHA256:
-        raise AuthorizationDenied("run payload binding mismatch")
-    if release.get("schedule_sha256") != SCHEDULE_SHA256 or grant.get("schedule_sha256") != SCHEDULE_SHA256:
-        raise AuthorizationDenied("schedule binding mismatch")
+    for document, label in ((release, "release"), (grant, "grant")):
+        if document.get("run_id") != RUN_ID or document.get("run_payload_sha256") != RUN_PAYLOAD_SHA256:
+            raise AuthorizationDenied(f"{label} run binding mismatch")
+        if document.get("schedule_sha256") != SCHEDULE_SHA256 or document.get("planned_entry_count") != PLANNED_ENTRY_COUNT:
+            raise AuthorizationDenied(f"{label} schedule binding mismatch")
+        if document.get("dependency_lock_sha256") != DEPENDENCY_LOCK_SHA256:
+            raise AuthorizationDenied(f"{label} dependency binding mismatch")
+        if document.get("result_schema_git_blob_sha1") != EXPECTED_RESULT_SCHEMA_BLOB:
+            raise AuthorizationDenied(f"{label} result-schema binding mismatch")
+        if document.get("target_git_blob_sha1") != EXPECTED_TARGET_BLOB:
+            raise AuthorizationDenied(f"{label} target binding mismatch")
     if release.get("grant_sha256") != grant_sha or release.get("transaction_contract_sha256") != contract_sha or release.get("source_bundle_sha256") != bundle_sha:
-        raise AuthorizationDenied("release exact binding mismatch")
+        raise AuthorizationDenied("release exact contract/source/grant binding mismatch")
     if grant.get("transaction_contract_sha256") != contract_sha or grant.get("source_bundle_sha256") != bundle_sha:
         raise AuthorizationDenied("grant source/contract binding mismatch")
-    if grant.get("dependency_lock_sha256") != DEPENDENCY_LOCK_SHA256:
-        raise AuthorizationDenied("dependency binding mismatch")
-    if grant.get("result_schema_git_blob_sha1") != EXPECTED_RESULT_SCHEMA_BLOB:
-        raise AuthorizationDenied("result schema binding mismatch")
-    if grant.get("target_git_blob_sha1") != EXPECTED_TARGET_BLOB:
-        raise AuthorizationDenied("target source binding mismatch")
     for key in ("single_use", "physical_solve_authorized", "no_retry", "no_scan", "no_fallback", "no_parameter_or_topology_mutation"):
         if grant.get(key) is not True:
             raise AuthorizationDenied(f"grant scope flag missing: {key}")
@@ -282,17 +285,64 @@ def strict_startup_environment() -> None:
 def runtime_attestation() -> dict[str, Any]:
     import numpy as np
     import scipy
+    buffer = io.StringIO()
+    with redirect_stdout(buffer):
+        np.__config__.show()
     return {
         "platform": platform.platform(),
         "machine": platform.machine(),
         "processor": platform.processor(),
+        "logical_cpu_count": os.cpu_count(),
         "python_version": platform.python_version(),
         "numpy_version": np.__version__,
         "scipy_version": scipy.__version__,
         "thread_environment": {key: os.environ.get(key) for key in THREAD_ENV_KEYS},
         "numpy_longdouble_mantissa_bits": int(np.finfo(np.longdouble).nmant) + 1,
-        "blas_lapack_configuration": str(np.__config__.show()),
+        "blas_lapack_configuration": buffer.getvalue(),
     }
+
+
+def _prepare_network_denial(grant_dir: Path) -> Path:
+    deny_dir = grant_dir / "python-network-deny"
+    deny_dir.mkdir()
+    sitecustomize = deny_dir / "sitecustomize.py"
+    sitecustomize.write_text(
+        "import socket\n"
+        "def _deny(*args, **kwargs):\n    raise RuntimeError('CP01R2 solver network access denied by frozen resource policy')\n"
+        "socket.create_connection = _deny\n"
+        "socket.getaddrinfo = _deny\n"
+        "_orig_socket = socket.socket\n"
+        "class _DeniedSocket(_orig_socket):\n"
+        "    def connect(self, *args, **kwargs):\n        return _deny(*args, **kwargs)\n"
+        "    def connect_ex(self, *args, **kwargs):\n        return _deny(*args, **kwargs)\n"
+        "socket.socket = _DeniedSocket\n",
+        encoding="utf-8",
+    )
+    with sitecustomize.open("rb") as stream:
+        os.fsync(stream.fileno())
+    _fsync_directory(deny_dir)
+    return deny_dir
+
+
+@contextmanager
+def post_target_wall_clock_limit(seconds: float):
+    if seconds <= 0.0:
+        raise TransactionError("no total wall-clock budget remains for packaging/commit")
+    if os.name != "posix" or not hasattr(signal, "SIGALRM") or not hasattr(signal, "setitimer"):
+        raise TransactionError("POSIX SIGALRM/setitimer required for post-target total deadline")
+    def handler(_signum, _frame):
+        raise TransactionError("CP01R2 total transaction wall-clock limit exceeded during packaging/commit")
+    previous_handler = signal.getsignal(signal.SIGALRM)
+    previous_timer = signal.getitimer(signal.ITIMER_REAL)
+    if previous_timer[0] > 0.0:
+        raise TransactionError("unexpected pre-existing parent ITIMER_REAL")
+    signal.signal(signal.SIGALRM, handler)
+    signal.setitimer(signal.ITIMER_REAL, float(seconds))
+    try:
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0.0)
+        signal.signal(signal.SIGALRM, previous_handler)
 
 
 def validate_result_closure(result: dict[str, Any]) -> None:
@@ -428,7 +478,11 @@ def supervised_target_execution(capability: dict[str, Any], grant_dir: Path, tot
     stdout_log = grant_dir / "target-stdout.txt"
     stderr_log = grant_dir / "target-stderr.txt"
     _atomic_json(capability_path, capability)
+    deny_dir = _prepare_network_denial(grant_dir)
     env = os.environ.copy()
+    existing_pythonpath = env.get("PYTHONPATH", "")
+    env["PYTHONPATH"] = str(deny_dir) + (os.pathsep + existing_pythonpath if existing_pythonpath else "")
+    env["UNIVERSELAB_NETWORK_POLICY"] = "DENY_CP01R2_SOLVER"
     command = [sys.executable, str(TARGET), "--execute-capability", str(capability_path), "--result-pickle", str(raw_pickle)]
     with stdout_log.open("wb") as out, stderr_log.open("wb") as err:
         process = subprocess.Popen(command, cwd=ROOT, env=env, stdout=out, stderr=err)
@@ -476,6 +530,10 @@ def static_preflight() -> dict[str, Any]:
     target_audit = target.audit_target()
     if target_audit["solver_calls"] != 0 or target_audit["physical_solve_executed"] is not False:
         raise TransactionError("target audit violated no-execution firewall")
+    h3_source = H3_REFERENCE.read_text(encoding="utf-8")
+    for fragment in ("COMMITTING_RESULT", "json_safe_diagnostic_projection", "claim_grant_atomically"):
+        if fragment not in h3_source:
+            raise TransactionError(f"H3 provenance invariant missing: {fragment}")
     return {
         "status": "PASS_WP3_D3H1_CP01R2_TRANSACTION_STATIC_PREFLIGHT_NO_EXECUTION",
         "run_id": RUN_ID,
@@ -507,6 +565,7 @@ def execute(transaction_root: Path) -> dict[str, Any]:
     stage_seconds = int(limits["maximum_wall_clock_seconds_per_seed_per_level"])
     grant_dir = claim_single_use_grant(transaction_root, grant, grant_sha)
     mark_state(grant_dir, "RUNNING", release_authorization_sha256=release_sha)
+    transaction_started = time.monotonic()
     capability = {
         "run_id": RUN_ID,
         "run_payload_sha256": RUN_PAYLOAD_SHA256,
@@ -523,23 +582,25 @@ def execute(transaction_root: Path) -> dict[str, Any]:
     package: dict[str, Any] | None = None
     try:
         raw, stdout_log, stderr_log = supervised_target_execution(capability, grant_dir, total_seconds, maximum_result_bytes)
-        package = package_schema_complete_result(staging, raw, runtime, grant, release_sha, grant_sha, maximum_result_bytes, stdout_log, stderr_log)
-        result_dir.parent.mkdir(parents=True, exist_ok=True)
-        mark_state(grant_dir, "COMMITTING_RESULT", expected_result_directory=str(result_dir), expected_result_sha256=package["result_sha256"], expected_artifact_manifest_sha256=package["artifact_manifest_sha256"])
-        os.replace(staging, result_dir)
-        _fsync_directory(result_dir.parent)
-        marker = {
-            "schema": "universelab.ulsh-01.md2s-bvp.cp01r2-result-commit-marker.v1",
-            "run_id": RUN_ID,
-            "authorization_decision_id": grant["authorization_decision_id"],
-            "result_sha256": package["result_sha256"],
-            "artifact_manifest_sha256": package["artifact_manifest_sha256"],
-            "committed_at_utc": datetime.now(timezone.utc).isoformat(),
-            "replay_permitted": False,
-        }
-        _atomic_json(result_dir / "result-commit-marker.json", marker)
-        marker_sha = sha256_file(result_dir / "result-commit-marker.json")
-        mark_state(grant_dir, "SUCCEEDED", result_package_committed=True, result_directory=str(result_dir), result_sha256=package["result_sha256"], artifact_manifest_sha256=package["artifact_manifest_sha256"], result_commit_marker_sha256=marker_sha)
+        remaining = float(total_seconds) - (time.monotonic() - transaction_started)
+        with post_target_wall_clock_limit(remaining):
+            package = package_schema_complete_result(staging, raw, runtime, grant, release_sha, grant_sha, maximum_result_bytes, stdout_log, stderr_log)
+            result_dir.parent.mkdir(parents=True, exist_ok=True)
+            mark_state(grant_dir, "COMMITTING_RESULT", expected_result_directory=str(result_dir), expected_result_sha256=package["result_sha256"], expected_artifact_manifest_sha256=package["artifact_manifest_sha256"])
+            os.replace(staging, result_dir)
+            _fsync_directory(result_dir.parent)
+            marker = {
+                "schema": "universelab.ulsh-01.md2s-bvp.cp01r2-result-commit-marker.v1",
+                "run_id": RUN_ID,
+                "authorization_decision_id": grant["authorization_decision_id"],
+                "result_sha256": package["result_sha256"],
+                "artifact_manifest_sha256": package["artifact_manifest_sha256"],
+                "committed_at_utc": datetime.now(timezone.utc).isoformat(),
+                "replay_permitted": False,
+            }
+            _atomic_json(result_dir / "result-commit-marker.json", marker)
+            marker_sha = sha256_file(result_dir / "result-commit-marker.json")
+            mark_state(grant_dir, "SUCCEEDED", result_package_committed=True, result_directory=str(result_dir), result_sha256=package["result_sha256"], artifact_manifest_sha256=package["artifact_manifest_sha256"], result_commit_marker_sha256=marker_sha)
         return {"status": "SUCCEEDED", "result_directory": str(result_dir), **package, "result_commit_marker_sha256": marker_sha}
     except BaseException as exc:
         committed = inspect_committed_result(result_dir, package)
