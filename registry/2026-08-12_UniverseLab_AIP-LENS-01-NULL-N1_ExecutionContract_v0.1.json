@@ -1,0 +1,204 @@
+{
+  "schema": "universelab.ai-for-physics.aip-lens-01-null-n1.execution-contract.v1",
+  "version": "0.1.0",
+  "date": "2026-08-12",
+  "pilot_id": "AIP-LENS-01-NULL-N1",
+  "parent_pilot": "AIP-LENS-01-NULL",
+  "parent_contract": "registry/2026-08-12_UniverseLab_AIP-LENS-01-NULL_Contract_v0.1.json",
+  "parent_main_sha": "56697791937ccb834c7f4cb7b9fe0b77871766fe",
+  "status": "AUTHORIZED_FOR_DETERMINISTIC_SYNTHETIC_EXECUTION",
+  "purpose": "Execute a small deterministic baseline-model weak-lensing-inspired synthetic null pilot with independent train/validation/calibration/final-test/OOD partitions, a non-ML linear baseline, a simple learned quadratic-ridge model, conformal interval calibration and feature-space OOD detection.",
+  "generator": {
+    "class": "DECLARED_TOY_SYNTHETIC_WEAK_LENSING_INSPIRED_SUMMARY_MODEL",
+    "physical_simulator": false,
+    "nbody": false,
+    "ray_tracing": false,
+    "survey_data": false,
+    "hzt_simulator": false,
+    "feature_count": 12,
+    "tomographic_like_amplitude_channels": 6,
+    "nuisance_channels": [
+      "noise",
+      "ia"
+    ],
+    "note": "This generator is an infrastructure/null-test surrogate only. Passing it cannot validate physical weak-lensing simulation fidelity."
+  },
+  "targets": {
+    "required": [
+      "Omega_m",
+      "S8"
+    ],
+    "diagnostic": [
+      "sigma8"
+    ],
+    "S8_definition": "sigma8 * sqrt(Omega_m / 0.3)",
+    "hzt_parameters_allowed": false
+  },
+  "split": {
+    "partitions": [
+      "TRAIN",
+      "VALIDATION",
+      "CALIBRATION",
+      "FINAL_TEST",
+      "OOD_STRESS"
+    ],
+    "sizes": {
+      "TRAIN": 512,
+      "VALIDATION": 128,
+      "CALIBRATION": 128,
+      "FINAL_TEST": 256,
+      "OOD_STRESS": 256
+    },
+    "seeds": {
+      "TRAIN": 11001,
+      "VALIDATION": 11002,
+      "CALIBRATION": 11003,
+      "FINAL_TEST": 11004,
+      "OOD_STRESS": 11005
+    },
+    "cross_partition_lineage_allowed": false,
+    "final_test_configuration_changes_after_opening_allowed": false
+  },
+  "parameter_ranges": {
+    "in_distribution": {
+      "Omega_m": [
+        0.22,
+        0.38
+      ],
+      "sigma8": [
+        0.68,
+        0.9
+      ],
+      "noise": [
+        0.02,
+        0.06
+      ],
+      "ia": [
+        -0.25,
+        0.25
+      ]
+    },
+    "ood_stress": {
+      "low_branch": {
+        "Omega_m": [
+          0.14,
+          0.2
+        ],
+        "sigma8": [
+          0.55,
+          0.65
+        ]
+      },
+      "high_branch": {
+        "Omega_m": [
+          0.4,
+          0.46
+        ],
+        "sigma8": [
+          0.94,
+          1.04
+        ]
+      },
+      "noise": [
+        0.07,
+        0.12
+      ],
+      "ia": [
+        -0.5,
+        0.5
+      ]
+    }
+  },
+  "estimators": {
+    "baseline": {
+      "class": "LINEAR_RIDGE_ON_FIRST_SIX_STANDARDIZED_SUMMARY_CHANNELS",
+      "lambda": 1e-06
+    },
+    "ml": {
+      "class": "QUADRATIC_FEATURE_RIDGE_REGRESSION",
+      "lambda": 0.5,
+      "external_ml_framework": false
+    },
+    "uncertainty": {
+      "class": "SPLIT_CONFORMAL_ABSOLUTE_RESIDUAL_INTERVAL",
+      "calibration_partition": "CALIBRATION",
+      "coverages": [
+        0.68,
+        0.95
+      ]
+    },
+    "ood": {
+      "class": "MAX_ABS_TRAINING_Z_SCORE",
+      "threshold": "VALIDATION_Q99"
+    }
+  },
+  "predeclared_thresholds": {
+    "abs_bias_max": {
+      "Omega_m": 0.01,
+      "S8": 0.01
+    },
+    "rmse_max": {
+      "Omega_m": 0.04,
+      "S8": 0.04
+    },
+    "ml_rmse_over_baseline_max": 1.0,
+    "coverage68_min": 0.55,
+    "coverage68_max": 0.82,
+    "coverage95_min": 0.88,
+    "coverage95_max": 1.0,
+    "nuisance_abs_corr_max": 0.2,
+    "ood_fpr_max": 0.05,
+    "ood_tpr_min": 0.9,
+    "stratified_rmse_over_global_max": 2.0
+  },
+  "execution": {
+    "python": "3.12",
+    "dependencies": "PYTHON_STANDARD_LIBRARY_ONLY",
+    "tool": "tools/2026-08-12_execute_aip_lens_01_null_n1_v0.1.py",
+    "test": "tests/2026-08-12_test_aip_lens_01_null_n1_v0.1.py",
+    "workflow": ".github/workflows/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N1_v0.1.yml",
+    "pr_run_class": "PR_REHEARSAL",
+    "main_run_class": "CANONICAL_MAIN",
+    "reruns_same_source_contract_allowed": true,
+    "canonical_result_review_requires_main_execution": true,
+    "artifact_retention_days": 90
+  },
+  "result_schema": {
+    "schema": "universelab.ai-for-physics.aip-lens-01-null-n1.execution-result.v1",
+    "required_outputs": [
+      "N1_execution_summary.json",
+      "split_manifest.json",
+      "final_test_predictions.csv"
+    ]
+  },
+  "gate_policy": {
+    "AIP-G0": "PRESERVE_NON_EVIDENCE_FIREWALL",
+    "AIP-G1": "MAY_PASS_FOR_THIS_SYNTHETIC_EXECUTION_ONLY_IF_SPLIT_AND_PROVENANCE_CHECKS_PASS",
+    "AIP-G2": "MAY_PASS_SCHEMA_AND_UNIT_CONTRACT_ONLY_NOT_PHYSICAL_SIMULATOR_VALIDATION",
+    "AIP-G3": "MAY_PASS_NUMERICAL_FIDELITY_THRESHOLDS",
+    "AIP-G4": "MAY_PASS_CALIBRATION_COVERAGE_OOD_THRESHOLDS",
+    "AIP-G5": "MAY_PASS_SYNTHETIC_TRUTH_RETURN_ONLY",
+    "AIP-G6": "CANNOT_PASS_IN_N1_REAL_DATA_NOT_USED",
+    "AIP-G7": "SEPARATE_REVIEW_REQUIRED"
+  },
+  "hzt_comparison": false,
+  "physical_evidence_effect": "NONE",
+  "governance_firewall": {
+    "solver_state_modified": false,
+    "likelihood_modified": false,
+    "physical_parameters_modified": false,
+    "topology_modified": false,
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_promotions": [
+    "NO_N1_SYNTHETIC_PASS_AS_REAL_WEAK_LENSING_VALIDATION",
+    "NO_N1_SYNTHETIC_PASS_AS_HZT_SUPPORT_OR_EVIDENCE",
+    "NO_N1_SYNTHETIC_PASS_TO_K1D_RELEASE",
+    "NO_N1_SYNTHETIC_PASS_TO_K1E_ADMISSIBILITY",
+    "NO_N1_SYNTHETIC_PASS_TO_WP4_RELEASE",
+    "NO_N2_REAL_DATA_EXECUTION_WITHOUT_SEPARATE_N1_RESULT_REVIEW"
+  ],
+  "next_if_execution_passes": "AIP-LENS-01-NULL-N1-RESULT-REVIEW_NO_REAL_DATA_EXECUTION"
+}

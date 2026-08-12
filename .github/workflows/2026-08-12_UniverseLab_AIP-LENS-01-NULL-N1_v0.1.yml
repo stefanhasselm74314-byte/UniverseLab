@@ -1,0 +1,64 @@
+name: UniverseLab AIP-LENS-01-NULL-N1 v0.1
+
+on:
+  pull_request:
+    paths:
+      - science/ai-for-physics/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N1_ExecutionProtocol_v0.1.md
+      - registry/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N1_ExecutionContract_v0.1.json
+      - tools/2026-08-12_execute_aip_lens_01_null_n1_v0.1.py
+      - tests/2026-08-12_test_aip_lens_01_null_n1_v0.1.py
+      - .github/workflows/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N1_v0.1.yml
+  push:
+    branches: [main]
+    paths:
+      - science/ai-for-physics/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N1_ExecutionProtocol_v0.1.md
+      - registry/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N1_ExecutionContract_v0.1.json
+      - tools/2026-08-12_execute_aip_lens_01_null_n1_v0.1.py
+      - tests/2026-08-12_test_aip_lens_01_null_n1_v0.1.py
+      - .github/workflows/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N1_v0.1.yml
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-null-execution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile N1 sources
+        run: |
+          python -m py_compile \
+            tools/2026-08-12_execute_aip_lens_01_null_n1_v0.1.py \
+            tests/2026-08-12_test_aip_lens_01_null_n1_v0.1.py
+      - name: Run N1 regression and determinism tests
+        run: python tests/2026-08-12_test_aip_lens_01_null_n1_v0.1.py
+      - name: Execute frozen N1 synthetic null pilot
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          OUT="${RUNNER_TEMP}/aip-lens-01-null-n1"
+          if [[ "${GITHUB_EVENT_NAME}" == "push" && "${GITHUB_REF}" == "refs/heads/main" ]]; then
+            RUN_CLASS="CANONICAL_MAIN"
+          else
+            RUN_CLASS="PR_REHEARSAL"
+          fi
+          python tools/2026-08-12_execute_aip_lens_01_null_n1_v0.1.py \
+            --output-dir "${OUT}" \
+            --run-class "${RUN_CLASS}" \
+            2>&1 | tee "${RUNNER_TEMP}/aip-lens-n1.log"
+      - name: Preserve N1 execution package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: AIP-LENS-01-NULL-N1-${{ github.event_name }}-${{ github.run_id }}-attempt-${{ github.run_attempt }}
+          retention-days: 90
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/aip-lens-n1.log
+            ${{ runner.temp }}/aip-lens-01-null-n1/**
