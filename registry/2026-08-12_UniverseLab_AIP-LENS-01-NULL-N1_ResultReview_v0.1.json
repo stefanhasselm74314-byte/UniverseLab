@@ -1,0 +1,162 @@
+{
+  "schema": "universelab.ai-for-physics.aip-lens-01-null-n1.result-review.v1",
+  "version": "0.1.0",
+  "date": "2026-08-12",
+  "review_id": "AIP-LENS-01-NULL-N1-RESULT-REVIEW",
+  "parent_pilot": "AIP-LENS-01-NULL-N1",
+  "review_baseline_main_sha": "d7476e0e163d4267f36be0256d110937684f59e1",
+  "status": "PASS_N1_RESULT_REVIEW_SYNTHETIC_INFRASTRUCTURE_VALIDATED_N2_PROTOCOL_PREPARATION_ELIGIBLE_NO_REAL_DATA_EXECUTION",
+  "canonical_run": {
+    "workflow_run_id": 31601928296,
+    "head_sha": "d7476e0e163d4267f36be0256d110937684f59e1",
+    "run_class": "CANONICAL_MAIN",
+    "conclusion": "success",
+    "artifact_id": 9143456964,
+    "artifact_name": "AIP-LENS-01-NULL-N1-push-31601928296-attempt-1",
+    "artifact_size_bytes": 16326,
+    "artifact_zip_sha256": "dce854e11dadda1e0650d59ba3722c83c89cc02f94ae5ddcdf704be15a8109ce",
+    "artifact_expires_at": "2026-11-10T13:32:23Z"
+  },
+  "artifact_entries": {
+    "aip-lens-n1.log": "bfcd70b54d14deafb47deb7fa5e3fc38afcd150a5733878b7ad22edc9484696c",
+    "aip-lens-01-null-n1/N1_execution_summary.json": "bfcd70b54d14deafb47deb7fa5e3fc38afcd150a5733878b7ad22edc9484696c",
+    "aip-lens-01-null-n1/final_test_predictions.csv": "5e3ea4059317d12cdd4a78c42fb88bac139fdc90ec4b1f6f5770889928658fdf",
+    "aip-lens-01-null-n1/split_manifest.json": "9329914137b5aa103db13920c1aae10bb792729adc2ecd71048649e5aa9c354c"
+  },
+  "integrity": {
+    "expected_entry_count": 4,
+    "expected_entries_present": true,
+    "summary_and_log_byte_identical": true,
+    "split_manifest_canonical_sha256": "b5908757ebb78ed62cfc41997e582f62dd75f215cba37fe596547e99f3c41f84",
+    "split_manifest_binding_matches_summary": true,
+    "final_test_rows": 256,
+    "final_test_unique_ids": 256,
+    "final_test_id_uniqueness_pass": true,
+    "reported_failures": []
+  },
+  "independent_final_test_recomputation": {
+    "tolerance": 1e-12,
+    "Omega_m": {
+      "ml_rmse_recomputed": 0.026297734741452885,
+      "ml_rmse_reported": 0.02629773474143493,
+      "bias_recomputed": 0.0026473927098085936,
+      "bias_reported": 0.0026473927098010362,
+      "coverage68_recomputed": 0.625,
+      "coverage68_reported": 0.625,
+      "coverage95_recomputed": 0.9609375,
+      "coverage95_reported": 0.9609375,
+      "corr_residual_noise_recomputed": -0.004900824267487005,
+      "corr_residual_noise_reported": -0.0049008242671928675,
+      "corr_residual_ia_recomputed": -0.13094066536818655,
+      "corr_residual_ia_reported": -0.1309406653662628,
+      "match_within_tolerance": true
+    },
+    "S8": {
+      "ml_rmse_recomputed": 0.020612637440226615,
+      "ml_rmse_reported": 0.020612637440267163,
+      "bias_recomputed": -0.0019483221431328148,
+      "bias_reported": -0.0019483221431069665,
+      "coverage68_recomputed": 0.62109375,
+      "coverage68_reported": 0.62109375,
+      "coverage95_recomputed": 0.92578125,
+      "coverage95_reported": 0.92578125,
+      "corr_residual_noise_recomputed": 0.02774842909833454,
+      "corr_residual_noise_reported": 0.02774842909722148,
+      "corr_residual_ia_recomputed": 0.14366292593639746,
+      "corr_residual_ia_reported": 0.14366292593549512,
+      "match_within_tolerance": true
+    }
+  },
+  "reported_threshold_review": {
+    "Omega_m": {
+      "baseline_rmse": 0.026900263946803726,
+      "ml_rmse": 0.02629773474143493,
+      "ml_rmse_over_baseline": 0.9776013645605738,
+      "bias": 0.0026473927098010362,
+      "coverage68": 0.625,
+      "coverage95": 0.9609375,
+      "max_abs_nuisance_corr": 0.1309406653662628,
+      "max_stratified_rmse_over_global": 1.148086714190775,
+      "thresholds_pass": true
+    },
+    "S8": {
+      "baseline_rmse": 0.021808198688519808,
+      "ml_rmse": 0.020612637440267163,
+      "ml_rmse_over_baseline": 0.9451783585921744,
+      "bias": -0.0019483221431069665,
+      "coverage68": 0.62109375,
+      "coverage95": 0.92578125,
+      "max_abs_nuisance_corr": 0.14366292593549512,
+      "max_stratified_rmse_over_global": 1.222222670020912,
+      "thresholds_pass": true
+    },
+    "ood": {
+      "validation_fpr": 0.015625,
+      "ood_tpr": 0.99609375,
+      "thresholds_pass": true,
+      "independently_recomputed_from_preserved_artifact": false,
+      "reason": "OOD_STRESS rows were not included in the preserved canonical artifact; these OOD values remain deterministic-pipeline outputs covered by the canonical regression/CI run rather than direct artifact-only recomputation."
+    }
+  },
+  "review_findings": {
+    "artifact_integrity": "PASS",
+    "split_binding": "PASS",
+    "final_test_metric_recomputation": "PASS",
+    "predeclared_threshold_application": "PASS",
+    "canonical_regression_ci": "PASS",
+    "physical_simulator_validation": "NOT_TESTED",
+    "real_data_validation": "NOT_TESTED",
+    "hzt_comparison": "NOT_PERFORMED",
+    "physical_evidence_effect": "NONE"
+  },
+  "gate_disposition": {
+    "AIP-G0": "PRESERVED",
+    "AIP-G1": "RATIFIED_PASS_FOR_N1_SYNTHETIC_EXECUTION_ONLY",
+    "AIP-G2": "RATIFIED_PASS_SCHEMA_AND_UNIT_CONTRACT_ONLY_NOT_PHYSICAL_SIMULATOR_VALIDATION",
+    "AIP-G3": "RATIFIED_PASS_FOR_FROZEN_TOY_SYNTHETIC_MODEL",
+    "AIP-G4": "RATIFIED_PASS_FOR_FROZEN_TOY_SYNTHETIC_MODEL",
+    "AIP-G5": "RATIFIED_PASS_SYNTHETIC_TRUTH_RETURN_ONLY",
+    "AIP-G6": "NOT_TESTED_REAL_DATA_EXECUTION_NOT_AUTHORIZED_BY_THIS_REVIEW",
+    "AIP-G7": "NOT_REACHED"
+  },
+  "decision": {
+    "n1_result_accepted": true,
+    "n2_protocol_preparation_eligible": true,
+    "n2_real_data_execution_authorized": false,
+    "next_candidate": "AIP-LENS-01-NULL-N2-PROTOCOL-FREEZE",
+    "required_before_any_n2_execution": [
+      "exact_real_dataset_and_release_identifier",
+      "license_and_provenance_freeze",
+      "blinding_and_no_training_on_real_data_contract",
+      "observable_and_preprocessing_definition",
+      "survey_mask_and_geometry_contract",
+      "reference_non_ml_baseline",
+      "simulator_to_real_transfer_diagnostics",
+      "systematics_and_null_test_plan",
+      "immutable_result_schema",
+      "separate_executable_authorization"
+    ]
+  },
+  "governance_firewall": {
+    "new_model_training": false,
+    "real_data_execution": false,
+    "hzt_comparison": false,
+    "solver_state_modified": false,
+    "likelihood_modified": false,
+    "physical_parameters_modified": false,
+    "topology_modified": false,
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_N1_SYNTHETIC_PASS_AS_PHYSICAL_WEAK_LENSING_VALIDATION",
+    "NO_N1_SYNTHETIC_PASS_AS_REAL_DATA_VALIDATION",
+    "NO_N1_SYNTHETIC_PASS_AS_HZT_SUPPORT_OR_EVIDENCE",
+    "NO_N1_REVIEW_TO_K1D_RELEASE",
+    "NO_N1_REVIEW_TO_K1E_ADMISSIBILITY",
+    "NO_N1_REVIEW_TO_WP4_RELEASE",
+    "NO_REAL_DATA_EXECUTION_FROM_THIS_REVIEW_ALONE"
+  ]
+}
