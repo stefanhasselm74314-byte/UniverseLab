@@ -1,0 +1,107 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-d6r1-cp01r2-independent-review.v1",
+  "version": "1.0.0",
+  "date": "2026-08-12",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP3-D6R1",
+  "classification": "CP01R2_INDEPENDENT_FINALIZATION_AND_DURABLE_CHECKPOINT_REREVIEW_NO_EXECUTION",
+  "review_status": "PASS_WP3_D6R1_D6_BLOCKERS_VERIFIED_CLOSED_NO_EXECUTION",
+  "baseline_main_commit": "a66dbb4730d124d6b2828be6a96dc5052d70cc65",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R2",
+  "run_payload_sha256": "e8b8e82d2cb1472d91c387a40c8f84024c2549a3dcc2c897df5561f7bf721b36",
+  "schedule_sha256": "929f59d018cc511f36c98ef26a8614ed495fe699a067b1b33e6c5b53efaf8e0b",
+  "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f",
+  "review_basis": {
+    "failed_execution_review": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6_CP01R2FailedExecutionReview_v1.0.json",
+      "git_blob_sha1": "7e017e67d3aeeec2469ea007ca87604ea7dabe03",
+      "required_review_status": "BLOCKED_WP3_D6_CP01R2_RESULT_REVIEW_FINALIZATION_DEFECT_NO_REPLAY"
+    },
+    "hardening_contract": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningContract_v1.0.json",
+      "git_blob_sha1": "e20be1172785aba293bb97212220856e77591bdf",
+      "required_status": "PASS_D6H1_IMPLEMENTED_NO_EXECUTION_PENDING_INDEPENDENT_REVIEW"
+    },
+    "checkpoint_schema": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2CheckpointSchema_v1.0.json",
+      "git_blob_sha1": "339f579c8b3d9f1ffffca04e79a5acf817a3c2eb"
+    },
+    "hardened_target": {
+      "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_target_v1.1.py",
+      "git_blob_sha1": "ad1dd5201ca7399bc283a24a38b18df55f3b7e75"
+    },
+    "hardened_transaction": {
+      "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_transaction_v1.2.py",
+      "git_blob_sha1": "080aab132948d095716a9d0675518b82088cd9b3"
+    }
+  },
+  "review_gates": {
+    "D6R1-R01_EXACT_SOURCE_AND_RUN_BINDINGS": "PASS",
+    "D6R1-R02_TOTAL_N96_TERMINAL_CLASSIFICATION": "PASS",
+    "D6R1-R03_TRUE_ROOT_RETENTION_IN_LEGACY_FINALIZER_VIEW": "PASS",
+    "D6R1-R04_ATOMIC_ORDERED_SHA256_CHECKPOINT_CHAIN": "PASS",
+    "D6R1-R05_DURABLE_FINALIZER_INPUT_REBUILD_CONTRACT": "PASS",
+    "D6R1-R06_LATE_FAILURE_PREFIX_RECOVERY_AND_TRANSACTION_SUMMARY": "PASS",
+    "D6R1-R07_STRICT_JSON_NONFINITE_AND_FAIL_CLOSED_MUTATION_GATES": "PASS",
+    "D6R1-R08_NO_EXECUTION_NO_ISSUANCE_NO_NUMERICAL_BACKEND": "PASS"
+  },
+  "D6_blocker_disposition": {
+    "D6-B01": {
+      "status": "VERIFIED_CLOSED",
+      "basis": "Independent fixtures cover timeout, skipped, absent N96 state, terminal state without root, root pending QA, root rejected by QA and accepted diagnostic candidate. The compatibility adapter removes only the non-root N96 progress state; a true root remains present."
+    },
+    "D6-B02": {
+      "status": "VERIFIED_CLOSED",
+      "basis": "Independent fixtures verify ordered per-entry atomic checkpoint creation, SHA-256 chaining, state-pointer agreement, strict JSON nonfinite provenance, duplicate and chain-mutation fail-closed behavior, and preservation/recovery of a durable prefix after a simulated late failure. Transaction source independently requires checkpoint-recovery.json on target failure and 35 durable checkpoints on successful return."
+    }
+  },
+  "new_release_blockers": [],
+  "non_blocking_findings": [],
+  "failed_attempt_disposition": {
+    "d5_grant": "SPENT_NON_REPLAYABLE",
+    "d5_numerical_outcome": "INDETERMINATE_UNPRESERVED_DUE_FINALIZATION_FAILURE",
+    "retrospective_reclassification_permitted": false,
+    "rerun_of_actions_run_31573154936_permitted": false
+  },
+  "no_execution_firewall": {
+    "future_release_authorization_present": false,
+    "future_single_use_grant_present": false,
+    "physical_solve_authorized": false,
+    "physical_solve_executed": false,
+    "review_solver_calls": 0,
+    "numpy_or_scipy_imported_by_review": false,
+    "physical_evidence_effect": "NONE"
+  },
+  "scientific_interpretation": {
+    "established": [
+      "The two D6 result-closure software blockers are independently verified closed under the D6H1 source bindings.",
+      "A future CP01R2 attempt can preserve a validated durable prefix even if post-loop finalization fails."
+    ],
+    "not_established": [
+      "that CP01R2 converges",
+      "that an M1 background exists or is unique",
+      "that R_4D is numerical rather than physical",
+      "continuum Jacobian invertibility or Fredholm properties",
+      "perturbative stability or ghost freedom",
+      "physical identification or observational confirmation"
+    ]
+  },
+  "governance_after_review": {
+    "WP3": "OPEN_CP01R2_D6R1_REVIEWED_FRESH_RELEASE_DECISION_PENDING",
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_allowed_action": "ULSH-01_WP3_D7_CP01R2_FRESH_SINGLE_USE_RELEASE_DECISION_NO_EXECUTION",
+  "forbidden_actions": [
+    "DO_NOT_RERUN_D5_ACTIONS_RUN_31573154936",
+    "DO_NOT_REPLAY_D5_GRANT_NONCE_FEFF4D8455F0589EA72743DB57ECEB72",
+    "DO_NOT_ISSUE_A_FRESH_RUNTIME_GRANT_FROM_D6R1_REVIEW_ALONE",
+    "DO_NOT_EXECUTE_CP01R2_DURING_D6R1",
+    "DO_NOT_CHANGE_PHYSICAL_PARAMETERS_TOPOLOGY_SEEDS_MESHES_THRESHOLDS_OR_ETRN01",
+    "DO_NOT_RECLASSIFY_THE_FAILED_D5_NUMERICAL_OUTCOME",
+    "DO_NOT_ADVANCE_TO_WP4_K1D_OR_K1E"
+  ]
+}
