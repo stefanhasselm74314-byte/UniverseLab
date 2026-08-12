@@ -1,0 +1,147 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-d4-cp01r2-release-decision.v1",
+  "version": "1.0.0",
+  "date": "2026-08-12",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP3-D4",
+  "classification": "CP01R2_SINGLE_USE_PHYSICAL_SOLVE_RELEASE_DECISION_NO_EXECUTION",
+  "status": "PASS_WP3_D4_CP01R2_SINGLE_USE_RELEASE_AUTHORIZED_NO_EXECUTION",
+  "decision_id": "ULSH-01-WP3-D4-CP01R2-RELEASE-DEC-20260812-A",
+  "baseline_main_commit": "39c285f893c0c119fc5bc16d1966a5d9e7d7d2b9",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R2",
+  "run_payload_sha256": "e8b8e82d2cb1472d91c387a40c8f84024c2549a3dcc2c897df5561f7bf721b36",
+  "schedule_sha256": "929f59d018cc511f36c98ef26a8614ed495fe699a067b1b33e6c5b53efaf8e0b",
+  "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f",
+  "review_basis": {
+    "d2_independent_protocol_review": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D2_CP01R2IndependentProtocolReview_v1.0.json",
+      "git_blob_sha1": "2734b120ffa9a481a092f87190605df24d02bcb0",
+      "required_review_status": "PASS_WP3_D2_INDEPENDENT_PROTOCOL_REVIEW_NO_EXECUTION"
+    },
+    "d3_run_input_freeze": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json",
+      "git_blob_sha1": "471f40a517140cc2a2d609f4828fd1004c4861e2",
+      "required_status": "FROZEN_CP01R2_NOT_AUTHORIZED_NOT_EXECUTED"
+    },
+    "d3_physical_binding_review": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingReleaseReadinessReview_v1.0.json",
+      "git_blob_sha1": "2e311f00d91dbd918401251052ba67bd23ab384a",
+      "required_physical_target_binding_status": "PASS_SOURCE_CONTRACT_BOUND_NO_EXECUTION",
+      "required_release_readiness_status": "BLOCKED_CP01R2_TRANSACTION_SUPERVISOR_AND_IMMUTABLE_RESULT_CLOSURE_NOT_YET_REBOUND",
+      "historical_blockers_closed_later_by": "WP3-D3H1-RR1"
+    },
+    "d3h1_transaction_hardening": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2TransactionHardeningContract_v1.0.json",
+      "git_blob_sha1": "ebe9193b6da50f6f352ac5397749d9caaceaf047",
+      "required_status": "PASS_D3H1_IMPLEMENTED_NO_EXECUTION_PENDING_INDEPENDENT_REVIEW"
+    },
+    "d3h1_independent_rr1": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_RR1_IndependentReview_v1.0.json",
+      "git_blob_sha1": "e240cb9b7fb4990575a99c3f436640b7fd91cb8b",
+      "required_review_status": "PASS_WP3_D3H1_RR1_D3_BLOCKERS_VERIFIED_CLOSED_NO_EXECUTION"
+    }
+  },
+  "source_bindings": {
+    "execution_target": {
+      "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_target_v1.0.py",
+      "git_blob_sha1": "199815ac9e4014cc0d68fde71d634cdac24516ce"
+    },
+    "transaction_supervisor": {
+      "path": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.1.py",
+      "git_blob_sha1": "07d1532be17e5d5d81c96ad4438c3195ca4653aa"
+    },
+    "result_schema": {
+      "path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2ResultSchema_v1.0.json",
+      "git_blob_sha1": "54bf49acdfcca128e3b909d6e479b1178c77c276"
+    }
+  },
+  "blocker_resolution": {
+    "D3-B01": "VERIFIED_CLOSED_BY_WP3_D3H1_RR1",
+    "D3-B02": "VERIFIED_CLOSED_BY_WP3_D3H1_RR1",
+    "new_release_blockers": []
+  },
+  "decision": {
+    "release_physical_solve": true,
+    "authorization_scope": "SINGLE_USE_CP01R2_ONLY",
+    "execution_in_this_work_package": false,
+    "execution_requires_fresh_single_use_grant": true,
+    "grant_must_bind_exactly_to_this_decision_id": true,
+    "grant_must_bind_exactly_to_authorization_decision_id": true,
+    "grant_validity_seconds": 3600,
+    "grant_nonce_requirement": "128-256_BIT_LOWERCASE_HEX",
+    "grant_replay_permitted": false,
+    "parallel_execution": false,
+    "adaptive_retry": false,
+    "parameter_or_topology_mutation": false,
+    "method_or_threshold_relaxation": false,
+    "branch_scan": false,
+    "fallback_method": false,
+    "external_execution_requires_pre_registered_holder_and_reproducibility_ticket": true,
+    "external_result_promotion_requires_separate_byte_identity_and_manifest_review": true
+  },
+  "single_use_authorization_template": {
+    "authorization_schema": "universelab.ulsh-01.md2s-bvp.cp01r2-physical-solve-release-authorization.v1",
+    "authorization_decision_id": "ULSH-01-WP3-D4-CP01R2-RELEASE-DEC-20260812-A",
+    "future_path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_PhysicalSolveReleaseAuthorization_v1.0.json",
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R2",
+    "run_payload_sha256": "e8b8e82d2cb1472d91c387a40c8f84024c2549a3dcc2c897df5561f7bf721b36",
+    "schedule_sha256": "929f59d018cc511f36c98ef26a8614ed495fe699a067b1b33e6c5b53efaf8e0b",
+    "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f",
+    "issued": false
+  },
+  "single_use_execution_grant_template": {
+    "grant_schema": "universelab.ulsh-01.md2s-bvp.cp01r2-single-use-execution-grant.v1",
+    "authorization_decision_id": "ULSH-01-WP3-D4-CP01R2-RELEASE-DEC-20260812-A",
+    "release_authorization_path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_PhysicalSolveReleaseAuthorization_v1.0.json",
+    "future_path": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_CP01R2_SingleUseExecutionGrant_v1.0.json",
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R2",
+    "run_payload_sha256": "e8b8e82d2cb1472d91c387a40c8f84024c2549a3dcc2c897df5561f7bf721b36",
+    "scope": "SINGLE_USE_CP01R2_ONLY",
+    "validity_seconds": 3600,
+    "nonce_requirement": "128-256_BIT_LOWERCASE_HEX",
+    "issued_utc": null,
+    "expires_utc": null,
+    "grant_nonce": null,
+    "issued": false
+  },
+  "no_execution_firewall": {
+    "release_authorization_artifact_present": false,
+    "single_use_grant_artifact_present": false,
+    "physical_solve_authorized_by_runtime_artifact": false,
+    "physical_solve_executed": false,
+    "result_directory_created_by_d4": false,
+    "audit_solver_calls": 0,
+    "physical_evidence_effect": "NONE"
+  },
+  "scientific_interpretation": {
+    "established": [
+      "The CP01R2 implementation, transaction supervisor and immutable result closure have passed the required independent no-execution reviews.",
+      "A strictly single-use CP01R2 physical solve may now receive a separately issued authorization and fresh execution grant bound to this decision."
+    ],
+    "not_established": [
+      "that CP01R2 converges",
+      "that R_4D is purely numerical",
+      "continuum existence or uniqueness",
+      "continuum Jacobian invertibility or Fredholm property",
+      "perturbative stability or ghost freedom",
+      "physical identification or observational confirmation"
+    ]
+  },
+  "governance_after_decision": {
+    "WP3": "RELEASE_DECIDED_SINGLE_USE_CP01R2_EXECUTION_PENDING",
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_allowed_action": "ULSH-01_WP3_D5_CP01R2_SINGLE_USE_RELEASE_ARTIFACT_AND_FRESH_GRANT_ISSUANCE_THEN_IMMEDIATE_EXECUTION",
+  "forbidden_actions": [
+    "DO_NOT_EXECUTE_CP01R2_FROM_D4_DECISION_ARTIFACT_ALONE",
+    "DO_NOT_CREATE_OR_REUSE_A_GRANT_WITHOUT_EXACT_D4_DECISION_BINDING",
+    "DO_NOT_REUSE_ANY_CP01R1_NONCE_OR_SPENT_GRANT",
+    "DO_NOT_CHANGE_PHYSICAL_PARAMETERS_TOPOLOGY_SEEDS_MESHES_THRESHOLDS_OR_PROTOCOL",
+    "DO_NOT_ENABLE_PARALLEL_ADAPTIVE_SCAN_OR_FALLBACK_EXECUTION",
+    "DO_NOT_ADVANCE_TO_WP4_K1D_K1E_BEFORE_CP01R2_RESULT_REVIEW"
+  ]
+}
