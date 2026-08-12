@@ -1,0 +1,96 @@
+{
+  "schema": "universelab.ai-for-physics.framework.v1",
+  "version": "0.1.0",
+  "date": "2026-08-12",
+  "framework_id": "UL-AIP-v0.1",
+  "title": "UniverseLab AI-for-Physics Framework",
+  "status": "METHODS_FRAMEWORK_DEFINED_NOT_RELEASED",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "canonical_document": "science/ai-for-physics/2026-08-12_UniverseLab_AIForPhysicsFramework_v0.1.md",
+  "purpose": "Govern machine-learning use as a methods, acceleration, inference and diagnostic layer without replacing authoritative physics or evidence governance.",
+  "principles": [
+    "AI_ACCELERATION_NE_SOLVER_VALIDATION_NE_PHYSICAL_IDENTIFICATION_NE_EVIDENCE",
+    "ML_ACCURACY_NE_PHYSICAL_ADMISSIBILITY",
+    "SIMULATOR_VALIDATION_NE_REAL_DATA_VALIDATION",
+    "AUTHORITATIVE_SOLVER_RETURN_PATH_REQUIRED",
+    "NEITHER_MODEL_STATE_REQUIRED_WHEN_CLOSED_CLASSIFICATION_IS_NOT_JUSTIFIED"
+  ],
+  "modules": {
+    "AIP-SYM": {
+      "role": "symmetry_and_constraint_preservation",
+      "initial_status": "DEFINED_NOT_RELEASED"
+    },
+    "AIP-SURR": {
+      "role": "verified_solver_surrogates",
+      "initial_status": "DEFINED_NOT_RELEASED"
+    },
+    "AIP-SBI": {
+      "role": "simulation_based_inference",
+      "initial_status": "DEFINED_NOT_RELEASED",
+      "evidential_use_requires_forward_map_admissible": true
+    },
+    "AIP-ANOM": {
+      "role": "anomaly_and_model_misspecification_detection",
+      "initial_status": "DEFINED_NOT_RELEASED",
+      "required_state_space": ["BASELINE", "CANDIDATE", "NEITHER_OR_OOD"]
+    },
+    "AIP-LENS": {
+      "role": "weak_and_strong_lensing_ml",
+      "initial_status": "DEFINED_NOT_RELEASED",
+      "first_pilot": "AIP-LENS-01-NULL"
+    },
+    "AIP-GW": {
+      "role": "gravitational_wave_ml",
+      "initial_status": "DEFINED_NOT_RELEASED"
+    },
+    "AIP-COSMO": {
+      "role": "large_scale_cosmology_ml",
+      "initial_status": "DEFINED_NOT_RELEASED"
+    }
+  },
+  "gates": {
+    "AIP-G0": "scope_and_non_evidence_firewall",
+    "AIP-G1": "provenance_and_split_integrity",
+    "AIP-G2": "symmetry_constraint_and_unit_conformance",
+    "AIP-G3": "numerical_fidelity",
+    "AIP-G4": "calibration_coverage_and_ood",
+    "AIP-G5": "authoritative_return_test",
+    "AIP-G6": "real_data_null_and_control_test",
+    "AIP-G7": "separate_evidence_promotion_review"
+  },
+  "pilot_sequence": [
+    "AIP-LENS-01-NULL",
+    "AIP-SURR-01",
+    "AIP-ANOM-01",
+    "AIP-SBI-01",
+    "AIP-SYM-01"
+  ],
+  "source_context": [
+    "https://physics.mit.edu/research-areas/strong-interaction-and-nuclear-theory/",
+    "https://iaifi.org/domain-research.html#astrophysics",
+    "https://iaifi.org/domain-research.html#experimental-physics",
+    "https://iaifi.org/domain-research.html#foundational-ai",
+    "https://iaifi.org/papers-theory.html",
+    "https://iaifi.org/domain-research.html#theoretical-physics"
+  ],
+  "governance_firewall": {
+    "model_training": false,
+    "model_execution": false,
+    "solver_state_modified": false,
+    "likelihood_modified": false,
+    "physical_parameters_modified": false,
+    "topology_modified": false,
+    "WP4": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_promotions": [
+    "NO_DIRECT_ML_OUTPUT_TO_PHYSICAL_EVIDENCE",
+    "NO_DIRECT_ML_OUTPUT_TO_K1D_RELEASE",
+    "NO_DIRECT_ML_OUTPUT_TO_K1E_ADMISSIBILITY",
+    "NO_DIRECT_ML_OUTPUT_TO_WP4_RELEASE",
+    "NO_SURROGATE_ONLY_PROOF_OF_EXISTENCE_UNIQUENESS_REGULARITY_OR_GHOST_FREEDOM",
+    "NO_SYNTHETIC_CLASSIFIER_SCORE_AS_HZT_CONFIRMATION"
+  ]
+}
