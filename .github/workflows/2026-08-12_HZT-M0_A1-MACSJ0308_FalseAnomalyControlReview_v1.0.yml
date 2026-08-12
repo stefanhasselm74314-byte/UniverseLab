@@ -1,0 +1,54 @@
+name: HZT-M0 A1 MACSJ0308 false-anomaly control
+
+on:
+  push:
+    paths:
+      - 'registry/2026-08-12_HZT-M0_Lensing_A1-MACSJ0308_FalseAnomalyControl_v1.0.json'
+      - 'science/hzt-m0/lensing/2026-08-12_HZT-M0_A1-MACSJ0308_FalseAnomalyControl_v1.0.md'
+      - 'tools/2026-08-12_hzt_m0_a1_macsj0308_false_anomaly_control_review_v1.0.py'
+      - 'tests/2026-08-12_HZT-M0_A1-MACSJ0308_FalseAnomalyControlTest_v1.0.py'
+      - '.github/workflows/2026-08-12_HZT-M0_A1-MACSJ0308_FalseAnomalyControlReview_v1.0.yml'
+  pull_request:
+    paths:
+      - 'registry/2026-08-12_HZT-M0_Lensing_A1-MACSJ0308_FalseAnomalyControl_v1.0.json'
+      - 'science/hzt-m0/lensing/2026-08-12_HZT-M0_A1-MACSJ0308_FalseAnomalyControl_v1.0.md'
+      - 'tools/2026-08-12_hzt_m0_a1_macsj0308_false_anomaly_control_review_v1.0.py'
+      - 'tests/2026-08-12_HZT-M0_A1-MACSJ0308_FalseAnomalyControlTest_v1.0.py'
+      - '.github/workflows/2026-08-12_HZT-M0_A1-MACSJ0308_FalseAnomalyControlReview_v1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  methods-control-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate registry JSON
+        run: python -m json.tool registry/2026-08-12_HZT-M0_Lensing_A1-MACSJ0308_FalseAnomalyControl_v1.0.json >/dev/null
+      - name: Compile validator and regression test
+        run: |
+          python -m py_compile tools/2026-08-12_hzt_m0_a1_macsj0308_false_anomaly_control_review_v1.0.py
+          python -m py_compile tests/2026-08-12_HZT-M0_A1-MACSJ0308_FalseAnomalyControlTest_v1.0.py
+      - name: Run methods-control validator
+        run: python tools/2026-08-12_hzt_m0_a1_macsj0308_false_anomaly_control_review_v1.0.py
+      - name: Run regression test
+        run: python tests/2026-08-12_HZT-M0_A1-MACSJ0308_FalseAnomalyControlTest_v1.0.py
+      - name: Assert no numerical backend or solver coupling
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -Ei '(^|[[:space:]])(import|from)[[:space:]]+(numpy|scipy|jax|torch|tensorflow)' tools/2026-08-12_hzt_m0_a1_macsj0308_false_anomaly_control_review_v1.0.py; then
+            echo 'Numerical backend import forbidden in methods-only review.' >&2
+            exit 1
+          fi
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-12_HZT-M0_Lensing_A1-MACSJ0308_FalseAnomalyControl_v1.0.json
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-12_HZT-M0_Lensing_A1-MACSJ0308_FalseAnomalyControl_v1.0.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-12_HZT-M0_Lensing_A1-MACSJ0308_FalseAnomalyControl_v1.0.json
