@@ -1,0 +1,54 @@
+name: HZT-M0 S6 C-PHYS H3 Time-Dependent 6D M1 Closure v0.1
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.1.md"
+      - "tools/2026-08-13_validate_hzt_m0_s6_c_phys_h3_time_dependent_6d_m1_closure_v0.1.py"
+      - "tests/2026-08-13_test_hzt_m0_s6_c_phys_h3_time_dependent_6d_m1_closure_v0.1.py"
+      - ".github/workflows/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.1.md"
+      - "tools/2026-08-13_validate_hzt_m0_s6_c_phys_h3_time_dependent_6d_m1_closure_v0.1.py"
+      - "tests/2026-08-13_test_hzt_m0_s6_c_phys_h3_time_dependent_6d_m1_closure_v0.1.py"
+      - ".github/workflows/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-h3-time-dependent-closure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate JSON syntax
+        run: python -m json.tool registry/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.1.json >/dev/null
+      - name: Compile H3 validator and tests
+        run: |
+          python -m py_compile tools/2026-08-13_validate_hzt_m0_s6_c_phys_h3_time_dependent_6d_m1_closure_v0.1.py
+          python -m py_compile tests/2026-08-13_test_hzt_m0_s6_c_phys_h3_time_dependent_6d_m1_closure_v0.1.py
+      - name: Run H3 analytic regression suite
+        run: python tests/2026-08-13_test_hzt_m0_s6_c_phys_h3_time_dependent_6d_m1_closure_v0.1.py
+      - name: Validate source bindings and interpretation
+        run: python tools/2026-08-13_validate_hzt_m0_s6_c_phys_h3_time_dependent_6d_m1_closure_v0.1.py --json
+      - name: Enforce scientific firewall
+        shell: bash
+        run: |
+          set -euo pipefail
+          F=registry/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.1.json
+          grep -q '"gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT"' "$F"
+          grep -q '"ambient_signature": "(-,+,+,+,+,+)"' "$F"
+          grep -q '"minimal_axisymmetric_two_component_D2NQ": "FALSIFIED_WITHIN_STATED_SUBSECTOR"' "$F"
+          grep -q '"full_M1_D2NQ_dynamic_selection": "OPEN_REQUIRES_NONMINIMAL_TWO_NORMAL_TIME_DEPENDENT_CLOSURE"' "$F"
+          grep -q '"K1-D": "NOT_RELEASED"' "$F"
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' "$F"
+          grep -q '"WP4": "BLOCKED"' "$F"
+          grep -q '"physical_evidence_effect": "NONE"' "$F"
