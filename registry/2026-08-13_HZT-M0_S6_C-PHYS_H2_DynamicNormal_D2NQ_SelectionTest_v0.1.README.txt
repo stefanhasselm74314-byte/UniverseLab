@@ -1,0 +1,1 @@
+H2 is a no-execution formal geometry and closure test. It does not authorize solver runs or promote K1-D, K1-E, WP4, ghost freedom, bounce, or physical evidence. The main result is the exact Codazzi degeneracy theorem: source-free Codazzi conserves the Q-sector but does not uniquely select B^2(a). The next admissible step is H3 time-dependent 6D M1 bulk/projection closure.
