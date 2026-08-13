@@ -1,0 +1,90 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys.h3-time-dependent-6d-m1-cosmological-closure.v1",
+  "version": "0.1.0",
+  "date": "2026-08-13",
+  "block_id": "C-PHYS-PARENT-H3-TIME-DEPENDENT-6D-M1-COSMOLOGICAL-ANSATZ-AND-PROJECTED-CLOSURE",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "baseline_main_sha": "9934e70623fb981ff2539594ce939d8550f3810e",
+  "status": "PASS_LOCAL_PARENT_TO_B2_RECONSTRUCTION_AND_MINIMAL_AXISYMMETRIC_D2NQ_NO_GO_FULL_DYNAMIC_SELECTION_STILL_OPEN",
+  "classification": "FORMAL_TIME_DEPENDENT_6D_CLOSURE_AND_FAIL_CLOSED_ANSATZ_TEST",
+  "solver_execution": false,
+  "physical_evidence_effect": "NONE",
+  "source_bindings": [
+    {"path": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.json", "git_blob_sha1": "38998947cdd1e8c9ee4415378438ddf725b2c375", "role": "H2_CODAZZI_DEGENERACY_AND_SELECTION_TEST"},
+    {"path": "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json", "git_blob_sha1": "13fbe0084dcf91f2d0696d00947c9eed221a58ce", "role": "CANONICAL_M1_FUNCTION_FAMILY_AND_STATIC_AXISYMMETRIC_SPECIALIZATION"},
+    {"path": "hzt-s6-parent-action-v0.1.json", "git_blob_sha1": "aab94691b3a960b744825393fd090da098f58e39", "role": "CANONICAL_ONE_TIME_6D_PARENT_PROFILE"}
+  ],
+  "external_material_firewall": {"gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT", "gemini_equations_used_as_premises": false, "gemini_code_used_as_validation": false, "two_time_signature_imported": false},
+  "canonical_signature": {"ambient_signature": "(-,+,+,+,+,+)", "physical_times": 1, "internal_metric": "POSITIVE_DEFINITE_TWO_DIMENSIONAL"},
+  "general_local_4plus2_cosmological_form": {
+    "metric": "ds6^2=g_munu(t,y)dx^mu dx^nu+gamma_ij(t,y)(dy^i+N^i_mu dx^mu)(dy^j+N^j_nu dx^nu)",
+    "flrw_horizontal_metric": "g_munu dx^mu dx^nu=-n(t,y)^2 dt^2+a(t,y)^2 q_ab^(k) dx^a dx^b",
+    "normal_metric": "gamma_ij positive definite",
+    "isotropy_restriction": "N^i_a=0; possible N^i_t is a normal-bundle shift/twist and is not set to zero globally by H3",
+    "local_section_gauge": "At a chosen observed 4D section and event one may use an orthonormal Gaussian-normal frame with N^i_mu=0 and gamma_ij=delta_ij locally; this is a local frame statement, not a global gauge claim."
+  },
+  "exact_local_parent_to_extrinsic_bridge": {
+    "convention": "K^i_munu=(1/2) L_{n_i} g_munu in the local orthonormal Gaussian-normal frame",
+    "alpha_i": "-n_i[ln(n)]",
+    "beta_i": "n_i[ln(a)]",
+    "B_squared": "delta^ij n_i[ln(a)] n_j[ln(a)]",
+    "classification": "EXACT_LOCAL_GEOMETRIC_RECONSTRUCTION_GIVEN_STATED_FRAME_AND_K_CONVENTION",
+    "meaning": "B_squared is not an independent fluid parameter at this level; it is the squared normal gradient of the logarithmic 4D scale factor induced by the 6D metric."
+  },
+  "mixed_parent_equation_and_codazzi_source": {
+    "geometric_role": "The normal-tangent 6D Einstein equations are the parent equations behind the H2 Codazzi source S_i.",
+    "mixed_ricci": "R_i0=M6^(-4) T_i0 when G_i0=0 in the local section frame; Lambda6 and the trace term do not contribute to the mixed component.",
+    "scalar_flux": "T_i0^(phi)=n_i(phi)*u(phi) in the local orthonormal frame",
+    "gauge_flux": "T_i0^(F)=Z_F F_iP F_0^P in the local section frame",
+    "source_free_sufficient_condition": "T_i0=0 together with the mixed Einstein equation implies vanishing mixed ambient Ricci source for Codazzi; it is not imposed as a universal M1 identity.",
+    "important_nonimplication": "A purely magnetic static internal profile has no mixed matter flux, but a genuinely time-dependent scalar/gauge/internal geometry can source T_i0 and therefore S_i."
+  },
+  "factorized_warp_test": {
+    "ansatz": "a(t,y)=a4(t)*exp(A(y))",
+    "result_beta": "beta_i=n_i(A), independent of a4(t)",
+    "result_B_squared": "B_squared=|grad_perp A|^2, time independent when the internal geometry and normal frame are time independent",
+    "source_free_effective_equation_of_state": "w_Q=-1",
+    "classification": "EXACT_NO_DUST_RESULT_WITHIN_FACTORISED_STATIC_INTERNAL_WARP_SUBSECTOR",
+    "consequence": "Merely replacing the static maximally symmetric 4D metric of the frozen M1 specialization by an FLRW metric while keeping the internal warp static cannot generate the B_m^2 a^(-3) term."
+  },
+  "minimal_axisymmetric_fixed_section_test": {
+    "subsector": "chi-independent diagonal internal metric with observed 4D section at fixed (r,chi), no gravitational normal shift/twist",
+    "normal_gradients": {"beta_r": "n_r[ln(a)] may be nonzero", "beta_chi": "n_chi[ln(a)]=0 by chi-isometry"},
+    "normal_rank": 1,
+    "target_requirement": "The exact D2N-Q profile B_Lambda^2+B_m^2*a^(-3) without an a^(-3/2) cross term requires two orthogonal nonzero normal components when both B_Lambda and B_m are nonzero.",
+    "rank_one_square": "If beta is confined to one normal direction and beta=B_Lambda+B_m*a^(-3/2), then B_squared contains 2*B_Lambda*B_m*a^(-3/2), which is absent from the target profile.",
+    "result": "NO_GO_FOR_NONZERO_B_LAMBDA_AND_B_m_IN_THE_MINIMAL_CHI_INDEPENDENT_DIAGONAL_FIXED_SECTION_SUBSECTOR",
+    "scope": "This is an ansatz-level no-go, not a falsification of the full 6D M1 parent theory or of all possible codimension-two embeddings."
+  },
+  "requirements_for_full_d2nq_realisation": {
+    "at_least_one_required_extension": ["GENUINE_TWO_NORMAL_DEPENDENCE_OF_THE_4D_WARP_GEOMETRY_SUCH_AS_CHI_DEPENDENCE_COMPATIBLE_WITH_GLOBAL_REGULARITY", "NONTRIVIAL_GRAVITATIONAL_NORMAL_SHIFT_OR_TWIST_THAT_GENERATES_A_SECOND_INDEPENDENT_EXTRINSIC_CHANNEL", "NONTRIVIAL_EMBEDDED_4D_SECTION_NOT_EQUIVALENT_TO_THE_MINIMAL_FIXED_INTERNAL_COORDINATE_SECTION"],
+    "governance": "Any extension must remain inside the one-time signature and be derived from the canonical parent metric degrees of freedom; adding an independent embedding action would be a separately governed branch."
+  },
+  "dynamic_closure_unknowns": {
+    "bulk_fields_needed": ["n(t,y1,y2)", "a(t,y1,y2)", "gamma_ij(t,y1,y2)", "allowed normal shift N^i_t(t,y1,y2)", "phi(t,y1,y2)", "A_M(t,y1,y2) subject to cosmological symmetry"],
+    "parent_equations_needed": ["tangent-tangent Einstein evolution and Hamiltonian sector", "normal-tangent Einstein momentum equations", "normal-normal Einstein equations", "scalar Euler-Lagrange equation", "Maxwell equation and flux quantization", "cap matching and regularity conditions", "normal-bundle Ricci equation and global patch consistency"],
+    "reconstruction_outputs": ["alpha_i", "beta_i", "B_squared(a)", "S_i", "normal eigenbasis evolution", "B_Lambda and B_m if dynamically identifiable"]
+  },
+  "selection_status": {
+    "S_i_equals_zero": "CONDITIONAL_NOT_GENERIC",
+    "B_squared_from_6D_metric": "LOCAL_RECONSTRUCTION_DERIVED",
+    "factorized_static_internal_warp": "SELECTS_ONLY_TIME_INDEPENDENT_B_SQUARED_AT_THIS_LEVEL",
+    "minimal_axisymmetric_two_component_D2NQ": "FALSIFIED_WITHIN_STATED_SUBSECTOR",
+    "full_M1_D2NQ_dynamic_selection": "OPEN_REQUIRES_NONMINIMAL_TWO_NORMAL_TIME_DEPENDENT_CLOSURE",
+    "B_Lambda_and_B_m_from_parent_constants": "OPEN"
+  },
+  "ghost_and_bounce": {"full_ghost_freedom": "OPEN", "negative_rho_squared_bounce_term": "NOT_DERIVED", "global_bounce": "OPEN"},
+  "gate_disposition": {
+    "H3_local_parent_to_B2_bridge": "PASS",
+    "H3_factorized_warp_test": "PASS_NO_DUST",
+    "H3_minimal_axisymmetric_target_test": "FAIL_FOR_TWO_NONZERO_ORTHOGONAL_TARGET_COMPONENTS_WITHIN_SUBSECTOR",
+    "full_parent_dynamic_selection": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": ["NO_GEMINI_DRAFT_AS_CANONICAL_INPUT", "NO_TWO_TIME_SIGNATURE_IN_C_PHYS", "NO_LOCAL_GAUSSIAN_NORMAL_FRAME_AS_GLOBAL_PRODUCT_GAUGE", "NO_SOURCE_FREE_CODAZZI_AS_GENERIC_M1_IDENTITY", "NO_FACTORISED_WARP_RESULT_AS_PROOF_AGAINST_ALL_TIME_DEPENDENT_6D_SOLUTIONS", "NO_AXISYMMETRIC_SUBSECTOR_NO_GO_AS_GLOBAL_FALSIFICATION_OF_D2NQ", "NO_LOCAL_B2_RECONSTRUCTION_AS_DYNAMIC_SELECTION", "NO_K1D_OR_K1E_PROMOTION", "NO_GHOST_OR_BOUNCE_PROMOTION", "NO_PHYSICAL_EVIDENCE_PROMOTION"],
+  "next_candidate": "C-PHYS-PARENT-H4-TWO-NORMAL-TIME-DEPENDENT-CLOSURE-DESIGN-AND-RANK-TEST"
+}
