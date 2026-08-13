@@ -1,0 +1,93 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys.h3-time-dependent-6d-m1-cosmological-closure.v1",
+  "version": "0.2.0",
+  "date": "2026-08-13",
+  "block_id": "C-PHYS-PARENT-H3-TIME-DEPENDENT-6D-M1-COSMOLOGICAL-ANSATZ-AND-PROJECTED-CLOSURE",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "baseline_main_sha": "f2d92ad371183850a6171321e61a1383df0af2c9",
+  "status": "PASS_LOCAL_PARENT_TO_B2_RECONSTRUCTION_FACTORIZED_WARP_NO_DUST_RANK_ONE_TARGET_REALISED_DYNAMIC_SELECTION_OPEN",
+  "classification": "CORRECTED_FORMAL_TIME_DEPENDENT_6D_CLOSURE_AND_COUNTEREXAMPLE_AUDIT",
+  "solver_execution": false,
+  "physical_evidence_effect": "NONE",
+  "supersedes": {
+    "path": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.1.json",
+    "git_blob_sha1": "f6adb44b9fc8e010677b3e9731d0815c8447a7d9",
+    "reason": "v0.1 incorrectly inferred that the target B_squared profile requires two orthogonal nonzero normal components. A rank-one counterexample beta=sqrt(B_Lambda^2+B_m^2*a^(-3)) exactly realises the target and invalidates that no-go."
+  },
+  "source_bindings": [
+    {"path": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.json", "git_blob_sha1": "38998947cdd1e8c9ee4415378438ddf725b2c375", "role": "H2_CODAZZI_DEGENERACY_AND_SELECTION_TEST"},
+    {"path": "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json", "git_blob_sha1": "13fbe0084dcf91f2d0696d00947c9eed221a58ce", "role": "CANONICAL_M1_FUNCTION_FAMILY_AND_STATIC_AXISYMMETRIC_SPECIALIZATION"},
+    {"path": "hzt-s6-parent-action-v0.1.json", "git_blob_sha1": "aab94691b3a960b744825393fd090da098f58e39", "role": "CANONICAL_ONE_TIME_6D_PARENT_PROFILE"}
+  ],
+  "external_material_firewall": {"gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT", "gemini_equations_used_as_premises": false, "gemini_code_used_as_validation": false, "two_time_signature_imported": false},
+  "canonical_signature": {"ambient_signature": "(-,+,+,+,+,+)", "physical_times": 1, "internal_metric": "POSITIVE_DEFINITE_TWO_DIMENSIONAL"},
+  "exact_local_parent_to_extrinsic_bridge": {
+    "convention": "K^i_munu=(1/2) L_{n_i} g_munu in a local orthonormal Gaussian-normal frame",
+    "alpha_i": "-n_i[ln(n)]",
+    "beta_i": "n_i[ln(a)]",
+    "B_squared": "delta^ij n_i[ln(a)] n_j[ln(a)]",
+    "classification": "EXACT_LOCAL_GEOMETRIC_RECONSTRUCTION_GIVEN_STATED_FRAME_AND_K_CONVENTION"
+  },
+  "mixed_parent_equation_and_codazzi_source": {
+    "mixed_ricci": "R_i0=M6^(-4) T_i0 when G_i0=0 in the local section frame",
+    "scalar_flux": "T_i0^(phi)=n_i(phi)*u(phi)",
+    "gauge_flux": "T_i0^(F)=Z_F F_iP F_0^P",
+    "S_i_equals_zero": "CONDITIONAL_ON_ACTUAL_PARENT_SOLUTION_WITH_ZERO_MIXED_FLUX_NOT_GENERIC"
+  },
+  "factorized_warp_test": {
+    "ansatz": "a(t,y)=a4(t)*exp(A(y))",
+    "result_beta": "beta_i=n_i(A)",
+    "result_B_squared": "B_squared=|grad_perp A|^2 and is time independent when the internal geometry and normal frame are time independent",
+    "source_free_w_Q": "-1",
+    "result": "NO_MATTERLIKE_B_m_SQUARED_A_MINUS3_TERM_IN_FACTORIZED_STATIC_INTERNAL_WARP_SUBSECTOR",
+    "status": "RETAINED_FROM_V0_1"
+  },
+  "rank_one_counterexample": {
+    "target": "X(a)=B_Lambda^2+B_m^2*a^(-3)",
+    "single_normal_choice": "beta_r=sqrt(X(a)), beta_chi=0",
+    "result_B_squared": "beta_r^2=X(a) exactly",
+    "v0_1_cross_term_argument": "APPLIES_ONLY_IF_ONE_ADDITIONALLY_ASSUMES_beta_r=B_Lambda+B_m*a^(-3/2)",
+    "v0_1_no_go": "FALSIFIED_BY_EXPLICIT_RANK_ONE_COUNTEREXAMPLE",
+    "classification": "EXACT_ALGEBRAIC_COUNTEREXAMPLE"
+  },
+  "source_free_rank_one_completion": {
+    "assumptions": "H nonzero, S_r=0, beta_r positive orientation, constant Einstein-normalized M4",
+    "X": "B_Lambda^2+B_m^2*a^(-3)",
+    "dot_X": "-3*H*B_m^2*a^(-3)",
+    "codazzi_alpha_beta": "alpha_r*beta_r=-X-dot_X/(2*H)=-B_Lambda^2+(1/2)*B_m^2*a^(-3)",
+    "alpha_r": "[-B_Lambda^2+(1/2)*B_m^2*a^(-3)]/sqrt(X)",
+    "rho_Q": "3*M4^2*X",
+    "p_Q": "-3*M4^2*B_Lambda^2",
+    "result": "EXACT_RANK_ONE_KINEMATIC_SOURCE_FREE_REALISATION_OF_D2NQ_BACKGROUND",
+    "dynamic_selection": "NOT_DERIVED"
+  },
+  "corrected_axisymmetric_disposition": {
+    "chi_independent_fixed_section": "NOT_EXCLUDED_BY_NORMAL_RANK_ONE",
+    "minimum_requirement": "A genuinely time-dependent nonfactorizable normal gradient n_r[ln(a)] can in principle realise the full target profile without chi dependence or normal twist.",
+    "parent_question": "Do the one-time M1 Einstein-scalar-Maxwell-cap equations dynamically produce beta_r^2=B_Lambda^2+B_m^2*a^(-3) and the corresponding alpha_r relation?",
+    "answer": "OPEN"
+  },
+  "dynamic_closure_required": {
+    "preferred_next_subsector": "AXISYMMETRIC_CHI_INDEPENDENT_BUT_TIME_RADIAL_NONSEPARABLE_M1",
+    "minimal_metric_shape": "ds6^2=-n(t,r)^2dt^2+a(t,r)^2 q_ab^(k)dx^a dx^b+c(t,r)^2dr^2+L(t,r)^2dchi^2",
+    "matter_shape": "phi(t,r), A_chi(t,r) with Maxwell components required by consistency",
+    "equations": ["tt/tangent Einstein sector", "tr mixed Einstein constraint", "rr normal-normal Einstein equation", "chichi Einstein equation", "scalar equation", "Maxwell equation", "cap/regularity/flux conditions"],
+    "target_reconstruction": "beta_r=(1/c)*partial_r ln(a), alpha_r=-(1/c)*partial_r ln(n) on the fixed section in diagonal gauge",
+    "warning": "These target functions must be outputs of the parent solution, not imposed boundary data unless separately justified."
+  },
+  "gate_disposition": {
+    "H3_local_parent_to_B2_bridge": "PASS",
+    "H3_factorized_warp_test": "PASS_NO_DUST",
+    "H3_v0_1_rank_one_no_go": "RETRACTED_FALSIFIED_BY_COUNTEREXAMPLE",
+    "H3_rank_one_target_realisability": "PASS_KINEMATIC_SOURCE_FREE",
+    "full_parent_dynamic_selection": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE"
+  },
+  "ghost_and_bounce": {"full_ghost_freedom": "OPEN", "negative_rho_squared_bounce_term": "NOT_DERIVED", "global_bounce": "OPEN"},
+  "forbidden_inferences": ["NO_V0_1_RANK_ONE_NO_GO_AS_CANONICAL_RESULT", "NO_GEMINI_DRAFT_AS_CANONICAL_INPUT", "NO_TWO_TIME_SIGNATURE_IN_C_PHYS", "NO_RANK_ONE_KINEMATIC_REALISATION_AS_PARENT_DYNAMIC_SELECTION", "NO_SOURCE_FREE_CODAZZI_AS_GENERIC_M1_IDENTITY", "NO_K1D_OR_K1E_PROMOTION", "NO_GHOST_OR_BOUNCE_PROMOTION", "NO_PHYSICAL_EVIDENCE_PROMOTION"],
+  "next_candidate": "C-PHYS-PARENT-H4-AXISYMMETRIC-TIME-RADIAL-NONSEPARABLE-M1-CLOSURE-AND-RANK-TEST"
+}
