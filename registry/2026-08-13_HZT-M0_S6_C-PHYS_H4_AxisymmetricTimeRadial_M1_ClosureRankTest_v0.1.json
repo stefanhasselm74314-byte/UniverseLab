@@ -1,0 +1,195 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys.h4-axisymmetric-time-radial-m1-closure.v1",
+  "version": "0.1.0",
+  "date": "2026-08-13",
+  "block_id": "C-PHYS-PARENT-H4-AXISYMMETRIC-TIME-RADIAL-NONSEPARABLE-M1-CLOSURE-AND-RANK-TEST",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "baseline_main_sha": "713de6edfc9c7fba4e8594f3af12a3d9a80f13af",
+  "status": "PASS_FORMAL_TIME_RADIAL_M1_REDUCTION_STRUCTURALLY_CLOSED_MODULO_GAUGE_LOCAL_FIELDSPACE_PRINCIPAL_RANK_CAPABLE_D2NQ_DYNAMIC_SELECTION_NOT_EXECUTED",
+  "classification": "FORMAL_REDUCTION_CLOSURE_GAUGE_COUNT_AND_LOCAL_PRINCIPAL_RANK_PREFLIGHT_NO_EXECUTION",
+  "solver_execution": false,
+  "physical_evidence_effect": "NONE",
+  "source_bindings": [
+    {
+      "path": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.2.json",
+      "git_blob_sha1": "40495a47c580b8b8af138bd838296b083dde9785",
+      "role": "H3_CORRECTED_PARENT_TO_B2_BRIDGE_AND_RANK_ONE_TARGET"
+    },
+    {
+      "path": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.json",
+      "git_blob_sha1": "38998947cdd1e8c9ee4415378438ddf725b2c375",
+      "role": "H2_CODAZZI_AND_D2NQ_SELECTION_FIREWALL"
+    },
+    {
+      "path": "hzt-s6-parent-action-v0.1.json",
+      "git_blob_sha1": "aab94691b3a960b744825393fd090da098f58e39",
+      "role": "CANONICAL_ONE_TIME_6D_PARENT_PROFILE"
+    },
+    {
+      "path": "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+      "git_blob_sha1": "13fbe0084dcf91f2d0696d00947c9eed221a58ce",
+      "role": "CANONICAL_M1_FUNCTION_FAMILY"
+    },
+    {
+      "path": "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+      "git_blob_sha1": "7bf51f38eae34254d855e82d96506a863990ccc7",
+      "role": "CANONICAL_BULK_CAP_AND_JUNCTION_SIGN_CONTRACT"
+    }
+  ],
+  "external_material_firewall": {
+    "gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT",
+    "gemini_equations_used_as_premises": false,
+    "gemini_code_used_as_validation": false,
+    "two_time_signature_imported": false
+  },
+  "canonical_signature": {
+    "ambient_signature": "(-,+,+,+,+,+)",
+    "physical_times": 1,
+    "internal_metric": "POSITIVE_DEFINITE_TWO_DIMENSIONAL"
+  },
+  "h4_symmetry_sector": {
+    "covariant_metric": "ds6^2=h_pq(t,r) dx^p dx^q + a(t,r)^2 q_ij^(k) dx^i dx^j + L(t,r)^2 dchi^2",
+    "diagonal_coordinate_representation": "h_pq dx^p dx^q=-n(t,r)^2 dt^2+c(t,r)^2 dr^2",
+    "base_coordinates": ["t", "r"],
+    "three_space_dimension": 3,
+    "three_space_curvature": "R[q]=6*k",
+    "chi_independent": true,
+    "matter_fields": ["phi(t,r)", "A_chi(t,r)"],
+    "maxwell_sector": "F_tchi=partial_t A_chi; F_rchi=partial_r A_chi; F_tr=0",
+    "g_tr_zero": "LOCAL_2D_COORDINATE_GAUGE_NOT_PHYSICAL_TRUNCATION",
+    "F_tr_zero": "CONSISTENT_MAGNETIC_DYNAMIC_SUBSECTOR_BRANCH_ASSUMPTION_FULL_ELECTRIC_TR_BRANCH_NOT_CLAIMED"
+  },
+  "consistent_truncation_audit": {
+    "three_space_isotropy": "PASS_BY_CONSTRUCTION",
+    "chi_Killing_sector": "PASS_BY_CONSTRUCTION",
+    "offdiagonal_chi_metric_sources": "T_pchi=0 for phi(t,r), A_chi(t,r), F_tr=0 in the diagonal chi-independent sector",
+    "maxwell_t_and_r_equations": "IDENTITIES_IN_THIS_SECTOR_BECAUSE_ONLY_F_pchi_IS_NONZERO_AND_PARTIAL_chi=0",
+    "maxwell_chi_equation": "ONE_NONTRIVIAL_2D_PDE",
+    "classification": "CONSISTENT_LOCAL_SYMMETRY_REDUCTION_SUBJECT_TO_GLOBAL_CAP_AND_PATCH_RECHECK"
+  },
+  "reduced_bulk_geometry": {
+    "R6": "R2 + 6*k/a^2 - 6*box(a)/a - 6*(grad a)^2/a^2 - 2*box(L)/L - 6*(grad a dot grad L)/(a*L)",
+    "volume_factor": "sqrt(|g6|)=sqrt(|h|)*a^3*L*sqrt(q)",
+    "ghy_compatible_bulk_action_after_ibp": "S2 proportional integral sqrt(|h|){[a^3*L*R2+6*k*a*L-2*Lambda_geom*a^3*L+6*a*L*(grad a)^2+6*a^2*(grad a dot grad L)]/(2*kappa6^2)-a^3*L*[0.5*(grad phi)^2+U(phi)]-0.5*a^3*Z_F(phi)*(grad A_chi)^2/L}",
+    "ibp_scope": "BULK_TOTAL_DERIVATIVES_REMOVED_ONLY_WITH_CANONICAL_GHY_BOUNDARY_COMPLETION_RETAINED",
+    "M1_specialization": {
+      "Z_phi": "1",
+      "U": "0.5*mhat_phi_sq*M6^6*(phi/M6^2)^2",
+      "Z_F": "exp[-2*a_F*(phi/M6^2)]",
+      "Z_F_positivity": "STRICTLY_POSITIVE_FOR_FINITE_phi"
+    }
+  },
+  "exact_covariant_bulk_equations": {
+    "base_ricci": "R_pq^(6)=R_pq[h]-3*a^(-1)*nabla_p nabla_q a-L^(-1)*nabla_p nabla_q L",
+    "three_space_ricci_coefficient": "R_3/g_3=2*k/a^2-box(a)/a-2*(grad a)^2/a^2-(grad a dot grad L)/(a*L)",
+    "chi_ricci_coefficient": "R_chichi/L^2=-box(L)/L-3*(grad a dot grad L)/(a*L)",
+    "einstein_system": "G_AB+Lambda_geom*g_AB=kappa6^2*T_AB",
+    "scalar_equation": "[1/(a^3*L)] nabla_p[a^3*L*nabla^p phi]-U_,phi-0.5*Z_F,phi*(grad A_chi)^2/L^2=0",
+    "maxwell_chi_equation": "nabla_p[a^3*Z_F*nabla^p A_chi/L]=0",
+    "base_stress": "T_pq=partial_p phi*partial_q phi-0.5*h_pq*((grad phi)^2+2*U)+Z_F/L^2*[partial_p A_chi*partial_q A_chi-0.5*h_pq*(grad A_chi)^2]",
+    "three_space_pressure": "T_3/g_3=-0.5*(grad phi)^2-U-0.5*Z_F*(grad A_chi)^2/L^2",
+    "chi_pressure": "T_chichi/L^2=-0.5*(grad phi)^2-U+0.5*Z_F*(grad A_chi)^2/L^2"
+  },
+  "mixed_tr_constraint": {
+    "R_tr": "-3/a*[a_tr-(n_r/n)*a_t-(c_t/c)*a_r]-1/L*[L_tr-(n_r/n)*L_t-(c_t/c)*L_r]",
+    "T_tr": "phi_t*phi_r+Z_F*Achi_t*Achi_r/L^2",
+    "equation": "R_tr=kappa6^2*T_tr",
+    "source_free_sufficient_condition": "T_tr=0 on the observed fixed-r section implies zero mixed matter flux there; it is not a generic M1 identity",
+    "important_result": "H3_SOURCE_FREE_CODAZZI_IS_NOW_A_TESTABLE_PARENT_SOLUTION_PROPERTY_IN_THIS_SUBSECTOR"
+  },
+  "gauge_and_equation_count": {
+    "covariant_unknown_functions": {"h_pq": 3, "a": 1, "L": 1, "phi": 1, "A_chi": 1, "total": 7},
+    "covariant_equations": {"base_Einstein": 3, "three_space_Einstein": 1, "chi_Einstein": 1, "scalar": 1, "maxwell_chi": 1, "total": 7},
+    "two_dimensional_diffeomorphism_gauge_functions": 2,
+    "noether_bianchi_differential_identities": 2,
+    "independent_unknowns_modulo_gauge": 5,
+    "independent_equations_modulo_identities": 5,
+    "diagonal_gauge_note": "g_tr=0 uses one local coordinate condition; the tr Einstein equation remains a momentum constraint and one residual base-coordinate gauge freedom remains",
+    "result": "STRUCTURALLY_SQUARE_MODULO_2D_DIFFEO_GAUGE"
+  },
+  "local_principal_rank_preflight": {
+    "local_conformal_representative": "h_pq=e^(2*omega)*eta_pq",
+    "field_vector": ["omega", "a", "L", "phi", "A_chi"],
+    "gravitational_principal_form": "eta^pq[6*a^2*L*d_p a*d_q omega+2*a^3*d_p L*d_q omega+6*a*L*d_p a*d_q a+6*a^2*d_p a*d_q L]/(2*kappa6^2)",
+    "gravitational_fieldspace_matrix": "[[0,3*a^2*L,a^3],[3*a^2*L,6*a*L,3*a^2],[a^3,3*a^2,0]]",
+    "gravitational_matrix_determinant": "12*a^7*L",
+    "scalar_principal_coefficient": "-0.5*a^3*L",
+    "gauge_principal_coefficient": "-0.5*a^3*Z_F/L",
+    "nondegenerate_domain": "a>0, L>0, finite phi so Z_F>0, finite nonzero kappa6",
+    "result": "PASS_LOCAL_FIELDSPACE_PRINCIPAL_HESSIAN_NONDEGENERATE_RANK_5_IN_STATED_REPRESENTATIVE",
+    "nonimplications": [
+      "NOT_A_GLOBAL_HYPERBOLICITY_PROOF",
+      "NOT_A_CONSTRAINT_PROPAGATION_PROOF",
+      "NOT_A_COMPLEMENTING_BOUNDARY_CONDITION_PROOF",
+      "NOT_GHOST_FREEDOM",
+      "NOT_PHYSICAL_STABILITY"
+    ]
+  },
+  "dynamic_cap_junction_completion": {
+    "outward_components": {
+      "k_t_s": "epsilon_s*(partial_r ln n_s)/c_s",
+      "k_a_s": "epsilon_s*(partial_r ln a_s)/c_s",
+      "k_chi_s": "epsilon_s*(partial_r ln L_s)/c_s"
+    },
+    "outward_sums": ["K_t=sum_s k_t_s", "K_a=sum_s k_a_s", "K_chi=sum_s k_chi_s"],
+    "Y_sigma": "Z_sigma*(N_sigma-q_sigma*A_chi)^2/L^2",
+    "time_junction": "-(3*K_a+K_chi)+kappa6^2*(lambda+Y_sigma/2)=0",
+    "space_junction": "-(K_t+2*K_a+K_chi)+kappa6^2*(lambda+Y_sigma/2)=0",
+    "chi_junction": "-(K_t+3*K_a)+kappa6^2*(lambda-Y_sigma/2)=0",
+    "new_4d_isotropy_boundary_condition": "K_t-K_a=0 follows from time minus spatial junction equations",
+    "static_limit": "K_t=K_a=A_Sigma reproduces the frozen static R_4d and R_chi junction system",
+    "M1_scalar_matching": "sum_s epsilon_s*(partial_r phi_s)/c_s=0 because Z_phi=1 and lambda_,phi=Z_sigma_,phi=0",
+    "gauge_matching": "sum_s n_A^(s)*Z_F*F_s^(A chi)=q_sigma*Z_sigma*D^chi sigma",
+    "continuity": ["n", "a", "L", "phi", "A_chi modulo gauge"],
+    "global_requirements": ["flux_quantization", "pole_or_cap_regularity", "patch_consistency", "orientation_bookkeeping"]
+  },
+  "d2nq_solution_derived_selection_test": {
+    "observed_section": "r=r_star fixed section; proper-time H=(1/n)*partial_t ln a",
+    "beta_r": "(1/c)*partial_r ln a",
+    "alpha_r": "-(1/c)*partial_r ln n",
+    "B_squared": "beta_r^2",
+    "N": "ln(a_obs)",
+    "target_family": "B_squared(N)=B_Lambda^2+B_m^2*exp(-3*N)",
+    "fit_free_differential_residual": "R_Lambda_m=d2(B_squared)/dN2+3*d(B_squared)/dN",
+    "solution_derived_B_m_squared": "-(exp(3*N)/3)*d(B_squared)/dN",
+    "solution_derived_B_Lambda_squared": "B_squared+(1/3)*d(B_squared)/dN",
+    "selection_pass_conditions": [
+      "R_Lambda_m=0 on a nontrivial interval",
+      "derived B_m_squared is constant and >=0",
+      "derived B_Lambda_squared is constant and >=0",
+      "constants arise from one parent solution and its globally fixed data, not time-by-time fitting"
+    ],
+    "source_free_codazzi_test": "alpha_r*beta_r=-B_squared-0.5*d(B_squared)/dN when T_tr=0 and H!=0",
+    "governance": "TARGET_RESIDUALS_ARE_POST_SOLUTION_DIAGNOSTICS_AND_MUST_NOT_BE_IMPOSED_AS_BOUNDARY_DATA_WITHOUT_SEPARATE_JUSTIFICATION"
+  },
+  "h4_disposition": {
+    "time_dependent_bulk_closure_in_axisymmetric_Ftr0_subsector": "PASS_FORMAL",
+    "structural_square_count": "PASS_MODULO_GAUGE",
+    "local_principal_rank_capability": "PASS_FIELDSPACE_NONDEGENERATE",
+    "dynamic_cap_extension": "PASS_FORMAL_JUNCTION_INVENTORY",
+    "H3_source_free_condition": "NOW_PARENT_TESTABLE_NOT_ASSUMED",
+    "D2NQ_target_profile": "KINEMATICALLY_ALLOWED_SOLUTION_DERIVED_TEST_DEFINED",
+    "D2NQ_parent_dynamic_selection": "OPEN_NOT_EXECUTED",
+    "global_IBVP_BVP_well_posedness": "OPEN",
+    "constraint_propagation": "OPEN",
+    "full_ghost_freedom": "OPEN",
+    "bounce": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_FORMAL_REDUCED_CLOSURE_AS_EXISTENCE_OR_UNIQUENESS_PROOF",
+    "NO_LOCAL_FIELDSPACE_RANK_AS_GLOBAL_HYPERBOLICITY_OR_GHOST_FREEDOM",
+    "NO_D2NQ_DIAGNOSTIC_RESIDUAL_AS_PARENT_DYNAMIC_SELECTION_BEFORE_A_PARENT_SOLUTION_EXISTS",
+    "NO_B_LAMBDA_OR_B_m_AS_FREE_BOUNDARY_KNOBS",
+    "NO_T_tr_ZERO_AS_GENERIC_M1_IDENTITY",
+    "NO_F_tr_ZERO_SUBSECTOR_AS_PROOF_ABOUT_THE_FULL_ELECTRIC_BRANCH",
+    "NO_K1D_OR_K1E_PROMOTION",
+    "NO_WP4_RELEASE",
+    "NO_PHYSICAL_EVIDENCE_PROMOTION"
+  ],
+  "next_candidate": "C-PHYS-PARENT-H4R1-DIMENSIONLESS-IBVP-CONSTRAINT-PROPAGATION-AND-BOUNDARY-RANK-PREFLIGHT"
+}
