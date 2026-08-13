@@ -1,0 +1,70 @@
+name: ULSH-01 WP3-D13 CP01R3 independent implementation review v1.0
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReview_v1.0.json"
+      - "science/hzt-m0/md2s/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReviewLedger_v1.0.md"
+      - "tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReviewTest_v1.0.py"
+      - ".github/workflows/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReview_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReview_v1.0.json"
+      - "science/hzt-m0/md2s/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReviewLedger_v1.0.md"
+      - "tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReviewTest_v1.0.py"
+      - ".github/workflows/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReview_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  independent-review-no-physical-execution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate review registry
+        run: python -m json.tool registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReview_v1.0.json >/dev/null
+      - name: Compile and run independent reference/static review
+        run: |
+          python -m py_compile tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReviewTest_v1.0.py
+          python tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReviewTest_v1.0.py
+      - name: Enforce review-only scope with AST and structured state checks
+        run: |
+          python - <<'PY'
+          import ast
+          import json
+          from pathlib import Path
+
+          test_path = Path('tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReviewTest_v1.0.py')
+          tree = ast.parse(test_path.read_text(encoding='utf-8'))
+          imports = set()
+          for node in ast.walk(tree):
+              if isinstance(node, ast.Import):
+                  imports.update(alias.name.split('.')[0] for alias in node.names)
+              elif isinstance(node, ast.ImportFrom) and node.module:
+                  imports.add(node.module.split('.')[0])
+          forbidden_imports = {'numpy', 'scipy', 'subprocess', 'importlib'}
+          assert not (imports & forbidden_imports), (imports & forbidden_imports)
+
+          review = json.loads(Path('registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReview_v1.0.json').read_text(encoding='utf-8'))
+          effect = review['execution_effect']
+          assert effect['physical_backend_imported'] is False
+          assert effect['physical_residual_evaluations'] == 0
+          assert effect['physical_jacobian_evaluations'] == 0
+          assert effect['physical_solver_calls'] == 0
+          assert effect['grants_created'] == 0
+          assert effect['physical_results_created'] == 0
+          assert effect['physical_evidence_effect'] == 'NONE'
+          PY
+      - name: Confirm governance and D14-only next step
+        run: |
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReview_v1.0.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReview_v1.0.json
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReview_v1.0.json
+          grep -q 'D14_CP01R3_EXACT_RUN_INPUT_GENERATED_SEED_AND_SOURCE_BUNDLE_FREEZE_NO_SOLVE' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D13_CP01R3IndependentImplementationReview_v1.0.json

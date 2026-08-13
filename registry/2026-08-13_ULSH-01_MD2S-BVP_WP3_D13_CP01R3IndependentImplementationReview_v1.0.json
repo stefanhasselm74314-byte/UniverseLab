@@ -1,0 +1,111 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-d13-cp01r3-independent-implementation-review.v1",
+  "version": "1.0.0",
+  "date": "2026-08-13",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP3-D13",
+  "classification": "INDEPENDENT_IMPLEMENTATION_REVIEW_NO_PHYSICAL_EXECUTION",
+  "status": "PASS_D13_INDEPENDENT_IMPLEMENTATION_REVIEW_D14_BINDING_ALLOWED_NO_PHYSICAL_EXECUTION",
+  "reviewed_d12_audit": "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D12_CP01R3ManufacturedControlAudit_v1.0.json",
+  "source_binding": {
+    "implementation_path": "tools/2026-08-13_ulsh_01_md2s_bvp_wp3_d12_cp01r3_bjp01_etrn02_v1.0.py",
+    "implementation_git_blob_sha1": "d6313721a459254b13bdc9e06b4b83fc5a0fcca9",
+    "seed_spec_path": "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D12_CP01R3SeedSpec_v1.0.json",
+    "seed_spec_sha256": "05315df34903188284b4ea58bffc6b440a06bda9486362a6760c7cc0cfcb1474",
+    "d12_audit_tested_head": "132e140490682daa0274849773156c9f135e03c4",
+    "d12_merge_commit": "8228446464c13e55f83f98bce0f964f9af5cdc37"
+  },
+  "independent_review_findings": [
+    {
+      "id": "D13-R1",
+      "subject": "BJP01_ALGEBRA",
+      "status": "PASS",
+      "finding": "An independent reference derivation reproduces A_sum_star=(lambda_hat-0.5*Y_sigma)/4 and ell_sum_star=-3*A_sum_star+lambda_hat+0.5*Y_sigma and verifies simultaneous R_4D=R_chi=0 in exact/reference arithmetic."
+    },
+    {
+      "id": "D13-R2",
+      "subject": "DERIVATIVE_ONLY_ENDPOINT_INVARIANTS",
+      "status": "PASS",
+      "finding": "For delta_u=c*(tau-1), both tau*delta_u at tau=0 and tau=1 vanish, while the tau=1 derivative contribution is nonzero as required. The D11 pole/brane value-preservation claim is algebraically consistent."
+    },
+    {
+      "id": "D13-R3",
+      "subject": "MESH_NORMALIZED_STATE_METRIC",
+      "status": "PASS_WITH_SCOPE_LIMIT",
+      "finding": "An independent reference implementation reproduces the registered smooth-control relative spread 0.004915480656330283 within floating-point tolerance and below the registered 0.006 limit. This validates only the registered control family, not exact mesh invariance for arbitrary functions."
+    },
+    {
+      "id": "D13-R4",
+      "subject": "PRECONDITIONER_TRUST_SEPARATION",
+      "status": "PASS",
+      "finding": "Static source review confirms trust clipping consumes direction['dx_unclipped'] in original variables and the frozen StageMetric; the equilibrated linear_coordinate is not the trust distance."
+    },
+    {
+      "id": "D13-R5",
+      "subject": "PHYSICAL_BACKEND_ISOLATION",
+      "status": "PASS",
+      "finding": "The D12 implementation contains no MD2S physical-backend path, no SciPy dependency, no grant path, and an explicit physical-run denial with exit code 73."
+    },
+    {
+      "id": "D13-R6",
+      "subject": "D12_CONTROL_MEASUREMENTS",
+      "status": "PASS",
+      "finding": "The persistent D12 audit binds all six PASS outcomes, implementation blob, seed-spec SHA-256, workflow/job identity, zero physical counters and physical evidence NONE."
+    }
+  ],
+  "binding_semantics_observations": [
+    {
+      "id": "D13-O1",
+      "classification": "MUST_FREEZE_IN_D14",
+      "observation": "freeze_stage_metric is called once from the initial stage state before the ETRN-02 iteration loop; field and parameter scales are therefore stage-initialization constants."
+    },
+    {
+      "id": "D13-O2",
+      "classification": "MUST_FREEZE_IN_D14",
+      "observation": "The current generic ETRN-02 implementation has no inner backtracking-factor loop. A rejected clipped trial shrinks Delta and consumes an outer iteration before recomputing the direction."
+    },
+    {
+      "id": "D13-O3",
+      "classification": "RESOURCE_ACCOUNTING_MUST_FREEZE_OR_VERSION_CHANGE",
+      "observation": "The current generic etrn02_solve_generic calls jacobian_fn(state) once for the equilibrated direction and a second time for model_reduction_ratio within an iteration. A later single-Jacobian cache/refactor would alter implementation semantics/source identity and requires a separately versioned implementation plus manufactured controls before physical binding."
+    },
+    {
+      "id": "D13-O4",
+      "classification": "SCOPE_LIMIT",
+      "observation": "The D12 stiff known-root control is a deterministic manufactured linear system. Passing it does not validate nonlinear MD2S basin geometry or physical convergence."
+    },
+    {
+      "id": "D13-O5",
+      "classification": "SCOPE_LIMIT",
+      "observation": "The seed-spec file freezes the BJP-01 construction recipe, not evaluated physical CP01R3 seed vectors. D14 must create a distinct source-bound generated-seed manifest/hash before any release review."
+    }
+  ],
+  "review_conclusion": "BJP-01 and ETRN-02 are internally consistent with the D11 design and the D12 manufactured audit within the registered control scope. D13 finds no blocker to a separate D14 exact binding/freeze block. D13 does not authorize physical backend evaluation or CP01R3 execution. D14 must preserve the reviewed implementation semantics exactly or version any change and repeat manufactured controls.",
+  "execution_effect": {
+    "physical_backend_imported": false,
+    "physical_residual_evaluations": 0,
+    "physical_jacobian_evaluations": 0,
+    "physical_solver_calls": 0,
+    "grants_created": 0,
+    "physical_results_created": 0,
+    "physical_evidence_effect": "NONE"
+  },
+  "governance_state": {
+    "WP3": "OPEN_D13_REVIEW_PASS_D14_EXACT_BINDING_FREEZE_ALLOWED_NO_SOLVE",
+    "WP4": "BLOCKED_NO_ACCEPTED_BACKGROUND_EXPORT",
+    "ULSH-02": "BLOCKED_PENDING_ULSH-01_RELEASE_GATE",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_allowed_action": "ULSH-01_WP3_D14_CP01R3_EXACT_RUN_INPUT_GENERATED_SEED_AND_SOURCE_BUNDLE_FREEZE_NO_SOLVE",
+  "forbidden_next_actions": [
+    "DO_NOT_EXECUTE_CP01R3_IN_D13",
+    "DO_NOT_IMPORT_OR_EVALUATE_THE_PHYSICAL_MD2S_BACKEND_IN_D13",
+    "DO_NOT_TREAT_D13_PASS_AS_PHYSICAL_VALIDATION",
+    "DO_NOT_SILENTLY_CHANGE_ETRN02_IMPLEMENTATION_SEMANTICS_IN_D14",
+    "DO_NOT_SKIP_D14_OR_D15",
+    "DO_NOT_ADVANCE_TO_WP4_OR_ULSH-02"
+  ]
+}
