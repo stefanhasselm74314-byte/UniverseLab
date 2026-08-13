@@ -1,0 +1,48 @@
+name: ULSH-01 WP3-D11 CP01R3 protocol design v1.0
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.json"
+      - "science/hzt-m0/md2s/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesignLedger_v1.0.md"
+      - "tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesignTest_v1.0.py"
+      - ".github/workflows/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.json"
+      - "science/hzt-m0/md2s/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesignLedger_v1.0.md"
+      - "tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesignTest_v1.0.py"
+      - ".github/workflows/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-design-no-execution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate design registry
+        run: python -m json.tool registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.json >/dev/null
+      - name: Compile and run design-only test
+        run: |
+          python -m py_compile tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesignTest_v1.0.py
+          python tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesignTest_v1.0.py
+      - name: Enforce no physical implementation or execution
+        run: |
+          ! grep -R -nE -- 'subprocess|import numpy|import scipy|--execute|solve_ivp\(|damped_newton\(|shooting_residual\(|physical_solve_authorized.: true|single_use_grant_present.: true' \
+            registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.json \
+            science/hzt-m0/md2s/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesignLedger_v1.0.md \
+            tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesignTest_v1.0.py
+      - name: Confirm pending implementation identity and governance
+        run: |
+          grep -q 'PENDING_D12_IMPLEMENTATION_FREEZE' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.json
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.json
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.json

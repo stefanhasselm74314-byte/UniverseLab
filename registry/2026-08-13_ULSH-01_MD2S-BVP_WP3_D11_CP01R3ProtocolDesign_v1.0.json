@@ -1,0 +1,181 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-d11-cp01r3-protocol-design.v1",
+  "version": "1.0.0",
+  "date": "2026-08-13",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP3-D11",
+  "classification": "BOUNDARY_AWARE_INITIALIZATION_AND_STATE_METRIC_TRUST_PROTOCOL_DESIGN_NO_EXECUTION",
+  "status": "PASS_CP01R3_PROTOCOL_DESIGNED_NOT_IMPLEMENTED_NOT_AUTHORIZED_NOT_EXECUTED",
+  "source_diagnosis": "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.json",
+  "new_run_identity": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R3",
+    "reason": "CP01R3 changes the seed construction and the nonlinear trust metric, so immutable-run governance requires a new run identity.",
+    "state": "DESIGNED_NOT_IMPLEMENTED_NOT_AUTHORIZED_NOT_EXECUTED",
+    "supersedes": [],
+    "preserves_CP01R1_and_CP01R2_as_immutable_results": true
+  },
+  "physical_identity_freeze": {
+    "model_parameters_identical_to_CP01R2": true,
+    "topological_sector_identical_to_CP01R2": true,
+    "alpha_H_identical_to_CP01R2": true,
+    "physical_equations_identical_to_CP01R2": true,
+    "boundary_residual_equations_identical_to_CP01R2": true,
+    "acceptance_thresholds_identical_to_CP01R2": true,
+    "node_counts_identical_to_CP01R2": true,
+    "seed_multiplier_count_identical_to_CP01R2": true,
+    "progress_continuation_rule_identical_to_CP01R2": true,
+    "changed_components": [
+      "seed_family_via_BJP-01_exact_boundary_derivative_projection",
+      "trust_region_metric_via_ETRN-02_mesh_normalized_original_state_metric"
+    ]
+  },
+  "boundary_projection": {
+    "id": "BJP-01_EXACT_JUNCTION_DERIVATIVE_PROJECTION",
+    "purpose": "Construct a deterministic initialization on the exact R_4D=R_chi=0 junction submanifold without changing the physical parameter point or brane field values.",
+    "input_quantities": ["A_sum_0", "ell_sum_0", "Y_sigma_0", "ell_sigma_0", "rho_N", "rho_S", "lambda_hat"],
+    "exact_targets": {
+      "A_sum_star": "(lambda_hat - 0.5*Y_sigma_0)/4",
+      "ell_sum_star": "-3*A_sum_star + lambda_hat + 0.5*Y_sigma_0",
+      "equivalent_ell_sum_star": "2*lambda_hat - 7*A_sum_star",
+      "delta_A_sum": "A_sum_star - A_sum_0",
+      "delta_ell_sum": "ell_sum_star - ell_sum_0"
+    },
+    "derivative_only_basis": {
+      "delta_u_A_N": "c_A_N*(tau-1)",
+      "delta_u_A_S": "c_A_S*(tau-1)",
+      "c_A_N": "rho_N*delta_A_sum/4",
+      "c_A_S": "rho_S*delta_A_sum/4",
+      "delta_u_ell_N": "c_ell_N*(tau-1)",
+      "delta_u_ell_S": "c_ell_S*(tau-1)",
+      "c_ell_N": "ell_sigma_0*delta_ell_sum/4",
+      "c_ell_S": "ell_sigma_0*delta_ell_sum/4"
+    },
+    "analytic_invariants": [
+      "delta_A_at_tau_1_equals_0",
+      "delta_ell_at_tau_1_equals_0",
+      "delta_A_at_pole_equals_0_in_physical_A",
+      "pole_Lhat_equals_1_is_preserved",
+      "ell_sigma_is_unchanged_at_projection",
+      "Y_sigma_is_unchanged_at_projection",
+      "R_A_R_ell_R_varphi_R_patch_R_scalar_R_gauge_are_unchanged_at_projection",
+      "R_4D_and_R_chi_are_exactly_zero_in_exact_arithmetic_after_projection"
+    ],
+    "scope_firewall": "BJP-01 is an initialization transform only. It is not a solved background and may increase bulk residuals."
+  },
+  "new_seed_family": {
+    "seed_set_id_reserved": "M1-BG3B-CP01R3-BJP01-SEEDS-01",
+    "seed_spec_sha256": "PENDING_D12_IMPLEMENTATION_FREEZE",
+    "construction": "Apply BJP-01 independently to each of the seven frozen CP01R2 seed multipliers at each frozen mesh.",
+    "uses_result_fitting": false,
+    "uses_changed_physical_parameters": false,
+    "uses_extra_seed_multipliers": false,
+    "hash_must_be_frozen_before_any_release_review": true
+  },
+  "etrn02_design": {
+    "id": "ETRN-02_EQUILIBRATED_LINEAR_SOLVE_WITH_MESH_NORMALIZED_STATE_METRIC_TRUST",
+    "linear_direction": {
+      "row_and_column_equilibration": "PRESERVED_FOR_LINEAR_SOLVE_ONLY",
+      "svd_relative_cutoff": "PRESERVE_CP01R2_VALUE_1e-12",
+      "acceptance_merit": "ORIGINAL_UNSCALED_RESIDUAL_INFINITY_NORM",
+      "rho_definition": "PRESERVE_CP01R2_ACTUAL_OVER_PREDICTED_REDUCTION"
+    },
+    "trust_metric": {
+      "principle": "Trust clipping must not use the Jacobian-equilibrated z norm as the state-space distance.",
+      "field_block_metric": "For each of the eight N-node field blocks, use RMS(delta_x_block / s_block), so changing node count alone does not grow the trust norm by sqrt(N).",
+      "field_block_scale": "s_block=max(1,RMS(seed_block)) frozen at stage initialization",
+      "parameter_metric": "For each of eight global parameters use abs(delta_p)/s_p with s_p=max(1,abs(seed_p)) frozen at stage initialization",
+      "combined_metric": "sqrt(sum(field_block_RMS_terms^2)+sum(parameter_scaled_terms^2))",
+      "clip_rule": "alpha=min(1,Delta/state_metric_norm(dx_unclipped)); dx=alpha*dx_unclipped",
+      "column_equilibration_affects_trust_metric": false,
+      "mesh_normalized_by_construction": true
+    },
+    "trust_update": {
+      "rho_accept_min": 0.10,
+      "rho_shrink": 0.25,
+      "rho_expand": 0.75,
+      "expansion_factor": 2.0,
+      "initial_radius": 0.25,
+      "minimum_radius": 1e-8,
+      "maximum_radius": 2.0,
+      "design_basis": "A dimensionless O(1) block-normalized state metric; values are protocol design constants and require manufactured-control validation before any physical release review."
+    },
+    "stagnation_and_iteration": {
+      "maximum_iterations_per_mesh": 120,
+      "stagnation_window_iterations": 12,
+      "stagnation_relative_improvement_floor": 0.0001,
+      "unchanged_from_CP01R2": true
+    },
+    "progress_continuation": {
+      "rule": "finite_and_primary_admissible_and_not_timed_out_and_final<=0.90*initial",
+      "unchanged_from_CP01R2": true,
+      "reason": "D11 intentionally changes only initialization and trust geometry so the next experiment remains diagnostically attributable."
+    }
+  },
+  "manufactured_control_suite_required_before_binding": [
+    {
+      "id": "D11-C1",
+      "name": "exact_boundary_projection_algebra",
+      "requirement": "For diverse finite synthetic junction tuples with positive rho_N,rho_S,ell_sigma, BJP-01 must zero R_4D and R_chi to arithmetic tolerance while preserving Y_sigma and brane field values."
+    },
+    {
+      "id": "D11-C2",
+      "name": "pole_and_patch_invariant_control",
+      "requirement": "The derivative-only basis must preserve pole A values, Lhat(0)=1, brane A/ell matching values, and all six nonprojected boundary residuals."
+    },
+    {
+      "id": "D11-C3",
+      "name": "mesh_normalized_metric_control",
+      "requirement": "Sampling the same smooth perturbation at N=24,32,48,64,96 must give the same state-metric norm within registered discretization tolerance."
+    },
+    {
+      "id": "D11-C4",
+      "name": "linear_preconditioner_trust_decoupling_control",
+      "requirement": "Changing Jacobian column equilibration while preserving the recovered original-variable Newton direction must not change the state-metric trust norm or clip decision."
+    },
+    {
+      "id": "D11-C5",
+      "name": "synthetic_stiff_boundary_bulk_problem",
+      "requirement": "ETRN-02 must converge or fail closed on a manufactured coupled boundary/bulk problem with known root and must export rho, state-metric step norm and trust history."
+    },
+    {
+      "id": "D11-C6",
+      "name": "nonfinite_and_admissibility_firewall",
+      "requirement": "Nonfinite states, invalid radii and inadmissible trial states must be rejected without state mutation."
+    }
+  ],
+  "release_sequence": [
+    "D12_IMPLEMENT_BJP01_ETRN02_AND_RUN_MANUFACTURED_CONTROLS_ONLY",
+    "D13_INDEPENDENT_IMPLEMENTATION_REVIEW_NO_PHYSICAL_EXECUTION",
+    "D14_FREEZE_CP01R3_EXACT_RUN_INPUT_SEED_HASH_AND_SOURCE_BUNDLE",
+    "D15_SEPARATE_PHYSICAL_RELEASE_ELIGIBILITY_REVIEW_ONLY"
+  ],
+  "execution_firewall": {
+    "CP01R3_solver_implementation_present": false,
+    "physical_backend_imported": false,
+    "physical_residual_evaluated": false,
+    "physical_jacobian_evaluated": false,
+    "physical_solve_authorized": false,
+    "single_use_grant_present": false,
+    "physical_solve_executed": false,
+    "physical_result_artifact_present": false
+  },
+  "governance_state": {
+    "WP3": "OPEN_CP01R3_PROTOCOL_DESIGNED_IMPLEMENTATION_AND_MANUFACTURED_CONTROLS_PENDING",
+    "WP4": "BLOCKED_NO_ACCEPTED_BACKGROUND_EXPORT",
+    "ULSH-02": "BLOCKED_PENDING_ULSH-01_RELEASE_GATE",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_allowed_action": "ULSH-01_WP3_D12_CP01R3_BJP01_ETRN02_IMPLEMENTATION_AND_MANUFACTURED_CONTROLS_ONLY",
+  "forbidden_next_actions": [
+    "DO_NOT_EXECUTE_CP01R3_IN_D11",
+    "DO_NOT_REUSE_OR_REPLAY_CP01R1_OR_CP01R2_GRANTS",
+    "DO_NOT_CALL_BJP01_AN_ACCEPTED_BACKGROUND",
+    "DO_NOT_CHANGE_PHYSICAL_PARAMETERS_OR_TOPOLOGY",
+    "DO_NOT_RELAX_PHYSICAL_ACCEPTANCE_THRESHOLDS",
+    "DO_NOT_AUTHORIZE_A_PHYSICAL_RUN_BEFORE_D12_D13_D14_AND_D15_REVIEWS",
+    "DO_NOT_ADVANCE_TO_WP4_OR_ULSH-02"
+  ]
+}
