@@ -1,0 +1,53 @@
+name: HZT-M0 S6 C-PHYS H2 Dynamic Normal D2N-Q Selection v0.1
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.md"
+      - "tools/2026-08-13_validate_hzt_m0_s6_c_phys_h2_dynamic_normal_d2nq_selection_v0.1.py"
+      - "tests/2026-08-13_test_hzt_m0_s6_c_phys_h2_dynamic_normal_d2nq_selection_v0.1.py"
+      - ".github/workflows/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.md"
+      - "tools/2026-08-13_validate_hzt_m0_s6_c_phys_h2_dynamic_normal_d2nq_selection_v0.1.py"
+      - "tests/2026-08-13_test_hzt_m0_s6_c_phys_h2_dynamic_normal_d2nq_selection_v0.1.py"
+      - ".github/workflows/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-h2-dynamic-normal-selection:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate JSON syntax
+        run: python -m json.tool registry/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.json >/dev/null
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/2026-08-13_validate_hzt_m0_s6_c_phys_h2_dynamic_normal_d2nq_selection_v0.1.py
+          python -m py_compile tests/2026-08-13_test_hzt_m0_s6_c_phys_h2_dynamic_normal_d2nq_selection_v0.1.py
+      - name: Run Codazzi degeneracy regression suite
+        run: python tests/2026-08-13_test_hzt_m0_s6_c_phys_h2_dynamic_normal_d2nq_selection_v0.1.py
+      - name: Validate source bindings and fail-closed interpretation
+        run: python tools/2026-08-13_validate_hzt_m0_s6_c_phys_h2_dynamic_normal_d2nq_selection_v0.1.py --json
+      - name: Enforce governance firewall
+        shell: bash
+        run: |
+          set -euo pipefail
+          F=registry/2026-08-13_HZT-M0_S6_C-PHYS_H2_DynamicNormal_D2NQ_SelectionTest_v0.1.json
+          grep -q '"gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT"' "$F"
+          grep -q '"answer": "NO_AT_CURRENT_CLOSURE"' "$F"
+          grep -q '"disposition": "BLOCKED_BY_MISSING_TIME_DEPENDENT_BULK_EMBEDDING_CLOSURE_NOT_FALSIFIED"' "$F"
+          grep -q '"K1-D": "NOT_RELEASED"' "$F"
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' "$F"
+          grep -q '"WP4": "BLOCKED"' "$F"
+          grep -q '"physical_evidence_effect": "NONE"' "$F"
