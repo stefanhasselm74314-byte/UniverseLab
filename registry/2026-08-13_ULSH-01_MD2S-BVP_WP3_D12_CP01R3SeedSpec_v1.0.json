@@ -1,0 +1,35 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.cp01r3-bjp01-seed-spec.v1",
+  "version": "1.0.0",
+  "date": "2026-08-13",
+  "run_id_reserved": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R3",
+  "seed_set_id": "M1-BG3B-CP01R3-BJP01-SEEDS-01",
+  "base_seed_set": "M1-BG3B-CP01-SEEDS-01",
+  "base_seed_multipliers": [
+    "0",
+    "1/8",
+    "-1/8",
+    "1/4",
+    "-1/4",
+    "1/2",
+    "-1/2"
+  ],
+  "node_counts": [
+    24,
+    32,
+    48,
+    64,
+    96
+  ],
+  "projection_id": "BJP-01_EXACT_JUNCTION_DERIVATIVE_PROJECTION",
+  "construction": {
+    "step_1": "construct the frozen CP01R2 seed at the same seed multiplier and node count",
+    "step_2": "evaluate only the seed-side boundary quantities A_sum_0, ell_sum_0, Y_sigma_0, ell_sigma_0, rho_N, rho_S under the frozen physical equations",
+    "step_3": "compute A_sum_star=(lambda_hat-0.5*Y_sigma_0)/4 and ell_sum_star=-3*A_sum_star+lambda_hat+0.5*Y_sigma_0",
+    "step_4": "apply derivative-only u_A and u_ell deformations c*(tau-1) with coefficients frozen by the D11 design",
+    "step_5": "do not alter physical parameters, topology, scalar/gauge seed fields, brane field values, node counts, or seed multipliers"
+  },
+  "implementation_source": "tools/2026-08-13_ulsh_01_md2s_bvp_wp3_d12_cp01r3_bjp01_etrn02_v1.0.py",
+  "physical_execution_authorized": false,
+  "physical_evidence_effect": "NONE"
+}
