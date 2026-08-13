@@ -1,0 +1,117 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys.h4r1-dimensionless-ibvp-constraint-boundary-rank.v1",
+  "version": "0.1.0",
+  "date": "2026-08-14",
+  "block_id": "C-PHYS-PARENT-H4R1-DIMENSIONLESS-IBVP-CONSTRAINT-PROPAGATION-AND-BOUNDARY-RANK-PREFLIGHT",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "baseline_main_sha": "5ddeaba225c97eaab743a8de28f51cab783a6a64",
+  "status": "PASS_DIMENSIONLESS_IBVP_BULK_CONSTRAINT_IDENTITY_LOCAL_BOUNDARY_RANK_NO_EXECUTION_GLOBAL_WELLPOSEDNESS_OPEN",
+  "classification": "FORMAL_PREFLIGHT_NO_PHYSICAL_EXECUTION",
+  "solver_execution": false,
+  "physical_backend_imported": false,
+  "physical_evidence_effect": "NONE",
+  "source_bindings": [
+    {"path": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H4_AxisymmetricTimeRadial_M1_ClosureRankTest_v0.1.json", "git_blob_sha1": "8bfa7c1f896b9fb9c0f97d64ab97b09b60eae116", "role": "H4_TIME_RADIAL_CLOSURE"},
+    {"path": "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json", "git_blob_sha1": "13fbe0084dcf91f2d0696d00947c9eed221a58ce", "role": "M1_DIMENSIONLESS_CONVENTIONS"},
+    {"path": "hzt-s6-parent-action-v0.1.json", "git_blob_sha1": "aab94691b3a960b744825393fd090da098f58e39", "role": "PARENT_ACTION"},
+    {"path": "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md", "git_blob_sha1": "7bf51f38eae34254d855e82d96506a863990ccc7", "role": "CAP_JUNCTION_CONTRACT"}
+  ],
+  "external_material_firewall": {
+    "gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT",
+    "gemini_equations_used_as_premises": false,
+    "two_time_signature_imported": false
+  },
+  "canonical_signature": {"ambient_signature": "(-,+,+,+,+,+)", "physical_times": 1},
+  "dimensionless_variables": {
+    "tau": "M6*t",
+    "x": "M6*r",
+    "varphi": "phi/M6^2",
+    "ell": "M6*L",
+    "a_chi": "A_chi/M6",
+    "u": "ln(a/a_ref)",
+    "v": "ln(ell/ell_ref)",
+    "omega": "h_pq=exp(2*omega)*eta_pq",
+    "Lambda_hat": "Lambda_geom/M6^2",
+    "kappa6_hat_squared": "kappa6^2*M6^4",
+    "lambda_hat": "lambda/M6^5",
+    "z_sigma_hat": "Z_sigma/M6^3",
+    "q_hat": "M6*q_ref"
+  },
+  "principal_characteristic_preflight": {
+    "field_vector": ["omega", "u", "v", "varphi", "a_chi"],
+    "H4_gravitational_determinant": "12*a^7*L",
+    "scalar_coefficient": "-0.5*a^3*L",
+    "gauge_coefficient": "-0.5*a^3*Z_F/L",
+    "domain": "a>0, L>0, finite varphi, Z_F=exp(-2*a_F*varphi)>0",
+    "principal_symbol": "P(xi)=K_field*(h^pq*xi_p*xi_q) with nonsingular K_field",
+    "characteristic_set": "h^pq*xi_p*xi_q=0",
+    "result": "PASS_LOCAL_WAVE_TYPE_CHARACTERISTIC_PREFLIGHT",
+    "global_hyperbolicity_proven": false,
+    "ghost_freedom_proven": false
+  },
+  "initial_data_inventory": {
+    "configuration_count": 5,
+    "velocity_count": 5,
+    "constraints": ["C_H=E_AB*u^A*u^B=0", "C_M=E_AB*u^A*s^B=0"],
+    "classification": "DATA_INVENTORY_NOT_PHYSICAL_DOF_COUNT"
+  },
+  "bulk_constraint_propagation": {
+    "einstein_residual": "E_AB=G_AB+Lambda_geom*g_AB-kappa6^2*T_AB",
+    "bianchi_identity": "nabla^A(G_AB+Lambda_geom*g_AB)=0",
+    "matter_condition": "nabla^A T_AB=0 when scalar and Maxwell Euler-Lagrange equations hold",
+    "combined_identity": "nabla^A E_AB=0",
+    "reduced_structure": "partial_tau C=A*partial_x C+B*C after evolution equations hold",
+    "result": "PASS_FORMAL_HOMOGENEOUS_BULK_CONSTRAINT_PROPAGATION_IDENTITY",
+    "incoming_boundary_constraint_compatibility": "OPEN"
+  },
+  "cap_boundary_normal_rank": {
+    "normal_derivatives": ["K_t", "K_a", "K_chi", "D_n_varphi", "D_n_a_chi"],
+    "metric_jacobian": [[0,-3,-1],[-1,-2,-1],[-1,-3,0]],
+    "metric_determinant": -4,
+    "scalar_coefficient": "1",
+    "gauge_coefficient": "Z_F/ell^2 up to nonzero orientation/normalization factors",
+    "full_determinant_up_to_nonzero_factors": "-4*Z_F/ell^2",
+    "result": "PASS_LOCAL_ALGEBRAIC_BOUNDARY_NORMAL_RANK_5",
+    "full_two_sided_complementing_condition": "OPEN"
+  },
+  "flux_patch_propagation": {
+    "R_patch": "a_chi_N-a_chi_S-N_F/q_hat",
+    "time_derivative": "partial_tau R_patch=partial_tau a_chi_N-partial_tau a_chi_S",
+    "preservation_condition": "R_patch=0 initially and zero boundary electromotive mismatch",
+    "result": "PASS_EXACT_PROPAGATION_CONDITION_NOT_AUTOMATIC_GLOBAL_CLOSURE"
+  },
+  "smooth_pole_branch": {
+    "scope": "alternative endpoint, not simultaneous with a codimension-1 cap",
+    "Delta_chi": "2*pi",
+    "regular_axis": "L=s+O(s^3) in proper radial distance",
+    "regular_gauge_patch": "A_chi=pure_gauge_constant+O(s^2)"
+  },
+  "gate_disposition": {
+    "dimensionless_formulation": "PASS",
+    "local_characteristic_preflight": "PASS",
+    "bulk_constraint_propagation_identity": "PASS_FORMAL",
+    "local_boundary_normal_rank": "PASS_RANK_5",
+    "flux_patch_propagation": "PASS_CONDITIONAL",
+    "boundary_constraint_preservation": "OPEN",
+    "full_two_sided_complementing_condition": "OPEN",
+    "nonlinear_energy_estimate": "OPEN",
+    "global_IBVP_existence_uniqueness": "OPEN",
+    "physical_parent_solve_authorized": false,
+    "D2NQ_parent_dynamic_selection": "OPEN_NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_BIANCHI_IDENTITY_AS_FULL_BOUNDARY_CONSTRAINT_PRESERVATION",
+    "NO_LOCAL_BOUNDARY_RANK_AS_FULL_COMPLEMENTING_CONDITION_OR_NONLINEAR_WELLPOSEDNESS",
+    "NO_WAVE_TYPE_PRINCIPAL_CONE_AS_GHOST_FREEDOM",
+    "NO_PREFLIGHT_AS_SOLVER_AUTHORIZATION",
+    "NO_D2NQ_DYNAMIC_SELECTION_BEFORE_A_PARENT_SOLUTION",
+    "NO_K1D_OR_K1E_PROMOTION",
+    "NO_WP4_OR_EVIDENCE_PROMOTION"
+  ],
+  "next_candidate": "C-PHYS-PARENT-H4R2-BOUNDARY-CONSTRAINT-COMPATIBILITY-TWO-SIDED-COMPLEMENTING-AND-ENERGY-ESTIMATE-PREFLIGHT"
+}
