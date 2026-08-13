@@ -1,0 +1,181 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys.parent-adm-d2nq-recheck.v1",
+  "version": "0.1.0",
+  "date": "2026-08-13",
+  "recheck_id": "C-PHYS-PARENT-ADM-D2NQ-RECHECK-01",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "baseline_main_sha": "2263b8452e036901685dcb9e7e1a8630b95f2f0b",
+  "status": "PASS_FORMAL_PARENT_ADM_AND_D2NQ_KINEMATIC_PROJECTION_DYNAMICAL_SELECTION_OPEN_NO_K1D_RELEASE",
+  "classification": "INDEPENDENT_REDERIVATION_FROM_CANONICAL_REPOSITORY_INPUTS_ONLY",
+  "purpose": "Re-derive the one-time 6D parent canonical constraints and the exact FLRW-symmetric Gauss-Codazzi extrinsic-curvature contribution relevant to D2N-Q, without accepting external Gemini equations as premises.",
+  "source_bindings": [
+    {
+      "path": "hzt-s6-parent-action-v0.1.json",
+      "git_blob_sha1": "aab94691b3a960b744825393fd090da098f58e39",
+      "role": "CANONICAL_SCI001_002_MACHINE_PROFILE"
+    },
+    {
+      "path": "SCI-001-002_v0.1_Canonical_6D_Parent_Action_and_Boundary_Closure.md",
+      "git_blob_sha1": "df1b4a65d613622dcb176a2acc3879044292ac1e",
+      "role": "CANONICAL_SCI001_002_VARIATIONAL_LEDGER"
+    },
+    {
+      "path": "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+      "git_blob_sha1": "13fbe0084dcf91f2d0696d00947c9eed221a58ce",
+      "role": "CANONICAL_M1_FUNCTION_FAMILY"
+    }
+  ],
+  "external_material_firewall": {
+    "gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT",
+    "gemini_equations_used_as_premises": false,
+    "gemini_code_used_as_validation": false,
+    "two_time_signature_imported": false,
+    "two_time_branch_disposition": "QUARANTINED_OUTSIDE_HZT_M0_S6_C_PHYS"
+  },
+  "canonical_parent_action": {
+    "signature": "(-,+,+,+,+,+)",
+    "physical_times": 1,
+    "internal_metric": "TWO_DIMENSIONAL_POSITIVE_DEFINITE",
+    "bulk_lagrangian": "sqrt(-g)*[(M6^4/2)*(R-2*Lambda6) - (1/2)*(dphi)^2 - U(phi) - (1/4)*Z_F(phi)*F_AB*F^AB]",
+    "boundary_closure": "M6^4*sum_s integral_Sigma sqrt(-h)*K_s + integral_Sigma sqrt(-h)*L_Sigma",
+    "cap_lagrangian": "L_Sigma=-lambda(phi)-(1/2)*Z_sigma(phi)*h^ab*D_a_sigma*D_b_sigma",
+    "dimensions_M": {
+      "M6": 1,
+      "Lambda6": 2,
+      "phi": 2,
+      "U": 6,
+      "A_A": 2,
+      "F_AB": 3,
+      "Z_F": 0,
+      "lambda": 5,
+      "Z_sigma": 3
+    }
+  },
+  "m1_sign_data": {
+    "M6_squared_positive": true,
+    "M6_fourth_positive": true,
+    "scalar_kinetic_normalization": "Z_phi=1",
+    "Z_F": "exp(-2*a_F*phi/M6^2)",
+    "Z_F_sign": "STRICTLY_POSITIVE_FOR_FINITE_PHI",
+    "Z_sigma": "z_sigma_hat*M6^3",
+    "Z_sigma_sign": "STRICTLY_POSITIVE_ON_ACTIVE_WINDING_BRANCH"
+  },
+  "temporal_adm": {
+    "split": "5+1_WITH_ONE_TIMELIKE_NORMAL",
+    "metric": "ds6^2=-N^2 dt^2+h_ab(dx^a+N^a dt)(dx^b+N^b dt)",
+    "spatial_dimension_d": 5,
+    "extrinsic_curvature": "K_ab=(dot(h_ab)-D_a N_b-D_b N_a)/(2*N)",
+    "canonical_momenta": {
+      "pi_ab": "(M6^4/2)*sqrt(h)*(K^ab-h^ab*K)",
+      "pi_trace": "-2*M6^4*sqrt(h)*K",
+      "K_ab_inverse": "2/(M6^4*sqrt(h))*(pi_ab-h_ab*pi/4)",
+      "p_phi": "sqrt(h)*(dot(phi)-N^a*D_a(phi))/N",
+      "Pi_A^a": "sqrt(h)*Z_F*E^a"
+    },
+    "hamiltonian_constraint_bulk": "H_perp=2/(M6^4*sqrt(h))*(pi_ab*pi^ab-pi^2/4)+p_phi^2/(2*sqrt(h))+Pi_Aa*Pi_A^a/(2*sqrt(h)*Z_F)+sqrt(h)*[-(M6^4/2)*(R5-2*Lambda6)+(1/2)*D_a(phi)D^a(phi)+U+(Z_F/4)*F_ab*F^ab]",
+    "momentum_constraint_bulk": "H_a=-2*D_b(pi^b_a)+p_phi*D_a(phi)+Pi_A^b*F_ab",
+    "gauge_constraint": "G_A=-D_a(Pi_A^a)+localized_cap_charge_density_with_fixed_sign_convention",
+    "constraint_status": "FORMALLY_REDERIVED_FOR_BULK; LOCALIZED_CAP_TERMS_REQUIRE_COMMON_TIME_FOLIATION_AND_ARE_CONDITIONAL"
+  },
+  "dimension_audit": {
+    "pi_ab": "M^5",
+    "p_phi": "M^3",
+    "Pi_A": "M^3",
+    "H_perp": "M^6",
+    "all_bulk_H_perp_terms": "PASS_M6",
+    "gemini_rho2_over_M6four_as_H2": "FAIL_DIMENSIONALLY_AS_WRITTEN"
+  },
+  "local_kinetic_signs": {
+    "scalar": "POSITIVE_CANONICAL_MOMENTUM_SQUARE",
+    "gauge": "POSITIVE_IF_Z_F_POSITIVE; M1_SATISFIES",
+    "cap_phase": "POSITIVE_IF_Z_sigma_POSITIVE_IN_STATIC_CAP_TIME_SPLIT; M1_ACTIVE_WINDING_BRANCH_SATISFIES",
+    "gravity": "DEWITT_SUPERMETRIC_HAS_CONSTRAINT_TRACE_DIRECTION; RAW_INDEFINITE_SUPERSPACE_SIGNATURE_IS_NOT_BY_ITSELF_A_PHYSICAL_GHOST",
+    "full_ghost_freedom": "NOT_PROVEN_REQUIRES_CONSTRAINED_QUADRATIC_ACTION_DIRAC_OR_EQUIVALENT_PHYSICAL_MODE_REDUCTION_AROUND_ACTUAL_BACKGROUND"
+  },
+  "four_dimensional_projection": {
+    "normal_metric": "delta_ij_positive_definite",
+    "flrw_extrinsic_ansatz": "K^i_munu=alpha^i*u_mu*u_nu+beta^i*gamma_munu",
+    "definitions": {
+      "gamma_munu": "g_munu+u_mu*u_nu",
+      "B_squared": "beta_i*beta^i",
+      "K_i_trace": "-alpha_i+3*beta_i"
+    },
+    "gauss_extrinsic_tensor": "Q_munu=K_i*K^i_munu-K^i_mur*K_nu^(i r)-(1/2)*g_munu*(K_i*K^i-K^i_rs*K_i^rs)",
+    "exact_flrw_components": {
+      "Q_00": "3*B_squared",
+      "Q_spatial": "(2*alpha_i*beta^i-B_squared)*gamma_munu"
+    },
+    "effective_fluid_if_Einstein_normalized": {
+      "rho_Q": "3*M4^2*B_squared",
+      "p_Q": "M4^2*(2*alpha_i*beta^i-B_squared)",
+      "w_Q": "(2*alpha_dot_beta-B_squared)/(3*B_squared)"
+    },
+    "status": "EXACT_KINEMATIC_IDENTITY_GIVEN_FLRW_SYMMETRY_AND_STATED_GAUSS_SIGN_CONVENTION"
+  },
+  "normal_codazzi": {
+    "covariant_form": "Dperp_t(beta_i)+H*(alpha_i+beta_i)=S_i/3",
+    "source_term": "S_i_from_projected_bulk_Ricci_normal_tangent_and_normal_bundle_connection_convention",
+    "source_free_fermi_normal_frame": "dot(beta_i)+H*(alpha_i+beta_i)=0",
+    "status": "KINEMATIC_CODAZZI_RELATION; SOURCE_FREE_REDUCTION_NOT_YET_DERIVED_FOR_DYNAMIC_M1_COSMOLOGY"
+  },
+  "d2nq_exact_conditional_construction": {
+    "normal_basis": "two_orthonormal_spacelike_normals e_Lambda and e_m",
+    "beta_vector": "B_Lambda*e_Lambda+B_m*a^(-3/2)*e_m",
+    "alpha_vector": "-B_Lambda*e_Lambda+(1/2)*B_m*a^(-3/2)*e_m",
+    "orthogonality": "e_Lambda dot e_m=0",
+    "consequences": {
+      "B_squared": "B_Lambda^2+B_m^2*a^(-3)",
+      "rho_Q": "3*M4^2*(B_Lambda^2+B_m^2*a^(-3))",
+      "p_Q": "-3*M4^2*B_Lambda^2",
+      "Lambda_component": "w=-1 and dot(beta_Lambda)=0 under source-free Codazzi",
+      "matterlike_component": "w=0 and beta_m proportional a^(-3/2) under source-free Codazzi"
+    },
+    "classification": "EXACT_KINEMATIC_REALIZATION_NOT_PARENT_DYNAMICAL_DERIVATION"
+  },
+  "effective_planck_normalization": {
+    "static_warped_reduction": "M4^2=M6^4*sum_regions integral_K2 d^2y sqrt(gamma2)*exp(2*A(y))",
+    "status": "CONDITIONAL_ON_STATIC_WARPED_ZERO_MODE_REDUCTION_AND_FINITE_EFFECTIVE_VOLUME"
+  },
+  "remaining_d2nq_dynamical_blockers": [
+    "derive_or_refute_source_free_normal_Codazzi_for_the_time_dependent_M1_sector",
+    "derive_alpha_i_vs_beta_i_from_normal-normal_6D_Einstein_equations_and_cap_matching rather than choosing target equations of state",
+    "derive_or_refute orthogonal Lambda-like and matter-like normal eigencomponents",
+    "determine B_Lambda and B_m from regularity flux cap data and integration constants without free insertion",
+    "control projected bulk Ricci and Weyl terms so Q_munu is not misidentified as the full 4D correction",
+    "establish time-dependent M4 normalization or prove it constant",
+    "perform constrained scalar vector tensor perturbation analysis around an actual accepted background"
+  ],
+  "bounce_disposition": {
+    "negative_rho_squared_term_derived": false,
+    "bounce_derived": false,
+    "H_zero_condition_tested": false,
+    "Hdot_positive_condition_tested": false,
+    "geodesic_completeness_proven": false,
+    "classification": "OPEN; GEMINI_BOUNCE_CLAIMS_NOT_IMPORTED"
+  },
+  "gate_disposition": {
+    "parent_variation": "RECONFIRMED_FROM_CANONICAL_ACTION",
+    "temporal_ADM_constraints": "FORMALLY_REDERIVED",
+    "D2NQ_Q00_identity": "DERIVED_EXACT_CONDITIONAL_ON_FLRW_EMBEDDING",
+    "D2NQ_target_scaling": "CONSTRUCTED_KINEMATICALLY_NOT_DERIVED_DYNAMically",
+    "full_parent_to_B_squared_map": "OPEN",
+    "full_ghost_freedom": "OPEN",
+    "global_bounce": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_GEMINI_DRAFT_AS_CANONICAL_INPUT",
+    "NO_TWO_TIME_SIGNATURE_IN_C_PHYS",
+    "NO_RAW_DEWITT_TRACE_SIGN_AS_PHYSICAL_GHOST_CLAIM",
+    "NO_POSITIVE_SCALAR_GAUGE_KINETICS_AS_FULL_GHOST_FREEDOM",
+    "NO_GAUSS_CODAZZI_Q00_IDENTITY_AS_DYNAMICAL_SELECTION_OF_B_LAMBDA_OR_B_m",
+    "NO_D2NQ_KINEMATIC_REALIZATION_AS_K1D_RELEASE",
+    "NO_NEGATIVE_RHO2_BOUNCE_TERM_WITHOUT_DERIVATION",
+    "NO_SOLVER_OR_OBSERVATIONAL_EVIDENCE_PROMOTION"
+  ],
+  "next_candidate": "C-PHYS-PARENT-H2-DYNAMIC-NORMAL-EQUATIONS-AND-D2NQ-SELECTION-TEST"
+}
