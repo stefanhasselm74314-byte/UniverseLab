@@ -75,7 +75,7 @@ def test_mixed_flux_can_cancel_but_is_not_identity():
     Z = 2.0
     L = 4.0
     phi_t, phi_r = 3.0, 5.0
-    A_t, A_r = 2.0, -30.0
+    A_t, A_r = 2.0, -60.0
     Ttr = phi_t * phi_r + Z * A_t * A_r / L**2
     assert math.isclose(Ttr, 0.0, abs_tol=1e-15)
     generic = phi_t * phi_r + Z * A_t * 1.0 / L**2
