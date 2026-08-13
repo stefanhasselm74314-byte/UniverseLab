@@ -1,0 +1,137 @@
+{
+  "schema": "universelab.ulsh-01.md2s-bvp.wp3-d10-cp01r2-failure-diagnosis.v1",
+  "version": "1.0.0",
+  "date": "2026-08-13",
+  "architecture": "HPVS -> HZT-M0 -> HZT-Full",
+  "solver_id": "ULSH-01 / MD2S-BVP",
+  "work_package": "WP3-D10",
+  "classification": "POST_RESULT_FAILURE_MODE_DIAGNOSIS_NO_EXECUTION",
+  "status": "PASS_CP01R2_FAILURE_MODE_DIAGNOSIS_BOUNDARY_MANIFOLD_AND_TRUST_GEOMETRY_IDENTIFIED_NO_EXECUTION",
+  "source_result_review": "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D9_CP01R2ResultReview_v1.0.json",
+  "frozen_sources": {
+    "physical_kernel": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py",
+    "seed_adapter": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py",
+    "etrn_method": "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d2_cp01r2_etrn_v1.0.py",
+    "run_input": "registry/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2RunInputFreeze_v1.0.json"
+  },
+  "execution_effect": {
+    "backend_imports": 0,
+    "residual_evaluations": 0,
+    "jacobian_evaluations": 0,
+    "solver_calls": 0,
+    "grant_issuance": 0,
+    "grant_replay": 0,
+    "physical_result_artifacts_created": 0
+  },
+  "confirmed_diagnostics": {
+    "all_35_entries_initialized_from_fresh_frozen_seed_same_index": true,
+    "mesh_continuation_source_entry_count": 0,
+    "entries_meeting_10_percent_progress_continuation_threshold": 0,
+    "maximum_relative_stage_residual_improvement": 0.007993134821050813,
+    "maximum_relative_stage_residual_improvement_entry": "CP01R2-E31-S6-N24",
+    "total_recorded_etrn_iterations": 1785,
+    "accepted_etrn_iterations": 1785,
+    "rejected_etrn_iterations": 0,
+    "n96_recorded_iterations": 84,
+    "n96_accepted_iterations": 84,
+    "n96_rejected_iterations": 0,
+    "n96_rho_range": [0.9746469077294196, 1.0117346904819102],
+    "n96_final_trust_radius_all_seeds": 64.0,
+    "n96_unclipped_scaled_step_norm_range": [189299164.39343628, 462382857.6050169],
+    "n96_max_trust_to_unclipped_step_ratio_range": [1.3841343585161839e-07, 3.380891838855847e-07],
+    "n96_relative_terminal_state_displacement_from_frozen_seed_range": [1.0639167430924769e-05, 1.1332300193563371e-05],
+    "n96_max_component_displacement_from_frozen_seed_range": [1.4072963737010724e-05, 1.5091765722008432e-05],
+    "n96_full_discrete_rank_all_seeds": "776_OF_776",
+    "n96_condition_estimate_range": [53364364303.94959, 178934820389.57547],
+    "n96_candidate_count": 0,
+    "n96_terminal_failure_all_seeds": "STAGNATION"
+  },
+  "junction_identity": {
+    "source_boundary_order": ["R_A", "R_ell", "R_varphi", "R_patch", "R_4D", "R_chi", "R_scalar", "R_gauge"],
+    "R_4D": "-3*A_sum - ell_sum + lambda_hat + 0.5*Y_sigma",
+    "R_chi": "-4*A_sum + lambda_hat - 0.5*Y_sigma",
+    "exact_sum_identity": "R_4D + R_chi = -7*A_sum - ell_sum + 2*lambda_hat",
+    "frozen_lambda_hat": 1.0,
+    "simultaneous_zero_necessary_condition": "7*A_sum + ell_sum = 2",
+    "Y_sigma_cancels_from_sum_identity": true,
+    "n96_observed_7A_sum_plus_ell_sum_range": [3.3297435159272195e-06, 0.003966294874889976],
+    "n96_observed_R4D_plus_Rchi_range": [1.99603370512511, 1.999996670256484],
+    "interpretation": "The terminal states remain extremely far from the exact combined junction manifold in this coordinate/residual representation. This is a diagnostic statement about the frozen numerical path, not a continuum nonexistence proof."
+  },
+  "ranked_failure_modes": [
+    {
+      "id": "D10-H1",
+      "label": "BOUNDARY_MANIFOLD_SEED_MISMATCH",
+      "strength": "STRONG_DIAGNOSTIC",
+      "evidence": [
+        "The exact combined junction condition requires 7*A_sum + ell_sum = 2 at lambda_hat=1.",
+        "All seven N96 terminal states remain between approximately 3.3e-6 and 3.97e-3 in 7*A_sum + ell_sum.",
+        "R_4D + R_chi therefore remains approximately 1.996 to 2.000.",
+        "All 35 stages restart from the frozen control-seed family rather than a boundary-manifold-informed continuation state."
+      ],
+      "not_claimed": "No statement that the exact junction manifold has no global solution."
+    },
+    {
+      "id": "D10-H2",
+      "label": "EQUILIBRATED_TRUST_SPACE_STEP_SQUEEZE",
+      "strength": "STRONG_NUMERICAL_DIAGNOSTIC",
+      "evidence": [
+        "Every one of 1785 recorded ETRN trial iterations was accepted; none was rejected.",
+        "At N96 rho stays close to one and the trust radius reaches its frozen maximum 64 for every seed.",
+        "The unconstrained equilibrated step norm at N96 is approximately 1.89e8 to 4.62e8, so the active trust radius is only approximately 1.38e-7 to 3.38e-7 of that norm.",
+        "The N96 terminal state moves only approximately 1.06e-5 to 1.13e-5 in relative Euclidean norm from its frozen seed before the stagnation rule fires."
+      ],
+      "not_claimed": "No automatic permission to enlarge the trust radius or alter scaling in CP01R2."
+    },
+    {
+      "id": "D10-H3",
+      "label": "PROGRESS_CONTINUATION_NEVER_ACTIVATED",
+      "strength": "CONFIRMED_PROTOCOL_PATH",
+      "evidence": [
+        "The frozen continuation rule requires final <= 0.90 * initial.",
+        "No stage reaches that threshold; the best relative stage improvement is approximately 0.7993 percent.",
+        "All 35 records identify their initialization as FRESH_FROZEN_CP01R1_SEED_SAME_INDEX and no continuation source entry is recorded."
+      ],
+      "not_claimed": "This is not a protocol defect; it is the exact realized path under the frozen rule."
+    },
+    {
+      "id": "D10-H4",
+      "label": "N96_DISCRETE_RANK_DEFICIENCY_NOT_PRIMARY_EXPLANATION",
+      "strength": "CONFIRMED_DIAGNOSTIC_NARROWING",
+      "evidence": [
+        "All seven N96 CP01R2 diagnostics report raw discrete rank 776/776.",
+        "All reported N96 condition estimates are below 1e12.",
+        "Despite this, all seven N96 stages stagnate without a local root and retain O(1) boundary residuals."
+      ],
+      "not_claimed": "Full discrete rank is not continuum invertibility and does not establish existence."
+    }
+  ],
+  "diagnostic_conclusion": "The preserved CP01R2 data support a combined diagnosis: the frozen seed family remains far from the exact combined junction manifold, while the equilibrated trust-region method accepts locally accurate but heavily clipped steps and never achieves the progress threshold required to activate mesh continuation. Improved N96 discrete rank/conditioning does not remove the boundary obstruction. This narrows the numerical failure mode but does not prove continuum nonexistence.",
+  "governance_state": {
+    "WP3": "NOT_CLOSED_DIAGNOSIS_COMPLETE_NEW_PROTOCOL_REQUIRES_SEPARATE_DESIGN_REVIEW",
+    "WP4": "BLOCKED_NO_ACCEPTED_BACKGROUND_EXPORT",
+    "ULSH-02": "BLOCKED_PENDING_ULSH-01_RELEASE_GATE",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_allowed_action": "ULSH-01_WP3_D11_BOUNDARY_AWARE_INITIALIZATION_AND_TRUST_SCALING_PROTOCOL_DESIGN_NO_EXECUTION",
+  "d11_design_requirements": [
+    "preserve the physical M1 parameter point and topology unless a separately named new experiment is explicitly authorized",
+    "derive boundary-manifold-aware initialization constraints from the exact frozen junction equations rather than fitting result data",
+    "separate seed construction from physical acceptance thresholds",
+    "test scaling/trust geometry only on analytic or manufactured systems before any physical release review",
+    "define any changed seed set with a new seed_set_id and SHA-256",
+    "define any changed nonlinear method or continuation rule under a new run_id",
+    "retain the original CP01R1 and CP01R2 results as immutable negative numerical outcomes"
+  ],
+  "forbidden_next_actions": [
+    "DO_NOT_RERUN_OR_REPLAY_CP01R2_D8",
+    "DO_NOT_SILENTLY_ENLARGE_TRUST_RADIUS_OR_RELAX_STAGNATION_RULE_AND_CALL_IT_CP01R2",
+    "DO_NOT_SILENTLY_REPLACE_THE_SEED_FAMILY_AND_CALL_IT_CP01R2",
+    "DO_NOT_CHANGE_PHYSICAL_PARAMETERS_TO_FORCE_THE_JUNCTION_IDENTITY",
+    "DO_NOT_TREAT_BOUNDARY_MANIFOLD_DISTANCE_AS_CONTINUUM_NONEXISTENCE",
+    "DO_NOT_ADVANCE_TO_WP4_OR_ULSH-02",
+    "DO_NOT_PROMOTE_DISCRETE_FULL_RANK_TO_CONTINUUM_INVERTIBILITY"
+  ]
+}

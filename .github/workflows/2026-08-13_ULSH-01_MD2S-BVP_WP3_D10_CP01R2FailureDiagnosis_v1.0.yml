@@ -1,0 +1,48 @@
+name: ULSH-01 WP3-D10 CP01R2 failure diagnosis v1.0
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.json"
+      - "science/hzt-m0/md2s/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosisLedger_v1.0.md"
+      - "tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosisTest_v1.0.py"
+      - ".github/workflows/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.json"
+      - "science/hzt-m0/md2s/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosisLedger_v1.0.md"
+      - "tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosisTest_v1.0.py"
+      - ".github/workflows/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose-no-execution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate diagnosis registry
+        run: python -m json.tool registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.json >/dev/null
+      - name: Compile and run fail-closed diagnosis test
+        run: |
+          python -m py_compile tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosisTest_v1.0.py
+          python tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosisTest_v1.0.py
+      - name: Enforce no-execution scope
+        run: |
+          ! grep -R -nE -- 'subprocess|import numpy|import scipy|--execute|grant.*issue|damped_newton\(|solve_ivp\(|shooting_residual\(|root\(' \
+            registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.json \
+            science/hzt-m0/md2s/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosisLedger_v1.0.md \
+            tests/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosisTest_v1.0.py
+      - name: Confirm immutable governance
+        run: |
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.json
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.json
+          grep -q 'DO_NOT_RERUN_OR_REPLAY_CP01R2_D8' registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D10_CP01R2FailureDiagnosis_v1.0.json
