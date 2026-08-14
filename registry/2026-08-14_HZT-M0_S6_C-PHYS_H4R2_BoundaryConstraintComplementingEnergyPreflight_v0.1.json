@@ -1,0 +1,134 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys.h4r2-boundary-constraint-complementing-energy-preflight.v1",
+  "version": "0.1.0",
+  "date": "2026-08-14",
+  "block_id": "C-PHYS-PARENT-H4R2-BOUNDARY-CONSTRAINT-COMPATIBILITY-TWO-SIDED-COMPLEMENTING-AND-ENERGY-ESTIMATE-PREFLIGHT",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "baseline_main_sha": "d81953e55b0ec39b73252905f4546cc486d0dc60",
+  "status": "PASS_FROZEN_TWO_SIDED_UNIFORM_LOPATINSKII_AND_CONSTRAINT_FLUX_COMPATIBILITY_CONDITIONAL_NO_EXECUTION_VARIABLE_COEFFICIENT_NONLINEAR_CLOSURE_OPEN",
+  "classification": "FORMAL_LINEARIZED_FROZEN_COEFFICIENT_IBVP_PREFLIGHT_NO_PHYSICAL_EXECUTION",
+  "solver_execution": false,
+  "physical_backend_imported": false,
+  "physical_evidence_effect": "NONE",
+  "source_bindings": [
+    {
+      "path": "registry/2026-08-14_HZT-M0_S6_C-PHYS_H4R1_DimensionlessIBVP_ConstraintBoundaryRank_v0.1.json",
+      "git_blob_sha1": "019478e04487a7361e009c34d7180e4380fe143e",
+      "role": "H4R1_DIMENSIONLESS_IBVP_CONSTRAINT_AND_LOCAL_BOUNDARY_RANK"
+    },
+    {
+      "path": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H4_AxisymmetricTimeRadial_M1_ClosureRankTest_v0.1.json",
+      "git_blob_sha1": "8bfa7c1f896b9fb9c0f97d64ab97b09b60eae116",
+      "role": "H4_TIME_RADIAL_PARENT_REDUCTION"
+    },
+    {
+      "path": "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+      "git_blob_sha1": "7bf51f38eae34254d855e82d96506a863990ccc7",
+      "role": "CANONICAL_CAP_JUNCTION_AND_MATCHING_CONTRACT"
+    }
+  ],
+  "external_material_firewall": {
+    "gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT",
+    "gemini_equations_used_as_premises": false,
+    "gemini_code_used_as_validation": false,
+    "two_time_signature_imported": false
+  },
+  "canonical_signature": {
+    "ambient_signature": "(-,+,+,+,+,+)",
+    "physical_times": 1
+  },
+  "frozen_principal_bulk_problem": {
+    "field_vector": ["omega", "u", "v", "varphi", "a_chi"],
+    "local_equation": "K_s*(-partial_tau^2+partial_xs^2)U_s+lower_order=0 on each side s in {N,S}",
+    "K_s": "nonsingular on a>0, ell>0, finite varphi with Z_F>0",
+    "normal_coordinates": "x_s>=0 measured away from the cap into each bulk",
+    "laplace_frequency": "zeta with Re(zeta)>0",
+    "decaying_mode": "U_s=exp(-kappa_s*x_s)*v_s",
+    "kappa_s": "c_s*zeta with c_s>0 after local principal normalization",
+    "scope": "FROZEN_COEFFICIENT_PRINCIPAL_SYSTEM_ONLY"
+  },
+  "two_sided_interface_symbol": {
+    "continuity": "v_N-v_S=0 so v_N=v_S=v",
+    "metric_block": [[0,-3,-1],[-1,-2,-1],[-1,-3,0]],
+    "metric_block_determinant": -4,
+    "side_gauge_weight": "z_s=Z_F_s/ell_Sigma^2>0",
+    "side_normal_matrix": "J_s=blockdiag(B_g,1,z_s)",
+    "outward_derivative_on_decaying_mode": "D_n U_s=kappa_s*v_s",
+    "reduced_interface_symbol": "M(zeta)=kappa_N*J_N+kappa_S*J_S",
+    "determinant": "-4*(kappa_N+kappa_S)^4*(kappa_N*z_N+kappa_S*z_S)",
+    "result": "PASS_NO_NONTRIVIAL_DECAYING_HOMOGENEOUS_MODE_FOR_Re_zeta_GT_0",
+    "classification": "FROZEN_TWO_SIDED_LOPATINSKII_COMPLEMENTING_PASS"
+  },
+  "uniform_lopatinskii_preflight": {
+    "compact_coefficient_domain": [
+      "c_s in [c_min,c_max] with c_min>0",
+      "z_s in [z_min,z_max] with z_min>0",
+      "normalized |zeta|=1 and Re(zeta)>=0 excluding zeta=0"
+    ],
+    "determinant_lower_bound": "|det M| >= 128*c_min^5*z_min on the normalized frozen domain",
+    "result": "PASS_UNIFORM_FROZEN_PRINCIPAL_COMPLEMENTING_BOUND",
+    "nonimplications": [
+      "NOT_A_VARIABLE_COEFFICIENT_KREISS_ESTIMATE",
+      "NOT_A_NONLINEAR_ENERGY_ESTIMATE",
+      "NOT_GLOBAL_EXISTENCE_OR_UNIQUENESS",
+      "NOT_GHOST_FREEDOM"
+    ]
+  },
+  "boundary_constraint_compatibility": {
+    "bulk_constraint_vector": ["C_H", "C_M"],
+    "principal_constraint_system": "partial_tau C_H=partial_x C_M+lower; partial_tau C_M=partial_x C_H+lower up to orientation conventions",
+    "characteristic_constraints": ["C_plus=C_H+C_M", "C_minus=C_H-C_M"],
+    "cap_codazzi_balance": "D^mu S_munu + sum_s T_AB^(s)*n_s^A*h^B_nu=0 when the cap Euler-Lagrange equations and scalar/Maxwell matching hold",
+    "constraint_flux_statement": "the cap balance law removes external injection into the combined two-sided momentum-constraint channel; the remaining homogeneous constraint energy has no cap source",
+    "required_conditions": [
+      "bulk scalar and Maxwell equations hold",
+      "dynamic junction equations hold",
+      "cap localized equations hold",
+      "scalar matching holds",
+      "Maxwell matching and patch condition hold",
+      "initial constraints vanish"
+    ],
+    "result": "PASS_CONDITIONAL_FORMAL_TWO_SIDED_CONSTRAINT_FLUX_COMPATIBILITY",
+    "not_proven": "an independent full variable-coefficient boundary constraint evolution theorem"
+  },
+  "linear_energy_resolvent_preflight": {
+    "statement": "strongly hyperbolic frozen scalar-wave principal reduction plus the uniform complementing bound gives a frozen-frequency Kreiss-type resolvent estimate on the declared compact coefficient domain",
+    "result": "PASS_FROZEN_LINEAR_PRINCIPAL_RESOLVENT_ESTIMATE_PREFLIGHT",
+    "physical_hamiltonian_positivity_inferred": false,
+    "variable_coefficient_energy_estimate": "OPEN",
+    "nonlinear_energy_estimate": "OPEN"
+  },
+  "flux_patch_compatibility": {
+    "R_patch": "a_chi_N-a_chi_S-N_F/q_hat",
+    "preservation": "R_patch=0 initially and zero boundary electromotive mismatch",
+    "role_in_h4r2": "required to prevent gauge-sector boundary injection into the frozen interface problem"
+  },
+  "gate_disposition": {
+    "frozen_two_sided_complementing_condition": "PASS",
+    "uniform_frozen_lopatinskii_bound": "PASS_ON_DECLARED_COMPACT_DOMAIN",
+    "boundary_constraint_flux_compatibility": "PASS_CONDITIONAL_FORMAL",
+    "frozen_linear_resolvent_estimate": "PASS_PREFLIGHT",
+    "variable_coefficient_constraint_boundary_theorem": "OPEN",
+    "variable_coefficient_kreiss_estimate": "OPEN",
+    "nonlinear_energy_estimate": "OPEN",
+    "global_IBVP_existence_uniqueness": "OPEN",
+    "full_ghost_freedom": "OPEN",
+    "physical_parent_solve_authorized": false,
+    "D2NQ_parent_dynamic_selection": "OPEN_NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_FROZEN_LOPATINSKII_PASS_AS_NONLINEAR_WELLPOSEDNESS",
+    "NO_FORMAL_CAP_CODAZZI_BALANCE_AS_UNCONDITIONAL_CONSTRAINT_PRESERVATION",
+    "NO_PDE_RESOLVENT_ESTIMATE_AS_PHYSICAL_HAMILTONIAN_POSITIVITY_OR_GHOST_FREEDOM",
+    "NO_H4R2_PREFLIGHT_AS_PHYSICAL_SOLVER_AUTHORIZATION",
+    "NO_D2NQ_DYNAMIC_SELECTION_BEFORE_A_PARENT_SOLUTION",
+    "NO_K1D_OR_K1E_PROMOTION",
+    "NO_WP4_OR_PHYSICAL_EVIDENCE_PROMOTION"
+  ],
+  "next_candidate": "C-PHYS-PARENT-H4R3-VARIABLE-COEFFICIENT-FIRST-ORDER-REDUCTION-CONSTRAINT-BOUNDARY-SYMMETRIZER-AND-NONLINEAR-ENERGY-CLOSURE"
+}
