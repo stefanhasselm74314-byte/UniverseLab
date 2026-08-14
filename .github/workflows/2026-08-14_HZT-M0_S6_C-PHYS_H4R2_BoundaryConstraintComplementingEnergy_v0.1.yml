@@ -1,0 +1,76 @@
+name: HZT-M0 S6 C-PHYS H4R2 Boundary Constraint Complementing Energy v0.1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "registry/2026-08-14_HZT-M0_S6_C-PHYS_H4R2_BoundaryConstraintComplementingEnergyPreflight_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-14_HZT-M0_S6_C-PHYS_H4R2_BoundaryConstraintComplementingEnergyPreflight_v0.1.md"
+      - "tools/2026-08-14_validate_hzt_m0_s6_c_phys_h4r2_complementing_energy_v0.1.py"
+      - "tests/2026-08-14_test_hzt_m0_s6_c_phys_h4r2_complementing_energy_v0.1.py"
+      - ".github/workflows/2026-08-14_HZT-M0_S6_C-PHYS_H4R2_BoundaryConstraintComplementingEnergy_v0.1.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-14_HZT-M0_S6_C-PHYS_H4R2_BoundaryConstraintComplementingEnergyPreflight_v0.1.json"
+      - "science/hzt-m0/md2s/2026-08-14_HZT-M0_S6_C-PHYS_H4R2_BoundaryConstraintComplementingEnergyPreflight_v0.1.md"
+      - "tools/2026-08-14_validate_hzt_m0_s6_c_phys_h4r2_complementing_energy_v0.1.py"
+      - "tests/2026-08-14_test_hzt_m0_s6_c_phys_h4r2_complementing_energy_v0.1.py"
+      - ".github/workflows/2026-08-14_HZT-M0_S6_C-PHYS_H4R2_BoundaryConstraintComplementingEnergy_v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-h4r2-no-physical-execution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate registry JSON
+        run: python -m json.tool registry/2026-08-14_HZT-M0_S6_C-PHYS_H4R2_BoundaryConstraintComplementingEnergyPreflight_v0.1.json >/dev/null
+      - name: Compile H4R2 validator and tests
+        run: |
+          python -m py_compile tools/2026-08-14_validate_hzt_m0_s6_c_phys_h4r2_complementing_energy_v0.1.py
+          python -m py_compile tests/2026-08-14_test_hzt_m0_s6_c_phys_h4r2_complementing_energy_v0.1.py
+      - name: Run independent H4R2 algebra tests
+        run: python tests/2026-08-14_test_hzt_m0_s6_c_phys_h4r2_complementing_energy_v0.1.py
+      - name: Validate bindings, mathematics and governance
+        run: python tools/2026-08-14_validate_hzt_m0_s6_c_phys_h4r2_complementing_energy_v0.1.py --json
+      - name: Enforce no-backend static scope
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          paths = [
+              Path('tools/2026-08-14_validate_hzt_m0_s6_c_phys_h4r2_complementing_energy_v0.1.py'),
+              Path('tests/2026-08-14_test_hzt_m0_s6_c_phys_h4r2_complementing_energy_v0.1.py'),
+          ]
+          forbidden = {'numpy', 'scipy', 'subprocess', 'importlib'}
+          for path in paths:
+              tree = ast.parse(path.read_text(encoding='utf-8'))
+              imports = set()
+              for node in ast.walk(tree):
+                  if isinstance(node, ast.Import):
+                      imports.update(alias.name.split('.')[0] for alias in node.names)
+                  elif isinstance(node, ast.ImportFrom) and node.module:
+                      imports.add(node.module.split('.')[0])
+              assert not (imports & forbidden), (path, imports & forbidden)
+          PY
+      - name: Enforce scientific firewall
+        shell: bash
+        run: |
+          set -euo pipefail
+          F=registry/2026-08-14_HZT-M0_S6_C-PHYS_H4R2_BoundaryConstraintComplementingEnergyPreflight_v0.1.json
+          grep -q '"gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT"' "$F"
+          grep -q '"frozen_two_sided_complementing_condition": "PASS"' "$F"
+          grep -q '"variable_coefficient_kreiss_estimate": "OPEN"' "$F"
+          grep -q '"nonlinear_energy_estimate": "OPEN"' "$F"
+          grep -q '"physical_parent_solve_authorized": false' "$F"
+          grep -q '"K1-D": "NOT_RELEASED"' "$F"
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' "$F"
+          grep -q '"WP4": "BLOCKED"' "$F"
+          grep -q '"physical_evidence_effect": "NONE"' "$F"
