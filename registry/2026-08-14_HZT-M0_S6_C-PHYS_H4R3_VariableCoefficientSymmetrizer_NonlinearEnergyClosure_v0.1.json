@@ -1,0 +1,149 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys.h4r3-variable-coefficient-symmetrizer-nonlinear-energy-closure.v1",
+  "version": "0.1.0",
+  "date": "2026-08-14",
+  "block_id": "C-PHYS-PARENT-H4R3-VARIABLE-COEFFICIENT-FIRST-ORDER-REDUCTION-CONSTRAINT-BOUNDARY-SYMMETRIZER-AND-NONLINEAR-ENERGY-CLOSURE",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "baseline_main_sha": "e50ddfa07fd34f7959723897066bcd8d34b15d19",
+  "status": "PASS_VARIABLE_COEFFICIENT_PRINCIPAL_SYMMETRIZER_AND_MAXIMALLY_CONSERVATIVE_INTERFACE_CONDITIONAL_LOCAL_SOBLEV_ENERGY_CLOSURE_NO_EXECUTION_LOCAL_EXISTENCE_THEOREM_NOT_RATIFIED",
+  "classification": "FORMAL_QUASILINEAR_IBVP_ENERGY_PREFLIGHT_NO_PHYSICAL_EXECUTION",
+  "solver_execution": false,
+  "physical_backend_imported": false,
+  "physical_evidence_effect": "NONE",
+  "source_bindings": [
+    {
+      "path": "registry/2026-08-14_HZT-M0_S6_C-PHYS_H4R2_BoundaryConstraintComplementingEnergyPreflight_v0.1.json",
+      "git_blob_sha1": "6c9d7b468347c739f789c2da84f618ea3295a9e3",
+      "role": "H4R2_FROZEN_TWO_SIDED_LOPATINSKII_AND_CONSTRAINT_FLUX_PREFLIGHT"
+    },
+    {
+      "path": "registry/2026-08-14_HZT-M0_S6_C-PHYS_H4R1_DimensionlessIBVP_ConstraintBoundaryRank_v0.1.json",
+      "git_blob_sha1": "019478e04487a7361e009c34d7180e4380fe143e",
+      "role": "H4R1_DIMENSIONLESS_VARIABLES_AND_BOUNDARY_NORMAL_RANK"
+    },
+    {
+      "path": "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+      "git_blob_sha1": "7bf51f38eae34254d855e82d96506a863990ccc7",
+      "role": "CAP_JUNCTION_SCALAR_GAUGE_AND_WINDING_BRANCH_CONTRACT"
+    }
+  ],
+  "external_material_firewall": {
+    "gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT",
+    "gemini_equations_used_as_premises": false,
+    "gemini_code_used_as_validation": false,
+    "two_time_signature_imported": false
+  },
+  "canonical_signature": {
+    "ambient_signature": "(-,+,+,+,+,+)",
+    "physical_times": 1
+  },
+  "variable_coefficient_bulk_reduction": {
+    "field_vector": ["omega", "u", "v", "varphi", "a_chi"],
+    "normalized_second_order_form": "partial_tau^2 U_s-c_s(U,partial U)^2*partial_xs^2 U_s=F_s(U,partial U) after left multiplication by the nonsingular H4 field-space principal matrix",
+    "side_domain": "x_s>=0 measured from the cap into each bulk",
+    "speed_domain": "0<c_min<=c_s<=c_max<infinity",
+    "first_order_variables": ["U_s", "P_s=partial_tau U_s", "Q_s=partial_xs U_s"],
+    "principal_first_order_system": [
+      "partial_tau U_s=P_s",
+      "partial_tau P_s-c_s^2*partial_xs Q_s=lower_order",
+      "partial_tau Q_s-partial_xs P_s=0"
+    ],
+    "result": "PASS_FORMAL_VARIABLE_COEFFICIENT_FIRST_ORDER_REDUCTION_ON_NONDEGENERATE_STATE_DOMAIN",
+    "physical_hamiltonian_interpretation": false
+  },
+  "boundary_row_normalization": {
+    "H4R2_metric_block": [[0,-3,-1],[-1,-2,-1],[-1,-3,0]],
+    "metric_block_determinant": -4,
+    "metric_block_inverse": [[0.75,-0.75,-0.25],[-0.25,0.25,-0.25],[-0.25,-0.75,0.75]],
+    "left_row_transform": "L_B=blockdiag(B_g^{-1},1,1)",
+    "H4R2_side_normal_matrix": "J_s=blockdiag(B_g,1,z_s)",
+    "z_s": "Z_F_s/ell_s^2>0",
+    "normalized_side_matrix": "D_s=L_B*J_s=diag(1,1,1,1,z_s)",
+    "equivalence": "left multiplication by invertible L_B leaves the zero set of the junction equations unchanged",
+    "result": "PASS_EXACT_POSITIVE_BOUNDARY_ROW_NORMALIZATION"
+  },
+  "bulk_pde_symmetrizer": {
+    "derivative_state": "Y_s=(P_s,Q_s)",
+    "A0_s": "blockdiag(D_s/c_s^2,D_s)",
+    "A1_s": "[[0,-D_s],[-D_s,0]] in P-Q block form",
+    "symmetry": "A0_s and A1_s are symmetric",
+    "uniform_positivity_domain": "z_s>=z_min>0 and c_s in [c_min,c_max]",
+    "coercivity_lower_bound": "lambda_min(A0_s)>=min(1,z_min)*min(1,1/c_max^2)",
+    "result": "PASS_EXPLICIT_POSITIVE_PDE_SYMMETRIZER_ON_DECLARED_COMPACT_STATE_DOMAIN",
+    "not_a_physical_kinetic_matrix": true,
+    "ghost_freedom_inferred": false
+  },
+  "interface_energy_flux": {
+    "principal_continuity": "P_N=P_S=P_Sigma obtained by differentiating field continuity in tau",
+    "principal_normal_matching": "D_N*Q_N+D_S*Q_S=0 up to the fixed outward-normal sign convention",
+    "principal_flux": "F_Sigma=P_Sigma^T*(D_N*Q_N+D_S*Q_S)",
+    "flux_on_homogeneous_interface_subspace": 0,
+    "boundary_variable_count": 20,
+    "independent_principal_interface_conditions": 10,
+    "boundary_subspace_dimension": 10,
+    "classification": "MAXIMAL_ISOTROPIC_MAXIMALLY_CONSERVATIVE_PRINCIPAL_INTERFACE_SUBSPACE",
+    "result": "PASS_PRINCIPAL_BOUNDARY_ENERGY_FLUX_CANCELLATION",
+    "nonhomogeneous_lower_order_cap_terms": "controlled as trace/source terms only; they do not alter the principal boundary count in the frozen winding branch"
+  },
+  "constraint_energy_propagation": {
+    "constraint_vector": ["C_H", "C_M"],
+    "variable_coefficient_form": "partial_tau C+A_C(U)*partial_x C=B_C(U,partial U)*C",
+    "principal_reference_matrix": [[0,-1],[-1,0]],
+    "principal_symmetrizer": "identity in the H4R2 orientation convention",
+    "boundary_input_condition": "cap Codazzi balance plus scalar/Maxwell matching and patch preservation remove external constraint injection",
+    "initial_condition": "C=0",
+    "energy_statement": "for any smooth parent solution satisfying the cap conditions, dE_C/dtau<=C_K*E_C and hence zero initial constraints remain zero while the solution stays in the declared state domain",
+    "result": "PASS_CONDITIONAL_VARIABLE_COEFFICIENT_CONSTRAINT_ENERGY_PROPAGATION",
+    "independent_parent_solution_existence_proven": false
+  },
+  "nonlinear_sobolev_energy_closure": {
+    "regularity_index": "integer m>=3 on the 1D radial reduction",
+    "state_domain_conditions": [
+      "a>=a_min>0",
+      "ell>=ell_min>0",
+      "Z_F>=Z_min>0",
+      "c_s in [c_min,c_max]",
+      "all coefficient maps and cap source maps are C^{m+1} on a compact state set K",
+      "initial and cap compatibility conditions hold through the required order",
+      "static winding branch sigma=n*chi is retained so the current cap ledger introduces no extra principal time-derivative boundary field"
+    ],
+    "energy": "E_m=sum_s sum_|alpha|<=m-1 integral[(d^alpha P_s)^T D_s/c_s^2 (d^alpha P_s)+(d^alpha Q_s)^T D_s(d^alpha Q_s)+|d^alpha U_s|^2] dx plus constraint energy",
+    "commutator_control": "1D Sobolev/Moser product estimates control derivatives of c_s and D_s without principal derivative loss for m>=3",
+    "boundary_control": "homogeneous principal flux cancels exactly; lower-order nonlinear cap terms enter through trace estimates and compatible source norms",
+    "estimate_template": "dE_m/dtau <= C_K*(1+sqrt(E_m))*E_m + C_K*||G_Sigma||_{H^{m-1/2}}^2",
+    "homogeneous_compatible_case": "G_Sigma=0 gives a local Gronwall bound while the state remains in K",
+    "result": "PASS_CONDITIONAL_LOCAL_QUASILINEAR_SOBLEV_ENERGY_CLOSURE_TEMPLATE",
+    "local_existence_uniqueness_theorem_ratified": false,
+    "global_existence_uniqueness_proven": false
+  },
+  "scope_limits": {
+    "variable_coefficient_first_order_reduction": "PASS_FORMAL",
+    "positive_pde_symmetrizer": "PASS_ON_DECLARED_STATE_DOMAIN",
+    "principal_maximally_conservative_interface": "PASS",
+    "variable_constraint_energy_propagation": "PASS_CONDITIONAL_ON_SMOOTH_SOLUTION_AND_CAP_BALANCE",
+    "nonlinear_sobolev_energy_closure": "PASS_CONDITIONAL_TEMPLATE",
+    "exact_full_coefficient_compatibility_hierarchy": "OPEN",
+    "local_quasilinear_IBVP_existence_uniqueness": "NOT_RATIFIED",
+    "global_IBVP_existence_uniqueness": "OPEN",
+    "physical_hamiltonian_positivity": "OPEN",
+    "full_ghost_freedom": "OPEN",
+    "physical_parent_solve_authorized": false,
+    "D2NQ_parent_dynamic_selection": "OPEN_NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_PDE_SYMMETRIZER_AS_PHYSICAL_HAMILTONIAN_OR_GHOST_FREEDOM",
+    "NO_PRINCIPAL_MAXIMAL_CONSERVATIVITY_AS_FULL_NONLINEAR_BOUNDARY_THEOREM",
+    "NO_CONDITIONAL_ENERGY_CLOSURE_AS_EXISTENCE_OF_A_PARENT_SOLUTION",
+    "NO_LOCAL_ENERGY_ESTIMATE_AS_GLOBAL_EXISTENCE_OR_BOUNCE",
+    "NO_H4R3_PREFLIGHT_AS_PHYSICAL_SOLVER_AUTHORIZATION",
+    "NO_D2NQ_DYNAMIC_SELECTION_BEFORE_A_PARENT_SOLUTION",
+    "NO_K1D_OR_K1E_PROMOTION",
+    "NO_WP4_OR_PHYSICAL_EVIDENCE_PROMOTION"
+  ],
+  "next_candidate": "C-PHYS-PARENT-H4R4-EXACT-COEFFICIENT-COMPATIBILITY-HIERARCHY-LOCAL-IBVP-THEOREM-RATIFICATION-AND-MANUFACTURED-SOLUTION-PREFLIGHT"
+}
