@@ -1,0 +1,38 @@
+name: ULSH-01 Background3C5 operator QA
+
+on:
+  push:
+    branches:
+      - ulsh-01-response-rank-gate-v1
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-15_hzt_background3c5_finite_thickness_operator_v0.1.py'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-15_test_hzt_background3c5_finite_thickness_operator_v0.1.py'
+      - '.github/workflows/2026-08-15_ulsh01_background3c5_operator_qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  operator-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependency
+        run: python -m pip install --disable-pip-version-check numpy
+      - name: Compile operator and QA
+        run: |
+          python -m py_compile \
+            ulsh/ULSH-01/C-PHYS/2026-08-15_hzt_background3c5_finite_thickness_operator_v0.1.py \
+            ulsh/ULSH-01/C-PHYS/2026-08-15_test_hzt_background3c5_finite_thickness_operator_v0.1.py
+      - name: Run implementation-only QA
+        run: |
+          python ulsh/ULSH-01/C-PHYS/2026-08-15_test_hzt_background3c5_finite_thickness_operator_v0.1.py | tee /tmp/bg3c5-operator-qa.log
+          grep -F 'PASS_BACKGROUND3C5_OPERATOR_QA__PHYSICAL_EVIDENCE_EFFECT_NONE' /tmp/bg3c5-operator-qa.log
+      - name: Verify physical-evidence firewall
+        run: |
+          grep -F 'PHYSICAL_EXECUTION_AUTHORIZED = False' ulsh/ULSH-01/C-PHYS/2026-08-15_hzt_background3c5_finite_thickness_operator_v0.1.py
+          grep -F 'RANK_R_CLAIM_ALLOWED = False' ulsh/ULSH-01/C-PHYS/2026-08-15_hzt_background3c5_finite_thickness_operator_v0.1.py
