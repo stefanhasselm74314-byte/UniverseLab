@@ -3,6 +3,8 @@
 **UniverseLab von Stefan Hasselmeyer** ist eine mobile, browserbasierte Simulations- und Lernumgebung für Kosmologie, zelluläre Universen, ΛCDM-Hintergrundentwicklung und lineare Strukturbildung.
 
 - **Live-Anwendung:** https://stefanhasselm74314-byte.github.io/UniverseLab/
+- **Link-Zentrale:** https://stefanhasselm74314-byte.github.io/UniverseLab/links.html
+- **Kanonisches Link-Register:** https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/ACTIVE_LINKS.md
 - **Quellcode:** https://github.com/stefanhasselm74314-byte/UniverseLab
 - **Entwicklung:** Stefan Hasselmeyer
 
