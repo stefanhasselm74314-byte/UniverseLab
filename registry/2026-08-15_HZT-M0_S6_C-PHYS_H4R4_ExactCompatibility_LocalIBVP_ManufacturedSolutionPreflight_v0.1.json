@@ -1,0 +1,142 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys.h4r4-exact-compatibility-local-ibvp-manufactured-solution-preflight.v1",
+  "version": "0.1.0",
+  "date": "2026-08-15",
+  "block_id": "C-PHYS-PARENT-H4R4-EXACT-COEFFICIENT-COMPATIBILITY-HIERARCHY-LOCAL-IBVP-THEOREM-RATIFICATION-AND-MANUFACTURED-SOLUTION-PREFLIGHT",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "baseline_main_sha": "23520f29e30542f0c280290ab036853c2e1cf4d1",
+  "status": "H4R4_AUDIT_COMPLETE_LOCAL_IBVP_THEOREM_NOT_RATIFIABLE_YET_EXACT_LOWER_ORDER_COEFFICIENT_AND_BOUNDARY_JET_EXPORT_MISSING_MMS_PREFLIGHT_FROZEN_NO_EXECUTION",
+  "classification": "THEOREM_APPLICABILITY_AND_COMPATIBILITY_HIERARCHY_AUDIT_NO_PHYSICAL_EXECUTION",
+  "solver_execution": false,
+  "manufactured_solution_execution": false,
+  "physical_backend_imported": false,
+  "physical_evidence_effect": "NONE",
+  "source_bindings": [
+    {
+      "path": "registry/2026-08-14_HZT-M0_S6_C-PHYS_H4R3_VariableCoefficientSymmetrizer_NonlinearEnergyClosure_v0.1.json",
+      "git_blob_sha1": "274de3d8f7657a5710c1231666264054b9488665",
+      "role": "H4R3_VARIABLE_COEFFICIENT_SYMMETRIZER_AND_ENERGY_PREFLIGHT"
+    },
+    {
+      "path": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H4_AxisymmetricTimeRadial_M1_ClosureRankTest_v0.1.json",
+      "git_blob_sha1": "8bfa7c1f896b9fb9c0f97d64ab97b09b60eae116",
+      "role": "H4_EXACT_COVARIANT_BULK_AND_DYNAMIC_CAP_EQUATION_INVENTORY"
+    },
+    {
+      "path": "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+      "git_blob_sha1": "7bf51f38eae34254d855e82d96506a863990ccc7",
+      "role": "CANONICAL_CAP_JUNCTION_SCALAR_GAUGE_AND_PATCH_CONTRACT"
+    }
+  ],
+  "external_material_firewall": {
+    "gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT",
+    "gemini_equations_used_as_premises": false,
+    "gemini_code_used_as_validation": false,
+    "two_time_signature_imported": false
+  },
+  "canonical_signature": {
+    "ambient_signature": "(-,+,+,+,+,+)",
+    "physical_times": 1
+  },
+  "h4r4_theorem_target": {
+    "system_class": "quasilinear first-order symmetrizable-hyperbolic two-sided interface IBVP after the H4R3 reduction",
+    "boundary_class": "noncharacteristic principal interface in the reduced derivative variables with maximally conservative principal subspace; exact nonlinear lower-order cap maps retained",
+    "regularity_target": "radial 1+1 reduction, integer Sobolev index m>=3",
+    "ratification_rule": "THEOREM_PASS_REQUIRES_EXPLICIT_CHECKABLE_MATCH_OF_ALL_HYPOTHESES_TO_EXPORTED_H4_COEFFICIENT_AND_BOUNDARY_MAPS; PRINCIPAL_SYMBOL_OR_ENERGY_TEMPLATE_ALONE_IS_INSUFFICIENT",
+    "result": "NOT_RATIFIABLE_YET"
+  },
+  "exact_state_and_boundary_maps_required": {
+    "bulk_state": "W_s=(U_s,P_s,Q_s), U_s=(omega,u,v,varphi,a_chi)",
+    "required_bulk_export": [
+      "A0_s(W) exact matrix",
+      "A1_s(W) exact matrix",
+      "F_s(W) complete lower-order source vector",
+      "constraint maps C_H(W,dW), C_M(W,dW)",
+      "all coefficient derivatives needed through compatibility order m-1"
+    ],
+    "exact_interface_residual_vector": [
+      "Delta U=U_N-U_S",
+      "three dynamic metric junction residuals",
+      "M1 scalar matching residual",
+      "Maxwell/gauge matching residual",
+      "patch/flux residual as a separate global-compatibility channel"
+    ],
+    "required_boundary_export": [
+      "B(W_N,W_S,Q_N,Q_S) exact nonlinear local interface residual",
+      "Jacobian dB/d(Q_N,Q_S) with orientation convention",
+      "time-jet recursion for d_tau^j B at tau=0",
+      "cap source derivatives lambda, Z_sigma and winding-sector dependencies exactly frozen",
+      "global patch/flux compatibility data and pole/cap regularity data"
+    ]
+  },
+  "compatibility_hierarchy": {
+    "order_zero": [
+      "B(W_N^0,W_S^0,Q_N^0,Q_S^0)=0",
+      "C_H[W_s^0]=0 and C_M[W_s^0]=0 on each side",
+      "R_patch=0 and quantized flux sector fixed",
+      "all continuity and cap regularity conditions hold"
+    ],
+    "recursive_rule": "For j=1,...,m-1 require d_tau^j B|_{tau=0}=0 after every time derivative is recursively eliminated with the exact first-order evolution equations and exact lower-order source maps; require the corresponding differentiated constraint and patch identities to vanish to the theorem-required order.",
+    "why_not_expanded_here": "H4 exports the exact covariant field equations and cap residual inventory, but the repository does not yet export a single exact gauge-fixed first-order coefficient map F_s(W) and boundary-jet generator. Expanding j>=1 without that artifact would silently choose unresolved lower-order conventions and would not be auditable.",
+    "result": "HIERARCHY_FORM_DEFINED_EXACT_JETS_BLOCKED_PENDING_COEFFICIENT_EXPORT"
+  },
+  "theorem_hypothesis_matrix": {
+    "symmetric_hyperbolic_principal_form": "PASS_H4R3_ON_DECLARED_COMPACT_NONDEGENERATE_DOMAIN",
+    "uniform_positive_A0": "PASS_H4R3_ON_DECLARED_COMPACT_NONDEGENERATE_DOMAIN",
+    "principal_maximal_boundary_control": "PASS_H4R3",
+    "constant_boundary_rank_principal": "PASS_H4R1_H4R3_ON_Z_F_POSITIVE_DOMAIN",
+    "smooth_exact_coefficient_maps": "STRUCTURALLY_EXPECTED_FROM_M1_BUT_NOT_EXPORTED_AS_A_SINGLE_AUDITABLE_FIRST_ORDER_MAP",
+    "exact_nonlinear_boundary_map_smoothness": "PARTIAL_CAP_LEDGER_EXISTS_FULL_GAUGE_FIXED_JET_MAP_NOT_EXPORTED",
+    "compatibility_conditions_through_required_order": "NOT_CHECKABLE_YET",
+    "constraint_preserving_exact_boundary_closure": "CONDITIONAL_FORMAL_H4R2_H4R3_NOT_FULL_JET_RATIFIED",
+    "local_existence_uniqueness": "NOT_RATIFIED",
+    "decision": "BLOCK_THEOREM_PROMOTION_UNTIL_EXACT_COEFFICIENT_AND_BOUNDARY_JET_EXPORT_EXISTS_AND_PASSES_INDEPENDENT_REVIEW"
+  },
+  "manufactured_solution_preflight": {
+    "purpose": "future code verification only; not a physical solution and not evidence",
+    "execution_authorized": false,
+    "analytic_family": "choose smooth side fields U_s^MMS(tau,x_s) with positive a, ell and finite varphi on a compact rectangle; derive P_s and Q_s analytically",
+    "bulk_forcing": "f_s^MMS := exact_bulk_operator[U_s^MMS]",
+    "boundary_forcing": "g_Sigma^MMS := exact_interface_residual[U_N^MMS,U_S^MMS,Q_N^MMS,Q_S^MMS]",
+    "constraint_forcing_policy": "MMS verification may use explicit manufactured constraint-source diagnostics, but no constraint-violating manufactured run may be reinterpreted as a physical parent solution",
+    "required_tests_before_execution": [
+      "symbolic or high-precision consistency of f_s^MMS and g_Sigma^MMS",
+      "independent implementation of exact derivatives",
+      "at least three grid refinements",
+      "predeclared convergence order p for the chosen discretization",
+      "bulk L2 and Linf errors",
+      "cap residual norm",
+      "constraint residual norm",
+      "patch/flux residual when the manufactured family exercises the gauge sector",
+      "no clipping, sign flipping, residual forcing suppression or post-hoc tolerance changes"
+    ],
+    "pass_rule": "observed convergence rate agrees with the predeclared formal order within a separately frozen tolerance and all boundary/constraint diagnostics converge at the declared rate",
+    "result": "MMS_PROTOCOL_PREFLIGHT_FROZEN_EXECUTION_BLOCKED"
+  },
+  "h4r4_disposition": {
+    "exact_compatibility_structure": "DEFINED",
+    "exact_compatibility_jets": "BLOCKED_PENDING_FIRST_ORDER_COEFFICIENT_AND_BOUNDARY_JET_EXPORT",
+    "local_quasilinear_IBVP_theorem": "NOT_RATIFIED",
+    "manufactured_solution_protocol": "FROZEN_NOT_EXECUTED",
+    "physical_parent_solve_authorized": false,
+    "D2NQ_parent_dynamic_selection": "OPEN_NOT_EXECUTED",
+    "physical_hamiltonian_positivity": "OPEN",
+    "full_ghost_freedom": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_H4R3_ENERGY_TEMPLATE_AS_LOCAL_EXISTENCE_THEOREM",
+    "NO_THEOREM_RATIFICATION_WITHOUT_EXACT_FIRST_ORDER_COEFFICIENT_AND_BOUNDARY_JET_MAPS",
+    "NO_MMS_PROTOCOL_AS_MMS_EXECUTION",
+    "NO_MMS_PASS_AS_PHYSICAL_PARENT_SOLUTION",
+    "NO_PDE_WELLPOSEDNESS_AS_PHYSICAL_HAMILTONIAN_POSITIVITY_OR_GHOST_FREEDOM",
+    "NO_D2NQ_DYNAMIC_SELECTION_BEFORE_A_PARENT_SOLUTION",
+    "NO_K1D_OR_K1E_PROMOTION",
+    "NO_WP4_OR_PHYSICAL_EVIDENCE_PROMOTION"
+  ],
+  "next_candidate": "C-PHYS-PARENT-H4R4A-EXACT-GAUGE-FIXED-FIRST-ORDER-COEFFICIENT-EXPORT-BOUNDARY-JET-GENERATOR-AND-INDEPENDENT-THEOREM-REVIEW"
+}
