@@ -1,0 +1,36 @@
+name: HZT-M0 S6 C-PHYS H4R4B Global Control Witness v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_ParentEquivalence_v0.1.json'
+      - 'science/hzt-m0/md2s/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_ParentEquivalence_v0.1.md'
+      - 'tools/2026-08-15_validate_hzt_m0_s6_c_phys_h4r4b_global_control_witness_v0.1.py'
+      - 'tests/2026-08-15_test_hzt_m0_s6_c_phys_h4r4b_global_control_witness_v0.1.py'
+      - '.github/workflows/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_v0.1.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_ParentEquivalence_v0.1.json'
+      - 'science/hzt-m0/md2s/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_ParentEquivalence_v0.1.md'
+      - 'tools/2026-08-15_validate_hzt_m0_s6_c_phys_h4r4b_global_control_witness_v0.1.py'
+      - 'tests/2026-08-15_test_hzt_m0_s6_c_phys_h4r4b_global_control_witness_v0.1.py'
+      - '.github/workflows/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_v0.1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  h4r4b-global-control-witness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate H4R4B analytic control witness
+        run: >-
+          python tools/2026-08-15_validate_hzt_m0_s6_c_phys_h4r4b_global_control_witness_v0.1.py
+          registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_ParentEquivalence_v0.1.json
+      - name: Run H4R4B contract tests
+        run: python tests/2026-08-15_test_hzt_m0_s6_c_phys_h4r4b_global_control_witness_v0.1.py
