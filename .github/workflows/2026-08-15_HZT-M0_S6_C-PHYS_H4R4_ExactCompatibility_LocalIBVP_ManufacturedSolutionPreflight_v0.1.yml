@@ -1,0 +1,55 @@
+name: HZT-M0 S6 C-PHYS H4R4 Exact Compatibility Local IBVP MMS Preflight v0.1
+
+on:
+  push:
+    paths:
+      - 'registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.json'
+      - 'science/hzt-m0/md2s/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.md'
+      - 'tools/2026-08-15_validate_hzt_m0_s6_c_phys_h4r4_exact_compatibility_theorem_mms_v0.1.py'
+      - 'tests/2026-08-15_test_hzt_m0_s6_c_phys_h4r4_exact_compatibility_theorem_mms_v0.1.py'
+      - '.github/workflows/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.yml'
+  pull_request:
+    paths:
+      - 'registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.json'
+      - 'science/hzt-m0/md2s/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.md'
+      - 'tools/2026-08-15_validate_hzt_m0_s6_c_phys_h4r4_exact_compatibility_theorem_mms_v0.1.py'
+      - 'tests/2026-08-15_test_hzt_m0_s6_c_phys_h4r4_exact_compatibility_theorem_mms_v0.1.py'
+      - '.github/workflows/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.yml'
+
+jobs:
+  validate-h4r4-no-execution:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate registry JSON
+        run: python -m json.tool registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.json >/dev/null
+      - name: Compile validator and tests
+        run: |
+          python -m py_compile tools/2026-08-15_validate_hzt_m0_s6_c_phys_h4r4_exact_compatibility_theorem_mms_v0.1.py
+          python -m py_compile tests/2026-08-15_test_hzt_m0_s6_c_phys_h4r4_exact_compatibility_theorem_mms_v0.1.py
+      - name: Run H4R4 independent tests
+        run: python tests/2026-08-15_test_hzt_m0_s6_c_phys_h4r4_exact_compatibility_theorem_mms_v0.1.py
+      - name: Validate source bindings and governance
+        run: python tools/2026-08-15_validate_hzt_m0_s6_c_phys_h4r4_exact_compatibility_theorem_mms_v0.1.py
+      - name: Enforce no execution and no theorem promotion
+        run: |
+          python - <<'PY'
+          import json
+          p='registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.json'
+          d=json.load(open(p, encoding='utf-8'))
+          assert d['solver_execution'] is False
+          assert d['manufactured_solution_execution'] is False
+          assert d['manufactured_solution_preflight']['execution_authorized'] is False
+          assert d['h4r4_disposition']['local_quasilinear_IBVP_theorem']=='NOT_RATIFIED'
+          assert d['h4r4_disposition']['physical_parent_solve_authorized'] is False
+          print('No-execution and theorem firewall PASS')
+          PY
+      - name: Enforce scientific governance firewall
+        run: |
+          grep -q '"K1-D": "NOT_RELEASED"' registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.json
+          grep -q '"K1-E": "NOT_ADMISSIBLE"' registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.json
+          grep -q '"WP4": "BLOCKED"' registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.json
+          grep -q '"physical_evidence_effect": "NONE"' registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.json
