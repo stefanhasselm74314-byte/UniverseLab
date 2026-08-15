@@ -1,0 +1,178 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys.h4r4b-global-control-witness-parent-equivalence.v1",
+  "version": "0.1.0",
+  "date": "2026-08-15",
+  "block_id": "C-PHYS-PARENT-H4R4B-ADMISSIBLE-CONSTRAINT-SATISFYING-INITIAL-DATA-CONSTRUCTION-GLOBAL-SECTOR-CLOSURE-AND-FULL-PARENT-EQUIVALENCE-AUDIT",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "baseline_main_sha": "0acefd910f9ba6883e0ce3e025637935917e1d99",
+  "status": "PASS_EXPLICIT_GLOBAL_CONSTRAINT_SATISFYING_CONTROL_WITNESS_IN_NONEMPTY_M1_SUBSECTOR_FULL_PARENT_EQUIVALENCE_FOR_WITNESS_ONLY_GENERIC_M1_AND_NONTRIVIAL_D2NQ_OPEN_NO_PHYSICAL_INFERENCE",
+  "classification": "EXACT_ANALYTIC_CONTROL_WITNESS_AND_EQUIVALENCE_AUDIT_NO_NUMERICAL_PHYSICAL_SOLVE",
+  "solver_execution": false,
+  "mms_execution": false,
+  "physical_evidence_effect": "NONE",
+  "source_bindings": [
+    {"path": "registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4A_ExactFirstOrder_BoundaryJet_TheoremReview_v0.1.json", "git_blob_sha1": "cb86d3f282cf49485147b330b97b2ff568284671", "role": "H4R4A_EXACT_LOCAL_IBVP_AND_BOUNDARY_JET_EXPORT"},
+    {"path": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H4_AxisymmetricTimeRadial_M1_ClosureRankTest_v0.1.json", "git_blob_sha1": "8bfa7c1f896b9fb9c0f97d64ab97b09b60eae116", "role": "H4_COVARIANT_TIME_RADIAL_PARENT_REDUCTION"},
+    {"path": "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json", "git_blob_sha1": "13fbe0084dcf91f2d0696d00947c9eed221a58ce", "role": "M1_FUNCTION_AND_CHARGE_FREEZE"},
+    {"path": "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json", "git_blob_sha1": "349079c5cbc44222387141b8b441bc4bb95e2fb0", "role": "GLOBAL_ANGLE_ORIENTATION_PATCH_FLUX_AND_CHARGE_LATTICE"},
+    {"path": "hzt-s6-parent-action-v0.1.json", "git_blob_sha1": "aab94691b3a960b744825393fd090da098f58e39", "role": "CANONICAL_ONE_TIME_6D_PARENT_ACTION"},
+    {"path": "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md", "git_blob_sha1": "7bf51f38eae34254d855e82d96506a863990ccc7", "role": "CAP_JUNCTION_AND_ORIENTATION_LEDGER"}
+  ],
+  "external_material_firewall": {
+    "gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT",
+    "gemini_equations_used_as_premises": false,
+    "gemini_code_used_as_validation": false,
+    "two_time_signature_imported": false
+  },
+  "canonical_signature": {"ambient_signature": "(-,+,+,+,+,+)", "physical_times": 1},
+  "normalization": {
+    "parent_einstein_prefactor": "M6^4/2",
+    "kappa6_squared": "M6^-4",
+    "kappa6_hat_squared": 1,
+    "Delta_chi": "2*pi"
+  },
+  "exact_witness_family": {
+    "scope": "nonempty analytic M1 control subsector; not a generic-parameter existence theorem",
+    "continuous_conditions": [
+      "mhat_phi_sq>0",
+      "a_F>0",
+      "varphi0>0",
+      "z_sigma_hat>0",
+      "lambda_hat=0",
+      "k4>0",
+      "Rbar_inv_sq>0"
+    ],
+    "discrete_conditions": [
+      "N_F is a positive even integer",
+      "m_sigma is a positive integer",
+      "N_sigma=m_sigma*N_F/2"
+    ],
+    "rho_F": "mhat_phi_sq*varphi0/(2*a_F)",
+    "k4": "[Lambda_hat+0.5*mhat_phi_sq*varphi0^2-rho_F]/6",
+    "Rbar_inv_sq": "0.5*Lambda_hat+0.25*mhat_phi_sq*varphi0^2+1.5*rho_F",
+    "Rbar": "1/sqrt(Rbar_inv_sq)",
+    "q": "sqrt(2*rho_F)*exp(-a_F*varphi0)",
+    "p": "q*exp(2*a_F*varphi0)*Rbar^2",
+    "q_hat": "N_F/(2*p)",
+    "q_N": "+q",
+    "q_S": "-q",
+    "cap_phase_condition": "d_chi=N_sigma-m_sigma*q_hat*p=0"
+  },
+  "global_exact_fields": {
+    "four_dimensional_geometry": "closed slicing of dS4 with dimensionless curvature k4",
+    "dimensionless_4d_metric": "-d_tau^2+k4^-1*cosh^2(sqrt(k4)*tau)*dOmega3_unit^2",
+    "hemisphere_domains": "x_s in [0,pi*Rbar/2], s in {N,S}",
+    "ell_s": "Rbar*sin(x_s/Rbar)",
+    "varphi_s": "varphi0",
+    "a_chi_N": "p*[1-cos(x_N/Rbar)]",
+    "a_chi_S": "-p*[1-cos(x_S/Rbar)]",
+    "local_cap_patch_alignment": "a_chi_S_cap_aligned=a_chi_S+N_F/q_hat",
+    "cap_location": "x_N=x_S=pi*Rbar/2"
+  },
+  "direct_full_parent_residuals": {
+    "R_Einstein_internal": "-6*k4+Lambda_hat+0.5*mhat_phi_sq*varphi0^2-rho_F",
+    "R_Einstein_4d": "3*k4+Rbar_inv_sq-Lambda_hat-0.5*mhat_phi_sq*varphi0^2-rho_F",
+    "R_scalar": "mhat_phi_sq*varphi0-2*a_F*rho_F",
+    "R_Maxwell": "0 identically for the monopole two-form on each smooth hemisphere",
+    "result": "PASS_IDENTICALLY_BY_WITNESS_DEFINITIONS"
+  },
+  "initial_data_at_tau_zero": {
+    "three_space_curvature": "+1",
+    "abar0": "1/sqrt(k4)",
+    "omega": 0,
+    "P_omega": 0,
+    "P_u": 0,
+    "P_v": 0,
+    "P_varphi": 0,
+    "P_a_chi": 0,
+    "C_M": "0 identically",
+    "C_H": "Rbar_inv_sq+3*k4-Lambda_hat-0.5*mhat_phi_sq*varphi0^2-rho_F=0",
+    "classification": "EXACT_TIME_SYMMETRIC_CONSTRAINT_SATISFYING_INITIAL_SLICE"
+  },
+  "global_sector_closure": {
+    "smooth_poles": [
+      "ell_s(0)=0",
+      "partial_x ell_s(0)=1",
+      "a_chi_s(0)=0",
+      "a_chi_s=O(x_s^2)",
+      "partial_x varphi_s(0)=0"
+    ],
+    "cap_metric_junction": "PASS because all radial 4d warp derivatives and partial_x ell at the equator vanish and lambda_hat=Y_hat_sigma=0",
+    "cap_scalar_junction": "PASS because normal scalar derivatives vanish",
+    "cap_gauge_junction": "PASS because q_N+q_S=0 and d_chi=0",
+    "configuration_continuity": "PASS after the frozen U(1) cap-patch alignment",
+    "R_patch": "a_chi_N(cap)-a_chi_S(cap)-N_F/q_hat=2*p-N_F/q_hat=0",
+    "flux_quantization": "PASS and equivalent to R_patch under the frozen regular pole gauges",
+    "phase_equation": "PASS because D_chi sigma=0",
+    "higher_boundary_jets": "J_j=0 for all j because the exact parent solution satisfies the boundary map for all tau",
+    "result": "PASS_EXACT_GLOBAL_CONTROL_SECTOR_CLOSURE"
+  },
+  "full_parent_equivalence_audit": {
+    "witness_solves_parent_bulk_equations": "PASS",
+    "witness_solves_reduced_H4_equations": "PASS",
+    "witness_satisfies_H4R4A_constraints": "PASS",
+    "witness_satisfies_local_cap_map": "PASS",
+    "witness_satisfies_global_patch_flux_pole_conditions": "PASS",
+    "pole_chart_note": "the logarithmic v=ln(ell/ell_ref) first-order chart excludes ell=0; smooth pole regularity is verified in ell and a_chi variables and the H4R4A local theorem is applied only on nondegenerate interior charts",
+    "decision": "FULL_PARENT_EQUIVALENCE_PASS_FOR_THIS_EXPLICIT_WITNESS_FAMILY_ONLY"
+  },
+  "numerical_sanity_witness": {
+    "mhat_phi_sq": 1.0,
+    "a_F": 0.5,
+    "varphi0": 1.0,
+    "Lambda_hat": 2.0,
+    "lambda_hat": 0.0,
+    "z_sigma_hat": 1.0,
+    "N_F": 2,
+    "m_sigma": 1,
+    "N_sigma": 1,
+    "rho_F": 1.0,
+    "k4": 0.25,
+    "Rbar_inv_sq": 2.75,
+    "Rbar": 0.6030226891555273,
+    "q": 0.8577638849607069,
+    "p": 0.8478705387625907,
+    "q_hat": 1.1794253418209717,
+    "purpose": "formula and residual sanity only; not a fit, posterior, measurement, or preferred physical parameter point"
+  },
+  "d2nq_disposition": {
+    "radial_4d_extrinsic_curvature": "beta_r=0",
+    "B_squared": 0,
+    "interpretation": "the witness proves nonempty global admissible M1 data but is deliberately D2N-Q-trivial",
+    "nontrivial_D2NQ_parent_dynamic_selection": "OPEN_NOT_DEMONSTRATED"
+  },
+  "bounce_firewall": {
+    "closed_dS_slicing_has_H_zero_at_tau_zero": true,
+    "closed_dS_slicing_has_positive_dH_at_tau_zero": true,
+    "classification": "STANDARD_DE_SITTER_CONTROL_GEOMETRY_NOT_A_HZT_SPECIFIC_EARLY_UNIVERSE_BOUNCE_MECHANISM",
+    "HZT_specific_bounce_claim": false
+  },
+  "gate_disposition": {
+    "nonempty_global_admissible_M1_subsector": "PASS_BY_EXPLICIT_ANALYTIC_WITNESS",
+    "constraint_satisfying_initial_data_exist": "PASS_FOR_WITNESS_SUBSECTOR",
+    "global_patch_flux_pole_closure": "PASS_FOR_WITNESS_SUBSECTOR",
+    "full_parent_equivalence": "PASS_FOR_WITNESS_SUBSECTOR",
+    "generic_M1_global_background_existence": "OPEN",
+    "generic_global_IBVP_wellposedness_including_poles": "OPEN",
+    "physical_parent_solve_authorized": false,
+    "MMS_execution_authorized_by_this_block": false,
+    "D2NQ_parent_dynamic_selection": "OPEN_NOT_EXECUTED_NONTRIVIALLY",
+    "physical_Hamiltonian_positivity": "OPEN",
+    "full_ghost_freedom": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_EXPLICIT_CONTROL_WITNESS_AS_GENERIC_M1_PARAMETER_EXISTENCE_THEOREM",
+    "NO_GLOBAL_EXISTENCE_WITNESS_AS_PHYSICAL_PARAMETER_SELECTION_OR_EVIDENCE",
+    "NO_B_SQUARED_ZERO_CONTROL_SOLUTION_AS_NONTRIVIAL_D2NQ_SELECTION",
+    "NO_LOCAL_OR_GLOBAL_PDE_WELLPOSEDNESS_AS_HAMILTONIAN_POSITIVITY_OR_GHOST_FREEDOM",
+    "NO_CLOSED_DE_SITTER_CONTROL_TURNAROUND_AS_HZT_SPECIFIC_SINGULARITY_RESOLUTION",
+    "NO_K1D_OR_K1E_PROMOTION",
+    "NO_WP4_OR_PHYSICAL_EVIDENCE_PROMOTION"
+  ],
+  "next_candidate": "C-PHYS-PARENT-H4R4C-GLOBAL-REGULAR-POLE-IBVP-CLOSURE-LINEARIZED-DEFORMATION-AND-NONTRIVIAL-B2-BRANCH-PREFLIGHT"
+}
