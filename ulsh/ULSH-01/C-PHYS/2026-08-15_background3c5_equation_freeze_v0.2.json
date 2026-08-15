@@ -1,0 +1,107 @@
+{
+  "schema": "ulsh01.cphys.background3c5.equation-freeze.v0.2",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "status": "ADVANCED_PARTIAL_FREEZE",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_execution_authorized": false
+  },
+  "correction_to_v0_1": {
+    "ZF_missing": false,
+    "EH_normalization_missing": false,
+    "M6_kappa6_relation_missing": false,
+    "remaining_blocker": "M1_FIELD_AND_GAUGE_NORMALIZATION_BRIDGE_NOT_PROVENANCE_BOUND"
+  },
+  "recovered_bulk_dimensionful": {
+    "action_density": "M6^4/2*(R6-2*Lambda6)-1/2*(dPhi)^2-V6(Phi)-ZF(Phi)/(4*g6^2)*F_AB*F^AB",
+    "dimensions": {
+      "M6": "M",
+      "Lambda6": "M^2",
+      "Phi": "M^2",
+      "V6": "M^6",
+      "g6_squared": "M^-2",
+      "ZF": "1"
+    },
+    "gravity_relation": "M6^4=kappa6^-2"
+  },
+  "frozen_M1": {
+    "U_phi": "1/2*mhat_phi^2*M6^6*phi^2",
+    "ZF_phi": "exp(-2*a_F*phi)",
+    "lambda": "lambdahat*M6^5",
+    "Z_sigma": "zhat_sigma*M6^3",
+    "q_ref": "qhat/M6",
+    "q_sigma": "m_sigma*q_ref",
+    "Delta_chi": "2*pi",
+    "active_domain": ["mhat_phi^2>0", "a_F>0", "zhat_sigma>0", "qhat>0"]
+  },
+  "field_bridge": {
+    "candidate": "Phi=M6^2*phi",
+    "status": "CANDIDATE_NOT_RATIFIED",
+    "rationale": "dimensionally natural and maps canonical Phi kinetic term to -M6^4/2*(dphi)^2 and quadratic potential to frozen M1 form",
+    "may_be_used_for_physical_execution": false
+  },
+  "geometry": {
+    "metric": "ds6^2=exp(2A) gbar_mn dx^m dx^n+dr^2+L^2 dchi^2",
+    "four_curvature": "gbar_R_mn=3*K4*gbar_mn",
+    "definitions": ["B=L'/L", "k4=K4*exp(-2A)"],
+    "Gmu": "3*A''+6*A'^2+3*A'*B+L''/L-3*k4",
+    "Grr": "6*A'^2+4*A'*B-6*k4",
+    "Gchichi": "4*A''+10*A'^2-6*k4"
+  },
+  "finite_thickness_layer": {
+    "Sigma": "s/sqrt(2)*exp(i*n*chi)",
+    "w": "n-gSigma*A_chi",
+    "potential": "Lambda_layer(phi)+1/2*mSigma2(phi)*s^2+lambdaSigma/4*s^4",
+    "mass_profile": "mSigma0^2+etaSigma*(phi-phi_star)",
+    "amplitude_ode": "s''+(4*A'+L'/L)*s'-(w^2/L^2)*s-mSigma2(phi)*s-lambdaSigma*s^3=0",
+    "layer_thickness": "DERIVED_NOT_FREE"
+  },
+  "maxwell_dimensionful_action_convention": {
+    "covariant_equation": "nabla_A[(ZF/g6^2)*F^(A chi)]=-gSigma*s^2*w/L^2",
+    "radial_conservative_equation": "d_dr[exp(4A)*(ZF/g6^2)*A_chi'/L]=-exp(4A)*gSigma*s^2*w/L",
+    "expanded_equation": "A_chi''+(4A'-L'/L+ZF'/ZF)*A_chi'=-(g6^2*gSigma/ZF)*s^2*w",
+    "M1_substitution_conditional": "ZF'/ZF=-2*a_F*phi'",
+    "execution_status": "BLOCKED_PENDING_GAUGE_NORMALIZATION_BRIDGE"
+  },
+  "scalar_dimensionful_action_convention": {
+    "covariant_equation": "Box6(Phi)-dPhi(V6)-(dPhi(ZF)/(4*g6^2))*F^2-dPhi(VSigma)=0",
+    "radial_equation": "Phi''+(4A'+L'/L)*Phi'-dPhi(V6)-(dPhi(ZF)/(2*g6^2))*A_chi'^2/L^2-dPhi(VSigma)=0",
+    "execution_in_M1_phi_notation": "BLOCKED_PENDING_FIELD_NORMALIZATION_BRIDGE"
+  },
+  "stress_dimensionful_action_convention": {
+    "E_Phi": "1/2*Phi'^2",
+    "E_r": "1/2*s'^2",
+    "E_chi": "1/2*s^2*w^2/L^2",
+    "rho_F": "ZF/(2*g6^2)*A_chi'^2/L^2",
+    "V_tot": "V6(Phi)+VSigma",
+    "Tmu": "-E_Phi-E_r-E_chi-V_tot-rho_F",
+    "Trr": "+E_Phi+E_r-E_chi-V_tot+rho_F",
+    "Tchichi": "-E_Phi-E_r+E_chi-V_tot+rho_F"
+  },
+  "einstein_dimensionful_action_convention": {
+    "equation": "M6^4*(G^A_B+Lambda6*delta^A_B)=T^A_B",
+    "mu_ode": "3A''+6A'^2+3A'B+L''/L-3k4+Lambda6=Tmu/M6^4",
+    "radial_constraint": "6A'^2+4A'B-6k4+Lambda6=Trr/M6^4",
+    "chi_ode": "4A''+10A'^2-6k4+Lambda6=Tchichi/M6^4"
+  },
+  "remaining_normalization_gates": [
+    "ratify Phi<->phi field redefinition",
+    "ratify M1 scalar kinetic prefactor",
+    "ratify g6<->q_ref/q_sigma/gSigma map",
+    "reconcile v0.3 rho_F shorthand with explicit 1/g6^2 factor"
+  ],
+  "branch_rules": {
+    "winding_n": "FIXED_INTEGER",
+    "flux_N": "FIXED_INTEGER",
+    "conical_rescue_mode": "FORBIDDEN",
+    "free_layer_thickness": "FORBIDDEN",
+    "free_radion_boundary_mass": "FORBIDDEN_UNLESS_PARENT_DERIVED"
+  },
+  "authorization": {
+    "background3c5_equation_freeze": "ADVANCED_PARTIAL",
+    "background3c5_physical_execution_authorized": false,
+    "reason": "M1_FIELD_AND_GAUGE_NORMALIZATION_BRIDGE_NOT_YET_PROVENANCE_BOUND"
+  }
+}
