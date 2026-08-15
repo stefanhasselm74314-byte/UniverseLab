@@ -1,0 +1,174 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys.h4r4a-exact-first-order-boundary-jet.v1",
+  "version": "0.1.0",
+  "date": "2026-08-15",
+  "block_id": "C-PHYS-PARENT-H4R4A-EXACT-GAUGE-FIXED-FIRST-ORDER-COEFFICIENT-EXPORT-BOUNDARY-JET-GENERATOR-AND-INDEPENDENT-THEOREM-REVIEW",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "baseline_main_sha": "5fb7b95dcf214c6fa022745c0bcc426ca469a91f",
+  "status": "PASS_EXACT_CONFORMAL_GAUGE_BULK_BOUNDARY_JET_EXPORT_LOCAL_REDUCED_IBVP_THEOREM_CONDITIONAL_RATIFICATION_NO_PHYSICAL_EXECUTION",
+  "classification": "FORMAL_ANALYTIC_EXPORT_AND_THEOREM_BINDING_NO_PHYSICAL_EXECUTION",
+  "solver_execution": false,
+  "mms_execution": false,
+  "physical_backend_imported": false,
+  "physical_evidence_effect": "NONE",
+  "source_bindings": [
+    {"path": "registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4_ExactCompatibility_LocalIBVP_ManufacturedSolutionPreflight_v0.1.json", "git_blob_sha1": "b0478c87ed3a2db343f5a1997173dbe4d3005750", "role": "H4R4_THEOREM_AND_COMPATIBILITY_AUDIT"},
+    {"path": "registry/2026-08-14_HZT-M0_S6_C-PHYS_H4R3_VariableCoefficientSymmetrizer_NonlinearEnergyClosure_v0.1.json", "git_blob_sha1": "274de3d8f7657a5710c1231666264054b9488665", "role": "H4R3_SYMMETRIZER_AND_ENERGY"},
+    {"path": "registry/2026-08-14_HZT-M0_S6_C-PHYS_H4R1_DimensionlessIBVP_ConstraintBoundaryRank_v0.1.json", "git_blob_sha1": "019478e04487a7361e009c34d7180e4380fe143e", "role": "H4R1_DIMENSIONLESS_VARIABLES"},
+    {"path": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H4_AxisymmetricTimeRadial_M1_ClosureRankTest_v0.1.json", "git_blob_sha1": "8bfa7c1f896b9fb9c0f97d64ab97b09b60eae116", "role": "H4_COVARIANT_TIME_RADIAL_PARENT_EQUATIONS"},
+    {"path": "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json", "git_blob_sha1": "13fbe0084dcf91f2d0696d00947c9eed221a58ce", "role": "M1_FUNCTION_AND_CHARGE_FREEZE"},
+    {"path": "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md", "git_blob_sha1": "7bf51f38eae34254d855e82d96506a863990ccc7", "role": "CAP_JUNCTION_AND_ORIENTATION_LEDGER"}
+  ],
+  "external_material_firewall": {
+    "gemini_blocks": "EXTERNAL_UNVERIFIED_GEMINI_DRAFT",
+    "gemini_equations_used_as_premises": false,
+    "gemini_code_used_as_validation": false,
+    "two_time_signature_imported": false
+  },
+  "canonical_signature": {"ambient_signature": "(-,+,+,+,+,+)", "physical_times": 1},
+  "gauge_and_normalization": {
+    "local_chart": "boundary-adapted conformal 1+1 chart on each side",
+    "metric": "h_pq=exp(2*omega)*eta_pq",
+    "side_coordinate": "x_s>=0 increases away from the cap",
+    "outward_dimensionless_normal_derivative": "nu_s[f]=-exp(-omega_s)*partial_x_s f",
+    "common_reference_scales": ["abar_ref=M6*a_ref>0", "ell_ref=M6*L_ref>0"],
+    "abar": "abar_ref*exp(u)",
+    "ell": "ell_ref*exp(v)",
+    "varphi": "phi/M6^2",
+    "a_chi": "A_chi/M6",
+    "z": "exp(-2*a_F*varphi)/ell^2",
+    "coordinate_wave_speed": 1,
+    "patch_handling": "local cap chart is patch-aligned; global R_patch and flux quantization remain separate channels",
+    "off_constraint_cap_trace_extension": "symmetric average U_Sigma=(U_N+U_S)/2; all physical residuals evaluated on continuity manifold, so extension choice changes only terms proportional to continuity residuals"
+  },
+  "reduced_conformal_action_density": {
+    "S_prefactor": "S=abar^3*ell",
+    "kinetic": "S*{kappa_hat^-2*[3 du.domega+dv.domega+3 du.du+3 du.dv]-0.5*dvarphi.dvarphi-0.5*z*da_chi.da_chi}",
+    "potential": "S*exp(2*omega)*{kappa_hat^-2*[3*k/abar^2-Lambda_hat]-0.5*mhat_phi_sq*varphi^2}",
+    "derivation": "independent Euler-Lagrange reduction from canonical H4 2D action; no Gemini premise"
+  },
+  "first_order_state": {
+    "U_order": ["omega", "u", "v", "varphi", "a_chi"],
+    "P": "partial_tau U",
+    "Q": "partial_x U",
+    "D_ij": "Q_i*Q_j-P_i*P_j",
+    "evolution": ["partial_tau U=P", "partial_tau P=partial_x Q+F(U,P,Q)", "partial_tau Q=partial_x P"]
+  },
+  "exact_bulk_source_F": {
+    "F_omega": "-3*D_uu-3*D_uv+(kappa_hat_sq/2)*D_varphivarphi+(kappa_hat_sq*z/4)*D_AA+exp(2*omega)*(3*k/abar^2-Lambda_hat/2-kappa_hat_sq*mhat_phi_sq*varphi^2/4)",
+    "F_u": "3*D_uu+D_uv-(kappa_hat_sq*z/4)*D_AA+exp(2*omega)*(Lambda_hat/2+kappa_hat_sq*mhat_phi_sq*varphi^2/4-2*k/abar^2)",
+    "F_v": "3*D_uv+D_vv+(3*kappa_hat_sq*z/4)*D_AA+exp(2*omega)*(Lambda_hat/2+kappa_hat_sq*mhat_phi_sq*varphi^2/4)",
+    "F_varphi": "3*D_uvarphi+D_vvarphi+a_F*z*D_AA-mhat_phi_sq*exp(2*omega)*varphi",
+    "F_a_chi": "3*D_uA-D_vA-2*a_F*D_varphiA",
+    "smooth_domain": "finite fields, abar>0, ell>0, kappa_hat_sq>0"
+  },
+  "exact_constraint_export": {
+    "C_M": "-3[d_x P_u+P_u Q_u-Q_omega P_u-P_omega Q_u]-[d_x P_v+P_v Q_v-Q_omega P_v-P_omega Q_v]-kappa_hat_sq[P_varphi Q_varphi+z P_A Q_A]",
+    "C_H": "-3*d_x Q_u-d_x Q_v+3*P_u^2+3*P_u*P_v+3*P_u*P_omega+P_v*P_omega-6*Q_u^2-3*Q_u*Q_v+3*Q_u*Q_omega-Q_v^2+Q_v*Q_omega+3*exp(2*omega)*k/abar^2-exp(2*omega)*Lambda_hat-(kappa_hat_sq/2)*(P_varphi^2+Q_varphi^2)-(kappa_hat_sq*z/2)*(P_A^2+Q_A^2)-(kappa_hat_sq/2)*mhat_phi_sq*varphi^2*exp(2*omega)",
+    "classification": "EXACT_IN_DECLARED_CONFORMAL_GAUGE; propagation to full parent equations still requires zero initial constraints plus exact cap balance"
+  },
+  "local_boundary_map": {
+    "continuity_rows": ["Delta_omega", "Delta_u", "Delta_v", "Delta_varphi", "Delta_a_chi"],
+    "normal_sums": {
+      "K_omega": "nu_N[omega]+nu_S[omega]",
+      "K_u": "nu_N[u]+nu_S[u]",
+      "K_v": "nu_N[v]+nu_S[v]",
+      "K_varphi": "nu_N[varphi]+nu_S[varphi]"
+    },
+    "cap_invariants": {
+      "q_cap": "m_sigma*q_hat",
+      "d_chi": "N_sigma-q_cap*a_chi_Sigma",
+      "Y_hat_sigma": "z_sigma_hat*d_chi^2/ell_Sigma^2"
+    },
+    "metric_rows": [
+      "-(3*K_u+K_v)+kappa_hat_sq*(lambda_hat+Y_hat_sigma/2)",
+      "-(K_omega+2*K_u+K_v)+kappa_hat_sq*(lambda_hat+Y_hat_sigma/2)",
+      "-(K_omega+3*K_u)+kappa_hat_sq*(lambda_hat-Y_hat_sigma/2)"
+    ],
+    "scalar_row": "K_varphi",
+    "gauge_row": "sum_s[z_s*nu_s[a_chi]]-q_cap*z_sigma_hat*d_chi/ell_Sigma^2",
+    "normal_jacobian_per_side": "-exp(-omega_s)*blockdiag(B_g,1,z_s)",
+    "B_g": [[0, -3, -1], [-1, -2, -1], [-1, -3, 0]],
+    "normal_rank": "5 per row-normalized side block for z_s>0",
+    "global_separate_channels": [
+      "R_patch=a_chi_N(original_patch)-a_chi_S(original_patch)-N_F/q_hat",
+      "quantized internal flux",
+      "pole/cap regularity and patch consistency"
+    ]
+  },
+  "boundary_time_jet_generator": {
+    "operator": "T U=P; T P=d_x Q+F; T Q=d_x P; T commutes with d_x for smooth solutions",
+    "J0": "B_local",
+    "recursion": "J_(j+1)=T[J_j] by exact chain rule",
+    "normal_first_derivative": "T nu_s[I]=-exp(-omega_s)*(d_x P_s[I]-P_s[omega]*Q_s[I])",
+    "z_first_derivative": "T z_s=z_s*(-2*a_F*P_s[varphi]-2*P_s[v])",
+    "d_chi_first_derivative": "T d_chi=-q_cap*P_Sigma[a_chi]",
+    "Y_first_derivative": "T Y_hat_sigma=-2*z_sigma_hat/ell_Sigma^2*(d_chi^2*P_Sigma[v]+q_cap*d_chi*P_Sigma[a_chi])",
+    "compatibility_required": "J_j|tau=0=0 for j=0,...,m-1; data-specific satisfaction is not asserted without initial data",
+    "status": "PASS_EXACT_FORMAL_GENERATOR_LOW_ORDER_CHAIN_RULE_VALIDATED"
+  },
+  "theorem_review": {
+    "target": "local smooth well-posedness of the reduced gauge-fixed two-sided quasilinear transmission IBVP",
+    "primary_references": [
+      "P.D. Lax and R.S. Phillips, Local boundary conditions for dissipative symmetric linear differential operators, CPAM 13 (1960), DOI 10.1002/cpa.3160130307",
+      "P. Secchi, Well-posedness of characteristic symmetric hyperbolic systems, Arch. Rational Mech. Anal. 134 (1996), DOI 10.1007/BF00379552",
+      "H.-O. Kreiss, O. Reula, O. Sarbach, J. Winicour, Boundary Conditions for Coupled Quasilinear Wave Equations with Application to Isolated Systems, CMP 289 (2009), arXiv:0807.3207"
+    ],
+    "hypothesis_matrix": {
+      "smooth_quasilinear_bulk_map": "PASS",
+      "symmetric_hyperbolic_first_order_form": "PASS_H4R3_AND_EXACT_C1_COEFFICIENT_EXPORT",
+      "uniform_positive_A0_on_compact_nondegenerate_state_domain": "PASS",
+      "boundary_characteristic_zero_modes_from_U_block": "CONSTANT_MULTIPLICITY; U evolves tangentially by d_tau U=P",
+      "nonzero_characteristic_boundary_subspace": "PASS_MAXIMAL_CONSERVATIVE_EQUIVALENT_MAXIMAL_NONPOSITIVE",
+      "boundary_rank_constant": "PASS_FOR_z>0",
+      "nonlinear_boundary_sources_smooth": "PASS",
+      "configuration_continuity": "PROPAGATED_BY_P_N=P_S_WHEN_PRESENT_AT_INITIAL_CORNER",
+      "compatibility_hierarchy": "EXACT_RECURSION_AVAILABLE; MUST_BE_SATISFIED_BY_CHOSEN_DATA",
+      "constraint_equivalence_to_full_parent": "CONDITIONAL_FORMAL_NOT_A_GLOBAL_BACKGROUND_EXISTENCE_RESULT",
+      "global_flux_patch_pole_closure": "OUTSIDE_LOCAL_THEOREM_AND_STILL_OPEN"
+    },
+    "decision": "RATIFIED_CONDITIONALLY_FOR_REDUCED_LOCAL_IBVP_WITH_SMOOTH_COMPATIBLE_DATA_IN_DECLARED_COMPACT_DOMAIN",
+    "not_implied": [
+      "existence of a global compactified physical M1 background",
+      "existence of constraint-satisfying global initial data in a chosen discrete flux sector",
+      "D2N-Q dynamic selection",
+      "Hamiltonian positivity",
+      "ghost freedom",
+      "physical evidence"
+    ]
+  },
+  "validation_contract": {
+    "exact_formula_check": "independent numerical Euler-Lagrange reconstruction using complex-step derivatives of field metric and potential",
+    "boundary_chain_rule_check": "finite-difference check of first time jet against analytic generator",
+    "principal_flux_check": "maximal-conservative homogeneous interface flux cancellation",
+    "no_solver_or_mms_run": true
+  },
+  "gate_disposition": {
+    "exact_gauge_fixed_bulk_coefficient_export": "PASS",
+    "exact_constraint_export": "PASS_IN_DECLARED_GAUGE",
+    "exact_local_boundary_map": "PASS",
+    "boundary_time_jet_generator": "PASS_FORMAL",
+    "local_reduced_IBVP_theorem": "PASS_CONDITIONAL_ANALYTIC",
+    "full_parent_global_background_existence": "OPEN_NOT_EXECUTED",
+    "physical_parent_solve_authorized": false,
+    "MMS_execution_authorized_by_this_block": false,
+    "D2NQ_parent_dynamic_selection": "OPEN_NOT_EXECUTED",
+    "physical_Hamiltonian_positivity": "OPEN",
+    "full_ghost_freedom": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "WP4": "BLOCKED",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_LOCAL_REDUCED_IBVP_THEOREM_AS_GLOBAL_COMPACTIFIED_BACKGROUND_EXISTENCE",
+    "NO_CONDITIONAL_THEOREM_AS_EXISTENCE_OF_ADMISSIBLE_PHYSICAL_INITIAL_DATA",
+    "NO_PDE_SYMMETRIZER_OR_WELLPOSEDNESS_AS_PHYSICAL_HAMILTONIAN_POSITIVITY_OR_GHOST_FREEDOM",
+    "NO_MMS_PREFLIGHT_OR_FORMULA_VALIDATION_AS_MMS_EXECUTION",
+    "NO_D2NQ_DYNAMIC_SELECTION_BEFORE_A_PARENT_SOLUTION",
+    "NO_K1D_OR_K1E_PROMOTION",
+    "NO_WP4_OR_PHYSICAL_EVIDENCE_PROMOTION"
+  ],
+  "next_candidate": "C-PHYS-PARENT-H4R4B-ADMISSIBLE-CONSTRAINT-SATISFYING-INITIAL-DATA-CONSTRUCTION-GLOBAL-SECTOR-CLOSURE-AND-FULL-PARENT-EQUIVALENCE-AUDIT"
+}
