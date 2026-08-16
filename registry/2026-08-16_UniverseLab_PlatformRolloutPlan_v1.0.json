@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "date": "2026-08-16",
   "scope": "P6_MANIFEST_SYNC_AND_GLOBAL_SHELL_ROLLOUT",
-  "status": "IMPLEMENTATION_IN_PROGRESS",
+  "status": "IMPLEMENTED_AWAITING_CI_REVIEW",
+  "migration_commit": "98633b0b2222bcf353f4971788fdd5879037b90d",
   "targets": [
     "navigator.html",
     "hyperlab.html",
