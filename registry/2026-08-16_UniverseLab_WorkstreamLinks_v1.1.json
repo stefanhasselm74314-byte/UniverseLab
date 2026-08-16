@@ -1,0 +1,124 @@
+{
+  "schema": "universelab.workstream-links.v1",
+  "version": "1.1.0",
+  "date": "2026-08-16",
+  "classification": "COORDINATION_AND_CHAT_NAMING_GOVERNANCE_ONLY",
+  "canonical_text_source": "ACTIVE_LINKS.md",
+  "preferred_mobile_entry": "links.html",
+  "private_chat_urls_published": false,
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "title_contract": {
+    "pattern": "<STATUS> — <PROJECT/FUNCTION> — <OPTIONAL SCOPE>",
+    "allowed_status_prefixes": ["ACTIVE", "UTILITY", "AUDIT", "CLOSED", "ARCHIVE", "BLOCKED"],
+    "rule": "Chat title status is coordination metadata only and never promotes scientific or solver release state."
+  },
+  "rules": [
+    "CHAT_CONTENT_IS_NOT_CANONICAL_PHYSICAL_EVIDENCE",
+    "GITHUB_ARTIFACTS_REGISTRIES_TESTS_PRS_AND_MERGE_COMMITS_CARRY_PROJECT_PROVENANCE",
+    "NO_AUTOMATIC_STATUS_TRANSFER_BETWEEN_WORKSTREAMS",
+    "PRIVATE_CHATGPT_CONVERSATION_IDENTIFIERS_ARE_NOT_PUBLISHED",
+    "GSRA01_REMAINS_REPOSITORY_SEPARATE_FROM_UNIVERSELAB"
+  ],
+  "workstreams": [
+    {
+      "id": "WS-PLATFORM-ARCH",
+      "current_chat_title": "Forschungsplattform Architektur",
+      "recommended_chat_title": "ACTIVE — UniverseLab Forschungsplattform",
+      "status": "ACTIVE",
+      "domain": "PLATFORM_GOVERNANCE",
+      "responsibility": "UniverseLab platform architecture, SiteState, reproducibility, navigation, status-axis separation and governed UI/registry integration.",
+      "canonical_outputs": ["https://github.com/stefanhasselm74314-byte/UniverseLab/pull/139"]
+    },
+    {
+      "id": "WS-ULSH01-BG3C5",
+      "current_chat_title": "Analyse der 17 Dateien",
+      "recommended_chat_title": "ACTIVE — ULSH-01 C-PHYS Solverentwicklung",
+      "status": "ACTIVE_CRITICAL_PATH",
+      "domain": "SCIENCE_SOLVER",
+      "responsibility": "ULSH-01 C-PHYS Background3C5 equation, finite-thickness operator, regular-center, response-rank and convergence gates.",
+      "current_task": "G5_FULL_FINITE_THICKNESS_OPERATOR_IDENTITY",
+      "canonical_outputs": ["https://github.com/stefanhasselm74314-byte/UniverseLab/pull/137"],
+      "scientific_state": {"rank_R":"OPEN_NOT_EXECUTED","K1-D":"NOT_RELEASED","K1-E":"NOT_ADMISSIBLE"}
+    },
+    {
+      "id": "WS-ACTIVE-LINKS",
+      "current_chat_title": "Aktive wichtige Links",
+      "recommended_chat_title": "UTILITY — UniverseLab Wichtige Links",
+      "status": "ACTIVE",
+      "domain": "LINK_GOVERNANCE",
+      "responsibility": "Maintain canonical active links and workstream destinations.",
+      "canonical_outputs": ["https://stefanhasselm74314-byte.github.io/UniverseLab/links.html","https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/ACTIVE_LINKS.md"]
+    },
+    {
+      "id": "WS-CP01R2-D8-WATCH",
+      "current_chat_title": "CP01R2 D8 Laufwache",
+      "recommended_chat_title": "CLOSED — CP01R2-D8 Laufwache",
+      "status": "CLOSED_NON_REPLAYABLE",
+      "domain": "RUN_WATCH_PROVENANCE",
+      "responsibility": "Historical one-shot CP01R2-D8 execution watch and result provenance.",
+      "current_task": "NONE_COMPLETED",
+      "replay_permitted": false
+    },
+    {
+      "id": "WS-C1-THEORY-LEGACY",
+      "current_chat_title": "HZT-M0-S6-C1 Theorie",
+      "recommended_chat_title": "ARCHIVE — HZT-M0-S6-C1 Theorie — Vorgänger",
+      "status": "ARCHIVE_REFERENCE",
+      "domain": "THEORY_HISTORY",
+      "responsibility": "Original C1 theory workstream retained as provenance/reference after chat-length exhaustion.",
+      "superseded_by": "WS-C1-CONTINUATION"
+    },
+    {
+      "id": "WS-C1-CONTINUATION",
+      "current_chat_title": "HZT-M0-S6-C1 Restart",
+      "recommended_chat_title": "ACTIVE — HZT-M0-S6-C1 Continuation — Solverplanung",
+      "status": "ACTIVE_CONTINUATION",
+      "domain": "THEORY_HANDOFF_SOLVER_PLANNING",
+      "responsibility": "Canonical continuation of C1 without C2 version jump; handoff and solver-wide planning.",
+      "canonical_outputs": ["https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_MasterBuildOrder_v1.0.html"]
+    },
+    {
+      "id": "WS-ULSH-MASTER-BUILD",
+      "current_chat_title": "ULSH Master Build Order",
+      "recommended_chat_title": "ACTIVE — ULSH Master Build Order — 14 Solver",
+      "status": "ACTIVE_REFERENCE",
+      "domain": "SOLVER_PROGRAM_MANAGEMENT",
+      "responsibility": "14-solver development program, 56 work packages, critical paths and release-gate sequencing.",
+      "canonical_outputs": ["https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_MasterBuildOrder_v1.0.html"]
+    },
+    {
+      "id": "WS-TECH-AUDIT",
+      "current_chat_title": "Technischer Neben-/Analysechat: UniverseLab Fehleranalyse",
+      "recommended_chat_title": "AUDIT — UniverseLab Fehleranalyse",
+      "status": "ACTIVE",
+      "domain": "TECHNICAL_AUDIT_QA",
+      "responsibility": "Repository/CI error analysis, P0 verification, integration audits and technical exceptional cases.",
+      "canonical_outputs": ["https://stefanhasselm74314-byte.github.io/UniverseLab/source.html"]
+    },
+    {
+      "id": "WS-HZT-STATUS-LEGACY",
+      "current_chat_title": "Hyperzeit Projektstatus Update",
+      "recommended_chat_title": "ARCHIVE — Hyperzeit Projektstatus Update — Übergabestand",
+      "status": "ARCHIVE_REFERENCE",
+      "domain": "THEORY_STATUS_HISTORY",
+      "responsibility": "Historical project-status and strategy snapshot retained for provenance; not the current solver execution authority."
+    },
+    {
+      "id": "WS-GSRA01-SYSTEM-ARCH",
+      "current_chat_title": "Bauplan Hyperzeit Raumschiff",
+      "recommended_chat_title": "ACTIVE — Generationsschiff Sagittarius A* — Systemarchitektur",
+      "status": "ACTIVE_INDEPENDENT_PROJECT",
+      "domain": "GSRA01_SYSTEM_ENGINEERING",
+      "project": "GSRA-01 Generation Ship",
+      "responsibility": "Re-definition and system-level engineering of the interstellar generation ship for a mission toward the Galactic Centre / Sagittarius A*, including habitat, life support, propulsion, energy, shielding, navigation, production and mission operations.",
+      "separation_from_universelab": "STRICT_REPOSITORY_SEPARATION_INTERFACE_ONLY",
+      "physics_rule": "Unverified HZT/Hyperzeit mechanisms may be studied as research options but must not be treated as engineering requirements or demonstrated propulsion technology.",
+      "canonical_outputs": [
+        "https://github.com/stefanhasselm74314-byte/GSRA-01-Generation-Ship",
+        "https://github.com/stefanhasselm74314-byte/GSRA-01-Control-Center",
+        "https://stefanhasselm74314-byte.github.io/GSRA-01-Control-Center/"
+      ]
+    }
+  ]
+}
