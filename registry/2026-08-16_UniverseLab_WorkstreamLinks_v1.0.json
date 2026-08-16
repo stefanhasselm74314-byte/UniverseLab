@@ -1,0 +1,120 @@
+{
+  "schema": "universelab.workstream-links.v1",
+  "version": "1.0.0",
+  "date": "2026-08-16",
+  "classification": "COORDINATION_AND_LINK_GOVERNANCE_ONLY",
+  "canonical_text_source": "ACTIVE_LINKS.md",
+  "preferred_mobile_entry": "links.html",
+  "private_chat_urls_published": false,
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "rules": [
+    "CHAT_CONTENT_IS_NOT_CANONICAL_PHYSICAL_EVIDENCE",
+    "GITHUB_ARTIFACTS_REGISTRIES_TESTS_PRS_AND_MERGE_COMMITS_CARRY_PROJECT_PROVENANCE",
+    "NO_AUTOMATIC_STATUS_TRANSFER_BETWEEN_WORKSTREAMS",
+    "PRIVATE_CHATGPT_CONVERSATION_IDENTIFIERS_ARE_NOT_PUBLISHED"
+  ],
+  "workstreams": [
+    {
+      "id": "WS-PLATFORM-ARCH",
+      "chat_title": "Forschungsplattform Architektur",
+      "status": "ACTIVE",
+      "domain": "PLATFORM_GOVERNANCE",
+      "responsibility": "UniverseLab platform architecture, global navigation, SiteState, reproducibility, status-axis separation and governed UI/registry integration.",
+      "current_task": "Maintain the Platform Governance and Reproducibility Layer and integrate governed solver state without changing physical release state.",
+      "canonical_outputs": [
+        "https://github.com/stefanhasselm74314-byte/UniverseLab/pull/139",
+        "https://github.com/stefanhasselm74314-byte/UniverseLab/pull/140",
+        "https://github.com/stefanhasselm74314-byte/UniverseLab/pull/141",
+        "https://github.com/stefanhasselm74314-byte/UniverseLab/pull/142",
+        "https://github.com/stefanhasselm74314-byte/UniverseLab/pull/143"
+      ]
+    },
+    {
+      "id": "WS-ULSH01-BG3C5",
+      "chat_title": "Analyse der 17 Dateien",
+      "status": "ACTIVE_CRITICAL_PATH",
+      "domain": "SCIENCE_SOLVER",
+      "responsibility": "ULSH-01 C-PHYS Background3C5 equation, finite-thickness operator, regular-center, response-rank and convergence gates.",
+      "current_task": "G5_FULL_FINITE_THICKNESS_OPERATOR_IDENTITY",
+      "canonical_outputs": [
+        "https://github.com/stefanhasselm74314-byte/UniverseLab/pull/137"
+      ],
+      "scientific_state": {
+        "rank_B_stress": "PROVED_3",
+        "rank_S": "PROVED_4",
+        "rank_R": "OPEN_NOT_EXECUTED",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE"
+      }
+    },
+    {
+      "id": "WS-ACTIVE-LINKS",
+      "chat_title": "Aktive wichtige Links",
+      "status": "ACTIVE",
+      "domain": "LINK_GOVERNANCE",
+      "responsibility": "Maintain canonical active links, remove dead or superseded links, and keep project/workstream destinations centralized.",
+      "current_task": "Maintain links.html, ACTIVE_LINKS.md and this workstream registry.",
+      "canonical_outputs": [
+        "https://stefanhasselm74314-byte.github.io/UniverseLab/links.html",
+        "https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/ACTIVE_LINKS.md"
+      ]
+    },
+    {
+      "id": "WS-CP01R2-D8-WATCH",
+      "chat_title": "CP01R2 D8 Laufwache",
+      "status": "COMPLETED",
+      "domain": "RUN_WATCH_PROVENANCE",
+      "responsibility": "Monitor, verify and terminate the one-time CP01R2-D8 run and preserve artifact/grant state.",
+      "current_task": "NONE_COMPLETED",
+      "completion": {
+        "run": "COMPLETED_SUCCESS",
+        "grant": "SPENT_NON_REPLAYABLE",
+        "replay_permitted": false,
+        "accepted_candidate": false
+      }
+    },
+    {
+      "id": "WS-C1-THEORY",
+      "chat_title": "HZT-M0-S6-C1 Theorie",
+      "status": "ACTIVE_REFERENCE",
+      "domain": "THEORY",
+      "responsibility": "Canonical C1/C-PHYS theory derivation within HPVS -> HZT-M0 -> HZT-Full, including parent physics, theory gates and derivational decisions.",
+      "current_task": "Provide theory-side canonical constraints and parent derivations for downstream solver work.",
+      "canonical_outputs": [
+        "https://github.com/stefanhasselm74314-byte/UniverseLab/tree/main/science/hzt-m0/md2s"
+      ]
+    },
+    {
+      "id": "WS-C1-RESTART",
+      "chat_title": "HZT-M0-S6-C1 Restart",
+      "status": "ACTIVE_CONTINUATION",
+      "domain": "HANDOFF_SOLVER_PLANNING",
+      "responsibility": "Canonical continuation of the C1 workstream after chat-length exhaustion; no C2 version jump. Solver-wide planning and ULSH handoff are maintained here.",
+      "current_task": "Maintain handoff continuity and solver-wide build-order alignment.",
+      "canonical_outputs": [
+        "https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_MasterBuildOrder_v1.0.html",
+        "https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html"
+      ]
+    },
+    {
+      "id": "WS-TECH-AUDIT",
+      "chat_title": "Technischer Neben-/Analysechat: UniverseLab Fehleranalyse",
+      "status": "ACTIVE",
+      "domain": "TECHNICAL_AUDIT_QA",
+      "responsibility": "Repository and CI error analysis, P0 verification, SCI-001/SCI-002 integration audits and technical exceptional cases.",
+      "current_task": "Provide technical QA and repair paths without promoting scientific release state.",
+      "canonical_outputs": [
+        "https://stefanhasselm74314-byte.github.io/UniverseLab/source.html",
+        "https://stefanhasselm74314-byte.github.io/UniverseLab/hyperzeit-methods.html"
+      ]
+    }
+  ],
+  "separation_contract": {
+    "THEORY": "derivation_and_physical_model_decisions",
+    "SCIENCE_SOLVER": "numerical_implementation_bvp_rank_convergence",
+    "PLATFORM_GOVERNANCE": "site_state_ui_governance_reproducibility",
+    "TECHNICAL_AUDIT_QA": "technical_audits_ci_and_repairs",
+    "LINK_GOVERNANCE": "active_destinations_and_workstream_mapping"
+  }
+}
