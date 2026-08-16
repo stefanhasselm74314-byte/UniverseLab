@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "universelab://schemas/site-state/v1.0",
+  "title": "UniverseLab Site State v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "version", "snapshot_date", "source_commit", "governance", "pages", "modules"],
+  "properties": {
+    "schema": {"const": "universelab.site-state.v1"},
+    "version": {"type": "string", "pattern": "^1\\.0\\.\\d+$"},
+    "snapshot_date": {"type": "string", "format": "date"},
+    "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "physical_gate_effect": {"const": "NONE"},
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["K1-D", "K1-E", "physical_evidence_effect", "status_axes_rule"],
+      "properties": {
+        "K1-D": {"enum": ["NOT_RELEASED", "RELEASED"]},
+        "K1-E": {"enum": ["NOT_ADMISSIBLE", "ADMISSIBLE"]},
+        "physical_evidence_effect": {"enum": ["NONE", "DIAGNOSTIC_ONLY", "PHYSICAL"]},
+        "status_axes_rule": {"const": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"}
+      }
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "domain", "status"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^UL-PAGE-[A-Z0-9_-]+$"},
+          "path": {"type": "string", "minLength": 1},
+          "domain": {"type": "string", "minLength": 1},
+          "status": {"enum": ["CANONICAL", "ACTIVE", "ACTIVE_DIAGNOSTIC", "ARCHIVED_REFERENCE", "LEGACY_REDIRECT"]},
+          "redirect_target": {"type": "string"}
+        }
+      }
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["module_id", "technical", "governance", "scientific", "release_gate", "provenance"],
+        "properties": {
+          "module_id": {"type": "string", "minLength": 1},
+          "technical": {"type": "object"},
+          "governance": {"type": "object"},
+          "scientific": {"type": "object"},
+          "release_gate": {"type": "object"},
+          "provenance": {"type": "object"},
+          "work_packages": {"type": "array", "items": {"type": "object"}}
+        }
+      }
+    }
+  }
+}

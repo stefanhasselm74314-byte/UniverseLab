@@ -1,0 +1,89 @@
+name: UniverseLab platform governance v1.0
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  platform-governance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON syntax
+        run: |
+          python -m json.tool schemas/2026-08-16_UniverseLab_SiteStateSchema_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-16_UniverseLab_SiteState_v1.0.json >/dev/null
+
+      - name: Enforce governance invariants
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          state = json.loads(Path('registry/2026-08-16_UniverseLab_SiteState_v1.0.json').read_text())
+          assert state['schema'] == 'universelab.site-state.v1'
+          assert state['physical_gate_effect'] == 'NONE'
+          gov = state['governance']
+          assert gov['K1-D'] == 'NOT_RELEASED'
+          assert gov['K1-E'] == 'NOT_ADMISSIBLE'
+          assert gov['physical_evidence_effect'] == 'NONE'
+          assert gov['status_axes_rule'] == 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT'
+
+          pages = {p['path']: p for p in state['pages']}
+          assert pages['navigator.html']['status'] == 'CANONICAL'
+          assert pages['navigator-app.html']['status'] == 'LEGACY_REDIRECT'
+          assert pages['navigator-app.html']['redirect_target'] == 'navigator.html'
+          assert pages['universelab-audit-2026-07-31.html']['status'] == 'ARCHIVED_REFERENCE'
+
+          modules = {m['module_id']: m for m in state['modules']}
+          u = modules['ULSH-01']
+          assert u['governance']['solver_release'] == 'NOT_AUTHORIZED'
+          assert u['governance']['K1-D'] == 'NOT_RELEASED'
+          assert u['governance']['K1-E'] == 'NOT_ADMISSIBLE'
+          assert u['governance']['physical_evidence_effect'] == 'NONE'
+          assert u['scientific']['physical_background'] == 'NOT_ESTABLISHED'
+          assert u['release_gate']['status'] == 'NOT_SATISFIED'
+          assert all(wp['status'] == 'NOT_EVALUATED_IN_SITE_STATE' for wp in u['work_packages'])
+          PY
+
+      - name: Enforce canonical navigator architecture
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          app = Path('navigator-app.html').read_text()
+          nav = Path('navigator.html').read_text()
+          assert '<iframe' not in app.lower()
+          assert 'navigator.html' in app
+          assert '2026-08-16_UniverseLab_GlobalShell_v1.0.css' in nav
+          assert '2026-08-16_UniverseLab_GlobalShell_v1.0.js' in nav
+          assert 'UL-PAGE-NAVIGATOR' in nav
+          assert 'solver-hub.html' in nav
+          assert '2026-08-16_UniverseLab_SiteState_v1.0.json' in nav
+          PY
+
+      - name: Enforce ULSH-01 governed pilot binding
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          hub = Path('solver-hub.html').read_text()
+          shell = Path('assets/2026-08-16_UniverseLab_GlobalShell_v1.0.js').read_text()
+          assert 'data-ul-module-state="ULSH-01"' in hub
+          assert 'UL-PAGE-SOLVER-HUB' in hub
+          assert '2026-08-16_UniverseLab_GlobalShell_v1.0.js' in hub
+          assert 'renderModuleState' in shell
+          assert "solver_release" in shell
+          assert "physical_background" in shell
+          assert "release_gate" in shell
+          PY

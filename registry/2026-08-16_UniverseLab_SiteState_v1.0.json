@@ -1,0 +1,61 @@
+{
+  "schema": "universelab.site-state.v1",
+  "version": "1.0.0",
+  "snapshot_date": "2026-08-16",
+  "source_commit": "6288f1e4f1b6f2a6a23077fa7a8ec89fc865e6b5",
+  "physical_gate_effect": "NONE",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"
+  },
+  "pages": [
+    {"id":"UL-PAGE-NAVIGATOR","path":"navigator.html","domain":"navigator","status":"CANONICAL"},
+    {"id":"UL-PAGE-NAVIGATOR-LEGACY","path":"navigator-app.html","domain":"navigator","status":"LEGACY_REDIRECT","redirect_target":"navigator.html"},
+    {"id":"UL-PAGE-HYPERLAB","path":"hyperlab.html","domain":"hyperlab","status":"ACTIVE_DIAGNOSTIC"},
+    {"id":"UL-PAGE-SOLVER-HUB","path":"solver-hub.html","domain":"solver","status":"ACTIVE_DIAGNOSTIC"},
+    {"id":"UL-PAGE-MATERIAL","path":"hyperzeit-material-v2.html","domain":"material","status":"ACTIVE"},
+    {"id":"UL-PAGE-METHODS","path":"hyperzeit-methods.html","domain":"methods","status":"ACTIVE"},
+    {"id":"UL-PAGE-AUDIT-20260731","path":"universelab-audit-2026-07-31.html","domain":"audit","status":"ARCHIVED_REFERENCE"},
+    {"id":"UL-PAGE-SOURCE","path":"source.html","domain":"source","status":"ACTIVE"}
+  ],
+  "modules": [
+    {
+      "module_id": "ULSH-01",
+      "technical": {
+        "implementation": "REAL_BACKEND_AF0_CONTROL_AUDITED_TARGET_PATH_AND_GRANT_RELEASE_MISSING",
+        "background_execution": "NOT_AUTHORIZED",
+        "reference_run": "NOT_RUN",
+        "independent_backend_physical_run": "NOT_RUN"
+      },
+      "governance": {
+        "priority": "ACTIVE_CRITICAL_PATH",
+        "solver_release": "NOT_AUTHORIZED",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
+        "classification": "OPEN",
+        "claim": "No physical MD2S background is established by this status snapshot."
+      },
+      "release_gate": {
+        "id": "REPRODUCIBLE_PHYSICAL_MD2S_BACKGROUND_WITH_ONE_SIDED_BOUNDARY_EXPORT",
+        "status": "NOT_SATISFIED"
+      },
+      "provenance": {
+        "master_build_order": "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json",
+        "project_manifest": "project-manifest.json",
+        "site_state_source_commit": "6288f1e4f1b6f2a6a23077fa7a8ec89fc865e6b5"
+      },
+      "work_packages": [
+        {"id":"WP1","title":"Targetgleichungs- und Randbedingungsvertrag aus kanonischem M1 schließen","status":"NOT_EVALUATED_IN_SITE_STATE"},
+        {"id":"WP2","title":"Physische BVP-Transaktion gegen eingefrorenen Target-Payload freigabefähig machen","status":"NOT_EVALUATED_IN_SITE_STATE"},
+        {"id":"WP3","title":"Unabhängige Backend-Gegenprüfung und Mesh/Residual-Konvergenz ausführen","status":"NOT_EVALUATED_IN_SITE_STATE"},
+        {"id":"WP4","title":"Einseitigen Bulk/Cap-Randexport samt Provenienz einfrieren","status":"NOT_EVALUATED_IN_SITE_STATE"}
+      ]
+    }
+  ]
+}
