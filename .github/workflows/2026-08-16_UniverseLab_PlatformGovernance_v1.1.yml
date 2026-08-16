@@ -26,7 +26,7 @@ jobs:
           python -m json.tool schemas/2026-08-16_UniverseLab_SiteStateSchema_v1.0.json >/dev/null
           python -m json.tool registry/2026-08-16_UniverseLab_SiteState_v1.0.json >/dev/null
           python -m json.tool project-manifest.json >/dev/null
-          python -m py_compile tools/2026-08-16_apply_universelab_platform_rollout_v1.0.py
+          python -m json.tool registry/2026-08-16_UniverseLab_PlatformRolloutPlan_v1.0.json >/dev/null
 
       - name: Enforce physical governance invariants
         run: |
@@ -84,7 +84,6 @@ jobs:
 
       - name: Enforce global shell rollout
         run: |
-          python tools/2026-08-16_apply_universelab_platform_rollout_v1.0.py --check
           python - <<'PY'
           from pathlib import Path
 
@@ -101,8 +100,8 @@ jobs:
           }
           for path, (page_id, domain) in pages.items():
               text = Path(path).read_text()
-              assert css in text, path
-              assert js in text, path
+              assert text.count(css) == 1, path
+              assert text.count(js) == 1, path
               assert f'data-ul-page-id="{page_id}"' in text, path
               assert f'data-ul-domain="{domain}"' in text, path
 
