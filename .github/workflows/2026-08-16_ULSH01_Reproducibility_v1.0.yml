@@ -26,6 +26,8 @@ jobs:
   ulsh01-reproducibility:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    env:
+      UL_REFERENCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
 
