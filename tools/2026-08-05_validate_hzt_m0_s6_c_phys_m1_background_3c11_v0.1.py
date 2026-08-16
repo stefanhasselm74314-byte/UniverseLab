@@ -26,6 +26,8 @@ GRANT_SCHEMA_PATH = ROOT / "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C
 PHYSICAL_ARTIFACT_ROOT = ROOT / "artifacts/hzt-m0/md2s/background3c/HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1"
 DENIAL = "DENIED_OPERATIVE_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_ABSENT"
 NEXT = "C-PHYS-R1.0-BACKGROUND-3C12_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_IMPLEMENTATION_ONLY"
+CANONICAL_RELEASE = "2.22-c-phys-m1-background-3c11-authorization-denied-v0.1"
+CANONICAL_CHECKPOINT = "UL-CHK-20260805-030"
 PACKAGE_DIGEST = "a7b48c88061e00cc3dc44dd00a2a17855a7f8c65dd228f725101fde9a1839eb4"
 
 
@@ -160,15 +162,22 @@ def validate() -> dict:
     assert run_input["gate_state"]["BACKGROUND_SOLVER_EXECUTION"] == "NOT_AUTHORIZED"
     assert run_input["gate_state"]["physical_background"] == "NOT_ESTABLISHED"
 
-    assert manifest["release"] == "2.21-c-phys-m1-background-3c10-real-backend-control-audited-v0.1"
+    # The review artifact is historical, but its regression validator runs against
+    # the current post-review canonical state. Never roll the manifest back to the
+    # pre-review 2.21 snapshot merely to revalidate the denial.
+    assert manifest["release"] == CANONICAL_RELEASE
     assert manifest["gates"]["BACKGROUND_3C10_REAL_BACKEND_ADAPTER_CONTROL_RELEASE"] == "PASS_AUDITED_AF0_CONTROL_ONLY"
-    assert manifest["gates"]["BACKGROUND_3C11_AUTHORIZATION_REVIEW"] == "NOT_STARTED"
+    assert manifest["gates"]["BACKGROUND_3C11_AUTHORIZATION_REVIEW"] == DENIAL
+    assert manifest["gates"]["BACKGROUND_3C12_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE"] == "NOT_STARTED"
     assert manifest["gates"]["BACKGROUND_3C_EXECUTION"] == "NOT_AUTHORIZED"
     assert manifest["gates"]["BACKGROUND_SOLVER_EXECUTION"] == "NOT_AUTHORIZED"
     assert manifest["gates"]["PHYSICAL_BACKGROUND"] == "NOT_ESTABLISHED"
-    assert manifest["next_block"] == review["block"]
-    assert checkpoint["checkpoint_id"] == "UL-CHK-20260805-029"
-    assert checkpoint["current_workstreams"][0]["next_block"] == review["block"]
+    assert manifest["gates"]["K1-D"] == "NOT_RELEASED"
+    assert manifest["gates"]["K1-E"] == "NOT_ADMISSIBLE"
+    assert manifest["gates"]["physical_evidence_effect"] == "NONE"
+    assert manifest["next_block"] == NEXT
+    assert checkpoint["checkpoint_id"] == CANONICAL_CHECKPOINT
+    assert checkpoint["current_workstreams"][0]["next_block"] == NEXT
 
     review_modules = imported_modules(Path(__file__).resolve())
     assert "numpy" not in review_modules
