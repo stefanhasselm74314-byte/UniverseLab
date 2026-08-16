@@ -55,9 +55,10 @@ jobs:
           assert u['governance']['physical_evidence_effect'] == 'NONE'
           assert u['scientific']['physical_background'] == 'NOT_ESTABLISHED'
           assert u['release_gate']['status'] == 'NOT_SATISFIED'
+          assert all(wp['status'] == 'NOT_EVALUATED_IN_SITE_STATE' for wp in u['work_packages'])
           PY
 
-      - name: Enforce navigator architecture
+      - name: Enforce canonical navigator architecture
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -70,4 +71,19 @@ jobs:
           assert 'UL-PAGE-NAVIGATOR' in nav
           assert 'solver-hub.html' in nav
           assert '2026-08-16_UniverseLab_SiteState_v1.0.json' in nav
+          PY
+
+      - name: Enforce ULSH-01 governed pilot binding
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          hub = Path('solver-hub.html').read_text()
+          shell = Path('assets/2026-08-16_UniverseLab_GlobalShell_v1.0.js').read_text()
+          assert 'data-ul-module-state="ULSH-01"' in hub
+          assert 'UL-PAGE-SOLVER-HUB' in hub
+          assert '2026-08-16_UniverseLab_GlobalShell_v1.0.js' in hub
+          assert 'renderModuleState' in shell
+          assert "solver_release" in shell
+          assert "physical_background" in shell
+          assert "release_gate" in shell
           PY
