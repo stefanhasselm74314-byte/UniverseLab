@@ -123,18 +123,35 @@ def validate(replay_path: Path, denied_path: Path, denied_exit_code: int) -> dic
     assert independent["nonlinear_root_calls"] == iacc["nonlinear_root_call_count"] == 0
     cutoffs = [float(record["epsilon"]) for record in independent["cutoff_records"]]
     assert cutoffs == [float(value) for value in compare["independent_cutoff_schedule_exact"]]
+
+    # The raw independent backend records intentionally contain the independent
+    # metrics and boundary vector.  The cross-backend distance is computed by
+    # the release layer and exported separately in cutoff_table.  Validate both
+    # structures and bind them by epsilon instead of assuming the derived field
+    # is present in the raw backend record.
+    cutoff_table = replay["cutoff_table"]
+    assert len(cutoff_table) == len(independent["cutoff_records"])
+    table_by_epsilon = {float(record["epsilon"]): record for record in cutoff_table}
+    assert set(table_by_epsilon) == set(cutoffs)
+
     independent_metric_ratios: list[dict[str, float]] = []
     for record in independent["cutoff_records"]:
+        epsilon = float(record["epsilon"])
+        derived = table_by_epsilon[epsilon]
+        assert_close(derived["profile_error_inf"], record["profile_error_inf"], rel_tol=0.0, abs_tol=0.0, label=f"cutoff_table[{epsilon}].profile")
+        assert_close(derived["constraint_inf"], record["constraint_inf"], rel_tol=0.0, abs_tol=0.0, label=f"cutoff_table[{epsilon}].constraint")
+        assert_close(derived["boundary_exact_distance"], record["boundary_exact_distance"], rel_tol=0.0, abs_tol=0.0, label=f"cutoff_table[{epsilon}].boundary")
+        backend_distance = float(derived["primary_independent_boundary_distance"])
         assert float(record["profile_error_inf"]) <= float(iacc["profile_error_inf_max"])
         assert float(record["constraint_inf"]) <= float(iacc["constraint_inf_max"])
         assert float(record["boundary_exact_distance"]) <= float(iacc["boundary_exact_distance_max"])
-        assert float(record["primary_independent_boundary_distance"]) <= float(iacc["primary_independent_boundary_distance_max"])
+        assert backend_distance <= float(iacc["primary_independent_boundary_distance_max"])
         independent_metric_ratios.append({
-            "epsilon": float(record["epsilon"]),
+            "epsilon": epsilon,
             "profile": float(record["profile_error_inf"]) / float(iacc["profile_error_inf_max"]),
             "constraint": float(record["constraint_inf"]) / float(iacc["constraint_inf_max"]),
             "boundary": float(record["boundary_exact_distance"]) / float(iacc["boundary_exact_distance_max"]),
-            "backend_distance": float(record["primary_independent_boundary_distance"]) / float(iacc["primary_independent_boundary_distance_max"]),
+            "backend_distance": backend_distance / float(iacc["primary_independent_boundary_distance_max"]),
         })
 
     assert denied_exit_code == firewalls["physical_run_cli_exit_code"] == 73
