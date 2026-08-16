@@ -30,5 +30,6 @@ jobs:
           assert g['physical_execution_authorized'] is False
           assert g['rank_R_claim_allowed'] is False
           assert g['evidence_effect']=='NONE_IMPLEMENTATION_ONLY'
-          assert g['Gamma_Sigma']=='OPEN_PROVENANCE_IDENTITY'
+          assert g['Gamma_Sigma']=='m_layer*q_hat'
+          assert g['Gamma_Sigma_status']=='PROVENANCE_CLOSED_CANONICAL_M1'
           PY
