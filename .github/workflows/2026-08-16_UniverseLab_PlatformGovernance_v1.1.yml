@@ -1,0 +1,120 @@
+name: UniverseLab platform governance v1.1
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  platform-governance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate machine-readable platform state
+        run: |
+          python -m json.tool schemas/2026-08-16_UniverseLab_SiteStateSchema_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-16_UniverseLab_SiteState_v1.0.json >/dev/null
+          python -m json.tool project-manifest.json >/dev/null
+          python -m json.tool registry/2026-08-16_UniverseLab_PlatformRolloutPlan_v1.0.json >/dev/null
+
+      - name: Enforce physical governance invariants
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          state = json.loads(Path('registry/2026-08-16_UniverseLab_SiteState_v1.0.json').read_text())
+          assert state['schema'] == 'universelab.site-state.v1'
+          assert state['physical_gate_effect'] == 'NONE'
+          gov = state['governance']
+          assert gov['K1-D'] == 'NOT_RELEASED'
+          assert gov['K1-E'] == 'NOT_ADMISSIBLE'
+          assert gov['physical_evidence_effect'] == 'NONE'
+          assert gov['status_axes_rule'] == 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT'
+
+          modules = {m['module_id']: m for m in state['modules']}
+          u = modules['ULSH-01']
+          assert u['governance']['solver_release'] == 'NOT_AUTHORIZED'
+          assert u['governance']['K1-D'] == 'NOT_RELEASED'
+          assert u['governance']['K1-E'] == 'NOT_ADMISSIBLE'
+          assert u['governance']['physical_evidence_effect'] == 'NONE'
+          assert u['scientific']['physical_background'] == 'NOT_ESTABLISHED'
+          assert u['release_gate']['status'] == 'NOT_SATISFIED'
+          assert all(wp['status'] == 'NOT_EVALUATED_IN_SITE_STATE' for wp in u['work_packages'])
+          PY
+
+      - name: Enforce manifest synchronization
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          manifest = json.loads(Path('project-manifest.json').read_text())
+          pages = {p['id']: p for p in manifest['canonical_pages']}
+          assert pages['navigator']['path'] == 'navigator.html'
+          assert pages['navigator']['status'] == 'ACTIVE'
+          assert pages['navigator_legacy_redirect']['path'] == 'navigator-app.html'
+          assert pages['navigator_legacy_redirect']['status'] == 'LEGACY_REDIRECT'
+          assert pages['navigator_legacy_redirect']['redirect_target'] == './navigator.html'
+          assert pages['solver_hub']['path'] == 'solver-hub.html'
+          assert pages['solver_hub']['status'] == 'ACTIVE_DIAGNOSTIC'
+          assert pages['audit']['status'] == 'ARCHIVED_REFERENCE'
+
+          registries = manifest['central_registries']
+          assert registries['site_state'] == 'registry/2026-08-16_UniverseLab_SiteState_v1.0.json'
+          assert registries['site_state_schema'] == 'schemas/2026-08-16_UniverseLab_SiteStateSchema_v1.0.json'
+          assert registries['platform_governance'] == 'governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md'
+
+          platform = manifest['platform_governance']
+          assert platform['version'] == '1.1.0'
+          assert platform['physical_gate_effect'] == 'NONE'
+          assert platform['status_axes_rule'] == 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT'
+          PY
+
+      - name: Enforce global shell rollout
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          css = '2026-08-16_UniverseLab_GlobalShell_v1.1.css'
+          js = '2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+          pages = {
+              'navigator.html': ('UL-PAGE-NAVIGATOR', 'navigator'),
+              'hyperlab.html': ('UL-PAGE-HYPERLAB', 'hyperlab'),
+              'solver-hub.html': ('UL-PAGE-SOLVER-HUB', 'solver'),
+              'hyperzeit-material-v2.html': ('UL-PAGE-MATERIAL', 'material'),
+              'hyperzeit-methods.html': ('UL-PAGE-METHODS', 'methods'),
+              'universelab-audit-2026-07-31.html': ('UL-PAGE-AUDIT-20260731', 'audit'),
+              'source.html': ('UL-PAGE-SOURCE', 'source'),
+          }
+          for path, (page_id, domain) in pages.items():
+              text = Path(path).read_text()
+              assert text.count(css) == 1, path
+              assert text.count(js) == 1, path
+              assert f'data-ul-page-id="{page_id}"' in text, path
+              assert f'data-ul-domain="{domain}"' in text, path
+
+          app = Path('navigator-app.html').read_text()
+          assert '<iframe' not in app.lower()
+          assert 'navigator.html' in app
+
+          shell = Path('assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js').read_text()
+          assert 'normalizeLegacyNav' in shell
+          assert 'ARCHIVSTAND' in shell
+          assert 'renderModuleState' in shell
+          assert 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT' not in shell
+
+          hub = Path('solver-hub.html').read_text()
+          assert 'data-ul-module-state="ULSH-01"' in hub
+          PY

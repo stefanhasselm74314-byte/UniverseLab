@@ -170,16 +170,31 @@
     },
     {
       "id": "navigator",
-      "path": "navigator-app.html",
-      "live": "./navigator-app.html?v=4",
+      "path": "navigator.html",
+      "live": "./navigator.html",
       "class": "scientific_navigation",
       "status": "ACTIVE"
+    },
+    {
+      "id": "navigator_legacy_redirect",
+      "path": "navigator-app.html",
+      "live": "./navigator-app.html",
+      "class": "compatibility_redirect",
+      "status": "LEGACY_REDIRECT",
+      "redirect_target": "./navigator.html"
     },
     {
       "id": "hyperlab",
       "path": "hyperlab.html",
       "live": "./hyperlab.html?v=10",
       "class": "status_and_diagnostics",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "solver_hub",
+      "path": "solver-hub.html",
+      "live": "./solver-hub.html?v=1",
+      "class": "numerical_research_infrastructure",
       "status": "ACTIVE_DIAGNOSTIC"
     },
     {
@@ -567,7 +582,10 @@
     "background_3c10_audit_result_r3": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json",
     "background_3c10_ledger_r3": "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlLedger_v0.3.md",
     "background_3c11_authorization_review": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json",
-    "background_3c11_authorization_ledger": "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11AuthorizationReviewLedger_v0.1.md"
+    "background_3c11_authorization_ledger": "science/hzt-m0/md2s/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11AuthorizationReviewLedger_v0.1.md",
+    "site_state": "registry/2026-08-16_UniverseLab_SiteState_v1.0.json",
+    "site_state_schema": "schemas/2026-08-16_UniverseLab_SiteStateSchema_v1.0.json",
+    "platform_governance": "governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md"
   },
   "workstream_priority": [
     "MD2S-R1-C-PHYS:C-PHYS-R1.0-BACKGROUND-3C4_EXECUTION_RUNNER_IMPLEMENTATION_ONLY",
@@ -852,5 +870,27 @@
     "physical_evidence_effect": "NONE",
     "review": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json",
     "next_block": "C-PHYS-R1.0-BACKGROUND-3C12_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_IMPLEMENTATION_ONLY"
+  },
+  "platform_governance": {
+    "version": "1.1.0",
+    "date": "2026-08-16",
+    "status": "GLOBAL_SHELL_ROLLED_OUT_TO_CANONICAL_PAGES",
+    "canonical_navigator": "navigator.html",
+    "legacy_navigator_redirect": "navigator-app.html",
+    "global_shell_css": "assets/2026-08-16_UniverseLab_GlobalShell_v1.1.css",
+    "global_shell_js": "assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js",
+    "site_state": "registry/2026-08-16_UniverseLab_SiteState_v1.0.json",
+    "site_state_schema": "schemas/2026-08-16_UniverseLab_SiteStateSchema_v1.0.json",
+    "rollout_pages": [
+      "navigator.html",
+      "hyperlab.html",
+      "solver-hub.html",
+      "hyperzeit-material-v2.html",
+      "hyperzeit-methods.html",
+      "universelab-audit-2026-07-31.html",
+      "source.html"
+    ],
+    "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT",
+    "physical_gate_effect": "NONE"
   }
 }

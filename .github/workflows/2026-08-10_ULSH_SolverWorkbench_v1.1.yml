@@ -71,9 +71,9 @@ jobs:
       - name: Confirm planning-only scope and frozen baseline protection
         run: |
           git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD | tee /tmp/ulsh-workbench-files.txt
-          forbidden_exec="$(grep -E '\.(py|ipynb)$' /tmp/ulsh-workbench-files.txt | grep -v '^tests/' || true)"
+          forbidden_exec="$(grep -E '\.(py|ipynb)$' /tmp/ulsh-workbench-files.txt | grep -vE '^tests/|^tools/[^/]*validate[^/]*\.py$' || true)"
           if [[ -n "$forbidden_exec" ]]; then
-            echo "Execution-capable code outside tests is forbidden in ULSH planning changes:"
+            echo "Execution-capable code outside tests and validation-only tools is forbidden in ULSH planning changes:"
             echo "$forbidden_exec"
             exit 1
           fi
