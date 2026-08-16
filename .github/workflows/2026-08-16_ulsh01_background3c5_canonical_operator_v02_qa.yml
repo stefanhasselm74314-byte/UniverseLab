@@ -32,8 +32,12 @@ jobs:
           python - <<'PY'
           import importlib.util
           from pathlib import Path
+          import sys
           p=Path('ulsh/ULSH-01/C-PHYS/2026-08-16_hzt_background3c5_canonical_candidate_operator_v0.2.py')
-          s=importlib.util.spec_from_file_location('m',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)
+          s=importlib.util.spec_from_file_location('m',p)
+          m=importlib.util.module_from_spec(s)
+          sys.modules[s.name]=m
+          s.loader.exec_module(m)
           assert m.PHYSICAL_EXECUTION_AUTHORIZED is False
           assert m.RANK_R_CLAIM_ALLOWED is False
           assert m.PARENT_EQUIVALENCE_STATUS == 'BULK_EXACT__FINITE_THICKNESS_NORMALIZATION_PENDING'
