@@ -1,8 +1,8 @@
 {
   "schema": "universelab.site-state.v1",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "snapshot_date": "2026-08-16",
-  "source_commit": "6288f1e4f1b6f2a6a23077fa7a8ec89fc865e6b5",
+  "source_commit": "bf058a39ab58601f7ecda4a6644bae49c9cc8c60",
   "physical_gate_effect": "NONE",
   "governance": {
     "K1-D": "NOT_RELEASED",
@@ -11,14 +11,55 @@
     "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"
   },
   "pages": [
-    {"id":"UL-PAGE-NAVIGATOR","path":"navigator.html","domain":"navigator","status":"CANONICAL"},
-    {"id":"UL-PAGE-NAVIGATOR-LEGACY","path":"navigator-app.html","domain":"navigator","status":"LEGACY_REDIRECT","redirect_target":"navigator.html"},
-    {"id":"UL-PAGE-HYPERLAB","path":"hyperlab.html","domain":"hyperlab","status":"ACTIVE_DIAGNOSTIC"},
-    {"id":"UL-PAGE-SOLVER-HUB","path":"solver-hub.html","domain":"solver","status":"ACTIVE_DIAGNOSTIC"},
-    {"id":"UL-PAGE-MATERIAL","path":"hyperzeit-material-v2.html","domain":"material","status":"ACTIVE"},
-    {"id":"UL-PAGE-METHODS","path":"hyperzeit-methods.html","domain":"methods","status":"ACTIVE"},
-    {"id":"UL-PAGE-AUDIT-20260731","path":"universelab-audit-2026-07-31.html","domain":"audit","status":"ARCHIVED_REFERENCE"},
-    {"id":"UL-PAGE-SOURCE","path":"source.html","domain":"source","status":"ACTIVE"}
+    {
+      "id": "UL-PAGE-NAVIGATOR",
+      "path": "navigator.html",
+      "domain": "navigator",
+      "status": "CANONICAL"
+    },
+    {
+      "id": "UL-PAGE-NAVIGATOR-LEGACY",
+      "path": "navigator-app.html",
+      "domain": "navigator",
+      "status": "LEGACY_REDIRECT",
+      "redirect_target": "navigator.html"
+    },
+    {
+      "id": "UL-PAGE-HYPERLAB",
+      "path": "hyperlab.html",
+      "domain": "hyperlab",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "UL-PAGE-SOLVER-HUB",
+      "path": "solver-hub.html",
+      "domain": "solver",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "UL-PAGE-MATERIAL",
+      "path": "hyperzeit-material-v2.html",
+      "domain": "material",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "UL-PAGE-METHODS",
+      "path": "hyperzeit-methods.html",
+      "domain": "methods",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "UL-PAGE-AUDIT-20260731",
+      "path": "universelab-audit-2026-07-31.html",
+      "domain": "audit",
+      "status": "ARCHIVED_REFERENCE"
+    },
+    {
+      "id": "UL-PAGE-SOURCE",
+      "path": "source.html",
+      "domain": "source",
+      "status": "ACTIVE"
+    }
   ],
   "modules": [
     {
@@ -27,7 +68,11 @@
         "implementation": "REAL_BACKEND_AF0_CONTROL_AUDITED_TARGET_PATH_AND_GRANT_RELEASE_MISSING",
         "background_execution": "NOT_AUTHORIZED",
         "reference_run": "NOT_RUN",
-        "independent_backend_physical_run": "NOT_RUN"
+        "independent_backend_physical_run": "NOT_RUN",
+        "control_reference": "AVAILABLE_AUDITED_AF0_R3",
+        "reference_replay": "NOT_TESTED",
+        "reproducibility_layer": "CONTROL_REFERENCE_PACKAGE_DEFINED_PHYSICAL_REFERENCE_NOT_AVAILABLE",
+        "machine_test_status_source": "CI_GENERATED_READ_ONLY_ARTIFACT"
       },
       "governance": {
         "priority": "ACTIVE_CRITICAL_PATH",
@@ -48,13 +93,35 @@
       "provenance": {
         "master_build_order": "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json",
         "project_manifest": "project-manifest.json",
-        "site_state_source_commit": "6288f1e4f1b6f2a6a23077fa7a8ec89fc865e6b5"
+        "site_state_source_commit": "bf058a39ab58601f7ecda4a6644bae49c9cc8c60",
+        "reproducibility_contract": "registry/2026-08-16_ULSH01_ReproducibilityContract_v1.0.json",
+        "control_reference_input": "reproducibility/ulsh-01/2026-08-16_ULSH01_ControlReferenceInput_v1.0.json",
+        "control_reference_output": "reproducibility/ulsh-01/2026-08-16_ULSH01_ControlReferenceOutput_v1.0.json",
+        "tolerance_contract": "reproducibility/ulsh-01/2026-08-16_ULSH01_ToleranceContract_v1.0.json",
+        "run_provenance": "reproducibility/ulsh-01/2026-08-16_ULSH01_RunProvenance_v1.0.json",
+        "checksums": "reproducibility/ulsh-01/2026-08-16_ULSH01_SHA256SUMS_v1.0.txt"
       },
       "work_packages": [
-        {"id":"WP1","title":"Targetgleichungs- und Randbedingungsvertrag aus kanonischem M1 schließen","status":"NOT_EVALUATED_IN_SITE_STATE"},
-        {"id":"WP2","title":"Physische BVP-Transaktion gegen eingefrorenen Target-Payload freigabefähig machen","status":"NOT_EVALUATED_IN_SITE_STATE"},
-        {"id":"WP3","title":"Unabhängige Backend-Gegenprüfung und Mesh/Residual-Konvergenz ausführen","status":"NOT_EVALUATED_IN_SITE_STATE"},
-        {"id":"WP4","title":"Einseitigen Bulk/Cap-Randexport samt Provenienz einfrieren","status":"NOT_EVALUATED_IN_SITE_STATE"}
+        {
+          "id": "WP1",
+          "title": "Targetgleichungs- und Randbedingungsvertrag aus kanonischem M1 schließen",
+          "status": "NOT_EVALUATED_IN_SITE_STATE"
+        },
+        {
+          "id": "WP2",
+          "title": "Physische BVP-Transaktion gegen eingefrorenen Target-Payload freigabefähig machen",
+          "status": "NOT_EVALUATED_IN_SITE_STATE"
+        },
+        {
+          "id": "WP3",
+          "title": "Unabhängige Backend-Gegenprüfung und Mesh/Residual-Konvergenz ausführen",
+          "status": "NOT_EVALUATED_IN_SITE_STATE"
+        },
+        {
+          "id": "WP4",
+          "title": "Einseitigen Bulk/Cap-Randexport samt Provenienz einfrieren",
+          "status": "NOT_EVALUATED_IN_SITE_STATE"
+        }
       ]
     }
   ]

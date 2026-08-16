@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "universelab://schemas/solver-reference-package/v1.0",
+  "title": "UniverseLab Solver Reference Package v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "version",
+    "date",
+    "package_id",
+    "module_id",
+    "solver_id",
+    "classification",
+    "status",
+    "physical_gate_effect",
+    "physical_evidence_effect",
+    "reference_scope",
+    "artifacts",
+    "sha256",
+    "checksums_file_sha256",
+    "comparison_semantics",
+    "machine_test",
+    "governance_invariants",
+    "forbidden_promotions"
+  ],
+  "properties": {
+    "schema": {
+      "const": "universelab.solver-reference-package.v1"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.0\\.\\d+$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "package_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "module_id": {
+      "const": "ULSH-01"
+    },
+    "solver_id": {
+      "const": "MD2S-BVP"
+    },
+    "classification": {
+      "const": "CONTROL_REFERENCE_REPRODUCIBILITY_PACKAGE_NO_PHYSICAL_TARGET_EXECUTION"
+    },
+    "status": {
+      "enum": [
+        "REFERENCE_PACKAGE_DEFINED_STATIC_AUDIT_BINDING",
+        "REFERENCE_PACKAGE_VALIDATED"
+      ]
+    },
+    "physical_gate_effect": {
+      "const": "NONE"
+    },
+    "physical_evidence_effect": {
+      "const": "NONE"
+    },
+    "reference_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "control_reference",
+        "control_replay",
+        "physical_target_reference",
+        "physical_target_run_id"
+      ],
+      "properties": {
+        "control_reference": {
+          "const": "AVAILABLE_AUDITED_AF0_R3"
+        },
+        "control_replay": {
+          "enum": [
+            "NOT_RUN_BY_THIS_PACKAGE",
+            "CI_REPLAY_CONTROL_ONLY"
+          ]
+        },
+        "physical_target_reference": {
+          "const": "NOT_AVAILABLE_NOT_AUTHORIZED"
+        },
+        "physical_target_run_id": {
+          "const": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1"
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object"
+    },
+    "sha256": {
+      "type": "object"
+    },
+    "checksums_file_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "comparison_semantics": {
+      "type": "object"
+    },
+    "machine_test": {
+      "type": "object"
+    },
+    "governance_invariants": {
+      "type": "object"
+    },
+    "forbidden_promotions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  }
+}

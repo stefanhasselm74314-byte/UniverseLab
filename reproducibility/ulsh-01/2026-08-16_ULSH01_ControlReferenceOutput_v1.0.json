@@ -1,0 +1,97 @@
+{
+  "schema": "universelab.ulsh01.control-reference-output.v1",
+  "version": "1.0.0",
+  "date": "2026-08-16",
+  "module_id": "ULSH-01",
+  "solver_id": "MD2S-BVP",
+  "classification": "AUDITED_REAL_BACKEND_ANALYTIC_CONTROL_REFERENCE_OUTPUT_ONLY",
+  "status": "PASS_REAL_BACKEND_AF0_CONTROL_RELEASE_NO_TARGET_SOLVE",
+  "physical_evidence_effect": "NONE",
+  "source_audit": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json",
+  "control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R3",
+  "primary_control": {
+    "status": "PASS_REAL_PRIMARY_AF0_CONTROL_NO_NEWTON",
+    "model_a_F": 0.0,
+    "node_records": [
+      {
+        "node_count": 24,
+        "bulk_residual_inf": 6.845900235585844e-11,
+        "constraint_inf": 1.3877787807814457e-17,
+        "boundary_exact_distance": 1.0458300891968975e-13,
+        "bulk_classification": "STANDARD_CONTROL_ENVELOPE"
+      },
+      {
+        "node_count": 48,
+        "bulk_residual_inf": 1.929132270594991e-10,
+        "constraint_inf": 1.3877787807814457e-17,
+        "boundary_exact_distance": 2.744471316873387e-13,
+        "bulk_classification": "STANDARD_CONTROL_ENVELOPE"
+      },
+      {
+        "node_count": 96,
+        "bulk_residual_inf": 1.7027736345931466e-08,
+        "constraint_inf": 1.3877787807814457e-17,
+        "boundary_exact_distance": 1.084909939663703e-12,
+        "bulk_classification": "HIGH_ORDER_DIFFERENTIATION_ROUNDOFF_ENVELOPE_CONTROL_ONLY"
+      }
+    ],
+    "candidate": {
+      "varphi_N_0": 0.0,
+      "q_N": 0.2792407799438735,
+      "A_S_0": 0.0,
+      "varphi_S_0": 0.0,
+      "q_S": -0.2792407799438735,
+      "rho_N": 2.101916493295789,
+      "rho_S": 2.101916493295789,
+      "k4": 0.1601687155680281
+    },
+    "candidate_sha256": "6a00f71f4904574841d17eaebba7f8318fc136d477ab6fd324f3354f1b33e400",
+    "candidate_cross_mesh_distance": 0.0,
+    "newton_call_count": 0
+  },
+  "independent_control": {
+    "status": "PASS_REAL_INDEPENDENT_AF0_CONTROL_NO_ROOT",
+    "model_a_F": 0.0,
+    "integration_call_count": 6,
+    "shooting_jacobian_call_count": 0,
+    "nonlinear_root_call_count": 0,
+    "cutoff_records": [
+      {
+        "epsilon": 0.001,
+        "profile_error_inf": 6.661338147750939e-16,
+        "constraint_inf": 2.0816681711721685e-17,
+        "boundary_exact_distance": 8.881784197001252e-16,
+        "primary_independent_boundary_distance": 1.085798118083403e-12
+      },
+      {
+        "epsilon": 0.0005,
+        "profile_error_inf": 4.440892098500626e-16,
+        "constraint_inf": 2.0816681711721685e-17,
+        "boundary_exact_distance": 2.220446049250313e-16,
+        "primary_independent_boundary_distance": 1.085131984268628e-12
+      },
+      {
+        "epsilon": 0.00025,
+        "profile_error_inf": 4.440892098500626e-16,
+        "constraint_inf": 2.0816681711721685e-17,
+        "boundary_exact_distance": 1.1102230246251565e-16,
+        "primary_independent_boundary_distance": 1.084909939663703e-12
+      }
+    ]
+  },
+  "execution_firewall": {
+    "cp01r1_attempts": 0,
+    "target_a_F_one_quarter_solves": 0,
+    "primary_newton_calls": 0,
+    "shooting_jacobian_calls": 0,
+    "nonlinear_root_calls": 0,
+    "operative_grants_created": 0,
+    "physical_result_artifacts_created": 0,
+    "physical_run_cli_exit_73": "PASS"
+  },
+  "forbidden_inferences": [
+    "This reference output is an analytic a_F=0 software control, not a physical CP01R1 background.",
+    "Static reference agreement does not establish continuum convergence, existence, uniqueness, stability or ghost freedom.",
+    "No K1-D, K1-E or physical evidence release follows."
+  ]
+}
