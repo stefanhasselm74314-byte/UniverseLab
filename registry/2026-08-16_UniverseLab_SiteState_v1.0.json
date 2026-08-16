@@ -1,8 +1,8 @@
 {
   "schema": "universelab.site-state.v1",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "snapshot_date": "2026-08-16",
-  "source_commit": "bf058a39ab58601f7ecda4a6644bae49c9cc8c60",
+  "source_commit": "93bc5f7d2c95ec9f8ba3735ca60c52f7527c79ef",
   "physical_gate_effect": "NONE",
   "governance": {
     "K1-D": "NOT_RELEASED",
@@ -70,9 +70,12 @@
         "reference_run": "NOT_RUN",
         "independent_backend_physical_run": "NOT_RUN",
         "control_reference": "AVAILABLE_AUDITED_AF0_R3",
-        "reference_replay": "NOT_TESTED",
-        "reproducibility_layer": "CONTROL_REFERENCE_PACKAGE_DEFINED_PHYSICAL_REFERENCE_NOT_AVAILABLE",
-        "machine_test_status_source": "CI_GENERATED_READ_ONLY_ARTIFACT"
+        "reference_replay": "NUMERICAL_MATCH_AF0_CONTROL_ONLY",
+        "control_replay": "PASS_FRESH_AF0_CONTROL_REPLAY_NUMERICAL_MATCH",
+        "control_replay_scope": "SOFTWARE_NUMERICAL_REPRODUCIBILITY_ONLY",
+        "physical_target_replay": "NOT_APPLICABLE_NOT_AUTHORIZED",
+        "reproducibility_layer": "CONTROL_REFERENCE_PACKAGE_AND_FRESH_AF0_REPLAY_VERIFIED_PHYSICAL_REFERENCE_NOT_AVAILABLE",
+        "machine_test_status_source": "PERSISTED_AUDIT_PLUS_CI_ARTIFACT"
       },
       "governance": {
         "priority": "ACTIVE_CRITICAL_PATH",
@@ -84,7 +87,7 @@
       "scientific": {
         "physical_background": "NOT_ESTABLISHED",
         "classification": "OPEN",
-        "claim": "No physical MD2S background is established by this status snapshot."
+        "claim": "No physical MD2S background is established by this status snapshot. The fresh a_F=0 replay establishes software/numerical control reproducibility only."
       },
       "release_gate": {
         "id": "REPRODUCIBLE_PHYSICAL_MD2S_BACKGROUND_WITH_ONE_SIDED_BOUNDARY_EXPORT",
@@ -93,13 +96,19 @@
       "provenance": {
         "master_build_order": "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json",
         "project_manifest": "project-manifest.json",
-        "site_state_source_commit": "bf058a39ab58601f7ecda4a6644bae49c9cc8c60",
+        "site_state_source_commit": "93bc5f7d2c95ec9f8ba3735ca60c52f7527c79ef",
         "reproducibility_contract": "registry/2026-08-16_ULSH01_ReproducibilityContract_v1.0.json",
         "control_reference_input": "reproducibility/ulsh-01/2026-08-16_ULSH01_ControlReferenceInput_v1.0.json",
         "control_reference_output": "reproducibility/ulsh-01/2026-08-16_ULSH01_ControlReferenceOutput_v1.0.json",
         "tolerance_contract": "reproducibility/ulsh-01/2026-08-16_ULSH01_ToleranceContract_v1.0.json",
         "run_provenance": "reproducibility/ulsh-01/2026-08-16_ULSH01_RunProvenance_v1.0.json",
-        "checksums": "reproducibility/ulsh-01/2026-08-16_ULSH01_SHA256SUMS_v1.0.txt"
+        "checksums": "reproducibility/ulsh-01/2026-08-16_ULSH01_SHA256SUMS_v1.0.txt",
+        "control_replay_contract": "registry/2026-08-16_ULSH01_ControlReplayContract_v1.0.json",
+        "control_replay_audit": "registry/2026-08-16_ULSH01_ControlReplayAuditResult_v1.0.json",
+        "control_replay_main_commit": "93bc5f7d2c95ec9f8ba3735ca60c52f7527c79ef",
+        "control_replay_workflow_run_id": "31933256761",
+        "control_replay_artifact_id": "9259899329",
+        "control_replay_artifact_digest": "sha256:a76acd0c48fcff138570d83109dd93ba03867d7beb8b5d61be165a8b1041c9da"
       },
       "work_packages": [
         {
