@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import importlib.util
 from pathlib import Path
+import sys
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
@@ -10,6 +11,7 @@ TARGET = HERE / "2026-08-16_hzt_background3c5_canonical_candidate_operator_v0.2.
 SPEC = importlib.util.spec_from_file_location("bg3c5_v02", TARGET)
 assert SPEC is not None and SPEC.loader is not None
 M = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = M
 SPEC.loader.exec_module(M)
 
 
@@ -51,7 +53,6 @@ def test_center_series_axis_conditions_and_winding_power():
     assert p.varphi[0] == 0.2
     assert p.s[0] == 0.0
     assert np.allclose(p.s[1:] / x[1:]**3, s_amp, rtol=1e-14, atol=1e-14)
-    # ell=x+l3*x^3 => ell/x -> 1 at the axis.
     assert abs(p.ell[1] / x[1] - 1.0) < 1e-6
 
 
