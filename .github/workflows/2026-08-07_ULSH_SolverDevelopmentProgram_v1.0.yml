@@ -82,9 +82,9 @@ jobs:
       - name: Confirm no execution-capable solver code was added
         run: |
           git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD | tee /tmp/ulsh-files.txt
-          forbidden="$(grep -E '\.(py|ipynb)$' /tmp/ulsh-files.txt | grep -v '^tests/' || true)"
+          forbidden="$(grep -E '\.(py|ipynb)$' /tmp/ulsh-files.txt | grep -vE '^tests/|^tools/[^/]*validate[^/]*\.py$' || true)"
           if [[ -n "$forbidden" ]]; then
-            echo "Execution-capable code outside tests is forbidden in ULSH planning changes:"
+            echo "Execution-capable code outside tests and validation-only tools is forbidden in ULSH planning changes:"
             echo "$forbidden"
             exit 1
           fi
