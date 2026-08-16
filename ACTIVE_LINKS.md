@@ -70,55 +70,74 @@ https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/registry/2026-0
 
 ## 3. Aktive Arbeitsstränge / Chat-Zuordnung
 
-> Diese Zuordnung ist eine **Koordinationsschicht**, keine wissenschaftliche Evidenzquelle. Chat-Inhalte werden nicht als kanonische Physik zitiert. Kanonisch werden Ergebnisse erst über versionierte GitHub-Artefakte, Registries, Tests, PRs und Merge-Commits. Private ChatGPT-URLs und Konversations-IDs werden bewusst nicht öffentlich gespeichert.
+> Diese Zuordnung ist eine **Koordinationsschicht**, keine wissenschaftliche Evidenzquelle. Chat-Inhalte werden nicht als kanonische Physik zitiert. Kanonisch werden Ergebnisse erst über versionierte GitHub-Artefakte, Registries, Tests, PRs und Merge-Commits. Private ChatGPT-URLs und Konversations-IDs werden bewusst nicht öffentlich gespeichert. **Chat-Titel sind keine stabile Chat-Identität.**
 
-### Forschungsplattform Architektur
+### ACTIVE — UniverseLab Forschungsplattform
 **ACTIVE · PLATFORM / GOVERNANCE**  
+**Bisheriger Titel:** `Forschungsplattform Architektur`  
 **Aufgabe:** UniverseLab als Forschungsplattform: globale Navigation, SiteState, Reproduzierbarkeit, Plattform-Governance, Statusachsen und UI-/Registry-Integration.  
 **Kanonische Ausgaben:** PR #139 / #140 sowie nachfolgende Reproduzierbarkeitsintegration #141–#143.  
 https://github.com/stefanhasselm74314-byte/UniverseLab/pull/140
 
-### Analyse der 17 Dateien
+### ACTIVE — ULSH-01 C-PHYS Solverentwicklung
 **ACTIVE · SCIENCE / SOLVER · CRITICAL PATH**  
-**Aufgabe:** `ULSH-01 → C-PHYS → Background3C5`; Response-Rank-Gate, Finite-Thickness-Operator, Regular-Center-Gates und anschließend vollständige Operatoridentität.  
-**Aktueller Auftrag:** `G5 — FULL FINITE-THICKNESS OPERATOR IDENTITY`.  
+**Bisheriger Titel:** `Analyse der 17 Dateien`  
+**Aufgabe:** `ULSH-01 → C-PHYS → Background3C5`; Response-Rank-Gate, Finite-Thickness-Operator, Regular-Center-Gates und vollständige Operatoridentität.  
 **Kanonischer Arbeitslink:** PR #137.  
 https://github.com/stefanhasselm74314-byte/UniverseLab/pull/137
 
-### Aktive wichtige Links
+### UTILITY — UniverseLab Wichtige Links
 **ACTIVE · LINK GOVERNANCE**  
+**Bisheriger Titel:** `Aktive wichtige Links`  
 **Aufgabe:** zentrale Pflege aller aktiven, kanonischen und temporären Projektlinks; tote oder ersetzte Links aussortieren.  
-**Kanonische Ausgaben:** `links.html`, `ACTIVE_LINKS.md` und Workstream-Registry.  
 https://stefanhasselm74314-byte.github.io/UniverseLab/links.html
 
-### CP01R2 D8 Laufwache
-**COMPLETED · RUN WATCH / PROVENANCE**  
-**Aufgabe:** einmaligen CP01R2-D8-Lauf überwachen, verifizieren, korrekt beenden und Artefakt-/Grant-Zustand sichern.  
-**Abschlussstatus:** Lauf `completed / success`; Grant einmalig verbraucht (`SPENT / NON-REPLAYABLE`, `replay_permitted=false`); kein akzeptierter Kandidat.  
-**Regel:** kein erneuter Lauf aus diesem Arbeitsstrang ohne neuen expliziten Grant/Vertrag.
+### ARCHIVE — ULSH Master / CP01R2 historische Ausführung
+**ARCHIVE REFERENCE · CLOSED RUN-WATCH PHASE**  
+**Historische Titel:** `ULSH Master Build Order` → `CP01R2 D8 Laufwache` → `CLOSED — CP01R2-D8 Laufwache`  
+**Identitätsstatus:** Nutzerbelege sprechen stark dafür, dass diese Titel denselben historischen Chat-Thread bezeichnen; die private ChatGPT-Konversations-ID wird im Repository nicht veröffentlicht und ist dort nicht verifiziert.  
+**Inhalt:** ULSH Master Build Order mit 14 Solvern / 56 Work Packages sowie spätere CP01R2-D8 Run-Watch-Provenienz.  
+**Run-Regel:** CP01R2-D8 bleibt `CLOSED_NON_REPLAYABLE`; kein erneuter Lauf aus dieser historischen Run-Watch-Phase.
 
-### HZT-M0-S6-C1 Theorie
-**ACTIVE REFERENCE / THEORY**  
-**Aufgabe:** kanonischer C1/C-PHYS-Theoriestrang innerhalb `HPVS → HZT-M0 → HZT-Full`; Parent-Physik, Herleitungen, Gates und Theorieentscheidungen.  
-**GitHub-Ziel:** versionierte C-PHYS-/MD2S-Artefakte und Registries auf `main`; Chat selbst ist keine kanonische Quelle.  
-https://github.com/stefanhasselm74314-byte/UniverseLab/tree/main/science/hzt-m0/md2s
-
-### HZT-M0-S6-C1 Restart
-**ACTIVE CONTINUATION / HANDOFF**  
-**Aufgabe:** kanonische Fortsetzung des wegen Chat-Längenlimit beendeten C1-Theoriestrangs; kein C2-Versionssprung. Zusätzlich Solver-Gesamtplanung und Übergabe in ULSH.  
-**Kanonische Ausgabe:** ULSH Master Build Order / Solver Workbench.  
+### ACTIVE — ULSH Master Control — Continuation
+**ACTIVE · SOLVER PROGRAM MANAGEMENT**  
+**Aktueller Chat-Titel:** `ULSH Master Build Order`  
+**Aufgabe:** frischer aktiver Steuerchat für die 14-Solver-Gesamtplanung, 56 Work Packages, Abhängigkeiten und Release-Gates; nicht mit dem historischen Master/CP01R2-Thread verwechseln.  
+**Kanonische Ausgabe:** Master Build Order v1.0.  
 https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_MasterBuildOrder_v1.0.html
 
-### Technischer Neben-/Analysechat: UniverseLab Fehleranalyse
+### ARCHIVE — HZT-M0-S6-C1 Theorie — Vorgänger
+**ARCHIVE REFERENCE · THEORY HISTORY**  
+**Bisheriger Titel:** `HZT-M0-S6-C1 Theorie`  
+**Aufgabe:** historischer C1-Theoriestrang; Referenz nach Chat-Längenlimit. Ersetzt durch den Continuation-Strang.
+
+### ACTIVE — HZT-M0-S6-C1 Continuation — Solverplanung
+**ACTIVE CONTINUATION / HANDOFF**  
+**Bisheriger Titel:** `HZT-M0-S6-C1 Restart`  
+**Aufgabe:** kanonische Fortsetzung des C1-Theoriestrangs ohne C2-Versionssprung; Handoff und Solver-Gesamtplanung.  
+https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_MasterBuildOrder_v1.0.html
+
+### AUDIT — UniverseLab Fehleranalyse
 **ACTIVE · TECHNICAL AUDIT / QA**  
-**Aufgabe:** technische Fehleranalyse, Repository-/CI-Audits, P0-Verifikation, SCI-001/SCI-002-Integrationsprüfung und technische Sonderprobleme.  
-**Kanonischer Zielbereich:** Quellcode, Methoden/QA, Registries und Audit-Artefakte.  
+**Bisheriger Titel:** `Technischer Neben-/Analysechat: UniverseLab Fehleranalyse`  
+**Aufgabe:** technische Fehleranalyse, Repository-/CI-Audits, P0-Verifikation, Integrationsprüfung und technische Sonderprobleme.  
 https://stefanhasselm74314-byte.github.io/UniverseLab/source.html
+
+### ARCHIVE — Hyperzeit Projektstatus Update — Übergabestand
+**ARCHIVE REFERENCE**  
+**Bisheriger Titel:** `Hyperzeit Projektstatus Update`  
+**Aufgabe:** historischer Status-/Strategiestand; keine aktuelle Solver-Ausführungsautorität.
+
+### ACTIVE — Generationsschiff Sagittarius A* — Systemarchitektur
+**ACTIVE · INDEPENDENT GSRA-01 PROJECT**  
+**Bisheriger Titel:** `Bauplan Hyperzeit Raumschiff`  
+**Aufgabe:** eigenständiges GSRA-01-Systemengineering. UniverseLab und GSRA-01 bleiben repositorisch strikt getrennt.
 
 ### Trennregel für parallele Chats
 
 `Theoriechat → Herleitung / physikalische Modellentscheidung`  
 `Solverchat → numerische Implementierung / BVP / Rang / Konvergenz`  
+`Master-Control → Solverprogramm / Build-Reihenfolge / Gates`  
 `Plattformchat → SiteState / UI / Governance / Reproduzierbarkeit`  
 `Fehleranalysechat → technische Audits / CI / Reparaturen`  
 `Linkchat → ausschließlich aktive Zugänge und Zuordnungen`
@@ -126,7 +145,7 @@ https://stefanhasselm74314-byte.github.io/UniverseLab/source.html
 **Keine automatische Statusübertragung zwischen diesen Arbeitssträngen.**
 
 Maschinenlesbare Zuordnung:  
-https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/registry/2026-08-16_UniverseLab_WorkstreamLinks_v1.0.json
+https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/registry/2026-08-16_UniverseLab_WorkstreamLinks_v1.2.json
 
 ---
 
@@ -175,3 +194,4 @@ Historische Zugänge werden nur aufbewahrt, wenn sie für Reproduzierbarkeit ode
 5. `links.html` ist der bevorzugte mobile Einstieg; `ACTIVE_LINKS.md` ist die kanonische textuelle Quelle.
 6. Chat-Arbeitsstränge erhalten eine eindeutige Zuständigkeit und einen GitHub-Ausgabeort; private Chat-URLs werden nicht veröffentlicht.
 7. Chatstatus, technischer Status, Governance-Status und wissenschaftlicher Status dürfen nicht automatisch ineinander überführt werden.
+8. Chat-Titel dürfen nicht als stabile Chat-Identität behandelt werden; Umbenennungen werden als Titelhistorie modelliert.
