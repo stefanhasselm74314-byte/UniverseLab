@@ -11,7 +11,7 @@
 - **CANONICAL** — maßgeblicher aktueller Einstieg
 - **ACTIVE** — aktuell funktionsfähig und relevant
 - **WORKING** — temporärer aktiver Arbeitslink, z. B. offener PR
-- **PRIVATE** — nur mit berechtigtem GitHub-Zugang erreichbar
+- **PRIVATE** — nur mit berechtigtem GitHub-Zugang und aktiver GitHub-Anmeldung erreichbar; GitHub kann unangemeldet absichtlich `404` anzeigen
 - **COMPLETED** — Arbeitsstrang abgeschlossen; Ergebnis bleibt als Provenienz relevant
 - **ARCHIVE / ERSETZT** — nicht mehr als primärer Einstieg verwenden
 
@@ -167,8 +167,10 @@ https://stefanhasselm74314-byte.github.io/GSRA-01-Control-Center/
 https://github.com/stefanhasselm74314-byte/GSRA-01-Control-Center
 
 ### GSRA-01 Generation Ship — Hauptrepository
-**CANONICAL · ACTIVE · PRIVATE**  
+**CANONICAL · ACTIVE · PRIVATE · LOGIN REQUIRED**  
 https://github.com/stefanhasselm74314-byte/GSRA-01-Generation-Ship
+
+**Zugriffshinweis:** Dieses Repository ist privat. Vor dem Öffnen muss im verwendeten Browser eine berechtigte GitHub-Anmeldung aktiv sein. Ohne Anmeldung beziehungsweise ohne Berechtigung kann GitHub absichtlich eine `404 — Didn’t find anything here`-Seite anzeigen; das bedeutet in diesem Fall nicht, dass der Link defekt ist.
 
 ---
 
@@ -201,3 +203,4 @@ Historische Zugänge werden nur aufbewahrt, wenn sie für Reproduzierbarkeit ode
 7. Chatstatus, technischer Status, Governance-Status und wissenschaftlicher Status dürfen nicht automatisch ineinander überführt werden.
 8. Chat-Titel dürfen nicht als stabile Chat-Identität behandelt werden; Umbenennungen werden als Titelhistorie modelliert.
 9. Ein sichtbarer Chat wird nicht allein aus seinem Titel zu einem governed Workstream hochgestuft.
+10. Private GitHub-Ziele werden mit `LOGIN REQUIRED` gekennzeichnet; ein unangemeldeter GitHub-404 wird nicht automatisch als defekter Link klassifiziert.
