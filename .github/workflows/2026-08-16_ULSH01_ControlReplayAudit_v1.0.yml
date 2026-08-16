@@ -1,0 +1,58 @@
+name: ULSH-01 persisted control replay audit v1.0
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/2026-08-16_ULSH01_ControlReplayAudit_v1.0.yml"
+      - "registry/2026-08-16_ULSH01_ControlReplayAuditResult_v1.0.json"
+      - "registry/2026-08-16_ULSH01_ControlReplayContract_v1.0.json"
+      - "registry/2026-08-16_UniverseLab_SiteState_v1.0.json"
+      - "reproducibility/ulsh-01/2026-08-16_ULSH01_ControlReferenceOutput_v1.0.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
+      - "tests/2026-08-16_ULSH01_ControlReplayAuditValidator_v1.0.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/2026-08-16_ULSH01_ControlReplayAudit_v1.0.yml"
+      - "registry/2026-08-16_ULSH01_ControlReplayAuditResult_v1.0.json"
+      - "registry/2026-08-16_ULSH01_ControlReplayContract_v1.0.json"
+      - "registry/2026-08-16_UniverseLab_SiteState_v1.0.json"
+      - "reproducibility/ulsh-01/2026-08-16_ULSH01_ControlReferenceOutput_v1.0.json"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
+      - "tests/2026-08-16_ULSH01_ControlReplayAuditValidator_v1.0.py"
+
+permissions:
+  contents: read
+
+jobs:
+  persisted-control-replay-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate governed JSON syntax
+        run: |
+          python -m json.tool registry/2026-08-16_ULSH01_ControlReplayAuditResult_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-16_ULSH01_ControlReplayContract_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-16_UniverseLab_SiteState_v1.0.json >/dev/null
+
+      - name: Compile persistent audit validator
+        run: python -m py_compile tests/2026-08-16_ULSH01_ControlReplayAuditValidator_v1.0.py
+
+      - name: Validate persisted replay provenance and governance firewall
+        run: |
+          python tests/2026-08-16_ULSH01_ControlReplayAuditValidator_v1.0.py \
+            --output "${RUNNER_TEMP}/2026-08-16_ULSH01_ControlReplayAuditValidation_v1.0.json"
+
+      - name: Upload read-only audit validation status
+        uses: actions/upload-artifact@v4
+        with:
+          name: 2026-08-16_ULSH01_ControlReplayAuditValidation_v1.0
+          path: ${{ runner.temp }}/2026-08-16_ULSH01_ControlReplayAuditValidation_v1.0.json
+          if-no-files-found: error
+          retention-days: 30
