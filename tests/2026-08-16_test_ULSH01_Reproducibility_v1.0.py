@@ -150,7 +150,7 @@ def validate() -> dict[str, Any]:
         "static_audit_binding": "MATCH",
         "control_replay": "NOT_TESTED",
         "physical_target": "NOT_APPLICABLE_NOT_AUTHORIZED",
-        "reference_package_commit": os.environ.get("GITHUB_SHA", "LOCAL_WORKTREE"),
+        "reference_package_commit": os.environ.get("UL_REFERENCE_COMMIT", os.environ.get("GITHUB_SHA", "LOCAL_WORKTREE")),
         "test_run_id": os.environ.get("GITHUB_RUN_ID", "LOCAL"),
         "solver_release": "NOT_AUTHORIZED",
         "physical_background": "NOT_ESTABLISHED",
