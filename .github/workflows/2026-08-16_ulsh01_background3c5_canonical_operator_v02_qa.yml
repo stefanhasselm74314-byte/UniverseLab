@@ -1,0 +1,41 @@
+name: ULSH-01 Background3C5 canonical operator v0.2 QA
+
+on:
+  pull_request:
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-16_hzt_background3c5_canonical_candidate_operator_v0.2.py'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-16_test_hzt_background3c5_canonical_candidate_operator_v0.2.py'
+      - '.github/workflows/2026-08-16_ulsh01_background3c5_canonical_operator_v02_qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  canonical-operator-v02-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependency
+        run: python -m pip install --disable-pip-version-check numpy
+      - name: Compile candidate and tests
+        run: |
+          python -m py_compile ulsh/ULSH-01/C-PHYS/2026-08-16_hzt_background3c5_canonical_candidate_operator_v0.2.py
+          python -m py_compile ulsh/ULSH-01/C-PHYS/2026-08-16_test_hzt_background3c5_canonical_candidate_operator_v0.2.py
+      - name: Run G2 regression suite
+        run: python ulsh/ULSH-01/C-PHYS/2026-08-16_test_hzt_background3c5_canonical_candidate_operator_v0.2.py
+      - name: Enforce fail-closed governance
+        run: |
+          python - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          p=Path('ulsh/ULSH-01/C-PHYS/2026-08-16_hzt_background3c5_canonical_candidate_operator_v0.2.py')
+          s=importlib.util.spec_from_file_location('m',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)
+          assert m.PHYSICAL_EXECUTION_AUTHORIZED is False
+          assert m.RANK_R_CLAIM_ALLOWED is False
+          assert m.PARENT_EQUIVALENCE_STATUS == 'BULK_EXACT__FINITE_THICKNESS_NORMALIZATION_PENDING'
+          print('PASS fail-closed governance')
+          PY
