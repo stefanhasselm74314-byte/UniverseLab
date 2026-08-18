@@ -14,7 +14,15 @@
     '/UniverseLab/research-status.html':{de:'/UniverseLab/research-status.html',en:'/UniverseLab/research-status-en.html'},
     '/UniverseLab/research-status-en.html':{de:'/UniverseLab/research-status.html',en:'/UniverseLab/research-status-en.html'},
     '/UniverseLab/solver-hub.html':{de:'/UniverseLab/solver-hub.html',en:'/UniverseLab/solver-hub-en.html'},
-    '/UniverseLab/solver-hub-en.html':{de:'/UniverseLab/solver-hub.html',en:'/UniverseLab/solver-hub-en.html'}
+    '/UniverseLab/solver-hub-en.html':{de:'/UniverseLab/solver-hub.html',en:'/UniverseLab/solver-hub-en.html'},
+    '/UniverseLab/hyperzeit-methods.html':{de:'/UniverseLab/hyperzeit-methods.html',en:'/UniverseLab/hyperzeit-methods-en.html'},
+    '/UniverseLab/hyperzeit-methods-en.html':{de:'/UniverseLab/hyperzeit-methods.html',en:'/UniverseLab/hyperzeit-methods-en.html'},
+    '/UniverseLab/hyperzeit-material-v2.html':{de:'/UniverseLab/hyperzeit-material-v2.html',en:'/UniverseLab/hyperzeit-material-v2-en.html'},
+    '/UniverseLab/hyperzeit-material-v2-en.html':{de:'/UniverseLab/hyperzeit-material-v2.html',en:'/UniverseLab/hyperzeit-material-v2-en.html'},
+    '/UniverseLab/sci-001-002-parent-closure-v0.1.html':{de:'/UniverseLab/sci-001-002-parent-closure-v0.1.html',en:'/UniverseLab/sci-001-002-parent-closure-v0.1-en.html'},
+    '/UniverseLab/sci-001-002-parent-closure-v0.1-en.html':{de:'/UniverseLab/sci-001-002-parent-closure-v0.1.html',en:'/UniverseLab/sci-001-002-parent-closure-v0.1-en.html'},
+    '/UniverseLab/navigator-app.html':{de:'/UniverseLab/navigator-app.html',en:'/UniverseLab/navigator-en.html'},
+    '/UniverseLab/navigator-en.html':{de:'/UniverseLab/navigator-app.html',en:'/UniverseLab/navigator-en.html'}
   };
   function pair(){return CURATED[location.pathname]||null;}
   function germanSource(){const p=pair();if(p)return location.origin+p.de;const c=document.querySelector('link[rel="alternate"][hreflang="de"]');if(c&&c.href)return c.href;const canonical=document.querySelector('link[rel="canonical"]');if(canonical&&canonical.href&&!/-en\.html(?:$|\?)/.test(canonical.href))return canonical.href;const u=new URL(location.href);u.search='';u.hash='';return u.href;}
