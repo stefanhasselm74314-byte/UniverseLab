@@ -50,6 +50,10 @@ The numerical blocks historically reported for B1.4K and B1.4L are **not** promo
 
 Reason: repeated searches using the branch labels and exact numerical fingerprints did not recover a primary solver-output/residual artifact with input binding, solver identity, run identity and convergence provenance.
 
+Repeated search fingerprints included the B1.4K values `0.842636731623`, `0.018368812404`, `0.163118759614`, `0.499999960986` and the B1.4L values `0.777738716721`, `1.449864769136`, `-1.775714440211`. No primary run-bound artifact was recovered from the currently searchable File Library or repository index.
+
+This absence is a conservative provenance result, not proof that no historical artifact ever existed.
+
 ## 6. Missing historical two-sided interface export
 
 An exact historical two-junction replay requires, at minimum, the run-bound values
