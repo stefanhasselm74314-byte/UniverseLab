@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071018">
+<meta name="description" content="UniverseLab Bibliographie-Katalog: menschenlesbare Ansicht der maschinenlesbaren Hyperzeit-Bibliographie mit Suche, Filtern, Quellenrollen und Scope-Hinweisen.">
+<title>UniverseLab · Bibliographie-Katalog</title>
+<style>
+:root{color-scheme:dark;--bg:#04090f;--panel:#0a1720;--panel2:#071119;--line:#294b5d;--text:#f2fbff;--muted:#a9bfcb;--cyan:#79dcff;--green:#75dfb1;--amber:#ffd078;--violet:#c0afff;--red:#ff8da4}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100dvh;background:radial-gradient(circle at 82% -14%,#174258,#071119 46%,#02070a 88%);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+nav{position:sticky;top:0;z-index:40;display:flex;gap:7px;overflow:auto;padding:7px 9px;border-bottom:1px solid var(--line);background:#050b11f3;backdrop-filter:blur(16px)}nav a{white-space:nowrap;display:inline-flex;align-items:center;min-height:40px;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:#0d202b;color:#fff;text-decoration:none;font-weight:850;font-size:11px}nav a:first-child{margin-right:auto}
+main{width:min(1380px,100%);margin:auto;padding:15px 10px 80px}.hero,.panel,.entry{border:1px solid var(--line);background:var(--panel)}.hero{padding:22px;border-radius:20px;background:linear-gradient(135deg,#123a4d,#081721 60%,#211d40)}.eye{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#a9eaff}h1{margin:7px 0 9px;font-size:clamp(32px,6vw,58px);line-height:1.02;letter-spacing:-.035em}.lead{max-width:1000px;margin:0;color:#c8dbe4;font-size:15px}.notice{margin-top:12px;padding:11px;border:1px solid #5a4d2d;border-radius:11px;background:#211b10;color:#ffe0a8}.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}.actions a,.actions button{min-height:40px;display:inline-flex;align-items:center;padding:8px 10px;border:1px solid #3a6579;border-radius:9px;background:#0b202a;color:#fff;text-decoration:none;font-weight:850;font-size:11px;cursor:pointer}.actions a.primary{background:#173c4c;border-color:#5e9fb8}.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:12px}.stat{padding:10px;border:1px solid var(--line);border-radius:11px;background:#07151d}.stat b{display:block;font-size:19px;color:#fff}.stat span{color:var(--muted);font-size:9px}
+.panel{margin-top:13px;padding:12px;border-radius:15px}.filters{display:grid;grid-template-columns:minmax(220px,2fr) repeat(4,minmax(120px,.7fr));gap:7px}.filters input,.filters select{min-height:41px;width:100%;border:1px solid #355a6d;border-radius:9px;background:#06131b;color:#fff;padding:7px 9px}.meta-line{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:9px;color:var(--muted);font-size:10px}.meta-line b{color:#fff}.entries{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.entry{padding:12px;border-radius:13px;display:flex;flex-direction:column;gap:8px}.topline{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.id{font:800 10px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--cyan)}.priority{padding:3px 7px;border-radius:999px;font-size:9px;font-weight:900}.priority.A{background:#173b30;color:var(--green)}.priority.B{background:#463614;color:var(--amber)}.entry h2{margin:0;font-size:18px;line-height:1.2}.authors{color:#d7e4ea;font-weight:700}.yearcat{display:flex;gap:6px;flex-wrap:wrap}.tag{padding:3px 6px;border:1px solid #355568;border-radius:6px;background:#091923;color:#bee8f8;font-size:9px;font-weight:800}.role,.scope{padding:8px 9px;border-radius:9px;background:var(--panel2);border:1px solid #203f4e}.role b,.scope b{display:block;margin-bottom:3px;color:#fff;font-size:10px;text-transform:uppercase;letter-spacing:.05em}.role{color:#d7e7ed}.scope{color:#cdbfe7;border-color:#493d61;background:#110e1b}.blocks{display:flex;flex-wrap:wrap;gap:4px}.block{padding:2px 5px;border-radius:5px;background:#102b38;color:#aee8ff;font:800 9px ui-monospace,SFMono-Regular,Consolas,monospace}.source{margin-top:auto}.source a{display:inline-flex;align-items:center;min-height:36px;padding:6px 9px;border:1px solid #3b677a;border-radius:8px;background:#0a202a;color:#fff;text-decoration:none;font-weight:800;font-size:10px}.source .missing{color:var(--muted);font-size:10px}.empty{padding:30px;text-align:center;color:var(--muted)}.error{padding:14px;border:1px solid #704151;border-radius:11px;background:#2a121b;color:#ffd7e1}
+@media(max-width:980px){.stats{grid-template-columns:repeat(3,1fr)}.filters{grid-template-columns:1fr 1fr}.filters input{grid-column:1/-1}.entries{grid-template-columns:1fr}}@media(max-width:620px){main{padding:10px 7px 70px}.hero{padding:16px 13px}.stats{grid-template-columns:1fr 1fr}.filters{grid-template-columns:1fr}.filters input{grid-column:auto}.topline{display:block}.priority{display:inline-block;margin-top:5px}}
+@media print{nav,.filters,.actions,.meta-line{display:none!important}body{background:#fff;color:#000}.hero,.panel,.entry,.role,.scope,.stat{background:#fff!important;color:#000!important;border-color:#999!important;box-shadow:none}.hero{padding:0 0 12px;border:0}.lead,.authors,.role,.scope,.stat span,.missing{color:#222!important}.entries{display:block}.entry{break-inside:avoid;margin:0 0 9mm}.entry h2,.stat b,.role b,.scope b{color:#000!important}.source a{color:#000!important;background:#fff!important}.tag,.block,.priority{color:#000!important;background:#fff!important;border:1px solid #999!important}}
+</style>
+<link rel="stylesheet" href="./assets/2026-08-16_UniverseLab_GlobalShell_v1.1.css">
+</head>
+<body data-ul-page-id="UL-PAGE-BIBLIOGRAPHY-CATALOG" data-ul-domain="literature">
+<nav aria-label="Bibliographie Navigation"><a href="./universelab-audit-2026-07-31.html?v=1">← Gesamt-Audit</a><a href="./hyperzeit-material-v2.html?v=2">Material 2.0</a><a href="./hyperzeit-methods.html?v=1">Methoden & QA</a><a href="./navigator.html">Navigator</a><a href="./">Portal</a></nav>
+<main>
+<section class="hero">
+<div class="eye">UniverseLab · Literatur / Quellenprovenienz</div>
+<h1>Bibliographie-Katalog</h1>
+<p class="lead">Menschenlesbare Ansicht der maschinenlesbaren Hyperzeit-Bibliographie. Titel, Autoren, Jahr, Kategorie, Priorität, Projektrolle, betroffene Blocks und Scope-Hinweise werden direkt aus <code>hyperzeit-bibliography.json</code> geladen; diese HTML-Seite erfindet oder ergänzt keine Literaturdaten.</p>
+<div class="notice"><b>Provenienzregel:</b> Die JSON-Datei bleibt die maschinenlesbare Datenquelle. Diese Seite ist eine Darstellungs-, Such- und Druckschicht. Literaturkompatibilität ist keine Herleitung der Hyperzeit-Theorie und keine physikalische Evidenz.</div>
+<div class="actions"><a class="primary" href="./hyperzeit-bibliography.json" target="_blank" rel="noopener">Bibliographie JSON öffnen</a><a href="./hyperzeit-bibliography.json" download>JSON herunterladen</a><button type="button" id="printNow">Drucken / PDF</button></div>
+<div class="stats"><div class="stat"><b id="countAll">–</b><span>Quellen gesamt</span></div><div class="stat"><b id="countA">–</b><span>Priorität A</span></div><div class="stat"><b id="countB">–</b><span>Priorität B</span></div><div class="stat"><b id="countCategories">–</b><span>Kategorien</span></div><div class="stat"><b id="updated">–</b><span>Datenstand JSON</span></div></div>
+</section>
+<section class="panel">
+<div class="filters"><input id="q" type="search" placeholder="Suche: Autor, Titel, Rolle, Scope, Block, ID …"><select id="category"><option value="">Alle Kategorien</option></select><select id="priority"><option value="">Priorität A+B</option><option value="A">Priorität A</option><option value="B">Priorität B</option></select><select id="year"><option value="">Alle Jahre</option></select><select id="block"><option value="">Alle Blocks</option></select></div>
+<div class="meta-line"><span>Sichtbar: <b id="visible">0</b></span><span>Sortierung: <b>Jahr ↓, dann Titel</b></span><span>Datenquelle: <b>hyperzeit-bibliography.json</b></span><button id="reset" type="button">Filter zurücksetzen</button></div>
+<div id="entries" class="entries"><div class="empty">Bibliographie wird geladen …</div></div>
+</section>
+</main>
+<script>
+(()=>{'use strict';
+const DATA='./hyperzeit-bibliography.json';
+const state={entries:[],schema:'',updated:''};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uniq=a=>[...new Set(a.filter(v=>v!==undefined&&v!==null&&String(v).trim()!==''))];
+function fillSelect(id,vals,label){const el=$(id);for(const v of vals){const o=document.createElement('option');o.value=String(v);o.textContent=label?label(v):String(v);el.appendChild(o)}}
+function populate(){
+ const cats=uniq(state.entries.map(x=>x.category)).sort((a,b)=>String(a).localeCompare(String(b),'de'));
+ const years=uniq(state.entries.map(x=>x.year)).sort((a,b)=>Number(b)-Number(a));
+ const blocks=uniq(state.entries.flatMap(x=>Array.isArray(x.blocks)?x.blocks:[])).sort((a,b)=>String(a).localeCompare(String(b),'de'));
+ fillSelect('category',cats,v=>v);fillSelect('year',years,v=>v);fillSelect('block',blocks,v=>v);
+ $('countAll').textContent=state.entries.length;$('countA').textContent=state.entries.filter(x=>x.priority==='A').length;$('countB').textContent=state.entries.filter(x=>x.priority==='B').length;$('countCategories').textContent=cats.length;$('updated').textContent=state.updated||'–';
+}
+function filtered(){const q=$('q').value.trim().toLowerCase(),cat=$('category').value,pri=$('priority').value,year=$('year').value,block=$('block').value;return state.entries.filter(x=>{
+ if(cat&&x.category!==cat)return false;if(pri&&x.priority!==pri)return false;if(year&&String(x.year)!==year)return false;if(block&&!(Array.isArray(x.blocks)&&x.blocks.includes(block)))return false;
+ if(!q)return true;return [x.id,x.year,x.category,x.priority,x.title,x.authors,x.role,x.scope,...(Array.isArray(x.blocks)?x.blocks:[])].join(' ').toLowerCase().includes(q);
+ }).sort((a,b)=>(Number(b.year)||0)-(Number(a.year)||0)||String(a.title||'').localeCompare(String(b.title||''),'de'))}
+function render(){const rows=filtered();$('visible').textContent=rows.length;const host=$('entries');if(!rows.length){host.innerHTML='<div class="empty">Keine Quellen entsprechen den aktuellen Filtern.</div>';return}
+ host.innerHTML=rows.map(x=>{const blocks=(Array.isArray(x.blocks)?x.blocks:[]).map(b=>`<span class="block">${esc(b)}</span>`).join('');const url=x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener">Original / DOI / arXiv ↗</a>`:'<span class="missing">Kein öffentlicher URL-Eintrag in der JSON-Datei.</span>';return `<article class="entry"><div class="topline"><div><div class="id">${esc(x.id||'OHNE-ID')}</div><h2>${esc(x.title||'Ohne Titel')}</h2></div><span class="priority ${esc(x.priority||'')}">Priorität ${esc(x.priority||'–')}</span></div><div class="authors">${esc(x.authors||'–')}</div><div class="yearcat"><span class="tag">${esc(x.year||'–')}</span><span class="tag">${esc(x.category||'ohne Kategorie')}</span></div><div class="role"><b>Rolle im UniverseLab-Kontext</b>${esc(x.role||'–')}</div><div class="scope"><b>Scope / Begrenzung</b>${esc(x.scope||'–')}</div><div class="blocks">${blocks||'<span class="tag">keine Blocks angegeben</span>'}</div><div class="source">${url}</div></article>`}).join('')}
+async function init(){try{const r=await fetch(DATA,{cache:'no-store'});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);const j=await r.json();state.schema=j.schema||'';state.updated=j.updated||'';state.entries=Array.isArray(j.entries)?j.entries:[];populate();render()}catch(e){console.warn('[UniverseLab bibliography]',e);$('entries').innerHTML='<div class="error"><b>Bibliographie konnte nicht geladen werden.</b><br>Die Rohdaten bleiben über „Bibliographie JSON öffnen“ erreichbar.</div>'}}
+['q','category','priority','year','block'].forEach(id=>$(id).addEventListener(id==='q'?'input':'change',render));$('reset').addEventListener('click',()=>{$('q').value='';$('category').value='';$('priority').value='';$('year').value='';$('block').value='';render()});$('printNow').addEventListener('click',()=>window.print());init();
+})();
+</script>
+<script src="./assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js"></script>
+</body>
+</html>
