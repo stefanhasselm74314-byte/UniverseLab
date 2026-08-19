@@ -1,4 +1,4 @@
-/* UniverseLab Site Language Switcher v1.1
+/* UniverseLab Site Language Switcher v1.1.1
  * German is the canonical research language.
  * Curated English routes are preferred where explicitly registered.
  * Other languages use full-page automatic translation from the German source.
@@ -29,8 +29,13 @@
     '/UniverseLab/guide-en.html':{de:'/UniverseLab/guide.html',en:'/UniverseLab/guide-en.html'},
     '/UniverseLab/tafelwerk.html':{de:'/UniverseLab/tafelwerk.html',en:'/UniverseLab/tafelwerk-en.html'},
     '/UniverseLab/tafelwerk-en.html':{de:'/UniverseLab/tafelwerk.html',en:'/UniverseLab/tafelwerk-en.html'},
-    '/UniverseLab/compare-desktop.html':{de:'/UniverseLab/compare-desktop.html',en:'/UniverseLab/compare-en.html'},
-    '/UniverseLab/compare-en.html':{de:'/UniverseLab/compare-desktop.html',en:'/UniverseLab/compare-en.html'}
+    '/UniverseLab/compare-safe.html':{de:'/UniverseLab/compare-safe.html',en:'/UniverseLab/compare-en.html'},
+    '/UniverseLab/compare-desktop.html':{de:'/UniverseLab/compare-safe.html',en:'/UniverseLab/compare-en.html'},
+    '/UniverseLab/compare-en.html':{de:'/UniverseLab/compare-safe.html',en:'/UniverseLab/compare-en.html'},
+    '/UniverseLab/observatory.html':{de:'/UniverseLab/observatory.html',en:'/UniverseLab/observatory-en.html'},
+    '/UniverseLab/observatory-en.html':{de:'/UniverseLab/observatory.html',en:'/UniverseLab/observatory-en.html'},
+    '/UniverseLab/validation.html':{de:'/UniverseLab/validation.html',en:'/UniverseLab/validation-en.html'},
+    '/UniverseLab/validation-en.html':{de:'/UniverseLab/validation.html',en:'/UniverseLab/validation-en.html'}
   };
   function pair(){return CURATED[location.pathname]||null;}
   function germanSource(){const p=pair();if(p)return location.origin+p.de;const c=document.querySelector('link[rel="alternate"][hreflang="de"]');if(c&&c.href)return c.href;const canonical=document.querySelector('link[rel="canonical"]');if(canonical&&canonical.href&&!/-en\.html(?:$|\?)/.test(canonical.href))return canonical.href;const u=new URL(location.href);u.search='';u.hash='';return u.href;}
