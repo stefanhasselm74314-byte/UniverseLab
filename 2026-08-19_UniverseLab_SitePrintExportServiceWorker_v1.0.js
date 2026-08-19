@@ -1,12 +1,13 @@
-/* UniverseLab Site Print & Export Service Worker v1.0.1
+/* UniverseLab Site Print & Export Service Worker v1.0.2
  * Injects the shared print/export utility into HTML navigation responses within
  * /UniverseLab/ after bootstrap registration. No caching and no scientific-data mutation.
- * Hotfix v1.0.1: never inject into the Owner Print Export page and always inject
- * before the final real </body> tag, not the first textual occurrence inside inline JS.
+ * v1.0.1: never inject into the Owner Print Export page and inject before the final real
+ * </body> tag, not the first textual occurrence inside inline JS.
+ * v1.0.2: loads the native-export-aware toolbar with an explicit cache-busting version.
  */
 'use strict';
 const ROOT='/UniverseLab/';
-const TOOL=ROOT+'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js';
+const TOOL=ROOT+'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js?v=1.0.2';
 const OWNER_EXPORT=ROOT+'2026-08-11_UniverseLab_OwnerPrintExport_v1.0.html';
 const MARK='data-ul-print-export-v10';
 
@@ -27,7 +28,7 @@ self.addEventListener('fetch',event=>{
     if(html.includes('2026-08-19_UniverseLab_SitePrintExport_v1.0.js')||html.includes('2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js')){
       return rebuild(response,html);
     }
-    const injection='<script '+MARK+'="1" src="'+TOOL+'" defer></script><!-- UniverseLab SitePrintExport SW v1.0.1 -->';
+    const injection='<script '+MARK+'="1" src="'+TOOL+'" defer></script><!-- UniverseLab SitePrintExport SW v1.0.2 -->';
     const matches=[...html.matchAll(/<\/body\s*>/ig)];
     if(matches.length){
       const last=matches[matches.length-1];
