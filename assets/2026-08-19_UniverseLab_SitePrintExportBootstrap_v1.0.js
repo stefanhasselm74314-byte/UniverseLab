@@ -1,4 +1,4 @@
-/* UniverseLab Site Print & Export Bootstrap v1.0
+/* UniverseLab Site Print & Export Bootstrap v1.0.2
  * Loads the floating page utility and registers the root-scope HTML injector.
  * Presentation/navigation layer only; no scientific status effect.
  */
@@ -7,7 +7,7 @@
   const qs=new URLSearchParams(location.search);
   if(qs.get('include-iframe')==='1')return;
   const ROOT='/UniverseLab/';
-  const TOOL=ROOT+'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js';
+  const TOOL=ROOT+'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js?v=1.0.2';
   const SW=ROOT+'2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js';
 
   if(!document.querySelector('script[data-ul-print-export-v10]')){
