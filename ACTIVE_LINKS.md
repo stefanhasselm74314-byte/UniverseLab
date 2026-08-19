@@ -1,7 +1,7 @@
 # UniverseLab — Canonical Active Links
 
 **Status:** ACTIVE · CANONICAL  
-**Letzte Pflege:** 2026-08-18  
+**Letzte Pflege:** 2026-08-19  
 **Zweck:** Single Source of Truth für aktuell wichtige und verwendbare Projektlinks sowie die Zuordnung aktiver Arbeitsstränge.
 
 > Regel: Nur aktive, aktuelle oder ausdrücklich als Arbeitslink benötigte Ziele gehören in dieses Register. Ersetzte oder historische Ziele werden aus dem aktiven Bereich entfernt bzw. unter `ARCHIV / ERSETZT` verschoben.
@@ -63,10 +63,11 @@ https://github.com/stefanhasselm74314-byte/UniverseLab/pull/137
 **Kennung:** `ULSH-01 · MD2S-BVP`
 
 ### ULSH-07 — Kaluza-Klein Spectrum Solver
-**ACTIVE PREPARATORY COORDINATION · PHYSICAL RELEASE BLOCKED**  
+**CANONICAL SOLVER PROGRAM · PREPARATORY ONLY · NO VISIBLE CHAT CONFIRMED**  
 **Kennung:** `ULSH-07 · KK`  
 **Upstream:** `ULSH-01`  
 **Zulässig:** vorbereitende Operator-, Randbedingungs-, Normierungs- und Eigensolver-Arbeit; keine physische Spektrumsfreigabe vor dem ULSH-01-Upstream-Gate.  
+**Chat-Zuordnung:** derzeit keine bestätigte sichtbare Chat-Identität.  
 https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/science/solver-hub/2026-08-07_ULSH-07_KK_Roadmap_v1.0.md
 
 ### Governed Site State
@@ -86,17 +87,18 @@ https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/registry/2026-0
 **Kanonische Ausgaben:** PR #139 / #140 sowie nachfolgende Reproduzierbarkeitsintegration #141–#143.  
 https://github.com/stefanhasselm74314-byte/UniverseLab/pull/140
 
-### ULSH-01 / C-PHYS — Repository-kritischer Solverpfad
+### ACTIVE — ULSH-01 C-PHYS Solverentwicklung
 **ACTIVE · SCIENCE / SOLVER · CRITICAL PATH**  
-**Chat-Identität:** In der aktuellen 28-Chat-Inventur ist kein sichtbarer Chat belastbar als ULSH-01 identifiziert. Der frühere Fehler, den sichtbaren ULSH-07-Titel als möglichen ULSH-01-Kandidaten zu behandeln, ist behoben.  
-**Aufgabe des kanonischen Repository-Workstreams:** `ULSH-01 → C-PHYS → Background3C5`; Response-Rank-Gate, Finite-Thickness-Operator, Regular-Center-Gates und vollständige Operatoridentität.  
+**Beobachteter Titel:** `ACTIVE — ULSH-01 C-PHYS Solverentwicklung`  
+**Identitätsstatus:** durch direktes Nutzer-Screenshot vom 2026-08-19 bestätigt; die frühere Transkription `ULSH-07 C-PHYSX` war falsch.  
+**Aufgabe:** `ULSH-01 → C-PHYS → Background3C5`; Response-Rank-Gate, Finite-Thickness-Operator, Regular-Center-Gates und vollständige Operatoridentität.  
+**Kanonischer Solver:** `ULSH-01 · MD2S-BVP`. `C-PHYS` ist die Workstream-/Scope-Bezeichnung und ersetzt nicht die Modul-ID.  
 **Kanonischer Arbeitslink:** PR #137.  
 https://github.com/stefanhasselm74314-byte/UniverseLab/pull/137
 
-### ACTIVE — ULSH-07 KK-Spektrum — Solverentwicklung
-**ACTIVE PREPARATORY COORDINATION · PHYSICAL RELEASE BLOCKED**  
-**Beobachteter Titel:** `ACTIVE - ULSH-07 C-PHYSX Solverentwicklung`  
-**Identitätsauflösung:** `ULSH-07` ist in den kanonischen ULSH-Registern eindeutig `KK` / `Kaluza-Klein Spectrum Solver`; `C-PHYSX` ist kein kanonischer ULSH-07-Modulname.  
+### ULSH-07 KK-Spektrum — kein sichtbarer Chat bestätigt
+**PREPARATORY REPOSITORY WORKSTREAM · PHYSICAL RELEASE BLOCKED**  
+**Chat-Identität:** aktuell keine bestätigte sichtbare Chat-Zuordnung in der 28-Chat-Inventur.  
 **Aufgabe:** sektorspezifischer Sturm-Liouville-Operator, Endpunktbedingungen, Maß/Normierung, Eigenwert-/Eigenmodenlöser, Orthogonalitäts- und Konvergenzkontrollen.  
 **Upstream-Regel:** physische Auswertung bleibt bis zu einem freigegebenen ULSH-01-Hintergrund und den benötigten Rand-/Normierungsdaten blockiert.  
 https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/science/solver-hub/2026-08-07_ULSH-07_KK_Roadmap_v1.0.md
@@ -151,7 +153,7 @@ https://stefanhasselm74314-byte.github.io/UniverseLab/source.html
 ### Vollständige Projekt-Chat-Inventur
 **COORDINATION · 28 SICHTBARE CHATS · MACHINE_READABLE**  
 Die vollständige Projektliste wird getrennt von den governed Workstreams geführt. Nicht jeder sichtbare Chat ist ein aktiver Workstream; unklare Titel bleiben `REVIEW_PENDING` oder `REFERENCE_*` statt automatisch umbenannt zu werden.  
-https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/registry/2026-08-18_UniverseLab_ChatInventory_v1.1.json
+https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/registry/2026-08-19_UniverseLab_ChatInventory_v1.2.json
 
 ### Trennregel für parallele Chats
 
@@ -165,7 +167,7 @@ https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/registry/2026-0
 **Keine automatische Statusübertragung zwischen diesen Arbeitssträngen.**
 
 Maschinenlesbare Zuordnung:  
-https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/registry/2026-08-18_UniverseLab_WorkstreamLinks_v1.4.json
+https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/registry/2026-08-19_UniverseLab_WorkstreamLinks_v1.5.json
 
 ---
 
@@ -205,6 +207,8 @@ https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/ACTIVE_LINKS.md
 
 Historische Zugänge werden nur aufbewahrt, wenn sie für Reproduzierbarkeit oder Provenienz benötigt werden. Der Audit vom 2026-07-31 ist ausdrücklich `ARCHIVED_REFERENCE` und kein aktueller kanonischer Projektstatus.
 
+Die fehlerhafte ULSH-07-Chat-Zuordnung aus PR #149 bleibt nur als historische Provenienz erhalten und ist durch `2026-08-19_UniverseLab_ULSH01_ChatIdentityCorrection_v1.0.md`, ChatInventory v1.2 und WorkstreamLinks v1.5 superseded.
+
 ---
 
 ## Pflegevertrag
@@ -218,5 +222,5 @@ Historische Zugänge werden nur aufbewahrt, wenn sie für Reproduzierbarkeit ode
 7. Chatstatus, technischer Status, Governance-Status und wissenschaftlicher Status dürfen nicht automatisch ineinander überführt werden.
 8. Chat-Titel dürfen nicht als stabile Chat-Identität behandelt werden; Umbenennungen werden als Titelhistorie modelliert.
 9. Ein sichtbarer Chat wird nicht allein aus seinem Titel zu einem governed Workstream hochgestuft.
-10. Bei kanonischen ULSH-IDs gilt die Solver-ID→Modul-Zuordnung aus den ULSH-Registern; ein mehrdeutiger oder veralteter Chat-Suffix darf diese Zuordnung nicht umdefinieren.
+10. Direkt lesbare Nutzer-Screenshots überschreiben frühere Transkriptionsfehler; Solver-Register dürfen nicht dazu verwendet werden, einen falsch gelesenen Chat-Titel nachträglich als andere Chat-Identität zu retten.
 11. Private GitHub-Ziele werden mit `LOGIN REQUIRED` gekennzeichnet; ein unangemeldeter GitHub-404 wird nicht automatisch als defekter Link klassifiziert.
