@@ -75,5 +75,6 @@
 <script>
 (()=>{const q=document.getElementById('search'),cards=[...document.querySelectorAll('[data-card]')],groups=[...document.querySelectorAll('[data-group]')],count=document.getElementById('count'),empty=document.getElementById('empty');function run(){const t=q.value.trim().toLowerCase();let n=0;cards.forEach(c=>{const hay=(c.dataset.search+' '+c.textContent).toLowerCase();const ok=!t||hay.includes(t);c.classList.toggle('hidden',!ok);if(ok)n++});groups.forEach(g=>g.classList.toggle('hidden',![...g.querySelectorAll('[data-card]')].some(c=>!c.classList.contains('hidden'))));count.textContent=n+' Links';empty.style.display=n?'none':'block'}q.addEventListener('input',run);run()})();
 </script>
+<script defer src="./assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js"></script>
 </body>
 </html>
