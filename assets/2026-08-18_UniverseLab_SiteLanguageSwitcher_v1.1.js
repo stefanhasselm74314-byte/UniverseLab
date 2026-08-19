@@ -22,7 +22,15 @@
     '/UniverseLab/sci-001-002-parent-closure-v0.1.html':{de:'/UniverseLab/sci-001-002-parent-closure-v0.1.html',en:'/UniverseLab/sci-001-002-parent-closure-v0.1-en.html'},
     '/UniverseLab/sci-001-002-parent-closure-v0.1-en.html':{de:'/UniverseLab/sci-001-002-parent-closure-v0.1.html',en:'/UniverseLab/sci-001-002-parent-closure-v0.1-en.html'},
     '/UniverseLab/navigator-app.html':{de:'/UniverseLab/navigator-app.html',en:'/UniverseLab/navigator-en.html'},
-    '/UniverseLab/navigator-en.html':{de:'/UniverseLab/navigator-app.html',en:'/UniverseLab/navigator-en.html'}
+    '/UniverseLab/navigator-en.html':{de:'/UniverseLab/navigator-app.html',en:'/UniverseLab/navigator-en.html'},
+    '/UniverseLab/hyperlab.html':{de:'/UniverseLab/hyperlab.html',en:'/UniverseLab/hyperlab-en.html'},
+    '/UniverseLab/hyperlab-en.html':{de:'/UniverseLab/hyperlab.html',en:'/UniverseLab/hyperlab-en.html'},
+    '/UniverseLab/guide.html':{de:'/UniverseLab/guide.html',en:'/UniverseLab/guide-en.html'},
+    '/UniverseLab/guide-en.html':{de:'/UniverseLab/guide.html',en:'/UniverseLab/guide-en.html'},
+    '/UniverseLab/tafelwerk.html':{de:'/UniverseLab/tafelwerk.html',en:'/UniverseLab/tafelwerk-en.html'},
+    '/UniverseLab/tafelwerk-en.html':{de:'/UniverseLab/tafelwerk.html',en:'/UniverseLab/tafelwerk-en.html'},
+    '/UniverseLab/compare-desktop.html':{de:'/UniverseLab/compare-desktop.html',en:'/UniverseLab/compare-en.html'},
+    '/UniverseLab/compare-en.html':{de:'/UniverseLab/compare-desktop.html',en:'/UniverseLab/compare-en.html'}
   };
   function pair(){return CURATED[location.pathname]||null;}
   function germanSource(){const p=pair();if(p)return location.origin+p.de;const c=document.querySelector('link[rel="alternate"][hreflang="de"]');if(c&&c.href)return c.href;const canonical=document.querySelector('link[rel="canonical"]');if(canonical&&canonical.href&&!/-en\.html(?:$|\?)/.test(canonical.href))return canonical.href;const u=new URL(location.href);u.search='';u.hash='';return u.href;}
