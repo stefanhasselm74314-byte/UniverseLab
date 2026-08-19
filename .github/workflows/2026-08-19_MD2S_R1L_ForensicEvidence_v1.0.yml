@@ -1,0 +1,34 @@
+name: MD2S R1-L forensic evidence v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'recovery/2026-08-19_MD2S_R1L_ForensicRecovery_v1.0.md'
+      - 'registry/2026-08-19_MD2S_R1L_ForensicEvidenceRegister_v1.0.json'
+      - 'tests/2026-08-19_test_MD2S_R1L_ForensicEvidence_v1.0.py'
+      - '.github/workflows/2026-08-19_MD2S_R1L_ForensicEvidence_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'recovery/2026-08-19_MD2S_R1L_ForensicRecovery_v1.0.md'
+      - 'registry/2026-08-19_MD2S_R1L_ForensicEvidenceRegister_v1.0.json'
+      - 'tests/2026-08-19_test_MD2S_R1L_ForensicEvidence_v1.0.py'
+      - '.github/workflows/2026-08-19_MD2S_R1L_ForensicEvidence_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate JSON syntax
+        run: python -m json.tool registry/2026-08-19_MD2S_R1L_ForensicEvidenceRegister_v1.0.json >/dev/null
+      - name: Compile validator
+        run: python -m py_compile tests/2026-08-19_test_MD2S_R1L_ForensicEvidence_v1.0.py
+      - name: Run forensic evidence validator
+        run: python tests/2026-08-19_test_MD2S_R1L_ForensicEvidence_v1.0.py
