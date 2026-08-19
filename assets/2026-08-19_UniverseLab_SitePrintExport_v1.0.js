@@ -1,8 +1,9 @@
-/* UniverseLab Site Print & Export v1.0.2
+/* UniverseLab Site Print & Export v1.0.3
  * Presentation/navigation utility only. No scientific, solver or governance status effect.
  * Provides current-page print/PDF, HTML snapshot, direct-link copy and access to the
  * existing Owner Print Export hub. Hidden in include-iframe export views and on print.
  * v1.0.2: suppresses the global control when a page already provides a native export UI.
+ * v1.0.3: upgrades legacy human-facing 50-Quellen-Katalog JSON links to the HTML catalog.
  */
 (function(){
   'use strict';
@@ -12,6 +13,7 @@
   else init();
 
   function init(){
+    upgradeLegacyBibliographyLinks();
     if(document.querySelector('[data-ul-print-export-host]'))return;
     if(hasNativeExport()){
       document.documentElement.dataset.ulGlobalExport='suppressed-native-export';
@@ -99,6 +101,22 @@
     window.addEventListener('beforeprint',()=>setOpen(false));
     (document.body||document.documentElement).appendChild(host);
     document.documentElement.dataset.ulGlobalExport='active';
+  }
+
+  function upgradeLegacyBibliographyLinks(){
+    const catalog='/UniverseLab/2026-08-19_UniverseLab_BibliographyCatalog_v1.0.html';
+    document.querySelectorAll('a[href]').forEach(a=>{
+      const label=(a.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
+      if(!label.includes('50-quellen-katalog'))return;
+      try{
+        const u=new URL(a.getAttribute('href'),location.href);
+        if(u.origin===location.origin&&u.pathname.endsWith('/hyperzeit-bibliography.json')){
+          a.href=catalog;
+          a.dataset.ulBibliographyView='html-catalog';
+          a.removeAttribute('download');
+        }
+      }catch(_e){}
+    });
   }
 
   function hasNativeExport(){
