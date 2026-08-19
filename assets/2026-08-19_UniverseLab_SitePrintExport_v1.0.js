@@ -1,9 +1,11 @@
-/* UniverseLab Site Print & Export v1.0.3
+/* UniverseLab Site Print & Export v1.0.4
  * Presentation/navigation utility only. No scientific, solver or governance status effect.
  * Provides current-page print/PDF, HTML snapshot, direct-link copy and access to the
  * existing Owner Print Export hub. Hidden in include-iframe export views and on print.
  * v1.0.2: suppresses the global control when a page already provides a native export UI.
  * v1.0.3: upgrades legacy human-facing 50-Quellen-Katalog JSON links to the HTML catalog.
+ * v1.0.4: routes same-origin JSON/CSV/TSV anchor navigation through the human-readable
+ * MachineDataViewer while preserving explicit raw/download links.
  */
 (function(){
   'use strict';
@@ -14,6 +16,7 @@
 
   function init(){
     upgradeLegacyBibliographyLinks();
+    upgradeMachineDataLinks();
     if(document.querySelector('[data-ul-print-export-host]'))return;
     if(hasNativeExport()){
       document.documentElement.dataset.ulGlobalExport='suppressed-native-export';
@@ -115,6 +118,21 @@
           a.dataset.ulBibliographyView='html-catalog';
           a.removeAttribute('download');
         }
+      }catch(_e){}
+    });
+  }
+
+  function upgradeMachineDataLinks(){
+    const ROOT='/UniverseLab/';
+    const VIEWER=ROOT+'2026-08-19_UniverseLab_MachineDataViewer_v1.0.html';
+    document.querySelectorAll('a[href]').forEach(a=>{
+      if(a.hasAttribute('download')||a.dataset.ulRawLink==='1'||a.dataset.ulNoDataViewer==='1')return;
+      try{
+        const u=new URL(a.getAttribute('href'),location.href);
+        if(u.origin!==location.origin||!u.pathname.startsWith(ROOT)||!/[.](json|csv|tsv)$/i.test(u.pathname))return;
+        const original=u.pathname+u.search;
+        a.dataset.ulMachineDataSource=original;
+        a.href=VIEWER+'?src='+encodeURIComponent(original);
       }catch(_e){}
     });
   }
