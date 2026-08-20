@@ -10,7 +10,7 @@
   "gate_effect": "NONE",
   "route_pairs": [
     {"id":"portal","de":"/UniverseLab/","en":"/UniverseLab/index-en.html","x_default":"/UniverseLab/"},
-    {"id":"navigator","de":"/UniverseLab/navigator-app.html","en":"/UniverseLab/navigator-en.html","x_default":"/UniverseLab/navigator-app.html"},
+    {"id":"navigator","de":"/UniverseLab/navigator.html","en":"/UniverseLab/navigator-en.html","x_default":"/UniverseLab/navigator.html","aliases_de":["/UniverseLab/navigator-app.html"]},
     {"id":"research_status","de":"/UniverseLab/research-status.html","en":"/UniverseLab/research-status-en.html","x_default":"/UniverseLab/research-status.html"},
     {"id":"solver_hub","de":"/UniverseLab/solver-hub.html","en":"/UniverseLab/solver-hub-en.html","x_default":"/UniverseLab/solver-hub.html"},
     {"id":"methods","de":"/UniverseLab/hyperzeit-methods.html","en":"/UniverseLab/hyperzeit-methods-en.html","x_default":"/UniverseLab/hyperzeit-methods.html"},
