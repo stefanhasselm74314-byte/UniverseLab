@@ -32,12 +32,19 @@ jobs:
         run: |
           npm install --no-save playwright
           npx playwright install --with-deps chromium
-      - name: Wait for Pages propagation on main push
-        if: github.event_name == 'push'
-        run: sleep 75
+      - name: Select audit target
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/universelab-http.log 2>&1 &
+            echo $! >/tmp/universelab-http.pid
+            sleep 2
+            echo "UNIVERSELAB_BASE_URL=http://127.0.0.1:8000/" >> "$GITHUB_ENV"
+          else
+            sleep 75
+            echo "UNIVERSELAB_BASE_URL=https://stefanhasselm74314-byte.github.io/UniverseLab/" >> "$GITHUB_ENV"
+          fi
       - name: Run browser runtime and numerical parity audit
         env:
-          UNIVERSELAB_BASE_URL: https://stefanhasselm74314-byte.github.io/UniverseLab/
           UNIVERSELAB_PARITY_EPS: '1e-12'
         run: node tools/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.mjs
       - name: Upload parity report
