@@ -1,0 +1,32 @@
+name: MD2S R1-L transcript recovery audit v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-08-20_MD2S_R1L_TranscriptRecoveryAudit_v1.0.json'
+      - 'recovery/2026-08-20_MD2S_R1L_TranscriptRecoveryAudit_v1.0.md'
+      - 'tests/2026-08-20_test_MD2S_R1L_TranscriptRecoveryAudit_v1.0.py'
+      - '.github/workflows/2026-08-20_MD2S_R1L_TranscriptRecoveryAudit_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-08-20_MD2S_R1L_TranscriptRecoveryAudit_v1.0.json'
+      - 'recovery/2026-08-20_MD2S_R1L_TranscriptRecoveryAudit_v1.0.md'
+      - 'tests/2026-08-20_test_MD2S_R1L_TranscriptRecoveryAudit_v1.0.py'
+      - '.github/workflows/2026-08-20_MD2S_R1L_TranscriptRecoveryAudit_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile audit test
+        run: python -m py_compile tests/2026-08-20_test_MD2S_R1L_TranscriptRecoveryAudit_v1.0.py
+      - name: Validate transcript recovery audit
+        run: python tests/2026-08-20_test_MD2S_R1L_TranscriptRecoveryAudit_v1.0.py
