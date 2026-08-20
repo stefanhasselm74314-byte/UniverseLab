@@ -1,0 +1,32 @@
+name: MD2S R1-L primary artifact search v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-08-20_MD2S_R1L_PrimaryArtifactSearch_v1.0.json'
+      - 'registry/2026-08-20_MD2S_R1L_ForensicEvidenceRegister_v1.3.json'
+      - 'recovery/2026-08-20_MD2S_R1L_PrimaryArtifactSearch_v1.0.md'
+      - 'tests/2026-08-20_test_MD2S_R1L_PrimaryArtifactSearch_v1.0.py'
+      - '.github/workflows/2026-08-20_MD2S_R1L_PrimaryArtifactSearch_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-08-20_MD2S_R1L_PrimaryArtifactSearch_v1.0.json'
+      - 'registry/2026-08-20_MD2S_R1L_ForensicEvidenceRegister_v1.3.json'
+      - 'recovery/2026-08-20_MD2S_R1L_PrimaryArtifactSearch_v1.0.md'
+      - 'tests/2026-08-20_test_MD2S_R1L_PrimaryArtifactSearch_v1.0.py'
+      - '.github/workflows/2026-08-20_MD2S_R1L_PrimaryArtifactSearch_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  scoped-recovery-search:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate scoped primary-artifact recovery record
+        run: python tests/2026-08-20_test_MD2S_R1L_PrimaryArtifactSearch_v1.0.py
