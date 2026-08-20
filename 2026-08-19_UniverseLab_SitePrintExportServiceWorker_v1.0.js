@@ -1,11 +1,11 @@
-/* UniverseLab Site Print & Export Service Worker v1.0.5
+/* UniverseLab Site Print & Export Service Worker v1.0.6
  * Injects shared presentation utilities into HTML navigation responses within /UniverseLab/.
  * No caching and no scientific-data mutation.
- * Preserves v1.0.4 machine-data-viewer-aware print/export utility and adds language injection.
+ * Preserves language injection and loads the JSONL/NDJSON/GitHub-blob-aware print/export utility.
  */
 'use strict';
 const ROOT='/UniverseLab/';
-const TOOL=ROOT+'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js?v=1.0.4';
+const TOOL=ROOT+'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js?v=1.0.6';
 const LANGUAGE=ROOT+'assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.1.js?v=1.1.1';
 const OWNER_EXPORT=ROOT+'2026-08-11_UniverseLab_OwnerPrintExport_v1.0.html';
 self.addEventListener('install',()=>self.skipWaiting());
@@ -21,7 +21,7 @@ self.addEventListener('fetch',event=>{
     if(!hasLanguage)injections.push('<script data-ul-language-switcher-sw="1" src="'+LANGUAGE+'" defer></script>');
     if(!hasPrint)injections.push('<script data-ul-print-export-v10="1" src="'+TOOL+'" defer></script>');
     if(!injections.length)return rebuild(response,html);
-    const injection=injections.join('')+'<!-- UniverseLab shared presentation SW v1.0.5 -->';
+    const injection=injections.join('')+'<!-- UniverseLab shared presentation SW v1.0.6 -->';
     const matches=[...html.matchAll(/<\/body\s*>/ig)];if(matches.length){const last=matches[matches.length-1];html=html.slice(0,last.index)+injection+html.slice(last.index)}else html+=injection;
     return rebuild(response,html);
   })().catch(err=>{console.warn('[UniverseLab shared presentation SW] navigation passthrough after error',err);return fetch(req)}));
