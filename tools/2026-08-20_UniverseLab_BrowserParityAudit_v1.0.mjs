@@ -1,0 +1,116 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+
+const BASE = process.env.UNIVERSELAB_BASE_URL || 'https://stefanhasselm74314-byte.github.io/UniverseLab/';
+const EPS = Number(process.env.UNIVERSELAB_PARITY_EPS || '1e-12');
+const report = { schema_version:'1.0', base_url:BASE, timestamp_utc:new Date().toISOString(), status:'PASS', checks:[], errors:[] };
+
+function push(name, ok, detail={}) {
+  report.checks.push({name, ok, ...detail});
+  if (!ok) report.status='FAIL';
+}
+function num(s){ const x=Number(String(s).trim()); return Number.isFinite(x)?x:NaN; }
+function close(a,b,eps=EPS){
+  if (!Number.isFinite(a)||!Number.isFinite(b)) return false;
+  return Math.abs(a-b) <= eps*Math.max(1,Math.abs(a),Math.abs(b));
+}
+async function goto(page,path){
+  const url=new URL(path,BASE).href + (path.includes('?')?'&':'?') + 'ul_parity=' + Date.now();
+  let last;
+  for(let i=0;i<4;i++){
+    try{
+      const r=await page.goto(url,{waitUntil:'networkidle',timeout:45000});
+      if(r && r.ok()) return r;
+      last=new Error(`HTTP ${r?.status()} for ${url}`);
+    }catch(e){last=e;}
+    await page.waitForTimeout(2500*(i+1));
+  }
+  throw last;
+}
+async function pageErrors(context,label){
+  const errors=[]; const page=await context.newPage();
+  page.on('pageerror',e=>errors.push(String(e)));
+  page.on('console',m=>{ if(m.type()==='error') errors.push(`console: ${m.text()}`); });
+  return {page,errors,label};
+}
+
+const browser=await chromium.launch({headless:true});
+try{
+  const context=await browser.newContext({viewport:{width:1280,height:900}, locale:'en-US'});
+
+  // 1) Validation Console: independent DE and EN code paths must produce same numbers.
+  {
+    const de=await pageErrors(context,'validation-de'); const en=await pageErrors(context,'validation-en');
+    await goto(de.page,'validation.html'); await goto(en.page,'validation-en.html');
+    await de.page.waitForFunction(()=>document.querySelectorAll('#rows tr').length===6);
+    await en.page.waitForFunction(()=>document.querySelectorAll('#rows tr').length===6);
+    const snap=async p=>p.evaluate(()=>({
+      passed:document.querySelector('#passed')?.textContent,
+      failed:document.querySelector('#failed')?.textContent,
+      maxerr:document.querySelector('#maxerr')?.textContent,
+      values:[...document.querySelectorAll('#rows code')].map(x=>Number(x.textContent)),
+      states:[...document.querySelectorAll('#rows .state')].map(x=>x.textContent.trim())
+    }));
+    const A=await snap(de.page), B=await snap(en.page);
+    const vals=A.values.length===B.values.length && A.values.every((v,i)=>close(v,B.values[i]));
+    push('validation_numeric_parity', vals && A.failed==='0' && B.failed==='0' && A.states.every(x=>x==='PASS') && B.states.every(x=>x==='PASS'), {de:A,en:B,epsilon:EPS});
+    push('validation_no_browser_errors', de.errors.length===0 && en.errors.length===0,{de_errors:de.errors,en_errors:en.errors});
+    await de.page.close(); await en.page.close();
+  }
+
+  // 2) Single-engine shells: English must route to the canonical German executable engine.
+  for(const spec of [
+    {id:'comparison', en:'compare-en.html', selector:'a[href*="compare-safe.html"]', expected:'compare-safe.html', engine:'compare-safe.html', outputs:['ageL','ageB','dev1','S8']},
+    {id:'observatory', en:'observatory-en.html', selector:'a[href="./observatory.html"]', expected:'observatory.html', engine:'observatory.html', outputs:['age','q0','s80','curv']}
+  ]){
+    const sh=await pageErrors(context,`${spec.id}-en-shell`); await goto(sh.page,spec.en);
+    const href=await sh.page.locator(spec.selector).first().getAttribute('href');
+    push(`${spec.id}_single_engine_route`, !!href && href.includes(spec.expected), {href,expected:spec.expected});
+    const eng=await pageErrors(context,`${spec.id}-engine`); await goto(eng.page,spec.engine);
+    await eng.page.waitForTimeout(800);
+    const out=await eng.page.evaluate(ids=>Object.fromEntries(ids.map(id=>[id,document.getElementById(id)?.textContent?.trim()])),spec.outputs);
+    const present=Object.values(out).every(v=>v && v!=='–');
+    push(`${spec.id}_engine_runtime`, present && eng.errors.length===0,{outputs:out,browser_errors:eng.errors});
+    push(`${spec.id}_shell_no_browser_errors`, sh.errors.length===0,{browser_errors:sh.errors});
+    await sh.page.close(); await eng.page.close();
+  }
+
+  // 3) Governed runtime mirrors: the rendered EN page must preserve executable input identity/default state.
+  for(const id of ['about','journey','emergence','universe3d']){
+    const de=await pageErrors(context,`${id}-de`); const en=await pageErrors(context,`${id}-en`);
+    await goto(de.page,`${id}.html`); await goto(en.page,`${id}-en.html`);
+    await en.page.waitForTimeout(1500);
+    const collect=async p=>p.evaluate(()=>({
+      fields:[...document.querySelectorAll('input,select,textarea')].map((e,i)=>({
+        key:e.id||e.name||`${e.tagName.toLowerCase()}-${i}`,
+        tag:e.tagName.toLowerCase(), type:e.type||'', value:e.value, min:e.min||'', max:e.max||'', step:e.step||''
+      })),
+      scripts:[...document.scripts].map(s=>s.src?new URL(s.src,location.href).pathname:'inline'),
+      canvases:document.querySelectorAll('canvas').length
+    }));
+    const A=await collect(de.page), B=await collect(en.page);
+    const sameFields=JSON.stringify(A.fields)===JSON.stringify(B.fields);
+    push(`${id}_runtime_mirror_input_parity`, sameFields,{de_fields:A.fields,en_fields:B.fields,de_canvas:A.canvases,en_canvas:B.canvases});
+    push(`${id}_runtime_mirror_no_browser_errors`, de.errors.length===0 && en.errors.length===0,{de_errors:de.errors,en_errors:en.errors});
+    await de.page.close(); await en.page.close();
+  }
+
+  // 4) HyperLab evidence/gate semantics must survive translation.
+  {
+    const de=await pageErrors(context,'hyperlab-de'); const en=await pageErrors(context,'hyperlab-en');
+    await goto(de.page,'hyperlab.html'); await goto(en.page,'hyperlab-en.html');
+    const textA=await de.page.textContent('body'); const textB=await en.page.textContent('body');
+    const okA=/K1-D/.test(textA)&&/NOT RELEASED/.test(textA)&&/K1-E/.test(textA)&&/NOT ADMISSIBLE/.test(textA);
+    const okB=/K1-D/.test(textB)&&/NOT RELEASED/.test(textB)&&/K1-E/.test(textB)&&/NOT ADMISSIBLE/.test(textB);
+    push('hyperlab_gate_semantic_parity',okA&&okB,{de:okA,en:okB});
+    push('hyperlab_no_browser_errors',de.errors.length===0&&en.errors.length===0,{de_errors:de.errors,en_errors:en.errors});
+    await de.page.close(); await en.page.close();
+  }
+
+  await context.close();
+}catch(e){ report.status='FAIL'; report.errors.push(String(e?.stack||e)); }
+finally{ await browser.close(); }
+
+fs.writeFileSync('browser-parity-report.json',JSON.stringify(report,null,2));
+console.log(JSON.stringify(report,null,2));
+if(report.status!=='PASS') process.exit(1);
