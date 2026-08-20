@@ -1,4 +1,4 @@
-/* UniverseLab Site Language Switcher v1.1.1
+/* UniverseLab Site Language Switcher v1.1.2
  * German is the canonical research language.
  * Curated English routes are preferred where explicitly registered.
  * Other languages use full-page automatic translation from the German source.
@@ -35,7 +35,15 @@
     '/UniverseLab/observatory.html':{de:'/UniverseLab/observatory.html',en:'/UniverseLab/observatory-en.html'},
     '/UniverseLab/observatory-en.html':{de:'/UniverseLab/observatory.html',en:'/UniverseLab/observatory-en.html'},
     '/UniverseLab/validation.html':{de:'/UniverseLab/validation.html',en:'/UniverseLab/validation-en.html'},
-    '/UniverseLab/validation-en.html':{de:'/UniverseLab/validation.html',en:'/UniverseLab/validation-en.html'}
+    '/UniverseLab/validation-en.html':{de:'/UniverseLab/validation.html',en:'/UniverseLab/validation-en.html'},
+    '/UniverseLab/about.html':{de:'/UniverseLab/about.html',en:'/UniverseLab/about-en.html'},
+    '/UniverseLab/about-en.html':{de:'/UniverseLab/about.html',en:'/UniverseLab/about-en.html'},
+    '/UniverseLab/journey.html':{de:'/UniverseLab/journey.html',en:'/UniverseLab/journey-en.html'},
+    '/UniverseLab/journey-en.html':{de:'/UniverseLab/journey.html',en:'/UniverseLab/journey-en.html'},
+    '/UniverseLab/emergence.html':{de:'/UniverseLab/emergence.html',en:'/UniverseLab/emergence-en.html'},
+    '/UniverseLab/emergence-en.html':{de:'/UniverseLab/emergence.html',en:'/UniverseLab/emergence-en.html'},
+    '/UniverseLab/universe3d.html':{de:'/UniverseLab/universe3d.html',en:'/UniverseLab/universe3d-en.html'},
+    '/UniverseLab/universe3d-en.html':{de:'/UniverseLab/universe3d.html',en:'/UniverseLab/universe3d-en.html'}
   };
   function pair(){return CURATED[location.pathname]||null;}
   function germanSource(){const p=pair();if(p)return location.origin+p.de;const c=document.querySelector('link[rel="alternate"][hreflang="de"]');if(c&&c.href)return c.href;const canonical=document.querySelector('link[rel="canonical"]');if(canonical&&canonical.href&&!/-en\.html(?:$|\?)/.test(canonical.href))return canonical.href;const u=new URL(location.href);u.search='';u.hash='';return u.href;}

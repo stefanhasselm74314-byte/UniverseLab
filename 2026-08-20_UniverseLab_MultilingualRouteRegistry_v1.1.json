@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.1",
+  "date": "2026-08-20",
+  "classification": "PRESENTATION_NAVIGATION_SEO_ONLY",
+  "canonical_research_language": "de",
+  "curated_secondary_language": "en",
+  "automatic_fallback_languages": ["fr", "es", "it", "nl", "pl", "cs", "pt", "ja", "zh-CN"],
+  "evidence_effect": "NONE",
+  "solver_release_effect": "NONE",
+  "gate_effect": "NONE",
+  "route_pairs": [
+    {"id":"portal","de":"/UniverseLab/","en":"/UniverseLab/index-en.html","x_default":"/UniverseLab/"},
+    {"id":"navigator","de":"/UniverseLab/navigator-app.html","en":"/UniverseLab/navigator-en.html","x_default":"/UniverseLab/navigator-app.html"},
+    {"id":"research_status","de":"/UniverseLab/research-status.html","en":"/UniverseLab/research-status-en.html","x_default":"/UniverseLab/research-status.html"},
+    {"id":"solver_hub","de":"/UniverseLab/solver-hub.html","en":"/UniverseLab/solver-hub-en.html","x_default":"/UniverseLab/solver-hub.html"},
+    {"id":"methods","de":"/UniverseLab/hyperzeit-methods.html","en":"/UniverseLab/hyperzeit-methods-en.html","x_default":"/UniverseLab/hyperzeit-methods.html"},
+    {"id":"material_atlas","de":"/UniverseLab/hyperzeit-material-v2.html","en":"/UniverseLab/hyperzeit-material-v2-en.html","x_default":"/UniverseLab/hyperzeit-material-v2.html"},
+    {"id":"parent_junction","de":"/UniverseLab/sci-001-002-parent-closure-v0.1.html","en":"/UniverseLab/sci-001-002-parent-closure-v0.1-en.html","x_default":"/UniverseLab/sci-001-002-parent-closure-v0.1.html"},
+    {"id":"hyperlab","de":"/UniverseLab/hyperlab.html","en":"/UniverseLab/hyperlab-en.html","x_default":"/UniverseLab/hyperlab.html"},
+    {"id":"observatory","de":"/UniverseLab/observatory.html","en":"/UniverseLab/observatory-en.html","x_default":"/UniverseLab/observatory.html"},
+    {"id":"validation","de":"/UniverseLab/validation.html","en":"/UniverseLab/validation-en.html","x_default":"/UniverseLab/validation.html"},
+    {"id":"guide","de":"/UniverseLab/guide.html","en":"/UniverseLab/guide-en.html","x_default":"/UniverseLab/guide.html"},
+    {"id":"tafelwerk","de":"/UniverseLab/tafelwerk.html","en":"/UniverseLab/tafelwerk-en.html","x_default":"/UniverseLab/tafelwerk.html"},
+    {"id":"comparison","de":"/UniverseLab/compare-safe.html","en":"/UniverseLab/compare-en.html","x_default":"/UniverseLab/compare-safe.html","aliases_de":["/UniverseLab/compare-desktop.html"]},
+    {"id":"about","de":"/UniverseLab/about.html","en":"/UniverseLab/about-en.html","x_default":"/UniverseLab/about.html","edition":"curated_runtime_mirror"},
+    {"id":"journey","de":"/UniverseLab/journey.html","en":"/UniverseLab/journey-en.html","x_default":"/UniverseLab/journey.html","edition":"curated_runtime_mirror"},
+    {"id":"emergence","de":"/UniverseLab/emergence.html","en":"/UniverseLab/emergence-en.html","x_default":"/UniverseLab/emergence.html","edition":"curated_runtime_mirror"},
+    {"id":"universe3d","de":"/UniverseLab/universe3d.html","en":"/UniverseLab/universe3d-en.html","x_default":"/UniverseLab/universe3d.html","edition":"curated_runtime_mirror"}
+  ],
+  "unpaired_german_routes": [],
+  "coverage_model": {
+    "curated_pairs": 17,
+    "legacy_runtime_mirror": "The four newly paired legacy interactives render the canonical German executable page through a governed literal English translation adapter; formulas and numerical code remain identical.",
+    "governed_first_load": "Bootstrap loads the language switcher directly where bootstrap is present.",
+    "subsequent_navigation": "Root-scope service worker injects the language switcher into HTML navigation responses when absent.",
+    "legacy_first_direct_deep_link": "May remain uncovered on the first-ever German response before service-worker control; the dedicated English route itself has static language metadata."
+  },
+  "scientific_firewall": [
+    "Translation changes presentation only.",
+    "Formulas, numerical code, data, gate states and evidence classifications are not translated into stronger claims.",
+    "German remains the canonical research source where wording conflicts arise.",
+    "Runtime English mirrors fetch and execute the canonical German page so scientific logic is not forked."
+  ]
+}

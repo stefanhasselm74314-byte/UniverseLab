@@ -30,7 +30,7 @@ jobs:
 
       - name: Validate machine-readable naming policy
         run: |
-          python -m json.tool registry/2026-08-01_UniverseLab_FileNamingPolicy_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-20_UniverseLab_FileNamingPolicy_v1.1.json >/dev/null
 
       - name: Run naming-contract tests
         run: |
@@ -55,11 +55,11 @@ jobs:
                 $1 ~ /^R[0-9]+$/ { print $3 }
               ' \
             > /tmp/universelab-added-or-renamed-paths.txt
-          echo "Paths subject to UL-FNS-v1.0:"
+          echo "Paths subject to UL-FNS-v1.1:"
           cat /tmp/universelab-added-or-renamed-paths.txt
 
       - name: Enforce dated file naming contract
         run: |
           python tools/2026-08-01_validate_file_naming_v1.0.py \
-            --policy registry/2026-08-01_UniverseLab_FileNamingPolicy_v1.0.json \
+            --policy registry/2026-08-20_UniverseLab_FileNamingPolicy_v1.1.json \
             --paths-file /tmp/universelab-added-or-renamed-paths.txt
