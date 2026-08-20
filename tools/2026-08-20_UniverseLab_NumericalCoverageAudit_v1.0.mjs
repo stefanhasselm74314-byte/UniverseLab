@@ -5,7 +5,14 @@ const BASE=process.env.UNIVERSELAB_BASE_URL||'https://stefanhasselm74314-byte.gi
 const report={schema_version:'1.0',base_url:BASE,timestamp_utc:new Date().toISOString(),status:'PASS',checks:[],errors:[]};
 function push(name,ok,detail={}){report.checks.push({name,ok,...detail});if(!ok)report.status='FAIL';}
 function finite(x){return Number.isFinite(x);}
-function parseDE(text){const m=String(text??'').replace(/−/g,'-').match(/[-+]?\d+(?:[.,]\d+)?(?:[eE][-+]?\d+)?/);return m?Number(m[0].replace(',','.')):NaN;}
+function parseDE(text){
+  const s=String(text??'').replace(/−/g,'-');
+  const m=s.match(/[-+]?\d[\d.,]*(?:[eE][-+]?\d+)?/);
+  if(!m)return NaN;
+  let token=m[0];
+  if(token.includes(',')) token=token.replace(/\./g,'').replace(',','.');
+  return Number(token);
+}
 async function open(context,path){const errors=[];const failed=[];const page=await context.newPage();page.on('pageerror',e=>errors.push(String(e)));page.on('console',m=>{if(m.type()==='error')errors.push(`console: ${m.text()}`)});page.on('response',r=>{if(r.status()>=400)failed.push({status:r.status(),url:r.url()})});const u=new URL(path,BASE);u.searchParams.set('ul_numcov',Date.now());const r=await page.goto(u.href,{waitUntil:'networkidle',timeout:45000});if(!r?.ok())throw new Error(`HTTP ${r?.status()} ${u.href}`);return{page,errors,failed};}
 async function setValue(page,id,value){await page.locator(`#${id}`).evaluate((el,v)=>{el.value=String(v);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));},value);await page.waitForTimeout(80);}
 
