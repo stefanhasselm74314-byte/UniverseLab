@@ -1,0 +1,56 @@
+name: UniverseLab numerical module coverage audit
+
+on:
+  pull_request:
+    paths:
+      - '**/*.html'
+      - 'assets/**'
+      - 'tools/2026-08-20_UniverseLab_NumericalCoverageAudit_v1.0.mjs'
+      - '.github/workflows/2026-08-20_UniverseLab_NumericalCoverageAudit_v1.0.yml'
+  push:
+    branches: [ main ]
+    paths:
+      - '**/*.html'
+      - 'assets/**'
+      - 'tools/2026-08-20_UniverseLab_NumericalCoverageAudit_v1.0.mjs'
+      - '.github/workflows/2026-08-20_UniverseLab_NumericalCoverageAudit_v1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  numerical-coverage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Select audit target
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            mkdir -p /tmp/ul-root
+            ln -s "$GITHUB_WORKSPACE" /tmp/ul-root/UniverseLab
+            cd /tmp/ul-root
+            python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/universelab-http.log 2>&1 &
+            sleep 2
+            echo "UNIVERSELAB_BASE_URL=http://127.0.0.1:8000/UniverseLab/" >> "$GITHUB_ENV"
+          else
+            sleep 75
+            echo "UNIVERSELAB_BASE_URL=https://stefanhasselm74314-byte.github.io/UniverseLab/" >> "$GITHUB_ENV"
+          fi
+      - name: Run numerical module coverage audit
+        run: node tools/2026-08-20_UniverseLab_NumericalCoverageAudit_v1.0.mjs
+      - name: Upload numerical coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universeLab-numerical-coverage-report
+          path: numerical-coverage-report.json
+          if-no-files-found: error
