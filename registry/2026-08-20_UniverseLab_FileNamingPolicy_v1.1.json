@@ -1,0 +1,35 @@
+{
+  "schema": "universelab.file-naming-policy.v1",
+  "policy_id": "UL-FNS-v1.1",
+  "created_date": "2026-08-20",
+  "status": "ACTIVE",
+  "supersedes": "UL-FNS-v1.0",
+  "governance_source": "governance/2026-08-01_UNIVERSELAB_FILE_NAMING_STANDARD_v1.0.md",
+  "canonical_pattern": "YYYY-MM-DD_Bereich_Kurztitel_vX.Y.ext",
+  "collision_pattern": "YYYY-MM-DD_HHMM_Bereich_Kurztitel_vX.Y.ext",
+  "filename_regex": "^(?P<date>\\d{4}-\\d{2}-\\d{2})(?:_(?P<time>\\d{4}))?_(?P<title>[A-Za-z0-9][A-Za-z0-9._-]*?)_v(?P<major>\\d+)\\.(?P<minor>\\d+)(?:_(?P<status>[A-Z][A-Z0-9_-]*))?(?P<extension>(?:\\.[A-Za-z0-9]+)+)$",
+  "date_semantics": "The leading date is the first-creation date of the artifact line. Revisions keep that date and advance the version. Materially new snapshots or successor lines receive a new date.",
+  "time_semantics": "HHMM is optional and uses local 24-hour time only for same-day collisions or multiple separately created outputs.",
+  "allowed_characters": "ASCII letters, digits, dot, hyphen and underscore",
+  "retroactivity": "NEW_FILES_ONLY",
+  "legacy_policy": "Files existing before activation are grandfathered and are not mass-renamed.",
+  "stable_aliases": [
+    {"path":"registry/session-checkpoint-latest.json","alias_type":"LATEST_POINTER","reason":"New sessions require one stable machine-readable checkpoint entry point.","requires_dated_canonical_snapshot":true,"dated_target_pattern":"registry/YYYY-MM-DD[_HHMM]_UniverseLab_SessionCheckpoint_vX.Y.json"},
+    {"path":"registry/decision-log.jsonl","alias_type":"APPEND_ONLY_CANONICAL_LOG","reason":"Decision IDs and append order require one stable canonical log path.","requires_dated_canonical_snapshot":false,"dated_target_pattern":null},
+    {"path":"about-en.html","alias_type":"PUBLIC_LANGUAGE_ROUTE","reason":"Stable public English counterpart of the grandfathered about.html route; required for reciprocal language navigation and sitemap identity.","requires_dated_canonical_snapshot":false,"dated_target_pattern":null},
+    {"path":"journey-en.html","alias_type":"PUBLIC_LANGUAGE_ROUTE","reason":"Stable public English counterpart of the grandfathered journey.html interactive route; required for reciprocal language navigation and sitemap identity.","requires_dated_canonical_snapshot":false,"dated_target_pattern":null},
+    {"path":"emergence-en.html","alias_type":"PUBLIC_LANGUAGE_ROUTE","reason":"Stable public English counterpart of the grandfathered emergence.html interactive route; required for reciprocal language navigation and sitemap identity.","requires_dated_canonical_snapshot":false,"dated_target_pattern":null},
+    {"path":"universe3d-en.html","alias_type":"PUBLIC_LANGUAGE_ROUTE","reason":"Stable public English counterpart of the grandfathered universe3d.html interactive route; required for reciprocal language navigation and sitemap identity.","requires_dated_canonical_snapshot":false,"dated_target_pattern":null}
+  ],
+  "new_alias_rule": "Any additional undated stable path requires a new governed policy version with an explicit reason and alias type.",
+  "external_artifact_rule": "Assistant-generated downloads and packages use the same dated naming scheme unless the user explicitly requests another name or a platform requires a fixed path.",
+  "enforcement": {
+    "mode": "READ_ONLY_FAIL_CLOSED",
+    "scope": "FILES_ADDED_IN_CURRENT_CHANGESET",
+    "validator": "tools/2026-08-01_validate_file_naming_v1.0.py",
+    "tests": "tests/2026-08-01_test_file_naming_v1.0.py",
+    "workflow": ".github/workflows/2026-08-01_UniverseLab_FileNamingContract_v1.0.yml"
+  },
+  "change_scope": "Adds exactly four stable PUBLIC_LANGUAGE_ROUTE aliases; canonical dated naming regex and grandfathering semantics are unchanged.",
+  "physical_gate_effect": "NONE"
+}
