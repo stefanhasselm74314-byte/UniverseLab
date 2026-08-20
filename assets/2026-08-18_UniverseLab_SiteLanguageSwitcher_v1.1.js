@@ -1,4 +1,4 @@
-/* UniverseLab Site Language Switcher v1.1.2
+/* UniverseLab Site Language Switcher v1.1.3
  * German is the canonical research language.
  * Curated English routes are preferred where explicitly registered.
  * Other languages use full-page automatic translation from the German source.
@@ -21,8 +21,9 @@
     '/UniverseLab/hyperzeit-material-v2-en.html':{de:'/UniverseLab/hyperzeit-material-v2.html',en:'/UniverseLab/hyperzeit-material-v2-en.html'},
     '/UniverseLab/sci-001-002-parent-closure-v0.1.html':{de:'/UniverseLab/sci-001-002-parent-closure-v0.1.html',en:'/UniverseLab/sci-001-002-parent-closure-v0.1-en.html'},
     '/UniverseLab/sci-001-002-parent-closure-v0.1-en.html':{de:'/UniverseLab/sci-001-002-parent-closure-v0.1.html',en:'/UniverseLab/sci-001-002-parent-closure-v0.1-en.html'},
-    '/UniverseLab/navigator-app.html':{de:'/UniverseLab/navigator-app.html',en:'/UniverseLab/navigator-en.html'},
-    '/UniverseLab/navigator-en.html':{de:'/UniverseLab/navigator-app.html',en:'/UniverseLab/navigator-en.html'},
+    '/UniverseLab/navigator.html':{de:'/UniverseLab/navigator.html',en:'/UniverseLab/navigator-en.html'},
+    '/UniverseLab/navigator-app.html':{de:'/UniverseLab/navigator.html',en:'/UniverseLab/navigator-en.html'},
+    '/UniverseLab/navigator-en.html':{de:'/UniverseLab/navigator.html',en:'/UniverseLab/navigator-en.html'},
     '/UniverseLab/hyperlab.html':{de:'/UniverseLab/hyperlab.html',en:'/UniverseLab/hyperlab-en.html'},
     '/UniverseLab/hyperlab-en.html':{de:'/UniverseLab/hyperlab.html',en:'/UniverseLab/hyperlab-en.html'},
     '/UniverseLab/guide.html':{de:'/UniverseLab/guide.html',en:'/UniverseLab/guide-en.html'},
