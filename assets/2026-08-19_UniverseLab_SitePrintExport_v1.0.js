@@ -1,4 +1,4 @@
-/* UniverseLab Site Print & Export v1.0.4
+/* UniverseLab Site Print & Export v1.0.6
  * Presentation/navigation utility only. No scientific, solver or governance status effect.
  * Provides current-page print/PDF, HTML snapshot, direct-link copy and access to the
  * existing Owner Print Export hub. Hidden in include-iframe export views and on print.
@@ -6,6 +6,8 @@
  * v1.0.3: upgrades legacy human-facing 50-Quellen-Katalog JSON links to the HTML catalog.
  * v1.0.4: routes same-origin JSON/CSV/TSV anchor navigation through the human-readable
  * MachineDataViewer while preserving explicit raw/download links.
+ * v1.0.6: adds JSONL/NDJSON and maps canonical GitHub blob links for this repository
+ * to the same human-readable viewer without changing the underlying data source.
  */
 (function(){
   'use strict';
@@ -124,13 +126,21 @@
 
   function upgradeMachineDataLinks(){
     const ROOT='/UniverseLab/';
-    const VIEWER=ROOT+'2026-08-19_UniverseLab_MachineDataViewer_v1.0.html';
+    const VIEWER=ROOT+'2026-08-20_UniverseLab_MachineDataViewer_v1.1.html';
+    const GH_PREFIX='/stefanhasselm74314-byte/UniverseLab/blob/main/';
+    const supported=/[.](json|jsonl|ndjson|csv|tsv)$/i;
     document.querySelectorAll('a[href]').forEach(a=>{
       if(a.hasAttribute('download')||a.dataset.ulRawLink==='1'||a.dataset.ulNoDataViewer==='1')return;
       try{
         const u=new URL(a.getAttribute('href'),location.href);
-        if(u.origin!==location.origin||!u.pathname.startsWith(ROOT)||!/[.](json|csv|tsv)$/i.test(u.pathname))return;
-        const original=u.pathname+u.search;
+        let original='';
+        if(u.origin===location.origin&&u.pathname.startsWith(ROOT)&&supported.test(u.pathname)){
+          original=u.pathname+u.search;
+        }else if(u.hostname==='github.com'&&u.pathname.startsWith(GH_PREFIX)){
+          const repoPath=u.pathname.slice(GH_PREFIX.length);
+          if(!supported.test(repoPath))return;
+          original=ROOT+repoPath;
+        }else return;
         a.dataset.ulMachineDataSource=original;
         a.href=VIEWER+'?src='+encodeURIComponent(original);
       }catch(_e){}
