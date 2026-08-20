@@ -1,0 +1,154 @@
+{
+  "schema": "universelab.md2s.r1l.forensic-evidence-register.v1",
+  "version": "1.3.0",
+  "created_date": "2026-08-20",
+  "status": "FORENSIC_RECOVERY_ONLY",
+  "identifier": {
+    "exact_string": "MD2S-R1-L",
+    "exact_string_recovered": true,
+    "recovered_role": "LEGACY_REPRODUCTION_TRACK_ID",
+    "source": "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
+    "canonical_artifact_identifier_recovered": false,
+    "original_historical_solver_artifact_recovered": false
+  },
+  "evidence_classes": {
+    "E1_VERIFIED_REPORTED_ARTIFACT": "Explicitly reported in a surviving project artifact; not automatically a rerunnable solver output.",
+    "E2_VERIFIED_CONTRACT_DEFINITION": "Explicitly defined in a surviving run-spec/method contract; not an executed result.",
+    "E3_DERIVED_CHECK": "Later consistency calculation from surviving values.",
+    "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT": "Historically reported in chat but primary solver/output/residual provenance has not been recovered.",
+    "E5_MISSING_SURVIVING_ARCHIVE": "Required for exact historical replay but absent from the currently recovered primary archive set.",
+    "E6_REBUILD_OR_C1_DATA_NOT_HISTORICAL": "Real derived/analytic/numerical data from a later rebuild or C1 candidate track that must not substitute for historical MD2S-R1-L data.",
+    "E7_ARCHIVE_LEVEL_FORENSIC_AUDIT": "Systematic inventory/full-text analysis supporting archive-scoped presence/absence claims only; not global nonexistence outside the audited archive.",
+    "E8_SCOPED_MULTI_SOURCE_RECOVERY_SEARCH": "Bounded search over enumerated indexes/registers supporting only a searched-scope recovery result; no global nonexistence inference."
+  },
+  "a0": {
+    "classification": "E1_VERIFIED_REPORTED_ARTIFACT",
+    "release_use": "REGRESSION_TARGET_ONLY",
+    "values": {
+      "sqrt_K4_rho_cap": 1.1196329253611,
+      "kappa6sq_lambda_eff_over_4sqrtK4": 0.8931498683204,
+      "K4_rho_cap_sq": 1.2535778875527,
+      "V_W": 0.5318111250097,
+      "R_circle_at_K4_eq_beta_eq_1": 0.6661500466003
+    },
+    "claim_limit": "Reported surviving benchmark block only; not a recovered full historical solver transaction."
+  },
+  "b14k": {
+    "classification": "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT",
+    "numerical_fingerprints": [0.842636731623, 0.018368812404, 0.163118759614, 0.499999960986],
+    "primary_solver_artifact_recovered": false
+  },
+  "b14l": {
+    "classification": "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT",
+    "numerical_fingerprints": [0.777738716721, 1.449864769136, -1.775714440211],
+    "primary_solver_artifact_recovered": false
+  },
+  "legacy_branch_audit": {
+    "source": "registry/2026-08-20_MD2S_R1L_LegacyBranchAudit_v1.0.json",
+    "audited_legacy_agent_md2s_branch_count": 13,
+    "historical_primary_solver_export_recovered": false,
+    "historical_two_sided_interface_export_recovered": false,
+    "C1_historical_A0_identity": "NOT_CLAIMED",
+    "C1_data_classification": "E6_REBUILD_OR_C1_DATA_NOT_HISTORICAL"
+  },
+  "hyper_zip_archive_audit": {
+    "classification": "E7_ARCHIVE_LEVEL_FORENSIC_AUDIT",
+    "repository_record": "recovery/2026-08-20_MD2S_HyperZIP_ForensicAudit_v1.0.md",
+    "external_report_name": "Hyper_ZIP_Analysebericht_2026-07-12.md",
+    "audit_scope": {
+      "pdf_file_count": 40,
+      "page_count": 1279,
+      "long_chat_pdf_page_count": 1191,
+      "full_text_extraction_reported": true
+    },
+    "md2s_terminal_result_in_archive": "B1.4N_REPORTED",
+    "b14o_status_in_archive": "NEXT_AUDIT_OPENED_NO_RESULT_PRESENT",
+    "archive_contains_only_pdfs": true,
+    "missing_from_archive": [
+      "python_scripts",
+      "csv_files",
+      "json_status_files",
+      "solver_inputs",
+      "solver_outputs",
+      "residual_logs",
+      "dot_graphs",
+      "sha256_manifests",
+      "docx_latex_sources",
+      "referenced_subpackages",
+      "referenced_zip_packages"
+    ],
+    "referenced_but_not_present": [
+      "MD2S_Gesamtpaket",
+      "MD2S_reproduction_script",
+      "MD2S_SHA256_manifest"
+    ],
+    "primary_solver_transaction_recovered_from_hyper_zip": false,
+    "reproducible_md2s_numerics_from_hyper_zip": false,
+    "scope_limit": "Negative only for the audited Hyper.zip corpus; does not prove nonexistence elsewhere."
+  },
+  "primary_artifact_search": {
+    "classification": "E8_SCOPED_MULTI_SOURCE_RECOVERY_SEARCH",
+    "source": "registry/2026-08-20_MD2S_R1L_PrimaryArtifactSearch_v1.0.json",
+    "searched_channels": [
+      "FILE_LIBRARY_INDEX",
+      "GITHUB_CURRENT_CODE_INDEX",
+      "GITHUB_COMMIT_MESSAGE_INDEX",
+      "HYPERZIP_ARCHIVE_AUDIT",
+      "CHATGPT_EXPORT_REGISTER"
+    ],
+    "primary_historical_solver_artifact_recovered": false,
+    "historical_sha256_manifest_recovered": false,
+    "historical_run_bound_solver_io_recovered": false,
+    "historical_two_sided_interface_export_recovered": false,
+    "transcript_provenance_targets_recovered": true,
+    "transcript_target_count": 2,
+    "private_transcript_identifiers_committed_to_public_repository": false,
+    "message_level_transcript_extraction_completed": false,
+    "global_nonexistence_claim": false
+  },
+  "two_sided_interface": {
+    "classification": "E5_MISSING_SURVIVING_ARCHIVE",
+    "required_historical_fields": [
+      "A_prime_bulk",
+      "A_prime_cap",
+      "Lprime_over_L_bulk",
+      "Lprime_over_L_cap",
+      "oriented_normals_bound_to_run",
+      "solver_artifacts",
+      "derivative_tables",
+      "residual_logs"
+    ],
+    "exact_historical_replay": "NOT_REPRODUCIBLE_FROM_SURVIVING_ARCHIVE"
+  },
+  "remaining_primary_recovery_targets": [
+    "referenced_MD2S_Gesamtpaket",
+    "referenced_reproduction_script",
+    "referenced_SHA256_manifest",
+    "run_bound_solver_input_output_package",
+    "run_bound_one_sided_bulk_cap_boundary_export",
+    "raw_message_level_extraction_of_privately_identified_projectstatus_transcripts"
+  ],
+  "promotion_policy": {
+    "required_for_VERIFIED_SOLVER_OUTPUT": [
+      "primary_output_artifact",
+      "solver_code_identity",
+      "input_binding",
+      "run_identity",
+      "residual_or_convergence_information",
+      "unambiguous_branch_association"
+    ],
+    "archive_scoped_absence_may_be_promoted_to_global_nonexistence": false,
+    "scoped_multi_source_absence_may_be_promoted_to_global_nonexistence": false,
+    "C1_or_rebuild_data_may_fill_historical_missing_fields": false,
+    "chat_transcript_may_replace_primary_solver_artifact": false,
+    "reconstruction_must_use_separate_class": "RECONSTRUCTED"
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}
