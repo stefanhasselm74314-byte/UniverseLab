@@ -3,16 +3,19 @@ import fs from 'node:fs';
 
 const BASE = process.env.UNIVERSELAB_BASE_URL || 'https://stefanhasselm74314-byte.github.io/UniverseLab/';
 const EPS = Number(process.env.UNIVERSELAB_PARITY_EPS || '1e-12');
-const report = { schema_version:'1.0', base_url:BASE, timestamp_utc:new Date().toISOString(), status:'PASS', checks:[], errors:[] };
+const report = { schema_version:'1.1', base_url:BASE, timestamp_utc:new Date().toISOString(), status:'PASS', checks:[], errors:[] };
 
 function push(name, ok, detail={}) {
   report.checks.push({name, ok, ...detail});
   if (!ok) report.status='FAIL';
 }
-function num(s){ const x=Number(String(s).trim()); return Number.isFinite(x)?x:NaN; }
 function close(a,b,eps=EPS){
   if (!Number.isFinite(a)||!Number.isFinite(b)) return false;
   return Math.abs(a-b) <= eps*Math.max(1,Math.abs(a),Math.abs(b));
+}
+function parseLocaleNumber(text){
+  const s=String(text??'').replace(/\s*Gyr/i,'').replace(/%/g,'').replace(/,/g,'.').replace(/[^0-9eE+\-.]/g,'');
+  const x=Number(s); return Number.isFinite(x)?x:NaN;
 }
 async function goto(page,path){
   const url=new URL(path,BASE).href + (path.includes('?')?'&':'?') + 'ul_parity=' + Date.now();
@@ -23,7 +26,7 @@ async function goto(page,path){
       if(r && r.ok()) return r;
       last=new Error(`HTTP ${r?.status()} for ${url}`);
     }catch(e){last=e;}
-    await page.waitForTimeout(2500*(i+1));
+    await page.waitForTimeout(1500*(i+1));
   }
   throw last;
 }
@@ -38,7 +41,7 @@ const browser=await chromium.launch({headless:true});
 try{
   const context=await browser.newContext({viewport:{width:1280,height:900}, locale:'en-US'});
 
-  // 1) Validation Console: independent DE and EN code paths must produce same numbers.
+  // 1) Validation Console: independent DE and EN code paths must agree and their own self-tests must pass.
   {
     const de=await pageErrors(context,'validation-de'); const en=await pageErrors(context,'validation-en');
     await goto(de.page,'validation.html'); await goto(en.page,'validation-en.html');
@@ -53,7 +56,8 @@ try{
     }));
     const A=await snap(de.page), B=await snap(en.page);
     const vals=A.values.length===B.values.length && A.values.every((v,i)=>close(v,B.values[i]));
-    push('validation_numeric_parity', vals && A.failed==='0' && B.failed==='0' && A.states.every(x=>x==='PASS') && B.states.every(x=>x==='PASS'), {de:A,en:B,epsilon:EPS});
+    push('validation_numeric_parity', vals, {de:A.values,en:B.values,epsilon:EPS});
+    push('validation_internal_health', A.failed==='0' && B.failed==='0' && A.states.every(x=>x==='PASS') && B.states.every(x=>x==='PASS'), {de:A,en:B});
     push('validation_no_browser_errors', de.errors.length===0 && en.errors.length===0,{de_errors:de.errors,en_errors:en.errors});
     await de.page.close(); await en.page.close();
   }
@@ -67,30 +71,38 @@ try{
     const href=await sh.page.locator(spec.selector).first().getAttribute('href');
     push(`${spec.id}_single_engine_route`, !!href && href.includes(spec.expected), {href,expected:spec.expected});
     const eng=await pageErrors(context,`${spec.id}-engine`); await goto(eng.page,spec.engine);
-    await eng.page.waitForTimeout(800);
+    await eng.page.waitForTimeout(500);
     const out=await eng.page.evaluate(ids=>Object.fromEntries(ids.map(id=>[id,document.getElementById(id)?.textContent?.trim()])),spec.outputs);
     const present=Object.values(out).every(v=>v && v!=='–');
     push(`${spec.id}_engine_runtime`, present && eng.errors.length===0,{outputs:out,browser_errors:eng.errors});
+    if(spec.id==='observatory'){
+      const age=parseLocaleNumber(out.age);
+      push('observatory_age_sanity', age>10 && age<20,{age_gyr:age,criterion:'10 < t0 < 20 Gyr'});
+    }
+    if(spec.id==='comparison'){
+      const ageL=parseLocaleNumber(out.ageL), ageB=parseLocaleNumber(out.ageB);
+      push('comparison_age_sanity', ageL>10&&ageL<20&&ageB>10&&ageB<20,{age_lcdm_gyr:ageL,age_bridge_gyr:ageB});
+    }
     push(`${spec.id}_shell_no_browser_errors`, sh.errors.length===0,{browser_errors:sh.errors});
     await sh.page.close(); await eng.page.close();
   }
 
-  // 3) Governed runtime mirrors: the rendered EN page must preserve executable input identity/default state.
+  // 3) Governed runtime mirrors: rendered EN must preserve executable input identity/default state.
   for(const id of ['about','journey','emergence','universe3d']){
     const de=await pageErrors(context,`${id}-de`); const en=await pageErrors(context,`${id}-en`);
     await goto(de.page,`${id}.html`); await goto(en.page,`${id}-en.html`);
-    await en.page.waitForTimeout(1500);
+    await en.page.waitForTimeout(1200);
     const collect=async p=>p.evaluate(()=>({
       fields:[...document.querySelectorAll('input,select,textarea')].map((e,i)=>({
         key:e.id||e.name||`${e.tagName.toLowerCase()}-${i}`,
         tag:e.tagName.toLowerCase(), type:e.type||'', value:e.value, min:e.min||'', max:e.max||'', step:e.step||''
       })),
-      scripts:[...document.scripts].map(s=>s.src?new URL(s.src,location.href).pathname:'inline'),
       canvases:document.querySelectorAll('canvas').length
     }));
     const A=await collect(de.page), B=await collect(en.page);
     const sameFields=JSON.stringify(A.fields)===JSON.stringify(B.fields);
     push(`${id}_runtime_mirror_input_parity`, sameFields,{de_fields:A.fields,en_fields:B.fields,de_canvas:A.canvases,en_canvas:B.canvases});
+    push(`${id}_runtime_mirror_canvas_parity`,A.canvases===B.canvases,{de:A.canvases,en:B.canvases});
     push(`${id}_runtime_mirror_no_browser_errors`, de.errors.length===0 && en.errors.length===0,{de_errors:de.errors,en_errors:en.errors});
     await de.page.close(); await en.page.close();
   }
@@ -99,9 +111,9 @@ try{
   {
     const de=await pageErrors(context,'hyperlab-de'); const en=await pageErrors(context,'hyperlab-en');
     await goto(de.page,'hyperlab.html'); await goto(en.page,'hyperlab-en.html');
-    const textA=await de.page.textContent('body'); const textB=await en.page.textContent('body');
-    const okA=/K1-D/.test(textA)&&/NOT RELEASED/.test(textA)&&/K1-E/.test(textA)&&/NOT ADMISSIBLE/.test(textA);
-    const okB=/K1-D/.test(textB)&&/NOT RELEASED/.test(textB)&&/K1-E/.test(textB)&&/NOT ADMISSIBLE/.test(textB);
+    const textA=(await de.page.textContent('body'))||''; const textB=(await en.page.textContent('body'))||'';
+    const okA=/K1-D/i.test(textA)&&/not\s+released/i.test(textA)&&/K1-E/i.test(textA)&&/not\s+admissible/i.test(textA);
+    const okB=/K1-D/i.test(textB)&&/not\s+released/i.test(textB)&&/K1-E/i.test(textB)&&/not\s+admissible/i.test(textB);
     push('hyperlab_gate_semantic_parity',okA&&okB,{de:okA,en:okB});
     push('hyperlab_no_browser_errors',de.errors.length===0&&en.errors.length===0,{de_errors:de.errors,en_errors:en.errors});
     await de.page.close(); await en.page.close();
