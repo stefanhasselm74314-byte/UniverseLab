@@ -1,0 +1,41 @@
+name: UniverseLab production smoke audit
+
+on:
+  pull_request:
+    paths:
+      - '2026-08-20_UniverseLab_MultilingualRouteRegistry_v1.1.json'
+      - 'sitemap.xml'
+      - 'assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.1.js'
+      - '*-en.html'
+      - 'tools/2026-08-20_UniverseLab_ProductionSmokeAudit_v1.0.py'
+      - '.github/workflows/2026-08-20_UniverseLab_ProductionSmokeAudit_v1.0.yml'
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-pages-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile audit
+        run: python -m py_compile tools/2026-08-20_UniverseLab_ProductionSmokeAudit_v1.0.py
+      - name: Wait for GitHub Pages propagation on main push
+        if: github.event_name == 'push'
+        run: sleep 45
+      - name: Audit live GitHub Pages routes
+        run: python tools/2026-08-20_UniverseLab_ProductionSmokeAudit_v1.0.py
+      - name: Upload live audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universelab-production-smoke-report
+          path: production-smoke-report.json
+          if-no-files-found: warn
