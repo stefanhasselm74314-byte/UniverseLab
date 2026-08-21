@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,9 +15,20 @@ LOCKED = {
     'physical_evidence_effect':'NONE',
     'physical_gate_effect':'NONE',
 }
+UUID_RE = re.compile(r'\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b')
+
+def walk_keys(obj):
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            yield str(key)
+            yield from walk_keys(value)
+    elif isinstance(obj, list):
+        for value in obj:
+            yield from walk_keys(value)
 
 def main():
-    data=json.loads(REG.read_text(encoding='utf-8'))
+    reg_text=REG.read_text(encoding='utf-8')
+    data=json.loads(reg_text)
     assert data['schema']=='universelab.md2s.r1l.kontoanalyse-recovery-pivot.v1'
     assert data['version']=='1.0.0'
     assert data['status']=='HIGH_PRIORITY_RECOVERY_PIVOT_IDENTIFIED'
@@ -35,13 +47,19 @@ def main():
     assert data['evidence_hygiene']['chat_transcript_alone_may_establish_verified_solver_output'] is False
     assert data['evidence_hygiene']['recovery_package_checksum_alone_proves_package_contents'] is False
     assert data['governance']==LOCKED
+
     text=REP.read_text(encoding='utf-8')
     assert 'No private conversation identifier is stored' in text
     assert 'verified historical transcript report' in text
-    forbidden=['conversation_id','Conversation-ID','6a64a293']
-    for marker in forbidden:
-        assert marker not in text
-        assert marker not in REG.read_text(encoding='utf-8')
+
+    # Privacy guard: no direct conversation-ID field and no UUID-shaped identifier
+    # may be embedded in these public provenance artifacts. Descriptive boolean
+    # fields such as private_conversation_identifier_committed are allowed.
+    normalized_keys={k.lower().replace('-', '_') for k in walk_keys(data)}
+    assert 'conversation_id' not in normalized_keys
+    assert UUID_RE.search(reg_text) is None
+    assert UUID_RE.search(text) is None
+
     print('PASS_MD2S_R1L_KONTOANALYSE_RECOVERY_PIVOT')
 
 if __name__=='__main__':
