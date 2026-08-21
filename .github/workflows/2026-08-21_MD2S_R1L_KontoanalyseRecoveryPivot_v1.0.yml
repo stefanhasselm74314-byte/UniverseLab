@@ -1,0 +1,30 @@
+name: MD2S R1-L Kontoanalyse recovery pivot v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-08-21_MD2S_R1L_KontoanalyseRecoveryPivot_v1.0.json'
+      - 'recovery/2026-08-21_MD2S_R1L_KontoanalyseRecoveryPivot_v1.0.md'
+      - 'tests/2026-08-21_test_MD2S_R1L_KontoanalyseRecoveryPivot_v1.0.py'
+      - '.github/workflows/2026-08-21_MD2S_R1L_KontoanalyseRecoveryPivot_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-08-21_MD2S_R1L_KontoanalyseRecoveryPivot_v1.0.json'
+      - 'recovery/2026-08-21_MD2S_R1L_KontoanalyseRecoveryPivot_v1.0.md'
+      - 'tests/2026-08-21_test_MD2S_R1L_KontoanalyseRecoveryPivot_v1.0.py'
+      - '.github/workflows/2026-08-21_MD2S_R1L_KontoanalyseRecoveryPivot_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate privacy-safe recovery pivot
+        run: python tests/2026-08-21_test_MD2S_R1L_KontoanalyseRecoveryPivot_v1.0.py
