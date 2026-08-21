@@ -1,0 +1,47 @@
+{
+  "schema": "ulsh01.background3c5.response-run-config.v1",
+  "status": "TEMPLATE_NOT_AUTHORIZED",
+  "evidence_mode": "SOFTWARE_QA_ONLY",
+  "branch": {
+    "winding_n": 1,
+    "flux_N": 1
+  },
+  "baseline_controls": {
+    "Lambda6_over_Lambda_ref": 1.0,
+    "Lambda_layer_over_Lambda_ref": 0.0,
+    "mSigma2_over_mref2": -1.0,
+    "gSigma": 1.0,
+    "lambdaSigma": 1.0
+  },
+  "perturbation_scales": {
+    "Lambda6_over_Lambda_ref": 1.0,
+    "Lambda_layer_over_Lambda_ref": 1.0,
+    "mSigma2_over_mref2": 1.0,
+    "gSigma": 1.0,
+    "lambdaSigma": 1.0
+  },
+  "relative_steps": [0.01, 0.005, 0.0025],
+  "require_solver_tolerance_refinement": true,
+  "solver_command": [
+    "python",
+    "REPLACE_WITH_RATIFIED_BACKGROUND3C5_KERNEL.py",
+    "{input}",
+    "{output}"
+  ],
+  "timeout_seconds": 3600,
+  "solver_settings": {
+    "nominal": {
+      "relative_tolerance": 1e-08,
+      "max_nodes": 20000
+    },
+    "refined": {
+      "relative_tolerance": 1e-10,
+      "max_nodes": 50000
+    }
+  },
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "authorization_required_before_physical_run": true
+  }
+}

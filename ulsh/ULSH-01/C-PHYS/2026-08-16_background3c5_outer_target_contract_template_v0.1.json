@@ -1,0 +1,55 @@
+{
+  "schema": "ulsh01.background3c5.outer-target-contract.v0.1",
+  "status": "UNSET_FAIL_CLOSED",
+  "physical_execution_authorized": false,
+  "outer_mode": "UNSET",
+  "allowed_outer_modes": [
+    "SMOOTH_BULK_HANDOFF",
+    "CAP_OR_BRANE_JUNCTION_HANDOFF"
+  ],
+  "outer_location_rule": {
+    "type": "UNSET",
+    "value_or_derivation": "UNSET",
+    "provenance": "UNSET"
+  },
+  "target_family": {
+    "identifier": "UNSET",
+    "version": "UNSET",
+    "provenance": "UNSET"
+  },
+  "continuous_mismatch_functions": [
+    {"id": "M1", "definition": "UNSET", "target": "UNSET"},
+    {"id": "M2", "definition": "UNSET", "target": "UNSET"},
+    {"id": "M3", "definition": "UNSET", "target": "UNSET"}
+  ],
+  "promoted_eigenparameters": [],
+  "layer_decay": {
+    "mode": "STABLE_MANIFOLD",
+    "implementation": "UNSET",
+    "double_dirichlet_s_and_sx_at_finite_boundary": "FORBIDDEN_AS_DEFAULT"
+  },
+  "gauge_flux_endpoint": {
+    "patch_convention": "UNSET",
+    "flux_quantization_equation": "UNSET",
+    "fixed_flux_sector": "N_F",
+    "charge_lattice_consistency": true
+  },
+  "constraint_policy": {
+    "rr_constraint": "MONITOR_PROPAGATED_NOT_INDEPENDENT_BC",
+    "source": "G4 constraint propagation closure v0.1"
+  },
+  "branch_policy": {
+    "fixed": ["n", "N_F", "m_layer"],
+    "conical_rescue_mode": "FORBIDDEN",
+    "profile_node_class_drift": "FORBIDDEN"
+  },
+  "authorization_requirements": {
+    "outer_mode_set": false,
+    "outer_location_rule_set": false,
+    "target_family_set": false,
+    "three_independent_mismatches_set": false,
+    "gauge_flux_endpoint_set": false,
+    "all_required_before_solver_binding": true
+  },
+  "evidence_effect": "NONE_CONTRACT_TEMPLATE"
+}

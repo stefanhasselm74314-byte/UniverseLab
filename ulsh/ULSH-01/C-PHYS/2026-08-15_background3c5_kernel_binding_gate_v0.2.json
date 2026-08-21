@@ -1,0 +1,81 @@
+{
+  "schema": "universelab.ulsh01.cphys.background3c5-kernel-binding-gate.v2",
+  "version": "0.2.0",
+  "date": "2026-08-15",
+  "supersedes": "2026-08-15_background3c5_kernel_binding_gate_v0.1.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "active_block": "HZT-M0-S6-C-PHYS-ULSH-01",
+  "status": "CANDIDATE_IMPLEMENTATIONS_LOCATED__NO_CURRENT_RATIFIED_PARENT_EQUIVALENT_FINITE_THICKNESS_KERNEL",
+  "physical_evidence_effect": "NONE",
+  "canonical_main": {
+    "current_bindable_background3c5_kernel_found": false,
+    "physical_execution_authorized": false
+  },
+  "historical_candidates": {
+    "located": true,
+    "source_scope": "UNMERGED_AGENT_BACKGROUND_3C_BRANCH_LINEAGE",
+    "direct_binding_allowed": false,
+    "own_governance_physical_execution": "NOT_AUTHORIZED",
+    "representative_primary_kernel": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py",
+    "representative_real_backend_control": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.3.py",
+    "c3c9_authorization": "DENIED",
+    "c3c10_control": "PASS_AF0_SOFTWARE_ANALYTIC_CONTROL_NO_TARGET_SOLVE"
+  },
+  "operator_identity": {
+    "historical_field_order": ["u_A", "u_ell", "u_varphi", "u_g"],
+    "historical_formulation": "TWO_REGION_THIN_OR_JUNCTION_LAYER_COLLOCATION_BVP",
+    "current_target_fields": ["A", "B", "C", "phi", "s", "Q"],
+    "current_formulation": "EXPLICIT_FINITE_THICKNESS_NONLINEAR_BVP",
+    "direct_equivalence": false,
+    "gate": "FAIL_FOR_HISTORICAL_DIRECT_BINDING",
+    "interpretation": "NUMERICAL_ANCESTRY_REUSABLE_OPERATOR_IDENTITY_NOT_ESTABLISHED"
+  },
+  "normalization": {
+    "phi_dimension": "M^2",
+    "varphi": "phi/M6^2",
+    "Z_phi": 1,
+    "Z_F": "exp(-2*a_F*varphi)",
+    "q_ref": "q_hat/M6",
+    "gSigma": "m_layer*q_hat/M6",
+    "independent_continuous_gSigma_forbidden": true
+  },
+  "fixed_discrete_branch_minimum": ["n", "N_F", "m_layer"],
+  "required_equation_blocks": [
+    "MAXWELL_Q_WITH_LOCALIZED_FINITE_THICKNESS_CURRENT",
+    "SCALAR_DIVERGENCE_PHI",
+    "FINITE_THICKNESS_MATTER_S_CHI",
+    "EINSTEIN_U_V_W_EVOLUTION",
+    "HAMILTONIAN_RADIAL_CONSTRAINT",
+    "FROZEN_TOTAL_POTENTIAL_AND_STRESS_DECOMPOSITION"
+  ],
+  "authorization_gates": {
+    "G1_symbolic_residual_realization": "OPEN",
+    "G2_center_expansion_closure": "OPEN",
+    "G3_outer_match_closure": "OPEN",
+    "G4_constraint_preservation": "OPEN",
+    "G5_operator_identity": "FAIL_FOR_HISTORICAL_DIRECT_BINDING",
+    "G6_H4R4B_and_control_regression": "OPEN",
+    "G7_solver_convergence_certificate": "OPEN",
+    "G8_provenance_firewall": "PASS_CONTRACT_LEVEL"
+  },
+  "reuse_policy": {
+    "chebyshev_collocation": "REUSE_CANDIDATE",
+    "complex_step_jacobian": "REUSE_CANDIDATE",
+    "newton_infrastructure": "REUSE_CANDIDATE",
+    "independent_backend_architecture": "REUSE_CANDIDATE",
+    "transaction_and_process_isolation": "REUSE_CANDIDATE",
+    "result_schema_and_firewalls": "REUSE_CANDIDATE",
+    "historical_thin_layer_operator": "DO_NOT_DIRECT_BIND",
+    "manufactured_backend": "QA_ONLY",
+    "historical_AF0_control": "REGRESSION_ONLY",
+    "H4R4B": "REGRESSION_ONLY"
+  },
+  "response_rank": {
+    "rank_B_stress": "PASS_RANK_3_STRUCTURAL",
+    "rank_S": "PASS_RANK_4_STRUCTURAL",
+    "rank_R": "OPEN_NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_action": "IMPLEMENT_CURRENT_FINITE_THICKNESS_RESIDUAL_OPERATOR_USING_ONLY_OPERATOR_AGNOSTIC_HISTORICAL_NUMERICAL_INFRASTRUCTURE_THEN_REAUDIT_G1_TO_G8"
+}
