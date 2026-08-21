@@ -1,0 +1,85 @@
+{
+  "schema": "universelab.md2s.r1l.kontoanalyse-recovery-pivot.v1",
+  "version": "1.0.0",
+  "date": "2026-08-21",
+  "status": "HIGH_PRIORITY_RECOVERY_PIVOT_IDENTIFIED",
+  "track": "MD2S-R1-L",
+  "purpose": "Record the privacy-safe recovery pivot from broad historical Hyperzeit transcript search to the account/archive analysis chat in which the later MD2S recovery work was performed.",
+  "source_evidence": {
+    "historical_snapshot": {
+      "title": "Kontoanalyse ChatGPT",
+      "source_class": "OFFICIAL_CHATGPT_EXPORT_2026_07_25",
+      "created_date": "2026-07-25",
+      "snapshot_user_messages": 3,
+      "snapshot_assistant_messages": 9,
+      "snapshot_mapping_nodes": 31,
+      "snapshot_last_modified_date": "2026-07-25"
+    },
+    "later_export_snapshot": {
+      "title": "Kontoanalyse ChatGPT",
+      "source_class": "LATER_OFFICIAL_CHATGPT_EXPORT_INDEX",
+      "created_date": "2026-07-25",
+      "last_modified_date": "2026-08-18",
+      "user_messages": 15,
+      "assistant_messages": 29,
+      "mapping_nodes": 109,
+      "same_chat_identity_verified_in_private_register": true,
+      "private_conversation_identifier_committed": false
+    },
+    "recovery_package_integrity_record": {
+      "file_name": "MD2S_Randdaten_Benchmark_RECOVERY_2026-08-18.zip",
+      "size_bytes": 14884,
+      "zip_entries": 12,
+      "integrity_test": "PASS",
+      "sha256": "dbee345414409f29f6fee5cc161807fd3f8a2d4b337460d3cf9bb8a307c3dff9",
+      "package_bytes_recovered_in_current_file_search": false
+    }
+  },
+  "inference_boundary": {
+    "supported": [
+      "The same account/archive analysis chat continued beyond the July 25 snapshot into August 18.",
+      "The later export index shows substantial additional message and mapping content in that chat.",
+      "The MD2S recovery ZIP integrity record was created on August 18 and is therefore temporally compatible with that continued chat workflow.",
+      "The account/archive analysis chat is now a higher-priority recovery target than another broad repository search."
+    ],
+    "not_yet_supported": [
+      "The raw message-level transcript directly proves every B1.4K/B1.4L value.",
+      "The recovery ZIP bytes have been independently re-opened in the current search interface.",
+      "Any historical MD2S solver output has been recovered.",
+      "The missing historical two-sided interface export has been recovered."
+    ]
+  },
+  "next_action": {
+    "priority": "HIGHEST_CURRENT_FORENSIC_PRIORITY",
+    "action": "Recover the message-level continuation of Kontoanalyse ChatGPT from the later official export and isolate the August 18 MD2S-R1-L search/recovery sequence. Extract exact generated filenames, package-entry names, quoted B1.4K/B1.4L result messages, attachment references, hashes, and any output paths without committing private conversation identifiers.",
+    "search_terms": [
+      "MD2S-R1-L",
+      "MD2S_Randdaten_Benchmark_RECOVERY_2026-08-18.zip",
+      "B1.4K",
+      "B1.4L",
+      "vollständige Randdaten und Benchmarkdefinitionen",
+      "Gesamtpaket",
+      "Reproduktionsskript",
+      "SHA-256",
+      "A_prime_bulk",
+      "A_prime_cap",
+      "Lprime_over_L_bulk",
+      "Lprime_over_L_cap"
+    ]
+  },
+  "evidence_hygiene": {
+    "chat_transcript_may_upgrade_report_provenance": true,
+    "chat_transcript_alone_may_establish_verified_solver_output": false,
+    "later_C1_or_rebuild_data_may_fill_historical_missing_fields": false,
+    "missing_historical_values_may_be_interpolated_as_original": false,
+    "recovery_package_checksum_alone_proves_package_contents": false
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}
