@@ -1,0 +1,30 @@
+name: MD2S R1-L forensic evidence v1.4
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-08-25_MD2S_R1L_ForensicEvidenceRegister_v1.4.json'
+      - 'recovery/2026-08-25_MD2S_R1L_RecoveryAudit_v2.0.md'
+      - 'tests/2026-08-25_test_MD2S_R1L_ForensicEvidenceRegister_v1.4.py'
+      - '.github/workflows/2026-08-25_MD2S_R1L_ForensicEvidenceRegister_v1.4.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-08-25_MD2S_R1L_ForensicEvidenceRegister_v1.4.json'
+      - 'recovery/2026-08-25_MD2S_R1L_RecoveryAudit_v2.0.md'
+      - 'tests/2026-08-25_test_MD2S_R1L_ForensicEvidenceRegister_v1.4.py'
+      - '.github/workflows/2026-08-25_MD2S_R1L_ForensicEvidenceRegister_v1.4.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate forensic register and recovery firewall
+        run: python tests/2026-08-25_test_MD2S_R1L_ForensicEvidenceRegister_v1.4.py
