@@ -1,0 +1,79 @@
+{
+  "schema": "universelab.md2s.r1l.source-identical-replay-closure.v1",
+  "version": "1.0.0",
+  "date": "2026-08-26",
+  "status": "TARGETS_NARROWED_REPLAY_STILL_BLOCKED",
+  "track": "MD2S-R1-L",
+  "current_recovery_state": {
+    "B1.4F": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+    "B1.4G": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+    "B1.4K": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID_PLUS_NUMERIC_REPRODUCTION_PASS",
+    "B1.4L": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID_PLUS_NUMERIC_REPRODUCTION_PASS",
+    "source_identical_two_junction_replay": "BLOCKED"
+  },
+  "newly_resolved_exact_prerequisite_package_names": {
+    "B1.4E": {
+      "package": "HZT_MD2S_B1_4E_SMOOTH_TARGET_REPAIR_v0_1_PACKAGE.zip",
+      "historical_chat_reference_recovered": true,
+      "binary_currently_recovered": false,
+      "priority": "P0"
+    },
+    "B1.4H": {
+      "package": "HZT_MD2S_B1_4H_RADION_STABILIZED_DESIGN_v0_1_PACKAGE.zip",
+      "historical_chat_reference_recovered": true,
+      "binary_currently_recovered": false,
+      "priority": "P0"
+    }
+  },
+  "remaining_source_identical_requirements": [
+    "historical source-identical 6D action/potential/coupling set including B1.4E/H inputs or source-identical equivalents",
+    "A_prime_bulk",
+    "A_prime_cap",
+    "Lprime_over_L_bulk",
+    "Lprime_over_L_cap",
+    "historically bound oriented normals",
+    "full-precision two-sided interface/profile derivative tables",
+    "original two-junction solver residual logs",
+    "complete generation solver tolerances/configuration for prerequisite runs"
+  ],
+  "recovery_priority": [
+    {
+      "rank": 1,
+      "target": "HZT_MD2S_B1_4E_SMOOTH_TARGET_REPAIR_v0_1_PACKAGE.zip",
+      "reason": "Exact historical prerequisite package name recovered; likely closes part of the source-identical background/action chain."
+    },
+    {
+      "rank": 2,
+      "target": "HZT_MD2S_B1_4H_RADION_STABILIZED_DESIGN_v0_1_PACKAGE.zip",
+      "reason": "Exact historical prerequisite package name recovered; likely closes the boundary-stabilizer input chain used before K/L."
+    },
+    {
+      "rank": 3,
+      "target": "run-bound two-sided Bulk/Cap interface export",
+      "required_fields": ["A_prime_bulk", "A_prime_cap", "Lprime_over_L_bulk", "Lprime_over_L_cap", "oriented_normals"]
+    },
+    {
+      "rank": 4,
+      "target": "original two-junction residual/derivative/configuration bundle"
+    }
+  ],
+  "search_scope_result": {
+    "file_library_exact_package_name_search": "REFERENCE_FOUND_BINARY_NOT_SURFACED",
+    "github_current_code_search": "NO_MATCH_FOR_B1_4E_OR_B1_4H_PACKAGE_NAMES",
+    "global_nonexistence_claim": false
+  },
+  "promotion_firewall": {
+    "chat_reference_is_not_binary_recovery": true,
+    "later_rebuild_or_C1_data_may_fill_historical_missing_fields": false,
+    "interpolation_may_be_labeled_historical_original": false,
+    "source_identical_replay_required_before_legacy_track_global_numeric_confirmation": true
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}
