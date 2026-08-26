@@ -1,0 +1,34 @@
+name: ULSH-01 WP2 WP3 reconciliation QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-26_ULSH01_WP2_WP3_ReconciliationManifest_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-26_test_ULSH01_WP2_WP3_ReconciliationManifest_v0.1.py'
+      - 'ulsh/ULSH-01/C-PHYS/*Background3C5*'
+      - 'ulsh/ULSH-01/C-PHYS/*background3c5*'
+      - 'ulsh/ULSH-01/C-PHYS/*physical_response*'
+      - '.github/workflows/*Background3C5*'
+      - '.github/workflows/*background3c5*'
+      - '.github/workflows/*cphys_response*'
+      - '.github/workflows/2026-08-26_ULSH01_WP2_WP3_Reconciliation_QA_v0.1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reconciliation-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate JSON
+        run: python -m json.tool ulsh/ULSH-01/C-PHYS/2026-08-26_ULSH01_WP2_WP3_ReconciliationManifest_v0.1.json >/dev/null
+      - name: Compile QA
+        run: python -m py_compile ulsh/ULSH-01/C-PHYS/2026-08-26_test_ULSH01_WP2_WP3_ReconciliationManifest_v0.1.py
+      - name: Run fail-closed reconciliation QA
+        run: python ulsh/ULSH-01/C-PHYS/2026-08-26_test_ULSH01_WP2_WP3_ReconciliationManifest_v0.1.py
