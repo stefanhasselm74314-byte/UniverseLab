@@ -7,20 +7,37 @@
     "target_contract_path": "ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json",
     "target_digest": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
     "target_shape": "TWO_REGION_COMMON_CAP_8x8",
-    "field_content": ["g_AB", "phi", "A_A", "sigma_cap"],
+    "field_content": [
+      "g_AB",
+      "phi",
+      "A_A",
+      "sigma_cap"
+    ],
     "continuous_unknown_order": [
-      "varphi_N_0", "q_N", "A_S_0", "varphi_S_0",
-      "q_S", "rho_N", "rho_S", "k4"
+      "varphi_N_0",
+      "q_N",
+      "A_S_0",
+      "varphi_S_0",
+      "q_S",
+      "rho_N",
+      "rho_S",
+      "k4"
     ],
     "boundary_residual_order": [
-      "R_A", "R_ell", "R_varphi", "R_patch",
-      "R_4d", "R_chi", "R_scalar", "R_gauge_local"
+      "R_A",
+      "R_ell",
+      "R_varphi",
+      "R_patch",
+      "R_4d",
+      "R_chi",
+      "R_scalar",
+      "R_gauge_local"
     ]
   },
   "wp2_patch_binding": {
     "status": "REPRESENTATION_BOUND_NO_TARGET_SEMANTICS_CHANGE",
     "representation": "a_chi_Sigma := a_chi_S(cap)",
-    "patch_residual": "R_patch = a_chi_N(cap)-a_chi_S(cap)-N_F/q_hat",
+    "patch_residual": "a_chi_N(cap)-a_chi_S(cap)-N_F/q_hat=0",
     "cap_combination": "d_chi = N_sigma-m_sigma*q_hat*a_chi_Sigma",
     "requirements": [
       "R_patch is counted exactly once",
@@ -33,43 +50,61 @@
   "asset_classification_rules": [
     {
       "glob": "ulsh/ULSH-01/C-PHYS/*Background3C5*",
-      "work_packages": ["ULSH-01-WP2", "ULSH-01-WP3"],
+      "work_packages": [
+        "ULSH-01-WP2",
+        "ULSH-01-WP3"
+      ],
       "classification": "DEVELOPMENT_ONLY",
       "reason": "Background3C5 finite-thickness and augmented 10x10 artifacts are not the frozen M1/C1 target."
     },
     {
       "glob": "ulsh/ULSH-01/C-PHYS/*background3c5*",
-      "work_packages": ["ULSH-01-WP2", "ULSH-01-WP3"],
+      "work_packages": [
+        "ULSH-01-WP2",
+        "ULSH-01-WP3"
+      ],
       "classification": "DEVELOPMENT_ONLY",
       "reason": "Background3C5 runners, contracts, tests and dry-run assets remain software-development artifacts."
     },
     {
       "glob": "ulsh/ULSH-01/C-PHYS/*physical_response*",
-      "work_packages": ["ULSH-01-WP2", "ULSH-01-WP3"],
+      "work_packages": [
+        "ULSH-01-WP2",
+        "ULSH-01-WP3"
+      ],
       "classification": "DEVELOPMENT_ONLY",
       "reason": "Response templates and auditors are not bound to an established physical 8x8 backend."
     },
     {
       "glob": "ulsh/ULSH-01/C-PHYS/*Physical_Response*",
-      "work_packages": ["ULSH-01-WP2", "ULSH-01-WP3"],
+      "work_packages": [
+        "ULSH-01-WP2",
+        "ULSH-01-WP3"
+      ],
       "classification": "DEVELOPMENT_ONLY",
       "reason": "Response-rank documentation cannot create physical evidence without an authorized backend."
     },
     {
       "glob": ".github/workflows/*Background3C5*",
-      "work_packages": ["ULSH-01-WP3"],
+      "work_packages": [
+        "ULSH-01-WP3"
+      ],
       "classification": "DEVELOPMENT_ONLY",
       "reason": "Green workflows certify software QA only."
     },
     {
       "glob": ".github/workflows/*background3c5*",
-      "work_packages": ["ULSH-01-WP3"],
+      "work_packages": [
+        "ULSH-01-WP3"
+      ],
       "classification": "DEVELOPMENT_ONLY",
       "reason": "Green workflows certify software QA only."
     },
     {
       "glob": ".github/workflows/*cphys_response*",
-      "work_packages": ["ULSH-01-WP3"],
+      "work_packages": [
+        "ULSH-01-WP3"
+      ],
       "classification": "DEVELOPMENT_ONLY",
       "reason": "The smoke workflow is not physical-target evidence."
     }
@@ -96,8 +131,15 @@
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
     "physical_evidence_effect": "NONE",
-    "forbidden_fields_in_canonical_8x8_backend": ["Sigma_FT", "c_N", "c_S"],
-    "forbidden_target_shapes": ["10x10", "AUGMENTED_FINITE_THICKNESS"]
+    "forbidden_fields_in_canonical_8x8_backend": [
+      "Sigma_FT",
+      "c_N",
+      "c_S"
+    ],
+    "forbidden_target_shapes": [
+      "10x10",
+      "AUGMENTED_FINITE_THICKNESS"
+    ]
   },
   "next_safe_action": "IMPLEMENT_CANONICAL_8x8_BACKEND_INTERFACE_AND_NONEXECUTING_SCHEMA_TESTS_THEN_REQUEST_SEPARATE_WP4_AUTHORIZATION_REVIEW"
 }
