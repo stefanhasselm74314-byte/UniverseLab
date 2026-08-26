@@ -38,7 +38,7 @@
     "status": "REPRESENTATION_BOUND_NO_TARGET_SEMANTICS_CHANGE",
     "representation": "a_chi_Sigma := a_chi_S(cap)",
     "patch_residual": "a_chi_N(cap)-a_chi_S(cap)-N_F/q_hat=0",
-    "cap_combination": "d_chi = N_sigma-m_sigma*q_hat*a_chi_Sigma",
+    "cap_combination": "N_sigma-m_sigma*q_hat*a_chi_Sigma",
     "requirements": [
       "R_patch is counted exactly once",
       "R_flux is not added as an independent residual",
