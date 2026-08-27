@@ -32,6 +32,7 @@
     "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json",
     "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json",
     "ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py",
+    "tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py",
     "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py",
     "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py",
     "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py",
@@ -74,5 +75,5 @@
     "K1-E": "NOT_ADMISSIBLE",
     "physical_evidence_effect": "NONE"
   },
-  "next_safe_action": "IMPLEMENT_AND_QA_PACKAGE_MANIFEST_GRANT_VALIDATION_AND_ATOMIC_CONTROL_RESERVATION_WITHOUT_REAL_BACKEND_IMPORT"
+  "next_safe_action": "RUN_PACKAGE_MANIFEST_GRANT_BINDING_AND_ATOMIC_CONTROL_RESERVATION_QA_WITHOUT_REAL_BACKEND_IMPORT"
 }
