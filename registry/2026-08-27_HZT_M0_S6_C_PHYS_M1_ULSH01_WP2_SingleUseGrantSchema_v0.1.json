@@ -1,0 +1,49 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-single-use-grant.v0.1",
+  "date": "2026-08-27",
+  "classification": "NONOPERATIVE_GRANT_SCHEMA_TEMPLATE_NO_AUTHORIZATION",
+  "status": "TEMPLATE_ONLY_NO_GRANT_CREATED",
+  "grant": {
+    "grant_id": null,
+    "authorization_decision_id": null,
+    "nonce": null,
+    "not_before_utc": null,
+    "expires_at_utc": null,
+    "single_use": true,
+    "scope": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R2_TARGET_ONLY",
+    "authorized": false,
+    "repository_commit_sha": null,
+    "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "run_payload_sha256": "990cb9902aabf740db34ce03d69d845588a4b0c6337f9e48633829bbd6a7cea7",
+    "release_package_manifest_sha256": null,
+    "backend_rebind_contract_sha256": null,
+    "resource_policy_sha256": null,
+    "result_schema_sha256": null,
+    "backend_interface_contract_sha256": null,
+    "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f",
+    "primary_source_sha256": "8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92",
+    "primary_base_source_sha256": "830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599",
+    "independent_source_sha256": "a8afd7b548366acf9f5ac72e91bcf07372913cc21a8790d86d0a989a89f03e7b",
+    "target_a_F": "1/4",
+    "control_override_allowed": false,
+    "automatic_authorization": false
+  },
+  "consumption_protocol": {
+    "reservation_must_occur_before_backend_import": true,
+    "reservation_creation": "ATOMIC_CREATE_IF_ABSENT",
+    "reservation_states": ["RESERVED", "SUCCEEDED", "FAILED", "TIMED_OUT", "SIGNALED", "CRASH_RECOVERY_LOCKED"],
+    "replay_after_any_reservation_state": "REJECT",
+    "nonce_reuse": "REJECT",
+    "grant_id_reuse": "REJECT",
+    "expiration_checked_before_reservation": true,
+    "crash_after_reservation": "GRANT_REMAINS_CONSUMED_AND_MUST_NOT_REPLAY"
+  },
+  "authorization_firewall": {
+    "this_file_is_an_operative_grant": false,
+    "physical_backend_import_allowed": false,
+    "cp01r2_target_solve_allowed": false,
+    "physical_result_artifact_allowed": false,
+    "physical_evidence_effect": "NONE"
+  },
+  "required_future_authorization": "SEPARATE_VERSIONED_AUTHORIZATION_DECISION_AND_FILLED_SINGLE_USE_GRANT_BOUND_TO_EXACT_RELEASE_PACKAGE_AND_REPOSITORY_COMMIT"
+}
