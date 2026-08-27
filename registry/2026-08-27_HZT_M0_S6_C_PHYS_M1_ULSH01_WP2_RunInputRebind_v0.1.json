@@ -1,0 +1,72 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-run-input-rebind.v0.1",
+  "date": "2026-08-27",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-01-WP2",
+  "classification": "EXACT_TARGET_DIGEST_RUN_INPUT_REBIND_NO_SOLVER_EXECUTION",
+  "status": "RUN_INPUT_FROZEN_CP01R2_EXECUTION_NOT_AUTHORIZED",
+  "supersedes_for_future_target_execution": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json",
+  "rebind_reason": "CP01R1 was frozen but never executed. The 2026-08-21 canonical M1/C1 8x8 target freeze is a new method/target contract, so the immutable-run rule requires a new run ID while preserving the compatible control point, topology, alpha_H and deterministic seed set.",
+  "compatibility_basis": {
+    "historical_cp01r1_never_executed": true,
+    "same_six_m1_parameters": true,
+    "same_discrete_sector": true,
+    "same_two_region_common_cap_topology": true,
+    "same_8N_plus_8_assembly": true,
+    "same_seed_set": true,
+    "same_alpha_H": true,
+    "historical_run_payload_reused_as_identity": false
+  },
+  "frozen_run_payload": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R2",
+    "classification": "TARGET_DIGEST_REBIND_FROM_NEVER_EXECUTED_CP01R1",
+    "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "backend_interface_contract": "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json",
+    "result_schema": "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json",
+    "model_parameters_ordered": {
+      "Lambda_hat": "1",
+      "mhat_phi_sq": "1",
+      "a_F": "1/4",
+      "lambda_hat": "1",
+      "z_sigma_hat": "1",
+      "q_hat": "1"
+    },
+    "topological_sector_ordered": {
+      "N_F": 1,
+      "N_sigma": 1,
+      "m_sigma": 1
+    },
+    "alpha_H": "1/2",
+    "seed_set_id": "M1-BG3B-CP01-SEEDS-01",
+    "seed_spec_path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json",
+    "seed_spec_sha256": "b6e4319cc29736799a0b46320002e51cd17b70b724a6b4c6e86567a316996161",
+    "dependency_lock_path": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt",
+    "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f",
+    "regional_node_counts": [24, 32, 48, 64, 96],
+    "seed_order": [0, 1, 2, 3, 4, 5, 6],
+    "continuous_unknown_order": ["varphi_N_0", "q_N", "A_S_0", "varphi_S_0", "q_S", "rho_N", "rho_S", "k4"],
+    "boundary_residual_order": ["R_A", "R_ell", "R_varphi", "R_patch", "R_4d", "R_chi", "R_scalar", "R_gauge_local"],
+    "constraint_channel": "C_rr_QA_ONLY",
+    "patch_binding": "a_chi_Sigma := a_chi_S(cap)",
+    "physical_value_M6_assigned": false
+  },
+  "frozen_run_payload_sha256": "990cb9902aabf740db34ce03d69d845588a4b0c6337f9e48633829bbd6a7cea7",
+  "immutability_rules": {
+    "same_run_id_may_not_be_reused_after_method_or_target_contract_change": true,
+    "parameter_change_requires_new_run_id": true,
+    "topology_change_requires_new_run_id": true,
+    "seed_change_requires_new_seed_id_and_hash": true,
+    "dependency_change_requires_new_lock_hash_and_review": true,
+    "target_digest_change_requires_new_run_id": true
+  },
+  "execution_firewall": {
+    "solver_authorized": false,
+    "physical_backend_import_allowed": false,
+    "target_solve_allowed": false,
+    "result_artifact_creation_allowed": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_safe_action": "BIND_CP01R2_TO_NONOPERATIVE_TARGET_TRANSACTION_AND_SINGLE_USE_GRANT_SCHEMA_WITH_SYNTHETIC_CONTROL_TESTS_ONLY"
+}
