@@ -1,5 +1,5 @@
-/* UniverseLab Site Print & Export Bootstrap v1.0.7
- * Loads the floating page utility, document-link router, site language switcher and
+/* UniverseLab Site Print & Export Bootstrap v1.0.8
+ * Loads the floating page utility, document/source link router, site language switcher and
  * registers the root-scope HTML injector. Presentation/navigation layer only;
  * no scientific status effect.
  */
@@ -9,7 +9,7 @@
   if(qs.get('include-iframe')==='1')return;
   const ROOT='/UniverseLab/';
   const TOOL=ROOT+'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js?v=1.0.6';
-  const DOCUMENT_ROUTER=ROOT+'assets/2026-08-27_UniverseLab_DocumentLinkRouter_v1.0.js?v=1.0.0';
+  const DOCUMENT_ROUTER=ROOT+'assets/2026-08-27_UniverseLab_DocumentLinkRouter_v1.0.js?v=1.1.0';
   const LANGUAGE=ROOT+'assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.1.js?v=1.1.1';
   const SW=ROOT+'2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js';
 
