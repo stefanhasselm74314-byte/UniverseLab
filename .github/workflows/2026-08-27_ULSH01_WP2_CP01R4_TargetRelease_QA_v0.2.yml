@@ -1,0 +1,97 @@
+name: ULSH-01 WP2 CP01R4 grant-gated release QA v0.2
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.3.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ResourcePolicy_v0.2.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_BackendRebindContract_v0.2.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_TargetTransactionContract_v0.3.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json'
+      - 'registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json'
+      - 'tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py'
+      - 'tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py'
+      - 'requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt'
+      - 'tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.1.py'
+      - 'tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py'
+      - 'tests/2026-08-27_test_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py'
+      - '.github/workflows/2026-08-27_ULSH01_WP2_CP01R4_TargetRelease_QA_v0.2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cp01r4-release-v02-preflight-no-physical-execution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate CP01R4 release contracts
+        run: |
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.3.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ResourcePolicy_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_BackendRebindContract_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_TargetTransactionContract_v0.3.json >/dev/null
+      - name: Compile release implementations and v0.2 QA
+        run: |
+          python -m py_compile tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.1.py
+          python -m py_compile tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py
+          python -m py_compile tests/2026-08-27_test_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py
+      - name: Assert grant and decision templates remain nonoperative
+        run: |
+          grep -F '"status": "TEMPLATE_ONLY_NO_GRANT_CREATED"' registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json
+          grep -F '"authorized": false' registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json
+          grep -F '"status": "TEMPLATE_ONLY_NOT_AUTHORIZED"' registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json
+          grep -F '"solver_execution_allowed": false' registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json
+      - name: Run source-bound v0.2 audit only
+        run: |
+          python tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py audit \
+            --repo-root . \
+            --manifest-output /tmp/ulsh01_wp2_cp01r4_release_manifest_v02.json \
+            --json | tee /tmp/ulsh01_wp2_cp01r4_preflight_v02.json
+          grep -F '"status": "PASS_CP01R4_RELEASE_V02_PREFLIGHT_IMPLEMENTATION_ONLY"' /tmp/ulsh01_wp2_cp01r4_preflight_v02.json
+          grep -F '"release_package_member_count": 16' /tmp/ulsh01_wp2_cp01r4_preflight_v02.json
+          grep -F '"backend_imported": false' /tmp/ulsh01_wp2_cp01r4_preflight_v02.json
+          grep -F '"solver_executed": false' /tmp/ulsh01_wp2_cp01r4_preflight_v02.json
+          grep -F '"physical_execution_authorized": false' /tmp/ulsh01_wp2_cp01r4_preflight_v02.json
+          grep -F '"memory_limit_mutated_during_audit": false' /tmp/ulsh01_wp2_cp01r4_preflight_v02.json
+          grep -F '"WP2_closed": false' /tmp/ulsh01_wp2_cp01r4_preflight_v02.json
+          grep -F '"physical_evidence_effect": "NONE"' /tmp/ulsh01_wp2_cp01r4_preflight_v02.json
+      - name: Run synthetic authorization and replay self-test only
+        run: |
+          mkdir -p /tmp/ulsh01_wp2_cp01r4_v02_reservations
+          python tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py self-test \
+            --repo-root . \
+            --reservation-dir /tmp/ulsh01_wp2_cp01r4_v02_reservations \
+            --json | tee /tmp/ulsh01_wp2_cp01r4_selftest_v02.json
+          grep -F '"status": "PASS_SYNTHETIC_DECISION_GRANT_BINDING_AND_REPLAY_QA"' /tmp/ulsh01_wp2_cp01r4_selftest_v02.json
+          grep -F '"backend_imported": false' /tmp/ulsh01_wp2_cp01r4_selftest_v02.json
+          grep -F '"solver_executed": false' /tmp/ulsh01_wp2_cp01r4_selftest_v02.json
+          grep -F '"memory_limit_mutated": false' /tmp/ulsh01_wp2_cp01r4_selftest_v02.json
+      - name: Run complete v0.2 Python QA
+        run: python tests/2026-08-27_test_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py
+      - name: Verify generated package manifest is evidence-neutral
+        run: |
+          python -m json.tool /tmp/ulsh01_wp2_cp01r4_release_manifest_v02.json >/dev/null
+          grep -F '"backend_imported":false' /tmp/ulsh01_wp2_cp01r4_release_manifest_v02.json
+          grep -F '"solver_executed":false' /tmp/ulsh01_wp2_cp01r4_release_manifest_v02.json
+          grep -F '"physical_evidence_effect":"NONE"' /tmp/ulsh01_wp2_cp01r4_release_manifest_v02.json
+      - name: Upload v0.2 implementation-QA manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulsh01-wp2-cp01r4-release-manifest-v02-qa-only
+          path: |
+            /tmp/ulsh01_wp2_cp01r4_release_manifest_v02.json
+            /tmp/ulsh01_wp2_cp01r4_preflight_v02.json
+            /tmp/ulsh01_wp2_cp01r4_selftest_v02.json
