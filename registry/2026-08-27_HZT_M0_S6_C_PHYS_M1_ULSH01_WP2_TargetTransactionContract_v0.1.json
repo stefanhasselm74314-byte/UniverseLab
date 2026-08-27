@@ -1,0 +1,78 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-target-transaction-contract.v0.1",
+  "date": "2026-08-27",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-01-WP2",
+  "classification": "SOURCE_BOUND_TARGET_TRANSACTION_IMPLEMENTATION_ONLY_NO_SOLVER_EXECUTION",
+  "status": "TRANSACTION_SCAFFOLD_DEFINED_AUTHORIZATION_REVIEW_PENDING",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R2",
+  "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+  "run_payload_sha256": "990cb9902aabf740db34ce03d69d845588a4b0c6337f9e48633829bbd6a7cea7",
+  "ordered_pre_backend_gates": [
+    "VERIFY_TARGET_DIGEST",
+    "VERIFY_FROZEN_RUN_PAYLOAD_DIGEST",
+    "VERIFY_BACKEND_INTERFACE_AND_RESULT_SCHEMA_BINDINGS",
+    "VERIFY_RESOURCE_POLICY_BINDINGS",
+    "VERIFY_AUDITED_BACKEND_SOURCE_HASHES",
+    "VERIFY_RELEASE_PACKAGE_MANIFEST_DIGEST",
+    "VERIFY_REPOSITORY_COMMIT_BINDING",
+    "VERIFY_AUTHORIZATION_DECISION_BINDING",
+    "VERIFY_SINGLE_USE_GRANT_BINDING_AND_TIME_WINDOW",
+    "ATOMICALLY_RESERVE_GRANT_BEFORE_BACKEND_IMPORT",
+    "ONLY_THEN_MAY_A_LATER_AUTHORIZED_RELEASE_IMPORT_THE_PRIMARY_BACKEND"
+  ],
+  "release_package_members": [
+    "ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.1.json",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ResourcePolicy_v0.1.json",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_BackendRebindContract_v0.1.json",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.1.json",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_TargetTransactionContract_v0.1.json",
+    "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json",
+    "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json",
+    "ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py",
+    "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt"
+  ],
+  "single_use_reservation": {
+    "must_precede_backend_import": true,
+    "mechanism": "ATOMIC_CREATE_EXCLUSIVE_RESERVATION_RECORD",
+    "replay_after_reservation": "REJECT",
+    "crash_after_reservation": "GRANT_CONSUMED_REPLAY_REJECTED",
+    "nonce_reuse": "REJECT",
+    "grant_id_reuse": "REJECT",
+    "reservation_record_is_not_physical_result": true
+  },
+  "implementation_phase_test_policy": {
+    "real_backend_import": false,
+    "real_backend_call": false,
+    "physical_target_solve": false,
+    "operative_grant_creation": false,
+    "repository_physical_result_creation": false,
+    "synthetic_control_grant_reservation_test": true,
+    "source_hash_validation": true,
+    "package_manifest_generation": true
+  },
+  "wp_scope": {
+    "WP2": "MAKE_PRIMARY_BVP_TRANSACTION_AUTHORIZABLE_AGAINST_FROZEN_TARGET_NO_EXECUTION_IN_THIS_BLOCK",
+    "WP3": "INDEPENDENT_BACKEND_CROSSCHECK_AND_MESH_RESIDUAL_CONVERGENCE_AFTER_WP2_AUTHORIZED_EXECUTION",
+    "WP4": "FREEZE_ONE_SIDED_INTERFACE_EXPORT_AFTER_WP3_ACCEPTANCE"
+  },
+  "firewall": {
+    "physical_execution_authorized": false,
+    "backend_import_authorized": false,
+    "target_solve_allowed": false,
+    "physical_result_artifact_allowed": false,
+    "WP2_closed": false,
+    "WP3_started": false,
+    "WP4_started": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_safe_action": "IMPLEMENT_AND_QA_PACKAGE_MANIFEST_GRANT_VALIDATION_AND_ATOMIC_CONTROL_RESERVATION_WITHOUT_REAL_BACKEND_IMPORT"
+}
