@@ -18,7 +18,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import unquote, urljoin, urlparse
+from urllib.parse import unquote, urlparse
 
 ROOT_PREFIX = "/UniverseLab/"
 GITHUB_BLOB_PREFIX = "/stefanhasselm74314-byte/UniverseLab/blob/main/"
@@ -184,8 +184,8 @@ def audit(repo_root: Path) -> int:
         if kind == "unsupported-internal-file":
             unsupported.append((link, display, target))
         elif target is not None and not target.exists():
-            # Missing targets are surfaced as warnings here; dedicated link-integrity
-            # checks may have their own policy. They are not a print/export failure.
+            # Human-facing internal links must resolve to an existing repository target.
+            # A viewer route for a missing file is still a broken public link, so fail closed.
             missing_targets.append((link, display))
 
     print("UniverseLab print/export link coverage audit v1.0")
@@ -208,16 +208,17 @@ def audit(repo_root: Path) -> int:
         print("\nAdd a governed viewer/router for these file types or mark truly intentional raw/download links explicitly.")
 
     if missing_targets:
-        print("\nWARN: covered links whose local target was not found in this checkout:")
+        print("\nFAIL: covered human-facing links whose local repository target does not exist:")
         for link, display in missing_targets[:50]:
             print(f"  - {link.source}: {link.href} -> {display}")
         if len(missing_targets) > 50:
             print(f"  ... {len(missing_targets) - 50} more")
+        print("\nCorrect the target path or explicitly mark an intentional raw/download link only when the target is expected to exist outside this governed checkout.")
 
-    if unsupported or parse_errors:
+    if unsupported or parse_errors or missing_targets:
         return 1
 
-    print("\nPASS: every scanned internal human-facing file link is covered by the current print/export/viewer architecture or is explicitly raw/download.")
+    print("\nPASS: every scanned internal human-facing file link resolves to an existing target and is covered by the current print/export/viewer architecture or is explicitly raw/download.")
     return 0
 
 
