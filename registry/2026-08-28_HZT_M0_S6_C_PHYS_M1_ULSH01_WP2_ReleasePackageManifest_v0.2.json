@@ -1,0 +1,67 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-release-package-manifest.v0.2",
+  "date": "2026-08-28",
+  "classification": "FROZEN_FROM_GREEN_CP01R4_V02_IMPLEMENTATION_QA_NO_PHYSICAL_RESULT_NO_AUTHORIZATION",
+  "status": "FROZEN_QA_PACKAGE_HEAD_BINDING_REVIEW_REQUIRED",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+  "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+  "run_payload_sha256": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+  "member_count": 16,
+  "member_sha256": {
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json": "114d42cabf736541e6bca072fa586096667bf3a8a8d1664493e6920fc4b8bc58",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json": "4eed66be42e71d3dc1fe423bf1d99ad94aac2f7026f5546cb65a55451b105471",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_BackendRebindContract_v0.2.json": "e60cc73cd3f1211dc8f4f504c427ac4f7b4dc59587d88ad1be4d710089b294a8",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ResourcePolicy_v0.2.json": "f01a4c13248dcc82d759da7ff291b68a3100bb7bec91d81cc515b6ff067c3fa7",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.3.json": "dcccacb1575eb4750572ff69b9ed499612f53a4d8e922cf158281569420bb8e3",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json": "e141cbbf2ff98ce0f7b201dc26c12e2afa798df1608dc88019eb8d4c58d9e0ba",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_TargetTransactionContract_v0.3.json": "6a325cec52bc86cee3ffb2a0438c642bbb9e0255c62d63aed10abb1b28fc9dbc",
+    "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f",
+    "tests/2026-08-27_test_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py": "10b590a8e0615326944185b21bf7cddf8151c941fab9f55626e877f8ce4c6667",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py": "830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py": "8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92",
+    "tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.1.py": "081746eb1ac6b4fb0e6e108298a2c0c8480fcc16053b0163986feccffdfc61ba",
+    "tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py": "fc93b93f4da15398f226e799d89b6e4592b5c50836b153b1ac6bb7f9e0652d26",
+    "ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json": "1b3f410e837371f11b50d8550c86c2d6409efeb25232114284f778754d1ae31f",
+    "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json": "ce40d78f3ab50ebab5ca2bc7d43b86ab54371a492bfab6a8bedb6e1d0de23048",
+    "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json": "c9ed6807d36872ebcb2070d861fe472f4fd168b0c2f3abd630bbd3250d1d581d"
+  },
+  "package_digest_sha256": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621",
+  "package_digest_definition": "SHA256(canonical JSON mapping member path -> raw file SHA256, sort_keys=true, separators=(',',':'), ensure_ascii=false)",
+  "qa_provenance": {
+    "workflow": "ULSH-01 WP2 CP01R4 grant-gated release QA v0.2",
+    "workflow_run_id": 33082448918,
+    "workflow_event_head_sha": "e151c1effbc14f1f95d5bc7a68c5a312ac4df753",
+    "workflow_checked_out_git_head_sha": "ad8b923d4f1ecc7ab11e7df4365aa2afd73d0ca7",
+    "workflow_conclusion": "success",
+    "artifact_id": 9650644044,
+    "artifact_name": "ulsh01-wp2-cp01r4-release-manifest-v02-qa-only",
+    "artifact_digest_sha256": "6e9c327ad2ba69eb59fbca8b825801362fbd931fe4ae220b92185805cd787a67",
+    "preflight_status": "PASS_CP01R4_RELEASE_V02_PREFLIGHT_IMPLEMENTATION_ONLY",
+    "synthetic_replay_status": "PASS_SYNTHETIC_DECISION_GRANT_BINDING_AND_REPLAY_QA"
+  },
+  "provenance_caveat": {
+    "pull_request_default_checkout_used_temporary_merge_ref": true,
+    "workflow_event_head_differs_from_checked_out_git_head": true,
+    "acceptable_for_software_QA": true,
+    "acceptable_for_future_single_use_physical_authorization": false,
+    "required_resolution": "REPEAT_IDENTICAL_NONEXECUTING_QA_WITH_EXPLICIT_PR_HEAD_CHECKOUT_AND_VERIFY_ACTUAL_GIT_HEAD_EQUALS_EXPECTED_RELEASE_SUBJECT_SHA"
+  },
+  "execution_state": {
+    "solver_executed": false,
+    "backend_imported": false,
+    "operative_authorization_decision_created": false,
+    "operative_grant_created": false,
+    "physical_result_created": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_evidence_effect": "NONE"
+  },
+  "gate_state": {
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "IMPLEMENTATION_QA_PASS_HEAD_BOUND_RELEASE_QA_REQUIRED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_safe_action": "RUN_HEAD_BOUND_NONEXECUTING_CP01R4_RELEASE_QA_AND_ONLY_THEN_REPEAT_WP2_AUTHORIZATION_REVIEW"
+}
