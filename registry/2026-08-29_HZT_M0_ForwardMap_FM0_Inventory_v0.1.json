@@ -1,0 +1,104 @@
+{
+  "schema": "hzt-m0.forward-map.fm0.inventory.v0.1",
+  "date": "2026-08-29",
+  "status": "ACTIVE_INITIAL_INVENTORY",
+  "classification": "PROVENANCE_INVENTORY_NO_NEW_PHYSICS",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "workstream": "WS1",
+  "work_package": "FM-0",
+  "gate": "FM-G0",
+  "gate_status": "OPEN",
+  "objective": "100 % der HZT-M0-Kerngrößen mit Definition, Einheit, Herkunft und Statusklasse erfassen, bevor neue Mapping-Beziehungen eingeführt werden.",
+  "parameter_set_from_ratified_program": [
+    {
+      "symbol": "a0",
+      "role_class": "UNRESOLVED_FUNDAMENTAL_DERIVED_OR_EFFECTIVE",
+      "dimension": "OPEN_RECOVERY_REQUIRED",
+      "parent_provenance": "OPEN_RECOVERY_REQUIRED",
+      "mapping_status": "NOT_YET_CLAIMED"
+    },
+    {
+      "symbol": "beta_tau",
+      "display": "β_τ",
+      "role_class": "UNRESOLVED_FUNDAMENTAL_DERIVED_OR_EFFECTIVE",
+      "dimension": "OPEN_RECOVERY_REQUIRED",
+      "parent_provenance": "OPEN_RECOVERY_REQUIRED",
+      "mapping_status": "NOT_YET_CLAIMED"
+    },
+    {
+      "symbol": "R_chi",
+      "display": "R_χ",
+      "role_class": "UNRESOLVED_FUNDAMENTAL_DERIVED_OR_EFFECTIVE",
+      "dimension": "OPEN_RECOVERY_REQUIRED",
+      "parent_provenance": "OPEN_RECOVERY_REQUIRED",
+      "mapping_status": "NOT_YET_CLAIMED"
+    },
+    {
+      "symbol": "I_B",
+      "display": "𝓘_B",
+      "role_class": "UNRESOLVED_FUNDAMENTAL_DERIVED_OR_EFFECTIVE",
+      "dimension": "OPEN_RECOVERY_REQUIRED",
+      "parent_provenance": "OPEN_RECOVERY_REQUIRED",
+      "mapping_status": "NOT_YET_CLAIMED"
+    },
+    {
+      "symbol": "kappa_6",
+      "display": "κ_6",
+      "role_class": "UNRESOLVED_FUNDAMENTAL_DERIVED_OR_EFFECTIVE",
+      "dimension": "OPEN_RECOVERY_REQUIRED",
+      "parent_provenance": "OPEN_RECOVERY_REQUIRED",
+      "mapping_status": "NOT_YET_CLAIMED"
+    }
+  ],
+  "observable_blocks_from_ratified_program": [
+    {
+      "id": "O_RAR",
+      "status": "INTERFACE_TO_RECOVER_OR_DEFINE"
+    },
+    {
+      "id": "O_cosmo",
+      "status": "INTERFACE_TO_RECOVER_OR_DEFINE"
+    },
+    {
+      "id": "O_growth",
+      "status": "INTERFACE_TO_RECOVER_OR_DEFINE"
+    },
+    {
+      "id": "O_lensing",
+      "status": "INTERFACE_TO_RECOVER_OR_DEFINE"
+    },
+    {
+      "id": "O_GW",
+      "status": "INTERFACE_TO_RECOVER_OR_DEFINE"
+    }
+  ],
+  "required_fields_per_entry": [
+    "definition",
+    "dimension",
+    "provenance",
+    "status_class",
+    "symmetry_or_convention",
+    "validity_range",
+    "upstream_inputs",
+    "downstream_observables"
+  ],
+  "first_pass_tasks": [
+    "Recover exact canonical definitions from current ratified/frozen repository artifacts.",
+    "Classify each quantity as fundamental, derived, effective, candidate, or unresolved.",
+    "Record dimensions/units without textbook substitution.",
+    "Identify every missing Parent→Reduced and Reduced→Observable bridge as an explicit gap.",
+    "Do not fit data or infer physical background-dependent coefficients during FM-0."
+  ],
+  "completion_criterion": "No HZT-M0 core parameter or observable block remains without explicit definition/unit/provenance status; unresolved items must exist as explicit gaps rather than silent assumptions.",
+  "forbidden_inference": [
+    "PROGRAM_DECLARATION_IS_NOT_PARENT_PROVENANCE",
+    "NO_EFFECTIVE_RELATION_IS_A_6D_DERIVATION_WITHOUT_ALL_INTERMEDIATE_STEPS",
+    "NO_PARAMETER_FIT_BEFORE_MAPPING_STRUCTURE_FREEZE",
+    "NO_PHYSICAL_BACKGROUND_CLAIM",
+    "NO_K1_D_RELEASE",
+    "NO_K1_E_ADMISSIBILITY"
+  ],
+  "cp01r4_dependency": "NONE_FOR_FM0_INVENTORY",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
