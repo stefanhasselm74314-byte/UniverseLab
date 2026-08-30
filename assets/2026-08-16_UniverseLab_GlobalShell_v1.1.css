@@ -20,3 +20,32 @@
   body[data-ul-page-id="UL-PAGE-SOLVER-HUB"] .hero h1{font-size:clamp(1.85rem,9.2vw,2.75rem)!important}
   body[data-ul-page-id="UL-PAGE-SOLVER-HUB"] .status{grid-template-columns:1fr}
 }
+
+/* HZT 10M research-program mobile containment v1.0.
+   Keep typography and touch targets intact; contain only horizontal layout. */
+@media(max-width:720px){
+  html:has(body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"]),
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"]{width:100%;max-width:100%;overflow-x:hidden}
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] main{width:100%;max-width:100%;min-width:0;overflow-x:hidden}
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] main > *,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .hero,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .notice,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .grid,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] article,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .links{min-width:0;max-width:100%}
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] h1,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] h2,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] p,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] code,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .lead{max-width:100%;overflow-wrap:anywhere;word-break:normal}
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .links a{min-width:0;max-width:100%;overflow-wrap:anywhere}
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .tablewrap{width:100%;max-width:100%;min-width:0;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] > nav{width:100%;max-width:100%;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .ul-shell{width:100%;max-width:100%;min-width:0;overflow-x:hidden}
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .ul-shell__row,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .ul-shell__meta,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .ul-shell__crumbs,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .ul-shell__gates{min-width:0;max-width:100%}
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .ul-shell__row,
+  body[data-ul-page-id="UL-HZT-10M-RESEARCH-PROGRAM"] .ul-shell__crumbs{overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+}
