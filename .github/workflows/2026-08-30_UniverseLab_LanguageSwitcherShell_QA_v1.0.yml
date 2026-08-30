@@ -1,0 +1,43 @@
+name: UniverseLab language switcher shell QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
+      - 'tests/2026-08-30_test_LanguageSwitcherShell_v1.0.js'
+      - '.github/workflows/2026-08-30_UniverseLab_LanguageSwitcherShell_QA_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
+      - 'tests/2026-08-30_test_LanguageSwitcherShell_v1.0.js'
+      - '.github/workflows/2026-08-30_UniverseLab_LanguageSwitcherShell_QA_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  language-switcher:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Mount branch like GitHub Pages
+        run: |
+          mkdir -p /tmp/ulsite/UniverseLab
+          cp -a . /tmp/ulsite/UniverseLab/
+          cd /tmp/ulsite
+          python3 -m http.server 4173 >/tmp/ul-http.log 2>&1 &
+          echo $! > /tmp/ul-http.pid
+          sleep 2
+      - name: Verify visible language selector and curated English routing
+        run: node tests/2026-08-30_test_LanguageSwitcherShell_v1.0.js
