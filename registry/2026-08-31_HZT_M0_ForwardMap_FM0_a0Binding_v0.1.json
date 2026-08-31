@@ -1,0 +1,76 @@
+{
+  "schema": "hzt-m0.forward-map.fm0.a0-binding.v0.1",
+  "date": "2026-08-31",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "workstream": "WS1",
+  "work_package": "FM-0",
+  "item": "a0",
+  "display": "a₀",
+  "classification": "PROVENANCE_RECOVERY_NO_NEW_PHYSICS",
+  "recovery_status": "HISTORICAL_PROVENANCE_RECOVERED_CANONICAL_PARENT_OPEN",
+  "historical_provenance": {
+    "formula_source": "legacy-formeln-H1-H64.csv",
+    "snapshot_source": "legacy-snapshot-2026-06-29.json",
+    "public_audit_source": "legacy.html",
+    "formula_ids": ["H31", "H34", "H35", "H36", "H37", "H38", "H39", "H40", "H41", "H42"],
+    "source_relations": [
+      "H31: S_Theta approximately div[mu(|grad vartheta|/a0) grad vartheta] — status open",
+      "H34: a0 = lambda_Theta c beta — status historical",
+      "H35: beta = H0 — status historical",
+      "H36: a0 = lambda_Theta c H0 — status historical",
+      "H37: g_obs = |grad Phi_dyn| — status historical",
+      "H38: g_bar = |grad Phi_N| — status historical",
+      "H39: g_obs = sqrt(a0 g_bar) — status historical",
+      "H40: g_obs = g_bar nu(g_bar/a0) — status historical",
+      "H41: nu(y) = 1/2 + sqrt(1/4 + 1/y) — status historical",
+      "H42: v^4 = G a0 M_b — status historical"
+    ],
+    "legacy_range_classification": "H34-H42: historical; historical branch, no current Hyperzeit prediction",
+    "claim_audit": "MOND_exact_no_free_parameters = historical; a0/MOND/MDAR/BTFR relations are legacy phenomenology without current parent derivation",
+    "import_policy": "MOND and a0 result claims are quarantined"
+  },
+  "historical_role": "Acceleration-scale-like phenomenological parameter used in the legacy MOND/MDAR/BTFR closure and in the open Theta-source interpolation ansatz.",
+  "current_canonical_definition": "OPEN_RECOVERY_REQUIRED",
+  "current_canonical_dimension": "OPEN_RECOVERY_REQUIRED",
+  "current_parent_provenance": "OPEN_RECOVERY_REQUIRED",
+  "historical_dimension_inference": {
+    "classification": "ALGEBRAIC_INFERENCE_NOT_CANONICAL_BINDING",
+    "statement": "Within legacy H37-H40, a0 has the same dimension as g_bar and g_obs because both g quantities are gradients of potentials and H39/H40 require dimensionally compatible ratios/products.",
+    "basis": "legacy-formeln-H1-H64.csv H37-H40",
+    "canonical_binding_effect": "NONE"
+  },
+  "uppercase_A0_guard": {
+    "identity_with_A0": "NO_IDENTITY_ASSERTED",
+    "A0_context_sources": [
+      "SCI-001-002_v0.2_MD-2S_Background_Substitution_Preflight.md",
+      "md2s-artifact-recovery-rank-audit-v0.1.json"
+    ],
+    "A0_context": "MD-2S global/published background benchmark label",
+    "rule": "Case similarity is not a canonical alias. Lowercase a0 must not be identified with uppercase A0 without an explicit source-backed alias/equality statement."
+  },
+  "status_class": "HISTORICAL_PHENOMENOLOGICAL_PARAMETER_CURRENT_PARENT_DERIVATION_OPEN",
+  "mapping_status": "HISTORICAL_RELATIONS_RECOVERED_CURRENT_PARENT_TO_REDUCED_AND_OBSERVABLE_MAP_OPEN",
+  "remaining_blockers": [
+    "Current canonical HZT-M0 definition of lowercase a0.",
+    "Current source-backed dimension/unit declaration for lowercase a0.",
+    "Parent-action or controlled reduction derivation producing a0.",
+    "Current upstream parameter dependencies.",
+    "Current reduced-to-observable contract for O_RAR and any other affected observable block.",
+    "Explicit canonical alias/equality to uppercase A0 if such an identity is ever intended."
+  ],
+  "gap_decision": {
+    "gap_id": "FM0-GAP-001",
+    "blocking": true,
+    "status": "PARTIALLY_RESOLVED_HISTORICAL_PROVENANCE_RECOVERED_CANONICAL_PARENT_OPEN",
+    "close_gap": false
+  },
+  "gate": "FM-G0",
+  "gate_status": "OPEN",
+  "cp01r4_state": "FROZEN_NO_EXECUTION",
+  "physical_background": "NOT_ESTABLISHED",
+  "rank_R": "OPEN_NOT_EXECUTED",
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
