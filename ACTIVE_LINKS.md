@@ -35,7 +35,7 @@
 - Cosmic Journey: https://stefanhasselm74314-byte.github.io/UniverseLab/journey.html
 - Emergence: https://stefanhasselm74314-byte.github.io/UniverseLab/emergence.html
 - Universe 3D: https://stefanhasselm74314-byte.github.io/UniverseLab/universe3d.html
-- Conway / Emergenz-Demo: https://stefanhasselm74314-byte.github.io/UniverseLab/conway.html
+- Conway: https://stefanhasselm74314-byte.github.io/UniverseLab/conway.html
 
 ## 5. Solver, Governance und Reproduzierbarkeit
 
@@ -49,8 +49,9 @@
 - Entwickler-/Quellcode-Hub: https://stefanhasselm74314-byte.github.io/UniverseLab/source.html
 - GitHub Repository: https://github.com/stefanhasselm74314-byte/UniverseLab
 - Dieses Register: https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/ACTIVE_LINKS.md
-- Dokument-Viewer: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-19_UniverseLab_DocumentViewer_v1.0.html
-- Machine-Data-Viewer: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-19_UniverseLab_MachineDataViewer_v1.1.html
+- Dokument-Viewer: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-27_UniverseLab_DocumentViewer_v1.0.html
+- Source-Text-Viewer: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-27_UniverseLab_SourceTextViewer_v1.0.html
+- Machine-Data-Viewer v1.1: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-20_UniverseLab_MachineDataViewer_v1.1.html
 
 ## 7. Browser-/Cache-Recovery
 
@@ -60,7 +61,7 @@ Nur verwenden, wenn eine aktuelle UniverseLab-Seite trotz Neuladen eine alte She
 
 ## 8. GSRA / Orion Pulse — separates Projekt
 
-Diese Links gehören **nicht** zum wissenschaftlichen UniverseLab-Kern und werden deshalb separat geführt:
+Diese Links gehören **nicht** zum wissenschaftlichen UniverseLab-Kern:
 
 - GSRA Source Brief: https://github.com/stefanhasselm74314-byte/gsra-orion-pulse/blob/main/docs/2026-08-19_GSRA-OrionPulse_SourceLinkBrief_v1.0.md
 - Telemetry Contract: https://docs.google.com/document/d/1EUwZhP8MEMfLz1Ocb_r7UxIA5doTiSCM59PCqiLHcco/edit
@@ -70,10 +71,9 @@ Diese Links gehören **nicht** zum wissenschaftlichen UniverseLab-Kern und werde
 
 Nicht als aktuellen Projektstatus verwenden:
 
-- Archiv: https://stefanhasselm74314-byte.github.io/UniverseLab/archiv.html
 - Gesamt-Audit 2026-07-31: https://stefanhasselm74314-byte.github.io/UniverseLab/universelab-audit-2026-07-31.html
 - Legacy-Bereich: https://stefanhasselm74314-byte.github.io/UniverseLab/legacy.html
 
 ---
 
-**Pflegeregel:** Neue operative oder wissenschaftliche Links kommen erst in den kanonischen Bereich, wenn ihr aktueller Zweck eindeutig ist. Ersetzte oder historische Ziele werden nicht stillschweigend gelöscht, sondern in Archiv/Legacy verschoben oder klar markiert.
+**Pflegeregel:** Neue operative oder wissenschaftliche Links kommen erst in den kanonischen Bereich, wenn ihr aktueller Zweck eindeutig ist. Ersetzte oder historische Ziele werden klar als Archiv/Legacy markiert.
