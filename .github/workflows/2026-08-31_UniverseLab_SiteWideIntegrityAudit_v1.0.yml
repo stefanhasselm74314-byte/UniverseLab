@@ -1,0 +1,38 @@
+name: UniverseLab site-wide integrity audit v1.0
+
+on:
+  pull_request:
+    paths:
+      - '**/*.html'
+      - 'assets/**'
+      - 'registry/**'
+      - 'tools/2026-08-31_UniverseLab_SiteWideIntegrityAudit_v1.0.py'
+      - '.github/workflows/2026-08-31_UniverseLab_SiteWideIntegrityAudit_v1.0.yml'
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  site-wide-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run complete HTML/site integrity scan
+        run: python tools/2026-08-31_UniverseLab_SiteWideIntegrityAudit_v1.0.py
+      - name: Print human-readable report
+        if: always()
+        run: cat 2026-08-31_UniverseLab_SiteWideIntegrityAudit_Report_v1.0.md || true
+      - name: Upload audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universelab-sitewide-integrity-audit
+          path: |
+            2026-08-31_UniverseLab_SiteWideIntegrityAudit_Report_v1.0.json
+            2026-08-31_UniverseLab_SiteWideIntegrityAudit_Report_v1.0.md
