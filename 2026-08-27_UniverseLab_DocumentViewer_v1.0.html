@@ -14,7 +14,7 @@ main{width:min(1180px,100%);margin:auto;padding:15px 10px 80px}.hero,.panel{bord
 @media(max-width:720px){main{padding:10px 7px 70px}.hero{padding:16px 13px}.stats{grid-template-columns:1fr 1fr}.controls{grid-template-columns:1fr 1fr}.controls input{grid-column:1/-1}.document{padding:13px}.yaml-line{grid-template-columns:44px minmax(0,1fr)}}
 @media print{nav,.actions,.controls,.meta,.matches{display:none!important}body{background:#fff;color:#000}.hero,.panel,.stat,.document,.yaml-lines{background:#fff!important;color:#000!important;border-color:#999!important}.hero{padding:0 0 10px;border:0}.lead,.stat span,.document p,.document li,.document blockquote{color:#111!important}.document pre,.raw,.yaml-lines,.ln,.lc{background:#fff!important;color:#000!important;border-color:#999!important}.document h2{border-color:#999}.panel{break-inside:auto}}
 </style>
-<link rel="stylesheet" href="./assets/2026-08-16_UniverseLab_GlobalShell_v1.1.css">
+<link rel="stylesheet" href="./assets/2026-08-16_UniverseLab_GlobalShell_v1.1.css?v=20260831-phase2">
 </head>
 <body data-ul-page-id="UL-PAGE-DOCUMENT-VIEWER" data-ul-domain="provenance" data-ul-native-export="1">
 <nav aria-label="Dokument Navigation"><a href="./source.html?v=3">← Quellcode & Daten</a><a href="./links.html">Wichtige Links</a><a href="./navigator.html">Navigator</a><a href="./">Portal</a></nav>
@@ -48,6 +48,6 @@ async function init(){const p=new URLSearchParams(location.search),src=p.get('sr
 $('q').addEventListener('input',applySearch);$('renderMode').addEventListener('click',()=>setMode(false));$('rawMode').addEventListener('click',()=>setMode(true));$('printNow').addEventListener('click',()=>window.print());$('saveHtml').addEventListener('click',saveHtml);$('copyLink').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href)}catch{}});init();
 })();
 </script>
-<script src="./assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js"></script>
+<script src="./assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js?v=20260831-phase2"></script>
 </body>
 </html>
