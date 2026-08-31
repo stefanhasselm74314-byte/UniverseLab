@@ -1,0 +1,419 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-authorization-decision-grant-filling-checklist.v0.1",
+  "date": "2026-08-28",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-01-WP2",
+  "classification": "APPEND_ONLY_NONOPERATIVE_DECISION_GRANT_FILLING_CHECKLIST_NO_AUTHORIZATION_NO_GRANT_NO_EXECUTION",
+  "status": "CHECKLIST_COMPLETE_AUTHORITY_AND_RUNTIME_ISSUANCE_INPUTS_UNRESOLVED_NOT_AUTHORIZED",
+  "purpose": "Define every fixed, runtime-generated, authority-provenance, and verification field required before any separate operative CP01R4 authorization decision and single-use grant could be admissibly created. This artifact does not create either artifact.",
+  "authority_precedence": {
+    "readiness_review": "registry/2026-08-28_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationReview_v0.3.json",
+    "authorization_decision_template": "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json",
+    "single_use_grant_template": "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json",
+    "target_transaction_contract": "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_TargetTransactionContract_v0.3.json",
+    "resource_policy": "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ResourcePolicy_v0.2.json",
+    "backend_rebind_contract": "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_BackendRebindContract_v0.2.json",
+    "release_package_manifest": "registry/2026-08-28_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ReleasePackageManifest_v0.3.json"
+  },
+  "frozen_release_identity": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+    "release_subject_repository_commit_sha": "d8890b9ef47936edf8bb7e758b882c898241b314",
+    "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "target_contract_file_sha256": "1b3f410e837371f11b50d8550c86c2d6409efeb25232114284f778754d1ae31f",
+    "run_payload_sha256": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+    "release_package_member_count": 16,
+    "release_package_manifest_sha256": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621",
+    "resource_policy_sha256": "f01a4c13248dcc82d759da7ff291b68a3100bb7bec91d81cc515b6ff067c3fa7",
+    "backend_rebind_contract_sha256": "e60cc73cd3f1211dc8f4f504c427ac4f7b4dc59587d88ad1be4d710089b294a8",
+    "result_schema_sha256": "c9ed6807d36872ebcb2070d861fe472f4fd168b0c2f3abd630bbd3250d1d581d",
+    "backend_interface_contract_sha256": "ce40d78f3ab50ebab5ca2bc7d43b86ab54371a492bfab6a8bedb6e1d0de23048",
+    "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f",
+    "primary_source_sha256": "8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92",
+    "primary_base_source_sha256": "830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599",
+    "target_a_F": "1/4",
+    "retargeting_by_later_governance_commit": false
+  },
+  "decision_artifact_checklist": {
+    "template_schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-authorization-decision.v0.1",
+    "required_top_level_status_if_and_only_if_operatively_ratified": "AUTHORIZED_SINGLE_USE_WP2_CP01R4_PRIMARY_TARGET_EXECUTION",
+    "fields": [
+      {
+        "field": "authorization_decision_id",
+        "class": "RUNTIME_GENERATED",
+        "current": null,
+        "requirement": "Globally unique immutable ID; any decision change requires a new ID."
+      },
+      {
+        "field": "decision_status",
+        "class": "AUTHORITY_DECIDED",
+        "current": "NOT_AUTHORIZED",
+        "requirement": "May equal the operative status literal only after authority and signature provenance pass."
+      },
+      {
+        "field": "authorized_run_id",
+        "class": "PREBOUND_CONSTANT",
+        "value": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4"
+      },
+      {
+        "field": "authorized_scope",
+        "class": "PREBOUND_CONSTANT",
+        "value": "PRIMARY_TARGET_EXECUTION_ONLY"
+      },
+      {
+        "field": "repository_commit_sha",
+        "class": "PREBOUND_CONSTANT",
+        "value": "d8890b9ef47936edf8bb7e758b882c898241b314"
+      },
+      {
+        "field": "target_contract_digest_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823"
+      },
+      {
+        "field": "run_payload_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c"
+      },
+      {
+        "field": "release_package_manifest_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621"
+      },
+      {
+        "field": "resource_policy_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "f01a4c13248dcc82d759da7ff291b68a3100bb7bec91d81cc515b6ff067c3fa7"
+      },
+      {
+        "field": "backend_rebind_contract_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "e60cc73cd3f1211dc8f4f504c427ac4f7b4dc59587d88ad1be4d710089b294a8"
+      },
+      {
+        "field": "result_schema_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "c9ed6807d36872ebcb2070d861fe472f4fd168b0c2f3abd630bbd3250d1d581d"
+      },
+      {
+        "field": "backend_interface_contract_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "ce40d78f3ab50ebab5ca2bc7d43b86ab54371a492bfab6a8bedb6e1d0de23048"
+      },
+      {
+        "field": "not_before_utc",
+        "class": "RUNTIME_GENERATED",
+        "current": null,
+        "requirement": "UTC timestamp; must not precede ratification/signature completion."
+      },
+      {
+        "field": "expires_at_utc",
+        "class": "RUNTIME_GENERATED",
+        "current": null,
+        "requirement": "UTC timestamp later than not_before; short bounded validity; exact bound must be ratified."
+      },
+      {
+        "field": "single_use_grant_required",
+        "class": "PREBOUND_CONSTANT",
+        "value": true
+      },
+      {
+        "field": "automatic_execution",
+        "class": "PREBOUND_CONSTANT",
+        "value": false
+      },
+      {
+        "field": "wp3_authorized",
+        "class": "PREBOUND_CONSTANT",
+        "value": false
+      },
+      {
+        "field": "wp4_authorized",
+        "class": "PREBOUND_CONSTANT",
+        "value": false
+      },
+      {
+        "field": "physical_response_rank_authorized",
+        "class": "PREBOUND_CONSTANT",
+        "value": false
+      },
+      {
+        "field": "K1_D_release_authorized",
+        "class": "PREBOUND_CONSTANT",
+        "value": false
+      },
+      {
+        "field": "K1_E_admissible",
+        "class": "PREBOUND_CONSTANT",
+        "value": false
+      }
+    ],
+    "current_artifact_created": false,
+    "current_operatively_authorized": false
+  },
+  "grant_artifact_checklist": {
+    "template_schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-single-use-grant.v0.2",
+    "fields": [
+      {
+        "field": "grant_id",
+        "class": "RUNTIME_GENERATED",
+        "current": null,
+        "requirement": "Unique non-reusable identifier."
+      },
+      {
+        "field": "authorization_decision_id",
+        "class": "DERIVED_FROM_SIGNED_DECISION",
+        "current": null
+      },
+      {
+        "field": "authorization_decision_sha256",
+        "class": "DERIVED_FROM_CANONICAL_DECISION_BYTES",
+        "current": null
+      },
+      {
+        "field": "nonce",
+        "class": "RUNTIME_GENERATED_SECRET_OR_UNPREDICTABLE_TOKEN",
+        "current": null,
+        "requirement": "Unique; reuse forbidden; generation mechanism and entropy source must be attested."
+      },
+      {
+        "field": "not_before_utc",
+        "class": "RUNTIME_GENERATED",
+        "current": null,
+        "requirement": "Within decision validity interval."
+      },
+      {
+        "field": "expires_at_utc",
+        "class": "RUNTIME_GENERATED",
+        "current": null,
+        "requirement": "Within decision validity interval and before execution start deadline."
+      },
+      {
+        "field": "single_use",
+        "class": "PREBOUND_CONSTANT",
+        "value": true
+      },
+      {
+        "field": "scope",
+        "class": "PREBOUND_CONSTANT",
+        "value": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4_TARGET_ONLY"
+      },
+      {
+        "field": "control_only",
+        "class": "OPERATIVE_VALUE_ONLY_AFTER_AUTHORITY_GATE",
+        "current": true,
+        "required_if_operatively_ratified": false
+      },
+      {
+        "field": "authorized",
+        "class": "OPERATIVE_VALUE_ONLY_AFTER_AUTHORITY_GATE",
+        "current": false,
+        "required_if_operatively_ratified": true
+      },
+      {
+        "field": "repository_commit_sha",
+        "class": "PREBOUND_CONSTANT",
+        "value": "d8890b9ef47936edf8bb7e758b882c898241b314"
+      },
+      {
+        "field": "target_contract_digest_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823"
+      },
+      {
+        "field": "run_payload_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c"
+      },
+      {
+        "field": "release_package_manifest_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621"
+      },
+      {
+        "field": "backend_rebind_contract_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "e60cc73cd3f1211dc8f4f504c427ac4f7b4dc59587d88ad1be4d710089b294a8"
+      },
+      {
+        "field": "resource_policy_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "f01a4c13248dcc82d759da7ff291b68a3100bb7bec91d81cc515b6ff067c3fa7"
+      },
+      {
+        "field": "result_schema_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "c9ed6807d36872ebcb2070d861fe472f4fd168b0c2f3abd630bbd3250d1d581d"
+      },
+      {
+        "field": "backend_interface_contract_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "ce40d78f3ab50ebab5ca2bc7d43b86ab54371a492bfab6a8bedb6e1d0de23048"
+      },
+      {
+        "field": "target_contract_file_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "1b3f410e837371f11b50d8550c86c2d6409efeb25232114284f778754d1ae31f"
+      },
+      {
+        "field": "dependency_lock_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f"
+      },
+      {
+        "field": "primary_source_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92"
+      },
+      {
+        "field": "primary_base_source_sha256",
+        "class": "PREBOUND_CONSTANT",
+        "value": "830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599"
+      },
+      {
+        "field": "target_a_F",
+        "class": "PREBOUND_CONSTANT",
+        "value": "1/4"
+      },
+      {
+        "field": "control_override_allowed",
+        "class": "PREBOUND_CONSTANT",
+        "value": false
+      },
+      {
+        "field": "automatic_authorization",
+        "class": "PREBOUND_CONSTANT",
+        "value": false
+      }
+    ],
+    "current_artifact_created": false,
+    "current_operatively_authorized": false
+  },
+  "authority_and_signature_provenance_gate": {
+    "status": "BLOCKED_MISSING_RATIFIED_ISSUING_AUTHORITY_AND_SIGNATURE_VERIFICATION_CONTRACT",
+    "finding": "The current technical AuthorizationDecision and SingleUseGrant schemas bind identifiers, hashes, scopes, and time windows but do not identify a ratified issuing authority, signer identity/key, canonical signature envelope, trust root, validity/revocation mechanism, or verifier requirement.",
+    "current_chat_command_is_operative_authorization": false,
+    "assistant_or_automation_may_self_authorize": false,
+    "required_before_any_operative_decision": [
+      "Append-only authority contract naming the competent decision authority and its scope.",
+      "Ratified signature/attestation profile defining canonical bytes, algorithm, signer identity or key fingerprint, trust root, validity interval, revocation/rotation handling, and replay semantics.",
+      "Independent verifier that fails closed if authority, signature, trust root, or payload binding is absent or invalid.",
+      "Separation of the readiness reviewer from any automatic self-issuance path, or an explicit ratified exception.",
+      "Audit record proving who/what issued the decision and under which authoritative rule."
+    ],
+    "permitted_mechanism": "RECONSTRUCTION_REQUIRED_OR_NEW_RATIFIED_GOVERNANCE_ARTIFACT",
+    "operative_decision_permitted_now": false
+  },
+  "runtime_issuance_gate": {
+    "status": "BLOCKED_RUNTIME_BINDINGS_NOT_YET_DESIGNATED",
+    "required_inputs": [
+      {
+        "field": "designated_execution_environment_id",
+        "current": null
+      },
+      {
+        "field": "persistent_reservation_store_identity",
+        "current": null
+      },
+      {
+        "field": "persistent_reservation_store_path_or_URI",
+        "current": null
+      },
+      {
+        "field": "reservation_store_access_control_and_crash_persistence_attestation",
+        "current": null
+      },
+      {
+        "field": "exclusive_local_result_path",
+        "current": null
+      },
+      {
+        "field": "result_path_absence_precheck_attestation",
+        "current": null
+      },
+      {
+        "field": "runtime_machine_and_platform_attestation",
+        "current": null
+      },
+      {
+        "field": "python_and_dependency_attestation",
+        "current": null
+      },
+      {
+        "field": "single_thread_BLAS_environment_attestation",
+        "current": null
+      },
+      {
+        "field": "GPU_disabled_attestation",
+        "current": null
+      },
+      {
+        "field": "network_isolation_attestation",
+        "current": null
+      },
+      {
+        "field": "RLIMIT_AS_enforcement_attestation",
+        "current": null
+      },
+      {
+        "field": "final_preimport_package_recomputation",
+        "current": null
+      }
+    ],
+    "operative_grant_permitted_now": false
+  },
+  "required_verification_order": [
+    "1_VERIFY_AUTHORITY_CONTRACT_AND_SIGNATURE_PROFILE",
+    "2_CHECKOUT_EXACT_RELEASE_SUBJECT_d8890b9",
+    "3_RECOMPUTE_16_MEMBER_PACKAGE_AND_ALL_BOUND_DIGESTS",
+    "4_VERIFY_RUNTIME_ENVIRONMENT_AND_PERSISTENT_RESERVATION_STORE",
+    "5_CREATE_SEPARATE_SIGNED_AUTHORIZATION_DECISION_IF_EXPLICITLY_RATIFIED",
+    "6_CANONICALIZE_AND_HASH_DECISION",
+    "7_CREATE_SEPARATE_BOUND_SINGLE_USE_GRANT_IF_DECISION_VALID",
+    "8_VERIFY_DECISION_AND_GRANT_WINDOWS_AND_IDENTICAL_BINDINGS",
+    "9_ATOMICALLY_RESERVE_GRANT_ID_AND_NONCE_IN_PERSISTENT_STORE",
+    "10_ONLY_THEN_APPLY_RESOURCE_LIMITS",
+    "11_ONLY_THEN_IMPORT_PHYSICAL_BACKEND",
+    "12_EXECUTE_EXACTLY_ONE_PRIMARY_CP01R4_TARGET_TRANSACTION",
+    "13_ATOMIC_NO_OVERWRITE_RESULT_COMMIT",
+    "14_STOP_WITH_WP3_AND_WP4_STILL_UNAUTHORIZED"
+  ],
+  "fail_closed_conditions": [
+    "Any missing or invalid authority/signature provenance.",
+    "Any mismatch in release subject, run, target, package, source, schema, or policy digest.",
+    "Expired or not-yet-valid decision or grant.",
+    "Grant ID or nonce already reserved in any terminal or reserved state.",
+    "Ephemeral reservation store proposed for operative use.",
+    "Result path already exists.",
+    "Required runtime, dependency, thread, GPU, network, memory, time, or size attestation fails.",
+    "Any request to mutate parameters, topology, seeds, mesh schedule, method, thresholds, source, or release package under the same run ID.",
+    "Any automatic WP3/WP4/K1-D/K1-E escalation."
+  ],
+  "current_gate_state": {
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "operative_authorization_decision_created": false,
+    "operative_single_use_grant_created": false,
+    "backend_imported": false,
+    "solver_executed": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "verdict": {
+    "technical_field_mapping": "COMPLETE",
+    "authority_signature_provenance": "BLOCKED",
+    "runtime_issuance_bindings": "BLOCKED",
+    "authorization": "NOT_GRANTED",
+    "grant": "NOT_CREATED",
+    "physical_execution": "NOT_ALLOWED"
+  },
+  "next_safe_action": "CREATE_AND_RATIFY_AUTHORITY_SIGNATURE_PROVENANCE_CONTRACT_OR_RECOVER_EXISTING_CANONICAL_AUTHORITY; THEN_IMPLEMENT_NONEXECUTING_FAIL_CLOSED_SIGNATURE_VERIFIER_QA_ONLY"
+}
