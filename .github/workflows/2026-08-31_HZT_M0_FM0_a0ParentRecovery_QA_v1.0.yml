@@ -1,0 +1,27 @@
+name: HZT-M0 FM-0 a0 Parent Recovery QA v1.0
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  fm0-a0-parent-recovery:
+    name: FM-0 a0 parent recovery fail-closed QA
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate targeted a0 provenance recovery
+        run: python tools/2026-08-31_validate_hzt_m0_fm0_a0_parent_recovery_v1.0.py
