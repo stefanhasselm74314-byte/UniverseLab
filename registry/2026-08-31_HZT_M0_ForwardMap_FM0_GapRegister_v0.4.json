@@ -1,0 +1,169 @@
+{
+  "schema": "hzt-m0.forward-map.fm0.gap-register.v0.4",
+  "date": "2026-08-31",
+  "supersedes": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.3.json",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "workstream": "WS1",
+  "work_package": "FM-0",
+  "gate": "FM-G0",
+  "gate_status": "OPEN",
+  "classification": "PROVENANCE_RECOVERY_NO_NEW_PHYSICS",
+  "blocking_gap_count": 10,
+  "fully_unresolved_blocking_gap_count": 7,
+  "partially_resolved_blocking_gap_count": 3,
+  "gaps": [
+    {
+      "id": "FM0-GAP-001",
+      "item": "a0",
+      "display": "a₀",
+      "kind": "PARAMETER_PARENT_CANON_BINDING",
+      "blocking": true,
+      "status": "PARTIALLY_RESOLVED_HISTORICAL_PROVENANCE_RECOVERED_CANONICAL_PARENT_OPEN",
+      "resolved": [
+        "historical_symbol_use",
+        "historical_formula_provenance_H31_H34_H42",
+        "historical_MOND_MDAR_BTFR_role",
+        "legacy_status_classification",
+        "historical_dimension_relation_as_explicit_noncanonical_inference"
+      ],
+      "missing": [
+        "current_canonical_definition",
+        "current_canonical_dimension_or_unit",
+        "current_parent_action_or_reduction_derivation",
+        "current_upstream_inputs",
+        "current_downstream_observables"
+      ],
+      "binding_artifact": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_a0Binding_v0.1.json",
+      "guard": "NO_IDENTITY_WITH_A0_WITHOUT_EXPLICIT_CANONICAL_BINDING"
+    },
+    {
+      "id": "FM0-GAP-002",
+      "item": "beta_tau",
+      "display": "β_τ",
+      "kind": "PARAMETER_PARENT_CANON_BINDING",
+      "blocking": true,
+      "status": "PARTIALLY_RESOLVED_EFFECTIVE_PROXY_AND_MAPPING_ROLES_RECOVERED_PARENT_DERIVATION_OPEN",
+      "resolved": [
+        "current_effective_proxy_definition",
+        "current_effective_proxy_dimensionless_contract",
+        "implemented_bridge_formula",
+        "implemented_beta_tau_I_B_degeneracy",
+        "implemented_beta_tau_zero_limit",
+        "declared_MDS_02_MDS_03_MDS_04_roles",
+        "later_audit_disposition_of_MDS_02_MDS_03_MDS_04",
+        "historical_beta_context",
+        "notation_collision_guards"
+      ],
+      "missing": [
+        "current_canonical_6D_parent_definition",
+        "physical_parent_dimension_and_normalization",
+        "derivation_or_rejection_of_MDS_02",
+        "derivation_fixation_or_exclusion_of_MDS_03",
+        "derivation_fixation_or_exclusion_of_MDS_04",
+        "explicit_normalization_binding_between_effective_proxy_and_physical_parameter",
+        "independent_resolution_of_beta_tau_I_B_degeneracy",
+        "released_reduced_to_observable_contract"
+      ],
+      "binding_artifact": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_BetaTauBinding_v0.1.json",
+      "guards": [
+        "NO_IDENTITY_WITH_LEGACY_DRIFT_BETA",
+        "NO_IDENTITY_WITH_MD2S_POTENTIAL_BETA",
+        "NO_IDENTITY_WITH_NORMAL_BUNDLE_BETA_I",
+        "NO_IDENTITY_WITH_CONICAL_OR_METRIC_BETA",
+        "NO_IDENTITY_WITH_BETA_0",
+        "NO_IDENTITY_WITH_RG_BETA_FUNCTIONS",
+        "DIMENSIONLESS_EFFECTIVE_PROXY_DOES_NOT_FIX_PHYSICAL_PARENT_NORMALIZATION"
+      ]
+    },
+    {
+      "id": "FM0-GAP-003",
+      "item": "R_chi",
+      "display": "R_χ",
+      "kind": "PARAMETER_PARENT_CANON_BINDING",
+      "blocking": true,
+      "status": "OPEN_RECOVERY_REQUIRED",
+      "missing": ["definition", "dimension", "parent_provenance", "status_class", "upstream_inputs", "downstream_observables"]
+    },
+    {
+      "id": "FM0-GAP-004",
+      "item": "I_B",
+      "display": "𝓘_B",
+      "kind": "PARAMETER_PARENT_CANON_BINDING",
+      "blocking": true,
+      "status": "OPEN_RECOVERY_REQUIRED",
+      "missing": ["definition", "dimension", "parent_provenance", "status_class", "upstream_inputs", "downstream_observables"]
+    },
+    {
+      "id": "FM0-GAP-005",
+      "item": "kappa_6",
+      "display": "κ_6",
+      "kind": "PARAMETER_PARENT_CANON_BINDING",
+      "blocking": true,
+      "status": "PARTIALLY_RESOLVED_CANONICAL_PARENT_RECOVERED_MAPPING_OPEN",
+      "resolved": [
+        "canonical_parent_definition",
+        "canonical_kappa_6_squared_dimension",
+        "kappa_6_dimension_with_explicit_algebraic_inference",
+        "parent_provenance",
+        "status_class",
+        "G_6_upstream_relation"
+      ],
+      "missing": [
+        "explicit_canonical_normalization_identity_to_M6_if_required",
+        "parent_to_reduced_parameter_role",
+        "downstream_observables"
+      ],
+      "binding_artifact": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Kappa6Binding_v0.1.json",
+      "guard": "M6_COEFFICIENT_MATCH_IS_ALGEBRAIC_INFERENCE_NOT_DIRECT_CANONICAL_BINDING"
+    },
+    {
+      "id": "FM0-GAP-006",
+      "item": "O_RAR",
+      "kind": "OBSERVABLE_INTERFACE_BINDING",
+      "blocking": true,
+      "status": "OPEN_RECOVERY_REQUIRED",
+      "current_class": "PROGRAM_DECLARATION_ONLY",
+      "missing": ["canonical_definition", "input_contract", "output_contract", "parent_to_reduced_bridge", "reduced_to_observable_bridge"]
+    },
+    {
+      "id": "FM0-GAP-007",
+      "item": "O_cosmo",
+      "kind": "OBSERVABLE_INTERFACE_BINDING",
+      "blocking": true,
+      "status": "OPEN_RECOVERY_REQUIRED",
+      "current_class": "PROGRAM_DECLARATION_ONLY",
+      "missing": ["canonical_definition", "input_contract", "output_contract", "parent_to_reduced_bridge", "reduced_to_observable_bridge"]
+    },
+    {
+      "id": "FM0-GAP-008",
+      "item": "O_growth",
+      "kind": "OBSERVABLE_INTERFACE_BINDING",
+      "blocking": true,
+      "status": "OPEN_RECOVERY_REQUIRED",
+      "current_class": "PROGRAM_DECLARATION_ONLY",
+      "missing": ["canonical_definition", "input_contract", "output_contract", "parent_to_reduced_bridge", "reduced_to_observable_bridge"]
+    },
+    {
+      "id": "FM0-GAP-009",
+      "item": "O_lensing",
+      "kind": "OBSERVABLE_INTERFACE_BINDING",
+      "blocking": true,
+      "status": "OPEN_RECOVERY_REQUIRED",
+      "current_class": "PROGRAM_DECLARATION_ONLY",
+      "missing": ["canonical_definition", "input_contract", "output_contract", "parent_to_reduced_bridge", "reduced_to_observable_bridge"]
+    },
+    {
+      "id": "FM0-GAP-010",
+      "item": "O_GW",
+      "kind": "OBSERVABLE_INTERFACE_BINDING",
+      "blocking": true,
+      "status": "OPEN_RECOVERY_REQUIRED",
+      "current_class": "PROGRAM_DECLARATION_ONLY",
+      "missing": ["canonical_definition", "input_contract", "output_contract", "parent_to_reduced_bridge", "reduced_to_observable_bridge"]
+    }
+  ],
+  "gate_rule": "FM-G0_MUST_REMAIN_OPEN_WHILE_ANY_BLOCKING_GAP_IS_OPEN",
+  "cp01r4_state": "FROZEN_NO_EXECUTION",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
