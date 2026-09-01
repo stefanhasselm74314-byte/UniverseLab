@@ -28,8 +28,9 @@ try{
     outputs:Object.fromEntries(['radMetric','matMetric','vacMetric','curvMetric','growthD','growthF','growthApprox','growthErr','epochNow','accelNow','eqRM','eqML','accA','qNow'].map(id=>[id,document.getElementById(id)?.textContent?.trim()])),
     eraBars:document.getElementById('eraBars')?.textContent?.trim()||'',statusText:document.getElementById('domainStatus')?.textContent||''
   }));
-  add('default_runtime_pass',initial.snapshot.status==='PASS'&&initial.snapshot.engineVersion==='1.0.0'&&initial.snapshot.version==='1.0.1'&&initial.snapshot.cellularDynamicsIndependent===true&&initial.snapshot.gridResamplingVisualOnly===true&&initial.canvases===2&&Object.values(initial.outputs).every(value=>value&&value!=='–')&&initial.eraBars.length>0&&/PASS/.test(initial.statusText),initial);
+  add('default_runtime_pass',initial.snapshot.status==='PASS'&&initial.snapshot.engineVersion==='1.0.0'&&initial.snapshot.version==='1.0.2'&&initial.snapshot.cellularDynamicsIndependent===true&&initial.snapshot.gridResamplingVisualOnly===true&&initial.canvases===2&&Object.values(initial.outputs).every(value=>value&&value!=='–')&&initial.eraBars.length>0&&/PASS/.test(initial.statusText),initial);
   add('exact_flat_reference_state',close(initial.snapshot.params.Om,.315,0,1e-12)&&close(initial.snapshot.params.Or,.000092,0,1e-12)&&close(initial.snapshot.params.Ode,.684908,0,1e-12)&&close(initial.snapshot.params.Ok,0,0,1e-12),{params:initial.snapshot.params});
+  add('exact_present_endpoint',initial.snapshot.domain?.displayTime?.endpoint?.x===0&&initial.snapshot.domain?.displayTime?.endpoint?.a===1,{endpoint:initial.snapshot.domain?.displayTime?.endpoint});
 
   const probe=await de.page.evaluate(()=>{
     const A=window.UniverseLabEmergence,C=window.UniverseLabCosmology,s=A.snapshot(),a=.5,z=1/a-1,p=s.params;
@@ -48,7 +49,7 @@ try{
     const A=window.UniverseLabEmergence,C=window.UniverseLabCosmology,mode=document.getElementById('expMode'),timeScale=document.getElementById('timeScale');
     mode.value='lcdm';mode.dispatchEvent(new Event('change',{bubbles:true}));timeScale.value='100';timeScale.dispatchEvent(new Event('input',{bubbles:true}));
     const before=A.snapshot(),after=A.step(),x0=Math.log(before.a),x1=Math.log(after.a),n=8192,h=(x1-x0)/n;
-    const integrand=x=>1/C.E(Math.exp(-x)-1,before.params,'lcdm');
+    const integrand=x=>1/C.E(Math.max(0,Math.exp(-Math.min(0,x))-1),before.params,'lcdm');
     let sum=integrand(x0)+integrand(x1);for(let i=1;i<n;i++)sum+=(i%2?4:2)*integrand(x0+i*h);
     return{before,after,expectedDeltaTau:.002,integratedDeltaTau:sum*h/3};
   });
@@ -66,11 +67,11 @@ try{
   add('cellular_automaton_remains_independent_under_invalid_cosmology',invalid.afterCellStep.generation===invalid.generationBefore+1&&close(invalid.afterCellStep.a,invalid.aBefore,0,0)&&invalid.afterCellStep.status==='INVALID_BACKGROUND_DOMAIN',{generationBefore:invalid.generationBefore,generationAfter:invalid.afterCellStep.generation,aBefore:invalid.aBefore,aAfter:invalid.afterCellStep.a,status:invalid.afterCellStep.status});
 
   const recovered=await de.page.evaluate(()=>window.UniverseLabEmergence.resetCosmology());
-  add('reset_recovers_reference_state',recovered.status==='PASS'&&close(recovered.params.Om,.315,0,1e-12)&&close(recovered.params.Or,.000092,0,1e-12)&&close(recovered.params.Ode,.684908,0,1e-12)&&close(recovered.params.Ok,0,0,1e-12)&&recovered.growth?.model==='lcdm'&&recovered.tau===0,recovered);
+  add('reset_recovers_reference_state',recovered.status==='PASS'&&close(recovered.params.Om,.315,0,1e-12)&&close(recovered.params.Or,.000092,0,1e-12)&&close(recovered.params.Ode,.684908,0,1e-12)&&close(recovered.params.Ok,0,0,1e-12)&&recovered.domain?.displayTime?.endpoint?.x===0&&recovered.domain?.displayTime?.endpoint?.a===1&&recovered.growth?.model==='lcdm'&&recovered.tau===0,recovered);
 
   const en=await openPage(context,'emergence-en.html','en');
   const parity=await en.page.evaluate(()=>({snapshot:window.UniverseLabEmergence.snapshot(),probe:window.UniverseLabEmergence.probeScaleFactor(.5),lang:document.documentElement.lang,title:document.title,canvases:document.querySelectorAll('canvas').length,separation:document.getElementById('separationNote')?.textContent||''}));
-  add('de_en_runtime_parity',parity.snapshot.status==='PASS'&&parity.snapshot.engineVersion==='1.0.0'&&parity.snapshot.version==='1.0.1'&&parity.lang==='en'&&/Emergence/.test(parity.title)&&parity.canvases===2&&close(parity.probe.E,probe.adapter.E)&&close(parity.probe.q,probe.adapter.q)&&close(parity.probe.growth.D,probe.adapter.D)&&close(parity.probe.growth.f,probe.adapter.f)&&/cellular automaton/i.test(parity.separation),parity);
+  add('de_en_runtime_parity',parity.snapshot.status==='PASS'&&parity.snapshot.engineVersion==='1.0.0'&&parity.snapshot.version==='1.0.2'&&parity.lang==='en'&&/Emergence/.test(parity.title)&&parity.canvases===2&&close(parity.probe.E,probe.adapter.E)&&close(parity.probe.q,probe.adapter.q)&&close(parity.probe.growth.D,probe.adapter.D)&&close(parity.probe.growth.f,probe.adapter.f)&&/cellular automaton/i.test(parity.separation),parity);
 
   add('no_browser_or_http_errors',de.errors.length===0&&de.httpErrors.length===0&&en.errors.length===0&&en.httpErrors.length===0,{de_errors:de.errors,de_http_errors:de.httpErrors,en_errors:en.errors,en_http_errors:en.httpErrors});
   await de.page.close();await en.page.close();await context.close();
