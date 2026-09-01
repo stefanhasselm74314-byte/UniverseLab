@@ -1,0 +1,163 @@
+{
+  "schema": "universelab.current-main-canonical-state.v1",
+  "version": "1.1.0",
+  "snapshot_date": "2026-09-01",
+  "snapshot_timestamp": "2026-09-01T23:20:00+02:00",
+  "time_zone": "Europe/Berlin",
+  "repository": "stefanhasselm74314-byte/UniverseLab",
+  "basis_main_commit": "2f03998fbb36185123fc02f4fd3cb1df5749834a",
+  "supersedes": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json",
+  "authority": {
+    "status": "CANONICAL_RECONCILIATION_FOR_MERGED_MAIN_ONLY",
+    "open_pull_requests_have_canonical_effect": false,
+    "source_priority": [
+      "current_explicit_user_decision",
+      "merged_versioned_repository_registry_or_governance_artifact",
+      "ratified_or_frozen_project_file",
+      "current_project_context",
+      "persistent_memory",
+      "historical_chat_or_assistant_summary"
+    ],
+    "rule": "Green CI, an open pull request, a visualization, a chat command or an assistant statement cannot by itself promote scientific, governance or execution status."
+  },
+  "architecture": {
+    "program_chain": ["HPVS", "HZT-M0", "HZT-Full"],
+    "governing_document": "MD-0",
+    "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"],
+    "hzt_full_status": "NOT_CONSTRUCTED"
+  },
+  "program": {
+    "program_id": "UL-HZT-10M-2026-2027",
+    "status": "ACTIVE_RATIFIED_RESEARCH_PROGRAM",
+    "horizon": {"start": "2026-09-01", "end": "2027-06-30"},
+    "active_workstream": "WS1",
+    "active_work_package": "FM-0",
+    "work_package_status": "ACTIVE_TARGETED_PARENT_RECOVERY",
+    "gate": "FM-G0",
+    "gate_status": "OPEN",
+    "blocking_gap_count": 10,
+    "fully_unresolved_blocking_gap_count": 7,
+    "partially_resolved_blocking_gap_count": 3
+  },
+  "public_numerics": {
+    "closure": "registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json",
+    "status": "COMPLETE_FOR_DECLARED_PUBLIC_SET",
+    "canonical_engine": {
+      "path": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+      "api_version": "1.0.0",
+      "implementation_revision": "1.0.1"
+    },
+    "merged_pull_request_chain": [196, 197, 198, 199, 200, 201],
+    "canonical_pages": {
+      "validation": "ACTIVE_CANONICAL_ENGINE",
+      "observatory": "ACTIVE_CANONICAL_ENGINE",
+      "compare_safe": "ACTIVE_CANONICAL_ENGINE",
+      "comparison_routes": "CONSOLIDATED_TO_CANONICAL_SAFE_ENGINE",
+      "emergence": "ACTIVE_CANONICAL_BACKGROUND_AND_GROWTH_ADAPTER"
+    },
+    "remaining_independent_public_cosmology_engines_in_declared_set": [],
+    "scientific_effect": "NONE"
+  },
+  "physical_governance": {
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+    "operative_authorization_decision": "NOT_CREATED",
+    "operative_single_use_grant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "solver_authorized": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "automatic_wp3_wp4_start": false
+  },
+  "scientific_status": {
+    "static_m1_operator": "DERIVED_CONDITIONAL",
+    "continuum_bvp_operator": "FUNCTION_SPACE_AND_TRACE_TEMPLATE_DEFINED",
+    "continuum_bvp_jacobian": "NOT_PROVEN",
+    "fredholm_property": "NOT_PROVEN",
+    "constraint_propagation": "PROVEN_SYMBOLIC_CONDITIONAL",
+    "h3_rank_one_counterexample": "PASS_EXACT_ALGEBRAIC_COUNTEREXAMPLE_DYNAMIC_SELECTION_OPEN",
+    "h4r4a_local_reduced_ibvp": "PASS_CONDITIONAL_ANALYTIC_ON_DECLARED_NONDEGENERATE_DOMAIN",
+    "h4r4b_global_control_witness": "PASS_FOR_EXPLICIT_B_SQUARED_ZERO_CONTROL_SUBSECTOR_ONLY",
+    "generic_m1_global_background_existence": "OPEN",
+    "parent_to_reduced_to_observable_forward_map": "OPEN",
+    "full_ghost_freedom": "OPEN",
+    "physical_hamiltonian_positivity": "OPEN"
+  },
+  "fm0": {
+    "inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+    "parameter_set": {
+      "a0": "HISTORICAL_PROVENANCE_RECOVERED_CANONICAL_PARENT_OPEN",
+      "beta_tau": "EFFECTIVE_PROXY_AND_MAPPING_ROLES_RECOVERED_PARENT_DERIVATION_OPEN",
+      "R_chi": "OPEN_RECOVERY_REQUIRED",
+      "I_B": "OPEN_RECOVERY_REQUIRED",
+      "kappa_6": "CANONICAL_PARENT_RECOVERED_REDUCED_OBSERVABLE_MAPPING_OPEN"
+    },
+    "observable_blocks": {
+      "O_RAR": "PROGRAM_DECLARATION_ONLY",
+      "O_cosmo": "PROGRAM_DECLARATION_ONLY",
+      "O_growth": "PROGRAM_DECLARATION_ONLY",
+      "O_lensing": "PROGRAM_DECLARATION_ONLY",
+      "O_GW": "PROGRAM_DECLARATION_ONLY"
+    },
+    "effective_identifiability": {
+      "implemented_combination": "beta_tau * I_B",
+      "separate_beta_tau_I_B_identifiability": "NO_IN_CURRENT_IMPLEMENTATION",
+      "structural_rank_bound": "rank J_(beta_tau,I_B) <= 1 without an independent channel"
+    }
+  },
+  "merged_main_lineage": [
+    {"pull_request": 195, "role": "CURRENT_MAIN_STATE_RECONCILIATION", "status": "MERGED"},
+    {"pull_request": 196, "role": "CANONICAL_COSMOLOGY_ENGINE_FOUNDATION", "status": "MERGED"},
+    {"pull_request": 197, "role": "VALIDATION_MIGRATION", "status": "MERGED"},
+    {"pull_request": 198, "role": "OBSERVATORY_MIGRATION", "status": "MERGED"},
+    {"pull_request": 199, "role": "COMPARE_SAFE_MIGRATION", "status": "MERGED"},
+    {"pull_request": 200, "role": "COMPARISON_ROUTE_CONSOLIDATION", "status": "MERGED"},
+    {
+      "pull_request": 201,
+      "role": "EMERGENCE_CANONICAL_BACKGROUND_AND_GROWTH_ADAPTER",
+      "status": "MERGED",
+      "merge_commit": "2f03998fbb36185123fc02f4fd3cb1df5749834a"
+    }
+  ],
+  "open_noncanonical_work": [
+    {
+      "pull_request": 137,
+      "title": "ULSH-01: harden C-PHYS physical response-rank gate",
+      "state": "OPEN_DRAFT",
+      "canonical_effect": "NONE_UNTIL_REBUILT_ON_CURRENT_MAIN_AND_MERGED_AFTER_EXACT_MERGE_TREE_AUDIT",
+      "reported_review_blockers": ["AUTHORITY_SIGNATURE_PROVENANCE", "RUNTIME_ISSUANCE_BINDINGS"]
+    }
+  ],
+  "status_sources": {
+    "research_program": "registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json",
+    "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+    "public_numerics_closure": "registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json",
+    "canonical_engine_contract": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
+    "previous_current_state": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json",
+    "previous_site_state": "registry/2026-09-01_UniverseLab_SiteState_v1.1.json",
+    "previous_checkpoint": "registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json"
+  },
+  "forbidden_inferences": [
+    "NO_GREEN_CI_AS_PHYSICAL_EVIDENCE",
+    "NO_TECHNICAL_MIGRATION_CLOSURE_AS_EMPIRICAL_MODEL_CONFIRMATION",
+    "NO_CANONICAL_ENGINE_AS_6D_PARENT_DERIVATION",
+    "NO_SQUARE_BVP_AS_JACOBIAN_INVERTIBILITY",
+    "NO_LOCAL_IBVP_THEOREM_AS_GLOBAL_COMPACTIFIED_EXISTENCE",
+    "NO_GLOBAL_ZERO_CONTROL_WITNESS_AS_GENERIC_D2NQ_SELECTION",
+    "NO_LINEAR_GR_GROWTH_REFERENCE_AS_RELEASED_HZT_GROWTH_MAP",
+    "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
+    "NO_OPEN_PR_STATUS_AS_MERGED_MAIN_CANON"
+  ],
+  "next_safe_program_step": "RESUME_FM0_PARENT_TO_REDUCED_TO_OBSERVABLE_PROVENANCE_RECOVERY_WITHOUT_PHYSICAL_EXECUTION",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
