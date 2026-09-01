@@ -1,8 +1,9 @@
 (()=>{
   'use strict';
 
-  const VERSION='1.0.2';
+  const VERSION='1.0.3';
   const STORAGE_KEY='universelab';
+  const STATE_SCHEMA='universelab.emergence-state.v2';
   const C=globalThis.UniverseLabCosmology;
   const $=selector=>document.querySelector(selector);
   const simCanvas=$('#c');
@@ -12,33 +13,15 @@
   const language=(document.documentElement.lang||'de').toLowerCase().startsWith('en')?'en':'de';
 
   const text={
-    de:{
-      start:'▶ Start',pause:'⏸ Pause',engine:'kanonischer Growth-Adapter',invalid:'ungültige Domäne',
-      pass:'PASS',noCurve:'Keine kosmologische Kurve aus einer ungültigen reellen Hintergrunddomäne.',
-      staticMode:'Kosmologische Anzeige statisch',physicalMode:'ΛCDM-Anzeigezeit aktiv',heuristicMode:'Heuristische Gittergröße aktiv',
-      radiation:'Strahlungsära',matter:'Materieära',curvature:'Krümmungsära',vacuum:'Vakuumära',
-      accelerated:'beschleunigt',decelerated:'gebremst',saved:'Zustand gespeichert',loaded:'Zustand geladen',
-      missingSave:'Kein gespeicherter Zustand',visualOnly:'Gitterreskalierung ist ausschließlich Visualisierung',
-      modelLine:'Zellautomat und Kosmologie sind dynamisch entkoppelt',
-      separationLong:'Zentrale Trennung: Der Zellautomat beeinflusst weder E(a), D(a), f(a) noch kosmologische Epochen. Die optionale Gittervergrößerung ist eine Visualisierungskonvention und keine Herleitung kosmischer Strukturbildung.'
-    },
-    en:{
-      start:'▶ Start',pause:'⏸ Pause',engine:'canonical growth adapter',invalid:'invalid domain',
-      pass:'PASS',noCurve:'No cosmological curve is generated from an invalid real background domain.',
-      staticMode:'Cosmology display held static',physicalMode:'ΛCDM display time active',heuristicMode:'Heuristic grid size active',
-      radiation:'radiation era',matter:'matter era',curvature:'curvature era',vacuum:'vacuum era',
-      accelerated:'accelerating',decelerated:'decelerating',saved:'State saved',loaded:'State loaded',
-      missingSave:'No saved state',visualOnly:'Grid resampling is visualization only',
-      modelLine:'Cellular automaton and cosmology are dynamically decoupled',
-      separationLong:'Core separation: the cellular automaton affects neither E(a), D(a), f(a), nor the cosmological epochs. Optional grid enlargement is a visualization convention, not a derivation of cosmic structure formation.'
-    }
+    de:{start:'▶ Start',pause:'⏸ Pause',engine:'kanonischer Growth-Adapter',invalid:'ungültige Domäne',pass:'PASS',noCurve:'Keine kosmologische Kurve aus einer ungültigen reellen Hintergrunddomäne.',staticMode:'Kosmologische Anzeige statisch',physicalMode:'ΛCDM-Anzeigezeit aktiv',heuristicMode:'Heuristische Anzeigegröße aktiv',radiation:'Strahlungsära',matter:'Materieära',curvature:'Krümmungsära',vacuum:'Vakuumära',accelerated:'beschleunigt',decelerated:'gebremst',saved:'Zustand gespeichert',missingSave:'Kein gespeicherter Zustand',visualOnly:'Anzeigeresampling verändert das Simulationsgitter nicht',modelLine:'Zellautomat und Kosmologie sind dynamisch entkoppelt',separationLong:'Zentrale Trennung: Der Zellautomat beeinflusst weder E(a), D(a), f(a) noch kosmologische Epochen. Die optionale Anzeigevergrößerung wird aus einer getrennten Renderansicht erzeugt und verändert weder Gittergröße noch Zellzustand des Automaten.'},
+    en:{start:'▶ Start',pause:'⏸ Pause',engine:'canonical growth adapter',invalid:'invalid domain',pass:'PASS',noCurve:'No cosmological curve is generated from an invalid real background domain.',staticMode:'Cosmology display held static',physicalMode:'ΛCDM display time active',heuristicMode:'Heuristic display size active',radiation:'radiation era',matter:'matter era',curvature:'curvature era',vacuum:'vacuum era',accelerated:'accelerating',decelerated:'decelerating',saved:'State saved',missingSave:'No saved state',visualOnly:'Display resampling does not modify the simulation lattice',modelLine:'Cellular automaton and cosmology are dynamically decoupled',separationLong:'Core separation: the cellular automaton affects neither E(a), D(a), f(a), nor the cosmological epochs. Optional display enlargement is generated in a separate render view and changes neither the automaton lattice size nor its cell state.'}
   }[language];
 
   const state={
-    status:'INITIALIZING',running:false,generation:0,N:120,
+    status:'INITIALIZING',running:false,generation:0,N:120,displayN:120,
     cells:new Uint8Array(120*120),next:new Uint8Array(120*120),
     lastFrame:0,accumulator:0,history:[],params:null,model:'lcdm',domain:null,
-    growth:null,timeMap:null,a:1e-3,tau:0,revision:0,error:null,installPrompt:null,
+    growth:null,timeMap:null,a:1e-3,tau:0,revision:0,error:null,installPrompt:null,lastLoad:null,
     cellularDynamicsIndependent:true,gridResamplingVisualOnly:true
   };
   const parameterIds=['h0','om','or','ol'];
@@ -48,6 +31,7 @@
   function setText(id,value){const node=document.getElementById(id);if(node)node.textContent=String(value);}
   function fmt(value,digits=3){return Number.isFinite(value)?value.toLocaleString(language==='de'?'de-DE':'en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits}):'–';}
   function fmtExp(value,digits=3){return Number.isFinite(value)?value.toExponential(digits).replace('.',language==='de'?',':'.'):'–';}
+  function clamp(value,min,max){return Math.max(min,Math.min(max,value));}
 
   function readParams(){
     if(!C)throw new Error('CANONICAL_COSMOLOGY_ENGINE_MISSING');
@@ -77,7 +61,7 @@
   function dominantEra(c){return[[text.radiation,c.radiation],[text.matter,c.matter],[text.curvature,Math.abs(c.curvature)],[text.vacuum,c.vacuum]].sort((a,b)=>b[1]-a[1])[0][0];}
 
   function solveAccelerationOnset(params,aMin){
-    const qAt=a=>C.q(1/a-1,params,'lcdm');
+    const qAt=a=>C.q(Math.max(0,1/a-1),params,'lcdm');
     const samples=2048;
     let previousA=aMin,previousQ=qAt(aMin);
     for(let i=1;i<=samples;i++){
@@ -97,11 +81,7 @@
 
   function buildTimeMap(params,aMin,points=4096){
     const x0=Math.log(aMin),dx=-x0/points,rows=[];
-    const invE=x=>{
-      const xx=Math.min(0,x);
-      const z=Math.max(0,Math.exp(-xx)-1);
-      return 1/C.E(z,params,'lcdm');
-    };
+    const invE=x=>1/C.E(Math.max(0,Math.exp(-Math.min(0,x))-1),params,'lcdm');
     let x=x0,tau=0;
     rows.push({x,a:aMin,tau});
     for(let i=0;i<points;i++){
@@ -121,7 +101,7 @@
   }
 
   function tauAtScaleFactor(a,map){
-    const aa=Math.max(map.aMin,Math.min(1,Number(a)));
+    const aa=clamp(Number(a),map.aMin,1);
     if(aa<=map.aMin)return 0;
     if(aa>=1)return map.totalTau;
     const[lo,hi]=lowerBracket(map.rows,aa,'a'),A=map.rows[lo],B=map.rows[hi];
@@ -130,7 +110,7 @@
   }
 
   function scaleFactorAtTau(tau,map){
-    const tt=Math.max(0,Math.min(map.totalTau,Number(tau)));
+    const tt=clamp(Number(tau),0,map.totalTau);
     if(tt<=0)return map.aMin;
     if(tt>=map.totalTau)return 1;
     const[lo,hi]=lowerBracket(map.rows,tt,'tau'),A=map.rows[lo],B=map.rows[hi];
@@ -150,14 +130,13 @@
     state.domain={scaleFactor:scaleDomain,ageGyr:age,epochs,displayTime:{aMin:timeMap.aMin,points:timeMap.points,totalTau:timeMap.totalTau,endpoint:{x:timeMap.rows.at(-1).x,a:timeMap.rows.at(-1).a}}};
     state.error=null;state.status='PASS';state.history=[];
     if(resetScale||!Number.isFinite(state.a)){state.a=growth.aInit;state.tau=0;}
-    else{state.a=Math.max(growth.aInit,Math.min(1,state.a));state.tau=tauAtScaleFactor(state.a,timeMap);}
+    else{state.a=clamp(state.a,growth.aInit,1);state.tau=tauAtScaleFactor(state.a,timeMap);}
     state.revision++;
-    return{params,model,scaleDomain,growth,timeMap,age,epochs};
   }
 
   function diagnosticsAt(a=state.a){
     if(!state.params||!state.growth)throw new Error('COSMOLOGY_NOT_READY');
-    const aa=Math.max(state.growth.aInit,Math.min(1,Number(a))),z=Math.max(0,1/aa-1);
+    const aa=clamp(Number(a),state.growth.aInit,1),z=Math.max(0,1/aa-1);
     const E=C.E(z,state.params,state.model),components=componentState(aa,state.params),growth=C.growthAtZ(z,state.growth),q=C.q(z,state.params,state.model);
     const omegaMatter=components.fractions.matter,approximation=omegaMatter>=0?omegaMatter**.55:NaN;
     const approximationError=Number.isFinite(approximation)&&growth.f!==0?(approximation-growth.f)/growth.f:NaN;
@@ -173,15 +152,25 @@
 
   function ruleSets(value){const[birth,survival]=String(value).split('/');return{birth:new Set([...birth.slice(1)].map(Number)),survival:new Set([...survival.slice(1)].map(Number))};}
 
-  function resizeGrid(target){
-    const nextN=Math.max(40,Math.min(260,Math.round(target)));
-    if(nextN===state.N)return;
-    const previous=state.cells,previousN=state.N;
-    state.N=nextN;state.cells=new Uint8Array(nextN*nextN);state.next=new Uint8Array(nextN*nextN);
-    for(let y=0;y<nextN;y++)for(let x=0;x<nextN;x++){
-      const sx=Math.min(previousN-1,Math.floor(x*previousN/nextN)),sy=Math.min(previousN-1,Math.floor(y*previousN/nextN));
-      state.cells[y*nextN+x]=previous[sy*previousN+sx];
+  function restoreSimulationGrid(target,cells=null){
+    const N=clamp(Math.round(Number(target)||120),40,260);
+    state.N=N;
+    state.cells=new Uint8Array(N*N);
+    state.next=new Uint8Array(N*N);
+    if(Array.isArray(cells)&&cells.length===N*N)state.cells=Uint8Array.from(cells,value=>value?1:0);
+  }
+
+  function displayGridSize(){
+    const mode=$('#expMode')?.value||'lcdm';
+    if(mode==='lcdm'&&state.status==='PASS'&&state.growth){
+      const ratio=Math.max(1,state.a/state.growth.aInit);
+      return clamp(Math.round(state.N+28*Math.log10(ratio)),state.N,260);
     }
+    if(mode==='heuristic'){
+      const strength=Number($('#expand')?.value||0),period=Math.max(8,Math.round(110-strength));
+      return clamp(state.N+2*Math.floor(state.generation/period),state.N,260);
+    }
+    return state.N;
   }
 
   function seed(kind=$('#preset')?.value||'random'){
@@ -211,34 +200,30 @@
       state.next[index]=((state.cells[index]?rules.survival.has(neighbors):rules.birth.has(neighbors))||Math.random()<noise)?1:0;
     }
     [state.cells,state.next]=[state.next,state.cells];state.generation++;
-    const mode=$('#expMode')?.value||'lcdm';
-    if(mode==='heuristic'){
-      const strength=Number($('#expand')?.value||0);
-      if(strength&&state.generation%Math.max(8,Math.round(110-strength))===0)resizeGrid(state.N+2);
-    }else if(mode==='lcdm'&&state.status==='PASS'){
-      advanceCosmology();
-      const ratio=Math.max(1,state.a/(state.growth?.aInit||state.a)),target=120+28*Math.log10(ratio);
-      if(target>state.N)resizeGrid(target);
-    }
+    if($('#expMode')?.value==='lcdm'&&state.status==='PASS')advanceCosmology();
     if(state.status==='PASS')recordHistory();
     draw();return snapshot();
   }
 
   function liveCount(){let total=0;for(const value of state.cells)total+=value;return total;}
+  function cellHash(){let hash=2166136261;for(const value of state.cells)hash=Math.imul(hash^value,16777619);return(hash>>>0).toString(16).padStart(8,'0');}
 
   function recordHistory(){
     if(state.status!=='PASS'||!state.params||!state.growth)return;
     const live=liveCount(),d=diagnosticsAt(state.a);
-    state.history.push({generation:state.generation,N:state.N,live,density:live/(state.N*state.N),tau:state.tau,a:d.a,E:d.E,q:d.q,radiation:d.components.fractions.radiation,matter:d.components.fractions.matter,curvature:d.components.fractions.curvature,vacuum:d.components.fractions.vacuum,D:d.growth.D,f:d.growth.f,approximation:d.approximation,era:d.era});
+    state.history.push({generation:state.generation,N:state.N,displayN:displayGridSize(),live,density:live/(state.N*state.N),tau:state.tau,a:d.a,E:d.E,q:d.q,radiation:d.components.fractions.radiation,matter:d.components.fractions.matter,curvature:d.components.fractions.curvature,vacuum:d.components.fractions.vacuum,D:d.growth.D,f:d.growth.f,approximation:d.approximation,era:d.era});
     if(state.history.length>2500)state.history.shift();
   }
 
   function drawCells(){
     if(!simCtx||!simCanvas)return;
     simCtx.fillStyle='#02030a';simCtx.fillRect(0,0,simCanvas.width,simCanvas.height);
-    const scale=simCanvas.width/state.N;
-    for(let y=0;y<state.N;y++)for(let x=0;x<state.N;x++)if(state.cells[y*state.N+x]){
-      simCtx.fillStyle=`hsl(${235+55*((x+y+state.generation*.15)%state.N/state.N)} 90% 68%)`;
+    const renderN=displayGridSize();state.displayN=renderN;
+    const scale=simCanvas.width/renderN;
+    for(let y=0;y<renderN;y++)for(let x=0;x<renderN;x++){
+      const sx=Math.min(state.N-1,Math.floor(x*state.N/renderN)),sy=Math.min(state.N-1,Math.floor(y*state.N/renderN));
+      if(!state.cells[sy*state.N+sx])continue;
+      simCtx.fillStyle=`hsl(${235+55*((x+y+state.generation*.15)%renderN/renderN)} 90% 68%)`;
       simCtx.fillRect(x*scale,y*scale,Math.ceil(scale),Math.ceil(scale));
     }
   }
@@ -286,7 +271,7 @@
       $('#emergenceBadge').classList.add('invalid');$('#emergenceBadge').textContent=text.invalid;return;
     }
     const d=diagnosticsAt(state.a),live=liveCount();
-    $('#hud').innerHTML=`Generation: ${state.generation}<br>Gitter: ${state.N}×${state.N}<br>Aktiv: ${live}<br>a: ${fmtExp(d.a,3)}<br>E: ${fmtExp(d.E,3)}<br>D: ${fmt(d.growth.D,4)}<br>f: ${fmt(d.growth.f,4)}`;
+    $('#hud').innerHTML=`Generation: ${state.generation}<br>Simulationsgitter: ${state.N}×${state.N}<br>Anzeigegitter: ${state.displayN}×${state.displayN}<br>Aktiv: ${live}<br>a: ${fmtExp(d.a,3)}<br>E: ${fmtExp(d.E,3)}<br>D: ${fmt(d.growth.D,4)}<br>f: ${fmt(d.growth.f,4)}`;
     setText('radMetric',`${fmt(100*d.components.fractions.radiation,2)} %`);setText('matMetric',`${fmt(100*d.components.fractions.matter,2)} %`);setText('vacMetric',`${fmt(100*d.components.fractions.vacuum,2)} %`);setText('curvMetric',`${fmt(100*d.components.fractions.curvature,2)} %`);
     setText('growthD',fmt(d.growth.D,5));setText('growthF',fmt(d.growth.f,5));setText('growthApprox',fmt(d.approximation,5));setText('growthErr',Number.isFinite(d.approximationError)?`${fmt(100*d.approximationError,2)} %`:'–');
     setText('epochNow',d.era);setText('accelNow',d.expansion);setText('eqRM',state.domain.epochs.radiationMatter?fmtExp(state.domain.epochs.radiationMatter,3):'–');setText('eqML',state.domain.epochs.matterVacuum?fmt(state.domain.epochs.matterVacuum,4):'–');setText('accA',state.domain.epochs.acceleration?fmt(state.domain.epochs.acceleration,4):'–');setText('qNow',fmt(d.q,4));
@@ -323,27 +308,41 @@
   }
 
   function cellFromPointer(event){
-    const rect=simCanvas.getBoundingClientRect(),x=Math.floor((event.clientX-rect.left)/rect.width*state.N),y=Math.floor((event.clientY-rect.top)/rect.height*state.N);
+    const rect=simCanvas.getBoundingClientRect();
+    const renderN=state.displayN||state.N,xDisplay=Math.floor((event.clientX-rect.left)/rect.width*renderN),yDisplay=Math.floor((event.clientY-rect.top)/rect.height*renderN);
+    const x=Math.min(state.N-1,Math.floor(xDisplay*state.N/renderN)),y=Math.min(state.N-1,Math.floor(yDisplay*state.N/renderN));
     if(x>=0&&x<state.N&&y>=0&&y<state.N){state.cells[y*state.N+x]=1;drawCells();}
   }
 
+  function applySavedInputs(payload){
+    const source=payload&&typeof payload.inputs==='object'&&payload.inputs?payload.inputs:
+      payload&&typeof payload.settings==='object'&&payload.settings?payload.settings:{};
+    for(const[id,value]of Object.entries(source)){
+      const node=document.getElementById(id);
+      if(node&&value!=null)node.value=String(value);
+    }
+    return payload?.inputs?'CURRENT_INPUTS':payload?.settings?'LEGACY_SETTINGS_TO_INPUTS':'NO_SETTINGS';
+  }
+
   function saveState(){
-    const payload={schema:'universelab.emergence-state.v1',savedAt:new Date().toISOString(),N:state.N,generation:state.generation,a:state.a,tau:state.tau,cells:Array.from(state.cells),inputs:Object.fromEntries([...parameterIds,...controlIds,'expMode','preset','rule'].map(id=>[id,document.getElementById(id)?.value]))};
+    const payload={schema:STATE_SCHEMA,savedAt:new Date().toISOString(),N:state.N,generation:state.generation,a:state.a,tau:state.tau,cells:Array.from(state.cells),inputs:Object.fromEntries([...parameterIds,...controlIds,'expMode','preset','rule'].map(id=>[id,document.getElementById(id)?.value]))};
     localStorage.setItem(STORAGE_KEY,JSON.stringify(payload));$('#domainStatus').dataset.notice=text.saved;return payload;
   }
 
   function loadState(){
     const raw=localStorage.getItem(STORAGE_KEY);if(!raw){$('#domainStatus').dataset.notice=text.missingSave;return null;}
-    const payload=JSON.parse(raw);
-    for(const[id,value]of Object.entries(payload.inputs||{})){const node=document.getElementById(id);if(node&&value!=null)node.value=String(value);}
-    updateOutputs();cosmologyChanged();resizeGrid(Number(payload.N)||120);
-    if(Array.isArray(payload.cells)&&payload.cells.length===state.N*state.N){state.cells=Uint8Array.from(payload.cells,value=>value?1:0);state.next=new Uint8Array(state.N*state.N);}
-    state.generation=Math.max(0,Number(payload.generation)||0);state.a=Math.max(state.growth?.aInit||1e-3,Math.min(1,Number(payload.a)||state.growth?.aInit||1e-3));state.tau=state.timeMap?tauAtScaleFactor(state.a,state.timeMap):0;
-    state.history=[];recordHistory();draw();return snapshot();
+    const payload=JSON.parse(raw),migration=applySavedInputs(payload);
+    updateOutputs();cosmologyChanged();
+    restoreSimulationGrid(payload.N,payload.cells);
+    state.generation=Math.max(0,Number(payload.generation)||0);
+    state.a=clamp(Number(payload.a)||state.growth?.aInit||1e-3,state.growth?.aInit||1e-3,1);
+    state.tau=state.timeMap?tauAtScaleFactor(state.a,state.timeMap):0;
+    state.history=[];state.lastLoad={sourceSchema:payload.schema||'legacy-pre-schema',migration,legacyHistoryDiscarded:Array.isArray(payload.history)};
+    recordHistory();draw();return snapshot();
   }
 
   function exportCsv(){
-    const columns=['generation','N','live','density','tau','a','E','q','radiation','matter','curvature','vacuum','D','f','approximation','era'];
+    const columns=['generation','N','displayN','live','density','tau','a','E','q','radiation','matter','curvature','vacuum','D','f','approximation','era'];
     const lines=[columns.join(',')];for(const row of state.history)lines.push(columns.map(key=>JSON.stringify(row[key]??'')).join(','));
     const blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8'}),link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download='UniverseLab_Emergence_Diagnostics.csv';link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);
   }
@@ -360,7 +359,7 @@
 
   function probeScaleFactor(a){return diagnosticsAt(a);}
   function snapshot(){
-    return JSON.parse(JSON.stringify({version:VERSION,engineVersion:C?.VERSION||null,status:state.status,running:state.running,generation:state.generation,N:state.N,live:liveCount(),a:state.a,tau:state.tau,revision:state.revision,error:state.error,params:state.params,model:state.model,domain:state.domain,growth:state.growth?{model:state.growth.model,aInit:state.growth.aInit,steps:state.growth.steps}:null,cellularDynamicsIndependent:state.cellularDynamicsIndependent,gridResamplingVisualOnly:state.gridResamplingVisualOnly,expMode:$('#expMode')?.value||null}));
+    return JSON.parse(JSON.stringify({version:VERSION,engineVersion:C?.VERSION||null,status:state.status,running:state.running,generation:state.generation,N:state.N,displayN:state.displayN,live:liveCount(),cellHash:cellHash(),a:state.a,tau:state.tau,revision:state.revision,error:state.error,params:state.params,model:state.model,domain:state.domain,growth:state.growth?{model:state.growth.model,aInit:state.growth.aInit,steps:state.growth.steps}:null,lastLoad:state.lastLoad,cellularDynamicsIndependent:state.cellularDynamicsIndependent,gridResamplingVisualOnly:state.gridResamplingVisualOnly,expMode:$('#expMode')?.value||null}));
   }
 
   function bind(){
@@ -378,6 +377,6 @@
     if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
   }
 
-  globalThis.UniverseLabEmergence=Object.freeze({VERSION,get status(){return state.status;},get running(){return state.running;},step:stepCells,seed,clear:clearCells,update:cosmologyChanged,resetCosmology,setInputs,probeScaleFactor,snapshot});
+  globalThis.UniverseLabEmergence=Object.freeze({VERSION,get status(){return state.status;},get running(){return state.running;},step:stepCells,seed,clear:clearCells,update:cosmologyChanged,resetCosmology,setInputs,probeScaleFactor,snapshot,save:saveState,load:loadState});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
