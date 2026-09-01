@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "universelab.site-state.v1.1",
+  "title": "UniverseLab Site State v1.1",
+  "type": "object",
+  "required": [
+    "schema",
+    "version",
+    "snapshot_date",
+    "basis_main_commit",
+    "physical_gate_effect",
+    "governance",
+    "pages",
+    "modules",
+    "status_sources"
+  ],
+  "properties": {
+    "schema": {
+      "const": "universelab.site-state.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "snapshot_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "snapshot_timestamp": {
+      "type": "string"
+    },
+    "basis_main_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "basis_main_tree": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "canonical_state": {
+      "type": "string"
+    },
+    "physical_gate_effect": {
+      "const": "NONE"
+    },
+    "governance": {
+      "type": "object",
+      "required": [
+        "K1-D",
+        "K1-E",
+        "physical_evidence_effect",
+        "status_axes_rule"
+      ],
+      "properties": {
+        "K1-D": {
+          "const": "NOT_RELEASED"
+        },
+        "K1-E": {
+          "const": "NOT_ADMISSIBLE"
+        },
+        "physical_evidence_effect": {
+          "const": "NONE"
+        },
+        "status_axes_rule": {
+          "const": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"
+        }
+      },
+      "additionalProperties": true
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "path",
+          "domain",
+          "status"
+        ]
+      }
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "module_id",
+          "governance",
+          "scientific",
+          "release_gate"
+        ]
+      }
+    },
+    "status_sources": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,78 +1,50 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Aktueller öffentlicher Forschungs-, Gate- und Datenschutzstatus von UniverseLab, HPVS und HZT-M0.">
-  <title>UniverseLab · Forschungsstatus</title>
-  <style>
-    :root{color-scheme:dark;--bg:#07101f;--panel:#0d1a2f;--line:#203451;--text:#edf4ff;--muted:#a9b8cf;--ok:#62d6a7;--warn:#ffd166;--block:#ff7b7b;--accent:#7db6ff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0,#14264a 0,transparent 34%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}main{width:min(1120px,calc(100% - 28px));margin:auto;padding:26px 0 70px}.top{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:22px}.brand{font-weight:850}.back,.links a{color:var(--accent);text-decoration:none;border:1px solid var(--line);padding:9px 12px;border-radius:11px;background:#0a172b}.hero,.card{background:linear-gradient(180deg,rgba(18,36,66,.95),rgba(10,23,43,.95));border:1px solid var(--line);border-radius:18px}.hero{padding:27px}.eye{color:var(--accent);font-size:.78rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(2rem,6vw,4.3rem);line-height:1.03;margin:.45rem 0 1rem}.lead,.card p,.card li{color:var(--muted)}.gates{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:15px}.gate{padding:12px;border:1px solid var(--line);border-radius:13px;background:#091628}.gate b{display:block}.gate span{font-size:.79rem;color:var(--muted)}.ok{color:var(--ok)}.warn{color:var(--warn)}.block{color:var(--block)}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px}.card{grid-column:span 6;padding:19px}.wide{grid-column:span 12}.tag{display:inline-flex;padding:5px 8px;border:1px solid var(--line);border-radius:999px;font-size:.73rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase;background:#132641}h2{font-size:1.2rem;margin:.75rem 0 .45rem}code{color:#d7e8ff}.note{border-left:3px solid var(--warn);padding-left:12px}.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.footer{color:var(--muted);font-size:.84rem;margin-top:24px}@media(max-width:760px){.card{grid-column:span 12}.gates{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:21px}}
-  </style>
-  <link rel="stylesheet" href="./assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07101f">
+<meta name="description" content="Kanonischer öffentlicher Forschungs-, Gate- und Provenienzstatus von UniverseLab, HPVS und HZT-M0 am 1. September 2026.">
+<title>UniverseLab · Kanonischer Forschungsstatus · 1. September 2026</title>
+<style>
+:root{color-scheme:dark;--bg:#07101f;--panel:#0d1a2f;--line:#243c5e;--text:#edf4ff;--muted:#a9b8cf;--ok:#62d6a7;--warn:#ffd166;--block:#ff7b7b;--accent:#7db6ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0,#14264a 0,transparent 34%),var(--bg);color:var(--text);font:15px/1.58 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}main{width:min(1160px,calc(100% - 28px));margin:auto;padding:28px 0 76px}a{color:var(--accent)}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}.top a{text-decoration:none;border:1px solid var(--line);padding:9px 12px;border-radius:11px;background:#0a172b}.hero,.card{background:linear-gradient(180deg,rgba(18,36,66,.96),rgba(10,23,43,.96));border:1px solid var(--line);border-radius:19px}.hero{padding:28px}.eye{color:var(--accent);font-size:.78rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(2.1rem,6vw,4.5rem);line-height:1.02;margin:.45rem 0 1rem}h2{font-size:1.22rem;margin:.3rem 0 .55rem}.lead,.card p,.card li{color:var(--muted)}.basis{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.pill{padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:#091628;font-size:.76rem}.gates{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:16px}.gate{padding:12px;border:1px solid var(--line);border-radius:13px;background:#091628}.gate b{display:block}.gate span{font-size:.78rem;color:var(--muted)}.ok{color:var(--ok)}.warn{color:var(--warn)}.block{color:var(--block)}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px}.card{grid-column:span 6;padding:19px}.wide{grid-column:span 12}.tag{display:inline-flex;padding:5px 8px;border:1px solid var(--line);border-radius:999px;font-size:.71rem;font-weight:850;letter-spacing:.06em;text-transform:uppercase;background:#132641}.numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.num{padding:11px;border:1px solid var(--line);border-radius:12px;background:#081426}.num b{display:block;font-size:1.5rem}code{color:#d7e8ff}.note{border-left:3px solid var(--warn);padding-left:12px}.sources{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.sources a{text-decoration:none;border:1px solid var(--line);padding:8px 10px;border-radius:10px;background:#0a172b}.footer{color:var(--muted);font-size:.84rem;margin-top:24px}#loadState{margin-top:12px;color:var(--muted);font-size:.82rem}@media(max-width:760px){.card{grid-column:span 12}.gates{grid-template-columns:repeat(2,minmax(0,1fr))}.numbers{grid-template-columns:1fr}.hero{padding:21px}}
+</style>
+<link rel="stylesheet" href="./assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css">
 <link rel="stylesheet" href="./assets/2026-08-05_UniverseLab_Export_v1.0.css">
 <script src="./assets/2026-08-05_UniverseLab_Export_v1.0.js" defer></script>
+<script src="./assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js" defer></script>
 </head>
 <body data-ul-export-title="UniverseLab Forschungsstatus" data-ul-export-filename="UniverseLab-Forschungsstatus" data-ul-export-page-breaks="off">
 <main>
-  <div class="top"><div class="brand">UL · UniverseLab</div><a class="back" href="./">Zur Startseite</a></div>
-  <section class="hero">
-    <div class="eye">Öffentlicher Forschungsstand · 3. August 2026</div>
-    <h1>Forschungsstatus</h1>
-    <p class="lead">UniverseLab trennt strikt zwischen historischer Rekonstruktion, physikalischem Neuaufbau und numerischer Verifikation. C1 prüft derzeit Werkzeuge und Implementierungen – nicht die Natur.</p>
-    <div class="gates">
-      <div class="gate"><b class="block">K1-D</b><span>NOT RELEASED</span></div>
-      <div class="gate"><b class="block">K1-E</b><span>NOT ADMISSIBLE</span></div>
-      <div class="gate"><b class="warn">C1-V</b><span>Manufactured verification model</span></div>
-      <div class="gate"><b class="warn">Privacy QA</b><span>repositoryweites Gate</span></div>
-    </div>
-    <p class="lead" style="margin-top:15px">Architektur: HPVS → HZT-M0 → HZT-Full; kontrollierte Zweige HZT-M0-S6 und HZT-M0-P5.</p>
-  </section>
-
-  <div class="grid">
-    <article class="card">
-      <span class="tag block">Track L · blockiert</span>
-      <h2>MD2S-R1-L: historische Rekonstruktion</h2>
-      <p>Die historischen A0-Benchmarkwerte sind <strong>berichtet, aber nicht unabhängig reproduziert</strong>. Wirkung, Solver, vollständige Randdaten und Benchmarkdefinitionen sind nicht provenance-vollständig wiederhergestellt.</p>
-    </article>
-    <article class="card">
-      <span class="tag warn">Track C-PHYS · offen</span>
-      <h2>MD2S-R1-C-PHYS: physikalischer Neuaufbau</h2>
-      <p>Der Neuaufbau muss aus einer vollständig fixierten Parentwirkung folgen. Modellfreeze, Kontinuumsproblem, Perturbationen, Ghostaudit und kontrollierte 6D→4D-Reduktion bleiben offen.</p>
-    </article>
-    <article class="card wide">
-      <span class="tag ok">Track C1-V · diagnostisch bestätigt</span>
-      <h2>HZT-M0-S6-C1-V: numerischer Verifikationszweig</h2>
-      <ul>
-        <li>Exakter Zweikugel-Anker: bewiesen innerhalb des deklarierten C1-Modells.</li>
-        <li>Diskreter AD-Jacobian: Rang 8, schrittweitenkonvergent.</li>
-        <li>Unabhängiger Nicht-RK4-Backend: gleicher Rang- und Konditionsbefund.</li>
-        <li>Lokaler λ₀-Tangent: zwischen beiden Backends bestätigt.</li>
-      </ul>
-      <p class="note"><strong>Nicht bewiesen:</strong> Kontinuums-Invertierbarkeit, endliche Lösungsfamilie, Stabilität, Ghostfreiheit, historische A0-Identität oder physikalische Relevanz.</p>
-    </article>
-    <article class="card">
-      <span class="tag warn">Brückenstatus</span>
-      <h2>MDS-01 und MDS-05</h2>
-      <p><code>m_n=Ξ_n/Rχ</code> und <code>M₄²=V_W/κ₆²</code> sind nur unter deklarierten Voraussetzungen hergeleitet. Modenidentität, Koeffizienten, Profile und physikalische Normalisierung bleiben offen.</p>
-    </article>
-    <article class="card">
-      <span class="tag block">Evidenzgrenze</span>
-      <h2>Daten und Fits</h2>
-      <p>DESI, Pantheon+, KiDS/DES, RSD, SPARC und GW-Forecasts werden erst nach einer freigegebenen Kette <code>P_phys → P_mod → Observablen</code> zu Tests der Theorie.</p>
-    </article>
-    <article class="card wide">
-      <span class="tag warn">Öffentliche Datenschutzkorrektur</span>
-      <h2>Sanitisierte Provenienz</h2>
-      <p>Öffentliche Register enthalten keine Gesprächskennungen, Attachment-IDs, privaten Archivnamen oder detaillierten Account-Exportmetadaten. Ein fail-closed Privacy-Scanner prüft Registry, Governance, Forschungsdokumentation und öffentliche Seiten.</p>
-      <div class="links">
-        <a href="registry/session-checkpoint-latest.json">Aktueller Checkpoint</a>
-        <a href="registry/2026-08-03_UniverseLab_ClaimRegister_G0_v1.0.json">G0 Claim Register</a>
-        <a href="registry/decision-log.jsonl">Decision Log</a>
-        <a href="registry/2026-08-03_UniverseLab_PublicPrivacyContract_v1.0.json">Privacy Contract</a>
-      </div>
-    </article>
-  </div>
-  <div class="footer">Statussprache: bewiesen · konditional · numerisch bestätigt diagnostisch · berichtet, nicht unabhängig reproduziert · offen · blockiert · nicht freigegeben. Diese Aktualisierung verändert keine physikalische Gate-Entscheidung.</div>
+<div class="top"><strong>UL · UniverseLab</strong><a href="./">Zur Startseite</a></div>
+<section class="hero">
+<div class="eye">Kanonischer Merged-main-Status · 1. September 2026</div>
+<h1>Forschungsstatus</h1>
+<p class="lead">UniverseLab trennt strikt zwischen analytischen Resultaten, diagnostischer Numerik, offenen Parent→Observable-Brücken und physischer Evidenz. Dieser Stand gilt für den gemergten Repository-Zustand auf Basis von <code>46579b58b8ca…</code>. Offene Pull Requests besitzen keine kanonische Wirkung.</p>
+<div class="gates">
+<div class="gate"><b class="block">K1-D</b><span id="k1d">NOT RELEASED</span></div>
+<div class="gate"><b class="block">K1-E</b><span id="k1e">NOT ADMISSIBLE</span></div>
+<div class="gate"><b class="block">Physical Background</b><span id="background">NOT ESTABLISHED</span></div>
+<div class="gate"><b class="warn">FM-G0</b><span id="fmg0">OPEN</span></div>
+</div>
+<div class="basis"><span class="pill">HPVS → HZT-M0 → HZT-Full</span><span class="pill">CP01R4: METHOD FROZEN · NO EXECUTION</span><span class="pill">Evidence effect: NONE</span></div>
+<div id="loadState">Maschinenlesbarer Status wird aus dem datierten Canonical-State-Register geprüft.</div>
+</section>
+<div class="grid">
+<article class="card wide"><span class="tag warn">Aktives Programm</span><h2>10-Monats-Forschungsprogramm · WS1 / FM-0</h2><p>FM-0 rekonstruiert Parameter- und Observablenprovenienz. Der Gate-Status bleibt <strong>OPEN</strong>; eine ausführbare Parent→Reduced→Observable-Map ist nicht freigegeben.</p><div class="numbers"><div class="num"><b id="gaps">10</b><span>blockierende Gaps</span></div><div class="num"><b id="partial">3</b><span>teilweise gelöst</span></div><div class="num"><b id="unresolved">7</b><span>vollständig offen</span></div></div></article>
+<article class="card"><span class="tag ok">Analytisch belastbar</span><h2>H3-Korrektur</h2><p>Ein explizites Rang-eins-Gegenbeispiel widerlegt die frühere Behauptung, das Zielprofil benötige zwingend zwei nichtverschwindende orthogonale Normalenkomponenten. Die Parent-Dynamik selektiert das Profil dadurch noch nicht.</p></article>
+<article class="card"><span class="tag warn">Konditional</span><h2>H4R4A: lokales reduziertes IBVP</h2><p>Die lokale gauge-fixierte Transmission-Struktur ist für glatte kompatible Daten in der deklarierten nichtdegenerierten Zustandsdomäne konditional ratifiziert. Daraus folgt kein globaler Polsatz und keine Ghostfreiheit.</p></article>
+<article class="card"><span class="tag ok">Kontrollzeuge</span><h2>H4R4B: globaler M1-Untersektor</h2><p>Ein expliziter globaler constraintsatisfizierender Kontrollzeuge existiert. Er besitzt <code>B²=0</code> und ist daher kein Nachweis der nichttrivialen D2N-Q-Selektion, Dunkelsektor-Erklärung oder Bounce-Physik.</p></article>
+<article class="card"><span class="tag block">Forward Map offen</span><h2>Parameter und Observablen</h2><p><code>κ₆</code> besitzt eine kanonische Parent-Normierung; <code>a₀</code> und <code>βτ</code> sind nur teilweise wiedergewonnen; <code>Rχ</code> und <code>𝓘B</code> bleiben parentseitig offen. Alle fünf Observablenblöcke sind weiterhin Programmdeklarationen.</p></article>
+<article class="card wide"><span class="tag block">Ausführungsfirewall</span><h2>ULSH-01 / CP01R4</h2><p><code>WP1 = CLOSED_TARGET_FROZEN_NO_EXECUTION</code>, <code>WP2 = READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED</code>, <code>WP3 = NOT_STARTED</code>, <code>WP4 = BLOCKED_NOT_AUTHORIZED</code>. Es existieren im gemergten Kanon weder operative AuthorizationDecision noch SingleUseGrant, Backend-Import, Targetsolve oder physischer Response-Rank-Lauf.</p><p class="note"><strong>PR #137:</strong> offen und als Draft geführt. Seine Authority-/Signature- und Runtime-Issuance-Befunde sind materiell, bleiben jedoch bis zu einem Rebuild auf current main und einem geprüften Merge-Tree nichtkanonische Review-Befunde.</p></article>
+<article class="card wide"><span class="tag warn">Offene Beweispflichten</span><h2>Was nicht identifiziert ist</h2><ul><li>generische globale M1-Background-Existenz und Kontinuumsinvertierbarkeit;</li><li>vollständige Parent→Reduced→Observable-Map;</li><li>constraint-reduzierte physische kinetische Matrix und Ghostfreiheit;</li><li>physische Identifizierbarkeit von <code>βτ</code> und <code>𝓘B</code> getrennt;</li><li>Likelihood-/Evidenzinterpretation für HZT-M0.</li></ul></article>
+<article class="card wide"><span class="tag">Quellen</span><h2>Maschinenlesbare Autorität</h2><div class="sources"><a href="registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json">Current-main Canonical State</a><a href="registry/2026-09-01_UniverseLab_SiteState_v1.1.json">SiteState v1.1</a><a href="registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json">Session Checkpoint v1.31</a><a href="registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json">10M-Programmmanifest</a><a href="registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json">FM-0 Inventory v0.5</a><a href="registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json">FM-0 Gap Register v0.4</a></div></article>
+</div>
+<div class="footer">Statussprache: bewiesen · konditional · diagnostisch · offen · blockiert · nicht freigegeben. Technische Ausführbarkeit ist keine physikalische Identifikation; numerische Stabilität ist keine Ghostfreiheit; ein guter Fit wäre keine Theoriebestätigung. Diese Status-Reconciliation verändert keine physische Gate-Entscheidung.</div>
 </main>
+<script>
+(()=>{'use strict';const url='./registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json';const text=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=String(v)};fetch(url,{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(Error(r.status))).then(s=>{text('k1d',s.physical_governance['K1-D']);text('k1e',s.physical_governance['K1-E']);text('background',s.physical_governance.physical_background);text('fmg0',s.program.gate_status);text('gaps',s.program.blocking_gap_count);text('partial',s.program.partially_resolved_blocking_gap_count);text('unresolved',s.program.fully_unresolved_blocking_gap_count);text('loadState','Registerprüfung: PASS · Snapshot '+s.snapshot_date+' · Basis '+s.basis_main_commit.slice(0,12)+'… · physischer Evidence-Effekt '+s.physical_evidence_effect+'.')}).catch(e=>text('loadState','Registerprüfung nicht geladen; statischer fail-closed Fallback bleibt aktiv ('+e.message+').'))})();
+</script>
 </body>
 </html>
