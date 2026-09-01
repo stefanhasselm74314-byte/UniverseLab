@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
 
-  const VERSION='1.0.1';
+  const VERSION='1.0.2';
   const STORAGE_KEY='universelab';
   const C=globalThis.UniverseLabCosmology;
   const $=selector=>document.querySelector(selector);
@@ -46,9 +46,7 @@
   let timer=0;
 
   function setText(id,value){const node=document.getElementById(id);if(node)node.textContent=String(value);}
-  function fmt(value,digits=3){
-    return Number.isFinite(value)?value.toLocaleString(language==='de'?'de-DE':'en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits}):'–';
-  }
+  function fmt(value,digits=3){return Number.isFinite(value)?value.toLocaleString(language==='de'?'de-DE':'en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits}):'–';}
   function fmtExp(value,digits=3){return Number.isFinite(value)?value.toExponential(digits).replace('.',language==='de'?',':'.'):'–';}
 
   function readParams(){
@@ -76,17 +74,14 @@
     return{radiation,matter,curvature,vacuum,total,fractions:{radiation:radiation/total,matter:matter/total,curvature:curvature/total,vacuum:vacuum/total}};
   }
 
-  function dominantEra(c){
-    return[[text.radiation,c.radiation],[text.matter,c.matter],[text.curvature,Math.abs(c.curvature)],[text.vacuum,c.vacuum]].sort((a,b)=>b[1]-a[1])[0][0];
-  }
+  function dominantEra(c){return[[text.radiation,c.radiation],[text.matter,c.matter],[text.curvature,Math.abs(c.curvature)],[text.vacuum,c.vacuum]].sort((a,b)=>b[1]-a[1])[0][0];}
 
   function solveAccelerationOnset(params,aMin){
     const qAt=a=>C.q(1/a-1,params,'lcdm');
     const samples=2048;
     let previousA=aMin,previousQ=qAt(aMin);
     for(let i=1;i<=samples;i++){
-      const a=Math.exp(Math.log(aMin)*(1-i/samples));
-      const q=qAt(a);
+      const a=Math.exp(Math.log(aMin)*(1-i/samples)),q=qAt(a);
       if(Number.isFinite(previousQ)&&Number.isFinite(q)&&previousQ*q<=0){
         let lo=previousA,hi=a,qlo=previousQ;
         for(let j=0;j<80;j++){
@@ -102,14 +97,19 @@
 
   function buildTimeMap(params,aMin,points=4096){
     const x0=Math.log(aMin),dx=-x0/points,rows=[];
-    const invE=x=>1/C.E(Math.exp(-x)-1,params,'lcdm');
+    const invE=x=>{
+      const xx=Math.min(0,x);
+      const z=Math.max(0,Math.exp(-xx)-1);
+      return 1/C.E(z,params,'lcdm');
+    };
     let x=x0,tau=0;
     rows.push({x,a:aMin,tau});
     for(let i=0;i<points;i++){
-      const x1=x+dx,mid=(x+x1)/2;
-      tau+=dx*(invE(x)+4*invE(mid)+invE(x1))/6;
+      const x1=i===points-1?0:x+dx;
+      const localDx=x1-x,mid=(x+x1)/2;
+      tau+=localDx*(invE(x)+4*invE(mid)+invE(x1))/6;
       x=x1;
-      rows.push({x,a:Math.exp(x),tau});
+      rows.push({x,a:i===points-1?1:Math.exp(x),tau});
     }
     return{aMin,points,totalTau:tau,rows};
   }
@@ -124,8 +124,7 @@
     const aa=Math.max(map.aMin,Math.min(1,Number(a)));
     if(aa<=map.aMin)return 0;
     if(aa>=1)return map.totalTau;
-    const[lo,hi]=lowerBracket(map.rows,aa,'a');
-    const A=map.rows[lo],B=map.rows[hi];
+    const[lo,hi]=lowerBracket(map.rows,aa,'a'),A=map.rows[lo],B=map.rows[hi];
     const u=(Math.log(aa)-A.x)/(B.x-A.x);
     return A.tau*(1-u)+B.tau*u;
   }
@@ -134,10 +133,9 @@
     const tt=Math.max(0,Math.min(map.totalTau,Number(tau)));
     if(tt<=0)return map.aMin;
     if(tt>=map.totalTau)return 1;
-    const[lo,hi]=lowerBracket(map.rows,tt,'tau');
-    const A=map.rows[lo],B=map.rows[hi];
+    const[lo,hi]=lowerBracket(map.rows,tt,'tau'),A=map.rows[lo],B=map.rows[hi];
     const u=(tt-A.tau)/(B.tau-A.tau);
-    return Math.exp(A.x*(1-u)+B.x*u);
+    return Math.min(1,Math.exp(A.x*(1-u)+B.x*u));
   }
 
   function rebuildCosmology({resetScale=false}={}){
@@ -148,9 +146,8 @@
     const timeMap=buildTimeMap(params,growth.aInit,4096);
     const age=C.ageGyr(params,model,{aMin:1e-8,n:4096,domainSamples:8192});
     const epochs={radiationMatter:params.Om>0?params.Or/params.Om:null,matterVacuum:params.Ode>0?Math.cbrt(params.Om/params.Ode):null,acceleration:solveAccelerationOnset(params,growth.aInit)};
-
     state.params=params;state.model=model;state.growth=growth;state.timeMap=timeMap;
-    state.domain={scaleFactor:scaleDomain,ageGyr:age,epochs,displayTime:{aMin:timeMap.aMin,points:timeMap.points,totalTau:timeMap.totalTau}};
+    state.domain={scaleFactor:scaleDomain,ageGyr:age,epochs,displayTime:{aMin:timeMap.aMin,points:timeMap.points,totalTau:timeMap.totalTau,endpoint:{x:timeMap.rows.at(-1).x,a:timeMap.rows.at(-1).a}}};
     state.error=null;state.status='PASS';state.history=[];
     if(resetScale||!Number.isFinite(state.a)){state.a=growth.aInit;state.tau=0;}
     else{state.a=Math.max(growth.aInit,Math.min(1,state.a));state.tau=tauAtScaleFactor(state.a,timeMap);}
@@ -160,10 +157,9 @@
 
   function diagnosticsAt(a=state.a){
     if(!state.params||!state.growth)throw new Error('COSMOLOGY_NOT_READY');
-    const aa=Math.max(state.growth.aInit,Math.min(1,Number(a))),z=1/aa-1;
+    const aa=Math.max(state.growth.aInit,Math.min(1,Number(a))),z=Math.max(0,1/aa-1);
     const E=C.E(z,state.params,state.model),components=componentState(aa,state.params),growth=C.growthAtZ(z,state.growth),q=C.q(z,state.params,state.model);
-    const omegaMatter=components.fractions.matter;
-    const approximation=omegaMatter>=0?omegaMatter**.55:NaN;
+    const omegaMatter=components.fractions.matter,approximation=omegaMatter>=0?omegaMatter**.55:NaN;
     const approximationError=Number.isFinite(approximation)&&growth.f!==0?(approximation-growth.f)/growth.f:NaN;
     return{a:aa,z,E,q,components,growth,approximation,approximationError,era:dominantEra(components),expansion:q<0?text.accelerated:text.decelerated};
   }
@@ -175,10 +171,7 @@
     state.a=scaleFactorAtTau(state.tau,state.timeMap);
   }
 
-  function ruleSets(value){
-    const[birth,survival]=String(value).split('/');
-    return{birth:new Set([...birth.slice(1)].map(Number)),survival:new Set([...survival.slice(1)].map(Number))};
-  }
+  function ruleSets(value){const[birth,survival]=String(value).split('/');return{birth:new Set([...birth.slice(1)].map(Number)),survival:new Set([...survival.slice(1)].map(Number))};}
 
   function resizeGrid(target){
     const nextN=Math.max(40,Math.min(260,Math.round(target)));
@@ -218,7 +211,6 @@
       state.next[index]=((state.cells[index]?rules.survival.has(neighbors):rules.birth.has(neighbors))||Math.random()<noise)?1:0;
     }
     [state.cells,state.next]=[state.next,state.cells];state.generation++;
-
     const mode=$('#expMode')?.value||'lcdm';
     if(mode==='heuristic'){
       const strength=Number($('#expand')?.value||0);
@@ -252,24 +244,19 @@
   }
 
   function seriesRange(rows,keys){
-    const values=[];
-    for(const row of rows)for(const key of keys)if(Number.isFinite(row[key]))values.push(row[key]);
+    const values=[];for(const row of rows)for(const key of keys)if(Number.isFinite(row[key]))values.push(row[key]);
     if(!values.length)return{min:-1,max:1};
-    let min=Math.min(...values),max=Math.max(...values);
-    if(min===max){min-=1;max+=1;}
+    let min=Math.min(...values),max=Math.max(...values);if(min===max){min-=1;max+=1;}
     const pad=(max-min)*.08;return{min:min-pad,max:max+pad};
   }
 
   function drawChart(){
     if(!chartCtx||!chartCanvas)return;
     chartCtx.fillStyle='#02030a';chartCtx.fillRect(0,0,chartCanvas.width,chartCanvas.height);
-    if(state.status!=='PASS'||state.history.length===0){
-      chartCtx.fillStyle='#ff9ab0';chartCtx.font='700 16px system-ui';chartCtx.fillText(state.error?.code||'NO_VALID_COSMOLOGY_HISTORY',24,42);return;
-    }
+    if(state.status!=='PASS'||state.history.length===0){chartCtx.fillStyle='#ff9ab0';chartCtx.font='700 16px system-ui';chartCtx.fillText(state.error?.code||'NO_VALID_COSMOLOGY_HISTORY',24,42);return;}
     const rows=state.history,width=chartCanvas.width,height=chartCanvas.height,left=48,right=18,top=18,bottom=32;
     const plotWidth=width-left-right,plotHeight=height-top-bottom,range=seriesRange(rows,['radiation','matter','vacuum','D','f','approximation']);
-    const xOf=index=>left+index/Math.max(1,rows.length-1)*plotWidth;
-    const yOf=value=>top+(1-(value-range.min)/(range.max-range.min))*plotHeight;
+    const xOf=index=>left+index/Math.max(1,rows.length-1)*plotWidth,yOf=value=>top+(1-(value-range.min)/(range.max-range.min))*plotHeight;
     chartCtx.strokeStyle='#26304e';chartCtx.lineWidth=1;chartCtx.fillStyle='#8f9bbb';chartCtx.font='11px system-ui';
     for(let i=0;i<=4;i++){
       const y=top+i*plotHeight/4,value=range.max-(range.max-range.min)*i/4;
@@ -298,7 +285,6 @@
       $('#domainStatus').classList.add('invalid');$('#domainStatus').innerHTML=`<strong>${state.error?.code||state.status}</strong> · ${text.noCurve}`;
       $('#emergenceBadge').classList.add('invalid');$('#emergenceBadge').textContent=text.invalid;return;
     }
-
     const d=diagnosticsAt(state.a),live=liveCount();
     $('#hud').innerHTML=`Generation: ${state.generation}<br>Gitter: ${state.N}×${state.N}<br>Aktiv: ${live}<br>a: ${fmtExp(d.a,3)}<br>E: ${fmtExp(d.E,3)}<br>D: ${fmt(d.growth.D,4)}<br>f: ${fmt(d.growth.f,4)}`;
     setText('radMetric',`${fmt(100*d.components.fractions.radiation,2)} %`);setText('matMetric',`${fmt(100*d.components.fractions.matter,2)} %`);setText('vacMetric',`${fmt(100*d.components.fractions.vacuum,2)} %`);setText('curvMetric',`${fmt(100*d.components.fractions.curvature,2)} %`);
@@ -326,7 +312,6 @@
 
   function scheduleCosmology(){clearTimeout(timer);updateOutputs();timer=setTimeout(()=>cosmologyChanged(),90);}
   function togglePlay(){state.running=!state.running;const button=$('#play');if(button)button.textContent=state.running?text.pause:text.start;return state.running;}
-
   function animationFrame(timestamp){
     if(!state.lastFrame)state.lastFrame=timestamp;
     const elapsed=Math.min(250,timestamp-state.lastFrame);state.lastFrame=timestamp;
@@ -374,7 +359,6 @@
   }
 
   function probeScaleFactor(a){return diagnosticsAt(a);}
-
   function snapshot(){
     return JSON.parse(JSON.stringify({version:VERSION,engineVersion:C?.VERSION||null,status:state.status,running:state.running,generation:state.generation,N:state.N,live:liveCount(),a:state.a,tau:state.tau,revision:state.revision,error:state.error,params:state.params,model:state.model,domain:state.domain,growth:state.growth?{model:state.growth.model,aInit:state.growth.aInit,steps:state.growth.steps}:null,cellularDynamicsIndependent:state.cellularDynamicsIndependent,gridResamplingVisualOnly:state.gridResamplingVisualOnly,expMode:$('#expMode')?.value||null}));
   }
