@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression checks added after the real Chromium Emergence audits."""
+"""Regression checks added after real Chromium and Codex Emergence audits."""
 from __future__ import annotations
 
 import json
@@ -40,7 +40,7 @@ def main() -> None:
     contract = json.loads(CONTRACT.read_text(encoding='utf-8'))
 
     assert 'id="ol" type="range" min="0" max="1.2" step="0.000001" value="0.684908"' in html
-    assert "const VERSION='1.0.2'" in adapter
+    assert "const VERSION='1.0.3'" in adapter
     for token in (
         'function buildTimeMap',
         'function tauAtScaleFactor',
@@ -50,18 +50,37 @@ def main() -> None:
         "rows.push({x,a:i===points-1?1:Math.exp(x),tau})",
         "if($('#eraBars'))$('#eraBars').innerHTML=''",
         'state.history.length===0',
+        'function displayGridSize',
+        'state.displayN=renderN',
+        'function applySavedInputs',
+        'LEGACY_SETTINGS_TO_INPUTS',
+        "const parameterIds=['h0','om','or','ol']",
+        'let timer=0'
     ):
         assert token in adapter, token
-    for forbidden in ('const derivative=x=>C.E', 'state.history.length<2'):
+    for forbidden in (
+        'const derivative=x=>C.E',
+        'state.history.length<2',
+        'resizeGrid(',
+        'setN(',
+        'if(target>state.N)'
+    ):
         assert forbidden not in adapter, forbidden
 
-    assert contract['version'] == '1.0.2'
+    assert contract['version'] == '1.0.3'
     assert contract['background_contract']['display_time_integrator'] == 'PRECOMPUTED_MONOTONE_SIMPSON_TAU_OF_LN_A_MAP'
     assert contract['background_contract']['display_time_endpoint'] == 'EXACT_X_0_A_1_Z_0'
     assert contract['background_contract']['maximum_time_amplification'] == 100
     assert contract['fail_closed_ui']['stale_epoch_bars_cleared'] is True
+    assert contract['fail_closed_ui']['debounce_timer_declared'] is True
+    assert contract['architecture']['cosmology_mutates_simulation_grid_size'] is False
+    assert contract['architecture']['display_resampling_mutates_simulation_state'] is False
+    assert contract['persistence']['current_state_schema'] == 'universelab.emergence-state.v2'
+    assert contract['persistence']['legacy_pre_schema_control_field'] == 'settings'
     assert 'maximum_time_amplification_stays_in_domain' in contract['qa']['required_checks']
     assert 'exact_present_endpoint' in contract['qa']['required_checks']
+    assert 'deterministic_cell_update_independent_of_cosmology_mode' in contract['qa']['required_checks']
+    assert 'legacy_settings_payload_migrates_explicitly' in contract['qa']['required_checks']
 
     assert abs(1.0 - OR - OM - ODE) < 1e-15
     a_after = independent_scale_after_delta_tau()
