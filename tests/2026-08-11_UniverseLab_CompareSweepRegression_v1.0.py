@@ -1,75 +1,82 @@
 #!/usr/bin/env python3
-"""Regression contract for UniverseLab 2.2 parameter-sweep semantics.
+"""Regression contract for retirement of the duplicate direct comparison sweep.
 
-This is intentionally a no-network, no-browser static/numerical sanity test.
-It protects the model routing that was exposed by the 2026-08-11 manual sweep
-checks: w must route through wCDM, beta/I_B through the effective bridge, and
-Omega_m through LambdaCDM. Delta-H/H in the sweep is sensitivity relative to
-the current global parameter point in that same model.
+The historical direct-mode sweep was tied to an independent inline calculator.
+After route consolidation, this test protects the opposite invariant: no legacy
+sweep engine may reappear, and the canonical SAFE bridge semantics remain intact.
 """
 from __future__ import annotations
 
-from pathlib import Path
 import math
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGE = ROOT / "compare-direct.html"
+DIRECT = ROOT / "compare-direct.html"
 REDIRECT = ROOT / "compare.html"
+SAFE = ROOT / "compare-safe.html"
+ADAPTER = ROOT / "assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js"
+ENGINE = ROOT / "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js"
 OR = 9.2e-5
 
 
-def e0(z: float, om: float, ol: float) -> float:
+def e_lcdm(z: float, om: float, ode: float) -> float:
     a = 1.0 / (1.0 + z)
-    ok = 1.0 - OR - om - ol
-    return math.sqrt(max(1e-12, OR / a**4 + om / a**3 + ok / a**2 + ol))
+    ok = 1.0 - OR - om - ode
+    e2 = OR / a**4 + om / a**3 + ok / a**2 + ode
+    assert e2 > 0
+    return math.sqrt(e2)
 
 
-def ew(z: float, om: float, ol: float, w: float) -> float:
+def bridge_delta(z: float, beta: float, ib: float, rchi: float) -> float:
     a = 1.0 / (1.0 + z)
-    ok = 1.0 - OR - om - ol
-    return math.sqrt(max(1e-12, OR / a**4 + om / a**3 + ok / a**2 + ol * a ** (-3.0 * (1.0 + w))))
+    ac = 1.0 / (1.0 + 2.5 / max(.02, rchi))
+    return beta * ib * math.exp(-((a / ac) ** 2))
 
 
 def main() -> None:
-    html = PAGE.read_text(encoding="utf-8")
+    direct = DIRECT.read_text(encoding="utf-8")
     redirect = REDIRECT.read_text(encoding="utf-8")
+    safe = SAFE.read_text(encoding="utf-8")
+    adapter = ADAPTER.read_text(encoding="utf-8")
+    engine = ENGINE.read_text(encoding="utf-8")
 
-    assert "function sweepModel(k){return k==='w'?1:(k==='b'||k==='ib'?2:0)}" in html
-    assert "const x=lo+(hi-lo)*i/60,pp=P({[k]:x})" in html
-    assert "href=H(z,p,model)" in html
-    assert "(H(z,pp,model)/href-1)*100" in html
-    assert "q(z,pp,model)" in html
-    assert "mu(z,pp,model)" in html
-    assert "age(pp,model)" in html
-    assert "cv('#schart',[{c:'#68cfff',d}],lo,hi)" in html
-    assert "x-Achse: tatsächlicher Parameterwert" in html
+    for page in (direct, redirect):
+        assert "./compare-safe.html" in page
+        assert "location.replace(target.href)" in page
+        assert "target.search=location.search" in page
+        assert "target.hash=location.hash" in page
+        for forbidden in (
+            "function sweep(", "function sweepModel(", "function e0(", "function ew(",
+            "function eb(", "function dc(", "Math.sqrt(Math.max(1e-12", "Math.sqrt(Math.max(.02",
+        ):
+            assert forbidden not in page, forbidden
 
-    start_marker = "function sweep(){"
-    end_marker = "function table(){"
-    assert start_marker in html and end_marker in html, "sweep/table markers not found"
-    sweep = html.split(start_marker, 1)[1].split(end_marker, 1)[0]
-    assert "q(z,pp,2)" not in sweep
-    assert "mu(z,pp,2)" not in sweep
-    assert "age(pp,2)" not in sweep
-    assert "d.map((v,i)=>({x:i" not in sweep
+    assert "2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js" in safe
+    assert "UNRELEASED_GROWTH_MAP" in safe
+    assert "UNRELEASED_LENSING_MAP" in safe
+    assert "C.validateBackgroundDomain" in adapter
+    assert "CSV_BLOCKED_INVALID_DOMAIN" in adapter
+    assert "Math.sqrt(Math.max(" not in adapter
+    assert "UNRELEASED_GROWTH_MAP" in engine
 
-    # w must visibly affect H in wCDM at z=1.
-    om, ol, z = 0.315, 0.684908, 1.0
-    ref_w = -1.0
-    h_ref = ew(z, om, ol, ref_w)
-    dh_low = ew(z, om, ol, -1.5) / h_ref - 1.0
-    dh_high = ew(z, om, ol, -0.5) / h_ref - 1.0
-    assert abs(dh_low - dh_high) > 1e-3
+    # The canonical background channel identifies only beta_tau * I_B.
+    for z in (0.0, .5, 1.0, 3.0, 8.0):
+        d1 = bridge_delta(z, .05, .4, 1.0)
+        d2 = bridge_delta(z, .10, .2, 1.0)
+        assert abs(d1 - d2) < 1e-15
 
-    # Omega_m sensitivity is evaluated against the fixed global reference point,
-    # not divided by an LCDM curve carrying the same swept Omega_m.
-    h_om_ref = e0(z, om, ol)
-    dh_om_low = e0(z, 0.1, ol) / h_om_ref - 1.0
-    dh_om_high = e0(z, 0.6, ol) / h_om_ref - 1.0
-    assert abs(dh_om_low - dh_om_high) > 1e-2
+    # Omega_m remains an active LCDM background direction relative to a fixed reference.
+    z, ode = 1.0, .684908
+    ref = e_lcdm(z, .315, ode)
+    low = e_lcdm(z, .1, ode) / ref - 1.0
+    high = e_lcdm(z, .6, ode) / ref - 1.0
+    assert abs(low - high) > 1e-2
 
-    assert "compare-direct.html?v=23" in redirect
-    print("UniverseLab compare sweep regression: PASS")
+    # The old arbitrary wCDM-times-bridge sweep is intentionally unavailable.
+    assert 'id="w"' in safe and 'disabled' in safe
+    assert "RETIRED_DUPLICATE_ENGINE" in (ROOT / "compare-app.js").read_text(encoding="utf-8")
+
+    print("UniverseLab compare sweep retirement/consolidation regression: PASS")
 
 
 if __name__ == "__main__":
