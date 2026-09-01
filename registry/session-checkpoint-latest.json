@@ -69,5 +69,116 @@
   ],
   "next_allowed_repository_step": "STATUS_RECONCILIATION_REVIEW_THEN_SEPARATE_NUMERICAL_ENGINE_CONSOLIDATION_NO_PHYSICAL_EXECUTION",
   "physical_gate_effect": "NONE",
-  "physical_evidence_effect": "NONE"
+  "physical_evidence_effect": "NONE",
+  "current_goal": "Reconcile the public and machine-readable project state to the merged main basis while preserving all physical no-execution and evidence firewalls.",
+  "current_workstream": "WS1 / FM-0 targeted parent and observable provenance recovery; CP01R4 remains method-frozen without execution.",
+  "current_workstreams": [
+    {
+      "workstream": "WS1",
+      "work_package": "FM-0",
+      "status": "ACTIVE_TARGETED_PARENT_RECOVERY",
+      "gate": "FM-G0",
+      "gate_status": "OPEN",
+      "next_block": "FM0_PARENT_AND_OBSERVABLE_PROVENANCE_RECOVERY_NO_NEW_PHYSICS"
+    }
+  ],
+  "gate_state": {
+    "FM-G0": "OPEN",
+    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-CURRENT-MAIN-RECONCILIATION-001",
+      "statement": "The dated canonical state, SiteState, manifest and checkpoint are bound to merged main commit 46579b58b8ca2ae3fb4ba7726446c5871d84da79; this is repository-state reconciliation only.",
+      "status": "PASS_REPOSITORY_STATE_RECONCILIATION_NO_PHYSICAL_EFFECT",
+      "evidence_effect": "GOVERNANCE_AND_PROVENANCE_ONLY",
+      "physical_evidence_effect": "NONE",
+      "sources": [
+        "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json",
+        "registry/2026-09-01_UniverseLab_SiteState_v1.1.json",
+        "project-manifest.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-FM0-PROVENANCE-001",
+      "statement": "FM-0 contains ten blocking gaps, of which three are partially resolved and seven remain fully unresolved; FM-G0 remains open.",
+      "status": "ACTIVE_OPEN_PROVENANCE_RECOVERY",
+      "evidence_effect": "PROVENANCE_RECOVERY_NO_NEW_PHYSICS",
+      "physical_evidence_effect": "NONE",
+      "sources": [
+        "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+        "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-H3-RANK-ONE-001",
+      "statement": "The former compulsory two-normal-component claim is falsified by an exact rank-one counterexample; parent dynamic selection remains open.",
+      "status": "PASS_EXACT_COUNTEREXAMPLE_DYNAMIC_SELECTION_OPEN",
+      "evidence_effect": "ANALYTIC_SCOPE_CORRECTION_ONLY",
+      "physical_evidence_effect": "NONE",
+      "sources": [
+        "registry/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.2.json"
+      ]
+    },
+    {
+      "result_id": "UL-RES-H4R4B-CONTROL-001",
+      "statement": "An exact global M1 control witness exists only in the declared B-squared-zero subsector and does not establish nontrivial D2N-Q selection or generic M1 existence.",
+      "status": "PASS_EXACT_CONTROL_WITNESS_SUBSECTOR_ONLY",
+      "evidence_effect": "ANALYTIC_CONTROL_ONLY",
+      "physical_evidence_effect": "NONE",
+      "sources": [
+        "registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_ParentEquivalence_v0.1.json"
+      ]
+    }
+  ],
+  "open_blockers": [
+    {
+      "blocker_id": "UL-BLK-FM0-001",
+      "statement": "The parent-to-reduced-to-observable forward map remains open across all five observable blocks.",
+      "sources": [
+        "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-GENERIC-M1-001",
+      "statement": "Generic global M1 existence, continuum BVP invertibility, physical Hamiltonian positivity and full ghost freedom remain open.",
+      "sources": [
+        "registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4A_ExactFirstOrder_BoundaryJet_TheoremReview_v0.1.json",
+        "registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_ParentEquivalence_v0.1.json"
+      ]
+    },
+    {
+      "blocker_id": "UL-BLK-PR137-CURRENT-MAIN-001",
+      "statement": "Open draft PR 137 has no canonical effect and requires a current-main rebuild plus exact merge-tree audit before any later repository decision.",
+      "sources": [
+        "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json"
+      ]
+    }
+  ],
+  "active_assumptions": [
+    "Merged versioned repository artifacts outrank open pull requests, chat summaries and assistant statements for dynamic project status.",
+    "The controlled HZT-M0-S6 branch uses one physical time and signature (-,+,+,+,+,+).",
+    "CP01R4 remains method-frozen with no AuthorizationDecision, SingleUseGrant, backend import or solver execution.",
+    "Diagnostic and analytic control results carry no physical evidence effect without a released forward map."
+  ],
+  "forbidden_inferences": [
+    "NO_GREEN_CI_AS_PHYSICAL_EVIDENCE",
+    "NO_READINESS_AS_AUTHORIZATION",
+    "NO_LOCAL_IBVP_THEOREM_AS_GLOBAL_COMPACTIFIED_EXISTENCE",
+    "NO_B_SQUARED_ZERO_CONTROL_WITNESS_AS_NONTRIVIAL_D2NQ_SELECTION",
+    "NO_EFFECTIVE_BRIDGE_PROXY_AS_6D_PARENT_DERIVATION",
+    "NO_NUMERICAL_OR_PDE_STABILITY_AS_GHOST_FREEDOM",
+    "NO_OPEN_PULL_REQUEST_STATUS_AS_MERGED_MAIN_CANON"
+  ],
+  "entry_points": [
+    "research-status.html",
+    "project-manifest.json",
+    "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json",
+    "registry/2026-09-01_UniverseLab_SiteState_v1.1.json",
+    "registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json"
+  ],
+  "next_exact_action": "Review the status-only reconciliation and, only after it is green and merged, open a separate fail-closed numerical-engine consolidation block; do not execute CP01R4 or create any operative authorization artifact."
 }

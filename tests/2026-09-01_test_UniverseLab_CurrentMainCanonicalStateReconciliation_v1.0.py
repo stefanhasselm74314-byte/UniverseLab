@@ -34,6 +34,8 @@ def copy_minimal_root(dst: Path) -> None:
         module.MANIFEST,
         module.RESEARCH_STATUS,
         module.GLOBAL_SHELL,
+        module.PLATFORM_WORKFLOW,
+        module.G0_WORKFLOW,
     ]
     for rel in paths:
         target = dst / rel
@@ -68,6 +70,18 @@ def main() -> None:
         manifest['release_date'] = '2026-08-05'
         manifest_path.write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
         expect_failure(tmp, 'release_date')
+
+
+    with tempfile.TemporaryDirectory() as td:
+        tmp = Path(td)
+        copy_minimal_root(tmp)
+        checkpoint_path = tmp / module.CHECKPOINT
+        checkpoint = json.loads(checkpoint_path.read_text(encoding='utf-8'))
+        checkpoint.pop('current_goal')
+        mutated = json.dumps(checkpoint, indent=2, ensure_ascii=False) + '\n'
+        checkpoint_path.write_text(mutated, encoding='utf-8')
+        (tmp / module.CHECKPOINT_ALIAS).write_text(mutated, encoding='utf-8')
+        expect_failure(tmp, 'current_goal')
 
     print('UniverseLab current-main reconciliation regression tests: PASS')
 

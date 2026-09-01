@@ -287,5 +287,24 @@
   ],
   "supersedes_release": "2.22-c-phys-m1-background-3c11-authorization-denied-v0.1",
   "history_rule": "Prior detailed manifest content remains recoverable from Git history and the versioned source registries; this compact manifest is the current status entry point.",
-  "physical_gate_effect": "NONE"
+  "physical_gate_effect": "NONE",
+  "central_registries": {
+    "current_main_canonical_state": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json",
+    "site_state": "registry/2026-09-01_UniverseLab_SiteState_v1.1.json",
+    "site_state_schema": "schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json",
+    "session_checkpoint": "registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json",
+    "session_checkpoint_alias": "registry/session-checkpoint-latest.json",
+    "platform_governance": "governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md",
+    "research_program": "registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json",
+    "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+  },
+  "platform_governance": {
+    "version": "1.1.0",
+    "status": "ACTIVE_GOVERNED_PLATFORM_V1_CURRENT_STATE_RECONCILED",
+    "navigator_authority": "CANONICAL_DIRECT_DOCUMENT",
+    "site_state": "registry/2026-09-01_UniverseLab_SiteState_v1.1.json",
+    "physical_gate_effect": "NONE",
+    "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"
+  }
 }

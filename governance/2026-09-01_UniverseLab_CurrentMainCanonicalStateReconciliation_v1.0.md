@@ -92,3 +92,16 @@ Nach Merge und grüner Reconciliation-QA folgt separat:
 `UNIVERSELAB_CANONICAL_COSMOLOGY_ENGINE_CONSOLIDATION_FAIL_CLOSED_V1`
 
 mit gemeinsamer Distanzgeometrie `D_C → D_M → D_L/D_A`, explizitem `E²>0`-Domain-Gate, Growth-ODE-Referenz und Engine-Paritätstests. Auch dieser Folgeblock besitzt zunächst keinen HZT-physikalischen Evidenzeffekt.
+
+## 8. CI-Kompatibilitätsmigration
+
+Die erste Draft-Ausführung zeigte vier bewusst ernst genommene Altvertragsabweichungen. Sie werden ohne Status- oder Sicherheitsabschwächung geschlossen:
+
+- **Memory Protocol:** Der datierte Checkpoint behält die aktuellen Reconciliation-Felder und erfüllt zusätzlich vollständig den öffentlichen Memory-Protocol-Vertrag (`current_goal`, `gate_state`, verifizierte Resultate, offene Blocker, Annahmen, verbotene Inferenzen, Einstiegspunkte und nächster exakter Schritt).
+- **Platform Governance:** Die bestehenden Kompatibilitätsfelder `central_registries` und `platform_governance` bleiben erhalten; der Workflow wird auf SiteState v1.1 und dessen aktuelle WP-/FM-0-Semantik migriert.
+- **Export:** Die Statusseite behält stabile Exporttitel- und Dateinamenmetadaten bei, obwohl ihr sichtbarer wissenschaftlicher Stand datiert ist.
+- **G0:** Die 3C11-Artefakte vom 5. August 2026 bleiben byte-unverändert und werden als historische Append-only-Kette revalidiert. Der alte Release-String wird nicht länger als aktueller Manifeststatus erzwungen. Der neue aktuelle G0-Einstieg ist der fail-closed Current-main-Reconciliation-Validator.
+
+Damit gilt:
+
+`historische Artefaktintegrität + aktuelle Statusautorität`, nicht `historischer Snapshot = aktueller Kanon`.

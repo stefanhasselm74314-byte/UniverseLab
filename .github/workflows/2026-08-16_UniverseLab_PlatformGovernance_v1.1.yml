@@ -1,4 +1,4 @@
-name: UniverseLab platform governance v1.1
+name: UniverseLab platform governance v1.2 current-state aware
 
 on:
   pull_request:
@@ -23,8 +23,9 @@ jobs:
 
       - name: Validate machine-readable platform state
         run: |
-          python -m json.tool schemas/2026-08-16_UniverseLab_SiteStateSchema_v1.0.json >/dev/null
-          python -m json.tool registry/2026-08-16_UniverseLab_SiteState_v1.0.json >/dev/null
+          python -m json.tool schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json >/dev/null
+          python -m json.tool registry/2026-09-01_UniverseLab_SiteState_v1.1.json >/dev/null
+          python -m json.tool registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json >/dev/null
           python -m json.tool project-manifest.json >/dev/null
           python -m json.tool registry/2026-08-16_UniverseLab_PlatformRolloutPlan_v1.0.json >/dev/null
 
@@ -34,24 +35,46 @@ jobs:
           import json
           from pathlib import Path
 
-          state = json.loads(Path('registry/2026-08-16_UniverseLab_SiteState_v1.0.json').read_text())
+          state = json.loads(Path('registry/2026-09-01_UniverseLab_SiteState_v1.1.json').read_text())
           assert state['schema'] == 'universelab.site-state.v1'
+          assert state['version'] == '1.1.0'
+          assert state['snapshot_date'] == '2026-09-01'
+          assert state['basis_main_commit'] == '46579b58b8ca2ae3fb4ba7726446c5871d84da79'
           assert state['physical_gate_effect'] == 'NONE'
           gov = state['governance']
           assert gov['K1-D'] == 'NOT_RELEASED'
           assert gov['K1-E'] == 'NOT_ADMISSIBLE'
           assert gov['physical_evidence_effect'] == 'NONE'
           assert gov['status_axes_rule'] == 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT'
+          assert gov['open_pull_requests_have_canonical_effect'] is False
 
           modules = {m['module_id']: m for m in state['modules']}
           u = modules['ULSH-01']
+          assert u['technical']['background_execution'] == 'NOT_AUTHORIZED'
+          assert u['technical']['physical_response_rank'] == 'NOT_EXECUTED'
+          assert u['technical']['backend_import'] == 'NOT_EXECUTED'
           assert u['governance']['solver_release'] == 'NOT_AUTHORIZED'
           assert u['governance']['K1-D'] == 'NOT_RELEASED'
           assert u['governance']['K1-E'] == 'NOT_ADMISSIBLE'
           assert u['governance']['physical_evidence_effect'] == 'NONE'
           assert u['scientific']['physical_background'] == 'NOT_ESTABLISHED'
           assert u['release_gate']['status'] == 'NOT_SATISFIED'
-          assert all(wp['status'] == 'NOT_EVALUATED_IN_SITE_STATE' for wp in u['work_packages'])
+          work_packages = {wp['id']: wp['status'] for wp in u['work_packages']}
+          assert work_packages == {
+              'WP1': 'CLOSED_TARGET_FROZEN_NO_EXECUTION',
+              'WP2': 'READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED',
+              'WP3': 'NOT_STARTED',
+              'WP4': 'BLOCKED_NOT_AUTHORIZED',
+          }
+
+          fm0 = modules['HZT-M0-FM0']
+          assert fm0['technical']['blocking_gap_count'] == 10
+          assert fm0['technical']['partially_resolved_blocking_gap_count'] == 3
+          assert fm0['technical']['fully_unresolved_blocking_gap_count'] == 7
+          assert fm0['governance']['gate'] == 'FM-G0'
+          assert fm0['governance']['gate_status'] == 'OPEN'
+          assert fm0['governance']['physical_evidence_effect'] == 'NONE'
+          assert fm0['release_gate']['status'] == 'NOT_SATISFIED'
           PY
 
       - name: Enforce manifest synchronization
@@ -70,16 +93,28 @@ jobs:
           assert pages['solver_hub']['path'] == 'solver-hub.html'
           assert pages['solver_hub']['status'] == 'ACTIVE_DIAGNOSTIC'
           assert pages['audit']['status'] == 'ARCHIVED_REFERENCE'
+          assert pages['research_status']['status'] == 'ACTIVE_CURRENT'
 
           registries = manifest['central_registries']
-          assert registries['site_state'] == 'registry/2026-08-16_UniverseLab_SiteState_v1.0.json'
-          assert registries['site_state_schema'] == 'schemas/2026-08-16_UniverseLab_SiteStateSchema_v1.0.json'
+          assert registries['current_main_canonical_state'] == 'registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json'
+          assert registries['site_state'] == 'registry/2026-09-01_UniverseLab_SiteState_v1.1.json'
+          assert registries['site_state_schema'] == 'schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json'
+          assert registries['session_checkpoint'] == 'registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json'
+          assert registries['session_checkpoint_alias'] == 'registry/session-checkpoint-latest.json'
           assert registries['platform_governance'] == 'governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md'
 
           platform = manifest['platform_governance']
           assert platform['version'] == '1.1.0'
+          assert platform['status'] == 'ACTIVE_GOVERNED_PLATFORM_V1_CURRENT_STATE_RECONCILED'
+          assert platform['navigator_authority'] == 'CANONICAL_DIRECT_DOCUMENT'
+          assert platform['site_state'] == registries['site_state']
           assert platform['physical_gate_effect'] == 'NONE'
           assert platform['status_axes_rule'] == 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT'
+
+          assert manifest['canonical_state'] == registries['current_main_canonical_state']
+          assert manifest['site_state'] == registries['site_state']
+          assert manifest['session_checkpoint'] == registries['session_checkpoint']
+          assert manifest['physical_gate_effect'] == 'NONE'
           PY
 
       - name: Enforce global shell rollout
@@ -114,6 +149,8 @@ jobs:
           assert 'ARCHIVSTAND' in shell
           assert 'renderModuleState' in shell
           assert 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT' not in shell
+          assert 'registry/2026-09-01_UniverseLab_SiteState_v1.1.json' in shell
+          assert 'registry/2026-08-16_UniverseLab_SiteState_v1.0.json' not in shell
 
           hub = Path('solver-hub.html').read_text()
           assert 'data-ul-module-state="ULSH-01"' in hub
