@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "universelab.site-state.v1.2",
+  "title": "UniverseLab Site State v1.2",
+  "type": "object",
+  "required": [
+    "schema",
+    "version",
+    "snapshot_date",
+    "basis_main_commit",
+    "canonical_state",
+    "physical_gate_effect",
+    "governance",
+    "freshness",
+    "pages",
+    "modules",
+    "status_sources"
+  ],
+  "properties": {
+    "schema": {"const": "universelab.site-state.v1"},
+    "version": {"const": "1.2.0"},
+    "snapshot_date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "snapshot_timestamp": {"type": "string"},
+    "basis_main_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "canonical_state": {"type": "string"},
+    "schema_contract": {"type": "string"},
+    "physical_gate_effect": {"const": "NONE"},
+    "governance": {
+      "type": "object",
+      "required": ["K1-D", "K1-E", "physical_evidence_effect", "status_axes_rule", "open_pull_requests_have_canonical_effect"],
+      "properties": {
+        "K1-D": {"const": "NOT_RELEASED"},
+        "K1-E": {"const": "NOT_ADMISSIBLE"},
+        "physical_evidence_effect": {"const": "NONE"},
+        "status_axes_rule": {"const": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"},
+        "open_pull_requests_have_canonical_effect": {"const": false}
+      },
+      "additionalProperties": true
+    },
+    "freshness": {
+      "type": "object",
+      "required": ["status", "supersedes", "validator"],
+      "properties": {
+        "status": {"const": "CURRENT_FOR_POST_MIGRATION_BASIS_MAIN"},
+        "supersedes": {"type": "string"},
+        "validator": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "pages": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "domain", "status"],
+        "properties": {
+          "id": {"type": "string"},
+          "path": {"type": "string"},
+          "domain": {"type": "string"},
+          "status": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "modules": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["module_id", "governance", "scientific", "release_gate"],
+        "additionalProperties": true
+      }
+    },
+    "status_sources": {"type": "object"}
+  },
+  "additionalProperties": true
+}
