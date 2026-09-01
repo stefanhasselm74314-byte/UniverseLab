@@ -78,7 +78,7 @@ def main() -> None:
     for token in (
         'C.e2FromA', 'C.solveGrowth', 'C.growthAtZ', 'C.q', 'C.E', 'C.ageGyr',
         'INVALID_BACKGROUND_DOMAIN', 'cellularDynamicsIndependent:true',
-        'gridResamplingVisualOnly:true', 'omegaMatter**0.55'
+        'gridResamplingVisualOnly:true', 'omegaMatter**.55'
     ):
         assert token in adapter, token
     for forbidden in (
