@@ -76,25 +76,34 @@ def main() -> None:
     assert '<script>\'use strict\'' not in html
 
     for token in (
-        'C.e2FromA', 'C.solveGrowth', 'C.growthAtZ', 'C.q', 'C.E', 'C.ageGyr',
-        'INVALID_BACKGROUND_DOMAIN', 'cellularDynamicsIndependent:true',
-        'gridResamplingVisualOnly:true', 'omegaMatter**.55'
+        "const VERSION='1.0.3'", "let timer=0", 'C.e2FromA', 'C.solveGrowth', 'C.growthAtZ',
+        'C.q', 'C.E', 'C.ageGyr', 'INVALID_BACKGROUND_DOMAIN',
+        'cellularDynamicsIndependent:true', 'gridResamplingVisualOnly:true', 'omegaMatter**.55',
+        'function displayGridSize', 'function restoreSimulationGrid', 'function applySavedInputs',
+        "payload?.settings?'LEGACY_SETTINGS_TO_INPUTS'", 'cellHash:cellHash()'
     ):
         assert token in adapter, token
     for forbidden in (
         'Math.sqrt(Math.max(0', 'Math.sqrt(Math.max(1e-12',
-        'function buildGrowth', 'function dlnH', 'function terms('
+        'function buildGrowth', 'function dlnH', 'function terms(',
+        'resizeGrid(', 'if(target>state.N)'
     ):
         assert forbidden not in adapter, forbidden
     assert 'UNRELEASED_GROWTH_MAP' in engine
 
     assert contract['status'] == 'IMPLEMENTED_REVIEW_PENDING'
-    assert contract['architecture']['dynamical_coupling_between_automaton_and_cosmology'] is False
-    assert contract['architecture']['grid_resampling_is_structure_formation_model'] is False
-    assert contract['architecture']['cellular_automaton_continues_when_cosmology_is_invalid'] is True
+    assert contract['version'] == '1.0.3'
+    architecture = contract['architecture']
+    assert architecture['dynamical_coupling_between_automaton_and_cosmology'] is False
+    assert architecture['cosmology_mutates_simulation_grid_size'] is False
+    assert architecture['cosmology_mutates_cell_state'] is False
+    assert architecture['display_resampling_mutates_simulation_state'] is False
+    assert architecture['display_resampling_is_structure_formation_model'] is False
+    assert architecture['cellular_automaton_continues_when_cosmology_is_invalid'] is True
     assert contract['background_contract']['invalid_policy'] == 'FAIL_CLOSED_NO_POSITIVE_FLOOR'
     assert contract['growth_contract']['approximation_role'] == 'DISPLAY_ONLY_DIAGNOSTIC_NOT_DYNAMICS'
     assert contract['growth_contract']['bridge_growth'] == 'UNRELEASED_GROWTH_MAP'
+    assert contract['persistence']['legacy_settings_migration'] == 'SUPPORTED_EXPLICIT_LEGACY_SETTINGS_TO_INPUTS'
     assert contract['K1-D'] == 'NOT_RELEASED'
     assert contract['K1-E'] == 'NOT_ADMISSIBLE'
     assert contract['physical_gate_effect'] == 'NONE'
