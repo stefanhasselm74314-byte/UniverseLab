@@ -1,0 +1,90 @@
+name: UniverseLab Observatory migration QA v1.5
+
+on:
+  pull_request:
+    paths:
+      - 'observatory.html'
+      - 'observatory-en.html'
+      - 'model-state.js'
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'assets/2026-09-01_UniverseLab_ObservatoryAdapter_v1.5.js'
+      - 'registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json'
+      - 'science/cosmology/2026-09-01_UniverseLab_ObservatoryMigration_v1.5.md'
+      - 'tests/2026-09-01_test_UniverseLab_ObservatoryMigration_v1.5.py'
+      - 'tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs'
+      - '.github/workflows/2026-09-01_UniverseLab_ObservatoryMigration_QA_v1.5.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'observatory.html'
+      - 'observatory-en.html'
+      - 'model-state.js'
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'assets/2026-09-01_UniverseLab_ObservatoryAdapter_v1.5.js'
+      - 'registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json'
+      - 'science/cosmology/2026-09-01_UniverseLab_ObservatoryMigration_v1.5.md'
+      - 'tests/2026-09-01_test_UniverseLab_ObservatoryMigration_v1.5.py'
+      - 'tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs'
+      - '.github/workflows/2026-09-01_UniverseLab_ObservatoryMigration_QA_v1.5.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-observatory-migration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Parse contract and compile code
+        run: |
+          python -m json.tool registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json >/dev/null
+          python -m py_compile tests/2026-09-01_test_UniverseLab_ObservatoryMigration_v1.5.py
+          node --check assets/2026-09-01_UniverseLab_ObservatoryAdapter_v1.5.js
+          node --check tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs
+      - name: Re-run canonical engine foundation validation
+        run: |
+          node tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs
+          python tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py
+      - name: Run static and independent numerical migration contract
+        run: python tests/2026-09-01_test_UniverseLab_ObservatoryMigration_v1.5.py
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Start local Pages server
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/universelab-observatory-http.log 2>&1 &
+          echo $! >/tmp/universelab-observatory-http.pid
+          sleep 2
+      - name: Run Observatory browser and adversarial audit
+        env:
+          UNIVERSELAB_BASE_URL: 'http://127.0.0.1:8000/'
+        run: node tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs
+      - name: Enforce evidence firewall
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json')
+          d=json.loads(p.read_text())
+          assert d['physical_gate_effect']=='NONE'
+          assert d['physical_evidence_effect']=='NONE'
+          assert d['didactic_data_policy']['likelihood_fit'] is False
+          assert d['growth_contract']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
+          assert d['background_contract']['invalid_policy']=='FAIL_CLOSED_NO_POSITIVE_FLOOR'
+          print('Observatory evidence firewall: PASS')
+          PY
+      - name: Upload Observatory audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universelab-observatory-migration-report
+          path: observatory-migration-report.json
+          if-no-files-found: error
