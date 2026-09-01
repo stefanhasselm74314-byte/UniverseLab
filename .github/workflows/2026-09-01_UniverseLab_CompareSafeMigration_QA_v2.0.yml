@@ -11,6 +11,7 @@ on:
       - 'science/cosmology/2026-09-01_UniverseLab_CompareSafeMigration_v2.0.md'
       - 'tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py'
       - 'tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs'
+      - 'tools/2026-09-01_UniverseLab_CompareSafeFormulaRefreshAudit_v2.0.mjs'
       - '.github/workflows/2026-09-01_UniverseLab_CompareSafeMigration_QA_v2.0.yml'
   push:
     branches: [main]
@@ -23,6 +24,7 @@ on:
       - 'science/cosmology/2026-09-01_UniverseLab_CompareSafeMigration_v2.0.md'
       - 'tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py'
       - 'tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs'
+      - 'tools/2026-09-01_UniverseLab_CompareSafeFormulaRefreshAudit_v2.0.mjs'
       - '.github/workflows/2026-09-01_UniverseLab_CompareSafeMigration_QA_v2.0.yml'
 
 permissions:
@@ -46,6 +48,7 @@ jobs:
           python -m py_compile tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py
           node --check assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js
           node --check tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs
+          node --check tools/2026-09-01_UniverseLab_CompareSafeFormulaRefreshAudit_v2.0.mjs
       - name: Re-run canonical engine foundation validation
         run: |
           node tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs
@@ -65,6 +68,10 @@ jobs:
         env:
           UNIVERSELAB_BASE_URL: 'http://127.0.0.1:8000/'
         run: node tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs
+      - name: Run formula refresh regression audit
+        env:
+          UNIVERSELAB_BASE_URL: 'http://127.0.0.1:8000/'
+        run: node tools/2026-09-01_UniverseLab_CompareSafeFormulaRefreshAudit_v2.0.mjs
       - name: Enforce evidence firewall
         run: |
           python - <<'PY'
