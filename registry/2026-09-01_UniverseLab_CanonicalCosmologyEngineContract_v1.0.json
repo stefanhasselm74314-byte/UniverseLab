@@ -1,17 +1,24 @@
 {
   "schema": "universelab.canonical-cosmology-engine-contract.v1",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "date": "2026-09-01",
-  "status": "FOUNDATION_IMPLEMENTED_PAGE_MIGRATION_NOT_STARTED",
+  "status": "REFERENCE_ENGINE_ACTIVE_PAGE_MIGRATIONS_IN_PROGRESS",
   "classification": "NUMERICAL_REFERENCE_ENGINE_NO_HZT_PHYSICAL_EVIDENCE",
-  "stacked_base": {
-    "pull_request": 193,
-    "head_sha": "eb5bdea01bf605fa4a3b63e2c1850622796d1efd",
-    "reason": "The current-main status reconciliation is still draft because the GitHub connector could not transition it to ready-for-review."
+  "provenance": {
+    "foundation_pull_request": 196,
+    "foundation_merge_commit": "8a0dc1ae9aee8cdbde346b2a6ef5003f21cf2b08",
+    "current_basis_main_commit": "67c92e2644cee1f2c3a5526cd914f81a3b40a7b8",
+    "current_hardening_pull_request": 201,
+    "hardening_reason": "A real Chromium legacy-state audit exposed cumulative RK4 endpoint roundoff that evaluated the final growth stage at an infinitesimal negative redshift."
   },
   "engine": {
     "path": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
-    "runtime": ["browser_global", "node_commonjs"],
+    "api_version": "1.0.0",
+    "implementation_revision": "1.0.1",
+    "runtime": [
+      "browser_global",
+      "node_commonjs"
+    ],
     "global_name": "UniverseLabCosmology",
     "network_access": false,
     "deterministic": true,
@@ -61,15 +68,29 @@
     "initial_condition": "D(a_i)=a_i and D'(a_i)=a_i",
     "default_a_i": "max(1e-3, 10 Omega_r/Omega_m)",
     "normalization": "D(1)=1",
-    "solver": "fixed-step classical RK4",
+    "solver": "fixed-step classical RK4 with an exact shortened final step",
     "default_steps": 4000,
+    "endpoint": "EXACT_X_0_A_1",
+    "endpoint_policy": "The final integration abscissa is constructed as x=0 and a=1; no tolerance relaxation of the public z>=0 domain is permitted.",
+    "solution_metadata": {
+      "api_version": "1.0.0",
+      "implementation_revision": "1.0.1"
+    },
     "scope": "linear pressureless matter perturbations in GR with smooth LCDM or constant-w dark energy",
-    "excluded": ["bridge perturbations", "radiation perturbations", "massive-neutrino scale dependence", "nonlinear growth", "baryonic feedback", "modified-gravity mu or Sigma"]
+    "excluded": [
+      "bridge perturbations",
+      "radiation perturbations",
+      "massive-neutrino scale dependence",
+      "nonlinear growth",
+      "baryonic feedback",
+      "modified-gravity mu or Sigma"
+    ]
   },
   "fail_closed_domain_rules": {
     "E2": "must be finite and strictly positive at every evaluated point",
     "bridge_factor": "1 + Delta must be finite and strictly positive",
     "floors_for_negative_E2": false,
+    "negative_redshift_tolerance": false,
     "invalid_background_code": "INVALID_BACKGROUND_DOMAIN",
     "invalid_bridge_code": "INVALID_BRIDGE_DOMAIN",
     "unreleased_growth_code": "UNRELEASED_GROWTH_MAP"
@@ -82,6 +103,19 @@
       "z_1": 0.6068047406056298,
       "z_2": 0.4172414795427676,
       "z_3": 0.31553801878444504
+    },
+    "nondefault_growth_endpoint_witness": {
+      "H0": 70.0,
+      "Omega_m": 0.3,
+      "Omega_DE": 0.699908,
+      "Omega_r": 0.000092,
+      "w": -1.0,
+      "expected_endpoint": {
+        "x": 0.0,
+        "a": 1.0
+      },
+      "growth_D_z1": 0.6118580969985543,
+      "purpose": "regression against cumulative endpoint roundoff and NEGATIVE_REDSHIFT at the final RK4 stage"
     },
     "invalid_wcdm_witness": {
       "Omega_m": 0.1,
@@ -96,6 +130,7 @@
     "independent_python_test": "tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py",
     "workflow": ".github/workflows/2026-09-01_UniverseLab_CanonicalCosmologyEngineFoundation_QA_v1.0.yml",
     "checks": [
+      "API version and implementation revision",
       "E(0)=1",
       "flat D_M=D_C",
       "open D_M>D_C and closed D_M<D_C",
@@ -105,6 +140,8 @@
       "invalid bridge factor fails closed",
       "beta_tau I_B product degeneracy",
       "LCDM growth reference",
+      "exact x=0 and a=1 growth endpoint for default and nondefault a_i",
+      "nondefault growth D(z=1) independent reference",
       "Einstein-de Sitter D=a and f=1",
       "bridge growth firewall",
       "small-z Hubble law",
@@ -112,17 +149,22 @@
     ]
   },
   "migration": {
-    "stage": "FOUNDATION_ONLY",
+    "stage": "PUBLIC_REFERENCE_PAGE_MIGRATIONS_IN_PROGRESS",
     "page_behavior_changed": false,
-    "pages_not_yet_migrated": [
-      "compare-safe.html",
-      "compare-direct.html",
-      "compare-app.js",
-      "observatory.html",
+    "page_behavior_changed_by_this_engine_hardening": false,
+    "migrated_pages": [
       "validation.html",
+      "validation-en.html",
+      "observatory.html",
+      "compare-safe.html",
+      "compare.html",
+      "compare-direct.html"
+    ],
+    "review_pending_pages": [
       "emergence.html"
     ],
-    "next_stage": "MIGRATE_ONE_CANONICAL_PAGE_AT_A_TIME_WITH_PARITY_AND_ADVERSARIAL_TESTS"
+    "remaining_independent_cosmology_engines": [],
+    "next_stage": "MERGE_EMERGENCE_AFTER_EXACT_HEAD_BROWSER_AND_REPOSITORY_QA"
   },
   "forbidden_inferences": [
     "NO_REFERENCE_ENGINE_AS_HZT_PARENT_DERIVATION",
@@ -130,7 +172,7 @@
     "NO_LINEAR_GROWTH_REFERENCE_AS_RELEASED_HZT_GROWTH_MAP",
     "NO_BRIDGE_BACKGROUND_AS_BRIDGE_PERTURBATION_THEORY",
     "NO_NUMERICAL_CONSISTENCY_AS_GHOST_FREEDOM",
-    "NO_FOUNDATION_PR_AS_PAGE_MIGRATION_COMPLETE",
+    "NO_ENGINE_ENDPOINT_FIX_AS_PHYSICAL_EVIDENCE",
     "NO_PHYSICAL_GATE_PROMOTION"
   ],
   "physical_gate_effect": "NONE",

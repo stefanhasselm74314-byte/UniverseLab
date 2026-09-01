@@ -1,0 +1,109 @@
+name: UniverseLab Emergence canonical growth adapter QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'emergence.html'
+      - 'emergence-en.html'
+      - 'emergence-touch.js'
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'assets/2026-09-01_UniverseLab_EmergenceAdapter_v1.0.js'
+      - 'registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json'
+      - 'science/cosmology/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.md'
+      - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py'
+      - 'tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs'
+      - '.github/workflows/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapter_QA_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'emergence.html'
+      - 'emergence-en.html'
+      - 'emergence-touch.js'
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'assets/2026-09-01_UniverseLab_EmergenceAdapter_v1.0.js'
+      - 'registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json'
+      - 'science/cosmology/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.md'
+      - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py'
+      - 'tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs'
+      - '.github/workflows/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapter_QA_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-emergence-adapter:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Parse contract and compile migration code
+        run: |
+          python -m json.tool registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json >/dev/null
+          python -m py_compile tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py
+          python -m py_compile tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py
+          node --check assets/2026-09-01_UniverseLab_EmergenceAdapter_v1.0.js
+          node --check tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs
+      - name: Re-run canonical cosmology engine validation
+        run: |
+          node tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs
+          python tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py
+      - name: Run static and independent Emergence contract
+        run: python tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py
+      - name: Run post-Chromium and Codex hardening regression
+        run: python tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Start local Pages server
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/universelab-emergence-http.log 2>&1 &
+          echo $! >/tmp/universelab-emergence-http.pid
+          sleep 2
+      - name: Run browser and adversarial audit
+        env:
+          UNIVERSELAB_BASE_URL: 'http://127.0.0.1:8000/'
+        run: node tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs
+      - name: Enforce scientific and physical firewalls
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json')
+          d=json.loads(p.read_text())
+          assert d['version']=='1.0.3'
+          a=d['architecture']
+          assert a['dynamical_coupling_between_automaton_and_cosmology'] is False
+          assert a['cosmology_mutates_simulation_grid_size'] is False
+          assert a['cosmology_mutates_cell_state'] is False
+          assert a['display_resampling_mutates_simulation_state'] is False
+          assert a['display_resampling_is_structure_formation_model'] is False
+          assert a['cellular_automaton_continues_when_cosmology_is_invalid'] is True
+          assert d['background_contract']['display_time_integrator']=='PRECOMPUTED_MONOTONE_SIMPSON_TAU_OF_LN_A_MAP'
+          assert d['background_contract']['display_time_endpoint']=='EXACT_X_0_A_1_Z_0'
+          assert d['fail_closed_ui']['stale_epoch_bars_cleared'] is True
+          assert d['fail_closed_ui']['debounce_timer_declared'] is True
+          assert d['growth_contract']['approximation_role']=='DISPLAY_ONLY_DIAGNOSTIC_NOT_DYNAMICS'
+          assert d['growth_contract']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
+          assert d['persistence']['legacy_settings_migration']=='SUPPORTED_EXPLICIT_LEGACY_SETTINGS_TO_INPUTS'
+          assert d['K1-D']=='NOT_RELEASED'
+          assert d['K1-E']=='NOT_ADMISSIBLE'
+          assert d['physical_gate_effect']=='NONE'
+          assert d['physical_evidence_effect']=='NONE'
+          print('Emergence scientific and physical firewalls: PASS')
+          PY
+      - name: Upload Emergence audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universelab-emergence-canonical-growth-adapter-report
+          path: emergence-canonical-growth-adapter-report.json
+          if-no-files-found: error

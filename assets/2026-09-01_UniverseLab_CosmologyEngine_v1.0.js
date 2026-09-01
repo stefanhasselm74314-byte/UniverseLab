@@ -7,6 +7,7 @@
   'use strict';
 
   const VERSION='1.0.0';
+  const REVISION='1.0.1';
   const C_KM_S=299792.458;
   const HUBBLE_TIME_100_GYR=9.77813;
   const DEFAULT_OR=9.2e-5;
@@ -264,29 +265,32 @@
     const aInit=finite(options.aInit??Math.max(1e-3,10*aEq),'aInit');
     if(!(aInit>0&&aInit<1)) throw new CosmologyError('INVALID_GROWTH_AINIT','Require 0 < aInit < 1',{aInit});
     const steps=Math.max(400,Math.trunc(finite(options.steps??4000,'steps')));
-    const x0=Math.log(aInit),h=(0-x0)/steps;
+    const x0=Math.log(aInit),nominalH=(0-x0)/steps;
     let x=x0,D=aInit,V=aInit;
     const rows=[];
     const rhs=(X,Y,W)=>{
       const a=Math.exp(X);
-      const om=omegaM(1/a-1,p,key);
+      const om=omegaM(Math.max(0,1/a-1),p,key);
       return [W,-(2+dLnHdLnA(a,p,key))*W+1.5*om*Y];
     };
     for(let i=0;i<=steps;i++){
-      rows.push({x,a:Math.exp(x),D,V});
+      if(i===steps)x=0;
+      rows.push({x,a:i===steps?1:Math.exp(x),D,V});
       if(i===steps)break;
+      const nextX=i===steps-1?0:x+nominalH;
+      const h=nextX-x;
       const k1=rhs(x,D,V);
       const k2=rhs(x+h/2,D+h*k1[0]/2,V+h*k1[1]/2);
       const k3=rhs(x+h/2,D+h*k2[0]/2,V+h*k2[1]/2);
-      const k4=rhs(x+h,D+h*k3[0],V+h*k3[1]);
+      const k4=rhs(nextX,D+h*k3[0],V+h*k3[1]);
       D+=h*(k1[0]+2*k2[0]+2*k3[0]+k4[0])/6;
       V+=h*(k1[1]+2*k2[1]+2*k3[1]+k4[1])/6;
-      x+=h;
+      x=nextX;
     }
     const norm=rows[rows.length-1].D;
     if(!(Number.isFinite(norm)&&norm>0)) throw new CosmologyError('INVALID_GROWTH_NORMALIZATION','Growth normalization is invalid',{norm});
     for(const row of rows){row.Dn=row.D/norm;row.f=row.V/row.D;}
-    return Object.freeze({version:VERSION,model:key,params:p,aInit,steps,rows:Object.freeze(rows)});
+    return Object.freeze({version:VERSION,revision:REVISION,model:key,params:p,aInit,steps,rows:Object.freeze(rows)});
   }
 
   function growthAtZ(z,solution){
@@ -314,7 +318,7 @@
   }
 
   return Object.freeze({
-    VERSION,C_KM_S,HUBBLE_TIME_100_GYR,DEFAULT_OR,DEFAULT_RD_MPC,CosmologyError,
+    VERSION,REVISION,C_KM_S,HUBBLE_TIME_100_GYR,DEFAULT_OR,DEFAULT_RD_MPC,CosmologyError,
     normalizeParams,normalizeModel,aOfZ,zOfA,bridgeScale,bridgeDeltaFromA,
     e2FromA,e2,E,dLnHdLnA,q,omegaM,validateBackgroundDomain,simpson,
     hubbleDistance,hubbleTimeGyr,radialComovingDistance,transverseComovingDistance,
