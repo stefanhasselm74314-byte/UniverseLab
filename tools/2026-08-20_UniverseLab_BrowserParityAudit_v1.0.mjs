@@ -3,7 +3,7 @@ import fs from 'node:fs';
 
 const BASE = process.env.UNIVERSELAB_BASE_URL || 'https://stefanhasselm74314-byte.github.io/UniverseLab/';
 const EPS = Number(process.env.UNIVERSELAB_PARITY_EPS || '1e-12');
-const report = { schema_version:'1.1', base_url:BASE, timestamp_utc:new Date().toISOString(), status:'PASS', checks:[], errors:[] };
+const report = { schema_version:'1.2', base_url:BASE, timestamp_utc:new Date().toISOString(), status:'PASS', checks:[], errors:[] };
 
 function push(name, ok, detail={}) {
   report.checks.push({name, ok, ...detail});
@@ -12,6 +12,11 @@ function push(name, ok, detail={}) {
 function close(a,b,eps=EPS){
   if (!Number.isFinite(a)||!Number.isFinite(b)) return false;
   return Math.abs(a-b) <= eps*Math.max(1,Math.abs(a),Math.abs(b));
+}
+function sameValue(a,b){
+  if(a===null||b===null)return a===b;
+  if(typeof a==='number'||typeof b==='number')return close(Number(a),Number(b));
+  return JSON.stringify(a)===JSON.stringify(b);
 }
 function parseLocaleNumber(text){
   const s=String(text??'').replace(/\s*Gyr/i,'').replace(/%/g,'').replace(/,/g,'.').replace(/[^0-9eE+\-.]/g,'');
@@ -41,24 +46,31 @@ const browser=await chromium.launch({headless:true});
 try{
   const context=await browser.newContext({viewport:{width:1280,height:900}, locale:'en-US'});
 
-  // 1) Validation Console: independent DE and EN code paths must agree and their own self-tests must pass.
+  // 1) Validation Console: DE and EN use one canonical engine and must expose identical stable test semantics.
   {
     const de=await pageErrors(context,'validation-de'); const en=await pageErrors(context,'validation-en');
     await goto(de.page,'validation.html'); await goto(en.page,'validation-en.html');
-    await de.page.waitForFunction(()=>document.querySelectorAll('#rows tr').length===6);
-    await en.page.waitForFunction(()=>document.querySelectorAll('#rows tr').length===6);
+    await de.page.waitForFunction(()=>window.UniverseLabValidation?.status==='complete'&&document.querySelectorAll('#rows tr[data-test-id]').length>=10);
+    await en.page.waitForFunction(()=>window.UniverseLabValidation?.status==='complete'&&document.querySelectorAll('#rows tr[data-test-id]').length>=10);
     const snap=async p=>p.evaluate(()=>({
-      passed:document.querySelector('#passed')?.textContent,
-      failed:document.querySelector('#failed')?.textContent,
-      maxerr:document.querySelector('#maxerr')?.textContent,
-      values:[...document.querySelectorAll('#rows code')].map(x=>Number(x.textContent)),
-      states:[...document.querySelectorAll('#rows .state')].map(x=>x.textContent.trim())
+      api:window.UniverseLabValidation.snapshot(),
+      rowIds:[...document.querySelectorAll('#rows tr[data-test-id]')].map(x=>x.dataset.testId),
+      rowStates:[...document.querySelectorAll('#rows tr[data-test-id]')].map(x=>x.dataset.testStatus),
+      failedText:document.querySelector('#failed')?.textContent,
+      releaseText:document.querySelector('#release')?.textContent
     }));
     const A=await snap(de.page), B=await snap(en.page);
-    const vals=A.values.length===B.values.length && A.values.every((v,i)=>close(v,B.values[i]));
-    push('validation_numeric_parity', vals, {de:A.values,en:B.values,epsilon:EPS});
-    push('validation_internal_health', A.failed==='0' && B.failed==='0' && A.states.every(x=>x==='PASS') && B.states.every(x=>x==='PASS'), {de:A,en:B});
-    push('validation_no_browser_errors', de.errors.length===0 && en.errors.length===0,{de_errors:de.errors,en_errors:en.errors});
+    const idsA=A.api.results.map(x=>x.id), idsB=B.api.results.map(x=>x.id);
+    const idParity=JSON.stringify(idsA)===JSON.stringify(idsB)&&JSON.stringify(A.rowIds)===JSON.stringify(idsA)&&JSON.stringify(B.rowIds)===JSON.stringify(idsB);
+    const semanticParity=idParity&&A.api.results.every((x,i)=>{
+      const y=B.api.results[i];
+      return x.id===y.id&&x.kind===y.kind&&x.ok===y.ok&&x.code===y.code&&sameValue(x.value,y.value)&&sameValue(x.target,y.target)&&sameValue(x.error,y.error)&&sameValue(x.tolerance,y.tolerance);
+    });
+    push('validation_test_id_parity',idParity,{de_ids:idsA,en_ids:idsB,de_rows:A.rowIds,en_rows:B.rowIds});
+    push('validation_numeric_parity',semanticParity,{de:A.api.results,en:B.api.results,epsilon:EPS});
+    push('validation_engine_identity',A.api.engineVersion===B.api.engineVersion&&A.api.engineVersion==='1.0.0',{de:A.api.engineVersion,en:B.api.engineVersion});
+    push('validation_internal_health',A.api.failed===0&&B.api.failed===0&&A.api.results.length>=10&&A.api.results.every(x=>x.ok)&&B.api.results.every(x=>x.ok)&&A.rowStates.every(x=>x==='PASS')&&B.rowStates.every(x=>x==='PASS'),{de:A,en:B});
+    push('validation_no_browser_errors',de.errors.length===0&&en.errors.length===0,{de_errors:de.errors,en_errors:en.errors});
     await de.page.close(); await en.page.close();
   }
 
