@@ -1,4 +1,4 @@
-# UniverseLab Emergence: kanonischer Hintergrund- und Growth-Adapter v1.0
+# UniverseLab Emergence: kanonischer Hintergrund- und Growth-Adapter v1.0.3
 
 **Datum:** 2026-09-01  
 **Basis-`main`:** `67c92e2644cee1f2c3a5526cd914f81a3b40a7b8`  
@@ -12,11 +12,25 @@ Die Seite vereint zwei mathematisch verschiedene Systeme:
 1. einen zweidimensionalen diskreten Zellautomaten;
 2. eine kosmologische Hintergrund- und lineare Growth-Diagnostik.
 
-Die Migration erzwingt die direkte Produkstruktur
+Die Migration erzwingt die direkte Produktstruktur
 
 `Zustand = Zustand_Zellautomat × Zustand_Kosmologie`.
 
-Es existiert kein Term, durch den die Zellbelegung in `E(a)`, `q(a)`, `D(a)` oder `f(a)` eingeht. Umgekehrt verändert die Growth-Amplitude keine Geburts- oder Überlebensregel. Die optionale Änderung der sichtbaren Gitterauflösung ist ausschließlich eine Resampling-Konvention.
+Der dynamische Automatenzustand lautet schematisch
+
+`S_CA=(N,cells,generation,rule,noise)`.
+
+Der Kosmologiezustand lautet
+
+`S_cos=(a,tau,Omega_i,E,q,D,f)`.
+
+Es existiert kein Term, durch den `N`, `cells` oder `generation` in `E(a)`, `q(a)`, `D(a)` oder `f(a)` eingehen. Umgekehrt verändern `a`, `D` und `f` weder die Nachbarschaftszählung noch Geburts- oder Überlebensregeln.
+
+Die sichtbare Anzeigeauflösung ist ein dritter, abgeleiteter Renderzustand
+
+`R=(displayN,canvas)`.
+
+`displayN` darf von der gewählten Darstellung und von `a` abhängen, wird aber nur beim Zeichnen ausgewertet. Es verändert weder `N` noch `cells`. Ein Codex-Review hatte zutreffend erkannt, dass eine frühere Fassung den simulierten Automaten mit einem kosmologieabhängigen `resizeGrid` tatsächlich umgesampelt hätte. Dieser Pfad wurde entfernt und durch die getrennte Renderansicht ersetzt.
 
 Daher gilt:
 
@@ -46,6 +60,16 @@ und äquivalent
 
 `da/dτ=a E(a)`.
 
+Der Adapter integriert diese Anzeigezeit nicht mit einem einzelnen groben Schritt, sondern konstruiert die monotone Abbildung
+
+`τ(a)-τ(a_i)=Integral_[ln(a_i)]^[ln(a)] dx/E(exp(x))`.
+
+Die Integralelemente werden mit Simpson-Quadratur auf 4096 Knoten aufgebaut und anschließend monoton invertiert. Der letzte Knoten wird konstruktiv auf
+
+`(x,a,z)=(0,1,0)`
+
+gesetzt. Damit entsteht aus kumulierter Gleitkommarundung kein winzig negatives `z`; die strikte Engine-Domäne `z>=0` bleibt unverändert.
+
 Der Adapter integriert nur bis `a=1`. Eine Fortsetzung in die Zukunft `a>1` ist im derzeitigen Engine-Vertrag nicht enthalten.
 
 ### Dimensionsprüfung
@@ -55,7 +79,7 @@ Der Adapter integriert nur bis `a=1`. Eine Fortsetzung in die Zukunft `a>1` ist 
 - `τ=H0 t` ist dimensionslos;
 - die Zellgeneration ist ein diskreter Index ohne physikalische Zeiteinheit.
 
-Eine Gleichsetzung von Zellgeneration und kosmischer Eigenzeit wäre daher ohne zusätzliche Kalibrierungsabbildung unzulässig.
+Eine Gleichsetzung von Zellgeneration und kosmischer Eigenzeit wäre ohne zusätzliche Kalibrierungsabbildung unzulässig.
 
 ## 3. Fail-closed Domäne
 
@@ -75,7 +99,7 @@ Dann werden keine kosmologischen Zeitreihen fortgesetzt, keine scheinbar endlich
 
 `sqrt(max(epsilon,E²))`
 
-verwendet. Der Zellautomat bleibt als diskrete Visualisierung funktionsfähig; die kosmologische Diagnose bleibt gesperrt.
+verwendet. Statistikfelder, Verlauf und Epochenbalken werden geleert. Der Zellautomat bleibt als diskrete Visualisierung funktionsfähig; die kosmologische Diagnose bleibt gesperrt.
 
 ## 4. Lineares Wachstum
 
@@ -117,13 +141,29 @@ Die analytischen Gleichheitsskalen im ΛCDM-Referenzmodell lauten
 
 `a_MΛ=(Ω_m/Ω_Λ)^(1/3)`.
 
-Der Beschleunigungsbeginn wird nicht aus einer separaten Näherungsformel übernommen, sondern numerisch aus dem kanonischen Hintergrund bestimmt:
+Der Beschleunigungsbeginn wird numerisch aus dem kanonischen Hintergrund bestimmt:
 
 `q(a_acc)=0`.
 
 Diese Skalen sind Eigenschaften des deklarierten homogenen Referenzhintergrunds, keine aus dem Zellautomaten emergenten Größen.
 
-## 6. Gültigkeitsbereich und ausgeschlossene Physik
+## 6. Persistenz und Legacy-Migration
+
+Neue Speicherstände verwenden
+
+`schema=universelab.emergence-state.v2`
+
+und legen Bedienelemente unter `inputs` ab. Die vor der Migration erzeugten Speicherstände besaßen noch kein Schema und verwendeten den Schlüssel `settings`.
+
+Die Ladefunktion unterscheidet deshalb explizit:
+
+- `inputs` → aktueller Zustand;
+- `settings` → `LEGACY_SETTINGS_TO_INPUTS`;
+- kein Steuerblock → `NO_SETTINGS`.
+
+Alte `history`-Arrays werden nicht als neue kanonische Objekt-Historie ausgegeben, weil ihre Spaltensemantik vom v2-Vertrag abweicht. Stattdessen werden die wiederhergestellten Zellen, Parameter und der Skalenfaktor übernommen und eine neue kanonische Historie berechnet. Die Wiederherstellung eines gespeicherten Automatenrasters ist ein Persistenzvorgang, kein kosmologisches Resampling.
+
+## 7. Gültigkeitsbereich und ausgeschlossene Physik
 
 Die Growth-Gleichung gilt für lineare, drucklose Materieperturbationen in GR mit glatter Λ-Komponente. Nicht enthalten sind:
 
@@ -136,15 +176,20 @@ Die Growth-Gleichung gilt für lineare, drucklose Materieperturbationen in GR mi
 - eine Parent→Reduced→Observable-Herleitung;
 - Ghost- oder Hamilton-Positivitätsanalyse.
 
-## 7. Falsifikations- und QA-Struktur
+## 8. Falsifikations- und QA-Struktur
 
 Der Migrationsvertrag verlangt:
 
 - Identität der sichtbaren Diagnose mit direkten Aufrufen des kanonischen Rechenkerns;
-- unverändertes `a`, wenn der Zellautomat im statischen Kosmologiemodus einen Schritt ausführt;
-- wachsendes `a`, wenn die ΛCDM-Anzeigezeit aktiviert ist;
-- fail-closed Verhalten für einen expliziten negativen-`E²`-Zeugen;
+- einen realen Slider-`input`-Event durch den deklarierten Debounce-Pfad;
+- unverändertes `a` im statischen Modus;
+- wachsendes `a` bei aktivierter ΛCDM-Anzeigezeit;
+- Genauigkeit auch bei maximaler Zeitverstärkung;
+- exakt gleichen nächsten Zellhash für identische Startzellen, Regeln und `noise=0` in `off` und `lcdm`;
+- konstantes Simulationsgitter `N` bei veränderter Anzeigegröße `displayN`;
+- fail-closed Verhalten für einen negativen-`E²`-Zeugen;
 - weiterhin iterierbaren Zellautomaten bei gesperrter Kosmologiediagnose;
+- explizite Migration eines historischen `settings`-Speicherstands;
 - unabhängige Python-Rekonstruktion der ΛCDM-Growth-ODE;
 - deutsch/englische Laufzeitparität;
 - keine Browser- oder HTTP-Fehler.
