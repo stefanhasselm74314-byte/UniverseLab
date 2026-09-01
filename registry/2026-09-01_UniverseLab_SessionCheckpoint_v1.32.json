@@ -1,0 +1,190 @@
+{
+  "schema": "universelab.session-checkpoint.v1",
+  "checkpoint_id": "UL-CHK-20260901-032",
+  "timestamp": "2026-09-01T23:20:00+02:00",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "basis_commit": "2f03998fbb36185123fc02f4fd3cb1df5749834a",
+  "canonical_snapshot": "registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.32.json",
+  "supersedes": "registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json",
+  "canonical_state": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+  "site_state": "registry/2026-09-01_UniverseLab_SiteState_v1.2.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "controlled_branches": ["HZT-M0-S6", "HZT-M0-P5"],
+  "active_program": {
+    "program_id": "UL-HZT-10M-2026-2027",
+    "status": "ACTIVE_RATIFIED_RESEARCH_PROGRAM",
+    "workstream": "WS1",
+    "work_package": "FM-0",
+    "gate": "FM-G0",
+    "gate_status": "OPEN"
+  },
+  "physical_governance": {
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+    "operative_authorization_decision": "NOT_CREATED",
+    "operative_single_use_grant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "solver_authorized": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "automatic_wp3_wp4_start": false
+  },
+  "public_numerics_summary": {
+    "closure": "registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json",
+    "status": "COMPLETE_FOR_DECLARED_PUBLIC_SET",
+    "canonical_engine_api_version": "1.0.0",
+    "canonical_engine_implementation_revision": "1.0.1",
+    "merged_pull_requests": [196, 197, 198, 199, 200, 201],
+    "remaining_independent_public_cosmology_engines": 0,
+    "scientific_effect": "NONE",
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE"
+  },
+  "fm0_summary": {
+    "inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+    "blocking_gap_count": 10,
+    "fully_unresolved_blocking_gap_count": 7,
+    "partially_resolved_blocking_gap_count": 3,
+    "gate": "FM-G0",
+    "gate_status": "OPEN"
+  },
+  "open_noncanonical_work": [
+    {
+      "pull_request": 137,
+      "state": "OPEN_DRAFT",
+      "canonical_effect": "NONE_UNTIL_REBUILT_ON_CURRENT_MAIN_AND_MERGED_AFTER_EXACT_MERGE_TREE_AUDIT",
+      "reported_review_blockers": ["AUTHORITY_SIGNATURE_PROVENANCE", "RUNTIME_ISSUANCE_BINDINGS"]
+    }
+  ],
+  "current_goal": "Resume the active WS1/FM-0 parent-to-reduced-to-observable provenance recovery after technical closure of the declared public cosmology-engine migration set.",
+  "current_workstream": "WS1/FM-0",
+  "current_workstreams": [
+    {
+      "id": "WS1/FM-0",
+      "status": "ACTIVE_TARGETED_PARENT_RECOVERY",
+      "gate": "FM-G0",
+      "gate_status": "OPEN",
+      "source": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+    },
+    {
+      "id": "PUBLIC-COSMOLOGY-MIGRATION",
+      "status": "TECHNICALLY_CLOSED_NO_PHYSICAL_EFFECT",
+      "source": "registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json"
+    }
+  ],
+  "gate_state": {
+    "FM-G0": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE"
+  },
+  "verified_results": [
+    {
+      "id": "VR-PUBLIC-COSMOLOGY-MIGRATION-CLOSURE",
+      "status": "MERGED_MAIN_TECHNICAL_CLOSURE",
+      "result": "Validation, Observatory, Compare routes and Emergence use the canonical public cosmology engine or its governed adapters for the declared migration set.",
+      "source": "registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json"
+    },
+    {
+      "id": "VR-CANONICAL-ENGINE-REVISION",
+      "status": "NUMERICALLY_VALIDATED",
+      "result": "The canonical engine retains API version 1.0.0 and records implementation revision 1.0.1 with exact growth endpoint x=0, a=1.",
+      "source": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json"
+    },
+    {
+      "id": "VR-FM0-GAP-COUNT",
+      "status": "CURRENT_REGISTERED_GAP_STATE",
+      "result": "FM-0 has ten blocking gaps: seven fully unresolved and three partially resolved.",
+      "source": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+    },
+    {
+      "id": "VR-NO-PHYSICAL-PROMOTION",
+      "status": "ENFORCED",
+      "result": "The public numerical migration closure has no physical gate or physical evidence effect.",
+      "source": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json"
+    }
+  ],
+  "open_blockers": [
+    {
+      "id": "BL-FM0-01",
+      "blocker": "The parent-to-reduced-to-observable forward map is not complete.",
+      "status": "BLOCKING",
+      "source": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+    },
+    {
+      "id": "BL-FM0-02",
+      "blocker": "R_chi and I_B still require canonical parent provenance recovery.",
+      "status": "BLOCKING",
+      "source": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json"
+    },
+    {
+      "id": "BL-FM0-03",
+      "blocker": "The currently implemented beta_tau and I_B dependence identifies only their product without an independent channel.",
+      "status": "BLOCKING_IDENTIFIABILITY",
+      "source": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json"
+    },
+    {
+      "id": "BL-SCI-01",
+      "blocker": "Generic global M1 background existence and continuum BVP Jacobian invertibility are not proven.",
+      "status": "OPEN",
+      "source": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json"
+    },
+    {
+      "id": "BL-SCI-02",
+      "blocker": "Full ghost freedom and physical Hamiltonian positivity remain open.",
+      "status": "OPEN",
+      "source": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json"
+    }
+  ],
+  "active_assumptions": [
+    {
+      "id": "AS-01",
+      "assumption": "The canonical public cosmology engine is numerical reference infrastructure, not a 6D parent derivation.",
+      "source": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json"
+    },
+    {
+      "id": "AS-02",
+      "assumption": "The linear GR growth reference is restricted to pressureless matter with smooth LCDM or constant-w dark energy.",
+      "source": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json"
+    },
+    {
+      "id": "AS-03",
+      "assumption": "Open pull requests have no current-main canonical effect.",
+      "source": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json"
+    }
+  ],
+  "forbidden_inferences": [
+    "NO_GREEN_CI_AS_PHYSICAL_EVIDENCE",
+    "NO_TECHNICAL_MIGRATION_CLOSURE_AS_EMPIRICAL_MODEL_CONFIRMATION",
+    "NO_CANONICAL_ENGINE_AS_6D_PARENT_DERIVATION",
+    "NO_LINEAR_GR_GROWTH_REFERENCE_AS_RELEASED_HZT_GROWTH_MAP",
+    "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
+    "NO_OPEN_PR_STATUS_AS_MERGED_MAIN_CANON",
+    "NO_READINESS_AS_AUTHORIZATION"
+  ],
+  "entry_points": {
+    "canonical_state": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+    "site_state": "registry/2026-09-01_UniverseLab_SiteState_v1.2.json",
+    "public_numerics_closure": "registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json",
+    "research_program": "registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json",
+    "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+    "research_status": "research-status.html"
+  },
+  "next_exact_action": "Select the highest-priority unresolved FM-0 parent-provenance gap from the canonical gap register and perform source recovery only; do not execute CP01R4, a physical background solve or a physical response-rank run.",
+  "next_allowed_repository_step": "POST_MIGRATION_RECONCILIATION_REVIEW_THEN_FM0_PROVENANCE_RECOVERY_NO_PHYSICAL_EXECUTION",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
