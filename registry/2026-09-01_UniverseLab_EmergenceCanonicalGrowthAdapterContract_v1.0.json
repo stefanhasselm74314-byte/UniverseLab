@@ -1,6 +1,6 @@
 {
   "schema": "universelab.emergence-canonical-growth-adapter-contract.v1",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "date": "2026-09-01",
   "basis_main_commit": "67c92e2644cee1f2c3a5526cd914f81a3b40a7b8",
   "status": "IMPLEMENTED_REVIEW_PENDING",
@@ -12,11 +12,17 @@
   "architecture": {
     "cellular_automaton": "DISCRETE_2D_DIAGNOSTIC_VISUALIZATION",
     "cosmology_overlay": "CANONICAL_LCDM_BACKGROUND_AND_LINEAR_GR_GROWTH_REFERENCE",
+    "state_space": "CELLULAR_AUTOMATON_STATE_DIRECT_PRODUCT_COSMOLOGY_DIAGNOSTIC_STATE",
     "dynamical_coupling_between_automaton_and_cosmology": false,
-    "grid_resampling_role": "VISUALIZATION_ONLY",
-    "grid_resampling_is_structure_formation_model": false,
     "automaton_state_enters_friedmann_equation": false,
     "automaton_state_enters_growth_equation": false,
+    "cosmology_mutates_simulation_grid_size": false,
+    "cosmology_mutates_cell_state": false,
+    "simulation_grid": "N_AND_CELLS_USED_ONLY_BY_CELLULAR_UPDATE_RULE",
+    "display_grid": "DERIVED_RENDER_VIEW_DISPLAY_N",
+    "display_resampling_role": "VISUALIZATION_ONLY",
+    "display_resampling_mutates_simulation_state": false,
+    "display_resampling_is_structure_formation_model": false,
     "cellular_automaton_continues_when_cosmology_is_invalid": true
   },
   "background_contract": {
@@ -68,7 +74,8 @@
     "boundary": "PERIODIC_TORUS",
     "noise": "OPTIONAL_RANDOM_CELL_BIRTH_DIAGNOSTIC",
     "cosmological_backreaction": false,
-    "physical_structure_growth_claim": false
+    "physical_structure_growth_claim": false,
+    "deterministic_independence_test": "IDENTICAL_CELL_STATE_RULE_AND_ZERO_NOISE_PRODUCE_IDENTICAL_NEXT_CELL_HASH_FOR_EXPANSION_OFF_AND_LCDM"
   },
   "preserved_runtime_ids": [
     "c",
@@ -117,11 +124,18 @@
     "invalid_curve_generated": false,
     "nan_or_infinity_rendering_allowed": false,
     "single_valid_history_point_is_not_an_error": true,
-    "reset_recovers_exact_flat_reference_state": true
+    "reset_recovers_exact_flat_reference_state": true,
+    "parameter_input_event_rebuilds_cosmology": true,
+    "debounce_timer_declared": true
   },
   "persistence": {
     "local_storage_key": "universelab",
-    "state_schema": "universelab.emergence-state.v1",
+    "current_state_schema": "universelab.emergence-state.v2",
+    "current_control_field": "inputs",
+    "legacy_pre_schema_control_field": "settings",
+    "legacy_settings_migration": "SUPPORTED_EXPLICIT_LEGACY_SETTINGS_TO_INPUTS",
+    "legacy_history_policy": "DISCARD_INCOMPATIBLE_ARRAY_HISTORY_AND_RECOMPUTE_CANONICAL_OBJECT_HISTORY",
+    "restored_simulation_grid_is_not_cosmological_resampling": true,
     "csv_export": true,
     "pwa_install_and_service_worker_preserved": true
   },
@@ -133,13 +147,17 @@
     "required_checks": [
       "default_runtime_pass",
       "exact_flat_reference_state",
+      "exact_present_endpoint",
+      "parameter_slider_event_rebuilds_cosmology",
       "canonical_probe_identity",
       "cellular_step_does_not_modify_static_cosmology",
+      "deterministic_cell_update_independent_of_cosmology_mode",
+      "display_resampling_does_not_mutate_simulation_grid",
       "lcdm_display_time_advances_scale_factor",
       "maximum_time_amplification_stays_in_domain",
-      "exact_present_endpoint",
       "invalid_background_fails_closed",
       "cellular_automaton_remains_independent_under_invalid_cosmology",
+      "legacy_settings_payload_migrates_explicitly",
       "reset_recovers_reference_state",
       "de_en_runtime_parity",
       "no_browser_or_http_errors"
@@ -147,7 +165,7 @@
   },
   "forbidden_inferences": [
     "NO_CELLULAR_AUTOMATON_AS_DERIVED_COSMIC_STRUCTURE_FORMATION",
-    "NO_GRID_RESAMPLING_AS_PHYSICAL_EXPANSION_DYNAMICS",
+    "NO_DISPLAY_RESAMPLING_AS_PHYSICAL_EXPANSION_DYNAMICS",
     "NO_LCDM_DISPLAY_TIME_AS_6D_PARENT_DERIVATION",
     "NO_LINEAR_GR_GROWTH_AS_RELEASED_HZT_PERTURBATION_MAP",
     "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
