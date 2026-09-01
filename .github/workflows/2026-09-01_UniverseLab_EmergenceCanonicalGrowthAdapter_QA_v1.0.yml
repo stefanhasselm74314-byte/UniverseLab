@@ -57,7 +57,7 @@ jobs:
           python tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py
       - name: Run static and independent Emergence contract
         run: python tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py
-      - name: Run post-Chromium hardening regression
+      - name: Run post-Chromium and Codex hardening regression
         run: python tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py
       - name: Install Playwright Chromium
         run: |
@@ -79,15 +79,21 @@ jobs:
           from pathlib import Path
           p=Path('registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json')
           d=json.loads(p.read_text())
-          assert d['version']=='1.0.2'
-          assert d['architecture']['dynamical_coupling_between_automaton_and_cosmology'] is False
-          assert d['architecture']['grid_resampling_is_structure_formation_model'] is False
-          assert d['architecture']['cellular_automaton_continues_when_cosmology_is_invalid'] is True
+          assert d['version']=='1.0.3'
+          a=d['architecture']
+          assert a['dynamical_coupling_between_automaton_and_cosmology'] is False
+          assert a['cosmology_mutates_simulation_grid_size'] is False
+          assert a['cosmology_mutates_cell_state'] is False
+          assert a['display_resampling_mutates_simulation_state'] is False
+          assert a['display_resampling_is_structure_formation_model'] is False
+          assert a['cellular_automaton_continues_when_cosmology_is_invalid'] is True
           assert d['background_contract']['display_time_integrator']=='PRECOMPUTED_MONOTONE_SIMPSON_TAU_OF_LN_A_MAP'
           assert d['background_contract']['display_time_endpoint']=='EXACT_X_0_A_1_Z_0'
           assert d['fail_closed_ui']['stale_epoch_bars_cleared'] is True
+          assert d['fail_closed_ui']['debounce_timer_declared'] is True
           assert d['growth_contract']['approximation_role']=='DISPLAY_ONLY_DIAGNOSTIC_NOT_DYNAMICS'
           assert d['growth_contract']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
+          assert d['persistence']['legacy_settings_migration']=='SUPPORTED_EXPLICIT_LEGACY_SETTINGS_TO_INPUTS'
           assert d['K1-D']=='NOT_RELEASED'
           assert d['K1-E']=='NOT_ADMISSIBLE'
           assert d['physical_gate_effect']=='NONE'
