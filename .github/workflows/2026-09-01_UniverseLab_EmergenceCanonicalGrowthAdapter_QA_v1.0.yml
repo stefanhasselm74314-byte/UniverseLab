@@ -11,6 +11,7 @@ on:
       - 'registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json'
       - 'science/cosmology/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.md'
       - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py'
       - 'tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs'
       - '.github/workflows/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapter_QA_v1.0.yml'
   push:
@@ -24,6 +25,7 @@ on:
       - 'registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json'
       - 'science/cosmology/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.md'
       - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py'
       - 'tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs'
       - '.github/workflows/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapter_QA_v1.0.yml'
 
@@ -46,6 +48,7 @@ jobs:
         run: |
           python -m json.tool registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json >/dev/null
           python -m py_compile tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py
+          python -m py_compile tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py
           node --check assets/2026-09-01_UniverseLab_EmergenceAdapter_v1.0.js
           node --check tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs
       - name: Re-run canonical cosmology engine validation
@@ -54,6 +57,8 @@ jobs:
           python tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py
       - name: Run static and independent Emergence contract
         run: python tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py
+      - name: Run post-Chromium hardening regression
+        run: python tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py
       - name: Install Playwright Chromium
         run: |
           npm install --no-save playwright
@@ -74,9 +79,12 @@ jobs:
           from pathlib import Path
           p=Path('registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json')
           d=json.loads(p.read_text())
+          assert d['version']=='1.0.1'
           assert d['architecture']['dynamical_coupling_between_automaton_and_cosmology'] is False
           assert d['architecture']['grid_resampling_is_structure_formation_model'] is False
           assert d['architecture']['cellular_automaton_continues_when_cosmology_is_invalid'] is True
+          assert d['background_contract']['display_time_integrator']=='PRECOMPUTED_MONOTONE_SIMPSON_TAU_OF_LN_A_MAP'
+          assert d['fail_closed_ui']['stale_epoch_bars_cleared'] is True
           assert d['growth_contract']['approximation_role']=='DISPLAY_ONLY_DIAGNOSTIC_NOT_DYNAMICS'
           assert d['growth_contract']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
           assert d['K1-D']=='NOT_RELEASED'
