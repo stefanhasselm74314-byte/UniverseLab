@@ -1,0 +1,236 @@
+{
+  "schema": "universelab.site-state.v1",
+  "version": "1.2.0",
+  "snapshot_date": "2026-09-01",
+  "snapshot_timestamp": "2026-09-01T23:20:00+02:00",
+  "basis_main_commit": "2f03998fbb36185123fc02f4fd3cb1df5749834a",
+  "canonical_state": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+  "schema_contract": "schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.2.json",
+  "physical_gate_effect": "NONE",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT",
+    "open_pull_requests_have_canonical_effect": false,
+    "technical_migration_closure_is_physical_identification": false,
+    "green_ci_is_physical_evidence": false
+  },
+  "freshness": {
+    "status": "CURRENT_FOR_POST_MIGRATION_BASIS_MAIN",
+    "supersedes": "registry/2026-09-01_UniverseLab_SiteState_v1.1.json",
+    "validator": "tools/2026-09-01_validate_UniverseLab_PostMigrationCurrentMainReconciliation_v1.0.py"
+  },
+  "pages": [
+    {
+      "id": "UL-PAGE-PORTAL",
+      "path": "index.html",
+      "domain": "portal",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "UL-PAGE-RESEARCH-STATUS",
+      "path": "research-status.html",
+      "domain": "status",
+      "status": "CANONICAL_CURRENT"
+    },
+    {
+      "id": "UL-PAGE-NAVIGATOR",
+      "path": "navigator.html",
+      "domain": "navigator",
+      "status": "CANONICAL"
+    },
+    {
+      "id": "UL-PAGE-NAVIGATOR-LEGACY",
+      "path": "navigator-app.html",
+      "domain": "navigator",
+      "status": "LEGACY_REDIRECT",
+      "redirect_target": "navigator.html"
+    },
+    {
+      "id": "UL-PAGE-HYPERLAB",
+      "path": "hyperlab.html",
+      "domain": "hyperlab",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "UL-PAGE-SOLVER-HUB",
+      "path": "solver-hub.html",
+      "domain": "solver",
+      "status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY"
+    },
+    {
+      "id": "UL-PAGE-MATERIAL",
+      "path": "hyperzeit-material-v2.html",
+      "domain": "material",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "UL-PAGE-METHODS",
+      "path": "hyperzeit-methods.html",
+      "domain": "methods",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "UL-PAGE-SOURCE",
+      "path": "source.html",
+      "domain": "source",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "UL-PAGE-VALIDATION",
+      "path": "validation.html",
+      "domain": "validation",
+      "status": "ACTIVE_CANONICAL_COSMOLOGY_ENGINE"
+    },
+    {
+      "id": "UL-PAGE-VALIDATION-EN",
+      "path": "validation-en.html",
+      "domain": "validation",
+      "status": "ACTIVE_CANONICAL_COSMOLOGY_ENGINE"
+    },
+    {
+      "id": "UL-PAGE-OBSERVATORY",
+      "path": "observatory.html",
+      "domain": "observatory",
+      "status": "ACTIVE_CANONICAL_COSMOLOGY_ENGINE"
+    },
+    {
+      "id": "UL-PAGE-OBSERVATORY-EN",
+      "path": "observatory-en.html",
+      "domain": "observatory",
+      "status": "CURATED_SHELL_TO_CANONICAL_EXECUTABLE"
+    },
+    {
+      "id": "UL-PAGE-COMPARE-SAFE",
+      "path": "compare-safe.html",
+      "domain": "comparison",
+      "status": "ACTIVE_CANONICAL_COSMOLOGY_ENGINE"
+    },
+    {
+      "id": "UL-PAGE-COMPARE",
+      "path": "compare.html",
+      "domain": "comparison",
+      "status": "CONSOLIDATED_CANONICAL_ROUTE"
+    },
+    {
+      "id": "UL-PAGE-COMPARE-DIRECT",
+      "path": "compare-direct.html",
+      "domain": "comparison",
+      "status": "CONSOLIDATED_CANONICAL_ROUTE"
+    },
+    {
+      "id": "UL-PAGE-EMERGENCE",
+      "path": "emergence.html",
+      "domain": "emergence",
+      "status": "ACTIVE_CANONICAL_BACKGROUND_AND_GROWTH_ADAPTER"
+    },
+    {
+      "id": "UL-PAGE-EMERGENCE-EN",
+      "path": "emergence-en.html",
+      "domain": "emergence",
+      "status": "ACTIVE_CANONICAL_BACKGROUND_AND_GROWTH_ADAPTER"
+    },
+    {
+      "id": "UL-PAGE-10M-PROGRAM",
+      "path": "2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html",
+      "domain": "program",
+      "status": "ACTIVE_RATIFIED"
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "ULSH-01",
+      "technical": {
+        "target_contract": "FROZEN_8X8_NO_EXECUTION",
+        "backend_execution": "NOT_AUTHORIZED",
+        "physical_response_rank": "NOT_EXECUTED",
+        "reproducibility_scope": "SOFTWARE_AND_GOVERNANCE_ONLY"
+      },
+      "governance": {
+        "priority": "ACTIVE_CRITICAL_PATH_ON_HOLD",
+        "solver_release": "NOT_AUTHORIZED",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
+        "classification": "OPEN",
+        "claim": "No physical M1 background or physical response rank is established by this site-state snapshot."
+      },
+      "release_gate": {
+        "id": "REPRODUCIBLE_PHYSICAL_MD2S_BACKGROUND_WITH_ONE_SIDED_BOUNDARY_EXPORT",
+        "status": "NOT_SATISFIED"
+      },
+      "work_packages": [
+        {"id": "WP1", "status": "CLOSED_TARGET_FROZEN_NO_EXECUTION"},
+        {"id": "WP2", "status": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED"},
+        {"id": "WP3", "status": "NOT_STARTED"},
+        {"id": "WP4", "status": "BLOCKED_NOT_AUTHORIZED"}
+      ]
+    },
+    {
+      "module_id": "HZT-M0-FM0",
+      "technical": {
+        "inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+        "gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+        "blocking_gap_count": 10,
+        "fully_unresolved_blocking_gap_count": 7,
+        "partially_resolved_blocking_gap_count": 3
+      },
+      "governance": {
+        "priority": "ACTIVE_WS1",
+        "gate": "FM-G0",
+        "gate_status": "OPEN",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "forward_map": "OPEN",
+        "observable_interfaces": "PROGRAM_DECLARATION_ONLY",
+        "classification": "PROVENANCE_RECOVERY_NO_NEW_PHYSICS"
+      },
+      "release_gate": {
+        "id": "FM-G0",
+        "status": "NOT_SATISFIED"
+      }
+    },
+    {
+      "module_id": "UNIVERSELAB-CANONICAL-COSMOLOGY-PUBLIC-MIGRATION",
+      "technical": {
+        "closure": "registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json",
+        "status": "COMPLETE_FOR_DECLARED_PUBLIC_SET",
+        "engine_api_version": "1.0.0",
+        "engine_implementation_revision": "1.0.1",
+        "remaining_independent_public_cosmology_engines": 0
+      },
+      "governance": {
+        "priority": "CLOSED_TECHNICAL_MIGRATION",
+        "canonical_effect": "MERGED_MAIN_TECHNICAL_ONLY",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "classification": "NUMERICAL_REFERENCE_INFRASTRUCTURE",
+        "physical_identification": "NONE",
+        "empirical_model_confirmation": "NONE"
+      },
+      "release_gate": {
+        "id": "PUBLIC_COSMOLOGY_ENGINE_MIGRATION",
+        "status": "TECHNICALLY_CLOSED_NO_PHYSICAL_EFFECT"
+      }
+    }
+  ],
+  "status_sources": {
+    "canonical_state": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+    "research_program": "registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json",
+    "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+    "public_numerics_closure": "registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json",
+    "canonical_engine_contract": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
+    "previous_site_state": "registry/2026-09-01_UniverseLab_SiteState_v1.1.json"
+  }
+}
