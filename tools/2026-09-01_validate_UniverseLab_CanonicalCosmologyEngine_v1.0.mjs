@@ -4,7 +4,7 @@ import fs from 'node:fs';
 const require=createRequire(import.meta.url);
 const C=require('../assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js');
 
-const report={schema:'universelab.cosmology-engine.validation.v1',engine_version:C.VERSION,status:'PASS',checks:[]};
+const report={schema:'universelab.cosmology-engine.validation.v1',engine_version:C.VERSION,engine_revision:C.REVISION,status:'PASS',checks:[]};
 function check(name,fn){
   try{const detail=fn()??{};report.checks.push({name,status:'PASS',detail});}
   catch(error){report.status='FAIL';report.checks.push({name,status:'FAIL',error:String(error?.stack||error)});}
@@ -12,6 +12,7 @@ function check(name,fn){
 function close(a,b,rtol=1e-10,atol=1e-12){assert.ok(Number.isFinite(a)&&Number.isFinite(b));assert.ok(Math.abs(a-b)<=atol+rtol*Math.max(Math.abs(a),Math.abs(b)),`${a} != ${b}`);}
 const ref={H0:67.4,Om:.315,Ode:.684908,Or:9.2e-5,w:-1,sigma8:.811};
 
+check('engine_api_and_revision',()=>{assert.equal(C.VERSION,'1.0.0');assert.equal(C.REVISION,'1.0.1');return{api_version:C.VERSION,implementation_revision:C.REVISION}});
 check('normalization_E0',()=>{close(C.E(0,ref,'lcdm'),1,1e-13);return{E0:C.E(0,ref,'lcdm')}});
 check('flat_distance_identity',()=>{const dc=C.radialComovingDistance(1,ref);const dm=C.transverseComovingDistance(1,ref);close(dm,dc,1e-13);return{dc,dm}});
 check('curvature_mapping_direction',()=>{
@@ -47,16 +48,30 @@ check('bridge_product_degeneracy',()=>{
 });
 check('lcdm_growth_reference',()=>{
   const s=C.solveGrowth(ref,'lcdm',{steps:4000});
+  assert.equal(s.revision,'1.0.1');
+  assert.equal(s.rows.at(-1).x,0);assert.equal(s.rows.at(-1).a,1);
   const expected=new Map([[.5,.7689433284],[1,.6068047406],[2,.4172414795],[3,.3155380188]]);
   const rows=[];
   for(const [z,Dexp] of expected){const g=C.growthAtZ(z,s);close(g.D,Dexp,3e-9);rows.push({z,...g});}
-  return{aInit:s.aInit,steps:s.steps,rows};
+  return{aInit:s.aInit,steps:s.steps,endpoint:s.rows.at(-1),rows};
+});
+check('growth_endpoint_nondefault_initial_epoch',()=>{
+  const p={H0:70,Om:.3,Ode:.699908,Or:9.2e-5,w:-1,sigma8:.811};
+  const s=C.solveGrowth(p,'lcdm',{steps:4000});
+  const endpoint=s.rows.at(-1);
+  assert.equal(endpoint.x,0);assert.equal(endpoint.a,1);
+  assert.equal(s.revision,'1.0.1');
+  const g=C.growthAtZ(1,s);
+  close(g.D,.6118580969985543,5e-9);
+  assert.ok(Number.isFinite(g.f)&&Number.isFinite(g.fsigma8));
+  return{aInit:s.aInit,endpoint:{x:endpoint.x,a:endpoint.a,D:endpoint.D,V:endpoint.V},z1:g};
 });
 check('eds_growth_exact_limit',()=>{
   const p={H0:70,Om:1,Ode:0,Or:0,w:-1,sigma8:.8};
   const s=C.solveGrowth(p,'lcdm',{steps:2500,aInit:1e-3});
+  assert.equal(s.rows.at(-1).x,0);assert.equal(s.rows.at(-1).a,1);
   for(const z of [0,.5,1,3,9]){const g=C.growthAtZ(z,s);close(g.D,1/(1+z),2e-6);close(g.f,1,2e-9);}
-  return{tested_z:[0,.5,1,3,9]};
+  return{tested_z:[0,.5,1,3,9],endpoint:s.rows.at(-1)};
 });
 check('bridge_growth_firewall',()=>{assert.throws(()=>C.solveGrowth({...ref,betaTau:.05,IB:.4},'bridge'),e=>e?.code==='UNRELEASED_GROWTH_MAP');return{code:'UNRELEASED_GROWTH_MAP'}});
 check('small_z_hubble_law',()=>{const z=1e-5;const dc=C.radialComovingDistance(z,ref);const approx=C.hubbleDistance(ref)*z;close(dc,approx,1e-5);return{z,dc,approx}});
