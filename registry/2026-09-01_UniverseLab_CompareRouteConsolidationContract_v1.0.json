@@ -1,0 +1,55 @@
+{
+  "schema": "universelab.compare-route-consolidation-contract.v1",
+  "version": "1.0.0",
+  "date": "2026-09-01",
+  "basis_main_commit": "325333ec3b9e62f40b8fad3e4ed87a132f72a75a",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "classification": "LEGACY_ROUTE_RETIREMENT_NO_PHYSICAL_EVIDENCE_EFFECT",
+  "canonical_executable_route": "compare-safe.html",
+  "canonical_engine": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+  "canonical_adapter": "assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js",
+  "legacy_routes": {
+    "compare.html": "REDIRECT_TO_COMPARE_SAFE",
+    "compare-direct.html": "REDIRECT_TO_COMPARE_SAFE",
+    "compare-app.js": "RETIRED_DUPLICATE_ENGINE_METADATA_ONLY"
+  },
+  "redirect_contract": {
+    "target": "./compare-safe.html",
+    "query_preserved": true,
+    "hash_preserved": true,
+    "meta_refresh_fallback": true,
+    "no_redirect_loop": true
+  },
+  "removed_duplicate_semantics": [
+    "LOCAL_LCDM_BACKGROUND",
+    "LOCAL_WCDM_BACKGROUND",
+    "LOCAL_BRIDGE_BACKGROUND",
+    "POSITIVE_E2_FLOOR",
+    "POSITIVE_BRIDGE_FACTOR_FLOOR",
+    "LOCAL_SIMPSON_INTEGRATION",
+    "LOCAL_DISTANCE_CHAIN",
+    "LOCAL_GROWTH_INDEX_APPROXIMATION",
+    "LOCAL_SWEEP_ENGINE",
+    "LOCAL_CSV_ENGINE"
+  ],
+  "compatibility_api": {
+    "global": "UniverseLabCompareLegacy",
+    "status": "RETIRED_DUPLICATE_ENGINE",
+    "canonicalUrl": "./compare-safe.html?v=safe2",
+    "numerical_functions": 0
+  },
+  "qa": {
+    "static_test": "tests/2026-09-01_test_UniverseLab_CompareRouteConsolidation_v1.0.py",
+    "browser_audit": "tools/2026-09-01_UniverseLab_CompareRouteConsolidationAudit_v1.0.mjs",
+    "workflow": ".github/workflows/2026-09-01_UniverseLab_CompareRouteConsolidation_QA_v1.0.yml"
+  },
+  "forbidden_inferences": [
+    "NO_ROUTE_CONSOLIDATION_AS_PHYSICAL_MODEL_VALIDATION",
+    "NO_SINGLE_ENGINE_AS_PARENT_DERIVATION",
+    "NO_GREEN_REDIRECT_QA_AS_EMPIRICAL_EVIDENCE",
+    "NO_NUMERICAL_CONSISTENCY_AS_GHOST_FREEDOM",
+    "NO_PHYSICAL_GATE_PROMOTION"
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
