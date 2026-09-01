@@ -56,8 +56,8 @@ try{
       api:window.UniverseLabValidation.snapshot(),
       rowIds:[...document.querySelectorAll('#rows tr[data-test-id]')].map(x=>x.dataset.testId),
       rowStates:[...document.querySelectorAll('#rows tr[data-test-id]')].map(x=>x.dataset.testStatus),
-      failedText:document.querySelector(g#failed')?.textContent,
-      releaseText:document.querySelector(c#release')?.textContent
+      failedText:document.querySelector('#failed')?.textContent,
+      releaseText:document.querySelector('#release')?.textContent
     }));
     const A=await snap(de.page), B=await snap(en.page);
     const idsA=A.api.results.map(x=>x.id), idsB=B.api.results.map(x=>x.id);
