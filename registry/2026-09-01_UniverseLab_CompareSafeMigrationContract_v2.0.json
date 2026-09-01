@@ -1,0 +1,88 @@
+{
+  "schema": "universelab.compare-safe-migration-contract.v1",
+  "version": "2.0.0",
+  "date": "2026-09-01",
+  "basis_main_commit": "3d989304678280491951d46f0ac6b261f4d0c720",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "classification": "PUBLIC_DIAGNOSTIC_COMPARISON_MIGRATION_NO_PHYSICAL_EVIDENCE_EFFECT",
+  "page": "compare-safe.html",
+  "english_entry": "compare-en.html",
+  "canonical_engine": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+  "adapter": "assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js",
+  "models": {
+    "base": "lcdm",
+    "bridge": "bridge",
+    "bridge_base_w": -1,
+    "removed_page_local_model": "wcdm_times_bridge",
+    "reason": "The canonical bridge contract is E_LCDM^2(1+Delta); no independent wCDM-times-bridge parent or effective contract is released."
+  },
+  "background_contract": {
+    "base": "E_LCDM^2",
+    "bridge": "E_LCDM^2 [1 + beta_tau I_B exp(-(a/a_c)^2)]",
+    "amplitude_identifiability": "ONLY_PRODUCT_beta_tau_times_I_B_IN_CURRENT_BACKGROUND_CHANNEL",
+    "chart_domain": "0 <= z <= 5",
+    "distance_domain": "0.001 <= z <= 8",
+    "age_domain": "1e-8 <= a <= 1",
+    "invalid_background_code": "INVALID_BACKGROUND_DOMAIN",
+    "invalid_bridge_code": "INVALID_BRIDGE_DOMAIN",
+    "invalid_policy": "FAIL_CLOSED_NO_POSITIVE_FLOOR"
+  },
+  "distance_contract": {
+    "chain": "D_C_TO_D_M_TO_D_L_AND_D_A",
+    "curvature_mapping": {
+      "open": "sinh",
+      "flat": "identity",
+      "closed": "sin"
+    },
+    "etherington": "D_L=(1+z)^2 D_A",
+    "old_error_removed": "D_C used directly as D_M in curved models"
+  },
+  "observable_firewalls": {
+    "bridge_growth": "UNRELEASED_GROWTH_MAP",
+    "bridge_lensing": "UNRELEASED_LENSING_MAP",
+    "separate_beta_tau_I_B_identification": "NOT_IDENTIFIABLE_IN_CURRENT_BACKGROUND_CHANNEL",
+    "parent_to_observable_map": "OPEN"
+  },
+  "csv_contract": {
+    "columns": [
+      "z",
+      "H_LCDM_km_s_Mpc",
+      "H_bridge_km_s_Mpc",
+      "delta_H_over_H"
+    ],
+    "invalid_domain_export": "BLOCKED",
+    "forbidden_values": ["NaN", "Infinity"]
+  },
+  "preserved_ids": [
+    "H0", "Om", "Ol", "w", "s8", "beta", "ib", "rchi", "z",
+    "ageL", "ageB", "dev1", "S8", "dc", "dl", "da", "mu", "chart",
+    "formula", "fDesc", "fEq", "fInputs", "fResult", "fUnit", "fHint", "reset", "csv"
+  ],
+  "qa": {
+    "static_test": "tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py",
+    "browser_audit": "tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs",
+    "workflow": ".github/workflows/2026-09-01_UniverseLab_CompareSafeMigration_QA_v2.0.yml",
+    "required_checks": [
+      "default_runtime_pass",
+      "curved_distance_uses_D_M",
+      "bridge_product_degeneracy",
+      "invalid_background_fails_closed",
+      "invalid_bridge_fails_closed",
+      "invalid_csv_export_blocked",
+      "growth_and_lensing_firewalls_visible",
+      "reset_recovers_reference_state",
+      "no_browser_or_http_errors"
+    ]
+  },
+  "forbidden_inferences": [
+    "NO_EFFECTIVE_BRIDGE_BACKGROUND_AS_6D_PARENT_DERIVATION",
+    "NO_GOOD_NUMERICAL_BEHAVIOR_AS_EMPIRICAL_CONFIRMATION",
+    "NO_beta_tau_I_B_PRODUCT_FIT_AS_SEPARATE_PARAMETER_IDENTIFICATION",
+    "NO_LCDM_GROWTH_REFERENCE_AS_RELEASED_BRIDGE_GROWTH_MAP",
+    "NO_GR_LENSING_IDENTITY_AS_RELEASED_BRIDGE_LENSING_MAP",
+    "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
+    "NO_PAGE_MIGRATION_AS_PHYSICAL_GATE_PROMOTION"
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
