@@ -1,0 +1,231 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-authority-signature-provenance-contract.v0.1",
+  "contract_id": "ULSH01-WP2-AUTHORITY-SIGNATURE-PROVENANCE-v0.1",
+  "date": "2026-09-02",
+  "classification": "NONOPERATIVE_AUTHORITY_AND_SIGNATURE_PROVENANCE_CONTRACT_CANDIDATE",
+  "status": "DRAFT_NOT_RATIFIED",
+  "basis_pull_request": 137,
+  "basis_head_sha_at_creation": "eba2c6545add8a759f33728a388a9917454bdd4c",
+  "governed_run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+  "governed_target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+  "governed_run_payload_sha256": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+  "problem_statement": {
+    "authority_signature_provenance": "BLOCKED",
+    "reason": "Decision/grant templates bind identifiers, digests, scope and time windows but do not yet establish a ratified issuing authority, trust root, signer key, canonical signed bytes, signature verification, revocation or rotation semantics.",
+    "bootstrap_problem": "Possession of a private key proves control of that key, not project authority. Initial authority therefore requires a separately adopted trust-root ratification record whose adoption provenance is externally attributable to the project owner.",
+    "chat_command_is_authorization": false,
+    "assistant_or_automation_may_self_authorize": false
+  },
+  "trust_bootstrap": {
+    "required_status_for_operation": "RATIFIED_ACTIVE",
+    "current_status": "BLOCKED_NO_RATIFIED_TRUST_ROOT",
+    "required_ratification_record_type": "TRUST_ROOT_RATIFICATION",
+    "minimum_bootstrap_evidence": [
+      "versioned trust-root artifact containing authority_id and raw Ed25519 public-key fingerprint",
+      "root-key proof of possession over the canonical trust-root ratification payload",
+      "explicit human project-owner adoption of the exact trust-root artifact digest",
+      "repository record of the exact adoption commit or tag with independently reviewable identity/verification metadata",
+      "statement that the signing private key is not available to repository CI, assistants or automation"
+    ],
+    "not_sufficient_alone": [
+      "a chat command including Go",
+      "repository ownership without a pinned signer key",
+      "a self-signature without explicit project-owner adoption",
+      "a merged JSON file without attributable ratification provenance",
+      "a green CI run",
+      "an AuthorizationReview artifact",
+      "a filled decision or grant template"
+    ],
+    "pending_human_fields": [
+      "ratified_authority_id",
+      "human_controller_identity_or_pseudonymous_project_identity",
+      "authority_roles",
+      "Ed25519_public_key_base64",
+      "public_key_fingerprint_sha256",
+      "key_valid_from_utc",
+      "key_valid_until_utc",
+      "ratification_artifact_sha256",
+      "ratification_commit_or_tag",
+      "ratification_commit_or_tag_verification_metadata",
+      "private_key_custody_statement",
+      "revocation_contact_or_procedure"
+    ]
+  },
+  "signature_profile": {
+    "profile_id": "UL-ED25519-CANONICAL-JSON-v1",
+    "algorithm": "Ed25519-RFC8032",
+    "public_key_encoding": "base64_of_32_raw_bytes",
+    "signature_encoding": "base64_of_64_raw_bytes",
+    "public_key_fingerprint": "lowercase_hex_SHA256(raw_public_key_bytes)",
+    "domain_separator_utf8_plus_nul": "UNIVERSELAB-AUTHORITY-ATTESTATION-V1\\u0000",
+    "signed_structure": {
+      "protected": "protected header object",
+      "payload": "authorization decision, grant or trust-root ratification payload"
+    },
+    "signed_message": "domain_separator || canonical_json({protected,payload})",
+    "signed_bytes_digest": "lowercase_hex_SHA256(signed_message)",
+    "verification_implementation": "pure Python RFC8032 verification only; no signing API",
+    "strict_point_policy": "canonical encoding, non-identity prime-order subgroup, S < group order"
+  },
+  "canonical_json_profile": {
+    "profile_id": "UL-CANONICAL-JSON-v1",
+    "encoding": "UTF-8 without BOM",
+    "object_key_order": "ascending Unicode code-point order",
+    "whitespace": "none outside JSON strings",
+    "separators": "comma and colon",
+    "duplicate_keys": "REJECT",
+    "floats": "REJECT",
+    "integers": "allowed only within plus-or-minus (2^53-1)",
+    "strings": "valid Unicode scalar values; UTF-16 surrogate code points rejected",
+    "reason_for_float_exclusion": "avoid cross-runtime number-canonicalization ambiguity in authorization artifacts"
+  },
+  "signed_envelope_contract": {
+    "schema": "universelab.signed-authority-envelope.v0.1",
+    "required_protected_fields": [
+      "artifact_type",
+      "attestation_id",
+      "authority_id",
+      "contract_id",
+      "key_id",
+      "profile",
+      "signed_at_utc"
+    ],
+    "required_signature_fields": [
+      "algorithm",
+      "encoding",
+      "attestation_id",
+      "public_key_fingerprint_sha256",
+      "signed_bytes_sha256",
+      "value"
+    ],
+    "artifact_types": {
+      "AUTHORIZATION_DECISION": {
+        "required_key_role": "AUTHORIZATION_DECISION_ISSUER",
+        "required_operational_status": "AUTHORIZED_SINGLE_USE_WP2_CP01R4_PRIMARY_TARGET_EXECUTION"
+      },
+      "SINGLE_USE_GRANT": {
+        "required_key_role": "SINGLE_USE_GRANT_ISSUER",
+        "required_operational_scope": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4_TARGET_ONLY"
+      },
+      "TRUST_ROOT_RATIFICATION": {
+        "required_key_role": "TRUST_ROOT_RATIFIER",
+        "purpose": "root-key proof of possession; explicit owner adoption remains separately required"
+      }
+    },
+    "binding_requirements": [
+      "governed run id",
+      "target contract digest",
+      "run payload digest",
+      "exact repository release-subject commit",
+      "exact release-package manifest digest",
+      "automatic_execution=false",
+      "decision/grant identity and time-window fields",
+      "authority_id, key_id and attestation_id"
+    ]
+  },
+  "authority_and_key_policy": {
+    "allowed_authority_controller": "explicitly ratified human-controlled project authority",
+    "assistant_is_allowed_authority": false,
+    "automation_is_allowed_authority": false,
+    "repository_CI_is_allowed_private_key_custodian": false,
+    "private_keys_may_be_committed": false,
+    "private_keys_may_be_pasted_into_chat": false,
+    "private_keys_may_be_exposed_to_assistant": false,
+    "key_status_required_for_operation": "ACTIVE",
+    "required_roles_are_per_key": true,
+    "revoked_key_policy_for_operation": "REJECT regardless of signing time",
+    "expired_key_policy_for_operation": "REJECT",
+    "key_rotation": {
+      "new_key_requires_new_versioned_trust_root": true,
+      "old_key_status_must_be_explicit": true,
+      "predecessor_and_successor_fingerprints_must_be_bound": true,
+      "rotation_does_not_revalidate_old_unsigned_artifacts": true
+    },
+    "revocation": {
+      "versioned_revocation_artifact_required": true,
+      "revocation_reason_required": true,
+      "revoked_at_utc_required": true,
+      "compromise_or_loss_requires_fail_closed_operation": true
+    }
+  },
+  "decision_grant_separation": {
+    "authorization_decision_and_single_use_grant_are_distinct_artifacts": true,
+    "both_require_valid_authority_attestation": true,
+    "same_run_target_commit_and_package_bindings_required": true,
+    "same_authority_may_issue_both_only_if_trust_root_grants_both_roles": true,
+    "independent_human_review_recommended": true,
+    "review_is_not_a_signature": true,
+    "signature_is_not_grant_consumption": true
+  },
+  "verifier_contract": {
+    "path": "tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py",
+    "signing_function_present": false,
+    "network_access_required": false,
+    "external_python_dependency_required": false,
+    "fail_closed_exit_code": 2,
+    "draft_repository_trust_root_result": "TRUST_ROOT_NOT_RATIFIED",
+    "synthetic_positive_result": "PASS_SYNTHETIC_CONTROL_ONLY_NO_AUTHORIZATION",
+    "operative_positive_result_after_future_ratification": "PASS_OPERATIVE_AUTHORITY_ATTESTATION",
+    "operative_positive_result_authorizes_execution_by_itself": false,
+    "additional_runtime_issuance_gate_required": true,
+    "core_path": "tools/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityVerificationCore_v0.1.py"
+  },
+  "synthetic_qa_policy": {
+    "synthetic_key_allowed_in_tests": true,
+    "synthetic_private_key_committed": false,
+    "synthetic_authority_status": "RATIFIED_SYNTHETIC_CONTROL_ONLY",
+    "synthetic_pass_can_authorize": false,
+    "synthetic_backend_import_allowed": false,
+    "synthetic_solver_execution_allowed": false,
+    "required_negative_tests": [
+      "draft trust root",
+      "payload mutation",
+      "signature mutation",
+      "unknown authority",
+      "unknown key",
+      "fingerprint mismatch",
+      "missing key role",
+      "revoked key",
+      "expired key",
+      "future signature time",
+      "float in signed payload",
+      "duplicate JSON key",
+      "run or digest mismatch"
+    ]
+  },
+  "remaining_independent_blocker": {
+    "runtime_issuance_bindings": "BLOCKED",
+    "required_before_any_operative_grant": [
+      "designated execution-environment identity",
+      "persistent reservation-store identity and access control",
+      "crash-persistent single-use semantics",
+      "exclusive result path",
+      "runtime, dependency, thread, GPU, network and memory attestations"
+    ]
+  },
+  "current_gate_state": {
+    "authority_signature_provenance": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
+    "runtime_issuance_bindings": "BLOCKED",
+    "operative_authorization_decision": "NOT_CREATED",
+    "operative_single_use_grant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "ratification": {
+    "ratified": false,
+    "ratified_by": null,
+    "ratified_at_utc": null,
+    "ratification_artifact": null,
+    "ratification_artifact_sha256": null,
+    "ratification_commit_or_tag": null
+  },
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
