@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 JS = ROOT / "assets/2026-08-05_UniverseLab_SplitPane_v1.0.js"
 CSS = ROOT / "assets/2026-08-05_UniverseLab_SplitPane_v1.0.css"
+OBSERVATORY_ADAPTER = ROOT / "assets/2026-09-01_UniverseLab_ObservatoryAdapter_v1.5.js"
 STYLE = '<link rel="stylesheet" href="./assets/2026-08-05_UniverseLab_SplitPane_v1.0.css">'
 SCRIPT = '<script src="./assets/2026-08-05_UniverseLab_SplitPane_v1.0.js" defer></script>'
 
@@ -114,8 +115,22 @@ def main() -> None:
             require(text, f'{attribute}="{value}"', f"{field} contract in {relative}")
 
     observatory = (ROOT / "observatory.html").read_text(encoding="utf-8")
-    for token in ('<canvas id="chart">', "addEventListener('resize',resize)", 'id="H0"', 'id="Om"'):
-        require(observatory, token, "Observatory calculation continuity")
+    observatory_adapter = OBSERVATORY_ADAPTER.read_text(encoding="utf-8")
+    for token in (
+        '<canvas id="chart">',
+        '2026-09-01_UniverseLab_ObservatoryAdapter_v1.5.js',
+        'id="H0"',
+        'id="Om"',
+    ):
+        require(observatory, token, "Observatory page continuity")
+    for token in (
+        "globalThis.addEventListener('resize',schedule",
+        "globalThis.UniverseLabObservatory",
+        "C.distanceModulus",
+        "C.baoDMOverRd",
+        "C.solveGrowth",
+    ):
+        require(observatory_adapter, token, "Observatory adapter continuity")
 
     tafelwerk = (ROOT / "tafelwerk.html").read_text(encoding="utf-8")
     for token in (
