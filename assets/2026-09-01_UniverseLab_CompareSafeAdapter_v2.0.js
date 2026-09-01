@@ -218,6 +218,7 @@
       if(p)updateReadouts(p);
       drawInvalid(error);
     }
+    calculateFormula();
     globalThis.dispatchEvent(new CustomEvent('universelab:compare-safe-update',{detail:snapshot()}));
     return snapshot();
   }
