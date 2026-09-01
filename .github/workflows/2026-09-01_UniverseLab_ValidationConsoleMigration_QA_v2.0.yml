@@ -1,0 +1,67 @@
+name: UniverseLab Validation Console migration QA v2.0
+
+on:
+  pull_request:
+    paths:
+      - 'validation.html'
+      - 'validation-en.html'
+      - 'assets/2026-09-01_UniverseLab_ValidationConsole_v2.0.js'
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'registry/2026-09-01_UniverseLab_ValidationConsoleContract_v2.0.json'
+      - 'science/cosmology/2026-09-01_UniverseLab_ValidationConsoleMigration_v2.0.md'
+      - 'tools/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.mjs'
+      - 'tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs'
+      - 'tests/2026-09-01_test_UniverseLab_ValidationConsoleMigration_v2.0.py'
+      - '.github/workflows/2026-09-01_UniverseLab_ValidationConsoleMigration_QA_v2.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'validation.html'
+      - 'validation-en.html'
+      - 'assets/2026-09-01_UniverseLab_ValidationConsole_v2.0.js'
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'registry/2026-09-01_UniverseLab_ValidationConsoleContract_v2.0.json'
+      - 'science/cosmology/2026-09-01_UniverseLab_ValidationConsoleMigration_v2.0.md'
+      - 'tools/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.mjs'
+      - 'tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs'
+      - 'tests/2026-09-01_test_UniverseLab_ValidationConsoleMigration_v2.0.py'
+      - '.github/workflows/2026-09-01_UniverseLab_ValidationConsoleMigration_QA_v2.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-console-migration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Parse migration contract
+        run: python -m json.tool registry/2026-09-01_UniverseLab_ValidationConsoleContract_v2.0.json >/dev/null
+      - name: Compile scripts and tests
+        run: |
+          node --check assets/2026-09-01_UniverseLab_ValidationConsole_v2.0.js
+          node --check tools/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.mjs
+          python -m py_compile tests/2026-09-01_test_UniverseLab_ValidationConsoleMigration_v2.0.py
+      - name: Re-run canonical engine foundation validator
+        run: node tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs
+      - name: Run static and adversarial migration contract
+        run: python tests/2026-09-01_test_UniverseLab_ValidationConsoleMigration_v2.0.py
+      - name: Enforce evidence firewall
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('registry/2026-09-01_UniverseLab_ValidationConsoleContract_v2.0.json')
+          d=json.loads(p.read_text())
+          assert d['physical_gate_effect']=='NONE'
+          assert d['physical_evidence_effect']=='NONE'
+          assert d['scope']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
+          assert len(d['stable_test_ids'])==15
+          print('Validation Console evidence firewall: PASS')
+          PY

@@ -1,0 +1,60 @@
+{
+  "schema": "universelab.validation-console-contract.v2",
+  "version": "2.0.0",
+  "date": "2026-09-01",
+  "basis_main_commit": "8a0dc1ae9aee8cdbde346b2a6ef5003f21cf2b08",
+  "status": "VALIDATION_PAGE_MIGRATED_TO_CANONICAL_ENGINE",
+  "classification": "INTERNAL_NUMERICAL_AND_MATHEMATICAL_VALIDATION_NO_EMPIRICAL_OR_PHYSICAL_EVIDENCE_EFFECT",
+  "canonical_engine": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+  "shared_adapter": "assets/2026-09-01_UniverseLab_ValidationConsole_v2.0.js",
+  "pages": [
+    "validation.html",
+    "validation-en.html"
+  ],
+  "stable_test_ids": [
+    "normalization_E0",
+    "density_closure",
+    "eds_age",
+    "small_z_hubble_law",
+    "radial_distance_monotonic",
+    "flat_transverse_identity",
+    "open_curvature_mapping",
+    "closed_curvature_mapping",
+    "etherington_reciprocity",
+    "invalid_background_fail_closed",
+    "invalid_bridge_fail_closed",
+    "bridge_product_degeneracy",
+    "lcdm_growth_reference",
+    "eds_growth_limit",
+    "bridge_growth_firewall"
+  ],
+  "parity_contract": {
+    "tool": "tools/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.mjs",
+    "stable_test_id_parity": true,
+    "numeric_semantic_parity": true,
+    "shared_engine_identity": "1.0.0",
+    "localized_labels_may_differ": true
+  },
+  "removed_duplicate_page_algorithms": [
+    "page_local_Friedmann_E",
+    "page_local_Simpson_integrator",
+    "page_local_age_integral",
+    "page_local_radial_distance"
+  ],
+  "scope": {
+    "background_models": ["lcdm", "constant_w"],
+    "distance_chain": "D_C_TO_D_M_TO_D_L_AND_D_A",
+    "growth": "LINEAR_GR_SMOOTH_LCDM_OR_CONSTANT_W_REFERENCE",
+    "invalid_domain_policy": "FAIL_CLOSED_NO_NUMERICAL_FLOOR",
+    "bridge_growth": "UNRELEASED_GROWTH_MAP"
+  },
+  "forbidden_inferences": [
+    "NO_INTERNAL_PASS_AS_EMPIRICAL_MODEL_CONFIRMATION",
+    "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
+    "NO_REFERENCE_ENGINE_AS_6D_PARENT_DERIVATION",
+    "NO_BRIDGE_BACKGROUND_AS_RELEASED_BRIDGE_PERTURBATION_MAP",
+    "NO_VALIDATION_PAGE_MIGRATION_AS_PHYSICAL_GATE_PROMOTION"
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
