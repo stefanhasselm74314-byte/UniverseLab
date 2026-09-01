@@ -1,6 +1,6 @@
 {
   "schema": "universelab.emergence-canonical-growth-adapter-contract.v1",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "date": "2026-09-01",
   "basis_main_commit": "67c92e2644cee1f2c3a5526cd914f81a3b40a7b8",
   "status": "IMPLEMENTED_REVIEW_PENDING",
@@ -39,6 +39,8 @@
     "display_time_equation": "d ln(a)/d tau = E(a)",
     "display_time_integrator": "PRECOMPUTED_MONOTONE_SIMPSON_TAU_OF_LN_A_MAP",
     "display_time_map_points": 4096,
+    "display_time_endpoint": "EXACT_X_0_A_1_Z_0",
+    "endpoint_roundoff_policy": "PIN_FINAL_LOG_SCALE_FACTOR_NODE_TO_ZERO_WITHOUT_RELAXING_ENGINE_REDSHIFT_DOMAIN",
     "maximum_time_amplification": 100,
     "maximum_step_delta_tau": 0.002,
     "future_domain": "NOT_INCLUDED_A_GREATER_THAN_1"
@@ -135,6 +137,7 @@
       "cellular_step_does_not_modify_static_cosmology",
       "lcdm_display_time_advances_scale_factor",
       "maximum_time_amplification_stays_in_domain",
+      "exact_present_endpoint",
       "invalid_background_fails_closed",
       "cellular_automaton_remains_independent_under_invalid_cosmology",
       "reset_recovers_reference_state",
