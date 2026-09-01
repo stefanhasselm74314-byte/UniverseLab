@@ -53,6 +53,16 @@ Geprüft werden die lineare GR-Wachstumsgleichung in `ln a`, ΛCDM-Referenzwerte
 
 Für das Bridge-Modell muss die Growth-Anfrage mit `UNRELEASED_GROWTH_MAP` scheitern, weil keine freigegebene HZT-Perturbationsabbildung vorliegt.
 
+
+### Gültige konstante-w-Referenzen
+
+Der deklarierte konstante-w-Scope wird nicht nur durch einen absichtlich ungültigen Negativtest abgedeckt. Für `w=-0,8` und `z=1` prüft die Konsole zusätzlich:
+
+- den unabhängigen Hintergrundanker `E(1)=1,8866898001885484`;
+- den unabhängig hochaufgelöst rekonstruierten Wachstumsanker `D(1)=0,6221646187388952`, wobei hier `D(1)` die normierte Wachstumsamplitude bei Rotverschiebung `z=1` bezeichnet.
+
+Der zweite Anker wurde mit einer getrennten Python-RK4-Rekonstruktion bei verfeinerter Schrittzahl bestimmt; die Browser-Engine wird mit relativer Toleranz `5×10^-8` dagegen geprüft.
+
 ## 4. Evidenzgrenze
 
 Ein grüner Console-Status bedeutet ausschließlich:

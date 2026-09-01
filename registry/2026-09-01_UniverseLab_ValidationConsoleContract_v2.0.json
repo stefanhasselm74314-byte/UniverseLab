@@ -14,6 +14,7 @@
   "stable_test_ids": [
     "normalization_E0",
     "density_closure",
+    "wcdm_background_reference",
     "eds_age",
     "small_z_hubble_law",
     "radial_distance_monotonic",
@@ -25,6 +26,7 @@
     "invalid_bridge_fail_closed",
     "bridge_product_degeneracy",
     "lcdm_growth_reference",
+    "wcdm_growth_reference",
     "eds_growth_limit",
     "bridge_growth_firewall"
   ],
@@ -42,7 +44,10 @@
     "page_local_radial_distance"
   ],
   "scope": {
-    "background_models": ["lcdm", "constant_w"],
+    "background_models": [
+      "lcdm",
+      "constant_w"
+    ],
     "distance_chain": "D_C_TO_D_M_TO_D_L_AND_D_A",
     "growth": "LINEAR_GR_SMOOTH_LCDM_OR_CONSTANT_W_REFERENCE",
     "invalid_domain_policy": "FAIL_CLOSED_NO_NUMERICAL_FLOOR",
@@ -56,5 +61,14 @@
     "NO_VALIDATION_PAGE_MIGRATION_AS_PHYSICAL_GATE_PROMOTION"
   ],
   "physical_gate_effect": "NONE",
-  "physical_evidence_effect": "NONE"
+  "physical_evidence_effect": "NONE",
+  "constant_w_reference": {
+    "w": -0.8,
+    "z": 1.0,
+    "E_z1": 1.8866898001885484,
+    "E_tolerance_relative": 1e-12,
+    "growth_D_z1": 0.6221646187388952,
+    "growth_D_tolerance_relative": 5e-08,
+    "provenance": "independent closed-form background evaluation plus independent high-resolution Python RK4 reconstruction"
+  }
 }

@@ -62,6 +62,6 @@ jobs:
           assert d['physical_gate_effect']=='NONE'
           assert d['physical_evidence_effect']=='NONE'
           assert d['scope']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
-          assert len(d['stable_test_ids'])==15
+          assert len(d['stable_test_ids'])==17
           print('Validation Console evidence firewall: PASS')
           PY

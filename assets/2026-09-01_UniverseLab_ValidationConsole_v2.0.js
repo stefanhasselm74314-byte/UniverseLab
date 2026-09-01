@@ -2,6 +2,8 @@
   'use strict';
 
   const VERSION='2.0.0';
+  const WCDM_BACKGROUND_E_Z1=1.8866898001885484;
+  const WCDM_GROWTH_D_Z1=0.6221646187388952;
   const root=window;
   const C=root.UniverseLabCosmology;
   const lang=(document.documentElement.lang||'de').toLowerCase().startsWith('en')?'en':'de';
@@ -16,6 +18,7 @@
       tests:{
         normalization_E0:['Normierung E(0)=1','|E(0)−1| ≤ 10⁻¹²'],
         density_closure:['Dichteabschluss inklusive Ωₖ','Ωᵣ+Ωₘ+ΩDE+Ωₖ = 1'],
+        wcdm_background_reference:['Gültige wCDM-Hintergrundreferenz','w=−0,8, z=1: E(z) gegen unabhängigen Anker'],
         eds_age:['Einstein–de-Sitter-Alter','t₀ = 2/(3H₀)'],
         small_z_hubble_law:['Kleine-z-Hubble-Grenze','D_C/(D_H z) → 1'],
         radial_distance_monotonic:['Radiale komovierende Distanz monoton','D_C(1) > D_C(0,5)'],
@@ -27,6 +30,7 @@
         invalid_bridge_fail_closed:['Ungültige Brückendomäne fail-closed','1+Δ≤0 ⇒ INVALID_BRIDGE_DOMAIN'],
         bridge_product_degeneracy:['βτ·𝓘B-Produktdegeneration','gleiches Produkt ⇒ gleiche Hintergrundkurve'],
         lcdm_growth_reference:['ΛCDM-Wachstumsreferenz','max. relativer D-Fehler ≤ 3×10⁻⁹'],
+        wcdm_growth_reference:['Gültige wCDM-Wachstumsreferenz','w=−0,8, z=1: relativer D-Fehler ≤ 5×10⁻⁸'],
         eds_growth_limit:['Einstein–de-Sitter-Wachstumsgrenze','D=a und f=1'],
         bridge_growth_firewall:['Brücken-Wachstumsfirewall','UNRELEASED_GROWTH_MAP']
       }
@@ -40,6 +44,7 @@
       tests:{
         normalization_E0:['Normalization E(0)=1','|E(0)−1| ≤ 10⁻¹²'],
         density_closure:['Density closure including Ωₖ','Ωᵣ+Ωₘ+ΩDE+Ωₖ = 1'],
+        wcdm_background_reference:['Valid wCDM background reference','w=−0.8, z=1: E(z) against independent anchor'],
         eds_age:['Einstein–de Sitter age','t₀ = 2/(3H₀)'],
         small_z_hubble_law:['Small-z Hubble limit','D_C/(D_H z) → 1'],
         radial_distance_monotonic:['Radial comoving distance monotonic','D_C(1) > D_C(0.5)'],
@@ -51,6 +56,7 @@
         invalid_bridge_fail_closed:['Invalid bridge domain fails closed','1+Δ≤0 ⇒ INVALID_BRIDGE_DOMAIN'],
         bridge_product_degeneracy:['βτ·𝓘B product degeneracy','same product ⇒ same background curve'],
         lcdm_growth_reference:['ΛCDM growth reference','maximum relative D error ≤ 3×10⁻⁹'],
+        wcdm_growth_reference:['Valid wCDM growth reference','w=−0.8, z=1: relative D error ≤ 5×10⁻⁸'],
         eds_growth_limit:['Einstein–de Sitter growth limit','D=a and f=1'],
         bridge_growth_firewall:['Bridge growth firewall','UNRELEASED_GROWTH_MAP']
       }
@@ -88,6 +94,10 @@
 
     results.push(numeric('normalization_E0',C.E(0,p,'lcdm'),1,1e-12));
     results.push(numeric('density_closure',p.Or+p.Om+p.Ode+p.Ok,1,1e-14,{mode:'absolute'}));
+
+    const wRef={...ref,w:-.8};
+    const wE1=C.E(1,wRef,'wcdm');
+    results.push(numeric('wcdm_background_reference',wE1,WCDM_BACKGROUND_E_Z1,1e-12,{detail:{z:1,w:-.8}}));
 
     const eds={H0:70,Om:1,Ode:0,Or:0,w:-1,sigma8:.8};
     const edsAge=C.ageGyr(eds,'lcdm',{aMin:1e-10,n:8192});
@@ -149,6 +159,10 @@
       growthRows.push({z,got,target});
     }
     results.push(numeric('lcdm_growth_reference',growthMax,0,3e-9,{mode:'absolute',detail:{rows:growthRows}}));
+
+    const wGrowth=C.solveGrowth(wRef,'wcdm',{steps:4000});
+    const wGrowthD1=C.growthAtZ(1,wGrowth).D;
+    results.push(numeric('wcdm_growth_reference',wGrowthD1,WCDM_GROWTH_D_Z1,5e-8,{detail:{z:1,w:-.8,reference:WCDM_GROWTH_D_Z1}}));
 
     const edsGrowth=C.solveGrowth(eds,'lcdm',{steps:2500,aInit:1e-3});
     let edsGrowthMax=0;
