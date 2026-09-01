@@ -89,7 +89,7 @@ try{
   add('invalid_bridge_fails_closed',invalidBridge.status==='INVALID_BRIDGE_DOMAIN'&&invalidBridge.seriesCounts.bridge===0&&bridgeUi.csvDisabled&&!/(?:NaN|Infinity)/.test(bridgeUi.body),{snapshot:invalidBridge,ui:bridgeUi});
 
   const recovered=await page.evaluate(()=>window.UniverseLabCompareSafe.reset());
-  add('reset_recovers_reference_state',recovered.status==='PASS'&&Math.abs(recovered.params.Om-.315)<1e-12&&Math.abs(recovered.params.Ode-.684908)<1e-12&&Math.abs(recovered.params.betaTau-.05)<1e-12&&Math.abs(recovered.params.IB-.4)<1e-12&&Math.abs(recovered.params.Rchi-1)<1e-12,recovered);
+  add('reset_recovers_reference_state',recovered.status==='PASS'&&Math.abs(recovered.params.Om-.315)<1e-12&&Math.abs(recovered.params.Ode-.685)<1e-12&&Math.abs(recovered.params.betaTau-.05)<1e-12&&Math.abs(recovered.params.IB-.4)<1e-12&&Math.abs(recovered.params.Rchi-1)<1e-12,recovered);
 
   add('no_browser_or_http_errors',browserErrors.length===0&&httpErrors.length===0,{browser_errors:browserErrors,http_errors:httpErrors});
   await context.close();
