@@ -1,0 +1,138 @@
+{
+  "schema": "universelab.canonical-cosmology-engine-contract.v1",
+  "version": "1.0.0",
+  "date": "2026-09-01",
+  "status": "FOUNDATION_IMPLEMENTED_PAGE_MIGRATION_NOT_STARTED",
+  "classification": "NUMERICAL_REFERENCE_ENGINE_NO_HZT_PHYSICAL_EVIDENCE",
+  "stacked_base": {
+    "pull_request": 193,
+    "head_sha": "eb5bdea01bf605fa4a3b63e2c1850622796d1efd",
+    "reason": "The current-main status reconciliation is still draft because the GitHub connector could not transition it to ready-for-review."
+  },
+  "engine": {
+    "path": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+    "runtime": ["browser_global", "node_commonjs"],
+    "global_name": "UniverseLabCosmology",
+    "network_access": false,
+    "deterministic": true,
+    "external_dependencies": []
+  },
+  "conventions": {
+    "redshift_domain": "z >= 0",
+    "scale_factor_domain": "0 < a <= 1",
+    "distance_unit": "Mpc",
+    "hubble_unit": "km s^-1 Mpc^-1",
+    "time_unit": "Gyr",
+    "c_km_s": 299792.458,
+    "default_radiation_density": 0.000092,
+    "default_sound_horizon_mpc": 147.1,
+    "curvature": "Omega_k = 1 - Omega_r - Omega_m - Omega_DE"
+  },
+  "models": {
+    "lcdm": {
+      "E2": "Omega_r a^-4 + Omega_m a^-3 + Omega_k a^-2 + Omega_DE",
+      "growth": "released as standard linear GR smooth-DE reference"
+    },
+    "wcdm": {
+      "E2": "Omega_r a^-4 + Omega_m a^-3 + Omega_k a^-2 + Omega_DE a^[-3(1+w)]",
+      "growth": "released as linear GR smooth constant-w DE reference"
+    },
+    "bridge": {
+      "Delta": "beta_tau I_B exp[-(a/a_c)^2]",
+      "E2": "E_LCDM^2 (1 + Delta)",
+      "growth": "UNRELEASED_GROWTH_MAP",
+      "physical_parent_status": "OPEN"
+    }
+  },
+  "distance_chain": {
+    "D_H": "c/H0",
+    "D_C": "D_H integral_0^z dz'/E(z')",
+    "D_M_open": "D_H/sqrt(Omega_k) sinh[sqrt(Omega_k) D_C/D_H]",
+    "D_M_flat": "D_C",
+    "D_M_closed": "D_H/sqrt(|Omega_k|) sin[sqrt(|Omega_k|) D_C/D_H]",
+    "D_L": "(1+z) D_M",
+    "D_A": "D_M/(1+z)",
+    "distance_modulus": "5 log10(D_L/Mpc) + 25",
+    "etherington_ratio": "D_L/[(1+z)^2 D_A] = 1"
+  },
+  "growth_reference": {
+    "equation": "D'' + [2 + d ln H/d ln a] D' - (3/2) Omega_m(a) D = 0",
+    "derivative_variable": "ln a",
+    "initial_condition": "D(a_i)=a_i and D'(a_i)=a_i",
+    "default_a_i": "max(1e-3, 10 Omega_r/Omega_m)",
+    "normalization": "D(1)=1",
+    "solver": "fixed-step classical RK4",
+    "default_steps": 4000,
+    "scope": "linear pressureless matter perturbations in GR with smooth LCDM or constant-w dark energy",
+    "excluded": ["bridge perturbations", "radiation perturbations", "massive-neutrino scale dependence", "nonlinear growth", "baryonic feedback", "modified-gravity mu or Sigma"]
+  },
+  "fail_closed_domain_rules": {
+    "E2": "must be finite and strictly positive at every evaluated point",
+    "bridge_factor": "1 + Delta must be finite and strictly positive",
+    "floors_for_negative_E2": false,
+    "invalid_background_code": "INVALID_BACKGROUND_DOMAIN",
+    "invalid_bridge_code": "INVALID_BRIDGE_DOMAIN",
+    "unreleased_growth_code": "UNRELEASED_GROWTH_MAP"
+  },
+  "reference_checks": {
+    "E_LCDM_z0": 1.0,
+    "age_LCDM_Gyr": 13.79098557965264,
+    "growth_D": {
+      "z_0.5": 0.7689433284179076,
+      "z_1": 0.6068047406056298,
+      "z_2": 0.4172414795427676,
+      "z_3": 0.31553801878444504
+    },
+    "invalid_wcdm_witness": {
+      "Omega_m": 0.1,
+      "Omega_DE": 1.2,
+      "Omega_r": 0.000092,
+      "w": -1.5,
+      "result": "E2 becomes negative inside the allowed historical slider box"
+    }
+  },
+  "qa": {
+    "node_validator": "tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs",
+    "independent_python_test": "tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py",
+    "workflow": ".github/workflows/2026-09-01_UniverseLab_CanonicalCosmologyEngineFoundation_QA_v1.0.yml",
+    "checks": [
+      "E(0)=1",
+      "flat D_M=D_C",
+      "open D_M>D_C and closed D_M<D_C",
+      "Etherington reciprocity",
+      "Einstein-de Sitter age",
+      "invalid E2 fails closed",
+      "invalid bridge factor fails closed",
+      "beta_tau I_B product degeneracy",
+      "LCDM growth reference",
+      "Einstein-de Sitter D=a and f=1",
+      "bridge growth firewall",
+      "small-z Hubble law",
+      "independent Python distance and growth reconstruction"
+    ]
+  },
+  "migration": {
+    "stage": "FOUNDATION_ONLY",
+    "page_behavior_changed": false,
+    "pages_not_yet_migrated": [
+      "compare-safe.html",
+      "compare-direct.html",
+      "compare-app.js",
+      "observatory.html",
+      "validation.html",
+      "emergence.html"
+    ],
+    "next_stage": "MIGRATE_ONE_CANONICAL_PAGE_AT_A_TIME_WITH_PARITY_AND_ADVERSARIAL_TESTS"
+  },
+  "forbidden_inferences": [
+    "NO_REFERENCE_ENGINE_AS_HZT_PARENT_DERIVATION",
+    "NO_BACKGROUND_DOMAIN_PASS_AS_EMPIRICAL_MODEL_CONFIRMATION",
+    "NO_LINEAR_GROWTH_REFERENCE_AS_RELEASED_HZT_GROWTH_MAP",
+    "NO_BRIDGE_BACKGROUND_AS_BRIDGE_PERTURBATION_THEORY",
+    "NO_NUMERICAL_CONSISTENCY_AS_GHOST_FREEDOM",
+    "NO_FOUNDATION_PR_AS_PAGE_MIGRATION_COMPLETE",
+    "NO_PHYSICAL_GATE_PROMOTION"
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
