@@ -1,47 +1,89 @@
-name: UniverseLab current-main canonical state reconciliation QA
+name: UniverseLab post-migration current-main reconciliation QA v1.1
 
 on:
   pull_request:
     paths:
       - 'project-manifest.json'
       - 'research-status.html'
-      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
-      - 'registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json'
-      - 'registry/2026-09-01_UniverseLab_SiteState_v1.1.json'
-      - 'registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json'
+      - 'registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json'
+      - 'registry/2026-09-01_UniverseLab_SiteState_v1.2.json'
+      - 'registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.32.json'
       - 'registry/session-checkpoint-latest.json'
-      - 'schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json'
-      - 'governance/2026-09-01_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.md'
-      - 'tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py'
-      - 'tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py'
+      - 'registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json'
+      - 'registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json'
+      - 'schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.2.json'
+      - 'governance/2026-09-01_UniverseLab_PostMigrationCurrentMainReconciliation_v1.0.md'
+      - 'tools/2026-09-01_validate_UniverseLab_PostMigrationCurrentMainReconciliation_v1.0.py'
+      - 'tools/2026-09-01_validate_UniverseLab_PostMigrationCurrentMainReconciliation_v1.1.py'
+      - 'tests/2026-09-01_test_UniverseLab_PostMigrationCurrentMainReconciliation_v1.0.py'
       - '.github/workflows/2026-09-01_UniverseLab_CurrentMainCanonicalStateReconciliation_QA_v1.0.yml'
   push:
     branches: [main]
+    paths:
+      - 'project-manifest.json'
+      - 'research-status.html'
+      - 'registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json'
+      - 'registry/2026-09-01_UniverseLab_SiteState_v1.2.json'
+      - 'registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.32.json'
+      - 'registry/session-checkpoint-latest.json'
+      - 'registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json'
+      - 'registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json'
+      - 'schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.2.json'
+      - 'governance/2026-09-01_UniverseLab_PostMigrationCurrentMainReconciliation_v1.0.md'
+      - 'tools/2026-09-01_validate_UniverseLab_PostMigrationCurrentMainReconciliation_v1.0.py'
+      - 'tools/2026-09-01_validate_UniverseLab_PostMigrationCurrentMainReconciliation_v1.1.py'
+      - 'tests/2026-09-01_test_UniverseLab_PostMigrationCurrentMainReconciliation_v1.0.py'
+      - '.github/workflows/2026-09-01_UniverseLab_CurrentMainCanonicalStateReconciliation_QA_v1.0.yml'
 
 permissions:
   contents: read
 
 jobs:
-  validate-current-main-state:
-    runs-on: ubuntu-latest
+  validate-post-migration-current-main:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Compile validator and tests
+      - name: Parse current JSON authority set
         run: |
-          python -m py_compile tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py
-          python -m py_compile tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py
-      - name: Parse canonical JSON artifacts
-        run: |
-          python -m json.tool registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json >/dev/null
-          python -m json.tool registry/2026-09-01_UniverseLab_SiteState_v1.1.json >/dev/null
-          python -m json.tool schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json >/dev/null
-          python -m json.tool registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json >/dev/null
-          python -m json.tool registry/session-checkpoint-latest.json >/dev/null
           python -m json.tool project-manifest.json >/dev/null
-      - name: Run fail-closed reconciliation validator
-        run: python tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py --strict-source-existence
-      - name: Run adversarial regression tests
-        run: python tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py
+          python -m json.tool registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json >/dev/null
+          python -m json.tool registry/2026-09-01_UniverseLab_SiteState_v1.2.json >/dev/null
+          python -m json.tool registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.32.json >/dev/null
+          python -m json.tool registry/session-checkpoint-latest.json >/dev/null
+          python -m json.tool registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json >/dev/null
+          python -m json.tool schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.2.json >/dev/null
+      - name: Compile validators and adversarial tests
+        run: |
+          python -m py_compile tools/2026-09-01_validate_UniverseLab_PostMigrationCurrentMainReconciliation_v1.0.py
+          python -m py_compile tools/2026-09-01_validate_UniverseLab_PostMigrationCurrentMainReconciliation_v1.1.py
+          python -m py_compile tests/2026-09-01_test_UniverseLab_PostMigrationCurrentMainReconciliation_v1.0.py
+      - name: Run hardened fail-closed reconciliation validator
+        run: python tools/2026-09-01_validate_UniverseLab_PostMigrationCurrentMainReconciliation_v1.1.py
+      - name: Run adversarial reconciliation regressions
+        run: python tests/2026-09-01_test_UniverseLab_PostMigrationCurrentMainReconciliation_v1.0.py
+      - name: Enforce immutable physical and scientific firewalls
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          state=json.loads(Path('registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.1.json').read_text())
+          closure=json.loads(Path('registry/2026-09-01_UniverseLab_CanonicalCosmologyPublicMigrationClosure_v1.0.json').read_text())
+          pg=state['physical_governance']
+          assert pg['K1-D']=='NOT_RELEASED'
+          assert pg['K1-E']=='NOT_ADMISSIBLE'
+          assert pg['CP01R4']=='METHOD_FROZEN_NO_EXECUTION'
+          assert pg['operative_authorization_decision']=='NOT_CREATED'
+          assert pg['operative_single_use_grant']=='NOT_CREATED'
+          assert pg['backend_import']=='NOT_EXECUTED'
+          assert pg['solver_execution']=='NOT_EXECUTED'
+          assert pg['physical_background']=='NOT_ESTABLISHED'
+          assert pg['physical_response_rank']=='NOT_EXECUTED'
+          assert state['program']['gate_status']=='OPEN'
+          assert closure['physical_gate_effect']=='NONE'
+          assert closure['physical_evidence_effect']=='NONE'
+          print('Post-migration physical/scientific firewalls: PASS')
+          PY
