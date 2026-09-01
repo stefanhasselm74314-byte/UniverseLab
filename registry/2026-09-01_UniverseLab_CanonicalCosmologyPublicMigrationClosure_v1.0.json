@@ -1,0 +1,88 @@
+{
+  "schema": "universelab.canonical-cosmology-public-migration-closure.v1",
+  "version": "1.0.0",
+  "date": "2026-09-01",
+  "basis_main_commit": "2f03998fbb36185123fc02f4fd3cb1df5749834a",
+  "status": "MERGED_MAIN_TECHNICAL_CLOSURE",
+  "classification": "SOFTWARE_NUMERICS_AND_GOVERNANCE_CLOSURE_NO_PHYSICAL_EVIDENCE_EFFECT",
+  "scope": {
+    "canonical_engine_api_version": "1.0.0",
+    "canonical_engine_implementation_revision": "1.0.1",
+    "declared_public_migration_set": [
+      "validation.html",
+      "validation-en.html",
+      "observatory.html",
+      "compare-safe.html",
+      "compare.html",
+      "compare-direct.html",
+      "emergence.html",
+      "emergence-en.html"
+    ],
+    "migration_status": "COMPLETE_FOR_DECLARED_PUBLIC_SET",
+    "remaining_independent_public_cosmology_engines_in_declared_set": []
+  },
+  "merged_pull_requests": [
+    {"number": 196, "role": "CANONICAL_COSMOLOGY_ENGINE_FOUNDATION", "status": "MERGED"},
+    {"number": 197, "role": "VALIDATION_CONSOLE_MIGRATION", "status": "MERGED"},
+    {"number": 198, "role": "OBSERVATORY_MIGRATION", "status": "MERGED"},
+    {"number": 199, "role": "COMPARE_SAFE_MIGRATION", "status": "MERGED"},
+    {"number": 200, "role": "COMPARISON_ROUTE_CONSOLIDATION", "status": "MERGED"},
+    {
+      "number": 201,
+      "role": "EMERGENCE_CANONICAL_BACKGROUND_AND_GROWTH_ADAPTER",
+      "status": "MERGED",
+      "merge_commit": "2f03998fbb36185123fc02f4fd3cb1df5749834a"
+    }
+  ],
+  "implemented_contracts": {
+    "background": "LCDM_AND_CONSTANT_W_REFERENCE_WITH_FAIL_CLOSED_E2_DOMAIN",
+    "curvature_distance_chain": "D_C_TO_D_M_TO_D_L_AND_D_A",
+    "growth": "LINEAR_GR_SMOOTH_DE_REFERENCE_IN_LN_A_NORMALIZED_D1_EQ_1",
+    "bridge_growth": "UNRELEASED_GROWTH_MAP",
+    "invalid_background": "INVALID_BACKGROUND_DOMAIN",
+    "invalid_bridge": "INVALID_BRIDGE_DOMAIN",
+    "negative_E2_floor": "FORBIDDEN",
+    "emergence_automaton_cosmology_coupling": "NONE",
+    "emergence_display_resampling": "RENDER_ONLY_NO_SIMULATION_STATE_MUTATION"
+  },
+  "qa_closure": {
+    "reviewed_exact_head": "d782dcc7e39c9ddce77eae74932a298fc98f918b",
+    "merged_main_commit": "2f03998fbb36185123fc02f4fd3cb1df5749834a",
+    "regular_exact_head_workflows": "SUCCESS",
+    "temporary_g0_probe_workflows": "SKIPPED_AS_DESIGNED",
+    "open_review_threads_at_merge": 0,
+    "browser_and_adversarial_audits": "PASS",
+    "independent_python_reconstructions": "PASS",
+    "repository_wide_naming_contract": "PASS",
+    "numerical_module_coverage": "PASS",
+    "site_wide_integrity": "PASS"
+  },
+  "scientific_status_effect": {
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "FM-G0": "OPEN",
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "NO_TECHNICAL_MIGRATION_CLOSURE_AS_EMPIRICAL_MODEL_CONFIRMATION",
+    "NO_CANONICAL_ENGINE_AS_6D_PARENT_DERIVATION",
+    "NO_LINEAR_GR_GROWTH_REFERENCE_AS_RELEASED_HZT_PERTURBATION_MAP",
+    "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
+    "NO_EMERGENCE_VISUALIZATION_AS_DERIVED_COSMIC_STRUCTURE_FORMATION",
+    "NO_GREEN_CI_AS_PHYSICAL_EVIDENCE",
+    "NO_TECHNICAL_CLOSURE_AS_K1_D_OR_K1_E_PROMOTION"
+  ],
+  "next_authorized_program_step": {
+    "program": "UL-HZT-10M-2026-2027",
+    "workstream": "WS1",
+    "work_package": "FM-0",
+    "gate": "FM-G0",
+    "action": "RESUME_PARENT_TO_REDUCED_TO_OBSERVABLE_PROVENANCE_RECOVERY_NO_PHYSICAL_EXECUTION"
+  },
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
