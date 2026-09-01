@@ -1,0 +1,71 @@
+{
+  "schema": "universelab.observatory-migration-contract.v1",
+  "version": "1.5.0",
+  "date": "2026-09-01",
+  "basis_main_commit": "6d603a47c90ceed61f3637d2cd0272ca85b54462",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "classification": "PUBLIC_DIAGNOSTIC_PAGE_NUMERICAL_ENGINE_MIGRATION_NO_PHYSICAL_EVIDENCE_EFFECT",
+  "page": "observatory.html",
+  "english_entry": "observatory-en.html",
+  "canonical_engine": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+  "adapter": "assets/2026-09-01_UniverseLab_ObservatoryAdapter_v1.5.js",
+  "background_contract": {
+    "model": "constant_w_with_lcdm_limit_at_w_minus_1",
+    "curvature": "Omega_k = 1 - Omega_r - Omega_m - Omega_DE",
+    "chart_domain": "0 <= z <= 5",
+    "age_domain": "1e-8 <= a <= 1",
+    "invalid_policy": "FAIL_CLOSED_NO_POSITIVE_FLOOR",
+    "invalid_code": "INVALID_BACKGROUND_DOMAIN"
+  },
+  "distance_contract": {
+    "chain": "D_C_TO_D_M_TO_D_L_AND_D_A",
+    "hubble_diagram": "distanceModulus using D_L=(1+z)D_M",
+    "bao": "D_M/r_d",
+    "open_geometry": "sinh",
+    "flat_geometry": "identity",
+    "closed_geometry": "sin"
+  },
+  "growth_contract": {
+    "equation": "D'' + [2 + d ln H/d ln a] D' - (3/2) Omega_m(a) D = 0",
+    "derivative_variable": "ln a",
+    "normalization": "D(1)=1",
+    "displayed_quantity": "f sigma8 = f D sigma8_0",
+    "old_approximation_removed": "sigma8 Omega_m(z)^0.55/(1+z)",
+    "bridge_growth": "UNRELEASED_GROWTH_MAP"
+  },
+  "preserved_runtime_ids": [
+    "H0", "Om", "Ol", "w", "s8", "age", "q0", "s80", "curv", "chart", "legend"
+  ],
+  "didactic_data_policy": {
+    "embedded_points": "DIDACTIC_EXAMPLE_VALUES",
+    "likelihood_fit": false,
+    "covariance": false,
+    "selection_function": false,
+    "nuisance_model": false,
+    "observational_release_claim": false
+  },
+  "qa": {
+    "static_test": "tests/2026-09-01_test_UniverseLab_ObservatoryMigration_v1.5.py",
+    "browser_audit": "tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs",
+    "workflow": ".github/workflows/2026-09-01_UniverseLab_ObservatoryMigration_QA_v1.5.yml",
+    "required_checks": [
+      "default_runtime_pass",
+      "open_curvature_uses_D_M",
+      "closed_curvature_uses_D_M",
+      "growth_uses_canonical_ODE",
+      "invalid_domain_fails_closed",
+      "reset_recovers_valid_state",
+      "no_browser_or_http_errors"
+    ]
+  },
+  "forbidden_inferences": [
+    "NO_VALID_BACKGROUND_AS_EMPIRICAL_CONFIRMATION",
+    "NO_INTERNAL_GROWTH_ODE_AS_RELEASED_HZT_PERTURBATION_MAP",
+    "NO_DIDACTIC_POINT_COMPARISON_AS_LIKELIHOOD_FIT",
+    "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
+    "NO_PAGE_MIGRATION_AS_6D_PARENT_DERIVATION",
+    "NO_PHYSICAL_GATE_PROMOTION"
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
