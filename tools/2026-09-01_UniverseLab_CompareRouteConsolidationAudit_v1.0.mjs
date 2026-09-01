@@ -40,12 +40,24 @@ try{
       script.src='./compare-app.js?retirement-audit='+Date.now();
       script.onload=resolve;script.onerror=reject;document.head.appendChild(script);
     });
-    return window.UniverseLabCompareLegacy;
+    const api=window.UniverseLabCompareLegacy;
+    const forbidden=['E','H','dc','mu','growth','sweep'];
+    return {
+      status:api?.status,
+      canonicalUrl:api?.canonicalUrl,
+      keys:Object.keys(api||{}),
+      openCanonicalIsFunction:typeof api?.openCanonical==='function',
+      hasNumericalAuthority:Object.keys(api||{}).some(key=>forbidden.includes(key)),
+      provenance:api?.provenance||null,
+      physicalGateEffect:api?.physicalGateEffect,
+      physicalEvidenceEffect:api?.physicalEvidenceEffect
+    };
   });
   add('legacy_app_has_no_numerical_authority',
-    legacy?.status==='RETIRED_DUPLICATE_ENGINE'&&legacy?.canonicalUrl==='./compare-safe.html?v=safe2'&&
-    typeof legacy?.openCanonical==='function'&&Object.keys(legacy).every(key=>!['E','H','dc','mu','growth','sweep'].includes(key)),
-    {legacy_keys:Object.keys(legacy||{}),status:legacy?.status,canonical_url:legacy?.canonicalUrl});
+    legacy.status==='RETIRED_DUPLICATE_ENGINE'&&legacy.canonicalUrl==='./compare-safe.html?v=safe2'&&
+    legacy.openCanonicalIsFunction&&!legacy.hasNumericalAuthority&&legacy.physicalGateEffect==='NONE'&&
+    legacy.physicalEvidenceEffect==='NONE'&&legacy.provenance?.unit==='dimensionslos',
+    legacy);
   await page.close();
   await context.close();
 }catch(error){
