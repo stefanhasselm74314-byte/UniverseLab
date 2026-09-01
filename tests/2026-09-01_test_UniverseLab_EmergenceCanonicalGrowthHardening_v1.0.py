@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression checks added after the first real Chromium Emergence audit."""
+"""Regression checks added after the real Chromium Emergence audits."""
 from __future__ import annotations
 
 import json
@@ -40,12 +40,14 @@ def main() -> None:
     contract = json.loads(CONTRACT.read_text(encoding='utf-8'))
 
     assert 'id="ol" type="range" min="0" max="1.2" step="0.000001" value="0.684908"' in html
-    assert "const VERSION='1.0.1'" in adapter
+    assert "const VERSION='1.0.2'" in adapter
     for token in (
         'function buildTimeMap',
         'function tauAtScaleFactor',
         'function scaleFactorAtTau',
         'state.timeMap',
+        "const x1=i===points-1?0:x+dx",
+        "rows.push({x,a:i===points-1?1:Math.exp(x),tau})",
         "if($('#eraBars'))$('#eraBars').innerHTML=''",
         'state.history.length===0',
     ):
@@ -53,11 +55,13 @@ def main() -> None:
     for forbidden in ('const derivative=x=>C.E', 'state.history.length<2'):
         assert forbidden not in adapter, forbidden
 
-    assert contract['version'] == '1.0.1'
+    assert contract['version'] == '1.0.2'
     assert contract['background_contract']['display_time_integrator'] == 'PRECOMPUTED_MONOTONE_SIMPSON_TAU_OF_LN_A_MAP'
+    assert contract['background_contract']['display_time_endpoint'] == 'EXACT_X_0_A_1_Z_0'
     assert contract['background_contract']['maximum_time_amplification'] == 100
     assert contract['fail_closed_ui']['stale_epoch_bars_cleared'] is True
     assert 'maximum_time_amplification_stays_in_domain' in contract['qa']['required_checks']
+    assert 'exact_present_endpoint' in contract['qa']['required_checks']
 
     assert abs(1.0 - OR - OM - ODE) < 1e-15
     a_after = independent_scale_after_delta_tau()
