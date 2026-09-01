@@ -1,10 +1,13 @@
-name: UniverseLab compare parameter sweep regression
+name: UniverseLab compare parameter sweep retirement regression
 
 on:
   pull_request:
     paths:
       - "compare-direct.html"
       - "compare.html"
+      - "compare-app.js"
+      - "compare-safe.html"
+      - "assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js"
       - "tests/2026-08-11_UniverseLab_CompareSweepRegression_v1.0.py"
       - ".github/workflows/2026-08-11_UniverseLab_CompareSweepRegression_v1.0.yml"
   push:
@@ -12,6 +15,9 @@ on:
     paths:
       - "compare-direct.html"
       - "compare.html"
+      - "compare-app.js"
+      - "compare-safe.html"
+      - "assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js"
       - "tests/2026-08-11_UniverseLab_CompareSweepRegression_v1.0.py"
       - ".github/workflows/2026-08-11_UniverseLab_CompareSweepRegression_v1.0.yml"
 
@@ -19,31 +25,37 @@ permissions:
   contents: read
 
 jobs:
-  compare-sweep-regression:
+  compare-sweep-retirement-regression:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
 
-      - name: Run numerical and static sweep regression
+      - name: Run numerical and static retirement regression
         run: python tests/2026-08-11_UniverseLab_CompareSweepRegression_v1.0.py
 
-      - name: Extract inline calculator JavaScript
+      - name: JavaScript compatibility marker syntax check
+        run: node --check compare-app.js
+
+      - name: Canonical target contract
+        run: |
+          grep -F './compare-safe.html' compare.html
+          grep -F './compare-safe.html' compare-direct.html
+          grep -F 'RETIRED_DUPLICATE_ENGINE' compare-app.js
+          grep -F '2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js' compare-safe.html
+
+      - name: Enforce no duplicate inline sweep engine
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
-          html = Path('compare-direct.html').read_text(encoding='utf-8')
-          blocks = re.findall(r'<script>(.*?)</script>', html, flags=re.S|re.I)
-          assert blocks, 'no inline script found'
-          Path('/tmp/compare-direct.js').write_text('\n'.join(blocks), encoding='utf-8')
+          for name in ('compare.html','compare-direct.html'):
+              text=Path(name).read_text(encoding='utf-8')
+              for token in ('function sweep(', 'function sweepModel(', 'Math.sqrt(Math.max(1e-12', 'Math.sqrt(Math.max(.02'):
+                  assert token not in text, (name,token)
+          print('Legacy direct sweep retirement: PASS')
           PY
-
-      - name: JavaScript syntax check
-        run: node --check /tmp/compare-direct.js
-
-      - name: Cache-bust contract
-        run: |
-          grep -F 'compare-direct.html?v=23' compare.html
