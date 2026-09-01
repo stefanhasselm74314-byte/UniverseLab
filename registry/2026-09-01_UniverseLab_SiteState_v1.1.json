@@ -1,0 +1,203 @@
+{
+  "schema": "universelab.site-state.v1",
+  "version": "1.1.0",
+  "snapshot_date": "2026-09-01",
+  "snapshot_timestamp": "2026-09-01T03:20:00+02:00",
+  "basis_main_commit": "46579b58b8ca2ae3fb4ba7726446c5871d84da79",
+  "basis_main_tree": "06e7e6671abe3a3c5fab232837178cadb2ea11ff",
+  "canonical_state": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json",
+  "schema_contract": "schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json",
+  "physical_gate_effect": "NONE",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT",
+    "open_pull_requests_have_canonical_effect": false
+  },
+  "freshness": {
+    "status": "CURRENT_FOR_BASIS_MAIN",
+    "supersedes": "registry/2026-08-16_UniverseLab_SiteState_v1.0.json",
+    "validator": "tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py"
+  },
+  "pages": [
+    {
+      "id": "UL-PAGE-PORTAL",
+      "path": "index.html",
+      "domain": "portal",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "UL-PAGE-RESEARCH-STATUS",
+      "path": "research-status.html",
+      "domain": "status",
+      "status": "CANONICAL_CURRENT"
+    },
+    {
+      "id": "UL-PAGE-NAVIGATOR",
+      "path": "navigator.html",
+      "domain": "navigator",
+      "status": "CANONICAL"
+    },
+    {
+      "id": "UL-PAGE-NAVIGATOR-LEGACY",
+      "path": "navigator-app.html",
+      "domain": "navigator",
+      "status": "LEGACY_REDIRECT",
+      "redirect_target": "navigator.html"
+    },
+    {
+      "id": "UL-PAGE-HYPERLAB",
+      "path": "hyperlab.html",
+      "domain": "hyperlab",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "UL-PAGE-SOLVER-HUB",
+      "path": "solver-hub.html",
+      "domain": "solver",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "UL-PAGE-MATERIAL",
+      "path": "hyperzeit-material-v2.html",
+      "domain": "material",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "UL-PAGE-METHODS",
+      "path": "hyperzeit-methods.html",
+      "domain": "methods",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "UL-PAGE-AUDIT-20260731",
+      "path": "universelab-audit-2026-07-31.html",
+      "domain": "audit",
+      "status": "ARCHIVED_REFERENCE"
+    },
+    {
+      "id": "UL-PAGE-SOURCE",
+      "path": "source.html",
+      "domain": "source",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "UL-PAGE-COMPARISON",
+      "path": "compare-safe.html",
+      "domain": "comparison",
+      "status": "ACTIVE_DIAGNOSTIC_PENDING_ENGINE_RECONCILIATION"
+    },
+    {
+      "id": "UL-PAGE-OBSERVATORY",
+      "path": "observatory.html",
+      "domain": "observatory",
+      "status": "ACTIVE_DIAGNOSTIC_PENDING_NUMERICAL_RECONCILIATION"
+    },
+    {
+      "id": "UL-PAGE-VALIDATION",
+      "path": "validation.html",
+      "domain": "validation",
+      "status": "ACTIVE_DIAGNOSTIC"
+    },
+    {
+      "id": "UL-PAGE-10M-PROGRAM",
+      "path": "2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html",
+      "domain": "program",
+      "status": "ACTIVE_RATIFIED"
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "ULSH-01",
+      "technical": {
+        "target_contract": "FROZEN_8X8_NO_EXECUTION",
+        "background_execution": "NOT_AUTHORIZED",
+        "physical_response_rank": "NOT_EXECUTED",
+        "backend_import": "NOT_EXECUTED",
+        "reproducibility_scope": "SOFTWARE_AND_GOVERNANCE_ONLY"
+      },
+      "governance": {
+        "priority": "ACTIVE_CRITICAL_PATH_ON_HOLD",
+        "solver_release": "NOT_AUTHORIZED",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
+        "classification": "OPEN",
+        "claim": "No physical M1 background or physical response rank is established by this site-state snapshot."
+      },
+      "release_gate": {
+        "id": "REPRODUCIBLE_PHYSICAL_MD2S_BACKGROUND_WITH_ONE_SIDED_BOUNDARY_EXPORT",
+        "status": "NOT_SATISFIED"
+      },
+      "provenance": {
+        "site_state_basis_main_commit": "46579b58b8ca2ae3fb4ba7726446c5871d84da79",
+        "canonical_state": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json",
+        "research_program": "registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json"
+      },
+      "work_packages": [
+        {
+          "id": "WP1",
+          "title": "Kanonischen M1/C1-Targetvertrag einfrieren",
+          "status": "CLOSED_TARGET_FROZEN_NO_EXECUTION"
+        },
+        {
+          "id": "WP2",
+          "title": "Separate Autorisierungsentscheidung vorbereiten",
+          "status": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED"
+        },
+        {
+          "id": "WP3",
+          "title": "Unabhängige physische Backend-Gegenprüfung",
+          "status": "NOT_STARTED"
+        },
+        {
+          "id": "WP4",
+          "title": "Einseitigen Bulk/Cap-Randexport einfrieren",
+          "status": "BLOCKED_NOT_AUTHORIZED"
+        }
+      ]
+    },
+    {
+      "module_id": "HZT-M0-FM0",
+      "technical": {
+        "inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+        "gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+        "blocking_gap_count": 10,
+        "fully_unresolved_blocking_gap_count": 7,
+        "partially_resolved_blocking_gap_count": 3
+      },
+      "governance": {
+        "priority": "ACTIVE_WS1",
+        "gate": "FM-G0",
+        "gate_status": "OPEN",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "forward_map": "OPEN",
+        "observable_interfaces": "PROGRAM_DECLARATION_ONLY",
+        "classification": "PROVENANCE_RECOVERY_NO_NEW_PHYSICS"
+      },
+      "release_gate": {
+        "id": "FM-G0",
+        "status": "NOT_SATISFIED"
+      }
+    }
+  ],
+  "status_sources": {
+    "research_program": "registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json",
+    "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+    "h3_corrected_closure": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.2.json",
+    "h4r4a_local_ibvp": "registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4A_ExactFirstOrder_BoundaryJet_TheoremReview_v0.1.json",
+    "h4r4b_global_witness": "registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_ParentEquivalence_v0.1.json",
+    "conventions": "convention-registry.json",
+    "previous_site_state": "registry/2026-08-16_UniverseLab_SiteState_v1.0.json",
+    "previous_checkpoint": "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json"
+  }
+}
