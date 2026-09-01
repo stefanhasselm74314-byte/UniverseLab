@@ -41,14 +41,20 @@ jobs:
         run: |
           set -euo pipefail
           if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
-            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            # A long-lived PR may have a stale event base SHA while GitHub's
+            # merge ref is rebuilt against a newer base branch. Diffing that
+            # stale SHA to GITHUB_SHA incorrectly attributes later main-branch
+            # additions to the PR. Use the merge-base of the current base ref
+            # and the actual PR head so UL-FNS-v1.0 sees PR-introduced paths only.
+            HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+            BASE_SHA="$(git merge-base "origin/${GITHUB_BASE_REF}" "${HEAD_SHA}")"
           else
             BASE_SHA="${{ github.event.before }}"
             if [[ -z "${BASE_SHA}" || "${BASE_SHA}" =~ ^0+$ ]]; then
               BASE_SHA="$(git rev-list --max-parents=0 HEAD)"
             fi
+            HEAD_SHA="${GITHUB_SHA}"
           fi
-          HEAD_SHA="${GITHUB_SHA}"
           git diff --name-status --find-renames "${BASE_SHA}" "${HEAD_SHA}" \
             | awk -F '\t' '
                 $1 == "A" { print $2 }

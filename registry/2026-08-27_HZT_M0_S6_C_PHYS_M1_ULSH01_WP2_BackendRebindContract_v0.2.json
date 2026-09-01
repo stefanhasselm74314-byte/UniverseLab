@@ -1,0 +1,87 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-backend-rebind-contract.v0.2",
+  "date": "2026-08-27",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-01-WP2",
+  "classification": "SOURCE_BOUND_REAL_BACKEND_REBIND_IMPLEMENTATION_ONLY_NO_EXECUTION",
+  "status": "BACKENDS_COMPATIBLE_REBOUND_CP01R4_PHYSICAL_IMPORT_NOT_AUTHORIZED",
+  "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+  "run_payload_sha256": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+  "audited_source_bindings": {
+    "primary_adapter": {
+      "path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py",
+      "sha256": "8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92"
+    },
+    "primary_base": {
+      "path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py",
+      "sha256": "830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599"
+    },
+    "independent_backend": {
+      "path": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py",
+      "sha256": "a8afd7b548366acf9f5ac72e91bcf07372913cc21a8790d86d0a989a89f03e7b",
+      "execution_work_package": "ULSH-01-WP3"
+    }
+  },
+  "compatibility": {
+    "regional_profile_semantics_match": true,
+    "two_region_common_cap_topology_match": true,
+    "continuous_unknown_order_match": true,
+    "fixed_discrete_sector_match": true,
+    "bulk_equation_semantics_match": true,
+    "cap_junction_semantics_match": true,
+    "south_patch_a_chi_sigma_match": true,
+    "Sigma_FT_present": false,
+    "augmented_10x10_present": false,
+    "seed_adapter_matches_frozen_seed_spec": true
+  },
+  "boundary_alias_rebind": {
+    "historical_R_4D": "R_4d",
+    "historical_R_gauge": "R_gauge_local",
+    "semantic_change": false
+  },
+  "off_shell_cap_radius_representative": {
+    "implementation_formula": "ell_Sigma_offshell := 0.5*(ell_N(cap)+ell_S(cap))",
+    "used_by_primary": true,
+    "used_by_independent": true,
+    "target_on_shell_condition": "R_ell=ell_N(cap)-ell_S(cap)=0",
+    "on_shell_equivalence": "if R_ell=0 then ell_Sigma_offshell=ell_N(cap)=ell_S(cap)=ell_Sigma",
+    "classification": "NUMERICAL_OFF_SHELL_EXTENSION_PRESERVES_TARGET_ZERO_SET",
+    "continuum_or_jacobian_inference": "NONE"
+  },
+  "cp01r4_execution_binding": {
+    "control_a_F_override_allowed": false,
+    "required_a_F": "1/4",
+    "model_loader": "model_from_payload(payload, control_a_F=False)",
+    "sector_loader": "sector_from_payload(payload)",
+    "primary_seed_entry": "seven_seeds",
+    "primary_newton_entry": "damped_newton",
+    "all_newton_arguments_from_cp01r4_must_be_passed_explicitly": true,
+    "mesh_prolongation_implemented_outside_historical_kernel_under_cp01r4_freeze": true,
+    "mesh_prolongation_may_not_modify_augmented_variables": true,
+    "direct_backend_invocation": "FORBIDDEN",
+    "independent_backend_call_in_WP2": false
+  },
+  "import_firewall": {
+    "all_target_resource_and_source_hashes_verified_before_import": true,
+    "authorization_decision_verified_before_import": true,
+    "operative_grant_verified_before_import": true,
+    "single_use_reservation_created_before_import": true,
+    "reservation_failure_action": "ABORT_NO_IMPORT",
+    "grant_replay_action": "ABORT_NO_IMPORT",
+    "grant_expiry_action": "ABORT_NO_IMPORT"
+  },
+  "firewall": {
+    "solver_authorized": false,
+    "backend_import_authorized": false,
+    "cp01r4_execution_authorized": false,
+    "operative_grant_created": false,
+    "physical_result_created": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_safe_action": "IMPLEMENT_CP01R4_GRANT_GATED_TARGET_RELEASE_AND_SYNTHETIC_FAIL_CLOSED_QA_WITHOUT_BACKEND_IMPORT"
+}

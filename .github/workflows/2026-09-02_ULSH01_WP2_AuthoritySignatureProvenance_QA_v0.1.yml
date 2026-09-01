@@ -1,0 +1,128 @@
+name: ULSH-01 WP2 authority signature provenance QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json'
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.md'
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityTrustRootCandidate_v0.1.json'
+      - 'tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py'
+      - 'tools/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityVerificationCore_v0.1.py'
+      - 'tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json'
+      - '.github/workflows/2026-09-02_ULSH01_WP2_AuthoritySignatureProvenance_QA_v0.1.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json'
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.md'
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityTrustRootCandidate_v0.1.json'
+      - 'tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py'
+      - 'tools/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityVerificationCore_v0.1.py'
+      - 'tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py'
+      - '.github/workflows/2026-09-02_ULSH01_WP2_AuthoritySignatureProvenance_QA_v0.1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  authority-signature-provenance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse machine-readable contracts
+        run: |
+          python -m json.tool registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityTrustRootCandidate_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json >/dev/null
+
+      - name: Compile verifier and adversarial tests
+        run: |
+          python -m py_compile tools/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityVerificationCore_v0.1.py
+          python -m py_compile tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py
+          python -m py_compile tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py
+
+      - name: Run synthetic positive and fail-closed negative QA
+        run: python tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py
+
+      - name: Enforce no private key or signing implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json
+            registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.md
+            registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityTrustRootCandidate_v0.1.json
+            tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py
+            tools/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityVerificationCore_v0.1.py
+            tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py
+          )
+          if grep -En -- 'BEGIN (OPENSSH |EC |RSA )?PRIVATE KEY|PRIVATE KEY-----' "${files[@]}"; then
+            echo 'Private key material was found.' >&2
+            exit 1
+          fi
+          python - <<'PY'
+          from pathlib import Path
+          text='\n'.join(Path(p).read_text() for p in ['tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py','tools/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityVerificationCore_v0.1.py'])
+          forbidden=['private_bytes(', 'Ed25519PrivateKey', '.sign(', 'import scipy', 'import numpy']
+          found=[token for token in forbidden if token in text]
+          assert not found, found
+          print('Verification-only implementation: PASS')
+          PY
+
+      - name: Enforce draft trust root and physical firewalls
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          contract=json.loads(Path('registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json').read_text())
+          root=json.loads(Path('registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityTrustRootCandidate_v0.1.json').read_text())
+          decision=json.loads(Path('registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json').read_text())
+          grant=json.loads(Path('registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json').read_text())
+          assert contract['status']=='DRAFT_NOT_RATIFIED'
+          assert contract['ratification']['ratified'] is False
+          assert contract['current_gate_state']['authority_signature_provenance']=='BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION'
+          assert contract['current_gate_state']['runtime_issuance_bindings']=='BLOCKED'
+          assert contract['physical_gate_effect']=='NONE'
+          assert contract['physical_evidence_effect']=='NONE'
+          assert root['status']=='DRAFT_NO_RATIFIED_TRUST_ROOT'
+          assert root['authorities']==[]
+          assert root['firewall']['this_file_establishes_an_authority'] is False
+          assert root['firewall']['backend_import_allowed'] is False
+          assert root['firewall']['solver_execution_allowed'] is False
+          assert decision['decision']['decision_status']=='NOT_AUTHORIZED'
+          assert decision['firewall']['backend_import_allowed'] is False
+          assert decision['firewall']['solver_execution_allowed'] is False
+          assert grant['grant']['authorized'] is False
+          assert grant['authorization_firewall']['physical_backend_import_allowed'] is False
+          assert grant['authorization_firewall']['cp01r4_target_solve_allowed'] is False
+          print('Draft authority and physical firewalls: PASS')
+          PY
+
+      - name: Publish nonoperative QA summary
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## ULSH-01 WP2 authority/signature provenance
+
+          - Ed25519 verification-only implementation: PASS
+          - RFC 8032 reference vector: PASS
+          - synthetic decision/grant envelopes: PASS, control-only
+          - adversarial mutation/revocation/role/canonicalization tests: PASS
+          - operative trust root: NOT RATIFIED
+          - runtime issuance bindings: BLOCKED
+          - AuthorizationDecision: NOT CREATED
+          - SingleUseGrant: NOT CREATED
+          - backend import / solver execution: NOT EXECUTED
+          - K1-D: NOT RELEASED
+          - K1-E: NOT ADMISSIBLE
+          - physical evidence effect: NONE
+          EOF

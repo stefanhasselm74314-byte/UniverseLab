@@ -1,0 +1,79 @@
+{
+  "schema": "universelab.ulsh01.cphys.background3c5-kernel-binding-gate.v1",
+  "version": "0.1.0",
+  "date": "2026-08-15",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "active_block": "HZT-M0-S6-C-PHYS-ULSH-01",
+  "status": "BLOCKED_NO_RATIFIED_EXACT_BACKGROUND3C5_KERNEL_FOUND",
+  "physical_evidence_effect": "NONE",
+  "kernel": {
+    "expected_primary_path": "src/hzt2six/blocks/background3c5.py",
+    "located": false,
+    "ratified": false,
+    "bound_to_response_runner": false,
+    "physical_execution_authorized": false
+  },
+  "normalization": {
+    "phi_dimension": "M^2",
+    "varphi": "phi/M6^2",
+    "Z_phi": 1,
+    "Z_F": "exp(-2*a_F*varphi)",
+    "q_ref": "q_hat/M6",
+    "gSigma": "m_layer*q_hat/M6",
+    "independent_continuous_gSigma_forbidden": true
+  },
+  "fixed_discrete_branch_minimum": ["n", "N_F", "m_layer"],
+  "target_fields": ["A", "B", "C", "phi", "s", "Q"],
+  "required_equation_blocks": [
+    "MAXWELL_Q_WITH_LOCALIZED_CURRENT",
+    "SCALAR_DIVERGENCE_PHI",
+    "FINITE_THICKNESS_MATTER_S_CHI",
+    "EINSTEIN_U_V_W_EVOLUTION",
+    "HAMILTONIAN_RADIAL_CONSTRAINT",
+    "FROZEN_TOTAL_POTENTIAL_AND_STRESS_DECOMPOSITION"
+  ],
+  "required_global_conditions": [
+    "REGULAR_CENTER_EXPANSION",
+    "CONICAL_REGULARITY",
+    "FINITE_CENTER_FIELD_STRENGTH",
+    "OUTER_PARENT_MATCHING",
+    "S_TO_ZERO_OUTER",
+    "Q_TO_QINF_OUTER",
+    "H_TO_ZERO_OUTER",
+    "FIXED_CHARGE_FLUX_SECTOR",
+    "BRANCH_CONTINUITY_PROVENANCE"
+  ],
+  "authorization_gates": {
+    "G1_symbolic_residual_realization": "OPEN",
+    "G2_center_expansion_closure": "OPEN",
+    "G3_outer_match_closure": "OPEN",
+    "G4_constraint_preservation": "OPEN",
+    "G5_operator_identity": "OPEN",
+    "G6_H4R4B_control_regression": "OPEN",
+    "G7_solver_convergence_certificate": "OPEN",
+    "G8_provenance_firewall_contract": "PASS_EXECUTION_PENDING"
+  },
+  "authorization_rule": "AUTHORIZED iff G1&G2&G3&G4&G5&G6&G7&G8 are independently PASS",
+  "h4r4b": {
+    "role": "EXACT_ANALYTIC_REGRESSION_AND_PARENT_CONSISTENCY_WITNESS_ONLY",
+    "solver_execution": false,
+    "physical_evidence_effect": "NONE",
+    "may_substitute_for_background3c5_kernel": false,
+    "generic_M1_existence": "OPEN",
+    "nontrivial_D2NQ_selection": "OPEN"
+  },
+  "response_rank": {
+    "rank_B_stress": "PASS_RANK_3_STRUCTURAL",
+    "rank_S": "PASS_RANK_4_STRUCTURAL",
+    "rank_R": "OPEN_NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "NO_MISSING_KERNEL_AS_MODEL_FALSIFICATION",
+    "NO_H4R4B_WITNESS_AS_GENERIC_PARAMETER_EXISTENCE",
+    "NO_H4R4B_WITNESS_AS_PHYSICAL_PARAMETER_SELECTION",
+    "NO_SYNTHETIC_OR_CI_PASS_AS_PHYSICAL_RESPONSE_RANK",
+    "NO_NUMERICAL_CONVERGENCE_AS_GHOST_FREEDOM"
+  ]
+}

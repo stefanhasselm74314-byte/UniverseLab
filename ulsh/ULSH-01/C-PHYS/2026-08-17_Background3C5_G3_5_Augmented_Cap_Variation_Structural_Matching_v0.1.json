@@ -1,0 +1,70 @@
+{
+  "schema": "universelab.ulsh01.cphys.background3c5.g3_5_augmented_cap_variation.v0.1",
+  "date": "2026-08-17",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "status": "AUGMENTED_CAP_VARIATION_PASS_STRUCTURAL_MATCHING_10_PASS_PATCH_WINDING_FROZEN_EXECUTION_BLOCKED",
+  "development_path": "SUPPLEMENTARY_BULK_LAYER_WITH_CANONICAL_CAP",
+  "assumptions": {
+    "sigma_cap_and_Sigma_FT_distinct": true,
+    "new_cap_localized_coupling_of_Sigma_FT": false,
+    "canonical_layer_kinetic_normalization": true,
+    "canonical_cap_normals": {"N": "+1", "S": "+1"}
+  },
+  "layer_cap_residuals": {
+    "R_s": "s_N(rho_N)-s_S(rho_S)",
+    "R_s_flux": "s_N_prime(rho_N)+s_S_prime(rho_S)",
+    "derivation": "common cap trace plus free cap variation of canonical bulk amplitude kinetic term"
+  },
+  "two_patch_winding": {
+    "patch_relation": "A_chi_N(rho_N)-A_chi_S(rho_S)=N_F/q_ref",
+    "charge_relation": "gSigma=m_layer*q_ref",
+    "winding_relation": "n_N-n_S=m_layer*N_F",
+    "continuous_residual": false,
+    "branch_rule": "hold discrete bundle sector fixed during continuous scans",
+    "pole_series": {
+      "N": "s_N~c_N*r_N^abs(n_N)",
+      "S": "s_S~c_S*r_S^abs(n_S)"
+    }
+  },
+  "maxwell_cap_generalization": {
+    "Pcal_s": "exp(4A_s)*Z_F*A_chi_s_prime/L_s",
+    "distributed_current": "Pcal_s is radially evolving when Sigma_FT is active",
+    "canonical_substitution": "Q_s -> Pcal_s(rho_s) in the cap gauge normal-flux residual",
+    "R_patch_form_changed": false,
+    "extra_gauge_BC_added": false
+  },
+  "continuous_unknowns": ["phi_N0", "Q_N", "A_S0", "phi_S0", "Q_S", "rho_N", "rho_S", "K4", "c_N", "c_S"],
+  "global_residuals": ["R_A", "R_L", "R_phi", "R_patch", "R_4d", "R_chi", "R_scalar", "R_gauge_FT", "R_s", "R_s_flux"],
+  "continuous_unknown_count": 10,
+  "global_residual_count": 10,
+  "declared_structural_matching": {
+    "R_A": "A_S0",
+    "R_L": "rho_N",
+    "R_phi": "phi_N0",
+    "R_patch": "Q_N",
+    "R_4d": "rho_S",
+    "R_chi": "K4",
+    "R_scalar": "phi_S0",
+    "R_gauge_FT": "Q_S",
+    "R_s": "c_N",
+    "R_s_flux": "c_S"
+  },
+  "maximum_structural_matching": 10,
+  "structural_bvp_verdict": "SQUARE_PREFLIGHT_PASS",
+  "actual_10x10_Jacobian_rank": "OPEN",
+  "rank_risk_surfaces": [
+    "layer_trace_sensitivity_degeneracy",
+    "accidental_symmetric_linear_dependence",
+    "canonical_scalar_shift_surface",
+    "fixed_K4_without_promoted_parameter",
+    "nonregular_pole_branch",
+    "future_cap_localized_Sigma_FT_interaction"
+  ],
+  "next_required_gate": "G3_6_AUGMENTED_BOUNDARY_OPERATOR_AND_JACOBIAN_PREFLIGHT",
+  "physical_execution_authorized": false,
+  "physical_background": "NOT_ESTABLISHED",
+  "physical_response_rank_R": "NOT_EXECUTED",
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE",
+  "physical_evidence_effect": "NONE"
+}
