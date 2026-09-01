@@ -1,0 +1,100 @@
+{
+  "schema": "universelab.emergence-canonical-growth-adapter-contract.v1",
+  "version": "1.0.0",
+  "date": "2026-09-01",
+  "basis_main_commit": "67c92e2644cee1f2c3a5526cd914f81a3b40a7b8",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "classification": "PUBLIC_DIAGNOSTIC_VISUALIZATION_CANONICAL_BACKGROUND_AND_GROWTH_ADAPTER_NO_PHYSICAL_EVIDENCE_EFFECT",
+  "page": "emergence.html",
+  "english_entry": "emergence-en.html",
+  "canonical_engine": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+  "adapter": "assets/2026-09-01_UniverseLab_EmergenceAdapter_v1.0.js",
+  "architecture": {
+    "cellular_automaton": "DISCRETE_2D_DIAGNOSTIC_VISUALIZATION",
+    "cosmology_overlay": "CANONICAL_LCDM_BACKGROUND_AND_LINEAR_GR_GROWTH_REFERENCE",
+    "dynamical_coupling_between_automaton_and_cosmology": false,
+    "grid_resampling_role": "VISUALIZATION_ONLY",
+    "grid_resampling_is_structure_formation_model": false,
+    "automaton_state_enters_friedmann_equation": false,
+    "automaton_state_enters_growth_equation": false,
+    "cellular_automaton_continues_when_cosmology_is_invalid": true
+  },
+  "background_contract": {
+    "model": "lcdm",
+    "equation": "E2(a)=Omega_r a^-4 + Omega_m a^-3 + Omega_k a^-2 + Omega_Lambda",
+    "curvature": "Omega_k=1-Omega_r-Omega_m-Omega_Lambda",
+    "visible_redshift_domain": "0<=z<=5",
+    "scale_factor_preflight": "1e-8<=a<=1 logarithmic sampling",
+    "invalid_policy": "FAIL_CLOSED_NO_POSITIVE_FLOOR",
+    "invalid_code": "INVALID_BACKGROUND_DOMAIN",
+    "time_variable": "tau=H0 t",
+    "display_time_equation": "d ln(a)/d tau = E(a)",
+    "future_domain": "NOT_INCLUDED_A_GREATER_THAN_1"
+  },
+  "growth_contract": {
+    "equation": "D''+[2+d ln H/d ln a]D'-(3/2)Omega_m(a)D=0",
+    "derivative_variable": "ln a",
+    "initial_condition": "matter-regime growing mode at a_i=max(1e-3,10 Omega_r/Omega_m)",
+    "normalization": "D(1)=1",
+    "displayed_exact_quantities": ["D(a)", "f(a)=d ln D/d ln a"],
+    "approximation": "Omega_m(a)^0.55",
+    "approximation_role": "DISPLAY_ONLY_DIAGNOSTIC_NOT_DYNAMICS",
+    "bridge_growth": "UNRELEASED_GROWTH_MAP"
+  },
+  "cellular_automaton_contract": {
+    "rules": ["B3/S23", "B36/S23", "B2/S", "B3678/S34678"],
+    "boundary": "PERIODIC_TORUS",
+    "noise": "OPTIONAL_RANDOM_CELL_BIRTH_DIAGNOSTIC",
+    "cosmological_backreaction": false,
+    "physical_structure_growth_claim": false
+  },
+  "preserved_runtime_ids": [
+    "c", "chart", "hud", "play", "step", "seed", "clear", "preset", "rule",
+    "speed", "density", "noise", "expMode", "h0", "om", "or", "ol", "timeScale", "expand",
+    "save", "load", "export", "install", "radMetric", "matMetric", "vacMetric", "curvMetric",
+    "growthD", "growthF", "growthApprox", "growthErr", "epochNow", "accelNow", "eqRM", "eqML", "accA", "qNow"
+  ],
+  "fail_closed_ui": {
+    "status_element": "domainStatus",
+    "invalid_statistics": "EN_DASH",
+    "invalid_cosmology_history": "CLEARED",
+    "invalid_curve_generated": false,
+    "nan_or_infinity_rendering_allowed": false,
+    "reset_recovers_reference_state": true
+  },
+  "persistence": {
+    "local_storage_key": "universelab",
+    "state_schema": "universelab.emergence-state.v1",
+    "csv_export": true,
+    "pwa_install_and_service_worker_preserved": true
+  },
+  "qa": {
+    "static_and_independent_test": "tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py",
+    "browser_audit": "tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs",
+    "workflow": ".github/workflows/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapter_QA_v1.0.yml",
+    "required_checks": [
+      "default_runtime_pass",
+      "canonical_probe_identity",
+      "cellular_step_does_not_modify_static_cosmology",
+      "lcdm_display_time_advances_scale_factor",
+      "invalid_background_fails_closed",
+      "cellular_automaton_remains_independent_under_invalid_cosmology",
+      "reset_recovers_reference_state",
+      "de_en_runtime_parity",
+      "no_browser_or_http_errors"
+    ]
+  },
+  "forbidden_inferences": [
+    "NO_CELLULAR_AUTOMATON_AS_DERIVED_COSMIC_STRUCTURE_FORMATION",
+    "NO_GRID_RESAMPLING_AS_PHYSICAL_EXPANSION_DYNAMICS",
+    "NO_LCDM_DISPLAY_TIME_AS_6D_PARENT_DERIVATION",
+    "NO_LINEAR_GR_GROWTH_AS_RELEASED_HZT_PERTURBATION_MAP",
+    "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
+    "NO_VISUAL_SIMILARITY_AS_EMPIRICAL_MODEL_CONFIRMATION",
+    "NO_PAGE_MIGRATION_AS_K1_D_OR_K1_E_PROMOTION"
+  ],
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
