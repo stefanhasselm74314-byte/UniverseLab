@@ -1,0 +1,56 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-authority-trust-root.v0.1",
+  "date": "2026-09-02",
+  "classification": "NONOPERATIVE_EMPTY_TRUST_ROOT_CANDIDATE",
+  "status": "DRAFT_NO_RATIFIED_TRUST_ROOT",
+  "contract_id": "ULSH01-WP2-AUTHORITY-SIGNATURE-PROVENANCE-v0.1",
+  "governed_run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+  "authorities": [],
+  "authority_template_not_an_authority": {
+    "authority_id": null,
+    "display_name_or_pseudonymous_project_identity": null,
+    "status": "NOT_RATIFIED",
+    "synthetic_control_only": false,
+    "controller_class": "HUMAN_CONTROLLED_PROJECT_AUTHORITY_REQUIRED",
+    "roles": [],
+    "keys": [
+      {
+        "key_id": null,
+        "algorithm": "Ed25519-RFC8032",
+        "public_key_base64": null,
+        "public_key_fingerprint_sha256": null,
+        "status": "NOT_RATIFIED",
+        "valid_from_utc": null,
+        "valid_until_utc": null,
+        "revoked": false,
+        "revoked_at_utc": null,
+        "roles": []
+      }
+    ]
+  },
+  "bootstrap_ratification": {
+    "ratified": false,
+    "ratified_by": null,
+    "ratified_at_utc": null,
+    "root_key_proof_of_possession_envelope": null,
+    "explicit_project_owner_adoption_record": null,
+    "adopted_trust_root_file_sha256": null,
+    "ratification_commit_or_tag": null,
+    "ratification_commit_or_tag_verification_metadata": null,
+    "private_key_custody_statement": null,
+    "revocation_procedure": null
+  },
+  "firewall": {
+    "this_file_establishes_an_authority": false,
+    "this_file_is_a_trust_root": false,
+    "this_file_may_validate_an_operative_signature": false,
+    "operative_authorization_decision_allowed": false,
+    "operative_single_use_grant_allowed": false,
+    "backend_import_allowed": false,
+    "solver_execution_allowed": false,
+    "physical_evidence_effect": "NONE"
+  },
+  "next_required_human_action": "EXPLICITLY_SELECT_OR_CREATE_A_HUMAN_CONTROLLED_ED25519_PUBLIC_KEY_AND_RATIFY_THE_EXACT_TRUST_ROOT_ARTIFACT_DIGEST_OUT_OF_BAND",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
