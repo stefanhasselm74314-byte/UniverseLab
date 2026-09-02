@@ -113,7 +113,20 @@ def main() -> None:
         assert forbidden not in adapter, forbidden
     assert 'UNRELEASED_GROWTH_MAP' in engine
 
-    assert contract['status'] == 'IMPLEMENTED_REVIEW_PENDING'
+    assert contract['version'] == '1.5.1'
+    assert contract['status'] == 'ACTIVE_MERGED_QA_RECONCILED'
+    assert contract['merged_pull_request'] == 198
+    reference = contract['background_contract']['reference_state']
+    assert reference == {
+        'H0': 67.4,
+        'Omega_r': .000092,
+        'Omega_m': .315,
+        'Omega_DE': .684908,
+        'Omega_k': 0.0,
+        'w': -1.0,
+        'closure': 'Omega_r + Omega_m + Omega_DE + Omega_k = 1',
+    }
+    assert abs(reference['Omega_r'] + reference['Omega_m'] + reference['Omega_DE'] + reference['Omega_k'] - 1) < 1e-15
     assert contract['distance_contract']['bao'] == 'D_M/r_d'
     assert contract['growth_contract']['bridge_growth'] == 'UNRELEASED_GROWTH_MAP'
     assert contract['didactic_data_policy']['likelihood_fit'] is False
@@ -139,7 +152,7 @@ def main() -> None:
     old_d_equal_a = .5
     assert abs(d1 - old_d_equal_a) > .1
 
-    print('UniverseLab Observatory migration v1.5 static/numerical contract: PASS')
+    print('UniverseLab Observatory migration v1.5.1 static/numerical contract: PASS')
 
 
 if __name__ == '__main__':
