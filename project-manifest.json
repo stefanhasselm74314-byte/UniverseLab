@@ -1,9 +1,10 @@
 {
   "schema": "universelab.project-manifest.v1",
-  "release": "2.31-current-main-canonical-state-reconciliation-v1.0",
-  "release_date": "2026-09-01",
-  "basis_main_commit": "46579b58b8ca2ae3fb4ba7726446c5871d84da79",
-  "basis_main_tree": "06e7e6671abe3a3c5fab232837178cadb2ea11ff",
+  "release": "2.32-band-ivb-current-main-reconciliation-v1.0",
+  "release_date": "2026-09-03",
+  "basis_main_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
+  "basis_main_tree": "de4cf960a4390b173b683c0a14991985b8ec349f",
+  "basis_semantics": "Merged main at Band-IV-B branch creation plus the reconciliation changeset, canonical only after merge.",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
   "project": {
@@ -16,10 +17,10 @@
       "en"
     ]
   },
-  "manifest_strategy": "COMPACT_CURRENT_STATE_WITH_VERSIONED_SOURCE_REGISTRIES",
-  "canonical_state": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json",
-  "site_state": "registry/2026-09-01_UniverseLab_SiteState_v1.1.json",
-  "session_checkpoint": "registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json",
+  "manifest_strategy": "COMPACT_CURRENT_STATE_WITH_APPEND_ONLY_VERSIONED_SOURCE_REGISTRIES",
+  "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+  "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
+  "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
   "architecture": {
     "governing_document": "MD-0",
     "program_chain": [
@@ -104,10 +105,19 @@
     "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
     "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
     "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
-    "ULSH-01-WP2": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED",
+    "ULSH-01-WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
     "ULSH-01-WP3": "NOT_STARTED",
     "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
     "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+    "AUTHORITY_SIGNATURE_VERIFIER": "IMPLEMENTED_AND_QA_GREEN",
+    "HUMAN_TRUST_ROOT_PREPARATION": "IMPLEMENTED_AND_QA_GREEN",
+    "RATIFIED_HUMAN_TRUST_ROOT": "NOT_RATIFIED",
+    "AUTHORITY_SIGNATURE_PROVENANCE": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
+    "RUNTIME_ISSUANCE_BINDINGS": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
     "FM-G0": "OPEN",
     "FM0_BLOCKING_GAPS": 10,
     "CONTINUUM_BVP_JACOBIAN": "NOT_PROVEN",
@@ -124,16 +134,38 @@
     "gate": "FM-G0",
     "gate_status": "OPEN"
   },
+  "public_numerical_platform": {
+    "canonical_engine": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+    "api_version": "1.0.0",
+    "implementation_revision": "1.0.2",
+    "migrations": "COMPLETE",
+    "observatory": "ACTIVE_MERGED_QA_RECONCILED",
+    "compare_safe": "ACTIVE_MERGED_QA_RECONCILED",
+    "emergence": "ACTIVE_MERGED_QA_RECONCILED",
+    "remaining_independent_engines": 0,
+    "bridge_scale": "a_c=Rchi/(Rchi+2.5), Rchi>0, no hidden floor",
+    "bridge_growth": "UNRELEASED_GROWTH_MAP",
+    "bridge_lensing": "UNRELEASED_LENSING_MAP",
+    "likelihood_fit": "NOT_PRESENT",
+    "physical_evidence_effect": "NONE"
+  },
   "current_status_sources": {
+    "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
+    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
+    "canonical_engine": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
+    "observatory": "registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json",
+    "compare_safe": "registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json",
+    "emergence": "registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json",
+    "authority_signature_provenance": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json",
+    "human_trust_root_preparation": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json",
     "research_program": "registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json",
     "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
     "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
     "h3_corrected_closure": "registry/2026-08-13_HZT-M0_S6_C-PHYS_H3_TimeDependent6D_M1_CosmologicalClosure_v0.2.json",
     "h4r4a_local_ibvp": "registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4A_ExactFirstOrder_BoundaryJet_TheoremReview_v0.1.json",
     "h4r4b_global_witness": "registry/2026-08-15_HZT-M0_S6_C-PHYS_H4R4B_GlobalControlWitness_ParentEquivalence_v0.1.json",
-    "conventions": "convention-registry.json",
-    "previous_site_state": "registry/2026-08-16_UniverseLab_SiteState_v1.0.json",
-    "previous_checkpoint": "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json"
+    "conventions": "convention-registry.json"
   },
   "canonical_pages": [
     {
@@ -146,9 +178,9 @@
     {
       "id": "research_status",
       "path": "research-status.html",
-      "live": "./research-status.html?v=20260901",
+      "live": "./research-status.html?v=20260903",
       "class": "canonical_public_status",
-      "status": "ACTIVE_CURRENT"
+      "status": "ACTIVE_CURRENT_RECONCILED"
     },
     {
       "id": "navigator",
@@ -177,7 +209,7 @@
       "path": "solver-hub.html",
       "live": "./solver-hub.html?v=1",
       "class": "numerical_research_infrastructure",
-      "status": "ACTIVE_DIAGNOSTIC"
+      "status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY"
     },
     {
       "id": "material",
@@ -210,23 +242,30 @@
     {
       "id": "comparison",
       "path": "compare-safe.html",
-      "live": "./compare-safe.html?v=safe2",
+      "live": "./compare-safe.html?v=20260903",
       "class": "calculator",
-      "status": "ACTIVE_DIAGNOSTIC_PENDING_ENGINE_RECONCILIATION"
+      "status": "ACTIVE_MERGED_QA_RECONCILED"
     },
     {
       "id": "observatory",
       "path": "observatory.html",
-      "live": "./observatory.html",
+      "live": "./observatory.html?v=20260903",
       "class": "cosmology_parameter_lab",
-      "status": "ACTIVE_DIAGNOSTIC_PENDING_NUMERICAL_RECONCILIATION"
+      "status": "ACTIVE_MERGED_QA_RECONCILED"
     },
     {
       "id": "validation",
       "path": "validation.html",
-      "live": "./validation.html",
+      "live": "./validation.html?v=20260903",
       "class": "numerical_validation",
-      "status": "ACTIVE_DIAGNOSTIC"
+      "status": "ACTIVE_CANONICAL_ENGINE_ADAPTER"
+    },
+    {
+      "id": "emergence",
+      "path": "emergence.html",
+      "live": "./emergence.html?v=20260903",
+      "class": "diagnostic_visualization",
+      "status": "ACTIVE_MERGED_QA_RECONCILED"
     },
     {
       "id": "program_10m",
@@ -249,7 +288,8 @@
     "formal_function_space_definition_is_not_solution_existence",
     "bounded_map_closed_graph_is_not_fredholmness",
     "open_pull_request_has_no_canonical_effect_until_merged",
-    "readiness_is_not_authorization",
+    "readiness_or_preparation_is_not_authorization",
+    "trust_root_preparation_is_not_human_ratification",
     "green_ci_is_not_physical_evidence"
   ],
   "c_phys_operator_entry": {
@@ -261,6 +301,12 @@
     "constraint_dependency_proof": "PROVEN_SYMBOLIC_CONDITIONAL",
     "physical_background": "NOT_ESTABLISHED",
     "solver_authorized": false,
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "runtime_issuance_bindings": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
     "physical_evidence_effect": "NONE",
@@ -274,37 +320,47 @@
       "pull_request": 137,
       "title": "ULSH-01: harden C-PHYS physical response-rank gate",
       "state": "OPEN_DRAFT",
-      "head_sha": "eba2c6545add8a759f33728a388a9917454bdd4c",
+      "head_sha": "f8db7baa4d7cc8b3d1b505ddff80d69f4290d836",
       "base_sha_at_creation": "6288f1e4f1b6f2a6a23077fa7a8ec89fc865e6b5",
-      "canonical_effect": "NONE_UNTIL_MERGED_AFTER_CURRENT_MAIN_RECONCILIATION",
-      "merge_tree_audited_against_basis_main": false,
-      "reported_open_blockers": [
-        "AUTHORITY_SIGNATURE_PROVENANCE",
-        "RUNTIME_ISSUANCE_BINDINGS"
+      "commits": 156,
+      "changed_files": 139,
+      "canonical_effect": "NONE_UNTIL_REBUILT_REVIEWED_AND_MERGED",
+      "extracted_merged_subblocks": [
+        "PR202_AUTHORITY_SIGNATURE_PROVENANCE",
+        "PR203_HUMAN_TRUST_ROOT_PREPARATION"
       ],
-      "interpretation": "The blockers are material review findings in the open PR but are not promoted here to merged-main canonical registry fields."
+      "interpretation": "The large draft remains noncanonical; the two safe sub-blocks are separately merged."
     }
   ],
-  "supersedes_release": "2.22-c-phys-m1-background-3c11-authorization-denied-v0.1",
-  "history_rule": "Prior detailed manifest content remains recoverable from Git history and the versioned source registries; this compact manifest is the current status entry point.",
+  "supersedes_release": "2.31-current-main-canonical-state-reconciliation-v1.0",
+  "history_rule": "Prior detailed manifest content remains recoverable from Git history and the versioned source registries; historical dated snapshots are not edited in place.",
   "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
   "central_registries": {
-    "current_main_canonical_state": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json",
-    "site_state": "registry/2026-09-01_UniverseLab_SiteState_v1.1.json",
+    "current_main_canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
     "site_state_schema": "schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json",
-    "session_checkpoint": "registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json",
+    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
     "session_checkpoint_alias": "registry/session-checkpoint-latest.json",
     "platform_governance": "governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md",
+    "canonical_engine": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
+    "observatory": "registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json",
+    "compare_safe": "registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json",
+    "emergence": "registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json",
+    "authority_signature_provenance": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json",
+    "human_trust_root_preparation": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json",
     "research_program": "registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json",
     "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
     "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
   },
   "platform_governance": {
-    "version": "1.1.0",
-    "status": "ACTIVE_GOVERNED_PLATFORM_V1_CURRENT_STATE_RECONCILED",
+    "version": "1.2.0",
+    "status": "ACTIVE_GOVERNED_PLATFORM_CURRENT_STATE_RECONCILED_2026_09_03",
     "navigator_authority": "CANONICAL_DIRECT_DOCUMENT",
-    "site_state": "registry/2026-09-01_UniverseLab_SiteState_v1.1.json",
+    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
     "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE",
     "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"
-  }
+  },
+  "next_allowed_repository_step": "BAND_V_PUBLIC_CLAIM_TO_HZT_M0_PARENT_STATUS_OBSERVABLE_AND_FALSIFICATION_AUDIT_NO_PHYSICAL_EXECUTION"
 }
