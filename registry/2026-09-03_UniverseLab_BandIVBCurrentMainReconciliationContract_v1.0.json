@@ -1,0 +1,117 @@
+{
+  "schema": "universelab.band-ivb-current-main-reconciliation-contract.v1",
+  "version": "1.0.0",
+  "date": "2026-09-03",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "classification": "NUMERICAL_QA_PROVENANCE_PUBLIC_STATUS_ACCESSIBILITY_RECONCILIATION_NO_PHYSICAL_EXECUTION",
+  "basis_main_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
+  "basis_main_tree": "de4cf960a4390b173b683c0a14991985b8ec349f",
+  "historical_snapshots_are_append_only": true,
+  "superseding_state_artifacts": {
+    "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
+    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
+    "latest_checkpoint_pointer": "registry/session-checkpoint-latest.json"
+  },
+  "numerical_reconciliation": {
+    "reference_closure": {
+      "Omega_r": 0.000092,
+      "Omega_m": 0.315,
+      "Omega_DE": 0.684908,
+      "Omega_k": 0.0,
+      "equation": "Omega_r+Omega_m+Omega_DE+Omega_k=1",
+      "observatory_reset_audit": "RECONCILED",
+      "compare_safe_reset_audit": "RECONCILED"
+    },
+    "bridge_scale": {
+      "equation": "a_c(Rchi)=Rchi/(Rchi+2.5)",
+      "domain": "Rchi>0",
+      "hidden_floor": false,
+      "small_Rchi_limit": "a_c/Rchi -> 0.4",
+      "engine_api_version": "1.0.0",
+      "engine_implementation_revision": "1.0.2",
+      "physical_parent_derivation": "NOT_ESTABLISHED"
+    }
+  },
+  "public_reconciliation": {
+    "project_manifest": "project-manifest.json",
+    "research_status_de": "research-status.html",
+    "research_status_en": "research-status-en.html",
+    "global_shell_state_source": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
+    "sitemap": "sitemap.xml",
+    "sitemap_lastmod_policy": "LATEST_COMMIT_DATE_OF_PAGE_RESOURCE_IN_EUROPE_BERLIN",
+    "emergence_label": "LambdaCDM display time reference, not physical cellular structure formation",
+    "mobile_zoom": "RESTORED"
+  },
+  "specialized_qa": {
+    "canonical_engine": {
+      "node": "tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs",
+      "python": "tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py"
+    },
+    "observatory": {
+      "static": "tests/2026-09-01_test_UniverseLab_ObservatoryMigration_v1.5.py",
+      "browser": "tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs"
+    },
+    "compare_safe": {
+      "static": "tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py",
+      "browser": "tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs"
+    },
+    "emergence": {
+      "static": "tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py",
+      "hardening": "tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py",
+      "browser": "tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs"
+    },
+    "band_ivb": {
+      "test": "tests/2026-09-03_test_UniverseLab_BandIVBCurrentMainReconciliation_v1.0.py",
+      "sitemap_generator": "tools/2026-09-03_generate_UniverseLab_SitemapLastmod_v1.0.py",
+      "workflow": ".github/workflows/2026-09-03_UniverseLab_BandIVB_CurrentMainReconciliation_QA_v1.0.yml"
+    }
+  },
+  "required_exact_head_checks": [
+    "radiation-inclusive reset closure",
+    "small-Rchi bridge-scale asymptotics",
+    "no hidden bridge-scale floor",
+    "canonical-engine regression",
+    "Observatory static and browser QA",
+    "Compare Safe static and browser QA",
+    "Emergence static, hardening and browser QA",
+    "current-state pointer consistency",
+    "historical snapshot preservation",
+    "public DE/EN status consistency",
+    "sitemap lastmod reproducibility",
+    "mobile zoom accessibility",
+    "all physical and authorization firewalls unchanged"
+  ],
+  "parked_external_human_action": {
+    "human_trust_root_ratification": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
+    "may_be_fabricated_by_ci_or_assistant": false,
+    "affects_band_ivb_completion": false
+  },
+  "gate_state": {
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "authority_signature_provenance": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
+    "runtime_issuance_bindings": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "NO_QA_PASS_AS_EMPIRICAL_EVIDENCE",
+    "NO_ENGINE_RECONCILIATION_AS_6D_PARENT_DERIVATION",
+    "NO_BRIDGE_BACKGROUND_AS_RELEASED_BRIDGE_GROWTH_OR_LENSING",
+    "NO_CURRENT_STATE_RECONCILIATION_AS_AUTHORIZATION",
+    "NO_TRUST_ROOT_PREPARATION_AS_HUMAN_RATIFICATION",
+    "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
+    "NO_PUBLIC_STATUS_UPDATE_AS_PHYSICAL_GATE_PROMOTION"
+  ],
+  "next_stage_after_green_merge": "BAND_V_PUBLIC_CLAIM_TO_HZT_M0_PARENT_STATUS_OBSERVABLE_AND_FALSIFICATION_AUDIT_NO_PHYSICAL_EXECUTION",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
