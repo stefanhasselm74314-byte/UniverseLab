@@ -99,6 +99,8 @@ def main() -> None:
     assert '2026-09-01_UniverseLab_CosmologyEngine_v1.0.js' in html
     assert '2026-09-01_UniverseLab_ObservatoryAdapter_v1.5.js' in html
     assert '<script>\n\'use strict\'' not in html
+    assert 'id="Ol" type="range" min="0" max="1.2" step="0.000001" value="0.684908"' in html
+    assert 'id="Ol" type="range" min="0" max="1.2" step="0.001" value="0.684908"' not in html
     for element_id in ('H0','Om','Ol','w','s8','age','q0','s80','curv','chart','legend','domainStatus','observatoryBadge'):
         assert f'id="{element_id}"' in html, element_id
 
@@ -126,6 +128,7 @@ def main() -> None:
         'w': -1.0,
         'closure': 'Omega_r + Omega_m + Omega_DE + Omega_k = 1',
     }
+    assert contract['background_contract']['reference_density_slider_resolution'] == .000001
     assert abs(reference['Omega_r'] + reference['Omega_m'] + reference['Omega_DE'] + reference['Omega_k'] - 1) < 1e-15
     assert contract['distance_contract']['bao'] == 'D_M/r_d'
     assert contract['growth_contract']['bridge_growth'] == 'UNRELEASED_GROWTH_MAP'
