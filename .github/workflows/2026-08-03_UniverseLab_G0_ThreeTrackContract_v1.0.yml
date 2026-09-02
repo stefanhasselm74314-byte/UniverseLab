@@ -1,41 +1,39 @@
-name: UniverseLab G0 current-main governance contract v1.23
+name: UniverseLab G0 current-main governance contract v1.24
 
 on:
   pull_request:
     paths:
-      - "project-manifest.json"
-      - "registry/session-checkpoint-latest.json"
-      - "registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json"
-      - "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json"
-      - "registry/2026-09-01_UniverseLab_SiteState_v1.1.json"
-      - "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json"
-      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json"
-      - "tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py"
-      - "tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py"
-      - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
+      - 'project-manifest.json'
+      - 'registry/session-checkpoint-latest.json'
+      - 'registry/*UniverseLab_SessionCheckpoint*.json'
+      - 'registry/*UniverseLab_CurrentMainCanonicalState*.json'
+      - 'registry/*UniverseLab_SiteState*.json'
+      - 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json'
+      - 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json'
+      - 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json'
+      - 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json'
+      - 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json'
+      - 'registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json'
+      - 'tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py'
+      - '.github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml'
   push:
     branches: [main]
     paths:
-      - "project-manifest.json"
-      - "registry/session-checkpoint-latest.json"
-      - "registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json"
-      - "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json"
-      - "registry/2026-09-01_UniverseLab_SiteState_v1.1.json"
-      - "registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json"
-      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json"
-      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json"
-      - "tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py"
-      - "tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py"
-      - ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml"
+      - 'project-manifest.json'
+      - 'registry/session-checkpoint-latest.json'
+      - 'registry/*UniverseLab_SessionCheckpoint*.json'
+      - 'registry/*UniverseLab_CurrentMainCanonicalState*.json'
+      - 'registry/*UniverseLab_SiteState*.json'
+      - 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json'
+      - 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json'
+      - 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json'
+      - 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json'
+      - 'registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json'
+      - 'registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json'
+      - 'tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py'
+      - '.github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml'
 
 permissions:
   contents: read
@@ -45,32 +43,50 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      PYTHONHASHSEED: "0"
-      RECONCILIATION_BASE: "46579b58b8ca2ae3fb4ba7726446c5871d84da79"
+      PYTHONHASHSEED: '0'
+      RECONCILIATION_BASE: '46579b58b8ca2ae3fb4ba7726446c5871d84da79'
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
-      - name: Validate current and historical JSON artifacts
+      - name: Validate active pointer chain and historical JSON
         run: |
-          python -m json.tool project-manifest.json >/dev/null
-          python -m json.tool registry/session-checkpoint-latest.json >/dev/null
-          python -m json.tool registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json >/dev/null
-          python -m json.tool registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json >/dev/null
-          python -m json.tool registry/2026-09-01_UniverseLab_SiteState_v1.1.json >/dev/null
-          python -m json.tool registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json >/dev/null
-          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json >/dev/null
-          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json >/dev/null
-          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json >/dev/null
-          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json >/dev/null
-          python -m json.tool registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json >/dev/null
-          python -m json.tool registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json >/dev/null
+          python - <<'PY'
+          import json
+          from pathlib import Path, PurePosixPath
+          root=Path('.')
+          latest=json.loads((root/'registry/session-checkpoint-latest.json').read_text())
+          manifest=json.loads((root/'project-manifest.json').read_text())
+          for field in ('canonical_snapshot','canonical_state','site_state'):
+              rel=PurePosixPath(latest[field])
+              assert not rel.is_absolute() and '..' not in rel.parts
+              target=root/rel
+              assert target.is_file(), target
+              json.loads(target.read_text())
+          assert latest['canonical_snapshot']==manifest['session_checkpoint']
+          assert latest['canonical_state']==manifest['canonical_state']
+          assert latest['site_state']==manifest['site_state']
+          assert (root/'registry/session-checkpoint-latest.json').read_bytes()==(root/latest['canonical_snapshot']).read_bytes()
+          PY
+          for file in \
+            registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json \
+            registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json \
+            registry/2026-09-01_UniverseLab_SiteState_v1.1.json \
+            registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json \
+            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json \
+            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json \
+            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json \
+            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json \
+            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json \
+            registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json; do
+            python -m json.tool "$file" >/dev/null
+          done
 
-      - name: Compile and run current-main fail-closed gate
+      - name: Run pointer-aware fail-closed gate
         run: |
           python -m py_compile tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py
           python -m py_compile tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py
@@ -79,83 +95,74 @@ jobs:
 
       - name: Prove Background-3C11 artifacts remain append-only and historical
         run: |
-          git diff --exit-code "$RECONCILIATION_BASE" -- \
-            registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json \
-            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json \
-            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json \
-            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json \
-            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json \
-            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json \
+          historical=(
+            registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json
+            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json
+            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json
+            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json
+            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json
+            registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json
             registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json
+          )
+          git diff --exit-code "$RECONCILIATION_BASE" -- "${historical[@]}"
           python - <<'PY'
           import json
           from pathlib import Path
+          load=lambda path: json.loads(Path(path).read_text())
+          old_checkpoint=load('registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json')
+          old_current=load('registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json')
+          review=load('registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json')
+          contract=load('registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json')
+          audit=load('registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json')
+          failure1=load('registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json')
+          failure2=load('registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json')
+          run_input=load('registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json')
+          latest=load('registry/session-checkpoint-latest.json')
+          manifest=load('project-manifest.json')
+          current=load(latest['canonical_state'])
 
-          load = lambda path: json.loads(Path(path).read_text())
-          denial = 'DENIED_OPERATIVE_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_ABSENT'
-          digest = 'a7b48c88061e00cc3dc44dd00a2a17855a7f8c65dd228f725101fde9a1839eb4'
-
-          old_checkpoint = load('registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json')
-          review = load('registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json')
-          contract = load('registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json')
-          audit = load('registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json')
-          failure_r1 = load('registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.1.json')
-          failure_r2 = load('registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlFailureResult_v0.2.json')
-          run_input = load('registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json')
-          current = load('registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json')
-          latest = load('registry/session-checkpoint-latest.json')
-          manifest = load('project-manifest.json')
-
-          assert old_checkpoint['checkpoint_id'] == 'UL-CHK-20260805-030'
-          assert old_checkpoint['canonical_snapshot'] == 'registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json'
-          assert review['status'] == denial
-          assert review['classification'] == 'APPEND_ONLY_FAIL_CLOSED_TARGET_PATH_EXECUTION_ELIGIBILITY_REVIEW'
-          assert review['physical_evidence_effect'] == 'NONE'
-          assert review['authorization_decision'] == {
-              'authorized': False,
-              'grant_created': False,
-              'physical_backend_imported': False,
-              'primary_newton_called': False,
-              'independent_shooting_called': False,
-              'shooting_jacobian_called': False,
-              'nonlinear_root_called': False,
-              'cp01r1_attempted': False,
-              'target_a_F_one_quarter_solve_attempted': False,
-              'result_artifact_created': False,
-          }
-          assert review['passed_prerequisites']['package_manifest_sha256'] == digest
-          assert contract['control_override']['a_F'] == 0.0
-          assert contract['control_override']['target_a_F'] == '1/4_FORBIDDEN'
-          assert audit['status'] == 'PASS_REAL_BACKEND_AF0_CONTROL_RELEASE_NO_TARGET_SOLVE'
-          assert audit['closed_package']['package_manifest_sha256'] == digest
-          assert audit['execution_firewall']['cp01r1_attempts'] == 0
-          assert audit['execution_firewall']['target_a_F_one_quarter_solves'] == 0
-          assert audit['execution_firewall']['operative_grants_created'] == 0
-          assert audit['execution_firewall']['physical_result_artifacts_created'] == 0
-          assert failure_r1['status'] == 'FAIL_CLOSED_PRIMARY_UNIFORM_BULK_THRESHOLD_AT_N96'
-          assert failure_r2['status'] == 'FAIL_CLOSED_CANDIDATE_JSON_KEY_ORDER_MISTAKEN_FOR_VECTOR_ORDER'
-          assert run_input['status'] == 'RUN_INPUT_FROZEN_CP01R1_EXECUTION_NOT_AUTHORIZED'
+          assert old_checkpoint['checkpoint_id']=='UL-CHK-20260805-030'
+          assert old_checkpoint['canonical_snapshot']=='registry/2026-08-05_UniverseLab_SessionCheckpoint_v1.30.json'
+          assert old_current['basis_main_commit']=='46579b58b8ca2ae3fb4ba7726446c5871d84da79'
+          assert review['status']=='DENIED_OPERATIVE_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_ABSENT'
+          assert review['physical_evidence_effect']=='NONE'
+          assert all(value is False for value in review['authorization_decision'].values())
+          digest='a7b48c88061e00cc3dc44dd00a2a17855a7f8c65dd228f725101fde9a1839eb4'
+          assert review['passed_prerequisites']['package_manifest_sha256']==digest
+          assert contract['control_override']=={'a_F':0.0,'target_a_F':'1/4_FORBIDDEN'}
+          assert audit['status']=='PASS_REAL_BACKEND_AF0_CONTROL_RELEASE_NO_TARGET_SOLVE'
+          assert audit['closed_package']['package_manifest_sha256']==digest
+          assert audit['execution_firewall']['cp01r1_attempts']==0
+          assert audit['execution_firewall']['target_a_F_one_quarter_solves']==0
+          assert audit['execution_firewall']['operative_grants_created']==0
+          assert audit['execution_firewall']['physical_result_artifacts_created']==0
+          assert failure1['status']=='FAIL_CLOSED_PRIMARY_UNIFORM_BULK_THRESHOLD_AT_N96'
+          assert failure2['status']=='FAIL_CLOSED_CANDIDATE_JSON_KEY_ORDER_MISTAKEN_FOR_VECTOR_ORDER'
+          assert run_input['status']=='RUN_INPUT_FROZEN_CP01R1_EXECUTION_NOT_AUTHORIZED'
           assert run_input['solver_authorized'] is False
 
-          assert manifest['supersedes_release'] == '2.22-c-phys-m1-background-3c11-authorization-denied-v0.1'
-          assert latest['checkpoint_id'] == 'UL-CHK-20260901-031'
-          assert current['basis_main_commit'] == '46579b58b8ca2ae3fb4ba7726446c5871d84da79'
-          assert current['physical_governance']['solver_authorized'] is False
-          assert current['physical_governance']['solver_execution'] == 'NOT_EXECUTED'
-          assert current['physical_governance']['backend_import'] == 'NOT_EXECUTED'
-          assert current['physical_governance']['operative_authorization_decision'] == 'NOT_CREATED'
-          assert current['physical_governance']['operative_single_use_grant'] == 'NOT_CREATED'
-          assert current['physical_governance']['K1-D'] == 'NOT_RELEASED'
-          assert current['physical_governance']['K1-E'] == 'NOT_ADMISSIBLE'
-          assert current['physical_evidence_effect'] == 'NONE'
+          assert latest['canonical_snapshot']==manifest['session_checkpoint']
+          assert latest['canonical_state']==manifest['canonical_state']
+          assert latest['site_state']==manifest['site_state']
+          assert current['basis_main_commit']==manifest['basis_main_commit']
+          physical=current['physical_governance']
+          expected={
+              'solver_execution':'NOT_EXECUTED',
+              'backend_import':'NOT_EXECUTED',
+              'operative_authorization_decision':'NOT_CREATED',
+              'operative_single_use_grant':'NOT_CREATED',
+              'K1-D':'NOT_RELEASED',
+              'K1-E':'NOT_ADMISSIBLE',
+          }
+          assert physical['solver_authorized'] is False
+          for key,value in expected.items(): assert physical[key]==value
+          assert current['physical_evidence_effect']=='NONE'
           PY
 
-      - name: Verify no operative execution artifact is introduced
+      - name: Enforce nonoperative change boundary
         run: |
           test ! -e tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c12_target_path_release_v0.1.py
           test ! -e registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C12SingleUseGrantContract_v0.1.json
-          test ! -e registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
-          test ! -e registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CExecutionAuthorization_v0.2.json
           changed="$(git diff --name-only "$RECONCILIATION_BASE"...HEAD)"
           ! grep -Eiq '(SingleUseGrant|AuthorizationDecision|TargetSolve|PhysicalExecutionWorker|BackendImport)' <<<"$changed"
           grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' project-manifest.json
