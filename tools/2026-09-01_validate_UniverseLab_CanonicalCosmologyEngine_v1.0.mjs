@@ -12,7 +12,7 @@ function check(name,fn){
 function close(a,b,rtol=1e-10,atol=1e-12){assert.ok(Number.isFinite(a)&&Number.isFinite(b));assert.ok(Math.abs(a-b)<=atol+rtol*Math.max(Math.abs(a),Math.abs(b)),`${a} != ${b}`);}
 const ref={H0:67.4,Om:.315,Ode:.684908,Or:9.2e-5,w:-1,sigma8:.811};
 
-check('engine_api_and_revision',()=>{assert.equal(C.VERSION,'1.0.0');assert.equal(C.REVISION,'1.0.1');return{api_version:C.VERSION,implementation_revision:C.REVISION}});
+check('engine_api_and_revision',()=>{assert.equal(C.VERSION,'1.0.0');assert.equal(C.REVISION,'1.0.2');return{api_version:C.VERSION,implementation_revision:C.REVISION}});
 check('normalization_E0',()=>{close(C.E(0,ref,'lcdm'),1,1e-13);return{E0:C.E(0,ref,'lcdm')}});
 check('flat_distance_identity',()=>{const dc=C.radialComovingDistance(1,ref);const dm=C.transverseComovingDistance(1,ref);close(dm,dc,1e-13);return{dc,dm}});
 check('curvature_mapping_direction',()=>{
@@ -40,6 +40,20 @@ check('bridge_no_floor_and_domain_gate',()=>{
   assert.throws(()=>C.E(domain.z,bad,'bridge'),e=>e?.code==='INVALID_BRIDGE_DOMAIN');
   return domain;
 });
+check('bridge_scale_small_rchi_asymptotic_no_hidden_floor',()=>{
+  const samples=[1,.1,.02,.01,1e-3,1e-6].map(Rchi=>{
+    const scale=C.bridgeScale(C.normalizeParams({...ref,Rchi}));
+    const expected=Rchi/(Rchi+2.5);
+    close(scale,expected,1e-14,1e-16);
+    return{Rchi,scale,expected,ratio:scale/Rchi};
+  });
+  const at001=samples.find(row=>row.Rchi===.01).scale;
+  const oldFloor=1/(1+2.5/.02);
+  assert.ok(Math.abs(at001-oldFloor)>1e-3,'Rchi=.01 must not be clamped to .02');
+  const tiny=samples.at(-1);
+  close(tiny.ratio,1/2.5,1e-6,1e-12);
+  return{formula:'a_c=Rchi/(Rchi+2.5)',samples,old_hidden_floor_value:oldFloor};
+});
 check('bridge_product_degeneracy',()=>{
   const p1={...ref,betaTau:.05,IB:.4,Rchi:1};
   const p2={...ref,betaTau:.1,IB:.2,Rchi:1};
@@ -48,7 +62,7 @@ check('bridge_product_degeneracy',()=>{
 });
 check('lcdm_growth_reference',()=>{
   const s=C.solveGrowth(ref,'lcdm',{steps:4000});
-  assert.equal(s.revision,'1.0.1');
+  assert.equal(s.revision,'1.0.2');
   assert.equal(s.rows.at(-1).x,0);assert.equal(s.rows.at(-1).a,1);
   const expected=new Map([[.5,.7689433284],[1,.6068047406],[2,.4172414795],[3,.3155380188]]);
   const rows=[];
@@ -60,7 +74,7 @@ check('growth_endpoint_nondefault_initial_epoch',()=>{
   const s=C.solveGrowth(p,'lcdm',{steps:4000});
   const endpoint=s.rows.at(-1);
   assert.equal(endpoint.x,0);assert.equal(endpoint.a,1);
-  assert.equal(s.revision,'1.0.1');
+  assert.equal(s.revision,'1.0.2');
   const g=C.growthAtZ(1,s);
   close(g.D,.6118580969985543,5e-9);
   assert.ok(Number.isFinite(g.f)&&Number.isFinite(g.fsigma8));
