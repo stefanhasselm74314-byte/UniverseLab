@@ -72,14 +72,16 @@ jobs:
         env:
           UNIVERSELAB_BASE_URL: 'http://127.0.0.1:8000/'
         run: node tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs
-      - name: Enforce scientific and physical firewalls
+      - name: Enforce scientific, public-semantic and physical firewalls
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
           p=Path('registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json')
           d=json.loads(p.read_text())
-          assert d['version']=='1.0.3'
+          assert d['version']=='1.0.4'
+          assert d['status']=='ACTIVE_MERGED_QA_RECONCILED'
+          assert d['merged_pull_request']==201
           a=d['architecture']
           assert a['dynamical_coupling_between_automaton_and_cosmology'] is False
           assert a['cosmology_mutates_simulation_grid_size'] is False
@@ -94,11 +96,19 @@ jobs:
           assert d['growth_contract']['approximation_role']=='DISPLAY_ONLY_DIAGNOSTIC_NOT_DYNAMICS'
           assert d['growth_contract']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
           assert d['persistence']['legacy_settings_migration']=='SUPPORTED_EXPLICIT_LEGACY_SETTINGS_TO_INPUTS'
+          assert d['public_semantics']['former_ambiguous_label_removed'] is True
+          assert d['public_semantics']['page_claims_cellular_automaton_is_physical_structure_formation'] is False
+          assert d['accessibility']['mobile_zoom_allowed'] is True
+          assert d['accessibility']['viewport_forbids_user_scaling'] is False
           assert d['K1-D']=='NOT_RELEASED'
           assert d['K1-E']=='NOT_ADMISSIBLE'
           assert d['physical_gate_effect']=='NONE'
           assert d['physical_evidence_effect']=='NONE'
-          print('Emergence scientific and physical firewalls: PASS')
+          html=Path('emergence.html').read_text()
+          assert 'user-scalable=no' not in html
+          assert 'ΛCDM-Anzeigezeit (Referenz)' in html
+          assert 'Physikalisch: ΛCDM' not in html
+          print('Emergence scientific, public-semantic and physical firewalls: PASS')
           PY
       - name: Upload Emergence audit report
         if: always()
