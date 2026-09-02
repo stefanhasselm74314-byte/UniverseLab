@@ -11,7 +11,8 @@ permissions:
 
 jobs:
   platform-governance:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,15 +20,35 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
-      - name: Validate machine-readable platform state
+      - name: Resolve and validate the manifest-declared platform state
         run: |
-          python -m json.tool schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json >/dev/null
-          python -m json.tool registry/2026-09-01_UniverseLab_SiteState_v1.1.json >/dev/null
-          python -m json.tool registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json >/dev/null
-          python -m json.tool project-manifest.json >/dev/null
-          python -m json.tool registry/2026-08-16_UniverseLab_PlatformRolloutPlan_v1.0.json >/dev/null
+          python - <<'PY'
+          import json
+          from pathlib import Path, PurePosixPath
+
+          root=Path('.')
+          manifest=json.loads((root/'project-manifest.json').read_text())
+          resolved={}
+          for field in ('canonical_state','site_state','session_checkpoint'):
+              value=manifest[field]
+              path=PurePosixPath(value)
+              assert not path.is_absolute() and '..' not in path.parts, (field,value)
+              target=root/path
+              assert target.is_file(), (field,value)
+              resolved[field]=json.loads(target.read_text())
+          alias=root/'registry/session-checkpoint-latest.json'
+          assert alias.is_file()
+          latest=json.loads(alias.read_text())
+          assert latest['canonical_state']==manifest['canonical_state']
+          assert latest['site_state']==manifest['site_state']
+          assert latest['canonical_snapshot']==manifest['session_checkpoint']
+          assert alias.read_bytes()==(root/manifest['session_checkpoint']).read_bytes()
+          json.loads((root/'schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json').read_text())
+          json.loads((root/'registry/2026-08-16_UniverseLab_PlatformRolloutPlan_v1.0.json').read_text())
+          print('Manifest-declared platform state: PASS')
+          PY
 
       - name: Enforce physical governance invariants
         run: |
@@ -35,46 +56,80 @@ jobs:
           import json
           from pathlib import Path
 
-          state = json.loads(Path('registry/2026-09-01_UniverseLab_SiteState_v1.1.json').read_text())
-          assert state['schema'] == 'universelab.site-state.v1'
-          assert state['version'] == '1.1.0'
-          assert state['snapshot_date'] == '2026-09-01'
-          assert state['basis_main_commit'] == '46579b58b8ca2ae3fb4ba7726446c5871d84da79'
-          assert state['physical_gate_effect'] == 'NONE'
-          gov = state['governance']
-          assert gov['K1-D'] == 'NOT_RELEASED'
-          assert gov['K1-E'] == 'NOT_ADMISSIBLE'
-          assert gov['physical_evidence_effect'] == 'NONE'
-          assert gov['status_axes_rule'] == 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT'
-          assert gov['open_pull_requests_have_canonical_effect'] is False
+          manifest=json.loads(Path('project-manifest.json').read_text())
+          state=json.loads(Path(manifest['site_state']).read_text())
+          current=json.loads(Path(manifest['canonical_state']).read_text())
+          checkpoint=json.loads(Path(manifest['session_checkpoint']).read_text())
 
-          modules = {m['module_id']: m for m in state['modules']}
-          u = modules['ULSH-01']
-          assert u['technical']['background_execution'] == 'NOT_AUTHORIZED'
-          assert u['technical']['physical_response_rank'] == 'NOT_EXECUTED'
-          assert u['technical']['backend_import'] == 'NOT_EXECUTED'
-          assert u['governance']['solver_release'] == 'NOT_AUTHORIZED'
-          assert u['governance']['K1-D'] == 'NOT_RELEASED'
-          assert u['governance']['K1-E'] == 'NOT_ADMISSIBLE'
-          assert u['governance']['physical_evidence_effect'] == 'NONE'
-          assert u['scientific']['physical_background'] == 'NOT_ESTABLISHED'
-          assert u['release_gate']['status'] == 'NOT_SATISFIED'
-          work_packages = {wp['id']: wp['status'] for wp in u['work_packages']}
-          assert work_packages == {
-              'WP1': 'CLOSED_TARGET_FROZEN_NO_EXECUTION',
-              'WP2': 'READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED',
-              'WP3': 'NOT_STARTED',
-              'WP4': 'BLOCKED_NOT_AUTHORIZED',
+          assert state['schema']=='universelab.site-state.v1'
+          assert state['canonical_state']==manifest['canonical_state']
+          assert state['snapshot_date']==manifest['release_date']
+          assert state['basis_main_commit']==manifest['basis_main_commit']
+          assert state['basis_main_tree']==manifest['basis_main_tree']
+          assert state['physical_gate_effect']=='NONE'
+          gov=state['governance']
+          assert gov['K1-D']=='NOT_RELEASED'
+          assert gov['K1-E']=='NOT_ADMISSIBLE'
+          assert gov['physical_evidence_effect']=='NONE'
+          assert gov['status_axes_rule']=='TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT'
+          assert gov['open_pull_requests_have_canonical_effect'] is False
+          assert gov['trust_root_status']=='NOT_RATIFIED'
+          assert gov['runtime_issuance_bindings']=='BLOCKED'
+
+          modules={module['module_id']:module for module in state['modules']}
+          u=modules['ULSH-01']
+          assert u['technical']['background_execution']=='NOT_AUTHORIZED'
+          assert u['technical']['physical_response_rank']=='NOT_EXECUTED'
+          assert u['technical']['backend_import']=='NOT_EXECUTED'
+          assert u['technical']['ratified_human_trust_root']=='NOT_RATIFIED'
+          assert u['technical']['runtime_issuance_bindings']=='BLOCKED'
+          assert u['governance']['solver_release']=='NOT_AUTHORIZED'
+          assert u['governance']['K1-D']=='NOT_RELEASED'
+          assert u['governance']['K1-E']=='NOT_ADMISSIBLE'
+          assert u['governance']['physical_evidence_effect']=='NONE'
+          assert u['scientific']['physical_background']=='NOT_ESTABLISHED'
+          assert u['release_gate']['status']=='NOT_SATISFIED'
+          work_packages={item['id']:item['status'] for item in u['work_packages']}
+          assert work_packages=={
+              'WP1':'CLOSED_TARGET_FROZEN_NO_EXECUTION',
+              'WP2':'METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED',
+              'WP3':'NOT_STARTED',
+              'WP4':'BLOCKED_NOT_AUTHORIZED',
           }
 
-          fm0 = modules['HZT-M0-FM0']
-          assert fm0['technical']['blocking_gap_count'] == 10
-          assert fm0['technical']['partially_resolved_blocking_gap_count'] == 3
-          assert fm0['technical']['fully_unresolved_blocking_gap_count'] == 7
-          assert fm0['governance']['gate'] == 'FM-G0'
-          assert fm0['governance']['gate_status'] == 'OPEN'
-          assert fm0['governance']['physical_evidence_effect'] == 'NONE'
-          assert fm0['release_gate']['status'] == 'NOT_SATISFIED'
+          fm0=modules['HZT-M0-FM0']
+          assert fm0['technical']['blocking_gap_count']==10
+          assert fm0['technical']['partially_resolved_blocking_gap_count']==3
+          assert fm0['technical']['fully_unresolved_blocking_gap_count']==7
+          assert fm0['governance']['gate']=='FM-G0'
+          assert fm0['governance']['gate_status']=='OPEN'
+          assert fm0['governance']['physical_evidence_effect']=='NONE'
+          assert fm0['release_gate']['status']=='NOT_SATISFIED'
+
+          public=modules['PUBLIC-COSMOLOGY']
+          assert public['technical']['canonical_engine_api_version']=='1.0.0'
+          assert public['technical']['canonical_engine_implementation_revision']=='1.0.2'
+          assert public['technical']['remaining_independent_engines']==0
+          assert public['scientific']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
+          assert public['governance']['K1-D']=='NOT_RELEASED'
+          assert public['governance']['K1-E']=='NOT_ADMISSIBLE'
+          assert public['governance']['physical_evidence_effect']=='NONE'
+
+          physical=current['physical_governance']
+          assert physical['ratified_human_trust_root']=='NOT_RATIFIED'
+          assert physical['runtime_issuance_bindings']=='BLOCKED'
+          assert physical['operative_authorization_decision']=='NOT_CREATED'
+          assert physical['operative_single_use_grant']=='NOT_CREATED'
+          assert physical['backend_import']=='NOT_EXECUTED'
+          assert physical['solver_execution']=='NOT_EXECUTED'
+          assert physical['physical_background']=='NOT_ESTABLISHED'
+          assert physical['physical_response_rank']=='NOT_EXECUTED'
+          assert physical['K1-D']=='NOT_RELEASED'
+          assert physical['K1-E']=='NOT_ADMISSIBLE'
+          assert physical['physical_evidence_effect']=='NONE'
+
+          assert checkpoint['physical_gate_effect']=='NONE'
+          assert checkpoint['physical_evidence_effect']=='NONE'
           PY
 
       - name: Enforce manifest synchronization
@@ -83,75 +138,90 @@ jobs:
           import json
           from pathlib import Path
 
-          manifest = json.loads(Path('project-manifest.json').read_text())
-          pages = {p['id']: p for p in manifest['canonical_pages']}
-          assert pages['navigator']['path'] == 'navigator.html'
-          assert pages['navigator']['status'] == 'ACTIVE'
-          assert pages['navigator_legacy_redirect']['path'] == 'navigator-app.html'
-          assert pages['navigator_legacy_redirect']['status'] == 'LEGACY_REDIRECT'
-          assert pages['navigator_legacy_redirect']['redirect_target'] == './navigator.html'
-          assert pages['solver_hub']['path'] == 'solver-hub.html'
-          assert pages['solver_hub']['status'] == 'ACTIVE_DIAGNOSTIC'
-          assert pages['audit']['status'] == 'ARCHIVED_REFERENCE'
-          assert pages['research_status']['status'] == 'ACTIVE_CURRENT'
+          manifest=json.loads(Path('project-manifest.json').read_text())
+          pages={page['id']:page for page in manifest['canonical_pages']}
+          assert pages['navigator']['path']=='navigator.html'
+          assert pages['navigator']['status']=='ACTIVE'
+          assert pages['navigator_legacy_redirect']['path']=='navigator-app.html'
+          assert pages['navigator_legacy_redirect']['status']=='LEGACY_REDIRECT'
+          assert pages['navigator_legacy_redirect']['redirect_target']=='./navigator.html'
+          assert pages['solver_hub']['path']=='solver-hub.html'
+          assert pages['solver_hub']['status']=='ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY'
+          assert pages['audit']['status']=='ARCHIVED_REFERENCE'
+          assert pages['research_status']['status']=='ACTIVE_CURRENT_RECONCILED'
 
-          registries = manifest['central_registries']
-          assert registries['current_main_canonical_state'] == 'registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json'
-          assert registries['site_state'] == 'registry/2026-09-01_UniverseLab_SiteState_v1.1.json'
-          assert registries['site_state_schema'] == 'schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json'
-          assert registries['session_checkpoint'] == 'registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json'
-          assert registries['session_checkpoint_alias'] == 'registry/session-checkpoint-latest.json'
-          assert registries['platform_governance'] == 'governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md'
+          registries=manifest['central_registries']
+          assert registries['current_main_canonical_state']==manifest['canonical_state']
+          assert registries['site_state']==manifest['site_state']
+          assert registries['session_checkpoint']==manifest['session_checkpoint']
+          assert registries['session_checkpoint_alias']=='registry/session-checkpoint-latest.json'
+          assert registries['site_state_schema']=='schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json'
+          assert registries['platform_governance']=='governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md'
 
-          platform = manifest['platform_governance']
-          assert platform['version'] == '1.1.0'
-          assert platform['status'] == 'ACTIVE_GOVERNED_PLATFORM_V1_CURRENT_STATE_RECONCILED'
-          assert platform['navigator_authority'] == 'CANONICAL_DIRECT_DOCUMENT'
-          assert platform['site_state'] == registries['site_state']
-          assert platform['physical_gate_effect'] == 'NONE'
-          assert platform['status_axes_rule'] == 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT'
+          platform=manifest['platform_governance']
+          assert platform['status']=='ACTIVE_GOVERNED_PLATFORM_V1_CURRENT_STATE_RECONCILED'
+          assert platform['navigator_authority']=='CANONICAL_DIRECT_DOCUMENT'
+          assert platform['site_state']==manifest['site_state']
+          assert platform['physical_gate_effect']=='NONE'
+          assert platform['status_axes_rule']=='TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT'
 
-          assert manifest['canonical_state'] == registries['current_main_canonical_state']
-          assert manifest['site_state'] == registries['site_state']
-          assert manifest['session_checkpoint'] == registries['session_checkpoint']
-          assert manifest['physical_gate_effect'] == 'NONE'
+          numerical=manifest['public_numerical_platform']
+          assert numerical['api_version']=='1.0.0'
+          assert numerical['implementation_revision']=='1.0.2'
+          assert numerical['remaining_independent_engines']==0
+          assert numerical['bridge_growth']=='UNRELEASED_GROWTH_MAP'
+          assert numerical['bridge_lensing']=='UNRELEASED_LENSING_MAP'
+
+          gates=manifest['gates']
+          assert gates['FM-G0']=='OPEN'
+          assert gates['RATIFIED_HUMAN_TRUST_ROOT']=='NOT_RATIFIED'
+          assert gates['RUNTIME_ISSUANCE_BINDINGS']=='BLOCKED'
+          assert gates['AuthorizationDecision']=='NOT_CREATED'
+          assert gates['SingleUseGrant']=='NOT_CREATED'
+          assert gates['BACKEND_IMPORT']=='NOT_EXECUTED'
+          assert gates['SOLVER_EXECUTION']=='NOT_EXECUTED'
+          assert gates['K1-D']=='NOT_RELEASED'
+          assert gates['K1-E']=='NOT_ADMISSIBLE'
+          assert manifest['physical_gate_effect']=='NONE'
           PY
 
       - name: Enforce global shell rollout
         run: |
           python - <<'PY'
+          import json
           from pathlib import Path
 
-          css = '2026-08-16_UniverseLab_GlobalShell_v1.1.css'
-          js = '2026-08-16_UniverseLab_GlobalShell_v1.1.js'
-          pages = {
-              'navigator.html': ('UL-PAGE-NAVIGATOR', 'navigator'),
-              'hyperlab.html': ('UL-PAGE-HYPERLAB', 'hyperlab'),
-              'solver-hub.html': ('UL-PAGE-SOLVER-HUB', 'solver'),
-              'hyperzeit-material-v2.html': ('UL-PAGE-MATERIAL', 'material'),
-              'hyperzeit-methods.html': ('UL-PAGE-METHODS', 'methods'),
-              'universelab-audit-2026-07-31.html': ('UL-PAGE-AUDIT-20260731', 'audit'),
-              'source.html': ('UL-PAGE-SOURCE', 'source'),
+          css='2026-08-16_UniverseLab_GlobalShell_v1.1.css'
+          js='2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+          pages={
+              'navigator.html':('UL-PAGE-NAVIGATOR','navigator'),
+              'hyperlab.html':('UL-PAGE-HYPERLAB','hyperlab'),
+              'solver-hub.html':('UL-PAGE-SOLVER-HUB','solver'),
+              'hyperzeit-material-v2.html':('UL-PAGE-MATERIAL','material'),
+              'hyperzeit-methods.html':('UL-PAGE-METHODS','methods'),
+              'universelab-audit-2026-07-31.html':('UL-PAGE-AUDIT-20260731','audit'),
+              'source.html':('UL-PAGE-SOURCE','source'),
           }
-          for path, (page_id, domain) in pages.items():
-              text = Path(path).read_text()
-              assert text.count(css) == 1, path
-              assert text.count(js) == 1, path
-              assert f'data-ul-page-id="{page_id}"' in text, path
-              assert f'data-ul-domain="{domain}"' in text, path
+          for path,(page_id,domain) in pages.items():
+              text=Path(path).read_text()
+              assert text.count(css)==1,path
+              assert text.count(js)==1,path
+              assert f'data-ul-page-id="{page_id}"' in text,path
+              assert f'data-ul-domain="{domain}"' in text,path
 
-          app = Path('navigator-app.html').read_text()
+          app=Path('navigator-app.html').read_text()
           assert '<iframe' not in app.lower()
           assert 'navigator.html' in app
 
-          shell = Path('assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js').read_text()
+          manifest=json.loads(Path('project-manifest.json').read_text())
+          shell=Path('assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js').read_text()
           assert 'normalizeLegacyNav' in shell
           assert 'ARCHIVSTAND' in shell
           assert 'renderModuleState' in shell
           assert 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT' not in shell
-          assert 'registry/2026-09-01_UniverseLab_SiteState_v1.1.json' in shell
+          assert manifest['site_state'] in shell
           assert 'registry/2026-08-16_UniverseLab_SiteState_v1.0.json' not in shell
 
-          hub = Path('solver-hub.html').read_text()
+          hub=Path('solver-hub.html').read_text()
           assert 'data-ul-module-state="ULSH-01"' in hub
           PY
