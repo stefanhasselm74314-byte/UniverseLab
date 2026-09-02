@@ -78,12 +78,15 @@ jobs:
           import json
           from pathlib import Path
           d=json.loads(Path('registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json').read_text())
+          assert d['version']=='2.0.1'
           assert d['physical_gate_effect']=='NONE'
           assert d['physical_evidence_effect']=='NONE'
           assert d['observable_firewalls']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
           assert d['observable_firewalls']['bridge_lensing']=='UNRELEASED_LENSING_MAP'
-          assert d['background_contract']['invalid_policy']=='FAIL_CLOSED_NO_POSITIVE_FLOOR'
+          assert d['background_contract']['invalid_policy']=='FAIL_CLOSED_NO_POSITIVE_FLOOR_OR_HIDDEN_PARAMETER_FLOOR'
+          assert d['background_contract']['reference_density_slider_resolution']==0.000001
           assert d['models']['bridge_base_w']==-1
+          assert d['models']['bridge_scale_hidden_floor'] is False
           print('Compare SAFE evidence firewall: PASS')
           PY
       - name: Upload Compare SAFE audit report
