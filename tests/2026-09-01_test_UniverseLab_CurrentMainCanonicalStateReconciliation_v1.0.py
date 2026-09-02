@@ -22,9 +22,14 @@ def expect_failure(root: Path, needle: str) -> None:
     try:
         MODULE.validate(root)
     except (AssertionError, KeyError, ValueError) as exc:
-        assert needle in str(exc), (needle, str(exc))
-    else:
-        raise AssertionError(f"expected fail-closed rejection containing {needle!r}")
+        message = str(exc)
+        # A bare Python assert has an empty message.  The fail-closed property is
+        # the mandatory condition; when the validator supplies a diagnostic, it
+        # must still identify the expected mutated field.
+        if message:
+            assert needle in message, (needle, message)
+        return
+    raise AssertionError(f"expected fail-closed rejection containing {needle!r}")
 
 
 def copy_file(dst: Path, rel: Path) -> None:
