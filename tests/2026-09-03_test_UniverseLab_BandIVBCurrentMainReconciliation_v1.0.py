@@ -54,7 +54,7 @@ def add(name: str, fn: Callable[[], Any]) -> None:
     try:
         detail = fn()
         report["checks"].append({"name": name, "status": "PASS", "detail": detail or {}})
-    except Exception as exc:  # noqa: BLE001 - report every fail-closed witness
+    except Exception as exc:  # noqa: BLE001 - record every fail-closed witness
         report["status"] = "FAIL"
         report["checks"].append({"name": name, "status": "FAIL", "error": f"{type(exc).__name__}: {exc}"})
 
@@ -157,8 +157,6 @@ def check_state_successors() -> dict[str, Any]:
 
 
 def check_historical_snapshots() -> dict[str, Any]:
-    # Presence plus self-declared older version/date guards against accidental deletion
-    # or replacement by the latest-pointer update.
     old_current, old_site, old_checkpoint = map(load, ("old_current", "old_site", "old_checkpoint"))
     assert old_current["version"].startswith("1.0")
     assert old_site["version"].startswith("1.1")
@@ -172,14 +170,29 @@ def check_migration_contracts() -> dict[str, Any]:
     assert observatory["status"] == "ACTIVE_MERGED_QA_RECONCILED"
     assert compare["status"] == "ACTIVE_MERGED_QA_RECONCILED"
     assert emergence["status"] == "ACTIVE_MERGED_QA_RECONCILED"
-    assert observatory["reference_closure"]["Omega_DE"] == .684908
-    assert compare["reference_closure"]["Omega_DE"] == .684908
-    assert emergence["canonical_engine_revision"] == "1.0.2"
-    assert compare["growth_contract"]["bridge_growth"] == "UNRELEASED_GROWTH_MAP"
+
+    obs_ref = observatory["background_contract"]["reference_state"]
+    cmp_ref = compare["background_contract"]["reference_state"]
+    em_ref = emergence["background_contract"]["reference_parameters"]
+    for reference, dark_energy_key in ((obs_ref, "Omega_DE"), (cmp_ref, "Omega_DE"), (em_ref, "Omega_Lambda")):
+        assert reference["Omega_r"] == .000092
+        assert reference["Omega_m"] == .315
+        assert reference[dark_energy_key] == .684908
+        assert reference["Omega_k"] == 0.0
+
+    assert compare["models"]["bridge_scale_hidden_floor"] is False
+    assert compare["observable_firewalls"]["bridge_growth"] == "UNRELEASED_GROWTH_MAP"
+    assert emergence["growth_contract"]["bridge_growth"] == "UNRELEASED_GROWTH_MAP"
+    assert emergence["public_semantics"]["former_ambiguous_label_removed"] is True
+    assert emergence["accessibility"]["mobile_zoom_allowed"] is True
     for value in (observatory, compare, emergence):
         assert value["physical_gate_effect"] == "NONE"
         assert value["physical_evidence_effect"] == "NONE"
-    return {"observatory": observatory["status"], "compare": compare["status"], "emergence": emergence["status"]}
+    return {
+        "observatory": observatory["status"],
+        "compare": compare["status"],
+        "emergence": emergence["status"],
+    }
 
 
 def check_public_semantics() -> dict[str, Any]:
@@ -187,16 +200,27 @@ def check_public_semantics() -> dict[str, Any]:
     assert "user-scalable=no" not in emergence
     assert "ΛCDM-Anzeigezeit (Referenz)" in emergence
     assert "Physikalisch: ΛCDM" not in emergence
-    for name in ("research_de", "research_en"):
-        source = text(name)
-        assert "2026-09-03" in source
-        assert "NOT_RATIFIED" in source
-        assert "NOT_RELEASED" in source
-        assert "NOT_ADMISSIBLE" in source
-        assert "UNRELEASED_GROWTH_MAP" in source
+
+    current_path = "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json"
+    de = text("research_de")
+    en = text("research_en")
+    for source in (de, en):
+        assert current_path in source
+        assert "NOT RELEASED" in source
+        assert "NOT ADMISSIBLE" in source
+        assert "NOT RATIFIED" in source
+        assert "3. September 2026" in source or "3 September 2026" in source
+    assert "Bridge-Growth und Bridge-Lensing bleiben ausdrücklich unveröffentlicht" in de
+    assert "Bridge growth and bridge lensing remain unreleased" in en
+
     shell = text("global_shell")
     assert "2026-09-03_UniverseLab_SiteState_v1.2.json" in shell
-    return {"mobile_zoom": "RESTORED", "emergence_label": "REFERENCE", "status_languages": ["de", "en"]}
+    return {
+        "mobile_zoom": "RESTORED",
+        "emergence_label": "REFERENCE",
+        "status_languages": ["de", "en"],
+        "machine_state_source": current_path,
+    }
 
 
 def check_sitemap_shape() -> dict[str, Any]:
@@ -221,12 +245,23 @@ def check_firewalls() -> dict[str, Any]:
         assert gates.get("solver_execution", gates.get("SOLVER_EXECUTION")) == "NOT_EXECUTED"
         assert gates["K1-D"] == "NOT_RELEASED"
         assert gates["K1-E"] == "NOT_ADMISSIBLE"
+
+    assert site["physical_gate_effect"] == "NONE"
+    assert site["governance"]["physical_evidence_effect"] == "NONE"
+    assert site["governance"]["trust_root_status"] == "NOT_RATIFIED"
+    assert site["governance"]["runtime_issuance_bindings"] == "BLOCKED"
+    assert site["governance"]["K1-D"] == "NOT_RELEASED"
+    assert site["governance"]["K1-E"] == "NOT_ADMISSIBLE"
     assert contract["parked_external_human_action"]["affects_band_ivb_completion"] is False
     assert contract["physical_gate_effect"] == "NONE"
     assert contract["physical_evidence_effect"] == "NONE"
     assert current["physical_evidence_effect"] == "NONE"
-    assert site["physical_evidence_effect"] == "NONE"
-    return {"checked_gate_sources": len(sources), "physical_gate_effect": "NONE", "physical_evidence_effect": "NONE"}
+    return {
+        "checked_full_gate_sources": len(sources),
+        "site_governance_checked": True,
+        "physical_gate_effect": "NONE",
+        "physical_evidence_effect": "NONE",
+    }
 
 
 add("required_paths_exist", check_paths)
