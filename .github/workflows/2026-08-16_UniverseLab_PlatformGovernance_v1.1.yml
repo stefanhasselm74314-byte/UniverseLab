@@ -159,7 +159,8 @@ jobs:
           assert registries['platform_governance']=='governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md'
 
           platform=manifest['platform_governance']
-          assert platform['status']=='ACTIVE_GOVERNED_PLATFORM_V1_CURRENT_STATE_RECONCILED'
+          assert platform['version']=='1.2.0'
+          assert platform['status']=='ACTIVE_GOVERNED_PLATFORM_CURRENT_STATE_RECONCILED_2026_09_03'
           assert platform['navigator_authority']=='CANONICAL_DIRECT_DOCUMENT'
           assert platform['site_state']==manifest['site_state']
           assert platform['physical_gate_effect']=='NONE'
