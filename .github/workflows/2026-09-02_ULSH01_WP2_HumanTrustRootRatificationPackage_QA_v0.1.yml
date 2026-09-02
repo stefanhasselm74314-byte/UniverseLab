@@ -58,12 +58,12 @@ jobs:
 
       - name: Verify committed empty templates remain non-ratifying
         run: |
-          python tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py draft \
+          python tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py \
+            --output human-trust-root-preparation-report.json draft \
             --contract registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json \
             --candidate-template registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidateTemplate_v0.1.json \
             --proof-template registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RootKeyProofOfPossessionTemplate_v0.1.json \
-            --adoption-template registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ProjectOwnerAdoptionRecordTemplate_v0.1.json \
-            --output human-trust-root-preparation-report.json
+            --adoption-template registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ProjectOwnerAdoptionRecordTemplate_v0.1.json
 
       - name: Enforce no private-key ingestion or signing API
         shell: bash
