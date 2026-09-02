@@ -24,6 +24,7 @@
       "w": -1.0,
       "closure": "Omega_r + Omega_m + Omega_DE + Omega_k = 1"
     },
+    "reference_density_slider_resolution": 0.000001,
     "chart_domain": "0 <= z <= 5",
     "age_domain": "1e-8 <= a <= 1",
     "invalid_policy": "FAIL_CLOSED_NO_POSITIVE_FLOOR",
@@ -71,8 +72,10 @@
     "browser_audit": "tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs",
     "workflow": ".github/workflows/2026-09-01_UniverseLab_ObservatoryMigration_QA_v1.5.yml",
     "reset_reference_correction": "The previous browser assertion used Omega_DE=0.685=1-Omega_m and omitted Omega_r. The corrected exact flat reference uses Omega_DE=0.684908=1-Omega_m-Omega_r.",
+    "ui_quantization_correction": "The Omega_DE range step is 0.000001 so the browser can represent 0.684908 exactly instead of snapping the input to 0.685.",
     "required_checks": [
       "default_runtime_pass",
+      "exact_flat_reference_state_without_range_quantization",
       "open_curvature_uses_D_M",
       "closed_curvature_uses_D_M",
       "growth_uses_canonical_ODE",
