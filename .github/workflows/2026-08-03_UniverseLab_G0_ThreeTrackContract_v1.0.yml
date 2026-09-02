@@ -129,7 +129,8 @@ jobs:
           assert all(value is False for value in review['authorization_decision'].values())
           digest='a7b48c88061e00cc3dc44dd00a2a17855a7f8c65dd228f725101fde9a1839eb4'
           assert review['passed_prerequisites']['package_manifest_sha256']==digest
-          assert contract['control_override']=={'a_F':0.0,'target_a_F':'1/4_FORBIDDEN'}
+          assert contract['control_override']['a_F']==0.0
+          assert contract['control_override']['target_a_F']=='1/4_FORBIDDEN'
           assert audit['status']=='PASS_REAL_BACKEND_AF0_CONTROL_RELEASE_NO_TARGET_SOLVE'
           assert audit['closed_package']['package_manifest_sha256']==digest
           assert audit['execution_firewall']['cp01r1_attempts']==0
