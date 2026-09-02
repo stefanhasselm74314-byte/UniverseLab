@@ -1,0 +1,128 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-human-trust-root-ratification-package-contract.v0.1",
+  "contract_id": "ULSH01-WP2-HUMAN-TRUST-ROOT-RATIFICATION-PACKAGE-v0.1",
+  "date": "2026-09-02",
+  "classification": "NONOPERATIVE_HUMAN_TRUST_ROOT_RATIFICATION_PREPARATION_PACKAGE",
+  "status": "PREPARATION_ONLY_NOT_RATIFIED",
+  "basis_main_commit": "3286bdbf9c89e744d0a4f0117315acff9bd78795",
+  "depends_on": {
+    "authority_signature_provenance_contract": {
+      "path": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json",
+      "git_blob_sha": "7091dd8f7156367fe2a34ce152c8f90c5e38ccf7",
+      "status_required": "DRAFT_NOT_RATIFIED"
+    },
+    "empty_trust_root_candidate": {
+      "path": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityTrustRootCandidate_v0.1.json",
+      "git_blob_sha": "ed296b36596b98a10b44352d20c69afd29fe472f",
+      "status_required": "DRAFT_NO_RATIFIED_TRUST_ROOT"
+    }
+  },
+  "governed_scope": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+    "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "run_payload_sha256": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c"
+  },
+  "purpose": [
+    "prepare a candidate trust-root artifact from a human-controlled Ed25519 public key without ingesting private-key material",
+    "prepare exact canonical bytes for an offline root-key proof of possession",
+    "verify root-key proof of possession and byte/digest bindings",
+    "prepare a project-owner adoption record whose human attribution remains a manual review question",
+    "preserve all runtime, decision, grant, backend and solver firewalls"
+  ],
+  "non_goals": [
+    "generate or store a private key",
+    "sign any artifact",
+    "ratify a trust root",
+    "declare a human identity machine-verified",
+    "create an AuthorizationDecision",
+    "create a SingleUseGrant",
+    "bind a runtime execution environment",
+    "import a physical backend",
+    "execute CP01R4",
+    "promote K1-D or K1-E"
+  ],
+  "bootstrap_logic": {
+    "necessary_conditions": [
+      "candidate trust-root file with exact raw-file and canonical-JSON digests",
+      "root-key proof of possession over a domain-separated canonical message",
+      "explicit human project-owner adoption record binding the exact candidate and proof digests",
+      "manual attribution review of the adopting project identity",
+      "new versioned ratified trust-root artifact created in a later change",
+      "new verifier/review result for that later ratified artifact"
+    ],
+    "proof_of_possession_is_authority": false,
+    "repository_commit_is_human_identity_proof_by_itself": false,
+    "assistant_generated_record_is_human_ratification": false,
+    "green_ci_is_ratification": false,
+    "editing_committed_templates_in_place_is_ratification": false,
+    "required_final_transition": "A_NEW_VERSIONED_ARTIFACT_MAY_SET_RATIFIED_ACTIVE_ONLY_AFTER_EXPLICIT_HUMAN_ADOPTION_AND_MANUAL_ATTRIBUTION_REVIEW"
+  },
+  "least_privilege_policy": {
+    "root_key_default_role": "TRUST_ROOT_RATIFIER",
+    "operational_decision_and_grant_roles_are_not_defaulted": true,
+    "separate_operational_keys_recommended": true,
+    "single_human_project_allowed": true,
+    "single_human_project_requires_explicit_self_review_disclosure": true,
+    "two_person_review_recommended_when_available": true
+  },
+  "key_custody_policy": {
+    "private_key_may_be_committed": false,
+    "private_key_may_be_uploaded_to_ci": false,
+    "private_key_may_be_pasted_into_chat": false,
+    "private_key_may_be_exposed_to_assistant": false,
+    "private_key_may_be_passed_to_package_tools": false,
+    "package_tools_accept_public_key_only": true,
+    "offline_signing_required": true,
+    "revocation_and_backup_procedure_required": true
+  },
+  "artifacts": {
+    "candidate_template": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidateTemplate_v0.1.json",
+    "proof_template": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RootKeyProofOfPossessionTemplate_v0.1.json",
+    "adoption_template": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ProjectOwnerAdoptionRecordTemplate_v0.1.json",
+    "procedure": "governance/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationProcedure_v0.1.md",
+    "preparer": "tools/2026-09-02_prepare_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidate_v0.1.py",
+    "verifier": "tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py",
+    "tests": "tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py",
+    "workflow": ".github/workflows/2026-09-02_ULSH01_WP2_HumanTrustRootRatificationPackage_QA_v0.1.yml"
+  },
+  "verifier_statuses": {
+    "committed_empty_templates": "PASS_PREPARATION_ONLY_NO_RATIFICATION",
+    "cryptographically_bound_candidate": "PASS_CRYPTOGRAPHIC_BINDINGS_MANUAL_HUMAN_RATIFICATION_REQUIRED",
+    "ratified_active_status_accepted_by_this_verifier": false,
+    "fail_closed_exit_code": 2
+  },
+  "manual_human_boundary": {
+    "machine_can_verify": [
+      "canonical JSON and raw-file digests",
+      "public-key fingerprint",
+      "root-key proof-of-possession signature",
+      "authority/key/role/time/digest cross-bindings",
+      "firewall booleans",
+      "absence of ratified-active status in preparation artifacts"
+    ],
+    "machine_cannot_establish_from_repository_data_alone": [
+      "that the adopting identity is a human",
+      "that the adopting identity is the legitimate project owner",
+      "that private-key custody statements are factually true",
+      "that an out-of-band revocation channel is operational"
+    ],
+    "manual_review_required": true
+  },
+  "current_gate_state": {
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "authority_signature_provenance": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
+    "runtime_issuance_bindings": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
