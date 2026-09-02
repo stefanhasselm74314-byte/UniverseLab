@@ -71,6 +71,8 @@ def main() -> None:
     assert 'data-ul-split-key="compare-safe"' in html
     assert '<canvas id="chart"></canvas>' in html
     assert 'id="w"' in html and 'disabled' in html
+    assert 'id="Ol" type="range" min="0" max="1.3" step="0.000001" value="0.684908"' in html
+    assert 'id="Ol" type="range" min="0" max="1.3" step="0.001" value="0.684908"' not in html
     for element_id in ('H0','Om','Ol','w','s8','beta','ib','rchi','z','ageL','ageB','dev1','S8','dc','dl','da','mu','chart','formula','reset','csv'):
         assert f'id="{element_id}"' in html, element_id
     for forbidden in ('function eL(', 'function eW(', 'function eB(', 'function simp(', 'function dc(', 'Math.sqrt(Math.max('):
@@ -98,6 +100,7 @@ def main() -> None:
     assert contract['models']['bridge_scale']=='a_c=Rchi/(Rchi+2.5) for Rchi>0'
     assert contract['models']['bridge_scale_hidden_floor'] is False
     reference=contract['background_contract']['reference_state']
+    assert contract['background_contract']['reference_density_slider_resolution']==.000001
     assert abs(reference['Omega_r']+reference['Omega_m']+reference['Omega_DE']+reference['Omega_k']-1)<1e-15
     assert contract['distance_contract']['chain']=='D_C_TO_D_M_TO_D_L_AND_D_A'
     assert contract['observable_firewalls']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
