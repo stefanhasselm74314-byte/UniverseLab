@@ -1,9 +1,12 @@
 {
   "schema": "universelab.observatory-migration-contract.v1",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "date": "2026-09-01",
+  "last_reconciled_date": "2026-09-03",
   "basis_main_commit": "6d603a47c90ceed61f3637d2cd0272ca85b54462",
-  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "current_reconciliation_basis_main_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
+  "merged_pull_request": 198,
+  "status": "ACTIVE_MERGED_QA_RECONCILED",
   "classification": "PUBLIC_DIAGNOSTIC_PAGE_NUMERICAL_ENGINE_MIGRATION_NO_PHYSICAL_EVIDENCE_EFFECT",
   "page": "observatory.html",
   "english_entry": "observatory-en.html",
@@ -12,6 +15,15 @@
   "background_contract": {
     "model": "constant_w_with_lcdm_limit_at_w_minus_1",
     "curvature": "Omega_k = 1 - Omega_r - Omega_m - Omega_DE",
+    "reference_state": {
+      "H0": 67.4,
+      "Omega_r": 0.000092,
+      "Omega_m": 0.315,
+      "Omega_DE": 0.684908,
+      "Omega_k": 0.0,
+      "w": -1.0,
+      "closure": "Omega_r + Omega_m + Omega_DE + Omega_k = 1"
+    },
     "chart_domain": "0 <= z <= 5",
     "age_domain": "1e-8 <= a <= 1",
     "invalid_policy": "FAIL_CLOSED_NO_POSITIVE_FLOOR",
@@ -34,7 +46,17 @@
     "bridge_growth": "UNRELEASED_GROWTH_MAP"
   },
   "preserved_runtime_ids": [
-    "H0", "Om", "Ol", "w", "s8", "age", "q0", "s80", "curv", "chart", "legend"
+    "H0",
+    "Om",
+    "Ol",
+    "w",
+    "s8",
+    "age",
+    "q0",
+    "s80",
+    "curv",
+    "chart",
+    "legend"
   ],
   "didactic_data_policy": {
     "embedded_points": "DIDACTIC_EXAMPLE_VALUES",
@@ -48,13 +70,14 @@
     "static_test": "tests/2026-09-01_test_UniverseLab_ObservatoryMigration_v1.5.py",
     "browser_audit": "tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs",
     "workflow": ".github/workflows/2026-09-01_UniverseLab_ObservatoryMigration_QA_v1.5.yml",
+    "reset_reference_correction": "The previous browser assertion used Omega_DE=0.685=1-Omega_m and omitted Omega_r. The corrected exact flat reference uses Omega_DE=0.684908=1-Omega_m-Omega_r.",
     "required_checks": [
       "default_runtime_pass",
       "open_curvature_uses_D_M",
       "closed_curvature_uses_D_M",
       "growth_uses_canonical_ODE",
       "invalid_domain_fails_closed",
-      "reset_recovers_valid_state",
+      "reset_recovers_valid_state_with_radiation_inclusive_closure",
       "no_browser_or_http_errors"
     ]
   },
