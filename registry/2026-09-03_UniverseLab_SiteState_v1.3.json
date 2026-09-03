@@ -61,6 +61,7 @@
         "backend_import": "NOT_EXECUTED"
       },
       "governance": {
+        "priority": "P0_PHYSICAL_GATE_REMAINS_CLOSED",
         "solver_release": "NOT_AUTHORIZED",
         "K1-D": "NOT_RELEASED",
         "K1-E": "NOT_ADMISSIBLE",
@@ -72,16 +73,35 @@
         "continuum_BVP_invertibility": "OPEN",
         "Hamiltonian_positivity": "OPEN",
         "ghost_freedom": "OPEN"
+      },
+      "work_packages": [
+        {"id":"WP1","status":"CLOSED_TARGET_FROZEN_NO_EXECUTION"},
+        {"id":"WP2","status":"METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED"},
+        {"id":"WP3","status":"NOT_STARTED"},
+        {"id":"WP4","status":"BLOCKED_NOT_AUTHORIZED"}
+      ],
+      "release_gate": {
+        "id": "ULSH01-WP2-AUTHORITY-AND-RUNTIME",
+        "status": "NOT_SATISFIED",
+        "blockers": [
+          "RATIFIED_HUMAN_TRUST_ROOT_ABSENT",
+          "RUNTIME_ISSUANCE_BINDINGS_BLOCKED",
+          "AUTHORIZATION_DECISION_NOT_CREATED",
+          "SINGLE_USE_GRANT_NOT_CREATED"
+        ]
       }
     },
     {
       "module_id": "HZT-M0-FM0",
       "technical": {
+        "inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+        "gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
         "blocking_gap_count": 10,
         "partially_resolved_blocking_gap_count": 3,
         "fully_unresolved_blocking_gap_count": 7
       },
       "governance": {
+        "priority": "P0_FORWARD_MAP_RECOVERY",
         "gate": "FM-G0",
         "gate_status": "OPEN",
         "K1-D": "NOT_RELEASED",
@@ -89,11 +109,39 @@
         "physical_evidence_effect": "NONE"
       },
       "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
         "forward_map": "OPEN",
         "observable_blocks_released": false,
         "bridge_growth": "UNRELEASED_GROWTH_MAP",
         "bridge_lensing": "UNRELEASED_LENSING_MAP"
-      }
+      },
+      "release_gate": {"id":"FM-G0","status":"NOT_SATISFIED"}
+    },
+    {
+      "module_id": "PUBLIC-COSMOLOGY",
+      "technical": {
+        "canonical_engine_api_version": "1.0.0",
+        "canonical_engine_implementation_revision": "1.0.2",
+        "validation": "ACTIVE",
+        "observatory": "ACTIVE_MERGED_QA_RECONCILED",
+        "compare_safe": "ACTIVE_MERGED_QA_RECONCILED",
+        "emergence": "ACTIVE_MERGED_QA_RECONCILED",
+        "remaining_independent_engines": 0
+      },
+      "governance": {
+        "priority": "P1_PUBLIC_NUMERICAL_INTEGRITY",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "REFERENCE_FLRW_ONLY_NOT_HZT_IDENTIFICATION",
+        "bridge_background": "REDUCED_EFFECTIVE_DIAGNOSTIC_MODEL",
+        "bridge_growth": "UNRELEASED_GROWTH_MAP",
+        "likelihood_fit": "NOT_PRESENT",
+        "ghost_freedom": "NOT_IDENTIFIED"
+      },
+      "release_gate": {"id":"PUBLIC-NUMERICAL-QA","status":"MERGED_QA_RECONCILED"}
     },
     {
       "module_id": "PUBLIC-CLAIM-AUDIT",
