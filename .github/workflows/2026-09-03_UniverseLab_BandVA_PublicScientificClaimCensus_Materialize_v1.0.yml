@@ -24,17 +24,43 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
           persist-credentials: true
+
+      - name: Determine whether the newest commit changes census inputs
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed="$(git diff-tree --no-commit-id --name-only -r HEAD)"
+          echo 'Newest-commit paths:'
+          printf '%s\n' "$changed"
+          materialize=false
+          while IFS= read -r path; do
+            case "$path" in
+              *.html|README.md|project-manifest.json|sitemap.xml|tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py|.github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_Materialize_v1.0.yml)
+                materialize=true
+                break
+                ;;
+            esac
+          done <<< "$changed"
+          echo "materialize=$materialize" >> "$GITHUB_OUTPUT"
+          if [[ "$materialize" == false ]]; then
+            echo 'No public-corpus/scanner/materializer change in newest commit; generated census remains valid and no bot commit will be created.'
+          fi
+
       - uses: actions/setup-python@v5
+        if: steps.scope.outputs.materialize == 'true'
         with:
           python-version: '3.12'
 
-      - name: Extract exact-head candidates
+      - name: Extract exact-input candidates
+        if: steps.scope.outputs.materialize == 'true'
         run: |
           python tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py \
             --root . \
             --output-dir claim-census-output
 
       - name: Build bounded review queue and canonical generated paths
+        if: steps.scope.outputs.materialize == 'true'
         run: |
           python - <<'PY'
           import json
@@ -53,7 +79,7 @@ jobs:
 
           candidates['schema']='universelab.public-scientific-claim-lexical-candidates.v0.1'
           candidates['generated_by']='tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
-          candidates['canonical_status']='GENERATED_EXACT_HEAD_REVIEW_INPUT_NOT_ADJUDICATED'
+          candidates['canonical_status']='GENERATED_SOURCE_INPUT_REVIEW_INPUT_NOT_ADJUDICATED'
           summary['schema']='universelab.public-scientific-claim-extraction-summary.v0.1'
           summary['generated_by']='tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
           out_candidates.write_text(json.dumps(candidates,ensure_ascii=False,sort_keys=True,indent=2)+'\n',encoding='utf-8')
@@ -66,7 +92,7 @@ jobs:
           lines=[
               '# UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1',
               '',
-              f"**Basis:** `{summary['basis_commit']}`  ",
+              f"**Extraktionsbasis:** `{summary['basis_commit']}`  ",
               f"**HTML-Dateien:** `{summary['tracked_html_files']}`  ",
               f"**Claim-Kandidaten:** `{summary['claim_candidates']}`  ",
               f"**HIGH/MEDIUM:** `{len(priority)}`  ",
@@ -95,7 +121,8 @@ jobs:
           out_queue.write_text('\n'.join(lines)+'\n',encoding='utf-8')
           PY
 
-      - name: Commit generated exact-head census if changed
+      - name: Commit generated source-input census if changed
+        if: steps.scope.outputs.materialize == 'true'
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
@@ -105,7 +132,7 @@ jobs:
             registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json \
             science/audit/2026-09-03_UniverseLab_PublicScientificClaimReviewQueue_v0.1.md
           if git diff --cached --quiet; then
-            echo 'Generated claim census already matches exact head.'
+            echo 'Generated claim census already matches the newest materialized source inputs.'
             exit 0
           fi
           git commit -m 'chore(audit): materialize Band V-A public claim candidates'
