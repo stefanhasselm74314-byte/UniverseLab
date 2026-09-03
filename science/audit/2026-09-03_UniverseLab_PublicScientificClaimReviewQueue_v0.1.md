@@ -1,6 +1,6 @@
 # UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1
 
-**Extraktionsbasis:** `58e2661289659573a31d315231c5392a2c17a366`  
+**Extraktionsbasis:** `657f8948b70d0dd2d25a124717d84e3ea3f86efb`  
 **HTML-Dateien:** `72`  
 **Claim-Kandidaten:** `989`  
 **HIGH/MEDIUM:** `42`  
