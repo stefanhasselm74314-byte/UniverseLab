@@ -1,9 +1,9 @@
 # UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1
 
-**Basis:** `4926c4208c53cd96f1a1e50adf8528a4104c95c5`  
+**Basis:** `a41b80384e429f90117ea4734e8b5cb25977ac59`  
 **HTML-Dateien:** `72`  
-**Claim-Kandidaten:** `987`  
-**HIGH/MEDIUM:** `89`  
+**Claim-Kandidaten:** `997`  
+**HIGH/MEDIUM:** `77`  
 **Status:** `GENERATED_NOT_ADJUDICATED`  
 **Physical gate effect:** `NONE`  
 **Physical evidence effect:** `NONE`
@@ -43,15 +43,6 @@
 
 ## `README.md`
 
-### UL-CLAIM-CANDIDATE-FED098B0339E3E7B · MEDIUM +6
-
-- Quelle: Zeile `86`, Tag `markdown-line`, Region `document`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `DERIVATION_IDENTIFICATION, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Insbesondere stellt die Anwendung keine bestätigte Ableitung einer 6D-Hyperzeit-Theorie dar.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ### UL-CLAIM-CANDIDATE-F86E9EBB58CF2D58 · MEDIUM +5
 
 - Quelle: Zeile `98`, Tag `markdown-line`, Region `document`
@@ -59,15 +50,6 @@
 - Kategorien: `PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
 - Text: Relevante Suchbegriffe: UniverseLab, Stefan Hasselmeyer, Kosmologie, Astrophysik, ΛCDM, Friedmann-Gleichung, kosmische Expansion, Strukturbildung, numerische Simulation, Hyperzeit, 6D-Modell.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-C3CE7ABAC3F238D4 · MEDIUM +4
-
-- Quelle: Zeile `73`, Tag `markdown-line`, Region `document`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Nicht enthalten sind Strahlungsperturbationen, Neutrinofreiströmung, baryonische Akustik, nichtlineares Wachstum, baryonische Rückkopplung, effektive modifizierte Gravitation oder eine hergeleitete 6D-Hyperzeit-Kopplung.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `about.html`
@@ -88,50 +70,6 @@
 - Kategorien: `EVIDENCE_CONFIRMATION`
 - Limiter vorhanden: `false`
 - Text: Etabliert Standardmodell oder empirisch gut bestätigte Physik.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-## `baryogenesis-operator.html`
-
-### UL-CLAIM-CANDIDATE-6095A3C91EBAE349 · HIGH +14
-
-- Quelle: Zeile `1`, Tag `div`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Sie beweist weder, dass Θ existiert, noch dass eine konkrete 6D-Mode den gewählten Quellenvektor erzeugt.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-## `baryogenesis-v09.html`
-
-### UL-CLAIM-CANDIDATE-EF17C3A2B9619084 · HIGH +11
-
-- Quelle: Zeile `1`, Tag `div`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Es beweist nicht, dass alle KK-, Metrik-, Flux- oder Radionbeiträge verschwinden.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-## `baryogenesis-v10.html`
-
-### UL-CLAIM-CANDIDATE-0BEBDCE5209EF240 · HIGH +14
-
-- Quelle: Zeile `1`, Tag `div`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Status-Firewall: Ein bestandener 4×4-Benchmark beweist keine Ghostfreiheit des vollständigen 6D-Störungssystems.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-## `baryogenesis-v11.html`
-
-### UL-CLAIM-CANDIDATE-A8A663357D53D0A6 · MEDIUM +6
-
-- Quelle: Zeile `1`, Tag `h3`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `DERIVATION_IDENTIFICATION, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Noch keine 6D-Ableitung
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `baryogenesis-v12.html`
@@ -204,24 +142,6 @@
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `guide.html`
-
-### UL-CLAIM-CANDIDATE-82CEC2C09AA87C71 · HIGH +16
-
-- Quelle: Zeile `180`, Tag `div`, Region `main`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Beweist nicht: Hyperzeit, 6D-Dynamik, Ghostfreiheit, reale Strukturbildung, einen Datenfit oder Überlegenheit gegenüber ΛCDM.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-B10E5AA6C9382D92 · HIGH +11
-
-- Quelle: Zeile `33`, Tag `div`, Region `main`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Grenzen Was die App beweist, nicht beweist und nur illustriert.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-7700AB943693A450 · MEDIUM +6
 
@@ -299,15 +219,6 @@
 
 ## `hyperlab.html`
 
-### UL-CLAIM-CANDIDATE-3B2C31F7DD9F9246 · MEDIUM +5
-
-- Quelle: Zeile `39`, Tag `p`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `OBSERVATIONAL_DATA, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Hyperzeit ist derzeit ein strukturiertes 6D-Forschungsprogramm mit einem kontrollierten Kern, dokumentierten No-Go-Ergebnissen, offenen physischen Kandidaten und noch nicht freigegebenen Fundamentalzweigen — keine geschlossene, durch Daten bestätigte Weltformel.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ### UL-CLAIM-CANDIDATE-B1ACC2D314184022 · MEDIUM +5
 
 - Quelle: Zeile `43`, Tag `p`, Region `section`
@@ -347,15 +258,6 @@
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `hyperzeit-material-v2.html`
-
-### UL-CLAIM-CANDIDATE-FC38C7C8147856AE · HIGH +11
-
-- Quelle: Zeile `44`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Die Minisuperspace-Nebenbedingung beweist nicht, dass alle inhomogenen skalaren, vektoriellen und tensoriellen Moden ghostfrei sind.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-ABE36E9E61CE8C2E · MEDIUM +6
 
@@ -434,15 +336,6 @@
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `hyperzeit-methods.html`
-
-### UL-CLAIM-CANDIDATE-51DAE05790CCF666 · HIGH +11
-
-- Quelle: Zeile `29`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Dass Lorentzsymmetrie in einem anderen System emergiert, beweist jedoch nicht, dass die 4D-Lorentzstruktur aus HPVS hervorgeht.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-C62309DB4031D9F3 · HIGH +11
 
@@ -547,15 +440,6 @@
 - Kategorien: `OBSERVATIONAL_DATA, PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
 - Text: „DESI/KiDS bestätigen Hyperzeit oder liefern bessere Fits als ΛCDM.“
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-A49B4E2174DF0F98 · MEDIUM +7
-
-- Quelle: Zeile `47`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `DERIVATION_IDENTIFICATION, PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Lensing- und GW-Arbeitsansätze ohne geschlossene aktuelle 6D-Ableitung.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-5FF62CD3FB3CBD13 · MEDIUM +6

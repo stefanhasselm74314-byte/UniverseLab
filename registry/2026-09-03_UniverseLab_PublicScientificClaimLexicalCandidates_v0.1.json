@@ -1,70 +1,6 @@
 {
-  "basis_commit": "4926c4208c53cd96f1a1e50adf8528a4104c95c5",
+  "basis_commit": "a41b80384e429f90117ea4734e8b5cb25977ac59",
   "candidates": [
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-82CEC2C09AA87C71",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "EVIDENCE_CONFIRMATION",
-        "PHYSICAL_COSMOLOGY",
-        "THEORY_6D_PARENT"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "guide.html",
-      "preliminary_risk_class": "HIGH",
-      "preliminary_risk_score": 16,
-      "region": "main",
-      "source_line": 180,
-      "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
-      "tag": "div",
-      "text": "Beweist nicht: Hyperzeit, 6D-Dynamik, Ghostfreiheit, reale Strukturbildung, einen Datenfit oder Überlegenheit gegenüber ΛCDM."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-6095A3C91EBAE349",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "EVIDENCE_CONFIRMATION",
-        "THEORY_6D_PARENT"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
-      "path": "baryogenesis-operator.html",
-      "preliminary_risk_class": "HIGH",
-      "preliminary_risk_score": 14,
-      "region": "section",
-      "source_line": 1,
-      "source_sha256": "5c24342e341ce572b0bffe6a0d072b924050537f348e21c6098b757bebc6cd12",
-      "tag": "div",
-      "text": "Sie beweist weder, dass Θ existiert, noch dass eine konkrete 6D-Mode den gewählten Quellenvektor erzeugt."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-0BEBDCE5209EF240",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "EVIDENCE_CONFIRMATION",
-        "THEORY_6D_PARENT"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
-      "path": "baryogenesis-v10.html",
-      "preliminary_risk_class": "HIGH",
-      "preliminary_risk_score": 14,
-      "region": "section",
-      "source_line": 1,
-      "source_sha256": "3c58b3366e4b9e5bd45667bf9969e14a5d9e81200fb2fd87250d0f994896d270",
-      "tag": "div",
-      "text": "Status-Firewall: Ein bestandener 4×4-Benchmark beweist keine Ghostfreiheit des vollständigen 6D-Störungssystems."
-    },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-B25E81FF693E5F0F",
@@ -108,86 +44,6 @@
       "source_sha256": "44020e92a52044316c78e3faec12b4eab854a5a5072ec3fcd45154acda3b23e8",
       "tag": "p",
       "text": "Ghost freedom, derivation of fitted parameters from the six-dimensional parent action, uniqueness of a dark-sector interpretation, or observational confirmation of HZT."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-EF17C3A2B9619084",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "EVIDENCE_CONFIRMATION"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
-      "path": "baryogenesis-v09.html",
-      "preliminary_risk_class": "HIGH",
-      "preliminary_risk_score": 11,
-      "region": "section",
-      "source_line": 1,
-      "source_sha256": "8aac5887afe89d82fe6dbae175eb28fc3859830425619b92bbded9f58df20e4c",
-      "tag": "div",
-      "text": "Es beweist nicht, dass alle KK-, Metrik-, Flux- oder Radionbeiträge verschwinden."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-B10E5AA6C9382D92",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "EVIDENCE_CONFIRMATION"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "guide.html",
-      "preliminary_risk_class": "HIGH",
-      "preliminary_risk_score": 11,
-      "region": "main",
-      "source_line": 33,
-      "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
-      "tag": "div",
-      "text": "Grenzen Was die App beweist, nicht beweist und nur illustriert."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-FC38C7C8147856AE",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "EVIDENCE_CONFIRMATION"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "hyperzeit-material-v2.html",
-      "preliminary_risk_class": "HIGH",
-      "preliminary_risk_score": 11,
-      "region": "article",
-      "source_line": 44,
-      "source_sha256": "71347477124edc9baac003eb1882050ac3bde335b7ef6b853b3b2037bacb1823",
-      "tag": "p",
-      "text": "Die Minisuperspace-Nebenbedingung beweist nicht, dass alle inhomogenen skalaren, vektoriellen und tensoriellen Moden ghostfrei sind."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-51DAE05790CCF666",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "EVIDENCE_CONFIRMATION"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "hyperzeit-methods.html",
-      "preliminary_risk_class": "HIGH",
-      "preliminary_risk_score": 11,
-      "region": "article",
-      "source_line": 29,
-      "source_sha256": "13f4afd47ea7a424f5b0d1a83ff9d7fe1a1636b27cfe3e221b1e8a0fd6124200",
-      "tag": "p",
-      "text": "Dass Lorentzsymmetrie in einem anderen System emergiert, beweist jedoch nicht, dass die 4D-Lorentzstruktur aus HPVS hervorgeht."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -297,49 +153,6 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-A49B4E2174DF0F98",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "DERIVATION_IDENTIFICATION",
-        "PHYSICAL_COSMOLOGY",
-        "THEORY_6D_PARENT"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "TRACKED_ARCHIVE_OR_UTILITY_PAGE",
-      "path": "legacy.html",
-      "preliminary_risk_class": "MEDIUM",
-      "preliminary_risk_score": 7,
-      "region": "article",
-      "source_line": 47,
-      "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
-      "tag": "p",
-      "text": "Lensing- und GW-Arbeitsansätze ohne geschlossene aktuelle 6D-Ableitung."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-FED098B0339E3E7B",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "DERIVATION_IDENTIFICATION",
-        "THEORY_6D_PARENT"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "PUBLIC_REPOSITORY_README",
-      "path": "README.md",
-      "preliminary_risk_class": "MEDIUM",
-      "preliminary_risk_score": 6,
-      "region": "document",
-      "source_line": 86,
-      "source_sha256": "5bf6af834c371715c91cc903296d370223364014df6eedf4a43345a215e8ce5e",
-      "tag": "markdown-line",
-      "text": "Insbesondere stellt die Anwendung keine bestätigte Ableitung einer 6D-Hyperzeit-Theorie dar."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-4D218C42EDAC69AD",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
@@ -358,27 +171,6 @@
       "source_sha256": "09d6b1aa2ed017821a959a01c83994952aa18755990cb6962647bf82ef83d6e4",
       "tag": "div",
       "text": "Heute Cosmology Observatory, Cosmic Journey, Validation, Modellvergleich, Emergenz-Labor und HyperLab."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-A8A663357D53D0A6",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "DERIVATION_IDENTIFICATION",
-        "THEORY_6D_PARENT"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
-      "path": "baryogenesis-v11.html",
-      "preliminary_risk_class": "MEDIUM",
-      "preliminary_risk_score": 6,
-      "region": "article",
-      "source_line": 1,
-      "source_sha256": "ddbc1bd2fd1402ad74e9d594b2ae547f63cd9fb4111e1307b4cc5adbed97b586",
-      "tag": "h3",
-      "text": "Noch keine 6D-Ableitung"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -676,27 +468,6 @@
       "source_sha256": "dec698afe549aed004182834af1ade418567c7769d51187fa452d3453f191218",
       "tag": "li",
       "text": "a regular cosmological origin;"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-3B2C31F7DD9F9246",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "OBSERVATIONAL_DATA",
-        "THEORY_6D_PARENT"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_DIAGNOSTIC",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "hyperlab.html",
-      "preliminary_risk_class": "MEDIUM",
-      "preliminary_risk_score": 5,
-      "region": "section",
-      "source_line": 39,
-      "source_sha256": "130fe0174579c39dec679fc0564315f5374f03f8d23cb056c57435f9877d6c72",
-      "tag": "p",
-      "text": "Hyperzeit ist derzeit ein strukturiertes 6D-Forschungsprogramm mit einem kontrollierten Kern, dokumentierten No-Go-Ergebnissen, offenen physischen Kandidaten und noch nicht freigegebenen Fundamentalzweigen — keine geschlossene, durch Daten bestätigte Weltformel."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -1037,27 +808,6 @@
       "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
       "tag": "td",
       "text": "Parent→Reduced-Brücke + NR-Grundgerüst"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-C3CE7ABAC3F238D4",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "PHYSICAL_COSMOLOGY",
-        "THEORY_6D_PARENT"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "PUBLIC_REPOSITORY_README",
-      "path": "README.md",
-      "preliminary_risk_class": "MEDIUM",
-      "preliminary_risk_score": 4,
-      "region": "document",
-      "source_line": 73,
-      "source_sha256": "5bf6af834c371715c91cc903296d370223364014df6eedf4a43345a215e8ce5e",
-      "tag": "markdown-line",
-      "text": "Nicht enthalten sind Strahlungsperturbationen, Neutrinofreiströmung, baryonische Akustik, nichtlineares Wachstum, baryonische Rückkopplung, effektive modifizierte Gravitation oder eine hergeleitete 6D-Hyperzeit-Kopplung."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -2351,26 +2101,6 @@
       "source_sha256": "56a9add9e94427c5e386e0d161e48b577e3cb389bfff433263d508b14e00bb82",
       "tag": "div",
       "text": "Hyperzeit / HPVS · COS-04.2B-1i · Dirac-Klassifikation"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-593CC9696B2C8108",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "DERIVATION_IDENTIFICATION"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
-      "path": "baryogenesis-v12.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 3,
-      "region": "section",
-      "source_line": 6,
-      "source_sha256": "56a9add9e94427c5e386e0d161e48b577e3cb389bfff433263d508b14e00bb82",
-      "tag": "div",
-      "text": "Es ersetzt weder die Herleitung aller primären/sekundären Zwänge noch die Feldtheorie-Rangprüfung an jedem Raumzeitpunkt."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -3710,26 +3440,6 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5736D3B37E498648",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "DERIVATION_IDENTIFICATION"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ARCHIVED_REFERENCE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "universelab-audit-2026-07-31.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 3,
-      "region": "article",
-      "source_line": 31,
-      "source_sha256": "287d0b6c9085eb23b13165c96404ac1746ecf35141396bd7dd14fba105f8e074",
-      "tag": "p",
-      "text": "Ein positives Signal identifiziert nicht automatisch den dominanten mikroskopischen Operator."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-AF64B816141A7CFB",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
@@ -4712,26 +4422,6 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-1C105CFC02198A61",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "PHYSICAL_COSMOLOGY"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_MERGED_QA_RECONCILED",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "emergence.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 2,
-      "region": "main",
-      "source_line": 144,
-      "source_sha256": "3ca21a0a723b2d650fde1ea585770f4113f3ddb66c25769d954bc483e551b252",
-      "tag": "p",
-      "text": "Zentrale Trennung: Der Zellautomat beeinflusst weder E(a), D(a), f(a) noch kosmologische Epochen."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-8B2FBE84151B9851",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
@@ -5311,26 +5001,6 @@
       "source_sha256": "71347477124edc9baac003eb1882050ac3bde335b7ef6b853b3b2037bacb1823",
       "tag": "div",
       "text": "Gesamtstatus: Die Seite verbessert Einordnung, Nachvollziehbarkeit und Falsifizierbarkeit."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5C1CC01DB8AB2769",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "OBSERVATIONAL_DATA"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "hyperzeit-material-v2.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 2,
-      "region": "section",
-      "source_line": 50,
-      "source_sha256": "71347477124edc9baac003eb1882050ac3bde335b7ef6b853b3b2037bacb1823",
-      "tag": "div",
-      "text": "Sie ändert keine Freigabeentscheidung: Literaturähnlichkeit, ein Potentialminimum oder eine stabile numerische Kurve ersetzen weder Parentwirkung noch Constraint-Schließung, physische Hilbertraumkonstruktion oder Forward-Likelihood."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -9182,26 +8852,6 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-81DF38836C6F929F",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "PHYSICAL_COSMOLOGY"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "guide.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "main",
-      "source_line": 129,
-      "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
-      "tag": "div",
-      "text": "Nicht enthalten: nichtlineares Wachstum, Neutrino-Skalenabhängigkeit, baryonische Effekte, Bias-Modellierung und modifizierte Gravitation mit skalenabhängigem Wachstum."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-7EED569D9BCD09B2",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
@@ -11434,24 +11084,6 @@
       "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
       "tag": "div",
       "text": "Φdyn=ΦN+Φϑ; ∇²Φdyn=4πGρb+SΘ; ∂τϑ=βϑ−λΘ∇²ϑ"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-A3A6B58F3D7E49D3",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "TRACKED_ARCHIVE_OR_UTILITY_PAGE",
-      "path": "legacy.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 45,
-      "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
-      "tag": "p",
-      "text": "Nicht aus dem kontrollierten Kern hergeleitete phänomenologische Closure."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -14555,26 +14187,6 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-4B4CF6724DD20952",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "research-status.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "article",
-      "source_line": 43,
-      "source_sha256": "8c3e9af0d57b24b7af2e71fe897d7025036da3c36303e0d5ef1b2b44fc77a9e7",
-      "tag": "p",
-      "text": "Es existieren weder operative AuthorizationDecision noch SingleUseGrant, Backend-Import, Targetsolve oder physischer Response-Rank-Lauf."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-DFCCA1F18AFDCB80",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
@@ -15238,6 +14850,29 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-82CEC2C09AA87C71",
+      "equation_like": true,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "EVIDENCE_CONFIRMATION",
+        "PHYSICAL_COSMOLOGY",
+        "STATUS_FIREWALL",
+        "THEORY_6D_PARENT"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "guide.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -1,
+      "region": "main",
+      "source_line": 180,
+      "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
+      "tag": "div",
+      "text": "Beweist nicht: Hyperzeit, 6D-Dynamik, Ghostfreiheit, reale Strukturbildung, einen Datenfit oder Überlegenheit gegenüber ΛCDM."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-BBBDD2E3E220A1FC",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
@@ -15473,6 +15108,28 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-6095A3C91EBAE349",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "EVIDENCE_CONFIRMATION",
+        "STATUS_FIREWALL",
+        "THEORY_6D_PARENT"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
+      "path": "baryogenesis-operator.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -3,
+      "region": "section",
+      "source_line": 1,
+      "source_sha256": "5c24342e341ce572b0bffe6a0d072b924050537f348e21c6098b757bebc6cd12",
+      "tag": "div",
+      "text": "Sie beweist weder, dass Θ existiert, noch dass eine konkrete 6D-Mode den gewählten Quellenvektor erzeugt."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-6D4DAE3C12DB8EDF",
       "equation_like": true,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
@@ -15491,6 +15148,28 @@
       "source_sha256": "8aac5887afe89d82fe6dbae175eb28fc3859830425619b92bbded9f58df20e4c",
       "tag": "div",
       "text": "● C00n numerisch ● C0000 direkt ● schwere Modenintegration ● Auswahlregeln ● Basis-/Gitterkonvergenz ● λmin/λmax und κ(M) ● K1-D nicht freigegeben · K1-E unzulässig"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-0BEBDCE5209EF240",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "EVIDENCE_CONFIRMATION",
+        "STATUS_FIREWALL",
+        "THEORY_6D_PARENT"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
+      "path": "baryogenesis-v10.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -3,
+      "region": "section",
+      "source_line": 1,
+      "source_sha256": "3c58b3366e4b9e5bd45667bf9969e14a5d9e81200fb2fd87250d0f994896d270",
+      "tag": "div",
+      "text": "Status-Firewall: Ein bestandener 4×4-Benchmark beweist keine Ghostfreiheit des vollständigen 6D-Störungssystems."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -15720,6 +15399,29 @@
       "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
       "tag": "p",
       "text": "Die DOK/REK/OFFEN-Struktur ist wertvoll; jede Formel wurde jedoch neu eingestuft."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-A49B4E2174DF0F98",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "DERIVATION_IDENTIFICATION",
+        "PHYSICAL_COSMOLOGY",
+        "STATUS_FIREWALL",
+        "THEORY_6D_PARENT"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_ARCHIVE_OR_UTILITY_PAGE",
+      "path": "legacy.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -3,
+      "region": "article",
+      "source_line": 47,
+      "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
+      "tag": "p",
+      "text": "Lensing- und GW-Arbeitsansätze ohne geschlossene aktuelle 6D-Ableitung."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -16154,6 +15856,28 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-FED098B0339E3E7B",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "DERIVATION_IDENTIFICATION",
+        "STATUS_FIREWALL",
+        "THEORY_6D_PARENT"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE",
+      "page_scope": "PUBLIC_REPOSITORY_README",
+      "path": "README.md",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -4,
+      "region": "document",
+      "source_line": 86,
+      "source_sha256": "5bf6af834c371715c91cc903296d370223364014df6eedf4a43345a215e8ce5e",
+      "tag": "markdown-line",
+      "text": "Insbesondere stellt die Anwendung keine bestätigte Ableitung einer 6D-Hyperzeit-Theorie dar."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-D787D801F333094B",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
@@ -16333,6 +16057,28 @@
       "source_sha256": "ddbc1bd2fd1402ad74e9d594b2ae547f63cd9fb4111e1307b4cc5adbed97b586",
       "tag": "td",
       "text": "K1-D nicht freigegeben · K1-E unzulässig"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-A8A663357D53D0A6",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "DERIVATION_IDENTIFICATION",
+        "STATUS_FIREWALL",
+        "THEORY_6D_PARENT"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
+      "path": "baryogenesis-v11.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -4,
+      "region": "article",
+      "source_line": 1,
+      "source_sha256": "ddbc1bd2fd1402ad74e9d594b2ae547f63cd9fb4111e1307b4cc5adbed97b586",
+      "tag": "h3",
+      "text": "Noch keine 6D-Ableitung"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -17755,6 +17501,28 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-3B2C31F7DD9F9246",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "OBSERVATIONAL_DATA",
+        "STATUS_FIREWALL",
+        "THEORY_6D_PARENT"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE_DIAGNOSTIC",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "hyperlab.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -5,
+      "region": "section",
+      "source_line": 39,
+      "source_sha256": "130fe0174579c39dec679fc0564315f5374f03f8d23cb056c57435f9877d6c72",
+      "tag": "p",
+      "text": "Hyperzeit ist derzeit ein strukturiertes 6D-Forschungsprogramm mit einem kontrollierten Kern, dokumentierten No-Go-Ergebnissen, offenen physischen Kandidaten und noch nicht freigegebenen Fundamentalzweigen — keine geschlossene, durch Daten bestätigte Weltformel."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-710ECF6DEEE57CEB",
       "equation_like": true,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
@@ -17962,6 +17730,28 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-C3CE7ABAC3F238D4",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "PHYSICAL_COSMOLOGY",
+        "STATUS_FIREWALL",
+        "THEORY_6D_PARENT"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE",
+      "page_scope": "PUBLIC_REPOSITORY_README",
+      "path": "README.md",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "document",
+      "source_line": 73,
+      "source_sha256": "5bf6af834c371715c91cc903296d370223364014df6eedf4a43345a215e8ce5e",
+      "tag": "markdown-line",
+      "text": "Nicht enthalten sind Strahlungsperturbationen, Neutrinofreiströmung, baryonische Akustik, nichtlineares Wachstum, baryonische Rückkopplung, effektive modifizierte Gravitation oder eine hergeleitete 6D-Hyperzeit-Kopplung."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-4D1243C7486B5BB4",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
@@ -18066,6 +17856,26 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-47BDE6E282BFE6F6",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
+      "path": "baryogenesis-v08.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 9,
+      "source_sha256": "0d3272d79024059a762df9b30c74b692d936951ad508c4618a2f1f6ad925ce68",
+      "tag": "p",
+      "text": "Sie zeigt, dass die Stromkopplung selbst nicht zwingend das größte Problem ist; gefährlicher können generische KK- oder Bulk-induzierte Selbstoperatoren sein."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-22551EC30FD6EF56",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
@@ -18083,6 +17893,88 @@
       "source_sha256": "0d3272d79024059a762df9b30c74b692d936951ad508c4618a2f1f6ad925ce68",
       "tag": "div",
       "text": "Status-Firewall: Ein berechnetes EFT-Fenster ist konditional."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-EF17C3A2B9619084",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "EVIDENCE_CONFIRMATION",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
+      "path": "baryogenesis-v09.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "section",
+      "source_line": 1,
+      "source_sha256": "8aac5887afe89d82fe6dbae175eb28fc3859830425619b92bbded9f58df20e4c",
+      "tag": "div",
+      "text": "Es beweist nicht, dass alle KK-, Metrik-, Flux- oder Radionbeiträge verschwinden."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-0FEC75DA0288C1DD",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
+      "path": "baryogenesis-v10.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "section",
+      "source_line": 1,
+      "source_sha256": "3c58b3366e4b9e5bd45667bf9969e14a5d9e81200fb2fd87250d0f994896d270",
+      "tag": "div",
+      "text": "Tensor-, Vektor-, Branenbiegungs- und höhere KK-Moden sind noch nicht enthalten."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-593CC9696B2C8108",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "DERIVATION_IDENTIFICATION",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
+      "path": "baryogenesis-v12.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "section",
+      "source_line": 6,
+      "source_sha256": "56a9add9e94427c5e386e0d161e48b577e3cb389bfff433263d508b14e00bb82",
+      "tag": "div",
+      "text": "Es ersetzt weder die Herleitung aller primären/sekundären Zwänge noch die Feldtheorie-Rangprüfung an jedem Raumzeitpunkt."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-ACAB408FBE13434C",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
+      "path": "baryogenesis.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "main",
+      "source_line": 18,
+      "source_sha256": "a5ff4a5cf8ef00296ede5b9c0abf3fef8e4aaa7499197fcc9849737f205f5c0c",
+      "tag": "div",
+      "text": "Es liefert keine vollständige lokale Feldtheorie-Zwangsalgebra, keinen BRST-Abschluss, keine hergeleitete propagierende Θ-Mode und keinen geschlossenen Baryogenese-Mechanismus."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -18146,6 +18038,27 @@
       "source_sha256": "54c62ef6cbb118ed938e422eb1d3f0f8c586a6d7e6a0786b2717c93414fbac38",
       "tag": "section",
       "text": "Interpretation: Ein gültiger Hintergrund ist keine empirische Bestätigung."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-1C105CFC02198A61",
+      "equation_like": true,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "PHYSICAL_COSMOLOGY",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE_MERGED_QA_RECONCILED",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "emergence.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "main",
+      "source_line": 144,
+      "source_sha256": "3ca21a0a723b2d650fde1ea585770f4113f3ddb66c25769d954bc483e551b252",
+      "tag": "p",
+      "text": "Zentrale Trennung: Der Zellautomat beeinflusst weder E(a), D(a), f(a) noch kosmologische Epochen."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -18269,6 +18182,27 @@
       "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
       "tag": "div",
       "text": "etablierte Physik Analyse heuristisch / didaktisch spekulativ / blockiert"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-B10E5AA6C9382D92",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "EVIDENCE_CONFIRMATION",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "guide.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "main",
+      "source_line": 33,
+      "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
+      "tag": "div",
+      "text": "Grenzen Was die App beweist, nicht beweist und nur illustriert."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -18439,6 +18373,27 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-81DF38836C6F929F",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "PHYSICAL_COSMOLOGY",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "guide.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "main",
+      "source_line": 129,
+      "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
+      "tag": "div",
+      "text": "Nicht enthalten: nichtlineares Wachstum, Neutrino-Skalenabhängigkeit, baryonische Effekte, Bias-Modellierung und modifizierte Gravitation mit skalenabhängigem Wachstum."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-AC7B9A50A964BF57",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
@@ -18456,6 +18411,26 @@
       "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
       "tag": "p",
       "text": "Eine räumliche, epochenabhängige Visualisierung."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-FDF8AF849BAF45F3",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "guide.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "main",
+      "source_line": 157,
+      "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
+      "tag": "p",
+      "text": "Audit- und Sensitivitätslabor für ein effektives, noch nicht fundamental hergeleitetes Brückenmodell."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -18477,6 +18452,26 @@
       "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
       "tag": "p",
       "text": "βτ und 𝓘B treten nur als Produkt auf und sind daher in diesem Brückenmodell degeneriert. κ₆ kann in der aktuellen Implementierung nicht aus den Ausgaben identifiziert werden."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-2E9089ACFCF90484",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "guide.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "main",
+      "source_line": 175,
+      "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
+      "tag": "summary",
+      "text": "Was UniverseLab zeigt – und was nicht"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -18662,6 +18657,26 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-9939F77C8014B3F8",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "hyperzeit-material-v2.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 38,
+      "source_sha256": "71347477124edc9baac003eb1882050ac3bde335b7ef6b853b3b2037bacb1823",
+      "tag": "p",
+      "text": "Für große Klassen glatter, kompakter Supergravitationen mit bestimmten Energiebedingungen und ohne geeignete negative Quellen oder Korrekturen sind nichtsinguläre de-Sitter-Kompaktifizierungen ausgeschlossen."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-FA8BD1362F5AE10D",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
@@ -18679,6 +18694,48 @@
       "source_sha256": "71347477124edc9baac003eb1882050ac3bde335b7ef6b853b3b2037bacb1823",
       "tag": "article",
       "text": "Mögliche Auswege – alle konditional"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-FC38C7C8147856AE",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "EVIDENCE_CONFIRMATION",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "hyperzeit-material-v2.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 44,
+      "source_sha256": "71347477124edc9baac003eb1882050ac3bde335b7ef6b853b3b2037bacb1823",
+      "tag": "p",
+      "text": "Die Minisuperspace-Nebenbedingung beweist nicht, dass alle inhomogenen skalaren, vektoriellen und tensoriellen Moden ghostfrei sind."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-5C1CC01DB8AB2769",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "OBSERVATIONAL_DATA",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "hyperzeit-material-v2.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "section",
+      "source_line": 50,
+      "source_sha256": "71347477124edc9baac003eb1882050ac3bde335b7ef6b853b3b2037bacb1823",
+      "tag": "div",
+      "text": "Sie ändert keine Freigabeentscheidung: Literaturähnlichkeit, ein Potentialminimum oder eine stabile numerische Kurve ersetzen weder Parentwirkung noch Constraint-Schließung, physische Hilbertraumkonstruktion oder Forward-Likelihood."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -18741,6 +18798,27 @@
       "source_sha256": "9e6726cfbcd6ee5598816542596225a12cf01551dfaff2b406e12b8d5e09fab5",
       "tag": "p",
       "text": "Agreement between loop expansions, large-N and functional RG can increase robustness but is not a proof of UV completion."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-51DAE05790CCF666",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "EVIDENCE_CONFIRMATION",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "hyperzeit-methods.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 29,
+      "source_sha256": "13f4afd47ea7a424f5b0d1a83ff9d7fe1a1636b27cfe3e221b1e8a0fd6124200",
+      "tag": "p",
+      "text": "Dass Lorentzsymmetrie in einem anderen System emergiert, beweist jedoch nicht, dass die 4D-Lorentzstruktur aus HPVS hervorgeht."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -18845,6 +18923,26 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-D09D5061954676CE",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "index.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 72,
+      "source_sha256": "a25df13b1d305cef8c6ceb9432b711b0b3d7b7e145f9064b90582ee98dc1b5b6",
+      "tag": "p",
+      "text": "UniverseLab zeigt nicht nur, was berechnet wird, sondern auch, wie belastbar die jeweilige Aussage ist."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-EA92A8929E54AE33",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
@@ -18862,6 +18960,26 @@
       "source_sha256": "e49f4ec3fa514db037ba3d266859253b1cf7387d0cd6f06d7e2c1ecf3976522c",
       "tag": "div",
       "text": "Epochenbeschreibungen und Hintergrundgrafik sind didaktisch."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-7BA8E4AE92447D43",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_ARCHIVE_OR_UTILITY_PAGE",
+      "path": "legacy.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 27,
+      "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
+      "tag": "p",
+      "text": "Keine aktuelle Parentableitung."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -18927,6 +19045,26 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-A3A6B58F3D7E49D3",
+      "equation_like": true,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_ARCHIVE_OR_UTILITY_PAGE",
+      "path": "legacy.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 45,
+      "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
+      "tag": "p",
+      "text": "Nicht aus dem kontrollierten Kern hergeleitete phänomenologische Closure."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-DC50CA3C1D8F6FF8",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
@@ -18944,6 +19082,26 @@
       "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
       "tag": "td",
       "text": "Eine Legacy-Referenz behalten"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-BE939F149850E52F",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_ARCHIVE_OR_UTILITY_PAGE",
+      "path": "md2s-artifact-recovery-rank-audit-v0.1.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "section",
+      "source_line": 1,
+      "source_sha256": "c100a03e48c4bfbe931461d08ed4a248284d882e7e5d444eaa9f0510baa76e54",
+      "tag": "p",
+      "text": "Deshalb darf weder das Zwei-Junction-Gate noch der B1.4O-Rankaudit mit rekonstruierten oder geschätzten Zahlen gefüllt werden."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -19093,6 +19251,27 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-4B4CF6724DD20952",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "research-status.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 43,
+      "source_sha256": "8c3e9af0d57b24b7af2e71fe897d7025036da3c36303e0d5ef1b2b44fc77a9e7",
+      "tag": "p",
+      "text": "Es existieren weder operative AuthorizationDecision noch SingleUseGrant, Backend-Import, Targetsolve oder physischer Response-Rank-Lauf."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-3E88F073CB388763",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
@@ -19131,6 +19310,26 @@
       "source_sha256": "8c3e9af0d57b24b7af2e71fe897d7025036da3c36303e0d5ef1b2b44fc77a9e7",
       "tag": "div",
       "text": "Technische Ausführbarkeit ist keine physikalische Identifikation; numerische Stabilität ist keine Ghostfreiheit; ein guter Fit wäre keine Theoriebestätigung; Trust-Root-Vorbereitung ist keine menschliche Ratifikation."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-DEA9311588D7E579",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "solver-hub.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "section",
+      "source_line": 28,
+      "source_sha256": "54f7f51ca9fbf57cc7eb8f4994f3e48a7cb54cb7261ba73b8fbc670844a7bfa1",
+      "tag": "div",
+      "text": "Ein erfolgreicher Test oder Work-Package-Abschluss kann weder Solverfreigabe noch physikalische Identifikation erzeugen."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -19353,6 +19552,27 @@
       "source_sha256": "287d0b6c9085eb23b13165c96404ac1746ecf35141396bd7dd14fba105f8e074",
       "tag": "li",
       "text": "keine freigegebene Likelihood- und Datenkette"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-5736D3B37E498648",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "DERIVATION_IDENTIFICATION",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ARCHIVED_REFERENCE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "universelab-audit-2026-07-31.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 31,
+      "source_sha256": "287d0b6c9085eb23b13165c96404ac1746ecf35141396bd7dd14fba105f8e074",
+      "tag": "p",
+      "text": "Ein positives Signal identifiziert nicht automatisch den dominanten mikroskopischen Operator."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",

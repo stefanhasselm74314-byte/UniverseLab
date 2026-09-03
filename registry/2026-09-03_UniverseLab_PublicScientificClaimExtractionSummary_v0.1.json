@@ -1,12 +1,12 @@
 {
-  "basis_commit": "4926c4208c53cd96f1a1e50adf8528a4104c95c5",
-  "claim_candidates": 987,
+  "basis_commit": "a41b80384e429f90117ea4734e8b5cb25977ac59",
+  "claim_candidates": 997,
   "explicit_statuses": {
     "BLOCKED_OR_UNRELEASED": 66,
     "CONDITIONAL_OR_HEURISTIC": 56,
-    "EXPLICITLY_NEGATED_OR_LIMITED": 58,
+    "EXPLICITLY_NEGATED_OR_LIMITED": 87,
     "OPEN_OR_NOT_EXECUTED": 43,
-    "UNCLASSIFIED": 764
+    "UNCLASSIFIED": 745
   },
   "generated_by": "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py",
   "lexical_categories": {
@@ -17,13 +17,13 @@
     "OBSERVATIONAL_DATA": 111,
     "PHYSICAL_COSMOLOGY": 169,
     "PREDICTION_SIGNATURE": 23,
-    "STATUS_FIREWALL": 177,
+    "STATUS_FIREWALL": 206,
     "THEORY_6D_PARENT": 141
   },
   "limitations": [
     "Lexical extraction cannot establish whether a scientific claim is true.",
     "Risk scores prioritize manual review and are not evidence grades.",
-    "Negation detection is bounded lexical context, not full semantic parsing.",
+    "Negation and exclusion detection use bounded lexical context, not full semantic parsing.",
     "A visible qualifier may occur in another nearby block and requires contextual review.",
     "Code, tests, data and parent-theory derivations are not inferred by lexical proximity."
   ],
@@ -679,19 +679,19 @@
     }
   ],
   "page_scopes": {
-    "CANONICAL_MANIFEST_PAGE": 365,
+    "CANONICAL_MANIFEST_PAGE": 368,
     "PUBLIC_REPOSITORY_README": 33,
-    "PUBLIC_SITEMAP_PAGE": 342,
-    "TRACKED_ARCHIVE_OR_UTILITY_PAGE": 68,
-    "TRACKED_NON_SITEMAP_PAGE": 179
+    "PUBLIC_SITEMAP_PAGE": 344,
+    "TRACKED_ARCHIVE_OR_UTILITY_PAGE": 70,
+    "TRACKED_NON_SITEMAP_PAGE": 182
   },
   "physical_evidence_effect": "NONE",
   "physical_gate_effect": "NONE",
   "risk_classes": {
-    "CONTEXT_OR_FIREWALL": 304,
-    "HIGH": 12,
-    "LOW": 594,
-    "MEDIUM": 77
+    "CONTEXT_OR_FIREWALL": 332,
+    "HIGH": 5,
+    "LOW": 588,
+    "MEDIUM": 72
   },
   "schema": "universelab.public-scientific-claim-extraction-summary.v0.1",
   "sitemap_pages": 34,
