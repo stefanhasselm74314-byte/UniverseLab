@@ -1,29 +1,47 @@
 {
   "schema": "universelab.session-checkpoint.v1",
-  "checkpoint_id": "UL-CHK-20260903-032",
-  "timestamp": "2026-09-03T12:00:00+02:00",
+  "checkpoint_id": "UL-CHK-20260903-033",
+  "timestamp": "2026-09-03T20:45:00+02:00",
   "privacy_classification": "PUBLIC_SANITIZED",
-  "basis_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
-  "basis_tree": "de4cf960a4390b173b683c0a14991985b8ec349f",
-  "basis_semantics": "The checkpoint starts from merged main at Band-IV-B branch creation. The reconciliation changes become canonical only after a green merge.",
-  "canonical_snapshot": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
-  "supersedes": "registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json",
-  "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
-  "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
-  "architecture": [
-    "HPVS",
-    "HZT-M0",
-    "HZT-Full"
-  ],
-  "controlled_branches": [
-    "HZT-M0-S6",
-    "HZT-M0-P5"
-  ],
-  "current_goal": "Complete Band IV-B current-main, numerical-QA, public-status, metadata and accessibility reconciliation without physical execution.",
-  "current_workstream": "WS1 / FM-0 with public numerical-platform reconciliation as a nonphysical integrity sub-block.",
+  "basis_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55",
+  "basis_tree": "536d74be58bab519f1665df9c222662814000464",
+  "basis_semantics": "Exact merged main after Band V-A. Band-V-B high-claim adjudication and current-state pointer repair remain a noncanonical changeset until reviewed and merged.",
+  "canonical_snapshot": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
+  "supersedes": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
+  "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+  "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "current_goal": "Complete Band V-B contextual adjudication of public claims, beginning with the two Band-V-A HIGH candidates, while preserving physical and authorization firewalls.",
+  "current_workstream": "Band V public claim-to-theory/code/test/data/falsifier audit in parallel with WS1/FM-0; no physical execution.",
+  "completed_blocks": {
+    "band_iv_b": {
+      "status": "MERGED_QA_RECONCILED",
+      "pull_request": 204,
+      "merge_commit": "06479dc4b919496edcef471a67a75ca101c6af69"
+    },
+    "band_v_a": {
+      "status": "MERGED_CLAIM_CENSUS_AND_ROUTING_COVERAGE",
+      "pull_request": 205,
+      "merge_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55",
+      "claim_candidates": 989,
+      "family_assignments": 989,
+      "unmapped_candidates": 0,
+      "manual_review_required": 249
+    }
+  },
+  "active_block": {
+    "id": "BAND_V_B_HIGH_CLAIM_ADJUDICATION",
+    "status": "IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING",
+    "high_candidates": 2,
+    "adjudicated": 2,
+    "high_substantive_overclaims": 0,
+    "high_scope_firewalls": 1,
+    "high_governance_claims": 1,
+    "confirmed_provenance_defects": 1,
+    "source": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json"
+  },
   "active_program": {
     "program_id": "UL-HZT-10M-2026-2027",
-    "status": "ACTIVE_RATIFIED_RESEARCH_PROGRAM",
     "workstream": "WS1",
     "work_package": "FM-0",
     "gate": "FM-G0",
@@ -32,36 +50,17 @@
     "partially_resolved_blocking_gap_count": 3,
     "fully_unresolved_blocking_gap_count": 7
   },
-  "public_numerical_platform": {
-    "canonical_engine": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
-    "api_version": "1.0.0",
-    "implementation_revision_after_band_ivb": "1.0.2",
-    "validation": "ACTIVE_MERGED",
-    "observatory": "ACTIVE_MERGED_QA_RECONCILED",
-    "compare_safe": "ACTIVE_MERGED_QA_RECONCILED",
-    "compare_legacy_routes": "CONSOLIDATED_TO_COMPARE_SAFE",
-    "emergence": "ACTIVE_MERGED_QA_RECONCILED",
-    "remaining_independent_public_cosmology_engines": 0,
-    "bridge_scale": "a_c=Rchi/(Rchi+2.5), Rchi>0, no hidden floor",
-    "bridge_background": "REDUCED_EFFECTIVE_DIAGNOSTIC_MODEL_NOT_6D_PARENT_DERIVATION",
-    "bridge_growth": "UNRELEASED_GROWTH_MAP",
-    "bridge_lensing": "UNRELEASED_LENSING_MAP",
-    "likelihood_fit": "NOT_PRESENT",
-    "physical_evidence_effect": "NONE"
-  },
   "physical_governance": {
     "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
     "ULSH-01-WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
     "ULSH-01-WP3": "NOT_STARTED",
     "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
     "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
-    "technical_authority_signature_verifier": "IMPLEMENTED_AND_QA_GREEN",
-    "human_trust_root_preparation_package": "IMPLEMENTED_AND_QA_GREEN",
     "ratified_human_trust_root": "NOT_RATIFIED",
-    "authority_signature_provenance": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
+    "human_trust_root_action": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
     "runtime_issuance_bindings": "BLOCKED",
-    "operative_authorization_decision": "NOT_CREATED",
-    "operative_single_use_grant": "NOT_CREATED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
     "backend_import": "NOT_EXECUTED",
     "solver_execution": "NOT_EXECUTED",
     "physical_background": "NOT_ESTABLISHED",
@@ -70,137 +69,102 @@
     "K1-E": "NOT_ADMISSIBLE",
     "physical_evidence_effect": "NONE"
   },
-  "gate_state": {
-    "FM-G0": "OPEN",
-    "FM0_BLOCKING_GAPS": 10,
-    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
-    "ULSH-01-WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
-    "ULSH-01-WP3": "NOT_STARTED",
-    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
-    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
-    "RATIFIED_HUMAN_TRUST_ROOT": "NOT_RATIFIED",
-    "RUNTIME_ISSUANCE_BINDINGS": "BLOCKED",
-    "AuthorizationDecision": "NOT_CREATED",
-    "SingleUseGrant": "NOT_CREATED",
-    "BACKEND_IMPORT": "NOT_EXECUTED",
-    "SOLVER_EXECUTION": "NOT_EXECUTED",
-    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
-    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
-    "K1-D": "NOT_RELEASED",
-    "K1-E": "NOT_ADMISSIBLE",
-    "physical_evidence_effect": "NONE"
-  },
   "verified_results": [
     {
-      "result_id": "UL-RES-BAND-IVB-RESET-CLOSURE-001",
-      "statement": "The exact flat public reference includes radiation: Omega_r=0.000092, Omega_m=0.315, Omega_DE=0.684908 and Omega_k=0, so the closure sum is exactly one.",
-      "status": "IMPLEMENTED_EXACT_HEAD_QA_IN_PROGRESS",
-      "evidence_effect": "NUMERICAL_QA_ONLY",
+      "result_id": "UL-RES-BAND-IVB-001",
+      "statement": "Band IV-B numerical-QA, provenance, public-status and accessibility reconciliation is merged and its exact-head checks were green.",
+      "status": "MERGED_QA_RECONCILED",
+      "evidence_effect": "SOFTWARE_AND_NUMERICAL_QA_ONLY",
+      "physical_evidence_effect": "NONE",
       "sources": [
-        "tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs",
-        "tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs",
-        "registry/2026-09-03_UniverseLab_BandIVBCurrentMainReconciliationContract_v1.0.json"
+        "registry/2026-09-03_UniverseLab_BandIVBCurrentMainReconciliationContract_v1.0.json",
+        "science/cosmology/2026-09-03_UniverseLab_BandIVB_CurrentMainReconciliation_v1.0.md"
       ]
     },
     {
-      "result_id": "UL-RES-BAND-IVB-RCHI-001",
-      "statement": "The reduced bridge scale is implemented as a_c=Rchi/(Rchi+2.5) for every Rchi>0, with a_c/Rchi approaching 0.4 and no hidden lower floor.",
-      "status": "IMPLEMENTED_EXACT_HEAD_QA_IN_PROGRESS",
-      "evidence_effect": "NUMERICAL_MODEL_CONTRACT_ONLY",
+      "result_id": "UL-RES-BAND-VA-001",
+      "statement": "The public claim census covers 72 tracked HTML files with 989 lexical candidates and 989 family assignments; unmapped candidate count is zero. Routing is not scientific adjudication.",
+      "status": "MERGED_REPRODUCIBLE_CENSUS",
+      "evidence_effect": "AUDIT_PROVENANCE_ONLY",
+      "physical_evidence_effect": "NONE",
       "sources": [
-        "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
-        "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
-        "tests/2026-09-03_test_UniverseLab_BandIVBCurrentMainReconciliation_v1.0.py"
+        "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+        "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json"
       ]
     },
     {
-      "result_id": "UL-RES-PUBLIC-ENGINE-MIGRATION-001",
-      "statement": "Validation, Observatory, Compare and Emergence use the shared canonical cosmology engine; Bridge growth and lensing remain unreleased.",
-      "status": "MERGED_WITH_BAND_IV_B_STATUS_RECONCILIATION_PENDING",
-      "evidence_effect": "SOFTWARE_ARCHITECTURE_ONLY",
+      "result_id": "UL-RES-BAND-VB-HIGH-001",
+      "statement": "The two Band-V-A HIGH candidates are a current-capability scope firewall and a repository/governance separation statement, not positive physical HZT evidence claims.",
+      "status": "ADJUDICATED_IN_CHANGESET_REVIEW_PENDING",
+      "evidence_effect": "PUBLIC_CLAIM_CONTEXT_AUDIT_ONLY",
+      "physical_evidence_effect": "NONE",
       "sources": [
-        "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
-        "registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json",
-        "registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json",
-        "registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json"
+        "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+        "observatory-en.html",
+        "research-status.html"
       ]
-    },
+    }
+  ],
+  "confirmed_defects": [
     {
-      "result_id": "UL-RES-AUTHORITY-PREPARATION-001",
-      "statement": "Verification-only authority-signature and human trust-root preparation infrastructure is merged, but no human trust root is ratified and no operational authority exists.",
-      "status": "MERGED_NONOPERATIVE",
-      "evidence_effect": "GOVERNANCE_INFRASTRUCTURE_ONLY",
-      "sources": [
-        "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json",
-        "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json"
-      ]
+      "defect_id": "UL-DEF-CURRENT-STATE-STALE-001",
+      "severity": "P1_GOVERNANCE_PROVENANCE",
+      "statement": "research-status.html and CurrentMainCanonicalState_v1.1 still expose a 30b781... pre-Band-IV-B basis although PRs 204 and 205 are merged.",
+      "repair": "Publish append-only CurrentMainCanonicalState_v1.2, SiteState_v1.3 and SessionCheckpoint_v1.33 and update current pointers."
     }
   ],
   "open_blockers": [
     {
-      "blocker_id": "UL-BLK-FM0-001",
-      "statement": "The parent-to-reduced-to-observable forward map remains open across all five observable blocks.",
-      "status": "OPEN",
-      "sources": [
-        "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
-        "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
-      ]
+      "blocker_id":"UL-BLK-FM0-001",
+      "status":"OPEN",
+      "statement":"Parent-to-reduced-to-observable forward map remains open across the declared observable blocks.",
+      "sources":["registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"]
     },
     {
-      "blocker_id": "UL-BLK-TRUST-ROOT-001",
-      "statement": "The human-controlled trust root is not ratified. Offline key creation and human adoption are parked until an exclusively user-controlled computer is available.",
-      "status": "PARKED_EXTERNAL_HUMAN_ACTION_REQUIRED",
-      "sources": [
-        "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json",
-        "governance/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationProcedure_v0.1.md"
-      ]
+      "blocker_id":"UL-BLK-TRUST-ROOT-001",
+      "status":"PARKED_EXTERNAL_HUMAN_ACTION_REQUIRED",
+      "statement":"Human-controlled trust root is not ratified; offline key action is parked until an exclusively user-controlled computer is available.",
+      "sources":["registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json"]
     },
     {
-      "blocker_id": "UL-BLK-RUNTIME-ISSUANCE-001",
-      "statement": "Execution-environment identity, reservation store, crash-persistent single-use semantics, exclusive result path and runtime attestations remain unspecified or unratified.",
-      "status": "BLOCKED",
-      "sources": [
-        "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json"
-      ]
+      "blocker_id":"UL-BLK-RUNTIME-ISSUANCE-001",
+      "status":"BLOCKED",
+      "statement":"Runtime issuance bindings remain blocked.",
+      "sources":["registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json"]
     },
     {
-      "blocker_id": "UL-BLK-C-PHYS-GENERIC-M1-001",
-      "statement": "Generic global M1 existence, continuum BVP invertibility, physical Hamiltonian positivity and full ghost freedom remain open.",
-      "status": "OPEN",
-      "sources": [
-        "project-manifest.json",
-        "science/cosmology/2026-09-03_UniverseLab_BandIVB_CurrentMainReconciliation_v1.0.md"
-      ]
+      "blocker_id":"UL-BLK-C-PHYS-GENERIC-M1-001",
+      "status":"OPEN",
+      "statement":"Generic global M1 existence, continuum BVP invertibility, Hamiltonian positivity and full ghost freedom remain open.",
+      "sources":["project-manifest.json"]
     }
   ],
   "active_assumptions": [
-    "Band IV-B is a numerical-QA, provenance, public-status, metadata and accessibility reconciliation only.",
+    "Band V-A is a public-claim inventory and routing-coverage layer, not scientific adjudication.",
+    "Band V-B high-claim review is a contextual public-claim audit and does not create physical evidence.",
     "The reduced Bridge background is not a derivation from the six-dimensional parent theory.",
     "The linear GR growth equation is a reference model and not a released HZT perturbation map.",
-    "The current dated state files become canon only after the pull request is reviewed and merged.",
-    "Human trust-root ratification remains an external human action and is not required to complete Band IV-B."
+    "Human trust-root ratification remains parked until an exclusively user-controlled computer is available.",
+    "The dated v1.2/v1.3/v1.33 state chain becomes current only after this changeset is reviewed and merged."
   ],
   "forbidden_inferences": [
+    "a lexical HIGH score is a physical overclaim",
+    "a scope firewall proves the corresponding positive physical proposition",
+    "a governance claim is a physical measurement",
+    "100 percent routing coverage is 100 percent scientific adjudication",
     "green QA is empirical evidence",
-    "correct small-Rchi asymptotics establish the six-dimensional parent theory",
-    "a valid reduced background releases Bridge growth or lensing",
-    "current-state reconciliation creates an AuthorizationDecision or SingleUseGrant",
-    "trust-root preparation is human ratification",
     "numerical stability is ghost freedom",
-    "a public status update promotes K1-D or K1-E"
+    "a status-pointer repair promotes K1-D or K1-E"
   ],
   "entry_points": [
     "project-manifest.json",
-    "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
-    "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
-    "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
-    "registry/2026-09-03_UniverseLab_BandIVBCurrentMainReconciliationContract_v1.0.json",
-    "science/cosmology/2026-09-03_UniverseLab_BandIVB_CurrentMainReconciliation_v1.0.md",
-    "research-status.html",
-    "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
-    "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+    "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+    "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
+    "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+    "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+    "research-status.html"
   ],
-  "next_exact_action": "Complete exact-head repository and browser QA for PR 204, repair only current-pointer-aware validators, merge only if every non-temporary check is green, then start Band V without physical execution.",
+  "next_exact_action": "Run exact-head QA for the Band-V-B high-claim and pointer-reconciliation changeset; if green, merge; then adjudicate the 42 MEDIUM candidates in bounded families.",
   "physical_gate_effect": "NONE",
   "physical_evidence_effect": "NONE"
 }
