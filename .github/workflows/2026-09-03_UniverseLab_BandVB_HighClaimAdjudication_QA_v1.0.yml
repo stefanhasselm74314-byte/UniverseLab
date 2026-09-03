@@ -1,0 +1,107 @@
+name: UniverseLab Band V-B HIGH claim adjudication QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'observatory-en.html'
+      - 'research-status.html'
+      - 'research-status-en.html'
+      - 'project-manifest.json'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json'
+      - 'registry/2026-09-03_UniverseLab_SiteState_v1.3.json'
+      - 'registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json'
+      - 'registry/session-checkpoint-latest.json'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json'
+      - 'science/audit/2026-09-03_UniverseLab_BandVB_HighClaimAdjudication_v1.0.md'
+      - 'tests/2026-09-03_test_UniverseLab_BandVB_HighClaimAdjudication_v1.0.py'
+      - '.github/workflows/2026-09-03_UniverseLab_BandVB_HighClaimAdjudication_QA_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'observatory-en.html'
+      - 'research-status.html'
+      - 'research-status-en.html'
+      - 'project-manifest.json'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json'
+      - 'registry/2026-09-03_UniverseLab_SiteState_v1.3.json'
+      - 'registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json'
+      - 'registry/session-checkpoint-latest.json'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json'
+      - 'science/audit/2026-09-03_UniverseLab_BandVB_HighClaimAdjudication_v1.0.md'
+      - 'tests/2026-09-03_test_UniverseLab_BandVB_HighClaimAdjudication_v1.0.py'
+      - '.github/workflows/2026-09-03_UniverseLab_BandVB_HighClaimAdjudication_QA_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-band-vb-high-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse machine-readable Band V-B state
+        run: |
+          python -m json.tool registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json >/dev/null
+          python -m json.tool registry/2026-09-03_UniverseLab_SiteState_v1.3.json >/dev/null
+          python -m json.tool registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json >/dev/null
+          python -m json.tool registry/session-checkpoint-latest.json >/dev/null
+          python -m json.tool registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json >/dev/null
+
+      - name: Compile validators and regression gate
+        run: |
+          python -m py_compile tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py
+          python -m py_compile tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py
+          python -m py_compile tests/2026-09-03_test_UniverseLab_BandVB_HighClaimAdjudication_v1.0.py
+
+      - name: Run strict current-state provenance validation
+        run: |
+          python tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py \
+            --strict-source-existence
+
+      - name: Run Band V-B HIGH contextual and scanner regressions
+        run: python tests/2026-09-03_test_UniverseLab_BandVB_HighClaimAdjudication_v1.0.py
+
+      - name: Emit nonoperative HIGH-gate report
+        run: |
+          python - <<'PY'
+          import importlib.util, json, sys
+          from pathlib import Path
+          root=Path('.').resolve()
+          path=root/'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+          spec=importlib.util.spec_from_file_location('vb_scanner_report',path)
+          mod=importlib.util.module_from_spec(spec); sys.modules[spec.name]=mod; spec.loader.exec_module(mod)
+          rows,summary=mod.extract(root)
+          ledger=json.loads((root/'registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json').read_text())
+          report={
+            'schema':'universelab.band-vb-high-claim-gate-report.v1',
+            'status':'PASS_HIGH_GATE_NO_UNRESOLVED_HIGH_OVERCLAIM',
+            'historical_band_va_high_candidates':ledger['high_candidate_count'],
+            'historical_high_adjudicated':ledger['adjudicated_count'],
+            'historical_high_substantive_overclaims':ledger['global_result']['high_overclaim_count'],
+            'current_reextracted_high_candidates':sum(r.preliminary_risk_class=='HIGH' for r in rows),
+            'current_claim_candidates':len(rows),
+            'physical_claim_promotions':ledger['global_result']['physical_claim_promotions'],
+            'physical_gate_effect':'NONE',
+            'physical_evidence_effect':'NONE',
+          }
+          assert report['current_reextracted_high_candidates']==0
+          Path('band-vb-high-gate-report.json').write_text(json.dumps(report,sort_keys=True,indent=2)+'\n')
+          print(json.dumps(report,sort_keys=True,indent=2))
+          PY
+
+      - name: Upload nonoperative HIGH-gate report
+        uses: actions/upload-artifact@v4
+        with:
+          name: universelab-band-vb-high-claim-gate-report
+          path: band-vb-high-gate-report.json
+          if-no-files-found: error
