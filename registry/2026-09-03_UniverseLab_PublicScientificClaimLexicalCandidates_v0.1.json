@@ -1,5 +1,5 @@
 {
-  "basis_commit": "3754c3be9903521ad69c033068af576304277af1",
+  "basis_commit": "58e2661289659573a31d315231c5392a2c17a366",
   "candidates": [
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -714,7 +714,7 @@
         "THEORY_6D_PARENT"
       ],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "MEDIUM",
@@ -5413,7 +5413,7 @@
         "PHYSICAL_COSMOLOGY"
       ],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -5433,7 +5433,7 @@
         "PREDICTION_SIGNATURE"
       ],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -5453,7 +5453,7 @@
         "OBSERVATIONAL_DATA"
       ],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -5473,7 +5473,7 @@
         "PREDICTION_SIGNATURE"
       ],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -11092,7 +11092,7 @@
         "PHYSICAL_COSMOLOGY"
       ],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -11110,7 +11110,7 @@
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -11128,7 +11128,7 @@
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -11148,7 +11148,7 @@
         "PHYSICAL_COSMOLOGY"
       ],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -11166,7 +11166,7 @@
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -11186,7 +11186,7 @@
         "PHYSICAL_COSMOLOGY"
       ],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -11204,7 +11204,7 @@
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -11222,7 +11222,7 @@
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "LOW",
@@ -13402,7 +13402,7 @@
         "NUMERICAL_METHOD"
       ],
       "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -13426,7 +13426,7 @@
         "THEORY_6D_PARENT"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -14812,7 +14812,7 @@
         "THEORY_6D_PARENT"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18573,7 +18573,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18593,7 +18593,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18613,7 +18613,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18634,7 +18634,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18655,7 +18655,7 @@
         "THEORY_6D_PARENT"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18675,7 +18675,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18695,7 +18695,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18716,7 +18716,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18736,7 +18736,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18756,7 +18756,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18777,7 +18777,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18799,7 +18799,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
@@ -18819,7 +18819,7 @@
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
       "path": "research-status.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",

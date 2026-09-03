@@ -1,5 +1,5 @@
 {
-  "basis_commit": "3754c3be9903521ad69c033068af576304277af1",
+  "basis_commit": "58e2661289659573a31d315231c5392a2c17a366",
   "claim_candidates": 989,
   "explicit_statuses": {
     "BLOCKED_OR_UNRELEASED": 66,
@@ -535,7 +535,7 @@
     },
     {
       "manifest_member": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED_BAND_VB_HIGH",
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "path": "research-status.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
