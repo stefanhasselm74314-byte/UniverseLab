@@ -1,0 +1,129 @@
+{
+  "schema": "universelab.session-checkpoint.v1",
+  "checkpoint_id": "UL-CHK-20260903-033",
+  "timestamp": "2026-09-03T20:45:00+02:00",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "basis_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55",
+  "basis_tree": "536d74be58bab519f1665df9c222662814000464",
+  "basis_semantics": "Exact merged main after Band V-A. Band-V-B high-claim adjudication and current-state pointer repair remain a noncanonical changeset until reviewed and merged.",
+  "canonical_snapshot": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
+  "supersedes": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
+  "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+  "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "current_goal": "Complete Band V-B contextual adjudication of public claims, beginning with the two Band-V-A HIGH candidates, while preserving physical and authorization firewalls.",
+  "current_workstream": "Band V public claim-to-theory/code/test/data/falsifier audit in parallel with WS1/FM-0; no physical execution.",
+  "completed_blocks": {
+    "band_iv_b": {
+      "status": "MERGED_QA_RECONCILED",
+      "pull_request": 204,
+      "merge_commit": "06479dc4b919496edcef471a67a75ca101c6af69"
+    },
+    "band_v_a": {
+      "status": "MERGED_CLAIM_CENSUS_AND_ROUTING_COVERAGE",
+      "pull_request": 205,
+      "merge_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55",
+      "claim_candidates": 989,
+      "family_assignments": 989,
+      "unmapped_candidates": 0,
+      "manual_review_required": 249
+    }
+  },
+  "active_block": {
+    "id": "BAND_V_B_HIGH_CLAIM_ADJUDICATION",
+    "status": "IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING",
+    "high_candidates": 2,
+    "adjudicated": 2,
+    "high_substantive_overclaims": 0,
+    "high_scope_firewalls": 1,
+    "high_governance_claims": 1,
+    "confirmed_provenance_defects": 1,
+    "source": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json"
+  },
+  "active_program": {
+    "program_id": "UL-HZT-10M-2026-2027",
+    "workstream": "WS1",
+    "work_package": "FM-0",
+    "gate": "FM-G0",
+    "gate_status": "OPEN",
+    "blocking_gap_count": 10,
+    "partially_resolved_blocking_gap_count": 3,
+    "fully_unresolved_blocking_gap_count": 7
+  },
+  "physical_governance": {
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "human_trust_root_action": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
+    "runtime_issuance_bindings": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-BAND-IVB-001",
+      "statement": "Band IV-B numerical-QA, provenance, public-status and accessibility reconciliation is merged and its exact-head checks were green.",
+      "status": "MERGED_QA_RECONCILED",
+      "evidence_effect": "SOFTWARE_AND_NUMERICAL_QA_ONLY",
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "result_id": "UL-RES-BAND-VA-001",
+      "statement": "The public claim census covers 72 tracked HTML files with 989 lexical candidates and 989 family assignments; unmapped candidate count is zero. Routing is not scientific adjudication.",
+      "status": "MERGED_REPRODUCIBLE_CENSUS",
+      "evidence_effect": "AUDIT_PROVENANCE_ONLY",
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "result_id": "UL-RES-BAND-VB-HIGH-001",
+      "statement": "The two Band-V-A HIGH candidates are a current-capability scope firewall and a repository/governance separation statement, not positive physical HZT evidence claims.",
+      "status": "ADJUDICATED_IN_CHANGESET_REVIEW_PENDING",
+      "evidence_effect": "PUBLIC_CLAIM_CONTEXT_AUDIT_ONLY",
+      "physical_evidence_effect": "NONE"
+    }
+  ],
+  "confirmed_defects": [
+    {
+      "defect_id": "UL-DEF-CURRENT-STATE-STALE-001",
+      "severity": "P1_GOVERNANCE_PROVENANCE",
+      "statement": "research-status.html and CurrentMainCanonicalState_v1.1 still expose a 30b781... pre-Band-IV-B basis although PRs 204 and 205 are merged.",
+      "repair": "Publish append-only CurrentMainCanonicalState_v1.2, SiteState_v1.3 and SessionCheckpoint_v1.33 and update current pointers."
+    }
+  ],
+  "open_blockers": [
+    {"blocker_id":"UL-BLK-FM0-001","status":"OPEN","statement":"Parent-to-reduced-to-observable forward map remains open across the declared observable blocks."},
+    {"blocker_id":"UL-BLK-TRUST-ROOT-001","status":"PARKED_EXTERNAL_HUMAN_ACTION_REQUIRED","statement":"Human-controlled trust root is not ratified; offline key action is parked until an exclusively user-controlled computer is available."},
+    {"blocker_id":"UL-BLK-RUNTIME-ISSUANCE-001","status":"BLOCKED","statement":"Runtime issuance bindings remain blocked."},
+    {"blocker_id":"UL-BLK-C-PHYS-GENERIC-M1-001","status":"OPEN","statement":"Generic global M1 existence, continuum BVP invertibility, Hamiltonian positivity and full ghost freedom remain open."}
+  ],
+  "forbidden_inferences": [
+    "a lexical HIGH score is a physical overclaim",
+    "a scope firewall proves the corresponding positive physical proposition",
+    "a governance claim is a physical measurement",
+    "100 percent routing coverage is 100 percent scientific adjudication",
+    "green QA is empirical evidence",
+    "numerical stability is ghost freedom",
+    "a status-pointer repair promotes K1-D or K1-E"
+  ],
+  "entry_points": [
+    "project-manifest.json",
+    "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+    "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
+    "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+    "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+    "research-status.html"
+  ],
+  "next_exact_action": "Run exact-head QA for the Band-V-B high-claim and pointer-reconciliation changeset; if green, merge; then adjudicate the 42 MEDIUM candidates in bounded families.",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
