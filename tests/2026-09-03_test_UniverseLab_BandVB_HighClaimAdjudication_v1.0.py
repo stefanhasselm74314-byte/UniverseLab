@@ -19,6 +19,8 @@ SITE = ROOT / "registry/2026-09-03_UniverseLab_SiteState_v1.3.json"
 CHECKPOINT = ROOT / "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json"
 ALIAS = ROOT / "registry/session-checkpoint-latest.json"
 LEDGER = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json"
+COMMITTED_SUMMARY = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json"
+COMMITTED_ASSIGNMENTS = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json"
 MANIFEST = ROOT / "project-manifest.json"
 OBS_EN = ROOT / "observatory-en.html"
 STATUS_DE = ROOT / "research-status.html"
@@ -107,6 +109,8 @@ def main() -> None:
     assert obs_record["replacement_text"] in obs
     assert "As a status rule only — not evidence for HZT and not a physical measurement" in en
     assert "Als reine Statusregel – keine Evidenz für HZT und keine physikalische Messung" in de
+    assert "Open pull requests have no canonical effect" in en
+    assert "Offene Pull Requests besitzen keine kanonische Wirkung" in de
     assert "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json" in de
     assert "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json" in en
     assert "registry/2026-09-03_UniverseLab_SiteState_v1.3.json" in shell
@@ -129,14 +133,38 @@ def main() -> None:
     assert state["merged_analysis_blocks"]["band_v_a"]["status"] == "MERGED_PUBLIC_CLAIM_CENSUS_AND_ROUTING_COVERAGE"
     assert state["active_analysis_block"]["substantive_high_overclaims"] == 0
     assert state["active_analysis_block"]["physical_claim_promotions"] == 0
+    assert checkpoint["gate_state"]["K1-D"] == "NOT_RELEASED"
+    assert checkpoint["gate_state"]["K1-E"] == "NOT_ADMISSIBLE"
     assert manifest["canonical_state"] == STATE.relative_to(ROOT).as_posix()
     assert manifest["site_state"] == SITE.relative_to(ROOT).as_posix()
     assert manifest["session_checkpoint"] == CHECKPOINT.relative_to(ROOT).as_posix()
+    assert manifest["canonical_pages"][1]["status"] == "ACTIVE_CURRENT_RECONCILED"
     assert ALIAS.read_bytes() == CHECKPOINT.read_bytes()
     assert_closed_gates(state)
     assert_closed_gates(site)
     assert_closed_gates(checkpoint)
     assert_closed_gates(manifest)
+
+    # The committed Band-V-A generated registers must describe the repaired
+    # public corpus, not the historical pre-adjudication HIGH queue.
+    committed_summary = load(COMMITTED_SUMMARY)
+    committed_assignments = load(COMMITTED_ASSIGNMENTS)
+    assert committed_summary["claim_candidates"] == 989
+    assert committed_summary["tracked_html_files"] == 72
+    assert committed_summary["risk_classes"].get("HIGH", 0) == 0
+    assert committed_summary["risk_classes"]["MEDIUM"] == 42
+    assert committed_summary["risk_classes"]["CONTEXT_OR_FIREWALL"] == 360
+    assert committed_summary["physical_gate_effect"] == "NONE"
+    assert committed_summary["physical_evidence_effect"] == "NONE"
+    assert committed_assignments["candidate_count"] == 989
+    assert committed_assignments["assignment_count"] == 989
+    assert committed_assignments["high_medium_candidate_count"] == 42
+    assert committed_assignments["manual_review_required_count"] == 247
+    assert committed_assignments["fallback_assignment_count"] == 209
+    assert committed_assignments["unknown_family_ids"] == 0
+    assert committed_assignments["unmapped_candidates"] == 0
+    assert committed_assignments["semantics"]["routing_is_scientific_adjudication"] is False
+    assert committed_assignments["semantics"]["routing_creates_evidence"] is False
 
     # Re-extract the live branch corpus. The two former HIGH items must now be
     # self-contained firewalls/governance qualifiers, and no unresolved HIGH
@@ -144,7 +172,10 @@ def main() -> None:
     scanner = module("ul_band_va_scanner_vb", SCANNER)
     rows, summary = scanner.extract(ROOT)
     high = [row for row in rows if row.preliminary_risk_class == "HIGH"]
+    medium = [row for row in rows if row.preliminary_risk_class == "MEDIUM"]
     assert high == [], [(row.path, row.source_line, row.text) for row in high]
+    assert len(rows) == 989
+    assert len(medium) == 42
 
     obs_rows = [row for row in rows if row.path == "observatory-en.html" and "may not establish ghost freedom" in row.text]
     assert len(obs_rows) == 1, obs_rows
@@ -159,8 +190,8 @@ def main() -> None:
 
     print(
         "UniverseLab Band V-B HIGH gate: PASS "
-        f"historical_high=2 adjudicated=2 current_high={len(high)} "
-        "physical_promotions=0"
+        f"historical_high=2 adjudicated=2 current_high={len(high)} current_medium={len(medium)} "
+        "materialized_manual_review=247 physical_promotions=0"
     )
 
 
