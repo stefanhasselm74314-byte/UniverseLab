@@ -33,6 +33,7 @@ HIDDEN_TAGS = {"script", "style", "template", "noscript", "svg"}
 REGION_TAGS = {"main", "article", "section", "aside", "header", "nav", "footer"}
 NONCLAIM_TAGS = {"nav", "button", "option", "label"}
 SPACE = re.compile(r"\s+")
+STEM_TERMS = {"kosmolog", "cosmolog", "falsifiz", "falsif"}
 
 LEXICON: dict[str, tuple[str, ...]] = {
     "THEORY_6D_PARENT": (
@@ -75,7 +76,8 @@ LEXICON: dict[str, tuple[str, ...]] = {
         "nicht freigegeben", "nicht veröffentlicht", "nicht hergeleitet", "offen",
         "open", "keine empirische", "no empirical", "keine evidenz", "no evidence",
         "keine likelihood", "no likelihood", "keine theoriebestätigung",
-        "no theory confirmation", "≠", "not equal", "does not imply",
+        "no theory confirmation", "physical_evidence_effect = none",
+        "physical evidence effect: none", "≠", "not equal", "does not imply",
     ),
     "CONDITIONAL_HEURISTIC": (
         "konditional", "conditional", "modellannahme", "model assumption", "heuristisch",
@@ -279,39 +281,50 @@ def has_negated_claim(text: str) -> bool:
     return any(pattern.search(text) for pattern in NEGATED_CLAIM_PATTERNS)
 
 
-def categories(text: str) -> list[str]:
+def term_present(text: str, term: str) -> bool:
     lower = text.casefold()
-    result = {name for name, terms in LEXICON.items() if any(term.casefold() in lower for term in terms)}
+    token = term.casefold()
+    if token in STEM_TERMS:
+        return re.search(rf"(?<!\w){re.escape(token)}\w*", lower) is not None
+    if any(symbol in token for symbol in ("→", "≠", "=", "∂", "∫")):
+        return token in lower
+    return re.search(rf"(?<!\w){re.escape(token)}(?!\w)", lower) is not None
+
+
+def contains_any(text: str, terms: Iterable[str]) -> bool:
+    return any(term_present(text, term) for term in terms)
+
+
+def categories(text: str) -> list[str]:
+    result = {name for name, terms in LEXICON.items() if contains_any(text, terms)}
     if has_negated_claim(text):
         result.add("STATUS_FIREWALL")
     return sorted(result)
 
 
 def explicit_status(text: str) -> str:
-    lower = text.casefold()
-    if any(term in lower for term in ("falsifiziert", "falsified")):
+    if contains_any(text, ("falsifiziert", "falsified")):
         return "FALSIFIED"
-    if any(term in lower for term in ("not admissible", "not released", "unreleased", "blocked", "blockiert", "gesperrt", "nicht freigegeben", "nicht veröffentlicht")):
+    if contains_any(text, ("not admissible", "not released", "unreleased", "blocked", "blockiert", "gesperrt", "nicht freigegeben", "nicht veröffentlicht")):
         return "BLOCKED_OR_UNRELEASED"
     if has_negated_claim(text):
         return "EXPLICITLY_NEGATED_OR_LIMITED"
-    if any(term in lower for term in ("not established", "not executed", "offen", "open", "pending", "ausstehend")):
+    if contains_any(text, ("not established", "not executed", "offen", "open", "pending", "ausstehend")):
         return "OPEN_OR_NOT_EXECUTED"
-    if any(term.casefold() in lower for term in LEXICON["CONDITIONAL_HEURISTIC"]):
+    if contains_any(text, LEXICON["CONDITIONAL_HEURISTIC"]):
         return "CONDITIONAL_OR_HEURISTIC"
-    if any(term in lower for term in ("numerisch bestätigt", "numerically confirmed", "numerically validated")):
+    if contains_any(text, ("numerisch bestätigt", "numerically confirmed", "numerically validated")):
         return "CLAIMED_NUMERICALLY_CONFIRMED"
-    if any(term in lower for term in ("bewiesen", "proved", "proven", "theorem", "satz")):
+    if contains_any(text, ("bewiesen", "proved", "proven", "theorem", "satz")):
         return "CLAIMED_PROVEN"
     return "UNCLASSIFIED"
 
 
 def score(text: str, cats: list[str], equation_like: bool) -> tuple[int, bool]:
-    lower = text.casefold()
     negated = has_negated_claim(text)
-    limiter = negated or any(term.casefold() in lower for term in EXPLICIT_LIMITERS)
+    limiter = negated or contains_any(text, EXPLICIT_LIMITERS)
     value = 0
-    if not negated and any(term.casefold() in lower for term in STRONG_OVERCLAIM):
+    if not negated and contains_any(text, STRONG_OVERCLAIM):
         value += 7
     if "EVIDENCE_CONFIRMATION" in cats:
         value += 4
