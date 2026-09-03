@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Extract public scientific claim candidates from UniverseLab pages.
+"""Deterministic public scientific-claim census for UniverseLab.
 
-Deterministic lexical census only: this script does not adjudicate scientific
-truth, infer evidence, run a physical solver, or promote any gate. It scans
-visible public text, records exact source provenance and prioritizes candidates
-for later human claim -> equation -> code -> test -> source -> falsifier review.
+This is a lexical inventory, not a truth/evidence adjudicator. It extracts
+visible public text with exact file/hash/line/tag provenance and assigns only a
+preliminary review priority. No network access, physical backend import, solver
+execution, authorization, likelihood evaluation or evidence promotion occurs.
 """
 from __future__ import annotations
 
 import argparse
 from collections import Counter
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 import hashlib
 from html.parser import HTMLParser
 import json
@@ -22,6 +22,7 @@ from typing import Any, Iterable
 from urllib.parse import urlsplit
 
 BASE_URL = "https://stefanhasselm74314-byte.github.io/UniverseLab/"
+SPACE = re.compile(r"\s+")
 BLOCK_TAGS = {
     "address", "article", "aside", "blockquote", "button", "caption", "dd",
     "details", "dialog", "div", "dl", "dt", "figcaption", "figure", "footer",
@@ -32,7 +33,6 @@ BLOCK_TAGS = {
 HIDDEN_TAGS = {"script", "style", "template", "noscript", "svg"}
 REGION_TAGS = {"main", "article", "section", "aside", "header", "nav", "footer"}
 NONCLAIM_TAGS = {"nav", "button", "option", "label"}
-SPACE = re.compile(r"\s+")
 STEM_TERMS = {"kosmolog", "cosmolog", "falsifiz", "falsif"}
 
 LEXICON: dict[str, tuple[str, ...]] = {
@@ -47,7 +47,7 @@ LEXICON: dict[str, tuple[str, ...]] = {
     "EVIDENCE_CONFIRMATION": (
         "beweist", "bewiesen", "bestätigt", "bestätigung", "nachgewiesen", "beweis",
         "evidenz", "empirisch", "proves", "proved", "proven", "proof", "confirmed",
-        "confirmation", "demonstrates", "evidence", "empirical", "validated", "validation",
+        "confirmation", "demonstrates", "evidence", "empirical", "validated",
     ),
     "PREDICTION_SIGNATURE": (
         "vorhersage", "vorhersagt", "prediction", "predicts", "signatur", "signature",
@@ -72,12 +72,14 @@ LEXICON: dict[str, tuple[str, ...]] = {
     ),
     "STATUS_FIREWALL": (
         "not released", "not admissible", "not established", "not executed",
-        "not authorized", "unreleased", "blocked", "gesperrt", "blockiert",
-        "nicht freigegeben", "nicht veröffentlicht", "nicht hergeleitet", "offen",
-        "open", "keine empirische", "no empirical", "keine evidenz", "no evidence",
-        "keine likelihood", "no likelihood", "keine theoriebestätigung",
-        "no theory confirmation", "physical_evidence_effect = none",
-        "physical evidence effect: none", "≠", "not equal", "does not imply",
+        "not authorized", "unreleased", "blocked", "gesperrt", "blockiert", "blocker",
+        "nicht freigegeben", "keine freigegebene", "nicht veröffentlicht",
+        "nicht hergeleitet", "offen", "open", "keine empirische", "no empirical",
+        "keine evidenz", "no evidence", "keine likelihood", "no likelihood",
+        "keine theoriebestätigung", "no theory confirmation", "evidence limits",
+        "evidence gates", "physical_evidence_effect = none",
+        "physical evidence effect: none", "von empirischer evidenz trennen",
+        "≠", "not equal", "does not imply",
     ),
     "CONDITIONAL_HEURISTIC": (
         "konditional", "conditional", "modellannahme", "model assumption", "heuristisch",
@@ -86,35 +88,33 @@ LEXICON: dict[str, tuple[str, ...]] = {
         "visualization", "demonstrator", "experimentell", "experimental",
     ),
 }
-
 STRONG_OVERCLAIM = (
     "beweist", "bewiesen", "bestätigt die theorie", "nachgewiesen", "proves",
     "proved", "proven", "confirms the theory", "confirmed the theory", "demonstrates that",
     "erklärt die dunkle materie", "explains dark matter", "ersetzt dunkle materie",
     "replaces dark matter", "hergeleitet aus 6d", "derived from 6d",
 )
-EXPLICIT_LIMITERS = LEXICON["STATUS_FIREWALL"] + LEXICON["CONDITIONAL_HEURISTIC"]
 EQUATION_MARKERS = (
     "=", "→", "∂", "∫", "Ω", "Λ", "σ", "β", "η", "μ", "Σ", "sqrt(",
     "log", "ln ", "d²", "d/", "e²", "h(z)", "d(a)", "fσ", "q(a)",
 )
 
-# Negation can precede or follow the evidence/derivation verb. These bounded
-# patterns deliberately cover explicit firewall prose such as "nicht bewiesen",
-# "beweist nicht", "beweist keine Ghostfreiheit", "weder ... noch" and
-# "keine bestätigte 6D-Ableitung" without treating an arbitrarily distant
-# qualifier elsewhere in a long block as local negation.
-NEGATED_CLAIM_PATTERNS = tuple(re.compile(pattern, re.IGNORECASE) for pattern in (
-    r"\b(?:nicht|noch\s+nicht|kein(?:e|en|em|er|es)?|ohne)\b.{0,96}\b(?:bewiesen|beweis(?:e|es|en)?|bestätigt(?:e|en|er|es)?|bestätigung|nachgewiesen|evidenz(?:status)?|empirisch|hergeleitet(?:e|en|er|es)?|herleitung|ableitung|identifiziert|identifikation|likelihood)\b",
-    r"\b(?:beweist|bestätigt|zeigt|demonstriert|impliziert|erklärt|identifiziert)\b.{0,64}\b(?:nicht|kein(?:e|en|em|er|es)?|weder)\b",
-    r"\bweder\b.{0,128}\bnoch\b",
-    r"\b(?:not|not\s+yet|no|without|does\s+not|do\s+not|did\s+not)\b.{0,96}\b(?:proved|proven|proof|confirmed|confirmation|validated|validation|evidence|empirical|derived|derivation|identified|identification|likelihood|imply)\b",
-    r"\b(?:proves?|confirms?|shows?|demonstrates?|implies?|explains?|identifies?)\b.{0,64}\b(?:not|no|neither)\b",
-    r"\bneither\b.{0,128}\bnor\b",
+NEGATED_PATTERNS = tuple(re.compile(pattern, re.IGNORECASE) for pattern in (
+    # negator before an evidence/derivation/physical-identification term
+    r"\b(?:nicht|noch\s+nicht|kein(?:e|en|em|er|es)?|ohne)\b.{0,120}\b(?:beweist|bewiesen|beweis(?:e|es|en)?|bestätigt(?:e|en|er|es)?|bestätigung|nachgewiesen|evidenz(?:status)?|empirisch|hergeleitet(?:e|en|er|es)?|herleitung|ableitung|identifiziert|identifikation|konstruiert|vorhersage|likelihood)\b",
+    # evidence verb before its negator
+    r"\b(?:beweist|bestätigt|zeigt|demonstriert|impliziert|erklärt|identifiziert)\b.{0,80}\b(?:nicht|kein(?:e|en|em|er|es)?|weder)\b",
+    r"\bweder\b.{0,160}\bnoch\b",
+    r"\b(?:not|not\s+yet|no|without|does\s+not|do\s+not|did\s+not)\b.{0,120}\b(?:proves?|proved|proven|proof|confirmed|confirmation|validated|evidence|empirical|derived|derivation|identified|identification|constructed|prediction|likelihood|imply)\b",
+    r"\b(?:proves?|confirms?|shows?|demonstrates?|implies?|explains?|identifies?)\b.{0,80}\b(?:not|no|neither)\b",
+    r"\bneither\b.{0,160}\bnor\b",
 ))
 EXCLUSION_PATTERNS = tuple(re.compile(pattern, re.IGNORECASE) for pattern in (
-    r"\b(?:nicht\s+enthalten|nicht\s+umfasst|nicht\s+Bestandteil|ausgeschlossen|keine\s+.*?Ableitung|noch\s+keine\s+.*?Ableitung)\b",
-    r"\b(?:not\s+included|not\s+part\s+of|does\s+not\s+include|do\s+not\s+include|excluded|no\s+.*?derivation)\b",
+    r"\b(?:nicht\s+enthalten|nicht\s+umfasst|nicht\s+Bestandteil|ausgeschlossen)\b",
+    r"\b(?:keine|kein|noch\s+keine)\b.{0,96}\b(?:freigegebene|freigegebenen|ableitung|herleitung|vorhersage|evidenz|likelihood)\b",
+    r"\bblocker\b.{0,220}\b(?:fehlt|fehlen|offen|blockiert)\b",
+    r"\b(?:not\s+included|not\s+part\s+of|does\s+not\s+include|do\s+not\s+include|excluded)\b",
+    r"\b(?:no|not\s+yet)\b.{0,96}\b(?:released|derivation|prediction|evidence|likelihood)\b",
 ))
 
 
@@ -155,12 +155,7 @@ class Candidate:
 
 
 class VisibleBlockParser(HTMLParser):
-    """Collect leaf/direct visible block text with source-line provenance.
-
-    Text is appended only to the innermost open block. This prevents nested
-    navigation/form content from being copied into ancestor header/main blocks
-    and avoids ancestor/leaf duplicate provenance drift.
-    """
+    """Collect direct visible text from leaf blocks, not copied ancestor text."""
 
     def __init__(self, path: str, source_sha256: str, page_scope: str, manifest_status: str | None):
         super().__init__(convert_charrefs=True)
@@ -188,14 +183,14 @@ class VisibleBlockParser(HTMLParser):
     def handle_endtag(self, tag: str) -> None:
         lower = tag.lower()
         if lower in BLOCK_TAGS and self.hidden_depth == 0 and self.block_stack:
-            index = next((i for i in range(len(self.block_stack)-1, -1, -1)
+            index = next((i for i in range(len(self.block_stack) - 1, -1, -1)
                           if self.block_stack[i]["tag"] == lower), None)
             if index is not None:
                 block = self.block_stack.pop(index)
                 self._append(block["tag"], block["line"], " ".join(block["parts"]))
         if lower in HIDDEN_TAGS and self.hidden_depth:
             self.hidden_depth -= 1
-        for index in range(len(self.stack)-1, -1, -1):
+        for index in range(len(self.stack) - 1, -1, -1):
             if self.stack[index] == lower:
                 del self.stack[index:]
                 break
@@ -214,37 +209,29 @@ class VisibleBlockParser(HTMLParser):
             return
         region = next((name for name in reversed(self.stack) if name in REGION_TAGS), "document")
         self.blocks.append(Block(
-            path=self.path,
-            source_sha256=self.source_sha256,
-            page_scope=self.page_scope,
-            manifest_status=self.manifest_status,
-            tag=tag,
-            region=region,
-            line=line,
-            text=normalized,
+            self.path, self.source_sha256, self.page_scope, self.manifest_status,
+            tag, region, line, normalized,
         ))
 
 
 def run_git(root: Path, *args: str) -> str:
-    result = subprocess.run(["git", "-C", str(root), *args], check=False, capture_output=True, text=True)
+    result = subprocess.run(["git", "-C", str(root), *args], capture_output=True, text=True)
     if result.returncode != 0:
         raise CensusError(f"GIT_COMMAND_FAILED:{' '.join(args)}:{result.stderr.strip()}")
     return result.stdout
 
 
 def tracked_html(root: Path) -> list[str]:
-    output = run_git(root, "ls-files", "*.html")
-    result = sorted(line.strip() for line in output.splitlines() if line.strip())
-    if not result:
+    paths = sorted(line.strip() for line in run_git(root, "ls-files", "*.html").splitlines() if line.strip())
+    if not paths:
         raise CensusError("NO_TRACKED_HTML_FILES")
-    return result
+    return paths
 
 
 def sitemap_paths(root: Path) -> set[str]:
     source = (root / "sitemap.xml").read_text(encoding="utf-8")
-    locations = re.findall(r"<loc>([^<]+)</loc>", source)
     result: set[str] = set()
-    for location in locations:
+    for location in re.findall(r"<loc>([^<]+)</loc>", source):
         if not location.startswith(BASE_URL):
             raise CensusError(f"NONCANONICAL_SITEMAP_LOCATION:{location}")
         relative = urlsplit(location).path.removeprefix("/UniverseLab/") or "index.html"
@@ -257,11 +244,11 @@ def sitemap_paths(root: Path) -> set[str]:
 
 def manifest_pages(root: Path) -> dict[str, str]:
     manifest = json.loads((root / "project-manifest.json").read_text(encoding="utf-8"))
-    result: dict[str, str] = {}
-    for page in manifest.get("canonical_pages", []):
-        if isinstance(page, dict) and isinstance(page.get("path"), str):
-            result[page["path"]] = str(page.get("status", "UNSPECIFIED"))
-    return result
+    return {
+        page["path"]: str(page.get("status", "UNSPECIFIED"))
+        for page in manifest.get("canonical_pages", [])
+        if isinstance(page, dict) and isinstance(page.get("path"), str)
+    }
 
 
 def page_scope(path: str, sitemap: set[str], manifest: dict[str, str]) -> tuple[str, str | None]:
@@ -278,29 +265,13 @@ def page_scope(path: str, sitemap: set[str], manifest: dict[str, str]) -> tuple[
 
 def split_sentences(value: str) -> list[str]:
     pieces = re.split(r"(?<=[.!?])\s+(?=[A-ZÄÖÜ0-9\[])", value)
-    result = []
-    for piece in pieces:
-        normalized = SPACE.sub(" ", piece).strip(" -\t\r\n")
-        if len(normalized) >= 18:
-            result.append(normalized)
+    result = [SPACE.sub(" ", piece).strip(" -\t\r\n") for piece in pieces]
+    result = [piece for piece in result if len(piece) >= 18]
     return result or ([value] if len(value) >= 18 else [])
 
 
-def has_negated_claim(text: str) -> bool:
-    return any(pattern.search(text) for pattern in NEGATED_CLAIM_PATTERNS)
-
-
-def has_exclusion(text: str) -> bool:
-    return any(pattern.search(text) for pattern in EXCLUSION_PATTERNS)
-
-
-def has_explicit_limiter(text: str) -> bool:
-    return has_negated_claim(text) or has_exclusion(text)
-
-
 def term_present(text: str, term: str) -> bool:
-    lower = text.casefold()
-    token = term.casefold()
+    lower, token = text.casefold(), term.casefold()
     if token in STEM_TERMS:
         return re.search(rf"(?<!\w){re.escape(token)}\w*", lower) is not None
     if any(symbol in token for symbol in ("→", "≠", "=", "∂", "∫")):
@@ -310,6 +281,14 @@ def term_present(text: str, term: str) -> bool:
 
 def contains_any(text: str, terms: Iterable[str]) -> bool:
     return any(term_present(text, term) for term in terms)
+
+
+def has_explicit_limiter(text: str) -> bool:
+    return (
+        any(pattern.search(text) for pattern in NEGATED_PATTERNS)
+        or any(pattern.search(text) for pattern in EXCLUSION_PATTERNS)
+        or contains_any(text, LEXICON["STATUS_FIREWALL"])
+    )
 
 
 def categories(text: str) -> list[str]:
@@ -324,10 +303,10 @@ def explicit_status(text: str) -> str:
         return "FALSIFIED"
     if contains_any(text, ("not admissible", "not released", "unreleased", "blocked", "blockiert", "gesperrt", "nicht freigegeben", "nicht veröffentlicht")):
         return "BLOCKED_OR_UNRELEASED"
-    if has_explicit_limiter(text):
-        return "EXPLICITLY_NEGATED_OR_LIMITED"
     if contains_any(text, ("not established", "not executed", "offen", "open", "pending", "ausstehend")):
         return "OPEN_OR_NOT_EXECUTED"
+    if has_explicit_limiter(text):
+        return "EXPLICITLY_NEGATED_OR_LIMITED"
     if contains_any(text, LEXICON["CONDITIONAL_HEURISTIC"]):
         return "CONDITIONAL_OR_HEURISTIC"
     if contains_any(text, ("numerisch bestätigt", "numerically confirmed", "numerically validated")):
@@ -338,10 +317,9 @@ def explicit_status(text: str) -> str:
 
 
 def score(text: str, cats: list[str], equation_like: bool) -> tuple[int, bool]:
-    limiting_context = has_explicit_limiter(text)
-    limiter = limiting_context or contains_any(text, EXPLICIT_LIMITERS)
+    limiter = has_explicit_limiter(text)
     value = 0
-    if not limiting_context and contains_any(text, STRONG_OVERCLAIM):
+    if not limiter and contains_any(text, STRONG_OVERCLAIM):
         value += 7
     if "EVIDENCE_CONFIRMATION" in cats:
         value += 4
@@ -358,7 +336,7 @@ def score(text: str, cats: list[str], equation_like: bool) -> tuple[int, bool]:
     if equation_like:
         value += 1
     if limiter:
-        value -= 10 if limiting_context else 4
+        value -= 12
     if "CONDITIONAL_HEURISTIC" in cats:
         value -= 2
     return max(-6, value), limiter
@@ -382,24 +360,14 @@ def candidate_from(block: Block, sentence: str) -> Candidate | None:
     if not cats and not equation_like:
         return None
     value, limiter = score(sentence, cats, equation_like)
-    digest = hashlib.sha256(f"{block.path}\0{block.line}\0{block.tag}\0{sentence}".encode("utf-8")).hexdigest()[:16]
+    digest = hashlib.sha256(
+        f"{block.path}\0{block.line}\0{block.tag}\0{sentence}".encode("utf-8")
+    ).hexdigest()[:16]
     return Candidate(
-        claim_id=f"UL-CLAIM-CANDIDATE-{digest.upper()}",
-        path=block.path,
-        source_sha256=block.source_sha256,
-        page_scope=block.page_scope,
-        manifest_status=block.manifest_status,
-        tag=block.tag,
-        region=block.region,
-        source_line=block.line,
-        text=sentence,
-        lexical_categories=cats,
-        equation_like=equation_like,
-        explicit_status=explicit_status(sentence),
-        limiter_present=limiter,
-        preliminary_risk_score=value,
-        preliminary_risk_class=risk_class(value),
-        adjudication_status="AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+        f"UL-CLAIM-CANDIDATE-{digest.upper()}", block.path, block.source_sha256,
+        block.page_scope, block.manifest_status, block.tag, block.region, block.line,
+        sentence, cats, equation_like, explicit_status(sentence), limiter, value,
+        risk_class(value), "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
     )
 
 
@@ -414,7 +382,8 @@ def readme_candidates(root: Path) -> list[Candidate]:
         text = SPACE.sub(" ", re.sub(r"^[#>*+\-\d.\s]+", "", line)).strip()
         if len(text) < 18:
             continue
-        block = Block("README.md", sha, "PUBLIC_REPOSITORY_README", "ACTIVE", "markdown-line", "document", line_number, text)
+        block = Block("README.md", sha, "PUBLIC_REPOSITORY_README", "ACTIVE",
+                      "markdown-line", "document", line_number, text)
         for sentence in split_sentences(text):
             item = candidate_from(block, sentence)
             if item:
@@ -423,9 +392,7 @@ def readme_candidates(root: Path) -> list[Candidate]:
 
 
 def extract(root: Path) -> tuple[list[Candidate], dict[str, Any]]:
-    sitemap = sitemap_paths(root)
-    manifest = manifest_pages(root)
-    paths = tracked_html(root)
+    sitemap, manifest, paths = sitemap_paths(root), manifest_pages(root), tracked_html(root)
     blocks: list[Block] = []
     page_index: list[dict[str, Any]] = []
     for relative in paths:
@@ -452,9 +419,9 @@ def extract(root: Path) -> tuple[list[Candidate], dict[str, Any]]:
             "manifest_member": relative in manifest,
         })
 
-    # Nested ancestor copies are prevented by the parser. If exact text still
-    # repeats through equivalent leaf markup, prefer the smallest direct block;
-    # this preserves the most local source-line/tag provenance.
+    # Because ancestors no longer receive descendant text, duplicate text now
+    # comes only from equivalent leaf wrappers. Prefer the smallest direct block,
+    # then its earliest line, so source provenance points to the local element.
     selected: dict[str, tuple[Candidate, int]] = {}
     for block in blocks:
         for sentence in split_sentences(block.text):
@@ -462,14 +429,13 @@ def extract(root: Path) -> tuple[list[Candidate], dict[str, Any]]:
             if not item:
                 continue
             key = f"{item.path}\0{item.text}"
-            previous = selected.get(key)
+            current = selected.get(key)
             preference = (len(block.text), item.source_line, item.tag)
-            if previous is None:
+            if current is None:
                 selected[key] = (item, len(block.text))
             else:
-                previous_item, previous_size = previous
-                previous_preference = (previous_size, previous_item.source_line, previous_item.tag)
-                if preference < previous_preference:
+                old, old_size = current
+                if preference < (old_size, old.source_line, old.tag):
                     selected[key] = (item, len(block.text))
     for item in readme_candidates(root):
         selected[f"{item.path}\0{item.text}"] = (item, len(item.text))
@@ -489,7 +455,7 @@ def extract(root: Path) -> tuple[list[Candidate], dict[str, Any]]:
         "claim_candidates": len(ordered),
         "risk_classes": dict(Counter(item.preliminary_risk_class for item in ordered)),
         "explicit_statuses": dict(Counter(item.explicit_status for item in ordered)),
-        "lexical_categories": dict(Counter(category for item in ordered for category in item.lexical_categories)),
+        "lexical_categories": dict(Counter(cat for item in ordered for cat in item.lexical_categories)),
         "page_scopes": dict(Counter(item.page_scope for item in ordered)),
         "page_index": page_index,
         "limitations": [
@@ -525,7 +491,8 @@ def write_outputs(root: Path, output_dir: Path) -> dict[str, Path]:
     for item in candidates:
         value = asdict(item)
         rows.append("\t".join(
-            json.dumps(value[column], ensure_ascii=False) if isinstance(value[column], (list, dict, bool))
+            json.dumps(value[column], ensure_ascii=False)
+            if isinstance(value[column], (list, dict, bool))
             else str(value[column]).replace("\t", " ").replace("\n", " ")
             for column in columns
         ))
