@@ -155,16 +155,21 @@
         "medium_claims": 42
       },
       "governance": {
+        "priority": "P1_PUBLIC_CLAIM_INTEGRITY",
         "automatic_routing_is_adjudication": false,
         "risk_score_is_evidence_grade": false,
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
         "physical_evidence_effect": "NONE"
       },
       "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
         "high_substantive_overclaims": 0,
         "high_scope_firewalls": 1,
         "high_governance_claims": 1,
         "medium_context_review": "NOT_STARTED"
-      }
+      },
+      "release_gate": {"id":"BAND-VB-HIGH-CLAIM-GATE","status":"CHANGESET_REVIEW_PENDING"}
     }
   ],
   "status_sources": {
