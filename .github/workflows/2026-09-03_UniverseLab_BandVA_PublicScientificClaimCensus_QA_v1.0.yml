@@ -1,0 +1,102 @@
+name: UniverseLab Band V-A public scientific claim census QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - '*.html'
+      - 'README.md'
+      - 'project-manifest.json'
+      - 'sitemap.xml'
+      - 'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json'
+      - 'science/audit/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.md'
+      - 'tests/2026-09-03_test_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.py'
+      - '.github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_QA_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - '*.html'
+      - 'README.md'
+      - 'project-manifest.json'
+      - 'sitemap.xml'
+      - 'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json'
+      - 'science/audit/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.md'
+      - 'tests/2026-09-03_test_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.py'
+      - '.github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_QA_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  extract-public-claim-candidates:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile deterministic extractor
+        run: python -m py_compile tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py
+
+      - name: Extract all tracked public scientific claim candidates
+        run: |
+          python tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py \
+            --root . \
+            --output-dir claim-census-output
+
+      - name: Enforce extraction coverage and non-adjudication semantics
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary=json.loads(Path('claim-census-output/UniverseLab_PublicScientificClaimExtractionSummary_v1.0.json').read_text())
+          candidates=json.loads(Path('claim-census-output/UniverseLab_PublicScientificClaimCandidates_v1.0.json').read_text())
+          tracked=[line for line in __import__('subprocess').check_output(['git','ls-files','*.html'],text=True).splitlines() if line]
+          assert summary['status']=='PASS_AUTOMATED_EXTRACTION_NOT_SCIENTIFIC_ADJUDICATION'
+          assert candidates['status']=='AUTOMATED_CANDIDATES_NOT_ADJUDICATED'
+          assert summary['tracked_html_files']==len(tracked)
+          indexed={row['path'] for row in summary['page_index']}
+          assert indexed==set(tracked), (len(indexed),len(tracked),sorted(set(tracked)-indexed)[:10])
+          assert summary['claim_candidates']>0
+          assert len(candidates['candidates'])==summary['claim_candidates']
+          assert all(row['adjudication_status']=='AUTOMATED_CANDIDATE_NOT_ADJUDICATED' for row in candidates['candidates'])
+          assert all(row['source_sha256'] and len(row['source_sha256'])==64 for row in candidates['candidates'])
+          assert candidates['physical_gate_effect']=='NONE'
+          assert candidates['physical_evidence_effect']=='NONE'
+          assert summary['physical_gate_effect']=='NONE'
+          assert summary['physical_evidence_effect']=='NONE'
+          print('Band V-A automated claim extraction coverage: PASS')
+          PY
+
+      - name: Enforce nonoperative boundary
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text=Path('tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py').read_text()
+          forbidden=[
+              'AuthorizationDecision(',
+              'SingleUseGrant(',
+              'subprocess.run(["python", "solver',
+              'import scipy',
+              'import numpy',
+              'requests.',
+              'urllib.request',
+          ]
+          found=[token for token in forbidden if token in text]
+          assert not found, found
+          assert 'physical_gate_effect' in text
+          assert 'physical_evidence_effect' in text
+          print('Band V-A nonoperative boundary: PASS')
+          PY
+
+      - name: Upload claim-census candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: universelab-band-va-public-scientific-claim-candidates
+          path: claim-census-output/
+          if-no-files-found: error
