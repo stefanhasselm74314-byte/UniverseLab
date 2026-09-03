@@ -1,25 +1,24 @@
 {
-  "basis_commit": "896805107f26064e20f64227fdc2495659200f54",
-  "claim_candidates": 1411,
+  "basis_commit": "4926c4208c53cd96f1a1e50adf8528a4104c95c5",
+  "claim_candidates": 987,
   "explicit_statuses": {
-    "BLOCKED_OR_UNRELEASED": 76,
-    "CLAIMED_PROVEN": 34,
-    "CONDITIONAL_OR_HEURISTIC": 100,
+    "BLOCKED_OR_UNRELEASED": 66,
+    "CONDITIONAL_OR_HEURISTIC": 56,
     "EXPLICITLY_NEGATED_OR_LIMITED": 58,
-    "OPEN_OR_NOT_EXECUTED": 62,
-    "UNCLASSIFIED": 1081
+    "OPEN_OR_NOT_EXECUTED": 43,
+    "UNCLASSIFIED": 764
   },
   "generated_by": "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py",
   "lexical_categories": {
-    "CONDITIONAL_HEURISTIC": 114,
-    "DERIVATION_IDENTIFICATION": 98,
-    "EVIDENCE_CONFIRMATION": 145,
-    "NUMERICAL_METHOD": 418,
-    "OBSERVATIONAL_DATA": 195,
-    "PHYSICAL_COSMOLOGY": 400,
-    "PREDICTION_SIGNATURE": 32,
-    "STATUS_FIREWALL": 207,
-    "THEORY_6D_PARENT": 145
+    "CONDITIONAL_HEURISTIC": 64,
+    "DERIVATION_IDENTIFICATION": 65,
+    "EVIDENCE_CONFIRMATION": 80,
+    "NUMERICAL_METHOD": 124,
+    "OBSERVATIONAL_DATA": 111,
+    "PHYSICAL_COSMOLOGY": 169,
+    "PREDICTION_SIGNATURE": 23,
+    "STATUS_FIREWALL": 177,
+    "THEORY_6D_PARENT": 141
   },
   "limitations": [
     "Lexical extraction cannot establish whether a scientific claim is true.",
@@ -680,19 +679,19 @@
     }
   ],
   "page_scopes": {
-    "CANONICAL_MANIFEST_PAGE": 541,
-    "PUBLIC_REPOSITORY_README": 45,
-    "PUBLIC_SITEMAP_PAGE": 429,
-    "TRACKED_ARCHIVE_OR_UTILITY_PAGE": 110,
-    "TRACKED_NON_SITEMAP_PAGE": 286
+    "CANONICAL_MANIFEST_PAGE": 365,
+    "PUBLIC_REPOSITORY_README": 33,
+    "PUBLIC_SITEMAP_PAGE": 342,
+    "TRACKED_ARCHIVE_OR_UTILITY_PAGE": 68,
+    "TRACKED_NON_SITEMAP_PAGE": 179
   },
   "physical_evidence_effect": "NONE",
   "physical_gate_effect": "NONE",
   "risk_classes": {
-    "CONTEXT_OR_FIREWALL": 478,
-    "HIGH": 36,
-    "LOW": 766,
-    "MEDIUM": 131
+    "CONTEXT_OR_FIREWALL": 304,
+    "HIGH": 12,
+    "LOW": 594,
+    "MEDIUM": 77
   },
   "schema": "universelab.public-scientific-claim-extraction-summary.v0.1",
   "sitemap_pages": 34,
