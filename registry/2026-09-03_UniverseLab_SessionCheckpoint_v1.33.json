@@ -75,21 +75,34 @@
       "statement": "Band IV-B numerical-QA, provenance, public-status and accessibility reconciliation is merged and its exact-head checks were green.",
       "status": "MERGED_QA_RECONCILED",
       "evidence_effect": "SOFTWARE_AND_NUMERICAL_QA_ONLY",
-      "physical_evidence_effect": "NONE"
+      "physical_evidence_effect": "NONE",
+      "sources": [
+        "registry/2026-09-03_UniverseLab_BandIVBCurrentMainReconciliationContract_v1.0.json",
+        "science/cosmology/2026-09-03_UniverseLab_BandIVB_CurrentMainReconciliation_v1.0.md"
+      ]
     },
     {
       "result_id": "UL-RES-BAND-VA-001",
       "statement": "The public claim census covers 72 tracked HTML files with 989 lexical candidates and 989 family assignments; unmapped candidate count is zero. Routing is not scientific adjudication.",
       "status": "MERGED_REPRODUCIBLE_CENSUS",
       "evidence_effect": "AUDIT_PROVENANCE_ONLY",
-      "physical_evidence_effect": "NONE"
+      "physical_evidence_effect": "NONE",
+      "sources": [
+        "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+        "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json"
+      ]
     },
     {
       "result_id": "UL-RES-BAND-VB-HIGH-001",
       "statement": "The two Band-V-A HIGH candidates are a current-capability scope firewall and a repository/governance separation statement, not positive physical HZT evidence claims.",
       "status": "ADJUDICATED_IN_CHANGESET_REVIEW_PENDING",
       "evidence_effect": "PUBLIC_CLAIM_CONTEXT_AUDIT_ONLY",
-      "physical_evidence_effect": "NONE"
+      "physical_evidence_effect": "NONE",
+      "sources": [
+        "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+        "observatory-en.html",
+        "research-status.html"
+      ]
     }
   ],
   "confirmed_defects": [
@@ -101,10 +114,38 @@
     }
   ],
   "open_blockers": [
-    {"blocker_id":"UL-BLK-FM0-001","status":"OPEN","statement":"Parent-to-reduced-to-observable forward map remains open across the declared observable blocks."},
-    {"blocker_id":"UL-BLK-TRUST-ROOT-001","status":"PARKED_EXTERNAL_HUMAN_ACTION_REQUIRED","statement":"Human-controlled trust root is not ratified; offline key action is parked until an exclusively user-controlled computer is available."},
-    {"blocker_id":"UL-BLK-RUNTIME-ISSUANCE-001","status":"BLOCKED","statement":"Runtime issuance bindings remain blocked."},
-    {"blocker_id":"UL-BLK-C-PHYS-GENERIC-M1-001","status":"OPEN","statement":"Generic global M1 existence, continuum BVP invertibility, Hamiltonian positivity and full ghost freedom remain open."}
+    {
+      "blocker_id":"UL-BLK-FM0-001",
+      "status":"OPEN",
+      "statement":"Parent-to-reduced-to-observable forward map remains open across the declared observable blocks.",
+      "sources":["registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"]
+    },
+    {
+      "blocker_id":"UL-BLK-TRUST-ROOT-001",
+      "status":"PARKED_EXTERNAL_HUMAN_ACTION_REQUIRED",
+      "statement":"Human-controlled trust root is not ratified; offline key action is parked until an exclusively user-controlled computer is available.",
+      "sources":["registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json"]
+    },
+    {
+      "blocker_id":"UL-BLK-RUNTIME-ISSUANCE-001",
+      "status":"BLOCKED",
+      "statement":"Runtime issuance bindings remain blocked.",
+      "sources":["registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json"]
+    },
+    {
+      "blocker_id":"UL-BLK-C-PHYS-GENERIC-M1-001",
+      "status":"OPEN",
+      "statement":"Generic global M1 existence, continuum BVP invertibility, Hamiltonian positivity and full ghost freedom remain open.",
+      "sources":["project-manifest.json"]
+    }
+  ],
+  "active_assumptions": [
+    "Band V-A is a public-claim inventory and routing-coverage layer, not scientific adjudication.",
+    "Band V-B high-claim review is a contextual public-claim audit and does not create physical evidence.",
+    "The reduced Bridge background is not a derivation from the six-dimensional parent theory.",
+    "The linear GR growth equation is a reference model and not a released HZT perturbation map.",
+    "Human trust-root ratification remains parked until an exclusively user-controlled computer is available.",
+    "The dated v1.2/v1.3/v1.33 state chain becomes current only after this changeset is reviewed and merged."
   ],
   "forbidden_inferences": [
     "a lexical HIGH score is a physical overclaim",
