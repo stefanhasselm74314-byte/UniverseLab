@@ -1,0 +1,73 @@
+{
+  "schema": "universelab.band-vb-high-claim-adjudication-contract.v1",
+  "version": "1.0.0",
+  "date": "2026-09-03",
+  "basis_main_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55",
+  "classification": "PUBLIC_CLAIM_CONTEXT_ADJUDICATION_AND_CURRENT_STATE_PROVENANCE_RECONCILIATION",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "inputs": {
+    "band_va_claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+    "band_va_lexical_candidates": "registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json",
+    "band_va_family_assignments": "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json"
+  },
+  "outputs": {
+    "high_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+    "human_readable_audit": "science/audit/2026-09-03_UniverseLab_BandVB_HighClaimAdjudication_v1.0.md",
+    "current_state_successor": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+    "site_state_successor": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
+    "checkpoint_successor": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
+    "regression_test": "tests/2026-09-03_test_UniverseLab_BandVB_HighClaimAdjudication_v1.0.py",
+    "qa_workflow": ".github/workflows/2026-09-03_UniverseLab_BandVB_HighClaimAdjudication_QA_v1.0.yml"
+  },
+  "high_gate": {
+    "historical_high_candidates": 2,
+    "manually_context_adjudicated": 2,
+    "unadjudicated_high": 0,
+    "substantive_positive_physical_overclaims": 0,
+    "scope_firewalls": 1,
+    "repository_governance_claims": 1,
+    "confirmed_current_state_provenance_defects": 1,
+    "physical_claim_promotions": 0,
+    "required_current_reextracted_high_candidates_after_repairs": 0
+  },
+  "provenance_repair": {
+    "mode": "APPEND_ONLY_VERSIONED_SUCCESSORS",
+    "historical_snapshots_edited_in_place": false,
+    "old_current_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+    "old_site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
+    "old_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
+    "new_basis_main_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55"
+  },
+  "required_qa": [
+    "existing current-state reconciliation validator with strict source existence",
+    "Band V-B HIGH contextual regression test",
+    "Band V-A lexical scanner re-extraction",
+    "zero current HIGH lexical candidates after wording repair",
+    "checkpoint alias byte identity",
+    "manifest-current-state-site-state-checkpoint pointer consistency",
+    "all physical and authorization firewalls unchanged"
+  ],
+  "forbidden_inferences": [
+    "lexical HIGH score is physical evidence",
+    "scope firewall proves the negated positive proposition",
+    "repository governance statement is a physical measurement",
+    "zero current HIGH lexical candidates means HZT is scientifically validated",
+    "status reconciliation promotes K1-D or K1-E",
+    "green QA is empirical evidence"
+  ],
+  "current_gate_state": {
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "runtime_issuance_bindings": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_layer_after_green_merge": "BAND_VB_MEDIUM_CLAIM_CONTEXT_ADJUDICATION",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
