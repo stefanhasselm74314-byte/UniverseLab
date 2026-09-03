@@ -1,0 +1,131 @@
+{
+  "schema": "universelab.site-state.v1",
+  "version": "1.3.0",
+  "snapshot_date": "2026-09-03",
+  "snapshot_timestamp": "2026-09-03T20:45:00+02:00",
+  "basis_main_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55",
+  "basis_main_tree": "536d74be58bab519f1665df9c222662814000464",
+  "basis_semantics": "Exact merged main after Band V-A; Band-V-B high-claim adjudication and status-pointer repair in the containing changeset remain noncanonical until merged.",
+  "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+  "supersedes": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
+  "physical_gate_effect": "NONE",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "physical_evidence_effect": "NONE",
+    "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT",
+    "open_pull_requests_have_canonical_effect": false,
+    "historical_snapshots_are_append_only": true,
+    "trust_root_status": "NOT_RATIFIED",
+    "human_trust_root_action": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
+    "runtime_issuance_bindings": "BLOCKED"
+  },
+  "analysis_state": {
+    "band_iv_b": "MERGED_QA_RECONCILED",
+    "band_v_a": "MERGED_PUBLIC_CLAIM_CENSUS_AND_ROUTING_COVERAGE",
+    "band_v_b_high_claims": "ADJUDICATED_IN_CHANGESET_REVIEW_PENDING",
+    "band_v_b_medium_claims": "NOT_STARTED",
+    "lexical_claim_candidates": 989,
+    "high_claims": 2,
+    "high_substantive_overclaims": 0,
+    "confirmed_status_provenance_defects": 1
+  },
+  "pages": [
+    {"id":"home","path":"index.html","domain":"home","status":"ACTIVE"},
+    {"id":"navigator","path":"navigator.html","domain":"navigator","status":"ACTIVE_CANONICAL_DIRECT_DOCUMENT"},
+    {"id":"research_status","path":"research-status.html","domain":"status","status":"ACTIVE_CURRENT_POINTER_TO_V1_2_AFTER_CHANGESET_MERGE"},
+    {"id":"solver_hub","path":"solver-hub.html","domain":"solver","status":"ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY"},
+    {"id":"validation","path":"validation.html","domain":"validation","status":"ACTIVE_CANONICAL_ENGINE_ADAPTER"},
+    {"id":"observatory","path":"observatory.html","domain":"observatory","status":"ACTIVE_MERGED_QA_RECONCILED"},
+    {"id":"observatory_en","path":"observatory-en.html","domain":"observatory","status":"ACTIVE_CURATED_SCOPE_ORIENTATION_HIGH_CLAIM_WORDING_REPAIRED_IN_CHANGESET"},
+    {"id":"compare_safe","path":"compare-safe.html","domain":"compare","status":"ACTIVE_MERGED_QA_RECONCILED"},
+    {"id":"emergence","path":"emergence.html","domain":"emergence","status":"ACTIVE_MERGED_QA_RECONCILED_DIAGNOSTIC_VISUALIZATION"},
+    {"id":"methods","path":"hyperzeit-methods.html","domain":"methods","status":"ACTIVE"},
+    {"id":"material","path":"hyperzeit-material-v2.html","domain":"material","status":"ACTIVE"},
+    {"id":"audit_20260731","path":"universelab-audit-2026-07-31.html","domain":"audit","status":"ARCHIVED_REFERENCE"}
+  ],
+  "modules": [
+    {
+      "module_id": "ULSH-01",
+      "technical": {
+        "target_contract": "FROZEN",
+        "response_rank_method": "SPECIFIED_NOT_EXECUTED",
+        "authority_signature_verifier": "IMPLEMENTED_AND_QA_GREEN",
+        "human_trust_root_preparation": "IMPLEMENTED_AND_QA_GREEN",
+        "ratified_human_trust_root": "NOT_RATIFIED",
+        "runtime_issuance_bindings": "BLOCKED",
+        "background_execution": "NOT_AUTHORIZED",
+        "physical_response_rank": "NOT_EXECUTED",
+        "backend_import": "NOT_EXECUTED"
+      },
+      "governance": {
+        "solver_release": "NOT_AUTHORIZED",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
+        "global_M1_existence": "OPEN",
+        "continuum_BVP_invertibility": "OPEN",
+        "Hamiltonian_positivity": "OPEN",
+        "ghost_freedom": "OPEN"
+      }
+    },
+    {
+      "module_id": "HZT-M0-FM0",
+      "technical": {
+        "blocking_gap_count": 10,
+        "partially_resolved_blocking_gap_count": 3,
+        "fully_unresolved_blocking_gap_count": 7
+      },
+      "governance": {
+        "gate": "FM-G0",
+        "gate_status": "OPEN",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "forward_map": "OPEN",
+        "observable_blocks_released": false,
+        "bridge_growth": "UNRELEASED_GROWTH_MAP",
+        "bridge_lensing": "UNRELEASED_LENSING_MAP"
+      }
+    },
+    {
+      "module_id": "PUBLIC-CLAIM-AUDIT",
+      "technical": {
+        "tracked_html_files": 72,
+        "lexical_candidates": 989,
+        "family_assignments": 989,
+        "unmapped_candidates": 0,
+        "high_claims": 2,
+        "high_claims_adjudicated_in_changeset": 2,
+        "medium_claims": 42
+      },
+      "governance": {
+        "automatic_routing_is_adjudication": false,
+        "risk_score_is_evidence_grade": false,
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "high_substantive_overclaims": 0,
+        "high_scope_firewalls": 1,
+        "high_governance_claims": 1,
+        "medium_context_review": "NOT_STARTED"
+      }
+    }
+  ],
+  "status_sources": {
+    "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
+    "claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+    "high_claim_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+    "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+  },
+  "physical_evidence_effect": "NONE"
+}
