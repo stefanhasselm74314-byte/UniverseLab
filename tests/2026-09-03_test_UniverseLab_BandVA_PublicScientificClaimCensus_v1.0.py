@@ -55,6 +55,7 @@ def main() -> None:
         "Jede Karte sagt, was sie ausdrücklich nicht für Hyperzeit beweist.",
         "Diese Erweiterung ist eine Sensitivitätsfläche, keine freigegebene Hyperzeit-Vorhersage.",
         "Blocker: vollständige 6D-Herleitung und Ghostfreiheit fehlen.",
+        "Brücke Σ(a,k), η(a,k) nicht aus dem Parent-Sektor konstruiert.",
     ):
         assert_firewall(text)
 
@@ -66,10 +67,12 @@ def main() -> None:
     assert positive.preliminary_risk_class == "HIGH"
 
     # Token-boundary regression: lexical terms must not fire inside unrelated
-    # longer words (proven in Provenienz, Satz in Datensatz).
+    # longer words (proven in Provenienz, Satz in Datensatz). Generic UI/module
+    # label "Validation" is also not empirical confirmation by itself.
     assert "EVIDENCE_CONFIRMATION" not in M.categories("UniverseLab · Daten / Provenienz")
     assert M.explicit_status("UniverseLab · Daten / Provenienz") != "CLAIMED_PROVEN"
     assert M.explicit_status("Ein lesbarer Datensatz") != "CLAIMED_PROVEN"
+    assert "EVIDENCE_CONFIRMATION" not in M.categories("Validation Console")
 
     # Navigation text must not leak through an ancestor header block.
     parser = M.VisibleBlockParser("synthetic.html", "1" * 64, "SYNTHETIC_TEST", None)
@@ -111,6 +114,7 @@ def main() -> None:
         ("baryogenesis-v09.html", "Es beweist nicht"),
         ("baryogenesis-v10.html", "beweist keine Ghostfreiheit"),
         ("hyperzeit-material.html", "nicht für Hyperzeit beweist"),
+        ("compare-safe.html", "nicht aus dem Parent-Sektor konstruiert"),
     )
     for path, fragment in known_firewalls:
         matched = [row for row in rows if row.path == path and fragment in row.text]
