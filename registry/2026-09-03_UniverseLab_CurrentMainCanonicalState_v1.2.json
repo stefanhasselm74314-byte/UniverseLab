@@ -110,6 +110,7 @@
     "operative_single_use_grant": "NOT_CREATED",
     "backend_import": "NOT_EXECUTED",
     "solver_execution": "NOT_EXECUTED",
+    "solver_authorized": false,
     "physical_background": "NOT_ESTABLISHED",
     "physical_response_rank": "NOT_EXECUTED",
     "K1-D": "NOT_RELEASED",
