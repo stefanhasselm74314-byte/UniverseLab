@@ -8,6 +8,9 @@ on:
       - 'project-manifest.json'
       - 'sitemap.xml'
       - 'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+      - 'tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignmentContract_v0.1.json'
       - '.github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_Materialize_v1.0.yml'
 
 permissions:
@@ -36,7 +39,7 @@ jobs:
           materialize=false
           while IFS= read -r path; do
             case "$path" in
-              *.html|README.md|project-manifest.json|sitemap.xml|tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py|.github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_Materialize_v1.0.yml)
+              *.html|README.md|project-manifest.json|sitemap.xml|tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py|tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py|registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json|registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignmentContract_v0.1.json|.github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_Materialize_v1.0.yml)
                 materialize=true
                 break
                 ;;
@@ -44,13 +47,19 @@ jobs:
           done <<< "$changed"
           echo "materialize=$materialize" >> "$GITHUB_OUTPUT"
           if [[ "$materialize" == false ]]; then
-            echo 'No public-corpus/scanner/materializer change in newest commit; generated census remains valid and no bot commit will be created.'
+            echo 'No public-corpus/scanner/family-routing/materializer change in newest commit; generated registers remain valid and no bot commit will be created.'
           fi
 
       - uses: actions/setup-python@v5
         if: steps.scope.outputs.materialize == 'true'
         with:
           python-version: '3.12'
+
+      - name: Compile extraction and family-routing tools
+        if: steps.scope.outputs.materialize == 'true'
+        run: |
+          python -m py_compile tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py
+          python -m py_compile tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py
 
       - name: Extract exact-input candidates
         if: steps.scope.outputs.materialize == 'true'
@@ -121,7 +130,38 @@ jobs:
           out_queue.write_text('\n'.join(lines)+'\n',encoding='utf-8')
           PY
 
-      - name: Commit generated source-input census if changed
+      - name: Materialize complete candidate-to-family coverage
+        if: steps.scope.outputs.materialize == 'true'
+        run: |
+          python tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py \
+            --candidates registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json \
+            --families registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json \
+            --output registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json
+
+      - name: Enforce zero-unmapped family coverage before commit
+        if: steps.scope.outputs.materialize == 'true'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json').read_text())
+          a=json.loads(Path('registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json').read_text())
+          assert a['status']=='PASS_COMPLETE_AUTOMATED_ROUTING_NOT_SCIENTIFIC_ADJUDICATION'
+          assert a['candidate_count']==len(c['candidates'])
+          assert a['assignment_count']==a['candidate_count']
+          assert a['unmapped_candidates']==0
+          assert a['unknown_family_ids']==0
+          assert len({row['claim_id'] for row in a['assignments']})==a['candidate_count']
+          assert all(row['family_ids'] for row in a['assignments'])
+          assert a['semantics']['routing_is_scientific_adjudication'] is False
+          assert a['semantics']['routing_changes_epistemic_status'] is False
+          assert a['semantics']['routing_creates_evidence'] is False
+          assert a['physical_gate_effect']=='NONE'
+          assert a['physical_evidence_effect']=='NONE'
+          print('Band V-A candidate-to-family coverage: PASS, unmapped=0')
+          PY
+
+      - name: Commit generated source-input census and coverage if changed
         if: steps.scope.outputs.materialize == 'true'
         run: |
           set -euo pipefail
@@ -130,10 +170,11 @@ jobs:
           git add \
             registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json \
             registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json \
+            registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json \
             science/audit/2026-09-03_UniverseLab_PublicScientificClaimReviewQueue_v0.1.md
           if git diff --cached --quiet; then
-            echo 'Generated claim census already matches the newest materialized source inputs.'
+            echo 'Generated claim census and family coverage already match the newest materialized source inputs.'
             exit 0
           fi
-          git commit -m 'chore(audit): materialize Band V-A public claim candidates'
+          git commit -m 'chore(audit): materialize Band V-A claim census and family coverage'
           git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
