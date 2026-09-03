@@ -23,7 +23,8 @@
     "lexical_category_matches": "Use candidate lexical categories and bounded scientific keywords as nonexclusive routing hints.",
     "multiple_family_ids_allowed": true,
     "fallback_family_id": "UL-CLM-EDUCATIONAL-VISUAL-001",
-    "fallback_semantics": "Review-routing fallback only; it does not classify the proposition as educational truth or scientific adjudication.",
+    "fallback_semantics": "Technical review-queue sink only. A fallback assignment satisfies routing coverage but does not assert that the underlying proposition is educational, non-scientific, true, false, supported, or adjudicated.",
+    "fallback_candidates_are_unresolved_for_manual_family_adjudication": true,
     "manual_review_required_for_high_medium": true,
     "manual_review_required_for_fallback": true
   },
