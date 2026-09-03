@@ -1,0 +1,112 @@
+name: UniverseLab Band V-A materialize public claim candidates v1.0
+
+on:
+  pull_request:
+    paths:
+      - '*.html'
+      - 'README.md'
+      - 'project-manifest.json'
+      - 'sitemap.xml'
+      - 'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+      - '.github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_Materialize_v1.0.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  materialize-exact-head-census:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Extract exact-head candidates
+        run: |
+          python tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py \
+            --root . \
+            --output-dir claim-census-output
+
+      - name: Build bounded review queue and canonical generated paths
+        run: |
+          python - <<'PY'
+          import json
+          from collections import defaultdict
+          from pathlib import Path
+
+          source=Path('claim-census-output')
+          candidates=json.loads((source/'UniverseLab_PublicScientificClaimCandidates_v1.0.json').read_text())
+          summary=json.loads((source/'UniverseLab_PublicScientificClaimExtractionSummary_v1.0.json').read_text())
+          out_candidates=Path('registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json')
+          out_summary=Path('registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json')
+          out_queue=Path('science/audit/2026-09-03_UniverseLab_PublicScientificClaimReviewQueue_v0.1.md')
+          out_candidates.parent.mkdir(parents=True,exist_ok=True)
+          out_summary.parent.mkdir(parents=True,exist_ok=True)
+          out_queue.parent.mkdir(parents=True,exist_ok=True)
+
+          candidates['schema']='universelab.public-scientific-claim-lexical-candidates.v0.1'
+          candidates['generated_by']='tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+          candidates['canonical_status']='GENERATED_EXACT_HEAD_REVIEW_INPUT_NOT_ADJUDICATED'
+          summary['schema']='universelab.public-scientific-claim-extraction-summary.v0.1'
+          summary['generated_by']='tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+          out_candidates.write_text(json.dumps(candidates,ensure_ascii=False,sort_keys=True,indent=2)+'\n',encoding='utf-8')
+          out_summary.write_text(json.dumps(summary,ensure_ascii=False,sort_keys=True,indent=2)+'\n',encoding='utf-8')
+
+          priority=[row for row in candidates['candidates'] if row['preliminary_risk_class'] in {'HIGH','MEDIUM'}]
+          grouped=defaultdict(list)
+          for row in priority:
+              grouped[row['path']].append(row)
+          lines=[
+              '# UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1',
+              '',
+              f"**Basis:** `{summary['basis_commit']}`  ",
+              f"**HTML-Dateien:** `{summary['tracked_html_files']}`  ",
+              f"**Claim-Kandidaten:** `{summary['claim_candidates']}`  ",
+              f"**HIGH/MEDIUM:** `{len(priority)}`  ",
+              '**Status:** `GENERATED_NOT_ADJUDICATED`  ',
+              '**Physical gate effect:** `NONE`  ',
+              '**Physical evidence effect:** `NONE`',
+              '',
+              '> Diese Queue priorisiert Textprüfung. Sie ist kein Wahrheits-, Evidenz- oder Freigabeurteil.',
+              '',
+          ]
+          for path in sorted(grouped):
+              lines.extend([f"## `{path}`",''])
+              for row in grouped[path]:
+                  text=' '.join(row['text'].split())
+                  lines.extend([
+                      f"### {row['claim_id']} · {row['preliminary_risk_class']} {row['preliminary_risk_score']:+d}",
+                      '',
+                      f"- Quelle: Zeile `{row['source_line']}`, Tag `{row['tag']}`, Region `{row['region']}`",
+                      f"- Statussignal: `{row['explicit_status']}`",
+                      f"- Kategorien: `{', '.join(row['lexical_categories'])}`",
+                      f"- Limiter vorhanden: `{str(row['limiter_present']).lower()}`",
+                      f"- Text: {text}",
+                      f"- Adjudikation: `{row['adjudication_status']}`",
+                      '',
+                  ])
+          out_queue.write_text('\n'.join(lines)+'\n',encoding='utf-8')
+          PY
+
+      - name: Commit generated exact-head census if changed
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json \
+            registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json \
+            science/audit/2026-09-03_UniverseLab_PublicScientificClaimReviewQueue_v0.1.md
+          if git diff --cached --quiet; then
+            echo 'Generated claim census already matches exact head.'
+            exit 0
+          fi
+          git commit -m 'chore(audit): materialize Band V-A public claim candidates'
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
