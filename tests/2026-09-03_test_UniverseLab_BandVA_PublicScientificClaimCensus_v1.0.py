@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Regression tests for the Band V-A public scientific claim census.
 
-These tests guard lexical polarity and exact source provenance only. They do
-not adjudicate scientific truth or create physical evidence.
+These tests guard lexical polarity, exact source provenance and routing
+semantics only. They do not adjudicate scientific truth, change epistemic
+status, create physical evidence or authorize execution.
 """
 from __future__ import annotations
 
@@ -12,11 +13,20 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SCANNER = ROOT / "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py"
-SPEC = importlib.util.spec_from_file_location("universelab_band_va_claim_scanner", SCANNER)
-assert SPEC is not None and SPEC.loader is not None
-M = importlib.util.module_from_spec(SPEC)
-sys.modules[SPEC.name] = M
-SPEC.loader.exec_module(M)
+MAPPER = ROOT / "tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py"
+
+
+def load_module(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+M = load_module("universelab_band_va_claim_scanner", SCANNER)
+R = load_module("universelab_band_va_family_mapper", MAPPER)
 
 
 def classify(text: str):
@@ -123,7 +133,53 @@ def main() -> None:
         assert all(row.preliminary_risk_class == "CONTEXT_OR_FIREWALL" for row in matched), matched
 
     assert all(row.adjudication_status == "AUTOMATED_CANDIDATE_NOT_ADJUDICATED" for row in rows)
-    print("UniverseLab Band V-A lexical/provenance regressions: PASS")
+
+    # Family-routing regression. Specific scientific hints may route to one or
+    # more real families, but routing remains non-adjudicating and preserves
+    # manual review for a priority candidate.
+    allowed = {
+        "UL-CLM-PARENT-FORWARD-MAP-001",
+        "UL-CLM-DATA-LIKELIHOOD-001",
+        "UL-CLM-EDUCATIONAL-VISUAL-001",
+    }
+    routed = R.route({
+        "claim_id": "UL-CLAIM-CANDIDATE-SYNTHETIC1",
+        "path": "synthetic.html",
+        "source_sha256": "2" * 64,
+        "text": "A six-dimensional parent action must map to observables and likelihood inputs.",
+        "lexical_categories": ["THEORY_6D_PARENT", "OBSERVATIONAL_DATA"],
+        "preliminary_risk_class": "HIGH",
+        "explicit_status": "UNCLASSIFIED",
+        "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+        "page_scope": "SYNTHETIC_TEST",
+    }, allowed)
+    assert set(routed["family_ids"]) == {
+        "UL-CLM-PARENT-FORWARD-MAP-001",
+        "UL-CLM-DATA-LIKELIHOOD-001",
+    }
+    assert routed["routing_status"] == "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED"
+    assert routed["manual_review_required"] is True
+    assert routed["candidate_adjudication_status"] == "AUTOMATED_CANDIDATE_NOT_ADJUDICATED"
+
+    # Fallback is a technical review-queue sink only. It must always require
+    # manual review and must never be mistaken for scientific adjudication.
+    fallback = R.route({
+        "claim_id": "UL-CLAIM-CANDIDATE-SYNTHETIC2",
+        "path": "synthetic.html",
+        "source_sha256": "3" * 64,
+        "text": "Unresolved scientific wording requiring human family review.",
+        "lexical_categories": [],
+        "preliminary_risk_class": "LOW",
+        "explicit_status": "UNCLASSIFIED",
+        "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+        "page_scope": "SYNTHETIC_TEST",
+    }, allowed)
+    assert fallback["family_ids"] == ["UL-CLM-EDUCATIONAL-VISUAL-001"]
+    assert fallback["routing_status"] == "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED"
+    assert fallback["manual_review_required"] is True
+    assert fallback["candidate_adjudication_status"] == "AUTOMATED_CANDIDATE_NOT_ADJUDICATED"
+
+    print("UniverseLab Band V-A lexical/provenance/routing regressions: PASS")
 
 
 if __name__ == "__main__":
