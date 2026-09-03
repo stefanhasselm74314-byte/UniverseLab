@@ -1,0 +1,135 @@
+name: UniverseLab Band V-A public claim census review report v1.1
+
+on:
+  pull_request:
+    paths:
+      - '*.html'
+      - 'README.md'
+      - 'project-manifest.json'
+      - 'sitemap.xml'
+      - 'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+      - '.github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_Report_v1.1.yml'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  publish-census-review-report:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Extract claim candidates
+        run: |
+          python tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py \
+            --root . \
+            --output-dir claim-census-output
+
+      - name: Build bounded review report
+        run: |
+          python - <<'PY'
+          import json
+          from collections import defaultdict
+          from pathlib import Path
+
+          root=Path('claim-census-output')
+          summary=json.loads((root/'UniverseLab_PublicScientificClaimExtractionSummary_v1.0.json').read_text())
+          candidates=json.loads((root/'UniverseLab_PublicScientificClaimCandidates_v1.0.json').read_text())['candidates']
+          priority=[row for row in candidates if row['preliminary_risk_class'] in {'HIGH','MEDIUM'}]
+          grouped=defaultdict(list)
+          for row in priority:
+              grouped[row['path']].append(row)
+
+          lines=[
+              '<!-- universelab-band-va-claim-census-report -->',
+              '## Band V-A · automatischer Claim-Zensus',
+              '',
+              '> **Nur Review-Priorisierung.** Kein Treffer ist damit wissenschaftlich adjudiziert, bestätigt oder falsifiziert.',
+              '',
+              f"- Basis: `{summary['basis_commit']}`",
+              f"- getrackte HTML-Dateien: `{summary['tracked_html_files']}`",
+              f"- sichtbare Textblöcke: `{summary['visible_blocks']}`",
+              f"- Claim-Kandidaten gesamt: `{summary['claim_candidates']}`",
+              f"- Risikoklassen: `{json.dumps(summary['risk_classes'],sort_keys=True)}`",
+              f"- priorisierte HIGH/MEDIUM-Treffer: `{len(priority)}`",
+              '',
+              '### Priorisierte Treffer',
+              '',
+          ]
+          max_rows=160
+          used=0
+          for path in sorted(grouped):
+              if used>=max_rows:
+                  break
+              lines.append(f"#### `{path}`")
+              lines.append('')
+              for row in grouped[path]:
+                  if used>=max_rows:
+                      break
+                  text=' '.join(row['text'].split())
+                  if len(text)>420:
+                      text=text[:417]+'…'
+                  categories=', '.join(row['lexical_categories']) or 'equation-like'
+                  lines.append(
+                      f"- **{row['preliminary_risk_class']} {row['preliminary_risk_score']:+d}** "
+                      f"· `{row['claim_id']}` · Zeile `{row['source_line']}` · Statussignal "
+                      f"`{row['explicit_status']}` · Kategorien `{categories}`  \n  {text}"
+                  )
+                  used+=1
+              lines.append('')
+
+          if len(priority)>used:
+              lines.extend([
+                  f"_Aus Platzgründen werden `{used}` von `{len(priority)}` priorisierten Treffern angezeigt._",
+                  '',
+              ])
+          lines.extend([
+              '### Verbindliche Grenzen',
+              '',
+              '- `AUTOMATED_CANDIDATE_NOT_ADJUDICATED` bleibt für alle Extraktionstreffer erhalten.',
+              '- Risikoscore ≠ Evidenzgrad.',
+              '- Lexikalische Nähe ≠ Code-, Test-, Daten- oder Parent-Herleitung.',
+              '- Physical gate effect: `NONE`.',
+              '- Physical evidence effect: `NONE`.',
+          ])
+          Path('claim-census-review-comment.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
+          PY
+
+      - name: Publish or update PR review report
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- universelab-band-va-claim-census-report -->';
+            const body = fs.readFileSync('claim-census-review-comment.md', 'utf8');
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number, per_page: 100
+            });
+            const previous = comments.find(comment =>
+              comment.user?.type === 'Bot' && comment.body?.includes(marker)
+            );
+            if (previous) {
+              await github.rest.issues.updateComment({
+                owner, repo, comment_id: previous.id, body
+              });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+
+      - name: Upload complete machine-readable census
+        uses: actions/upload-artifact@v4
+        with:
+          name: universelab-band-va-complete-claim-census
+          path: |
+            claim-census-output/
+            claim-census-review-comment.md
+          if-no-files-found: error
