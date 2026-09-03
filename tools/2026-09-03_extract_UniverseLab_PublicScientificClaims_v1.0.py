@@ -99,13 +99,22 @@ EQUATION_MARKERS = (
     "log", "ln ", "d²", "d/", "e²", "h(z)", "d(a)", "fσ", "q(a)",
 )
 
-# Negation must be recognized before positive evidence/proof tokens. The bounded
-# wildcard handles phrases such as "keine physikalische Evidenz" or
-# "keinen ... Evidenzstatus" without treating arbitrarily distant prose as one
-# negated proposition.
+# Negation can precede or follow the evidence/derivation verb. These bounded
+# patterns deliberately cover explicit firewall prose such as "nicht bewiesen",
+# "beweist nicht", "beweist keine Ghostfreiheit", "weder ... noch" and
+# "keine bestätigte 6D-Ableitung" without treating an arbitrarily distant
+# qualifier elsewhere in a long block as local negation.
 NEGATED_CLAIM_PATTERNS = tuple(re.compile(pattern, re.IGNORECASE) for pattern in (
-    r"\b(?:nicht|noch\s+nicht|kein(?:e|en|em|er|es)?|ohne)\b.{0,96}\b(?:bewiesen|beweis|bestätigt|bestätigung|nachgewiesen|evidenz(?:status)?|empirisch|hergeleitet|herleitung|identifiziert|identifikation|likelihood)\b",
+    r"\b(?:nicht|noch\s+nicht|kein(?:e|en|em|er|es)?|ohne)\b.{0,96}\b(?:bewiesen|beweis(?:e|es|en)?|bestätigt(?:e|en|er|es)?|bestätigung|nachgewiesen|evidenz(?:status)?|empirisch|hergeleitet(?:e|en|er|es)?|herleitung|ableitung|identifiziert|identifikation|likelihood)\b",
+    r"\b(?:beweist|bestätigt|zeigt|demonstriert|impliziert|erklärt|identifiziert)\b.{0,64}\b(?:nicht|kein(?:e|en|em|er|es)?|weder)\b",
+    r"\bweder\b.{0,128}\bnoch\b",
     r"\b(?:not|not\s+yet|no|without|does\s+not|do\s+not|did\s+not)\b.{0,96}\b(?:proved|proven|proof|confirmed|confirmation|validated|validation|evidence|empirical|derived|derivation|identified|identification|likelihood|imply)\b",
+    r"\b(?:proves?|confirms?|shows?|demonstrates?|implies?|explains?|identifies?)\b.{0,64}\b(?:not|no|neither)\b",
+    r"\bneither\b.{0,128}\bnor\b",
+))
+EXCLUSION_PATTERNS = tuple(re.compile(pattern, re.IGNORECASE) for pattern in (
+    r"\b(?:nicht\s+enthalten|nicht\s+umfasst|nicht\s+Bestandteil|ausgeschlossen|keine\s+.*?Ableitung|noch\s+keine\s+.*?Ableitung)\b",
+    r"\b(?:not\s+included|not\s+part\s+of|does\s+not\s+include|do\s+not\s+include|excluded|no\s+.*?derivation)\b",
 ))
 
 
@@ -281,6 +290,14 @@ def has_negated_claim(text: str) -> bool:
     return any(pattern.search(text) for pattern in NEGATED_CLAIM_PATTERNS)
 
 
+def has_exclusion(text: str) -> bool:
+    return any(pattern.search(text) for pattern in EXCLUSION_PATTERNS)
+
+
+def has_explicit_limiter(text: str) -> bool:
+    return has_negated_claim(text) or has_exclusion(text)
+
+
 def term_present(text: str, term: str) -> bool:
     lower = text.casefold()
     token = term.casefold()
@@ -297,7 +314,7 @@ def contains_any(text: str, terms: Iterable[str]) -> bool:
 
 def categories(text: str) -> list[str]:
     result = {name for name, terms in LEXICON.items() if contains_any(text, terms)}
-    if has_negated_claim(text):
+    if has_explicit_limiter(text):
         result.add("STATUS_FIREWALL")
     return sorted(result)
 
@@ -307,7 +324,7 @@ def explicit_status(text: str) -> str:
         return "FALSIFIED"
     if contains_any(text, ("not admissible", "not released", "unreleased", "blocked", "blockiert", "gesperrt", "nicht freigegeben", "nicht veröffentlicht")):
         return "BLOCKED_OR_UNRELEASED"
-    if has_negated_claim(text):
+    if has_explicit_limiter(text):
         return "EXPLICITLY_NEGATED_OR_LIMITED"
     if contains_any(text, ("not established", "not executed", "offen", "open", "pending", "ausstehend")):
         return "OPEN_OR_NOT_EXECUTED"
@@ -321,10 +338,10 @@ def explicit_status(text: str) -> str:
 
 
 def score(text: str, cats: list[str], equation_like: bool) -> tuple[int, bool]:
-    negated = has_negated_claim(text)
-    limiter = negated or contains_any(text, EXPLICIT_LIMITERS)
+    limiting_context = has_explicit_limiter(text)
+    limiter = limiting_context or contains_any(text, EXPLICIT_LIMITERS)
     value = 0
-    if not negated and contains_any(text, STRONG_OVERCLAIM):
+    if not limiting_context and contains_any(text, STRONG_OVERCLAIM):
         value += 7
     if "EVIDENCE_CONFIRMATION" in cats:
         value += 4
@@ -341,7 +358,7 @@ def score(text: str, cats: list[str], equation_like: bool) -> tuple[int, bool]:
     if equation_like:
         value += 1
     if limiter:
-        value -= 10 if negated else 4
+        value -= 10 if limiting_context else 4
     if "CONDITIONAL_HEURISTIC" in cats:
         value -= 2
     return max(-6, value), limiter
@@ -478,7 +495,7 @@ def extract(root: Path) -> tuple[list[Candidate], dict[str, Any]]:
         "limitations": [
             "Lexical extraction cannot establish whether a scientific claim is true.",
             "Risk scores prioritize manual review and are not evidence grades.",
-            "Negation detection is bounded lexical context, not full semantic parsing.",
+            "Negation and exclusion detection use bounded lexical context, not full semantic parsing.",
             "A visible qualifier may occur in another nearby block and requires contextual review.",
             "Code, tests, data and parent-theory derivations are not inferred by lexical proximity.",
         ],
