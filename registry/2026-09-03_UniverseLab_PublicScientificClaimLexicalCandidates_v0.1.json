@@ -1,5 +1,5 @@
 {
-  "basis_commit": "d2b82b59a7d257bb607e36d3d8724cde9ec40b6f",
+  "basis_commit": "0867de88139d2dea91e17fe512210494978800c1",
   "candidates": [
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -19505,7 +19505,7 @@
       "text": "Technische Ausführbarkeit ist keine physikalische Identifikation; numerische Stabilität ist keine Ghostfreiheit; ein interner PASS ist keine empirische Modellbestätigung."
     }
   ],
-  "canonical_status": "GENERATED_EXACT_HEAD_REVIEW_INPUT_NOT_ADJUDICATED",
+  "canonical_status": "GENERATED_SOURCE_INPUT_REVIEW_INPUT_NOT_ADJUDICATED",
   "generated_by": "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py",
   "physical_evidence_effect": "NONE",
   "physical_gate_effect": "NONE",
