@@ -40,8 +40,13 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Compile deterministic extractor
-        run: python -m py_compile tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py
+      - name: Compile deterministic extractor and regression test
+        run: |
+          python -m py_compile tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py
+          python -m py_compile tests/2026-09-03_test_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.py
+
+      - name: Run lexical polarity and source-provenance regressions
+        run: python tests/2026-09-03_test_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.py
 
       - name: Extract all tracked public scientific claim candidates
         run: |
