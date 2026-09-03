@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#090b16">
 <meta name="description" content="UniverseLab Emergenz: Zellautomat und davon getrennte kanonische ΛCDM-Hintergrund- und Growth-Diagnostik mit fail-closed Domänenprüfung.">
 <link rel="manifest" href="manifest.webmanifest">
@@ -122,7 +122,7 @@ output{min-width:72px;text-align:right;color:#d9d4ff}
     </section>
 
     <section>
-      <select id="expMode" aria-label="Darstellungsmodus"><option value="lcdm">Physikalisch: ΛCDM</option><option value="heuristic">Heuristische Gitterexpansion</option><option value="off">Expansion aus</option></select>
+      <select id="expMode" aria-label="Darstellungsmodus"><option value="lcdm">ΛCDM-Anzeigezeit (Referenz)</option><option value="heuristic">Heuristische Anzeigegröße</option><option value="off">Kosmologie statisch</option></select>
       <div id="lcdmBox" class="cosmo on">
         <div class="row"><label for="h0">H₀<small>km s⁻¹ Mpc⁻¹</small></label><output id="h0Out"></output></div><input id="h0" type="range" min="50" max="90" step="0.1" value="67.4">
         <div class="row"><label for="om">Ωₘ</label><output id="omOut"></output></div><input id="om" type="range" min="0.05" max="0.6" step="0.001" value="0.315">
@@ -131,7 +131,7 @@ output{min-width:72px;text-align:right;color:#d9d4ff}
         <div class="row"><label for="timeScale">Zeitverstärkung</label><output id="timeOut"></output></div><input id="timeScale" type="range" min="1" max="100" value="25">
       </div>
       <div id="heurBox" class="cosmo">
-        <div class="row"><label for="expand">Expansionsstärke</label><output id="expandOut"></output></div><input id="expand" type="range" min="0" max="100" value="18">
+        <div class="row"><label for="expand">Anzeigevergrößerung</label><output id="expandOut"></output></div><input id="expand" type="range" min="0" max="100" value="18">
       </div>
       <div class="domainStatus" id="domainStatus" aria-live="polite"><strong>Status:</strong> Kanonischer Rechenkern wird geladen.</div>
     </section>
@@ -141,7 +141,7 @@ output{min-width:72px;text-align:right;color:#d9d4ff}
     <details>
       <summary>Wissenschaftlicher Status</summary>
       <p class="note">Die Wachstumsrechnung ist die skalenunabhängige lineare GR-Gleichung für drucklose Materie auf einem homogenen ΛCDM-Hintergrund. Sie ist nicht für Strahlungsperturbationen, nichtlineare Strukturen, baryonische Rückkopplung oder 6D-Modifikationen gültig. Die Zellgitterdarstellung bleibt davon getrennt.</p>
-      <p class="note" id="separationNote">Zentrale Trennung: Der Zellautomat beeinflusst weder E(a), D(a), f(a) noch kosmologische Epochen. Die optionale Gittervergrößerung ist eine Visualisierungskonvention und keine Herleitung kosmischer Strukturbildung.</p>
+      <p class="note" id="separationNote">Zentrale Trennung: Der Zellautomat beeinflusst weder E(a), D(a), f(a) noch kosmologische Epochen. Die optionale Anzeigevergrößerung ist eine reine Renderkonvention, verändert weder das Simulationsgitter noch den Zellzustand und ist keine Herleitung kosmischer Strukturbildung.</p>
     </details>
   </div>
 </div>

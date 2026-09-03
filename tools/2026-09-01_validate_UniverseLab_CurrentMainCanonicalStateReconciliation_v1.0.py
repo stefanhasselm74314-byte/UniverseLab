@@ -1,192 +1,266 @@
 #!/usr/bin/env python3
-"""Fail-closed QA for the 2026-09-01 UniverseLab current-main state reconciliation."""
+"""Fail-closed validation of the manifest-declared UniverseLab state chain."""
 from __future__ import annotations
 
 import argparse
+from dataclasses import dataclass
+from datetime import datetime
 import json
+from pathlib import Path, PurePosixPath
 import re
-from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 DEFAULT_ROOT = Path(__file__).resolve().parents[1]
-DATE = '2026-09-01'
-BASE_COMMIT = '46579b58b8ca2ae3fb4ba7726446c5871d84da79'
-BASE_TREE = '06e7e6671abe3a3c5fab232837178cadb2ea11ff'
-CURRENT_STATE = Path('registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json')
-SITE_STATE = Path('registry/2026-09-01_UniverseLab_SiteState_v1.1.json')
-CHECKPOINT = Path('registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json')
-CHECKPOINT_ALIAS = Path('registry/session-checkpoint-latest.json')
-MANIFEST = Path('project-manifest.json')
-RESEARCH_STATUS = Path('research-status.html')
-GLOBAL_SHELL = Path('assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js')
-PLATFORM_WORKFLOW = Path('.github/workflows/2026-08-16_UniverseLab_PlatformGovernance_v1.1.yml')
-G0_WORKFLOW = Path('.github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml')
+CHECKPOINT_ALIAS = Path("registry/session-checkpoint-latest.json")
+MANIFEST = Path("project-manifest.json")
+RESEARCH_STATUS_DE = Path("research-status.html")
+RESEARCH_STATUS_EN = Path("research-status-en.html")
+GLOBAL_SHELL = Path("assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js")
+PLATFORM_WORKFLOW = Path(".github/workflows/2026-08-16_UniverseLab_PlatformGovernance_v1.1.yml")
+G0_WORKFLOW = Path(".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml")
+SHA40 = re.compile(r"^[0-9a-f]{40}$")
+DATE_PREFIX = re.compile(r"^(\d{4}-\d{2}-\d{2})")
+
+
+@dataclass(frozen=True)
+class ActivePaths:
+    checkpoint: Path
+    current_state: Path
+    site_state: Path
 
 
 def load_json(root: Path, rel: Path) -> dict[str, Any]:
-    with (root / rel).open('r', encoding='utf-8') as fh:
-        data = json.load(fh)
-    if not isinstance(data, dict):
-        raise AssertionError(f'{rel} must contain a JSON object')
-    return data
+    value = json.loads((root / rel).read_text(encoding="utf-8"))
+    assert isinstance(value, dict), f"{rel} must contain an object"
+    return value
 
 
-def assert_firewalls(obj: dict[str, Any], *, context: str) -> None:
-    # Allow the fields to live either at top level or in the canonical nested blocks.
-    physical = obj.get('physical_governance', obj.get('gates', obj.get('governance', {})))
-    assert physical.get('K1-D') == 'NOT_RELEASED', f'{context}: K1-D promotion detected'
-    assert physical.get('K1-E') == 'NOT_ADMISSIBLE', f'{context}: K1-E promotion detected'
-    evidence = physical.get('physical_evidence_effect', obj.get('physical_evidence_effect'))
-    assert evidence == 'NONE', f'{context}: physical evidence effect must remain NONE'
+def safe_repo_path(value: Any, field: str) -> Path:
+    assert isinstance(value, str) and value.strip(), f"{field} must be non-empty"
+    pure = PurePosixPath(value)
+    assert not pure.is_absolute() and ".." not in pure.parts, f"unsafe {field}: {value}"
+    return Path(pure.as_posix())
+
+
+def resolve_paths(root: Path = DEFAULT_ROOT) -> ActivePaths:
+    alias = load_json(root, CHECKPOINT_ALIAS)
+    return ActivePaths(
+        checkpoint=safe_repo_path(alias.get("canonical_snapshot"), "canonical_snapshot"),
+        current_state=safe_repo_path(alias.get("canonical_state"), "canonical_state"),
+        site_state=safe_repo_path(alias.get("site_state"), "site_state"),
+    )
+
+
+def gate_block(value: dict[str, Any]) -> dict[str, Any]:
+    for name in ("physical_governance", "gates", "governance"):
+        block = value.get(name)
+        if isinstance(block, dict) and ("K1-D" in block or "K1-E" in block):
+            return block
+    return value
+
+
+def evidence_effect(value: dict[str, Any]) -> Any:
+    for name in ("physical_governance", "gates", "governance"):
+        block = value.get(name)
+        if isinstance(block, dict) and "physical_evidence_effect" in block:
+            return block["physical_evidence_effect"]
+    return value.get("physical_evidence_effect")
+
+
+def assert_firewalls(value: dict[str, Any], context: str) -> None:
+    gates = gate_block(value)
+    assert gates.get("K1-D") == "NOT_RELEASED", f"{context}: K1-D"
+    assert gates.get("K1-E") == "NOT_ADMISSIBLE", f"{context}: K1-E"
+    assert evidence_effect(value) == "NONE", f"{context}: physical evidence"
+    checks = (
+        (("ratified_human_trust_root", "RATIFIED_HUMAN_TRUST_ROOT"), "NOT_RATIFIED"),
+        (("runtime_issuance_bindings", "RUNTIME_ISSUANCE_BINDINGS"), "BLOCKED"),
+        (("operative_authorization_decision", "AuthorizationDecision"), "NOT_CREATED"),
+        (("operative_single_use_grant", "SingleUseGrant"), "NOT_CREATED"),
+        (("backend_import", "BACKEND_IMPORT"), "NOT_EXECUTED"),
+        (("solver_execution", "SOLVER_EXECUTION"), "NOT_EXECUTED"),
+    )
+    for aliases, expected in checks:
+        actual = next((gates[name] for name in aliases if name in gates), None)
+        if actual is not None:
+            assert actual == expected, f"{context}: {aliases[0]}={actual}"
+
+
+def assert_source(root: Path, value: Any, context: str) -> None:
+    rel = safe_repo_path(value, context)
+    assert (root / rel).is_file(), f"missing source {context}: {rel}"
+
+
+def assert_sources(root: Path, value: Any, context: str) -> None:
+    assert isinstance(value, list) and value, f"{context}: sources must be non-empty"
+    for source in value:
+        assert_source(root, source, context)
+
+
+def newest_snapshot(root: Path, token: str) -> str:
+    candidates = []
+    for path in (root / "registry").glob("*.json"):
+        match = DATE_PREFIX.match(path.name)
+        if match and token in path.name:
+            candidates.append((match.group(1), path.name))
+    assert candidates, f"no snapshots for {token}"
+    return sorted(candidates)[-1][1]
 
 
 def validate(root: Path = DEFAULT_ROOT, *, strict_source_existence: bool = False) -> None:
-    state = load_json(root, CURRENT_STATE)
-    site = load_json(root, SITE_STATE)
-    checkpoint = load_json(root, CHECKPOINT)
+    root = root.resolve()
+    paths = resolve_paths(root)
     alias = load_json(root, CHECKPOINT_ALIAS)
+    checkpoint = load_json(root, paths.checkpoint)
+    state = load_json(root, paths.current_state)
+    site = load_json(root, paths.site_state)
     manifest = load_json(root, MANIFEST)
 
-    assert state['snapshot_date'] == DATE
-    assert state['basis_main_commit'] == BASE_COMMIT
-    assert state['basis_main_tree'] == BASE_TREE
-    assert state['authority']['open_pull_requests_have_canonical_effect'] is False
-    assert state['physical_governance']['solver_authorized'] is False
-    assert state['physical_governance']['solver_execution'] == 'NOT_EXECUTED'
-    assert state['physical_governance']['backend_import'] == 'NOT_EXECUTED'
-    assert state['physical_governance']['operative_authorization_decision'] == 'NOT_CREATED'
-    assert state['physical_governance']['operative_single_use_grant'] == 'NOT_CREATED'
-    assert state['physical_governance']['physical_background'] == 'NOT_ESTABLISHED'
-    assert state['physical_governance']['physical_response_rank'] == 'NOT_EXECUTED'
-    assert state['program']['gate'] == 'FM-G0'
-    assert state['program']['gate_status'] == 'OPEN'
-    assert state['program']['blocking_gap_count'] == 10
-    assert state['program']['partially_resolved_blocking_gap_count'] == 3
-    assert state['program']['fully_unresolved_blocking_gap_count'] == 7
-    assert state['physical_gate_effect'] == 'NONE'
-    assert state['physical_evidence_effect'] == 'NONE'
-    assert state['open_noncanonical_work'][0]['pull_request'] == 137
-    assert state['open_noncanonical_work'][0]['canonical_effect'].startswith('NONE_')
-    assert state['open_noncanonical_work'][0]['merge_tree_audited_against_basis_main'] is False
-    assert_firewalls(state, context='current state')
-
-    assert site['snapshot_date'] == DATE
-    assert site['basis_main_commit'] == BASE_COMMIT
-    assert site['canonical_state'] == CURRENT_STATE.as_posix()
-    assert site['freshness']['status'] == 'CURRENT_FOR_BASIS_MAIN'
-    assert site['governance']['open_pull_requests_have_canonical_effect'] is False
-    assert_firewalls(site, context='site state')
-    module_ids = {m['module_id'] for m in site['modules']}
-    assert {'ULSH-01','HZT-M0-FM0'} <= module_ids
-
-    assert checkpoint['timestamp'].startswith(DATE)
-    assert checkpoint['basis_commit'] == BASE_COMMIT
-    assert checkpoint['canonical_state'] == CURRENT_STATE.as_posix()
-    assert checkpoint['site_state'] == SITE_STATE.as_posix()
-    assert checkpoint['physical_gate_effect'] == 'NONE'
-    assert checkpoint['physical_evidence_effect'] == 'NONE'
-    for field in ('current_goal','current_workstream','next_exact_action'):
-        assert isinstance(checkpoint.get(field), str) and checkpoint[field].strip(), f'checkpoint missing memory-protocol field: {field}'
-    assert checkpoint['gate_state']['K1-D'] == 'NOT_RELEASED'
-    assert checkpoint['gate_state']['K1-E'] == 'NOT_ADMISSIBLE'
-    assert checkpoint['verified_results'], 'checkpoint verified_results must remain non-empty'
-    assert checkpoint['open_blockers'], 'checkpoint open_blockers must remain non-empty'
-    assert checkpoint['active_assumptions'], 'checkpoint active_assumptions must remain non-empty'
-    assert checkpoint['forbidden_inferences'], 'checkpoint forbidden_inferences must remain non-empty'
-    assert checkpoint['entry_points'], 'checkpoint entry_points must remain non-empty'
-    assert_firewalls(checkpoint, context='checkpoint')
-
-    dated_bytes = (root / CHECKPOINT).read_bytes()
-    alias_bytes = (root / CHECKPOINT_ALIAS).read_bytes()
-    assert dated_bytes == alias_bytes, 'session-checkpoint-latest.json must be byte-identical to the dated canonical snapshot'
+    assert (root / CHECKPOINT_ALIAS).read_bytes() == (root / paths.checkpoint).read_bytes(), "checkpoint alias must be byte-identical"
     assert alias == checkpoint
+    assert checkpoint["schema"] == "universelab.session-checkpoint.v1"
+    assert checkpoint["privacy_classification"] == "PUBLIC_SANITIZED"
+    stamp = datetime.fromisoformat(checkpoint["timestamp"])
+    assert stamp.tzinfo is not None and stamp.utcoffset() is not None
+    date = stamp.date().isoformat()
+    assert re.fullmatch(r"UL-CHK-\d{8}-\d{3}", checkpoint["checkpoint_id"])
+    base, tree = checkpoint["basis_commit"], checkpoint["basis_tree"]
+    assert SHA40.fullmatch(base) and SHA40.fullmatch(tree)
 
-    assert manifest['release_date'] == DATE, 'project manifest release_date must match reconciliation date'
-    assert manifest['basis_main_commit'] == BASE_COMMIT
-    assert manifest['canonical_state'] == CURRENT_STATE.as_posix()
-    assert manifest['site_state'] == SITE_STATE.as_posix()
-    assert manifest['session_checkpoint'] == CHECKPOINT.as_posix()
-    assert manifest['gates']['FM-G0'] == 'OPEN'
-    assert manifest['gates']['FM0_BLOCKING_GAPS'] == 10
-    assert manifest['gates']['official_MD2S_solver'] == 'NOT_AUTHORIZED'
-    assert manifest['c_phys_operator_entry']['solver_authorized'] is False
-    registries = manifest['central_registries']
-    assert registries['current_main_canonical_state'] == CURRENT_STATE.as_posix()
-    assert registries['site_state'] == SITE_STATE.as_posix()
-    assert registries['site_state_schema'] == 'schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json'
-    assert registries['session_checkpoint'] == CHECKPOINT.as_posix()
-    assert registries['session_checkpoint_alias'] == CHECKPOINT_ALIAS.as_posix()
-    platform = manifest['platform_governance']
-    assert platform['status'] == 'ACTIVE_GOVERNED_PLATFORM_V1_CURRENT_STATE_RECONCILED'
-    assert platform['navigator_authority'] == 'CANONICAL_DIRECT_DOCUMENT'
-    assert platform['site_state'] == SITE_STATE.as_posix()
-    assert platform['physical_gate_effect'] == 'NONE'
-    assert platform['status_axes_rule'] == 'TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT'
-    assert_firewalls(manifest, context='project manifest')
+    assert state["schema"] == "universelab.current-main-canonical-state.v1"
+    assert state["snapshot_date"] == date
+    assert state["basis_main_commit"] == base and state["basis_main_tree"] == tree
+    assert state["supersedes"] != paths.current_state.as_posix()
+    rule = state.get("authority_rule") or state.get("authority") or {}
+    assert rule["open_pull_requests_have_canonical_effect"] is False
+    assert rule["historical_snapshots_are_append_only"] is True
+    assert state["active_program"]["gate"] == "FM-G0"
+    assert state["active_program"]["gate_status"] == "OPEN"
+    assert state["active_program"]["blocking_gap_count"] == 10
+    assert state["active_program"]["partially_resolved_blocking_gap_count"] == 3
+    assert state["active_program"]["fully_unresolved_blocking_gap_count"] == 7
+    assert state["physical_governance"]["solver_authorized"] is False
+    assert state["physical_governance"]["physical_background"] == "NOT_ESTABLISHED"
+    assert state["physical_governance"]["physical_response_rank"] == "NOT_EXECUTED"
+    assert state["physical_gate_effect"] == "NONE"
+    assert_firewalls(state, "current state")
 
-    html = (root / RESEARCH_STATUS).read_text(encoding='utf-8')
-    assert '1. September 2026' in html
-    assert CURRENT_STATE.as_posix() in html
-    assert 'Offene Pull Requests besitzen keine kanonische Wirkung' in html
-    assert 'K1-D' in html and 'NOT RELEASED' in html
-    assert 'K1-E' in html and 'NOT ADMISSIBLE' in html
-    assert '3. August 2026' not in html
-    assert 'data-ul-export-title="UniverseLab Forschungsstatus"' in html
-    assert 'data-ul-export-filename="UniverseLab-Forschungsstatus"' in html
-    assert 'data-ul-export-page-breaks="off"' in html
-
-    shell = (root / GLOBAL_SHELL).read_text(encoding='utf-8')
-    assert SITE_STATE.as_posix() in shell
-    assert '2026-08-16_UniverseLab_SiteState_v1.0.json' not in shell
-    assert "const VERSION='1.1.2'" in shell
-
-    platform_workflow = (root / PLATFORM_WORKFLOW).read_text(encoding='utf-8')
-    assert SITE_STATE.as_posix() in platform_workflow
-    assert 'python -m json.tool registry/2026-08-16_UniverseLab_SiteState_v1.0.json' not in platform_workflow
-    assert "state = json.loads(Path('registry/2026-08-16_UniverseLab_SiteState_v1.0.json')" not in platform_workflow
-    assert 'ACTIVE_GOVERNED_PLATFORM_V1_CURRENT_STATE_RECONCILED' in platform_workflow
-    g0_workflow = (root / G0_WORKFLOW).read_text(encoding='utf-8')
-    assert CURRENT_STATE.as_posix() in g0_workflow
-    assert 'Prove Background-3C11 artifacts remain append-only and historical' in g0_workflow
-    assert '2.22-c-phys-m1-background-3c11-authorization-denied-v0.1' in g0_workflow
-    assert "grep -q '\"release\": \"2.22-c-phys-m1-background-3c11-authorization-denied-v0.1\"'" not in g0_workflow
-
-    # Monotone dated snapshot families. Newer successors must force an explicit update.
-    registry = root / 'registry'
-    families = {
-        'CurrentMainCanonicalState': CURRENT_STATE.name,
-        'UniverseLab_SiteState': SITE_STATE.name,
-        'UniverseLab_SessionCheckpoint': CHECKPOINT.name,
+    assert site["schema"] == "universelab.site-state.v1"
+    assert site["snapshot_date"] == date
+    assert site["basis_main_commit"] == base and site["basis_main_tree"] == tree
+    assert site["canonical_state"] == paths.current_state.as_posix()
+    assert site["supersedes"] != paths.site_state.as_posix()
+    assert site["governance"]["open_pull_requests_have_canonical_effect"] is False
+    assert site["governance"]["historical_snapshots_are_append_only"] is True
+    assert site["physical_gate_effect"] == "NONE"
+    assert_firewalls(site, "site state")
+    modules = {item["module_id"]: item for item in site["modules"]}
+    assert {"ULSH-01", "HZT-M0-FM0", "PUBLIC-COSMOLOGY"} <= set(modules)
+    ulsh = modules["ULSH-01"]
+    assert ulsh["technical"]["background_execution"] == "NOT_AUTHORIZED"
+    assert ulsh["technical"]["physical_response_rank"] == "NOT_EXECUTED"
+    assert ulsh["technical"]["backend_import"] == "NOT_EXECUTED"
+    assert ulsh["governance"]["solver_release"] == "NOT_AUTHORIZED"
+    assert ulsh["scientific"]["physical_background"] == "NOT_ESTABLISHED"
+    assert ulsh["release_gate"]["status"] == "NOT_SATISFIED"
+    assert {item["id"]: item["status"] for item in ulsh["work_packages"]} == {
+        "WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+        "WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
+        "WP3": "NOT_STARTED",
+        "WP4": "BLOCKED_NOT_AUTHORIZED",
     }
-    for token, expected in families.items():
-        names = [p.name for p in registry.glob('*.json') if token in p.name]
-        dates = sorted((m.group(1), name) for name in names if (m := re.match(r'^(\d{4}-\d{2}-\d{2})', name)))
-        assert dates, f'No dated snapshots found for {token}'
-        assert dates[-1][1] == expected, f'{expected} is no longer the newest {token} snapshot'
+    fm0 = modules["HZT-M0-FM0"]
+    assert fm0["technical"]["blocking_gap_count"] == 10
+    assert fm0["technical"]["partially_resolved_blocking_gap_count"] == 3
+    assert fm0["technical"]["fully_unresolved_blocking_gap_count"] == 7
+    assert fm0["governance"]["gate"] == "FM-G0" and fm0["governance"]["gate_status"] == "OPEN"
+
+    assert checkpoint["canonical_snapshot"] == paths.checkpoint.as_posix()
+    assert checkpoint["canonical_state"] == paths.current_state.as_posix()
+    assert checkpoint["site_state"] == paths.site_state.as_posix()
+    assert checkpoint["physical_gate_effect"] == "NONE"
+    assert checkpoint["physical_evidence_effect"] == "NONE"
+    for field in ("current_goal", "current_workstream", "next_exact_action"):
+        assert isinstance(checkpoint.get(field), str) and checkpoint[field].strip(), f"checkpoint missing {field}"
+    for field in ("verified_results", "open_blockers", "active_assumptions", "forbidden_inferences", "entry_points"):
+        assert isinstance(checkpoint.get(field), list) and checkpoint[field], f"checkpoint {field} empty"
+    assert_firewalls(checkpoint, "checkpoint")
+
+    assert manifest["release_date"] == date
+    assert manifest["basis_main_commit"] == base and manifest["basis_main_tree"] == tree
+    assert manifest["canonical_state"] == paths.current_state.as_posix()
+    assert manifest["site_state"] == paths.site_state.as_posix()
+    assert manifest["session_checkpoint"] == paths.checkpoint.as_posix()
+    assert manifest["gates"]["FM-G0"] == "OPEN"
+    assert manifest["gates"]["FM0_BLOCKING_GAPS"] == 10
+    assert manifest["gates"]["official_MD2S_solver"] == "NOT_AUTHORIZED"
+    assert manifest["c_phys_operator_entry"]["solver_authorized"] is False
+    registries = manifest["central_registries"]
+    assert registries["current_main_canonical_state"] == paths.current_state.as_posix()
+    assert registries["site_state"] == paths.site_state.as_posix()
+    assert registries["session_checkpoint"] == paths.checkpoint.as_posix()
+    assert registries["session_checkpoint_alias"] == CHECKPOINT_ALIAS.as_posix()
+    platform = manifest["platform_governance"]
+    assert platform["version"] == "1.2.0"
+    assert platform["status"] == "ACTIVE_GOVERNED_PLATFORM_CURRENT_STATE_RECONCILED_2026_09_03"
+    assert platform["navigator_authority"] == "CANONICAL_DIRECT_DOCUMENT"
+    assert platform["site_state"] == paths.site_state.as_posix()
+    assert platform["physical_gate_effect"] == "NONE"
+    assert platform["status_axes_rule"] == "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"
+    assert manifest["physical_gate_effect"] == "NONE"
+    assert_firewalls(manifest, "project manifest")
+
+    de = (root / RESEARCH_STATUS_DE).read_text(encoding="utf-8")
+    en = (root / RESEARCH_STATUS_EN).read_text(encoding="utf-8")
+    for html in (de, en):
+        assert paths.current_state.as_posix() in html
+        assert "K1-D" in html and "NOT RELEASED" in html
+        assert "K1-E" in html and "NOT ADMISSIBLE" in html
+    assert "Offene Pull Requests besitzen keine kanonische Wirkung" in de
+    assert "Open pull requests have no canonical effect" in en
+    assert 'data-ul-export-title="UniverseLab Forschungsstatus"' in de
+    assert 'data-ul-export-filename="UniverseLab-Forschungsstatus"' in de
+    assert 'data-ul-export-page-breaks="off"' in de
+
+    shell = (root / GLOBAL_SHELL).read_text(encoding="utf-8")
+    assert paths.site_state.as_posix() in shell
+    assert "registry/2026-08-16_UniverseLab_SiteState_v1.0.json" not in shell
+    platform_workflow = (root / PLATFORM_WORKFLOW).read_text(encoding="utf-8")
+    assert "manifest['site_state']" in platform_workflow or 'manifest["site_state"]' in platform_workflow
+    assert "registry/2026-09-01_UniverseLab_SiteState_v1.1.json" not in platform_workflow
+    assert "2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py" in (root / G0_WORKFLOW).read_text(encoding="utf-8")
+
+    for token, expected in {
+        "CurrentMainCanonicalState": paths.current_state.name,
+        "UniverseLab_SiteState": paths.site_state.name,
+        "UniverseLab_SessionCheckpoint": paths.checkpoint.name,
+    }.items():
+        assert newest_snapshot(root, token) == expected, f"{expected} is not newest {token}"
 
     if strict_source_existence:
-        for label, path in state['status_sources'].items():
-            candidate = root / path
-            assert candidate.exists(), f'missing status source {label}: {path}'
-        for result in checkpoint['verified_results']:
-            for path in result['sources']:
-                assert (root / path).is_file(), f'missing checkpoint result source: {path}'
-        for blocker in checkpoint['open_blockers']:
-            for path in blocker['sources']:
-                assert (root / path).is_file(), f'missing checkpoint blocker source: {path}'
-        for path in checkpoint['entry_points']:
-            assert (root / path).is_file(), f'missing checkpoint entry point: {path}'
+        for label, source in state.get("status_sources", {}).items():
+            assert_source(root, source, f"state.status_sources.{label}")
+        for label, source in site.get("status_sources", {}).items():
+            assert_source(root, source, f"site.status_sources.{label}")
+        for label, source in manifest.get("current_status_sources", {}).items():
+            assert_source(root, source, f"manifest.current_status_sources.{label}")
+        for index, result in enumerate(checkpoint["verified_results"]):
+            assert_sources(root, result.get("sources"), f"checkpoint.verified_results[{index}]")
+        for index, blocker in enumerate(checkpoint["open_blockers"]):
+            assert_sources(root, blocker.get("sources"), f"checkpoint.open_blockers[{index}]")
+        for index, source in enumerate(checkpoint["entry_points"]):
+            assert_source(root, source, f"checkpoint.entry_points[{index}]")
 
-    print('UniverseLab current-main canonical state reconciliation: PASS')
+    print(f"UniverseLab current-main canonical state reconciliation: PASS ({paths.current_state}, {paths.site_state}, {paths.checkpoint})")
 
 
-def main() -> None:
+def main(argv: Iterable[str] | None = None) -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument('--root', type=Path, default=DEFAULT_ROOT)
-    parser.add_argument('--strict-source-existence', action='store_true')
-    args = parser.parse_args()
-    validate(args.root.resolve(), strict_source_existence=args.strict_source_existence)
+    parser.add_argument("--root", type=Path, default=DEFAULT_ROOT)
+    parser.add_argument("--strict-source-existence", action="store_true")
+    args = parser.parse_args(list(argv) if argv is not None else None)
+    validate(args.root, strict_source_existence=args.strict_source_existence)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

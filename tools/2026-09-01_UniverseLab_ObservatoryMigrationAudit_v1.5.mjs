@@ -118,10 +118,15 @@ try{
     invalid);
 
   const recovered=await page.evaluate(()=>window.UniverseLabObservatory.reset());
+  const closure=recovered.params.Or+recovered.params.Om+recovered.params.Ode+recovered.params.Ok;
   add('reset_recovers_valid_state',
     recovered.status==='PASS'&&Math.abs(recovered.params.Om-.315)<1e-12&&
-    Math.abs(recovered.params.Ode-.685)<1e-12&&Math.abs(recovered.params.w+1)<1e-12,
-    recovered);
+    Math.abs(recovered.params.Or-.000092)<1e-12&&
+    Math.abs(recovered.params.Ode-.684908)<1e-12&&
+    Math.abs(recovered.params.Ok)<1e-12&&
+    Math.abs(closure-1)<1e-12&&
+    Math.abs(recovered.params.w+1)<1e-12,
+    {...recovered,closure});
 
   add('no_browser_or_http_errors',browserErrors.length===0&&httpErrors.length===0,{browser_errors:browserErrors,http_errors:httpErrors});
   await context.close();

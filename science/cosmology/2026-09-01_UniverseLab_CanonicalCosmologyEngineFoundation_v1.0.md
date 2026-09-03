@@ -1,16 +1,21 @@
-# UniverseLab Canonical Cosmology Engine v1.0 · Implementierungsrevision 1.0.1
+# UniverseLab Canonical Cosmology Engine v1.0 · Implementierungsrevision 1.0.2
 
-**Datum:** 2026-09-01  
+**Erstfassung:** 2026-09-01  
+**Letzte Reconciliation:** 2026-09-03  
 **Klassifikation:** numerische Referenzinfrastruktur; keine HZT-Physikevidenz  
 **Foundation:** gemergter PR #196  
-**Aktuelle Härtung:** PR #201 auf Basis `67c92e2644cee1f2c3a5526cd914f81a3b40a7b8`  
+**Growth-Endpunkthärtung:** gemergter PR #201  
+**Aktuelle Härtung:** Band IV-B auf Basis `30b781f84d9c7c9fc74fac1adb34e4d935b1679b`  
 **API-Version:** `1.0.0`  
-**Implementierungsrevision:** `1.0.1`  
+**Implementierungsrevision:** `1.0.2`  
 **Physical gate effect:** `NONE`
 
 ## 1. Zweck
 
-Der gemeinsame browser- und Node-fähige Rechenkern ist die einzige Referenzimplementierung für die kosmologischen Grundrechnungen von Validation, Observatory, Compare und – nach Review von PR #201 – Emergence. Die stabile API-Version bleibt `1.0.0`; Revision `1.0.1` korrigiert ausschließlich den konstruktiven Endpunkt des Growth-RK4-Solvers.
+Der gemeinsame browser- und Node-fähige Rechenkern ist die einzige Referenzimplementierung für die kosmologischen Grundrechnungen von Validation, Observatory, Compare und Emergence. Die stabile API-Version bleibt `1.0.0`.
+
+- Revision `1.0.1` pinnt den konstruktiven Endpunkt des Growth-RK4-Solvers auf `ln a=0`, `a=1`.
+- Revision `1.0.2` entfernt einen nicht deklarierten Klein-`Rchi`-Floor aus der Bridge-Skala.
 
 Die Konsolidierung bedeutet nicht, dass eine Modellimplementierung aus dem 6D-Parentsektor hergeleitet oder empirisch bestätigt ist. Sie reduziert Rechendrift zwischen Benutzeroberflächen.
 
@@ -42,8 +47,6 @@ Die öffentliche Redshift-Domäne bleibt strikt
 
 `z >= 0`.
 
-Eine negative Toleranzzone wurde durch die Endpunkthärtung ausdrücklich nicht eingeführt.
-
 ### Distanzen
 
 `D_C = (c/H0) ∫_0^z dz'/E(z')`
@@ -70,7 +73,7 @@ Für das effektive Bridge-Modell existiert keine freigegebene Perturbationsabbil
 
 `UNRELEASED_GROWTH_MAP`.
 
-## 3. Endpunkthärtung 1.0.1
+## 3. Growth-Endpunkthärtung 1.0.1
 
 ### 3.1 Gefundener Gegenfall
 
@@ -106,15 +109,11 @@ Der vierte RK4-Stützpunkt wird bei `nextX` ausgewertet; die letzte gespeicherte
 
 `x=0`, `a=1`.
 
-Die Physikgleichung, Anfangsbedingungen, Anzahl der Standardschritte und Normierung bleiben unverändert. Die Korrektur ist daher eine numerische Endpunkthärtung, keine Modelländerung.
-
 ### 3.3 Regressionsanker
 
 Für den Standardreferenzsatz bleibt
 
-`D(z=1)=0.6068047406056`
-
-innerhalb der bisherigen Toleranzen unverändert.
+`D(z=1)=0.6068047406056`.
 
 Für den nichtstandardmäßigen Gegenfall wird unabhängig geprüft:
 
@@ -124,7 +123,57 @@ mit exakt
 
 `(x_end,a_end)=(0,1)`.
 
-## 4. Gültigkeitsbereich
+## 4. Bridge-Skalenhärtung 1.0.2
+
+### 4.1 Deklarierter Modellvertrag
+
+Die reduzierte Bridge-Skala lautet
+
+`a_c(Rchi)=1/(1+2.5/Rchi)=Rchi/(Rchi+2.5)`,
+
+für
+
+`Rchi>0`.
+
+Der Klein-`Rchi`-Grenzfall ist
+
+`a_c(Rchi)=Rchi/2.5 + O(Rchi^2)`.
+
+Damit gilt
+
+`lim_(Rchi->0+) a_c/Rchi = 0.4`.
+
+### 4.2 Gefundener Gegenfall
+
+Die frühere Implementierung verwendete intern
+
+`a_c=1/(1+2.5/max(0.02,Rchi))`.
+
+Für `0<Rchi<0.02` wurde daher ein konstanter Wert
+
+`a_c=1/126≈0.00793650794`
+
+erzeugt. Dies widersprach der deklarierten Formel, setzte die Ableitung in diesem Intervall künstlich auf null und zerstörte die korrekte `Rchi->0+`-Asymptotik.
+
+### 4.3 Korrektur und Gültigkeit
+
+Revision `1.0.2` implementiert exakt
+
+`a_c=Rchi/(Rchi+2.5)`
+
+und behält die fail-closed Voraussetzung
+
+`Rchi>0`.
+
+Es wird kein versteckter Mindestwert eingesetzt. Für extrem kleine positive Werte kann der Exponentialfaktor numerisch gegen null unterlaufen; das entspricht dem analytischen Grenzverhalten
+
+`exp[-(a/a_c)^2] -> 0`
+
+für festes `a>0` und `Rchi->0+` und ist kein positiver Regularisierungsfloor.
+
+Die öffentliche Compare-Safe-Oberfläche beginnt bei `Rchi=0.1`; ihre bisher sichtbaren Kurven werden durch diese Härtung nicht verändert.
+
+## 5. Gültigkeitsbereich
 
 Die Growth-Lösung gilt für lineare, drucklose Materieperturbationen in GR auf einem glatten ΛCDM- beziehungsweise konstanten-w-Hintergrund. Nicht enthalten sind:
 
@@ -135,7 +184,9 @@ Die Growth-Lösung gilt für lineare, drucklose Materieperturbationen in GR auf 
 - modifizierte Poisson-, Slip- oder Lensingfunktionen,
 - eine HZT-spezifische Growth-Forward-Map.
 
-## 5. QA
+Der Bridge-Hintergrund bleibt ein reduzierter effektiver Vergleichspfad. Die korrigierte `Rchi`-Asymptotik ist keine 6D-Parent-Herleitung.
+
+## 6. QA
 
 Der Node-Validator prüft:
 
@@ -144,26 +195,29 @@ Der Node-Validator prüft:
 - Krümmungsgeometrie,
 - Etherington-Reziprozität,
 - ungültige Hintergrund- und Bridge-Domänen,
+- exakte Bridge-Skalenwerte ober- und unterhalb des historischen Floors,
+- `a_c/Rchi -> 0.4`,
 - die `βτ I_B`-Degeneration,
 - ΛCDM-Referenzwerte,
 - den Einstein-de-Sitter-Grenzfall,
 - exakte Growth-Endpunkte für Standard- und nichtstandardmäßige Anfangsepochen,
 - die Bridge-Growth-Firewall.
 
-Ein unabhängiger Python-Test rekonstruiert Distanzen und beide Growth-Fälle getrennt und vergleicht sie mit den Node-Ausgaben.
+Ein unabhängiger Python-Test rekonstruiert Distanzen, Bridge-Skala und beide Growth-Fälle getrennt und vergleicht sie mit den Node-Ausgaben.
 
-## 6. Migrationsstatus
+## 7. Migrationsstatus
 
-Bereits an den gemeinsamen Kern gebunden sind:
+An den gemeinsamen Kern gebunden sind:
 
 1. Validation Console,
 2. Observatory,
 3. Compare SAFE,
-4. die konsolidierten Vergleichsrouten.
+4. die konsolidierten Vergleichsrouten,
+5. Emergence einschließlich getrennter Zellautomaten-/Kosmologiearchitektur.
 
-`emergence.html` befindet sich in PR #201 im Review. Der dortige Zellautomat bleibt dynamisch vom Kosmologiekanal getrennt.
+Damit verbleibt kein bekannter unabhängiger öffentlicher Kosmologie-Rechenkern.
 
-## 7. Nicht enthalten
+## 8. Nicht enthalten
 
 - kein Likelihood-Fit,
 - keine Parent-Herleitung,

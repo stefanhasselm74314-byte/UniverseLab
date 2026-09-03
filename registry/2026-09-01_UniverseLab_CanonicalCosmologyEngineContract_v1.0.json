@@ -1,20 +1,23 @@
 {
   "schema": "universelab.canonical-cosmology-engine-contract.v1",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "date": "2026-09-01",
-  "status": "REFERENCE_ENGINE_ACTIVE_PAGE_MIGRATIONS_IN_PROGRESS",
+  "last_reconciled_date": "2026-09-03",
+  "status": "REFERENCE_ENGINE_ACTIVE_PAGE_MIGRATIONS_COMPLETE",
   "classification": "NUMERICAL_REFERENCE_ENGINE_NO_HZT_PHYSICAL_EVIDENCE",
   "provenance": {
     "foundation_pull_request": 196,
     "foundation_merge_commit": "8a0dc1ae9aee8cdbde346b2a6ef5003f21cf2b08",
-    "current_basis_main_commit": "67c92e2644cee1f2c3a5526cd914f81a3b40a7b8",
-    "current_hardening_pull_request": 201,
-    "hardening_reason": "A real Chromium legacy-state audit exposed cumulative RK4 endpoint roundoff that evaluated the final growth stage at an infinitesimal negative redshift."
+    "growth_endpoint_hardening_pull_request": 201,
+    "growth_endpoint_merge_commit": "59ddf570c62a31ca9ec2feb2e9ba3d4e7ef0690c",
+    "current_basis_main_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
+    "current_reconciliation": "BAND_IV_B_CURRENT_MAIN_STATE_TEST_PUBLIC_STATUS_RECONCILIATION",
+    "current_hardening_reason": "Remove an undocumented max(0.02,Rchi) floor so the implemented bridge scale equals the declared a_c=Rchi/(Rchi+2.5) for every Rchi>0 and has the correct Rchi->0+ asymptotic."
   },
   "engine": {
     "path": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
     "api_version": "1.0.0",
-    "implementation_revision": "1.0.1",
+    "implementation_revision": "1.0.2",
     "runtime": [
       "browser_global",
       "node_commonjs"
@@ -27,6 +30,7 @@
   "conventions": {
     "redshift_domain": "z >= 0",
     "scale_factor_domain": "0 < a <= 1",
+    "bridge_Rchi_domain": "Rchi > 0",
     "distance_unit": "Mpc",
     "hubble_unit": "km s^-1 Mpc^-1",
     "time_unit": "Gyr",
@@ -46,6 +50,10 @@
     },
     "bridge": {
       "Delta": "beta_tau I_B exp[-(a/a_c)^2]",
+      "a_c": "Rchi/(Rchi+2.5)",
+      "Rchi_domain": "Rchi > 0",
+      "small_Rchi_asymptotic": "a_c = Rchi/2.5 + O(Rchi^2)",
+      "hidden_Rchi_floor": false,
       "E2": "E_LCDM^2 (1 + Delta)",
       "growth": "UNRELEASED_GROWTH_MAP",
       "physical_parent_status": "OPEN"
@@ -74,7 +82,7 @@
     "endpoint_policy": "The final integration abscissa is constructed as x=0 and a=1; no tolerance relaxation of the public z>=0 domain is permitted.",
     "solution_metadata": {
       "api_version": "1.0.0",
-      "implementation_revision": "1.0.1"
+      "implementation_revision": "1.0.2"
     },
     "scope": "linear pressureless matter perturbations in GR with smooth LCDM or constant-w dark energy",
     "excluded": [
@@ -89,10 +97,13 @@
   "fail_closed_domain_rules": {
     "E2": "must be finite and strictly positive at every evaluated point",
     "bridge_factor": "1 + Delta must be finite and strictly positive",
+    "Rchi": "must be finite and strictly positive; no hidden lower floor is applied",
     "floors_for_negative_E2": false,
+    "hidden_parameter_floors": false,
     "negative_redshift_tolerance": false,
     "invalid_background_code": "INVALID_BACKGROUND_DOMAIN",
     "invalid_bridge_code": "INVALID_BRIDGE_DOMAIN",
+    "invalid_Rchi_code": "INVALID_RCHI",
     "unreleased_growth_code": "UNRELEASED_GROWTH_MAP"
   },
   "reference_checks": {
@@ -103,6 +114,13 @@
       "z_1": 0.6068047406056298,
       "z_2": 0.4172414795427676,
       "z_3": 0.31553801878444504
+    },
+    "bridge_scale": {
+      "Rchi_0.02": 0.007936507936507936,
+      "Rchi_0.01": 0.00398406374501992,
+      "Rchi_1e-6": 3.99999840000064e-7,
+      "asymptotic_limit_a_c_over_Rchi": 0.4,
+      "historical_hidden_floor_removed": 0.02
     },
     "nondefault_growth_endpoint_witness": {
       "H0": 70.0,
@@ -138,6 +156,7 @@
       "Einstein-de Sitter age",
       "invalid E2 fails closed",
       "invalid bridge factor fails closed",
+      "exact small-Rchi bridge scale and Rchi->0+ asymptotic without hidden floor",
       "beta_tau I_B product degeneracy",
       "LCDM growth reference",
       "exact x=0 and a=1 growth endpoint for default and nondefault a_i",
@@ -145,26 +164,29 @@
       "Einstein-de Sitter D=a and f=1",
       "bridge growth firewall",
       "small-z Hubble law",
-      "independent Python distance and growth reconstruction"
+      "independent Python distance, bridge-scale and growth reconstruction"
     ]
   },
   "migration": {
-    "stage": "PUBLIC_REFERENCE_PAGE_MIGRATIONS_IN_PROGRESS",
+    "stage": "PUBLIC_REFERENCE_PAGE_MIGRATIONS_COMPLETE",
     "page_behavior_changed": false,
     "page_behavior_changed_by_this_engine_hardening": false,
+    "reason_no_current_page_change": "The public Compare Safe Rchi slider has Rchi>=0.1, above the removed historical floor.",
     "migrated_pages": [
       "validation.html",
       "validation-en.html",
       "observatory.html",
+      "observatory-en.html",
       "compare-safe.html",
       "compare.html",
-      "compare-direct.html"
+      "compare-direct.html",
+      "compare-en.html",
+      "emergence.html",
+      "emergence-en.html"
     ],
-    "review_pending_pages": [
-      "emergence.html"
-    ],
+    "review_pending_pages": [],
     "remaining_independent_cosmology_engines": [],
-    "next_stage": "MERGE_EMERGENCE_AFTER_EXACT_HEAD_BROWSER_AND_REPOSITORY_QA"
+    "next_stage": "BAND_V_PUBLIC_SCIENTIFIC_CLAIM_TO_HZT_M0_PARENT_STATUS_AUDIT"
   },
   "forbidden_inferences": [
     "NO_REFERENCE_ENGINE_AS_HZT_PARENT_DERIVATION",
@@ -172,7 +194,7 @@
     "NO_LINEAR_GROWTH_REFERENCE_AS_RELEASED_HZT_GROWTH_MAP",
     "NO_BRIDGE_BACKGROUND_AS_BRIDGE_PERTURBATION_THEORY",
     "NO_NUMERICAL_CONSISTENCY_AS_GHOST_FREEDOM",
-    "NO_ENGINE_ENDPOINT_FIX_AS_PHYSICAL_EVIDENCE",
+    "NO_ENGINE_ENDPOINT_OR_PARAMETER_DOMAIN_FIX_AS_PHYSICAL_EVIDENCE",
     "NO_PHYSICAL_GATE_PROMOTION"
   ],
   "physical_gate_effect": "NONE",

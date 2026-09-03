@@ -1,14 +1,19 @@
 {
   "schema": "universelab.emergence-canonical-growth-adapter-contract.v1",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "date": "2026-09-01",
+  "last_reconciled_date": "2026-09-03",
   "basis_main_commit": "67c92e2644cee1f2c3a5526cd914f81a3b40a7b8",
-  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "current_reconciliation_basis_main_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
+  "merged_pull_request": 201,
+  "merge_commit": "59ddf570c62a31ca9ec2feb2e9ba3d4e7ef0690c",
+  "status": "ACTIVE_MERGED_QA_RECONCILED",
   "classification": "PUBLIC_DIAGNOSTIC_VISUALIZATION_CANONICAL_BACKGROUND_AND_GROWTH_ADAPTER_NO_PHYSICAL_EVIDENCE_EFFECT",
   "page": "emergence.html",
   "english_entry": "emergence-en.html",
   "canonical_engine": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
   "adapter": "assets/2026-09-01_UniverseLab_EmergenceAdapter_v1.0.js",
+  "adapter_runtime_version": "1.0.3",
   "architecture": {
     "cellular_automaton": "DISCRETE_2D_DIAGNOSTIC_VISUALIZATION",
     "cosmology_overlay": "CANONICAL_LCDM_BACKGROUND_AND_LINEAR_GR_GROWTH_REFERENCE",
@@ -76,6 +81,19 @@
     "cosmological_backreaction": false,
     "physical_structure_growth_claim": false,
     "deterministic_independence_test": "IDENTICAL_CELL_STATE_RULE_AND_ZERO_NOISE_PRODUCE_IDENTICAL_NEXT_CELL_HASH_FOR_EXPANSION_OFF_AND_LCDM"
+  },
+  "public_semantics": {
+    "lcdm_mode_label": "LambdaCDM display time (reference)",
+    "heuristic_mode_label": "heuristic display size",
+    "static_mode_label": "cosmology static",
+    "former_ambiguous_label": "Physikalisch: LambdaCDM",
+    "former_ambiguous_label_removed": true,
+    "page_claims_cellular_automaton_is_physical_structure_formation": false
+  },
+  "accessibility": {
+    "mobile_zoom_allowed": true,
+    "viewport_forbids_user_scaling": false,
+    "removed_attribute": "user-scalable=no"
   },
   "preserved_runtime_ids": [
     "c",
@@ -159,6 +177,8 @@
       "cellular_automaton_remains_independent_under_invalid_cosmology",
       "legacy_settings_payload_migrates_explicitly",
       "reset_recovers_reference_state",
+      "public_mode_labels_are_diagnostic_not_physical",
+      "mobile_zoom_is_not_disabled",
       "de_en_runtime_parity",
       "no_browser_or_http_errors"
     ]
@@ -170,7 +190,7 @@
     "NO_LINEAR_GR_GROWTH_AS_RELEASED_HZT_PERTURBATION_MAP",
     "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
     "NO_VISUAL_SIMILARITY_AS_EMPIRICAL_MODEL_CONFIRMATION",
-    "NO_PAGE_MIGRATION_AS_K1_D_OR_K1_E_PROMOTION"
+    "NO_PAGE_MIGRATION_OR_WORDING_FIX_AS_K1_D_OR_K1_E_PROMOTION"
   ],
   "K1-D": "NOT_RELEASED",
   "K1-E": "NOT_ADMISSIBLE",

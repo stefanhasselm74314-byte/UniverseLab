@@ -46,9 +46,15 @@ def dm(z: float, h0: float, om: float, ode: float) -> float:
     return dh/math.sqrt(ok)*math.sinh(chi) if ok>0 else dh/math.sqrt(-ok)*math.sin(chi)
 
 
+def bridge_scale(rchi: float) -> float:
+    if not rchi > 0:
+        raise ValueError('Rchi must be positive')
+    return rchi/(rchi+2.5)
+
+
 def bridge_delta(z: float, beta: float, ib: float, rchi: float) -> float:
     a=1/(1+z)
-    ac=1/(1+2.5/max(.02,rchi))
+    ac=bridge_scale(rchi)
     return beta*ib*math.exp(-(a/ac)**2)
 
 
@@ -65,6 +71,8 @@ def main() -> None:
     assert 'data-ul-split-key="compare-safe"' in html
     assert '<canvas id="chart"></canvas>' in html
     assert 'id="w"' in html and 'disabled' in html
+    assert 'id="Ol" type="range" min="0" max="1.3" step="0.000001" value="0.684908"' in html
+    assert 'id="Ol" type="range" min="0" max="1.3" step="0.001" value="0.684908"' not in html
     for element_id in ('H0','Om','Ol','w','s8','beta','ib','rchi','z','ageL','ageB','dev1','S8','dc','dl','da','mu','chart','formula','reset','csv'):
         assert f'id="{element_id}"' in html, element_id
     for forbidden in ('function eL(', 'function eW(', 'function eB(', 'function simp(', 'function dc(', 'Math.sqrt(Math.max('):
@@ -80,11 +88,20 @@ def main() -> None:
     for forbidden in ('Math.sqrt(Math.max(', 'Math.max(.02', "C.solveGrowth(p,'bridge'"):
         assert forbidden not in adapter, forbidden
     assert 'UNRELEASED_GROWTH_MAP' in engine
+    assert 'Math.max(0.02,p.Rchi)' not in engine
+    assert 'function bridgeScale(p){return p.ac??p.Rchi/(p.Rchi+2.5);}' in engine
 
-    assert contract['status']=='IMPLEMENTED_REVIEW_PENDING'
+    assert contract['version']=='2.0.1'
+    assert contract['status']=='ACTIVE_MERGED_QA_RECONCILED'
+    assert contract['merged_pull_request']==199
     assert contract['models']['base']=='lcdm'
     assert contract['models']['bridge']=='bridge'
     assert contract['models']['bridge_base_w']==-1
+    assert contract['models']['bridge_scale']=='a_c=Rchi/(Rchi+2.5) for Rchi>0'
+    assert contract['models']['bridge_scale_hidden_floor'] is False
+    reference=contract['background_contract']['reference_state']
+    assert contract['background_contract']['reference_density_slider_resolution']==.000001
+    assert abs(reference['Omega_r']+reference['Omega_m']+reference['Omega_DE']+reference['Omega_k']-1)<1e-15
     assert contract['distance_contract']['chain']=='D_C_TO_D_M_TO_D_L_AND_D_A'
     assert contract['observable_firewalls']['bridge_growth']=='UNRELEASED_GROWTH_MAP'
     assert contract['observable_firewalls']['bridge_lensing']=='UNRELEASED_LENSING_MAP'
@@ -97,6 +114,12 @@ def main() -> None:
         d1=bridge_delta(z,.05,.4,1)
         d2=bridge_delta(z,.1,.2,1)
         assert abs(d1-d2)<1e-15
+
+    # Exact small-Rchi model contract and asymptotic, with no historical .02 floor.
+    assert abs(bridge_scale(.02)-.02/2.52)<1e-16
+    assert abs(bridge_scale(.01)-.01/2.51)<1e-16
+    assert abs(bridge_scale(.01)-bridge_scale(.02))>1e-3
+    assert abs(bridge_scale(1e-6)/1e-6-.4)<2e-7
 
     # Curved geometry must not identify D_C with D_M.
     z=2.33
@@ -117,7 +140,7 @@ def main() -> None:
     # Bridge witness beta*I_B<-1 is invalid in the early-time limit.
     assert 1+bridge_delta(1e8,-3,1,1)<0
 
-    print('UniverseLab Compare SAFE migration v2.0 static/numerical contract: PASS')
+    print('UniverseLab Compare SAFE migration v2.0.1 static/numerical contract: PASS')
 
 
 if __name__=='__main__':

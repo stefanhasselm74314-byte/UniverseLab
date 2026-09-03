@@ -1,0 +1,204 @@
+{
+  "schema": "universelab.current-main-canonical-state.v1",
+  "version": "1.1.0",
+  "snapshot_date": "2026-09-03",
+  "snapshot_timestamp": "2026-09-03T12:00:00+02:00",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "status": "CURRENT_RECONCILED_STATE_FOR_DECLARED_BASIS_AND_CHANGESET",
+  "basis_main_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
+  "basis_main_tree": "de4cf960a4390b173b683c0a14991985b8ec349f",
+  "basis_semantics": "The snapshot starts from the declared merged main commit. Band-IV-B reconciliation changes become canonical only if this changeset is merged.",
+  "supersedes": "registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json",
+  "architecture": [
+    "HPVS",
+    "HZT-M0",
+    "HZT-Full"
+  ],
+  "authority_rule": {
+    "priority": [
+      "current explicit user decision",
+      "current merged versioned repository registry or governance artifact",
+      "current ratified or frozen project file",
+      "current project context",
+      "persistent memory",
+      "historical chats and assistant summaries"
+    ],
+    "open_pull_requests_have_canonical_effect": false,
+    "historical_snapshots_are_append_only": true,
+    "reconciliation_must_use_a_new_dated_successor": true
+  },
+  "active_program": {
+    "program_id": "UL-HZT-10M-2026-2027",
+    "status": "ACTIVE_RATIFIED_RESEARCH_PROGRAM",
+    "workstream": "WS1",
+    "work_package": "FM-0",
+    "gate": "FM-G0",
+    "gate_status": "OPEN",
+    "inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+    "blocking_gap_count": 10,
+    "partially_resolved_blocking_gap_count": 3,
+    "fully_unresolved_blocking_gap_count": 7
+  },
+  "public_numerical_platform": {
+    "canonical_engine": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+    "api_version": "1.0.0",
+    "implementation_revision_after_this_reconciliation": "1.0.2",
+    "status": "ACTIVE_SHARED_REFERENCE_ENGINE",
+    "page_migrations": {
+      "validation": "ACTIVE_MERGED",
+      "observatory": "ACTIVE_MERGED_QA_RECONCILED",
+      "compare_safe": "ACTIVE_MERGED_QA_RECONCILED",
+      "compare_legacy_routes": "CONSOLIDATED_TO_COMPARE_SAFE",
+      "emergence": "ACTIVE_MERGED_QA_RECONCILED"
+    },
+    "remaining_independent_public_cosmology_engines": [],
+    "bridge_background_status": "REDUCED_EFFECTIVE_DIAGNOSTIC_MODEL_NOT_6D_PARENT_DERIVATION",
+    "bridge_growth": "UNRELEASED_GROWTH_MAP",
+    "bridge_lensing": "UNRELEASED_LENSING_MAP",
+    "didactic_points_are_likelihood_data": false,
+    "physical_evidence_effect": "NONE"
+  },
+  "physical_governance": {
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+    "technical_authority_signature_verifier": "IMPLEMENTED_AND_QA_GREEN",
+    "human_trust_root_preparation_package": "IMPLEMENTED_AND_QA_GREEN",
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "authority_signature_provenance": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
+    "runtime_issuance_bindings": "BLOCKED",
+    "operative_authorization_decision": "NOT_CREATED",
+    "operative_single_use_grant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "solver_authorized": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "automatic_wp3_wp4_start": false,
+    "physical_evidence_effect": "NONE"
+  },
+  "merged_reconciliation_sources": {
+    "canonical_engine_foundation": {
+      "pull_request": 196,
+      "status": "MERGED"
+    },
+    "observatory_migration": {
+      "pull_request": 198,
+      "status": "MERGED"
+    },
+    "compare_safe_migration": {
+      "pull_request": 199,
+      "status": "MERGED"
+    },
+    "emergence_migration": {
+      "pull_request": 201,
+      "merge_commit": "59ddf570c62a31ca9ec2feb2e9ba3d4e7ef0690c",
+      "status": "MERGED"
+    },
+    "authority_signature_provenance": {
+      "pull_request": 202,
+      "merge_commit": "3286bdbf9c89e744d0a4f0117315acff9bd78795",
+      "status": "MERGED_NONOPERATIVE"
+    },
+    "human_trust_root_preparation": {
+      "pull_request": 203,
+      "merge_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
+      "status": "MERGED_PREPARATION_ONLY_NOT_RATIFIED"
+    }
+  },
+  "open_noncanonical_work": [
+    {
+      "pull_request": 137,
+      "title": "ULSH-01: harden C-PHYS physical response-rank gate",
+      "state": "OPEN_DRAFT",
+      "head_sha": "f8db7baa4d7cc8b3d1b505ddff80d69f4290d836",
+      "base_sha_at_creation": "6288f1e4f1b6f2a6a23077fa7a8ec89fc865e6b5",
+      "commits": 156,
+      "changed_files": 139,
+      "canonical_effect": "NONE_UNTIL_REBUILT_REVIEWED_AND_MERGED",
+      "mergeable_at_snapshot": false,
+      "interpretation": "Authority/signature and human-trust-root preparation sub-blocks were extracted and merged separately in PRs 202 and 203. The remaining large draft is not current-main canon."
+    }
+  ],
+  "band_iv_b_reconciliation": {
+    "status": "IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING",
+    "changes": [
+      "correct Observatory reset QA to radiation-inclusive flat closure",
+      "correct Compare Safe reset QA to radiation-inclusive flat closure",
+      "remove undocumented small-Rchi bridge-scale floor",
+      "reconcile Observatory, Compare Safe and Emergence migration statuses",
+      "clarify Emergence reference labels and restore mobile zoom",
+      "publish dated current-main, SiteState and checkpoint successors",
+      "synchronize manifest, public research status and sitemap metadata"
+    ],
+    "scope": "NUMERICAL_QA_PROVENANCE_PUBLIC_STATUS_AND_ACCESSIBILITY_ONLY",
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE"
+  },
+  "verified_results": [
+    {
+      "result_id": "UL-RES-BAND-IVB-RESET-CLOSURE-001",
+      "statement": "The exact flat public reference includes radiation: Omega_r=0.000092, Omega_m=0.315, Omega_DE=0.684908 and Omega_k=0.",
+      "status": "IMPLEMENTED_TEST_RECONCILIATION_PENDING_EXACT_HEAD_QA",
+      "evidence_effect": "NUMERICAL_QA_ONLY",
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "result_id": "UL-RES-BAND-IVB-RCHI-001",
+      "statement": "The reduced bridge scale is implemented as a_c=Rchi/(Rchi+2.5) for every Rchi>0 with a_c/Rchi->0.4 and no hidden lower floor.",
+      "status": "IMPLEMENTED_TEST_RECONCILIATION_PENDING_EXACT_HEAD_QA",
+      "evidence_effect": "NUMERICAL_MODEL_CONTRACT_ONLY",
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "result_id": "UL-RES-PUBLIC-ENGINE-MIGRATION-001",
+      "statement": "Validation, Observatory, Compare and Emergence use the shared canonical cosmology engine; Bridge growth remains unreleased.",
+      "status": "MERGED_WITH_BAND_IV_B_STATUS_RECONCILIATION_PENDING",
+      "evidence_effect": "SOFTWARE_ARCHITECTURE_ONLY",
+      "physical_evidence_effect": "NONE"
+    }
+  ],
+  "open_blockers": [
+    {
+      "blocker_id": "UL-BLK-FM0-001",
+      "statement": "The parent-to-reduced-to-observable forward map remains open across all five observable blocks.",
+      "status": "OPEN",
+      "source": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+    },
+    {
+      "blocker_id": "UL-BLK-TRUST-ROOT-001",
+      "statement": "The human-controlled trust root is not ratified. The required offline key and human adoption are parked until an exclusively user-controlled computer is available.",
+      "status": "PARKED_EXTERNAL_HUMAN_ACTION_REQUIRED",
+      "source": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json"
+    },
+    {
+      "blocker_id": "UL-BLK-RUNTIME-ISSUANCE-001",
+      "statement": "Execution-environment identity, reservation store, crash-persistent single-use semantics, exclusive result path and runtime attestations remain unspecified or unratified.",
+      "status": "BLOCKED",
+      "source": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json"
+    },
+    {
+      "blocker_id": "UL-BLK-C-PHYS-GENERIC-M1-001",
+      "statement": "Generic global M1 existence, continuum BVP invertibility, physical Hamiltonian positivity and full ghost freedom remain open.",
+      "status": "OPEN"
+    }
+  ],
+  "status_sources": {
+    "canonical_engine": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
+    "observatory": "registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json",
+    "compare_safe": "registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json",
+    "emergence": "registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json",
+    "authority_signature_provenance": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json",
+    "human_trust_root_preparation": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json",
+    "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+  },
+  "next_allowed_repository_step": "BAND_V_PUBLIC_CLAIM_TO_HZT_M0_PARENT_STATUS_OBSERVABLE_AND_FALSIFICATION_AUDIT_NO_PHYSICAL_EXECUTION",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

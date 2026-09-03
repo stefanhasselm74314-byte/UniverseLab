@@ -1,9 +1,12 @@
 {
   "schema": "universelab.compare-safe-migration-contract.v1",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "date": "2026-09-01",
+  "last_reconciled_date": "2026-09-03",
   "basis_main_commit": "3d989304678280491951d46f0ac6b261f4d0c720",
-  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "current_reconciliation_basis_main_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
+  "merged_pull_request": 199,
+  "status": "ACTIVE_MERGED_QA_RECONCILED",
   "classification": "PUBLIC_DIAGNOSTIC_COMPARISON_MIGRATION_NO_PHYSICAL_EVIDENCE_EFFECT",
   "page": "compare-safe.html",
   "english_entry": "compare-en.html",
@@ -13,6 +16,9 @@
     "base": "lcdm",
     "bridge": "bridge",
     "bridge_base_w": -1,
+    "bridge_scale": "a_c=Rchi/(Rchi+2.5) for Rchi>0",
+    "bridge_scale_hidden_floor": false,
+    "small_Rchi_asymptotic": "a_c=Rchi/2.5+O(Rchi^2)",
     "removed_page_local_model": "wcdm_times_bridge",
     "reason": "The canonical bridge contract is E_LCDM^2(1+Delta); no independent wCDM-times-bridge parent or effective contract is released."
   },
@@ -20,12 +26,22 @@
     "base": "E_LCDM^2",
     "bridge": "E_LCDM^2 [1 + beta_tau I_B exp(-(a/a_c)^2)]",
     "amplitude_identifiability": "ONLY_PRODUCT_beta_tau_times_I_B_IN_CURRENT_BACKGROUND_CHANNEL",
+    "reference_state": {
+      "H0": 67.4,
+      "Omega_r": 0.000092,
+      "Omega_m": 0.315,
+      "Omega_DE": 0.684908,
+      "Omega_k": 0.0,
+      "closure": "Omega_r + Omega_m + Omega_DE + Omega_k = 1"
+    },
+    "reference_density_slider_resolution": 0.000001,
     "chart_domain": "0 <= z <= 5",
     "distance_domain": "0.001 <= z <= 8",
     "age_domain": "1e-8 <= a <= 1",
     "invalid_background_code": "INVALID_BACKGROUND_DOMAIN",
     "invalid_bridge_code": "INVALID_BRIDGE_DOMAIN",
-    "invalid_policy": "FAIL_CLOSED_NO_POSITIVE_FLOOR"
+    "invalid_Rchi_code": "INVALID_RCHI",
+    "invalid_policy": "FAIL_CLOSED_NO_POSITIVE_FLOOR_OR_HIDDEN_PARAMETER_FLOOR"
   },
   "distance_contract": {
     "chain": "D_C_TO_D_M_TO_D_L_AND_D_A",
@@ -51,26 +67,57 @@
       "delta_H_over_H"
     ],
     "invalid_domain_export": "BLOCKED",
-    "forbidden_values": ["NaN", "Infinity"]
+    "forbidden_values": [
+      "NaN",
+      "Infinity"
+    ]
   },
   "preserved_ids": [
-    "H0", "Om", "Ol", "w", "s8", "beta", "ib", "rchi", "z",
-    "ageL", "ageB", "dev1", "S8", "dc", "dl", "da", "mu", "chart",
-    "formula", "fDesc", "fEq", "fInputs", "fResult", "fUnit", "fHint", "reset", "csv"
+    "H0",
+    "Om",
+    "Ol",
+    "w",
+    "s8",
+    "beta",
+    "ib",
+    "rchi",
+    "z",
+    "ageL",
+    "ageB",
+    "dev1",
+    "S8",
+    "dc",
+    "dl",
+    "da",
+    "mu",
+    "chart",
+    "formula",
+    "fDesc",
+    "fEq",
+    "fInputs",
+    "fResult",
+    "fUnit",
+    "fHint",
+    "reset",
+    "csv"
   ],
   "qa": {
     "static_test": "tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py",
     "browser_audit": "tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs",
     "workflow": ".github/workflows/2026-09-01_UniverseLab_CompareSafeMigration_QA_v2.0.yml",
+    "reset_reference_correction": "The previous browser assertion used Omega_DE=0.685=1-Omega_m and omitted Omega_r. The corrected exact flat reference uses Omega_DE=0.684908=1-Omega_m-Omega_r.",
+    "ui_quantization_correction": "The Omega_DE range step is 0.000001 so the browser can represent 0.684908 exactly instead of snapping the input to 0.685.",
     "required_checks": [
       "default_runtime_pass",
+      "exact_flat_reference_state_without_range_quantization",
       "curved_distance_uses_D_M",
       "bridge_product_degeneracy",
+      "exact_small_Rchi_bridge_scale_without_hidden_floor",
       "invalid_background_fails_closed",
       "invalid_bridge_fails_closed",
       "invalid_csv_export_blocked",
       "growth_and_lensing_firewalls_visible",
-      "reset_recovers_reference_state",
+      "reset_recovers_reference_state_with_radiation_inclusive_closure",
       "no_browser_or_http_errors"
     ]
   },
@@ -81,7 +128,7 @@
     "NO_LCDM_GROWTH_REFERENCE_AS_RELEASED_BRIDGE_GROWTH_MAP",
     "NO_GR_LENSING_IDENTITY_AS_RELEASED_BRIDGE_LENSING_MAP",
     "NO_NUMERICAL_STABILITY_AS_GHOST_FREEDOM",
-    "NO_PAGE_MIGRATION_AS_PHYSICAL_GATE_PROMOTION"
+    "NO_PAGE_MIGRATION_OR_PARAMETER_DOMAIN_FIX_AS_PHYSICAL_GATE_PROMOTION"
   ],
   "physical_gate_effect": "NONE",
   "physical_evidence_effect": "NONE"

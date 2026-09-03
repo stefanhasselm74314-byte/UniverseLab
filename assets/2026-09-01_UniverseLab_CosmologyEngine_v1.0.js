@@ -7,7 +7,7 @@
   'use strict';
 
   const VERSION='1.0.0';
-  const REVISION='1.0.1';
+  const REVISION='1.0.2';
   const C_KM_S=299792.458;
   const HUBBLE_TIME_100_GYR=9.77813;
   const DEFAULT_OR=9.2e-5;
@@ -70,7 +70,7 @@
     return 1/value-1;
   }
 
-  function bridgeScale(p){return p.ac??1/(1+2.5/Math.max(0.02,p.Rchi));}
+  function bridgeScale(p){return p.ac??p.Rchi/(p.Rchi+2.5);}
   function bridgeDeltaFromA(a,p){
     const ac=bridgeScale(p);
     return p.betaTau*p.IB*Math.exp(-Math.pow(a/ac,2));

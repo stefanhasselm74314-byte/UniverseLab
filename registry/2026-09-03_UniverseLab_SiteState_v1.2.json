@@ -1,0 +1,232 @@
+{
+  "schema": "universelab.site-state.v1",
+  "version": "1.2.0",
+  "snapshot_date": "2026-09-03",
+  "snapshot_timestamp": "2026-09-03T12:00:00+02:00",
+  "basis_main_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
+  "basis_main_tree": "de4cf960a4390b173b683c0a14991985b8ec349f",
+  "basis_semantics": "Base main plus the Band-IV-B reconciliation changes in this changeset; canonical only after merge.",
+  "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+  "supersedes": "registry/2026-09-01_UniverseLab_SiteState_v1.1.json",
+  "physical_gate_effect": "NONE",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "physical_evidence_effect": "NONE",
+    "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT",
+    "open_pull_requests_have_canonical_effect": false,
+    "historical_snapshots_are_append_only": true,
+    "trust_root_status": "NOT_RATIFIED",
+    "runtime_issuance_bindings": "BLOCKED"
+  },
+  "pages": [
+    {
+      "id": "home",
+      "path": "index.html",
+      "domain": "home",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "navigator",
+      "path": "navigator.html",
+      "domain": "navigator",
+      "status": "ACTIVE_CANONICAL_DIRECT_DOCUMENT"
+    },
+    {
+      "id": "research_status",
+      "path": "research-status.html",
+      "domain": "status",
+      "status": "ACTIVE_CURRENT_RECONCILED_2026_09_03"
+    },
+    {
+      "id": "solver_hub",
+      "path": "solver-hub.html",
+      "domain": "solver",
+      "status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY"
+    },
+    {
+      "id": "validation",
+      "path": "validation.html",
+      "domain": "validation",
+      "status": "ACTIVE_CANONICAL_ENGINE_ADAPTER"
+    },
+    {
+      "id": "observatory",
+      "path": "observatory.html",
+      "domain": "observatory",
+      "status": "ACTIVE_MERGED_QA_RECONCILED"
+    },
+    {
+      "id": "compare_safe",
+      "path": "compare-safe.html",
+      "domain": "compare",
+      "status": "ACTIVE_MERGED_QA_RECONCILED"
+    },
+    {
+      "id": "compare_legacy",
+      "path": "compare.html",
+      "domain": "compare",
+      "status": "LEGACY_ROUTE_TO_COMPARE_SAFE"
+    },
+    {
+      "id": "compare_direct_legacy",
+      "path": "compare-direct.html",
+      "domain": "compare",
+      "status": "LEGACY_ROUTE_TO_COMPARE_SAFE"
+    },
+    {
+      "id": "emergence",
+      "path": "emergence.html",
+      "domain": "emergence",
+      "status": "ACTIVE_MERGED_QA_RECONCILED_DIAGNOSTIC_VISUALIZATION"
+    },
+    {
+      "id": "methods",
+      "path": "hyperzeit-methods.html",
+      "domain": "methods",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "material",
+      "path": "hyperzeit-material-v2.html",
+      "domain": "material",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "audit_20260731",
+      "path": "universelab-audit-2026-07-31.html",
+      "domain": "audit",
+      "status": "ARCHIVED_REFERENCE"
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "ULSH-01",
+      "technical": {
+        "target_contract": "FROZEN",
+        "response_rank_method": "SPECIFIED_NOT_EXECUTED",
+        "authority_signature_verifier": "IMPLEMENTED_AND_QA_GREEN",
+        "human_trust_root_preparation": "IMPLEMENTED_AND_QA_GREEN",
+        "ratified_human_trust_root": "NOT_RATIFIED",
+        "runtime_issuance_bindings": "BLOCKED",
+        "background_execution": "NOT_AUTHORIZED",
+        "physical_response_rank": "NOT_EXECUTED",
+        "backend_import": "NOT_EXECUTED"
+      },
+      "governance": {
+        "priority": "P0_PHYSICAL_GATE_REMAINS_CLOSED",
+        "solver_release": "NOT_AUTHORIZED",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
+        "global_M1_existence": "OPEN",
+        "continuum_BVP_invertibility": "OPEN",
+        "Hamiltonian_positivity": "OPEN",
+        "ghost_freedom": "OPEN"
+      },
+      "work_packages": [
+        {
+          "id": "WP1",
+          "status": "CLOSED_TARGET_FROZEN_NO_EXECUTION"
+        },
+        {
+          "id": "WP2",
+          "status": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED"
+        },
+        {
+          "id": "WP3",
+          "status": "NOT_STARTED"
+        },
+        {
+          "id": "WP4",
+          "status": "BLOCKED_NOT_AUTHORIZED"
+        }
+      ],
+      "release_gate": {
+        "id": "ULSH01-WP2-AUTHORITY-AND-RUNTIME",
+        "status": "NOT_SATISFIED",
+        "blockers": [
+          "RATIFIED_HUMAN_TRUST_ROOT_ABSENT",
+          "RUNTIME_ISSUANCE_BINDINGS_BLOCKED",
+          "AUTHORIZATION_DECISION_NOT_CREATED",
+          "SINGLE_USE_GRANT_NOT_CREATED"
+        ]
+      }
+    },
+    {
+      "module_id": "HZT-M0-FM0",
+      "technical": {
+        "inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+        "gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+        "blocking_gap_count": 10,
+        "partially_resolved_blocking_gap_count": 3,
+        "fully_unresolved_blocking_gap_count": 7
+      },
+      "governance": {
+        "priority": "P0_FORWARD_MAP_RECOVERY",
+        "gate": "FM-G0",
+        "gate_status": "OPEN",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
+        "forward_map": "OPEN",
+        "observable_blocks_released": false,
+        "bridge_growth": "UNRELEASED_GROWTH_MAP",
+        "bridge_lensing": "UNRELEASED_LENSING_MAP"
+      },
+      "release_gate": {
+        "id": "FM-G0",
+        "status": "NOT_SATISFIED"
+      }
+    },
+    {
+      "module_id": "PUBLIC-COSMOLOGY",
+      "technical": {
+        "canonical_engine_api_version": "1.0.0",
+        "canonical_engine_implementation_revision": "1.0.2",
+        "validation": "ACTIVE",
+        "observatory": "ACTIVE_MERGED_QA_RECONCILED",
+        "compare_safe": "ACTIVE_MERGED_QA_RECONCILED",
+        "emergence": "ACTIVE_MERGED_QA_RECONCILED",
+        "remaining_independent_engines": 0
+      },
+      "governance": {
+        "priority": "P1_PUBLIC_NUMERICAL_INTEGRITY",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "REFERENCE_FLRW_ONLY_NOT_HZT_IDENTIFICATION",
+        "bridge_background": "REDUCED_EFFECTIVE_DIAGNOSTIC_MODEL",
+        "bridge_growth": "UNRELEASED_GROWTH_MAP",
+        "likelihood_fit": "NOT_PRESENT",
+        "ghost_freedom": "NOT_IDENTIFIED"
+      },
+      "release_gate": {
+        "id": "PUBLIC-NUMERICAL-QA",
+        "status": "BAND_IV_B_EXACT_HEAD_QA_REQUIRED_BEFORE_MERGE"
+      }
+    }
+  ],
+  "status_sources": {
+    "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
+    "canonical_engine": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
+    "observatory": "registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json",
+    "compare_safe": "registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json",
+    "emergence": "registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json",
+    "authority_signature_provenance": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.1.json",
+    "human_trust_root_preparation": "registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json",
+    "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+  }
+}

@@ -30,6 +30,12 @@ def e2(z: float, om: float, ode: float, w: float = -1.0, orad: float = OR) -> fl
     return orad * zp1**4 + om * zp1**3 + ok * zp1**2 + ode * zp1 ** (3.0 * (1.0 + w))
 
 
+def bridge_scale(rchi: float) -> float:
+    if not rchi > 0:
+        raise ValueError('Rchi must be positive')
+    return rchi / (rchi + 2.5)
+
+
 def growth_reference(
     om: float = .315,
     ode: float = .684908,
@@ -90,13 +96,14 @@ def main() -> None:
     text = ENGINE.read_text(encoding='utf-8')
     required = [
         "const VERSION='1.0.0'",
-        "const REVISION='1.0.1'",
+        "const REVISION='1.0.2'",
         'INVALID_BACKGROUND_DOMAIN',
         'INVALID_BRIDGE_DOMAIN',
         'UNRELEASED_GROWTH_MAP',
         'transverseComovingDistance',
         'solveGrowth',
         'etheringtonRatio',
+        'function bridgeScale(p){return p.ac??p.Rchi/(p.Rchi+2.5);}',
         'const nextX=i===steps-1?0:x+nominalH',
         'rows.push({x,a:i===steps?1:Math.exp(x),D,V})',
     ]
@@ -104,13 +111,14 @@ def main() -> None:
         assert token in text, token
     assert 'Math.sqrt(Math.max(1e-12' not in text
     assert 'Math.sqrt(Math.max(.02' not in text
+    assert 'Math.max(0.02,p.Rchi)' not in text
 
     subprocess.run(['node', str(VALIDATOR)], cwd=ROOT, check=True)
     report = json.loads(REPORT.read_text(encoding='utf-8'))
     assert report['status'] == 'PASS'
     assert report['engine_version'] == '1.0.0'
-    assert report['engine_revision'] == '1.0.1'
-    assert len(report['checks']) >= 14
+    assert report['engine_revision'] == '1.0.2'
+    assert len(report['checks']) >= 15
     assert all(row['status'] == 'PASS' for row in report['checks'])
 
     # Independent flat LCDM distance reference.
@@ -119,6 +127,15 @@ def main() -> None:
     flat_row = next(row for row in report['checks'] if row['name'] == 'flat_distance_identity')
     node_dc = flat_row['detail']['dc']
     assert abs(node_dc - dc) / dc < 2e-10, (node_dc, dc)
+
+    # Independent small-Rchi asymptotic and removal of the historical floor.
+    small_row = next(row for row in report['checks'] if row['name'] == 'bridge_scale_small_rchi_asymptotic_no_hidden_floor')
+    node_scales = {float(row['Rchi']): float(row['scale']) for row in small_row['detail']['samples']}
+    for rchi in (1.0, .1, .02, .01, 1e-3, 1e-6):
+        assert abs(node_scales[rchi] - bridge_scale(rchi)) < 1e-15
+    historical_floor = 1 / (1 + 2.5 / .02)
+    assert abs(node_scales[.01] - historical_floor) > 1e-3
+    assert abs(node_scales[1e-6] / 1e-6 - .4) < 2e-7
 
     # Independent invalid-domain witness.
     vals = [e2(5 * i / 20000, .1, 1.2, -1.5) for i in range(20001)]

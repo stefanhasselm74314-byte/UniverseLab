@@ -1,0 +1,175 @@
+name: UniverseLab Band IV-B current-main reconciliation QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs'
+      - 'tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs'
+      - 'tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs'
+      - 'tools/2026-09-03_generate_UniverseLab_SitemapLastmod_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_ObservatoryMigration_v1.5.py'
+      - 'tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py'
+      - 'tests/2026-09-03_test_UniverseLab_BandIVBCurrentMainReconciliation_v1.0.py'
+      - 'registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json'
+      - 'registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json'
+      - 'registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json'
+      - 'registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json'
+      - 'registry/2026-09-03_UniverseLab_BandIVBCurrentMainReconciliationContract_v1.0.json'
+      - 'registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json'
+      - 'registry/2026-09-03_UniverseLab_SiteState_v1.2.json'
+      - 'registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json'
+      - 'registry/session-checkpoint-latest.json'
+      - 'project-manifest.json'
+      - 'research-status.html'
+      - 'research-status-en.html'
+      - 'emergence.html'
+      - 'sitemap.xml'
+      - 'science/cosmology/2026-09-01_UniverseLab_CanonicalCosmologyEngineFoundation_v1.0.md'
+      - 'science/cosmology/2026-09-03_UniverseLab_BandIVB_CurrentMainReconciliation_v1.0.md'
+      - '.github/workflows/2026-09-03_UniverseLab_BandIVB_CurrentMainReconciliation_QA_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs'
+      - 'tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs'
+      - 'tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs'
+      - 'tools/2026-09-03_generate_UniverseLab_SitemapLastmod_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_ObservatoryMigration_v1.5.py'
+      - 'tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py'
+      - 'tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py'
+      - 'tests/2026-09-03_test_UniverseLab_BandIVBCurrentMainReconciliation_v1.0.py'
+      - 'registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json'
+      - 'registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json'
+      - 'registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json'
+      - 'registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json'
+      - 'registry/2026-09-03_UniverseLab_BandIVBCurrentMainReconciliationContract_v1.0.json'
+      - 'registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json'
+      - 'registry/2026-09-03_UniverseLab_SiteState_v1.2.json'
+      - 'registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json'
+      - 'registry/session-checkpoint-latest.json'
+      - 'project-manifest.json'
+      - 'research-status.html'
+      - 'research-status-en.html'
+      - 'emergence.html'
+      - 'sitemap.xml'
+      - 'science/cosmology/2026-09-01_UniverseLab_CanonicalCosmologyEngineFoundation_v1.0.md'
+      - 'science/cosmology/2026-09-03_UniverseLab_BandIVB_CurrentMainReconciliation_v1.0.md'
+      - '.github/workflows/2026-09-03_UniverseLab_BandIVB_CurrentMainReconciliation_QA_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-band-ivb:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse contracts and compile reconciliation code
+        run: |
+          set -euo pipefail
+          for file in \
+            registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json \
+            registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json \
+            registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json \
+            registry/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterContract_v1.0.json \
+            registry/2026-09-03_UniverseLab_BandIVBCurrentMainReconciliationContract_v1.0.json \
+            registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json \
+            registry/2026-09-03_UniverseLab_SiteState_v1.2.json \
+            registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json \
+            registry/session-checkpoint-latest.json \
+            project-manifest.json; do
+            python -m json.tool "$file" >/dev/null
+          done
+          node --check assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js
+          node --check tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs
+          node --check tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs
+          node --check tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs
+          python -m py_compile tools/2026-09-03_generate_UniverseLab_SitemapLastmod_v1.0.py
+          python -m py_compile tests/2026-09-03_test_UniverseLab_BandIVBCurrentMainReconciliation_v1.0.py
+
+      - name: Run canonical engine Node validation
+        run: node tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs
+
+      - name: Run independent canonical engine Python validation
+        run: python tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py
+
+      - name: Run Observatory static and independent numerical contract
+        run: python tests/2026-09-01_test_UniverseLab_ObservatoryMigration_v1.5.py
+
+      - name: Run Compare Safe static and independent numerical contract
+        run: python tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py
+
+      - name: Run Emergence static and hardening contracts
+        run: |
+          python tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py
+          python tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py
+
+      - name: Run Band IV-B cross-layer reconciliation test
+        run: python tests/2026-09-03_test_UniverseLab_BandIVBCurrentMainReconciliation_v1.0.py
+
+      - name: Verify reproducible sitemap lastmod values
+        run: |
+          python tools/2026-09-03_generate_UniverseLab_SitemapLastmod_v1.0.py \
+            --check \
+            --generated-output sitemap.generated.xml \
+            --report sitemap-lastmod-report.tsv
+
+      - name: Enforce physical, authorization and parked-trust firewalls
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('registry/2026-09-03_UniverseLab_BandIVBCurrentMainReconciliationContract_v1.0.json')
+          d=json.loads(p.read_text())
+          g=d['gate_state']
+          assert d['status']=='IMPLEMENTED_REVIEW_PENDING'
+          assert d['parked_external_human_action']['human_trust_root_ratification']=='PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS'
+          assert d['parked_external_human_action']['may_be_fabricated_by_ci_or_assistant'] is False
+          assert d['parked_external_human_action']['affects_band_ivb_completion'] is False
+          assert g['ratified_human_trust_root']=='NOT_RATIFIED'
+          assert g['runtime_issuance_bindings']=='BLOCKED'
+          assert g['AuthorizationDecision']=='NOT_CREATED'
+          assert g['SingleUseGrant']=='NOT_CREATED'
+          assert g['backend_import']=='NOT_EXECUTED'
+          assert g['solver_execution']=='NOT_EXECUTED'
+          assert g['physical_background']=='NOT_ESTABLISHED'
+          assert g['physical_response_rank']=='NOT_EXECUTED'
+          assert g['ULSH-01-WP3']=='NOT_STARTED'
+          assert g['ULSH-01-WP4']=='BLOCKED_NOT_AUTHORIZED'
+          assert g['K1-D']=='NOT_RELEASED'
+          assert g['K1-E']=='NOT_ADMISSIBLE'
+          assert d['physical_gate_effect']=='NONE'
+          assert d['physical_evidence_effect']=='NONE'
+          print('Band IV-B physical and authorization firewalls: PASS')
+          PY
+
+      - name: Upload Band IV-B QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universelab-band-ivb-current-main-reconciliation
+          path: |
+            band-ivb-current-main-reconciliation-report.json
+            canonical-cosmology-engine-report.json
+            sitemap.generated.xml
+            sitemap-lastmod-report.tsv
+          if-no-files-found: warn

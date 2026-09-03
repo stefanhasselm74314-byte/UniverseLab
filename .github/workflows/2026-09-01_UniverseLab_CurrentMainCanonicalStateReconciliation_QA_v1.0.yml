@@ -5,13 +5,14 @@ on:
     paths:
       - 'project-manifest.json'
       - 'research-status.html'
+      - 'research-status-en.html'
       - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
-      - 'registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json'
-      - 'registry/2026-09-01_UniverseLab_SiteState_v1.1.json'
-      - 'registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json'
+      - 'registry/*UniverseLab_CurrentMainCanonicalState*.json'
+      - 'registry/*UniverseLab_SiteState*.json'
+      - 'registry/*UniverseLab_SessionCheckpoint*.json'
       - 'registry/session-checkpoint-latest.json'
-      - 'schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json'
-      - 'governance/2026-09-01_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.md'
+      - 'schemas/*UniverseLab_SiteStateSchema*.json'
+      - 'governance/*UniverseLab_CurrentMainCanonicalStateReconciliation*.md'
       - 'tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py'
       - 'tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py'
       - '.github/workflows/2026-09-01_UniverseLab_CurrentMainCanonicalStateReconciliation_QA_v1.0.yml'
@@ -23,25 +24,46 @@ permissions:
 
 jobs:
   validate-current-main-state:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Compile validator and tests
+
+      - name: Compile pointer-aware validator and tests
         run: |
           python -m py_compile tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py
           python -m py_compile tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py
-      - name: Parse canonical JSON artifacts
+
+      - name: Parse the active state chain declared by the latest checkpoint
         run: |
-          python -m json.tool registry/2026-09-01_UniverseLab_CurrentMainCanonicalState_v1.0.json >/dev/null
-          python -m json.tool registry/2026-09-01_UniverseLab_SiteState_v1.1.json >/dev/null
-          python -m json.tool schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json >/dev/null
-          python -m json.tool registry/2026-09-01_UniverseLab_SessionCheckpoint_v1.31.json >/dev/null
-          python -m json.tool registry/session-checkpoint-latest.json >/dev/null
-          python -m json.tool project-manifest.json >/dev/null
+          python - <<'PY'
+          import json
+          from pathlib import Path, PurePosixPath
+
+          root=Path('.')
+          alias_path=root/'registry/session-checkpoint-latest.json'
+          alias=json.loads(alias_path.read_text())
+          assert alias['schema']=='universelab.session-checkpoint.v1'
+          for field in ('canonical_snapshot','canonical_state','site_state'):
+              value=alias[field]
+              path=PurePosixPath(value)
+              assert not path.is_absolute() and '..' not in path.parts, (field,value)
+              target=root/path
+              assert target.is_file(), (field,value)
+              json.loads(target.read_text())
+          json.loads((root/'project-manifest.json').read_text())
+          checkpoint=root/alias['canonical_snapshot']
+          assert alias_path.read_bytes()==checkpoint.read_bytes()
+          print('Active current-main pointer chain: PASS')
+          PY
+
       - name: Run fail-closed reconciliation validator
         run: python tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py --strict-source-existence
-      - name: Run adversarial regression tests
+
+      - name: Run adversarial pointer and firewall regressions
         run: python tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py

@@ -99,6 +99,8 @@ def main() -> None:
     assert '2026-09-01_UniverseLab_CosmologyEngine_v1.0.js' in html
     assert '2026-09-01_UniverseLab_ObservatoryAdapter_v1.5.js' in html
     assert '<script>\n\'use strict\'' not in html
+    assert 'id="Ol" type="range" min="0" max="1.2" step="0.000001" value="0.684908"' in html
+    assert 'id="Ol" type="range" min="0" max="1.2" step="0.001" value="0.684908"' not in html
     for element_id in ('H0','Om','Ol','w','s8','age','q0','s80','curv','chart','legend','domainStatus','observatoryBadge'):
         assert f'id="{element_id}"' in html, element_id
 
@@ -113,7 +115,21 @@ def main() -> None:
         assert forbidden not in adapter, forbidden
     assert 'UNRELEASED_GROWTH_MAP' in engine
 
-    assert contract['status'] == 'IMPLEMENTED_REVIEW_PENDING'
+    assert contract['version'] == '1.5.1'
+    assert contract['status'] == 'ACTIVE_MERGED_QA_RECONCILED'
+    assert contract['merged_pull_request'] == 198
+    reference = contract['background_contract']['reference_state']
+    assert reference == {
+        'H0': 67.4,
+        'Omega_r': .000092,
+        'Omega_m': .315,
+        'Omega_DE': .684908,
+        'Omega_k': 0.0,
+        'w': -1.0,
+        'closure': 'Omega_r + Omega_m + Omega_DE + Omega_k = 1',
+    }
+    assert contract['background_contract']['reference_density_slider_resolution'] == .000001
+    assert abs(reference['Omega_r'] + reference['Omega_m'] + reference['Omega_DE'] + reference['Omega_k'] - 1) < 1e-15
     assert contract['distance_contract']['bao'] == 'D_M/r_d'
     assert contract['growth_contract']['bridge_growth'] == 'UNRELEASED_GROWTH_MAP'
     assert contract['didactic_data_policy']['likelihood_fit'] is False
@@ -139,7 +155,7 @@ def main() -> None:
     old_d_equal_a = .5
     assert abs(d1 - old_d_equal_a) > .1
 
-    print('UniverseLab Observatory migration v1.5 static/numerical contract: PASS')
+    print('UniverseLab Observatory migration v1.5.1 static/numerical contract: PASS')
 
 
 if __name__ == '__main__':

@@ -67,6 +67,12 @@ def main() -> None:
     ledger = LEDGER.read_text(encoding='utf-8')
 
     assert '<title>UniverseLab 1.0 · Emergenz</title>' in html
+    assert '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">' in html
+    assert 'user-scalable=no' not in html
+    assert 'ΛCDM-Anzeigezeit (Referenz)' in html
+    assert 'Heuristische Anzeigegröße' in html
+    assert 'Kosmologie statisch' in html
+    assert 'Physikalisch: ΛCDM' not in html
     assert '2026-09-01_UniverseLab_CosmologyEngine_v1.0.js' in html
     assert '2026-09-01_UniverseLab_EmergenceAdapter_v1.0.js' in html
     assert html.index('CosmologyEngine_v1.0.js') < html.index('EmergenceAdapter_v1.0.js')
@@ -91,8 +97,10 @@ def main() -> None:
         assert forbidden not in adapter, forbidden
     assert 'UNRELEASED_GROWTH_MAP' in engine
 
-    assert contract['status'] == 'IMPLEMENTED_REVIEW_PENDING'
-    assert contract['version'] == '1.0.3'
+    assert contract['status'] == 'ACTIVE_MERGED_QA_RECONCILED'
+    assert contract['version'] == '1.0.4'
+    assert contract['merged_pull_request'] == 201
+    assert contract['adapter_runtime_version'] == '1.0.3'
     architecture = contract['architecture']
     assert architecture['dynamical_coupling_between_automaton_and_cosmology'] is False
     assert architecture['cosmology_mutates_simulation_grid_size'] is False
@@ -104,6 +112,10 @@ def main() -> None:
     assert contract['growth_contract']['approximation_role'] == 'DISPLAY_ONLY_DIAGNOSTIC_NOT_DYNAMICS'
     assert contract['growth_contract']['bridge_growth'] == 'UNRELEASED_GROWTH_MAP'
     assert contract['persistence']['legacy_settings_migration'] == 'SUPPORTED_EXPLICIT_LEGACY_SETTINGS_TO_INPUTS'
+    assert contract['public_semantics']['former_ambiguous_label_removed'] is True
+    assert contract['public_semantics']['page_claims_cellular_automaton_is_physical_structure_formation'] is False
+    assert contract['accessibility']['mobile_zoom_allowed'] is True
+    assert contract['accessibility']['viewport_forbids_user_scaling'] is False
     assert contract['K1-D'] == 'NOT_RELEASED'
     assert contract['K1-E'] == 'NOT_ADMISSIBLE'
     assert contract['physical_gate_effect'] == 'NONE'
@@ -124,7 +136,7 @@ def main() -> None:
     closure = (orad/a**4 + om/a**3 + ok/a**2 + ode) / total
     assert abs(closure - 1) < 1e-15
 
-    print('UniverseLab Emergence canonical growth adapter static/numerical contract: PASS')
+    print('UniverseLab Emergence canonical growth adapter v1.0.4 static/numerical contract: PASS')
 
 
 if __name__ == '__main__':
