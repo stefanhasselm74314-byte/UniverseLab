@@ -8,8 +8,10 @@ on:
       - 'project-manifest.json'
       - 'sitemap.xml'
       - 'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+      - 'tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py'
       - 'registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json'
-      - 'science/audit/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.md'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignmentContract_v0.1.json'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json'
       - 'tests/2026-09-03_test_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.py'
       - '.github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_QA_v1.0.yml'
   push:
@@ -20,8 +22,10 @@ on:
       - 'project-manifest.json'
       - 'sitemap.xml'
       - 'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+      - 'tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py'
       - 'registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json'
-      - 'science/audit/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.md'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignmentContract_v0.1.json'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json'
       - 'tests/2026-09-03_test_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.py'
       - '.github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_QA_v1.0.yml'
 
@@ -40,9 +44,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Compile deterministic extractor and regression test
+      - name: Compile extractor mapper and regression test
         run: |
           python -m py_compile tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py
+          python -m py_compile tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py
           python -m py_compile tests/2026-09-03_test_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.py
 
       - name: Run lexical polarity and source-provenance regressions
@@ -69,6 +74,7 @@ jobs:
           assert indexed==set(tracked), (len(indexed),len(tracked),sorted(set(tracked)-indexed)[:10])
           assert summary['claim_candidates']>0
           assert len(candidates['candidates'])==summary['claim_candidates']
+          assert len({row['claim_id'] for row in candidates['candidates']})==summary['claim_candidates']
           assert all(row['adjudication_status']=='AUTOMATED_CANDIDATE_NOT_ADJUDICATED' for row in candidates['candidates'])
           assert all(row['source_sha256'] and len(row['source_sha256'])==64 for row in candidates['candidates'])
           assert candidates['physical_gate_effect']=='NONE'
@@ -78,11 +84,58 @@ jobs:
           print('Band V-A automated claim extraction coverage: PASS')
           PY
 
+      - name: Route every candidate to existing claim families
+        run: |
+          python tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py \
+            --candidates claim-census-output/UniverseLab_PublicScientificClaimCandidates_v1.0.json \
+            --families registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json \
+            --output claim-census-output/UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json
+
+      - name: Enforce complete family coverage and review preservation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('claim-census-output/UniverseLab_PublicScientificClaimCandidates_v1.0.json').read_text())
+          a=json.loads(Path('claim-census-output/UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json').read_text())
+          family_catalog=json.loads(Path('registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json').read_text())
+          contract=json.loads(Path('registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignmentContract_v0.1.json').read_text())
+          allowed={row['claim_family_id'] for row in family_catalog['claim_families']}
+          by_id={row['claim_id']:row for row in c['candidates']}
+          assert a['status']=='PASS_COMPLETE_AUTOMATED_ROUTING_NOT_SCIENTIFIC_ADJUDICATION'
+          assert a['candidate_count']==len(by_id)==a['assignment_count']
+          assert a['unmapped_candidates']==0
+          assert a['unknown_family_ids']==0
+          assert len({row['claim_id'] for row in a['assignments']})==len(by_id)
+          for row in a['assignments']:
+              source=by_id[row['claim_id']]
+              assert row['path']==source['path']
+              assert row['source_sha256']==source['source_sha256']
+              assert row['family_ids'] and set(row['family_ids']) <= allowed
+              assert row['candidate_adjudication_status']=='AUTOMATED_CANDIDATE_NOT_ADJUDICATED'
+              if source['preliminary_risk_class'] in {'HIGH','MEDIUM'}:
+                  assert row['manual_review_required'] is True
+              if row['routing_status']=='AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED':
+                  assert row['manual_review_required'] is True
+          assert contract['coverage_rules']['unmapped_candidate']=='FAIL_CLOSED'
+          assert contract['coverage_rules']['unknown_family_id']=='FAIL_CLOSED'
+          assert contract['coverage_rules']['assignment_is_scientific_adjudication'] is False
+          assert a['semantics']['routing_is_scientific_adjudication'] is False
+          assert a['semantics']['routing_changes_epistemic_status'] is False
+          assert a['semantics']['routing_creates_evidence'] is False
+          assert a['physical_gate_effect']=='NONE'
+          assert a['physical_evidence_effect']=='NONE'
+          print(f"Band V-A family coverage: PASS candidates={a['candidate_count']} unmapped=0 fallback={a['fallback_assignment_count']}")
+          PY
+
       - name: Enforce nonoperative boundary
         run: |
           python - <<'PY'
           from pathlib import Path
-          text=Path('tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py').read_text()
+          text='\n'.join(Path(path).read_text() for path in [
+              'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py',
+              'tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py',
+          ])
           forbidden=[
               'AuthorizationDecision(',
               'SingleUseGrant(',
@@ -99,7 +152,7 @@ jobs:
           print('Band V-A nonoperative boundary: PASS')
           PY
 
-      - name: Upload claim-census candidates
+      - name: Upload complete claim-census and family-coverage candidates
         uses: actions/upload-artifact@v4
         with:
           name: universelab-band-va-public-scientific-claim-candidates
