@@ -1,9 +1,9 @@
 # UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1
 
-**Basis:** `110430413a95e1898f9d3bd16ee0bd9cba4a4348`  
+**Basis:** `b9dfbfde481c5f5eeab0813906f78c9b0bad033d`  
 **HTML-Dateien:** `72`  
-**Claim-Kandidaten:** `997`  
-**HIGH/MEDIUM:** `77`  
+**Claim-Kandidaten:** `989`  
+**HIGH/MEDIUM:** `44`  
 **Status:** `GENERATED_NOT_ADJUDICATED`  
 **Physical gate effect:** `NONE`  
 **Physical evidence effect:** `NONE`
@@ -54,15 +54,6 @@
 
 ## `about.html`
 
-### UL-CLAIM-CANDIDATE-4D218C42EDAC69AD · MEDIUM +6
-
-- Quelle: Zeile `89`, Tag `div`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, PHYSICAL_COSMOLOGY`
-- Limiter vorhanden: `false`
-- Text: Heute Cosmology Observatory, Cosmic Journey, Validation, Modellvergleich, Emergenz-Labor und HyperLab.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ### UL-CLAIM-CANDIDATE-8547CC3EBF7A2D3B · MEDIUM +4
 
 - Quelle: Zeile `71`, Tag `div`, Region `section`
@@ -83,26 +74,6 @@
 - Text: – Nfirst bestätigt
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-## `compare-safe.html`
-
-### UL-CLAIM-CANDIDATE-10A56EEFB68ABE74 · MEDIUM +4
-
-- Quelle: Zeile `45`, Tag `div`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Brücke Σ(a,k), η(a,k) nicht aus dem Parent-Sektor konstruiert
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-F3667C9B7637CB1C · MEDIUM +4
-
-- Quelle: Zeile `52`, Tag `section`, Region `section`
-- Statussignal: `OPEN_OR_NOT_EXECUTED`
-- Kategorien: `DERIVATION_IDENTIFICATION, PHYSICAL_COSMOLOGY, STATUS_FIREWALL, THEORY_6D_PARENT`
-- Limiter vorhanden: `true`
-- Text: Der Brückenkanal identifiziert im implementierten Hintergrund nur das Produkt βτ𝓘B; getrennte Parameteridentifikation, HZT-Growth, Lensing, Ghostfreiheit und eine vollständige Parent→Observable-Map bleiben offen.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ## `guide-en.html`
 
 ### UL-CLAIM-CANDIDATE-E57BCD10CED0C7C3 · MEDIUM +6
@@ -114,52 +85,7 @@
 - Text: 6D parent parameters → 4D EFT → observables → instrument/selection model → likelihood
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-008C0B9FD8ED43D5 · MEDIUM +4
-
-- Quelle: Zeile `1`, Tag `p`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: A compact scientific guide to the architecture, modules, equations, result interpretation and evidence limits of UniverseLab.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-642DA0323A18F0F6 · MEDIUM +4
-
-- Quelle: Zeile `1`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: HPVS is the audit and validation layer.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-F6E69EF1C3A06D7A · MEDIUM +4
-
-- Quelle: Zeile `1`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: HZT-Full is reserved for extensions that pass the required consistency and evidence gates.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ## `guide.html`
-
-### UL-CLAIM-CANDIDATE-7700AB943693A450 · MEDIUM +6
-
-- Quelle: Zeile `172`, Tag `div`, Region `main`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `DERIVATION_IDENTIFICATION, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Blocker: vollständige 6D-Herleitung, Randbedingungen, kinetische Matrix, Ghostfreiheit, Modenspektrum, normierte Kopplungen und eine freigegebene Forward Map fehlen.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-F6453FDF2758A172 · MEDIUM +5
-
-- Quelle: Zeile `154`, Tag `div`, Region `main`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `PREDICTION_SIGNATURE, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Diese Erweiterung ist eine Sensitivitätsfläche, keine freigegebene Hyperzeit-Vorhersage.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-AFB59D1E8901F74E · MEDIUM +4
 
@@ -170,43 +96,7 @@
 - Text: Dieses Handbuch erklärt, was UniverseLab berechnet, wie die Bedienelemente funktionieren, welche Einheiten und Formeln verwendet werden und wie Ergebnisse wissenschaftlich korrekt gelesen werden.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-80B9F8DAFE182B76 · MEDIUM +4
-
-- Quelle: Zeile `48`, Tag `li`, Region `main`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Validation Console ausführen.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-91C8AC3A0B38DFE9 · MEDIUM +4
-
-- Quelle: Zeile `156`, Tag `h3`, Region `main`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Validation Console
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-B9454E4F95C75B79 · MEDIUM +4
-
-- Quelle: Zeile `201`, Tag `li`, Region `main`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Interne Tests von empirischer Evidenz trennen.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ## `hyperlab-en.html`
-
-### UL-CLAIM-CANDIDATE-A6D23DA61E1E4248 · MEDIUM +6
-
-- Quelle: Zeile `1`, Tag `div`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `DERIVATION_IDENTIFICATION, EVIDENCE_CONFIRMATION, NUMERICAL_METHOD, STATUS_FIREWALL, THEORY_6D_PARENT`
-- Limiter vorhanden: `true`
-- Text: Scientific firewall: numerical stability ≠ ghost freedom; technical feasibility ≠ physical identification; a good fit ≠ theory confirmation; parameter fitting ≠ derivation from the six-dimensional parent sector.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-C68357F7266E034F · MEDIUM +5
 
@@ -215,17 +105,6 @@
 - Kategorien: `DERIVATION_IDENTIFICATION, PHYSICAL_COSMOLOGY`
 - Limiter vorhanden: `false`
 - Text: a regular cosmological origin;
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-## `hyperlab.html`
-
-### UL-CLAIM-CANDIDATE-B1ACC2D314184022 · MEDIUM +5
-
-- Quelle: Zeile `43`, Tag `p`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `PREDICTION_SIGNATURE, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Sie sind ausdrücklich keine Datenfreigabe und keine fundamentale Hyperzeit-Vorhersage.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `hyperzeit-material-v2-en.html`
@@ -288,15 +167,6 @@
 
 ## `hyperzeit-material.html`
 
-### UL-CLAIM-CANDIDATE-B25E81FF693E5F0F · HIGH +14
-
-- Quelle: Zeile `1`, Tag `p`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Jede Karte sagt, wofür die Quelle brauchbar ist und was sie ausdrücklich nicht für Hyperzeit beweist.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ### UL-CLAIM-CANDIDATE-4753C0592F9254EC · MEDIUM +5
 
 - Quelle: Zeile `1`, Tag `meta-description`, Region `document`
@@ -308,15 +178,6 @@
 
 ## `hyperzeit-methods-en.html`
 
-### UL-CLAIM-CANDIDATE-4D23BEF75AB93DDF · HIGH +8
-
-- Quelle: Zeile `1`, Tag `meta-description`, Region `document`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, NUMERICAL_METHOD, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Curated English methods and QA catalogue for Hyperzeit/HPVS: Hilbert space, multitime integrability, RG, controlled reduction, likelihoods and numerical validation.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ### UL-CLAIM-CANDIDATE-77A2A1C9E6CBF71E · MEDIUM +6
 
 - Quelle: Zeile `10`, Tag `div`, Region `article`
@@ -324,6 +185,15 @@
 - Kategorien: `OBSERVATIONAL_DATA, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
 - Text: 6D parameters → 4D EFT → observables → instrument response → selection → background model → likelihood.
+- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
+
+### UL-CLAIM-CANDIDATE-4D23BEF75AB93DDF · MEDIUM +4
+
+- Quelle: Zeile `1`, Tag `meta-description`, Region `document`
+- Statussignal: `UNCLASSIFIED`
+- Kategorien: `NUMERICAL_METHOD, THEORY_6D_PARENT`
+- Limiter vorhanden: `false`
+- Text: Curated English methods and QA catalogue for Hyperzeit/HPVS: Hilbert space, multitime integrability, RG, controlled reduction, likelihoods and numerical validation.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-C56D0258D9737125 · MEDIUM +4
@@ -336,15 +206,6 @@
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `hyperzeit-methods.html`
-
-### UL-CLAIM-CANDIDATE-C62309DB4031D9F3 · HIGH +11
-
-- Quelle: Zeile `31`, Tag `h3`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Warum dies nicht direkt GR beweist
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-DEADAD88A45BD4C2 · MEDIUM +7
 
@@ -393,15 +254,6 @@
 - Text: An interactive research and cosmology platform that keeps established physics, numerical diagnostics, model-dependent calculations and speculative 6D Hyperzeit hypotheses explicitly separated.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-085A4BA594672CCE · MEDIUM +4
-
-- Quelle: Zeile `1`, Tag `div`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Numerics diagnostics and validation
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ## `index.html`
 
 ### UL-CLAIM-CANDIDATE-A2E28CBDDEA3BB2B · MEDIUM +5
@@ -420,15 +272,6 @@
 - Kategorien: `PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
 - Text: Erkunde kosmische Expansion, Epochen, Strukturbildung und Modellvarianten – vom etablierten ΛCDM-Hintergrund bis zu klar gekennzeichneten experimentellen 6D-Hypothesen.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-460DE83CB5CFF737 · MEDIUM +4
-
-- Quelle: Zeile `67`, Tag `h3`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Validation Console
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `legacy.html`
@@ -451,24 +294,6 @@
 - Text: „MOND ist exakt aus 6D hergeleitet und benötigt keine freien Parameter.“
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-992A8100E7AAA2A4 · MEDIUM +5
-
-- Quelle: Zeile `34`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `PREDICTION_SIGNATURE, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Slip- und Yukawa-Beziehungen sind Arbeitsansätze, keine heutige 6D-Vorhersage.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-1FE4C59DE9BCB7F5 · MEDIUM +5
-
-- Quelle: Zeile `46`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `PREDICTION_SIGNATURE, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Als Theoriegeschichte und Testansatz bewahren; keine aktuelle Hyperzeit-Vorhersage.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ### UL-CLAIM-CANDIDATE-EBCBD0A5D9FC5358 · MEDIUM +4
 
 - Quelle: Zeile `21`, Tag `p`, Region `article`
@@ -487,17 +312,6 @@
 - Text: Zero-Modes und 6D→4D-Reduktion
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-## `links.html`
-
-### UL-CLAIM-CANDIDATE-ECA854F1116AFB3C · MEDIUM +4
-
-- Quelle: Zeile `5`, Tag `h3`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Validation Console
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ## `navigator.html`
 
 ### UL-CLAIM-CANDIDATE-81BFEAE4C1F181E3 · MEDIUM +6
@@ -507,15 +321,6 @@
 - Kategorien: `OBSERVATIONAL_DATA, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
 - Text: Hilbertraum, RG, kontrollierte 6D→4D-Reduktion, Likelihood- und Solverstandards.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-CA1D524C212C6806 · MEDIUM +4
-
-- Quelle: Zeile `25`, Tag `h3`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Validation Console
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `observatory-en.html`
@@ -529,15 +334,6 @@
 - Text: Ghost freedom, derivation of fitted parameters from the six-dimensional parent action, uniqueness of a dark-sector interpretation, or observational confirmation of HZT.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-43996784EAC6AB9B · MEDIUM +4
-
-- Quelle: Zeile `1`, Tag `header`, Region `header`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: ← Portal Navigator Validation
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ## `research-status-en.html`
 
 ### UL-CLAIM-CANDIDATE-A0E49DE6A446BC01 · MEDIUM +6
@@ -547,24 +343,6 @@
 - Kategorien: `EVIDENCE_CONFIRMATION, OBSERVATIONAL_DATA`
 - Limiter vorhanden: `false`
 - Text: an HZT-M0 likelihood or evidence interpretation;
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-EBB1CB38816CEED0 · MEDIUM +5
-
-- Quelle: Zeile `41`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, PHYSICAL_COSMOLOGY`
-- Limiter vorhanden: `false`
-- Text: Validation, Observatory, Compare Safe and Emergence use the same canonical FLRW, distance and linear-growth engine.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-9AC35F30A770E43D · MEDIUM +5
-
-- Quelle: Zeile `46`, Tag `div`, Region `main`
-- Statussignal: `BLOCKED_OR_UNRELEASED`
-- Kategorien: `CONDITIONAL_HEURISTIC, EVIDENCE_CONFIRMATION, STATUS_FIREWALL`
-- Limiter vorhanden: `true`
-- Text: Status vocabulary: proven · conditional · diagnostic · open · blocked · not released.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-3F15A164E3F0C45D · MEDIUM +4
@@ -585,24 +363,6 @@
 - Kategorien: `EVIDENCE_CONFIRMATION, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
 - Text: UniverseLab trennt strikt zwischen analytischen Resultaten, diagnostischer Numerik, offenen Parent→Observable-Brücken, Autorisierungsinfrastruktur und physischer Evidenz.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-D64419294010F036 · MEDIUM +5
-
-- Quelle: Zeile `42`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, PHYSICAL_COSMOLOGY`
-- Limiter vorhanden: `false`
-- Text: Validation, Observatory, Compare Safe und Emergence verwenden denselben kanonischen FLRW-/Distanz-/Growth-Kern.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-1F96C7D5DB380644 · MEDIUM +5
-
-- Quelle: Zeile `47`, Tag `div`, Region `main`
-- Statussignal: `BLOCKED_OR_UNRELEASED`
-- Kategorien: `CONDITIONAL_HEURISTIC, EVIDENCE_CONFIRMATION, STATUS_FIREWALL`
-- Limiter vorhanden: `true`
-- Text: Statussprache: bewiesen · konditional · diagnostisch · offen · blockiert · nicht freigegeben.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-A736D04348FC6218 · MEDIUM +4
@@ -645,17 +405,6 @@
 - Text: Cosmology / Likelihood
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-## `source.html`
-
-### UL-CLAIM-CANDIDATE-A9E4DCE44D342BBF · MEDIUM +4
-
-- Quelle: Zeile `85`, Tag `div`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Validation Console ▶
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ## `tafelwerk.html`
 
 ### UL-CLAIM-CANDIDATE-C595D97F5EA6F2C6 · MEDIUM +5
@@ -689,70 +438,16 @@
 
 ## `validation-en.html`
 
-### UL-CLAIM-CANDIDATE-DA3041B75F28909D · MEDIUM +6
-
-- Quelle: Zeile `7`, Tag `meta-description`, Region `document`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, PHYSICAL_COSMOLOGY`
-- Limiter vorhanden: `false`
-- Text: UniverseLab Validation Console for the canonical cosmology engine: background, curved distances, linear growth and fail-closed domain tests.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-88F7FE63F906FE07 · MEDIUM +5
+### UL-CLAIM-CANDIDATE-36B8376E86A372B2 · MEDIUM +4
 
 - Quelle: Zeile `25`, Tag `div`, Region `section`
-- Statussignal: `BLOCKED_OR_UNRELEASED`
-- Kategorien: `EVIDENCE_CONFIRMATION, NUMERICAL_METHOD, OBSERVATIONAL_DATA, STATUS_FIREWALL, THEORY_6D_PARENT`
-- Limiter vorhanden: `true`
-- Text: Not released Bridge perturbations, complete 6D dynamics, physical background, response rank, ghost freedom, likelihood or evidence claims.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-AC651EBBE4D8A914 · MEDIUM +4
-
-- Quelle: Zeile `10`, Tag `title`, Region `document`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
+- Statussignal: `CONDITIONAL_OR_HEURISTIC`
+- Kategorien: `CONDITIONAL_HEURISTIC, EVIDENCE_CONFIRMATION, PHYSICAL_COSMOLOGY`
 - Limiter vorhanden: `false`
-- Text: UniverseLab 2.0 · Validation Console
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-C5541B4CD15F4890 · MEDIUM +4
-
-- Quelle: Zeile `22`, Tag `h1`, Region `header`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Validation Console
+- Text: Validated scope ΛCDM and constant w, fail-closed E² domain, D C →D M →D L /D A , Etherington reciprocity and the linear-GR growth reference.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `validation.html`
-
-### UL-CLAIM-CANDIDATE-0893044EFBE72F76 · MEDIUM +6
-
-- Quelle: Zeile `7`, Tag `meta-description`, Region `document`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, PHYSICAL_COSMOLOGY`
-- Limiter vorhanden: `false`
-- Text: UniverseLab Validation Console für den kanonischen Kosmologie-Rechenkern: Hintergrund, Krümmungsdistanzen, lineares Wachstum und fail-closed Domänentests.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-CE227B7594C647AD · MEDIUM +4
-
-- Quelle: Zeile `10`, Tag `title`, Region `document`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: UniverseLab 2.0 · Validation Console
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
-### UL-CLAIM-CANDIDATE-E590B890BC02F7C1 · MEDIUM +4
-
-- Quelle: Zeile `23`, Tag `h1`, Region `header`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION`
-- Limiter vorhanden: `false`
-- Text: Validation Console
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-DC0C140C7240B187 · MEDIUM +4
 
