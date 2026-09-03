@@ -1,0 +1,58 @@
+{
+  "schema": "universelab.public-scientific-claim-family-assignment-contract.v0.1",
+  "version": "0.1.0",
+  "date": "2026-09-03",
+  "status": "AUTOMATED_ROUTING_CONTRACT_NOT_SCIENTIFIC_ADJUDICATION",
+  "candidate_register": "registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json",
+  "family_catalog": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+  "generated_assignment_register": "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json",
+  "mapper": "tools/2026-09-03_map_UniverseLab_PublicScientificClaimsToFamilies_v1.0.py",
+  "coverage_rules": {
+    "every_candidate_id_unique": true,
+    "every_candidate_receives_at_least_one_existing_family_id": true,
+    "every_assignment_preserves_candidate_path_and_source_sha256": true,
+    "high_or_medium_candidate_may_be_silently_dropped": false,
+    "unknown_family_id": "FAIL_CLOSED",
+    "unmapped_candidate": "FAIL_CLOSED",
+    "assignment_is_scientific_adjudication": false,
+    "assignment_changes_epistemic_status": false,
+    "assignment_creates_evidence": false
+  },
+  "routing_semantics": {
+    "page_pattern_matches": "Use declared family public_surface_patterns as nonexclusive routing hints.",
+    "lexical_category_matches": "Use candidate lexical categories and bounded scientific keywords as nonexclusive routing hints.",
+    "multiple_family_ids_allowed": true,
+    "fallback_family_id": "UL-CLM-EDUCATIONAL-VISUAL-001",
+    "fallback_semantics": "Technical review-queue sink only. A fallback assignment satisfies routing coverage but does not assert that the underlying proposition is educational, non-scientific, true, false, supported, or adjudicated.",
+    "fallback_candidates_are_unresolved_for_manual_family_adjudication": true,
+    "manual_review_required_for_high_medium": true,
+    "manual_review_required_for_fallback": true
+  },
+  "required_assignment_fields": [
+    "claim_id",
+    "path",
+    "source_sha256",
+    "family_ids",
+    "routing_basis",
+    "routing_status",
+    "manual_review_required"
+  ],
+  "allowed_routing_statuses": [
+    "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+    "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED"
+  ],
+  "current_gate_state": {
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "runtime_issuance_bindings": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
