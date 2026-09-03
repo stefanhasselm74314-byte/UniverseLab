@@ -1,28 +1,30 @@
 {
-  "basis_commit": "a1dea90cc158b09506122515dcf9d508fd26b173",
-  "claim_candidates": 2321,
+  "basis_commit": "896805107f26064e20f64227fdc2495659200f54",
+  "claim_candidates": 1411,
   "explicit_statuses": {
-    "BLOCKED_OR_UNRELEASED": 206,
-    "CLAIMED_PROVEN": 32,
-    "CONDITIONAL_OR_HEURISTIC": 210,
-    "OPEN_OR_NOT_EXECUTED": 145,
-    "UNCLASSIFIED": 1728
+    "BLOCKED_OR_UNRELEASED": 76,
+    "CLAIMED_PROVEN": 34,
+    "CONDITIONAL_OR_HEURISTIC": 100,
+    "EXPLICITLY_NEGATED_OR_LIMITED": 58,
+    "OPEN_OR_NOT_EXECUTED": 62,
+    "UNCLASSIFIED": 1081
   },
   "generated_by": "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py",
   "lexical_categories": {
-    "CONDITIONAL_HEURISTIC": 272,
-    "DERIVATION_IDENTIFICATION": 198,
-    "EVIDENCE_CONFIRMATION": 209,
-    "NUMERICAL_METHOD": 795,
-    "OBSERVATIONAL_DATA": 394,
-    "PHYSICAL_COSMOLOGY": 711,
-    "PREDICTION_SIGNATURE": 73,
-    "STATUS_FIREWALL": 379,
-    "THEORY_6D_PARENT": 284
+    "CONDITIONAL_HEURISTIC": 114,
+    "DERIVATION_IDENTIFICATION": 98,
+    "EVIDENCE_CONFIRMATION": 145,
+    "NUMERICAL_METHOD": 418,
+    "OBSERVATIONAL_DATA": 195,
+    "PHYSICAL_COSMOLOGY": 400,
+    "PREDICTION_SIGNATURE": 32,
+    "STATUS_FIREWALL": 207,
+    "THEORY_6D_PARENT": 145
   },
   "limitations": [
     "Lexical extraction cannot establish whether a scientific claim is true.",
     "Risk scores prioritize manual review and are not evidence grades.",
+    "Negation detection is bounded lexical context, not full semantic parsing.",
     "A visible qualifier may occur in another nearby block and requires contextual review.",
     "Code, tests, data and parent-theory derivations are not inferred by lexical proximity."
   ],
@@ -35,7 +37,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "b4d27c5c6c5770ab02bbab03f5df9d61cb71084ab970e4bda3989df64844a1ed",
-      "visible_blocks": 35
+      "visible_blocks": 29
     },
     {
       "manifest_member": false,
@@ -44,7 +46,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "faba26c023ef79753588cd861520cfa5f7194ba2ff0dc2bf0a2cffe4669e651f",
-      "visible_blocks": 33
+      "visible_blocks": 26
     },
     {
       "manifest_member": false,
@@ -53,7 +55,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "fe3786d3acf8f15fa96f4885884894d26f579f8bf294bdc04d54b2af595c8cd8",
-      "visible_blocks": 30
+      "visible_blocks": 26
     },
     {
       "manifest_member": false,
@@ -62,7 +64,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "e6a5071accd6fce2fb1da9af6e458391cf88cf8501671e3f209f6403d55d23ed",
-      "visible_blocks": 13
+      "visible_blocks": 16
     },
     {
       "manifest_member": false,
@@ -71,7 +73,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "18cf09495f777b0c1b5e754a8021c3e3cd3d5fa2e91f9f1bbc331e82aa80df32",
-      "visible_blocks": 20
+      "visible_blocks": 23
     },
     {
       "manifest_member": false,
@@ -107,7 +109,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "d8816fce3aa9c33c6142d861b12141127c7e9f2962b580eabd9b65d8fc1ac1ca",
-      "visible_blocks": 19
+      "visible_blocks": 18
     },
     {
       "manifest_member": true,
@@ -116,7 +118,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": false,
       "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
-      "visible_blocks": 103
+      "visible_blocks": 89
     },
     {
       "manifest_member": false,
@@ -143,7 +145,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "09d6b1aa2ed017821a959a01c83994952aa18755990cb6962647bf82ef83d6e4",
-      "visible_blocks": 62
+      "visible_blocks": 42
     },
     {
       "manifest_member": false,
@@ -152,7 +154,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "5c24342e341ce572b0bffe6a0d072b924050537f348e21c6098b757bebc6cd12",
-      "visible_blocks": 111
+      "visible_blocks": 98
     },
     {
       "manifest_member": false,
@@ -161,7 +163,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "3e6fab87a5b4c2bea66ae2fc745e076862c2fd66a10f7a2cb6bef63e1968a09f",
-      "visible_blocks": 55
+      "visible_blocks": 40
     },
     {
       "manifest_member": false,
@@ -179,7 +181,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "8aac5887afe89d82fe6dbae175eb28fc3859830425619b92bbded9f58df20e4c",
-      "visible_blocks": 108
+      "visible_blocks": 101
     },
     {
       "manifest_member": false,
@@ -188,7 +190,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "3c58b3366e4b9e5bd45667bf9969e14a5d9e81200fb2fd87250d0f994896d270",
-      "visible_blocks": 103
+      "visible_blocks": 100
     },
     {
       "manifest_member": false,
@@ -197,7 +199,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "ddbc1bd2fd1402ad74e9d594b2ae547f63cd9fb4111e1307b4cc5adbed97b586",
-      "visible_blocks": 104
+      "visible_blocks": 107
     },
     {
       "manifest_member": false,
@@ -206,7 +208,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "56a9add9e94427c5e386e0d161e48b577e3cb389bfff433263d508b14e00bb82",
-      "visible_blocks": 70
+      "visible_blocks": 74
     },
     {
       "manifest_member": false,
@@ -224,7 +226,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "647a2f37cd8ee5b5e65596920a9ee21361c9cd1b1077d0da42c37a2e0077b7ce",
-      "visible_blocks": 4
+      "visible_blocks": 3
     },
     {
       "manifest_member": false,
@@ -233,7 +235,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "1afa621eca75b66d59b3707c27ecaa049cbed7fd5639e6d27cea50b1771e9d45",
-      "visible_blocks": 2
+      "visible_blocks": 6
     },
     {
       "manifest_member": false,
@@ -251,7 +253,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "94e506fd89f51e6dccfcb2fc4675ed24d04d2ac56d964defcc272882eccdeda4",
-      "visible_blocks": 10
+      "visible_blocks": 8
     },
     {
       "manifest_member": true,
@@ -260,7 +262,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
       "source_sha256": "54c62ef6cbb118ed938e422eb1d3f0f8c586a6d7e6a0786b2717c93414fbac38",
-      "visible_blocks": 66
+      "visible_blocks": 60
     },
     {
       "manifest_member": false,
@@ -305,7 +307,7 @@
       "scope": "TRACKED_ARCHIVE_OR_UTILITY_PAGE",
       "sitemap_member": false,
       "source_sha256": "95386891d9359b7ed6c353d818b75ccfa13b47225855df1fd448665e4674aa0a",
-      "visible_blocks": 30
+      "visible_blocks": 35
     },
     {
       "manifest_member": false,
@@ -314,7 +316,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "5b3c867167074b41397c3cbd8674756f35a26e88f1e32bdde5037d8f66d4a67e",
-      "visible_blocks": 33
+      "visible_blocks": 25
     },
     {
       "manifest_member": false,
@@ -323,7 +325,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
-      "visible_blocks": 314
+      "visible_blocks": 240
     },
     {
       "manifest_member": false,
@@ -332,7 +334,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "dec698afe549aed004182834af1ade418567c7769d51187fa452d3453f191218",
-      "visible_blocks": 32
+      "visible_blocks": 28
     },
     {
       "manifest_member": true,
@@ -341,7 +343,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
       "source_sha256": "130fe0174579c39dec679fc0564315f5374f03f8d23cb056c57435f9877d6c72",
-      "visible_blocks": 114
+      "visible_blocks": 99
     },
     {
       "manifest_member": false,
@@ -350,7 +352,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "d65bbd3b44932727a44ca4b50459aaafde6795cec37c21757057ea620f5e5c3c",
-      "visible_blocks": 78
+      "visible_blocks": 63
     },
     {
       "manifest_member": true,
@@ -359,7 +361,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
       "source_sha256": "71347477124edc9baac003eb1882050ac3bde335b7ef6b853b3b2037bacb1823",
-      "visible_blocks": 257
+      "visible_blocks": 204
     },
     {
       "manifest_member": false,
@@ -368,7 +370,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "31ea79486f9482d4b30d01476e3c6eacd46ef44fc385bce1d8cfdaad484da0c7",
-      "visible_blocks": 52
+      "visible_blocks": 43
     },
     {
       "manifest_member": false,
@@ -377,7 +379,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "9e6726cfbcd6ee5598816542596225a12cf01551dfaff2b406e12b8d5e09fab5",
-      "visible_blocks": 37
+      "visible_blocks": 32
     },
     {
       "manifest_member": true,
@@ -386,7 +388,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
       "source_sha256": "13f4afd47ea7a424f5b0d1a83ff9d7fe1a1636b27cfe3e221b1e8a0fd6124200",
-      "visible_blocks": 254
+      "visible_blocks": 195
     },
     {
       "manifest_member": false,
@@ -395,7 +397,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "5d0f34048778bdbd346cdc7d95d92e4e29e3d3638d372fb5c023c30c8abb4ac9",
-      "visible_blocks": 16
+      "visible_blocks": 14
     },
     {
       "manifest_member": false,
@@ -404,7 +406,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "71e775b613e43774afef52ff8f3699eeaf8287c18ca99aa2e9d17be8c771ceee",
-      "visible_blocks": 29
+      "visible_blocks": 25
     },
     {
       "manifest_member": true,
@@ -413,7 +415,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
       "source_sha256": "a25df13b1d305cef8c6ceb9432b711b0b3d7b7e145f9064b90582ee98dc1b5b6",
-      "visible_blocks": 70
+      "visible_blocks": 60
     },
     {
       "manifest_member": false,
@@ -440,7 +442,7 @@
       "scope": "TRACKED_ARCHIVE_OR_UTILITY_PAGE",
       "sitemap_member": false,
       "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
-      "visible_blocks": 191
+      "visible_blocks": 162
     },
     {
       "manifest_member": false,
@@ -449,7 +451,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
-      "visible_blocks": 101
+      "visible_blocks": 76
     },
     {
       "manifest_member": false,
@@ -458,7 +460,7 @@
       "scope": "TRACKED_ARCHIVE_OR_UTILITY_PAGE",
       "sitemap_member": false,
       "source_sha256": "c100a03e48c4bfbe931461d08ed4a248284d882e7e5d444eaa9f0510baa76e54",
-      "visible_blocks": 52
+      "visible_blocks": 41
     },
     {
       "manifest_member": true,
@@ -467,7 +469,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": false,
       "source_sha256": "fd30f32dbbd1af4ff0814f5918c7f92d88ccc1c26d7287516f01a7355a617524",
-      "visible_blocks": 5
+      "visible_blocks": 4
     },
     {
       "manifest_member": false,
@@ -476,7 +478,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "067bf0df03fceb0b19cb6fdc65ef0781eac3f977554a3cb2e0450cad30e61f22",
-      "visible_blocks": 30
+      "visible_blocks": 26
     },
     {
       "manifest_member": true,
@@ -485,7 +487,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
       "source_sha256": "b135e977807e7a8e529a2d9fe46e82bc3c91451d0b67e07f86a853b4125f60b6",
-      "visible_blocks": 115
+      "visible_blocks": 96
     },
     {
       "manifest_member": false,
@@ -494,7 +496,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "44020e92a52044316c78e3faec12b4eab854a5a5072ec3fcd45154acda3b23e8",
-      "visible_blocks": 17
+      "visible_blocks": 12
     },
     {
       "manifest_member": true,
@@ -503,7 +505,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
       "source_sha256": "f9b92abeac46261c576fd36794655a97e5ddc5270c260ac411864edadcfd7ffb",
-      "visible_blocks": 31
+      "visible_blocks": 25
     },
     {
       "manifest_member": false,
@@ -521,7 +523,7 @@
       "scope": "TRACKED_ARCHIVE_OR_UTILITY_PAGE",
       "sitemap_member": false,
       "source_sha256": "1bbe4401d09ca74b84eef4c1198e343dba6eb2f090335e2da9af2a0823e21238",
-      "visible_blocks": 4
+      "visible_blocks": 3
     },
     {
       "manifest_member": false,
@@ -530,7 +532,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "3d25b0b9a32f3036ba55f7c1332876b8df5d613b25a602e70a1e63692534d9ba",
-      "visible_blocks": 58
+      "visible_blocks": 53
     },
     {
       "manifest_member": true,
@@ -539,7 +541,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
       "source_sha256": "8c3e9af0d57b24b7af2e71fe897d7025036da3c36303e0d5ef1b2b44fc77a9e7",
-      "visible_blocks": 58
+      "visible_blocks": 53
     },
     {
       "manifest_member": false,
@@ -557,7 +559,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "5d7498ec11b43f4fdad945195dc12f45784291d3d04e56f4332150a0cd0a0cbc",
-      "visible_blocks": 30
+      "visible_blocks": 22
     },
     {
       "manifest_member": false,
@@ -566,7 +568,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "2af0e157e5d5e7a6b7f5283944b1a6293c80991c1e3d9bb401116624ffa31696",
-      "visible_blocks": 40
+      "visible_blocks": 35
     },
     {
       "manifest_member": false,
@@ -575,7 +577,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "1abbcf7580d2077ad7bf503c728f1917e80b91a11d2c322f89a1518d8d215333",
-      "visible_blocks": 39
+      "visible_blocks": 34
     },
     {
       "manifest_member": false,
@@ -584,7 +586,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "2bf6b135f1b4ead0f0ec9ae86312cc2bf3680d8268b0b4d4ca07e123f7601498",
-      "visible_blocks": 43
+      "visible_blocks": 34
     },
     {
       "manifest_member": true,
@@ -593,7 +595,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
       "source_sha256": "54f7f51ca9fbf57cc7eb8f4994f3e48a7cb54cb7261ba73b8fbc670844a7bfa1",
-      "visible_blocks": 63
+      "visible_blocks": 48
     },
     {
       "manifest_member": false,
@@ -602,7 +604,7 @@
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
       "source_sha256": "a086296ae86198eaa6f618353161728a3ff1f374cace4745bd1b65bf4be4d6b5",
-      "visible_blocks": 26
+      "visible_blocks": 23
     },
     {
       "manifest_member": true,
@@ -611,7 +613,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": false,
       "source_sha256": "21adc53c86c8e6a7519451462cf1d30d3763d8aa31d0a608e3a79272f272bdc6",
-      "visible_blocks": 46
+      "visible_blocks": 43
     },
     {
       "manifest_member": false,
@@ -620,7 +622,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "e5d950942660d2afdb4141836537fe6b16028770740e5d6c5df0076a211d27e1",
-      "visible_blocks": 33
+      "visible_blocks": 29
     },
     {
       "manifest_member": false,
@@ -629,7 +631,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "16a11cf0fbf7c9ae529292f9c06f665e7609fce2cf25d67e2ed49e6ca164cd15",
-      "visible_blocks": 33
+      "visible_blocks": 36
     },
     {
       "manifest_member": false,
@@ -656,7 +658,7 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": false,
       "source_sha256": "287d0b6c9085eb23b13165c96404ac1746ecf35141396bd7dd14fba105f8e074",
-      "visible_blocks": 329
+      "visible_blocks": 282
     },
     {
       "manifest_member": false,
@@ -665,7 +667,7 @@
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
       "source_sha256": "d45d1f053806a8cf671ab31dd9ed431a524262425bd4a95be788f9bc6edc4a34",
-      "visible_blocks": 25
+      "visible_blocks": 19
     },
     {
       "manifest_member": true,
@@ -674,27 +676,27 @@
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
       "source_sha256": "356185eedc9eced4df057c9cf9f90ac82b29fcdb0cefa0756cb119ebe3e4cc22",
-      "visible_blocks": 25
+      "visible_blocks": 19
     }
   ],
   "page_scopes": {
-    "CANONICAL_MANIFEST_PAGE": 925,
+    "CANONICAL_MANIFEST_PAGE": 541,
     "PUBLIC_REPOSITORY_README": 45,
-    "PUBLIC_SITEMAP_PAGE": 638,
-    "TRACKED_ARCHIVE_OR_UTILITY_PAGE": 195,
-    "TRACKED_NON_SITEMAP_PAGE": 518
+    "PUBLIC_SITEMAP_PAGE": 429,
+    "TRACKED_ARCHIVE_OR_UTILITY_PAGE": 110,
+    "TRACKED_NON_SITEMAP_PAGE": 286
   },
   "physical_evidence_effect": "NONE",
   "physical_gate_effect": "NONE",
   "risk_classes": {
-    "CONTEXT_OR_FIREWALL": 760,
-    "HIGH": 38,
-    "LOW": 1235,
-    "MEDIUM": 288
+    "CONTEXT_OR_FIREWALL": 478,
+    "HIGH": 36,
+    "LOW": 766,
+    "MEDIUM": 131
   },
   "schema": "universelab.public-scientific-claim-extraction-summary.v0.1",
   "sitemap_pages": 34,
   "status": "PASS_AUTOMATED_EXTRACTION_NOT_SCIENTIFIC_ADJUDICATION",
   "tracked_html_files": 72,
-  "visible_blocks": 3983
+  "visible_blocks": 3429
 }
