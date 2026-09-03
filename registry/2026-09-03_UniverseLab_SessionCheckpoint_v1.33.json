@@ -38,6 +38,9 @@
     "high_scope_firewalls": 1,
     "high_governance_claims": 1,
     "confirmed_provenance_defects": 1,
+    "current_reextracted_high_candidates": 0,
+    "current_medium_candidates": 42,
+    "current_manual_review_required": 247,
     "source": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json"
   },
   "active_program": {
@@ -65,6 +68,26 @@
     "solver_execution": "NOT_EXECUTED",
     "physical_background": "NOT_ESTABLISHED",
     "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "gate_state": {
+    "FM-G0": "OPEN",
+    "FM0_BLOCKING_GAPS": 10,
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+    "RATIFIED_HUMAN_TRUST_ROOT": "NOT_RATIFIED",
+    "RUNTIME_ISSUANCE_BINDINGS": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
     "physical_evidence_effect": "NONE"
