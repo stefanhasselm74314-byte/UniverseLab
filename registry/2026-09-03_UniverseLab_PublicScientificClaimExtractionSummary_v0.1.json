@@ -1,23 +1,23 @@
 {
-  "basis_commit": "dfe1539ef58a4bdee399da6178f5c1c606adc53a",
+  "basis_commit": "5d6cc496b08879bdf4cf9bd8c08ef1c04fe35dcf",
   "claim_candidates": 993,
   "explicit_statuses": {
     "BLOCKED_OR_UNRELEASED": 66,
     "CONDITIONAL_OR_HEURISTIC": 55,
-    "EXPLICITLY_NEGATED_OR_LIMITED": 121,
+    "EXPLICITLY_NEGATED_OR_LIMITED": 122,
     "OPEN_OR_NOT_EXECUTED": 44,
-    "UNCLASSIFIED": 707
+    "UNCLASSIFIED": 706
   },
   "generated_by": "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py",
   "lexical_categories": {
     "CONDITIONAL_HEURISTIC": 64,
     "DERIVATION_IDENTIFICATION": 68,
-    "EVIDENCE_CONFIRMATION": 67,
+    "EVIDENCE_CONFIRMATION": 68,
     "NUMERICAL_METHOD": 124,
     "OBSERVATIONAL_DATA": 115,
     "PHYSICAL_COSMOLOGY": 171,
     "PREDICTION_SIGNATURE": 25,
-    "STATUS_FIREWALL": 231,
+    "STATUS_FIREWALL": 232,
     "THEORY_6D_PARENT": 141
   },
   "limitations": [
@@ -530,7 +530,7 @@
       "path": "research-status-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "5b8e5ac4fef70a770efb800b20e67008a0e268be70077bcf3d99f81fa0546974",
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
       "visible_blocks": 62
     },
     {
@@ -688,8 +688,7 @@
   "physical_evidence_effect": "NONE",
   "physical_gate_effect": "NONE",
   "risk_classes": {
-    "CONTEXT_OR_FIREWALL": 363,
-    "HIGH": 1,
+    "CONTEXT_OR_FIREWALL": 364,
     "LOW": 583,
     "MEDIUM": 46
   },

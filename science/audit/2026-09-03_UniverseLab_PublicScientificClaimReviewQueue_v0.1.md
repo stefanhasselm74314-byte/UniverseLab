@@ -1,9 +1,9 @@
 # UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1
 
-**Extraktionsbasis:** `dfe1539ef58a4bdee399da6178f5c1c606adc53a`  
+**Extraktionsbasis:** `5d6cc496b08879bdf4cf9bd8c08ef1c04fe35dcf`  
 **HTML-Dateien:** `72`  
 **Claim-Kandidaten:** `993`  
-**HIGH/MEDIUM:** `47`  
+**HIGH/MEDIUM:** `46`  
 **Status:** `GENERATED_NOT_ADJUDICATED`  
 **Physical gate effect:** `NONE`  
 **Physical evidence effect:** `NONE`
@@ -324,15 +324,6 @@
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `research-status-en.html`
-
-### UL-CLAIM-CANDIDATE-B70DD41ECCC5B02F · HIGH +8
-
-- Quelle: Zeile `28`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `DERIVATION_IDENTIFICATION, OBSERVATIONAL_DATA, PREDICTION_SIGNATURE`
-- Limiter vorhanden: `false`
-- Text: Band V-C maps all 15 canonical claim families across Claim → equation/derivation → code → test → data → falsifier/gate.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-96D51E71A2B48F98 · MEDIUM +6
 
