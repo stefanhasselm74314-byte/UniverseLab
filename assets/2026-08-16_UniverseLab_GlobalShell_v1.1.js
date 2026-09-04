@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
-  const VERSION='1.1.3';
-  const STATE_URL='./registry/2026-09-03_UniverseLab_SiteState_v1.2.json';
+  const VERSION='1.1.4';
+  const STATE_URL='./registry/2026-09-03_UniverseLab_SiteState_v1.3.json';
   const pages={
     'research-status.html':{id:'UL-PAGE-RESEARCH-STATUS',domain:'status',label:'Forschungsstatus',crumbs:[['UniverseLab','./'],['Forschungsstatus',null]]},
     'navigator.html':{id:'UL-PAGE-NAVIGATOR',domain:'navigator',label:'Navigator',crumbs:[['UniverseLab','./'],['Navigator',null]]},

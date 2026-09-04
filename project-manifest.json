@@ -1,10 +1,10 @@
 {
   "schema": "universelab.project-manifest.v1",
-  "release": "2.32-band-ivb-current-main-reconciliation-v1.0",
+  "release": "2.33-band-vb-high-claim-adjudication-v1.0",
   "release_date": "2026-09-03",
-  "basis_main_commit": "30b781f84d9c7c9fc74fac1adb34e4d935b1679b",
-  "basis_main_tree": "de4cf960a4390b173b683c0a14991985b8ec349f",
-  "basis_semantics": "Merged main at Band-IV-B branch creation plus the reconciliation changeset, canonical only after merge.",
+  "basis_main_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55",
+  "basis_main_tree": "536d74be58bab519f1665df9c222662814000464",
+  "basis_semantics": "Exact merged main after Band V-A plus the Band-V-B high-claim adjudication and current-state pointer-reconciliation changeset, canonical only after merge.",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
   "project": {
@@ -18,9 +18,9 @@
     ]
   },
   "manifest_strategy": "COMPACT_CURRENT_STATE_WITH_APPEND_ONLY_VERSIONED_SOURCE_REGISTRIES",
-  "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
-  "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
-  "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
+  "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+  "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
+  "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
   "architecture": {
     "governing_document": "MD-0",
     "program_chain": [
@@ -150,9 +150,11 @@
     "physical_evidence_effect": "NONE"
   },
   "current_status_sources": {
-    "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
-    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
-    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
+    "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
+    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
+    "claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+    "high_claim_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
     "canonical_engine": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
     "observatory": "registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json",
     "compare_safe": "registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json",
@@ -178,7 +180,7 @@
     {
       "id": "research_status",
       "path": "research-status.html",
-      "live": "./research-status.html?v=20260903",
+      "live": "./research-status.html?v=20260903b",
       "class": "canonical_public_status",
       "status": "ACTIVE_CURRENT_RECONCILED"
     },
@@ -332,17 +334,19 @@
       "interpretation": "The large draft remains noncanonical; the two safe sub-blocks are separately merged."
     }
   ],
-  "supersedes_release": "2.31-current-main-canonical-state-reconciliation-v1.0",
+  "supersedes_release": "2.32-band-ivb-current-main-reconciliation-v1.0",
   "history_rule": "Prior detailed manifest content remains recoverable from Git history and the versioned source registries; historical dated snapshots are not edited in place.",
   "physical_gate_effect": "NONE",
   "physical_evidence_effect": "NONE",
   "central_registries": {
-    "current_main_canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
-    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
+    "current_main_canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
     "site_state_schema": "schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json",
-    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
+    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
     "session_checkpoint_alias": "registry/session-checkpoint-latest.json",
     "platform_governance": "governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md",
+    "claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+    "high_claim_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
     "canonical_engine": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
     "observatory": "registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json",
     "compare_safe": "registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json",
@@ -357,10 +361,10 @@
     "version": "1.2.0",
     "status": "ACTIVE_GOVERNED_PLATFORM_CURRENT_STATE_RECONCILED_2026_09_03",
     "navigator_authority": "CANONICAL_DIRECT_DOCUMENT",
-    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
+    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
     "physical_gate_effect": "NONE",
     "physical_evidence_effect": "NONE",
     "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"
   },
-  "next_allowed_repository_step": "BAND_V_PUBLIC_CLAIM_TO_HZT_M0_PARENT_STATUS_OBSERVABLE_AND_FALSIFICATION_AUDIT_NO_PHYSICAL_EXECUTION"
+  "next_allowed_repository_step": "BAND_VB_MEDIUM_CLAIM_CONTEXT_ADJUDICATION_AFTER_HIGH_GATE_GREEN_NO_PHYSICAL_EXECUTION"
 }

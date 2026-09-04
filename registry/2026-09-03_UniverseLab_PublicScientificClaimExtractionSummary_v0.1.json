@@ -1,12 +1,12 @@
 {
-  "basis_commit": "1ddca1357cee1a59e89750b2ec96a8a0e9eb38fd",
+  "basis_commit": "657f8948b70d0dd2d25a124717d84e3ea3f86efb",
   "claim_candidates": 989,
   "explicit_statuses": {
     "BLOCKED_OR_UNRELEASED": 66,
     "CONDITIONAL_OR_HEURISTIC": 55,
-    "EXPLICITLY_NEGATED_OR_LIMITED": 116,
+    "EXPLICITLY_NEGATED_OR_LIMITED": 118,
     "OPEN_OR_NOT_EXECUTED": 44,
-    "UNCLASSIFIED": 708
+    "UNCLASSIFIED": 706
   },
   "generated_by": "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py",
   "lexical_categories": {
@@ -14,10 +14,10 @@
     "DERIVATION_IDENTIFICATION": 65,
     "EVIDENCE_CONFIRMATION": 59,
     "NUMERICAL_METHOD": 124,
-    "OBSERVATIONAL_DATA": 111,
+    "OBSERVATIONAL_DATA": 113,
     "PHYSICAL_COSMOLOGY": 169,
     "PREDICTION_SIGNATURE": 23,
-    "STATUS_FIREWALL": 226,
+    "STATUS_FIREWALL": 228,
     "THEORY_6D_PARENT": 141
   },
   "limitations": [
@@ -494,7 +494,7 @@
       "path": "observatory-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "44020e92a52044316c78e3faec12b4eab854a5a5072ec3fcd45154acda3b23e8",
+      "source_sha256": "8c017dcc3fb71a7869463b993e074a4f1ce09a0cbd15a51f412c21cc0644b6dc",
       "visible_blocks": 12
     },
     {
@@ -530,7 +530,7 @@
       "path": "research-status-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "3d25b0b9a32f3036ba55f7c1332876b8df5d613b25a602e70a1e63692534d9ba",
+      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83",
       "visible_blocks": 53
     },
     {
@@ -539,7 +539,7 @@
       "path": "research-status.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "8c3e9af0d57b24b7af2e71fe897d7025036da3c36303e0d5ef1b2b44fc77a9e7",
+      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d",
       "visible_blocks": 53
     },
     {
@@ -688,8 +688,7 @@
   "physical_evidence_effect": "NONE",
   "physical_gate_effect": "NONE",
   "risk_classes": {
-    "CONTEXT_OR_FIREWALL": 358,
-    "HIGH": 2,
+    "CONTEXT_OR_FIREWALL": 360,
     "LOW": 587,
     "MEDIUM": 42
   },

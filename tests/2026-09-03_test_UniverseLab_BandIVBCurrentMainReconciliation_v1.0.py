@@ -4,6 +4,12 @@
 This test validates numerical-contract, status-pointer, public-semantics and
 firewall consistency. It deliberately performs no physical backend import or
 solver execution.
+
+Band IV-B's dated v1.1/v1.2/v1.32 snapshots are historical once later
+append-only state successors exist. Therefore current-state assertions resolve
+the active chain from registry/session-checkpoint-latest.json instead of
+hard-coding Band-IV-B's one-time pointer targets. The original Band-IV-B
+snapshots remain explicitly checked as preserved historical evidence.
 """
 from __future__ import annotations
 
@@ -19,9 +25,11 @@ REPORT = ROOT / "band-ivb-current-main-reconciliation-report.json"
 
 PATHS = {
     "contract": ROOT / "registry/2026-09-03_UniverseLab_BandIVBCurrentMainReconciliationContract_v1.0.json",
+    # Band-IV-B snapshots: historical evidence after later append-only successors.
     "current": ROOT / "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
     "site": ROOT / "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
     "checkpoint": ROOT / "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
+    # Current pointer alias: authoritative entry to whatever dated chain is active.
     "latest": ROOT / "registry/session-checkpoint-latest.json",
     "manifest": ROOT / "project-manifest.json",
     "engine_contract": ROOT / "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
@@ -65,6 +73,25 @@ def load(name: str) -> dict[str, Any]:
     return value
 
 
+def load_rel(value: str, context: str) -> dict[str, Any]:
+    assert isinstance(value, str) and value and not value.startswith("/"), context
+    path = ROOT / value
+    assert path.is_file(), f"{context}: missing {value}"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    assert isinstance(data, dict), context
+    return data
+
+
+def active_chain() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
+    latest = load("latest")
+    checkpoint = load_rel(latest["canonical_snapshot"], "latest.canonical_snapshot")
+    current = load_rel(latest["canonical_state"], "latest.canonical_state")
+    site = load_rel(latest["site_state"], "latest.site_state")
+    assert latest == checkpoint, "latest alias must equal active checkpoint semantically"
+    assert PATHS["latest"].read_bytes() == (ROOT / latest["canonical_snapshot"]).read_bytes(), "latest alias must be byte-identical to active checkpoint"
+    return latest, checkpoint, current, site
+
+
 def text(name: str) -> str:
     return PATHS[name].read_text(encoding="utf-8")
 
@@ -72,7 +99,11 @@ def text(name: str) -> str:
 def check_paths() -> dict[str, Any]:
     missing = [str(path.relative_to(ROOT)) for path in PATHS.values() if not path.is_file()]
     assert not missing, missing
-    return {"required_paths": len(PATHS)}
+    latest = load("latest")
+    active = [latest["canonical_snapshot"], latest["canonical_state"], latest["site_state"]]
+    missing_active = [value for value in active if not (ROOT / value).is_file()]
+    assert not missing_active, missing_active
+    return {"required_static_paths": len(PATHS), "active_pointer_paths": active}
 
 
 def check_reference_closure() -> dict[str, Any]:
@@ -133,26 +164,39 @@ def check_engine_contract() -> dict[str, Any]:
 
 
 def check_state_successors() -> dict[str, Any]:
-    current, site, checkpoint, latest, manifest = map(load, ("current", "site", "checkpoint", "latest", "manifest"))
-    assert current["supersedes"].endswith("CurrentMainCanonicalState_v1.0.json")
-    assert site["supersedes"].endswith("SiteState_v1.1.json")
-    assert checkpoint["supersedes"].endswith("SessionCheckpoint_v1.31.json")
-    assert latest["canonical_snapshot"] == "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json"
-    assert latest["canonical_state"] == "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json"
-    assert latest["site_state"] == "registry/2026-09-03_UniverseLab_SiteState_v1.2.json"
+    # First preserve the original Band-IV-B successor evidence itself.
+    band_ivb_current, band_ivb_site, band_ivb_checkpoint = map(load, ("current", "site", "checkpoint"))
+    assert band_ivb_current["supersedes"].endswith("CurrentMainCanonicalState_v1.0.json")
+    assert band_ivb_site["supersedes"].endswith("SiteState_v1.1.json")
+    assert band_ivb_checkpoint["supersedes"].endswith("SessionCheckpoint_v1.31.json")
+    assert band_ivb_current["basis_main_commit"] == "30b781f84d9c7c9fc74fac1adb34e4d935b1679b"
+    assert band_ivb_site["basis_main_commit"] == band_ivb_current["basis_main_commit"]
+    assert band_ivb_checkpoint["basis_commit"] == band_ivb_current["basis_main_commit"]
+
+    # Then validate the current append-only successor chain dynamically.
+    latest, checkpoint, current, site = active_chain()
+    manifest = load("manifest")
     assert manifest["canonical_state"] == latest["canonical_state"]
     assert manifest["site_state"] == latest["site_state"]
     assert manifest["session_checkpoint"] == latest["canonical_snapshot"]
+    assert site["canonical_state"] == latest["canonical_state"]
+    assert checkpoint["canonical_state"] == latest["canonical_state"]
+    assert checkpoint["site_state"] == latest["site_state"]
+    assert checkpoint["canonical_snapshot"] == latest["canonical_snapshot"]
     assert manifest["public_numerical_platform"]["implementation_revision"] == "1.0.2"
     assert manifest["public_numerical_platform"]["remaining_independent_engines"] == 0
     assert manifest["public_numerical_platform"]["bridge_growth"] == "UNRELEASED_GROWTH_MAP"
-    assert current["basis_main_commit"] == "30b781f84d9c7c9fc74fac1adb34e4d935b1679b"
     assert site["basis_main_commit"] == current["basis_main_commit"]
     assert checkpoint["basis_commit"] == current["basis_main_commit"]
+    assert current["public_numerical_platform"]["implementation_revision"] == "1.0.2"
+    assert current["public_numerical_platform"]["remaining_independent_public_cosmology_engines"] == 0
+    assert current["public_numerical_platform"]["bridge_growth"] == "UNRELEASED_GROWTH_MAP"
     return {
-        "current": PATHS["current"].name,
-        "site": PATHS["site"].name,
-        "checkpoint": PATHS["checkpoint"].name,
+        "band_ivb_snapshots": [PATHS["current"].name, PATHS["site"].name, PATHS["checkpoint"].name],
+        "active_current": latest["canonical_state"],
+        "active_site": latest["site_state"],
+        "active_checkpoint": latest["canonical_snapshot"],
+        "active_basis": current["basis_main_commit"],
     }
 
 
@@ -162,7 +206,10 @@ def check_historical_snapshots() -> dict[str, Any]:
     assert old_site["version"].startswith("1.1")
     assert old_checkpoint["checkpoint_id"].endswith("031")
     assert old_current.get("snapshot_date") == "2026-09-01"
-    return {"preserved": [path.name for key, path in PATHS.items() if key.startswith("old_")]}
+    # Band-IV-B's own dated outputs must also remain append-only after Band V.
+    for name in ("current", "site", "checkpoint"):
+        assert PATHS[name].is_file()
+    return {"preserved": [path.name for key, path in PATHS.items() if key.startswith("old_")] + [PATHS[key].name for key in ("current", "site", "checkpoint")]}
 
 
 def check_migration_contracts() -> dict[str, Any]:
@@ -201,7 +248,9 @@ def check_public_semantics() -> dict[str, Any]:
     assert "ΛCDM-Anzeigezeit (Referenz)" in emergence
     assert "Physikalisch: ΛCDM" not in emergence
 
-    current_path = "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json"
+    latest, _checkpoint, _current, _site = active_chain()
+    current_path = latest["canonical_state"]
+    site_path = latest["site_state"]
     de = text("research_de")
     en = text("research_en")
     for source in (de, en):
@@ -214,12 +263,13 @@ def check_public_semantics() -> dict[str, Any]:
     assert "Bridge growth and bridge lensing remain unreleased" in en
 
     shell = text("global_shell")
-    assert "2026-09-03_UniverseLab_SiteState_v1.2.json" in shell
+    assert site_path in shell
     return {
         "mobile_zoom": "RESTORED",
         "emergence_label": "REFERENCE",
         "status_languages": ["de", "en"],
         "machine_state_source": current_path,
+        "shell_site_state_source": site_path,
     }
 
 
@@ -234,8 +284,10 @@ def check_sitemap_shape() -> dict[str, Any]:
 
 
 def check_firewalls() -> dict[str, Any]:
-    contract, current, site, latest, manifest = map(load, ("contract", "current", "site", "latest", "manifest"))
-    sources = [contract["gate_state"], current["physical_governance"], latest["physical_governance"], manifest["gates"]]
+    contract = load("contract")
+    latest, checkpoint, current, site = active_chain()
+    manifest = load("manifest")
+    sources = [contract["gate_state"], current["physical_governance"], checkpoint["physical_governance"], manifest["gates"]]
     for gates in sources:
         assert gates.get("ratified_human_trust_root", gates.get("RATIFIED_HUMAN_TRUST_ROOT")) == "NOT_RATIFIED"
         assert gates.get("runtime_issuance_bindings", gates.get("RUNTIME_ISSUANCE_BINDINGS")) == "BLOCKED"
@@ -256,9 +308,11 @@ def check_firewalls() -> dict[str, Any]:
     assert contract["physical_gate_effect"] == "NONE"
     assert contract["physical_evidence_effect"] == "NONE"
     assert current["physical_evidence_effect"] == "NONE"
+    assert latest == checkpoint
     return {
         "checked_full_gate_sources": len(sources),
         "site_governance_checked": True,
+        "active_current_state": latest["canonical_state"],
         "physical_gate_effect": "NONE",
         "physical_evidence_effect": "NONE",
     }

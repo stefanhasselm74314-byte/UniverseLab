@@ -1,9 +1,9 @@
 # UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1
 
-**Extraktionsbasis:** `1ddca1357cee1a59e89750b2ec96a8a0e9eb38fd`  
+**Extraktionsbasis:** `657f8948b70d0dd2d25a124717d84e3ea3f86efb`  
 **HTML-Dateien:** `72`  
 **Claim-Kandidaten:** `989`  
-**HIGH/MEDIUM:** `44`  
+**HIGH/MEDIUM:** `42`  
 **Status:** `GENERATED_NOT_ADJUDICATED`  
 **Physical gate effect:** `NONE`  
 **Physical evidence effect:** `NONE`
@@ -323,17 +323,6 @@
 - Text: Hilbertraum, RG, kontrollierte 6D→4D-Reduktion, Likelihood- und Solverstandards.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-## `observatory-en.html`
-
-### UL-CLAIM-CANDIDATE-978286FC7F925D9A · HIGH +12
-
-- Quelle: Zeile `1`, Tag `p`, Region `article`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `DERIVATION_IDENTIFICATION, EVIDENCE_CONFIRMATION, OBSERVATIONAL_DATA, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: Ghost freedom, derivation of fitted parameters from the six-dimensional parent action, uniqueness of a dark-sector interpretation, or observational confirmation of HZT.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
-
 ## `research-status-en.html`
 
 ### UL-CLAIM-CANDIDATE-A0E49DE6A446BC01 · MEDIUM +6
@@ -355,15 +344,6 @@
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ## `research-status.html`
-
-### UL-CLAIM-CANDIDATE-AA0AA1DAAC06DFF6 · HIGH +8
-
-- Quelle: Zeile `24`, Tag `p`, Region `section`
-- Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, THEORY_6D_PARENT`
-- Limiter vorhanden: `false`
-- Text: UniverseLab trennt strikt zwischen analytischen Resultaten, diagnostischer Numerik, offenen Parent→Observable-Brücken, Autorisierungsinfrastruktur und physischer Evidenz.
-- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
 ### UL-CLAIM-CANDIDATE-A736D04348FC6218 · MEDIUM +4
 
