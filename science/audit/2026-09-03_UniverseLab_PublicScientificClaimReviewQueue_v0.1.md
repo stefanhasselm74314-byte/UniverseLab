@@ -1,9 +1,9 @@
 # UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1
 
-**Extraktionsbasis:** `657f8948b70d0dd2d25a124717d84e3ea3f86efb`  
+**Extraktionsbasis:** `dfe1539ef58a4bdee399da6178f5c1c606adc53a`  
 **HTML-Dateien:** `72`  
-**Claim-Kandidaten:** `989`  
-**HIGH/MEDIUM:** `42`  
+**Claim-Kandidaten:** `993`  
+**HIGH/MEDIUM:** `47`  
 **Status:** `GENERATED_NOT_ADJUDICATED`  
 **Physical gate effect:** `NONE`  
 **Physical evidence effect:** `NONE`
@@ -325,18 +325,45 @@
 
 ## `research-status-en.html`
 
-### UL-CLAIM-CANDIDATE-A0E49DE6A446BC01 · MEDIUM +6
+### UL-CLAIM-CANDIDATE-B70DD41ECCC5B02F · HIGH +8
 
-- Quelle: Zeile `43`, Tag `li`, Region `article`
+- Quelle: Zeile `28`, Tag `p`, Region `article`
 - Statussignal: `UNCLASSIFIED`
-- Kategorien: `EVIDENCE_CONFIRMATION, OBSERVATIONAL_DATA`
+- Kategorien: `DERIVATION_IDENTIFICATION, OBSERVATIONAL_DATA, PREDICTION_SIGNATURE`
 - Limiter vorhanden: `false`
-- Text: an HZT-M0 likelihood or evidence interpretation;
+- Text: Band V-C maps all 15 canonical claim families across Claim → equation/derivation → code → test → data → falsifier/gate.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-3F15A164E3F0C45D · MEDIUM +4
+### UL-CLAIM-CANDIDATE-96D51E71A2B48F98 · MEDIUM +6
 
-- Quelle: Zeile `43`, Tag `li`, Region `article`
+- Quelle: Zeile `37`, Tag `div`, Region `article`
+- Statussignal: `UNCLASSIFIED`
+- Kategorien: `EVIDENCE_CONFIRMATION, PREDICTION_SIGNATURE`
+- Limiter vorhanden: `false`
+- Text: Current-main Canonical State v1.3 SiteState v1.4 Session Checkpoint v1.34 Public Claim Census v1.0 Band V-B MEDIUM Summary Band V-C Evidence Crosswalk Band V-C Missing-Link Register Canonical Engine Contract Authority Signature Provenance FM-0 Gap Register v0.4
+- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
+
+### UL-CLAIM-CANDIDATE-D2C8919501F1635B · MEDIUM +5
+
+- Quelle: Zeile `36`, Tag `li`, Region `article`
+- Statussignal: `UNCLASSIFIED`
+- Kategorien: `DERIVATION_IDENTIFICATION, PREDICTION_SIGNATURE`
+- Limiter vorhanden: `false`
+- Text: quantitative parent-derived multichannel predictions with operational falsification thresholds;
+- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
+
+### UL-CLAIM-CANDIDATE-56B6792E9F85C517 · MEDIUM +4
+
+- Quelle: Zeile `28`, Tag `div`, Region `article`
+- Statussignal: `UNCLASSIFIED`
+- Kategorien: `EVIDENCE_CONFIRMATION`
+- Limiter vorhanden: `false`
+- Text: 10 scientific/empirical blockers
+- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
+
+### UL-CLAIM-CANDIDATE-C522F0894845C85C · MEDIUM +4
+
+- Quelle: Zeile `36`, Tag `li`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
@@ -345,9 +372,27 @@
 
 ## `research-status.html`
 
-### UL-CLAIM-CANDIDATE-A736D04348FC6218 · MEDIUM +4
+### UL-CLAIM-CANDIDATE-564A8251149D78C4 · MEDIUM +6
 
-- Quelle: Zeile `44`, Tag `li`, Region `article`
+- Quelle: Zeile `40`, Tag `div`, Region `article`
+- Statussignal: `UNCLASSIFIED`
+- Kategorien: `EVIDENCE_CONFIRMATION, PREDICTION_SIGNATURE`
+- Limiter vorhanden: `false`
+- Text: Current-main Canonical State v1.3 SiteState v1.4 Session Checkpoint v1.34 Public Claim Census v1.0 Band V-B MEDIUM Summary Band V-C Evidence Crosswalk Band V-C Missing-Link-Register Canonical Engine Contract Authority Signature Provenance FM-0 Gap Register v0.4
+- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
+
+### UL-CLAIM-CANDIDATE-BFD848A8933FE2AF · MEDIUM +4
+
+- Quelle: Zeile `31`, Tag `div`, Region `article`
+- Statussignal: `UNCLASSIFIED`
+- Kategorien: `EVIDENCE_CONFIRMATION`
+- Limiter vorhanden: `false`
+- Text: 10 wissenschaftlich/empirisch blockierend
+- Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
+
+### UL-CLAIM-CANDIDATE-ECF721D85B555B00 · MEDIUM +4
+
+- Quelle: Zeile `39`, Tag `li`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
