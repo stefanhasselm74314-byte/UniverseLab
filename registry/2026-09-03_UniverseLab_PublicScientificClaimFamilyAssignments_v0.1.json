@@ -1,5 +1,5 @@
 {
-  "assignment_count": 989,
+  "assignment_count": 993,
   "assignments": [
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -162,20 +162,41 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-A0E49DE6A446BC01",
+      "claim_id": "UL-CLAIM-CANDIDATE-96D51E71A2B48F98",
       "family_ids": [
-        "UL-CLM-DATA-LIKELIHOOD-001",
+        "UL-CLM-FM0-PROGRAM-001",
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "manual_review_required": true,
       "path": "research-status-en.html",
       "routing_basis": [
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
-        "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
+        "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "BOUNDED_TEXT_HINT:fm-0->UL-CLM-FM0-PROGRAM-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "MEDIUM",
+      "claim_id": "UL-CLAIM-CANDIDATE-564A8251149D78C4",
+      "family_ids": [
+        "UL-CLM-FM0-PROGRAM-001",
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": true,
+      "path": "research-status.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "BOUNDED_TEXT_HINT:fm-0->UL-CLM-FM0-PROGRAM-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -284,6 +305,25 @@
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
       "source_sha256": "a25df13b1d305cef8c6ceb9432b711b0b3d7b7e145f9064b90582ee98dc1b5b6"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "MEDIUM",
+      "claim_id": "UL-CLAIM-CANDIDATE-D2C8919501F1635B",
+      "family_ids": [
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": true,
+      "path": "research-status-en.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "BOUNDED_TEXT_HINT:prediction->UL-CLM-PREDICTIONS-FALSIFIERS-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -623,7 +663,23 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-3F15A164E3F0C45D",
+      "claim_id": "UL-CLAIM-CANDIDATE-56B6792E9F85C517",
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": true,
+      "path": "research-status-en.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "MEDIUM",
+      "claim_id": "UL-CLAIM-CANDIDATE-C522F0894845C85C",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -636,13 +692,29 @@
         "BOUNDED_TEXT_HINT:parent→->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-A736D04348FC6218",
+      "claim_id": "UL-CLAIM-CANDIDATE-BFD848A8933FE2AF",
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": true,
+      "path": "research-status.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "MEDIUM",
+      "claim_id": "UL-CLAIM-CANDIDATE-ECF721D85B555B00",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -655,7 +727,7 @@
         "BOUNDED_TEXT_HINT:parent→->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -2105,7 +2177,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-61D457D1B60CC741",
+      "claim_id": "UL-CLAIM-CANDIDATE-3DBAD5B43A6885D7",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -2117,7 +2189,7 @@
         "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -4679,7 +4751,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-CA5A30C6F4175464",
+      "claim_id": "UL-CLAIM-CANDIDATE-6C679B62CDCCDD62",
       "family_ids": [
         "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
         "UL-CLM-PREDICTIONS-FALSIFIERS-001",
@@ -4693,13 +4765,13 @@
         "BOUNDED_TEXT_HINT:rank->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-662C4B56CA88A57D",
+      "claim_id": "UL-CLAIM-CANDIDATE-1781F67E85DBE05F",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -4709,51 +4781,54 @@
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-2B6EAB523B660B3A",
+      "claim_id": "UL-CLAIM-CANDIDATE-D2E09886CE15078E",
       "family_ids": [
-        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "manual_review_required": false,
       "path": "research-status-en.html",
       "routing_basis": [
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001"
+        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
+        "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-CB2BA80CB72E080B",
+      "claim_id": "UL-CLAIM-CANDIDATE-00ECC93A14D5063D",
       "family_ids": [
-        "UL-CLM-FM0-PROGRAM-001",
+        "UL-CLM-BRIDGE-BACKGROUND-001",
+        "UL-CLM-LINEAR-GROWTH-001",
         "UL-CLM-PREDICTIONS-FALSIFIERS-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "manual_review_required": false,
-      "path": "research-status-en.html",
+      "path": "research-status.html",
       "routing_basis": [
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001",
-        "BOUNDED_TEXT_HINT:fm-0->UL-CLM-FM0-PROGRAM-001"
+        "BOUNDED_TEXT_HINT:growth->UL-CLM-LINEAR-GROWTH-001",
+        "BOUNDED_TEXT_HINT:bridge->UL-CLM-BRIDGE-BACKGROUND-001",
+        "BOUNDED_TEXT_HINT:lensing->UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-C6F9E1B61C0AF57C",
+      "claim_id": "UL-CLAIM-CANDIDATE-08702A975E5FE61D",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -4763,31 +4838,13 @@
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-268B71DAE34F48A9",
-      "family_ids": [
-        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "research-status.html",
-      "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-8A1506476BAE5435",
+      "claim_id": "UL-CLAIM-CANDIDATE-4AE9A919D8362C9B",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -4800,15 +4857,14 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-EFFFF3AC345243C0",
+      "claim_id": "UL-CLAIM-CANDIDATE-F904B254E04B471C",
       "family_ids": [
-        "UL-CLM-FM0-PROGRAM-001",
         "UL-CLM-PREDICTIONS-FALSIFIERS-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -4817,10 +4873,10 @@
       "routing_basis": [
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
         "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001",
-        "BOUNDED_TEXT_HINT:fm-0->UL-CLM-FM0-PROGRAM-001"
+        "BOUNDED_TEXT_HINT:vorhersage->UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -9799,7 +9855,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-54DCEACAABC99E33",
+      "claim_id": "UL-CLAIM-CANDIDATE-08A3770C7D8ED92D",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -9809,57 +9865,29 @@
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-327F2C5C3DE6838F",
+      "claim_id": "UL-CLAIM-CANDIDATE-DD4A0C3B958CD8B7",
       "family_ids": [
-        "UL-CLM-BRIDGE-BACKGROUND-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "manual_review_required": false,
       "path": "research-status-en.html",
       "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "BOUNDED_TEXT_HINT:bridge->UL-CLM-BRIDGE-BACKGROUND-001"
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-EBB1CB38816CEED0",
-      "family_ids": [
-        "UL-CLM-DISTANCE-GEOMETRY-001",
-        "UL-CLM-EMERGENCE-SEPARATION-001",
-        "UL-CLM-FLRW-BACKGROUND-001",
-        "UL-CLM-LINEAR-GROWTH-001",
-        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "research-status-en.html",
-      "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "BOUNDED_TEXT_HINT:flrw->UL-CLM-FLRW-BACKGROUND-001",
-        "BOUNDED_TEXT_HINT:distance->UL-CLM-DISTANCE-GEOMETRY-001",
-        "BOUNDED_TEXT_HINT:growth->UL-CLM-LINEAR-GROWTH-001",
-        "BOUNDED_TEXT_HINT:emergence->UL-CLM-EMERGENCE-SEPARATION-001",
-        "BOUNDED_TEXT_HINT:growth->UL-CLM-PREDICTIONS-FALSIFIERS-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-D20BBDB942386473",
+      "claim_id": "UL-CLAIM-CANDIDATE-E3E364C9944E6E34",
       "family_ids": [
         "UL-CLM-DISTANCE-GEOMETRY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -9872,33 +9900,53 @@
         "BOUNDED_TEXT_HINT:blocked->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-668FC56777305DBA",
+      "claim_id": "UL-CLAIM-CANDIDATE-AA00BD95DEEC630B",
       "family_ids": [
         "UL-CLM-BRIDGE-BACKGROUND-001",
-        "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
+        "UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001",
+        "UL-CLM-LINEAR-GROWTH-001",
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "manual_review_required": false,
       "path": "research-status-en.html",
       "routing_basis": [
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "BOUNDED_TEXT_HINT:βτ->UL-CLM-BRIDGE-BACKGROUND-001",
-        "BOUNDED_TEXT_HINT:identifiability->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
+        "BOUNDED_TEXT_HINT:growth->UL-CLM-LINEAR-GROWTH-001",
+        "BOUNDED_TEXT_HINT:bridge->UL-CLM-BRIDGE-BACKGROUND-001",
+        "BOUNDED_TEXT_HINT:poisson->UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001",
+        "BOUNDED_TEXT_HINT:lensing->UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-107B88DBEB1F1BD2",
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "research-status.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-C9C558B1CE40E283",
+      "claim_id": "UL-CLAIM-CANDIDATE-7F7F87E0F1B9CFB6",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -9910,13 +9958,13 @@
         "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-691E0B084D2A5073",
+      "claim_id": "UL-CLAIM-CANDIDATE-49302134332EDCB0",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -9926,69 +9974,13 @@
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-5A850079E34AE0CF",
-      "family_ids": [
-        "UL-CLM-BRIDGE-BACKGROUND-001",
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "research-status.html",
-      "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "BOUNDED_TEXT_HINT:bridge->UL-CLM-BRIDGE-BACKGROUND-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-619211C1FC91CABA",
-      "family_ids": [
-        "UL-CLM-BRIDGE-BACKGROUND-001",
-        "UL-CLM-LINEAR-GROWTH-001",
-        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "research-status.html",
-      "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "BOUNDED_TEXT_HINT:growth->UL-CLM-LINEAR-GROWTH-001",
-        "BOUNDED_TEXT_HINT:bridge->UL-CLM-BRIDGE-BACKGROUND-001",
-        "BOUNDED_TEXT_HINT:lensing->UL-CLM-PREDICTIONS-FALSIFIERS-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-BD572FDD5C778D4F",
-      "family_ids": [
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "research-status.html",
-      "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-D64419294010F036",
+      "claim_id": "UL-CLAIM-CANDIDATE-1A71678590EF280A",
       "family_ids": [
         "UL-CLM-DISTANCE-GEOMETRY-001",
         "UL-CLM-EMERGENCE-SEPARATION-001",
@@ -10008,13 +10000,13 @@
         "BOUNDED_TEXT_HINT:growth->UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-0CA9FB0E0ACBE23A",
+      "claim_id": "UL-CLAIM-CANDIDATE-5882C474B1E6D762",
       "family_ids": [
         "UL-CLM-DISTANCE-GEOMETRY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -10027,27 +10019,31 @@
         "BOUNDED_TEXT_HINT:blocked->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-C3913B37C151F58D",
+      "claim_id": "UL-CLAIM-CANDIDATE-1C5BBD254605299C",
       "family_ids": [
         "UL-CLM-BRIDGE-BACKGROUND-001",
-        "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
+        "UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001",
+        "UL-CLM-LINEAR-GROWTH-001",
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "manual_review_required": false,
       "path": "research-status.html",
       "routing_basis": [
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "BOUNDED_TEXT_HINT:βτ->UL-CLM-BRIDGE-BACKGROUND-001",
-        "BOUNDED_TEXT_HINT:identifizier->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
+        "BOUNDED_TEXT_HINT:growth->UL-CLM-LINEAR-GROWTH-001",
+        "BOUNDED_TEXT_HINT:bridge->UL-CLM-BRIDGE-BACKGROUND-001",
+        "BOUNDED_TEXT_HINT:poisson->UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001",
+        "BOUNDED_TEXT_HINT:lensing->UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -11850,7 +11846,28 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-B2D02AFCD2064D3B",
+      "claim_id": "UL-CLAIM-CANDIDATE-C92D954A87CF59DE",
+      "family_ids": [
+        "UL-CLM-DATA-LIKELIHOOD-001",
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "research-status-en.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
+        "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
+      "claim_id": "UL-CLAIM-CANDIDATE-660C10A8A69802D5",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PARENT-FORWARD-MAP-001",
@@ -11868,13 +11885,13 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-C698228C85DDC597",
+      "claim_id": "UL-CLAIM-CANDIDATE-B5D01BF9CD7906A9",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -11884,13 +11901,13 @@
         "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-775D0CA926D9E8E0",
+      "claim_id": "UL-CLAIM-CANDIDATE-301B918E1A7C7A63",
       "family_ids": [
         "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
@@ -11905,13 +11922,34 @@
         "BOUNDED_TEXT_HINT:authorization->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
+      "claim_id": "UL-CLAIM-CANDIDATE-A1004A7B25E758C2",
+      "family_ids": [
+        "UL-CLM-DATA-LIKELIHOOD-001",
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "research-status.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
+        "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-65CB9A9D711D97AD",
+      "claim_id": "UL-CLAIM-CANDIDATE-E088011B718A87EC",
       "family_ids": [
         "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -11923,13 +11961,13 @@
         "BOUNDED_TEXT_HINT:rang->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-AD391A8D4246628D",
+      "claim_id": "UL-CLAIM-CANDIDATE-F87CD1E6B85801C3",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PARENT-FORWARD-MAP-001",
@@ -11947,7 +11985,7 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -12507,17 +12545,27 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-636D0528053B4BED",
+      "claim_id": "UL-CLAIM-CANDIDATE-700978EF46EAA07E",
       "family_ids": [
+        "UL-CLM-DISTANCE-GEOMETRY-001",
+        "UL-CLM-EMERGENCE-SEPARATION-001",
+        "UL-CLM-FLRW-BACKGROUND-001",
+        "UL-CLM-LINEAR-GROWTH-001",
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "manual_review_required": false,
       "path": "research-status-en.html",
       "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "BOUNDED_TEXT_HINT:flrw->UL-CLM-FLRW-BACKGROUND-001",
+        "BOUNDED_TEXT_HINT:distance->UL-CLM-DISTANCE-GEOMETRY-001",
+        "BOUNDED_TEXT_HINT:growth->UL-CLM-LINEAR-GROWTH-001",
+        "BOUNDED_TEXT_HINT:emergence->UL-CLM-EMERGENCE-SEPARATION-001",
+        "BOUNDED_TEXT_HINT:growth->UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -13091,7 +13139,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-B52583696CF9FDD8",
+      "claim_id": "UL-CLAIM-CANDIDATE-6E83AA1994FA3AA7",
       "family_ids": [
         "UL-CLM-BRIDGE-BACKGROUND-001",
         "UL-CLM-DATA-LIKELIHOOD-001",
@@ -13110,7 +13158,7 @@
         "BOUNDED_TEXT_HINT:status->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -13300,7 +13348,7 @@
         "BOUNDED_TEXT_HINT:authorization->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -13541,6 +13589,25 @@
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
       "source_sha256": "8c017dcc3fb71a7869463b993e074a4f1ce09a0cbd15a51f412c21cc0644b6dc"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
+      "claim_id": "UL-CLAIM-CANDIDATE-89D9AA8C49B1B288",
+      "family_ids": [
+        "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "research-status-en.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "BOUNDED_TEXT_HINT:ghost->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -16204,13 +16271,13 @@
         "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-5E4C0F2946226CA6",
+      "claim_id": "UL-CLAIM-CANDIDATE-671FEA49FA337543",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -16224,13 +16291,31 @@
         "BOUNDED_TEXT_HINT:not admissible->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
+      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
+      "claim_id": "UL-CLAIM-CANDIDATE-A7557D7A5F554572",
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "research-status-en.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "BOUNDED_TEXT_HINT:blocked->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-0556F854C136C3A8",
+      "claim_id": "UL-CLAIM-CANDIDATE-C6649CB996A1A832",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -16243,31 +16328,13 @@
         "BOUNDED_TEXT_HINT:physical background->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
-      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-AA31286CC5E3E1A2",
-      "family_ids": [
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "research-status-en.html",
-      "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "BOUNDED_TEXT_HINT:blocked->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-710ECF6DEEE57CEB",
+      "claim_id": "UL-CLAIM-CANDIDATE-C8A5622CFBCB4AFC",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -16278,13 +16345,30 @@
         "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
+      "claim_id": "UL-CLAIM-CANDIDATE-2632EFB78FFE9E46",
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "research-status-en.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-A1A6C06263BEBEDB",
+      "claim_id": "UL-CLAIM-CANDIDATE-1D9DD265B7C59DAE",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -16298,13 +16382,13 @@
         "BOUNDED_TEXT_HINT:parent→->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-65CEA625021396E6",
+      "claim_id": "UL-CLAIM-CANDIDATE-9921E31BE438E301",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -16317,13 +16401,13 @@
         "BOUNDED_TEXT_HINT:ghost->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-04D88F430BC35968",
+      "claim_id": "UL-CLAIM-CANDIDATE-60D7B3C197042010",
       "family_ids": [
         "UL-CLM-BRIDGE-BACKGROUND-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -16336,13 +16420,13 @@
         "BOUNDED_TEXT_HINT:βτ->UL-CLM-BRIDGE-BACKGROUND-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-A414CB8E684786D7",
+      "claim_id": "UL-CLAIM-CANDIDATE-DAF732E27076804A",
       "family_ids": [
         "UL-CLM-BRIDGE-BACKGROUND-001",
         "UL-CLM-LINEAR-GROWTH-001",
@@ -16359,13 +16443,30 @@
         "BOUNDED_TEXT_HINT:lensing->UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
+      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
+      "claim_id": "UL-CLAIM-CANDIDATE-78D8F456175E6986",
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "research-status-en.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-0EEC8F6918092456",
+      "claim_id": "UL-CLAIM-CANDIDATE-EA4CEBD1A49B4F92",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -16377,13 +16478,13 @@
         "BOUNDED_TEXT_HINT:trust root->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-4EB63C470A4EEBA7",
+      "claim_id": "UL-CLAIM-CANDIDATE-1C8E6555823C254B",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -16394,30 +16495,13 @@
         "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
-      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-BCF3428B25BE78E1",
-      "family_ids": [
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "research-status-en.html",
-      "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-E0C19FD2433FBCBF",
+      "claim_id": "UL-CLAIM-CANDIDATE-4B4C377534DB3FCC",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -16428,32 +16512,13 @@
         "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
-      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-64C3FEC8D90FC969",
-      "family_ids": [
-        "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "research-status-en.html",
-      "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "BOUNDED_TEXT_HINT:ghost->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-9AC35F30A770E43D",
+      "claim_id": "UL-CLAIM-CANDIDATE-D6735536FDE73A8F",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -16465,13 +16530,32 @@
         "BOUNDED_TEXT_HINT:status->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e9a3872ae89728bf5f865e8144ecfc0f56dab8d11bc9ebbdee5c340e0160ca83"
+      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
+      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
+      "claim_id": "UL-CLAIM-CANDIDATE-30322FCEB33AFD25",
+      "family_ids": [
+        "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "research-status.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "BOUNDED_TEXT_HINT:physical background->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-3FEF5B69A79622E8",
+      "claim_id": "UL-CLAIM-CANDIDATE-9B1F0728219A3B12",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -16485,32 +16569,13 @@
         "BOUNDED_TEXT_HINT:not admissible->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
-      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-CEE1ECE4192D9348",
-      "family_ids": [
-        "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "research-status.html",
-      "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "BOUNDED_TEXT_HINT:physical background->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-B7E771555D2B98B3",
+      "claim_id": "UL-CLAIM-CANDIDATE-A54FA2A03F6B390D",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -16522,13 +16587,13 @@
         "BOUNDED_TEXT_HINT:blocked->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-8A49BA92922A7E3B",
+      "claim_id": "UL-CLAIM-CANDIDATE-C39A2C558647F418",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -16539,13 +16604,30 @@
         "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
+      "claim_id": "UL-CLAIM-CANDIDATE-6C3FD45F99347DA6",
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "research-status.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-57F9AFD87A7B633B",
+      "claim_id": "UL-CLAIM-CANDIDATE-11C49452803C569C",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -16560,13 +16642,13 @@
         "BOUNDED_TEXT_HINT:status->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-A3129419FA304FC7",
+      "claim_id": "UL-CLAIM-CANDIDATE-B02A8966D6698BE0",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -16577,13 +16659,13 @@
         "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-E33B55192DB34BCF",
+      "claim_id": "UL-CLAIM-CANDIDATE-55F008D0010A73FE",
       "family_ids": [
         "UL-CLM-BRIDGE-BACKGROUND-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -16596,13 +16678,31 @@
         "BOUNDED_TEXT_HINT:βτ->UL-CLM-BRIDGE-BACKGROUND-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
+      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
+      "claim_id": "UL-CLAIM-CANDIDATE-0D65315747D44572",
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "research-status.html",
+      "routing_basis": [
+        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+        "BOUNDED_TEXT_HINT:trust root->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-4B4CF6724DD20952",
+      "claim_id": "UL-CLAIM-CANDIDATE-1FAAD6D1F182E58B",
       "family_ids": [
         "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
@@ -16618,13 +16718,13 @@
         "BOUNDED_TEXT_HINT:authorization->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-5FCE3C7C3BE43A82",
+      "claim_id": "UL-CLAIM-CANDIDATE-95E0602A574696F1",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -16635,31 +16735,13 @@
         "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
-      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-F8F6D981A125AA99",
-      "family_ids": [
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "research-status.html",
-      "routing_basis": [
-        "PAGE_PATTERN:research-status*.html->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-        "BOUNDED_TEXT_HINT:trust root->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-3E88F073CB388763",
+      "claim_id": "UL-CLAIM-CANDIDATE-56CC6BCF2C4ABD21",
       "family_ids": [
         "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -16672,13 +16754,13 @@
         "BOUNDED_TEXT_HINT:identifizier->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-1F96C7D5DB380644",
+      "claim_id": "UL-CLAIM-CANDIDATE-0A2D4AB38CE1FF37",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -16690,13 +16772,13 @@
         "BOUNDED_TEXT_HINT:status->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-CAFBF9E12CF2A1BC",
+      "claim_id": "UL-CLAIM-CANDIDATE-743A5BE1B2C4C7AD",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -16709,7 +16791,7 @@
         "BOUNDED_TEXT_HINT:ghost->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "134de99cad15ccb5b094472b6584460ce3774d13ebc85803efc0022dd5c9960d"
+      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -17332,28 +17414,28 @@
       "source_sha256": "356185eedc9eced4df057c9cf9f90ac82b29fcdb0cefa0756cb119ebe3e4cc22"
     }
   ],
-  "candidate_basis_commit": "657f8948b70d0dd2d25a124717d84e3ea3f86efb",
-  "candidate_count": 989,
+  "candidate_basis_commit": "663e7585d006e35cbc97e08f0efb02395a692d8a",
+  "candidate_count": 993,
   "fallback_assignment_count": 209,
   "family_counts": {
-    "UL-CLM-BRIDGE-BACKGROUND-001": 42,
-    "UL-CLM-BRIDGE-IDENTIFIABILITY-001": 48,
-    "UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001": 4,
-    "UL-CLM-DATA-LIKELIHOOD-001": 119,
+    "UL-CLM-BRIDGE-BACKGROUND-001": 40,
+    "UL-CLM-BRIDGE-IDENTIFIABILITY-001": 46,
+    "UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001": 6,
+    "UL-CLM-DATA-LIKELIHOOD-001": 121,
     "UL-CLM-DISTANCE-GEOMETRY-001": 32,
     "UL-CLM-EDUCATIONAL-VISUAL-001": 411,
     "UL-CLM-EMERGENCE-SEPARATION-001": 21,
     "UL-CLM-FLRW-BACKGROUND-001": 89,
     "UL-CLM-FM0-PROGRAM-001": 17,
     "UL-CLM-HISTORICAL-ARCHIVE-001": 140,
-    "UL-CLM-LINEAR-GROWTH-001": 43,
+    "UL-CLM-LINEAR-GROWTH-001": 45,
     "UL-CLM-PARENT-FORWARD-MAP-001": 147,
     "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001": 91,
-    "UL-CLM-PREDICTIONS-FALSIFIERS-001": 59,
-    "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001": 315
+    "UL-CLM-PREDICTIONS-FALSIFIERS-001": 63,
+    "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001": 319
   },
-  "high_medium_candidate_count": 42,
-  "manual_review_required_count": 247,
+  "high_medium_candidate_count": 46,
+  "manual_review_required_count": 251,
   "physical_evidence_effect": "NONE",
   "physical_gate_effect": "NONE",
   "schema": "universelab.public-scientific-claim-family-assignments.v0.1",

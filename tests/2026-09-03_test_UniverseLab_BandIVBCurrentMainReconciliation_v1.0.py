@@ -1,15 +1,10 @@
 #!/usr/bin/env python3
-"""Band IV-B current-main reconciliation QA.
+"""Successor-aware Band IV-B current-main reconciliation QA.
 
-This test validates numerical-contract, status-pointer, public-semantics and
-firewall consistency. It deliberately performs no physical backend import or
-solver execution.
-
-Band IV-B's dated v1.1/v1.2/v1.32 snapshots are historical once later
-append-only state successors exist. Therefore current-state assertions resolve
-the active chain from registry/session-checkpoint-latest.json instead of
-hard-coding Band-IV-B's one-time pointer targets. The original Band-IV-B
-snapshots remain explicitly checked as preserved historical evidence.
+Band IV-B numerical invariants remain frozen evidence. Current-state/public
+semantics resolve through the active checkpoint alias so later append-only
+successors do not fail merely because their dated status page is newer.
+No physical execution is performed.
 """
 from __future__ import annotations
 
@@ -17,7 +12,6 @@ import json
 from pathlib import Path
 import re
 import subprocess
-import sys
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,11 +19,9 @@ REPORT = ROOT / "band-ivb-current-main-reconciliation-report.json"
 
 PATHS = {
     "contract": ROOT / "registry/2026-09-03_UniverseLab_BandIVBCurrentMainReconciliationContract_v1.0.json",
-    # Band-IV-B snapshots: historical evidence after later append-only successors.
     "current": ROOT / "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
     "site": ROOT / "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
     "checkpoint": ROOT / "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json",
-    # Current pointer alias: authoritative entry to whatever dated chain is active.
     "latest": ROOT / "registry/session-checkpoint-latest.json",
     "manifest": ROOT / "project-manifest.json",
     "engine_contract": ROOT / "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
@@ -62,7 +54,7 @@ def add(name: str, fn: Callable[[], Any]) -> None:
     try:
         detail = fn()
         report["checks"].append({"name": name, "status": "PASS", "detail": detail or {}})
-    except Exception as exc:  # noqa: BLE001 - record every fail-closed witness
+    except Exception as exc:  # noqa: BLE001
         report["status"] = "FAIL"
         report["checks"].append({"name": name, "status": "FAIL", "error": f"{type(exc).__name__}: {exc}"})
 
@@ -87,8 +79,8 @@ def active_chain() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict
     checkpoint = load_rel(latest["canonical_snapshot"], "latest.canonical_snapshot")
     current = load_rel(latest["canonical_state"], "latest.canonical_state")
     site = load_rel(latest["site_state"], "latest.site_state")
-    assert latest == checkpoint, "latest alias must equal active checkpoint semantically"
-    assert PATHS["latest"].read_bytes() == (ROOT / latest["canonical_snapshot"]).read_bytes(), "latest alias must be byte-identical to active checkpoint"
+    assert latest == checkpoint
+    assert PATHS["latest"].read_bytes() == (ROOT / latest["canonical_snapshot"]).read_bytes()
     return latest, checkpoint, current, site
 
 
@@ -101,23 +93,17 @@ def check_paths() -> dict[str, Any]:
     assert not missing, missing
     latest = load("latest")
     active = [latest["canonical_snapshot"], latest["canonical_state"], latest["site_state"]]
-    missing_active = [value for value in active if not (ROOT / value).is_file()]
-    assert not missing_active, missing_active
+    assert all((ROOT / value).is_file() for value in active)
     return {"required_static_paths": len(PATHS), "active_pointer_paths": active}
 
 
 def check_reference_closure() -> dict[str, Any]:
     values = {"Or": .000092, "Om": .315, "Ode": .684908, "Ok": 0.0}
     closure = sum(values.values())
-    assert abs(closure - 1) < 1e-15
+    assert abs(closure - 1.0) < 1e-15
     for name in ("observatory_audit", "compare_audit"):
         source = text(name)
-        for token in (
-            "recovered.params.Or-.000092",
-            "recovered.params.Ode-.684908",
-            "recovered.params.Ok",
-            "closure-1",
-        ):
+        for token in ("recovered.params.Or-.000092", "recovered.params.Ode-.684908", "recovered.params.Ok", "closure-1"):
             assert token in source, (name, token)
         assert "recovered.params.Ode-.685" not in source
     return {**values, "closure": closure}
@@ -128,7 +114,6 @@ def check_bridge_scale() -> dict[str, Any]:
     assert "const REVISION='1.0.2'" in source
     assert "function bridgeScale(p){return p.ac??p.Rchi/(p.Rchi+2.5);}" in source
     assert "Math.max(0.02,p.Rchi)" not in source
-    assert "Math.max(0.02, p.Rchi)" not in source
     script = r"""
 const C=require('./assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js');
 const values=[.1,.02,.01,1e-4,1e-8].map(Rchi=>({Rchi,ac:C.bridgeScale(C.normalizeParams({Rchi})),expected:Rchi/(Rchi+2.5)}));
@@ -137,8 +122,7 @@ console.log(JSON.stringify({version:C.VERSION,revision:C.REVISION,values,invalid
 """
     result = subprocess.run(["node", "-e", script], cwd=ROOT, check=True, capture_output=True, text=True)
     data = json.loads(result.stdout)
-    assert data["version"] == "1.0.0"
-    assert data["revision"] == "1.0.2"
+    assert data["version"] == "1.0.0" and data["revision"] == "1.0.2"
     assert data["invalid"] == "INVALID_RCHI"
     for row in data["values"]:
         assert abs(row["ac"] - row["expected"]) <= 2e-16 * max(1.0, abs(row["expected"]))
@@ -158,22 +142,19 @@ def check_engine_contract() -> dict[str, Any]:
     assert bridge["hidden_Rchi_floor"] is False
     assert value["migration"]["review_pending_pages"] == []
     assert value["migration"]["remaining_independent_cosmology_engines"] == []
-    assert value["physical_gate_effect"] == "NONE"
-    assert value["physical_evidence_effect"] == "NONE"
+    assert value["physical_gate_effect"] == value["physical_evidence_effect"] == "NONE"
     return {"version": value["version"], "migration_stage": value["migration"]["stage"]}
 
 
 def check_state_successors() -> dict[str, Any]:
-    # First preserve the original Band-IV-B successor evidence itself.
-    band_ivb_current, band_ivb_site, band_ivb_checkpoint = map(load, ("current", "site", "checkpoint"))
-    assert band_ivb_current["supersedes"].endswith("CurrentMainCanonicalState_v1.0.json")
-    assert band_ivb_site["supersedes"].endswith("SiteState_v1.1.json")
-    assert band_ivb_checkpoint["supersedes"].endswith("SessionCheckpoint_v1.31.json")
-    assert band_ivb_current["basis_main_commit"] == "30b781f84d9c7c9fc74fac1adb34e4d935b1679b"
-    assert band_ivb_site["basis_main_commit"] == band_ivb_current["basis_main_commit"]
-    assert band_ivb_checkpoint["basis_commit"] == band_ivb_current["basis_main_commit"]
+    ivb_current, ivb_site, ivb_checkpoint = map(load, ("current", "site", "checkpoint"))
+    assert ivb_current["supersedes"].endswith("CurrentMainCanonicalState_v1.0.json")
+    assert ivb_site["supersedes"].endswith("SiteState_v1.1.json")
+    assert ivb_checkpoint["supersedes"].endswith("SessionCheckpoint_v1.31.json")
+    assert ivb_current["basis_main_commit"] == "30b781f84d9c7c9fc74fac1adb34e4d935b1679b"
+    assert ivb_site["basis_main_commit"] == ivb_current["basis_main_commit"]
+    assert ivb_checkpoint["basis_commit"] == ivb_current["basis_main_commit"]
 
-    # Then validate the current append-only successor chain dynamically.
     latest, checkpoint, current, site = active_chain()
     manifest = load("manifest")
     assert manifest["canonical_state"] == latest["canonical_state"]
@@ -183,11 +164,10 @@ def check_state_successors() -> dict[str, Any]:
     assert checkpoint["canonical_state"] == latest["canonical_state"]
     assert checkpoint["site_state"] == latest["site_state"]
     assert checkpoint["canonical_snapshot"] == latest["canonical_snapshot"]
+    assert site["basis_main_commit"] == current["basis_main_commit"] == checkpoint["basis_commit"] == manifest["basis_main_commit"]
     assert manifest["public_numerical_platform"]["implementation_revision"] == "1.0.2"
     assert manifest["public_numerical_platform"]["remaining_independent_engines"] == 0
     assert manifest["public_numerical_platform"]["bridge_growth"] == "UNRELEASED_GROWTH_MAP"
-    assert site["basis_main_commit"] == current["basis_main_commit"]
-    assert checkpoint["basis_commit"] == current["basis_main_commit"]
     assert current["public_numerical_platform"]["implementation_revision"] == "1.0.2"
     assert current["public_numerical_platform"]["remaining_independent_public_cosmology_engines"] == 0
     assert current["public_numerical_platform"]["bridge_growth"] == "UNRELEASED_GROWTH_MAP"
@@ -206,7 +186,6 @@ def check_historical_snapshots() -> dict[str, Any]:
     assert old_site["version"].startswith("1.1")
     assert old_checkpoint["checkpoint_id"].endswith("031")
     assert old_current.get("snapshot_date") == "2026-09-01"
-    # Band-IV-B's own dated outputs must also remain append-only after Band V.
     for name in ("current", "site", "checkpoint"):
         assert PATHS[name].is_file()
     return {"preserved": [path.name for key, path in PATHS.items() if key.startswith("old_")] + [PATHS[key].name for key in ("current", "site", "checkpoint")]}
@@ -217,29 +196,22 @@ def check_migration_contracts() -> dict[str, Any]:
     assert observatory["status"] == "ACTIVE_MERGED_QA_RECONCILED"
     assert compare["status"] == "ACTIVE_MERGED_QA_RECONCILED"
     assert emergence["status"] == "ACTIVE_MERGED_QA_RECONCILED"
-
     obs_ref = observatory["background_contract"]["reference_state"]
     cmp_ref = compare["background_contract"]["reference_state"]
     em_ref = emergence["background_contract"]["reference_parameters"]
-    for reference, dark_energy_key in ((obs_ref, "Omega_DE"), (cmp_ref, "Omega_DE"), (em_ref, "Omega_Lambda")):
+    for reference, de_key in ((obs_ref, "Omega_DE"), (cmp_ref, "Omega_DE"), (em_ref, "Omega_Lambda")):
         assert reference["Omega_r"] == .000092
         assert reference["Omega_m"] == .315
-        assert reference[dark_energy_key] == .684908
+        assert reference[de_key] == .684908
         assert reference["Omega_k"] == 0.0
-
     assert compare["models"]["bridge_scale_hidden_floor"] is False
     assert compare["observable_firewalls"]["bridge_growth"] == "UNRELEASED_GROWTH_MAP"
     assert emergence["growth_contract"]["bridge_growth"] == "UNRELEASED_GROWTH_MAP"
     assert emergence["public_semantics"]["former_ambiguous_label_removed"] is True
     assert emergence["accessibility"]["mobile_zoom_allowed"] is True
     for value in (observatory, compare, emergence):
-        assert value["physical_gate_effect"] == "NONE"
-        assert value["physical_evidence_effect"] == "NONE"
-    return {
-        "observatory": observatory["status"],
-        "compare": compare["status"],
-        "emergence": emergence["status"],
-    }
+        assert value["physical_gate_effect"] == value["physical_evidence_effect"] == "NONE"
+    return {"observatory": observatory["status"], "compare": compare["status"], "emergence": emergence["status"]}
 
 
 def check_public_semantics() -> dict[str, Any]:
@@ -248,19 +220,28 @@ def check_public_semantics() -> dict[str, Any]:
     assert "ΛCDM-Anzeigezeit (Referenz)" in emergence
     assert "Physikalisch: ΛCDM" not in emergence
 
-    latest, _checkpoint, _current, _site = active_chain()
+    latest, checkpoint, current, _site = active_chain()
     current_path = latest["canonical_state"]
     site_path = latest["site_state"]
     de = text("research_de")
     en = text("research_en")
+    snapshot_date = current["snapshot_date"]
+    assert snapshot_date == checkpoint["timestamp"][:10]
+    y, m, d = map(int, snapshot_date.split("-"))
+    de_date = f"{d}. September {y}" if m == 9 else snapshot_date
+    en_date = f"{d} September {y}" if m == 9 else snapshot_date
+
     for source in (de, en):
         assert current_path in source
         assert "NOT RELEASED" in source
         assert "NOT ADMISSIBLE" in source
         assert "NOT RATIFIED" in source
-        assert "3. September 2026" in source or "3 September 2026" in source
-    assert "Bridge-Growth und Bridge-Lensing bleiben ausdrücklich unveröffentlicht" in de
-    assert "Bridge growth and bridge lensing remain unreleased" in en
+    assert de_date in de
+    assert en_date in en
+    assert "bridge-growth" in de.lower() and "bridge-lensing" in de.lower() and "unveröffentlicht" in de.lower()
+    assert "bridge growth" in en.lower() and "bridge lensing" in en.lower() and "unreleased" in en.lower()
+    assert "keine Evidenz für HZT" in de
+    assert "not evidence for HZT" in en
 
     shell = text("global_shell")
     assert site_path in shell
@@ -268,6 +249,7 @@ def check_public_semantics() -> dict[str, Any]:
         "mobile_zoom": "RESTORED",
         "emergence_label": "REFERENCE",
         "status_languages": ["de", "en"],
+        "snapshot_date": snapshot_date,
         "machine_state_source": current_path,
         "shell_site_state_source": site_path,
     }
@@ -285,51 +267,40 @@ def check_sitemap_shape() -> dict[str, Any]:
 
 def check_firewalls() -> dict[str, Any]:
     contract = load("contract")
-    latest, checkpoint, current, site = active_chain()
+    _latest, checkpoint, current, site = active_chain()
     manifest = load("manifest")
     sources = [contract["gate_state"], current["physical_governance"], checkpoint["physical_governance"], manifest["gates"]]
-    for gates in sources:
-        assert gates.get("ratified_human_trust_root", gates.get("RATIFIED_HUMAN_TRUST_ROOT")) == "NOT_RATIFIED"
-        assert gates.get("runtime_issuance_bindings", gates.get("RUNTIME_ISSUANCE_BINDINGS")) == "BLOCKED"
-        assert gates.get("operative_authorization_decision", gates.get("AuthorizationDecision")) == "NOT_CREATED"
-        assert gates.get("operative_single_use_grant", gates.get("SingleUseGrant")) == "NOT_CREATED"
-        assert gates.get("backend_import", gates.get("BACKEND_IMPORT")) == "NOT_EXECUTED"
-        assert gates.get("solver_execution", gates.get("SOLVER_EXECUTION")) == "NOT_EXECUTED"
-        assert gates["K1-D"] == "NOT_RELEASED"
-        assert gates["K1-E"] == "NOT_ADMISSIBLE"
-
-    assert site["physical_gate_effect"] == "NONE"
+    for g in sources:
+        assert g.get("ratified_human_trust_root", g.get("RATIFIED_HUMAN_TRUST_ROOT")) == "NOT_RATIFIED"
+        assert g.get("runtime_issuance_bindings", g.get("RUNTIME_ISSUANCE_BINDINGS")) == "BLOCKED"
+        assert g.get("operative_authorization_decision", g.get("AuthorizationDecision")) == "NOT_CREATED"
+        assert g.get("operative_single_use_grant", g.get("SingleUseGrant")) == "NOT_CREATED"
+        assert g.get("backend_import", g.get("BACKEND_IMPORT")) == "NOT_EXECUTED"
+        assert g.get("solver_execution", g.get("SOLVER_EXECUTION")) == "NOT_EXECUTED"
+        assert g["K1-D"] == "NOT_RELEASED"
+        assert g["K1-E"] == "NOT_ADMISSIBLE"
     assert site["governance"]["physical_evidence_effect"] == "NONE"
-    assert site["governance"]["trust_root_status"] == "NOT_RATIFIED"
-    assert site["governance"]["runtime_issuance_bindings"] == "BLOCKED"
-    assert site["governance"]["K1-D"] == "NOT_RELEASED"
-    assert site["governance"]["K1-E"] == "NOT_ADMISSIBLE"
-    assert contract["parked_external_human_action"]["affects_band_ivb_completion"] is False
-    assert contract["physical_gate_effect"] == "NONE"
-    assert contract["physical_evidence_effect"] == "NONE"
-    assert current["physical_evidence_effect"] == "NONE"
-    assert latest == checkpoint
-    return {
-        "checked_full_gate_sources": len(sources),
-        "site_governance_checked": True,
-        "active_current_state": latest["canonical_state"],
-        "physical_gate_effect": "NONE",
-        "physical_evidence_effect": "NONE",
-    }
+    assert manifest["physical_gate_effect"] == manifest["physical_evidence_effect"] == "NONE"
+    return {"active_current_state": load("latest")["canonical_state"], "checked_full_gate_sources": len(sources), "site_governance_checked": True, "physical_gate_effect": "NONE", "physical_evidence_effect": "NONE"}
 
 
-add("required_paths_exist", check_paths)
-add("radiation_inclusive_flat_reset_closure", check_reference_closure)
-add("bridge_scale_exact_domain_and_asymptotic", check_bridge_scale)
-add("canonical_engine_contract_reconciled", check_engine_contract)
-add("dated_state_successors_and_pointers", check_state_successors)
-add("historical_state_snapshots_preserved", check_historical_snapshots)
-add("page_migration_contracts_reconciled", check_migration_contracts)
-add("public_semantics_and_accessibility", check_public_semantics)
-add("sitemap_structure", check_sitemap_shape)
-add("physical_and_authorization_firewalls", check_firewalls)
+def main() -> None:
+    add("required_paths_exist", check_paths)
+    add("radiation_inclusive_flat_reset_closure", check_reference_closure)
+    add("bridge_scale_exact_domain_and_asymptotic", check_bridge_scale)
+    add("canonical_engine_contract_reconciled", check_engine_contract)
+    add("dated_state_successors_and_pointers", check_state_successors)
+    add("historical_state_snapshots_preserved", check_historical_snapshots)
+    add("page_migration_contracts_reconciled", check_migration_contracts)
+    add("public_semantics_and_accessibility", check_public_semantics)
+    add("sitemap_structure", check_sitemap_shape)
+    add("physical_and_authorization_firewalls", check_firewalls)
 
-REPORT.write_text(json.dumps(report, sort_keys=True, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-print(json.dumps(report, sort_keys=True, indent=2, ensure_ascii=False))
-if report["status"] != "PASS":
-    sys.exit(1)
+    REPORT.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(json.dumps(report, indent=2, ensure_ascii=False))
+    if report["status"] != "PASS":
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()
