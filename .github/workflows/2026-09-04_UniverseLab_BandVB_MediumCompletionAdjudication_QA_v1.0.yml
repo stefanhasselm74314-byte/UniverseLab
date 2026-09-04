@@ -1,0 +1,139 @@
+name: UniverseLab Band V-B MEDIUM completion adjudication QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-04_UniverseLab_PublicScientificMediumCompletionAdjudication_v1.0.json'
+      - 'registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json'
+      - 'science/audit/2026-09-04_UniverseLab_BandVB_MediumCompletionAdjudication_v1.0.md'
+      - 'tests/2026-09-04_test_UniverseLab_BandVB_MediumCompletionAdjudication_v1.0.py'
+      - '.github/workflows/2026-09-04_UniverseLab_BandVB_MediumCompletionAdjudication_QA_v1.0.yml'
+      - 'registry/2026-09-04_UniverseLab_PublicScientificMediumPriorityAdjudication_v1.0.json'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json'
+      - 'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+      - 'README.md'
+      - 'hyperlab-en.html'
+      - 'hyperzeit-material.html'
+      - 'index-en.html'
+      - 'index.html'
+      - 'tafelwerk.html'
+      - '2026-08-19_UniverseLab_BibliographyCatalog_v1.0.html'
+      - '2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html'
+      - 'about.html'
+      - 'baryogenesis-v12.html'
+      - 'guide.html'
+      - 'hyperzeit-material-v2-en.html'
+      - 'hyperzeit-material-v2.html'
+      - 'hyperzeit-methods-en.html'
+      - 'hyperzeit-methods.html'
+      - 'legacy.html'
+      - 'research-status-en.html'
+      - 'research-status.html'
+      - 'solver-hub-en.html'
+      - 'solver-hub.html'
+      - 'universelab-audit-2026-07-31.html'
+      - 'validation-en.html'
+      - 'validation.html'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-09-04_UniverseLab_PublicScientificMediumCompletionAdjudication_v1.0.json'
+      - 'registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json'
+      - 'science/audit/2026-09-04_UniverseLab_BandVB_MediumCompletionAdjudication_v1.0.md'
+      - 'tests/2026-09-04_test_UniverseLab_BandVB_MediumCompletionAdjudication_v1.0.py'
+      - '.github/workflows/2026-09-04_UniverseLab_BandVB_MediumCompletionAdjudication_QA_v1.0.yml'
+      - 'registry/2026-09-04_UniverseLab_PublicScientificMediumPriorityAdjudication_v1.0.json'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json'
+      - 'tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py'
+      - 'README.md'
+      - 'hyperlab-en.html'
+      - 'hyperzeit-material.html'
+      - 'index-en.html'
+      - 'index.html'
+      - 'tafelwerk.html'
+      - '2026-08-19_UniverseLab_BibliographyCatalog_v1.0.html'
+      - '2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html'
+      - 'about.html'
+      - 'baryogenesis-v12.html'
+      - 'guide.html'
+      - 'hyperzeit-material-v2-en.html'
+      - 'hyperzeit-material-v2.html'
+      - 'hyperzeit-methods-en.html'
+      - 'hyperzeit-methods.html'
+      - 'legacy.html'
+      - 'research-status-en.html'
+      - 'research-status.html'
+      - 'solver-hub-en.html'
+      - 'solver-hub.html'
+      - 'universelab-audit-2026-07-31.html'
+      - 'validation-en.html'
+      - 'validation.html'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-medium-completion:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse MEDIUM adjudication state
+        run: |
+          python -m json.tool registry/2026-09-04_UniverseLab_PublicScientificMediumPriorityAdjudication_v1.0.json >/dev/null
+          python -m json.tool registry/2026-09-04_UniverseLab_PublicScientificMediumCompletionAdjudication_v1.0.json >/dev/null
+          python -m json.tool registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json >/dev/null
+          python -m json.tool registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json >/dev/null
+          python -m json.tool registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json >/dev/null
+
+      - name: Compile scanner and MEDIUM completion gate
+        run: |
+          python -m py_compile tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py
+          python -m py_compile tests/2026-09-04_test_UniverseLab_BandVB_MediumCompletionAdjudication_v1.0.py
+
+      - name: Run complete MEDIUM contextual adjudication gate
+        run: python tests/2026-09-04_test_UniverseLab_BandVB_MediumCompletionAdjudication_v1.0.py
+
+      - name: Emit nonoperative MEDIUM completion report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary=json.loads(Path('registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json').read_text())
+          report={
+            'schema':'universelab.band-vb-medium-completion-gate-report.v1',
+            'status':'PASS_ALL_MATERIALIZED_MEDIUM_CONTEXT_ADJUDICATED',
+            'materialized_high':summary['materialized_high_candidates'],
+            'materialized_medium':summary['materialized_medium_candidates'],
+            'contextually_adjudicated_medium':summary['result']['medium_contextually_adjudicated_total'],
+            'contextually_unadjudicated_medium':summary['result']['medium_contextually_unadjudicated'],
+            'positive_physical_hzt_overclaims':summary['result']['positive_physical_hzt_overclaims'],
+            'physical_claim_promotions':summary['result']['physical_claim_promotions'],
+            'physical_gate_effect':'NONE',
+            'physical_evidence_effect':'NONE',
+          }
+          assert report['materialized_high']==0
+          assert report['materialized_medium']==42
+          assert report['contextually_adjudicated_medium']==42
+          assert report['contextually_unadjudicated_medium']==0
+          assert report['positive_physical_hzt_overclaims']==0
+          assert report['physical_claim_promotions']==0
+          Path('band-vb-medium-completion-gate-report.json').write_text(json.dumps(report,sort_keys=True,indent=2)+'\n')
+          print(json.dumps(report,sort_keys=True,indent=2))
+          PY
+
+      - name: Upload nonoperative MEDIUM completion report
+        uses: actions/upload-artifact@v4
+        with:
+          name: universelab-band-vb-medium-completion-gate-report
+          path: band-vb-medium-completion-gate-report.json
+          if-no-files-found: error
