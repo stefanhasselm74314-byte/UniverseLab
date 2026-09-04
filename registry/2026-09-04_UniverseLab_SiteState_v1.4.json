@@ -1,0 +1,198 @@
+{
+  "schema": "universelab.site-state.v1",
+  "version": "1.4.0",
+  "snapshot_date": "2026-09-04",
+  "snapshot_timestamp": "2026-09-04T12:46:00+02:00",
+  "basis_main_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+  "basis_main_tree": "b073c74b53fb0119ca9f72e3de3ad9399796266d",
+  "basis_semantics": "Exact merged main after Band V-C PR 209. Public numerical and physical gate states are unchanged; public claim-audit provenance is refreshed through Band V-C.",
+  "canonical_state": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+  "supersedes": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
+  "physical_gate_effect": "NONE",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "physical_evidence_effect": "NONE",
+    "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT",
+    "open_pull_requests_have_canonical_effect": false,
+    "historical_snapshots_are_append_only": true,
+    "trust_root_status": "NOT_RATIFIED",
+    "human_trust_root_action": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
+    "runtime_issuance_bindings": "BLOCKED"
+  },
+  "analysis_state": {
+    "band_iv_b": "MERGED_QA_RECONCILED",
+    "band_v_a": "MERGED_PUBLIC_CLAIM_CENSUS_AND_ROUTING_COVERAGE",
+    "band_v_b_high_claims": "COMPLETE_MERGED_CURRENT_LEXICAL_HIGH_0",
+    "band_v_b_medium_claims": "COMPLETE_MERGED_42_OF_42_CONTEXTUALLY_ADJUDICATED",
+    "band_v_c": "MERGED_15_FAMILY_CLAIM_EVIDENCE_CROSSWALK",
+    "lexical_claim_candidates": 989,
+    "current_lexical_high": 0,
+    "current_lexical_medium": 42,
+    "medium_contextually_adjudicated": 42,
+    "medium_contextually_unadjudicated": 0,
+    "band_vc_claim_families": 15,
+    "band_vc_missing_links": 11,
+    "band_vc_scientific_or_empirical_blocking_missing_links": 10,
+    "band_vc_governance_provenance_missing_links": 1,
+    "physical_claim_promotions": 0
+  },
+  "pages": [
+    {"id":"home","path":"index.html","domain":"home","status":"ACTIVE"},
+    {"id":"navigator","path":"navigator.html","domain":"navigator","status":"ACTIVE_CANONICAL_DIRECT_DOCUMENT"},
+    {"id":"research_status","path":"research-status.html","domain":"status","status":"ACTIVE_CURRENT_POST_BAND_VC_POINTER"},
+    {"id":"research_status_en","path":"research-status-en.html","domain":"status","status":"ACTIVE_CURRENT_POST_BAND_VC_POINTER"},
+    {"id":"solver_hub","path":"solver-hub.html","domain":"solver","status":"ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY"},
+    {"id":"validation","path":"validation.html","domain":"validation","status":"ACTIVE_CANONICAL_ENGINE_ADAPTER"},
+    {"id":"observatory","path":"observatory.html","domain":"observatory","status":"ACTIVE_MERGED_QA_RECONCILED"},
+    {"id":"observatory_en","path":"observatory-en.html","domain":"observatory","status":"ACTIVE_CURATED_SCOPE_ORIENTATION"},
+    {"id":"compare_safe","path":"compare-safe.html","domain":"compare","status":"ACTIVE_MERGED_QA_RECONCILED"},
+    {"id":"emergence","path":"emergence.html","domain":"emergence","status":"ACTIVE_MERGED_QA_RECONCILED_DIAGNOSTIC_VISUALIZATION"},
+    {"id":"methods","path":"hyperzeit-methods.html","domain":"methods","status":"ACTIVE"},
+    {"id":"material","path":"hyperzeit-material-v2.html","domain":"material","status":"ACTIVE"},
+    {"id":"audit_20260731","path":"universelab-audit-2026-07-31.html","domain":"audit","status":"ARCHIVED_REFERENCE"}
+  ],
+  "modules": [
+    {
+      "module_id": "ULSH-01",
+      "technical": {
+        "target_contract": "FROZEN",
+        "response_rank_method": "SPECIFIED_NOT_EXECUTED",
+        "authority_signature_verifier": "IMPLEMENTED_AND_QA_GREEN",
+        "human_trust_root_preparation": "IMPLEMENTED_AND_QA_GREEN",
+        "ratified_human_trust_root": "NOT_RATIFIED",
+        "runtime_issuance_bindings": "BLOCKED",
+        "background_execution": "NOT_AUTHORIZED",
+        "physical_response_rank": "NOT_EXECUTED",
+        "backend_import": "NOT_EXECUTED"
+      },
+      "governance": {
+        "priority": "P0_PHYSICAL_GATE_REMAINS_CLOSED",
+        "solver_release": "NOT_AUTHORIZED",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
+        "global_M1_existence": "OPEN",
+        "continuum_BVP_invertibility": "OPEN",
+        "Hamiltonian_positivity": "OPEN",
+        "ghost_freedom": "OPEN"
+      },
+      "work_packages": [
+        {"id":"WP1","status":"CLOSED_TARGET_FROZEN_NO_EXECUTION"},
+        {"id":"WP2","status":"METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED"},
+        {"id":"WP3","status":"NOT_STARTED"},
+        {"id":"WP4","status":"BLOCKED_NOT_AUTHORIZED"}
+      ],
+      "release_gate": {
+        "id": "ULSH01-WP2-AUTHORITY-AND-RUNTIME",
+        "status": "NOT_SATISFIED",
+        "blockers": [
+          "RATIFIED_HUMAN_TRUST_ROOT_ABSENT",
+          "RUNTIME_ISSUANCE_BINDINGS_BLOCKED",
+          "AUTHORIZATION_DECISION_NOT_CREATED",
+          "SINGLE_USE_GRANT_NOT_CREATED"
+        ]
+      }
+    },
+    {
+      "module_id": "HZT-M0-FM0",
+      "technical": {
+        "inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+        "gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+        "blocking_gap_count": 10,
+        "partially_resolved_blocking_gap_count": 3,
+        "fully_unresolved_blocking_gap_count": 7
+      },
+      "governance": {
+        "priority": "P0_FORWARD_MAP_RECOVERY",
+        "gate": "FM-G0",
+        "gate_status": "OPEN",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
+        "forward_map": "OPEN",
+        "observable_blocks_released": false,
+        "bridge_growth": "UNRELEASED_GROWTH_MAP",
+        "bridge_lensing": "UNRELEASED_LENSING_MAP"
+      },
+      "release_gate": {"id":"FM-G0","status":"NOT_SATISFIED"}
+    },
+    {
+      "module_id": "PUBLIC-COSMOLOGY",
+      "technical": {
+        "canonical_engine_api_version": "1.0.0",
+        "canonical_engine_implementation_revision": "1.0.2",
+        "validation": "ACTIVE",
+        "observatory": "ACTIVE_MERGED_QA_RECONCILED",
+        "compare_safe": "ACTIVE_MERGED_QA_RECONCILED",
+        "emergence": "ACTIVE_MERGED_QA_RECONCILED",
+        "remaining_independent_engines": 0
+      },
+      "governance": {
+        "priority": "P1_PUBLIC_NUMERICAL_INTEGRITY",
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "REFERENCE_FLRW_ONLY_NOT_HZT_IDENTIFICATION",
+        "bridge_background": "REDUCED_EFFECTIVE_DIAGNOSTIC_MODEL",
+        "bridge_growth": "UNRELEASED_GROWTH_MAP",
+        "likelihood_fit": "NOT_PRESENT",
+        "ghost_freedom": "NOT_IDENTIFIED"
+      },
+      "release_gate": {"id":"PUBLIC-NUMERICAL-QA","status":"MERGED_QA_RECONCILED"}
+    },
+    {
+      "module_id": "PUBLIC-CLAIM-AUDIT",
+      "technical": {
+        "tracked_html_files": 72,
+        "lexical_candidates": 989,
+        "family_assignments": 989,
+        "unmapped_candidates": 0,
+        "current_lexical_high": 0,
+        "current_lexical_medium": 42,
+        "medium_contextually_adjudicated": 42,
+        "band_vc_claim_families": 15,
+        "band_vc_missing_links": 11
+      },
+      "governance": {
+        "priority": "P1_PUBLIC_CLAIM_INTEGRITY_AND_EVIDENCE_PROVENANCE",
+        "automatic_routing_is_adjudication": false,
+        "risk_score_is_evidence_grade": false,
+        "K1-D": "NOT_RELEASED",
+        "K1-E": "NOT_ADMISSIBLE",
+        "physical_evidence_effect": "NONE"
+      },
+      "scientific": {
+        "physical_background": "NOT_ESTABLISHED",
+        "positive_physical_hzt_overclaims": 0,
+        "physical_claim_promotions": 0,
+        "medium_context_review": "COMPLETE_42_OF_42",
+        "band_vc_crosswalk": "MERGED",
+        "band_vc_scientific_or_empirical_missing_links": 10
+      },
+      "release_gate": {"id":"BAND-VC-CLAIM-EVIDENCE-CROSSWALK","status":"MERGED_QA_GREEN"}
+    }
+  ],
+  "status_sources": {
+    "canonical_state": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+    "session_checkpoint": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
+    "claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+    "high_claim_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+    "medium_claim_summary": "registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json",
+    "band_vc_crosswalk": "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
+    "band_vc_missing_links": "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json",
+    "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+  },
+  "physical_evidence_effect": "NONE"
+}
