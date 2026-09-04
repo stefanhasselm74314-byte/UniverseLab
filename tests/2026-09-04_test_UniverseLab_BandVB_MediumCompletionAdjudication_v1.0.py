@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Band V-B complete MEDIUM contextual adjudication gate.
+"""Successor-aware Band V-B complete MEDIUM contextual adjudication gate.
 
-Proves that the priority (score >=6) and completion (score 5/4) ledgers form
-an exact, disjoint partition of the 42 materialized MEDIUM candidates. This
-is a context audit only; lexical MEDIUM counts remain unchanged and no
-physical/evidence status is promoted.
+The priority and completion ledgers remain an exact disjoint partition of the
+42 frozen Band-V-A materialized MEDIUM candidates. Later append-only updates to
+research-status*.html are treated as a declared live-corpus delta and may not
+rewrite the historical 42/42 adjudication or create lexical HIGH claims.
 """
 from __future__ import annotations
 
@@ -20,6 +20,7 @@ SUMMARY = ROOT / "registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudica
 CANDIDATES = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json"
 ASSIGNMENTS = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json"
 SCANNER = ROOT / "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py"
+STATUS_DELTA_PATHS = {"research-status.html", "research-status-en.html"}
 
 EXPECTED_CLASS_COUNTS = {
     "HISTORICAL_INFRASTRUCTURE_DESCRIPTION": 1,
@@ -83,6 +84,7 @@ def main() -> None:
     priority_ids = {row["claim_id"] for row in priority["records"]}
     completion_ids = {row["claim_id"] for row in completion["records"]}
 
+    assert len(candidates["candidates"]) == 989
     assert len(materialized_medium) == 42
     assert materialized_high == set()
     assert len(priority_ids) == 9
@@ -127,8 +129,7 @@ def main() -> None:
     assert summary["physical_gate_effect"] == "NONE"
     assert summary["physical_evidence_effect"] == "NONE"
 
-    # Critical context sentinels. These prevent isolated lexical fragments from
-    # being promoted beyond the semantics of their source pages.
+    # Critical context sentinels outside the intentionally refreshed status pages.
     contains("README.md", "## Auffindbarkeit", "Relevante Suchbegriffe")
     contains("hyperlab-en.html", "What does not follow automatically", "a regular cosmological origin", "It is not a closed or observationally confirmed theory of nature")
     contains("hyperzeit-material.html", "Jede Karte sagt, wofür die Quelle brauchbar ist und was sie ausdrücklich nicht für Hyperzeit beweist", "K1-D bleibt nicht freigegeben", "K1-E bleibt unzulässig")
@@ -145,31 +146,44 @@ def main() -> None:
     contains("hyperzeit-methods-en.html", "claims that are not transferable to Hyperzeit", "Controlled dimensional reduction", "Gauge reduction, constraints and boundary structure must be handled separately")
     contains("hyperzeit-methods.html", "Kontrolliertes Ziel für 6D→4D", "nicht als bereits bewiesene Brücke")
     contains("legacy.html", "historische Arbeitsnotiz", "H19-H28 · Konditional", "Brauchbare EFT-Schablonen")
-    contains("research-status-en.html", "Open proof obligations", "What is not identified", "the complete parent→reduced→observable map")
-    contains("research-status.html", "Offene Beweispflichten", "Was nicht identifiziert ist", "vollständige Parent→Reduced→Observable-Map")
     contains("solver-hub-en.html", "PLANNED", "Cosmology / Likelihood", "Permitted only after a released fundamental-to-observable forward map exists")
     contains("solver-hub.html", "Work-package completion != solver release", "Cosmology / Likelihood", "Erst nach Freigabe der fundamentalen Forward-Map")
     contains("universelab-audit-2026-07-31.html", "fehlerkontrollierte 6D→4D-Reduktion", "K1-E bleibt selbst danach separat", "Modellselektion ist keine Bestätigung einer ontologischen Interpretation")
     contains("validation-en.html", "Validated scope", "Not released", "an internal PASS is not empirical confirmation of a model")
     contains("validation.html", "Geprüfter Scope", "Nicht freigegeben", "Ein PASS bestätigt ausschließlich die interne mathematische, numerische und sprachübergreifende Konsistenz")
 
-    # Re-extract the unchanged public corpus. Context adjudication is a separate
-    # evidence layer, so lexical MEDIUM remains 42 by design while HIGH remains 0.
-    scanner = module("ul_band_vb_medium_completion_scanner", SCANNER)
+    # Successor status pages preserve the same epistemic firewalls while adding
+    # Band-V-C audit progress.
+    contains("research-status-en.html", "Open proof obligations", "What is not identified", "the complete parent→reduced→observable map", "not evidence for HZT")
+    contains("research-status.html", "Offene Beweispflichten", "Was nicht identifiziert ist", "vollständige Parent→Reduced→Observable-Map", "keine Evidenz für HZT")
+
+    # Re-extract the live corpus. Only the two declared status pages may change
+    # claim IDs relative to the frozen 989-candidate Band-V-A/V-B register.
+    scanner = module("ul_band_vb_medium_completion_scanner_successor", SCANNER)
     rows, scanner_summary = scanner.extract(ROOT)
     high = [row for row in rows if row.preliminary_risk_class == "HIGH"]
-    medium = [row for row in rows if row.preliminary_risk_class == "MEDIUM"]
-    assert len(rows) == 989
-    assert high == []
-    assert len(medium) == 42
-    assert {row.claim_id for row in medium} == materialized_medium
+    assert high == [], [(row.path, row.source_line, row.text) for row in high]
+
+    frozen_nonstatus = {
+        row["claim_id"] for row in candidates["candidates"]
+        if row["path"] not in STATUS_DELTA_PATHS
+    }
+    live_nonstatus = {
+        row.claim_id for row in rows
+        if row.path not in STATUS_DELTA_PATHS
+    }
+    assert live_nonstatus == frozen_nonstatus, {
+        "missing_outside_status": sorted(frozen_nonstatus - live_nonstatus),
+        "new_outside_status": sorted(live_nonstatus - frozen_nonstatus),
+    }
+    assert all(row.preliminary_risk_class != "HIGH" for row in rows if row.path in STATUS_DELTA_PATHS)
     assert scanner_summary["physical_gate_effect"] == "NONE"
     assert scanner_summary["physical_evidence_effect"] == "NONE"
 
     print(
         "UniverseLab Band V-B MEDIUM completion gate: PASS "
-        "materialized_medium=42 context_adjudicated=42 context_unadjudicated=0 "
-        "lexical_medium=42 high=0 positive_overclaims=0 physical_promotions=0"
+        f"frozen_medium=42 context_adjudicated=42 context_unadjudicated=0 current_live_claims={len(rows)} "
+        "current_high=0 status_delta_paths=2 positive_overclaims=0 physical_promotions=0"
     )
 
 
