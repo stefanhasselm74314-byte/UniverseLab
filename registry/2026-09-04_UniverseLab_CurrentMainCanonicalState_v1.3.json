@@ -1,0 +1,197 @@
+{
+  "schema": "universelab.current-main-canonical-state.v1",
+  "version": "1.3.0",
+  "snapshot_date": "2026-09-04",
+  "snapshot_timestamp": "2026-09-04T12:46:00+02:00",
+  "privacy_classification": "PUBLIC_SANITIZED",
+  "status": "POST_BAND_VC_RECONCILED_CURRENT_STATE",
+  "basis_main_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+  "basis_main_tree": "b073c74b53fb0119ca9f72e3de3ad9399796266d",
+  "basis_semantics": "Exact merged main after PR 209. Band V-B HIGH and MEDIUM contextual adjudication are merged; Band V-C 15-family claim-evidence crosswalk is merged. This successor repairs only current-state provenance freshness and does not change physical or authorization gates.",
+  "supersedes": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "authority_rule": {
+    "priority": [
+      "current explicit user decision",
+      "current merged versioned repository registry or governance artifact",
+      "current ratified or frozen project file",
+      "current project context",
+      "persistent memory",
+      "historical chats and assistant summaries"
+    ],
+    "open_pull_requests_have_canonical_effect": false,
+    "historical_snapshots_are_append_only": true,
+    "current_state_reconciliation_uses_new_versioned_successors": true
+  },
+  "merged_analysis_blocks": {
+    "band_iv_b": {
+      "pull_request": 204,
+      "merge_commit": "06479dc4b919496edcef471a67a75ca101c6af69",
+      "status": "MERGED_QA_RECONCILED",
+      "scope": "NUMERICAL_QA_PROVENANCE_PUBLIC_STATUS_ACCESSIBILITY",
+      "physical_evidence_effect": "NONE"
+    },
+    "band_v_a": {
+      "pull_request": 205,
+      "merge_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55",
+      "status": "MERGED_PUBLIC_CLAIM_CENSUS_AND_ROUTING_COVERAGE",
+      "tracked_html_files": 72,
+      "lexical_claim_candidates": 989,
+      "family_assignments": 989,
+      "unmapped_candidates": 0,
+      "physical_evidence_effect": "NONE"
+    },
+    "band_v_b_high": {
+      "pull_request": 206,
+      "merge_commit": "edeab749981781a08b0d449984840ab024b0a8f8",
+      "status": "MERGED_CONTEXTUAL_ADJUDICATION",
+      "historical_high_candidates": 2,
+      "contextually_adjudicated": 2,
+      "current_lexical_high": 0,
+      "substantive_positive_physical_overclaims": 0,
+      "physical_claim_promotions": 0,
+      "physical_evidence_effect": "NONE"
+    },
+    "band_v_b_medium_priority": {
+      "pull_request": 207,
+      "merge_commit": "32bd028ace1068a400067f8c890137b27c05fa3c",
+      "status": "MERGED_CONTEXTUAL_ADJUDICATION",
+      "contextually_adjudicated": 9,
+      "physical_claim_promotions": 0,
+      "physical_evidence_effect": "NONE"
+    },
+    "band_v_b_medium_completion": {
+      "pull_request": 208,
+      "merge_commit": "e4e92090d313abf8a53d7b7354923983c9cda939",
+      "status": "MERGED_CONTEXTUAL_ADJUDICATION_COMPLETE",
+      "materialized_medium_candidates": 42,
+      "contextually_adjudicated_total": 42,
+      "contextually_unadjudicated": 0,
+      "current_lexical_medium": 42,
+      "positive_physical_hzt_overclaims": 0,
+      "empirical_hzt_confirmation_claims": 0,
+      "physical_claim_promotions": 0,
+      "physical_evidence_effect": "NONE"
+    },
+    "band_v_c": {
+      "pull_request": 209,
+      "merge_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+      "status": "MERGED_15_FAMILY_CLAIM_EVIDENCE_CROSSWALK",
+      "claim_family_count": 15,
+      "missing_link_count": 11,
+      "scientific_or_empirical_blocking_missing_links": 10,
+      "governance_provenance_missing_links": 1,
+      "physical_claim_promotions": 0,
+      "physical_evidence_effect": "NONE"
+    }
+  },
+  "active_analysis_block": {
+    "id": "BAND_VC_MISSING_LINK_REMEDIATION",
+    "status": "ACTIVE_NONOPERATIVE_REMEDIATION",
+    "source_crosswalk": "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
+    "source_gap_register": "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json",
+    "blocking_scientific_or_empirical_gaps": 10,
+    "governance_provenance_gap": "UL-BVC-G11_STATE_FRESHNESS_BEING_REPAIRED_BY_SUCCESSOR_CHAIN",
+    "physical_claim_promotions": 0
+  },
+  "active_program": {
+    "program_id": "UL-HZT-10M-2026-2027",
+    "status": "ACTIVE_RATIFIED_RESEARCH_PROGRAM",
+    "workstream": "WS1",
+    "work_package": "FM-0",
+    "gate": "FM-G0",
+    "gate_status": "OPEN",
+    "blocking_gap_count": 10,
+    "partially_resolved_blocking_gap_count": 3,
+    "fully_unresolved_blocking_gap_count": 7
+  },
+  "public_numerical_platform": {
+    "canonical_engine": "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+    "api_version": "1.0.0",
+    "implementation_revision": "1.0.2",
+    "validation": "ACTIVE_MERGED",
+    "observatory": "ACTIVE_MERGED_QA_RECONCILED",
+    "compare_safe": "ACTIVE_MERGED_QA_RECONCILED",
+    "emergence": "ACTIVE_MERGED_QA_RECONCILED",
+    "remaining_independent_public_cosmology_engines": 0,
+    "bridge_background": "REDUCED_EFFECTIVE_DIAGNOSTIC_MODEL_NOT_6D_PARENT_DERIVATION",
+    "bridge_scale": "a_c=Rchi/(Rchi+2.5), Rchi>0, no hidden floor",
+    "bridge_growth": "UNRELEASED_GROWTH_MAP",
+    "bridge_lensing": "UNRELEASED_LENSING_MAP",
+    "likelihood_fit": "NOT_PRESENT",
+    "physical_evidence_effect": "NONE"
+  },
+  "public_claim_governance": {
+    "claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+    "lexical_candidates": "registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json",
+    "family_assignments": "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json",
+    "high_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+    "medium_priority_adjudication": "registry/2026-09-04_UniverseLab_PublicScientificMediumPriorityAdjudication_v1.0.json",
+    "medium_completion_adjudication": "registry/2026-09-04_UniverseLab_PublicScientificMediumCompletionAdjudication_v1.0.json",
+    "medium_summary": "registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json",
+    "band_vc_crosswalk": "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
+    "band_vc_missing_links": "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json",
+    "automatic_routing_is_scientific_adjudication": false,
+    "risk_score_is_evidence_grade": false,
+    "high_claim_gate": "COMPLETE_MERGED_CURRENT_LEXICAL_HIGH_0",
+    "medium_claim_gate": "COMPLETE_MERGED_42_OF_42_CONTEXTUALLY_ADJUDICATED",
+    "band_vc_gate": "MERGED_15_FAMILIES_11_MISSING_LINKS_REGISTERED"
+  },
+  "physical_governance": {
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+    "technical_authority_signature_verifier": "IMPLEMENTED_AND_QA_GREEN",
+    "human_trust_root_preparation_package": "IMPLEMENTED_AND_QA_GREEN",
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "human_trust_root_action": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
+    "authority_signature_provenance": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
+    "runtime_issuance_bindings": "BLOCKED",
+    "operative_authorization_decision": "NOT_CREATED",
+    "operative_single_use_grant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "solver_authorized": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "scientific_open_state": {
+    "parent_to_reduced_to_observable_forward_map": "OPEN",
+    "bridge_growth_poisson_slip_lensing_map": "OPEN_UNRELEASED",
+    "generic_global_M1_existence": "OPEN",
+    "continuum_BVP_invertibility": "OPEN",
+    "Hamiltonian_positivity": "OPEN",
+    "full_ghost_freedom": "OPEN",
+    "beta_tau_and_I_B_separate_physical_identifiability": "OPEN",
+    "HZT_M0_bound_data_likelihood_stack": "OPEN",
+    "quantitative_parent_derived_multichannel_predictions": "OPEN"
+  },
+  "open_noncanonical_work": [
+    {
+      "pull_request": 137,
+      "state": "OPEN_DRAFT",
+      "canonical_effect": "NONE",
+      "interpretation": "Safe authority/signature and human-trust-root preparation sub-blocks were separately merged in PRs 202 and 203; the remaining draft is noncanonical."
+    }
+  ],
+  "status_sources": {
+    "project_manifest": "project-manifest.json",
+    "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+    "session_checkpoint": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
+    "claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+    "high_claim_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+    "medium_claim_summary": "registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json",
+    "band_vc_crosswalk": "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
+    "band_vc_missing_links": "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json",
+    "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+    "fm0_gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+  },
+  "next_allowed_repository_step": "BAND_VC_MISSING_LINK_REMEDIATION_NO_PHYSICAL_EXECUTION",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
