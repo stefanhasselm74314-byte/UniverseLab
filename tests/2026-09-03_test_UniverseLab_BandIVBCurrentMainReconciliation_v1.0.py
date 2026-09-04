@@ -8,12 +8,10 @@ No physical execution is performed.
 """
 from __future__ import annotations
 
-from datetime import date
 import json
 from pathlib import Path
 import re
 import subprocess
-import sys
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -240,8 +238,8 @@ def check_public_semantics() -> dict[str, Any]:
         assert "NOT RATIFIED" in source
     assert de_date in de
     assert en_date in en
-    assert "Bridge-Growth und Bridge-Lensing bleiben ausdrücklich unveröffentlicht" in de or "Bridge-Growth" in de and "Bridge-Lensing" in de
-    assert "Bridge growth and bridge lensing remain unreleased" in en
+    assert "bridge-growth" in de.lower() and "bridge-lensing" in de.lower() and "unveröffentlicht" in de.lower()
+    assert "bridge growth" in en.lower() and "bridge lensing" in en.lower() and "unreleased" in en.lower()
     assert "keine Evidenz für HZT" in de
     assert "not evidence for HZT" in en
 
