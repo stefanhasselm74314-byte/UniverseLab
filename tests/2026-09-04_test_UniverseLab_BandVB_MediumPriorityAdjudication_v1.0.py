@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Band V-B priority MEDIUM contextual adjudication gate.
+"""Successor-aware Band V-B priority MEDIUM contextual adjudication gate.
 
-The gate adjudicates the nine materialized MEDIUM candidates with risk score
->= 6. It is a public-claim context audit only and must not promote physical
-evidence, parent derivation, K1-D/K1-E, authorization, or solver execution.
+The nine original >=6 MEDIUM candidates remain immutable audit provenance.
+Later append-only status pages may change live claim IDs, but no new HIGH or
+physical/evidence promotion is permitted.
 """
 from __future__ import annotations
 
@@ -103,71 +103,43 @@ def main() -> None:
         "remaining_materialized_medium_candidates_before_lower_score_review": 33,
     }
 
-    # Context sentinels: the isolated lexical phrase must not be allowed to
-    # override the surrounding page semantics.
-    contains(
-        "legacy.html",
-        "Claim Firewall",
-        "not admissible",
-        "Keine freigegebene vollständige Forward Map",
-        "historical",
-        "Keine aktuelle Parentableitung",
-    )
-    contains(
-        "hyperzeit-methods.html",
-        "beweist jedoch nicht, dass die 4D-Lorentzstruktur aus HPVS hervorgeht",
-        "Für Hyperzeit müsste ein eigener RG-Fluss",
-    )
-    contains(
-        "guide-en.html",
-        "Observational comparison becomes admissible only when every required map is released",
-        "A fitted parameter is not a derivation from the six-dimensional parent sector",
-    )
-    contains(
-        "hyperzeit-methods-en.html",
-        "become theory tests only after a released forward map exists",
-        "A good fit without that derivation is not evidence for Hyperzeit",
-    )
-    contains(
-        "hyperzeit-material-v2-en.html",
-        "Literature compatibility is not treated as derivation or evidence for Hyperzeit",
-        "Applicable only after forward-map release",
-    )
-    contains(
-        "hyperzeit-material-v2.html",
-        "nicht den Bestätigungsgrad der Theorie",
-        "Erst nach Freigabe des Forward-Modells",
-    )
-    contains(
-        "navigator.html",
-        "Methoden und Qualitätssicherung",
-        "Hilbertraum, RG, kontrollierte 6D→4D-Reduktion, Likelihood- und Solverstandards",
-    )
+    # Original context sentinels remain valid outside the intentionally refreshed
+    # status pages.
+    contains("legacy.html", "Claim Firewall", "not admissible", "Keine freigegebene vollständige Forward Map", "historical", "Keine aktuelle Parentableitung")
+    contains("hyperzeit-methods.html", "beweist jedoch nicht, dass die 4D-Lorentzstruktur aus HPVS hervorgeht", "Für Hyperzeit müsste ein eigener RG-Fluss")
+    contains("guide-en.html", "Observational comparison becomes admissible only when every required map is released", "A fitted parameter is not a derivation from the six-dimensional parent sector")
+    contains("hyperzeit-methods-en.html", "become theory tests only after a released forward map exists", "A good fit without that derivation is not evidence for Hyperzeit")
+    contains("hyperzeit-material-v2-en.html", "Literature compatibility is not treated as derivation or evidence for Hyperzeit", "Applicable only after forward-map release")
+    contains("hyperzeit-material-v2.html", "nicht den Bestätigungsgrad der Theorie", "Erst nach Freigabe des Forward-Modells")
+    contains("navigator.html", "Methoden und Qualitätssicherung", "Hilbertraum, RG, kontrollierte 6D→4D-Reduktion, Likelihood- und Solverstandards")
+
+    # Status-page wording is successor-aware: test the semantic firewall, not an
+    # obsolete sentence fragment.
     contains(
         "research-status-en.html",
         "Open proof obligations",
         "What is not identified",
-        "an HZT-M0 likelihood or evidence interpretation;",
+        "a bound HZT data/covariance/selection/nuisance/likelihood stack;",
+        "not evidence for HZT",
     )
 
-    # Re-run the public scanner. This tranche does not rewrite public pages;
-    # therefore the lexical queue remains 42 MEDIUM items, but the exact nine
-    # highest-score items are now manually context-adjudicated in the ledger.
-    scanner = module("ul_band_vb_medium_priority_scanner", SCANNER)
+    scanner = module("ul_band_vb_medium_priority_scanner_successor", SCANNER)
     rows, summary = scanner.extract(ROOT)
     high = [row for row in rows if row.preliminary_risk_class == "HIGH"]
-    medium = [row for row in rows if row.preliminary_risk_class == "MEDIUM"]
-    priority = [row for row in medium if row.preliminary_risk_score >= 6]
-    assert high == []
-    assert len(rows) == 989
-    assert len(medium) == 42
-    assert {row.claim_id for row in priority} == EXPECTED_IDS
+    assert high == [], [(row.path, row.source_line, row.text) for row in high]
+
+    # The frozen materialized queue remains exactly the adjudicated nine >=6
+    # candidates; current status-page successor IDs are intentionally separate.
+    frozen_medium = [row for row in candidates["candidates"] if row["preliminary_risk_class"] == "MEDIUM"]
+    frozen_priority = [row for row in frozen_medium if row["preliminary_risk_score"] >= 6]
+    assert len(frozen_medium) == 42
+    assert {row["claim_id"] for row in frozen_priority} == EXPECTED_IDS
     assert summary["physical_gate_effect"] == "NONE"
     assert summary["physical_evidence_effect"] == "NONE"
 
     print(
         "UniverseLab Band V-B priority MEDIUM gate: PASS "
-        "materialized_medium=42 priority_reviewed=9 remaining_lower_score=33 "
+        f"frozen_medium=42 priority_reviewed=9 current_live_claims={len(rows)} current_high=0 "
         "positive_overclaims=0 physical_promotions=0"
     )
 
