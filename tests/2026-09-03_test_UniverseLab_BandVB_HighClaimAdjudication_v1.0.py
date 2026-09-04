@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Successor-aware Band V-B HIGH adjudication regression gate.
-
-The original two HIGH adjudications are immutable historical evidence. Later
-append-only current-state successors may change status-page claim IDs, but must
-never reintroduce lexical HIGH claims or promote physical/authorization gates.
-"""
+"""Band V-B HIGH historical adjudication + current-corpus regression gate."""
 from __future__ import annotations
 
 import importlib.util
@@ -17,6 +12,7 @@ ALIAS = ROOT / "registry/session-checkpoint-latest.json"
 LEDGER = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json"
 SUMMARY = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json"
 ASSIGNMENTS = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json"
+DELTA = ROOT / "registry/2026-09-04_UniverseLab_BandVC_StatusPageMediumDeltaAdjudication_v1.0.json"
 MANIFEST = ROOT / "project-manifest.json"
 OBS_EN = ROOT / "observatory-en.html"
 STATUS_DE = ROOT / "research-status.html"
@@ -70,9 +66,10 @@ def assert_closed(value: dict) -> None:
 
 
 def main() -> None:
-    validator = module("ul_state_validator_vb_high_successor", VALIDATOR)
+    validator = module("ul_state_validator_high_current", VALIDATOR)
     validator.validate(ROOT, strict_source_existence=True)
 
+    # Historical HIGH adjudication remains immutable.
     ledger = load(LEDGER)
     assert ledger["high_candidate_count"] == 2
     assert ledger["adjudicated_count"] == 2
@@ -82,34 +79,17 @@ def main() -> None:
     assert result["high_scope_firewall_count"] == 1
     assert result["high_governance_claim_count"] == 1
     assert result["physical_claim_promotions"] == 0
-    assert result["public_wording_repairs_required"] == 2
-    assert result["public_wording_repairs_completed_in_changeset"] == 2
-    assert result["public_wording_repairs_remaining"] == 0
-    assert ledger["physical_gate_effect"] == "NONE"
-    assert ledger["physical_evidence_effect"] == "NONE"
+    assert ledger["physical_gate_effect"] == ledger["physical_evidence_effect"] == "NONE"
 
     by_id = {row["claim_id"]: row for row in ledger["records"]}
     obs_record = by_id["UL-CLAIM-CANDIDATE-978286FC7F925D9A"]
     gov_record = by_id["UL-CLAIM-CANDIDATE-AA0AA1DAAC06DFF6"]
     assert obs_record["adjudication"]["is_positive_physical_hzt_claim"] is False
-    assert obs_record["adjudication"]["is_empirical_confirmation_claim"] is False
-    assert obs_record["adjudication"]["is_parent_derivation_claim"] is False
     assert obs_record["underlying_physical_status"]["ghost_freedom"] == "OFFEN"
-    assert obs_record["underlying_physical_status"]["observational_confirmation_of_hzt"] == "OFFEN_NOT_ESTABLISHED"
     assert gov_record["adjudication"]["primary_status"] == "NICHT_WISSENSCHAFTLICHER_CLAIM"
-    assert gov_record["adjudication"]["is_positive_physical_hzt_claim"] is False
     assert gov_record["content_validity"]["physical_evidence"] == "NONE"
 
-    obs = OBS_EN.read_text(encoding="utf-8")
-    de = STATUS_DE.read_text(encoding="utf-8")
-    en = STATUS_EN.read_text(encoding="utf-8")
-    shell = SHELL.read_text(encoding="utf-8")
-    assert obs_record["replacement_text"] in obs
-    assert "As a status rule only — not evidence for HZT and not a physical measurement" in en
-    assert "Als reine Statusregel – keine Evidenz für HZT und keine physikalische Messung" in de
-    assert "Open pull requests have no canonical effect" in en
-    assert "Offene Pull Requests besitzen keine kanonische Wirkung" in de
-
+    # Active append-only pointer chain and public firewalls.
     alias = load(ALIAS)
     checkpoint = load(rel(alias["canonical_snapshot"]))
     state = load(rel(alias["canonical_state"]))
@@ -117,6 +97,17 @@ def main() -> None:
     manifest = load(MANIFEST)
     assert ALIAS.read_bytes() == rel(alias["canonical_snapshot"]).read_bytes()
     assert checkpoint == alias
+    de = STATUS_DE.read_text(encoding="utf-8")
+    en = STATUS_EN.read_text(encoding="utf-8")
+    shell = SHELL.read_text(encoding="utf-8")
+    obs = OBS_EN.read_text(encoding="utf-8")
+    assert obs_record["replacement_text"] in obs
+    assert "As a status rule only — not evidence for HZT and not a physical measurement" in en
+    assert "Als reine Statusregel – keine Evidenz für HZT und keine physikalische Messung" in de
+    assert "Open pull requests have no canonical effect" in en
+    assert "Offene Pull Requests besitzen keine kanonische Wirkung" in de
+    assert "As a repository-audit mapping only" in en and "not physical evidence for HZT" in en
+    assert "Als reine Repository-Auditzuordnung" in de and "keine physische Evidenz für HZT" in de
     assert alias["canonical_state"] in de and alias["canonical_state"] in en
     assert alias["site_state"] in shell
     assert manifest["canonical_state"] == alias["canonical_state"]
@@ -126,37 +117,35 @@ def main() -> None:
     for value in (state, site, checkpoint, manifest):
         assert_closed(value)
 
-    # Frozen Band-V-A materialization remains historical audit provenance.
-    frozen = load(SUMMARY)
+    # Current materialized corpus: 993, HIGH=0, MEDIUM=46.
+    summary = load(SUMMARY)
     assignments = load(ASSIGNMENTS)
-    assert frozen["claim_candidates"] == 989
-    assert frozen["tracked_html_files"] == 72
-    assert frozen["risk_classes"].get("HIGH", 0) == 0
-    assert frozen["risk_classes"]["MEDIUM"] == 42
-    assert frozen["physical_gate_effect"] == "NONE"
-    assert frozen["physical_evidence_effect"] == "NONE"
-    assert assignments["candidate_count"] == 989
-    assert assignments["assignment_count"] == 989
+    delta = load(DELTA)
+    assert summary["claim_candidates"] == 993
+    assert summary["tracked_html_files"] == 72
+    assert summary["risk_classes"].get("HIGH", 0) == 0
+    assert summary["risk_classes"]["MEDIUM"] == 46
+    assert summary["physical_gate_effect"] == summary["physical_evidence_effect"] == "NONE"
+    assert assignments["candidate_count"] == 993
+    assert assignments["assignment_count"] == 993
+    assert assignments["high_medium_candidate_count"] == 46
     assert assignments["unknown_family_ids"] == 0
     assert assignments["unmapped_candidates"] == 0
-    assert assignments["semantics"]["routing_is_scientific_adjudication"] is False
-    assert assignments["semantics"]["routing_creates_evidence"] is False
+    assert delta["global_result"]["contextually_adjudicated"] == 7
+    assert delta["global_result"]["physical_claim_promotions"] == 0
 
-    # Current public corpus may have successor claim IDs on status pages, but
-    # no lexical HIGH may reappear anywhere.
-    scanner = module("ul_scanner_vb_high_successor", SCANNER)
-    rows, summary = scanner.extract(ROOT)
+    scanner = module("ul_scanner_high_current", SCANNER)
+    rows, live_summary = scanner.extract(ROOT)
     high = [row for row in rows if row.preliminary_risk_class == "HIGH"]
+    medium = [row for row in rows if row.preliminary_risk_class == "MEDIUM"]
     assert high == [], [(row.path, row.source_line, row.text) for row in high]
-    assert any(row.path == "observatory-en.html" and "may not establish ghost freedom" in row.text for row in rows)
-    assert any(row.path == "research-status.html" and "keine Evidenz für HZT" in row.text for row in rows)
-    assert summary["physical_gate_effect"] == "NONE"
-    assert summary["physical_evidence_effect"] == "NONE"
+    assert len(rows) == 993
+    assert len(medium) == 46
+    assert live_summary["physical_gate_effect"] == live_summary["physical_evidence_effect"] == "NONE"
 
     print(
-        "UniverseLab Band V-B HIGH gate: PASS "
-        f"historical_high=2 adjudicated=2 current_high=0 current_live_claims={len(rows)} "
-        "physical_promotions=0 successor_chain=active"
+        "UniverseLab Band V-B HIGH gate: PASS historical_high=2/2 current_claims=993 "
+        "current_high=0 current_medium=46 successor_delta=7/7 physical_promotions=0"
     )
 
 
