@@ -83,10 +83,11 @@ def main() -> None:
     gap_rows = gaps["gaps"]
     assert gaps["gap_count"] == 11
     assert len(gap_rows) == 11
-    gap_families = {row["claim_family_id"] for row in gap_rows if row.get("claim_family_id")}
+    gap_families = {family_id for row in gap_rows for family_id in row.get("family_ids", [])}
     assert missing_families <= gap_families
-    assert gaps["scientific_or_empirical_blocking_gap_count"] == 10
+    assert gaps["blocking_scientific_gap_count"] == 10
     assert gaps["governance_provenance_gap_count"] == 1
+    assert {row["gap_id"] for row in gap_rows} == {f"UL-BVC-G{i:02d}" for i in range(1, 12)}
 
     # All paths explicitly bound by the family catalogue must continue to exist.
     for family in census["claim_families"]:
@@ -106,10 +107,11 @@ def main() -> None:
     assert medium["physical_evidence_effect"] == "NONE"
 
     # Resolve the current append-only state dynamically through the canonical alias.
-    checkpoint = load(repo_path(alias["canonical_snapshot"]))
+    checkpoint_path = repo_path(alias["canonical_snapshot"])
+    checkpoint = load(checkpoint_path)
     state = load(repo_path(alias["canonical_state"]))
     site = load(repo_path(alias["site_state"]))
-    assert ALIAS.read_bytes() == repo_path(alias["canonical_snapshot"]).read_bytes()
+    assert ALIAS.read_bytes() == checkpoint_path.read_bytes()
     assert checkpoint == alias
     assert manifest["canonical_state"] == alias["canonical_state"]
     assert manifest["site_state"] == alias["site_state"]
