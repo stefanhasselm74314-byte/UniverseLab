@@ -1,0 +1,52 @@
+{
+  "schema": "universelab.public-scientific-medium-adjudication-summary.v1",
+  "version": "1.0",
+  "snapshot_date": "2026-09-04",
+  "basis_main_commit": "32bd028ace1068a400067f8c890137b27c05fa3c",
+  "basis_main_tree": "fdbbf9c1e3a95f67c17d3b4121dbd46c22cf7123",
+  "materialized_claim_candidates": 989,
+  "materialized_high_candidates": 0,
+  "materialized_medium_candidates": 42,
+  "adjudication_blocks": [
+    {
+      "source": "registry/2026-09-04_UniverseLab_PublicScientificMediumPriorityAdjudication_v1.0.json",
+      "selection": "MEDIUM risk score >= 6",
+      "candidates": 9,
+      "contextually_adjudicated": 9
+    },
+    {
+      "source": "registry/2026-09-04_UniverseLab_PublicScientificMediumCompletionAdjudication_v1.0.json",
+      "selection": "remaining MEDIUM risk scores 5 and 4",
+      "candidates": 33,
+      "contextually_adjudicated": 33
+    }
+  ],
+  "result": {
+    "medium_contextually_adjudicated_total": 42,
+    "medium_contextually_unadjudicated": 0,
+    "positive_physical_hzt_overclaims": 0,
+    "empirical_hzt_confirmation_claims": 0,
+    "complete_parent_derivation_promotions": 0,
+    "physical_claim_promotions": 0,
+    "locally_scoped_mathematical_derivation_claims": 1,
+    "internal_reference_kernel_validation_claims": 2,
+    "historical_or_rejected_priority_claims": 2,
+    "open_priority_requirements_or_obligations": 2
+  },
+  "lexical_state_after_adjudication": {
+    "HIGH": 0,
+    "MEDIUM": 42,
+    "interpretation": "The lexical risk queue is intentionally unchanged because contextual adjudication is stored separately and does not rewrite public source text. MEDIUM=42 therefore does not mean 42 unresolved scientific claims."
+  },
+  "scientific_boundary": [
+    "lexical risk score is not an evidence grade",
+    "contextual adjudication is not proof of a positive physical proposition",
+    "local mathematical derivation is not complete 6D parent closure",
+    "internal reference-engine validation is not empirical HZT confirmation",
+    "roadmap or planned solver labels are not completed results",
+    "historical quoted claims are not current canonical HZT results"
+  ],
+  "next_allowed_step": "BAND_VC_CLAIM_TO_EQUATION_CODE_TEST_DATA_FALSIFIER_CROSSWALK_NO_PHYSICAL_EXECUTION",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
