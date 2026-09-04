@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Fail-closed Band V-C G11 state-freshness closure gate."""
+"""Fail-closed Band V-C G11 state-freshness closure gate.
+
+The state-freshness repair intentionally changes the DE/EN canonical public
+status pages. Therefore the Band-V-A/V-B 989-candidate corpus is historical
+provenance after this changeset. This gate proves that the live claim delta is
+confined to those two status pages and creates no new HIGH claim. Historical
+claim ledgers are never rewritten in place.
+"""
 from __future__ import annotations
 
 import importlib.util
@@ -9,6 +16,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 VALIDATOR = ROOT / "tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py"
+SCANNER = ROOT / "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py"
+HISTORICAL_CANDIDATES = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json"
 CURRENT = ROOT / "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json"
 SITE = ROOT / "registry/2026-09-04_UniverseLab_SiteState_v1.4.json"
 CHECKPOINT = ROOT / "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json"
@@ -24,19 +33,25 @@ OLD_CHECKPOINT = ROOT / "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33
 
 BASIS = "3022dc8aac27ed2054fdb7643708fe57440b9256"
 TREE = "b073c74b53fb0119ca9f72e3de3ad9399796266d"
+STATUS_DELTA_PATHS = {"research-status.html", "research-status-en.html"}
 
 
 def load(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def main() -> None:
-    spec = importlib.util.spec_from_file_location("ul_state_reconcile_post_vc", VALIDATOR)
+def module(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
     assert spec and spec.loader
     mod = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = mod
+    sys.modules[name] = mod
     spec.loader.exec_module(mod)
-    mod.validate(ROOT, strict_source_existence=True)
+    return mod
+
+
+def main() -> None:
+    validator = module("ul_state_reconcile_post_vc", VALIDATOR)
+    validator.validate(ROOT, strict_source_existence=True)
 
     current, site, checkpoint = load(CURRENT), load(SITE), load(CHECKPOINT)
     manifest, closure = load(MANIFEST), load(CLOSURE)
@@ -99,19 +114,48 @@ def main() -> None:
     assert "15" in de and "15" in en
     assert "K1-D" in de and "NOT RELEASED" in de and "K1-E" in de and "NOT ADMISSIBLE" in de
     assert "K1-D" in en and "NOT RELEASED" in en and "K1-E" in en and "NOT ADMISSIBLE" in en
+    assert "keine physische HZT-Bestätigung" in de
+    assert "not physical confirmation of HZT" in en
 
-    # Historical snapshots remain as historical append-only sources and retain
-    # their old post-Band-V-A basis. The repair must never rewrite them in place.
+    # Historical snapshots remain append-only and retain their old post-Band-V-A basis.
     old_current, old_site, old_checkpoint = load(OLD_CURRENT), load(OLD_SITE), load(OLD_CHECKPOINT)
     assert old_current["basis_main_commit"] == "8351f2d7d9d0852768014c1fdfbbecfb4432fa55"
     assert old_site["basis_main_commit"] == "8351f2d7d9d0852768014c1fdfbbecfb4432fa55"
     assert old_checkpoint["basis_commit"] == "8351f2d7d9d0852768014c1fdfbbecfb4432fa55"
 
+    # Post-V-C claim-delta audit. The frozen 989-candidate registry is historical.
+    # Outside the two deliberately refreshed public status pages, the materialized
+    # claim-ID set must be identical. The refreshed pages may change IDs/text but
+    # must introduce no HIGH claim and must retain self-contained firewalls.
+    historical = load(HISTORICAL_CANDIDATES)
+    assert historical["candidate_count"] == 989
+    historical_outside = {
+        row["claim_id"] for row in historical["candidates"] if row["path"] not in STATUS_DELTA_PATHS
+    }
+    scanner = module("ul_post_vc_g11_claim_scanner", SCANNER)
+    live_rows, live_summary = scanner.extract(ROOT)
+    live_outside = {row.claim_id for row in live_rows if row.path not in STATUS_DELTA_PATHS}
+    assert live_outside == historical_outside, (
+        "claim drift outside declared status delta",
+        sorted(historical_outside - live_outside)[:10],
+        sorted(live_outside - historical_outside)[:10],
+    )
+    live_high = [row for row in live_rows if row.preliminary_risk_class == "HIGH"]
+    assert live_high == [], [(row.path, row.source_line, row.text) for row in live_high]
+    live_status_rows = [row for row in live_rows if row.path in STATUS_DELTA_PATHS]
+    assert live_status_rows
+    assert all(row.preliminary_risk_class != "HIGH" for row in live_status_rows)
+    assert any("keine physische HZT-Bestätigung" in row.text for row in live_status_rows if row.path == "research-status.html")
+    assert any("not physical confirmation of HZT" in row.text for row in live_status_rows if row.path == "research-status-en.html")
+    assert live_summary["physical_gate_effect"] == "NONE"
+    assert live_summary["physical_evidence_effect"] == "NONE"
+
     print(
         "UniverseLab Band V-C G11 state freshness closure gate: PASS "
         "successor=v1.3/v1.4/v1.34 alias_byte_identical=yes "
-        "band_vb_medium=42/42 band_vc_families=15 scientific_missing_links=10 "
-        "governance_provenance_missing_links=0 physical_gate_effect=NONE physical_evidence_effect=NONE"
+        "band_vb_historical_medium=42/42 band_vc_families=15 scientific_missing_links=10 "
+        f"governance_provenance_missing_links=0 live_claims={len(live_rows)} live_high=0 "
+        f"status_delta_claims={len(live_status_rows)} physical_gate_effect=NONE physical_evidence_effect=NONE"
     )
 
 
