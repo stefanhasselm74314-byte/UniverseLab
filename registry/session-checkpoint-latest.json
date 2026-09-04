@@ -5,146 +5,62 @@
   "privacy_classification": "PUBLIC_SANITIZED",
   "basis_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
   "basis_tree": "b073c74b53fb0119ca9f72e3de3ad9399796266d",
-  "basis_semantics": "Exact merged main after Band V-C PR 209. This checkpoint records merged Band V-B and V-C audit completion and the remaining fail-closed scientific/empirical missing links without physical execution.",
+  "basis_semantics": "Exact merged main after Band V-C PR 209. This checkpoint records merged Band V-B/V-C audit provenance, the current materialized 993-claim corpus with 46 MEDIUM candidates fully contextually covered through a seven-item status-page successor delta, and the remaining fail-closed scientific/empirical missing links without physical execution.",
   "canonical_snapshot": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
   "supersedes": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
   "canonical_state": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
   "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
   "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
-  "current_goal": "Remediate the Band V-C missing-link register in bounded, evidence-preserving blocks while keeping all physical and authorization gates fail-closed.",
+  "current_goal": "Remediate the ten Band V-C scientific/empirical missing links in bounded, evidence-preserving blocks while keeping all physical and authorization gates fail-closed.",
   "current_workstream": "Band V-C evidence-chain remediation in parallel with WS1/FM-0 parent/observable recovery; no physical execution.",
   "completed_blocks": {
-    "band_iv_b": {"status":"MERGED_QA_RECONCILED","pull_request":204,"merge_commit":"06479dc4b919496edcef471a67a75ca101c6af69"},
-    "band_v_a": {"status":"MERGED_CLAIM_CENSUS_AND_ROUTING_COVERAGE","pull_request":205,"merge_commit":"8351f2d7d9d0852768014c1fdfbbecfb4432fa55","claim_candidates":989,"family_assignments":989,"unmapped_candidates":0},
-    "band_v_b_high": {"status":"MERGED_CONTEXTUAL_ADJUDICATION","pull_request":206,"merge_commit":"edeab749981781a08b0d449984840ab024b0a8f8","historical_high_candidates":2,"current_lexical_high":0,"physical_claim_promotions":0},
-    "band_v_b_medium": {"status":"MERGED_CONTEXTUAL_ADJUDICATION_COMPLETE","pull_requests":[207,208],"final_merge_commit":"e4e92090d313abf8a53d7b7354923983c9cda939","materialized_medium":42,"contextually_adjudicated":42,"contextually_unadjudicated":0,"physical_claim_promotions":0},
-    "band_v_c": {"status":"MERGED_15_FAMILY_CLAIM_EVIDENCE_CROSSWALK","pull_request":209,"merge_commit":"3022dc8aac27ed2054fdb7643708fe57440b9256","claim_families":15,"missing_links":11,"scientific_or_empirical_blocking_missing_links":10,"governance_provenance_missing_links":1,"physical_claim_promotions":0}
+    "band_iv_b":{"status":"MERGED_QA_RECONCILED","pull_request":204,"merge_commit":"06479dc4b919496edcef471a67a75ca101c6af69"},
+    "band_v_a":{"status":"MERGED_CLAIM_CENSUS_AND_ROUTING_COVERAGE","pull_request":205,"merge_commit":"8351f2d7d9d0852768014c1fdfbbecfb4432fa55","historical_claim_candidates":989,"historical_family_assignments":989,"unmapped_candidates":0},
+    "band_v_b_high":{"status":"MERGED_CONTEXTUAL_ADJUDICATION","pull_request":206,"merge_commit":"edeab749981781a08b0d449984840ab024b0a8f8","historical_high_candidates":2,"physical_claim_promotions":0},
+    "band_v_b_medium":{"status":"MERGED_CONTEXTUAL_ADJUDICATION_COMPLETE","pull_requests":[207,208],"final_merge_commit":"e4e92090d313abf8a53d7b7354923983c9cda939","historical_materialized_medium":42,"historical_contextually_adjudicated":42,"historical_contextually_unadjudicated":0,"physical_claim_promotions":0},
+    "band_v_c":{"status":"MERGED_15_FAMILY_CLAIM_EVIDENCE_CROSSWALK","pull_request":209,"merge_commit":"3022dc8aac27ed2054fdb7643708fe57440b9256","claim_families":15,"missing_links":11,"scientific_or_empirical_blocking_missing_links":10,"governance_provenance_missing_links":1,"physical_claim_promotions":0}
   },
   "active_block": {
-    "id": "BAND_VC_STATE_FRESHNESS_AND_MISSING_LINK_REMEDIATION",
-    "status": "ACTIVE_NONOPERATIVE",
-    "crosswalk": "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
-    "missing_link_register": "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json",
-    "state_freshness_gap": "UL-BVC-G11",
-    "state_freshness_action": "APPEND_ONLY_SUCCESSOR_CHAIN_AND_PUBLIC_POINTER_REPAIR",
-    "remaining_scientific_or_empirical_blocking_missing_links": 10,
-    "physical_claim_promotions": 0
+    "id":"BAND_VC_STATE_FRESHNESS_AND_MISSING_LINK_REMEDIATION",
+    "status":"ACTIVE_NONOPERATIVE",
+    "crosswalk":"registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
+    "missing_link_register":"registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json",
+    "status_page_medium_delta":"registry/2026-09-04_UniverseLab_BandVC_StatusPageMediumDeltaAdjudication_v1.0.json",
+    "state_freshness_gap":"UL-BVC-G11",
+    "state_freshness_action":"APPEND_ONLY_SUCCESSOR_CHAIN_AND_PUBLIC_POINTER_REPAIR",
+    "current_materialized_claim_candidates":993,
+    "current_lexical_high":0,
+    "current_lexical_medium":46,
+    "historical_medium_ids_still_live":39,
+    "retired_historical_status_page_medium_ids":3,
+    "new_status_page_medium_ids":7,
+    "new_status_page_medium_contextually_adjudicated":7,
+    "current_medium_contextually_adjudicated":46,
+    "current_medium_contextually_unadjudicated":0,
+    "remaining_scientific_or_empirical_blocking_missing_links":10,
+    "physical_claim_promotions":0
   },
-  "active_program": {
-    "program_id": "UL-HZT-10M-2026-2027",
-    "workstream": "WS1",
-    "work_package": "FM-0",
-    "gate": "FM-G0",
-    "gate_status": "OPEN",
-    "blocking_gap_count": 10,
-    "partially_resolved_blocking_gap_count": 3,
-    "fully_unresolved_blocking_gap_count": 7
-  },
-  "physical_governance": {
-    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
-    "ULSH-01-WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
-    "ULSH-01-WP3": "NOT_STARTED",
-    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
-    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
-    "ratified_human_trust_root": "NOT_RATIFIED",
-    "human_trust_root_action": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
-    "runtime_issuance_bindings": "BLOCKED",
-    "AuthorizationDecision": "NOT_CREATED",
-    "SingleUseGrant": "NOT_CREATED",
-    "backend_import": "NOT_EXECUTED",
-    "solver_execution": "NOT_EXECUTED",
-    "physical_background": "NOT_ESTABLISHED",
-    "physical_response_rank": "NOT_EXECUTED",
-    "K1-D": "NOT_RELEASED",
-    "K1-E": "NOT_ADMISSIBLE",
-    "physical_evidence_effect": "NONE"
-  },
-  "gate_state": {
-    "FM-G0": "OPEN",
-    "FM0_BLOCKING_GAPS": 10,
-    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
-    "ULSH-01-WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
-    "ULSH-01-WP3": "NOT_STARTED",
-    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
-    "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
-    "RATIFIED_HUMAN_TRUST_ROOT": "NOT_RATIFIED",
-    "RUNTIME_ISSUANCE_BINDINGS": "BLOCKED",
-    "AuthorizationDecision": "NOT_CREATED",
-    "SingleUseGrant": "NOT_CREATED",
-    "BACKEND_IMPORT": "NOT_EXECUTED",
-    "SOLVER_EXECUTION": "NOT_EXECUTED",
-    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
-    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
-    "K1-D": "NOT_RELEASED",
-    "K1-E": "NOT_ADMISSIBLE",
-    "physical_evidence_effect": "NONE"
-  },
+  "active_program":{"program_id":"UL-HZT-10M-2026-2027","workstream":"WS1","work_package":"FM-0","gate":"FM-G0","gate_status":"OPEN","blocking_gap_count":10,"partially_resolved_blocking_gap_count":3,"fully_unresolved_blocking_gap_count":7},
+  "physical_governance":{"ULSH-01-WP1":"CLOSED_TARGET_FROZEN_NO_EXECUTION","ULSH-01-WP2":"METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED","ULSH-01-WP3":"NOT_STARTED","ULSH-01-WP4":"BLOCKED_NOT_AUTHORIZED","CP01R4":"METHOD_FROZEN_NO_EXECUTION","ratified_human_trust_root":"NOT_RATIFIED","human_trust_root_action":"PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS","runtime_issuance_bindings":"BLOCKED","AuthorizationDecision":"NOT_CREATED","SingleUseGrant":"NOT_CREATED","backend_import":"NOT_EXECUTED","solver_execution":"NOT_EXECUTED","physical_background":"NOT_ESTABLISHED","physical_response_rank":"NOT_EXECUTED","K1-D":"NOT_RELEASED","K1-E":"NOT_ADMISSIBLE","physical_evidence_effect":"NONE"},
+  "gate_state":{"FM-G0":"OPEN","FM0_BLOCKING_GAPS":10,"ULSH-01-WP1":"CLOSED_TARGET_FROZEN_NO_EXECUTION","ULSH-01-WP2":"METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED","ULSH-01-WP3":"NOT_STARTED","ULSH-01-WP4":"BLOCKED_NOT_AUTHORIZED","CP01R4":"METHOD_FROZEN_NO_EXECUTION","RATIFIED_HUMAN_TRUST_ROOT":"NOT_RATIFIED","RUNTIME_ISSUANCE_BINDINGS":"BLOCKED","AuthorizationDecision":"NOT_CREATED","SingleUseGrant":"NOT_CREATED","BACKEND_IMPORT":"NOT_EXECUTED","SOLVER_EXECUTION":"NOT_EXECUTED","PHYSICAL_BACKGROUND":"NOT_ESTABLISHED","PHYSICAL_RESPONSE_RANK":"NOT_EXECUTED","K1-D":"NOT_RELEASED","K1-E":"NOT_ADMISSIBLE","physical_evidence_effect":"NONE"},
   "verified_results": [
-    {
-      "result_id": "UL-RES-BAND-VB-COMPLETE-001",
-      "statement": "Band V-B contextual adjudication is merged: current lexical HIGH=0, lexical MEDIUM=42, MEDIUM contextually adjudicated=42/42, contextually unadjudicated=0, physical claim promotions=0.",
-      "status": "MERGED_CONTEXTUAL_ADJUDICATION_COMPLETE",
-      "evidence_effect": "PUBLIC_CLAIM_CONTEXT_AUDIT_ONLY",
-      "physical_evidence_effect": "NONE",
-      "sources": ["registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json"]
-    },
-    {
-      "result_id": "UL-RES-BAND-VC-001",
-      "statement": "Band V-C is merged and maps all 15 canonical claim families onto claim/equation/code/test/data/falsifier axes, registering 11 missing links of which 10 are scientific or empirical blockers and one is governance-provenance freshness.",
-      "status": "MERGED_15_FAMILY_CLAIM_EVIDENCE_CROSSWALK",
-      "evidence_effect": "AUDIT_PROVENANCE_ONLY",
-      "physical_evidence_effect": "NONE",
-      "sources": [
-        "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
-        "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json"
-      ]
-    },
-    {
-      "result_id": "UL-RES-PUBLIC-NUMERICAL-001",
-      "statement": "The public cosmology tools share the canonical FLRW/distance/linear-GR-growth reference engine; Bridge growth and lensing remain unreleased.",
-      "status": "MERGED_QA_RECONCILED",
-      "evidence_effect": "SOFTWARE_AND_NUMERICAL_QA_ONLY",
-      "physical_evidence_effect": "NONE",
-      "sources": ["registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json"]
-    }
+    {"result_id":"UL-RES-BAND-VB-HISTORICAL-001","statement":"Band V-B historical contextual adjudication is merged: 989-candidate audit basis, lexical HIGH=0, lexical MEDIUM=42, MEDIUM contextually adjudicated=42/42, physical claim promotions=0.","status":"MERGED_CONTEXTUAL_ADJUDICATION_COMPLETE","evidence_effect":"PUBLIC_CLAIM_CONTEXT_AUDIT_ONLY","physical_evidence_effect":"NONE","sources":["registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json"]},
+    {"result_id":"UL-RES-STATUS-DELTA-001","statement":"After the dated status-page successor, the current materialized corpus has 993 candidates, HIGH=0 and MEDIUM=46. Thirty-nine historical MEDIUM IDs remain live, three historical status-page IDs are retired, and seven new current status-page MEDIUM IDs are contextually adjudicated 7/7 with zero physical promotions.","status":"CONTEXTUALLY_ADJUDICATED_IN_CHANGESET_REVIEW_PENDING","evidence_effect":"PUBLIC_CLAIM_CONTEXT_AUDIT_ONLY","physical_evidence_effect":"NONE","sources":["registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json","registry/2026-09-04_UniverseLab_BandVC_StatusPageMediumDeltaAdjudication_v1.0.json"]},
+    {"result_id":"UL-RES-BAND-VC-001","statement":"Band V-C is merged and maps all 15 canonical claim families onto claim/equation/code/test/data/falsifier axes, registering 11 missing links of which 10 are scientific or empirical blockers and one is governance-provenance freshness.","status":"MERGED_15_FAMILY_CLAIM_EVIDENCE_CROSSWALK","evidence_effect":"AUDIT_PROVENANCE_ONLY","physical_evidence_effect":"NONE","sources":["registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json","registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json"]},
+    {"result_id":"UL-RES-PUBLIC-NUMERICAL-001","statement":"The public cosmology tools share the canonical FLRW/distance/linear-GR-growth reference engine; Bridge growth and lensing remain unreleased.","status":"MERGED_QA_RECONCILED","evidence_effect":"SOFTWARE_AND_NUMERICAL_QA_ONLY","physical_evidence_effect":"NONE","sources":["registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json"]}
   ],
   "confirmed_defects": [
-    {
-      "defect_id": "UL-BVC-G11",
-      "severity": "P1_GOVERNANCE_PROVENANCE",
-      "statement": "The v1.2/v1.3/v1.33 state chain and public status pointers predate merged Band V-B/V-C audit completion.",
-      "repair": "Publish append-only v1.3/v1.4/v1.34 successor chain, update byte-identical checkpoint alias, manifest, global shell and DE/EN public status pointers without physical gate changes.",
-      "repair_status": "IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING"
-    }
+    {"defect_id":"UL-BVC-G11","severity":"P1_GOVERNANCE_PROVENANCE","statement":"The v1.2/v1.3/v1.33 state chain and public status pointers predate merged Band V-B/V-C audit completion.","repair":"Publish append-only v1.3/v1.4/v1.34 successor chain, update byte-identical checkpoint alias, manifest, global shell and DE/EN public status pointers, and contextually adjudicate the bounded status-page claim delta without physical gate changes.","repair_status":"IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING"}
   ],
   "open_blockers": [
-    {
-      "blocker_id": "UL-BVC-P0-EVIDENCE-CHAIN-001",
-      "status": "OPEN",
-      "statement": "Ten Band V-C scientific or empirical missing links remain blocking across Bridge observables, parent forward map, physical solution/stability, data/likelihood and quantitative predictions.",
-      "sources": ["registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json"]
-    },
-    {
-      "blocker_id": "UL-BLK-FM0-001",
-      "status": "OPEN",
-      "statement": "Parent-to-reduced-to-observable forward map remains open across the declared observable blocks.",
-      "sources": ["registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"]
-    },
-    {
-      "blocker_id": "UL-BLK-TRUST-ROOT-001",
-      "status": "PARKED_EXTERNAL_HUMAN_ACTION_REQUIRED",
-      "statement": "Human-controlled trust root is not ratified; offline key action remains parked until an exclusively user-controlled computer is available.",
-      "sources": ["registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json"]
-    },
-    {
-      "blocker_id": "UL-BLK-C-PHYS-GENERIC-M1-001",
-      "status": "OPEN",
-      "statement": "Generic global M1 existence, continuum BVP invertibility, Hamiltonian positivity and full ghost freedom remain open.",
-      "sources": ["project-manifest.json"]
-    }
+    {"blocker_id":"UL-BVC-P0-EVIDENCE-CHAIN-001","status":"OPEN","statement":"Ten Band V-C scientific or empirical missing links remain blocking across Bridge observables, parent forward map, physical solution/stability, data/likelihood and quantitative predictions.","sources":["registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json"]},
+    {"blocker_id":"UL-BLK-FM0-001","status":"OPEN","statement":"Parent-to-reduced-to-observable forward map remains open across the declared observable blocks.","sources":["registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"]},
+    {"blocker_id":"UL-BLK-TRUST-ROOT-001","status":"PARKED_EXTERNAL_HUMAN_ACTION_REQUIRED","statement":"Human-controlled trust root is not ratified; offline key action remains parked until an exclusively user-controlled computer is available.","sources":["registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json"]},
+    {"blocker_id":"UL-BLK-C-PHYS-GENERIC-M1-001","status":"OPEN","statement":"Generic global M1 existence, continuum BVP invertibility, Hamiltonian positivity and full ghost freedom remain open.","sources":["project-manifest.json"]}
   ],
   "active_assumptions": [
-    "Band V-B contextual adjudication does not create physical evidence.",
+    "Band V-B historical contextual adjudication does not create physical evidence.",
+    "The current 46 MEDIUM live candidates are contextually covered by 39 still-live historical IDs plus seven successor status-page IDs; three historical status-page IDs are retired from the live corpus.",
     "Band V-C evidence-chain mapping records presence, absence or non-applicability; it does not fill missing scientific links by inference.",
     "The reduced Bridge background is not a derivation from the six-dimensional parent theory.",
     "The linear GR growth equation is a reference model and not a released HZT perturbation map.",
@@ -165,6 +81,7 @@
     "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
     "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
     "registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json",
+    "registry/2026-09-04_UniverseLab_BandVC_StatusPageMediumDeltaAdjudication_v1.0.json",
     "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
     "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json",
     "research-status.html"
