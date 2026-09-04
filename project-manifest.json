@@ -1,10 +1,10 @@
 {
   "schema": "universelab.project-manifest.v1",
-  "release": "2.33-band-vb-high-claim-adjudication-v1.0",
-  "release_date": "2026-09-03",
-  "basis_main_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55",
-  "basis_main_tree": "536d74be58bab519f1665df9c222662814000464",
-  "basis_semantics": "Exact merged main after Band V-A plus the Band-V-B high-claim adjudication and current-state pointer-reconciliation changeset, canonical only after merge.",
+  "release": "2.34-band-vc-state-freshness-v1.0",
+  "release_date": "2026-09-04",
+  "basis_main_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+  "basis_main_tree": "b073c74b53fb0119ca9f72e3de3ad9399796266d",
+  "basis_semantics": "Exact merged main after Band V-C PR 209 plus the append-only state-freshness successor and pointer-reconciliation changeset, canonical only after merge. No physical or authorization gate is promoted.",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
   "project": {
@@ -12,67 +12,26 @@
     "research_program": "Hyperzeit / HPVS",
     "author": "Stefan Hasselmeyer",
     "language_primary": "de",
-    "language_planned": [
-      "de",
-      "en"
-    ]
+    "language_planned": ["de", "en"]
   },
   "manifest_strategy": "COMPACT_CURRENT_STATE_WITH_APPEND_ONLY_VERSIONED_SOURCE_REGISTRIES",
-  "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
-  "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
-  "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
+  "canonical_state": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+  "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+  "session_checkpoint": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
   "architecture": {
     "governing_document": "MD-0",
-    "program_chain": [
-      "HPVS",
-      "HZT-M0",
-      "HZT-Full"
-    ],
+    "program_chain": ["HPVS", "HZT-M0", "HZT-Full"],
     "levels": [
-      {
-        "id": "HPVS",
-        "role": "foundations_program",
-        "status": "OPEN_RESEARCH_PROGRAM"
-      },
-      {
-        "id": "HZT-M0-S6",
-        "role": "primary_controlled_forward_model_branch",
-        "signature": "(-,+,+,+,+,+)",
-        "status": "RETAINED_AND_INCOMPLETE"
-      },
-      {
-        "id": "HZT-M0-P5",
-        "role": "projection_quotient_and_uplift_control_branch",
-        "status": "CONDITIONAL"
-      },
-      {
-        "id": "HZT-Full",
-        "role": "fundamental_multitime_candidate",
-        "status": "NOT_CONSTRUCTED"
-      }
+      {"id":"HPVS","role":"foundations_program","status":"OPEN_RESEARCH_PROGRAM"},
+      {"id":"HZT-M0-S6","role":"primary_controlled_forward_model_branch","signature":"(-,+,+,+,+,+)","status":"RETAINED_AND_INCOMPLETE"},
+      {"id":"HZT-M0-P5","role":"projection_quotient_and_uplift_control_branch","status":"CONDITIONAL"},
+      {"id":"HZT-Full","role":"fundamental_multitime_candidate","status":"NOT_CONSTRUCTED"}
     ],
     "research_tracks": [
-      {
-        "id": "MD2S-R1-L",
-        "role": "historical_legacy_reproduction",
-        "status": "BLOCKED_BY_MISSING_PRIMARY_SOURCES"
-      },
-      {
-        "id": "MD2S-R1-C-PHYS",
-        "role": "current_canonical_physical_rebuild",
-        "status": "CP01R4_METHOD_FROZEN_NO_EXECUTION",
-        "active_model": "HZT-M0-S6-C-PHYS-M1"
-      },
-      {
-        "id": "HZT-M0-S6-C1-V",
-        "role": "manufactured_verification_sandbox",
-        "status": "CONDITIONAL_DIAGNOSTIC"
-      },
-      {
-        "id": "HZT-M0-FM0",
-        "role": "forward_map_parameter_and_observable_provenance",
-        "status": "ACTIVE_TARGETED_PARENT_RECOVERY"
-      }
+      {"id":"MD2S-R1-L","role":"historical_legacy_reproduction","status":"BLOCKED_BY_MISSING_PRIMARY_SOURCES"},
+      {"id":"MD2S-R1-C-PHYS","role":"current_canonical_physical_rebuild","status":"CP01R4_METHOD_FROZEN_NO_EXECUTION","active_model":"HZT-M0-S6-C-PHYS-M1"},
+      {"id":"HZT-M0-S6-C1-V","role":"manufactured_verification_sandbox","status":"CONDITIONAL_DIAGNOSTIC"},
+      {"id":"HZT-M0-FM0","role":"forward_map_parameter_and_observable_provenance","status":"ACTIVE_TARGETED_PARENT_RECOVERY"}
     ],
     "track_migration_rule": "No result, parameter, equation, status or evidence label migrates between tracks without an explicit versioned model-identity or verification-to-physics bridge.",
     "control_core": "S6-Q1 / RB0-heavy-GR-quiet"
@@ -149,12 +108,26 @@
     "likelihood_fit": "NOT_PRESENT",
     "physical_evidence_effect": "NONE"
   },
+  "public_claim_audit": {
+    "band_v_a": "MERGED_989_CANDIDATES_15_FAMILIES",
+    "band_v_b_high": "COMPLETE_MERGED_CURRENT_LEXICAL_HIGH_0",
+    "band_v_b_medium": "COMPLETE_MERGED_42_OF_42_CONTEXTUALLY_ADJUDICATED",
+    "band_v_c": "MERGED_15_FAMILY_CLAIM_EVIDENCE_CROSSWALK",
+    "band_v_c_missing_links": 11,
+    "band_v_c_scientific_or_empirical_blocking_missing_links": 10,
+    "band_v_c_governance_provenance_missing_links": 1,
+    "physical_claim_promotions": 0,
+    "physical_evidence_effect": "NONE"
+  },
   "current_status_sources": {
-    "canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
-    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
-    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
+    "canonical_state": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+    "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+    "session_checkpoint": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
     "claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
     "high_claim_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+    "medium_claim_summary": "registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json",
+    "band_vc_crosswalk": "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
+    "band_vc_missing_links": "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json",
     "canonical_engine": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
     "observatory": "registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json",
     "compare_safe": "registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json",
@@ -170,112 +143,21 @@
     "conventions": "convention-registry.json"
   },
   "canonical_pages": [
-    {
-      "id": "portal",
-      "path": "index.html",
-      "live": "./",
-      "class": "public_interface",
-      "status": "ACTIVE"
-    },
-    {
-      "id": "research_status",
-      "path": "research-status.html",
-      "live": "./research-status.html?v=20260903b",
-      "class": "canonical_public_status",
-      "status": "ACTIVE_CURRENT_RECONCILED"
-    },
-    {
-      "id": "navigator",
-      "path": "navigator.html",
-      "live": "./navigator.html",
-      "class": "scientific_navigation",
-      "status": "ACTIVE"
-    },
-    {
-      "id": "navigator_legacy_redirect",
-      "path": "navigator-app.html",
-      "live": "./navigator-app.html",
-      "class": "compatibility_redirect",
-      "status": "LEGACY_REDIRECT",
-      "redirect_target": "./navigator.html"
-    },
-    {
-      "id": "hyperlab",
-      "path": "hyperlab.html",
-      "live": "./hyperlab.html?v=10",
-      "class": "status_and_diagnostics",
-      "status": "ACTIVE_DIAGNOSTIC"
-    },
-    {
-      "id": "solver_hub",
-      "path": "solver-hub.html",
-      "live": "./solver-hub.html?v=1",
-      "class": "numerical_research_infrastructure",
-      "status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY"
-    },
-    {
-      "id": "material",
-      "path": "hyperzeit-material-v2.html",
-      "live": "./hyperzeit-material-v2.html?v=2",
-      "class": "literature_derivations_visuals",
-      "status": "ACTIVE"
-    },
-    {
-      "id": "methods",
-      "path": "hyperzeit-methods.html",
-      "live": "./hyperzeit-methods.html?v=1",
-      "class": "methods_and_quality_gates",
-      "status": "ACTIVE"
-    },
-    {
-      "id": "audit",
-      "path": "universelab-audit-2026-07-31.html",
-      "live": "./universelab-audit-2026-07-31.html?v=1",
-      "class": "historical_master_audit",
-      "status": "ARCHIVED_REFERENCE"
-    },
-    {
-      "id": "source",
-      "path": "source.html",
-      "live": "./source.html?v=3",
-      "class": "developer_and_governance_hub",
-      "status": "ACTIVE"
-    },
-    {
-      "id": "comparison",
-      "path": "compare-safe.html",
-      "live": "./compare-safe.html?v=20260903",
-      "class": "calculator",
-      "status": "ACTIVE_MERGED_QA_RECONCILED"
-    },
-    {
-      "id": "observatory",
-      "path": "observatory.html",
-      "live": "./observatory.html?v=20260903",
-      "class": "cosmology_parameter_lab",
-      "status": "ACTIVE_MERGED_QA_RECONCILED"
-    },
-    {
-      "id": "validation",
-      "path": "validation.html",
-      "live": "./validation.html?v=20260903",
-      "class": "numerical_validation",
-      "status": "ACTIVE_CANONICAL_ENGINE_ADAPTER"
-    },
-    {
-      "id": "emergence",
-      "path": "emergence.html",
-      "live": "./emergence.html?v=20260903",
-      "class": "diagnostic_visualization",
-      "status": "ACTIVE_MERGED_QA_RECONCILED"
-    },
-    {
-      "id": "program_10m",
-      "path": "2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html",
-      "live": "./2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html",
-      "class": "ratified_research_program",
-      "status": "ACTIVE"
-    }
+    {"id":"portal","path":"index.html","live":"./","class":"public_interface","status":"ACTIVE"},
+    {"id":"research_status","path":"research-status.html","live":"./research-status.html?v=20260904","class":"canonical_public_status","status":"ACTIVE_CURRENT_RECONCILED"},
+    {"id":"navigator","path":"navigator.html","live":"./navigator.html","class":"scientific_navigation","status":"ACTIVE"},
+    {"id":"navigator_legacy_redirect","path":"navigator-app.html","live":"./navigator-app.html","class":"compatibility_redirect","status":"LEGACY_REDIRECT","redirect_target":"./navigator.html"},
+    {"id":"hyperlab","path":"hyperlab.html","live":"./hyperlab.html?v=10","class":"status_and_diagnostics","status":"ACTIVE_DIAGNOSTIC"},
+    {"id":"solver_hub","path":"solver-hub.html","live":"./solver-hub.html?v=1","class":"numerical_research_infrastructure","status":"ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY"},
+    {"id":"material","path":"hyperzeit-material-v2.html","live":"./hyperzeit-material-v2.html?v=2","class":"literature_derivations_visuals","status":"ACTIVE"},
+    {"id":"methods","path":"hyperzeit-methods.html","live":"./hyperzeit-methods.html?v=1","class":"methods_and_quality_gates","status":"ACTIVE"},
+    {"id":"audit","path":"universelab-audit-2026-07-31.html","live":"./universelab-audit-2026-07-31.html?v=1","class":"historical_master_audit","status":"ARCHIVED_REFERENCE"},
+    {"id":"source","path":"source.html","live":"./source.html?v=3","class":"developer_and_governance_hub","status":"ACTIVE"},
+    {"id":"comparison","path":"compare-safe.html","live":"./compare-safe.html?v=20260903","class":"calculator","status":"ACTIVE_MERGED_QA_RECONCILED"},
+    {"id":"observatory","path":"observatory.html","live":"./observatory.html?v=20260903","class":"cosmology_parameter_lab","status":"ACTIVE_MERGED_QA_RECONCILED"},
+    {"id":"validation","path":"validation.html","live":"./validation.html?v=20260903","class":"numerical_validation","status":"ACTIVE_CANONICAL_ENGINE_ADAPTER"},
+    {"id":"emergence","path":"emergence.html","live":"./emergence.html?v=20260903","class":"diagnostic_visualization","status":"ACTIVE_MERGED_QA_RECONCILED"},
+    {"id":"program_10m","path":"2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html","live":"./2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html","class":"ratified_research_program","status":"ACTIVE"}
   ],
   "governance_rules": [
     "technical_execution_is_not_physical_identification",
@@ -327,26 +209,26 @@
       "commits": 156,
       "changed_files": 139,
       "canonical_effect": "NONE_UNTIL_REBUILT_REVIEWED_AND_MERGED",
-      "extracted_merged_subblocks": [
-        "PR202_AUTHORITY_SIGNATURE_PROVENANCE",
-        "PR203_HUMAN_TRUST_ROOT_PREPARATION"
-      ],
+      "extracted_merged_subblocks": ["PR202_AUTHORITY_SIGNATURE_PROVENANCE", "PR203_HUMAN_TRUST_ROOT_PREPARATION"],
       "interpretation": "The large draft remains noncanonical; the two safe sub-blocks are separately merged."
     }
   ],
-  "supersedes_release": "2.32-band-ivb-current-main-reconciliation-v1.0",
+  "supersedes_release": "2.33-band-vb-high-claim-adjudication-v1.0",
   "history_rule": "Prior detailed manifest content remains recoverable from Git history and the versioned source registries; historical dated snapshots are not edited in place.",
   "physical_gate_effect": "NONE",
   "physical_evidence_effect": "NONE",
   "central_registries": {
-    "current_main_canonical_state": "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json",
-    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
+    "current_main_canonical_state": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+    "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
     "site_state_schema": "schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json",
-    "session_checkpoint": "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json",
+    "session_checkpoint": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
     "session_checkpoint_alias": "registry/session-checkpoint-latest.json",
     "platform_governance": "governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md",
     "claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
     "high_claim_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
+    "medium_claim_summary": "registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json",
+    "band_vc_crosswalk": "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
+    "band_vc_missing_links": "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json",
     "canonical_engine": "registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json",
     "observatory": "registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json",
     "compare_safe": "registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json",
@@ -361,10 +243,10 @@
     "version": "1.2.0",
     "status": "ACTIVE_GOVERNED_PLATFORM_CURRENT_STATE_RECONCILED_2026_09_03",
     "navigator_authority": "CANONICAL_DIRECT_DOCUMENT",
-    "site_state": "registry/2026-09-03_UniverseLab_SiteState_v1.3.json",
+    "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
     "physical_gate_effect": "NONE",
     "physical_evidence_effect": "NONE",
     "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"
   },
-  "next_allowed_repository_step": "BAND_VB_MEDIUM_CLAIM_CONTEXT_ADJUDICATION_AFTER_HIGH_GATE_GREEN_NO_PHYSICAL_EXECUTION"
+  "next_allowed_repository_step": "BAND_VC_MISSING_LINK_REMEDIATION_NO_PHYSICAL_EXECUTION"
 }
