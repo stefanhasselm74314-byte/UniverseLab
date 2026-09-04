@@ -133,7 +133,7 @@ def main() -> None:
     contains("hyperlab-en.html", "What does not follow automatically", "a regular cosmological origin", "It is not a closed or observationally confirmed theory of nature")
     contains("hyperzeit-material.html", "Jede Karte sagt, wofür die Quelle brauchbar ist und was sie ausdrücklich nicht für Hyperzeit beweist", "K1-D bleibt nicht freigegeben", "K1-E bleibt unzulässig")
     contains("index-en.html", "speculative 6D Hyperzeit hypotheses explicitly separated", "K1-D", "NOT RELEASED", "K1-E", "NOT ADMISSIBLE")
-    contains("index.html", "experimentellen 6D-Hyperzeitmodelle", "experimentellen 6D-Hypothesen", "Spekulation klar getrennt")
+    contains("index.html", "experimentelle 6D-Hyperzeitmodelle", "experimentellen 6D-Hypothesen", "Spekulation klar getrennt")
     contains("tafelwerk.html", "Jede nicht etablierte Beziehung trägt einen sichtbaren Evidenzstatus", "abgeleitet\u201c bedeutet mathematisch aus einem angegebenen Ansatz abgeleitet")
     contains("2026-08-19_UniverseLab_BibliographyCatalog_v1.0.html", "menschenlesbare Ansicht der maschinenlesbaren Hyperzeit-Bibliographie")
     contains("2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html", "Primärer Pfad:", "CP01R4-HOLD", "Parent→Reduced-Brücke + NR-Grundgerüst", "FM-G0 bleibt offen")
