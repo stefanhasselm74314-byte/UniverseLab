@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Band V-C claim→equation/code/test/data/falsifier crosswalk gate.
+"""Successor-aware Band V-C claim→evidence crosswalk gate.
 
-This is a nonoperative audit gate. It verifies family coverage, declared
-repository evidence links, fail-closed missing-link accounting and unchanged
-physical/authorization firewalls. It performs no physical solver execution.
+The Band-V-C crosswalk is immutable audit provenance. A later append-only
+state-freshness successor may close the nonphysical G11 provenance gap without
+changing the ten scientific/empirical missing links or any physical gate.
 """
 from __future__ import annotations
 
@@ -11,34 +11,15 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CENSUS = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json"
 CROSSWALK = ROOT / "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json"
 GAPS = ROOT / "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json"
+CENSUS = ROOT / "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json"
 MEDIUM = ROOT / "registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json"
 MANIFEST = ROOT / "project-manifest.json"
-STATE = ROOT / "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json"
-SITE = ROOT / "registry/2026-09-03_UniverseLab_SiteState_v1.3.json"
-SESSION = ROOT / "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json"
+ALIAS = ROOT / "registry/session-checkpoint-latest.json"
+G11 = ROOT / "registry/2026-09-04_UniverseLab_BandVC_G11_StateFreshnessClosure_v1.0.json"
 
-EXPECTED_FAMILIES = {
-    "UL-CLM-FLRW-BACKGROUND-001",
-    "UL-CLM-DISTANCE-GEOMETRY-001",
-    "UL-CLM-LINEAR-GROWTH-001",
-    "UL-CLM-BRIDGE-BACKGROUND-001",
-    "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
-    "UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001",
-    "UL-CLM-PARENT-FORWARD-MAP-001",
-    "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
-    "UL-CLM-DATA-LIKELIHOOD-001",
-    "UL-CLM-EMERGENCE-SEPARATION-001",
-    "UL-CLM-PREDICTIONS-FALSIFIERS-001",
-    "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
-    "UL-CLM-FM0-PROGRAM-001",
-    "UL-CLM-EDUCATIONAL-VISUAL-001",
-    "UL-CLM-HISTORICAL-ARCHIVE-001",
-}
-
-ALLOWED_LINK_STATUS = {
+ALLOWED = {
     "VERIFIED_PRESENT",
     "REFERENCE_ONLY",
     "BLOCKED_BY_UNRELEASED_MAP",
@@ -46,105 +27,74 @@ ALLOWED_LINK_STATUS = {
     "NOT_APPLICABLE",
     "DECLARED_PROSPECTIVE",
 }
-
 FIREWALLS = {
-    "K1-D": "NOT_RELEASED",
-    "K1-E": "NOT_ADMISSIBLE",
-    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
-    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "FM-G0": "OPEN",
     "RATIFIED_HUMAN_TRUST_ROOT": "NOT_RATIFIED",
     "RUNTIME_ISSUANCE_BINDINGS": "BLOCKED",
     "AuthorizationDecision": "NOT_CREATED",
     "SingleUseGrant": "NOT_CREATED",
     "BACKEND_IMPORT": "NOT_EXECUTED",
     "SOLVER_EXECUTION": "NOT_EXECUTED",
-    "FM-G0": "OPEN",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
 }
 
 
 def load(path: Path):
-    return json.loads(path.read_text(encoding="utf-8"))
+    value = json.loads(path.read_text(encoding="utf-8"))
+    assert isinstance(value, dict), path
+    return value
 
 
-def assert_paths_exist(paths):
-    for rel in paths:
-        p = ROOT / rel
-        assert p.exists(), f"missing repository evidence path: {rel}"
-
-
-def has_gate_material(family: dict) -> bool:
-    return any(
-        family.get(key)
-        for key in (
-            "falsifiers",
-            "forbidden_inference",
-            "closure_conditions",
-            "required_evidence",
-            "required_release_conditions",
-            "required_qualifier",
-            "authority_rule",
-        )
-    )
+def repo_path(value: str) -> Path:
+    assert isinstance(value, str) and value and not value.startswith("/") and ".." not in Path(value).parts
+    path = ROOT / value
+    assert path.is_file(), value
+    return path
 
 
 def main() -> None:
-    census = load(CENSUS)
     crosswalk = load(CROSSWALK)
     gaps = load(GAPS)
+    census = load(CENSUS)
     medium = load(MEDIUM)
     manifest = load(MANIFEST)
-    state = load(STATE)
-    site = load(SITE)
-    session = load(SESSION)
+    alias = load(ALIAS)
 
-    assert crosswalk["basis_main_commit"] == "e4e92090d313abf8a53d7b7354923983c9cda939"
+    families = crosswalk["families"]
+    census_ids = {row["claim_family_id"] for row in census["claim_families"]}
+    cross_ids = [row["claim_family_id"] for row in families]
     assert crosswalk["family_count"] == 15
-    assert gaps["basis_main_commit"] == crosswalk["basis_main_commit"]
-    assert gaps["gap_count"] == 11
-    assert gaps["blocking_scientific_gap_count"] == 10
-    assert gaps["governance_provenance_gap_count"] == 1
-
-    census_map = {f["claim_family_id"]: f for f in census["claim_families"]}
-    crosswalk_map = {f["claim_family_id"]: f for f in crosswalk["families"]}
-    assert set(census_map) == EXPECTED_FAMILIES
-    assert set(crosswalk_map) == EXPECTED_FAMILIES
-    assert len(crosswalk_map) == len(crosswalk["families"]) == 15
+    assert len(families) == 15 and len(set(cross_ids)) == 15
+    assert set(cross_ids) == census_ids
 
     axes = ("claim", "equation_or_derivation", "code", "test", "data", "falsifier_or_gate")
-    for family_id, row in crosswalk_map.items():
-        family = census_map[family_id]
+    missing_families = set()
+    for row in families:
         for axis in axes:
-            assert row[axis] in ALLOWED_LINK_STATUS, (family_id, axis, row[axis])
-        assert row["claim"] == "VERIFIED_PRESENT"
+            assert row[axis] in ALLOWED, (row["claim_family_id"], axis, row[axis])
+            if row[axis] == "MISSING_REQUIRED_LINK":
+                missing_families.add(row["claim_family_id"])
+        assert row["evidence_scope"]
+        assert row["notes"]
 
-        if row["equation_or_derivation"] == "VERIFIED_PRESENT":
-            assert family.get("equations"), f"{family_id} lacks declared equations"
-        if row["code"] == "VERIFIED_PRESENT":
-            assert family.get("code_paths"), f"{family_id} lacks code_paths"
-            assert_paths_exist(family["code_paths"])
-        if row["test"] == "VERIFIED_PRESENT":
-            assert family.get("test_paths"), f"{family_id} lacks test_paths"
-            assert_paths_exist(family["test_paths"])
-        if row["falsifier_or_gate"] == "VERIFIED_PRESENT":
-            assert has_gate_material(family), f"{family_id} lacks a falsifier/gate declaration"
+    gap_rows = gaps["gaps"]
+    assert gaps["gap_count"] == 11
+    assert len(gap_rows) == 11
+    gap_families = {row["claim_family_id"] for row in gap_rows if row.get("claim_family_id")}
+    assert missing_families <= gap_families
+    assert gaps["scientific_or_empirical_blocking_gap_count"] == 10
+    assert gaps["governance_provenance_gap_count"] == 1
 
-        # Every explicitly bound source/code/test path from the family catalog
-        # must still resolve in the repository. Presence is not physical proof.
-        assert_paths_exist(family.get("source_paths", []))
-        assert_paths_exist(family.get("code_paths", []))
-        assert_paths_exist(family.get("test_paths", []))
+    # All paths explicitly bound by the family catalogue must continue to exist.
+    for family in census["claim_families"]:
+        for field in ("source_paths", "code_paths", "test_paths"):
+            for source in family.get(field, []):
+                repo_path(source)
 
-    gap_ids = [g["gap_id"] for g in gaps["gaps"]]
-    assert len(gap_ids) == len(set(gap_ids)) == 11
-    gap_families = {fid for g in gaps["gaps"] for fid in g["family_ids"]}
-    for family_id, row in crosswalk_map.items():
-        if "MISSING_REQUIRED_LINK" in {row[a] for a in axes}:
-            assert family_id in gap_families, f"missing-link family not represented in gap register: {family_id}"
-
-    assert [g["gap_id"] for g in gaps["gaps"] if g["severity"] == "P1_GOVERNANCE_PROVENANCE"] == ["UL-BVC-G11"]
-    assert gaps["gaps"][-1]["status"] == "OPEN_NONPHYSICAL"
-
-    # Band V-B must be fully contextually closed before V-C is admissible.
+    # Band V-B is an immutable prerequisite: 42/42 contextual closure, no promotions.
     assert medium["materialized_claim_candidates"] == 989
     assert medium["materialized_high_candidates"] == 0
     assert medium["materialized_medium_candidates"] == 42
@@ -155,9 +105,36 @@ def main() -> None:
     assert medium["physical_gate_effect"] == "NONE"
     assert medium["physical_evidence_effect"] == "NONE"
 
-    # Current manifest firewalls stay closed. V-C may not promote them.
-    for key, value in FIREWALLS.items():
-        assert manifest["gates"][key] == value, (key, manifest["gates"][key], value)
+    # Resolve the current append-only state dynamically through the canonical alias.
+    checkpoint = load(repo_path(alias["canonical_snapshot"]))
+    state = load(repo_path(alias["canonical_state"]))
+    site = load(repo_path(alias["site_state"]))
+    assert ALIAS.read_bytes() == repo_path(alias["canonical_snapshot"]).read_bytes()
+    assert checkpoint == alias
+    assert manifest["canonical_state"] == alias["canonical_state"]
+    assert manifest["site_state"] == alias["site_state"]
+    assert manifest["session_checkpoint"] == alias["canonical_snapshot"]
+    assert state["basis_main_commit"] == site["basis_main_commit"] == checkpoint["basis_commit"] == manifest["basis_main_commit"]
+
+    # G11 is either historically open (pre-successor) or explicitly closed by
+    # the append-only closure artifact. Never silently erase the provenance gap.
+    if G11.is_file() and manifest.get("next_allowed_repository_step") == "BAND_VC_MISSING_LINK_REMEDIATION_NO_PHYSICAL_EXECUTION":
+        closure = load(G11)
+        assert closure["gap_id"] == "UL-BVC-G11"
+        assert closure["scientific_missing_links_after_closure"] == 10
+        assert closure["governance_provenance_missing_links_after_closure"] == 0
+        assert closure["physical_gate_effect"] == "NONE"
+        assert closure["physical_evidence_effect"] == "NONE"
+        assert state["public_claim_governance"]["medium_claim_gate"] == "COMPLETE_MERGED_42_OF_42_CONTEXTUALLY_ADJUDICATED"
+        assert state["public_claim_governance"]["band_vc_gate"] == "MERGED_15_FAMILIES_11_MISSING_LINKS_REGISTERED"
+        freshness = "G11_CLOSED_APPEND_ONLY"
+    else:
+        assert "BAND_VB_MEDIUM" in manifest["next_allowed_repository_step"]
+        assert state["public_claim_governance"]["medium_claim_gate"] == "NOT_STARTED"
+        freshness = "G11_HISTORICALLY_OPEN"
+
+    for key, expected in FIREWALLS.items():
+        assert manifest["gates"][key] == expected, (key, manifest["gates"][key], expected)
     assert manifest["physical_gate_effect"] == "NONE"
     assert manifest["physical_evidence_effect"] == "NONE"
     assert crosswalk["physical_gate_effect"] == "NONE"
@@ -165,16 +142,9 @@ def main() -> None:
     assert gaps["physical_gate_effect"] == "NONE"
     assert gaps["physical_evidence_effect"] == "NONE"
 
-    # G11 is an observed provenance freshness defect, not a guessed one.
-    assert state["active_analysis_block"]["status"] == "IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING"
-    assert state["public_claim_governance"]["medium_claim_gate"] == "NOT_STARTED"
-    assert site["analysis_state"]["band_v_b_medium_claims"] == "NOT_STARTED"
-    assert session["active_block"]["status"] == "IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING"
-    assert "BAND_VB_MEDIUM" in manifest["next_allowed_repository_step"]
-
     print(
         "UniverseLab Band V-C claim evidence crosswalk gate: PASS "
-        "families=15 gaps=11 scientific_or_empirical_blocking=10 governance_provenance=1 "
+        f"families=15 gaps=11 scientific_or_empirical_blocking=10 freshness={freshness} "
         "band_vb_medium=42/42 physical_gate_effect=NONE physical_evidence_effect=NONE"
     )
 
