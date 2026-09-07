@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import json
 import math
 from pathlib import Path
@@ -29,17 +30,9 @@ def analytic_d2(hbar_diag, qdiag, w, d, lam, z):
     q2 = sum((hi * qi) ** 2 for hi, qi in zip(hinv, qdiag))
     n1 = 0.5 * qtrace
     n2 = 0.125 * qtrace * qtrace - 0.25 * q2
-
     x0 = sum(hi * wi * wi for hi, wi in zip(hinv, w))
-    x1 = (
-        2.0 * sum(hi * wi * di for hi, wi, di in zip(hinv, w, d))
-        - sum((hi * hi) * qi * wi * wi for hi, qi, wi in zip(hinv, qdiag, w))
-    )
-    x2 = (
-        sum(hi * di * di for hi, di in zip(hinv, d))
-        - 2.0 * sum((hi * hi) * qi * wi * di for hi, qi, wi, di in zip(hinv, qdiag, w, d))
-        + sum((hi ** 3) * (qi ** 2) * wi * wi for hi, qi, wi in zip(hinv, qdiag, w))
-    )
+    x1 = 2.0 * sum(hi * wi * di for hi, wi, di in zip(hinv, w, d)) - sum((hi * hi) * qi * wi * wi for hi, qi, wi in zip(hinv, qdiag, w))
+    x2 = sum(hi * di * di for hi, di in zip(hinv, d)) - 2.0 * sum((hi * hi) * qi * wi * di for hi, qi, wi, di in zip(hinv, qdiag, w, d)) + sum((hi ** 3) * (qi ** 2) * wi * wi for hi, qi, wi in zip(hinv, qdiag, w))
     l0 = -lam - 0.5 * z * x0
     l1 = -0.5 * z * x1
     l2 = -0.5 * z * x2
@@ -56,19 +49,14 @@ def exact_density(eps, hbar_diag, qdiag, w, d, lam, z):
 
 
 def test_independent_lorentzian_finite_difference_reconstruction():
-    # 5D induced Lorentz signature control; last entry is a non-unit circle metric component.
     hbar = [-1.0, 1.3, 0.9, 1.7, 4.0]
     q = [0.07, -0.11, 0.05, 0.09, 0.31]
     w = [0.12, -0.23, 0.08, 0.17, 0.61]
     d = [-0.04, 0.07, 0.03, -0.02, 0.13]
     lam = 0.73
     z = 1.41
-
     d2 = analytic_d2(hbar, q, w, d, lam, z)
-    sqrt0 = math.sqrt(-math.prod(hbar))
-    expected_density_coeff = sqrt0 * d2
-
-    # Moderate epsilon minimizes cancellation while retaining O(eps^2) convergence.
+    expected_density_coeff = math.sqrt(-math.prod(hbar)) * d2
     errors = []
     for eps in (2.0e-3, 1.0e-3, 5.0e-4):
         fp = exact_density(+eps, hbar, q, w, d, lam, z)
@@ -76,8 +64,8 @@ def test_independent_lorentzian_finite_difference_reconstruction():
         f0 = exact_density(0.0, hbar, q, w, d, lam, z)
         fd = (fp + fm - 2.0 * f0) / (2.0 * eps * eps)
         errors.append(abs(fd - expected_density_coeff))
-    assert errors[-1] < 2.0e-7
-    assert errors[-1] < errors[0]
+    assert errors[-1] < 2.0e-7, errors
+    assert errors[-1] < errors[0], errors
 
 
 def test_fixed_metric_limit():
@@ -139,3 +127,23 @@ def test_physical_and_execution_firewalls_unchanged():
     assert g["PHYSICAL_RESPONSE_RANK"] == "NOT_EXECUTED"
     assert g["K1-D"] == "NOT_RELEASED"
     assert g["K1-E"] == "NOT_ADMISSIBLE"
+
+
+def main():
+    tests = [
+        test_contract_status_and_scope,
+        test_independent_lorentzian_finite_difference_reconstruction,
+        test_fixed_metric_limit,
+        test_linearized_u1_gauge_invariant_combination,
+        test_m1_cap_functions_are_constant_in_phi,
+        test_upstream_hessian_chain_exists_and_wp1_not_overpromoted,
+        test_physical_and_execution_firewalls_unchanged,
+    ]
+    for fn in tests:
+        fn()
+        print(f"PASS: {fn.__name__}")
+    print("PASS: ULSH-05 WP1C2 fixed-interface cap Hessian v0.1")
+
+
+if __name__ == "__main__":
+    main()
