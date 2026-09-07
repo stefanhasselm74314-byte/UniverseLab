@@ -1,0 +1,150 @@
+{
+  "schema": "universelab.band-vc-status-page-medium-delta-adjudication.v1",
+  "version": "1.0.0",
+  "date": "2026-09-04",
+  "basis_materialized_claim_commit": "5d6cc496b08879bdf4cf9bd8c08ef1c04fe35dcf",
+  "basis_main_before_g11_changeset": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+  "status": "CONTEXTUALLY_ADJUDICATED_IN_CHANGESET_REVIEW_PENDING",
+  "scope": {
+    "historical_band_vb_medium_ids": 42,
+    "historical_medium_ids_still_live": 39,
+    "historical_medium_ids_retired_by_status_page_successor": 3,
+    "current_materialized_claim_candidates": 993,
+    "current_materialized_high_candidates": 0,
+    "current_materialized_medium_candidates": 46,
+    "new_current_medium_ids_not_in_historical_band_vb_set": 7,
+    "delta_paths": [
+      "research-status.html",
+      "research-status-en.html"
+    ]
+  },
+  "records": [
+    {
+      "claim_id": "UL-CLAIM-CANDIDATE-96D51E71A2B48F98",
+      "path": "research-status-en.html",
+      "risk_score": 6,
+      "family_ids": [
+        "UL-CLM-FM0-PROGRAM-001",
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "text": "Current-main Canonical State v1.3 SiteState v1.4 Session Checkpoint v1.34 Public Claim Census v1.0 Band V-B MEDIUM Summary Band V-C Evidence Crosswalk Band V-C Missing-Link Register Canonical Engine Contract Authority Signature Provenance FM-0 Gap Register v0.4",
+      "context_class": "SOURCE_NAVIGATION_METADATA",
+      "contextual_status": "NICHT_WISSENSCHAFTLICHER_CLAIM",
+      "positive_physical_hzt_claim": false,
+      "empirical_confirmation_claim": false,
+      "parent_derivation_claim": false,
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "claim_id": "UL-CLAIM-CANDIDATE-564A8251149D78C4",
+      "path": "research-status.html",
+      "risk_score": 6,
+      "family_ids": [
+        "UL-CLM-FM0-PROGRAM-001",
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "text": "Current-main Canonical State v1.3 SiteState v1.4 Session Checkpoint v1.34 Public Claim Census v1.0 Band V-B MEDIUM Summary Band V-C Evidence Crosswalk Band V-C Missing-Link-Register Canonical Engine Contract Authority Signature Provenance FM-0 Gap Register v0.4",
+      "context_class": "SOURCE_NAVIGATION_METADATA",
+      "contextual_status": "NICHT_WISSENSCHAFTLICHER_CLAIM",
+      "positive_physical_hzt_claim": false,
+      "empirical_confirmation_claim": false,
+      "parent_derivation_claim": false,
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "claim_id": "UL-CLAIM-CANDIDATE-D2C8919501F1635B",
+      "path": "research-status-en.html",
+      "risk_score": 5,
+      "family_ids": [
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "text": "quantitative parent-derived multichannel predictions with operational falsification thresholds;",
+      "context_class": "OPEN_PROOF_OBLIGATION_NOT_IDENTIFIED",
+      "contextual_status": "OFFEN",
+      "positive_physical_hzt_claim": false,
+      "empirical_confirmation_claim": false,
+      "parent_derivation_claim": false,
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "claim_id": "UL-CLAIM-CANDIDATE-56B6792E9F85C517",
+      "path": "research-status-en.html",
+      "risk_score": 4,
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "text": "10 scientific/empirical blockers",
+      "context_class": "AUDIT_BLOCKER_COUNT",
+      "contextual_status": "BEWIESEN_AS_REPOSITORY_STATE_CONTRACT",
+      "positive_physical_hzt_claim": false,
+      "empirical_confirmation_claim": false,
+      "parent_derivation_claim": false,
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "claim_id": "UL-CLAIM-CANDIDATE-C522F0894845C85C",
+      "path": "research-status-en.html",
+      "risk_score": 4,
+      "family_ids": [
+        "UL-CLM-PARENT-FORWARD-MAP-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "text": "the complete parent→reduced→observable map;",
+      "context_class": "OPEN_PROOF_OBLIGATION_NOT_IDENTIFIED",
+      "contextual_status": "OFFEN",
+      "positive_physical_hzt_claim": false,
+      "empirical_confirmation_claim": false,
+      "parent_derivation_claim": false,
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "claim_id": "UL-CLAIM-CANDIDATE-BFD848A8933FE2AF",
+      "path": "research-status.html",
+      "risk_score": 4,
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "text": "10 wissenschaftlich/empirisch blockierend",
+      "context_class": "AUDIT_BLOCKER_COUNT",
+      "contextual_status": "BEWIESEN_AS_REPOSITORY_STATE_CONTRACT",
+      "positive_physical_hzt_claim": false,
+      "empirical_confirmation_claim": false,
+      "parent_derivation_claim": false,
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "claim_id": "UL-CLAIM-CANDIDATE-ECF721D85B555B00",
+      "path": "research-status.html",
+      "risk_score": 4,
+      "family_ids": [
+        "UL-CLM-PARENT-FORWARD-MAP-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "text": "vollständige Parent→Reduced→Observable-Map;",
+      "context_class": "OPEN_PROOF_OBLIGATION_NOT_IDENTIFIED",
+      "contextual_status": "OFFEN",
+      "positive_physical_hzt_claim": false,
+      "empirical_confirmation_claim": false,
+      "parent_derivation_claim": false,
+      "physical_evidence_effect": "NONE"
+    }
+  ],
+  "global_result": {
+    "delta_candidates": 7,
+    "contextually_adjudicated": 7,
+    "contextually_unadjudicated": 0,
+    "source_navigation_metadata": 2,
+    "audit_blocker_counts": 2,
+    "open_proof_obligations": 3,
+    "positive_physical_hzt_overclaims": 0,
+    "empirical_confirmation_claims": 0,
+    "parent_derivation_promotions": 0,
+    "physical_claim_promotions": 0
+  },
+  "interpretation": "The original Band-V-B 42/42 adjudication remains historical audit provenance. The current 46 MEDIUM candidates consist of 39 still-live historical IDs plus seven successor status-page IDs adjudicated here; three historical status-page IDs are retired from the live corpus.",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
