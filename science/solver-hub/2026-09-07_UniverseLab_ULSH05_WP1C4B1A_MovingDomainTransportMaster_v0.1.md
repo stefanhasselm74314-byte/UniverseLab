@@ -242,23 +242,66 @@ Diese Angaben werden nicht geraten.
 
 ---
 
-## 7. Bewegte GHY- und Kappenintegrale
+## 7. Bewegte GHY- und Kappenintegrale: Extension-Firewall
 
-Ist `B_s(epsilon)` eine 5-Form auf der regionalen Kappe, gilt direkt aus C4B0:
-
-\[
-Q_1[B_s]=B_{1,s}+\mathcal L_{z_s}\bar B_s,
-\]
+Die C4B0-Pullbackformeln
 
 \[
-Q_2[B_s]
-=B_{2,s}+2\mathcal L_{z_s}B_{1,s}
-+(\mathcal L_{w_s}+\mathcal L_{z_s}^2)\bar B_s.
+Q_1[T]=T_1+\mathcal L_z\bar T,
+\qquad
+Q_2[T]=T_2+2\mathcal L_zT_1+(\mathcal L_w+\mathcal L_z^2)\bar T
 \]
 
-Diese Regel gilt sowohl für die GHY-5-Form jeder Region als auch für die lokalisierte Kappen-5-Form.
+gelten direkt für ein **ambient definiertes** Tensor-/Formfeld `T`, dessen regionale Extension deklariert ist.
 
-Damit ist die kinematische Infrastruktur für B1B vorhanden. Was noch fehlt, ist die dynamische Assemblierung der Eulerian EH/Materie-Variation, der regionalen Domain-Flüsse, der bewegten GHY-Pullbacks und der Cap-Variation zu einem gemeinsamen First-Shape-Residual.
+Für einen GHY- oder Cap-Lagrangian ist deshalb zwischen zwei Situationen zu unterscheiden.
+
+### 7.1 Ambient fortgesetztes Boundary-Objekt
+
+Wenn eine regionale 5-Form `B_s` ausdrücklich als glatte ambient fortgesetzte Form definiert wurde, darf unmittelbar
+
+\[
+Q_1[B_s]=B_{1,s}+\mathcal L_{z_s}\bar B_s
+\]
+
+und
+
+\[
+Q_2[B_s]=B_{2,s}+2\mathcal L_{z_s}B_{1,s}+(\mathcal L_{w_s}+\mathcal L_{z_s}^2)\bar B_s
+\]
+
+verwendet werden.
+
+### 7.2 Intrinsische lokalisierte Kappenform
+
+Die reale lokalisierte Kappenwirkung ist hingegen intrinsisch auf dem abstrakten Interface aufgebaut:
+
+\[
+S_\Sigma
+=\int_{\Sigma_5}
+\mathbf b_\Sigma
+\bigl(
+ h_{ab},\,X_\epsilon^*\phi,\,X_\epsilon^*A,\,\sigma,\,D\sigma
+\bigr).
+\]
+
+Ihre korrekte moving-interface Variation wird daher **nicht** durch ein undeclariertes normales `L_z b_Sigma` definiert. Stattdessen gilt:
+
+1. ambient Felder `g,phi,A,...` mit den C4B0-Q1/Q2-Regeln auf die feste abstrakte `Sigma` pullbacken;
+2. daraus `h_ab(epsilon)`, `PhiSigma(epsilon)`, `aSigma(epsilon)` und die intrinsischen Ableitungen bilden;
+3. die intrinsische 5-Form entlang dieses induzierten Feldpfads mit der gewöhnlichen Kettenregel differenzieren.
+
+Dasselbe Vorsichtsprinzip gilt für den GHY-Sektor: dessen 5-Form hängt von induzierter Metrik, normiertem Normalenfeld und Extrinsikkrümmung ab. Die vollständige moving-GHY-Variation benötigt daher die C4B1B/C-Assemblierung der Geometrie und ist durch die reine Bulk-Domain-Transportidentität noch **nicht** eingefroren.
+
+Damit gilt fail-closed:
+
+```text
+undeclared normal Lie derivative of intrinsic cap five-form = FORBIDDEN
+moving GHY total variation = OPEN
+moving intrinsic cap total variation = OPEN beyond frozen C2/C4A ingredients
+```
+
+Diese Präzisierung verhindert, dass eine willkürliche Ambient-Extension eines intrinsischen Boundary-Lagrangians als physikalische Aussage in die Hesse eingeht.
 
 ---
 
@@ -334,6 +377,7 @@ Eine mathematische Gegenprüfung an der allgemeinen Weiss-Variation bewegter GR-
 
 - vollständiger First-Shape-Residual von EH+GHY+Skalar+Maxwell+Kappe;
 - Entscheidung, ob dessen Normalanteil unabhängig oder durch Bulk/Junction/Bianchi redundant ist;
+- moving intrinsic localized-cap total variation beyond the already-derived fixed-interface C2 and linear C4A ingredients;
 - zweite bewegte GHY-Variation;
 - zweite bewegte Kappenvariation;
 - vollständige Boundary-Hesse;
@@ -347,6 +391,7 @@ Eine mathematische Gegenprüfung an der allgemeinen Weiss-Variation bewegter GR-
 Unverändert:
 
 ```text
+WP1_boundary_intrinsic_form_extension_policy = FROZEN_FAIL_CLOSED
 WP1_full_shape_residual = NOT_ASSEMBLED
 WP1_configuration_space_connection = NOT_FROZEN
 WP1_full_boundary_hessian = NOT_CLOSED
@@ -367,4 +412,4 @@ physical_evidence_effect = NONE
 
 ## 11. Nächster Block
 
-`ULSH-05/WP1C4B1B` muss den vollständigen ersten Shape-Residual der Parentwirkung assemblieren. Erst wenn dessen Status gegenüber Diffeomorphismus-/Bianchi-/Junction-Identitäten geklärt ist, darf `WP1C4B1C` die zweite moving-boundary Variation als Boundary-Hessian-Baustein aufbauen.
+`ULSH-05/WP1C4B1B` muss den vollständigen ersten Shape-Residual der Parentwirkung assemblieren. Es muss die regionalen Bulk-Topform-Flüsse und bewegten GHY-Geometriebeiträge mit der **intrinsisch über induzierte Felder differenzierten** Cap-Wirkung kombinieren. Erst wenn dessen Status gegenüber Diffeomorphismus-/Bianchi-/Junction-Identitäten geklärt ist, darf `WP1C4B1C` die zweite moving-boundary Variation als Boundary-Hessian-Baustein aufbauen.
