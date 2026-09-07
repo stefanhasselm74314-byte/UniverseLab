@@ -26,36 +26,20 @@ def single_interval_transport_control() -> None:
     a0 = 0.83
     xi = -0.27
     chi = 0.36
-
-    # f_j(x)=c0+c1*x+c2*x^2 for j=0,1,2.
     c0 = (1.1, 0.4, 0.2)
     c1 = (-0.3, 0.5, -0.1)
     c2 = (0.7, -0.2, 0.3)
 
-    def val(c, x):
-        return c[0] + c[1]*x + c[2]*x*x
-
-    def deriv(c, x):
-        return c[1] + 2*c[2]*x
-
-    def integ(c, x):
-        return poly_int(*c, x)
-
-    def a(eps):
-        return a0 + eps*xi + 0.5*eps*eps*chi
-
+    def val(c, x): return c[0] + c[1]*x + c[2]*x*x
+    def deriv(c, x): return c[1] + 2*c[2]*x
+    def integ(c, x): return poly_int(*c, x)
+    def a(eps): return a0 + eps*xi + 0.5*eps*eps*chi
     def I(eps):
         aa = a(eps)
         return integ(c0, aa) + eps*integ(c1, aa) + 0.5*eps*eps*integ(c2, aa)
 
     expected1 = integ(c1, a0) + xi*val(c0, a0)
-    expected2 = (
-        integ(c2, a0)
-        + 2*xi*val(c1, a0)
-        + chi*val(c0, a0)
-        + xi*xi*deriv(c0, a0)
-    )
-
+    expected2 = integ(c2, a0) + 2*xi*val(c1, a0) + chi*val(c0, a0) + xi*xi*deriv(c0, a0)
     errs = []
     for h in (4e-4, 2e-4, 1e-4):
         fd1 = (I(h)-I(-h))/(2*h)
@@ -68,49 +52,27 @@ def single_interval_transport_control() -> None:
 
 
 def two_region_interface_control() -> None:
-    y0 = 0.72
-    L = 1.91
-    xi = 0.31
-    chi = -0.22
+    y0, L, xi, chi = 0.72, 1.91, 0.31, -0.22
+    n0, n1, n2 = (0.8, 0.45, 0.12), (-0.15, 0.33, 0.04), (0.21, -0.18, 0.09)
+    s0, s1, s2 = (1.25, -0.28, 0.07), (0.18, 0.14, -0.05), (-0.12, 0.26, 0.03)
 
-    n0 = (0.8, 0.45, 0.12)
-    n1 = (-0.15, 0.33, 0.04)
-    n2 = (0.21, -0.18, 0.09)
-    s0 = (1.25, -0.28, 0.07)
-    s1 = (0.18, 0.14, -0.05)
-    s2 = (-0.12, 0.26, 0.03)
-
-    def val(c, x):
-        return c[0] + c[1]*x + c[2]*x*x
-
-    def deriv(c, x):
-        return c[1] + 2*c[2]*x
-
-    def integ(c, a, b):
-        return poly_int(*c, b)-poly_int(*c, a)
-
-    def y(eps):
-        return y0 + eps*xi + 0.5*eps*eps*chi
-
+    def val(c, x): return c[0] + c[1]*x + c[2]*x*x
+    def deriv(c, x): return c[1] + 2*c[2]*x
+    def integ(c, a, b): return poly_int(*c, b)-poly_int(*c, a)
+    def y(eps): return y0 + eps*xi + 0.5*eps*eps*chi
     def I(eps):
         yy = y(eps)
         IN = integ(n0, 0.0, yy) + eps*integ(n1, 0.0, yy) + 0.5*eps*eps*integ(n2, 0.0, yy)
         IS = integ(s0, yy, L) + eps*integ(s1, yy, L) + 0.5*eps*eps*integ(s2, yy, L)
         return IN + IS
 
-    expected1 = (
-        integ(n1, 0.0, y0)
-        + integ(s1, y0, L)
-        + xi*(val(n0, y0)-val(s0, y0))
-    )
+    expected1 = integ(n1, 0.0, y0) + integ(s1, y0, L) + xi*(val(n0, y0)-val(s0, y0))
     expected2 = (
-        integ(n2, 0.0, y0)
-        + integ(s2, y0, L)
+        integ(n2, 0.0, y0) + integ(s2, y0, L)
         + 2*xi*(val(n1, y0)-val(s1, y0))
         + chi*(val(n0, y0)-val(s0, y0))
         + xi*xi*(deriv(n0, y0)-deriv(s0, y0))
     )
-
     errs = []
     for h in (4e-4, 2e-4, 1e-4):
         fd1 = (I(h)-I(-h))/(2*h)
@@ -123,37 +85,21 @@ def two_region_interface_control() -> None:
 
 
 def tangential_top_form_flux_control() -> None:
-    # In 2D let omega=f dx^dy and boundary x=a with tangent t=partial_y.
-    # i_t omega=-f dx, whose pullback to x=a has dx/dy=0, hence vanishes.
-    f = 1.73
-    tau = -0.42
-    alpha_x = -tau*f
-    alpha_y = 0.0
-    boundary_dx_ds = 0.0
-    boundary_dy_ds = 1.0
-    pullback = alpha_x*boundary_dx_ds + alpha_y*boundary_dy_ds
+    f, tau = 1.73, -0.42
+    alpha_x, alpha_y = -tau*f, 0.0
+    pullback = alpha_x*0.0 + alpha_y*1.0
     close(pullback, 0.0, atol=0.0, rtol=0.0)
 
 
 def fixed_domain_limit_control() -> None:
     a0 = 0.63
-    c1 = (0.2, -0.4, 0.1)
-    c2 = (-0.3, 0.6, 0.05)
-    expected1 = poly_int(*c1, a0)
-    expected2 = poly_int(*c2, a0)
-
+    c1, c2 = (0.2, -0.4, 0.1), (-0.3, 0.6, 0.05)
+    expected1, expected2 = poly_int(*c1, a0), poly_int(*c2, a0)
     def I(eps):
-        return (
-            poly_int(1.0, 0.2, 0.3, a0)
-            + eps*poly_int(*c1, a0)
-            + 0.5*eps*eps*poly_int(*c2, a0)
-        )
-
+        return poly_int(1.0, 0.2, 0.3, a0) + eps*poly_int(*c1, a0) + 0.5*eps*eps*poly_int(*c2, a0)
     h = 1e-4
-    fd1 = (I(h)-I(-h))/(2*h)
-    fd2 = (I(h)-2*I(0.0)+I(-h))/(h*h)
-    close(fd1, expected1, atol=2e-9, rtol=2e-9)
-    close(fd2, expected2, atol=2e-8, rtol=2e-8)
+    close((I(h)-I(-h))/(2*h), expected1, atol=2e-9, rtol=2e-9)
+    close((I(h)-2*I(0.0)+I(-h))/(h*h), expected2, atol=2e-8, rtol=2e-8)
 
 
 def contract_and_firewall_control() -> None:
@@ -175,11 +121,16 @@ def contract_and_firewall_control() -> None:
     assert "2*i_zs L1_s+i_ws Lbar_s+i_zs L_zs Lbar_s" in transport["stokes_second"]
     assert d["internal_cap_first_order"]["canonical_two_side_form"] == "sum_s Xbar_s^*(i_zs Lbar_s)"
     assert d["internal_cap_first_order"]["status"] == "ORIENTATION_SAFE_MASTER_FROZEN_SCALAR_JUMP_REDUCTION_CONDITIONAL"
+    boundary = d["boundary_action_transport"]
+    assert boundary["status"] == "AMBIENT_PULLBACK_RULE_FROZEN_INTRINSIC_CAP_AND_GHY_TOTAL_VARIATIONS_DEFERRED"
+    assert "intrinsically constructed" in boundary["intrinsic_localized_cap_rule"]
+    assert "do not write L_z" in boundary["forbidden_shortcut"]
 
     g = d["gate_state"]
     expected = {
         "WP1_second_order_embedding_path_contract": "DERIVED",
         "WP1_moving_domain_transport_master": "DERIVED",
+        "WP1_boundary_intrinsic_form_extension_policy": "FROZEN_FAIL_CLOSED",
         "WP1_full_shape_residual": "NOT_ASSEMBLED",
         "WP1_configuration_space_connection": "NOT_FROZEN",
         "WP1_full_boundary_hessian": "NOT_CLOSED",
@@ -195,8 +146,7 @@ def contract_and_firewall_control() -> None:
         "K1-D": "NOT_RELEASED",
         "K1-E": "NOT_ADMISSIBLE",
     }
-    for key, value in expected.items():
-        assert g[key] == value, (key, g[key], value)
+    for key, value in expected.items(): assert g[key] == value, (key, g[key], value)
 
     assert c4b0["gate_state"]["WP1_second_order_embedding_path_contract"] == "DERIVED"
     assert c4b0["gate_state"]["WP1_configuration_space_connection"] == "NOT_FROZEN"
@@ -204,9 +154,10 @@ def contract_and_firewall_control() -> None:
     assert c4a["gate_state"]["WP1_full_boundary_hessian"] == "NOT_CLOSED"
 
     for sentinel in (
-        "I_{1,s}",
-        "I_{2,s}",
+        "I_{1,s}", "I_{2,s}",
+        "undeclared normal Lie derivative of intrinsic cap five-form = FORBIDDEN",
         "regional transport term != physical brane force by itself",
+        "WP1_boundary_intrinsic_form_extension_policy = FROZEN_FAIL_CLOSED",
         "WP1_full_shape_residual = NOT_ASSEMBLED",
         "PHYSICAL_BACKGROUND = NOT_ESTABLISHED",
     ):
