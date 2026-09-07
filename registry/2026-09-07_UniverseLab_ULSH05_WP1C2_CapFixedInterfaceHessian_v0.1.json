@@ -1,0 +1,149 @@
+{
+  "schema": "universelab.ulsh05-wp1c2-cap-fixed-interface-hessian.v0.1",
+  "version": "0.1.0",
+  "date": "2026-09-07",
+  "basis_main_commit": "d78cafe423cc86dc9eec80a4c0e2c952177942f4",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "module_id": "ULSH-05",
+  "work_package": "WP1C2_CAP_LOCALIZED_ACTION_HESSIAN_FIXED_INTERFACE_CONTROL",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "classification": "NONOPERATIVE_ANALYTIC_CAP_HESSIAN_FIXED_INTERFACE_CONTROL",
+  "status": "DERIVED_FIXED_INTERFACE_CAP_LOCALIZED_HESSIAN_AND_STRESS_RESPONSE_BENDING_AND_FULL_JUNCTION_NOT_CLOSED",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "purpose": "Derive the exact epsilon^2 coefficient of the localized C-PHYS-M1 cap action for a fixed cap embedding, including simultaneous induced-metric, cap-phase and tangential U(1) perturbations, and derive the corresponding first-order cap stress/current response. Cap displacement/bending and the complete perturbed two-sided junction system remain outside this control block.",
+  "authoritative_sources": [
+    "SCI-001-002_v0.1_Canonical_6D_Parent_Action_and_Boundary_Closure.md",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.json"
+  ],
+  "cap_parent_action": {
+    "formula": "S_Sigma=int_Sigma d5x sqrt(-h)[-lambda(phi)-0.5*Z_sigma(phi)*h^ab*D_a sigma*D_b sigma]",
+    "covariant_phase_gradient": "B_a=D_a sigma=partial_a sigma-q_Sigma*A_a",
+    "m1_lambda": "lambda=lambda_hat*M6^5",
+    "m1_Z_sigma": "Z_sigma=z_sigma_hat*M6^3",
+    "m1_scalar_derivatives": "lambda_phi=lambda_phiphi=Z_sigma_phi=Z_sigma_phiphi=0",
+    "charge": "q_Sigma=m_sigma*q_hat/M6 with m_sigma positive integer and q_hat>0"
+  },
+  "fixed_interface_path": {
+    "embedding": "fixed coordinate embedding of Sigma5 in WP1C2",
+    "induced_metric": "h_ab(epsilon)=hbar_ab+epsilon*q_ab",
+    "cap_phase": "sigma(epsilon)=sigmabar+epsilon*s",
+    "tangential_gauge": "A_a(epsilon)=Abar_a+epsilon*a_a",
+    "phase_gradient": "B_a(epsilon)=Bbar_a+epsilon*b_a",
+    "b_a": "partial_a s-q_Sigma*a_a",
+    "inverse_metric": "h^ab=hbar^ab-epsilon*q^ab+epsilon^2*rSigma^ab+O(epsilon^3), rSigma^ab=q^a_c*q^cb",
+    "trace": "q=hbar^ab*q_ab",
+    "norm": "q2=q_ab*q^ab"
+  },
+  "measure_expansion": {
+    "formula": "sqrt(-h)=sqrt(-hbar)[1+epsilon*n1+epsilon^2*n2+O(epsilon^3)]",
+    "n1": "q/2",
+    "n2": "q^2/8-q_ab*q^ab/4"
+  },
+  "phase_norm_expansion": {
+    "definition": "Y=h^ab*B_a*B_b=Y0+epsilon*Y1+epsilon^2*Y2+O(epsilon^3)",
+    "Y0": "Bbar_a*Bbar^a",
+    "Y1": "2*Bbar^a*b_a-q^ab*Bbar_a*Bbar_b",
+    "Y2": "b_a*b^a-2*q^ab*Bbar_a*b_b+rSigma^ab*Bbar_a*Bbar_b",
+    "index_rule": "all raised indices and contractions use hbar_ab"
+  },
+  "cap_lagrangian_coefficients": {
+    "L0": "-lambda-0.5*Z_sigma*Y0",
+    "L1": "-0.5*Z_sigma*Y1",
+    "L2": "-0.5*Z_sigma*Y2"
+  },
+  "exact_cap_quadratic_density": {
+    "definition": "sqrt(-h)*L_Sigma=sqrt(-hbar)[L0+epsilon*(L1+n1*L0)+epsilon^2*C2+O(epsilon^3)]",
+    "formula": "C2=L2+n1*L1+n2*L0",
+    "expanded": "C2=-0.5*Z_sigma*Y2-(q/4)*Z_sigma*Y1+(q^2/8-q_ab*q^ab/4)*[-lambda-0.5*Z_sigma*Y0]",
+    "action": "S_Sigma,quad^(2)=int_Sigma d5x sqrt(-hbar)*C2",
+    "classification": "EXACT_ALGEBRAIC_FIXED_INTERFACE_CAP_SECOND_ORDER_DENSITY"
+  },
+  "cap_stress_response": {
+    "background": "Sbar_ab=-(lambda+0.5*Z_sigma*Y0)*hbar_ab+Z_sigma*Bbar_a*Bbar_b",
+    "linear": "deltaS_ab=-(lambda+0.5*Z_sigma*Y0)*q_ab-0.5*Z_sigma*Y1*hbar_ab+Z_sigma*(Bbar_a*b_b+b_a*Bbar_b)",
+    "classification": "EXACT_FIRST_VARIATION_OF_PROJECT_EQ006_AT_FIXED_INTERFACE",
+    "future_israel_residual": "deltaJunction_ab=M6^4*sum_s deltaPi_ab^(s)-deltaS_ab; it may be interpreted as a linearized junction equation only after a background satisfying the unperturbed junction condition is established."
+  },
+  "cap_gauge_current_response": {
+    "background": "Jbar_Sigma^a=q_Sigma*Z_sigma*Bbar^a",
+    "linear": "deltaJ_Sigma^a=q_Sigma*Z_sigma*(b^a-q^ab*Bbar_b)",
+    "classification": "EXACT_FIRST_VARIATION_OF_PROJECT_EQ009_CURRENT_AT_FIXED_INTERFACE"
+  },
+  "phase_equation_density_kernel": {
+    "background_density": "Kbar_phase^a=sqrt(-hbar)*Z_sigma*Bbar^a",
+    "linear_density": "deltaK_phase^a=sqrt(-hbar)*Z_sigma*[b^a-q^ab*Bbar_b+(q/2)*Bbar^a]",
+    "residual_form": "partial_a(Kbar_phase^a+epsilon*deltaK_phase^a)=0+O(epsilon^2)",
+    "on_shell_warning": "deltaK_phase defines the linearized residual kernel off shell; setting its divergence to zero as a perturbation equation presumes the background cap phase equation is satisfied."
+  },
+  "u1_gauge_control": {
+    "transformation": "a_a -> a_a+partial_a alpha; s -> s+q_Sigma*alpha",
+    "b_a_response": "INVARIANT",
+    "C2_response": "INVARIANT",
+    "deltaS_ab_response": "INVARIANT",
+    "deltaJ_Sigma_response": "INVARIANT",
+    "firewall": "This U(1) statement does not address bulk diffeomorphism gauge, cap displacement gauge, patch topology, or global winding-sector transitions."
+  },
+  "control_limits": {
+    "fixed_induced_metric": "q_ab=0 gives C2=-0.5*Z_sigma*b_a*b^a, the ordinary Stückelberg/phase kinetic Hessian on the cap",
+    "no_phase_or_gauge_perturbation": "b_a=0 leaves the pure induced-metric response of cap tension plus background winding energy",
+    "isotropic_no_winding_background": "Bbar_a=0 removes all background-winding mixing; q_ab=0 then leaves only -0.5*Z_sigma*b^2",
+    "no_active_phase_perturbation": "If the declared isotropic control disables the phase sector entirely, WP1C2 must not be used to infer a propagating cap mode."
+  },
+  "independent_QA_contract": {
+    "direct_density": "Use deterministic Lorentz-signature 5x5 induced metrics and central finite differences of the original non-expanded cap density to reconstruct C2.",
+    "stress_response": "Finite-difference the exact project EQ-006 cap stress tensor and compare each component with deltaS_ab.",
+    "current_response": "Finite-difference J_Sigma^a=q_Sigma*Z_sigma*h^ab*B_b and compare with deltaJ_Sigma^a.",
+    "gauge_invariance": "Apply simultaneous perturbation shifts a_a->a_a+xi_a and partial_a s->partial_a s+q_Sigma*xi_a and verify b_a, C2, deltaS_ab and deltaJ remain unchanged.",
+    "fixed_metric_limit": "q_ab=0 must reduce exactly to -0.5*Z_sigma*b^2."
+  },
+  "parent_hessian_progress": {
+    "WP1A_fixed_metric_scalar_Maxwell": "DERIVED_CONTROL_SUBSECTOR",
+    "WP1B_EH_GHY_master": "DERIVED_CONTROL_TEMPLATE",
+    "WP1C1_bulk_metric_matter": "DERIVED",
+    "WP1C2_cap_fixed_interface": "DERIVED_CONTROL_SUBSECTOR",
+    "bulk_plus_fixed_interface_cap_parent_hessian": "ASSEMBLABLE_CONTROL_LEVEL_NOT_BENDING_COMPLETE_NOT_GAUGE_REDUCED",
+    "full_parent_hessian_with_moving_cap": "NOT_DERIVED"
+  },
+  "what_remains_open": [
+    "cap displacement/bending or globally justified fixed-interface gauge",
+    "normal and tangential metric perturbations outside the local fixed-interface control chart",
+    "complete two-sided perturbed Israel/scalar/gauge/phase junction assembly",
+    "diffeomorphism gauge-invariant S/V/T variables",
+    "constraint elimination",
+    "released physical on-shell background",
+    "matter Delta_m observable-source definition and coupling",
+    "6D-to-4D perturbative reduction",
+    "mu eta Sigma growth and lensing",
+    "ghost freedom, kinetic positivity, gradient stability and physical spectrum"
+  ],
+  "wp1_progress_effect": {
+    "ULSH05_WP1": "PREPARATORY_IN_PROGRESS_NOT_CLOSED",
+    "G01": "OPEN_BLOCKING",
+    "full_coupled_S_quad_2": "NOT_DERIVED_MOVING_CAP_AND_GAUGE_REDUCTION_OPEN"
+  },
+  "forbidden_inferences": [
+    "Do not interpret fixed-interface cap closure as proof that cap bending is absent or pure gauge.",
+    "Do not impose the linearized Israel residual as a physical boundary equation without an established background satisfying the unperturbed matching conditions.",
+    "Do not infer a propagating cap mode when the phase sector is disabled in an isotropic control branch.",
+    "Do not infer ghost freedom or stability from Z_sigma>0 or from the cap Hessian alone.",
+    "Do not infer a 4D observable map, growth, lensing or physical response rank.",
+    "Do not authorize solver execution or promote K1-D/K1-E."
+  ],
+  "unchanged_firewalls": {
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_analytic_block": "WP1C3_CAP_BENDING_EMBEDDING_AND_COMPLETE_PERTURBED_JUNCTION_ASSEMBLY"
+}
