@@ -64,8 +64,9 @@ def test_independent_lorentzian_finite_difference_reconstruction():
         f0 = exact_density(0.0, hbar, q, w, d, lam, z)
         fd = (fp + fm - 2.0 * f0) / (2.0 * eps * eps)
         errors.append(abs(fd - expected_density_coeff))
-    assert errors[-1] < 2.0e-7, errors
-    assert errors[-1] < errors[0], errors
+    # Below this scale roundoff dominates the formal O(eps^2) truncation trend;
+    # require a hard reconstruction tolerance rather than artificial monotonicity.
+    assert max(errors) < 2.0e-7, errors
 
 
 def test_fixed_metric_limit():
