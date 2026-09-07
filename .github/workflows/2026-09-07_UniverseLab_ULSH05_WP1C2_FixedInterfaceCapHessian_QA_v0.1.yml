@@ -35,6 +35,7 @@ jobs:
           assert d['physical_evidence_effect'] == 'NONE'
           assert d['solver_authorized'] is False
           assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
+          assert g['FM-G0'] == 'OPEN'
           assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
           assert g['K1-D'] == 'NOT_RELEASED'
           assert g['K1-E'] == 'NOT_ADMISSIBLE'
