@@ -1,0 +1,156 @@
+{
+  "schema": "universelab.ulsh05.wp1c4a.signed-collar-bending-gluing.v0.1",
+  "date": "2026-09-07",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1C4A",
+  "status": "DERIVED_EXPLICIT_SIGNED_COLLAR_TWO_SIDE_BENDING_GLUING_FULL_MOVING_BOUNDARY_DYNAMICS_OPEN",
+  "classification": "NONOPERATIVE_GEOMETRIC_GLUING_PREFLIGHT",
+  "basis_main": "91c2f2bc089f41f1e3168bf46d7b69f727e4a6a2",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.json"
+  ],
+  "frozen_regional_orientation_basis": {
+    "r_N": "increases from north smooth pole to cap",
+    "r_S": "increases from south smooth pole to cap",
+    "local_outward_normals": {
+      "n_N": "+partial_rN",
+      "n_S": "+partial_rS"
+    },
+    "source": "2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1"
+  },
+  "common_signed_collar_map": {
+    "interface": "u=0",
+    "north_side": {
+      "domain": "u<=0",
+      "map": "r_N=rho_N+u",
+      "derivative": "partial_u=partial_rN"
+    },
+    "south_side": {
+      "domain": "u>=0",
+      "map": "r_S=rho_S-u",
+      "derivative": "partial_u=-partial_rS"
+    },
+    "global_signed_normal": "nu=partial_u points north-to-south across the collar",
+    "local_outward_normals_in_collar": {
+      "n_N": "+nu",
+      "n_S": "-nu"
+    },
+    "classification": "EXPLICIT_INTERFACE_IDENTIFICATION_CONVENTION_NOT_PHYSICAL_BACKGROUND"
+  },
+  "single_interface_graph": {
+    "graph": "u=epsilon*zeta(y)",
+    "regional_coordinate_displacements": {
+      "delta_r_N": "+epsilon*zeta",
+      "delta_r_S": "-epsilon*zeta"
+    },
+    "local_outward_normal_bending_scalars": {
+      "xi_N": "+zeta",
+      "xi_S": "-zeta"
+    },
+    "gluing_relation": "xi_N+xi_S=0",
+    "status": "DERIVED_IN_DECLARED_SIGNED_COLLAR",
+    "interpretation": "representation identity for one geometric interface in the declared collar; not a gauge-invariant observable"
+  },
+  "compatible_bulk_D_gauge": {
+    "common_collar_generator": "beta=zeta_gauge^u at u=0",
+    "regional_outward_components": {
+      "beta_N": "+beta",
+      "beta_S": "-beta"
+    },
+    "transformations": [
+      "xi_N -> xi_N+beta_N",
+      "xi_S -> xi_S+beta_S"
+    ],
+    "preserved_relation": "(xi_N+xi_S) -> (xi_N+xi_S)+(beta_N+beta_S)=0",
+    "compatibility_condition_for_independent_regional_gauges": "beta_N+beta_S=0",
+    "local_simultaneous_fixed_interface_choice": "beta=-zeta gives xi_N'=xi_S'=0",
+    "global_extension_to_poles_and_patch_structure": "NOT_PROVEN"
+  },
+  "first_fundamental_form_gluing": {
+    "general_relation": "p_N_ab-p_S_ab+2*zeta*(K_N_ab+K_S_ab)+2*D_(a(tau_N_b-tau_S_b))=0",
+    "common_intrinsic_tangential_gauge": "tau_N=tau_S",
+    "reduced_relation": "p_N_ab-p_S_ab+2*zeta*(K_N_ab+K_S_ab)=0",
+    "status": "DERIVED_KINEMATIC_CONTINUITY_CONDITION"
+  },
+  "scalar_pullback_gluing": {
+    "background_continuity": "phibar_N(rho_N)=phibar_S(rho_S)",
+    "common_tangential_gauge_relation": "varphi_N-varphi_S+zeta*(partial_rN phibar_N+partial_rS phibar_S)=0",
+    "on_shell_scalar_junction_simplification_used": false,
+    "reason": "PHYSICAL_BACKGROUND is NOT_ESTABLISHED; no background scalar-junction relation may be inserted as a solved identity"
+  },
+  "metric_warp_and_radius_interpretation": {
+    "statement": "A and L pullback continuity are contained in the tensor first-fundamental-form condition; no separate physical background solution is inferred."
+  },
+  "gauge_patch_gluing": {
+    "background_patch_contract": "A_chi_N-A_chi_S=N_F/q_ref in the frozen regular-pole patch convention",
+    "moving_perturbation_transition_function": "NOT_FROZEN_IN_WP1C4A",
+    "reason": "regional U1 gauge perturbations may shift the overlap transition function; full moving gauge-patch and normal-flux junction assembly is deferred",
+    "status": "OPEN_FOR_WP1C4B"
+  },
+  "what_this_closes": [
+    "explicit common interface identification map in a signed normal collar",
+    "regional sign relation between the two local bending scalars",
+    "compatible normal bulk-D-gauge condition preserving one-interface gluing",
+    "local simultaneous fixed-interface gauge inside the collar",
+    "off-shell first-fundamental-form gluing relation",
+    "off-shell scalar pullback continuity relation"
+  ],
+  "not_closed": [
+    "global extension of the collar fixed-interface gauge to both poles",
+    "moving U1 patch-transition perturbation",
+    "perturbed scalar normal-flux junction",
+    "perturbed gauge normal-flux junction",
+    "moving-boundary second variation of GHY plus localized action",
+    "assembled boundary Hessian",
+    "full perturbed Israel/scalar/gauge junction system",
+    "S/V/T decomposition and constraint elimination",
+    "physical background",
+    "ghost freedom and stability",
+    "6D-to-4D perturbative reduction",
+    "mu eta Sigma growth and lensing"
+  ],
+  "gate_state": {
+    "WP1_moving_interface_linear_geometry": "DERIVED_PREFLIGHT",
+    "WP1_signed_collar_interface_identification": "DERIVED",
+    "WP1_two_side_bending_gluing": "DERIVED_IN_DECLARED_COLLAR",
+    "WP1_local_simultaneous_fixed_interface_gauge": "DERIVED_COLLAR_LOCAL_ONLY",
+    "WP1_global_fixed_interface_gauge": "NOT_PROVEN",
+    "WP1_full_boundary_hessian": "NOT_CLOSED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "xi_N=-xi_S is not a gauge-invariant physical observable; it is the representation of one interface graph in the declared signed collar.",
+    "No global fixed-interface gauge is proven.",
+    "No physical background is constructed by the collar map.",
+    "No full moving-boundary Hessian or perturbed junction system is released.",
+    "No ghost-freedom, stability or 4D observable claim.",
+    "No authorization, grant, backend import or solver execution."
+  ],
+  "next_block": {
+    "id": "ULSH-05/WP1C4B",
+    "title": "Perturbed scalar/gauge normal-flux and moving patch gluing preflight",
+    "execution_type": "ANALYTIC_NONOPERATIVE",
+    "required_output": [
+      "moving scalar normal-flux variation",
+      "moving gauge normal-flux variation",
+      "perturbed U1 overlap/patch transition contract",
+      "two-side outward-sum sign audit in the signed collar",
+      "no physical solver execution"
+    ]
+  }
+}
