@@ -1,0 +1,141 @@
+{
+  "schema": "universelab.ulsh05.wp1c4b0.second-order-embedding-path-contract.v0.1",
+  "date": "2026-09-07",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1C4B0",
+  "classification": "NONOPERATIVE_SECOND_ORDER_VARIATIONAL_KINEMATICS_CONTRACT",
+  "status": "DERIVED_SECOND_ORDER_EMBEDDING_AND_PULLBACK_PATH_CONTRACT_MOVING_BOUNDARY_HESSIAN_NOT_YET_ASSEMBLED",
+  "basis_main": "fa8749bb87351c7057fb37db6129c3819a4b6ad7",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json"
+  ],
+  "second_order_field_path": {
+    "generic_field": "T(epsilon)=Tbar+epsilon*T1+0.5*epsilon^2*T2+O(epsilon^3)",
+    "configuration_path": "Phi(epsilon)=Phibar+epsilon*u+0.5*epsilon^2*v+O(epsilon^3)",
+    "interpretation_u": "first tangent in configuration space",
+    "interpretation_v": "second path tangent / acceleration datum; not fixed by u",
+    "off_shell_warning": "v cannot be discarded when DS[Phibar] is nonzero"
+  },
+  "embedding_generator_path": {
+    "definition": "dX_epsilon/d epsilon = v_epsilon o X_epsilon",
+    "first_generator": "z=v_epsilon|_0",
+    "second_generator": "w=(d v_epsilon/d epsilon)|_0",
+    "important_distinction": "w is the second Lie-generator datum, not an undeclared coordinate second derivative Xddot^A",
+    "coordinate_acceleration_note": "a coordinate/covariant Xddot additionally depends on the extension/connection and the convective derivative of z",
+    "autonomous_flow_control": "w=0 is allowed only as a declared autonomous-generator control path, not as a physical statement that interface acceleration vanishes"
+  },
+  "moving_pullback_second_order": {
+    "first_order": "Q1[T]=T1+L_z Tbar",
+    "second_order": "Q2[T]=T2+2*L_z T1+(L_w+L_z^2)Tbar",
+    "meaning": "Q1 and Q2 are the first and second coefficients of X_epsilon^* T(epsilon) in the declared time-dependent-generator convention",
+    "extension_policy": "component expansions of L_z or L_w require an explicitly declared regional extension; the pullback master itself is the canonical object"
+  },
+  "second_order_bulk_D_gauge": {
+    "first_generator": "zeta",
+    "second_generator": "lambda",
+    "field_first": "T1' = T1-L_zeta Tbar",
+    "field_second": "T2' = T2-2*L_zeta T1+(L_zeta^2-L_lambda)Tbar",
+    "embedding_first": "z' = z+zeta",
+    "embedding_second": "w' = w+lambda-[zeta,z]",
+    "result": "Q1 and Q2 are invariant under the declared second-order bulk D-gauge transformation",
+    "commutator_convention": "[zeta,z]^A=zeta^B nabla_B z^A-z^B nabla_B zeta^A; equivalently [L_zeta,L_z]=L_[zeta,z]"
+  },
+  "second_order_surface_reparameterization": {
+    "intrinsic_first_generator": "beta^a",
+    "intrinsic_second_generator": "gamma^a",
+    "intrinsic_tensor_first": "q1' = q1-L_beta q0",
+    "intrinsic_tensor_second": "q2' = q2-2*L_beta q1+(L_beta^2-L_gamma)q0",
+    "status": "COVARIANCE_CONTRACT_ONLY_NO_SVT_OR_INTRINSIC_GAUGE_FIXING"
+  },
+  "off_shell_hessian_extraction": {
+    "path_second_derivative": "d2S/d epsilon2|0 = D2S[u,u]+DS[v]",
+    "wp1_quadratic_coefficient": "S_path_quad^(2)=0.5*D2S[u,u]+0.5*DS[v]",
+    "intrinsic_hessian_coefficient": "S_Hess^(2)=0.5*D2S[u,u]=S_path_quad^(2)-0.5*DS[v]",
+    "physical_background_dependency": "because PHYSICAL_BACKGROUND=NOT_ESTABLISHED, DS[v] may not be set to zero",
+    "forbidden_shortcut": "a chosen linear or autonomous embedding path may not be promoted to a path-independent off-shell Hessian unless the DS[v] contribution is explicitly removed or the relevant first variation is independently proven zero"
+  },
+  "two_side_second_order_gluing": {
+    "common_normal": "N^A=n_N^A=-n_S^A",
+    "first_generator_common": "z^A=xi*N^A+tau^a*e_a^A",
+    "second_generator_common": "w^A=chi*N^A+nu^a*e_a^A",
+    "regional_first": [
+      "xi_N=+xi",
+      "xi_S=-xi",
+      "tau_N^a=tau_S^a=tau^a"
+    ],
+    "regional_second": [
+      "chi_N=+chi",
+      "chi_S=-chi",
+      "nu_N^a=nu_S^a=nu^a"
+    ],
+    "equivalent_second_constraint": "chi_N+chi_S=0",
+    "scope": "generator-level gluing in the same common-interface identification as WP1C4A; not a statement about raw coordinate Xddot components"
+  },
+  "independent_controls": {
+    "moving_scalar_pullback": "direct finite difference of T_epsilon(x_epsilon) reproduces T2+2*z*dT1+z^2*d2Tbar+w*dTbar in a one-dimensional control",
+    "noncommuting_gauge_algebra": "finite-dimensional noncommuting operator matrices verify Q1'=Q1 and Q2'=Q2 using w'=w+lambda-[zeta,z]",
+    "off_shell_path_dependence": "two paths with identical first tangent u but different second tangent v have second action derivatives differing by DS[v1-v2], while the subtracted Hessian coefficient agrees",
+    "two_side_second_order_coordinate_control": "y(epsilon)=epsilon*xi+0.5*epsilon^2*chi with r_N=rho_N+y and r_S=rho_S-y reproduces first and second sign flips"
+  },
+  "not_closed": [
+    "second-order moving GHY contribution",
+    "second-order moving localized cap action including embedding perturbation",
+    "assembled full boundary Hessian",
+    "full perturbed Israel/scalar/gauge boundary-value operator",
+    "global fixed-interface gauge admissibility",
+    "S/V/T decomposition and constraint elimination",
+    "physical background",
+    "ghost freedom and stability",
+    "6D-to-4D perturbative reduction",
+    "mu eta Sigma growth and lensing"
+  ],
+  "gate_state": {
+    "WP1_bulk_gravity_matter_hessian": "ASSEMBLABLE_OFFSHELL",
+    "WP1_fixed_interface_localized_cap_hessian": "DERIVED",
+    "WP1_moving_interface_linear_geometry": "DERIVED_PREFLIGHT",
+    "WP1_two_side_bending_glue": "DERIVED",
+    "WP1_scalar_normal_flux_junction": "DERIVED_LINEAR_PREFLIGHT",
+    "WP1_gauge_normal_flux_junction": "DERIVED_LINEAR_PREFLIGHT",
+    "WP1_second_order_embedding_path_contract": "DERIVED",
+    "WP1_full_boundary_hessian": "NOT_CLOSED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "No claim that w=0 is physically selected.",
+    "No claim that DS[v]=0 off shell.",
+    "No claim that the moving-boundary Hessian is closed.",
+    "No released full perturbed junction operator.",
+    "No S/V/T spectrum, ghost-freedom, stability, physical background or observable claim.",
+    "No authorization, grant, backend import or solver execution."
+  ],
+  "next_block": {
+    "id": "ULSH-05/WP1C4B1",
+    "title": "Moving GHY plus localized-action second variation with explicit Hessian extraction",
+    "execution_type": "ANALYTIC_NONOPERATIVE",
+    "required_output": [
+      "second path variation of moving GHY term",
+      "second path variation of moving localized cap action",
+      "explicit subtraction of DS[v] path-acceleration terms",
+      "recovery of fixed-interface WP1B/WP1C2 limits",
+      "assembly with WP1C3/WP1C4A moving geometry and junction preflight",
+      "boundary Hessian closure verdict",
+      "no physical solver execution"
+    ]
+  }
+}
