@@ -120,7 +120,7 @@ def test_upstream_hessian_chain_exists_and_wp1_not_overpromoted():
 def test_physical_and_execution_firewalls_unchanged():
     g = load(REG)["gate_state"]
     assert g["PHYSICAL_BACKGROUND"] == "NOT_ESTABLISHED"
-    assert g["FM_G0"] == "OPEN"
+    assert g["FM-G0"] == "OPEN"
     assert g["AuthorizationDecision"] == "NOT_CREATED"
     assert g["SingleUseGrant"] == "NOT_CREATED"
     assert g["BACKEND_IMPORT"] == "NOT_EXECUTED"
