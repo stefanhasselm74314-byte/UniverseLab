@@ -1,0 +1,67 @@
+name: 2026-09-07 ULSH05 WP1C4B0 Second-Order Embedding Path QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.md'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.py'
+      - '.github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPath_QA_v0.1.yml'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json'
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  wp1c4b0-second-order-path:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Parse contract and compile test
+        run: |
+          python -m json.tool registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json >/dev/null
+          python -m py_compile tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.py
+      - name: Run WP1C4B0 independent controls
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.py
+      - name: Re-run WP1C4A gluing and normal-flux preflight
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.py
+      - name: Re-run WP1C3 moving-interface geometry
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.py
+      - name: Re-run WP1C2 fixed-interface cap Hessian
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.py
+      - name: Re-run WP1B EH plus GHY Hessian master
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.py
+      - name: Re-run G01 observable firewall
+        run: python tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py
+      - name: Fail closed on path, boundary and physical promotion
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json').read_text())
+          g=d['gate_state']
+          assert d['physical_gate_effect']=='NONE'
+          assert d['physical_evidence_effect']=='NONE'
+          assert d['solver_authorized'] is False
+          assert g['WP1_second_order_embedding_path_contract']=='DERIVED'
+          assert g['WP1_full_boundary_hessian']=='NOT_CLOSED'
+          assert g['WP1_full_quadratic_action']=='NOT_CLOSED'
+          assert g['PERTURBED_JUNCTION_SYSTEM']=='NOT_RELEASED'
+          assert g['PHYSICAL_BACKGROUND']=='NOT_ESTABLISHED'
+          assert g['FM-G0']=='OPEN'
+          assert g['AuthorizationDecision']=='NOT_CREATED'
+          assert g['SingleUseGrant']=='NOT_CREATED'
+          assert g['BACKEND_IMPORT']=='NOT_EXECUTED'
+          assert g['SOLVER_EXECUTION']=='NOT_EXECUTED'
+          assert g['PHYSICAL_RESPONSE_RANK']=='NOT_EXECUTED'
+          assert g['K1-D']=='NOT_RELEASED'
+          assert g['K1-E']=='NOT_ADMISSIBLE'
+          assert 'DS[v]' in d['off_shell_hessian_extraction']['path_second_derivative']
+          assert 'w+lambda-[zeta,z]' in d['second_order_bulk_D_gauge']['embedding_second']
+          print('WP1C4B0 firewalls: PASS')
+          PY
