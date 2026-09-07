@@ -1,0 +1,127 @@
+{
+  "schema": "universelab.ulsh05-wp1b-eh-ghy-hessian-master.v0.1",
+  "version": "0.1.0",
+  "date": "2026-09-07",
+  "basis_main_commit": "b6e90a46d17e96a5635c4a9c625964ea62ca7b16",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "module_id": "ULSH-05",
+  "work_package": "WP1B_EINSTEIN_HILBERT_GHY_HESSIAN_MASTER",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "classification": "NONOPERATIVE_ANALYTIC_GRAVITY_HESSIAN_CONTROL",
+  "status": "DERIVED_VARIATIONAL_HESSIAN_MASTER_FIXED_INTERFACE_GN_BOUNDARY_CONTROL_FULL_COUPLED_SYSTEM_NOT_CLOSED",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "purpose": "Derive an exact off-shell second-variation master identity for the Einstein-Hilbert plus GHY sector of one C-PHYS-M1 bulk region and an explicit local fixed-interface Gaussian-normal boundary variation kernel. This is a gravitational control block; it does not yet combine the metric Hessian with WP1A matter-field metric mixing, cap Hessian, cap bending, perturbed junction conditions, gauge reduction or observables.",
+  "authoritative_project_sources": [
+    "SCI-001-002_v0.1_Canonical_6D_Parent_Action_and_Boundary_Closure.md",
+    "hzt-s6-parent-action-v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryLedger_v0.1.md",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Operator2BFunctionSpaceTraceContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-15_HZT-M0_S6_C-PHYS_H4R4A_ExactFirstOrder_BoundaryJet_TheoremReview_v0.1.md",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.json"
+  ],
+  "gravity_action_one_region": {
+    "formula": "S_g=(M6^4/2) int_M sqrt(-g)(R-2 Lambda6)+M6^4 int_Sigma sqrt(-h) K",
+    "normal_convention": "outward normal for each region",
+    "boundary_type": "non-null timelike cap in the project branch",
+    "cosmological_tensor": "E_AB=G_AB+Lambda6*g_AB",
+    "brown_york_momentum_convention": "Pi_ab=K_ab-K*h_ab"
+  },
+  "first_variation_identity": {
+    "formula": "dS_g/d epsilon=(M6^4/2)[int_M sqrt(-g) E_AB (d g^AB/d epsilon)+int_Sigma sqrt(-h) Pi_ab (d h^ab/d epsilon)]",
+    "scope": "fixed coordinate embedding of Sigma; GHY cancels normal-derivative variations of the metric from the Einstein-Hilbert term",
+    "interface_sign_crosscheck": "With delta S_Sigma=-(1/2) int sqrt(-h) S_ab delta h^ab, summing the two outward-normal region terms gives M6^4 sum_s Pi_ab^(s)=S_ab, exactly the project Israel convention."
+  },
+  "metric_path": {
+    "bulk": "g_AB(epsilon)=gbar_AB+epsilon*p_AB",
+    "boundary_induced": "h_ab(epsilon)=hbar_ab+epsilon*q_ab for fixed embedding, q_ab=e_a^A e_b^B p_AB",
+    "bulk_inverse_first": "(d g^AB/d epsilon)_0=-p^AB",
+    "bulk_inverse_second": "(d2 g^AB/d epsilon2)_0=2*p^A_C*p^CB",
+    "boundary_inverse_first": "(d h^ab/d epsilon)_0=-q^ab",
+    "boundary_inverse_second": "(d2 h^ab/d epsilon2)_0=2*q^a_c*q^cb",
+    "bulk_measure_first": "(d sqrt(-g)/d epsilon)_0=0.5*sqrt(-gbar)*p",
+    "boundary_measure_first": "(d sqrt(-h)/d epsilon)_0=0.5*sqrt(-hbar)*q",
+    "traces": "p=gbar^AB p_AB; q=hbar^ab q_ab"
+  },
+  "exact_offshell_second_order_master": {
+    "convention": "S=S0+epsilon deltaS+epsilon^2 S_quad^(2)+O(epsilon^3)",
+    "formula": "S_g,quad^(2)=(M6^4/4){int_M sqrt(-gbar)[-p^AB delta_p E_AB-0.5*p*Ebar_AB*p^AB+2*Ebar_AB*p^A_C*p^CB]+int_Sigma sqrt(-hbar)[-q^ab delta_p Pi_ab-0.5*q*Pibar_ab*q^ab+2*Pibar_ab*q^a_c*q^cb]}",
+    "classification": "EXACT_PATHWISE_SECOND_DERIVATIVE_IDENTITY_FOR_EH_PLUS_GHY",
+    "offshell_warning": "Terms proportional to Ebar_AB and Pibar_ab are genuine off-shell terms and must not be dropped.",
+    "coupled_parent_warning": "Even on a future full parent on-shell background, Ebar_AB for the gravity sector alone generally equals M6^-4*Tbar_AB rather than zero. Cancellation/reorganization requires adding the metric second variations of scalar, Maxwell and cap sectors."
+  },
+  "linearized_bulk_gravity_kernel": {
+    "delta_R_AB": "0.5*(nabla_C nabla_A p^C_B+nabla_C nabla_B p^C_A-box p_AB-nabla_A nabla_B p)",
+    "delta_R": "nabla_A nabla_B p^AB-box p-Rbar_AB*p^AB",
+    "delta_E_AB": "delta_R_AB-0.5*gbar_AB*delta_R-0.5*Rbar*p_AB+Lambda6*p_AB",
+    "derivative_order_note": "Covariant-derivative ordering is part of the formula; curvature terms appear explicitly if derivatives are commuted."
+  },
+  "fixed_interface_gaussian_normal_boundary_control": {
+    "classification": "LOCAL_CONTROL_GAUGE_NOT_GLOBAL_PHYSICAL_GAUGE_RELEASE",
+    "assumptions": [
+      "Sigma is kept at fixed coordinate location in a boundary-adapted Gaussian-normal neighborhood",
+      "p_nn=0 and p_na=0 in that control neighborhood",
+      "q_ab is the tangential metric perturbation",
+      "no cap embedding/bending field is included in WP1B"
+    ],
+    "background_relation": "Kbar_ab=0.5*partial_n hbar_ab",
+    "delta_K_ab_coordinate": "0.5*partial_n q_ab",
+    "delta_K": "-Kbar^ab*q_ab+0.5*hbar^ab*partial_n q_ab",
+    "delta_Pi_ab": "0.5*partial_n q_ab-hbar_ab*(-Kbar^cd*q_cd+0.5*hbar^cd*partial_n q_cd)-Kbar*q_ab",
+    "covariant_equivalent_delta_K_ab": "0.5*nabla_n q_ab+Kbar_(a^c q_b)c",
+    "gauge_firewall": "This local fixed-interface Gaussian-normal control does not prove equivalence to the full cap-bending sector and does not close diffeomorphism gauge control."
+  },
+  "independent_control_checks": {
+    "six_dimensional_constant_conformal_scaling": "For p_AB=c*gbar_AB on a constant-curvature background, the bulk master coefficient reproduces the direct epsilon^2 coefficient of sqrt(-g)(R-2 Lambda6) under g_AB -> (1+epsilon*c)gbar_AB.",
+    "flat_background_local_conformal_ricci": "For p_AB=2*sigma*gbar_AB in a flat local frame, delta R_AB=-(D-2)*partial_A partial_B sigma-gbar_AB*box sigma with D=6.",
+    "gaussian_normal_boundary_matrix_check": "The covariant and coordinate forms of delta K_ab, delta K and delta Pi_ab agree for arbitrary symmetric local q_ab, partial_n q_ab and Kbar_ab.",
+    "israel_sign_check": "The first-variation boundary sign reproduces the project EQ-007 Israel matching convention when combined with the cap stress definition."
+  },
+  "what_is_proven_here": [
+    "exact pathwise off-shell EH+GHY second-variation master identity in terms of delta E_AB and delta Pi_ab",
+    "explicit linearized Einstein-plus-cosmological bulk kernel for covariant metric perturbations",
+    "explicit local fixed-interface Gaussian-normal boundary momentum variation kernel",
+    "consistency of the boundary first-variation sign with the project outward-normal Israel convention"
+  ],
+  "what_remains_open": [
+    "full metric-scalar and metric-Maxwell second variation and mixing with WP1A",
+    "cap localized-action Hessian",
+    "cap embedding/bending perturbation or a globally justified fixed-interface gauge",
+    "full perturbed Israel/scalar/gauge/phase junction system",
+    "diffeomorphism gauge-invariant S/V/T variables",
+    "constraint elimination",
+    "released physical on-shell background",
+    "matter Delta_m source and coupling",
+    "6D-to-4D perturbative reduction",
+    "mu eta Sigma growth and lensing",
+    "ghost freedom, kinetic positivity, gradient stability and physical spectrum"
+  ],
+  "wp1_progress_effect": {
+    "WP1A_fixed_metric_scalar_Maxwell": "DERIVED_CONTROL_SUBSECTOR",
+    "WP1B_EH_GHY_master": "DERIVED_CONTROL_TEMPLATE",
+    "full_coupled_S_quad_2": "NOT_DERIVED",
+    "ULSH05_WP1": "PREPARATORY_IN_PROGRESS_NOT_CLOSED",
+    "G01": "OPEN_BLOCKING"
+  },
+  "forbidden_inferences": [
+    "Do not drop Ebar_AB terms by assuming vacuum Einstein equations; C-PHYS-M1 contains scalar and Maxwell stress.",
+    "Do not interpret the local Gaussian-normal fixed-interface control as a proof that cap bending is absent or pure gauge globally.",
+    "Do not infer ghost freedom, positivity or stability from the existence of the gravity Hessian master identity.",
+    "Do not infer a released physical background, 4D gravity map, Poisson/slip/lensing relation or growth law.",
+    "Do not authorize solver execution or promote K1-D/K1-E."
+  ],
+  "unchanged_firewalls": {
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_analytic_block": "WP1C_METRIC_SCALAR_MAXWELL_MIXING_PLUS_CAP_HESSIAN_AND_PERTURBED_JUNCTION_ASSEMBLY"
+}
