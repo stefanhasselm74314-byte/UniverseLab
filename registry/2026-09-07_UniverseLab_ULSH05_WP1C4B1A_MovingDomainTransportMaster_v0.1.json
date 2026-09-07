@@ -65,11 +65,11 @@
     "component_reduction_status": "NOT_FROZEN_WITHOUT_DECLARED_ORIENTATION_AND_EXTENSION_CONVENTIONS"
   },
   "boundary_action_transport": {
-    "boundary_top_form": "B_s(epsilon)=Bbar_s+epsilon*B1_s+0.5*epsilon^2*B2_s+... on Sigma5",
-    "first_pullback": "Q1[B_s]=B1_s+L_zs Bbar_s",
-    "second_pullback": "Q2[B_s]=B2_s+2*L_zs B1_s+(L_ws+L_zs^2)Bbar_s",
-    "localized_cap": "the same Q1/Q2 rule applies to the localized cap five-form",
-    "source": "direct specialization of the merged WP1C4B0 moving-pullback contract"
+    "ambient_boundary_object_rule": "for a boundary tensor or five-form B_s(epsilon) supplied with an explicit smooth regional ambient extension, the merged C4B0 Q1/Q2 pullback formulas apply directly",
+    "intrinsic_localized_cap_rule": "the localized cap five-form is intrinsically constructed on the fixed abstract Sigma from h_ab(epsilon), X_epsilon^*phi, X_epsilon^*A, sigma and their intrinsic derivatives; its total epsilon derivatives must be obtained by the chain rule after applying C4B0 Q1/Q2 to each ambient field pullback",
+    "ghy_rule": "the GHY five-form additionally depends on the induced metric, normalized normal and extrinsic curvature; its moving first/second variations require the C4B1B/C geometry/shape assembly and are not frozen by the bulk-domain transport identity alone",
+    "forbidden_shortcut": "do not write L_z of an intrinsically defined cap five-form in a normal direction unless a specific ambient extension has first been declared and its extension dependence shown to cancel in the final pulled-back result",
+    "status": "AMBIENT_PULLBACK_RULE_FROZEN_INTRINSIC_CAP_AND_GHY_TOTAL_VARIATIONS_DEFERRED"
   },
   "gauge_and_split_scope": {
     "total_transport_covariance": "the pulled-back total action variation is governed by the C4B0 second-order D-gauge contract",
@@ -85,6 +85,7 @@
   "not_closed": [
     "dynamical first shape residual of the full EH plus GHY plus matter plus localized cap action",
     "normal-force or embedding equation at the cap",
+    "moving intrinsic localized-cap total variation beyond the already-derived fixed-interface C2 and linear C4A ingredients",
     "second moving GHY variation",
     "second moving localized cap variation",
     "assembled full boundary Hessian",
@@ -99,6 +100,7 @@
   "gate_state": {
     "WP1_second_order_embedding_path_contract": "DERIVED",
     "WP1_moving_domain_transport_master": "DERIVED",
+    "WP1_boundary_intrinsic_form_extension_policy": "FROZEN_FAIL_CLOSED",
     "WP1_full_shape_residual": "NOT_ASSEMBLED",
     "WP1_configuration_space_connection": "NOT_FROZEN",
     "WP1_full_boundary_hessian": "NOT_CLOSED",
@@ -117,6 +119,7 @@
   "forbidden_inferences": [
     "No claim that the kinematic transport term alone is the physical cap force equation.",
     "No claim that the regional shape/Eulerian split is separately gauge invariant.",
+    "No undeclared normal Lie derivative of an intrinsically defined cap five-form.",
     "No claim that the full moving-boundary Hessian is closed.",
     "No field-space connection is selected.",
     "No physical background, stability, ghost-freedom or observable claim.",
@@ -128,8 +131,8 @@
     "execution_type": "ANALYTIC_NONOPERATIVE",
     "required_output": [
       "assemble fixed-reference Eulerian first variations with moving-domain transport",
-      "include both regional bulk top-form fluxes and moving GHY pullbacks",
-      "include moving localized cap first variation",
+      "include both regional bulk top-form fluxes and moving GHY contributions with explicit geometry dependence",
+      "differentiate the intrinsic localized cap form through its induced-field path rather than an undeclared ambient extension",
       "derive an orientation-safe total normal shape residual or prove redundancy from bulk/junction identities",
       "state gauge-dependence/redundancy status explicitly",
       "do not set the residual to zero without an established background",
