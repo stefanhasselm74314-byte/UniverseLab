@@ -8,6 +8,15 @@ on:
       - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.py'
       - '.github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPath_QA_v0.1.yml'
       - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.py'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.json'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.py'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.py'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.py'
+      - 'registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json'
+      - 'tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py'
   push:
     branches: [main]
 
