@@ -166,9 +166,21 @@ jobs:
           test ! -e registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C12SingleUseGrantContract_v0.1.json
           changed="$(git diff --name-only "$RECONCILIATION_BASE"...HEAD)"
           ! grep -Eiq '(SingleUseGrant|AuthorizationDecision|TargetSolve|PhysicalExecutionWorker|BackendImport)' <<<"$changed"
-          grep -q '"official_MD2S_solver": "NOT_AUTHORIZED"' project-manifest.json
-          grep -q '"PHYSICAL_BACKGROUND": "NOT_ESTABLISHED"' project-manifest.json
-          grep -q '"PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED"' project-manifest.json
-          grep -q '"K1-D": "NOT_RELEASED"' project-manifest.json
-          grep -q '"K1-E": "NOT_ADMISSIBLE"' project-manifest.json
-          grep -q '"physical_evidence_effect": "NONE"' project-manifest.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest=json.loads(Path('project-manifest.json').read_text(encoding='utf-8'))
+          gates=manifest['gates']
+          expected={
+              'official_MD2S_solver':'NOT_AUTHORIZED',
+              'PHYSICAL_BACKGROUND':'NOT_ESTABLISHED',
+              'PHYSICAL_RESPONSE_RANK':'NOT_EXECUTED',
+              'K1-D':'NOT_RELEASED',
+              'K1-E':'NOT_ADMISSIBLE',
+              'physical_evidence_effect':'NONE',
+          }
+          for key,value in expected.items():
+              assert gates[key]==value, (key,gates.get(key),value)
+          assert manifest['physical_gate_effect']=='NONE'
+          assert manifest['physical_evidence_effect']=='NONE'
+          PY
