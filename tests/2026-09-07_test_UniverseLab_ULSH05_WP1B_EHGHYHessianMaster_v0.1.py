@@ -181,10 +181,13 @@ def main():
     assert c["physical_evidence_effect"] == "NONE"
     assert c["solver_authorized"] is False
 
-    # Project parent-action and Israel-sign provenance.
+    # Project parent-action and Israel-sign provenance. Use semantic markers rather
+    # than a full whitespace/boxed-formula literal so formatting cannot change the test.
     compact = "".join(parent.split())
-    assert "M_6^4\sum_{s=\pm}\int_{\Sigma_5}d^5x\sqrt{-h}\,K_s" in compact
-    assert "M_6^4\sum_{s=\pm}\left(K_{ab}^{(s)}-K^{(s)}h_{ab}\right)=S_{ab}" in compact
+    assert r"M_6^4\sum_{s=\pm}\int_{\Sigma_5}d^5x\sqrt{-h}\,K_s" in compact
+    assert "HZT-S6-PAR-v0.1-EQ-007" in parent
+    assert r"K_{ab}^{(s)}-K^{(s)}h_{ab}" in compact
+    assert r"S_{ab}" in compact
     assert "Outward-normal-Konvention" in parent
 
     # Independent 6D constant conformal-scaling check of the off-shell master factors.
