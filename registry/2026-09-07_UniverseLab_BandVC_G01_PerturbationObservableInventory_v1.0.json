@@ -1,0 +1,108 @@
+{
+  "schema": "universelab.band-vc-g01-perturbation-observable-inventory.v1",
+  "version": "1.0.0",
+  "date": "2026-09-07",
+  "basis_main_commit": "c3698b36860f7268a71ba259b36c64c105dd48a9",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "classification": "NONOPERATIVE_G01_FORENSIC_INVENTORY",
+  "gap_id": "UL-BVC-G01",
+  "claim_family_id": "UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001",
+  "result": "GENUINE_MISSING_DERIVATION_NOT_POINTER_DRIFT",
+  "gap_status_after_inventory": "OPEN_BLOCKING_TARGET_INTERFACE_CAN_BE_FROZEN",
+  "summary": "UniverseLab contains a reduced effective Bridge background, explicit fail-closed growth/lensing refusal semantics, and refusal tests, but no versioned gauge-controlled parent perturbation derivation or released Bridge growth/Poisson/slip/lensing map.",
+  "authoritative_sources": [
+    "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
+    "registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json",
+    "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+    "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json",
+    "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+    "assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js",
+    "hyperzeit-methods.html",
+    "hyperzeit-material-v2.html",
+    "solver-hub.html"
+  ],
+  "crosswalk_state": {
+    "claim": "VERIFIED_PRESENT",
+    "equation_or_derivation": "MISSING_REQUIRED_LINK",
+    "code": "BLOCKED_BY_UNRELEASED_MAP",
+    "test": "VERIFIED_PRESENT",
+    "data": "NOT_APPLICABLE",
+    "falsifier_or_gate": "VERIFIED_PRESENT",
+    "evidence_scope": "FAIL_CLOSED_RELEASE_FIREWALL"
+  },
+  "solver_roadmap_state": {
+    "ULSH-05": {
+      "module_id": "PERTURBATION",
+      "priority": "PREPARATORY_DERIVATION_ONLY",
+      "upstream": ["ULSH-01", "ULSH-04"],
+      "required_work": [
+        "derive complete quadratic action S^(2)",
+        "define gauge-invariant scalar/vector/tensor variables and boundary conditions",
+        "eliminate constraints and implement coupled mode equations",
+        "validate GR/control limits plus resolution and residual tests"
+      ]
+    },
+    "ULSH-10": {
+      "module_id": "COSMO",
+      "priority": "BLOCKED_BY_FOUNDATIONAL_GATES",
+      "required_work": [
+        "close ratified 6D-to-4D parameter map",
+        "derive background, growth and lensing equations",
+        "implement forward map to H(z), distances, fSigma8, mu, Sigma and eta",
+        "validate control limits and K1-D identifiability prerequisites"
+      ]
+    }
+  },
+  "inventory": [
+    {"item":"reduced_effective_bridge_background_H_of_a","status":"PRESENT_DIAGNOSTIC_ONLY","note":"Background-only effective proxy; not a parent perturbation derivation."},
+    {"item":"perturbation_gauge_choice_and_gauge_transformations","status":"MISSING_REQUIRED_LINK"},
+    {"item":"4d_scalar_metric_potentials_Phi_Psi_definition_for_HZT","status":"MISSING_REQUIRED_LINK"},
+    {"item":"matter_perturbation_Delta_m_definition_and_coupling_for_HZT","status":"MISSING_REQUIRED_LINK"},
+    {"item":"6d_parent_perturbation_variables","status":"MISSING_REQUIRED_LINK"},
+    {"item":"linearized_6d_parent_field_equations","status":"MISSING_REQUIRED_LINK"},
+    {"item":"perturbed_junction_boundary_conditions","status":"MISSING_REQUIRED_LINK"},
+    {"item":"constraint_elimination_and_physical_scalar_sector","status":"MISSING_REQUIRED_LINK"},
+    {"item":"6d_to_4d_perturbative_reduction","status":"MISSING_REQUIRED_LINK"},
+    {"item":"effective_poisson_mu_k_a","status":"MISSING_REQUIRED_LINK"},
+    {"item":"gravitational_slip_eta_k_a","status":"MISSING_REQUIRED_LINK"},
+    {"item":"lensing_Sigma_k_a","status":"MISSING_REQUIRED_LINK"},
+    {"item":"bridge_growth_source_and_mode_equation","status":"MISSING_REQUIRED_LINK"},
+    {"item":"released_k_a_validity_domain","status":"MISSING_REQUIRED_LINK"},
+    {"item":"released_initial_conditions_and_mode_normalization","status":"MISSING_REQUIRED_LINK"},
+    {"item":"executable_bridge_perturbation_forward_map","status":"BLOCKED_BY_UNRELEASED_MAP","note":"Existing code is refusal/firewall code only."},
+    {"item":"independent_physical_perturbation_validation","status":"MISSING_REQUIRED_LINK","note":"Existing tests validate refusal semantics, not HZT perturbation physics."},
+    {"item":"observational_data_bundle","status":"OUT_OF_SCOPE_G01_HANDLED_BY_G08"},
+    {"item":"likelihood_implementation","status":"OUT_OF_SCOPE_G01_HANDLED_BY_G09"}
+  ],
+  "existing_fail_closed_semantics": {
+    "bridge_growth": "UNRELEASED_GROWTH_MAP",
+    "bridge_lensing": "UNRELEASED_LENSING_MAP",
+    "gr_growth_must_not_be_borrowed_for_bridge": true,
+    "gr_lensing_identity_must_not_be_borrowed_for_bridge": true
+  },
+  "next_safe_step": "FREEZE_REFERENCE_ONLY_OBSERVABLE_INTERFACE_WITHOUT_ASSIGNING_HZT_VALUES",
+  "closure_condition_unchanged": "Separately reviewed parent/reduced perturbation and observable map with equations, scope, code and independent tests.",
+  "forbidden_inferences": [
+    "background H(z) determines Bridge growth",
+    "GR linear growth is an HZT perturbation prediction",
+    "Sigma=1 is an HZT lensing prediction",
+    "a reference observable definition is a parent derivation",
+    "interface freeze closes UL-BVC-G01",
+    "green QA is physical evidence"
+  ],
+  "unchanged_firewalls": {
+    "FM-G0": "OPEN",
+    "RATIFIED_HUMAN_TRUST_ROOT": "NOT_RATIFIED",
+    "RUNTIME_ISSUANCE_BINDINGS": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
