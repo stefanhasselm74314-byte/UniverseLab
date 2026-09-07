@@ -1,0 +1,46 @@
+name: 2026-09-07 ULSH05 WP1C2 Fixed Interface Cap Hessian QA v0.1
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  wp1c2-cap-hessian:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run WP1C2 validator
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.py
+      - name: Re-run upstream WP1 chain
+        run: |
+          python tests/2026-09-07_test_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.py
+          python tests/2026-09-07_test_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.py
+          python tests/2026-09-07_test_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.py
+          python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.py
+      - name: Re-run G01 observable firewall
+        run: python tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py
+      - name: Fail closed on physical promotion
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json')
+          d = json.loads(p.read_text())
+          g = d['gate_state']
+          assert d['physical_gate_effect'] == 'NONE'
+          assert d['physical_evidence_effect'] == 'NONE'
+          assert d['solver_authorized'] is False
+          assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
+          assert g['FM-G0'] == 'OPEN'
+          assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
+          assert g['K1-D'] == 'NOT_RELEASED'
+          assert g['K1-E'] == 'NOT_ADMISSIBLE'
+          assert g['AuthorizationDecision'] == 'NOT_CREATED'
+          assert g['SingleUseGrant'] == 'NOT_CREATED'
+          assert g['SOLVER_EXECUTION'] == 'NOT_EXECUTED'
+          print('WP1C2 firewalls: PASS')
+          PY
