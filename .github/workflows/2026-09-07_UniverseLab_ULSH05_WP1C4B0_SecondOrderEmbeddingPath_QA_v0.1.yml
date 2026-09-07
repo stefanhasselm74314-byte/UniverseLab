@@ -38,7 +38,7 @@ jobs:
         run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.py
       - name: Re-run G01 observable firewall
         run: python tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py
-      - name: Fail closed on path, boundary and physical promotion
+      - name: Fail closed on path, field-space, boundary and physical promotion
         run: |
           python - <<'PY'
           import json
@@ -49,6 +49,7 @@ jobs:
           assert d['physical_evidence_effect']=='NONE'
           assert d['solver_authorized'] is False
           assert g['WP1_second_order_embedding_path_contract']=='DERIVED'
+          assert g['WP1_configuration_space_connection']=='NOT_FROZEN'
           assert g['WP1_full_boundary_hessian']=='NOT_CLOSED'
           assert g['WP1_full_quadratic_action']=='NOT_CLOSED'
           assert g['PERTURBED_JUNCTION_SYSTEM']=='NOT_RELEASED'
@@ -61,7 +62,11 @@ jobs:
           assert g['PHYSICAL_RESPONSE_RANK']=='NOT_EXECUTED'
           assert g['K1-D']=='NOT_RELEASED'
           assert g['K1-E']=='NOT_ADMISSIBLE'
-          assert 'DS[v]' in d['off_shell_hessian_extraction']['path_second_derivative']
+          ex=d['off_shell_hessian_extraction']
+          assert 'DS[v]' in ex['path_second_derivative']
+          assert ex['field_space_connection_status']=='NOT_FROZEN'
+          assert 'declared local affine perturbation chart' in ex['chart_scope']
+          assert 'nabla_cfg' in ex['covariant_field_space_identity']
           assert 'w+lambda-[zeta,z]' in d['second_order_bulk_D_gauge']['embedding_second']
           print('WP1C4B0 firewalls: PASS')
           PY
