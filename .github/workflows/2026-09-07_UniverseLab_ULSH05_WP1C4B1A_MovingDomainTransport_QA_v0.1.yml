@@ -8,6 +8,7 @@ on:
       - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransportMaster_v0.1.py'
       - '.github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransport_QA_v0.1.yml'
       - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.md'
       - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.py'
       - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json'
       - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.py'
@@ -33,6 +34,9 @@ on:
       - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
       - 'assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js'
       - 'project-manifest.json'
+      - 'hyperzeit-methods.html'
+      - 'hyperzeit-material-v2.html'
+      - 'solver-hub.html'
   push:
     branches: [main]
 
