@@ -1,0 +1,142 @@
+{
+  "schema": "universelab.ulsh05.wp1c4b1a.moving-domain-transport-master.v0.1",
+  "date": "2026-09-07",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1C4B1A",
+  "classification": "NONOPERATIVE_MOVING_DOMAIN_VARIATIONAL_KINEMATICS_MASTER",
+  "status": "DERIVED_FIRST_SECOND_MOVING_DOMAIN_TRANSPORT_MASTER_DYNAMICAL_SHAPE_RESIDUAL_NOT_ASSEMBLED",
+  "basis_main": "2dec38781b453a6688f4f5ef0be08b57943ea012",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md"
+  ],
+  "reference_domain_flow": {
+    "regional_reference_domain": "M_s",
+    "moving_domain": "M_s(epsilon)=F_s,epsilon(M_s)",
+    "generator_definition": "dF_s,epsilon/d epsilon=v_s,epsilon o F_s,epsilon",
+    "first_generator": "z_s=v_s,epsilon|0",
+    "second_generator": "w_s=(d v_s,epsilon/d epsilon)|0",
+    "relation_to_c4b0": "same time-dependent-generator convention as WP1C4B0",
+    "coordinate_acceleration_warning": "w_s is not an undeclared raw coordinate Xddot_s"
+  },
+  "regional_top_form_path": {
+    "bulk_top_form": "L_s(epsilon)=Lbar_s+epsilon*L1_s+0.5*epsilon^2*L2_s+O(epsilon^3)",
+    "degree": 6,
+    "closed_as_top_form": "d L_s = 0 identically in six dimensions because there are no seven-forms",
+    "eulerian_coefficients": "L1_s and L2_s are field/action-density variations on the fixed reference domain before domain transport"
+  },
+  "moving_domain_transport": {
+    "first_derivative": "I1_s=integral_Ms[L1_s+L_zs Lbar_s]",
+    "second_derivative": "I2_s=integral_Ms[L2_s+2*L_zs L1_s+(L_ws+L_zs^2)Lbar_s]",
+    "stokes_first": "I1_s=integral_Ms L1_s+integral_dMs i_zs Lbar_s",
+    "stokes_second": "I2_s=integral_Ms L2_s+integral_dMs[2*i_zs L1_s+i_ws Lbar_s+i_zs L_zs Lbar_s]",
+    "assumptions": [
+      "F_s,epsilon is a smooth local diffeomorphic domain flow",
+      "z_s and w_s admit smooth regional extensions sufficient to define the Lie derivatives",
+      "corner/edge terms are treated separately if present",
+      "all boundary orientations are inherited from the declared regional orientation"
+    ],
+    "interpretation": "these are transport identities only; they do not yet assemble Euler-Lagrange, GHY, cap or junction residuals"
+  },
+  "internal_cap_first_order": {
+    "regional_displacement": "z_s=xi_s*n_s+tau^a*e_a",
+    "top_form_tangential_flux": "Xbar_s^*(i_tau Lbar_s)=0 because six tangent vectors in the five-dimensional interface tangent space are linearly dependent",
+    "normal_flux_master": "Xbar_s^*(i_zs Lbar_s)=xi_s*Xbar_s^*(i_ns Lbar_s)",
+    "c4a_gluing": [
+      "xi_N=+xi",
+      "xi_S=-xi"
+    ],
+    "canonical_two_side_form": "sum_s Xbar_s^*(i_zs Lbar_s)",
+    "common_orientation_reduction": "xi*(ell_N^out-ell_S^out)*volSigma is allowed only after an explicit common orientation map defines Xbar_s^*(i_ns Lbar_s)=ell_s^out*volSigma",
+    "status": "ORIENTATION_SAFE_MASTER_FROZEN_SCALAR_JUMP_REDUCTION_CONDITIONAL"
+  },
+  "internal_cap_second_order": {
+    "c4b0_gluing": [
+      "chi_N=+chi",
+      "chi_S=-chi"
+    ],
+    "regional_boundary_integrand": "2*i_zs L1_s+i_ws Lbar_s+i_zs L_zs Lbar_s",
+    "meaning": "contains first-order density variation, second generator and convective first-generator contribution",
+    "component_reduction_status": "NOT_FROZEN_WITHOUT_DECLARED_ORIENTATION_AND_EXTENSION_CONVENTIONS"
+  },
+  "boundary_action_transport": {
+    "ambient_boundary_object_rule": "for a boundary tensor or five-form B_s(epsilon) supplied with an explicit smooth regional ambient extension, the merged C4B0 Q1/Q2 pullback formulas apply directly",
+    "intrinsic_localized_cap_rule": "the localized cap five-form is intrinsically constructed on the fixed abstract Sigma from h_ab(epsilon), X_epsilon^*phi, X_epsilon^*A, sigma and their intrinsic derivatives; its total epsilon derivatives must be obtained by the chain rule after applying C4B0 Q1/Q2 to each ambient field pullback",
+    "ghy_rule": "the GHY five-form additionally depends on the induced metric, normalized normal and extrinsic curvature; its moving first/second variations require the C4B1B/C geometry/shape assembly and are not frozen by the bulk-domain transport identity alone",
+    "forbidden_shortcut": "do not write L_z of an intrinsically defined cap five-form in a normal direction unless a specific ambient extension has first been declared and its extension dependence shown to cancel in the final pulled-back result",
+    "status": "AMBIENT_PULLBACK_RULE_FROZEN_INTRINSIC_CAP_AND_GHY_TOTAL_VARIATIONS_DEFERRED"
+  },
+  "gauge_and_split_scope": {
+    "total_transport_covariance": "the pulled-back total action variation is governed by the C4B0 second-order D-gauge contract",
+    "shape_vs_eulerian_split": "the decomposition into Eulerian density variation and domain-transport terms is a declared reference-domain bookkeeping split and is not by itself a separately physical observable",
+    "forbidden_inference": "do not identify a standalone regional shape term with a gauge-invariant physical brane force before the full action residual is assembled"
+  },
+  "independent_controls": {
+    "single_interval": "direct finite difference of integral_0^{a(eps)} f(x,eps) dx reproduces the first and second transport identities",
+    "two_region_interface": "direct finite difference of integral_0^{y(eps)} f_N + integral_{y(eps)}^L f_S reproduces the xi and chi sign structure implied by xi_N=-xi_S and chi_N=-chi_S",
+    "tangential_flux": "explicit two-form control confirms that contraction with a purely tangential boundary displacement pulls back to zero for the top-form domain flux",
+    "fixed_domain_limit": "z=w=0 reduces I1 to integral L1 and I2 to integral L2"
+  },
+  "not_closed": [
+    "dynamical first shape residual of the full EH plus GHY plus matter plus localized cap action",
+    "normal-force or embedding equation at the cap",
+    "moving intrinsic localized-cap total variation beyond the already-derived fixed-interface C2 and linear C4A ingredients",
+    "second moving GHY variation",
+    "second moving localized cap variation",
+    "assembled full boundary Hessian",
+    "configuration-space connection for a covariant off-shell Hessian",
+    "released full perturbed junction boundary-value operator",
+    "global fixed-interface gauge admissibility",
+    "S/V/T reduction and constraint elimination",
+    "physical background",
+    "ghost freedom and stability",
+    "6D-to-4D perturbative reduction and observables"
+  ],
+  "gate_state": {
+    "WP1_second_order_embedding_path_contract": "DERIVED",
+    "WP1_moving_domain_transport_master": "DERIVED",
+    "WP1_boundary_intrinsic_form_extension_policy": "FROZEN_FAIL_CLOSED",
+    "WP1_full_shape_residual": "NOT_ASSEMBLED",
+    "WP1_configuration_space_connection": "NOT_FROZEN",
+    "WP1_full_boundary_hessian": "NOT_CLOSED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "No claim that the kinematic transport term alone is the physical cap force equation.",
+    "No claim that the regional shape/Eulerian split is separately gauge invariant.",
+    "No undeclared normal Lie derivative of an intrinsically defined cap five-form.",
+    "No claim that the full moving-boundary Hessian is closed.",
+    "No field-space connection is selected.",
+    "No physical background, stability, ghost-freedom or observable claim.",
+    "No authorization, grant, backend import or solver execution."
+  ],
+  "next_block": {
+    "id": "ULSH-05/WP1C4B1B",
+    "title": "Full first shape residual assembly for EH plus GHY plus matter plus localized cap",
+    "execution_type": "ANALYTIC_NONOPERATIVE",
+    "required_output": [
+      "assemble fixed-reference Eulerian first variations with moving-domain transport",
+      "include both regional bulk top-form fluxes and moving GHY contributions with explicit geometry dependence",
+      "differentiate the intrinsic localized cap form through its induced-field path rather than an undeclared ambient extension",
+      "derive an orientation-safe total normal shape residual or prove redundancy from bulk/junction identities",
+      "state gauge-dependence/redundancy status explicitly",
+      "do not set the residual to zero without an established background",
+      "no physical solver execution"
+    ]
+  }
+}
