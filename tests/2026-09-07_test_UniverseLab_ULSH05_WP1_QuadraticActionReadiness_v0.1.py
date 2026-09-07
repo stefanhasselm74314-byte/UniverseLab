@@ -27,7 +27,7 @@ def finite_difference_first(fn, x, h=1e-6):
     return (fn(x + h) - fn(x - h)) / (2.0 * h)
 
 
-def finite_difference_second(fn, x, h=1e-4):
+def finite_difference_second(fn, x, h=1e-3):
     return (fn(x + h) - 2.0 * fn(x) + fn(x - h)) / (h * h)
 
 
@@ -105,7 +105,7 @@ def main():
 
     # G01 remains the authoritative missing-link statement for matter/observable coupling.
     assert inventory_status(g, "matter_perturbation_Delta_m_definition_and_coupling_for_HZT") == "MISSING_REQUIRED_LINK"
-    assert inventory_status(g, "sixD_to_4d_perturbative_reduction".replace("4d", "4d")) == "MISSING_REQUIRED_LINK"
+    assert inventory_status(g, "6d_to_4d_perturbative_reduction") == "MISSING_REQUIRED_LINK"
     assert inventory_status(g, "effective_poisson_mu_k_a") == "MISSING_REQUIRED_LINK"
     assert inventory_status(g, "gravitational_slip_eta_k_a") == "MISSING_REQUIRED_LINK"
     assert inventory_status(g, "lensing_Sigma_k_a") == "MISSING_REQUIRED_LINK"
