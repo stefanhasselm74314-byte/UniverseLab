@@ -1,0 +1,124 @@
+{
+  "schema": "universelab.ulsh05-wp1a-fixed-metric-scalar-maxwell-hessian.v0.1",
+  "version": "0.1.0",
+  "date": "2026-09-07",
+  "basis_main_commit": "15ad300a24f6bd54d1a5b82c83e692730f5e753d",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "module_id": "ULSH-05",
+  "work_package": "WP1A_FIXED_METRIC_SCALAR_MAXWELL_HESSIAN",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "classification": "NONOPERATIVE_ANALYTIC_CONTROL_SUBSECTOR",
+  "status": "DERIVED_CONTROL_SUBSECTOR_OFFSHELL_FIXED_METRIC_BULK_INTERIOR",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "purpose": "Derive and independently test the exact second-order coefficient of the scalar-Maxwell bulk action for C-PHYS-M1 on a fixed arbitrary six-dimensional background metric, with compact-support perturbations in the smooth bulk interior. This is a Hessian control subsector only and excludes gravitational, GHY, cap, junction, matter-observable and on-shell claims.",
+  "dependencies": [
+    "hzt-s6-parent-action-v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json",
+    "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json"
+  ],
+  "scope_contract": {
+    "metric": "fixed arbitrary background gbar_AB; h_AB=0 in WP1A",
+    "region": "one smooth bulk interior region M_s^o",
+    "test_perturbations": "varphi and a_A compactly supported in the interior, or equivalently chosen so boundary terms vanish for this control derivation",
+    "cap_and_junction_terms": "excluded_from_WP1A",
+    "GHY": "excluded_from_WP1A_because_metric_is_fixed",
+    "physical_background_requirement": "not required for the off-shell Hessian coefficient; required before physical perturbation interpretation",
+    "diffeomorphism_gauge": "not addressed because metric perturbations are disabled in this control subsector",
+    "U1_gauge": "retained; the quadratic action depends on a_A only through f_AB=2*nabla_bar_[A a_B]"
+  },
+  "parent_bulk_subaction": {
+    "formula": "S_phiF=int d6X sqrt(-gbar)[-1/2 gbar^AB partial_A phi partial_B phi-U(phi)-1/4 Z_F(phi) F_AB F^AB]",
+    "field_split": {
+      "phi": "phi=phibar+epsilon*varphi",
+      "A_A": "A_A=Abar_A+epsilon*a_A",
+      "F_AB": "F_AB=Fbar_AB+epsilon*f_AB",
+      "f_AB": "2*nabla_bar_[A a_B]"
+    }
+  },
+  "generic_expansion_identities": {
+    "scalar_gradient_square": "(d phi)^2=(d phibar)^2+2 epsilon d phibar.d varphi+epsilon^2(d varphi)^2",
+    "potential": "U(phi)=Ubar+epsilon Ubar_phi varphi+epsilon^2/2 Ubar_phiphi varphi^2+O(epsilon^3)",
+    "gauge_function": "Z_F(phi)=Zbar+epsilon Zbar_phi varphi+epsilon^2/2 Zbar_phiphi varphi^2+O(epsilon^3)",
+    "field_strength_square": "F^2=Fbar^2+2 epsilon Fbar^AB f_AB+epsilon^2 f_AB f^AB"
+  },
+  "generic_quadratic_lagrangian": {
+    "convention": "S=S0+epsilon deltaS+epsilon^2 S_quad^(2)+O(epsilon^3)",
+    "formula": "L_quad^(2)=-1/2 (nabla_bar varphi)^2-1/2 Ubar_phiphi varphi^2-1/4 Zbar f_AB f^AB-1/2 Zbar_phi varphi Fbar^AB f_AB-1/8 Zbar_phiphi Fbar^2 varphi^2",
+    "classification": "EXACT_ALGEBRAIC_SECOND_ORDER_COEFFICIENT_AT_FIXED_METRIC"
+  },
+  "m1_specialization": {
+    "Zbar": "exp(-2*a_F*phibar/M6^2)",
+    "Ubar_phiphi": "mhat_phi_sq*M6^2",
+    "Zbar_phi": "-2*a_F*Zbar/M6^2",
+    "Zbar_phiphi": "4*a_F^2*Zbar/M6^4",
+    "scalar_flux_coefficient": "M_varphi_varphi= mhat_phi_sq*M6^2 + (a_F^2/M6^4)*Zbar*Fbar^2",
+    "mixing_coefficient": "C_varphi_f=(a_F/M6^2)*Zbar",
+    "quadratic_lagrangian": "L_quad^(2)=-1/2(nabla_bar varphi)^2-1/2 M_varphi_varphi varphi^2-1/4 Zbar f_AB f^AB+C_varphi_f varphi Fbar^AB f_AB",
+    "positivity_warning": "M_varphi_varphi is a local Hessian coefficient, not a proven physical positive mass squared. In Lorentzian signature the sign of Fbar^2 is background-dependent, and no physical background is released."
+  },
+  "hessian_euler_lagrange_operator": {
+    "interpretation": "Euler-Lagrange equations of the WP1A Hessian control functional; physical linearized perturbation equations only after an on-shell background and the omitted sectors are restored.",
+    "scalar": "box_bar varphi-[mhat_phi_sq*M6^2+(a_F^2/M6^4)*Zbar*Fbar^2]*varphi+(a_F/M6^2)*Zbar*Fbar^AB*f_AB=0",
+    "maxwell": "nabla_bar_A[Zbar*f^AB-(2*a_F/M6^2)*Zbar*varphi*Fbar^AB]=0",
+    "direct_linearization_crosscheck": {
+      "scalar_parent_equation": "box phi-U_phi-(1/4) Z_F_phi F^2=0",
+      "maxwell_parent_equation": "nabla_A(Z_F F^AB)=0",
+      "result": "MATCHES_FIXED_METRIC_FIRST_LINEARIZATION"
+    }
+  },
+  "u1_gauge_check": {
+    "transformation": "a_A -> a_A+nabla_bar_A alpha",
+    "field_strength_response": "f_AB -> f_AB",
+    "quadratic_action_response": "INVARIANT_IN_WP1A",
+    "does_not_address": "diffeomorphism gauge, metric-scalar gauge mixing, cap bending gauge or global gauge-patch boundary data"
+  },
+  "what_is_proven_here": [
+    "exact fixed-metric scalar-Maxwell second-order bulk coefficient for arbitrary background fields",
+    "exact C-PHYS-M1 specialization of the scalar-flux Hessian and mixing coefficients",
+    "agreement of the Hessian Euler-Lagrange operator with direct fixed-metric linearization of the parent scalar and Maxwell equations",
+    "local U(1) gauge invariance of the control subsector"
+  ],
+  "what_remains_open": [
+    "metric perturbations and Einstein-Hilbert Hessian",
+    "GHY second variation and gravitational boundary terms",
+    "metric-scalar and metric-Maxwell mixing",
+    "cap Hessian, cap bending/fixed-interface gauge and perturbed junction conditions",
+    "S/V/T decomposition and diffeomorphism gauge control",
+    "constraint elimination",
+    "released on-shell physical background",
+    "matter Delta_m definition and coupling",
+    "6D-to-4D perturbative reduction",
+    "mu eta Sigma growth and lensing",
+    "ghost freedom, kinetic positivity, gradient stability and mode spectrum"
+  ],
+  "wp1_progress_effect": {
+    "action_side_readiness": "PRESERVED",
+    "bulk_scalar_Maxwell_fixed_metric_control": "DERIVED",
+    "full_S_quad_2": "NOT_DERIVED",
+    "ULSH05_WP1": "PREPARATORY_IN_PROGRESS_NOT_CLOSED",
+    "G01": "OPEN_BLOCKING"
+  },
+  "forbidden_inferences": [
+    "Do not identify the WP1A scalar Hessian coefficient with an observed or on-shell particle mass.",
+    "Do not infer ghost freedom or stability from the fixed-metric scalar-Maxwell control action.",
+    "Do not infer a gravitational perturbation operator, Poisson equation, slip relation or lensing map.",
+    "Do not use the WP1A Maxwell U(1) gauge check as a substitute for diffeomorphism gauge control.",
+    "Do not set the background on shell or import a numerical background solution.",
+    "Do not release solver execution, K1-D or K1-E."
+  ],
+  "unchanged_firewalls": {
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_analytic_block": "WP1B_EINSTEIN_HILBERT_PLUS_GHY_HESSIAN_WITH_BOUNDARY_BOOKKEEPING"
+}
