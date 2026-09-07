@@ -11,13 +11,13 @@
 
 Nach WP1C3 und WP1C4A sind die lineare bewegte Grenzflächengeometrie, die zweiseitige Bending-Identifikation und die linearen Normalfluss-Junctions eingefroren. Für eine zweite Variation ist jedoch zusätzlich ein **zweiter Pfadtangent** nötig.
 
-Für eine allgemeine Konfigurationsbahn
+In einem deklarierten lokalen affinen Konfigurationschart sei
 
 \[
-\Phi(\epsilon)=\bar\Phi+\epsilon u+\frac12\epsilon^2v+O(\epsilon^3)
+\Phi(\epsilon)=\bar\Phi+\epsilon u+\frac12\epsilon^2v+O(\epsilon^3).
 \]
 
-gilt exakt
+Dann gilt in diesem Chart exakt
 
 \[
 \boxed{
@@ -26,7 +26,7 @@ gilt exakt
 }
 \]
 
-Damit ist die zweite Ableitung entlang eines Pfades off-shell **nicht automatisch** die intrinsische Hesse. Solange
+Damit ist die zweite Ableitung entlang eines Pfades off-shell **nicht automatisch** die zweite Fréchet-Ableitung im gewählten Chart. Solange
 
 ```text
 PHYSICAL_BACKGROUND = NOT_ESTABLISHED
@@ -47,17 +47,42 @@ S_{\rm path,quad}^{(2)}
 =\frac12D^2S[u,u]+\frac12DS[v].
 \]
 
-Die path-unabhängige Hessian-Koeffizient ist daher
+Innerhalb **desselben deklarierten Charts** kann daher der vom zweiten Pfadtangenten unabhängige Koeffizient extrahiert werden:
 
 \[
 \boxed{
-S_{\rm Hess}^{(2)}
+S_{\rm chart,Hess}^{(2)}
 =S_{\rm path,quad}^{(2)}-\frac12DS[v]
 =\frac12D^2S[u,u].
 }
 \]
 
 Das ist der zentrale C4B0-Subtraktionsvertrag.
+
+### 1.1 Wichtige Feldraum-Präzisierung
+
+Der Konfigurationsraum aus Metrik, Materiefeldern und Einbettungen ist nicht global ein kanonischer linearer Vektorraum. Außerhalb eines stationären Punkts ist eine zweite Ableitung unter nichtlinearen Feldraum-Koordinatenwechseln deshalb nicht automatisch ein intrinsischer Tensor.
+
+Wählt man eine Konfigurationsraum-Verbindung `nabla_cfg`, lautet die kovariante Identität stattdessen
+
+\[
+\boxed{
+\frac{d^2S}{d\epsilon^2}\Big|_0
+=(\nabla_{\rm cfg}^2S)[u,u]+DS[a_{\rm cfg}],
+}
+\]
+
+mit
+
+\[
+a_{\rm cfg}=\nabla^{\rm cfg}_{u}u
+\]
+
+als Feldraum-Beschleunigung der Kurve.
+
+C4B0 friert **keine** solche Konfigurationsraum-Verbindung ein. `D^2S` bezeichnet daher ausschließlich die zweite Fréchet-Ableitung im deklarierten lokalen affinen Perturbationschart. Eine global feldraum-kovariante off-shell Hesse wird nicht beansprucht.
+
+An einem stationären Punkt `DS=0` verschwindet die Verbindungs-/Beschleunigungsabhängigkeit. Dieser Spezialfall darf aber aktuell nicht angenommen werden, weil der physische Hintergrund weiterhin `NOT_ESTABLISHED` ist.
 
 ---
 
@@ -252,13 +277,13 @@ Aber off-shell bleibt für die Wirkungsableitung der Unterschied zwischen
 S_{\rm path,quad}^{(2)}
 \]
 
-und
+und dem im deklarierten Chart extrahierten
 
 \[
-S_{\rm Hess}^{(2)}
+S_{\rm chart,Hess}^{(2)}
 \]
 
-erhalten. Ein autonomer Pfad ist deshalb nur eine **Berechnungskonvention**. C4B1 muss entweder `DS[v]` explizit subtrahieren oder unabhängig beweisen, dass die relevante erste Variation verschwindet.
+erhalten. Ein autonomer Pfad ist deshalb nur eine **Berechnungskonvention**. C4B1 muss entweder im selben explizit deklarierten Chart `DS[v]` subtrahieren oder vor einem Anspruch auf eine feldraum-kovariante Hesse zusätzlich eine Konfigurationsraum-Verbindung einfrieren.
 
 ---
 
@@ -289,7 +314,7 @@ Zwei Konfigurationspfade besitzen denselben ersten Tangenten `u`, aber unterschi
 DS[v_1-v_2].
 \]
 
-Nach Subtraktion des `DS[v]`-Terms liefern beide denselben intrinsischen Hessianwert.
+Nach Subtraktion des `DS[v]`-Terms liefern beide im selben affinen Kontrollchart denselben Wert der zweiten Fréchet-Ableitung. Daraus folgt **nicht**, dass bereits eine global feldraum-kovariante Hesse definiert wäre.
 
 ### 8.4 Zweite Gluingkontrolle
 
@@ -312,6 +337,7 @@ folgen direkt die erste und zweite Vorzeichenrelation.
 
 WP1C4B0 schließt **keine** dynamische zweite Randvariation. Offen bleiben:
 
+- Konfigurationsraum-Verbindung für eine kovariante off-shell Hesse;
 - zweite Variation des bewegten GHY-Terms;
 - zweite Variation der bewegten lokalisierten Kappenwirkung;
 - vollständige Boundary-Hesse;
@@ -325,6 +351,7 @@ WP1C4B0 schließt **keine** dynamische zweite Randvariation. Offen bleiben:
 Daher unverändert:
 
 ```text
+WP1_configuration_space_connection = NOT_FROZEN
 WP1_full_boundary_hessian = NOT_CLOSED
 WP1_full_quadratic_action = NOT_CLOSED
 PERTURBED_JUNCTION_SYSTEM = NOT_RELEASED
@@ -343,11 +370,16 @@ physical_evidence_effect = NONE
 
 ## 10. Nächster zulässiger Block
 
-`ULSH-05/WP1C4B1` darf nun die zweite Pfadvariation von GHY + lokalisierter Kappenwirkung berechnen, muss aber die oben eingefrorene Off-shell-Subtraktion
+`ULSH-05/WP1C4B1` darf nun die zweite Pfadvariation von GHY + lokalisierter Kappenwirkung berechnen. Es muss dabei entweder
 
-\[
-S_{\rm Hess}^{(2)}
-=S_{\rm path,quad}^{(2)}-\frac12DS[v]
-\]
+1. im hier deklarierten lokalen affinen Konfigurationschart bleiben und
+   \[
+   S_{\rm chart,Hess}^{(2)}=S_{\rm path,quad}^{(2)}-\frac12DS[v]
+   \]
+   explizit verwenden,
 
-explizit durchführen. Erst danach ist ein Boundary-Hessian-Closure-Verdict zulässig.
+oder
+
+2. vor einem Anspruch auf eine feldraum-kovariante Hesse eine Konfigurationsraum-Verbindung `nabla_cfg` versioniert einfrieren.
+
+Erst danach ist ein Boundary-Hessian-Closure-Verdict zulässig.
