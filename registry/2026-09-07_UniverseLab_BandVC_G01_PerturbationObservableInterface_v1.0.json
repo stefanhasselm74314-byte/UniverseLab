@@ -1,0 +1,113 @@
+{
+  "schema": "universelab.band-vc-g01-perturbation-observable-interface.v1",
+  "version": "1.0.0",
+  "date": "2026-09-07",
+  "basis_main_commit": "c3698b36860f7268a71ba259b36c64c105dd48a9",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "classification": "REFERENCE_ONLY_INTERFACE_NOT_HZT_DERIVATION",
+  "gap_id": "UL-BVC-G01",
+  "gap_status_effect": "PARTIAL_TARGET_SEMANTICS_ONLY_G01_REMAINS_OPEN_BLOCKING",
+  "purpose": "Freeze the observable target vocabulary and algebraic relations needed by a future HZT perturbation derivation without supplying, fitting or inferring HZT values for mu, eta, Sigma or growth.",
+  "reference_conventions": {
+    "metric_gauge": "4D Newtonian gauge reference interface",
+    "metric": "ds^2 = -(1+2 Psi) dt^2 + a^2 (1-2 Phi) delta_ij dx^i dx^j",
+    "fourier_laplacian": "nabla^2 -> -k^2",
+    "scale_factor": "a dimensionless",
+    "comoving_wavenumber": "k in inverse comoving length; numerical unit convention may be Mpc^-1 when an observational implementation is later bound",
+    "matter_variable": "Delta_m denotes a reference gauge-invariant comoving matter-density contrast; its HZT parent coupling/reduction is NOT_RELEASED"
+  },
+  "observable_definitions": {
+    "mu": {
+      "symbol": "mu(k,a)",
+      "definition": "-k^2 Psi = 4 pi G a^2 mu(k,a) rho_m Delta_m",
+      "role": "effective Poisson response relative to the stated reference convention",
+      "hzt_value": "NOT_RELEASED"
+    },
+    "eta": {
+      "symbol": "eta(k,a)",
+      "definition": "eta(k,a) = Phi/Psi",
+      "role": "gravitational slip in the stated reference convention",
+      "hzt_value": "NOT_RELEASED",
+      "domain_note": "ratio requires Psi != 0; a physical HZT validity domain is NOT_RELEASED"
+    },
+    "Sigma": {
+      "symbol": "Sigma(k,a)",
+      "definition": "-k^2 (Phi+Psi) = 8 pi G a^2 Sigma(k,a) rho_m Delta_m",
+      "role": "lensing response in the stated reference convention",
+      "hzt_value": "NOT_RELEASED"
+    }
+  },
+  "algebraic_identity_under_these_definitions": {
+    "statement": "Sigma(k,a) = mu(k,a) [1+eta(k,a)] / 2",
+    "conditions": [
+      "the three observable definitions above are used with the same Phi, Psi, rho_m and Delta_m",
+      "Psi is nonzero where eta is evaluated",
+      "this is an algebraic identity of the reference interface, not an HZT prediction"
+    ]
+  },
+  "reference_gr_limit": {
+    "mu": 1.0,
+    "eta": 1.0,
+    "Sigma": 1.0,
+    "classification": "REFERENCE_GR_CONTROL_ONLY_NOT_BRIDGE_RESULT"
+  },
+  "optional_reference_growth_target": {
+    "classification": "REFERENCE_ONLY_NOT_RELEASED_FOR_BRIDGE",
+    "independent_variable": "ln a",
+    "equation": "D'' + [2 + d ln H/d ln a] D' - (3/2) Omega_m(a) mu(k,a) D = 0",
+    "assumptions": [
+      "pressureless minimally coupled matter in the reference 4D description",
+      "standard matter continuity and Euler equations",
+      "quasi-static subhorizon closure sufficient to reduce the source to mu(k,a)",
+      "no additional released HZT matter-force, entropy or nonlocal source term"
+    ],
+    "bridge_execution_status": "UNRELEASED_GROWTH_MAP",
+    "warning": "If a future parent reduction violates any assumption, this reference growth target must be replaced rather than imposed."
+  },
+  "hzt_outputs": {
+    "Phi": "NOT_RELEASED",
+    "Psi": "NOT_RELEASED",
+    "Delta_m_parent_mapping": "NOT_RELEASED",
+    "mu_k_a": "NOT_RELEASED",
+    "eta_k_a": "NOT_RELEASED",
+    "Sigma_k_a": "NOT_RELEASED",
+    "bridge_growth_equation": "NOT_RELEASED",
+    "bridge_growth_initial_conditions": "NOT_RELEASED",
+    "k_a_validity_domain": "NOT_RELEASED",
+    "perturbative_6d_to_4d_reduction": "NOT_RELEASED"
+  },
+  "required_parent_derivation_sequence": [
+    "select and state the released HZT-M0 parent background and matter coupling",
+    "perturb all parent metric/scalar/matter fields and derive gauge transformations",
+    "derive the complete quadratic action or equivalent linearized parent equations",
+    "derive perturbed boundary/junction conditions with orientation and provenance",
+    "classify and eliminate constraints; identify physical scalar variables",
+    "perform the controlled 6D-to-4D reduction including mode normalization and boundary response",
+    "identify Phi, Psi and Delta_m in the reduced 4D convention",
+    "derive mu(k,a), eta(k,a), Sigma(k,a) and any extra source/nonlocal terms",
+    "derive the released k,a domain, initial conditions and approximation hierarchy",
+    "implement the map and validate it independently against GR/control limits and numerical convergence"
+  ],
+  "release_requirements": {
+    "equation_or_derivation": "MISSING_REQUIRED_LINK",
+    "executable_bridge_perturbation_code": "MISSING_REQUIRED_LINK",
+    "independent_physical_validation": "MISSING_REQUIRED_LINK",
+    "G01": "OPEN_BLOCKING"
+  },
+  "existing_runtime_firewalls": {
+    "bridge_growth": "UNRELEASED_GROWTH_MAP",
+    "bridge_lensing": "UNRELEASED_LENSING_MAP",
+    "must_remain_fail_closed_until_release": true
+  },
+  "forbidden_inferences": [
+    "mu=1 for Bridge because GR is the reference limit",
+    "eta=1 for Bridge because anisotropic stress was not yet derived",
+    "Sigma=1 for Bridge because a public lensing formula needs a value",
+    "Sigma=mu(1+eta)/2 supplies HZT dynamics",
+    "the reference growth equation is a released HZT growth equation",
+    "background agreement determines perturbation agreement",
+    "interface QA promotes K1-D or K1-E"
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
