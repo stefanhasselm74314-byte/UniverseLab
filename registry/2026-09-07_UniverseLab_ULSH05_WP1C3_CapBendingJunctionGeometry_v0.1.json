@@ -1,0 +1,194 @@
+{
+  "schema": "universelab.ulsh05.wp1c3.cap-bending-junction-geometry.v0.1",
+  "date": "2026-09-07",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1C3",
+  "status": "DERIVED_DOUBLY_COVARIANT_LINEAR_MOVING_INTERFACE_GEOMETRY_PREFLIGHT_FULL_PERTURBED_JUNCTION_AND_BOUNDARY_HESSIAN_OPEN",
+  "classification": "NONOPERATIVE_ANALYTIC_GEOMETRY_PREFLIGHT",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "basis_main": "95e15217b4ddc173b7e22f3caf32e7346e38b6ed",
+  "dependencies": [
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json"
+  ],
+  "external_mathematical_crosscheck": {
+    "status": "REFERENCE_ONLY_NOT_PROJECT_AUTHORITY",
+    "citation": "Shinji Mukohyama, Perturbation of junction condition and doubly gauge-invariant variables, Class. Quant. Grav. 17 (2000) 4777-4798, arXiv:hep-th/0006146",
+    "url": "https://arxiv.org/abs/hep-th/0006146",
+    "use": "cross-check doubly-covariant moving-hypersurface perturbation identities; UniverseLab conventions and firewalls remain authoritative"
+  },
+  "background_hypersurface_contract": {
+    "surface": "Sigma5 with intrinsic coordinates y^a and background embedding Zbar^A(y)",
+    "tangent": "e_a^A=partial_a Zbar^A",
+    "normal": "nbar_A e_a^A=0 and nbar_A nbar^A=+1",
+    "normal_character": "SPACELIKE_OUTWARD_NORMAL_TO_TIMELIKE_CAP",
+    "induced_metric": "hbar_ab=e_a^A e_b^B gbar_AB",
+    "extrinsic_curvature": "Kbar_ab=0.5 e_a^A e_b^B L_nbar gbar_AB=e_a^A e_b^B nabla_bar_A nbar_B",
+    "normal_orientation": "OUTWARD_PER_REGION_AS_FROZEN_BY_C_PHYS_CONVENTION_CONTRACT"
+  },
+  "linear_perturbation_path": {
+    "bulk_metric": "g_AB=gbar_AB+p_AB",
+    "embedding": "Z^A=Zbar^A+z^A",
+    "embedding_decomposition": "z^A=xi*nbar^A+tau^a*e_a^A",
+    "xi": "normal bending scalar on each regional representation",
+    "tau": "intrinsic tangential displacement / surface reparameterization sector",
+    "order": "FIRST_ORDER_ONLY_FOR_MOVING_INTERFACE_GEOMETRY"
+  },
+  "bulk_D_gauge_contract": {
+    "transformation": [
+      "p_AB -> p_AB-L_zeta gbar_AB",
+      "z^A -> z^A+zeta^A"
+    ],
+    "invariant_induced_metric_master": "H_ab=e_a^A e_b^B[p_AB+L_z gbar_AB]",
+    "result": "H_ab is invariant under the declared bulk D-gauge transformation"
+  },
+  "surface_reparameterization_contract": {
+    "transformation": "z^A -> z^A-bar_zeta^a e_a^A under y^a -> y^a+bar_zeta^a",
+    "H_ab": "transforms as a perturbation of a five-dimensional tensor",
+    "deltaK_ab": "transforms as a perturbation of a five-dimensional tensor",
+    "interpretation": "bulk D-gauge invariance and intrinsic surface reparameterization covariance are distinct"
+  },
+  "induced_metric_variation": {
+    "master": "H_ab=e_a^A e_b^B[p_AB+L_z gbar_AB]",
+    "normal_tangential_decomposition": "H_ab=p_ab+2*xi*Kbar_ab+2*D_(a tau_b)",
+    "p_ab": "e_a^A e_b^B p_AB",
+    "fixed_interface_limit": "xi=tau=0 gives H_ab=p_ab"
+  },
+  "unit_normal_variation": {
+    "master_conditions": [
+      "e_a^A delta_n_A=nbar_A L_z e_a^A",
+      "nbar^A delta_n_A=0.5*nbar^A*nbar^B*p_AB"
+    ],
+    "status": "MASTER_CONDITIONS_FROZEN_COMPONENT_SPECIALIZATIONS_REQUIRE_DECLARED_EXTENSION_OR_ADAPTED_COORDINATES",
+    "forbidden_shortcut": "no global component formula for delta_n may be used without stating the normal/tangent extension convention"
+  },
+  "connection_variation": {
+    "deltaGamma_CAB": "0.5*(nabla_bar_A p_CB+nabla_bar_B p_CA-nabla_bar_C p_AB) with the first index lowered by gbar",
+    "notation_note": "the projected master equation below uses nbar^C deltaGamma_CAB"
+  },
+  "extrinsic_curvature_variation": {
+    "master": "deltaK_ab=0.5*e_a^A*e_b^B[L_delta_n gbar_AB+L_z L_nbar gbar_AB-2*nbar^C*deltaGamma_CAB]",
+    "status": "DOUBLY_COVARIANT_FIRST_ORDER_MASTER_FROZEN",
+    "bulk_D_gauge_result": "invariant under p_AB -> p_AB-L_zeta gbar_AB and z^A -> z^A+zeta^A",
+    "intrinsic_reparam_result": "transforms tensorially as a perturbation of K_ab",
+    "riemann_reduced_formula": "NOT_FROZEN_TO_AVOID_UNDECLARED_RIEMANN_SIGN_CONVENTION"
+  },
+  "gaussian_normal_controls": {
+    "pure_normal_fixed_metric": "in Gaussian-normal adapted coordinates deltaK_ab=-D_a D_b xi+xi*partial_n Kbar_ab",
+    "flat_graph": {
+      "background": "ds^2=dr^2+eta_ab dy^a dy^b, Kbar_ab=0",
+      "surface": "r=epsilon*xi(y)",
+      "prediction": "deltaK_ab=-partial_a partial_b xi"
+    },
+    "warped_parallel_shift": {
+      "background": "ds^2=dr^2+exp(2*c*r)*eta_ab dy^a dy^b",
+      "Kbar_ab": "c*hbar_ab",
+      "constant_normal_shift": "xi=constant",
+      "predictions": [
+        "delta h_ab=2*xi*Kbar_ab",
+        "delta K_ab=xi*partial_n Kbar_ab=2*c^2*xi*hbar_ab"
+      ]
+    }
+  },
+  "moving_pullback_contract": {
+    "generic_tensor": "delta_Sigma[X^*T]=Xbar^*[delta T+L_z Tbar]",
+    "scalar": "PhiSigma=varphi+z^A*nabla_bar_A phibar",
+    "field_strength": "deltaF_Sigma_ab=e_a^A e_b^B[f_AB+L_z Fbar_AB]",
+    "gauge_potential": "aSigma_a=e_a^A[a_A+L_z Abar_A]",
+    "u1_transformation": "aSigma_a -> aSigma_a+D_a alphaSigma",
+    "cap_phase": "s -> s+q_sigma*alphaSigma",
+    "u1_invariant_cap_combination": "dSigma_a=D_a s-q_sigma*aSigma_a",
+    "normal_flux_expansions": "DEFERRED_TO_FULL_PERTURBED_SCALAR_AND_GAUGE_JUNCTION_BLOCK"
+  },
+  "perturbed_first_fundamental_form": {
+    "condition": "H_ab^(N)=H_ab^(S) after pullback to one declared intrinsic interface chart",
+    "status": "REQUIRED_FOR_FULL_PERTURBED_JUNCTION_SYSTEM"
+  },
+  "perturbed_israel_operator": {
+    "background_per_side": "J_ab^(s)=K_ab^(s)-K^(s)*h_ab",
+    "linear_per_side": "deltaJ_ab=deltaK_ab-hbar_ab*hbar^{cd}*deltaK_cd+hbar_ab*Kbar^{cd}*H_cd-Kbar*H_ab",
+    "outward_sum_equation": "M6^4*sum_s deltaJ_ab^(s)=deltaS_ab",
+    "status": "LINEAR_OPERATOR_IDENTITY_FROZEN_FULL_TWO_SIDE_ASSEMBLY_NOT_RELEASED"
+  },
+  "m1_surface_stress_variation": {
+    "background": "S_ab=-(lambda+0.5*Z_sigma*X)*h_ab+Z_sigma*w_a*w_b",
+    "X": "h^{ab}w_a w_b",
+    "deltaX": "2*w^a*delta_w_a-H^{ab}*w_a*w_b",
+    "deltaS_ab": "-0.5*Z_sigma*deltaX*hbar_ab-(lambda+0.5*Z_sigma*Xbar)*H_ab+Z_sigma*(delta_w_a*w_b+w_a*delta_w_b)",
+    "lambda_Z_sigma_phi_dependence": "NONE_IN_M1_BECAUSE_BOTH_ARE_PHI_CONSTANT"
+  },
+  "two_side_bending_gluing": {
+    "regional_coordinates": "r_N and r_S both increase from their smooth pole toward the common cap",
+    "outward_normals": "n_N^r=n_S^r=+1 in their own regional coordinates",
+    "normal_displacement_gluing_relation": "OPEN_REQUIRES_EXPLICIT_INTERFACE_IDENTIFICATION_MAP",
+    "forbidden_inference": "do not assert xi_N=xi_S or xi_N=-xi_S without an explicit common embedding/orientation map"
+  },
+  "fixed_interface_gauge_admissibility": {
+    "local_statement": "a bulk D-gauge with suitable normal generator can locally set xi=0",
+    "global_statement": "NOT_PROVEN",
+    "global_requirements": [
+      "explicit two-side interface identification map",
+      "compatible gauge generators on both regions",
+      "preservation of pole regularity and frozen gauge-patch conditions",
+      "preservation of common induced-metric matching"
+    ],
+    "status": "LOCALLY_AVAILABLE_CONDITIONALLY_GLOBAL_ADMISSIBILITY_NOT_PROVEN"
+  },
+  "not_closed": [
+    "explicit two-side normal-displacement gluing relation",
+    "full perturbed scalar normal-flux junction",
+    "full perturbed gauge normal-flux junction",
+    "full moving-boundary second variation including bending terms",
+    "assembled boundary Hessian",
+    "fully assembled perturbed Israel/scalar/gauge junction system",
+    "S/V/T decomposition and harmonics",
+    "diffeomorphism constraint elimination",
+    "physical background",
+    "ghost freedom and stability",
+    "6D-to-4D perturbative reduction",
+    "mu eta Sigma growth and lensing"
+  ],
+  "gate_state": {
+    "WP1_bulk_gravity_matter_hessian": "ASSEMBLABLE_OFFSHELL",
+    "WP1_fixed_interface_localized_cap_hessian": "DERIVED",
+    "WP1_moving_interface_linear_geometry": "DERIVED_PREFLIGHT",
+    "WP1_full_boundary_hessian": "NOT_CLOSED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "No claim that cap bending is absent or pure gauge globally.",
+    "No claim that the full boundary Hessian is closed.",
+    "No released perturbed scalar/gauge normal-flux junctions.",
+    "No S/V/T physical mode count or gauge-reduced spectrum.",
+    "No ghost-freedom, stability, physical background or observable claim.",
+    "No authorization, grant, backend import or solver execution."
+  ],
+  "next_block": {
+    "id": "ULSH-05/WP1C4",
+    "title": "Moving-boundary Hessian and full perturbed junction assembly",
+    "execution_type": "ANALYTIC_NONOPERATIVE",
+    "required_output": [
+      "explicit two-side interface identification and xi gluing convention",
+      "second-order moving-boundary contribution to GHY plus localized action",
+      "perturbed scalar normal-flux junction",
+      "perturbed gauge normal-flux junction",
+      "assembled perturbed Israel operator",
+      "boundary Hessian closure verdict",
+      "no physical solver execution"
+    ]
+  }
+}
