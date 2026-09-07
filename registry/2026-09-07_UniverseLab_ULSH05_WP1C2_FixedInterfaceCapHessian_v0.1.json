@@ -1,0 +1,135 @@
+{
+  "schema": "universelab.ulsh05.wp1c2.fixed-interface-cap-hessian.v0.1",
+  "date": "2026-09-07",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1C2",
+  "status": "DERIVED_OFFSHELL_FIXED_INTERFACE_LOCALIZED_CAP_HESSIAN_BENDING_AND_PERTURBED_JUNCTIONS_OPEN",
+  "classification": "FORMAL_SECOND_VARIATION_ONLY",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.json"
+  ],
+  "localized_action": {
+    "formula": "S_Sigma=-integral_Sigma d5x sqrt(-h)[lambda+0.5*Z_sigma*X_sigma]",
+    "X_sigma": "h^{ab} D_a sigma D_b sigma",
+    "D_a_sigma": "partial_a sigma-q_sigma A_a",
+    "m1_specialization": {
+      "lambda": "lambda_hat*M6^5",
+      "Z_sigma": "z_sigma_hat*M6^3",
+      "d_lambda_dphi": 0,
+      "d2_lambda_dphi2": 0,
+      "d_Z_sigma_dphi": 0,
+      "d2_Z_sigma_dphi2": 0
+    }
+  },
+  "fixed_interface_perturbation_path": {
+    "induced_metric": "h_ab(eps)=hbar_ab+eps*q_ab",
+    "phase": "sigma(eps)=sigmabar+eps*s",
+    "gauge_pullback": "A_a(eps)=Abar_a+eps*a_a",
+    "interface_embedding": "FIXED",
+    "bending_mode": "EXCLUDED_NOT_SET_TO_ZERO_PHYSICALLY",
+    "definitions": {
+      "q": "hbar^{ab} q_ab",
+      "q2": "q_ab q^{ab}",
+      "r_ab_contravariant": "r^{ab}=q^a_c q^{cb}",
+      "w_a": "Dbar_a sigmabar=partial_a sigmabar-q_sigma Abar_a",
+      "d_a": "partial_a s-q_sigma a_a"
+    }
+  },
+  "determinant_expansion": {
+    "n1": "q/2",
+    "n2": "q^2/8-q_ab*q^ab/4"
+  },
+  "X_sigma_expansion": {
+    "X0": "w_a w^a",
+    "X1": "2 w^a d_a-q^{ab} w_a w_b",
+    "X2": "d_a d^a-2 q^{ab} w_a d_b+r^{ab} w_a w_b"
+  },
+  "localized_lagrangian_expansion": {
+    "l0": "-lambda-0.5*Z_sigma*X0",
+    "l1": "-0.5*Z_sigma*X1",
+    "l2": "-0.5*Z_sigma*X2"
+  },
+  "quadratic_density": {
+    "D2_Sigma": "l2+n1*l1+n2*l0",
+    "S_quad": "integral_Sigma d5x sqrt(-hbar)*D2_Sigma",
+    "interpretation": "exact epsilon^2 coefficient along the declared fixed-interface linear field path"
+  },
+  "u1_gauge_control": {
+    "transformation": [
+      "a_a -> a_a+partial_a alpha",
+      "s -> s+q_sigma*alpha"
+    ],
+    "invariant_combination": "d_a=partial_a s-q_sigma a_a",
+    "result": "D2_Sigma is U1 gauge invariant under the declared linearized transformation"
+  },
+  "scalar_sector_note": {
+    "result": "No explicit varphi terms occur in this localized M1 Hessian because lambda and Z_sigma are constant in phi.",
+    "forbidden_inference": "This does not remove scalar perturbations from the full theory; scalar dependence remains through bulk dynamics, induced metric/junction coupling and possible interface bending."
+  },
+  "hard_limits": {
+    "q_ab_zero": "D2_Sigma=-0.5*Z_sigma*d_a*d^a",
+    "phase_and_gauge_zero": "metric-only response of the background cap tension/winding energy remains",
+    "w_a_zero": "background winding mixings vanish while the phase-gauge kinetic Hessian remains"
+  },
+  "not_closed": [
+    "cap bending / perturbed embedding",
+    "normal-vector and extrinsic-curvature perturbations",
+    "full perturbed Israel equations",
+    "perturbed scalar junction condition",
+    "perturbed gauge junction condition",
+    "diffeomorphism gauge reduction",
+    "S/V/T decomposition and harmonics",
+    "constraint elimination",
+    "physical background",
+    "6D-to-4D perturbative reduction",
+    "mu eta Sigma",
+    "growth and lensing",
+    "ghost freedom",
+    "stability"
+  ],
+  "gate_state": {
+    "WP1_bulk_gravity_matter_hessian": "ASSEMBLABLE_OFFSHELL",
+    "WP1_fixed_interface_localized_cap_hessian": "DERIVED",
+    "WP1_full_boundary_hessian": "NOT_CLOSED_BENDING_AND_EXTRINSIC_CURVATURE_PERTURBATIONS_OPEN",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM_G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "Fixed-interface is a calculational subproblem, not a proof that cap bending is absent.",
+    "No perturbed junction system is released by this block.",
+    "No gauge-controlled physical degree-of-freedom count follows from this Hessian alone.",
+    "No ghost-freedom or stability claim.",
+    "No physical background, observable, growth or lensing claim.",
+    "No authorization, grant, backend import or solver execution."
+  ],
+  "next_block": {
+    "id": "ULSH-05/WP1C3",
+    "title": "Cap bending and perturbed junction geometry preflight",
+    "execution_type": "ANALYTIC_NONOPERATIVE",
+    "required_output": [
+      "embedding perturbation variable and diffeomorphism transformation",
+      "delta induced metric",
+      "delta unit normal",
+      "delta extrinsic curvature",
+      "boundary displacement terms in scalar and gauge pullbacks",
+      "fixed-interface gauge admissibility conditions",
+      "no physical solver execution"
+    ]
+  }
+}
