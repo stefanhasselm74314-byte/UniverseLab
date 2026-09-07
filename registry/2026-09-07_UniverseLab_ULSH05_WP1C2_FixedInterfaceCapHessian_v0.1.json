@@ -101,7 +101,7 @@
     "WP1_full_boundary_hessian": "NOT_CLOSED_BENDING_AND_EXTRINSIC_CURVATURE_PERTURBATIONS_OPEN",
     "WP1_full_quadratic_action": "NOT_CLOSED",
     "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
-    "FM_G0": "OPEN",
+    "FM-G0": "OPEN",
     "AuthorizationDecision": "NOT_CREATED",
     "SingleUseGrant": "NOT_CREATED",
     "BACKEND_IMPORT": "NOT_EXECUTED",
