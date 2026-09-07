@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Fail-closed Band V-C G11 state-freshness + claim-delta closure gate."""
+"""Fail-closed Band V-C G11 state-freshness + claim-delta closure gate.
+
+Terminal revalidation marker: a human-authored non-census-input commit follows
+the exact-head materializer refresh so PR workflows can execute normally.
+"""
 from __future__ import annotations
 
 import importlib.util
