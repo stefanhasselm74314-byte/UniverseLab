@@ -8,6 +8,7 @@ REG = ROOT / "registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeo
 WP1C2 = ROOT / "registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json"
 G01 = ROOT / "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json"
 D = 5
+SURFACE_SIGNS = [-1.0, 1.0, 1.0, 1.0, 1.0]
 
 
 def load(path):
@@ -92,10 +93,69 @@ def test_induced_metric_D_gauge_invariance():
     assert maxdiff(H, H2) < 2e-15
 
 
-def test_flat_graph_bending_sign():
+def graph_grad(y, linear, Hess):
+    return [linear[i] + sum(Hess[i][j]*y[j] for j in range(D)) for i in range(D)]
+
+
+def graph_normal_covector(eps, y, linear, Hess):
+    # Flat ambient metric: ds^2 = dr^2 + eta_ab dy^a dy^b.
+    # Surface: F=r-eps*xi(y)=0.  The outward spacelike normal covector is dF/|dF|.
+    g = graph_grad(y, linear, Hess)
+    grad_sq = sum(SURFACE_SIGNS[i]*g[i]*g[i] for i in range(D))
+    norm = math.sqrt(1.0 + eps*eps*grad_sq)
+    return [1.0/norm] + [-eps*g[i]/norm for i in range(D)]
+
+
+def graph_tangents(eps, y, linear, Hess):
+    g = graph_grad(y, linear, Hess)
+    E = []
+    for a in range(D):
+        row = [0.0]*(D+1)
+        row[0] = eps*g[a]
+        row[a+1] = 1.0
+        E.append(row)
+    return E
+
+
+def graph_extrinsic_curvature(eps, linear, Hess, y_step=2e-5):
+    # Build K_ab=e_a^A e_b^B partial_A n_B directly from embedding tangents
+    # and the normalized graph normal.  Ambient Christoffels vanish.
+    y0 = [0.0]*D
+    E = graph_tangents(eps, y0, linear, Hess)
+    n0 = graph_normal_covector(eps, y0, linear, Hess)
+
+    # Independent normalization/orthogonality controls.
+    n_sq = n0[0]*n0[0] + sum(SURFACE_SIGNS[a]*n0[a+1]*n0[a+1] for a in range(D))
+    assert math.isclose(n_sq, 1.0, rel_tol=0.0, abs_tol=3e-14)
+    for a in range(D):
+        assert abs(sum(n0[A]*E[a][A] for A in range(D+1))) < 3e-14
+
+    # Numerical tangential derivative of the normalized covector: this avoids
+    # inserting the claimed K_ab=-eps*Hess_ab sign by hand.
+    dnormal = []
+    for a in range(D):
+        yp, ym = y0[:], y0[:]
+        yp[a] += y_step
+        ym[a] -= y_step
+        np = graph_normal_covector(eps, yp, linear, Hess)
+        nm = graph_normal_covector(eps, ym, linear, Hess)
+        dnormal.append([(np[A]-nm[A])/(2*y_step) for A in range(D+1)])
+
+    K = zeros()
+    for a in range(D):
+        for b in range(D):
+            # n_B is extended independently of r, so only the y^a derivative contributes.
+            K[a][b] = sum(E[b][B]*dnormal[a][B] for B in range(D+1))
+    assert maxdiff(K, [[K[j][i] for j in range(D)] for i in range(D)]) < 3e-12
+    return K
+
+
+def test_flat_graph_bending_sign_from_embedding_and_normal():
     Hess = [[0.40,-0.10,0,0.05,0],[-0.10,-0.30,0.07,0,0.02],[0,0.07,0.25,-0.04,0],[0.05,0,-0.04,0.18,0.03],[0,0.02,0,0.03,-0.12]]
-    got = fd_matrix(lambda e: scale(-e, Hess), 1e-6)
-    assert maxdiff(got, scale(-1, Hess)) < 2e-11
+    # Nonzero gradient makes the normal normalization nontrivial while preserving n^2>0 for small eps.
+    linear = [0.13,-0.21,0.08,0.05,-0.11]
+    got = fd_matrix(lambda e: graph_extrinsic_curvature(e, linear, Hess), 1e-4)
+    assert maxdiff(got, scale(-1, Hess)) < 2e-8
 
 
 def test_warped_parallel_shift_signs():
@@ -208,7 +268,7 @@ def main():
     tests = [
         test_contract_scope,
         test_induced_metric_D_gauge_invariance,
-        test_flat_graph_bending_sign,
+        test_flat_graph_bending_sign_from_embedding_and_normal,
         test_warped_parallel_shift_signs,
         test_perturbed_israel_operator_finite_difference,
         test_surface_stress_variation_finite_difference,
