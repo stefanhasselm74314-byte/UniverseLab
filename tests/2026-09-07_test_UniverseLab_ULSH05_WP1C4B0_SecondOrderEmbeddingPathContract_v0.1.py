@@ -46,8 +46,8 @@ def msub(A, B):
     return [[A[i][j] - B[i][j] for j in range(len(A[0]))] for i in range(len(A))]
 
 
-def mscale(c, A):
-    return [[c * value for value in row] for row in A]
+def vdot(A, x):
+    return mvec(A, x)
 
 
 def assert_vec_equal(a, b):
@@ -106,27 +106,28 @@ def noncommuting_second_order_gauge_control() -> None:
     C = msub(mmul(J, Z), mmul(Z, J))  # [L_zeta,L_z] = L_[zeta,z]
     assert C != [[0,0,0],[0,0,0],[0,0,0]]
 
-    Q1 = vadd(T1, mvec(Z, T0))
-    Q2 = vadd(vadd(T2, vscale(2, mvec(Z, T1))), mvec(madd(W, mmul(Z, Z)), T0))
+    Q1 = vadd(T1, vdot(Z, T0))
+    Q2 = vadd(vadd(T2, vscale(2, vdot(Z, T1))), vdot(madd(W, mmul(Z, Z)), T0))
 
-    T1p = vsub(T1, mvec(J, T0))
-    T2p = vadd(vsub(T2, vscale(2, mvec(J, T1))), mvec(msub(mmul(J, J), L), T0))
+    T1p = vsub(T1, vdot(J, T0))
+    T2p = vadd(vsub(T2, vscale(2, vdot(J, T1))), vdot(msub(mmul(J, J), L), T0))
     Zp = madd(Z, J)
     Wp = msub(madd(W, L), C)
 
-    Q1p = vadd(T1p, mvec(Zp, T0))
-    Q2p = vadd(vadd(T2p, vscale(2, mvec(Zp, T1p))), mvec(madd(Wp, mmul(Zp, Zp)), T0))
+    Q1p = vadd(T1p, vdot(Zp, T0))
+    Q2p = vadd(vadd(T2p, vscale(2, vdot(Zp, T1p))), vdot(madd(Wp, mmul(Zp, Zp)), T0))
 
     assert_vec_equal(Q1p, Q1)
     assert_vec_equal(Q2p, Q2)
 
     # Omitting the commutator must fail for this non-commuting control.
     Wwrong = madd(W, L)
-    Q2wrong = vadd(vadd(T2p, vscale(2, mvec(Zp, T1p))), mvec(madd(Wwrong, mmul(Zp, Zp)), T0))
+    Q2wrong = vadd(vadd(T2p, vscale(2, vdot(Zp, T1p))), vdot(madd(Wwrong, mmul(Zp, Zp)), T0))
     assert Q2wrong != Q2
 
 
 def off_shell_path_dependence_control() -> None:
+    # This control is intentionally performed in one declared affine chart.
     x0 = 0.41
     u = -0.73
     v1 = 0.28
@@ -138,7 +139,7 @@ def off_shell_path_dependence_control() -> None:
     def DS(x):
         return 1.7 + 2.3*x + 0.2*x*x
 
-    def H(x):
+    def D2S(x):
         return 2.3 + 0.4*x
 
     def path(eps, v):
@@ -149,17 +150,17 @@ def off_shell_path_dependence_control() -> None:
 
     d1 = fd2(v1)
     d2 = fd2(v2)
-    expected1 = H(x0)*u*u + DS(x0)*v1
-    expected2 = H(x0)*u*u + DS(x0)*v2
+    expected1 = D2S(x0)*u*u + DS(x0)*v1
+    expected2 = D2S(x0)*u*u + DS(x0)*v2
     close(d1, expected1, atol=3e-7, rtol=3e-7)
     close(d2, expected2, atol=3e-7, rtol=3e-7)
     close(d1-d2, DS(x0)*(v1-v2), atol=5e-7, rtol=5e-7)
 
-    intrinsic1 = 0.5*(d1-DS(x0)*v1)
-    intrinsic2 = 0.5*(d2-DS(x0)*v2)
-    intrinsic_expected = 0.5*H(x0)*u*u
-    close(intrinsic1, intrinsic_expected, atol=3e-7, rtol=3e-7)
-    close(intrinsic2, intrinsic_expected, atol=3e-7, rtol=3e-7)
+    chart_hess1 = 0.5*(d1-DS(x0)*v1)
+    chart_hess2 = 0.5*(d2-DS(x0)*v2)
+    chart_hess_expected = 0.5*D2S(x0)*u*u
+    close(chart_hess1, chart_hess_expected, atol=3e-7, rtol=3e-7)
+    close(chart_hess2, chart_hess_expected, atol=3e-7, rtol=3e-7)
     assert abs(DS(x0)) > 0.1  # genuinely off shell control
 
 
@@ -203,14 +204,21 @@ def contract_and_firewall_control() -> None:
     assert d["physical_gate_effect"] == "NONE"
     assert d["physical_evidence_effect"] == "NONE"
     assert d["solver_authorized"] is False
+    assert d["second_order_field_path"]["configuration_chart"] == "DECLARED_LOCAL_AFFINE_PERTURBATION_CHART_FOR_THIS_PREFLIGHT"
+    assert d["second_order_field_path"]["field_space_connection_status"] == "NOT_FROZEN"
     assert "T2+2*L_z T1+(L_w+L_z^2)Tbar" in d["moving_pullback_second_order"]["second_order"]
     assert "w+lambda-[zeta,z]" in d["second_order_bulk_D_gauge"]["embedding_second"]
-    assert "DS[v]" in d["off_shell_hessian_extraction"]["path_second_derivative"]
+    extraction = d["off_shell_hessian_extraction"]
+    assert "DS[v]" in extraction["path_second_derivative"]
+    assert extraction["field_space_connection_status"] == "NOT_FROZEN"
+    assert "declared local affine perturbation chart" in extraction["chart_scope"]
+    assert "nabla_cfg" in extraction["covariant_field_space_identity"]
     assert d["two_side_second_order_gluing"]["equivalent_second_constraint"] == "chi_N+chi_S=0"
 
     g = d["gate_state"]
     expected = {
         "WP1_second_order_embedding_path_contract": "DERIVED",
+        "WP1_configuration_space_connection": "NOT_FROZEN",
         "WP1_full_boundary_hessian": "NOT_CLOSED",
         "WP1_full_quadratic_action": "NOT_CLOSED",
         "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
@@ -234,7 +242,9 @@ def contract_and_firewall_control() -> None:
 
     for sentinel in (
         "DS[v]",
-        "Q_2'[T]=Q_2[T]" if False else "Q_2'=Q_2",
+        "Q_2'=Q_2",
+        "Konfigurationsraum-Verbindung",
+        "global feldraum-kovariante off-shell Hesse",
         "PHYSICAL_BACKGROUND = NOT_ESTABLISHED",
         "WP1_full_boundary_hessian = NOT_CLOSED",
     ):
