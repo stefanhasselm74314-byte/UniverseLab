@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
       - name: Run WP1C2 tests
         run: python -m pytest -q tests/2026-09-07_test_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.py
       - name: Re-run upstream WP1 chain
