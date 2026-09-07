@@ -61,7 +61,7 @@ jobs:
         run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.py
       - name: Re-run G01 observable firewall
         run: python tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py
-      - name: Fail closed on shape, Hessian and physical promotion
+      - name: Fail closed on shape, intrinsic-form extension, Hessian and physical promotion
         run: |
           python - <<'PY'
           import json
@@ -72,6 +72,7 @@ jobs:
           assert d['physical_evidence_effect']=='NONE'
           assert d['solver_authorized'] is False
           assert g['WP1_moving_domain_transport_master']=='DERIVED'
+          assert g['WP1_boundary_intrinsic_form_extension_policy']=='FROZEN_FAIL_CLOSED'
           assert g['WP1_full_shape_residual']=='NOT_ASSEMBLED'
           assert g['WP1_configuration_space_connection']=='NOT_FROZEN'
           assert g['WP1_full_boundary_hessian']=='NOT_CLOSED'
@@ -87,5 +88,8 @@ jobs:
           assert g['K1-D']=='NOT_RELEASED'
           assert g['K1-E']=='NOT_ADMISSIBLE'
           assert d['internal_cap_first_order']['status']=='ORIENTATION_SAFE_MASTER_FROZEN_SCALAR_JUMP_REDUCTION_CONDITIONAL'
+          b=d['boundary_action_transport']
+          assert b['status']=='AMBIENT_PULLBACK_RULE_FROZEN_INTRINSIC_CAP_AND_GHY_TOTAL_VARIATIONS_DEFERRED'
+          assert 'do not write L_z' in b['forbidden_shortcut']
           print('WP1C4B1A firewalls: PASS')
           PY
