@@ -1,0 +1,148 @@
+{
+  "schema": "universelab.ulsh05-wp1c1-bulk-metric-matter-hessian.v0.1",
+  "version": "0.1.0",
+  "date": "2026-09-07",
+  "basis_main_commit": "2af889e354beaa73e7d5e3c832235328a216a8e5",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "module_id": "ULSH-05",
+  "work_package": "WP1C1_BULK_METRIC_SCALAR_MAXWELL_MIXED_HESSIAN",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "classification": "NONOPERATIVE_ANALYTIC_BULK_MATTER_HESSIAN",
+  "status": "DERIVED_OFFSHELL_BULK_METRIC_SCALAR_MAXWELL_SECOND_ORDER_DENSITY_BOUNDARY_AND_GAUGE_REDUCTION_NOT_CLOSED",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "purpose": "Derive the exact off-shell epsilon^2 coefficient of the C-PHYS-M1 scalar-Maxwell bulk density under simultaneous covariant metric, scalar and U(1) perturbations. This closes the bulk matter metric-mixing algebra needed to combine WP1A with the WP1B gravity master, but does not close cap/boundary dynamics, diffeomorphism gauge reduction, a physical background, or any 4D observable map.",
+  "dependencies": [
+    "hzt-s6-parent-action-v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+    "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json"
+  ],
+  "simultaneous_path": {
+    "metric": "g_AB(epsilon)=gbar_AB+epsilon*p_AB",
+    "scalar": "phi(epsilon)=phibar+epsilon*varphi",
+    "gauge": "A_A(epsilon)=Abar_A+epsilon*a_A",
+    "field_strength": "F_AB(epsilon)=Fbar_AB+epsilon*f_AB with f_AB=2*nabla_bar_[A a_B]",
+    "metric_inverse_first": "g1^AB=-p^AB",
+    "metric_inverse_second_coefficient": "g2^AB=r^AB=p^A_C*p^CB",
+    "trace": "p=gbar^AB*p_AB",
+    "norm": "p2=p_AB*p^AB"
+  },
+  "measure_expansion": {
+    "formula": "sqrt(-g)=sqrt(-gbar)[1+epsilon*m1+epsilon^2*m2+O(epsilon^3)]",
+    "m1": "p/2",
+    "m2": "p^2/8-p_AB*p^AB/4"
+  },
+  "scalar_gradient_expansion": {
+    "definition": "X=g^AB partial_A phi partial_B phi=X0+epsilon*X1+epsilon^2*X2+O(epsilon^3)",
+    "X0": "u_A*u^A where u_A=partial_A phibar",
+    "X1": "2*u^A*v_A-p^AB*u_A*u_B where v_A=partial_A varphi",
+    "X2": "v_A*v^A-2*p^AB*u_A*v_B+r^AB*u_A*u_B"
+  },
+  "field_strength_expansion": {
+    "definition": "W=F_AB*F^AB=W0+epsilon*W1+epsilon^2*W2+O(epsilon^3)",
+    "W0": "Fbar_AB*Fbar^AB",
+    "W1": "2*Fbar^AB*f_AB-2*p^AC*Fbar_A^B*Fbar_CB",
+    "W2": "f_AB*f^AB-4*p^AC*Fbar_A^B*f_CB+2*r^AC*Fbar_A^B*Fbar_CB+p^AC*p^BD*Fbar_AB*Fbar_CD",
+    "index_rule": "all raised indices and contractions in W0,W1,W2 use gbar_AB"
+  },
+  "function_expansions": {
+    "U": "U=Ubar+epsilon*Ubar_phi*varphi+epsilon^2*(Ubar_phiphi/2)*varphi^2+O(epsilon^3)",
+    "Z": "Z=Zbar+epsilon*Zbar_phi*varphi+epsilon^2*(Zbar_phiphi/2)*varphi^2+O(epsilon^3)"
+  },
+  "unweighted_lagrangian_coefficients": {
+    "L0": "-X0/2-Ubar-Zbar*W0/4",
+    "L1": "-X1/2-Ubar_phi*varphi-(Zbar*W1+Zbar_phi*varphi*W0)/4",
+    "L2": "-X2/2-(Ubar_phiphi/2)*varphi^2-[Zbar*W2+Zbar_phi*varphi*W1+(Zbar_phiphi/2)*varphi^2*W0]/4"
+  },
+  "exact_quadratic_density": {
+    "definition": "sqrt(-g)*L=sqrt(-gbar)[L0+epsilon*(L1+m1*L0)+epsilon^2*D2+O(epsilon^3)]",
+    "formula": "D2=L2+m1*L1+m2*L0",
+    "action": "S_phiF,quad^(2)=int d6X sqrt(-gbar)*D2",
+    "classification": "EXACT_ALGEBRAIC_SECOND_ORDER_DENSITY_FOR_SIMULTANEOUS_METRIC_SCALAR_MAXWELL_PATH",
+    "pathwise_note": "This is the epsilon^2 coefficient for the declared linear covariant field path; no background equations are imposed."
+  },
+  "m1_specialization": {
+    "Ubar": "0.5*mhat_phi_sq*M6^2*phibar^2",
+    "Ubar_phi": "mhat_phi_sq*M6^2*phibar",
+    "Ubar_phiphi": "mhat_phi_sq*M6^2",
+    "Zbar": "exp(-2*a_F*phibar/M6^2)",
+    "Zbar_phi": "-2*a_F*Zbar/M6^2",
+    "Zbar_phiphi": "4*a_F^2*Zbar/M6^4",
+    "lambda_and_Zsigma": "not part of WP1C1; localized cap Hessian remains separate"
+  },
+  "explicit_scalar_density_piece": {
+    "formula": "D2_scalar=-X2/2-(Ubar_phiphi/2)*varphi^2+(p/2)*[-X1/2-Ubar_phi*varphi]+(p^2/8-p_AB*p^AB/4)*[-X0/2-Ubar]",
+    "expanded_mixing_core": "p^AB*u_A*v_B-(p/2)*u^A*v_A-(p/2)*Ubar_phi*varphi",
+    "pure_metric_background_core": "-(1/2)*r^AB*u_A*u_B+(p/4)*p^AB*u_A*u_B+(p^2/8-p_AB*p^AB/4)*[-X0/2-Ubar]"
+  },
+  "explicit_maxwell_density_piece": {
+    "formula": "D2_Maxwell=-(1/4){Zbar*W2+Zbar_phi*varphi*W1+(Zbar_phiphi/2)*varphi^2*W0+(p/2)[Zbar*W1+Zbar_phi*varphi*W0]+(p^2/8-p_AB*p^AB/4)*Zbar*W0}",
+    "contains": [
+      "metric-gauge mixing p*Fbar*f",
+      "metric-scalar-flux mixing p*varphi*Fbar^2",
+      "scalar-gauge mixing varphi*Fbar*f",
+      "pure metric quadratic flux response",
+      "fixed-metric WP1A Maxwell-scalar Hessian"
+    ]
+  },
+  "consistency_limits": {
+    "fixed_metric": "p_AB=0 implies m1=m2=0, X1=2*u.v, X2=v^2, W1=2*Fbar.f, W2=f^2 and D2 exactly reduces to WP1A",
+    "no_field_perturbations": "varphi=0 and f_AB=0 leaves the pure metric second variation of the scalar-Maxwell background density",
+    "no_background_flux": "Fbar_AB=0 removes scalar-flux and metric-background-flux mixing but leaves the ordinary -Zbar*f^2/4 gauge Hessian",
+    "constant_background_scalar": "u_A=0 removes scalar-gradient metric mixing but not potential measure terms or Z_F-mediated flux mixing"
+  },
+  "independent_QA_contract": {
+    "direct_local_density_test": "For deterministic Lorentz-signature 6x6 backgrounds, evaluate the exact density sqrt(-det g(epsilon))*L_phiF(epsilon) at +/-epsilon and reconstruct the epsilon^2 coefficient by central difference; compare with D2 assembled from X0..X2, W0..W2, m1,m2 and frozen M1 derivatives.",
+    "negative_F2_control": "At least one test sample has Fbar^2<0 to prevent hidden Euclidean/positivity assumptions.",
+    "WP1A_limit": "Set p_AB=0 and compare D2 with the merged WP1A fixed-metric formula.",
+    "field_strength_metric_expansion": "Independently finite-difference W(epsilon)=g(epsilon)^AC g(epsilon)^BD F(epsilon)_AB F(epsilon)_CD and compare W1,W2."
+  },
+  "bulk_assembly_status": {
+    "WP1A_fixed_metric_scalar_Maxwell": "DERIVED_CONTROL_SUBSECTOR",
+    "WP1B_gravity_EH_GHY_master": "DERIVED_CONTROL_TEMPLATE",
+    "WP1C1_bulk_matter_metric_mixing": "DERIVED",
+    "full_bulk_interior_gravity_scalar_Maxwell_hessian": "ASSEMBLABLE_AS_WP1B_BULK_PLUS_WP1C1_NOT_GAUGE_REDUCED",
+    "full_parent_hessian_including_cap": "NOT_DERIVED"
+  },
+  "what_remains_open": [
+    "localized cap action Hessian",
+    "cap bending/embedding perturbation or globally justified fixed-interface gauge",
+    "full perturbed Israel/scalar/gauge/phase junction assembly",
+    "diffeomorphism gauge control and S/V/T gauge-invariant variables",
+    "constraint elimination",
+    "released physical on-shell background",
+    "matter Delta_m observable-source definition and coupling",
+    "6D-to-4D perturbative reduction",
+    "mu eta Sigma growth and lensing",
+    "ghost freedom, kinetic positivity, gradient stability and physical spectrum"
+  ],
+  "wp1_progress_effect": {
+    "ULSH05_WP1": "PREPARATORY_IN_PROGRESS_NOT_CLOSED",
+    "G01": "OPEN_BLOCKING",
+    "full_coupled_S_quad_2": "NOT_DERIVED"
+  },
+  "forbidden_inferences": [
+    "Do not interpret the local quadratic density as an on-shell physical perturbation action.",
+    "Do not impose Ebar_AB=0 in the gravity sector or use matter terms to claim cancellation before the complete parent Hessian and on-shell conditions are assembled.",
+    "Do not infer ghost freedom, positivity or stability from the exact algebraic matter Hessian.",
+    "Do not treat U(1) gauge invariance as diffeomorphism gauge closure.",
+    "Do not infer a 4D Poisson/slip/lensing/growth map.",
+    "Do not authorize solver execution or promote K1-D/K1-E."
+  ],
+  "unchanged_firewalls": {
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_analytic_block": "WP1C2_CAP_LOCALIZED_ACTION_HESSIAN_FIXED_INTERFACE_CONTROL_THEN_CAP_BENDING_UPGRADE"
+}

@@ -1,0 +1,87 @@
+name: 2026-09-07 ULSH05 WP1C1 Bulk Metric-Matter Hessian QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.md'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.py'
+      - '.github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_QA_v0.1.yml'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.json'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json'
+      - 'registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse WP1C1 contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('registry/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          assert data['model_id'] == 'HZT-M0-S6-C-PHYS-M1'
+          assert data['classification'] == 'NONOPERATIVE_ANALYTIC_BULK_MATTER_HESSIAN'
+          assert data['status'] == 'DERIVED_OFFSHELL_BULK_METRIC_SCALAR_MAXWELL_SECOND_ORDER_DENSITY_BOUNDARY_AND_GAUGE_REDUCTION_NOT_CLOSED'
+          assert data['physical_gate_effect'] == 'NONE'
+          assert data['physical_evidence_effect'] == 'NONE'
+          assert data['solver_authorized'] is False
+          assert data['bulk_assembly_status']['WP1C1_bulk_matter_metric_mixing'] == 'DERIVED'
+          assert data['bulk_assembly_status']['full_parent_hessian_including_cap'] == 'NOT_DERIVED'
+          print('PASS: WP1C1 contract parses and remains nonoperative')
+          PY
+
+      - name: Independently reconstruct Lorentz-signature bulk epsilon-squared density
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.py
+
+      - name: Re-run WP1 readiness regression
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.py
+
+      - name: Re-run WP1A fixed-metric Hessian regression
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.py
+
+      - name: Re-run WP1B gravity Hessian regression
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.py
+
+      - name: Re-run G01 observable-interface firewall
+        run: python tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py
+
+      - name: Enforce boundary physical and observable non-promotion
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c = json.loads(Path('registry/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.json').read_text(encoding='utf-8'))
+          assert c['bulk_assembly_status']['full_parent_hessian_including_cap'] == 'NOT_DERIVED'
+          assert c['wp1_progress_effect']['ULSH05_WP1'] == 'PREPARATORY_IN_PROGRESS_NOT_CLOSED'
+          assert c['wp1_progress_effect']['G01'] == 'OPEN_BLOCKING'
+          assert c['wp1_progress_effect']['full_coupled_S_quad_2'] == 'NOT_DERIVED'
+          expected = {
+              'FM-G0': 'OPEN',
+              'AuthorizationDecision': 'NOT_CREATED',
+              'SingleUseGrant': 'NOT_CREATED',
+              'BACKEND_IMPORT': 'NOT_EXECUTED',
+              'SOLVER_EXECUTION': 'NOT_EXECUTED',
+              'PHYSICAL_BACKGROUND': 'NOT_ESTABLISHED',
+              'PHYSICAL_RESPONSE_RANK': 'NOT_EXECUTED',
+              'K1-D': 'NOT_RELEASED',
+              'K1-E': 'NOT_ADMISSIBLE',
+          }
+          assert c['unchanged_firewalls'] == expected
+          print('PASS: no cap, physical, observable, or authorization promotion')
+          PY
