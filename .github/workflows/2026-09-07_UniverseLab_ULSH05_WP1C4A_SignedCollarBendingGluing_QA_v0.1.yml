@@ -1,0 +1,68 @@
+name: 2026-09-07 ULSH05 WP1C4A Signed Collar Bending Gluing QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_SignedCollarBendingGluing_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4A_SignedCollarBendingGluing_v0.1.md'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4A_SignedCollarBendingGluing_v0.1.py'
+      - '.github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C4A_SignedCollarBendingGluing_QA_v0.1.yml'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.json'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_SignedCollarBendingGluing_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4A_SignedCollarBendingGluing_v0.1.md'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4A_SignedCollarBendingGluing_v0.1.py'
+      - '.github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C4A_SignedCollarBendingGluing_QA_v0.1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  wp1c4a-signed-collar-gluing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run WP1C4A signed-collar validator
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4A_SignedCollarBendingGluing_v0.1.py
+
+      - name: Re-run moving-boundary upstream chain
+        run: |
+          python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.py
+          python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.py
+          python tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py
+
+      - name: Fail closed on boundary and physical promotion
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_SignedCollarBendingGluing_v0.1.json').read_text())
+          g=d['gate_state']
+          assert d['physical_gate_effect']=='NONE'
+          assert d['physical_evidence_effect']=='NONE'
+          assert d['solver_authorized'] is False
+          assert g['WP1_signed_collar_interface_identification']=='DERIVED'
+          assert g['WP1_two_side_bending_gluing']=='DERIVED_IN_DECLARED_COLLAR'
+          assert g['WP1_local_simultaneous_fixed_interface_gauge']=='DERIVED_COLLAR_LOCAL_ONLY'
+          assert g['WP1_global_fixed_interface_gauge']=='NOT_PROVEN'
+          assert g['WP1_full_boundary_hessian']=='NOT_CLOSED'
+          assert g['WP1_full_quadratic_action']=='NOT_CLOSED'
+          assert g['PERTURBED_JUNCTION_SYSTEM']=='NOT_RELEASED'
+          assert g['PHYSICAL_BACKGROUND']=='NOT_ESTABLISHED'
+          assert g['FM-G0']=='OPEN'
+          assert g['AuthorizationDecision']=='NOT_CREATED'
+          assert g['SingleUseGrant']=='NOT_CREATED'
+          assert g['BACKEND_IMPORT']=='NOT_EXECUTED'
+          assert g['SOLVER_EXECUTION']=='NOT_EXECUTED'
+          assert g['PHYSICAL_RESPONSE_RANK']=='NOT_EXECUTED'
+          assert g['K1-D']=='NOT_RELEASED'
+          assert g['K1-E']=='NOT_ADMISSIBLE'
+          print('WP1C4A firewalls: PASS')
+          PY
