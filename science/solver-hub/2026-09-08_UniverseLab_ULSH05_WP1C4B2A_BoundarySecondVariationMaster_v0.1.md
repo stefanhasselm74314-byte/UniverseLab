@@ -184,7 +184,7 @@ Damit ist für den expliziten Residualkanal
 \right].
 \]
 
-Die Tangential-/Corner-Kanäle besitzen analog einen acceleration-linearen Anteil, den wir mit `C_{2,tc,acc}` bezeichnen. Nach **nur** der jeweiligen `DS[v]`-Subtraktion lautet der Boundary-Chart-Hessian-Integrand des expliziten Residualkanals
+Die Tangential-/Corner-Kanäle besitzen analog einen acceleration-linearen Anteil, den wir mit `C_{2,tc,acc}` bezeichnen. Nach **nur dieser** Subtraktion der jeweiligen `DS[v]`-Anteile lautet der Boundary-Chart-Hessian-Integrand des expliziten Residualkanals
 
 \[
 \begin{aligned}
