@@ -1,0 +1,143 @@
+{
+  "schema": "universelab.ulsh05.wp1c4b2b.component-boundary-residual-linearization.v0.1",
+  "date": "2026-09-08",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1C4B2B",
+  "basis_main": "5a5545ed80a94e99e7c466e5b30919dc47f86d6d",
+  "classification": "ANALYTIC_NONOPERATIVE_LOCAL_BOUNDARY_RESIDUAL_LINEARIZATION_AND_WEAK_HESSIAN_SYMMETRY",
+  "status": "COMPONENTIZED_LOCAL_INTERFACE_OPERATOR_WEAK_HESSIAN_SYMMETRIC_ON_DECLARED_TEST_DOMAIN_GLOBAL_PHYSICAL_BOUNDARY_DOMAIN_OPEN",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "SCI-001-002_v0.1_Canonical_6D_Parent_Action_and_Boundary_Closure.md",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json",
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.json",
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1D_DirectMovingActionShape_v0.1.json",
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.json"
+  ],
+  "test_domain": {
+    "symbol": "T_Sigma",
+    "definition": "C_c^infinity(M4) tensor C_2pi^infinity(S1_chi)",
+    "meaning": "smooth perturbations compactly supported in the four noncompact tangential directions and 2pi-periodic in chi",
+    "effect": "integrated intrinsic total divergences and boundary-of-boundary terms vanish on the local weak test pairing",
+    "firewall": "this is an analytic test domain, not a physical initial/boundary-condition release"
+  },
+  "boundary_residual_basis": {
+    "R_h": "M6^4*(Pi_N^ab+Pi_S^ab)-S^ab",
+    "R_phi": "Q_phi,N+Q_phi,S in M1",
+    "R_A": "Q_F,N^a+Q_F,S^a-j_Sigma^a",
+    "R_sigma": "D_a(Z_sigma D^a sigma)",
+    "R_perp": "M6^4*[(G_NN+Lambda6)]_c-[T_NN]_c"
+  },
+  "metric_residual_linearization": {
+    "DeltaPi_lower": "DeltaK_ab-hbar_ab*hbar^cd*DeltaK_cd+hbar_ab*Kbar^cd*H_cd-Kbar*H_ab",
+    "DeltaPi_upper": "hbar^ac*hbar^bd*DeltaPi_cd-H^ac*Pibar_c^b-H^bc*Pibar^a_c",
+    "DeltaX_sigma": "2*w^a*d_a-H^ab*w_a*w_b",
+    "DeltaS_lower": "-0.5*Z_sigma*DeltaX_sigma*hbar_ab-(lambda+0.5*Z_sigma*Xbar)*H_ab+Z_sigma*(d_a*w_b+w_a*d_b)",
+    "DeltaS_upper": "hbar^ac*hbar^bd*DeltaS_cd-H^ac*Sbar_c^b-H^bc*Sbar^a_c",
+    "DeltaR_h": "M6^4*sum_s DeltaPi_s^ab-DeltaS^ab",
+    "israel_used": false
+  },
+  "scalar_flux_residual_linearization": {
+    "DeltaR_phi": "sum_s Delta_Sigma Q_phi,s",
+    "DeltaQ_phi_s": "Xbar_s^*[(delta n_s^A)*nabla_A phibar_s+nbar_s^A*nabla_A varphi_s+L_zs(nbar_s^A*nabla_A phibar_s)]",
+    "localized_scalar_source": "ZERO_IN_M1_AND_ITS_LINEARIZATION_ZERO"
+  },
+  "gauge_flux_residual_linearization": {
+    "DeltaQ_F_s": "Xbar_s^*[delta(e_B^a n_A Z_F F^AB)+L_zs(e_B^a nbar_A Zbar_F Fbar^AB)]",
+    "Delta_j_Sigma": "q_sigma*Z_sigma*(d^a-H^ab*w_b)",
+    "DeltaR_A": "sum_s DeltaQ_F,s^a-q_sigma*Z_sigma*(d^a-H^ab*w_b)",
+    "u1_gauge_invariant": true
+  },
+  "phase_residual_linearization": {
+    "w_a": "D_a sigma_bar",
+    "d_a": "D_a s-q_sigma*Acal_a",
+    "Delta_w_upper": "d^a-H^ab*w_b",
+    "Delta_connection_trace": "DeltaGamma^a_ac=0.5*D_c H",
+    "DeltaR_sigma": "Z_sigma*[D_a(d^a-H^ab*w_b)+0.5*w^a*D_a H]",
+    "equivalent": "Z_sigma*[D_a d^a-D_a(H^ab*w_b)+0.5*w^a*D_a H]",
+    "mass_dimension": "M^5",
+    "status": "DERIVED_COMPONENT_OPERATOR_U1_GAUGE_INVARIANT"
+  },
+  "shape_geometry_linearization": {
+    "gauss_constraint": "G_NN=0.5*(K^2-K_ab*K^ab-R5)",
+    "DeltaK_trace": "hbar^ab*k_ab-H^ab*Kbar_ab",
+    "Delta_QK": "-2*Pibar^ab*k_ab+2*H^ab*(Kbar_a^c*Kbar_bc-Kbar*Kbar_ab)",
+    "Delta_R5": "-Rbar5^ab*H_ab+D^aD^bH_ab-D^2H",
+    "Delta_GNN_per_side": "-Pibar^ab*k_ab+H^ab*(Kbar_a^c*Kbar_bc-Kbar*Kbar_ab)+0.5*Rbar5^ab*H_ab-0.5*D^aD^bH_ab+0.5*D^2H",
+    "common_normal_jump": "[DeltaG_NN]_c=-[Pi^ab*k_ab]_c+H^ab*[K_a^c*K_bc-K*K_ab]_c",
+    "intrinsic_R5_jump_cancels_if": "H_ab^N=H_ab^S on the same intrinsic interface chart"
+  },
+  "matter_normal_stress_linearization": {
+    "decomposition": "T_NN=0.5*q_phi^2-0.5*nu_a*nu^a-U+Z*(0.5*E_a*E^a-0.25*B_ab*B^ab)",
+    "DeltaT_scalar": "q_phi*Deltaq_phi+0.5*H^ab*nu_a*nu_b-nu^a*D_a Phi_Sigma-U_phi*Phi_Sigma",
+    "DeltaT_Maxwell": "Z_phi*Phi_Sigma*(0.5*E^2-0.25*B^2)+Z*(-0.5*H^ab*E_a*E_b+E^a*e_a-0.5*B^ab*b_ab+0.5*H^ac*B_a^d*B_cd)",
+    "e_from_existing_flux_operator": "e_a=Z^-1*hbar_ab*DeltaQ_F^b+H_a^b*E_b-(Z_phi/Z)*Phi_Sigma*E_a",
+    "static_M1_scalar": "DeltaT_scalar=q_phi*Deltaq_phi-U_phi*Phi_Sigma",
+    "static_M1_Maxwell": "DeltaT_Maxwell=E_a*DeltaQ_F^a+0.5*Z*H^ab*E_a*E_b-0.5*Z_phi*Phi_Sigma*E^2",
+    "potential_jump_note": "the pure U_phi*Phi_Sigma term cancels in the common-normal jump when scalar value and total scalar pullback perturbation are continuous and the same M1 U is used on both sides"
+  },
+  "shape_residual_linearization": {
+    "DeltaR_perp": "M6^4*[DeltaG_NN]_c-[DeltaT_NN_scalar+DeltaT_NN_Maxwell]_c",
+    "expanded_common_normal": "-M6^4*[Pi^ab*k_ab]_c+M6^4*H^ab*[K_a^c*K_bc-K*K_ab]_c-[DeltaT_NN_scalar+DeltaT_NN_Maxwell]_c",
+    "Lambda6_linear_term": "ZERO_BECAUSE_Lambda6_CONSTANT_AND_N2_EQUALS_1",
+    "israel_used": false,
+    "status": "DERIVED_DIRECT_LINEARIZED_REGIONAL_NN_CONSTRAINT_JUMP"
+  },
+  "weak_hessian_symmetry": {
+    "definition": "H_Sigma[u,v]=partial_epsilon partial_eta S_Sigma[barPhi+epsilon*u+eta*v]|0",
+    "result": "H_Sigma[u,v]=H_Sigma[v,u]",
+    "scope": "DECLARED_LOCAL_TEST_DOMAIN_ONLY",
+    "reason": "ordinary Schwarz symmetry of the twice Frechet-differentiable canonical action after B2A acceleration subtraction; integrated tangential/corner divergences vanish on T_Sigma",
+    "does_not_establish": [
+      "global field-space covariant Hessian",
+      "physical boundary conditions",
+      "ghost freedom or kinetic positivity",
+      "physical spectrum",
+      "physical background"
+    ]
+  },
+  "independent_controls": [
+    "one-dimensional direct phase-residual finite difference",
+    "diagonal Lorentz-signature Gauss shape-kernel finite difference",
+    "diagonal scalar-Maxwell T_NN finite difference",
+    "two-parameter unexpanded cap-density mixed derivative versus polarization of merged WP1C2 quadratic coefficient",
+    "dependency and firewall checks"
+  ],
+  "gate_state": {
+    "WP1_boundary_second_variation_chain_rule": "DERIVED",
+    "WP1_boundary_residual_linearizations": "COMPONENTIZED_LOCAL_INTERFACE_OPERATOR",
+    "WP1_local_weak_boundary_hessian": "SYMMETRIC_ON_DECLARED_TEST_DOMAIN",
+    "WP1_full_global_boundary_hessian": "NOT_CLOSED_PHYSICAL_BC_AND_GLOBAL_CORNER_ADMISSIBILITY_OPEN",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "Local weak Hessian symmetry on the compact-support/periodic test domain is not a release of global physical boundary conditions.",
+    "Componentization of DeltaR_perp is not a physical background solution and does not use Israel as a substitute for the regional NN constraints.",
+    "Green algebraic controls do not establish ghost freedom, stability or a physical mode spectrum.",
+    "No backend import or solver execution is authorized.",
+    "No 6D-to-4D observable identification follows from this boundary-operator block."
+  ],
+  "next_block": {
+    "id": "ULSH-05/WP1C4B2C",
+    "title": "Global corner/support admissibility and boundary-domain preflight",
+    "execution_type": "ANALYTIC_NONOPERATIVE_CONDITIONAL",
+    "fallback_if_physical_domain_requires_unreleased_background": "freeze only a conditional S/V/T gauge-and-constraint domain without solver execution"
+  }
+}
