@@ -8,6 +8,7 @@ on:
       - 'tests/2026-09-08_test_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.py'
       - 'tools/2026-09-08_prepare_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.py'
       - '.github/workflows/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_QA_v0.1.yml'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.md'
       - 'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json'
       - 'tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.py'
       - 'science/solver-hub/2026-08-07_ULSH-04_Constraint_Roadmap_v1.0.md'
@@ -40,12 +41,20 @@ jobs:
           p = Path('registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json')
           d = json.loads(p.read_text(encoding='utf-8'))
           g = d['gate_state']
+          r = d['gauge_action']['intrinsic_surface_reparameterization']
+          q = d['kinematic_quotient']
           assert d['work_package'] == 'ULSH-05/WP1D'
           assert d['successor_assignment']['status'] == 'FROZEN_BY_THIS_SUCCESSOR_CONTRACT'
           assert d['solver_authorized'] is False
           assert d['physical_gate_effect'] == 'NONE'
           assert d['physical_evidence_effect'] == 'NONE'
+          assert r['independent_from_bulk_diffeomorphism'] is True
+          assert r['must_not_identify_with_zeta_parallel'] is True
+          assert r['pure_tangential_chart_mode'] == 'GAUGE_ORBIT_NOT_PHYSICAL_MODE'
+          assert q['bulk_vs_surface_reparameterization'] == 'DISTINCT_GAUGE_SYMMETRIES_MUST_NOT_BE_IDENTIFIED'
+          assert q['pure_tau_chart_orbit'] == 'NOT_A_PHYSICAL_KINEMATIC_MODE'
           assert d['constraint_elimination']['singular_C'] == 'DIRECT_ELIMINATION_FORBIDDEN'
+          assert g['WP1D_gauge_action'] == 'DEFINED_KINEMATICALLY_WITH_INDEPENDENT_SURFACE_REPARAMETERIZATION'
           assert g['WP1D_constraint_elimination'] == 'BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING'
           assert g['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
           assert g['WP1D_physical_DOF_count'] == 'NOT_RELEASED'
