@@ -66,18 +66,32 @@ def test_contract_and_firewalls() -> None:
         "Ghostfreiheit",
         "2\\pi",
         "S/V/T",
+        "operatorname{int}M_4",
     ):
         assert token in doc, token
 
 
+def test_finite_boundary_d0_requires_interior_support() -> None:
+    reg = json.loads(REG.read_text(encoding="utf-8"))
+    d0 = reg["domain_candidates"]["D0_local_test"]
+    geom = reg["geometric_domain"]
+
+    assert "C_c^infinity(int M4)" in d0["definition"]
+    assert "partialM4!=empty" in d0["definition"]
+    assert "compactly contained in int(M4)" in d0["finite_boundary_semantics"]
+    assert "compactly contained in int(M4)" in geom["local_test_support_convention"]
+    assert d0["boundary_flux"] == "VANISHES_BY_INTERIOR_COMPACT_SUPPORT_OR_BOUNDARYLESS_COMPACT_SUPPORT_AND_CHI_PERIODICITY"
+
+
 def test_unrestricted_interval_counterexample() -> None:
-    # L=-d^2/dx^2, u=x, v=x^2.
+    # L=-d^2/dx^2, u=x, v=x^2.  On compact [0,1] these functions
+    # are naively compactly supported, but they are not supported in int([0,1])
+    # and do not have zero boundary trace.
     u = lambda x: x
     up = lambda x: 1.0
     v = lambda x: x * x
     vp = lambda x: 2.0 * x
 
-    # Integral of u*Lv-(Lu)*v = integral_0^1 x*(-2) dx = -1.
     lhs = -1.0
     rhs = boundary_form(u, up, v, vp, 0.0, 1.0)
     close(lhs, -1.0)
@@ -124,6 +138,7 @@ def test_successor_id_is_not_invented() -> None:
 
 if __name__ == "__main__":
     test_contract_and_firewalls()
+    test_finite_boundary_d0_requires_interior_support()
     test_unrestricted_interval_counterexample()
     test_dirichlet_control_kills_boundary_form()
     test_periodic_chi_control()
