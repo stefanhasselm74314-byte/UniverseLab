@@ -19,7 +19,22 @@ def test_inherited_conditional_domain_is_explicit():
     assert dom['tangential_support_finite_boundary_M4'] == 'support compactly contained in int(M4)'
     assert dom['physical_release'] is False
     assert d['quotient']['domain_source'] == 'inherited_conditional_domain'
-    assert d['gate_state']['WP1D_analytic_field_domain'] == 'FROZEN_CONDITIONAL'
+
+
+def test_full_predecessor_gate_snapshot_is_inherited():
+    g = load()['gate_state']
+    assert g['WP1D_successor_identifier'] == 'FROZEN_BY_THIS_SUCCESSOR_CONTRACT'
+    assert g['WP1D_analytic_field_domain'] == 'FROZEN_CONDITIONAL'
+    assert g['WP1D_4D_covariant_SVT_bookkeeping'] == 'DEFINED_CONDITIONAL_PROJECTOR_KERNELS_OPEN'
+    assert g['WP1D_gauge_action'] == 'DEFINED_KINEMATICALLY_WITH_INDEPENDENT_SURFACE_REPARAMETERIZATION'
+    assert g['WP1D_constraint_elimination'] == 'BLOCKED'
+    assert g['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
+    assert g['WP1D_physical_DOF_count'] == 'NOT_RELEASED'
+    assert g['WP1_full_global_boundary_hessian'] == 'NOT_CLOSED_PHYSICAL_DOMAIN_NOT_RELEASED'
+    assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
+    assert g['PERTURBED_JUNCTION_SYSTEM'] == 'NOT_RELEASED'
+    assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
+    assert g['FM-G0'] == 'OPEN'
 
 
 def test_separate_gauge_columns():
@@ -79,9 +94,7 @@ def test_physical_firewalls():
     g = d['gate_state']
     assert g['FM-G0'] == 'OPEN'
     assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
-    assert g['WP1_physical_boundary_domain'] == 'BLOCKED'
     assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
-    assert g['WP1D_analytic_field_domain'] == 'FROZEN_CONDITIONAL'
     assert g['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
     assert g['PERTURBED_JUNCTION_SYSTEM'] == 'NOT_RELEASED'
     assert g['PHYSICAL_RESPONSE_RANK'] == 'NOT_EXECUTED'
@@ -95,6 +108,7 @@ def test_physical_firewalls():
 
 if __name__ == '__main__':
     test_inherited_conditional_domain_is_explicit()
+    test_full_predecessor_gate_snapshot_is_inherited()
     test_separate_gauge_columns()
     test_columnwise_not_full_invariance()
     test_projector_zero_modes_fail_closed()
