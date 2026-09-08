@@ -10,6 +10,18 @@ def load():
     return json.loads(REG.read_text(encoding='utf-8'))
 
 
+def test_inherited_conditional_domain_is_explicit():
+    d = load()
+    assert 'registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json' in d['dependencies']
+    dom = d['inherited_conditional_domain']
+    assert dom['name'] == 'D_cond'
+    assert dom['status'] == 'FROZEN_CONDITIONAL'
+    assert dom['tangential_support_finite_boundary_M4'] == 'support compactly contained in int(M4)'
+    assert dom['physical_release'] is False
+    assert d['quotient']['domain_source'] == 'inherited_conditional_domain'
+    assert d['gate_state']['WP1D_analytic_field_domain'] == 'FROZEN_CONDITIONAL'
+
+
 def test_separate_gauge_columns():
     d = load()
     g = d['gauge_operator']
@@ -48,6 +60,7 @@ def test_cokernel_requires_closed_range():
 def test_ulsh04_handoff_is_not_constraint_closure():
     d = load()
     assert d['ulsh04_handoff']['status'] == 'DEFINED_FAIL_CLOSED'
+    assert 'inherited WP1D D_cond field/domain contract' in d['ulsh04_handoff']['inputs']
     assert 'closed-range/Fredholm status of G remains unproven' in d['ulsh04_handoff']['inputs']
     assert 'physical 3+1/SVT gate remains NOT_RELEASED' in d['ulsh04_handoff']['inputs']
     g = d['gate_state']
@@ -68,6 +81,7 @@ def test_physical_firewalls():
     assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
     assert g['WP1_physical_boundary_domain'] == 'BLOCKED'
     assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
+    assert g['WP1D_analytic_field_domain'] == 'FROZEN_CONDITIONAL'
     assert g['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
     assert g['PERTURBED_JUNCTION_SYSTEM'] == 'NOT_RELEASED'
     assert g['PHYSICAL_RESPONSE_RANK'] == 'NOT_EXECUTED'
@@ -80,6 +94,7 @@ def test_physical_firewalls():
 
 
 if __name__ == '__main__':
+    test_inherited_conditional_domain_is_explicit()
     test_separate_gauge_columns()
     test_columnwise_not_full_invariance()
     test_projector_zero_modes_fail_closed()
