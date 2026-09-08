@@ -21,6 +21,7 @@ Kernstatus:
 WP1D1_successor_identifier       = FROZEN_BY_THIS_SUCCESSOR_CONTRACT
 WP1D1_gauge_operator             = COMPONENTIZED_STRUCTURALLY
 WP1D1_gauge_columns              = ZETA_LAMBDA_RHO_SEPARATED
+WP1D1_gauge_operator_interface_rows = COMPONENTIZED_ALL_DECLARED_ROWS
 WP1D1_projector_kernel_registry  = DEFINED_BACKGROUND_DEPENDENT
 WP1D1_full_projector_inverse     = NOT_FROZEN
 WP1D1_full_gauge_invariant_basis = NOT_CLAIMED
@@ -123,6 +124,42 @@ gilt
 \boxed{G_\zeta[H_{ab}]=0}.
 \]
 
+Die intrinsische Kappenphase ist im deklarierten doubly-covariant Split kein zusätzliches Bulkfeld. Für die **reine** Bulk-Diffeomorphismusspalte gilt daher direkt
+
+\[
+G_\zeta[s]=0.
+\]
+
+Für einen moving pullback eines Bulk-Tensors folgt aus der WP1C3-Masterregel
+
+\[
+\delta_\Sigma(X^*T)=\bar X^*\left(\delta T+\mathcal L_z\bar T\right)
+\]
+
+unter der gepaarten aktiven Bulk-/Embedding-Transformation kinematisch
+
+\[
+\boxed{G_\zeta[\Delta_\Sigma(X^*T)]=0}.
+\]
+
+Insbesondere ist für die gezogene Gauge-One-Form im reinen Diffeomorphismuskanal
+
+\[
+G_\zeta[\mathcal A_a]=0.
+\]
+
+Damit folgt für
+
+\[
+d_a=D_as-q_\sigma\mathcal A_a
+\]
+
+auch
+
+\[
+\boxed{G_\zeta[d_a]=0}.
+\]
+
 Unter U(1):
 
 \[
@@ -134,9 +171,7 @@ G_\lambda[\mathcal A_a]=D_a\lambda,
 und daher
 
 \[
-\boxed{G_\lambda[d_a]=0},
-\qquad
- d_a=D_as-q_\sigma\mathcal A_a.
+\boxed{G_\lambda[d_a]=0}.
 \]
 
 Unter unabhängiger Interface-Reparametrisierung:
@@ -158,10 +193,28 @@ Insbesondere
 \[
 G_\rho[H_{ab}]=2D_{(a}\rho_{b)},
 \qquad
-G_\rho[s]=\rho^aD_a\bar\sigma.
+G_\rho[s]=\rho^aD_a\bar\sigma,
 \]
 
-Damit ist `H_ab` unter `G_zeta` invariant, aber nicht unter dem vollständigen `G`; `d_a` ist unter `G_lambda` invariant, aber nicht automatisch unter dem vollständigen `G`. Das ist eine zentrale Firewall gegen falsche Vollinvarianzbehauptungen.
+\[
+G_\rho[\mathcal A_a]=(\mathcal L_\rho\bar{\mathcal A})_a.
+\]
+
+Mit
+
+\[
+\bar w_a=D_a\bar\sigma-q_\sigma\bar{\mathcal A}_a
+\]
+
+transformiert die U(1)-invariante Kappen-One-Form unter der **unabhängigen** Interface-Reparametrisierung als One-Form-Perturbation:
+
+\[
+\boxed{G_\rho[d_a]=(\mathcal L_\rho\bar w)_a}.
+\]
+
+Damit ist `H_ab` unter `G_zeta` invariant, aber nicht unter dem vollständigen `G`; `d_a` ist unter `G_zeta` und `G_lambda` invariant, aber wegen der unabhängigen `rho`-Spalte im Allgemeinen ebenfalls **nicht** unter dem vollständigen `G` invariant.
+
+[FIREWALL] Diese Aussagen sind kinematische Gauge-Transformationsregeln. Sie stellen weder eine physikalische Gaugefixierung noch eine physikalische Modenbasis dar.
 
 ## 4. 4D-kovariante Buchhaltung
 
@@ -272,15 +325,25 @@ reduced_cokernel_count      = NOT_AVAILABLE
 
 ## 7. Kinematische Invarianten: maximal sichere Aussage
 
-Zulässig sind nur spaltenbezogene Aussagen, die bereits bewiesen sind:
+Zulässig sind die spaltenbezogenen Aussagen, die durch die obige doubly-covariant Kinematik bewiesen sind:
 
 \[
 G_\zeta[H_{ab}]=0,
 \qquad
+G_\zeta[d_a]=0,
+\qquad
 G_\lambda[d_a]=0.
 \]
 
-Nicht zulässig ist daraus
+Wegen
+
+\[
+G_\rho[H_{ab}]=\mathcal L_\rho\bar h_{ab},
+\qquad
+G_\rho[d_a]=\mathcal L_\rho\bar w_a
+\]
+
+ist dagegen im Allgemeinen **nicht** zulässig,
 
 \[
 G[H_{ab}]=0
@@ -288,7 +351,7 @@ G[H_{ab}]=0
 G[d_a]=0
 \]
 
-zu folgern.
+zu behaupten.
 
 Eine vollständige lokale oder globale Basis \(I\) mit
 
@@ -326,7 +389,7 @@ WP1D1 definiert nur eine fail-closed Übergabeschnittstelle. ULSH-04 erhält als
 
 - Feldraum und konditionale Domäne,
 - den unverändert offenen Upstream-Gate `WP1_physical_boundary_domain = BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA`,
-- blockweisen Gaugeoperator `G=(G_zeta,G_lambda,G_rho)`,
+- blockweisen Gaugeoperator `G=(G_zeta,G_lambda,G_rho)` einschließlich der deklarierten Interface- und generischen moving-pullback-Zeilen,
 - explizite Trennung von Bulk- und Interface-Reparametrisierung,
 - Projektor-/Zero-Mode-Register,
 - bereits bewiesene spaltenbezogene kinematische Invarianten,
@@ -394,7 +457,7 @@ physical_evidence_effect        = NONE
 
 - Komponentenweise Registrierung von `G` ist keine physische Gaugefixierung.
 - `H_ab` ist nicht unter dem vollständigen Gaugeoperator invariant; seine bewiesene Invarianz betrifft die Bulk-Diffeomorphismusspalte.
-- `d_a` ist nicht automatisch unter dem vollständigen Gaugeoperator invariant; seine bewiesene Invarianz betrifft die U(1)-Spalte.
+- `d_a` ist zwar unter der gepaarten Bulk-Diffeomorphismusspalte und unter U(1) invariant, aber wegen der unabhängigen Interface-Reparametrisierung im Allgemeinen nicht unter dem vollständigen `G` invariant.
 - Projektor-Nullmoden dürfen nicht ohne Beweis entfernt werden.
 - Pairing-/Domain-Freeze allein identifiziert den gewöhnlichen Cokernel nicht mit `ker G^dagger`; dafür ist zusätzlich Closed Range beziehungsweise eine geeignete Fredholm-Bedingung erforderlich.
 - `ker G`, `coker G` und physische DOF dürfen nicht ohne Background, Domäne und ULSH-04-Abschluss gezählt werden.
