@@ -12,7 +12,8 @@
   "dependencies": [
     "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json",
     "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
-    "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.md"
+    "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.md",
+    "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.md"
   ],
   "successor_assignment": {
     "id": "ULSH-05/WP1D1",
@@ -32,26 +33,56 @@
     "gauge_closure": "bulk diffeomorphism, U1, and independent intrinsic interface-reparameterization parameters must each map D_cond into itself",
     "physical_release": false
   },
+  "field_space": {
+    "bulk": ["h_AB", "varphi", "a_A"],
+    "interface_primary": ["s", "xi_shape", "tau_a"],
+    "interface_derived_or_pullback_rows": ["H_ab", "Acal_a", "d_a", "generic_moving_pullback_DeltaSigma_T"],
+    "interpretation": "LINEAR_KINEMATIC_ROWS_NOT_PHYSICAL_MODES"
+  },
   "gauge_operator": {
     "form": "G=(G_zeta,G_lambda,G_rho)",
     "columns_separated": true,
+    "row_completeness": "BULK_FIELDS_PLUS_DECLARED_INTERFACE_PRIMARY_ROWS_AND_GENERIC_PULLBACK_ROWS_COMPONENTIZED",
     "bulk_diffeomorphism": {
       "metric": "delta h_AB=2 nabla_(A zeta_B)",
       "scalar": "delta varphi=zeta^A partial_A phibar",
-      "gauge_field": "delta a_A=Lie_zeta Abar_A"
+      "gauge_field": "delta a_A=Lie_zeta Abar_A",
+      "interface_rows": {
+        "xi_shape": "delta xi_shape=-zeta_perp",
+        "tau_a": "delta tau_a=-zeta_parallel_a",
+        "cap_phase_s_direct": "delta s=0 for the pure bulk-diffeomorphism column in the independent intrinsic surface-field representation",
+        "induced_metric_H_ab": "delta H_ab=0",
+        "generic_moving_pullback_DeltaSigma_T": "delta_zeta DeltaSigma(X* T)=0 under the paired bulk-field/embedding diffeomorphism convention"
+      }
     },
     "u1": {
       "metric": "0",
       "scalar": "0",
       "gauge_field": "delta a_A=partial_A lambda",
-      "cap_phase": "delta s=q_sigma lambda"
+      "cap_phase": "delta s=q_sigma lambda",
+      "interface_rows": {
+        "xi_shape": "0",
+        "tau_a": "0",
+        "induced_metric_H_ab": "0",
+        "pulled_gauge_oneform_Acal_a": "delta Acal_a=D_a lambda",
+        "cap_phase_s": "delta s=q_sigma lambda",
+        "cap_oneform_d_a": "delta d_a=0"
+      }
     },
     "intrinsic_interface_reparametrization": {
       "independent_of_zeta_parallel": true,
       "bulk_field_action": "NONE_AS_ADDITIONAL_BULK_GAUGE_TRANSFORMATION",
       "tau": "delta tau^a=rho^a",
       "xi": "delta xi=0",
-      "pullback_rule": "delta t=Lie_rho Tbar"
+      "pullback_rule": "delta t=Lie_rho Tbar",
+      "interface_rows": {
+        "xi_shape": "delta xi_shape=0",
+        "tau_a": "delta tau^a=rho^a",
+        "induced_metric_H_ab": "delta H_ab=Lie_rho hbar_ab=2 D_(a rho_b)",
+        "cap_phase_s": "delta s=rho^a D_a sigma_bar",
+        "pulled_gauge_oneform_Acal_a": "delta Acal_a=(Lie_rho Abarcal)_a",
+        "generic_moving_pullback_DeltaSigma_T": "delta t=Lie_rho Tbar"
+      }
     }
   },
   "columnwise_invariants": {
@@ -82,6 +113,7 @@
   "quotient": {
     "definition": "Q_kin=D_cond/im G",
     "domain_source": "inherited_conditional_domain",
+    "operator_rows_source": "gauge_operator",
     "physical_phase_space_equivalence": false
   },
   "ulsh04_handoff": {
@@ -89,7 +121,7 @@
     "inputs": [
       "inherited WP1D D_cond field/domain contract",
       "exact upstream physical boundary-domain blocker remains unresolved",
-      "G_zeta G_lambda G_rho separated operator",
+      "G_zeta G_lambda G_rho separated operator including declared interface rows",
       "bulk/interface reparameterization distinction",
       "projector and zero-mode registry",
       "columnwise proven kinematic invariants",
@@ -133,6 +165,7 @@
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
     "WP1D1_gauge_operator": "COMPONENTIZED_STRUCTURALLY",
+    "WP1D1_gauge_operator_interface_rows": "COMPONENTIZED_STRUCTURALLY",
     "WP1D1_projector_kernel_registry": "DEFINED_BACKGROUND_DEPENDENT",
     "WP1D1_full_projector_inverse": "NOT_FROZEN",
     "WP1D1_full_gauge_invariant_basis": "NOT_CLAIMED",
@@ -147,6 +180,7 @@
     "WP1_physical_boundary_domain remains BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA; neither the background nor global corner data are released by WP1D1.",
     "Pairing/domain freeze alone does not identify the ordinary cokernel codomain/im G with ker G^dagger; closed range is additionally required, otherwise only the reduced cokernel codomain/closure(im G) is represented by the adjoint kernel.",
     "ker G, coker G and physical DOF are not counted before background/domain/ULSH-04 closure.",
+    "The interface rows are kinematic gauge-action rows; their componentization does not release a physical gauge fixing or a physical mode basis.",
     "All predecessor WP1D release/firewall gates remain inherited unless explicitly superseded; WP1D1 adds analytic structure but releases none of them.",
     "WP1D_constraint_elimination remains BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING; neither blocker is superseded by WP1D1.",
     "WP1D_physical_3plus1_SVT remains NOT_RELEASED; no physical time/ADM/SVT reduction is implied.",
