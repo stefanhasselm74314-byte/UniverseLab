@@ -1,0 +1,208 @@
+{
+  "schema": "universelab.ulsh05.wp1e.gauge-operator-kernel-preflight.v0.1",
+  "date": "2026-09-08",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1E",
+  "basis_main": "a894517e2c8e378bff4f6a975aee67ca85fea785",
+  "classification": "ANALYTIC_NONOPERATIVE_LINEAR_GAUGE_OPERATOR_COMPONENTIZATION_AND_PROJECTOR_KERNEL_PREFLIGHT",
+  "status": "RAW_GAUGE_OPERATOR_COMPONENTIZED_REPRESENTATIVE_LEVEL_INVARIANTS_CONDITIONAL_PROJECTOR_KERNELS_OPEN",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "successor_assignment": {
+    "predecessor": "ULSH-05/WP1D",
+    "assigned_id": "ULSH-05/WP1E",
+    "status": "FROZEN_BY_THIS_SUCCESSOR_CONTRACT",
+    "semantics": "WP1D intentionally left its next exact subpackage ID unassigned. This successor contract newly assigns WP1E to the component gauge-operator and projector-kernel preflight; it is not claimed to have been pre-specified by WP1D."
+  },
+  "dependencies": [
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
+    "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.md",
+    "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.md",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "science/solver-hub/2026-08-07_ULSH-04_Constraint_Roadmap_v1.0.md",
+    "science/solver-hub/2026-08-07_ULSH-05_SVT-Perturbation_Roadmap_v1.0.md"
+  ],
+  "background_ansatz": {
+    "metric": "dsbar6^2 = exp(2A(r))*qbar_munu dx^mu dx^nu + dr^2 + L(r)^2 dchi^2",
+    "scalar": "phibar=phibar(r)",
+    "gauge_one_form": "Abar=Abar_chi(r) dchi",
+    "chi_period": "2pi",
+    "fourD_covariant_derivative": "D_mu is the covariant derivative of qbar_munu",
+    "prime": "partial_r",
+    "status": "CURRENT_CANONICAL_STATIC_ANSATZ_NOT_AN_ESTABLISHED_PHYSICAL_SOLUTION"
+  },
+  "gauge_parameter_convention": {
+    "bulk_diffeomorphism": "use lower/covector components zeta_A=(zeta_mu,zeta_r,zeta_chi)",
+    "fourD_split": "zeta_mu=zetaT_mu + D_mu zeta_L, with D^mu zetaT_mu=0, only on a declared projector representative slice",
+    "raised_internal_components": "zeta^r=zeta_r and zeta^chi=zeta_chi/L^2",
+    "U1": "lambda",
+    "intrinsic_interface_reparameterization": "rho^a, independent from zeta_parallel^a",
+    "representative_firewall": "zeta_L and all York/Hodge potentials are equivalence-class representatives modulo projector kernels; a kernel representative must not be counted as an additional gauge direction"
+  },
+  "raw_gauge_operator": {
+    "definition": "G_raw(zeta,lambda,rho) acts by Lie_zeta on background bulk fields, by d lambda in U1, and by independent intrinsic Lie_rho on interface pullback representatives",
+    "bulk_metric": "delta h_AB = 2 nabla_(A zeta_B)",
+    "bulk_scalar": "delta varphi = zeta^A partial_A phibar",
+    "bulk_gauge": "delta a_A = Lie_zeta Abar_A + partial_A lambda",
+    "interface_bulk_diff": "moving-interface compensation inherited from WP1D/WP1C3",
+    "interface_intrinsic": "delta_rho t = Lie_rho Tbar for an interface perturbation t of background pullback Tbar, together with delta_rho tau^a=rho^a in the active representative convention",
+    "status": "DEFINED_WITHOUT_YORK_HODGE_INVERSE"
+  },
+  "christoffel_control": {
+    "Gamma_r_munu": "-A_prime*exp(2A)*qbar_munu",
+    "Gamma_mu_rnu": "A_prime*delta_mu_nu",
+    "Gamma_r_chichi": "-L*L_prime",
+    "Gamma_chi_rchi": "L_prime/L",
+    "other_mixed_background_terms_used": "zero"
+  },
+  "bulk_metric_component_action": {
+    "delta_h_munu": "2 D_(mu zetaT_nu) + 2 D_mu D_nu zeta_L + 2 A_prime exp(2A) qbar_munu zeta_r",
+    "delta_h_mur": "(partial_r-2A_prime) zetaT_mu + D_mu[zeta_r+(partial_r-2A_prime)zeta_L]",
+    "delta_h_muchi": "partial_chi zetaT_mu + D_mu[zeta_chi+partial_chi zeta_L]",
+    "delta_h_rr": "2 partial_r zeta_r",
+    "delta_h_rchi": "partial_r zeta_chi + partial_chi zeta_r - 2(L_prime/L) zeta_chi",
+    "delta_h_chichi": "2 partial_chi zeta_chi + 2 L L_prime zeta_r"
+  },
+  "conditional_4D_coefficient_action": {
+    "decomposition_status": "ONLY_ON_A_COMMON_DECLARED_PROJECTOR_REPRESENTATIVE_SLICE",
+    "delta_hTT_munu": "0",
+    "delta_VT_mu": "zetaT_mu",
+    "delta_B": "2 zeta_L",
+    "delta_H": "2 D2 zeta_L + 8 A_prime exp(2A) zeta_r",
+    "delta_VT_mur": "(partial_r-2A_prime) zetaT_mu",
+    "delta_B_r": "zeta_r+(partial_r-2A_prime)zeta_L",
+    "delta_VT_muchi": "partial_chi zetaT_mu",
+    "delta_B_chi": "zeta_chi+partial_chi zeta_L",
+    "projector_warning": "these coefficient transformations are not a global field-space theorem until the York/Hodge representative and its kernel complement are fixed"
+  },
+  "matter_gauge_component_action": {
+    "delta_varphi": "phibar_prime*zeta_r",
+    "delta_aT_mu": "0",
+    "delta_alpha": "lambda + (Abar_chi/L^2) zeta_chi",
+    "delta_a_r": "partial_r lambda + Abar_chi*partial_r(zeta_chi/L^2)",
+    "delta_a_chi": "partial_chi lambda + Abar_chi_prime*zeta_r + Abar_chi*partial_chi(zeta_chi/L^2)",
+    "status": "EXACT_FOR_THE_DECLARED_STATIC_BACKGROUND_ANSATZ_AND_COVECTOR_ZETA_CONVENTION"
+  },
+  "representative_compensators": {
+    "X_r": "B_r - 0.5*(partial_r-2A_prime)*B",
+    "X_chi": "B_chi - 0.5*partial_chi B",
+    "delta_X_r": "zeta_r",
+    "delta_X_chi": "zeta_chi",
+    "status": "CONDITIONAL_ON_COMMON_PROJECTOR_REPRESENTATIVE_SLICE"
+  },
+  "conditional_kinematic_invariants": {
+    "scope": "BULK_DIFF_PLUS_U1_ONLY_ON_COMMON_PROJECTOR_REPRESENTATIVE_SLICE; NOT_FULL_SURFACE_RHO_INVARIANTS",
+    "tensor": {
+      "hTT_munu": "hTT_munu"
+    },
+    "vector": {
+      "Vhat_mur": "VT_mur-(partial_r-2A_prime)VT_mu",
+      "Vhat_muchi": "VT_muchi-partial_chi VT_mu",
+      "AhatT_mu": "aT_mu"
+    },
+    "scalar_metric_and_scalar_field": {
+      "Hhat": "H-D2 B-8 A_prime exp(2A) X_r",
+      "hhat_rr": "h_rr-2 partial_r X_r",
+      "hhat_rchi": "h_rchi-partial_r X_chi-partial_chi X_r+2(L_prime/L)X_chi",
+      "hhat_chichi": "h_chichi-2 partial_chi X_chi-2 L L_prime X_r",
+      "varphihat": "varphi-phibar_prime X_r"
+    },
+    "gauge_scalar": {
+      "u_r": "a_r-partial_r alpha",
+      "u_chi": "a_chi-partial_chi alpha",
+      "delta_u_r": "-(Abar_chi_prime/L^2) zeta_chi",
+      "delta_u_chi": "Abar_chi_prime zeta_r",
+      "Ahat_r": "u_r+(Abar_chi_prime/L^2)X_chi",
+      "Ahat_chi": "u_chi-Abar_chi_prime X_r"
+    },
+    "division_firewall": "no invariant above divides by phibar_prime, Abar_chi_prime, Fourier n, k, D2, or any background residual"
+  },
+  "interface_full_gauge_firewall": {
+    "H_ab": "bulk-diffeomorphism compensated but transforms under independent intrinsic rho as Lie_rho hbar_ab",
+    "d_a": "U1 invariant but transforms under intrinsic rho as the perturbation of an interface one-form",
+    "consequence": "raw interface components must not be advertised as invariants of the full G_cond quotient",
+    "safe_object": "surface tensor/one-form equivalence classes modulo intrinsic Lie_rho or a later explicitly frozen surface gauge",
+    "componentwise_full_rho_invariant_basis": "NOT_RELEASED"
+  },
+  "projector_kernel_audit": {
+    "raw_G_dependency_on_projector": false,
+    "coefficient_G_dependency_on_projector": true,
+    "global_D_inverse": "NOT_FROZEN",
+    "global_D2_inverse": "NOT_FROZEN",
+    "retarded_advanced_choice": "NOT_FROZEN",
+    "kernel_classes_to_track": [
+      "scalar-potential representatives annihilated by D_mu or the relevant Hessian map",
+      "Killing/vector projector kernels",
+      "constant or zero modes when admitted by the declared domain",
+      "internal n=0 modes",
+      "background stabilizers of G_raw",
+      "surface intrinsic reparameterization orbits"
+    ],
+    "rule": "kernel representatives are quotient/representation ambiguities, not automatically physical modes",
+    "cokernel_status": "NOT_DEFINED_WITHOUT_A_FROZEN_PAIRING_OPERATOR_DOMAIN_AND_ADJOINT_CONTRACT",
+    "physical_DOF_from_rank_G": "FORBIDDEN_BEFORE_ULSH04_CONSTRAINT_CLOSURE"
+  },
+  "controls": {
+    "C1_metric_componentization": "ALGEBRAIC_CHRISTOFFEL_CONTROL",
+    "C2_compensator_transform": "X_r_to_zeta_r_AND_X_chi_to_zeta_chi",
+    "C3_vector_invariants": "CANCEL_BULK_DIFF_ON_REPRESENTATIVE_SLICE",
+    "C4_scalar_metric_invariants": "CANCEL_BULK_DIFF_ON_REPRESENTATIVE_SLICE",
+    "C5_scalar_field_invariant": "CANCEL_RADIAL_BULK_DIFF_WITHOUT_DIVIDING_BY_PHIBAR_PRIME",
+    "C6_U1_and_gauge_scalar_invariants": "CANCEL_U1_AND_INTERNAL_BULK_DIFF_WITHOUT_DIVIDING_BY_ABAR_CHI_PRIME",
+    "C7_interface_rho_firewall": "PARTIAL_INVARIANTS_MUST_NOT_BE_PROMOTED_TO_FULL_GCOND_INVARIANTS",
+    "C8_projector_kernel_firewall": "NO_INVERSE_OR_PHYSICAL_MODE_COUNT_FROM_UNFROZEN_PROJECTORS"
+  },
+  "regime_checks": {
+    "phibar_prime_zero": "varphihat reduces smoothly to varphi; no unitary-gauge division is used",
+    "Abar_chi_prime_zero": "Ahat_r and Ahat_chi reduce smoothly to U1-invariant u_r and u_chi",
+    "internal_n_zero": "retained; no 1/n operation",
+    "A_prime_zero": "metric formulas reduce smoothly to unwarped radial controls",
+    "L_prime_zero": "internal metric formulas reduce smoothly to cylindrical-radius stationary control",
+    "projector_kernel_nontrivial": "coefficient-level invariants remain conditional and may not define field-space observables"
+  },
+  "gate_state": {
+    "WP1E_successor_identifier": "FROZEN_BY_THIS_SUCCESSOR_CONTRACT",
+    "WP1E_raw_gauge_operator": "COMPONENTIZED_ON_CURRENT_STATIC_ANSATZ",
+    "WP1E_coefficient_gauge_matrix": "DEFINED_CONDITIONAL_ON_PROJECTOR_REPRESENTATIVE_SLICE",
+    "WP1E_projector_kernel_audit": "OPEN_TRACKED_NO_GLOBAL_INVERSE_RELEASE",
+    "WP1E_conditional_bulk_kinematic_invariants": "DERIVED_REPRESENTATIVE_LEVEL",
+    "WP1E_full_interface_rho_invariant_basis": "NOT_RELEASED",
+    "WP1D_constraint_elimination": "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
+    "WP1D_physical_3plus1_SVT": "NOT_RELEASED",
+    "WP1D_physical_DOF_count": "NOT_RELEASED",
+    "WP1_full_global_boundary_hessian": "NOT_CLOSED_PHYSICAL_DOMAIN_NOT_RELEASED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "The current static ansatz is not an established physical background solution.",
+    "Representative-level York/Hodge coefficients are not global physical variables before projector kernels and domains are frozen.",
+    "H_ab and d_a are not invariants of the full intrinsic-surface reparameterization quotient merely because they are invariant under one gauge channel.",
+    "Rank or kernel of the kinematic gauge operator is not a physical DOF count before ULSH04 closes the constraint algebra.",
+    "No formal or numerical inverse of D2 may be used to erase zero modes silently.",
+    "No physical kinetic matrix, ghost, gradient, tachyon, KK-spectrum or stability claim follows.",
+    "No 6D-to-4D observable map or HZT mu, eta, Sigma, growth or lensing prediction follows.",
+    "No backend import or solver execution is authorized."
+  ],
+  "continuation": {
+    "next_analytic_class": "close only the projector-representative/kernel contract or choose a mathematically explicit kernel-complement test domain before assembling a sector-reduced quadratic form; do not perform physical constraint elimination",
+    "next_exact_subpackage_id": "NOT_PREASSIGNED",
+    "requires_before_physical_reduction": [
+      "ULSH04 physical time/ADM choice",
+      "ULSH04 canonical momenta and constraint algebra",
+      "released physical background and causal structure",
+      "compatible physical boundary domain"
+    ]
+  }
+}
