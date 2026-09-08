@@ -7,11 +7,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT = ROOT / 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.json'
 DOC = ROOT / 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.md'
-UPSTREAM = [
-    ROOT / 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json',
-    ROOT / 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json',
-    ROOT / 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransportMaster_v0.1.json',
-]
 
 
 def main() -> None:
@@ -27,6 +22,23 @@ def main() -> None:
     assert d['gate_state']['WP1_shape_Ward_identity'] == 'DERIVED_CONDITIONAL_REDUNDANCY'
     assert d['gate_state']['WP1_full_shape_residual'] == 'NOT_ASSEMBLED_COMPONENTWISE'
 
+    # Dependency closure is contract-driven: every declared dependency must exist.
+    deps = d.get('dependencies')
+    assert isinstance(deps, list) and len(deps) == 5, deps
+    assert len(deps) == len(set(deps)), deps
+    for rel in deps:
+        path = ROOT / rel
+        assert path.is_file(), path
+
+    required_dependencies = {
+        'registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json',
+        'registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json',
+        'registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransportMaster_v0.1.json',
+        'registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json',
+        'science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md',
+    }
+    assert set(deps) == required_dependencies, (set(deps), required_dependencies)
+
     # Finite-dimensional Noether/Ward control: S(q,X)=1/2(q-X)^2.
     for q, X in [(2.5, -0.7), (0.0, 1.2), (-3.1, -3.1)]:
         Eq = q - X
@@ -36,7 +48,7 @@ def main() -> None:
             assert abs(EX) < 1e-15
 
     # Israel-alone negative control in abstract residual algebra.
-    # Ward: R_perp + B + H = 0.  H models the Israel/metric interface residual.
+    # Ward: R_perp + B + H = 0. H models the Israel/metric interface residual.
     H = 0.0
     B = 1.75
     R_perp = -(B + H)
@@ -55,9 +67,6 @@ def main() -> None:
     beta_N = +beta
     beta_S = -beta
     assert abs(beta_N + beta_S) < 1e-15
-
-    for path in UPSTREAM:
-        assert path.is_file(), path
 
     g = d['gate_state']
     expected = {
