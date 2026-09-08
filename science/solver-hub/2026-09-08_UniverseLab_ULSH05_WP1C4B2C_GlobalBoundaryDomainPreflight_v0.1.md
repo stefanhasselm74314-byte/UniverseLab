@@ -8,16 +8,32 @@
 
 ## 0. Kernresultat
 
-Der in WP1C4B2B bewiesene lokale schwache Symmetriesatz gilt auf dem dort deklarierten Testbereich
+WP1C4B2B beweist eine lokale schwache Hessian-Symmetrie auf einem kompakten tangentialen Testbereich mit periodischer interner Richtung. Für die globale Domänenanalyse muss die bisherige Kurzschreibweise jedoch präzisiert werden.
+
+Für ein randloses beziehungsweise nichtkompaktes \(M_4\) verwenden wir
 
 \[
-\mathcal T_\Sigma =
-C_c^\infty(M_4)\otimes C^\infty_{2\pi}(S^1_\chi),
+\mathcal D_0=
+C_c^\infty(M_4)\otimes C^\infty_{2\pi}(S^1_\chi).
 \]
 
-also für glatte Störungen mit kompaktem Support in den vier nichtkompakten tangentialen Richtungen und \(2\pi\)-Periodizität in \(\chi\).
+Sobald stattdessen ein endlicher, randtragender Slab \(M_4\) eingeführt wird, lautet der sichere Testbereich
 
-Dieser Testbereich beseitigt per Konstruktion die tangentialen Rand- und Cornerterme der lokalen schwachen Paarung. Er ist **kein** physikalisch freigegebener Randwertbereich.
+\[
+\boxed{
+\mathcal D_0=
+C_c^\infty(\operatorname{int}M_4)
+\otimes C^\infty_{2\pi}(S^1_\chi)
+}
+\]
+
+mit
+
+\[
+\operatorname{supp}u\Subset \operatorname{int}M_4.
+\]
+
+Das heißt: die Störungen verschwinden in einer Umgebung des äußeren Randes. Bloßer „kompakter Support“ auf einer kompakten Mannigfaltigkeit **mit** Rand genügt nicht, weil dort jede glatte Funktion kompakt getragen sein kann, ohne verschwindenden Randtrace zu besitzen.
 
 Der globale Green-/Hessian-Unterschied besitzt strukturell die Form
 
@@ -29,7 +45,7 @@ Der globale Green-/Hessian-Unterschied besitzt strukturell die Form
 \sum_C \mathcal C_C[u,v].
 \]
 
-Daher ist eine globale Symmetrie- oder Selbstadjungiertheitsaussage erst dann zulässig, wenn für den tatsächlich deklarierten globalen Bereich sämtliche äußeren Rand- und Cornerbeiträge verschwinden oder durch eine vollständig spezifizierte Rand-/Joint-Wirkung kompensiert werden.
+Daher ist eine globale Symmetrie- oder Selbstadjungiertheitsaussage erst zulässig, wenn auf dem tatsächlich deklarierten Bereich sämtliche äußeren Rand- und Cornerbeiträge verschwinden oder durch vollständig spezifizierte Rand-/Joint-Terme kompensiert werden.
 
 **Ergebnis dieses Blocks**
 
@@ -39,7 +55,7 @@ aber
 
 `WP1_physical_boundary_domain = BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA`.
 
-Damit wird die globale physikalische Randdomäne **nicht** freigegeben.
+Damit wird keine globale physikalische Randdomäne freigegeben.
 
 ---
 
@@ -53,17 +69,17 @@ WP1C4B2B hat die lokalen linearen Randresiduen komponentisiert:
 - Kappenphasenresiduum \(\Delta\mathcal R_\sigma\),
 - Shape-/Normalconstraint \(\Delta\mathcal R_\perp\).
 
-Außerdem gilt für die zweite Variation der kanonischen Wirkung auf \(\mathcal T_\Sigma\)
+Auf dem korrekt verstandenen lokalen Testbereich gilt
 
 \[
 H_\Sigma[u,v]=H_\Sigma[v,u].
 \]
 
-Der Beweis benutzt ausdrücklich kompakten tangentialen Support und \(\chi\)-Periodizität. Deshalb folgt daraus nicht automatisch eine Aussage für einen globalen physikalischen Störungsraum.
+Der Beweis verwendet interior-kompakten tangentialen Support bei vorhandener äußerer Begrenzung beziehungsweise gewöhnlichen kompakten Support bei randlosem \(M_4\), zusammen mit \(\chi\)-Periodizität.
 
 ### Status
 
-[BEWIESEN] Lokale schwache Hessian-Symmetrie auf \(\mathcal T_\Sigma\).
+[BEWIESEN] Lokale schwache Hessian-Symmetrie auf dem präzisierten Testbereich.
 
 [OFFEN] Globale physikalische Randbedingungen.
 
@@ -76,7 +92,7 @@ Der Beweis benutzt ausdrücklich kompakten tangentialen Support und \(\chi\)-Per
 Für den im Parent-/Boundary-Vertrag verwendeten lokalen Interface-Typ
 
 \[
-\Sigma \simeq M_4\times S^1_\chi
+\Sigma\simeq M_4\times S^1_\chi
 \]
 
 gilt wegen
@@ -85,15 +101,11 @@ gilt wegen
 \partial S^1_\chi=\varnothing
 \]
 
-formal
+für eine endliche randtragende \(M_4\)-Region formal
 
 \[
-\partial\Sigma
-=
-(\partial M_4)\times S^1_\chi
+\partial\Sigma=(\partial M_4)\times S^1_\chi.
 \]
-
-sofern \(M_4\) als endliche Region mit äußerem Rand betrachtet wird.
 
 Für ein nichtkompaktes \(M_4\) ist statt eines endlichen \(\partial M_4\) ein asymptotischer Grenzfluss zu kontrollieren.
 
@@ -126,20 +138,20 @@ Für einen global symmetrischen Operatorbereich \(\mathcal D(L)\) muss mindesten
 \[
 \mathfrak G[u,v]=0
 \qquad
-\forall\,u,v\in\mathcal D(L).
+\forall u,v\in\mathcal D(L).
 \]
 
-Dies kann durch verschiedene Mechanismen geschehen:
+Mögliche Mechanismen sind:
 
-1. kompakter Support,
-2. Dirichlet- oder andere hinreichende Randbedingungen,
-3. asymptotischen Abfall,
+1. Support kompakt innerhalb des Inneren der endlichen Region,
+2. explizite Dirichlet- oder andere hinreichende Tracebedingungen,
+3. kontrollierter asymptotischer Abfall,
 4. eine fluxfreie gemischte Unterdomäne,
 5. explizite Rand-/Joint-Terme, deren Variation den Rest kompensiert.
 
 Welche dieser Möglichkeiten **physikalisch** zulässig ist, kann ohne etablierten Background und dessen Kausalstruktur nicht entschieden werden.
 
-### Wichtige Lorentz-Signatur-Firewall
+### Lorentz-Signatur-Firewall
 
 Die Bedingung
 
@@ -168,8 +180,7 @@ L=-\frac{d^2}{dx^2}.
 Dann gilt
 
 \[
-\int_0^1
-\bigl(uLv-(Lu)v\bigr)\,dx
+\int_0^1\bigl(uLv-(Lu)v\bigr)\,dx
 =
 \left[-u\,v'+u'v\right]_0^1.
 \]
@@ -186,19 +197,11 @@ Dann ist
 Lu=0,\qquad Lv=-2,
 \]
 
-und daher
+und damit
 
 \[
-\int_0^1uLv\,dx
-=
--2\int_0^1x\,dx
-=
--1.
-\]
-
-Der Randterm ist ebenfalls
-
-\[
+\int_0^1uLv\,dx=-1,
+\qquad
 \left[-u\,v'+u'v\right]_0^1=-1.
 \]
 
@@ -207,14 +210,14 @@ Also
 \[
 \boxed{
 \langle u,Lv\rangle-\langle Lu,v\rangle=-1\neq0
-}
+}.
 \]
 
-auf dem unbeschränkten glatten Funktionsraum.
+[BEWIESEN] Die formale Symmetrie des Differentialausdrucks \(-d^2/dx^2\) genügt nicht für die Symmetrie eines globalen Operatorbereichs.
 
-[BEWIESEN] Die formale Symmetrie des Differentialausdrucks \( -d^2/dx^2 \) genügt nicht für die Symmetrie eines globalen Operatorbereichs.
+Dieser Zeuge schließt zugleich die zuvor zu grobe Formulierung „kompakter Support genügt auf einer endlichen Region“ aus: auf dem kompakten Intervall \([0,1]\) sind \(u=x\) und \(v=x^2\) kompakt getragen, besitzen aber keinen verschwindenden Randtrace. Für die D0-Kontrolle ist daher interior-kompakter Support oder eine explizite Tracebedingung erforderlich.
 
-Wenn dagegen \(u=v=0\) an beiden Endpunkten gefordert wird, verschwindet derselbe Randkonkomitant. Die Operatoraussage hängt also wesentlich von der Domäne ab.
+Wenn dagegen \(u=v=0\) an beiden Endpunkten gefordert wird, verschwindet derselbe Randkonkomitant.
 
 ---
 
@@ -228,7 +231,7 @@ L_\chi=-\frac{d^2}{d\chi^2},
 \chi\in[0,2\pi],
 \]
 
-und periodische Funktionen
+und
 
 \[
 u(\chi)=\sin\chi,\qquad
@@ -243,36 +246,46 @@ gilt
 
 [BEWIESEN] Die \(2\pi\)-Periodizität schließt den \(\chi\)-Randkanal.
 
-Sie sagt jedoch nichts über die nichtkompakten oder endlichen äußeren \(M_4\)-Ränder.
+Sie sagt nichts über die nichtkompakten oder endlichen äußeren \(M_4\)-Ränder.
 
 ---
 
 ## 6. Kandidatendomänen
 
-### D0 — lokaler Testbereich
+### D0 — lokaler analytischer Testbereich
+
+Randloses/nichtkompaktes \(M_4\):
 
 \[
-\mathcal D_0=
-C_c^\infty(M_4)\otimes C^\infty_{2\pi}(S^1_\chi).
+\mathcal D_0=C_c^\infty(M_4)\otimes C^\infty_{2\pi}(S^1_\chi).
+\]
+
+Endliches randtragendes \(M_4\):
+
+\[
+\boxed{
+\mathcal D_0=C_c^\infty(\operatorname{int}M_4)
+\otimes C^\infty_{2\pi}(S^1_\chi)
+}.
 \]
 
 Status:
 
 `PROVEN_ANALYTIC_TEST_DOMAIN`
 
-[BEWIESEN] Auf diesem Bereich verschwinden die in WP1C4B2B ausgeschlossenen tangentialen Edge-/Cornerbeiträge durch kompakten Support und Periodizität.
+[BEWIESEN] Auf diesem präzisierten Bereich verschwinden die betreffenden äußeren tangentialen Beiträge durch interior-kompakten Support beziehungsweise bei randlosem \(M_4\) gewöhnlichen kompakten Support; der \(\chi\)-Randterm verschwindet durch Periodizität.
 
 [FIREWALL] \(\mathcal D_0\) ist kein physikalischer Randwertvertrag.
 
 ### D1 — endlicher Slab mit verschwindenden äußeren Variationen
 
-Eine mathematisch hinreichende Fallback-Wahl wäre ein endlicher äußerer Slab, auf dessen äußerem Rand und an seinen Corners die zulässigen Variationen verschwinden.
+Eine mathematisch hinreichende Fallback-Wahl wäre ein endlicher Slab, auf dessen äußerem Rand und an seinen Corners die zulässigen Variationen verschwinden.
 
 Status:
 
 `MATHEMATICALLY_SUFFICIENT_CONDITIONAL_FALLBACK_NOT_PHYSICAL_RELEASE`
 
-Diese Wahl ist nur zulässig, wenn zusätzlich geprüft wird:
+Zusätzlich zu prüfen:
 
 - exakte Definition des äußeren Randes,
 - Erhaltung durch zulässige Gauge-Transformationen,
@@ -307,7 +320,7 @@ Retardiert, advanced oder outgoing sind kausale Begriffe. Ohne etablierten physi
 
 ## 7. Corner-/Joint-Preflight
 
-Die kanonische Parentwirkung enthält die Cap-GHY-Terme und lokalisierte Kappenwirkung. Sie friert jedoch keinen zusätzlichen äußeren vierdimensionalen Slab-Rand und keine daraus entstehenden globalen codimension-2 Joint-Terme ein.
+Die kanonische Parentwirkung enthält Cap-GHY-Terme und die lokalisierte Kappenwirkung. Sie friert jedoch keinen zusätzlichen äußeren vierdimensionalen Slab-Rand und keine daraus entstehenden globalen codimension-2 Joint-Terme ein.
 
 Wird später eine endliche Region \(\Omega\) mit äußerem Rand \(\partial\Omega\) gewählt, können Schnittmengen
 
@@ -326,7 +339,7 @@ Bis dahin lautet der Gap:
 
 `MISSING_GLOBAL_CORNER_COMPLETION_OR_ZERO_VARIATION_CONDITION`
 
-Wichtig: Dieser Befund behauptet **nicht**, dass ein bestimmter zusätzlicher Joint-Term bereits jetzt zwingend Teil der kanonischen Theorie sein müsse. Die Notwendigkeit hängt von der später gewählten globalen Region und Variationsklasse ab.
+Dieser Befund behauptet **nicht**, dass ein bestimmter zusätzlicher Joint-Term unabhängig von der später gewählten globalen Region bereits jetzt zwingend Teil der kanonischen Theorie sein müsse.
 
 ---
 
@@ -336,7 +349,7 @@ Aktuell gilt
 
 `PHYSICAL_BACKGROUND = NOT_ESTABLISHED`.
 
-Daher fehlen für eine physikalische Domänenwahl mindestens:
+Damit fehlen mindestens:
 
 1. die reale Kausalstruktur des Backgrounds,
 2. der kausale Typ möglicher äußerer Hypersurfaces,
@@ -359,16 +372,16 @@ Status: [FALSIFIZIERT/BLOCKIERT] für jede Behauptung, der gegenwärtige lokale 
 
 ## 9. Invarianten eines späteren physikalischen Bereichs
 
-Ein zukünftiger \(\mathcal D_{\rm phys}\) muss mindestens alle folgenden Bedingungen erfüllen:
+Ein zukünftiger \(\mathcal D_{\rm phys}\) muss mindestens:
 
-1. \(2\pi\)-Periodizität in \(\chi\) erhalten.
-2. Zwei-Seiten-Gluing am gemeinsamen Interface erhalten.
-3. Zulässige Gauge-Transformationen bilden \(\mathcal D_{\rm phys}\) in sich ab.
-4. Quadratische Wirkung/Paarung bleibt endlich.
-5. Gesamter äußerer Rand- plus Corner-Greenfluss verschwindet oder wird durch eingefrorene Rand-/Joint-Terme kompensiert.
-6. Endpunkte, asymptotische Grenzen und deren Regularität sind explizit versioniert.
-7. Operator und Domäne werden gemeinsam geprüft; erst danach sind globale Symmetrie-/Spektralaussagen zulässig.
-8. Keine physikalische Randbedingung wird aus ΛCDM, C1-V-Manufactured-Verification oder Visualisierungsschichten importiert.
+1. \(2\pi\)-Periodizität in \(\chi\) erhalten,
+2. Zwei-Seiten-Gluing am gemeinsamen Interface erhalten,
+3. unter zulässigen Gauge-Transformationen abgeschlossen sein,
+4. eine endliche quadratische Wirkung/Paarung besitzen,
+5. den gesamten äußeren Rand- plus Corner-Greenfluss zum Verschwinden bringen oder durch eingefrorene Rand-/Joint-Terme kompensieren,
+6. Endpunkte und asymptotische Grenzen explizit versionieren,
+7. Operator und Domäne gemeinsam prüfen,
+8. keine physikalische Randbedingung aus ΛCDM, C1-V-Manufactured-Verification oder Visualisierungsschichten importieren.
 
 ---
 
@@ -376,15 +389,17 @@ Ein zukünftiger \(\mathcal D_{\rm phys}\) muss mindestens alle folgenden Beding
 
 Dieser Block führt keinen neuen dimensionsbehafteten Kopplungsparameter ein.
 
-Die Green-Identität vergleicht Terme derselben quadratischen Variationsordnung; Rand- und Bulkseite besitzen nach Einbezug des induzierten Maßes dieselbe Wirkungsdimension.
+Die Green-Identität vergleicht Terme derselben quadratischen Variationsordnung. Nach Einbezug des jeweiligen induzierten Maßes müssen Bulk-, Rand- und Cornerbeiträge dieselbe Wirkungsdimension besitzen.
 
-Der eindimensionale Gegenzeuge wird ausschließlich als dimensionsloser QA-Kontrollfall verwendet und trägt keine M1-Physik.
+Der eindimensionale Gegenzeuge ist ausschließlich ein dimensionsloser QA-Kontrollfall und trägt keine M1-Physik.
 
 Regime:
 
-- **lokal/kompakter Support:** geschlossen durch WP1C4B2B + diesen Preflight,
-- **periodisches \(\chi\):** geschlossen als Edge-Kanal,
-- **endlicher äußerer Slab:** nur konditional,
+- **randlos + kompakter Support:** analytisch geschlossen,
+- **endlicher Rand + interior-kompakter Support:** analytisch geschlossen,
+- **endlicher Rand + bloß kompakter Support:** nicht hinreichend,
+- **periodisches \(\chi\):** Edge-Kanal geschlossen,
+- **endlicher äußerer Slab mit physikalischen BC:** nur konditional,
 - **räumlich/zeitlich asymptotisch:** offen,
 - **retardiert/ausgehend:** blockiert bis Background/Kausalstruktur,
 - **physisches Spektrum/Ghostanalyse:** blockiert.
@@ -425,6 +440,12 @@ Regime:
 \]
 
 \[
+\text{kompakter Support auf einem kompakten }M_4\text{ mit Rand}
+\not\Rightarrow
+\text{verschwindender Randtrace},
+\]
+
+\[
 \text{verschwindender Green-Randterm auf }\mathcal D_0
 \not\Rightarrow
 \text{physikalische Randbedingungen},
@@ -448,7 +469,7 @@ Kein Backendimport, Solverlauf, Response-Rank-Lauf oder physikalischer Gate-Übe
 
 ## 13. Fortsetzung
 
-Der Vorgänger WP1C4B2B schreibt für den Fall, dass eine physikalische Domäne einen noch nicht freigegebenen Background benötigt, ausdrücklich den Fallback vor:
+Der Vorgänger WP1C4B2B schreibt für den Fall, dass eine physikalische Domäne einen noch nicht freigegebenen Background benötigt, den fail-closed Fallback vor:
 
 > nur eine konditionale S/V/T-Gauge- und Constraint-Reduktionsdomäne einfrieren, ohne Solverausführung.
 
