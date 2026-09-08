@@ -1,0 +1,64 @@
+name: 2026-09-08 ULSH05 WP1C4B2C Global Boundary Domain Preflight QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json'
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.md'
+      - 'tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.py'
+      - 'tools/2026-09-08_prepare_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.py'
+      - '.github/workflows/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_QA_v0.1.yml'
+      - 'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.json'
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.md'
+      - 'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.json'
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.md'
+      - 'SCI-001-002_v0.1_Canonical_6D_Parent_Action_and_Boundary_Closure.md'
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  wp1c4b2c-global-boundary-domain-preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run WP1C4B2C standalone controls
+        run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.py
+      - name: Emit nonoperative preflight summary
+        run: python tools/2026-09-08_prepare_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.py
+      - name: Rerun WP1C4B2B component boundary residual controls
+        run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.py
+      - name: Rerun WP1C4B2A second-variation master
+        run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.py
+      - name: Verify fail-closed domain and physical firewalls
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+          p = Path('registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json')
+          d = json.loads(p.read_text(encoding='utf-8'))
+          g = d['gate_state']
+          assert d['solver_authorized'] is False
+          assert d['physical_gate_effect'] == 'NONE'
+          assert d['physical_evidence_effect'] == 'NONE'
+          assert g['WP1_global_domain_preflight'] == 'COMPLETED_CONDITIONAL_NO_PHYSICAL_DOMAIN_RELEASE'
+          assert g['WP1_physical_boundary_domain'] == 'BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA'
+          assert g['WP1_full_global_boundary_hessian'] == 'NOT_CLOSED_PHYSICAL_DOMAIN_NOT_RELEASED'
+          assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
+          assert g['PERTURBED_JUNCTION_SYSTEM'] == 'NOT_RELEASED'
+          assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
+          assert g['FM-G0'] == 'OPEN'
+          assert g['AuthorizationDecision'] == 'NOT_CREATED'
+          assert g['SingleUseGrant'] == 'NOT_CREATED'
+          assert g['BACKEND_IMPORT'] == 'NOT_EXECUTED'
+          assert g['SOLVER_EXECUTION'] == 'NOT_EXECUTED'
+          assert g['PHYSICAL_RESPONSE_RANK'] == 'NOT_EXECUTED'
+          assert g['K1-D'] == 'NOT_RELEASED'
+          assert g['K1-E'] == 'NOT_ADMISSIBLE'
+          assert d['physical_domain_blocker']['status'] == 'PHYSICAL_BOUNDARY_DOMAIN_NOT_FIXABLE_BEFORE_BACKGROUND_CAUSAL_STRUCTURE'
+          print('WP1C4B2C fail-closed firewalls: PASS')
