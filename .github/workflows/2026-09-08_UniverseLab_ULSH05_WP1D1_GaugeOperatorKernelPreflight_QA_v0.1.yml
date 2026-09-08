@@ -1,0 +1,50 @@
+name: 2026-09-08 ULSH05 WP1D1 Gauge Operator Kernel Preflight QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.md'
+      - 'registry/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.json'
+      - 'tests/2026-09-08_test_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.py'
+      - 'tools/2026-09-08_prepare_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.py'
+      - '.github/workflows/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_QA_v0.1.yml'
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.md'
+      - 'registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json'
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  wp1d1-gauge-operator-kernel-preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run WP1D1 standalone controls
+        run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.py
+      - name: Emit nonoperative WP1D1 summary
+        run: python tools/2026-09-08_prepare_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.py
+      - name: Rerun WP1D predecessor controls
+        run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.py
+      - name: Verify exact fail-closed status
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+          d = json.loads(Path('registry/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.json').read_text(encoding='utf-8'))
+          assert d['gauge_operator']['form'] == 'G=(G_zeta,G_lambda,G_rho)'
+          assert d['gauge_operator']['intrinsic_interface_reparametrization']['independent_of_zeta_parallel'] is True
+          assert d['columnwise_invariants']['H_ab_under_full_G'] == 'NOT_INVARIANT_IN_GENERAL_RHO_COLUMN_NONZERO'
+          assert d['kernel_registry']['projector_zero_mode_implies_gauge_mode'] is False
+          assert d['cokernel_registry']['G_dagger_frozen'] is False
+          assert d['gate_state']['WP1D_constraint_elimination'] == 'BLOCKED'
+          assert d['gate_state']['WP1D_physical_DOF_count'] == 'NOT_RELEASED'
+          assert d['gate_state']['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
+          assert d['gate_state']['SOLVER_EXECUTION'] == 'NOT_EXECUTED'
+          assert d['physical_gate_effect'] == 'NONE'
+          assert d['physical_evidence_effect'] == 'NONE'
+          print('WP1D1 fail-closed firewalls: PASS')
