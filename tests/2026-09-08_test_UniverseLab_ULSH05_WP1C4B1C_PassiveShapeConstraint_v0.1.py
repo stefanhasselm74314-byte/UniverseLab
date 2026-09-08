@@ -117,16 +117,26 @@ def main() -> None:
         phixS = -phixN
         m2 = 0.7
         phi = -0.23
-        common_intrinsic = -0.41  # represents -6*k4*e^-2A + Lambda_hat
+        # Choose a positive common intrinsic/Lambda contribution so the individually
+        # on-shell flux energies remain positive without adding a residual offset.
+        common_intrinsic = 5.0  # represents -6*k4*e^-2A + Lambda_hat
         geomN = 6*aN*aN + 4*aN*lN + common_intrinsic
         geomS = 6*aS*aS + 4*aS*lS + common_intrinsic
-        # Choose positive flux energies so each frozen rr constraint is satisfied exactly.
-        rhoN = geomN - 0.5*phixN*phixN + 0.5*m2*phi*phi + 5.0
-        # Add the same harmless constant to both t_NN channels; it cancels in the jump.
+
+        # Frozen rr constraint after division by ell:
+        # geom_s - (0.5*phix_s^2 - 0.5*m2*phi^2 + rho_s) = 0.
+        rhoN = geomN - 0.5*phixN*phixN + 0.5*m2*phi*phi
+        rhoS = geomS - 0.5*phixS*phixS + 0.5*m2*phi*phi
         tN = 0.5*phixN*phixN - 0.5*m2*phi*phi + rhoN
-        rhoS = rhoN + (geomS - geomN)
         tS = 0.5*phixS*phixS - 0.5*m2*phi*phi + rhoS
+        rrN = geomN - tN
+        rrS = geomS - tS
+
         assert rhoN > 0 and rhoS > 0
+        assert abs(rrN) < 2e-14, (vals, rrN)
+        assert abs(rrS) < 2e-14, (vals, rrS)
+        assert abs(tN - geomN) < 2e-14
+        assert abs(tS - geomS) < 2e-14
         assert abs((tS - tN) - geom_jump) < 2e-14
         assert abs(surface - (tS - tN)) < 2e-14
         # With the scalar junction, only the flux-energy difference remains.
