@@ -74,7 +74,8 @@
       "projector and zero-mode registry",
       "columnwise proven kinematic invariants",
       "open global-domain and background dependencies",
-      "closed-range/Fredholm status of G remains unproven"
+      "closed-range/Fredholm status of G remains unproven",
+      "physical 3+1/SVT gate remains NOT_RELEASED"
     ],
     "required_outputs_before_physical_reduction": [
       "physical time/ADM split",
@@ -95,6 +96,7 @@
     "WP1D1_closed_range_of_G": "NOT_PROVEN",
     "WP1D1_Fredholm_property_of_G": "NOT_PROVEN",
     "WP1D_constraint_elimination": "BLOCKED",
+    "WP1D_physical_3plus1_SVT": "NOT_RELEASED",
     "WP1D_physical_DOF_count": "NOT_RELEASED",
     "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
     "WP1_physical_boundary_domain": "BLOCKED",
@@ -115,6 +117,7 @@
     "Projector zero modes are not automatically gauge modes.",
     "Pairing/domain freeze alone does not identify the ordinary cokernel codomain/im G with ker G^dagger; closed range is additionally required, otherwise only the reduced cokernel codomain/closure(im G) is represented by the adjoint kernel.",
     "ker G, coker G and physical DOF are not counted before background/domain/ULSH-04 closure.",
+    "WP1D_physical_3plus1_SVT remains NOT_RELEASED; no physical time/ADM/SVT reduction is implied.",
     "FM-G0 remains OPEN; this successor does not close any forward-map gap.",
     "No ghost, stability, spectrum, observable or solver-release claim follows."
   ],
