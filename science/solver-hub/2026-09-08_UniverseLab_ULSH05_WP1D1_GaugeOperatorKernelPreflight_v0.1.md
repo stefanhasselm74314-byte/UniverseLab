@@ -27,7 +27,7 @@ WP1D1_full_gauge_invariant_basis = NOT_CLAIMED
 WP1D1_closed_range_of_G          = NOT_PROVEN
 WP1D1_Fredholm_property_of_G     = NOT_PROVEN
 WP1D1_ULSH04_handoff             = DEFINED_FAIL_CLOSED
-WP1D_constraint_elimination      = BLOCKED
+WP1D_constraint_elimination      = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING
 WP1D_physical_DOF_count          = NOT_RELEASED
 FM-G0                            = OPEN
 SOLVER_EXECUTION                 = NOT_EXECUTED
@@ -339,7 +339,11 @@ ULSH-04 muss separat liefern:
 - zulässigen Constraint-Quotienten,
 - physischen DOF-Count auf einem freigegebenen Background.
 
-Bis dahin darf WP1D1 **keine** Variable als nondynamisch eliminieren.
+Bis dahin bleibt
+
+`WP1D_constraint_elimination = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING`
+
+und WP1D1 darf **keine** Variable als nondynamisch eliminieren.
 
 ## 10. Schur-Komplement-Firewall
 
@@ -364,7 +368,7 @@ FM-G0                     = OPEN
 PHYSICAL_BACKGROUND       = NOT_ESTABLISHED
 WP1_physical_boundary_domain = BLOCKED
 WP1_full_quadratic_action = NOT_CLOSED
-WP1D_constraint_elimination = BLOCKED
+WP1D_constraint_elimination = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING
 WP1D_physical_DOF_count   = NOT_RELEASED
 PERTURBED_JUNCTION_SYSTEM = NOT_RELEASED
 PHYSICAL_RESPONSE_RANK    = NOT_EXECUTED
@@ -386,6 +390,7 @@ physical_evidence_effect  = NONE
 - Projektor-Nullmoden dürfen nicht ohne Beweis entfernt werden.
 - Pairing-/Domain-Freeze allein identifiziert den gewöhnlichen Cokernel nicht mit `ker G^dagger`; dafür ist zusätzlich Closed Range beziehungsweise eine geeignete Fredholm-Bedingung erforderlich.
 - `ker G`, `coker G` und physische DOF dürfen nicht ohne Background, Domäne und ULSH-04-Abschluss gezählt werden.
+- `WP1D_constraint_elimination` bleibt `BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING`; weder ULSH-04 noch die physikalische Zeitwahl ist durch WP1D1 geschlossen.
 - `FM-G0` bleibt `OPEN`; WP1D1 schließt keine Forward-Map-Lücke.
 - Kein Ghost-, Stabilitäts-, Spektral-, Observable- oder Solverfreigabe-Claim folgt aus diesem Block.
 
