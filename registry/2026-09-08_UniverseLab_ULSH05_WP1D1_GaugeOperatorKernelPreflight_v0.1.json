@@ -1,0 +1,114 @@
+{
+  "schema": "universelab.ulsh05.wp1d1.gauge-operator-kernel-preflight.v0.1",
+  "date": "2026-09-08",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1D1",
+  "basis_main": "a894517e2c8e378bff4f6a975aee67ca85fea785",
+  "classification": "ANALYTIC_NONOPERATIVE_GAUGE_OPERATOR_KERNEL_AND_CONSTRAINT_HANDOFF_PREFLIGHT",
+  "status": "GAUGE_OPERATOR_STRUCTURALLY_COMPONENTIZED_KERNELS_REGISTERED_NO_PHYSICAL_REDUCTION_RELEASED",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "successor_assignment": {
+    "id": "ULSH-05/WP1D1",
+    "status": "FROZEN_BY_THIS_SUCCESSOR_CONTRACT",
+    "retroactively_claimed_from_predecessor": false
+  },
+  "gauge_operator": {
+    "form": "G=(G_zeta,G_lambda,G_rho)",
+    "columns_separated": true,
+    "bulk_diffeomorphism": {
+      "metric": "delta h_AB=2 nabla_(A zeta_B)",
+      "scalar": "delta varphi=zeta^A partial_A phibar",
+      "gauge_field": "delta a_A=Lie_zeta Abar_A"
+    },
+    "u1": {
+      "metric": "0",
+      "scalar": "0",
+      "gauge_field": "delta a_A=partial_A lambda",
+      "cap_phase": "delta s=q_sigma lambda"
+    },
+    "intrinsic_interface_reparametrization": {
+      "independent_of_zeta_parallel": true,
+      "bulk_field_action": "NONE_AS_ADDITIONAL_BULK_GAUGE_TRANSFORMATION",
+      "tau": "delta tau^a=rho^a",
+      "xi": "delta xi=0",
+      "pullback_rule": "delta t=Lie_rho Tbar"
+    }
+  },
+  "columnwise_invariants": {
+    "H_ab_under_bulk_diffeomorphism": "PROVEN_G_zeta_H_EQUALS_ZERO",
+    "d_a_under_u1": "PROVEN_G_lambda_d_EQUALS_ZERO",
+    "H_ab_under_full_G": "NOT_INVARIANT_IN_GENERAL_RHO_COLUMN_NONZERO",
+    "d_a_under_full_G": "NOT_CLAIMED"
+  },
+  "kernel_registry": {
+    "ker_G": "BACKGROUND_AND_DOMAIN_DEPENDENT_NOT_COUNTED",
+    "projector_scalar_kernel": "ker D^2",
+    "projector_oneform_kernel": "ker Delta_1",
+    "projector_tensor_kernel": "ker Delta_L",
+    "global_inverse_frozen": false,
+    "projector_zero_mode_implies_gauge_mode": false
+  },
+  "cokernel_registry": {
+    "formal_relation": "coker G equivalent to ker G^dagger only after pairing/domain freeze",
+    "G_dagger_frozen": false,
+    "count": "NOT_AVAILABLE"
+  },
+  "quotient": {
+    "definition": "Q_kin=D_cond/im G",
+    "physical_phase_space_equivalence": false
+  },
+  "ulsh04_handoff": {
+    "status": "DEFINED_FAIL_CLOSED",
+    "inputs": [
+      "conditional field/domain contract",
+      "G_zeta G_lambda G_rho separated operator",
+      "bulk/interface reparameterization distinction",
+      "projector and zero-mode registry",
+      "columnwise proven kinematic invariants",
+      "open global-domain and background dependencies"
+    ],
+    "required_outputs_before_physical_reduction": [
+      "physical time/ADM split",
+      "canonical variables and momenta",
+      "primary and secondary constraints",
+      "Poisson/Dirac algebra",
+      "first/second class classification",
+      "Hamiltonian gauge generators",
+      "constraint quotient",
+      "physical DOF count on released background"
+    ]
+  },
+  "gate_state": {
+    "WP1D1_gauge_operator": "COMPONENTIZED_STRUCTURALLY",
+    "WP1D1_projector_kernel_registry": "DEFINED_BACKGROUND_DEPENDENT",
+    "WP1D1_full_projector_inverse": "NOT_FROZEN",
+    "WP1D1_full_gauge_invariant_basis": "NOT_CLAIMED",
+    "WP1D_constraint_elimination": "BLOCKED",
+    "WP1D_physical_DOF_count": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "WP1_physical_boundary_domain": "BLOCKED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED"
+  },
+  "forbidden_inferences": [
+    "Componentizing G is not a physical gauge fixing.",
+    "Columnwise invariance is not full-G invariance.",
+    "Projector zero modes are not automatically gauge modes.",
+    "ker G, coker G and physical DOF are not counted before background/domain/ULSH-04 closure.",
+    "No ghost, stability, spectrum, observable or solver-release claim follows."
+  ],
+  "continuation": {
+    "next_candidate_id": "ULSH-05/WP1D2",
+    "title": "Kinematic invariant candidate ledger and projector solvability preflight",
+    "physical_execution_allowed": false
+  }
+}
