@@ -19,7 +19,8 @@
     "interface_topology_used_for_preflight": "Sigma locally equals M4 times S1_chi",
     "chi_periodicity": "2pi-periodic",
     "boundary_of_interface_if_M4_has_outer_boundary": "partialSigma=(partialM4) times S1_chi because partial(S1_chi)=empty",
-    "asymptotic_note": "for noncompact M4, asymptotic flux replaces a literal finite outer boundary"
+    "asymptotic_note": "for noncompact M4, asymptotic flux replaces a literal finite outer boundary",
+    "local_test_support_convention": "if partialM4 is empty, ordinary compact support in M4 is sufficient; if a finite boundary-bearing M4/slab is introduced, support must be compactly contained in int(M4), equivalently zero in a neighborhood of the outer boundary"
   },
   "green_identity": {
     "form": "<u,Lv>-<Lu,v>=integral_partialOmega B[u,v]+sum_C C_C[u,v]",
@@ -29,9 +30,10 @@
   },
   "domain_candidates": {
     "D0_local_test": {
-      "definition": "C_c^infinity(M4) tensor C_2pi^infinity(S1_chi)",
+      "definition": "(C_c^infinity(M4) if partialM4=empty; C_c^infinity(int M4) if partialM4!=empty) tensor C_2pi^infinity(S1_chi)",
       "status": "PROVEN_ANALYTIC_TEST_DOMAIN",
-      "boundary_flux": "VANISHES_BY_COMPACT_SUPPORT_AND_CHI_PERIODICITY",
+      "boundary_flux": "VANISHES_BY_INTERIOR_COMPACT_SUPPORT_OR_BOUNDARYLESS_COMPACT_SUPPORT_AND_CHI_PERIODICITY",
+      "finite_boundary_semantics": "compact support on a compact manifold with boundary is not enough; support must be compactly contained in int(M4) or explicit zero-trace/stronger boundary conditions must be imposed",
       "physical_release": false
     },
     "D1_finite_slab_fixed_variations": {
@@ -95,7 +97,7 @@
     "unrestricted_pair": "u=x, v=x^2",
     "green_difference": -1.0,
     "boundary_form": "[-u*v'+u'*v]_0^1=-1",
-    "lesson": "formal/local symmetry of the differential expression does not imply symmetry on an unrestricted global domain",
+    "lesson": "formal/local symmetry of the differential expression does not imply symmetry on an unrestricted global domain; on a compact manifold with boundary, naive compact support alone also does not imply zero boundary trace",
     "dirichlet_control": "if u=v=0 at both endpoints the same boundary form vanishes"
   },
   "chi_periodic_control": {
@@ -125,6 +127,7 @@
   },
   "forbidden_inferences": [
     "A local compact-support/periodic weak Hessian identity is not a physical global boundary-condition release.",
+    "On a compact finite M4 with boundary, compact support without interior-support or explicit trace conditions does not kill the boundary form.",
     "A vanishing Green obstruction on one mathematical fallback domain is not a physical self-adjointness theorem.",
     "A symmetric quadratic form is not ghost freedom, Hamiltonian positivity or a physical spectrum.",
     "No physical boundary condition is selected while the physical background and causal structure are not established.",
