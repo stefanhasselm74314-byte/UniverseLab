@@ -57,15 +57,21 @@ def test_separate_gauge_columns():
 def test_interface_rows_are_componentized():
     d = load()
     g = d['gauge_operator']
-    assert g['row_completeness'] == 'BULK_FIELDS_PLUS_DECLARED_INTERFACE_PRIMARY_ROWS_AND_GENERIC_PULLBACK_ROWS_COMPONENTIZED'
+    assert g['row_completeness'] == 'ALL_DECLARED_BULK_INTERFACE_PRIMARY_AND_DERIVED_OR_GENERIC_PULLBACK_ROWS_HAVE_COLUMN_ACTIONS'
     assert d['field_space']['interface_primary'] == ['s', 'xi_shape', 'tau_a']
+    assert d['field_space']['interface_derived_or_pullback_rows'] == ['H_ab', 'Acal_a', 'd_a', 'generic_moving_pullback_DeltaSigma_T']
     z = g['bulk_diffeomorphism']['interface_rows']
     assert z['xi_shape'] == 'delta xi_shape=-zeta_perp'
     assert z['tau_a'] == 'delta tau_a=-zeta_parallel_a'
     assert z['cap_phase_s_direct'] == 'delta s=0 for the pure bulk-diffeomorphism column in the independent intrinsic surface-field representation'
     assert z['induced_metric_H_ab'] == 'delta H_ab=0'
+    assert z['pulled_gauge_oneform_Acal_a'] == 'delta Acal_a=0 under the paired pure bulk-diffeomorphism/embedding transformation'
+    assert z['cap_oneform_d_a'] == 'delta d_a=0 under the paired pure bulk-diffeomorphism/embedding transformation'
     assert z['generic_moving_pullback_DeltaSigma_T'] == 'delta_zeta DeltaSigma(X* T)=0 under the paired bulk-field/embedding diffeomorphism convention'
     u = g['u1']['interface_rows']
+    assert u['xi_shape'] == '0'
+    assert u['tau_a'] == '0'
+    assert u['induced_metric_H_ab'] == '0'
     assert u['pulled_gauge_oneform_Acal_a'] == 'delta Acal_a=D_a lambda'
     assert u['cap_phase_s'] == 'delta s=q_sigma lambda'
     assert u['cap_oneform_d_a'] == 'delta d_a=0'
@@ -74,15 +80,19 @@ def test_interface_rows_are_componentized():
     assert r['tau_a'] == 'delta tau^a=rho^a'
     assert r['induced_metric_H_ab'] == 'delta H_ab=Lie_rho hbar_ab=2 D_(a rho_b)'
     assert r['cap_phase_s'] == 'delta s=rho^a D_a sigma_bar'
-    assert d['gate_state']['WP1D1_gauge_operator_interface_rows'] == 'COMPONENTIZED_STRUCTURALLY'
+    assert r['pulled_gauge_oneform_Acal_a'] == 'delta Acal_a=(Lie_rho Abarcal)_a'
+    assert r['cap_oneform_d_a'] == 'delta d_a=(Lie_rho wbar)_a with wbar_a=D_a sigma_bar-q_sigma Abarcal_a'
+    assert d['gate_state']['WP1D1_gauge_operator_interface_rows'] == 'COMPONENTIZED_ALL_DECLARED_ROWS'
 
 
 def test_columnwise_not_full_invariance():
     d = load()['columnwise_invariants']
+    assert d['selected_not_exhaustive'] is True
     assert d['H_ab_under_bulk_diffeomorphism'] == 'PROVEN_G_zeta_H_EQUALS_ZERO'
+    assert d['d_a_under_bulk_diffeomorphism'] == 'PROVEN_G_zeta_d_EQUALS_ZERO_FROM_PAIRED_MOVING_PULLBACK_RULE'
     assert d['d_a_under_u1'] == 'PROVEN_G_lambda_d_EQUALS_ZERO'
     assert d['H_ab_under_full_G'] == 'NOT_INVARIANT_IN_GENERAL_RHO_COLUMN_NONZERO'
-    assert d['d_a_under_full_G'] == 'NOT_CLAIMED'
+    assert d['d_a_under_full_G'] == 'NOT_INVARIANT_IN_GENERAL_RHO_COLUMN_NONZERO'
 
 
 def test_projector_zero_modes_fail_closed():
@@ -109,7 +119,7 @@ def test_ulsh04_handoff_is_not_constraint_closure():
     assert d['ulsh04_handoff']['status'] == 'DEFINED_FAIL_CLOSED'
     assert 'inherited WP1D D_cond field/domain contract' in d['ulsh04_handoff']['inputs']
     assert 'exact upstream physical boundary-domain blocker remains unresolved' in d['ulsh04_handoff']['inputs']
-    assert 'G_zeta G_lambda G_rho separated operator including declared interface rows' in d['ulsh04_handoff']['inputs']
+    assert 'G_zeta G_lambda G_rho separated operator including all declared interface primary/derived rows and generic pullback rule' in d['ulsh04_handoff']['inputs']
     assert 'closed-range/Fredholm status of G remains unproven' in d['ulsh04_handoff']['inputs']
     assert 'physical 3+1/SVT gate remains NOT_RELEASED' in d['ulsh04_handoff']['inputs']
     g = d['gate_state']
