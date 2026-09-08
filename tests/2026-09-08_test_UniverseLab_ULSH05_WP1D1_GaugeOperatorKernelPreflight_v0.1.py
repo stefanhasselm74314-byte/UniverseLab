@@ -12,6 +12,7 @@ def load():
 
 def test_inherited_conditional_domain_is_explicit():
     d = load()
+    assert 'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json' in d['dependencies']
     assert 'registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json' in d['dependencies']
     dom = d['inherited_conditional_domain']
     assert dom['name'] == 'D_cond'
@@ -19,6 +20,15 @@ def test_inherited_conditional_domain_is_explicit():
     assert dom['tangential_support_finite_boundary_M4'] == 'support compactly contained in int(M4)'
     assert dom['physical_release'] is False
     assert d['quotient']['domain_source'] == 'inherited_conditional_domain'
+
+
+def test_upstream_boundary_gate_snapshot_is_inherited():
+    g = load()['gate_state']
+    assert g['WP1_boundary_residual_linearizations'] == 'COMPONENTIZED_LOCAL_INTERFACE_OPERATOR'
+    assert g['WP1_local_weak_boundary_hessian'] == 'SYMMETRIC_ON_DECLARED_TEST_DOMAIN'
+    assert g['WP1_global_domain_preflight'] == 'COMPLETED_CONDITIONAL_NO_PHYSICAL_DOMAIN_RELEASE'
+    assert g['WP1_physical_boundary_domain'] == 'BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA'
+    assert g['WP1_full_global_boundary_hessian'] == 'NOT_CLOSED_PHYSICAL_DOMAIN_NOT_RELEASED'
 
 
 def test_full_predecessor_gate_snapshot_is_inherited():
@@ -30,7 +40,6 @@ def test_full_predecessor_gate_snapshot_is_inherited():
     assert g['WP1D_constraint_elimination'] == 'BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING'
     assert g['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
     assert g['WP1D_physical_DOF_count'] == 'NOT_RELEASED'
-    assert g['WP1_full_global_boundary_hessian'] == 'NOT_CLOSED_PHYSICAL_DOMAIN_NOT_RELEASED'
     assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
     assert g['PERTURBED_JUNCTION_SYSTEM'] == 'NOT_RELEASED'
     assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
@@ -76,6 +85,7 @@ def test_ulsh04_handoff_is_not_constraint_closure():
     d = load()
     assert d['ulsh04_handoff']['status'] == 'DEFINED_FAIL_CLOSED'
     assert 'inherited WP1D D_cond field/domain contract' in d['ulsh04_handoff']['inputs']
+    assert 'exact upstream physical boundary-domain blocker remains unresolved' in d['ulsh04_handoff']['inputs']
     assert 'closed-range/Fredholm status of G remains unproven' in d['ulsh04_handoff']['inputs']
     assert 'physical 3+1/SVT gate remains NOT_RELEASED' in d['ulsh04_handoff']['inputs']
     g = d['gate_state']
@@ -94,6 +104,7 @@ def test_physical_firewalls():
     g = d['gate_state']
     assert g['FM-G0'] == 'OPEN'
     assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
+    assert g['WP1_physical_boundary_domain'] == 'BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA'
     assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
     assert g['WP1D_constraint_elimination'] == 'BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING'
     assert g['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
@@ -109,6 +120,7 @@ def test_physical_firewalls():
 
 if __name__ == '__main__':
     test_inherited_conditional_domain_is_explicit()
+    test_upstream_boundary_gate_snapshot_is_inherited()
     test_full_predecessor_gate_snapshot_is_inherited()
     test_separate_gauge_columns()
     test_columnwise_not_full_invariance()
