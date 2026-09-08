@@ -1,0 +1,174 @@
+{
+  "schema": "universelab.ulsh05.wp1d.conditional-svt-gauge-constraint-reduction.v0.1",
+  "date": "2026-09-08",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1D",
+  "basis_main": "51a48f23c9b32480ce56b0fb247b14d012fb4a0e",
+  "classification": "ANALYTIC_NONOPERATIVE_CONDITIONAL_GAUGE_AND_CONSTRAINT_REDUCTION_DOMAIN",
+  "status": "CONDITIONAL_KINEMATIC_GAUGE_REDUCTION_DOMAIN_FROZEN_CONSTRAINT_ELIMINATION_BLOCKED",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "successor_assignment": {
+    "predecessor": "ULSH-05/WP1C4B2C",
+    "assigned_id": "ULSH-05/WP1D",
+    "status": "FROZEN_BY_THIS_SUCCESSOR_CONTRACT",
+    "semantics": "This contract assigns the exact successor ID for the fail-closed fallback class that WP1C4B2C intentionally left unassigned. The ID is not claimed to have been pre-specified by the predecessor."
+  },
+  "dependencies": [
+    "SCI-001-002_v0.1_Canonical_6D_Parent_Action_and_Boundary_Closure.md",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "science/solver-hub/2026-08-07_ULSH-04_Constraint_Roadmap_v1.0.md",
+    "science/solver-hub/2026-08-07_ULSH-05_SVT-Perturbation_Roadmap_v1.0.md",
+    "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.md",
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.json",
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.json",
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json",
+    "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json"
+  ],
+  "field_space": {
+    "bulk": ["h_AB", "varphi", "a_A"],
+    "interface": ["s", "xi_shape", "tau_a"],
+    "interpretation": "LINEAR_KINEMATIC_VARIABLES_NOT_YET_PHYSICAL_MODES"
+  },
+  "conditional_domain": {
+    "name": "D_cond",
+    "tangential_support_boundaryless_M4": "compact support in M4",
+    "tangential_support_finite_boundary_M4": "support compactly contained in int(M4)",
+    "chi_periodicity": "2pi periodic modulo the frozen U1 patch contract",
+    "pole_regularity": "smooth Cartesian extendibility at each disk pole; do not impose naive componentwise scalar power laws on tensors or one-forms",
+    "scalar_fourier_control": "for a genuine scalar mode f_n near a smooth polar origin, f_n=O(r^abs(n))",
+    "interface": "preserve two-side gluing and moving-interface kinematics from WP1C",
+    "gauge_closure": "allowed gauge parameters must map D_cond into itself",
+    "physical_release": false
+  },
+  "gauge_action": {
+    "diffeomorphism": {
+      "metric": "delta h_AB = 2 nabla_(A zeta_B)",
+      "scalar": "delta varphi = zeta^A partial_A phi_bar",
+      "gauge_potential_diffeomorphism_part": "delta a_A = Lie_zeta Abar_A"
+    },
+    "U1": {
+      "gauge_potential": "delta a_A = partial_A lambda",
+      "cap_phase": "delta s = q_sigma lambda",
+      "invariant_cap_one_form": "d_a = D_a s - q_sigma Acal_a",
+      "proof": "delta d_a = D_a(q_sigma lambda)-q_sigma D_a lambda = 0 for constant q_sigma"
+    },
+    "moving_interface": {
+      "gauge_vector_split": "zeta|Sigma = zeta_perp N + zeta_parallel^a e_a",
+      "embedding_normal": "delta xi_shape = -zeta_perp",
+      "embedding_tangent": "delta tau_a = -zeta_parallel_a",
+      "pulled_metric": "delta p_ab = 2 D_(a zeta_parallel_b) + 2 K_ab zeta_perp",
+      "invariant_induced_metric": "H_ab = p_ab + 2 xi_shape K_ab + 2 D_(a tau_b)",
+      "proof": "delta H_ab = 0"
+    }
+  },
+  "svt_semantics": {
+    "physical_3plus1_svt": "NOT_RELEASED",
+    "reason": "a physical time function/spatial slicing and causal background are not frozen",
+    "conditional_bookkeeping": "4D-covariant York/Hodge orbit decomposition only where the required projectors exist on the declared analytic domain",
+    "formal_metric_split": "h_munu = hTT_munu + 2 D_(mu VT_nu) + (D_mu D_nu - qbar_munu D2/4) B + qbar_munu H/4",
+    "formal_mixed_split": "h_mui = VT_mui + D_mu B_i",
+    "formal_gauge_split": "a_mu = aT_mu + D_mu alpha",
+    "projector_status": "CONDITIONAL_PROJECTOR_KERNELS_OPEN",
+    "not_frozen": [
+      "global inverse D2",
+      "retarded Green operator",
+      "advanced Green operator",
+      "physical mode projector",
+      "physical initial data"
+    ],
+    "kernel_risks": [
+      "constant scalar modes",
+      "Killing vectors",
+      "other zero modes",
+      "Lorentzian Green-operator ambiguity",
+      "outer-boundary dependence"
+    ]
+  },
+  "kinematic_quotient": {
+    "definition": "Q_kin = D_cond / G_cond",
+    "meaning": "quotient by explicit diffeomorphism and U1 gauge orbits that preserve D_cond",
+    "physical_phase_space": false,
+    "missing_for_physical_phase_space": [
+      "physical time/ADM split",
+      "canonical momenta",
+      "primary constraints",
+      "secondary/higher constraints",
+      "Poisson/Dirac algebra",
+      "first/second class classification",
+      "gauge generators",
+      "physical global boundary conditions"
+    ]
+  },
+  "constraint_elimination": {
+    "quadratic_form": "S2 = 0.5<q,Aq> + <q,Bn> + 0.5<n,Cn>",
+    "direct_elimination_condition": "C must be invertible on the correctly gauge/constraint-reduced declared domain",
+    "stationary_auxiliary_solution": "n_star = -C^-1 Bdagger q",
+    "schur_complement": "A_red = A - B C^-1 Bdagger",
+    "singular_C": "DIRECT_ELIMINATION_FORBIDDEN",
+    "singular_C_possible_meanings": [
+      "gauge kernel",
+      "first-class constraint",
+      "degenerate dynamics",
+      "unresolved boundary zero mode"
+    ],
+    "status": "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
+    "physical_kinetic_matrix": "NOT_IDENTIFIED"
+  },
+  "hard_controls": {
+    "C1_U1_cap_invariant": "PROVEN_KINEMATIC",
+    "C2_moving_interface_H_ab": "PROVEN_KINEMATIC",
+    "C3_scalar_fourier_pole_regular_control": "ANALYTIC_CONTROL_ONLY",
+    "C4_finite_dimensional_schur_control": "LINEAR_ALGEBRA_CONTROL_ONLY",
+    "C5_singular_auxiliary_block": "MUST_FAIL_CLOSED"
+  },
+  "regime_checks": {
+    "a_F_to_zero": "declared Maxwell-scalar decoupling control; does not close constraints or physical SVT",
+    "internal_n_zero": "must be retained; no division by n is allowed",
+    "large_abs_n": "stronger polar regularity but no KK spectrum claim",
+    "projector_zero_modes": "must be separated before any inverse/projector is used"
+  },
+  "gate_state": {
+    "WP1D_successor_identifier": "FROZEN_BY_THIS_SUCCESSOR_CONTRACT",
+    "WP1D_analytic_field_domain": "FROZEN_CONDITIONAL",
+    "WP1D_4D_covariant_SVT_bookkeeping": "DEFINED_CONDITIONAL_PROJECTOR_KERNELS_OPEN",
+    "WP1D_gauge_action": "DEFINED_KINEMATICALLY",
+    "WP1D_constraint_elimination": "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
+    "WP1D_physical_3plus1_SVT": "NOT_RELEASED",
+    "WP1D_physical_DOF_count": "NOT_RELEASED",
+    "WP1_full_global_boundary_hessian": "NOT_CLOSED_PHYSICAL_DOMAIN_NOT_RELEASED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "The conditional 4D-covariant decomposition is not a physical cosmological 3+1 SVT decomposition.",
+    "A kinematic gauge quotient is not the physical reduced phase space.",
+    "A formal Schur complement is not the physical kinetic matrix.",
+    "A singular auxiliary block may not be inverted or silently pseudoinverted.",
+    "No physical DOF count is released before ULSH04 closes the constraint algebra on a released background.",
+    "No ghost, gradient, tachyon, KK-spectrum or stability claim follows.",
+    "No 6D-to-4D observable map or HZT identification of Phi, Psi, Delta_m, mu, eta or Sigma follows.",
+    "No backend import or solver execution is authorized."
+  ],
+  "continuation": {
+    "next_analytic_class": "componentize the linear gauge-transformation operator G on D_cond and audit projector kernels before constructing only provable kinematic invariants",
+    "requires_before_constraint_elimination": [
+      "ULSH04 physical time/ADM choice",
+      "ULSH04 canonical momenta and full constraint algebra",
+      "released physical background and causal structure",
+      "compatible physical boundary domain"
+    ],
+    "next_exact_subpackage_id": "NOT_PREASSIGNED"
+  }
+}
