@@ -5,6 +5,7 @@ on:
     paths:
       - 'registry/2026-09-08_UniverseLab_ULSH05_WP1E_GaugeOperatorKernelPreflight_v0.1.json'
       - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1E_GaugeOperatorKernelPreflight_v0.1.md'
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1E_PoleCoordinateFirewall_v0.1.md'
       - 'tests/2026-09-08_test_UniverseLab_ULSH05_WP1E_GaugeOperatorKernelPreflight_v0.1.py'
       - 'tools/2026-09-08_prepare_UniverseLab_ULSH05_WP1E_GaugeOperatorKernelPreflight_v0.1.py'
       - '.github/workflows/2026-09-08_UniverseLab_ULSH05_WP1E_GaugeOperatorKernelPreflight_QA_v0.1.yml'
@@ -36,7 +37,7 @@ jobs:
         run: python tools/2026-09-08_prepare_UniverseLab_ULSH05_WP1E_GaugeOperatorKernelPreflight_v0.1.py
       - name: Rerun WP1D predecessor controls
         run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.py
-      - name: Verify WP1E projector/interface and physical firewalls
+      - name: Verify WP1E projector, polar-coordinate and physical firewalls
         shell: python
         run: |
           import json
@@ -46,6 +47,7 @@ jobs:
           g = d['gate_state']
           k = d['projector_kernel_audit']
           f = d['interface_full_gauge_firewall']
+          pole = d['polar_coordinate_firewall']
           assert d['work_package'] == 'ULSH-05/WP1E'
           assert d['basis_main'] == 'a894517e2c8e378bff4f6a975aee67ca85fea785'
           assert d['successor_assignment']['predecessor'] == 'ULSH-05/WP1D'
@@ -57,11 +59,14 @@ jobs:
           assert k['coefficient_G_dependency_on_projector'] is True
           assert k['global_D2_inverse'] == 'NOT_FROZEN'
           assert k['physical_DOF_from_rank_G'] == 'FORBIDDEN_BEFORE_ULSH04_CONSTRAINT_CLOSURE'
+          assert pole['component_formula_domain'] == 'punctured polar chart L>0 plus a separate smooth-extension requirement'
+          assert pole['pole_extension_of_representative_invariants'] == 'OPEN_NOT_PROVEN_COMPONENTWISE'
           assert f['componentwise_full_rho_invariant_basis'] == 'NOT_RELEASED'
           assert g['WP1E_raw_gauge_operator'] == 'COMPONENTIZED_ON_CURRENT_STATIC_ANSATZ'
           assert g['WP1E_coefficient_gauge_matrix'] == 'DEFINED_CONDITIONAL_ON_PROJECTOR_REPRESENTATIVE_SLICE'
           assert g['WP1E_projector_kernel_audit'] == 'OPEN_TRACKED_NO_GLOBAL_INVERSE_RELEASE'
-          assert g['WP1E_conditional_bulk_kinematic_invariants'] == 'DERIVED_REPRESENTATIVE_LEVEL'
+          assert g['WP1E_pole_extension_audit'] == 'OPEN_NOT_PROVEN_COMPONENTWISE'
+          assert g['WP1E_conditional_bulk_kinematic_invariants'] == 'DERIVED_REPRESENTATIVE_LEVEL_PUNCTURED_POLAR_CHART'
           assert g['WP1E_full_interface_rho_invariant_basis'] == 'NOT_RELEASED'
           assert g['WP1D_constraint_elimination'] == 'BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING'
           assert g['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
@@ -77,4 +82,4 @@ jobs:
           assert g['PHYSICAL_RESPONSE_RANK'] == 'NOT_EXECUTED'
           assert g['K1-D'] == 'NOT_RELEASED'
           assert g['K1-E'] == 'NOT_ADMISSIBLE'
-          print('WP1E fail-closed gauge/kernel firewalls: PASS')
+          print('WP1E fail-closed gauge/kernel/pole firewalls: PASS')
