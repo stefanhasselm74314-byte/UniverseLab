@@ -5,7 +5,7 @@
   "work_package": "ULSH-05/WP1E",
   "basis_main": "a894517e2c8e378bff4f6a975aee67ca85fea785",
   "classification": "ANALYTIC_NONOPERATIVE_LINEAR_GAUGE_OPERATOR_COMPONENTIZATION_AND_PROJECTOR_KERNEL_PREFLIGHT",
-  "status": "RAW_GAUGE_OPERATOR_COMPONENTIZED_REPRESENTATIVE_LEVEL_INVARIANTS_CONDITIONAL_PROJECTOR_KERNELS_OPEN",
+  "status": "RAW_GAUGE_OPERATOR_COMPONENTIZED_REPRESENTATIVE_LEVEL_INVARIANTS_CONDITIONAL_PROJECTOR_AND_POLE_EXTENSION_OPEN",
   "physical_gate_effect": "NONE",
   "physical_evidence_effect": "NONE",
   "solver_authorized": false,
@@ -22,7 +22,8 @@
     "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
     "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
     "science/solver-hub/2026-08-07_ULSH-04_Constraint_Roadmap_v1.0.md",
-    "science/solver-hub/2026-08-07_ULSH-05_SVT-Perturbation_Roadmap_v1.0.md"
+    "science/solver-hub/2026-08-07_ULSH-05_SVT-Perturbation_Roadmap_v1.0.md",
+    "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1E_PoleCoordinateFirewall_v0.1.md"
   ],
   "background_ansatz": {
     "metric": "dsbar6^2 = exp(2A(r))*qbar_munu dx^mu dx^nu + dr^2 + L(r)^2 dchi^2",
@@ -36,7 +37,7 @@
   "gauge_parameter_convention": {
     "bulk_diffeomorphism": "use lower/covector components zeta_A=(zeta_mu,zeta_r,zeta_chi)",
     "fourD_split": "zeta_mu=zetaT_mu + D_mu zeta_L, with D^mu zetaT_mu=0, only on a declared projector representative slice",
-    "raised_internal_components": "zeta^r=zeta_r and zeta^chi=zeta_chi/L^2",
+    "raised_internal_components": "zeta^r=zeta_r and zeta^chi=zeta_chi/L^2 on the punctured polar chart L>0; no bounded-coordinate-component claim is made at a smooth pole",
     "U1": "lambda",
     "intrinsic_interface_reparameterization": "rho^a, independent from zeta_parallel^a",
     "representative_firewall": "zeta_L and all York/Hodge potentials are equivalence-class representatives modulo projector kernels; a kernel representative must not be counted as an additional gauge direction"
@@ -83,7 +84,7 @@
     "delta_alpha": "lambda + (Abar_chi/L^2) zeta_chi",
     "delta_a_r": "partial_r lambda + Abar_chi*partial_r(zeta_chi/L^2)",
     "delta_a_chi": "partial_chi lambda + Abar_chi_prime*zeta_r + Abar_chi*partial_chi(zeta_chi/L^2)",
-    "status": "EXACT_FOR_THE_DECLARED_STATIC_BACKGROUND_ANSATZ_AND_COVECTOR_ZETA_CONVENTION"
+    "status": "EXACT_ON_THE_PUNCTURED_POLAR_CHART_FOR_THE_DECLARED_STATIC_BACKGROUND_ANSATZ_AND_COVECTOR_ZETA_CONVENTION; SMOOTH_POLE_EXTENSION_REQUIRES_SEPARATE_CARTESIAN_OR_ORTHONORMAL_FRAME_AUDIT"
   },
   "representative_compensators": {
     "X_r": "B_r - 0.5*(partial_r-2A_prime)*B",
@@ -93,7 +94,7 @@
     "status": "CONDITIONAL_ON_COMMON_PROJECTOR_REPRESENTATIVE_SLICE"
   },
   "conditional_kinematic_invariants": {
-    "scope": "BULK_DIFF_PLUS_U1_ONLY_ON_COMMON_PROJECTOR_REPRESENTATIVE_SLICE; NOT_FULL_SURFACE_RHO_INVARIANTS",
+    "scope": "BULK_DIFF_PLUS_U1_ONLY_ON_COMMON_PROJECTOR_REPRESENTATIVE_SLICE_AND_PUNCTURED_POLAR_CHART; NOT_FULL_SURFACE_RHO_INVARIANTS; POLE_EXTENSION_NOT_PROVEN_COMPONENTWISE",
     "tensor": {
       "hTT_munu": "hTT_munu"
     },
@@ -117,7 +118,16 @@
       "Ahat_r": "u_r+(Abar_chi_prime/L^2)X_chi",
       "Ahat_chi": "u_chi-Abar_chi_prime X_r"
     },
-    "division_firewall": "no invariant above divides by phibar_prime, Abar_chi_prime, Fourier n, k, D2, or any background residual"
+    "division_firewall": "no invariant above divides by phibar_prime, Abar_chi_prime, Fourier n, k, D2, or any background residual; inverse powers of L are polar-coordinate metric factors and are not licensed as bounded polewise component expressions without smooth-extension analysis"
+  },
+  "polar_coordinate_firewall": {
+    "coordinate_issue": "the polar chart degenerates at a smooth pole where L=0, so zeta^chi=zeta_chi/L^2 and terms with L_prime/L or Abar_chi_prime/L^2 must not be assessed by boundedness of individual polar components",
+    "primary_regularity_rule": "admissibility at each pole is smooth Cartesian extendibility of the underlying vector, tensor, scalar and U1 one-form fields, as frozen by WP1D",
+    "important_counterexample": "a smooth Cartesian translation vector has polar contravariant angular component proportional to 1/r near r=0, so a divergent angular coordinate component does not by itself signal a singular vector field",
+    "background_regular_gauge_note": "the frozen regular pole gauge has A_chi=0 at the pole and the canonical pole series begins quadratically in the angular potential, but this block does not use that fact to claim regularity of every perturbative representative",
+    "component_formula_domain": "punctured polar chart L>0 plus a separate smooth-extension requirement",
+    "pole_extension_of_representative_invariants": "OPEN_NOT_PROVEN_COMPONENTWISE",
+    "required_later": "rewrite/check the relevant internal components in smooth Cartesian or orthonormal-frame variables and verify mode-by-mode pole extension before any global mode or norm claim"
   },
   "interface_full_gauge_firewall": {
     "H_ab": "bulk-diffeomorphism compensated but transforms under independent intrinsic rho as Lie_rho hbar_ab",
@@ -145,21 +155,23 @@
     "physical_DOF_from_rank_G": "FORBIDDEN_BEFORE_ULSH04_CONSTRAINT_CLOSURE"
   },
   "controls": {
-    "C1_metric_componentization": "ALGEBRAIC_CHRISTOFFEL_CONTROL",
+    "C1_metric_componentization": "ALGEBRAIC_CHRISTOFFEL_CONTROL_ON_PUNCTURED_POLAR_CHART",
     "C2_compensator_transform": "X_r_to_zeta_r_AND_X_chi_to_zeta_chi",
     "C3_vector_invariants": "CANCEL_BULK_DIFF_ON_REPRESENTATIVE_SLICE",
     "C4_scalar_metric_invariants": "CANCEL_BULK_DIFF_ON_REPRESENTATIVE_SLICE",
     "C5_scalar_field_invariant": "CANCEL_RADIAL_BULK_DIFF_WITHOUT_DIVIDING_BY_PHIBAR_PRIME",
     "C6_U1_and_gauge_scalar_invariants": "CANCEL_U1_AND_INTERNAL_BULK_DIFF_WITHOUT_DIVIDING_BY_ABAR_CHI_PRIME",
     "C7_interface_rho_firewall": "PARTIAL_INVARIANTS_MUST_NOT_BE_PROMOTED_TO_FULL_GCOND_INVARIANTS",
-    "C8_projector_kernel_firewall": "NO_INVERSE_OR_PHYSICAL_MODE_COUNT_FROM_UNFROZEN_PROJECTORS"
+    "C8_projector_kernel_firewall": "NO_INVERSE_OR_PHYSICAL_MODE_COUNT_FROM_UNFROZEN_PROJECTORS",
+    "C9_polar_coordinate_firewall": "NO_GLOBAL_POLE_REGULARITY_CLAIM_FROM_SINGULAR_POLAR_COMPONENT_EXPRESSIONS"
   },
   "regime_checks": {
     "phibar_prime_zero": "varphihat reduces smoothly to varphi; no unitary-gauge division is used",
     "Abar_chi_prime_zero": "Ahat_r and Ahat_chi reduce smoothly to U1-invariant u_r and u_chi",
     "internal_n_zero": "retained; no 1/n operation",
     "A_prime_zero": "metric formulas reduce smoothly to unwarped radial controls",
-    "L_prime_zero": "internal metric formulas reduce smoothly to cylindrical-radius stationary control",
+    "L_prime_zero_away_from_pole": "internal metric formulas reduce smoothly to cylindrical-radius stationary control where L remains nonzero",
+    "smooth_pole_L_zero": "coordinate-component formulas containing 1/L or 1/L^2 are not evaluated by naive substitution; smooth Cartesian or orthonormal-frame extension is required",
     "projector_kernel_nontrivial": "coefficient-level invariants remain conditional and may not define field-space observables"
   },
   "gate_state": {
@@ -167,7 +179,8 @@
     "WP1E_raw_gauge_operator": "COMPONENTIZED_ON_CURRENT_STATIC_ANSATZ",
     "WP1E_coefficient_gauge_matrix": "DEFINED_CONDITIONAL_ON_PROJECTOR_REPRESENTATIVE_SLICE",
     "WP1E_projector_kernel_audit": "OPEN_TRACKED_NO_GLOBAL_INVERSE_RELEASE",
-    "WP1E_conditional_bulk_kinematic_invariants": "DERIVED_REPRESENTATIVE_LEVEL",
+    "WP1E_pole_extension_audit": "OPEN_NOT_PROVEN_COMPONENTWISE",
+    "WP1E_conditional_bulk_kinematic_invariants": "DERIVED_REPRESENTATIVE_LEVEL_PUNCTURED_POLAR_CHART",
     "WP1E_full_interface_rho_invariant_basis": "NOT_RELEASED",
     "WP1D_constraint_elimination": "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
     "WP1D_physical_3plus1_SVT": "NOT_RELEASED",
@@ -188,6 +201,8 @@
   "forbidden_inferences": [
     "The current static ansatz is not an established physical background solution.",
     "Representative-level York/Hodge coefficients are not global physical variables before projector kernels and domains are frozen.",
+    "Polar coordinate factors 1/L and 1/L^2 do not by themselves establish a singularity or regularity at L=0; only smooth tensorial extension can decide the pole limit.",
+    "The current representative-level hatted combinations have not yet been proven to extend componentwise through the smooth poles.",
     "H_ab and d_a are not invariants of the full intrinsic-surface reparameterization quotient merely because they are invariant under one gauge channel.",
     "Rank or kernel of the kinematic gauge operator is not a physical DOF count before ULSH04 closes the constraint algebra.",
     "No formal or numerical inverse of D2 may be used to erase zero modes silently.",
@@ -196,7 +211,7 @@
     "No backend import or solver execution is authorized."
   ],
   "continuation": {
-    "next_analytic_class": "close only the projector-representative/kernel contract or choose a mathematically explicit kernel-complement test domain before assembling a sector-reduced quadratic form; do not perform physical constraint elimination",
+    "next_analytic_class": "close the projector-representative/kernel contract and the smooth-pole extension contract, or choose a mathematically explicit kernel-complement test domain plus regular-frame variables before assembling a sector-reduced quadratic form; do not perform physical constraint elimination",
     "next_exact_subpackage_id": "NOT_PREASSIGNED",
     "requires_before_physical_reduction": [
       "ULSH04 physical time/ADM choice",
