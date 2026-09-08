@@ -11,7 +11,7 @@
 WP1C4B2A hat die zweite Pfadkettenregel der bewegten Interfacewirkung geschlossen, aber die Residualableitungen `Delta R_sigma` und `Delta R_perp` noch nicht komponentisiert. WP1C4B2B schließt genau diese Lücke und assembliert den lokalen linearen Boundary-Residualoperator
 
 \[
-\Delta\mathcal R_
+\Delta\mathcal R
 =
 (\Delta\mathcal R_h^{ab},
 \Delta\mathcal R_\phi,
@@ -107,7 +107,7 @@ Auf jeder Bulkseite verwenden wir
 \[
 q_\phi\equiv N^A\nabla_A\bar\phi,
 \qquad
-u_a\equiv D_a\bar\phi,
+\nu_a\equiv D_a\bar\phi,
 \]
 
 \[
