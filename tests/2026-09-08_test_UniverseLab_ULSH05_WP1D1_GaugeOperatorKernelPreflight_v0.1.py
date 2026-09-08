@@ -54,6 +54,29 @@ def test_separate_gauge_columns():
     assert g['intrinsic_interface_reparametrization']['independent_of_zeta_parallel'] is True
 
 
+def test_interface_rows_are_componentized():
+    d = load()
+    g = d['gauge_operator']
+    assert g['row_completeness'] == 'BULK_FIELDS_PLUS_DECLARED_INTERFACE_PRIMARY_ROWS_AND_GENERIC_PULLBACK_ROWS_COMPONENTIZED'
+    assert d['field_space']['interface_primary'] == ['s', 'xi_shape', 'tau_a']
+    z = g['bulk_diffeomorphism']['interface_rows']
+    assert z['xi_shape'] == 'delta xi_shape=-zeta_perp'
+    assert z['tau_a'] == 'delta tau_a=-zeta_parallel_a'
+    assert z['cap_phase_s_direct'] == 'delta s=0 for the pure bulk-diffeomorphism column in the independent intrinsic surface-field representation'
+    assert z['induced_metric_H_ab'] == 'delta H_ab=0'
+    assert z['generic_moving_pullback_DeltaSigma_T'] == 'delta_zeta DeltaSigma(X* T)=0 under the paired bulk-field/embedding diffeomorphism convention'
+    u = g['u1']['interface_rows']
+    assert u['pulled_gauge_oneform_Acal_a'] == 'delta Acal_a=D_a lambda'
+    assert u['cap_phase_s'] == 'delta s=q_sigma lambda'
+    assert u['cap_oneform_d_a'] == 'delta d_a=0'
+    r = g['intrinsic_interface_reparametrization']['interface_rows']
+    assert r['xi_shape'] == 'delta xi_shape=0'
+    assert r['tau_a'] == 'delta tau^a=rho^a'
+    assert r['induced_metric_H_ab'] == 'delta H_ab=Lie_rho hbar_ab=2 D_(a rho_b)'
+    assert r['cap_phase_s'] == 'delta s=rho^a D_a sigma_bar'
+    assert d['gate_state']['WP1D1_gauge_operator_interface_rows'] == 'COMPONENTIZED_STRUCTURALLY'
+
+
 def test_columnwise_not_full_invariance():
     d = load()['columnwise_invariants']
     assert d['H_ab_under_bulk_diffeomorphism'] == 'PROVEN_G_zeta_H_EQUALS_ZERO'
@@ -86,6 +109,7 @@ def test_ulsh04_handoff_is_not_constraint_closure():
     assert d['ulsh04_handoff']['status'] == 'DEFINED_FAIL_CLOSED'
     assert 'inherited WP1D D_cond field/domain contract' in d['ulsh04_handoff']['inputs']
     assert 'exact upstream physical boundary-domain blocker remains unresolved' in d['ulsh04_handoff']['inputs']
+    assert 'G_zeta G_lambda G_rho separated operator including declared interface rows' in d['ulsh04_handoff']['inputs']
     assert 'closed-range/Fredholm status of G remains unproven' in d['ulsh04_handoff']['inputs']
     assert 'physical 3+1/SVT gate remains NOT_RELEASED' in d['ulsh04_handoff']['inputs']
     g = d['gate_state']
@@ -123,6 +147,7 @@ if __name__ == '__main__':
     test_upstream_boundary_gate_snapshot_is_inherited()
     test_full_predecessor_gate_snapshot_is_inherited()
     test_separate_gauge_columns()
+    test_interface_rows_are_componentized()
     test_columnwise_not_full_invariance()
     test_projector_zero_modes_fail_closed()
     test_cokernel_requires_closed_range()
