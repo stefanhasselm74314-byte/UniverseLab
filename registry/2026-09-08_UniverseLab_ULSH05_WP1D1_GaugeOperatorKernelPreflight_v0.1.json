@@ -110,7 +110,7 @@
     "WP1D_analytic_field_domain": "FROZEN_CONDITIONAL",
     "WP1D_4D_covariant_SVT_bookkeeping": "DEFINED_CONDITIONAL_PROJECTOR_KERNELS_OPEN",
     "WP1D_gauge_action": "DEFINED_KINEMATICALLY_WITH_INDEPENDENT_SURFACE_REPARAMETERIZATION",
-    "WP1D_constraint_elimination": "BLOCKED",
+    "WP1D_constraint_elimination": "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
     "WP1D_physical_3plus1_SVT": "NOT_RELEASED",
     "WP1D_physical_DOF_count": "NOT_RELEASED",
     "WP1_full_global_boundary_hessian": "NOT_CLOSED_PHYSICAL_DOMAIN_NOT_RELEASED",
@@ -140,6 +140,7 @@
     "Pairing/domain freeze alone does not identify the ordinary cokernel codomain/im G with ker G^dagger; closed range is additionally required, otherwise only the reduced cokernel codomain/closure(im G) is represented by the adjoint kernel.",
     "ker G, coker G and physical DOF are not counted before background/domain/ULSH-04 closure.",
     "All predecessor WP1D release/firewall gates remain inherited unless explicitly superseded; WP1D1 adds analytic structure but releases none of them.",
+    "WP1D_constraint_elimination remains BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING; neither blocker is superseded by WP1D1.",
     "WP1D_physical_3plus1_SVT remains NOT_RELEASED; no physical time/ADM/SVT reduction is implied.",
     "FM-G0 remains OPEN; this successor does not close any forward-map gap.",
     "No ghost, stability, spectrum, observable or solver-release claim follows."
