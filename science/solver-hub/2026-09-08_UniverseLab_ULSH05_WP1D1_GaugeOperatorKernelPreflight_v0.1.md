@@ -27,7 +27,11 @@ WP1D1_full_gauge_invariant_basis = NOT_CLAIMED
 WP1D1_closed_range_of_G          = NOT_PROVEN
 WP1D1_Fredholm_property_of_G     = NOT_PROVEN
 WP1D1_ULSH04_handoff             = DEFINED_FAIL_CLOSED
+WP1_global_domain_preflight      = COMPLETED_CONDITIONAL_NO_PHYSICAL_DOMAIN_RELEASE
+WP1_physical_boundary_domain     = BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA
+WP1_full_global_boundary_hessian = NOT_CLOSED_PHYSICAL_DOMAIN_NOT_RELEASED
 WP1D_constraint_elimination      = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING
+WP1D_physical_3plus1_SVT         = NOT_RELEASED
 WP1D_physical_DOF_count          = NOT_RELEASED
 FM-G0                            = OPEN
 SOLVER_EXECUTION                 = NOT_EXECUTED
@@ -321,6 +325,7 @@ und ebenso
 WP1D1 definiert nur eine fail-closed Übergabeschnittstelle. ULSH-04 erhält als **Input**:
 
 - Feldraum und konditionale Domäne,
+- den unverändert offenen Upstream-Gate `WP1_physical_boundary_domain = BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA`,
 - blockweisen Gaugeoperator `G=(G_zeta,G_lambda,G_rho)`,
 - explizite Trennung von Bulk- und Interface-Reparametrisierung,
 - Projektor-/Zero-Mode-Register,
@@ -364,22 +369,25 @@ nur zulässig, wenn `C` auf der korrekt gauge-/constraint-reduzierten Domäne in
 ## 11. Firewalls
 
 ```text
-FM-G0                     = OPEN
-PHYSICAL_BACKGROUND       = NOT_ESTABLISHED
-WP1_physical_boundary_domain = BLOCKED
-WP1_full_quadratic_action = NOT_CLOSED
-WP1D_constraint_elimination = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING
-WP1D_physical_DOF_count   = NOT_RELEASED
-PERTURBED_JUNCTION_SYSTEM = NOT_RELEASED
-PHYSICAL_RESPONSE_RANK    = NOT_EXECUTED
-K1-D                      = NOT_RELEASED
-K1-E                      = NOT_ADMISSIBLE
-AuthorizationDecision     = NOT_CREATED
-SingleUseGrant            = NOT_CREATED
-BACKEND_IMPORT            = NOT_EXECUTED
-SOLVER_EXECUTION          = NOT_EXECUTED
-physical_gate_effect      = NONE
-physical_evidence_effect  = NONE
+FM-G0                           = OPEN
+PHYSICAL_BACKGROUND             = NOT_ESTABLISHED
+WP1_global_domain_preflight     = COMPLETED_CONDITIONAL_NO_PHYSICAL_DOMAIN_RELEASE
+WP1_physical_boundary_domain    = BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA
+WP1_full_global_boundary_hessian = NOT_CLOSED_PHYSICAL_DOMAIN_NOT_RELEASED
+WP1_full_quadratic_action       = NOT_CLOSED
+WP1D_constraint_elimination     = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING
+WP1D_physical_3plus1_SVT        = NOT_RELEASED
+WP1D_physical_DOF_count         = NOT_RELEASED
+PERTURBED_JUNCTION_SYSTEM       = NOT_RELEASED
+PHYSICAL_RESPONSE_RANK          = NOT_EXECUTED
+K1-D                            = NOT_RELEASED
+K1-E                            = NOT_ADMISSIBLE
+AuthorizationDecision           = NOT_CREATED
+SingleUseGrant                  = NOT_CREATED
+BACKEND_IMPORT                  = NOT_EXECUTED
+SOLVER_EXECUTION                = NOT_EXECUTED
+physical_gate_effect            = NONE
+physical_evidence_effect        = NONE
 ```
 
 ## 12. Verbotene Schlussfolgerungen
@@ -390,7 +398,9 @@ physical_evidence_effect  = NONE
 - Projektor-Nullmoden dürfen nicht ohne Beweis entfernt werden.
 - Pairing-/Domain-Freeze allein identifiziert den gewöhnlichen Cokernel nicht mit `ker G^dagger`; dafür ist zusätzlich Closed Range beziehungsweise eine geeignete Fredholm-Bedingung erforderlich.
 - `ker G`, `coker G` und physische DOF dürfen nicht ohne Background, Domäne und ULSH-04-Abschluss gezählt werden.
+- `WP1_physical_boundary_domain` bleibt `BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA`; weder der physische Hintergrund noch die globalen Corner-/Joint-Daten werden durch WP1D1 freigegeben.
 - `WP1D_constraint_elimination` bleibt `BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING`; weder ULSH-04 noch die physikalische Zeitwahl ist durch WP1D1 geschlossen.
+- `WP1D_physical_3plus1_SVT` bleibt `NOT_RELEASED`; die 4D-kovariante Buchhaltung ist keine physikalische 3+1-S/V/T-Zerlegung.
 - `FM-G0` bleibt `OPEN`; WP1D1 schließt keine Forward-Map-Lücke.
 - Kein Ghost-, Stabilitäts-, Spektral-, Observable- oder Solverfreigabe-Claim folgt aus diesem Block.
 
