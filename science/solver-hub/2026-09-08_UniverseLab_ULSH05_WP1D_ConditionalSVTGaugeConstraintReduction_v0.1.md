@@ -9,15 +9,13 @@
 
 ## 0. Entscheidung und Successor-ID
 
-WP1C4B2C hat die physikalische Randdomäne fail-closed blockiert, weil der physische 6D-Hintergrund, seine Kausalstruktur und ein globaler Outer-Boundary/Corner-Vertrag nicht freigegeben sind. Sein expliziter Fallback lautet daher: nur eine **konditionale S/V/T-Gauge- und Constraint-Reduktionsdomäne** einfrieren, ohne Solverausführung.
+WP1C4B2C blockiert die physikalische Randdomäne fail-closed, weil physischer 6D-Hintergrund, Kausalstruktur und globaler Outer-Boundary/Corner-Vertrag nicht freigegeben sind. Der dort vorgeschriebene Fallback ist deshalb ausschließlich eine **konditionale S/V/T-Gauge- und Constraint-Reduktionsdomäne ohne Solverausführung**.
 
-Dieser Nachfolgevertrag weist diesem Fallback erstmals kanonisch die ID
+Dieser Nachfolgevertrag weist diesem Fallback erstmals die kanonische ID
 
 `ULSH-05/WP1D`
 
-zu.
-
-Die Zuordnung ist eine **neue Governance-Zuweisung dieses Successor-Vertrags**; sie wird nicht rückwirkend als bereits im Vorgänger vorgegeben dargestellt.
+zu. Diese ID wird durch diesen Successor-Vertrag neu vergeben und nicht rückwirkend als bereits im Vorgänger vorgegeben dargestellt.
 
 Kernstatus:
 
@@ -25,7 +23,7 @@ Kernstatus:
 WP1D_successor_identifier          = FROZEN_BY_THIS_SUCCESSOR_CONTRACT
 WP1D_analytic_field_domain         = FROZEN_CONDITIONAL
 WP1D_4D_covariant_SVT_bookkeeping = DEFINED_CONDITIONAL_PROJECTOR_KERNELS_OPEN
-WP1D_gauge_action                  = DEFINED_KINEMATICALLY
+WP1D_gauge_action                  = DEFINED_KINEMATICALLY_WITH_INDEPENDENT_SURFACE_REPARAMETERIZATION
 WP1D_constraint_elimination        = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING
 WP1D_physical_3plus1_SVT           = NOT_RELEASED
 WP1D_physical_DOF_count            = NOT_RELEASED
@@ -34,15 +32,15 @@ PERTURBED_JUNCTION_SYSTEM          = NOT_RELEASED
 SOLVER_EXECUTION                   = NOT_EXECUTED
 ```
 
-[BEWIESEN] Der folgende Block kann die zulässige **kinematische Feld- und Gauge-Domäne** definieren.
+[BEWIESEN] Eine konditionale kinematische Feld- und Gauge-Domäne kann definiert werden.
 
-[FALSIFIZIERT/BLOCKIERT] Eine physikalische 3+1-S/V/T-Zerlegung, ein physischer DOF-Count oder eine Constraint-Elimination dürfen daraus nicht abgeleitet werden.
+[FALSIFIZIERT/BLOCKIERT] Daraus folgen weder eine physikalische 3+1-S/V/T-Zerlegung noch ein physischer DOF-Count oder eine physische Constraint-Elimination.
 
 ---
 
 ## 1. Kanonische Quellenkette
 
-Dieser Block verwendet ausschließlich:
+Verwendet werden ausschließlich:
 
 1. `SCI-001-002_v0.1_Canonical_6D_Parent_Action_and_Boundary_Closure.md`
 2. `registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json`
@@ -50,10 +48,11 @@ Dieser Block verwendet ausschließlich:
 4. `science/solver-hub/2026-08-07_ULSH-04_Constraint_Roadmap_v1.0.md`
 5. `science/solver-hub/2026-08-07_ULSH-05_SVT-Perturbation_Roadmap_v1.0.md`
 6. `science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.md`
-7. `registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.json`
-8. `registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.json`
-9. `registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json`
-10. `registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json`
+7. `science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.md`
+8. `registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.json`
+9. `registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.json`
+10. `registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json`
+11. `registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json`
 
 Keine ΛCDM-, C1-V-, HZT-Full-, historische A0- oder Visualisierungsvariable wird als physische HZT-M0-Perturbationsvariable importiert.
 
@@ -61,95 +60,87 @@ Keine ΛCDM-, C1-V-, HZT-Full-, historische A0- oder Visualisierungsvariable wir
 
 ## 2. Feldraum vor Reduktion
 
-Die linearen Bulkvariablen werden weiterhin als
+Bulk:
 
 \[
-\Psi_{\rm bulk}=(h_{AB},\varphi,a_A)
+\Psi_{\rm bulk}=(h_{AB},\varphi,a_A).
 \]
 
-geführt. Auf dem gemeinsamen Interface kommen die bereits eingefrorenen bewegten Interfacevariablen hinzu, insbesondere
+Gemeinsames Interface:
 
 \[
-\Psi_\Sigma=(s,\xi,\tau_a)
+\Psi_\Sigma=(s,\xi,\tau_a),
 \]
 
-zusammen mit den aus den Vorgängerblöcken konstruierten induzierten Variationen.
+mit
 
-Dabei gilt:
-
-- \(h_{AB}\): metrische Perturbation,
+- \(h_{AB}\): metrischer Perturbation,
 - \(\varphi\): Bulk-Skalarperturbation,
 - \(a_A\): U(1)-Potentialperturbation,
 - \(s\): Kappenphasenperturbation,
-- \(\xi\): normale Interfaceverschiebung,
-- \(\tau_a\): tangentiale Interfaceverschiebung.
+- \(\xi\): normaler Interfaceverschiebung,
+- \(\tau_a\): tangentialem Einbettungsrepräsentanten.
 
-Die physikalische Interpretation dieser Variablen wird **nicht** vorausgesetzt.
+Diese Variablen sind kinematische lineare Daten und noch keine physikalischen Moden.
 
 ---
 
 ## 3. Konditionale analytische Domäne
 
-Sei lokal
+Lokal sei
 
 \[
-\mathcal M_s\sim M_4\times D_{2,s}
+\mathcal M_s\sim M_4\times D_{2,s},
+\qquad \chi\sim\chi+2\pi.
 \]
 
-mit \(D_{2,s}\) als regionalem zweidimensionalem Disk-Sektor und \(\chi\sim\chi+2\pi\). Der analytische Fallback-Bereich \(\mathcal D_{\rm cond}\) besteht aus glatten linearen Störungen, die folgende Bedingungen erfüllen:
+Der Fallback-Bereich \(\mathcal D_{\rm cond}\) enthält glatte lineare Störungen mit:
 
-1. **Tangentialer Support:**
-   - falls \(\partial M_4=\varnothing\): kompakter Support in \(M_4\);
-   - falls ein endlicher randtragender Slab benutzt wird: Support kompakt enthalten in \(\operatorname{int}M_4\).
-2. **Interne Periodizität:** alle Felder sind \(2\pi\)-periodisch in \(\chi\), modulo der bereits eingefrorenen U(1)-Patchstruktur.
-3. **Pole:** Regularität wird nicht durch naive Komponenten-Dirichletwerte definiert, sondern durch glatte Fortsetzbarkeit in lokalen kartesischen Koordinaten des jeweiligen Diskpols.
-4. **Interface:** die Zwei-Seiten-Gluing- und Moving-Interface-Kinematik der WP1C-Reihe wird erhalten.
-5. **Gauge-Abschluss:** zulässige Gaugeparameter müssen dieselben Support-, Periodizitäts-, Pole- und Gluing-Bedingungen erhalten.
+1. kompaktem tangentialen Support in randlosem \(M_4\), beziehungsweise \(\operatorname{supp}u\Subset\operatorname{int}M_4\) bei einem endlichen randtragenden Slab;
+2. \(2\pi\)-Periodizität in \(\chi\), modulo der eingefrorenen U(1)-Patchstruktur;
+3. Polregularität durch glatte kartesische Fortsetzbarkeit;
+4. Erhaltung des Zwei-Seiten-Gluings und der Moving-Interface-Kinematik;
+5. Abschluss unter **allen** zugelassenen Gaugegeneratoren: Bulk-Diffeomorphismus, U(1) und unabhängige intrinsische Interface-Reparametrisierung.
 
-Für einen skalaren Fouriermodus
+Für einen echten skalaren Fouriermodus
 
 \[
 f(r,\chi)=\sum_{n\in\mathbb Z}f_n(r)e^{in\chi}
 \]
 
-impliziert glatte Polregularität im einfachsten skalaren Fall
+gilt am glatten Pol als Kontrollfall
 
 \[
-f_n(r)=O(r^{|n|})
-\qquad(r\to0).
+f_n(r)=O(r^{|n|}),\qquad r\to0.
 \]
 
-[FIREWALL] Diese skalare Potenzregel darf nicht blind auf Tensor- oder One-Form-Komponenten übertragen werden; dort ist die glatte kartesische Fortsetzbarkeit die primäre Bedingung.
+[FIREWALL] Diese skalare Potenzregel wird nicht blind auf One-Form- oder Tensorkomponenten übertragen.
+
+Für die intrinsische Interface-Reparametrisierung wird **ein gemeinsamer** Generator \(\rho^a(y)\) auf dem bereits geglueten Interface benutzt. Er muss dieselben Support-, Periodizitäts-, Pol- und Gluingbedingungen erhalten.
 
 ---
 
 ## 4. Gaugegruppe und lineare Wirkung
 
-### 4.1 6D-Diffeomorphismen
+### 4.1 6D-Bulk-Diffeomorphismus
 
-Für einen infinitesimalen Vektor \(\zeta^A\) frieren wir die aktive lineare Konvention
-
-\[
-\delta_\zeta h_{AB}=2\bar\nabla_{(A}\zeta_{B)}
-\]
-
-und
+Für \(\zeta^A\) benutzen wir die aktive lineare Konvention
 
 \[
-\delta_\zeta\varphi=\zeta^A\partial_A\bar\phi
+\delta_\zeta h_{AB}=2\bar\nabla_{(A}\zeta_{B)},
 \]
-
-sowie
 
 \[
-\delta_\zeta a_A=\mathcal L_\zeta\bar A_A
+\delta_\zeta\varphi=\zeta^A\partial_A\bar\phi,
 \]
 
-für den reinen Diffeomorphismusanteil ein.
+\[
+\delta_\zeta a_A=\mathcal L_\zeta\bar A_A.
+\]
 
 ### 4.2 U(1)
 
-Mit Gaugeparameter \(\lambda\):
+Mit \(\lambda\):
 
 \[
 \delta_\lambda a_A=\partial_A\lambda,
@@ -157,7 +148,7 @@ Mit Gaugeparameter \(\lambda\):
 \delta_\lambda s=q_\sigma\lambda.
 \]
 
-Dadurch bleibt die bereits in WP1C4B2B verwendete Kappenkombination
+Daher ist
 
 \[
 \boxed{d_a=D_as-q_\sigma\mathcal A_a}
@@ -170,27 +161,27 @@ unter U(1) invariant:
 =D_a(q_\sigma\lambda)-q_\sigma D_a\lambda=0.
 \]
 
-**[BEWIESEN]** Dies ist eine exakte lineare U(1)-Invarianz bei konstantem \(q_\sigma\).
+[BEWIESEN] Diese U(1)-Invarianz gilt für konstantes \(q_\sigma\).
 
-### 4.3 Moving-interface-Diffeomorphismus
+Sie darf nicht mit intrinsischer Oberflächenkoordinateninvarianz verwechselt werden: unter einer Interface-Reparametrisierung transformiert \(d_a\) als Interface-One-Form-Perturbation.
 
-Für die Zerlegung des Gaugevektors am Interface
+### 4.3 Moving Interface unter Bulk-Diffeomorphismus
+
+Am Interface:
 
 \[
-\zeta^A|_\Sigma=\zeta_\perp N^A+\zeta_\parallel^a e_a{}^A
+\zeta^A|_\Sigma=\zeta_\perp N^A+\zeta_\parallel^a e_a{}^A.
 \]
 
-wird für die Embeddingstörung die kompensierende Transformation
+Für den Einbettungsrepräsentanten:
 
 \[
-\delta\xi=-\zeta_\perp,
+\delta_\zeta\xi=-\zeta_\perp,
 \qquad
-\delta\tau_a=-\zeta_{\parallel a}
+\delta_\zeta\tau_a=-\zeta_{\parallel a}.
 \]
 
-verwendet.
-
-Mit der bereits eingefrorenen Moving-Interface-Kombination
+Mit
 
 \[
 H_{ab}=p_{ab}+2\xi K_{ab}+2D_{(a}\tau_{b)}
@@ -199,26 +190,87 @@ H_{ab}=p_{ab}+2\xi K_{ab}+2D_{(a}\tau_{b)}
 und
 
 \[
-\delta p_{ab}=2D_{(a}\zeta_{\parallel b)}+2K_{ab}\zeta_\perp
+\delta_\zeta p_{ab}
+=2D_{(a}\zeta_{\parallel b)}+2K_{ab}\zeta_\perp
 \]
 
 folgt
 
 \[
-\delta H_{ab}=0.
+\boxed{\delta_\zeta H_{ab}=0}.
 \]
 
-**[BEWIESEN/KINEMATISCH]** \(H_{ab}\) ist unter dem gepaarten linearen Bulk-/Embedding-Diffeomorphismus invariant. Das ist keine Dynamik- oder Ghostaussage.
+[BEWIESEN/KINEMATISCH] Dies ist die Bulk-Diffeomorphismus-Kompensation der doubly-covariant Moving-Interface-Konstruktion.
+
+### 4.4 Unabhängige intrinsische Interface-Reparametrisierung
+
+WP1C3 hält ausdrücklich eine **zweite**, vom Bulk-Diffeomorphismus unabhängige Symmetrie fest:
+
+\[
+y^a\rightarrow y^a+\rho^a(y).
+\]
+
+Daher gilt zwingend
+
+\[
+\boxed{
+\rho^a\ \text{ist nicht mit}\ \zeta_\parallel^a\ \text{zu identifizieren}.
+}
+\]
+
+In der hier benutzten aktiven Repräsentantenkonvention schreiben wir
+
+\[
+\delta_\rho\tau^a=+\rho^a,
+\qquad
+\delta_\rho\xi=0.
+\]
+
+Bulkfelder erhalten dadurch keine zusätzliche Bulk-Gaugetransformation. Stattdessen werden die **Interface-Pullbackrepräsentanten** reparametrisiert. Für eine Perturbation \(t\) eines Hintergrund-Pullbacks \(\bar T\) gilt schematisch
+
+\[
+\boxed{
+\delta_\rho t=\mathcal L_\rho\bar T.
+}
+\]
+
+Insbesondere
+
+\[
+\delta_\rho H_{ab}
+=\mathcal L_\rho\bar h_{ab}
+=2D_{(a}\rho_{b)},
+\]
+
+\[
+\delta_\rho s=\rho^aD_a\bar\sigma,
+\]
+
+und für die gezogene Gauge-One-Form
+
+\[
+\delta_\rho\mathcal A_a=(\mathcal L_\rho\bar{\mathcal A})_a.
+\]
+
+Das bedeutet: \(H_{ab}\) ist unter Bulk-Diffeomorphismus gauge-invariant, aber unter einer **unabhängigen Änderung des Interface-Charts** transformiert es korrekt als Perturbation eines 5D-Tensors. Das ist kein Widerspruch, sondern genau die doubly-covariant Trennung der beiden Symmetrien.
+
+[BEWIESEN/AUS KANONISCHER VORGÄNGERSTRUKTUR] Bulk-Diffeomorphismus und intrinsische Interface-Reparametrisierung sind getrennte Gaugekanäle.
+
+[FALSIFIZIERT] Die frühere Kurzdefinition von \(\mathcal G_{\rm cond}\) nur aus Bulk-Diffeomorphismus und U(1) war unvollständig, solange \(\tau_a\) im Feldraum geführt wird.
+
+Eine reine tangentiale Chartmode ist daher
+
+`GAUGE_ORBIT_NOT_PHYSICAL_MODE`.
+
+Hinweis zur Vorzeichenkonvention: WP1C3 formuliert die unabhängige Oberflächenkoordinatensymmetrie geometrisch. Ein Wechsel zwischen passiver und aktiver Parametrisierung kann das Vorzeichen des Generatorparameters umkehren; die Unabhängigkeit der Symmetrien und ihre Aufnahme in den Quotienten sind davon unberührt.
 
 ---
 
-## 5. Was hier mit „S/V/T“ gemeint ist
+## 5. Bedeutung von „S/V/T“ in WP1D
 
-Der Begriff S/V/T ist in diesem Block **nicht** die physische kosmologische 3+1-Zerlegung. Eine solche Zerlegung benötigt eine physikalisch ausgewählte Zeitfunktion beziehungsweise räumliche Blätter und damit genau die Kausal-/ADM-Struktur, die laut ULSH-04 und WP1C4B2C noch fehlt.
+WP1D friert **keine physikalische kosmologische 3+1-S/V/T-Zerlegung** ein. Eine solche benötigt eine physikalische Zeitfunktion, räumliche Blätter und damit eine freigegebene Kausal-/ADM-Struktur.
 
-Stattdessen wird nur eine **konditionale 4D-kovariante Orbit-Buchhaltung** eingefroren.
-
-Seien \(\mu,\nu\) Indizes auf dem vierdimensionalen Faktor und \(i,j\in\{r,\chi\}\). Wo ein geeigneter 4D-York/Hodge-Projektor auf der deklarierten analytischen Domäne existiert, schreiben wir formal
+Erlaubt ist nur eine konditionale 4D-kovariante York/Hodge-Buchhaltung. Wo die benötigten Projektoren existieren:
 
 \[
 \begin{aligned}
@@ -247,68 +299,67 @@ D^\mu V^T_{\mu i}=0,
 D^\mu a^T_\mu=0.
 \]
 
-Die übrigen Komponenten \(h_{ij},\varphi,a_i,s,\xi\) sind 4D-kovariante Skalare.
+\(h_{ij},\varphi,a_i,s,\xi\) sind in dieser reinen 4D-kovarianten Buchhaltung Skalare.
 
-### Projektor-Firewall
-
-Diese Zerlegung ist nur dann eindeutig, wenn die benötigten elliptischen/hyperbolischen Inversen auf dem tatsächlich gewählten Bereich wohldefiniert sind. Nullräume, Killingvektoren, konstante Modi, Lorentzsche Green-Operator-Wahl und äußere Randbedingungen können die Zerlegung nicht-eindeutig machen.
-
-Daher wird **kein** globaler Operator \(D^{-2}\), kein retarded/advanced Green-Operator und kein physischer Modenprojektor eingefroren.
+Projektor-Firewall: Nullräume, Killingvektoren, konstante Modi, Lorentzsche Green-Operator-Wahl und äußere Randbedingungen können die Zerlegung nicht-eindeutig machen. Deshalb werden weder ein globales \(D^{-2}\) noch retarded/advanced Green-Operatoren oder physische Modenprojektoren eingefroren.
 
 Status:
 
-`CONDITIONAL_4D_COVARIANT_DECOMPOSITION_BOOKKEEPING_ONLY`
+`CONDITIONAL_4D_COVARIANT_DECOMPOSITION_BOOKKEEPING_ONLY`.
 
 ---
 
 ## 6. Gaugeparameter in derselben Buchhaltung
 
-Wo derselbe konditionale 4D-Projektor existiert, wird
+Wo derselbe konditionale 4D-Projektor existiert:
 
 \[
 \zeta_\mu=\zeta^T_\mu+D_\mu\zeta_L,
-\qquad
-D^\mu\zeta^T_\mu=0
+\qquad D^\mu\zeta^T_\mu=0,
 \]
 
-verwendet, zusammen mit \(\zeta_r\), \(\zeta_\chi\) und \(\lambda\).
+zusammen mit \(\zeta_r,\zeta_\chi,\lambda\) und zusätzlich dem **unabhängigen** Interfacegenerator \(\rho^a\).
 
-Damit ist sektoriell klar, welche Variablen durch reine Kinematik miteinander gemischt werden. Es wird jedoch **noch keine vollständige gauge-invariante physische Basis behauptet**, weil die globalen Projektoren und die Constraint-Klassifikation fehlen.
+Es wird keine vollständige physische gauge-invariante Basis behauptet.
 
 ---
 
 ## 7. Kinematischer Quotient versus physischer Phasenraum
 
-Definiere formal
+Korrekt lautet jetzt
 
 \[
+\boxed{
 \mathcal Q_{\rm kin}
-=\mathcal D_{\rm cond}/\mathcal G_{\rm cond},
+=\mathcal D_{\rm cond}/\mathcal G_{\rm cond}
+}
 \]
 
-wobei \(\mathcal G_{\rm cond}\) aus den Diffeomorphismus- und U(1)-Transformationen besteht, die \(\mathcal D_{\rm cond}\) in sich abbilden.
+mit \(\mathcal G_{\rm cond}\) erzeugt durch
 
-Dieser Quotient entfernt nur explizite Gauge-Redundanz auf der deklarierten analytischen Testdomäne.
+- Bulk-Diffeomorphismen \(\zeta^A\),
+- U(1)-Transformationen \(\lambda\),
+- unabhängige intrinsische Interface-Reparametrisierungen \(\rho^a\),
 
-Er ist **nicht** gleich dem physischen reduzierten Phasenraum, denn dafür müssten zusätzlich
+jeweils nur soweit sie \(\mathcal D_{\rm cond}\) in sich abbilden.
 
-1. eine Zeit-/ADM-Zerlegung,
+Die beiden Diffeomorphismusarten dürfen nicht identifiziert werden. Eine reine \(\rho^a\)-Chartverschiebung von \(\tau_a\) bleibt deshalb nicht als scheinbar physische Tangentialmode im Quotienten zurück.
+
+Dieser Quotient entfernt lediglich explizite kinematische Gauge-Redundanz. Er ist **nicht** der physische reduzierte Phasenraum. Dafür fehlen weiterhin:
+
+1. physische Zeit-/ADM-Zerlegung,
 2. kanonische Momenta,
 3. Primär-/Sekundärzwänge,
 4. Poisson-/Dirac-Algebra,
 5. first-/second-class Klassifikation,
-6. Gaugegeneratoren,
-7. zulässige globale Randbedingungen
-
-vollständig geschlossen sein.
-
-Diese Punkte sind im ULSH-04-Vertrag ausdrücklich noch offen.
+6. kanonisch abgeleitete Gaugegeneratoren,
+7. physische globale Randbedingungen.
 
 ---
 
 ## 8. Constraint-Elimination: exakte algebraische Bedingung
 
-Für eine quadratische Form mit behaltenen Variablen \(q\) und Kandidaten für nichtpropagierende Variablen \(n\)
+Für
 
 \[
 S^{(2)}
@@ -317,39 +368,20 @@ S^{(2)}
 +\frac12\langle n,Cn\rangle
 \]
 
-ist die formale Elimination nur zulässig, wenn \(C\) auf dem deklarierten Bereich nach korrekter Gauge-/Constraint-Behandlung invertierbar ist.
-
-Dann
+ist eine direkte Elimination von \(n\) nur zulässig, wenn \(C\) auf dem korrekt gauge-/constraint-reduzierten Bereich invertierbar ist:
 
 \[
-Cn+B^\dagger q=0
-\]
-
-und
-
-\[
+Cn+B^\dagger q=0,
+\qquad
 n_*=-C^{-1}B^\dagger q,
 \]
-
-sodass
 
 \[
 \boxed{
 S_{\rm red}^{(2)}
-=\frac12\langle q,
-(A-BC^{-1}B^\dagger)q\rangle.
+=\frac12\langle q,(A-BC^{-1}B^\dagger)q\rangle.
 }
 \]
-
-Der Operator
-
-\[
-A_{\rm Schur}=A-BC^{-1}B^\dagger
-\]
-
-ist das Schur-Komplement.
-
-### Nullraum-No-Go
 
 Falls
 
@@ -357,119 +389,87 @@ Falls
 \ker C\neq\{0\},
 \]
 
-ist die direkte Formel mit \(C^{-1}\) unzulässig. Ein Nullraum kann insbesondere Gaugefreiheit, first-class Constraints oder eine echte degenerierte Dynamik signalisieren.
+ist die direkte Inversion unzulässig. Ein Nullraum kann Gaugefreiheit, first-class Constraints, degenerierte Dynamik oder ungelöste Randmoden anzeigen.
 
-Daher gilt:
-
-\[
-\boxed{
-\text{singulärer Auxiliary-Block}
-\not\Rightarrow
-\text{„Variable einfach eliminieren“}
-}
-\]
-
-und ebenso
+Daher
 
 \[
 \boxed{
-\text{formales Schur-Komplement}
-\not\Rightarrow
-\text{physische kinetische Matrix}.
+\text{singulärer Auxiliary-Block}\not\Rightarrow\text{direkte Elimination}
 }
 \]
 
-**[BEWIESEN/LINEARE ALGEBRA]** Die Invertierbarkeit des Auxiliary-Blocks ist eine notwendige Voraussetzung für diese direkte Eliminationsformel.
+und
+
+\[
+\boxed{
+\text{formales Schur-Komplement}\not\Rightarrow\text{physische kinetische Matrix}.
+}
+\]
 
 ---
 
-## 9. Warum die eigentliche Constraint-Elimination blockiert bleibt
+## 9. Warum die physische Constraint-Elimination blockiert bleibt
 
-Der ULSH-04-Kanon verlangt eine eindeutige Zeitwahl, ADM-/Hamilton-Zerlegung, Primär-/Sekundärzwänge und Poisson-/Dirac-Algebra. Diese Kette ist noch nicht geschlossen.
+ULSH-04 verlangt eine eindeutige Zeitwahl, ADM-/Hamilton-Zerlegung, kanonische Variablen/Momenta, Primär-/Sekundärzwänge und die Poisson-/Dirac-Algebra.
 
-Zusätzlich ist
+Zusätzlich gilt
 
 `PHYSICAL_BACKGROUND = NOT_ESTABLISHED`.
 
-Damit ist nicht festgelegt, welche Koordinate beziehungsweise welche Hyperflächen physikalisch zeitartig/spacelike sind und welche Variablen tatsächlich Lagrange-Multiplikatoren, Constraints oder propagierende Felder darstellen.
+Damit ist nicht physikalisch festgelegt, welche Hyperflächen zeit- beziehungsweise raumartig sind und welche Variablen tatsächlich Lagrange-Multiplikatoren, Constraints oder propagierende Felder darstellen.
 
 Folglich:
 
-```text
-WP1D_constraint_elimination = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING
-```
+`WP1D_constraint_elimination = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING`.
 
-[FALSIFIZIERT/BLOCKIERT] Jeder jetzige physische DOF-Count.
-
-[FALSIFIZIERT/BLOCKIERT] Jede jetzige Identifikation einer „kinetischen Matrix der physischen Moden“.
-
-[FALSIFIZIERT/BLOCKIERT] Jede Ghostfreiheitsaussage.
+[FALSIFIZIERT/BLOCKIERT] Physischer DOF-Count.  
+[FALSIFIZIERT/BLOCKIERT] Identifikation einer physischen kinetischen Matrix.  
+[FALSIFIZIERT/BLOCKIERT] Ghostfreiheitsaussage.
 
 ---
 
-## 10. U(1)- und Embedding-Kontrollinvarianten
+## 10. Harte kinematische Kontrollen
 
-Dieser Block erlaubt zwei harte kinematische Kontrollen unabhängig von der noch offenen Constraintdynamik:
-
-### C1 — Kappen-U(1)
+**C1 — U(1):**
 
 \[
-d_a=D_as-q_\sigma\mathcal A_a
+d_a=D_as-q_\sigma\mathcal A_a,
+\qquad \delta_\lambda d_a=0.
 \]
 
-bleibt invariant unter
+**C2 — Bulk-Diffeomorphismus / Moving Interface:**
 
 \[
-s\mapsto s+q_\sigma\lambda,
-\qquad
-\mathcal A_a\mapsto\mathcal A_a+D_a\lambda.
+\delta_\zeta H_{ab}=0.
 \]
 
-### C2 — induzierte Moving-Interface-Metrik
+**C3 — Intrinsische Interface-Reparametrisierung:** \(\rho^a\) ist ein eigener Gaugegenerator; \(\rho^a\neq\zeta_\parallel^a\) als Gaugeidentität. Eine reine tangentiale Chartmode gehört zu \(\mathcal G_{\rm cond}\) und ist kein physischer Kinematikmodus.
 
-\[
-H_{ab}=p_{ab}+2\xi K_{ab}+2D_{(a}\tau_{b)}
-\]
+**C4 — Polregularität:** skalare Fourierkontrolle \(f_n=O(r^{|n|})\), ohne unzulässige Übertragung auf Tensor-/One-Form-Komponenten.
 
-bleibt invariant unter der gekoppelten Transformation
+**C5 — Schur-Komplement:** nur bei invertierbarem Auxiliary-Block.
 
-\[
-\delta p_{ab}=2D_{(a}\zeta_{\parallel b)}+2K_{ab}\zeta_\perp,
-\quad
-\delta\xi=-\zeta_\perp,
-\quad
-\delta\tau_a=-\zeta_{\parallel a}.
-\]
-
-Beide Kontrollen sind rein kinematisch.
+**C6 — Singulärer Auxiliary-Block:** muss fail-closed behandelt werden.
 
 ---
 
 ## 11. Dimensionscheck
 
-Die Gauge-kovariante Kappenableitung
+\(d_a\) ist per Definition ein wohldefinierter Interface-Kovektor. Einzelne Koordinatenkomponenten können wegen der dimensionslosen Winkelkoordinate \(\chi\) unterschiedliche Koordinatendimensionen tragen. Eindeutig ist dagegen
 
 \[
-d_a=D_as-q_\sigma\mathcal A_a
+X=h^{ab}d_a d_b,
 \]
 
-ist per Definition ein wohldefinierter Interface-Kovektor. Daher müssen die beiden Summanden in jeder verwendeten Koordinatenkomponente dieselbe Dimension besitzen. Einzelne Komponenten können wegen der dimensionslosen Winkelkoordinate \(\chi\) andere Koordinatendimensionen tragen als Komponenten entlang dimensionsbehafteter Tangentialkoordinaten; ein komponentenweises pauschales Massendimensionslabel ist deshalb nicht invariant.
-
-Die skalare Kombination der Kappenwirkung ist dagegen eindeutig:
-
-\[
-X=d_a d^a=h^{ab}d_a d_b,
-\]
-
-und im eingefrorenen M1-Vertrag gilt
+mit im M1-Vertrag
 
 \[
 [Z_\sigma]=M^3,
-\qquad
-[X]=M^2,
+\qquad [X]=M^2,
 \]
 
-sodass
+also
 
 \[
 [Z_\sigma X]=M^5,
@@ -477,54 +477,48 @@ sodass
 
 wie für eine 5D-lokalisierte Lagrangedichte erforderlich.
 
-**[BEWIESEN/DIMENSIONELL]** Der Gauge-invariante Kappensektor bleibt dimensionskonsistent, ohne eine koordinatenabhängige Komponentendimension als neue Theorieannahme einzufrieren.
-
 ---
 
 ## 12. Regime- und Grenzfallprüfung
 
-### U(1)-Decoupling control
-
-Im deklarierten Kontrollgrenzfall \(a_F\to0\) wird \(Z_F\to1\). Das vereinfacht Skalar-Maxwell-Mischungen, ändert aber weder die Diffeomorphismusstruktur noch die Notwendigkeit der Constraintklassifikation.
-
-### Fourier-Nullmode \(n=0\)
-
-Der interne Nullmode ist zulässig, aber gerade dort können Projektor- und Gauge-Nullräume besonders relevant sein. Er darf nicht durch eine formale Division durch \(n\) eliminiert werden.
-
-### Große |n|
-
-Große interne Fourierzahl verschärft die radialen Pol-Regularitätsbedingungen. Sie erzeugt aber ohne physische Hintergrundlösung noch kein freigegebenes KK-Spektrum.
-
-### 4D-Projektor-Nullräume
-
-Konstante Skalare, Killingvektoren oder andere Kernelmoden müssen separat behandelt werden. Eine Pseudoinverse ist eine zusätzliche mathematische Wahl und wird hier nicht als physische Vorschrift eingefroren.
+- \(a_F\to0\): Maxwell-Skalar-Decoupling-Kontrolle; schließt weder Constraints noch physische S/V/T.
+- interner Nullmode \(n=0\): bleibt zulässig; keine Division durch \(n\).
+- große \(|n|\): stärkere Polregularität, aber kein freigegebenes KK-Spektrum.
+- 4D-Projektor-Nullräume: konstante Skalare, Killingvektoren und andere Kernelmoden müssen separat behandelt werden; keine stillschweigende Pseudoinverse.
+- reine intrinsische Chartmode: bleibt Gaugeorbit und darf in einem späteren Kernel-/DOF-Audit nicht als zusätzliche Tangentialanregung gezählt werden.
 
 ---
 
 ## 13. Nicht zulässige Schlussfolgerungen
 
-Dieser Vertrag beweist **nicht**:
+Dieser Vertrag beweist nicht:
 
 - einen freigegebenen 6D-Hintergrund,
 - eine physische Zeitwahl,
 - eine physische 3+1-S/V/T-Zerlegung,
 - einen global eindeutigen York/Hodge-Projektor,
-- vollständige Gaugeinvarianten,
+- vollständige physische Gaugeinvarianten,
 - geschlossene Dirac-Bergmann-Constraints,
 - einen physischen Freiheitsgrad-Count,
 - die physische kinetische Matrix,
 - Ghost-, Gradient- oder Tachyonfreiheit,
-- einen Moden- oder KK-Spektrumsclaim,
+- ein Moden-/KK-Spektrum,
 - eine 6D→4D-Perturbationsmap,
-- \(\Phi,\Psi,\Delta_m\) als bereits hergeleitete HZT-Variablen,
+- \(\Phi,\Psi,\Delta_m\) als hergeleitete HZT-Variablen,
 - \(\mu,\eta,\Sigma\), Growth oder Lensing,
 - K1-D oder K1-E.
+
+Zusätzlich verboten ist die Identifikation
+
+\[
+\rho^a\equiv\zeta_\parallel^a
+\]
+
+als vermeintlich einzige gemeinsame Gaugefreiheit. WP1C3 behandelt diese Symmetrien ausdrücklich getrennt.
 
 ---
 
 ## 14. Gate- und Firewallstatus
-
-Unverändert:
 
 ```text
 FM-G0                     OPEN
@@ -540,20 +534,20 @@ physical_gate_effect      NONE
 physical_evidence_effect  NONE
 ```
 
-Der maximale Abschlussstatus dieses Blocks lautet:
+Maximaler Abschlussstatus:
 
-`CONDITIONAL_KINEMATIC_GAUGE_REDUCTION_DOMAIN_FROZEN_CONSTRAINT_ELIMINATION_BLOCKED`
+`CONDITIONAL_KINEMATIC_GAUGE_REDUCTION_DOMAIN_FROZEN_CONSTRAINT_ELIMINATION_BLOCKED`.
 
 ---
 
 ## 15. Nächster zulässiger analytischer Schritt
 
-Der nächste sachlich kleinste Schritt ist **nicht** eine Solverausführung, sondern die komponentenweise lineare Gauge-Matrix auf der deklarierten WP1D-Domäne:
+Der nächste Schritt bleibt rein analytisch:
 
 1. alle Bulk- und Interfacevariablen in der 4D-kovarianten Buchhaltung registrieren;
-2. Diffeomorphismus- und U(1)-Transformationen als linearen Operator \(G\) explizit komponentisieren;
-3. Kernel und cokernel der konditionalen Projektoren separat ausweisen;
-4. nur kinematische Gaugeinvarianten konstruieren, die ohne Zeit-/Constraintwahl bewiesen werden können;
-5. Übergabeschnittstelle zu ULSH-04 definieren, ohne Constraints zu erfinden.
+2. den linearen Gaugeoperator \(G\) mit **getrennten Spalten** für \(\zeta^A\), \(\lambda\) und \(\rho^a\) komponentisieren;
+3. Kernel und Cokernel der konditionalen Projektoren separat ausweisen;
+4. nur jene kinematischen Gaugeinvarianten konstruieren, die ohne physische Zeit-/Constraintwahl bewiesen werden können;
+5. die Übergabeschnittstelle zu ULSH-04 definieren, ohne Constraints zu erfinden.
 
-Eine physische Constraint-Elimination bleibt bis zur ULSH-04-Schließung und einer freigegebenen Background-/Zeitstruktur blockiert.
+Eine physische Constraint-Elimination bleibt bis zur ULSH-04-Schließung, einem freigegebenen Background und einer kompatiblen physischen Randdomäne blockiert.
