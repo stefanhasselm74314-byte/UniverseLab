@@ -45,7 +45,7 @@
     "tangential_corner_acceleration_split": "C2_tc=C2_tc,chart+C2_tc,acc, where C2_tc,acc is the path-acceleration-linear DS[v] contribution in the tangential/corner channel",
     "declared_chart_integrand": "B2_chart=m1*B1-0.5*(DeltaR_h^ab*H_ab+R_h^ab*H2_bil,ab)-(DeltaR_phi*Phi_Sigma+R_phi*Phi2_bil)-(DeltaR_A^a*Acal_a+R_A^a*Acal2_bil,a)+(DeltaR_sigma*s+R_sigma*s2_bil)+(xi*DeltaR_perp+xi2_bil*R_perp_direct)",
     "declared_chart_quadratic_coefficient": "S_boundary,chart^(2)=0.5*int sqrt(-hbar)*B2_chart+0.5*C2_tc,chart",
-    "critical_firewall": "PHYSICAL_BACKGROUND is not established, so residual-proportional U2_bil terms and bilinear tangential/corner contributions may not be dropped; only the explicitly identified path-acceleration contribution is removed by the declared-chart Hessian subtraction"
+    "critical_firewall": "PHYSICAL_BACKGROUND is not established, so residual-proportional U2_bil terms may not be dropped; bilinear tangential/corner contributions may likewise not be dropped; only the explicitly identified path-acceleration contribution is removed by the declared-chart Hessian subtraction"
   },
   "intrinsic_cap_chain_rule": {
     "normalization": "C2, D1 and C_cap^(2) are coefficients after factoring out sqrt(-hbar); the raw unexpanded density coefficient equals sqrt(-hbar) times these normalized coefficients",
