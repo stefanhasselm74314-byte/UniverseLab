@@ -43,12 +43,20 @@ B_1
 +\xi\mathcal R_\perp .
 \]
 
-Somit
+Somit lautet der explizite gemeinsame Interface-Residualkanal
 
 \[
-\delta S_\Sigma^{(1)}
+\delta S_{\Sigma,\mathrm{res}}^{(1)}
 =\int_\Sigma\sqrt{-\bar h}\,B_1.
 \]
+
+WP1C4B1D führt daneben Bulk-Euler-Lagrange-, Tangential- und gegebenenfalls Corner-Kanäle mit. Für die hier relevante Randkettenregel bezeichnen wir den additiven Tangential-/Corner-Anteil der ersten Variation entlang des Pfads mit
+
+\[
+\mathcal C_{1,\mathrm{tc}}(\epsilon).
+\]
+
+Er wird **nicht** stillschweigend auf null gesetzt.
 
 Für die erste Maßvariation gilt
 
@@ -83,10 +91,10 @@ Die Residuen besitzen
 =\bar{\mathcal R}+\epsilon\Delta\mathcal R+O(\epsilon^2).
 \]
 
-Direktes Differenzieren von `sqrt(-h) B1` liefert
+Direktes Differenzieren des expliziten Residualkanals `sqrt(-h) B1` liefert
 
 \[
-\frac{d^2S_\Sigma}{d\epsilon^2}\Big|_0
+\frac{d^2S_{\Sigma,\mathrm{res}}}{d\epsilon^2}\Big|_0
 =\int_\Sigma\sqrt{-\bar h}\,B_{2,\mathrm{path}}
 \]
 
@@ -108,12 +116,34 @@ B_{2,\mathrm{path}}={}&m_1B_1
 \end{aligned}
 \]
 
-Der Koeffizient von `epsilon^2` in der Pfadentwicklung ist
+Für die **vollständige** zweite Randvariation muss zusätzlich der von WP1C4B1D mitgeführte Tangential-/Corner-Kanal differenziert werden. Definiere
 
 \[
-S_{\Sigma,\mathrm{path}}^{(2)}
-=\frac12\int_\Sigma\sqrt{-\bar h}\,B_{2,\mathrm{path}}.
+\mathcal C_{2,\mathrm{tc}}
+:=\frac{d}{d\epsilon}\mathcal C_{1,\mathrm{tc}}(\epsilon)\Big|_0.
 \]
+
+Dann lautet die vollständige Randgleichung
+
+\[
+\boxed{
+\frac{d^2S_{\Sigma,\mathrm{boundary}}}{d\epsilon^2}\Big|_0
+=\int_\Sigma\sqrt{-\bar h}\,B_{2,\mathrm{path}}
++\mathcal C_{2,\mathrm{tc}}
+}.
+\]
+
+Der Koeffizient von `epsilon^2` in der Pfadentwicklung ist folglich
+
+\[
+\boxed{
+S_{\Sigma,\mathrm{boundary,path}}^{(2)}
+=\frac12\int_\Sigma\sqrt{-\bar h}\,B_{2,\mathrm{path}}
++\frac12\mathcal C_{2,\mathrm{tc}}
+}.
+\]
+
+`B_{2,path}` ist damit der exakte lokale Interface-Residualbeitrag; die vollständige Randvariation enthält zusätzlich `C_{2,tc}`. Es wird hier **keine Annahme** gemacht, dass Tangential- oder Corner-Kanäle verschwinden. Ein Verschwinden darf nur unter separat festgelegten Rand-/Support-/Topologiebedingungen eingesetzt werden.
 
 Diese Gleichung ist nur die Kettenregel; keine EOM und keine Junctionbedingung wurden eingesetzt.
 
@@ -140,10 +170,10 @@ U_2=U_{2,\mathrm{bil}}[u,u]+U_{2,\mathrm{acc}}[v].
 
 `U2_bil` enthält geometrisch nichtlineare zweite Pullbacks/induzierte Größen, die bereits durch die **erste** Konfigurationstangente erzeugt werden. `U2_acc` ist dagegen linear in der frei gewählten zweiten Pfadtangente `v` einschließlich des zugehörigen zweiten Embedding-Generatoranteils.
 
-Damit ist
+Damit ist für den expliziten Residualkanal
 
 \[
-\frac12DS[v]
+\frac12DS_{\mathrm{res}}[v]
 =\frac12\int_\Sigma\sqrt{-\bar h}
 \left[
 -\frac12\mathcal R_h^{ab}H_{2,\mathrm{acc},ab}
@@ -151,12 +181,10 @@ Damit ist
 -\mathcal R_A^a\mathcal A_{2,\mathrm{acc},a}
 +\mathcal R_\sigma s_{2,\mathrm{acc}}
 +\xi_{2,\mathrm{acc}}\mathcal R_\perp
-\right]
+\right].
 \]
 
-plus die entsprechenden Bulk-/Tangentialkanäle.
-
-Nach **nur dieser** Subtraktion lautet der Boundary-Chart-Hessian-Integrand
+Die Tangential-/Corner-Kanäle besitzen analog einen acceleration-linearen Anteil, den wir mit `C_{2,tc,acc}` bezeichnen. Nach **nur** der jeweiligen `DS[v]`-Subtraktion lautet der Boundary-Chart-Hessian-Integrand des expliziten Residualkanals
 
 \[
 \begin{aligned}
@@ -174,6 +202,23 @@ B_{2,\mathrm{chart}}={}&m_1B_1
 \end{aligned}
 \]
 
+Mit
+
+\[
+\mathcal C_{2,\mathrm{tc,chart}}
+:=\mathcal C_{2,\mathrm{tc}}-\mathcal C_{2,\mathrm{tc,acc}}
+\]
+
+ist der vollständige deklarierte Boundary-Chart-Koeffizient
+
+\[
+\boxed{
+S_{\Sigma,\mathrm{boundary,chart}}^{(2)}
+=\frac12\int_\Sigma\sqrt{-\bar h}\,B_{2,\mathrm{chart}}
++\frac12\mathcal C_{2,\mathrm{tc,chart}}
+}.
+\]
+
 ### Zentrale Firewall
 
 `PHYSICAL_BACKGROUND=NOT_ESTABLISHED`. Daher darf man **nicht** alle Terme proportional zu `R` verwerfen. Nur der nach C4B0 eindeutig als `DS[v]` identifizierte Acceleration-Anteil wird bei der deklarierten Chart-Hesse subtrahiert.
@@ -184,7 +229,7 @@ Ein Term wie
 \mathcal R_h^{ab}H_{2,\mathrm{bil},ab}
 \]
 
-kann off shell Teil der tatsächlichen zweiten Fréchet-Variation sein und bleibt erhalten.
+kann off shell Teil der tatsächlichen zweiten Fréchet-Variation sein und bleibt erhalten. Dasselbe Prinzip gilt für nichtverschwindende bilineare Tangential-/Corner-Beiträge.
 
 ## 5. Intrinsische Kappenwirkung: exakte Chain Rule
 
@@ -389,9 +434,9 @@ WP1_full_boundary_hessian                 = NOT_CLOSED_COMPONENT_OPERATOR_AND_SY
 
 ## 9. Was bewiesen ist
 
-**[BEWIESEN]** Exakte zweite Chain Rule der gesamten C4B1D-Interfacebasis.
+**[BEWIESEN]** Exakte zweite Chain Rule der expliziten C4B1D-Interface-Residualbasis; die zusätzlich möglichen Tangential-/Corner-Kanäle sind in der vollständigen Randgleichung als `C_{2,tc}` explizit erhalten und werden nicht wegangenommen.
 
-**[BEWIESEN]** Saubere Trennung `U2_bil + U2_acc` im C4B0-Chart.
+**[BEWIESEN]** Saubere Trennung `U2_bil + U2_acc` im C4B0-Chart einschließlich der analogen Trennung eines gegebenenfalls nichtverschwindenden Tangential-/Corner-Kanals.
 
 **[BEWIESEN]** Die bewegte intrinsische Kappenwirkung erfüllt
 
@@ -404,6 +449,8 @@ und nicht im Allgemeinen nur `C2[Y1]`.
 **[BEWIESEN]** Beschleunigte Moving-GHY-Kontrolle trennt den `chi*S_g'`-Pfadterm vom bilinearen `xi^2*S_g''`-Chartterm.
 
 **[OFFEN]** Vollständige komponentisierte `Delta R_sigma`- und `Delta R_perp`-Operatoren.
+
+**[OFFEN]** Explizite komponentenweise Auswertung nichtverschwindender Tangential-/Corner-Hessian-Kanäle für Geometrien, in denen sie nicht durch separat deklarierte Rand-/Supportbedingungen entfallen.
 
 **[OFFEN]** Gemischte Zwei-Parameter-Symmetrieprüfung des vollständigen gekoppelten Boundary-Hessians.
 
