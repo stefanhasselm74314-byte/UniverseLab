@@ -9,10 +9,26 @@
   "physical_gate_effect": "NONE",
   "physical_evidence_effect": "NONE",
   "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
+    "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.md"
+  ],
   "successor_assignment": {
     "id": "ULSH-05/WP1D1",
     "status": "FROZEN_BY_THIS_SUCCESSOR_CONTRACT",
     "retroactively_claimed_from_predecessor": false
+  },
+  "inherited_conditional_domain": {
+    "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
+    "name": "D_cond",
+    "status": "FROZEN_CONDITIONAL",
+    "tangential_support_boundaryless_M4": "compact support in M4",
+    "tangential_support_finite_boundary_M4": "support compactly contained in int(M4)",
+    "chi_periodicity": "2pi periodic modulo the frozen U1 patch contract",
+    "pole_regularity": "smooth Cartesian extendibility at each disk pole; do not impose naive componentwise scalar power laws on tensors or one-forms",
+    "interface": "preserve two-side gluing and moving-interface kinematics from WP1C",
+    "gauge_closure": "bulk diffeomorphism, U1, and independent intrinsic interface-reparameterization parameters must each map D_cond into itself",
+    "physical_release": false
   },
   "gauge_operator": {
     "form": "G=(G_zeta,G_lambda,G_rho)",
@@ -63,12 +79,13 @@
   },
   "quotient": {
     "definition": "Q_kin=D_cond/im G",
+    "domain_source": "inherited_conditional_domain",
     "physical_phase_space_equivalence": false
   },
   "ulsh04_handoff": {
     "status": "DEFINED_FAIL_CLOSED",
     "inputs": [
-      "conditional field/domain contract",
+      "inherited WP1D D_cond field/domain contract",
       "G_zeta G_lambda G_rho separated operator",
       "bulk/interface reparameterization distinction",
       "projector and zero-mode registry",
@@ -95,6 +112,7 @@
     "WP1D1_full_gauge_invariant_basis": "NOT_CLAIMED",
     "WP1D1_closed_range_of_G": "NOT_PROVEN",
     "WP1D1_Fredholm_property_of_G": "NOT_PROVEN",
+    "WP1D_analytic_field_domain": "FROZEN_CONDITIONAL",
     "WP1D_constraint_elimination": "BLOCKED",
     "WP1D_physical_3plus1_SVT": "NOT_RELEASED",
     "WP1D_physical_DOF_count": "NOT_RELEASED",
@@ -115,6 +133,7 @@
     "Componentizing G is not a physical gauge fixing.",
     "Columnwise invariance is not full-G invariance.",
     "Projector zero modes are not automatically gauge modes.",
+    "D_cond is inherited as a conditional analytic domain and is not a released physical perturbation boundary domain.",
     "Pairing/domain freeze alone does not identify the ordinary cokernel codomain/im G with ker G^dagger; closed range is additionally required, otherwise only the reduced cokernel codomain/closure(im G) is represented by the adjoint kernel.",
     "ker G, coker G and physical DOF are not counted before background/domain/ULSH-04 closure.",
     "WP1D_physical_3plus1_SVT remains NOT_RELEASED; no physical time/ADM/SVT reduction is implied.",
