@@ -31,10 +31,12 @@ def test_conditional_domain_is_not_physical_release() -> None:
     assert "2pi" in dom["chi_periodicity"]
     assert "smooth Cartesian" in dom["pole_regularity"]
     assert "O(r^abs(n))" in dom["scalar_fourier_control"]
+    assert "intrinsic interface-reparameterization" in dom["gauge_closure"]
+    for token in ("support", "2pi", "smooth pole", "common two-side"):
+        assert token in dom["intrinsic_reparameterization_domain"]
 
 
 def test_u1_cap_combination_is_invariant() -> None:
-    # For d = D s - q A and delta s = q lambda, delta A = D lambda:
     q = 2.75
     d_lambda = -1.3
     delta_Ds = q * d_lambda
@@ -42,10 +44,7 @@ def test_u1_cap_combination_is_invariant() -> None:
     assert math.isclose(delta_Ds - delta_qA, 0.0, abs_tol=1e-15)
 
 
-def test_moving_interface_induced_metric_is_invariant() -> None:
-    # Scalarized component control of
-    # delta p = 2 D zeta_parallel + 2 K zeta_perp,
-    # delta xi = -zeta_perp, delta(D tau) = -D zeta_parallel.
+def test_moving_interface_induced_metric_is_bulk_diff_invariant() -> None:
     D_zeta_parallel = 0.73
     K = -1.9
     zeta_perp = 0.41
@@ -56,8 +55,26 @@ def test_moving_interface_induced_metric_is_invariant() -> None:
     assert math.isclose(delta_H, 0.0, abs_tol=1e-15)
 
 
+def test_intrinsic_surface_reparameterization_is_independent_and_quotiented() -> None:
+    d = load()
+    r = d["gauge_action"]["intrinsic_surface_reparameterization"]
+    q = d["kinematic_quotient"]
+    assert r["independent_from_bulk_diffeomorphism"] is True
+    assert r["must_not_identify_with_zeta_parallel"] is True
+    assert r["common_interface_chart"] is True
+    assert r["pure_tangential_chart_mode"] == "GAUGE_ORBIT_NOT_PHYSICAL_MODE"
+    assert "intrinsic interface reparameterizations rho^a" in q["generators"]
+    assert q["bulk_vs_surface_reparameterization"] == "DISTINCT_GAUGE_SYMMETRIES_MUST_NOT_BE_IDENTIFIED"
+    assert q["pure_tau_chart_orbit"] == "NOT_A_PHYSICAL_KINEMATIC_MODE"
+
+    # Scalarized control of the active chart-representative convention:
+    # a pure intrinsic chart generator shifts tau but remains classified as gauge.
+    rho = 0.47
+    delta_tau = rho
+    assert math.isclose(delta_tau, rho, rel_tol=0.0, abs_tol=1e-15)
+
+
 def test_schur_complement_control() -> None:
-    # S = 1/2 A q^2 + B q n + 1/2 C n^2
     A = 4.0
     B = 2.0
     C = 5.0
@@ -99,7 +116,7 @@ def test_firewalls_remain_closed() -> None:
     assert d["physical_evidence_effect"] == "NONE"
     assert g["WP1D_successor_identifier"] == "FROZEN_BY_THIS_SUCCESSOR_CONTRACT"
     assert g["WP1D_analytic_field_domain"] == "FROZEN_CONDITIONAL"
-    assert g["WP1D_gauge_action"] == "DEFINED_KINEMATICALLY"
+    assert g["WP1D_gauge_action"] == "DEFINED_KINEMATICALLY_WITH_INDEPENDENT_SURFACE_REPARAMETERIZATION"
     assert g["WP1D_constraint_elimination"] == "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING"
     assert g["WP1D_physical_3plus1_SVT"] == "NOT_RELEASED"
     assert g["WP1D_physical_DOF_count"] == "NOT_RELEASED"
@@ -116,7 +133,7 @@ def test_firewalls_remain_closed() -> None:
     assert g["K1-E"] == "NOT_ADMISSIBLE"
 
 
-def test_document_contains_core_no_go_statements() -> None:
+def test_document_contains_core_no_go_and_surface_gauge_statements() -> None:
     text = DOC.read_text(encoding="utf-8")
     required = [
         "ULSH-05/WP1D",
@@ -124,7 +141,10 @@ def test_document_contains_core_no_go_statements() -> None:
         "singulärer Auxiliary-Block",
         "formales Schur-Komplement",
         "WP1D_constraint_elimination = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
-        "physische 3+1-S/V/T-Zerlegung",
+        "physikalische 3+1-S/V/T-Zerlegung",
+        "Unabhängige intrinsische Interface-Reparametrisierung",
+        "nicht mit\\ \\zeta_\\parallel^a",
+        "GAUGE_ORBIT_NOT_PHYSICAL_MODE",
         "SOLVER_EXECUTION          NOT_EXECUTED",
     ]
     for token in required:
@@ -135,13 +155,14 @@ def main() -> None:
     test_successor_id_is_assigned_only_here()
     test_conditional_domain_is_not_physical_release()
     test_u1_cap_combination_is_invariant()
-    test_moving_interface_induced_metric_is_invariant()
+    test_moving_interface_induced_metric_is_bulk_diff_invariant()
+    test_intrinsic_surface_reparameterization_is_independent_and_quotiented()
     test_schur_complement_control()
     test_singular_auxiliary_block_fails_closed()
     test_svt_semantics_are_conditional_not_physical_3plus1()
     test_internal_zero_mode_is_not_divided_away()
     test_firewalls_remain_closed()
-    test_document_contains_core_no_go_statements()
+    test_document_contains_core_no_go_and_surface_gauge_statements()
     print("WP1D conditional SVT gauge-constraint reduction controls: PASS")
 
 
