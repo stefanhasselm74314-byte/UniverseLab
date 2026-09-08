@@ -51,7 +51,13 @@
     "projector_zero_mode_implies_gauge_mode": false
   },
   "cokernel_registry": {
-    "formal_relation": "coker G equivalent to ker G^dagger only after pairing/domain freeze",
+    "ordinary_cokernel": "codomain(G)/im G",
+    "adjoint_identity_after_pairing_domain_freeze": "ker G^dagger=(closure(im G))^perp",
+    "ordinary_cokernel_equals_adjoint_kernel_requires": "CLOSED_RANGE_OF_G_OR_STRONGER_FREDHOLM_SETTING",
+    "reduced_cokernel": "codomain(G)/closure(im G)",
+    "reduced_cokernel_relation": "after Hilbert pairing/domain freeze the reduced cokernel is represented by ker G^dagger",
+    "closed_range_status": "NOT_PROVEN",
+    "fredholm_status": "NOT_PROVEN",
     "G_dagger_frozen": false,
     "count": "NOT_AVAILABLE"
   },
@@ -67,7 +73,8 @@
       "bulk/interface reparameterization distinction",
       "projector and zero-mode registry",
       "columnwise proven kinematic invariants",
-      "open global-domain and background dependencies"
+      "open global-domain and background dependencies",
+      "closed-range/Fredholm status of G remains unproven"
     ],
     "required_outputs_before_physical_reduction": [
       "physical time/ADM split",
@@ -85,12 +92,15 @@
     "WP1D1_projector_kernel_registry": "DEFINED_BACKGROUND_DEPENDENT",
     "WP1D1_full_projector_inverse": "NOT_FROZEN",
     "WP1D1_full_gauge_invariant_basis": "NOT_CLAIMED",
+    "WP1D1_closed_range_of_G": "NOT_PROVEN",
+    "WP1D1_Fredholm_property_of_G": "NOT_PROVEN",
     "WP1D_constraint_elimination": "BLOCKED",
     "WP1D_physical_DOF_count": "NOT_RELEASED",
     "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
     "WP1_physical_boundary_domain": "BLOCKED",
     "WP1_full_quadratic_action": "NOT_CLOSED",
     "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "FM-G0": "OPEN",
     "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
@@ -103,7 +113,9 @@
     "Componentizing G is not a physical gauge fixing.",
     "Columnwise invariance is not full-G invariance.",
     "Projector zero modes are not automatically gauge modes.",
+    "Pairing/domain freeze alone does not identify the ordinary cokernel codomain/im G with ker G^dagger; closed range is additionally required, otherwise only the reduced cokernel codomain/closure(im G) is represented by the adjoint kernel.",
     "ker G, coker G and physical DOF are not counted before background/domain/ULSH-04 closure.",
+    "FM-G0 remains OPEN; this successor does not close any forward-map gap.",
     "No ghost, stability, spectrum, observable or solver-release claim follows."
   ],
   "continuation": {
