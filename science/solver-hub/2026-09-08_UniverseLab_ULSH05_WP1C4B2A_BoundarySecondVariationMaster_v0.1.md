@@ -286,11 +286,11 @@ Wir verwenden eine diagonale Lorentz-Metrik
 und nichtlineare Pfade
 
 \[
-h_i(\epsilon)=\bar h_i+\epsilon q_i+rac12\epsilon^2r_i,
+h_i(\epsilon)=\bar h_i+\epsilon q_i+\frac12\epsilon^2r_i,
 \]
 
 \[
-B_i(\epsilon)=w_i+\epsilon d_i+rac12\epsilon^2e_i.
+B_i(\epsilon)=w_i+\epsilon d_i+\frac12\epsilon^2e_i.
 \]
 
 Die **unexpandierte** Dichte lautet
@@ -345,7 +345,7 @@ Wähle einen beschleunigten Randpfad
 
 \[
 \rho(\epsilon)
-=\rho_0+\epsilon\xi+rac12\epsilon^2\chi.
+=\rho_0+\epsilon\xi+\frac12\epsilon^2\chi.
 \]
 
 Dann ist der direkte Pfadkoeffizient
