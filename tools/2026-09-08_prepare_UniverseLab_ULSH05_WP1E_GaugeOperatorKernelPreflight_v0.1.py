@@ -12,6 +12,7 @@ def main() -> None:
     g = d["gate_state"]
     p = d["projector_kernel_audit"]
     f = d["interface_full_gauge_firewall"]
+    pole = d["polar_coordinate_firewall"]
     summary = {
         "work_package": d["work_package"],
         "model_id": d["model_id"],
@@ -20,11 +21,13 @@ def main() -> None:
         "raw_gauge_operator": g["WP1E_raw_gauge_operator"],
         "coefficient_gauge_matrix": g["WP1E_coefficient_gauge_matrix"],
         "projector_kernel_audit": g["WP1E_projector_kernel_audit"],
+        "pole_extension_audit": g["WP1E_pole_extension_audit"],
         "conditional_bulk_kinematic_invariants": g["WP1E_conditional_bulk_kinematic_invariants"],
         "full_interface_rho_invariant_basis": g["WP1E_full_interface_rho_invariant_basis"],
         "raw_G_projector_dependency": p["raw_G_dependency_on_projector"],
         "coefficient_G_projector_dependency": p["coefficient_G_dependency_on_projector"],
         "global_D2_inverse": p["global_D2_inverse"],
+        "polar_component_formula_domain": pole["component_formula_domain"],
         "interface_rho_firewall": f["componentwise_full_rho_invariant_basis"],
         "PHYSICAL_BACKGROUND": g["PHYSICAL_BACKGROUND"],
         "WP1D_constraint_elimination": g["WP1D_constraint_elimination"],
