@@ -33,8 +33,14 @@ def test_projector_zero_modes_fail_closed():
     assert d['ker_G'] == 'BACKGROUND_AND_DOMAIN_DEPENDENT_NOT_COUNTED'
 
 
-def test_cokernel_not_claimed():
+def test_cokernel_requires_closed_range():
     d = load()['cokernel_registry']
+    assert d['ordinary_cokernel'] == 'codomain(G)/im G'
+    assert d['adjoint_identity_after_pairing_domain_freeze'] == 'ker G^dagger=(closure(im G))^perp'
+    assert d['ordinary_cokernel_equals_adjoint_kernel_requires'] == 'CLOSED_RANGE_OF_G_OR_STRONGER_FREDHOLM_SETTING'
+    assert d['reduced_cokernel'] == 'codomain(G)/closure(im G)'
+    assert d['closed_range_status'] == 'NOT_PROVEN'
+    assert d['fredholm_status'] == 'NOT_PROVEN'
     assert d['G_dagger_frozen'] is False
     assert d['count'] == 'NOT_AVAILABLE'
 
@@ -42,7 +48,10 @@ def test_cokernel_not_claimed():
 def test_ulsh04_handoff_is_not_constraint_closure():
     d = load()
     assert d['ulsh04_handoff']['status'] == 'DEFINED_FAIL_CLOSED'
+    assert 'closed-range/Fredholm status of G remains unproven' in d['ulsh04_handoff']['inputs']
     g = d['gate_state']
+    assert g['WP1D1_closed_range_of_G'] == 'NOT_PROVEN'
+    assert g['WP1D1_Fredholm_property_of_G'] == 'NOT_PROVEN'
     assert g['WP1D_constraint_elimination'] == 'BLOCKED'
     assert g['WP1D_physical_DOF_count'] == 'NOT_RELEASED'
 
@@ -53,6 +62,7 @@ def test_physical_firewalls():
     assert d['physical_gate_effect'] == 'NONE'
     assert d['physical_evidence_effect'] == 'NONE'
     g = d['gate_state']
+    assert g['FM-G0'] == 'OPEN'
     assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
     assert g['WP1_physical_boundary_domain'] == 'BLOCKED'
     assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
@@ -70,7 +80,7 @@ if __name__ == '__main__':
     test_separate_gauge_columns()
     test_columnwise_not_full_invariance()
     test_projector_zero_modes_fail_closed()
-    test_cokernel_not_claimed()
+    test_cokernel_requires_closed_range()
     test_ulsh04_handoff_is_not_constraint_closure()
     test_physical_firewalls()
     print('WP1D1 gauge-operator/kernel preflight controls: PASS')
