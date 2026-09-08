@@ -42,7 +42,7 @@
   "gauge_operator": {
     "form": "G=(G_zeta,G_lambda,G_rho)",
     "columns_separated": true,
-    "row_completeness": "BULK_FIELDS_PLUS_DECLARED_INTERFACE_PRIMARY_ROWS_AND_GENERIC_PULLBACK_ROWS_COMPONENTIZED",
+    "row_completeness": "ALL_DECLARED_BULK_INTERFACE_PRIMARY_AND_DERIVED_OR_GENERIC_PULLBACK_ROWS_HAVE_COLUMN_ACTIONS",
     "bulk_diffeomorphism": {
       "metric": "delta h_AB=2 nabla_(A zeta_B)",
       "scalar": "delta varphi=zeta^A partial_A phibar",
@@ -52,6 +52,8 @@
         "tau_a": "delta tau_a=-zeta_parallel_a",
         "cap_phase_s_direct": "delta s=0 for the pure bulk-diffeomorphism column in the independent intrinsic surface-field representation",
         "induced_metric_H_ab": "delta H_ab=0",
+        "pulled_gauge_oneform_Acal_a": "delta Acal_a=0 under the paired pure bulk-diffeomorphism/embedding transformation",
+        "cap_oneform_d_a": "delta d_a=0 under the paired pure bulk-diffeomorphism/embedding transformation",
         "generic_moving_pullback_DeltaSigma_T": "delta_zeta DeltaSigma(X* T)=0 under the paired bulk-field/embedding diffeomorphism convention"
       }
     },
@@ -66,7 +68,8 @@
         "induced_metric_H_ab": "0",
         "pulled_gauge_oneform_Acal_a": "delta Acal_a=D_a lambda",
         "cap_phase_s": "delta s=q_sigma lambda",
-        "cap_oneform_d_a": "delta d_a=0"
+        "cap_oneform_d_a": "delta d_a=0",
+        "generic_u1_neutral_moving_pullback_DeltaSigma_T": "0; gauge-potential pullback uses the explicit Acal_a row"
       }
     },
     "intrinsic_interface_reparametrization": {
@@ -81,15 +84,18 @@
         "induced_metric_H_ab": "delta H_ab=Lie_rho hbar_ab=2 D_(a rho_b)",
         "cap_phase_s": "delta s=rho^a D_a sigma_bar",
         "pulled_gauge_oneform_Acal_a": "delta Acal_a=(Lie_rho Abarcal)_a",
+        "cap_oneform_d_a": "delta d_a=(Lie_rho wbar)_a with wbar_a=D_a sigma_bar-q_sigma Abarcal_a",
         "generic_moving_pullback_DeltaSigma_T": "delta t=Lie_rho Tbar"
       }
     }
   },
   "columnwise_invariants": {
+    "selected_not_exhaustive": true,
     "H_ab_under_bulk_diffeomorphism": "PROVEN_G_zeta_H_EQUALS_ZERO",
+    "d_a_under_bulk_diffeomorphism": "PROVEN_G_zeta_d_EQUALS_ZERO_FROM_PAIRED_MOVING_PULLBACK_RULE",
     "d_a_under_u1": "PROVEN_G_lambda_d_EQUALS_ZERO",
     "H_ab_under_full_G": "NOT_INVARIANT_IN_GENERAL_RHO_COLUMN_NONZERO",
-    "d_a_under_full_G": "NOT_CLAIMED"
+    "d_a_under_full_G": "NOT_INVARIANT_IN_GENERAL_RHO_COLUMN_NONZERO"
   },
   "kernel_registry": {
     "ker_G": "BACKGROUND_AND_DOMAIN_DEPENDENT_NOT_COUNTED",
@@ -121,7 +127,7 @@
     "inputs": [
       "inherited WP1D D_cond field/domain contract",
       "exact upstream physical boundary-domain blocker remains unresolved",
-      "G_zeta G_lambda G_rho separated operator including declared interface rows",
+      "G_zeta G_lambda G_rho separated operator including all declared interface primary/derived rows and generic pullback rule",
       "bulk/interface reparameterization distinction",
       "projector and zero-mode registry",
       "columnwise proven kinematic invariants",
@@ -165,7 +171,7 @@
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
     "WP1D1_gauge_operator": "COMPONENTIZED_STRUCTURALLY",
-    "WP1D1_gauge_operator_interface_rows": "COMPONENTIZED_STRUCTURALLY",
+    "WP1D1_gauge_operator_interface_rows": "COMPONENTIZED_ALL_DECLARED_ROWS",
     "WP1D1_projector_kernel_registry": "DEFINED_BACKGROUND_DEPENDENT",
     "WP1D1_full_projector_inverse": "NOT_FROZEN",
     "WP1D1_full_gauge_invariant_basis": "NOT_CLAIMED",
@@ -181,6 +187,7 @@
     "Pairing/domain freeze alone does not identify the ordinary cokernel codomain/im G with ker G^dagger; closed range is additionally required, otherwise only the reduced cokernel codomain/closure(im G) is represented by the adjoint kernel.",
     "ker G, coker G and physical DOF are not counted before background/domain/ULSH-04 closure.",
     "The interface rows are kinematic gauge-action rows; their componentization does not release a physical gauge fixing or a physical mode basis.",
+    "The generic moving-pullback row is a kinematic doubly-covariant identity; it does not establish a physical background or physical perturbation mode.",
     "All predecessor WP1D release/firewall gates remain inherited unless explicitly superseded; WP1D1 adds analytic structure but releases none of them.",
     "WP1D_constraint_elimination remains BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING; neither blocker is superseded by WP1D1.",
     "WP1D_physical_3plus1_SVT remains NOT_RELEASED; no physical time/ADM/SVT reduction is implied.",
