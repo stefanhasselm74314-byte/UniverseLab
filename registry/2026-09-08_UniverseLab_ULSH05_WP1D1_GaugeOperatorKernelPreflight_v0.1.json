@@ -10,6 +10,7 @@
   "physical_evidence_effect": "NONE",
   "solver_authorized": false,
   "dependencies": [
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json",
     "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
     "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.md"
   ],
@@ -20,6 +21,7 @@
   },
   "inherited_conditional_domain": {
     "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
+    "boundary_gate_source": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json",
     "name": "D_cond",
     "status": "FROZEN_CONDITIONAL",
     "tangential_support_boundaryless_M4": "compact support in M4",
@@ -86,6 +88,7 @@
     "status": "DEFINED_FAIL_CLOSED",
     "inputs": [
       "inherited WP1D D_cond field/domain contract",
+      "exact upstream physical boundary-domain blocker remains unresolved",
       "G_zeta G_lambda G_rho separated operator",
       "bulk/interface reparameterization distinction",
       "projector and zero-mode registry",
@@ -106,6 +109,10 @@
     ]
   },
   "gate_state": {
+    "WP1_boundary_residual_linearizations": "COMPONENTIZED_LOCAL_INTERFACE_OPERATOR",
+    "WP1_local_weak_boundary_hessian": "SYMMETRIC_ON_DECLARED_TEST_DOMAIN",
+    "WP1_global_domain_preflight": "COMPLETED_CONDITIONAL_NO_PHYSICAL_DOMAIN_RELEASE",
+    "WP1_physical_boundary_domain": "BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA",
     "WP1D_successor_identifier": "FROZEN_BY_THIS_SUCCESSOR_CONTRACT",
     "WP1D_analytic_field_domain": "FROZEN_CONDITIONAL",
     "WP1D_4D_covariant_SVT_bookkeeping": "DEFINED_CONDITIONAL_PROJECTOR_KERNELS_OPEN",
@@ -137,6 +144,7 @@
     "Columnwise invariance is not full-G invariance.",
     "Projector zero modes are not automatically gauge modes.",
     "D_cond is inherited as a conditional analytic domain and is not a released physical perturbation boundary domain.",
+    "WP1_physical_boundary_domain remains BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA; neither the background nor global corner data are released by WP1D1.",
     "Pairing/domain freeze alone does not identify the ordinary cokernel codomain/im G with ker G^dagger; closed range is additionally required, otherwise only the reduced cokernel codomain/closure(im G) is represented by the adjoint kernel.",
     "ker G, coker G and physical DOF are not counted before background/domain/ULSH-04 closure.",
     "All predecessor WP1D release/firewall gates remain inherited unless explicitly superseded; WP1D1 adds analytic structure but releases none of them.",
