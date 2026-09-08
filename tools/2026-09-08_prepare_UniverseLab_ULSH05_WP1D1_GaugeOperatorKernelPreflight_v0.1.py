@@ -16,6 +16,7 @@ def main() -> None:
     print('fredholm_property_of_G:', d['cokernel_registry']['fredholm_status'])
     print('full_projector_inverse:', d['gate_state']['WP1D1_full_projector_inverse'])
     print('constraint_elimination:', d['gate_state']['WP1D_constraint_elimination'])
+    print('physical_3plus1_SVT:', d['gate_state']['WP1D_physical_3plus1_SVT'])
     print('FM-G0:', d['gate_state']['FM-G0'])
     print('physical_background:', d['gate_state']['PHYSICAL_BACKGROUND'])
     print('solver_execution:', d['gate_state']['SOLVER_EXECUTION'])
