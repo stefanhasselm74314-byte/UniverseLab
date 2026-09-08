@@ -1,0 +1,77 @@
+name: 2026-09-08 ULSH05 WP1C4B1C Passive Shape Constraint QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.json'
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.md'
+      - 'tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.py'
+      - '.github/workflows/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_QA_v0.1.yml'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.md'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.py'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransportMaster_v0.1.json'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json'
+      - 'registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json'
+      - 'science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md'
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  wp1c4b1c-passive-shape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run WP1C4B1C standalone validator
+        run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.py
+      - name: Re-run WP1C4B1B Shape-Ward preflight
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.py
+      - name: Validate declared dependency closure
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('.')
+          d=json.loads((root/'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.json').read_text())
+          deps=d['dependencies']
+          assert len(deps)==len(set(deps))==5
+          for rel in deps:
+              assert (root/rel).is_file(), rel
+          print('WP1C4B1C dependency closure: PASS')
+          PY
+      - name: Fail closed on physical or boundary promotion
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.json').read_text())
+          g=d['gate_state']
+          assert d['physical_gate_effect']=='NONE'
+          assert d['physical_evidence_effect']=='NONE'
+          assert d['solver_authorized'] is False
+          assert g['WP1_shape_Ward_identity']=='DERIVED_CONDITIONAL_REDUNDANCY'
+          assert g['WP1_passive_shape_constraint']=='DERIVED_FROM_NN_CONSTRAINTS_AND_ISRAEL'
+          assert g['WP1_israel_only_shape_closure']=='FALSE'
+          assert g['WP1_full_shape_residual']=='NOT_ASSEMBLED_FROM_DIRECT_MOVING_ACTION'
+          assert g['WP1_full_boundary_hessian']=='NOT_CLOSED'
+          assert g['WP1_full_quadratic_action']=='NOT_CLOSED'
+          assert g['PERTURBED_JUNCTION_SYSTEM']=='NOT_RELEASED'
+          assert g['PHYSICAL_BACKGROUND']=='NOT_ESTABLISHED'
+          assert g['FM-G0']=='OPEN'
+          assert g['AuthorizationDecision']=='NOT_CREATED'
+          assert g['SingleUseGrant']=='NOT_CREATED'
+          assert g['BACKEND_IMPORT']=='NOT_EXECUTED'
+          assert g['SOLVER_EXECUTION']=='NOT_EXECUTED'
+          assert g['PHYSICAL_RESPONSE_RANK']=='NOT_EXECUTED'
+          assert g['K1-D']=='NOT_RELEASED'
+          assert g['K1-E']=='NOT_ADMISSIBLE'
+          print('WP1C4B1C firewalls: PASS')
+          PY
