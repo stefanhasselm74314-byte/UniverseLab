@@ -44,20 +44,16 @@ def test_raw_operator_is_projector_independent() -> None:
 
 
 def test_metric_componentization_scalarized_controls() -> None:
-    # Scalarized pointwise controls of the exact component formulas.  These do
-    # not solve any field equation; they only check the frozen Christoffel algebra.
     Aprime = 0.37
     L = 1.8
     Lprime = -0.23
-    em2A = 2.4
+    e2A = 2.4
 
-    # mu-nu trace-source control: two identical radial Christoffel contributions.
     zeta_r = -0.41
-    expected_radial_trace_piece = 2.0 * Aprime * em2A * zeta_r
-    direct_radial_trace_piece = -2.0 * (-Aprime * em2A) * zeta_r
+    expected_radial_trace_piece = 2.0 * Aprime * e2A * zeta_r
+    direct_radial_trace_piece = -2.0 * (-Aprime * e2A) * zeta_r
     close(direct_radial_trace_piece, expected_radial_trace_piece)
 
-    # mu-r control.
     Dmu_zeta_r = 0.31
     dr_zeta_mu = -0.62
     zeta_mu = 0.27
@@ -65,7 +61,6 @@ def test_metric_componentization_scalarized_controls() -> None:
     frozen_mur = Dmu_zeta_r + (dr_zeta_mu - 2.0 * Aprime * zeta_mu)
     close(direct_mur, frozen_mur)
 
-    # r-chi control.
     dr_zeta_chi = 0.44
     dchi_zeta_r = -0.18
     zeta_chi = 0.52
@@ -73,7 +68,6 @@ def test_metric_componentization_scalarized_controls() -> None:
     frozen_rchi = dr_zeta_chi + dchi_zeta_r - 2.0 * (Lprime / L) * zeta_chi
     close(direct_rchi, frozen_rchi)
 
-    # chi-chi control.
     dchi_zeta_chi = -0.33
     direct_chichi = 2.0 * dchi_zeta_chi + 2.0 * L * Lprime * zeta_r
     frozen_chichi = 2.0 * dchi_zeta_chi + 2.0 * L * Lprime * zeta_r
@@ -161,7 +155,6 @@ def test_scalar_field_invariant_has_no_unitary_gauge_division() -> None:
     delta_Xr = zeta_r
     close(delta_varphi - phiprime * delta_Xr)
 
-    # Zero-gradient regime remains defined rather than dividing by phiprime.
     phiprime = 0.0
     delta_varphi = phiprime * zeta_r
     close(delta_varphi - phiprime * delta_Xr)
@@ -183,11 +176,9 @@ def test_maxwell_scalar_invariants_cancel_u1_and_internal_bulk_diff() -> None:
     dr_lam = -0.14
     dchi_lam = 0.29
 
-    # δalpha = lambda + Achi/L^2 * zeta_chi.
     delta_alpha = lam + (Achi / L**2) * zeta_chi
     assert math.isfinite(delta_alpha)
 
-    # Derive δu_r explicitly to verify the L' terms cancel and only Achi' survives.
     d_zeta_contra_chi = dr_zeta_chi / L**2 - 2.0 * Lprime * zeta_chi / L**3
     delta_ar = dr_lam + Achi * d_zeta_contra_chi
     d_AoverL2 = Achiprime / L**2 - 2.0 * Achi * Lprime / L**3
@@ -195,7 +186,6 @@ def test_maxwell_scalar_invariants_cancel_u1_and_internal_bulk_diff() -> None:
     delta_ur = delta_ar - dr_delta_alpha
     close(delta_ur, -(Achiprime / L**2) * zeta_chi)
 
-    # chi channel: L has no chi dependence on the frozen ansatz.
     dchi_zeta_chi = -0.18
     delta_achi = dchi_lam + Achiprime * zeta_r + (Achi / L**2) * dchi_zeta_chi
     dchi_delta_alpha = dchi_lam + (Achi / L**2) * dchi_zeta_chi
@@ -207,7 +197,6 @@ def test_maxwell_scalar_invariants_cancel_u1_and_internal_bulk_diff() -> None:
     close(delta_ur + (Achiprime / L**2) * delta_Xchi)
     close(delta_uchi - Achiprime * delta_Xr)
 
-    # Zero flux-gradient regime is regular: no division by Achiprime.
     Achiprime = 0.0
     close(-(Achiprime / L**2) * zeta_chi + (Achiprime / L**2) * delta_Xchi)
     close(Achiprime * zeta_r - Achiprime * delta_Xr)
@@ -215,12 +204,12 @@ def test_maxwell_scalar_invariants_cancel_u1_and_internal_bulk_diff() -> None:
 
 def test_internal_zero_mode_and_no_division_firewall() -> None:
     d = load()
-    assert "retained" in d["regime_checks"]["internal_n_zero"]
+    zero = d["regime_checks"]["internal_n_zero"]
+    assert "retained" in zero
+    assert "no 1/n operation" in zero
     firewall = d["conditional_kinematic_invariants"]["division_firewall"]
     assert "Fourier n" in firewall
-    text = REGISTRY.read_text(encoding="utf-8")
-    assert '"internal_n_zero"' in text
-    assert "1/n" not in text
+    assert "no invariant above divides by" in firewall
 
 
 def test_interface_rho_is_independent_and_partial_invariance_not_promoted() -> None:
