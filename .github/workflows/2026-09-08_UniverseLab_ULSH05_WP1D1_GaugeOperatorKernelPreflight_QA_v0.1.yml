@@ -41,8 +41,14 @@ jobs:
           assert d['columnwise_invariants']['H_ab_under_full_G'] == 'NOT_INVARIANT_IN_GENERAL_RHO_COLUMN_NONZERO'
           assert d['kernel_registry']['projector_zero_mode_implies_gauge_mode'] is False
           assert d['cokernel_registry']['G_dagger_frozen'] is False
+          assert d['cokernel_registry']['closed_range_status'] == 'NOT_PROVEN'
+          assert d['cokernel_registry']['fredholm_status'] == 'NOT_PROVEN'
+          assert d['cokernel_registry']['ordinary_cokernel_equals_adjoint_kernel_requires'] == 'CLOSED_RANGE_OF_G_OR_STRONGER_FREDHOLM_SETTING'
+          assert d['gate_state']['WP1D1_closed_range_of_G'] == 'NOT_PROVEN'
+          assert d['gate_state']['WP1D1_Fredholm_property_of_G'] == 'NOT_PROVEN'
           assert d['gate_state']['WP1D_constraint_elimination'] == 'BLOCKED'
           assert d['gate_state']['WP1D_physical_DOF_count'] == 'NOT_RELEASED'
+          assert d['gate_state']['FM-G0'] == 'OPEN'
           assert d['gate_state']['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
           assert d['gate_state']['SOLVER_EXECUTION'] == 'NOT_EXECUTED'
           assert d['physical_gate_effect'] == 'NONE'
