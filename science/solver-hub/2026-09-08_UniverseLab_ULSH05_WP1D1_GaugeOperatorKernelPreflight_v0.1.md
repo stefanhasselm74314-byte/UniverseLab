@@ -24,9 +24,12 @@ WP1D1_gauge_columns              = ZETA_LAMBDA_RHO_SEPARATED
 WP1D1_projector_kernel_registry  = DEFINED_BACKGROUND_DEPENDENT
 WP1D1_full_projector_inverse     = NOT_FROZEN
 WP1D1_full_gauge_invariant_basis = NOT_CLAIMED
+WP1D1_closed_range_of_G          = NOT_PROVEN
+WP1D1_Fredholm_property_of_G     = NOT_PROVEN
 WP1D1_ULSH04_handoff             = DEFINED_FAIL_CLOSED
 WP1D_constraint_elimination      = BLOCKED
 WP1D_physical_DOF_count          = NOT_RELEASED
+FM-G0                            = OPEN
 SOLVER_EXECUTION                 = NOT_EXECUTED
 ```
 
@@ -191,7 +194,7 @@ und die entsprechenden Interfacebedingungen erfüllen. Killingvektoren oder komp
 
 [OFFEN] `ker G` wird nicht numerisch oder dimensionsmäßig gezählt, solange Background und globale Domäne nicht freigegeben sind.
 
-## 6. Projektor-Kernel und Cokernel
+## 6. Projektor-Kernel, Range und Cokernel
 
 Die konditionale 4D-Zerlegung verwendet Differentialoperatoren, deren Inversen Nullräume besitzen können. Schematisch:
 
@@ -213,13 +216,55 @@ f=D^2u
 
 erlaubt daher nur dann \(u=D^{-2}f\), wenn `f` im Bild liegt und eine Kernelbehandlung beziehungsweise Zusatzbedingung angegeben ist.
 
-Der Cokernel wird formal als
+Für einen dicht definierten Operator zwischen später festgelegten Hilberträumen gilt nach Freeze von Pairing und Domäne zunächst nur die sichere Identität
 
 \[
-\operatorname{coker}G\simeq\ker G^\dagger
+\boxed{
+\ker G^\dagger=(\overline{\operatorname{im}G})^\perp .
+}
 \]
 
-auf einer **später** eingefrorenen Paarung/Domäne verstanden. Da die physikalische globale Paarung noch nicht freigegeben ist, wird kein konkretes `G^dagger` und kein Cokernel-Count behauptet.
+Der **gewöhnliche** Cokernel ist dagegen
+
+\[
+\operatorname{coker}G
+=\operatorname{codomain}(G)/\operatorname{im}G.
+\]
+
+Daraus folgt im Allgemeinen **nicht**
+
+\[
+\operatorname{coker}G\simeq\ker G^\dagger,
+\]
+
+wenn \(\operatorname{im}G\) nicht abgeschlossen ist. Die Identifikation mit dem Adjungiertenkernel erfordert zusätzlich mindestens
+
+\[
+\boxed{
+\operatorname{im}G\ \text{abgeschlossen}
+}
+\]
+
+beziehungsweise einen stärkeren Fredholm-/Closed-Range-Vertrag. Ohne diesen kann höchstens der reduzierte Cokernel
+
+\[
+\overline{\operatorname{coker}}G
+:=\operatorname{codomain}(G)/\overline{\operatorname{im}G}
+\]
+
+nach geeignetem Hilbert-Pairing durch \(\ker G^\dagger\) repräsentiert werden.
+
+Aktuell gilt deshalb:
+
+```text
+G_dagger                    = NOT_FROZEN
+closed_range_of_G           = NOT_PROVEN
+Fredholm_property_of_G      = NOT_PROVEN
+ordinary_cokernel_count     = NOT_AVAILABLE
+reduced_cokernel_count      = NOT_AVAILABLE
+```
+
+[BEWIESEN/METHODISCH] Pairing-/Domain-Freeze allein reicht für die Gleichsetzung des gewöhnlichen Cokernels mit dem Adjungiertenkernel nicht aus.
 
 ## 7. Kinematische Invarianten: maximal sichere Aussage
 
@@ -269,6 +314,8 @@ und ebenso
 \boxed{\text{gauge reducibility parameter}\not\Rightarrow\text{physical perturbation mode}}.
 \]
 
+[OFFEN] Ob dieser algebraische Quotient in der später gewählten funktionalanalytischen Topologie abgeschlossen/Hausdorff ist, hängt insbesondere von der Closed-Range-Eigenschaft von `G` ab und wird hier nicht behauptet.
+
 ## 9. Übergabe an ULSH-04
 
 WP1D1 definiert nur eine fail-closed Übergabeschnittstelle. ULSH-04 erhält als **Input**:
@@ -278,7 +325,8 @@ WP1D1 definiert nur eine fail-closed Übergabeschnittstelle. ULSH-04 erhält als
 - explizite Trennung von Bulk- und Interface-Reparametrisierung,
 - Projektor-/Zero-Mode-Register,
 - bereits bewiesene spaltenbezogene kinematische Invarianten,
-- offene globale Domain- und Backgroundabhängigkeiten.
+- offene globale Domain- und Backgroundabhängigkeiten,
+- den offenen Closed-Range-/Fredholm-Status von `G`.
 
 ULSH-04 muss separat liefern:
 
@@ -312,7 +360,8 @@ nur zulässig, wenn `C` auf der korrekt gauge-/constraint-reduzierten Domäne in
 ## 11. Firewalls
 
 ```text
-PHYSICAL_BACKGROUND      = NOT_ESTABLISHED
+FM-G0                     = OPEN
+PHYSICAL_BACKGROUND       = NOT_ESTABLISHED
 WP1_physical_boundary_domain = BLOCKED
 WP1_full_quadratic_action = NOT_CLOSED
 WP1D_constraint_elimination = BLOCKED
@@ -335,7 +384,9 @@ physical_evidence_effect  = NONE
 - `H_ab` ist nicht unter dem vollständigen Gaugeoperator invariant; seine bewiesene Invarianz betrifft die Bulk-Diffeomorphismusspalte.
 - `d_a` ist nicht automatisch unter dem vollständigen Gaugeoperator invariant; seine bewiesene Invarianz betrifft die U(1)-Spalte.
 - Projektor-Nullmoden dürfen nicht ohne Beweis entfernt werden.
+- Pairing-/Domain-Freeze allein identifiziert den gewöhnlichen Cokernel nicht mit `ker G^dagger`; dafür ist zusätzlich Closed Range beziehungsweise eine geeignete Fredholm-Bedingung erforderlich.
 - `ker G`, `coker G` und physische DOF dürfen nicht ohne Background, Domäne und ULSH-04-Abschluss gezählt werden.
+- `FM-G0` bleibt `OPEN`; WP1D1 schließt keine Forward-Map-Lücke.
 - Kein Ghost-, Stabilitäts-, Spektral-, Observable- oder Solverfreigabe-Claim folgt aus diesem Block.
 
 ## 13. Nächster zulässiger analytischer Schritt
