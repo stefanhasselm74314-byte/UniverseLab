@@ -26,7 +26,7 @@ WP1D_successor_identifier          = FROZEN_BY_THIS_SUCCESSOR_CONTRACT
 WP1D_analytic_field_domain         = FROZEN_CONDITIONAL
 WP1D_4D_covariant_SVT_bookkeeping = DEFINED_CONDITIONAL_PROJECTOR_KERNELS_OPEN
 WP1D_gauge_action                  = DEFINED_KINEMATICALLY
-WP1D_constraint_elimination        = BLOCKED_BY_ULSH04_AND_UNFROZEN_TIME_CHOICE
+WP1D_constraint_elimination        = BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING
 WP1D_physical_3plus1_SVT           = NOT_RELEASED
 WP1D_physical_DOF_count            = NOT_RELEASED
 WP1_full_quadratic_action          = NOT_CLOSED
@@ -328,7 +328,7 @@ Cn+B^\dagger q=0
 und
 
 \[
- n_*=-C^{-1}B^\dagger q,
+n_*=-C^{-1}B^\dagger q,
 \]
 
 sodass
@@ -447,27 +447,37 @@ Beide Kontrollen sind rein kinematisch.
 
 ## 11. Dimensionscheck
 
-Die Diffeomorphismusvariation \(\delta h_{AB}=2\nabla_{(A}\zeta_{B)}\) ist dimensionsgleich zu \(h_{AB}\), wenn \(\zeta^A\) die Dimension einer Koordinatenverschiebung besitzt.
-
-Für den U(1)-Kappenblock gilt aus dem eingefrorenen M1-Vertrag
+Die Gauge-kovariante Kappenableitung
 
 \[
-[q_\sigma]=M^{-1},
-\qquad
-[A_a]=M,
+d_a=D_as-q_\sigma\mathcal A_a
 \]
 
-und bei dimensionsloser Phase \(\sigma\)
+ist per Definition ein wohldefinierter Interface-Kovektor. Daher müssen die beiden Summanden in jeder verwendeten Koordinatenkomponente dieselbe Dimension besitzen. Einzelne Komponenten können wegen der dimensionslosen Winkelkoordinate \(\chi\) andere Koordinatendimensionen tragen als Komponenten entlang dimensionsbehafteter Tangentialkoordinaten; ein komponentenweises pauschales Massendimensionslabel ist deshalb nicht invariant.
+
+Die skalare Kombination der Kappenwirkung ist dagegen eindeutig:
 
 \[
-[D_as]=M,
-\qquad
-[q_\sigma A_a]=M^0\;? 
+X=d_a d^a=h^{ab}d_a d_b,
 \]
 
-Die letzte Schreibweise hängt von der dimensionsbehafteten Koordinatenkonvention des Pullbacks ab. Deshalb wird in diesem Block **keine neue absolute Dimensionszuweisung für \(d_a\)** erfunden; maßgeblich bleibt die bereits in WP1C4B2B geprüfte M1-Konvention, in der \([d_a]=M\) und \([Z_\sigma]=M^3\) konsistent verwendet werden.
+und im eingefrorenen M1-Vertrag gilt
 
-[WICHTIG] Dieser Block überschreibt keine bestehende Dimensionskonvention durch eine aus Koordinatensymbolen erratene Alternative.
+\[
+[Z_\sigma]=M^3,
+\qquad
+[X]=M^2,
+\]
+
+sodass
+
+\[
+[Z_\sigma X]=M^5,
+\]
+
+wie für eine 5D-lokalisierte Lagrangedichte erforderlich.
+
+**[BEWIESEN/DIMENSIONELL]** Der Gauge-invariante Kappensektor bleibt dimensionskonsistent, ohne eine koordinatenabhängige Komponentendimension als neue Theorieannahme einzufrieren.
 
 ---
 
