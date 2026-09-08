@@ -45,14 +45,15 @@
     "critical_firewall": "PHYSICAL_BACKGROUND is not established, so residual-proportional U2_bil terms may not be dropped; only the explicitly identified U2_acc[v] contribution is removed by the declared-chart Hessian subtraction"
   },
   "intrinsic_cap_chain_rule": {
+    "normalization": "C2, D1 and C_cap^(2) are coefficients after factoring out sqrt(-hbar); the raw unexpanded density coefficient equals sqrt(-hbar) times these normalized coefficients",
     "induced_first": "Y1=(H_ab,d1_a) with d1_a=D_a s1-q_sigma*Acal1_a",
     "induced_second": "Y2=(H2_ab,d2_a)=Y2_bil+Y2_acc",
-    "fixed_interface_hessian": "C2[Y1] is exactly the merged WP1C2 epsilon^2 coefficient D2_Sigma evaluated on the first total induced perturbations",
+    "fixed_interface_hessian": "C2[Y1] is exactly the merged WP1C2 normalized epsilon^2 coefficient D2_Sigma evaluated on the first total induced perturbations",
     "first_density_coefficient": "D1[q,d]=l1[q,d]+n1[q]*l0, where n1=q/2 and l1=-0.5*Z_sigma*(2*w^a*d_a-q^ab*w_a*w_b)",
     "general_path_epsilon2_coefficient": "C_cap,path^(2)=C2[Y1]+0.5*D1[Y2]",
     "declared_chart_epsilon2_coefficient": "C_cap,chart^(2)=C2[Y1]+0.5*D1[Y2_bil]",
     "fixed_interface_limit": "for fixed embedding and an affine induced-field path, Y2_bil=0 and C_cap,chart^(2) reduces exactly to merged WP1C2",
-    "meaning": "this is the exact second-derivative chain rule for the intrinsic cap action; replacing q by H in C2 alone would miss the first-variation contribution from nonlinear second pullback/induced-field geometry"
+    "meaning": "this is the exact second-derivative chain rule for the intrinsic cap action after factoring out sqrt(-hbar); replacing q by H in C2 alone would miss the first-variation contribution from nonlinear second pullback/induced-field geometry"
   },
   "moving_gravity_shape_control": {
     "control_geometry": "ds6^2=dr^2+exp(2*c*r)*eta_ab dy^a dy^b on a moving upper boundary rho(epsilon)=rho0+epsilon*xi+0.5*epsilon^2*chi",
@@ -72,8 +73,8 @@
   },
   "independent_controls": {
     "moving_gravity_acceleration": "direct finite difference of the EH+GHY warped interval along rho(epsilon) reproduces the path epsilon^2 coefficient; subtracting 0.5*chi*S_g' leaves the bilinear xi^2 chart coefficient",
-    "intrinsic_cap_nonlinear_path": "direct finite difference of the original Lorentz-signature diagonal five-dimensional cap density along nonlinear h_ab(epsilon), B_a(epsilon) agrees with C2[Y1]+0.5*D1[Y2]",
-    "intrinsic_cap_chart_subtraction": "subtracting 0.5*D1[Y2_acc] from the nonlinear path coefficient leaves C2[Y1]+0.5*D1[Y2_bil]",
+    "intrinsic_cap_nonlinear_path": "direct finite difference of the original Lorentz-signature diagonal five-dimensional cap density, divided by sqrt(-det hbar), agrees with C2[Y1]+0.5*D1[Y2]",
+    "intrinsic_cap_chart_subtraction": "after the same sqrt(-det hbar) normalization, subtracting 0.5*D1[Y2_acc] from the nonlinear path coefficient leaves C2[Y1]+0.5*D1[Y2_bil]",
     "fixed_interface_cap_limit": "Y2=0 recovers merged WP1C2 exactly",
     "offshell_residual_control": "a synthetic nonzero first residual with nonzero acceleration demonstrates that removing all residual-proportional terms would change the path second derivative and is forbidden"
   },
