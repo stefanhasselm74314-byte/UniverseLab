@@ -49,10 +49,12 @@ def test_ulsh04_handoff_is_not_constraint_closure():
     d = load()
     assert d['ulsh04_handoff']['status'] == 'DEFINED_FAIL_CLOSED'
     assert 'closed-range/Fredholm status of G remains unproven' in d['ulsh04_handoff']['inputs']
+    assert 'physical 3+1/SVT gate remains NOT_RELEASED' in d['ulsh04_handoff']['inputs']
     g = d['gate_state']
     assert g['WP1D1_closed_range_of_G'] == 'NOT_PROVEN'
     assert g['WP1D1_Fredholm_property_of_G'] == 'NOT_PROVEN'
     assert g['WP1D_constraint_elimination'] == 'BLOCKED'
+    assert g['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
     assert g['WP1D_physical_DOF_count'] == 'NOT_RELEASED'
 
 
@@ -66,6 +68,7 @@ def test_physical_firewalls():
     assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
     assert g['WP1_physical_boundary_domain'] == 'BLOCKED'
     assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
+    assert g['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
     assert g['PERTURBED_JUNCTION_SYSTEM'] == 'NOT_RELEASED'
     assert g['PHYSICAL_RESPONSE_RANK'] == 'NOT_EXECUTED'
     assert g['K1-D'] == 'NOT_RELEASED'
