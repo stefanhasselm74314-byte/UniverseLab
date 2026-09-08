@@ -47,6 +47,7 @@ jobs:
           assert d['gate_state']['WP1D1_closed_range_of_G'] == 'NOT_PROVEN'
           assert d['gate_state']['WP1D1_Fredholm_property_of_G'] == 'NOT_PROVEN'
           assert d['gate_state']['WP1D_constraint_elimination'] == 'BLOCKED'
+          assert d['gate_state']['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
           assert d['gate_state']['WP1D_physical_DOF_count'] == 'NOT_RELEASED'
           assert d['gate_state']['FM-G0'] == 'OPEN'
           assert d['gate_state']['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
