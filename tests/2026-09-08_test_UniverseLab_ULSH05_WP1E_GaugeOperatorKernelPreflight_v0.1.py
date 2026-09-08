@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "registry/2026-09-08_UniverseLab_ULSH05_WP1E_GaugeOperatorKernelPreflight_v0.1.json"
 DOC = ROOT / "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1E_GaugeOperatorKernelPreflight_v0.1.md"
+POLE_DOC = ROOT / "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1E_PoleCoordinateFirewall_v0.1.md"
 
 
 def load() -> dict:
@@ -137,12 +138,7 @@ def test_scalar_metric_invariants_cancel_bulk_diffeomorphism() -> None:
     close(delta_hrr - 2.0 * dr_zeta_r)
 
     delta_hrchi = dr_zeta_chi + dchi_zeta_r - 2.0 * (Lprime / L) * zeta_chi
-    close(
-        delta_hrchi
-        - dr_zeta_chi
-        - dchi_zeta_r
-        + 2.0 * (Lprime / L) * delta_Xchi
-    )
+    close(delta_hrchi - dr_zeta_chi - dchi_zeta_r + 2.0 * (Lprime / L) * delta_Xchi)
 
     delta_hchichi = 2.0 * dchi_zeta_chi + 2.0 * L * Lprime * zeta_r
     close(delta_hchichi - 2.0 * dchi_zeta_chi - 2.0 * L * Lprime * delta_Xr)
@@ -212,6 +208,28 @@ def test_internal_zero_mode_and_no_division_firewall() -> None:
     assert "no invariant above divides by" in firewall
 
 
+def test_polar_coordinate_firewall_is_fail_closed() -> None:
+    d = load()
+    p = d["polar_coordinate_firewall"]
+    assert p["component_formula_domain"] == "punctured polar chart L>0 plus a separate smooth-extension requirement"
+    assert p["pole_extension_of_representative_invariants"] == "OPEN_NOT_PROVEN_COMPONENTWISE"
+    assert "smooth Cartesian extendibility" in p["primary_regularity_rule"]
+    assert "translation vector" in p["important_counterexample"]
+    assert d["gate_state"]["WP1E_pole_extension_audit"] == "OPEN_NOT_PROVEN_COMPONENTWISE"
+    assert d["gate_state"]["WP1E_conditional_bulk_kinematic_invariants"] == "DERIVED_REPRESENTATIVE_LEVEL_PUNCTURED_POLAR_CHART"
+    assert "naive substitution" in d["regime_checks"]["smooth_pole_L_zero"]
+
+    text = POLE_DOC.read_text(encoding="utf-8")
+    for token in (
+        "V=\\partial_x",
+        "V^\\chi=-\\frac{\\sin\\chi}{r}",
+        "glatte Fortsetzbarkeit in lokalen kartesischen Koordinaten",
+        "WP1E_pole_extension_audit",
+        "OPEN_NOT_PROVEN_COMPONENTWISE",
+    ):
+        assert token in text, token
+
+
 def test_interface_rho_is_independent_and_partial_invariance_not_promoted() -> None:
     d = load()
     f = d["interface_full_gauge_firewall"]
@@ -230,7 +248,8 @@ def test_gate_firewalls_remain_closed() -> None:
     assert g["WP1E_raw_gauge_operator"] == "COMPONENTIZED_ON_CURRENT_STATIC_ANSATZ"
     assert g["WP1E_coefficient_gauge_matrix"] == "DEFINED_CONDITIONAL_ON_PROJECTOR_REPRESENTATIVE_SLICE"
     assert g["WP1E_projector_kernel_audit"] == "OPEN_TRACKED_NO_GLOBAL_INVERSE_RELEASE"
-    assert g["WP1E_conditional_bulk_kinematic_invariants"] == "DERIVED_REPRESENTATIVE_LEVEL"
+    assert g["WP1E_pole_extension_audit"] == "OPEN_NOT_PROVEN_COMPONENTWISE"
+    assert g["WP1E_conditional_bulk_kinematic_invariants"] == "DERIVED_REPRESENTATIVE_LEVEL_PUNCTURED_POLAR_CHART"
     assert g["WP1E_full_interface_rho_invariant_basis"] == "NOT_RELEASED"
     assert g["WP1D_constraint_elimination"] == "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING"
     assert g["WP1D_physical_3plus1_SVT"] == "NOT_RELEASED"
@@ -276,6 +295,7 @@ def main() -> None:
     test_scalar_field_invariant_has_no_unitary_gauge_division()
     test_maxwell_scalar_invariants_cancel_u1_and_internal_bulk_diff()
     test_internal_zero_mode_and_no_division_firewall()
+    test_polar_coordinate_firewall_is_fail_closed()
     test_interface_rho_is_independent_and_partial_invariance_not_promoted()
     test_gate_firewalls_remain_closed()
     test_document_contains_required_no_go_statements()
