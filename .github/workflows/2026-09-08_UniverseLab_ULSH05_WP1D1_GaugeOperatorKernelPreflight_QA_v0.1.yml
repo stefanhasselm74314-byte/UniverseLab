@@ -36,6 +36,11 @@ jobs:
           import json
           from pathlib import Path
           d = json.loads(Path('registry/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.json').read_text(encoding='utf-8'))
+          assert 'registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json' in d['dependencies']
+          assert d['inherited_conditional_domain']['name'] == 'D_cond'
+          assert d['inherited_conditional_domain']['status'] == 'FROZEN_CONDITIONAL'
+          assert d['inherited_conditional_domain']['physical_release'] is False
+          assert d['quotient']['domain_source'] == 'inherited_conditional_domain'
           assert d['gauge_operator']['form'] == 'G=(G_zeta,G_lambda,G_rho)'
           assert d['gauge_operator']['intrinsic_interface_reparametrization']['independent_of_zeta_parallel'] is True
           assert d['columnwise_invariants']['H_ab_under_full_G'] == 'NOT_INVARIANT_IN_GENERAL_RHO_COLUMN_NONZERO'
@@ -46,6 +51,7 @@ jobs:
           assert d['cokernel_registry']['ordinary_cokernel_equals_adjoint_kernel_requires'] == 'CLOSED_RANGE_OF_G_OR_STRONGER_FREDHOLM_SETTING'
           assert d['gate_state']['WP1D1_closed_range_of_G'] == 'NOT_PROVEN'
           assert d['gate_state']['WP1D1_Fredholm_property_of_G'] == 'NOT_PROVEN'
+          assert d['gate_state']['WP1D_analytic_field_domain'] == 'FROZEN_CONDITIONAL'
           assert d['gate_state']['WP1D_constraint_elimination'] == 'BLOCKED'
           assert d['gate_state']['WP1D_physical_3plus1_SVT'] == 'NOT_RELEASED'
           assert d['gate_state']['WP1D_physical_DOF_count'] == 'NOT_RELEASED'
