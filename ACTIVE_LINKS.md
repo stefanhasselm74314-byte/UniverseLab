@@ -1,6 +1,6 @@
 # UniverseLab — Canonical Active Links
 
-**Stand:** 31.08.2026  
+**Stand:** 09.09.2026  
 **Zweck:** kompakte, kanonische Link-Zentrale für aktuell relevante UniverseLab-Zugänge. Historische/Legacy-Ziele sind ausdrücklich getrennt.  
 **Governance-Firewall:** Diese Liste verändert keine wissenschaftlichen, Solver-, Gate- oder Evidenzzustände. `K1-D = NOT_RELEASED`, `K1-E = NOT_ADMISSIBLE` bleiben unberührt.
 
@@ -61,11 +61,13 @@ Nur verwenden, wenn eine aktuelle UniverseLab-Seite trotz Neuladen eine alte She
 
 ## 8. GSRA / Orion Pulse — separates Projekt
 
-Diese Links gehören **nicht** zum wissenschaftlichen UniverseLab-Kern:
+Diese Ressourcen gehören **nicht** zum wissenschaftlichen UniverseLab-Kern. Die am 31.08.2026 hinterlegten externen Ziele wurden am 09.09.2026 geprüft und sind nicht mehr erreichbar. Sie werden deshalb nicht als aktive Links geführt.
 
-- GSRA Source Brief: https://github.com/stefanhasselm74314-byte/gsra-orion-pulse/blob/main/docs/2026-08-19_GSRA-OrionPulse_SourceLinkBrief_v1.0.md
-- Telemetry Contract: https://docs.google.com/document/d/1EUwZhP8MEMfLz1Ocb_r7UxIA5doTiSCM59PCqiLHcco/edit
-- Release Notes: https://docs.google.com/document/d/1CCKgG5dmBkjHNiiVLm7RoKM8nfzmlhDpTTqiVpJsytM/edit
+- GSRA Source Brief — **BLOCKIERT / KEIN KANONISCHES ZIEL**: früheres GitHub-Ziel liefert 404; kein verifizierter Ersatz identifiziert.
+- Telemetry Contract — **BLOCKIERT / KEIN KANONISCHES ZIEL**: frühere Google-Drive-Datei nicht mehr vorhanden/zugreifbar; kein verifizierter Ersatz identifiziert.
+- Release Notes — **BLOCKIERT / KEIN KANONISCHES ZIEL**: frühere Google-Drive-Datei nicht mehr vorhanden/zugreifbar; kein verifizierter Ersatz identifiziert.
+
+**Recovery-Regel:** Ein GSRA/Orion-Pulse-Ziel wird erst wieder verlinkt, wenn ein erreichbarer, eindeutig zugeordneter und kanonisch bestätigter Ersatz vorliegt. Alte 404-Ziele dürfen nicht reaktiviert werden.
 
 ## 9. Archiv / historischer Stand
 
@@ -76,4 +78,4 @@ Nicht als aktuellen Projektstatus verwenden:
 
 ---
 
-**Pflegeregel:** Neue operative oder wissenschaftliche Links kommen erst in den kanonischen Bereich, wenn ihr aktueller Zweck eindeutig ist. Ersetzte oder historische Ziele werden klar als Archiv/Legacy markiert.
+**Pflegeregel:** Neue operative oder wissenschaftliche Links kommen erst in den kanonischen Bereich, wenn ihr aktueller Zweck eindeutig ist. Ersetzte, unerreichbare oder historische Ziele werden klar als blockiert bzw. Archiv/Legacy markiert.
