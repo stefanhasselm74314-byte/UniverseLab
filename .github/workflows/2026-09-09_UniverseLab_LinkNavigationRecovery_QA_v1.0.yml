@@ -1,0 +1,40 @@
+name: 2026-09-09 UniverseLab Link Navigation Recovery QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'links.html'
+      - 'ACTIVE_LINKS.md'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js'
+      - '2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js'
+      - 'tests/2026-09-09_test_UniverseLab_LinkNavigationRecovery_v1.0.py'
+      - '.github/workflows/2026-09-09_UniverseLab_LinkNavigationRecovery_QA_v1.0.yml'
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  link-navigation-recovery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run link/navigation recovery controls
+        run: python tests/2026-09-09_test_UniverseLab_LinkNavigationRecovery_v1.0.py
+      - name: Verify retired presentation worker has no fetch interception
+        shell: python
+        run: |
+          from pathlib import Path
+          sw = Path('2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js').read_text(encoding='utf-8')
+          bootstrap = Path('assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js').read_text(encoding='utf-8')
+          assert "addEventListener('fetch'" not in sw
+          assert 'respondWith' not in sw
+          assert 'self.registration.unregister()' in sw
+          assert 'navigator.serviceWorker.register' not in bootstrap
+          assert 'navigator.serviceWorker.getRegistrations' in bootstrap
+          print('Navigation interception retirement: PASS')
