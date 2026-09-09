@@ -68,8 +68,12 @@ def test_unverifiable_gsra_targets_are_not_clickable():
     assert DEAD_GSRA_REPO not in hs
     assert DEAD_TELEMETRY_ID not in hs
     assert DEAD_RELEASE_ID not in hs
-    assert html.count('Derzeit nicht verfügbar') == 3
-    assert 'Keine Ersatz-URL wird erfunden' in html
+    # Preserve the original visible card text so the scientific claim census is unaffected;
+    # only the link semantics are disabled.
+    assert html.count('aria-disabled="true"') == 3
+    assert '<h3>Source Brief</h3><span class="link" aria-disabled="true"><span>Öffnen</span><span>↗</span></span>' in html
+    assert '<h3>Telemetry Contract</h3><span class="link" aria-disabled="true"><span>Öffnen</span><span>↗</span></span>' in html
+    assert '<h3>Release Notes</h3><span class="link" aria-disabled="true"><span>Öffnen</span><span>↗</span></span>' in html
 
 
 def test_active_registry_marks_old_gsra_targets_inactive():
