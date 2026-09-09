@@ -1,5 +1,5 @@
 {
-  "basis_commit": "c1114657fdd2003a458992334ddb2f0c7b6f559e",
+  "basis_commit": "fab3ecd99617958758fa8d50996803b3e68bbac2",
   "candidates": [
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -5240,7 +5240,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "KOSMOLOGIE Öffnen →"
     },
@@ -5260,7 +5260,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 7,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "h3",
       "text": "Machine-Data-Viewer v1.1"
     },
@@ -10447,7 +10447,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 2,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "KANONISCH Öffnen →"
     },
@@ -10465,7 +10465,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 3,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "AKTIV Programm öffnen →"
     },
@@ -10483,7 +10483,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 3,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "FM-0 Inventar öffnen → Registry JSON { }"
     },
@@ -10501,7 +10501,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 4,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "SCI-001/002 Öffnen →"
     },
@@ -10519,7 +10519,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 4,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "h3",
       "text": "Bibliographiekatalog"
     },
@@ -10537,7 +10537,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "VERGLEICH Öffnen →"
     },
@@ -10555,7 +10555,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "INTERAKTIV Öffnen →"
     },
@@ -10575,7 +10575,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "h3",
       "text": "Journey · Emergence · Universe 3D"
     },
@@ -10593,7 +10593,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 6,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "DIAGNOSTISCH Öffnen →"
     },
@@ -10611,7 +10611,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 6,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "ENTWICKLER Öffnen →"
     },
@@ -10629,7 +10629,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 10,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "HISTORISCH Öffnen →"
     },
@@ -10647,7 +10647,7 @@
       "preliminary_risk_score": 1,
       "region": "main",
       "source_line": 11,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "div",
       "text": "K1-D = NOT_RELEASED und K1-E = NOT_ADMISSIBLE bleiben unverändert."
     },
@@ -12906,7 +12906,7 @@
       "preliminary_risk_score": 0,
       "region": "section",
       "source_line": 1,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "p",
       "text": "Kanonische Zugänge zuerst; Forschungsprogramm, Wissenschaft, Rechner, Solver, Entwickler, Support und historische Ziele sind klar getrennt."
     },
@@ -12926,7 +12926,7 @@
       "preliminary_risk_score": 0,
       "region": "document",
       "source_line": 1,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "meta-description",
       "text": "UniverseLab Wichtige Links: aktuelle kanonische Zugänge, Forschungsprogramm, Wissenschaft, Rechner, Solver, Entwickler und Archiv."
     },
@@ -12947,7 +12947,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "article",
       "text": "VISUALISIERUNG Journey → Emergence → Universe 3D → Conway →"
     },
@@ -12967,7 +12967,7 @@
       "preliminary_risk_score": 0,
       "region": "section",
       "source_line": 6,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "6557f19111dcf57b1c5c70be5c90ff618d080e18626d0e4bc8067af392f42403",
       "tag": "h2",
       "text": "Solver, Governance & Entwickler"
     },
