@@ -1,0 +1,128 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c12-single-use-grant-contract.v0.1",
+  "date": "2026-08-05",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C12_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_IMPLEMENTATION_ONLY",
+  "classification": "NONOPERATIVE_SYNTHETIC_SINGLE_USE_GRANT_SCHEMA",
+  "status": "IMPLEMENTED_PENDING_AUDIT_NOT_AN_AUTHORIZATION",
+  "operative": false,
+  "physical_evidence_effect": "NONE",
+  "grant_schema_fields": [
+    "schema",
+    "grant_id",
+    "authorization_decision_id",
+    "classification",
+    "operative",
+    "issued_at_utc",
+    "not_before_utc",
+    "expires_at_utc",
+    "nonce",
+    "target_run_id",
+    "target_a_F",
+    "binding",
+    "allowed_action",
+    "forbidden_actions",
+    "grant_digest_sha256"
+  ],
+  "required_binding_fields": [
+    "checkout_commit_sha",
+    "target_release_package_sha256",
+    "frozen_run_payload_sha256",
+    "seed_spec_sha256",
+    "schedule_sha256",
+    "primary_source_sha256",
+    "primary_base_source_sha256",
+    "independent_source_sha256",
+    "dependency_lock_sha256",
+    "resource_policy_sha256",
+    "result_schema_sha256"
+  ],
+  "identity_constraints": {
+    "target_run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+    "target_a_F": "1/4",
+    "allowed_action": "SYNTHETIC_TARGET_PATH_TRANSACTION_CONTROL_ONLY",
+    "classification": "SYNTHETIC_NONOPERATIVE_TEST_GRANT_NOT_AUTHORIZATION",
+    "operative": false,
+    "nonce_minimum_bits": 128,
+    "grant_digest": "SHA256_OF_CANONICAL_JSON_WITHOUT_GRANT_DIGEST_FIELD"
+  },
+  "validity_constraints": {
+    "issued_at_not_after_not_before": true,
+    "not_before_strictly_before_expires": true,
+    "validation_time_must_be_within_window": true,
+    "maximum_synthetic_lifetime_seconds": 3600,
+    "expired_grant_rejected_before_transaction_reservation": true,
+    "not_yet_valid_grant_rejected_before_transaction_reservation": true
+  },
+  "single_consumption_state_machine": {
+    "initial_state": "ISSUED_SYNTHETIC",
+    "reservable_state": "ISSUED_SYNTHETIC",
+    "reserved_state": "RESERVED_SYNTHETIC",
+    "terminal_states": [
+      "CONSUMED_SYNTHETIC_SUCCESS",
+      "CONSUMED_SYNTHETIC_FAILURE",
+      "CONSUMED_SYNTHETIC_TIMEOUT",
+      "CONSUMED_SYNTHETIC_SIGNAL",
+      "CONSUMED_SYNTHETIC_CRASH"
+    ],
+    "atomic_reservation_required": true,
+    "atomic_terminal_transition_required": true,
+    "replay_after_reservation_rejected": true,
+    "replay_after_any_terminal_state_rejected": true,
+    "stale_reserved_state_requires_crash_recovery": true,
+    "crash_recovery_terminal_state": "CONSUMED_SYNTHETIC_CRASH",
+    "reuse_after_crash_recovery_rejected": true
+  },
+  "synthetic_control_matrix": [
+    "successful_single_consumption",
+    "explicit_failure_single_consumption",
+    "timeout_single_consumption",
+    "signal_single_consumption",
+    "crash_recovery_single_consumption",
+    "parallel_reservation_race_exactly_one_winner",
+    "expired_grant_rejection",
+    "not_before_grant_rejection",
+    "binding_digest_mismatch_rejection",
+    "nonce_mismatch_rejection",
+    "grant_digest_tamper_rejection",
+    "control_override_request_rejection",
+    "operative_true_rejection"
+  ],
+  "artifact_policy": {
+    "synthetic_state_root_external_temporary_directory_only": true,
+    "repository_grant_instance_creation_allowed": false,
+    "repository_consumption_record_creation_allowed": false,
+    "physical_result_path_creation_allowed": false,
+    "atomic_write_then_replace": true,
+    "overwrite_terminal_state": false
+  },
+  "hard_firewalls": {
+    "operative_grant_issuance_authorized": false,
+    "physical_backend_import_authorized": false,
+    "cp01r1_execution_authorized": false,
+    "target_a_F_one_quarter_solve_authorized": false,
+    "primary_newton_target_solve_authorized": false,
+    "independent_shooting_root_solve_authorized": false,
+    "physical_result_artifact_authorized": false,
+    "automatic_authorization_authorized": false
+  },
+  "gate_state": {
+    "BACKGROUND_3C11_AUTHORIZATION_REVIEW": "DENIED_OPERATIVE_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_ABSENT",
+    "BACKGROUND_3C12_SINGLE_USE_GRANT_SCHEMA": "IMPLEMENTED_PENDING_AUDIT_NONOPERATIVE_ONLY",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "A synthetic nonoperative grant is not an execution authorization.",
+    "Passing consumption and replay controls does not permit CP01R1.",
+    "No physical background, continuum, stability, ghost-freedom, K1-D, K1-E or evidence result follows."
+  ]
+}

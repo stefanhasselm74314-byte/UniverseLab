@@ -1,0 +1,126 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.background-3c12-target-path-release-contract.v0.2",
+  "date": "2026-08-05",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "block": "C-PHYS-R1.0-BACKGROUND-3C12_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_IMPLEMENTATION_ONLY",
+  "classification": "SOURCE_BOUND_NONEXECUTING_TARGET_PATH_RELEASE_PRE_AUDIT_CORRECTED",
+  "status": "IMPLEMENTED_PENDING_AUDIT_EXECUTION_NOT_AUTHORIZED",
+  "physical_evidence_effect": "NONE",
+  "supersedes_for_audit": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C12TargetPathReleaseContract_v0.1.json",
+  "pre_audit_correction": {
+    "audit_or_control_run_executed_under_v0_1": false,
+    "scientific_acceptance_threshold_changed": false,
+    "model_or_topology_changed": false,
+    "target_identity_changed": false,
+    "schedule_changed": false,
+    "grant_binding_changed": false,
+    "corrected_item": "DEFAULT_SYNTHETIC_NOT_BEFORE_EQUALS_ISSUED_AT",
+    "reason": "The v0.1 implementation defaulted not_before one second before issued_at while the frozen grant contract requires issued_at not after not_before. Immediate synthetic grants therefore use equality."
+  },
+  "target_identity": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+    "a_F": "1/4",
+    "seed_set_id": "M1-BG3B-CP01-SEEDS-01",
+    "seed_count": 7,
+    "node_counts_ordered": [24, 32, 48, 64, 96],
+    "schedule_entry_count": 35,
+    "frozen_run_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+    "seed_spec_sha256": "b6e4319cc29736799a0b46320002e51cd17b70b724a6b4c6e86567a316996161",
+    "schedule_sha256": "95001986dc93818f0fea3124cf9ddcd63eb136f8d206f6200a4e8c0cf6d54927"
+  },
+  "source_bindings": {
+    "primary_backend": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py",
+    "primary_base": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py",
+    "independent_backend": "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py",
+    "dependency_lock": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt",
+    "resource_policy": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResourcePolicy_v0.1.json",
+    "result_schema": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3CResultSchema_v0.1.json",
+    "run_input": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json",
+    "seed_specification": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json",
+    "single_use_grant_contract": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C12SingleUseGrantContract_v0.1.json",
+    "target_path_entry_point_base": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c12_target_path_release_v0.1.py",
+    "target_path_entry_point": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c12_target_path_release_v0.2.py",
+    "synthetic_worker": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c12_synthetic_target_worker_v0.1.py"
+  },
+  "target_path_preflight_order": [
+    "validate_nonoperative_grant_classification",
+    "validate_grant_integrity_digest",
+    "validate_grant_time_window",
+    "validate_grant_exact_binding_set",
+    "reject_control_override_fields",
+    "validate_target_run_id_and_a_F_one_quarter",
+    "validate_frozen_payload_digest",
+    "validate_seed_spec_and_35_entry_schedule",
+    "validate_backend_dependency_resource_and_schema_hashes",
+    "reserve_grant_atomically",
+    "execute_synthetic_target_transaction_only",
+    "consume_grant_atomically_into_terminal_synthetic_state"
+  ],
+  "control_override_rejection": {
+    "forbidden_request_fields": [
+      "control_a_F",
+      "control_override",
+      "analytic_control",
+      "manufactured_control",
+      "use_a_F_zero",
+      "model_override"
+    ],
+    "forbidden_values_anywhere": [
+      "a_F=0",
+      "CONTROL_OVERRIDE",
+      "ANALYTIC_AF0_CONTROL"
+    ],
+    "reject_before_backend_import": true,
+    "reject_before_grant_reservation": true
+  },
+  "synthetic_transaction_outcomes": [
+    "success",
+    "failure",
+    "timeout",
+    "signal",
+    "crash"
+  ],
+  "static_audit_requirements": {
+    "target_entry_point_imports_numpy": false,
+    "target_entry_point_imports_scipy": false,
+    "target_entry_point_imports_real_backend": false,
+    "synthetic_worker_imports_real_backend": false,
+    "target_entry_point_calls_newton": false,
+    "target_entry_point_calls_shooting": false,
+    "target_entry_point_calls_root_solver": false,
+    "physical_output_directory_created": false
+  },
+  "execution_policy": {
+    "audit_command_allowed": true,
+    "self_test_command_allowed": true,
+    "run_command_allowed": false,
+    "run_command_exit_code": 73,
+    "backend_import_before_future_operational_grant": false,
+    "future_operational_grant_must_be_append_only_separate_artifact": true,
+    "future_authorization_review_required": true
+  },
+  "hard_firewalls": {
+    "physical_backend_import_authorized": false,
+    "cp01r1_execution_authorized": false,
+    "target_a_F_one_quarter_solve_authorized": false,
+    "primary_newton_target_solve_authorized": false,
+    "independent_shooting_root_solve_authorized": false,
+    "operative_grant_issuance_authorized": false,
+    "physical_result_artifact_authorized": false
+  },
+  "gate_state": {
+    "BACKGROUND_3C11_AUTHORIZATION_REVIEW": "DENIED_OPERATIVE_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_ABSENT",
+    "BACKGROUND_3C12_TARGET_PATH_RELEASE": "IMPLEMENTED_PENDING_AUDIT_NONEXECUTING_ONLY",
+    "BACKGROUND_3C_EXECUTION": "NOT_AUTHORIZED",
+    "BACKGROUND_SOLVER_EXECUTION": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_block_if_pass": "C-PHYS-R1.0-BACKGROUND-3C13_GRANT_AND_TARGET_PATH_AUTHORIZATION_REVIEW_ONLY"
+}
