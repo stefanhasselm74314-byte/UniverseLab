@@ -1,6 +1,6 @@
 # UniverseLab — Canonical Active Links
 
-**Stand:** 31.08.2026  
+**Stand:** 09.09.2026  
 **Zweck:** kompakte, kanonische Link-Zentrale für aktuell relevante UniverseLab-Zugänge. Historische/Legacy-Ziele sind ausdrücklich getrennt.  
 **Governance-Firewall:** Diese Liste verändert keine wissenschaftlichen, Solver-, Gate- oder Evidenzzustände. `K1-D = NOT_RELEASED`, `K1-E = NOT_ADMISSIBLE` bleiben unberührt.
 
@@ -41,7 +41,7 @@
 
 - UniverseLab Solver Hub: https://stefanhasselm74314-byte.github.io/UniverseLab/solver-hub.html
 - MD2S Artefakt-Recovery & Rankaudit: https://stefanhasselm74314-byte.github.io/UniverseLab/md2s-artifact-recovery-rank-audit-v0.1.html
-- Governed Site State JSON: https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-16_UniverseLab_SiteState_v1.0.json
+- Governed Site State JSON: https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-09-04_UniverseLab_SiteState_v1.4.json
 - UniverseLab PR #137 — offener Arbeits-/Reviewpfad, **nicht** kanonischer Endstatus: https://github.com/stefanhasselm74314-byte/UniverseLab/pull/137
 
 ## 6. Entwickler, Quellcode und Daten
@@ -55,17 +55,21 @@
 
 ## 7. Browser-/Cache-Recovery
 
-Nur verwenden, wenn eine aktuelle UniverseLab-Seite trotz Neuladen eine alte Shell oder alte Bedienelemente zeigt:
+Nur verwenden, wenn eine aktuelle UniverseLab-Seite trotz Neuladen eine alte Shell, alte Bedienelemente oder eine festhängende Navigation zeigt:
 
-- 10M Fresh Launch: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-31_UniverseLab_10M_FreshLaunch_v1.0.html
+- 10M Fresh Launch: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-31_UniverseLab_10M_FreshLaunch_v1.0.html?v=20260909
 
-## 8. GSRA / Orion Pulse — separates Projekt
+## 8. GSRA / Orion Pulse — separates Projekt · derzeit nicht aktiv verlinkt
 
-Diese Links gehören **nicht** zum wissenschaftlichen UniverseLab-Kern:
+Diese Ziele gehören **nicht** zum wissenschaftlichen UniverseLab-Kern. Bei der Prüfung am 09.09.2026 waren die drei bisher registrierten Ziele nicht verifizierbar: das frühere GitHub-Repository ist über den verbundenen GitHub-Zugang nicht auffindbar; die beiden bisherigen Google-Docs-IDs liefern über den verbundenen Drive-Zugang `NOT_FOUND`.
 
-- GSRA Source Brief: https://github.com/stefanhasselm74314-byte/gsra-orion-pulse/blob/main/docs/2026-08-19_GSRA-OrionPulse_SourceLinkBrief_v1.0.md
-- Telemetry Contract: https://docs.google.com/document/d/1EUwZhP8MEMfLz1Ocb_r7UxIA5doTiSCM59PCqiLHcco/edit
-- Release Notes: https://docs.google.com/document/d/1CCKgG5dmBkjHNiiVLm7RoKM8nfzmlhDpTTqiVpJsytM/edit
+Bis eine neue autoritative URL vorliegt, werden deshalb keine defekten „Öffnen“-Links angeboten und keine Ersatzadresse erfunden.
+
+Historische Zielreferenzen, **nicht als aktive Links verwenden**:
+
+- GSRA Source Brief: `github.com/stefanhasselm74314-byte/gsra-orion-pulse/.../2026-08-19_GSRA-OrionPulse_SourceLinkBrief_v1.0.md`
+- Telemetry Contract: `Google Doc ID 1EUwZhP8MEMfLz1Ocb_r7UxIA5doTiSCM59PCqiLHcco`
+- Release Notes: `Google Doc ID 1CCKgG5dmBkjHNiiVLm7RoKM8nfzmlhDpTTqiVpJsytM`
 
 ## 9. Archiv / historischer Stand
 
@@ -76,4 +80,4 @@ Nicht als aktuellen Projektstatus verwenden:
 
 ---
 
-**Pflegeregel:** Neue operative oder wissenschaftliche Links kommen erst in den kanonischen Bereich, wenn ihr aktueller Zweck eindeutig ist. Ersetzte oder historische Ziele werden klar als Archiv/Legacy markiert.
+**Pflegeregel:** Neue operative oder wissenschaftliche Links kommen erst in den kanonischen Bereich, wenn ihr aktueller Zweck eindeutig und das Ziel verifiziert ist. Ersetzte, tote oder historische Ziele werden klar als inaktiv/Archiv/Legacy markiert.
