@@ -1,6 +1,6 @@
 (()=>{
   'use strict';
-  const VERSION='1.1.5';
+  const VERSION='1.1.6';
   const STATE_URL='./registry/2026-09-04_UniverseLab_SiteState_v1.4.json';
   const pages={
     'research-status.html':{id:'UL-PAGE-RESEARCH-STATUS',domain:'status',label:'Forschungsstatus',crumbs:[['UniverseLab','./'],['Forschungsstatus',null]]},
@@ -32,5 +32,5 @@
   fetch(STATE_URL,{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(Error(r.status))).then(render).catch(()=>render(null));
   window.UniverseLabShell={version:VERSION,stateUrl:STATE_URL,page:meta};
 })();
-(()=>{'use strict';if(new URLSearchParams(location.search).get('include-iframe')==='1'||document.querySelector('script[data-ul-print-export-bootstrap-v10]'))return;const s=document.createElement('script');s.src='/UniverseLab/assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js';s.defer=true;s.dataset.ulPrintExportBootstrapV10='1';(document.head||document.documentElement).appendChild(s);})();
+(()=>{'use strict';if(new URLSearchParams(location.search).get('include-iframe')==='1'||document.querySelector('script[data-ul-print-export-bootstrap-v10]'))return;const s=document.createElement('script');s.src='/UniverseLab/assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js?v=1.0.9';s.defer=true;s.dataset.ulPrintExportBootstrapV10='1';(document.head||document.documentElement).appendChild(s);})();
 (()=>{'use strict';if(document.querySelector('script[data-ul-language-switcher-v10]'))return;const s=document.createElement('script');s.src='/UniverseLab/assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js';s.defer=true;s.dataset.ulLanguageSwitcherV10='1';(document.head||document.documentElement).appendChild(s);})();
