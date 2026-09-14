@@ -45,28 +45,47 @@ def test_contract_and_successor() -> None:
 
 def test_inherited_domain_and_complete_interface_rows() -> None:
     r = load(REGISTRY)
+    p = load(PREDECESSOR)
     d = r["inherited_conditional_domain"]
+    pd = p["inherited_conditional_domain"]
     g = r["gauge_operator_extension"]
 
     assert d["name"] == "D_cond"
     assert d["status"] == "FROZEN_CONDITIONAL"
     assert d["physical_release"] is False
     assert "smooth Cartesian" in d["pole_regularity"]
+    assert d["interface"] == pd["interface"]
+    assert d["chi_periodicity"] == pd["chi_periodicity"]
+    assert d["gauge_closure"] == pd["gauge_closure"]
+    assert d["tangential_support_boundaryless_M4"] == pd["tangential_support_boundaryless_M4"]
+    assert d["tangential_support_finite_boundary_M4"] == pd["tangential_support_finite_boundary_M4"]
 
     z = g["bulk_diffeomorphism_rows"]
     u = g["u1_rows"]
     rho = g["intrinsic_interface_rows"]
 
-    # The two P1 omissions of the superseded WP1E branch must not recur.
+    # Complete interface-row coverage is required in all three columns.
+    canonical_interface_rows = {"s", "xi_shape", "tau_a", "H_ab", "Acal_a", "d_a", "generic_moving_pullback"}
+    assert canonical_interface_rows <= set(z)
+    assert canonical_interface_rows <= set(u)
+    assert canonical_interface_rows <= set(rho)
+
+    # Regression controls for the rows previously omitted on stale branches.
+    assert z["s"].startswith("delta s=0")
     assert z["xi_shape"] == "delta xi_shape = -zeta_perp"
     assert z["tau_a"] == "delta tau_a = -zeta_parallel_a"
     assert z["H_ab"] == "delta H_ab = 0 under the paired bulk-field/embedding transformation"
     assert z["d_a"] == "delta d_a = 0 under the paired bulk-field/embedding transformation"
+    assert "DeltaSigma" in z["generic_moving_pullback"]
+
     assert u["s"] == "delta s = q_sigma lambda"
     assert u["Acal_a"] == "delta Acal_a = D_a lambda"
     assert u["d_a"] == "delta d_a = 0"
+    assert u["generic_moving_pullback"].startswith("0;")
+
     assert rho["tau_a"] == "delta tau^a = rho^a"
     assert "2 D_(a rho_b)" in rho["H_ab"]
+    assert rho["generic_moving_pullback"] == "delta t=Lie_rho Tbar"
 
 
 def test_compensator_cancellation() -> None:
@@ -183,9 +202,25 @@ def test_full_g_invariance_firewall() -> None:
     assert s["full_componentwise_rho_invariant_basis"] == "NOT_RELEASED"
 
 
-def test_exact_gate_inheritance() -> None:
+def test_complete_predecessor_gate_inheritance() -> None:
     r = load(REGISTRY)
+    p = load(PREDECESSOR)
     g = r["gate_state"]
+
+    # WP1D2 does not supersede any WP1D1/predecessor gate. Therefore the
+    # complete predecessor gate snapshot must be a value-preserving subset.
+    missing = set(p["gate_state"]) - set(g)
+    assert not missing, f"missing predecessor gates: {sorted(missing)}"
+    for key, value in p["gate_state"].items():
+        assert g[key] == value, (key, g.get(key), value)
+
+    assert g["WP1D2_invariant_candidate_ledger"] == "DERIVED_KINEMATICALLY_CONDITIONAL_REPRESENTATIVE_LEVEL"
+    assert g["WP1D2_projector_solvability_preflight"] == "DERIVED_FAIL_CLOSED_CLOSED_RANGE_NOT_PROVEN"
+    assert g["WP1D2_pole_extension_audit"] == "OPEN_NOT_PROVEN_COMPONENTWISE"
+
+
+def test_exact_physical_and_solver_firewalls() -> None:
+    g = load(REGISTRY)["gate_state"]
     expected = {
         "WP1_physical_boundary_domain": "BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA",
         "WP1D_constraint_elimination": "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
