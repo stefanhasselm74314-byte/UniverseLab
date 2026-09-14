@@ -1,0 +1,35 @@
+name: UniverseLab Provenance Consistency Detectability QA v1.1
+
+on:
+  pull_request:
+    paths:
+      - 'governance/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityRule_v1.1.md'
+      - 'registry/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityContract_v1.1.json'
+      - 'tests/2026-09-15_test_UniverseLab_ProvenanceConsistencyDetectability_v1.1.py'
+      - '.github/workflows/2026-09-15_UniverseLab_ProvenanceConsistencyDetectability_QA_v1.1.yml'
+      - 'registry/2026-09-14_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  documentation-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact candidate head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Verify checkout provenance
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate method documentation and missing-date mutations
+        run: python tests/2026-09-15_test_UniverseLab_ProvenanceConsistencyDetectability_v1.1.py
