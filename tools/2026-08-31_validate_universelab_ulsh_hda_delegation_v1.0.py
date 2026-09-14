@@ -121,6 +121,29 @@ def require_exact_keys(obj: Any, keys: set[str], label: str, errors: list[str]) 
             errors.append(f"{label} missing keys: {missing}")
 
 
+def require_unique_string_list(
+    value: Any, label: str, errors: list[str]
+) -> list[str] | None:
+    if not isinstance(value, list):
+        errors.append(f"{label} must be an array")
+        return None
+    if any(not isinstance(item, str) or not item for item in value):
+        errors.append(f"{label} must contain only non-empty strings")
+        return None
+    if len(value) != len(set(value)):
+        errors.append(f"{label} must not contain duplicate entries")
+        return None
+    return value
+
+
+def require_exact_unique_string_list(
+    value: Any, expected: set[str], label: str, errors: list[str]
+) -> None:
+    items = require_unique_string_list(value, label, errors)
+    if items is not None and set(items) != expected:
+        errors.append(f"{label} mismatch")
+
+
 def main() -> int:
     errors: list[str] = []
     registry = load_json(REGISTRY, errors)
@@ -161,8 +184,10 @@ def main() -> int:
         require(owner.get("role") == EXPECTED_OWNER_ROLE, "owner role mismatch", errors)
         require(owner.get("routine_scientific_gate_decider") is False,
                 "Stefan must not remain routine scientific gate decider", errors)
-        retained = owner.get("retained_powers")
-        require(isinstance(retained, list) and len(retained) >= 4,
+        retained = require_unique_string_list(
+            owner.get("retained_powers"), "delegating_principal.retained_powers", errors
+        )
+        require(retained is not None and len(retained) >= 4,
                 "retained owner powers must be explicit", errors)
 
     authority = registry.get("authority")
@@ -223,19 +248,26 @@ def main() -> int:
     scope = registry.get("substantive_scope")
     require(isinstance(scope, dict), "substantive_scope must be an object", errors)
     if isinstance(scope, dict):
-        require(set(scope.get("ordinary_decision_vocabulary", [])) == EXPECTED_DECISIONS,
-                "ordinary decision vocabulary mismatch", errors)
-        require(
-            set(scope.get("future_execution_decision_vocabulary", []))
-            == EXPECTED_FUTURE_EXECUTION_DECISIONS,
-            "future execution decision vocabulary mismatch",
+        require_exact_unique_string_list(
+            scope.get("ordinary_decision_vocabulary"),
+            EXPECTED_DECISIONS,
+            "ordinary decision vocabulary",
+            errors,
+        )
+        require_exact_unique_string_list(
+            scope.get("future_execution_decision_vocabulary"),
+            EXPECTED_FUTURE_EXECUTION_DECISIONS,
+            "future execution decision vocabulary",
             errors,
         )
         require(scope.get("future_GRANT_is_operative_SingleUseGrant") is False,
                 "future substantive GRANT must not equal operative SingleUseGrant", errors)
         require(scope.get("evidence_bounded") is True,
                 "HDA scope must remain evidence-bounded", errors)
-        allowed = set(scope.get("allowed_decisions", []))
+        allowed_items = require_unique_string_list(
+            scope.get("allowed_decisions"), "substantive_scope.allowed_decisions", errors
+        )
+        allowed = set(allowed_items or [])
         for required_item in {
             "ULSH_14_SOLVER_PRIORITIZATION_AND_SEQUENCE",
             "NEXT_ADMISSIBLE_WORK_PACKAGE_AND_BRANCH",
@@ -244,7 +276,16 @@ def main() -> int:
         }:
             require(required_item in allowed, f"missing allowed HDA decision: {required_item}", errors)
 
-    exclusions = set(registry.get("explicit_exclusions", []))
+    exclusion_items = require_unique_string_list(
+        registry.get("explicit_exclusions"), "explicit_exclusions", errors
+    )
+    exclusions = set(exclusion_items or [])
+    require_unique_string_list(
+        registry.get("forbidden_equivalences"), "forbidden_equivalences", errors
+    )
+    require_unique_string_list(
+        registry.get("authority_hierarchy"), "authority_hierarchy", errors
+    )
     for required_item in {
         "NO_OPERATIVE_AUTHORIZATION_DECISION_FROM_THIS_AMENDMENT",
         "NO_SINGLE_USE_GRANT_FROM_THIS_AMENDMENT",
@@ -292,10 +333,17 @@ def main() -> int:
     require(isinstance(record, dict), "decision_record_contract must be an object", errors)
     if isinstance(record, dict):
         require(record.get("append_only") is True, "decision record must be append-only", errors)
-        require(set(record.get("required_fields", [])) == EXPECTED_REQUIRED_DECISION_FIELDS,
-                "decision record required fields mismatch", errors)
+        require_exact_unique_string_list(
+            record.get("required_fields"),
+            EXPECTED_REQUIRED_DECISION_FIELDS,
+            "decision record required fields",
+            errors,
+        )
 
-    fail_closed = set(registry.get("fail_closed_conditions", []))
+    fail_closed_items = require_unique_string_list(
+        registry.get("fail_closed_conditions"), "fail_closed_conditions", errors
+    )
+    fail_closed = set(fail_closed_items or [])
     for required_item in {
         "PENDING_OR_AMBIGUOUS_CANONICAL_FORUM_IDENTITY",
         "DUPLICATE_LIVE_AUTHORITY_CLAIMANT",
@@ -307,10 +355,14 @@ def main() -> int:
     require(registry.get("fail_closed_result") == "OPERATIONAL_AUTHORITY_SUSPENDED",
             "fail_closed_result mismatch", errors)
 
-    activation = registry.get("future_operational_activation_requirements")
-    require(isinstance(activation, list) and len(activation) >= 12,
+    activation = require_unique_string_list(
+        registry.get("future_operational_activation_requirements"),
+        "future_operational_activation_requirements",
+        errors,
+    )
+    require(activation is not None and len(activation) >= 12,
             "future operational activation requirements are incomplete", errors)
-    if isinstance(activation, list):
+    if activation is not None:
         for required_item in {
             "EXACT_CANONICAL_IDENTITY_BINDING_FOR_HDA_ULSH_MBO_01",
             "INDEPENDENT_DETERMINISTIC_POLICY_VALIDATION",
