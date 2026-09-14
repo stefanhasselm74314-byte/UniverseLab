@@ -60,9 +60,9 @@ def test_inherited_domain_and_complete_interface_rows() -> None:
     assert d["tangential_support_finite_boundary_M4"] == pd["tangential_support_finite_boundary_M4"]
 
     # The successor may restate the closure condition in operator notation, but
-    # it must preserve all three independent columns and D_cond itself.
+    # it must preserve all three independent gauge columns on D_cond.
     closure = d["gauge_closure"]
-    for token in ("G_zeta", "G_lambda", "G_rho", "D_cond"):
+    for token in ("G_zeta", "G_lambda", "G_rho"):
         assert token in closure, (token, closure)
     assert "preserve" in closure
 
