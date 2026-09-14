@@ -32,6 +32,11 @@ EXPECTED_DECISIONS = {
     "REVISE",
     "ESCALATE_CONSTITUTIONAL",
 }
+EXPECTED_FUTURE_EXECUTION_DECISIONS = {
+    "GRANT",
+    "HOLD",
+    "DENY",
+}
 EXPECTED_FIREWALL = {
     "WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
     "WP2": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED",
@@ -220,6 +225,12 @@ def main() -> int:
     if isinstance(scope, dict):
         require(set(scope.get("ordinary_decision_vocabulary", [])) == EXPECTED_DECISIONS,
                 "ordinary decision vocabulary mismatch", errors)
+        require(
+            set(scope.get("future_execution_decision_vocabulary", []))
+            == EXPECTED_FUTURE_EXECUTION_DECISIONS,
+            "future execution decision vocabulary mismatch",
+            errors,
+        )
         require(scope.get("future_GRANT_is_operative_SingleUseGrant") is False,
                 "future substantive GRANT must not equal operative SingleUseGrant", errors)
         require(scope.get("evidence_bounded") is True,
