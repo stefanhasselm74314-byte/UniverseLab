@@ -18,15 +18,71 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "registry/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.json"
 DOCUMENT = ROOT / "governance/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.md"
+CANONICAL_STATE = ROOT / "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json"
 
 # SHA-256 over UTF-8 canonical JSON:
 # json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-# Lists retain their exact sequence. Therefore every list type, entry, duplicate,
-# replacement, omission, addition and (for all lists) order is pinned. This is
-# intentionally stricter than the minimum governance requirement.
+# Lists retain sequence, so every governed field, list type, entry, duplicate,
+# addition, omission, replacement, and order is pinned.
 EXPECTED_REGISTRY_CANONICAL_SHA256 = (
-    "321ea2c1301936f02b0da484ef14ada224b4157abd60fb523a542668bb85cf34"
+    "fd66ba19767e1e3533b8400b3606cdc8b4717c4e2dd24772b28f41b854fbbb38"
 )
+
+EXPECTED_CANONICAL_BASIS = {
+    "path": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+    "schema": "universelab.current-main-canonical-state.v1",
+    "version": "1.3.0",
+    "snapshot_date": "2026-09-04",
+    "status": "POST_BAND_VC_RECONCILED_CURRENT_STATE",
+    "basis_main_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+    "synchronization_class": "CURRENT_CANONICAL_NONEXECUTION_BASELINE",
+}
+
+EXPECTED_METHOD_PREPARATION = {
+    "technical_authority_signature_verifier": "IMPLEMENTED_AND_QA_GREEN",
+    "human_trust_root_preparation_package": "IMPLEMENTED_AND_QA_GREEN",
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "human_trust_root_action": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
+    "authority_signature_provenance": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
+    "runtime_issuance_bindings": "BLOCKED",
+}
+
+EXPECTED_FIREWALL = {
+    "WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
+    "operative_AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_run": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "WP3": "NOT_STARTED",
+    "WP4": "BLOCKED_NOT_AUTHORIZED",
+    "rank_R": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+}
+
+EXPECTED_RESTART_ANCHORS = {
+    "release_subject": "d8890b9ef47936edf8bb7e758b882c898241b314",
+    "target": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "cp01r4_payload": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+    "release_package_16_file": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621",
+}
+
+CANONICAL_TO_FIREWALL = {
+    "ULSH-01-WP1": "WP1",
+    "ULSH-01-WP2": "WP2",
+    "operative_authorization_decision": "operative_AuthorizationDecision",
+    "operative_single_use_grant": "SingleUseGrant",
+    "backend_import": "backend_import",
+    "solver_execution": "solver_run",
+    "physical_background": "physical_background",
+    "ULSH-01-WP3": "WP3",
+    "ULSH-01-WP4": "WP4",
+    "physical_response_rank": "rank_R",
+    "K1-D": "K1-D",
+    "K1-E": "K1-E",
+}
 
 EXPECTED_AUTHORITY_HIERARCHY = [
     "CURRENT_EXPLICIT_CONSTITUTIONAL_OWNER_DECISION",
@@ -38,6 +94,7 @@ EXPECTED_AUTHORITY_HIERARCHY = [
     "PERSISTENT_MEMORY",
     "HISTORICAL_CHATS_AND_EARLIER_ASSISTANT_SUMMARIES",
 ]
+
 EXPECTED_FUTURE_EXECUTION_DECISIONS = ["GRANT", "HOLD", "DENY"]
 EXPECTED_LAYER_IDS = [
     "SUBSTANTIVE_HDA",
@@ -47,26 +104,6 @@ EXPECTED_LAYER_IDS = [
     "PERSISTENT_RESERVATION_STORE",
     "EXECUTION_HARNESS",
 ]
-EXPECTED_FIREWALL = {
-    "WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
-    "WP2": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED",
-    "operative_AuthorizationDecision": "NOT_CREATED",
-    "SingleUseGrant": "NOT_CREATED",
-    "backend_import": "NOT_EXECUTED",
-    "solver_run": "NOT_EXECUTED",
-    "physical_background": "NOT_ESTABLISHED",
-    "WP3": "NOT_STARTED",
-    "WP4": "BLOCKED_NOT_AUTHORIZED",
-    "rank_R": "OPEN_NOT_EXECUTED",
-    "K1-D": "NOT_RELEASED",
-    "K1-E": "NOT_ADMISSIBLE",
-}
-EXPECTED_RESTART_ANCHORS = {
-    "release_subject": "d8890b9ef47936edf8bb7e758b882c898241b314",
-    "target": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
-    "cp01r4_payload": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
-    "release_package_16_file": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621",
-}
 
 PUBLIC_PRIVACY_PATTERNS = {
     "chat_share_link": re.compile(r"https?://chatgpt\.com/share/", re.I),
@@ -78,7 +115,7 @@ PUBLIC_PRIVACY_PATTERNS = {
 
 
 def strict_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    """Reject duplicate JSON object keys rather than silently taking the last."""
+    """Reject duplicate JSON object keys instead of taking the last value."""
     result: dict[str, Any] = {}
     for key, value in pairs:
         if key in result:
@@ -87,19 +124,21 @@ def strict_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
-def load_registry(errors: list[str]) -> tuple[dict[str, Any], str]:
-    if not REGISTRY.is_file():
-        errors.append(f"missing required file: {REGISTRY.relative_to(ROOT)}")
-        return {}, ""
+def load_json_object(
+    path: Path, errors: list[str], label: str
+) -> tuple[dict[str, Any] | None, str]:
+    if not path.is_file():
+        errors.append(f"missing required {label}: {path.relative_to(ROOT)}")
+        return None, ""
     try:
-        text = REGISTRY.read_text(encoding="utf-8")
+        text = path.read_text(encoding="utf-8")
         value = json.loads(text, object_pairs_hook=strict_object)
     except (OSError, json.JSONDecodeError, ValueError) as exc:
-        errors.append(f"cannot strictly parse {REGISTRY.relative_to(ROOT)}: {exc}")
-        return {}, ""
+        errors.append(f"cannot strictly parse {label} {path.relative_to(ROOT)}: {exc}")
+        return None, ""
     if not isinstance(value, dict):
-        errors.append("registry top level must be an object")
-        return {}, text
+        errors.append(f"{label} top level must be an object")
+        return None, text
     return value, text
 
 
@@ -127,24 +166,37 @@ def read_path(value: dict[str, Any], *path: str) -> Any:
     return current
 
 
-def validate_pinned_registry(registry: dict[str, Any], errors: list[str]) -> None:
-    digest = canonical_sha256(registry)
+def validate_registry(registry: dict[str, Any], errors: list[str]) -> None:
     require(
-        digest == EXPECTED_REGISTRY_CANONICAL_SHA256,
-        "registry canonical content digest mismatch; governed fields or list contents drifted",
+        canonical_sha256(registry) == EXPECTED_REGISTRY_CANONICAL_SHA256,
+        "registry canonical content digest mismatch; governed content drifted",
         errors,
     )
-
     require(
-        read_path(registry, "status")
+        registry.get("schema") == "universelab.ulsh.hda-delegation.v1.0",
+        "registry schema mismatch",
+        errors,
+    )
+    require(
+        registry.get("status")
         == "RATIFIED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
         "registry status mismatch",
         errors,
     )
     require(
-        read_path(registry, "classification")
+        registry.get("classification")
         == "GOVERNANCE_DELEGATION_NO_OPERATIONAL_AUTHORITY",
         "registry classification mismatch",
+        errors,
+    )
+    require(
+        registry.get("canonical_state_basis") == EXPECTED_CANONICAL_BASIS,
+        "canonical state basis mismatch",
+        errors,
+    )
+    require(
+        registry.get("method_authority_preparation") == EXPECTED_METHOD_PREPARATION,
+        "method/authority preparation state mismatch",
         errors,
     )
     require(
@@ -159,7 +211,6 @@ def validate_pinned_registry(registry: dict[str, Any], errors: list[str]) -> Non
         "Stefan must not remain the routine scientific gate decider",
         errors,
     )
-
     require(
         read_path(registry, "authority", "authority_id") == "HDA-ULSH-MBO-01",
         "authority ID mismatch",
@@ -205,9 +256,8 @@ def validate_pinned_registry(registry: dict[str, Any], errors: list[str]) -> Non
         "identity ambiguity must suspend operational authority",
         errors,
     )
-
     require(
-        read_path(registry, "authority_hierarchy") == EXPECTED_AUTHORITY_HIERARCHY,
+        registry.get("authority_hierarchy") == EXPECTED_AUTHORITY_HIERARCHY,
         "authority hierarchy ordered contents mismatch",
         errors,
     )
@@ -229,7 +279,7 @@ def validate_pinned_registry(registry: dict[str, Any], errors: list[str]) -> Non
         errors,
     )
 
-    layers = read_path(registry, "decision_to_execution_layers")
+    layers = registry.get("decision_to_execution_layers")
     require(isinstance(layers, list) and len(layers) == 6, "six layers required", errors)
     if isinstance(layers, list):
         require(
@@ -281,15 +331,15 @@ def validate_pinned_registry(registry: dict[str, Any], errors: list[str]) -> Non
             errors,
         )
 
-    require(registry.get("firewall") == EXPECTED_FIREWALL, "CP01R4 firewall changed", errors)
+    require(registry.get("firewall") == EXPECTED_FIREWALL, "firewall mismatch", errors)
     require(
         registry.get("restart_anchors") == EXPECTED_RESTART_ANCHORS,
-        "CP01R4 restart anchors changed",
+        "restart anchors changed",
         errors,
     )
     require(
-        registry.get("cp01r4_state") == "FROZEN_NO_EXECUTION",
-        "CP01R4 must remain frozen",
+        registry.get("cp01r4_state") == "METHOD_FROZEN_NO_EXECUTION",
+        "CP01R4 state mismatch",
         errors,
     )
     require(
@@ -309,12 +359,71 @@ def validate_pinned_registry(registry: dict[str, Any], errors: list[str]) -> Non
     )
 
 
+def validate_against_canonical_state(
+    registry: dict[str, Any], canonical: dict[str, Any], errors: list[str]
+) -> None:
+    basis = registry.get("canonical_state_basis")
+    require(isinstance(basis, dict), "canonical state basis must be an object", errors)
+    if isinstance(basis, dict):
+        for field in ("schema", "version", "snapshot_date", "status", "basis_main_commit"):
+            require(
+                basis.get(field) == canonical.get(field),
+                f"canonical state basis field does not match current state: {field}",
+                errors,
+            )
+
+    physical = canonical.get("physical_governance")
+    require(isinstance(physical, dict), "canonical physical_governance missing", errors)
+    firewall = registry.get("firewall")
+    require(isinstance(firewall, dict), "delegation firewall missing", errors)
+    if isinstance(physical, dict) and isinstance(firewall, dict):
+        for canonical_key, firewall_key in CANONICAL_TO_FIREWALL.items():
+            require(
+                firewall.get(firewall_key) == physical.get(canonical_key),
+                f"delegation firewall stale versus canonical physical_governance: {firewall_key}",
+                errors,
+            )
+        require(
+            registry.get("cp01r4_state") == physical.get("CP01R4"),
+            "delegation CP01R4 state stale versus canonical physical_governance",
+            errors,
+        )
+        require(
+            registry.get("method_authority_preparation")
+            == {key: physical.get(key) for key in EXPECTED_METHOD_PREPARATION},
+            "delegation method-authority preparation stale versus canonical state",
+            errors,
+        )
+        require(
+            physical.get("solver_authorized") is False,
+            "canonical state unexpectedly authorizes solver execution",
+            errors,
+        )
+        require(
+            physical.get("physical_evidence_effect") == "NONE",
+            "canonical physical evidence effect must remain NONE",
+            errors,
+        )
+
+    require(
+        canonical.get("physical_gate_effect") == "NONE",
+        "canonical physical gate effect must remain NONE",
+        errors,
+    )
+    require(
+        canonical.get("physical_evidence_effect") == "NONE",
+        "canonical top-level physical evidence effect must remain NONE",
+        errors,
+    )
+
+
 def main() -> int:
     errors: list[str] = []
-    registry, registry_text = load_registry(errors)
+    registry, registry_text = load_json_object(REGISTRY, errors, "delegation registry")
+    canonical, _ = load_json_object(CANONICAL_STATE, errors, "canonical state")
 
     if not DOCUMENT.is_file():
-        errors.append(f"missing required file: {DOCUMENT.relative_to(ROOT)}")
+        errors.append(f"missing governance document: {DOCUMENT.relative_to(ROOT)}")
         document_text = ""
     else:
         document_text = DOCUMENT.read_text(encoding="utf-8")
@@ -323,8 +432,12 @@ def main() -> int:
         if pattern.search(registry_text) or pattern.search(document_text):
             errors.append(f"public governance artifact contains forbidden privacy pattern: {label}")
 
-    if registry:
-        validate_pinned_registry(registry, errors)
+    # Do not use truthiness here: an empty JSON object must still reach the
+    # pinned validation and fail closed through its digest and required fields.
+    if registry is not None:
+        validate_registry(registry, errors)
+    if registry is not None and canonical is not None:
+        validate_against_canonical_state(registry, canonical, errors)
 
     for fragment in (
         "HDA-ULSH-MBO-01",
@@ -334,8 +447,13 @@ def main() -> int:
         "USER_DECLARED_REFERENCE_NOT_COMMITTED_PUBLICLY",
         "SIGN_EXACT_PAYLOAD_OR_REJECT",
         "OPERATIONAL_AUTHORITY_SUSPENDED",
+        "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+        "WP2                            = METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
+        "ratified_human_trust_root               = NOT_RATIFIED",
+        "runtime_issuance_bindings               = BLOCKED",
+        "CP01R4                         = METHOD_FROZEN_NO_EXECUTION",
         "RATIFIED NONOPERATIVE SCIENTIFIC AND SOLVER-GOVERNANCE AUTHORITY",
-        "CP01R4                         = FROZEN_NO_EXECUTION",
+        "CP01R4\n= METHOD_FROZEN_NO_EXECUTION",
         "physical gate effect\n= NONE",
         "physical evidence effect\n= NONE",
     ):
@@ -349,11 +467,13 @@ def main() -> int:
 
     print("ULSH HDA Delegation QA: PASS")
     print(f"registry_canonical_sha256={EXPECTED_REGISTRY_CANONICAL_SHA256}")
-    print("all governed registry fields and list contents are exactly pinned")
+    print("all governed registry content is exactly pinned")
+    print("canonical_state=v1.3.0 and physical_governance cross-check=PASS")
     print("authority=HDA-ULSH-MBO-01")
     print("substantive_nonoperative_authority=true operative_authority=false")
     print("identity_binding=PENDING_CANONICAL_ID_BINDING")
-    print("CP01R4=FROZEN_NO_EXECUTION")
+    print("WP2=METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED")
+    print("CP01R4=METHOD_FROZEN_NO_EXECUTION")
     print("physical_gate_effect=NONE physical_evidence_effect=NONE")
     print("PASS is governance consistency, not execution authorization or physical evidence.")
     return 0
