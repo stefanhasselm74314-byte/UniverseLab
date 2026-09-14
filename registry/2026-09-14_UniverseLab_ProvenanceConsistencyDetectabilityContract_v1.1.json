@@ -1,0 +1,115 @@
+{
+  "schema": "universelab.provenance-consistency-detectability-contract.v1.1",
+  "rule_id": "UL-PKNR-v1.1",
+  "date": "2026-09-14",
+  "updated": "2026-09-15",
+  "basis_main": "e444d84efeb398e582a9ca84d61e0c55931ae586",
+  "document": "governance/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityRule_v1.1.md",
+  "adoption": {
+    "status": "USER_RATIFIED_METHOD_RULE",
+    "source_kind": "EXPLICIT_USER_INSTRUCTION",
+    "scope": "FUTURE_UNIVERSELAB_EVALUATIONS",
+    "cryptographic_attestation": "NOT_CLAIMED"
+  },
+  "publication": {
+    "status": "REVIEW_CANDIDATE_SEE_PULL_REQUEST",
+    "branch": "2026-09-15-provenance-consistency-detectability-v1-0",
+    "merge_claim": false,
+    "historical_v1_0_write_attempt": "BLOCKED_AS_RECORDED_IN_LOCAL_HANDOFF"
+  },
+  "architecture": ["HPVS", "HZT-M0", "HZT-Full"],
+  "rules": {
+    "P1": "SOURCE_DATA_PIPELINE_AND_COVARIANCE_PROVENANCE",
+    "P2": "MODEL_IDENTITY_TOPOLOGY_DOMAIN_AND_REGIME",
+    "P3": "DERIVED_NECESSARY_PREDICTION",
+    "P4": "QUANTIFIED_DETECTABILITY_AND_ERROR_CONTROL",
+    "P5": "JOINT_COUNTERTESTS_DEPENDENCIES_AND_EXCLUSION_SCOPE",
+    "automatic_geometry_priority": false,
+    "universal_echo_requirement": false,
+    "universal_counterimage_requirement": false,
+    "missing_test_means_pass": false,
+    "double_count_fit_data_as_independent_evidence": false,
+    "source_revision_requires_dependency_revalidation": true,
+    "reference_and_alternative_models_treated_symmetrically": true
+  },
+  "non_detection": {
+    "p_det": "P(T>=T_star|H,theta,eta)",
+    "p_non_detection": "1-p_det(theta,eta)",
+    "nuisance_methods_distinct": ["MARGINALIZED", "ROBUST_OVER_DECLARED_SET"],
+    "universal_threshold": null,
+    "actual_p_det_computed_here": false,
+    "unknown_coupling_status": "OPEN_NO_BLANKET_EXCLUSION",
+    "physical_exclusion_generated_here": false
+  },
+  "technical_clarifications": {
+    "status": "EDITORIAL_PROPOSALS_NOT_SEPARATE_USER_RATIFICATION",
+    "stochastic_prediction": "Model-derived predictive distributions can be valid; deterministic waveform is not universally necessary.",
+    "status_granularity": "Proven formula errors remain disproven for those formulas; unconstructed physical predictions remain OPEN.",
+    "EH3_nullmode": "NOT_REPRODUCED_OR_RELEASED_BY_THIS_RULE",
+    "homogeneous_stability": "NOT_FULL_STABILITY_OR_GHOST_FREEDOM",
+    "M1_smoothness": "SMOOTH_POLES_DO_NOT_IMPLY_ZERO_CAP_STRESS_WITHOUT_FULLY_SMOOTH_INTERFACE_MATCHING"
+  },
+  "evidence_record_required_fields": [
+    "claim_id", "claim_scope", "source_identifier", "source_version", "retrieval_status",
+    "observation_publication_and_retrieval_dates", "data_product_identifier", "data_level",
+    "calibration_and_processing", "noise_and_covariance", "model_and_parameter_domain",
+    "action_topology_and_boundary_domain", "prediction_derivation_reference",
+    "excitation_and_coupling_assumptions", "instrument_response",
+    "search_statistic_threshold_and_trials", "selection_and_injection_recovery",
+    "p_det_and_uncertainty_or_explicit_unknown", "nuisance_treatment", "dependency_map",
+    "alternative_explanations", "decision_method_and_error_control",
+    "excluded_domain_or_explicit_no_exclusion", "statement_status_and_limitations",
+    "downstream_dependencies"
+  ],
+  "unknown_fields": "EXPLICIT_UNKNOWN_OR_REASONED_NOT_APPLICABLE_NEVER_SILENT_PASS",
+  "a1_baseline": {
+    "object": "A1 behind MACS J0308.9+2645",
+    "arxiv_id": "2607.12129",
+    "version_user_supplied": "v2",
+    "version_date_user_supplied": "2026-08-07",
+    "primary_version_verified_at_creation": false,
+    "arxiv_direct_retrieval": "UNAVAILABLE",
+    "known_photometric_reinterpretation": "approximately 4.4 to approximately 1.4",
+    "range_user_supplied": [1.2, 1.7],
+    "range_primary_verified_at_creation": false,
+    "supporting_author_affiliated_source": "https://skycr.org/2026/08/28/universe-today-gravitational-arc-macs-j0308/",
+    "notify_known_reanalysis_again": false,
+    "new_result_categories": ["SPECTROSCOPIC_REDSHIFT", "DEDICATED_A1_LENS_MODEL", "COUNTERIMAGE_OR_MAGNIFICATION_CHANGE"],
+    "watch_is_read_only": true,
+    "metadata_only_alert": false,
+    "press_repeat_alert": false,
+    "temporary_source_failure_is_scientific_alert": false
+  },
+  "gate_inheritance": {
+    "mode": "REFERENCE_ONLY_NO_OVERRIDE",
+    "is_gate_snapshot": false,
+    "source_ref": "e444d84efeb398e582a9ca84d61e0c55931ae586",
+    "source": "registry/2026-09-14_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.json",
+    "source_blob_sha": "fc378618467646262a55ea36b2b686f4fc91252a",
+    "read_entire_applicable_canonical_contract": true,
+    "overrides": {}
+  },
+  "effects": {
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE",
+    "solver_authorized": false,
+    "creates_authorization_decision": false,
+    "creates_single_use_grant": false,
+    "authorizes_backend_import": false,
+    "authorizes_physical_solver_execution": false,
+    "assigns_ulsh_successor": false
+  },
+  "implementation": {
+    "machine_readable_documentation": true,
+    "automatic_evidence_evaluator": false,
+    "global_pipeline_enforcement": false,
+    "green_qa_is_physical_evidence": false
+  },
+  "revision_provenance": {
+    "previous_local_file": "2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityContract_v1.0.json",
+    "previous_sha256": "1fe9f55ac1dfc37447bea5654a3b27a81d82f2a13c21206c50b39865d0b7cfcc",
+    "changed_scope": ["version_and_publication_metadata", "repository_document_path"],
+    "method_rules_changed": false,
+    "a1_historical_baseline_reverified": false
+  }
+}
