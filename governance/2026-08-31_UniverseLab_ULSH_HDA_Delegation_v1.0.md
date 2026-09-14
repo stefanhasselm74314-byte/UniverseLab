@@ -193,13 +193,35 @@ Within its delegated scope, an HDA decision must not be displaced by a lower-pri
 
 If two authoritative records conflict and priority does not resolve the conflict, the result is `HOLD` or `ESCALATE_CONSTITUTIONAL`, never silent selection.
 
-## 9. CP01R4 firewall
+## 9. Current canonical nonexecution baseline and CP01R4 firewall
 
-This amendment preserves the complete frozen baseline:
+This amendment is synchronized to:
+
+```text
+registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json
+schema            = universelab.current-main-canonical-state.v1
+version           = 1.3.0
+snapshot_date     = 2026-09-04
+status            = POST_BAND_VC_RECONCILED_CURRENT_STATE
+basis_main_commit = 3022dc8aac27ed2054fdb7643708fe57440b9256
+```
+
+The current canonical state records that method- and authority-preparation components have been implemented and passed QA, while the human trust root remains unratified and all runtime issuance bindings remain blocked:
+
+```text
+technical_authority_signature_verifier = IMPLEMENTED_AND_QA_GREEN
+human_trust_root_preparation_package    = IMPLEMENTED_AND_QA_GREEN
+ratified_human_trust_root               = NOT_RATIFIED
+human_trust_root_action                 = PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS
+authority_signature_provenance          = BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION
+runtime_issuance_bindings               = BLOCKED
+```
+
+These preparation results do not constitute operative authority. The current canonical nonexecution baseline is preserved exactly as follows:
 
 ```text
 WP1                            = CLOSED_TARGET_FROZEN_NO_EXECUTION
-WP2                            = READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED
+WP2                            = METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED
 operative_AuthorizationDecision= NOT_CREATED
 SingleUseGrant                 = NOT_CREATED
 backend_import                 = NOT_EXECUTED
@@ -207,10 +229,10 @@ solver_run                     = NOT_EXECUTED
 physical_background            = NOT_ESTABLISHED
 WP3                            = NOT_STARTED
 WP4                            = BLOCKED_NOT_AUTHORIZED
-rank_R                         = OPEN_NOT_EXECUTED
+rank_R                         = NOT_EXECUTED
 K1-D                           = NOT_RELEASED
 K1-E                           = NOT_ADMISSIBLE
-CP01R4                         = FROZEN_NO_EXECUTION
+CP01R4                         = METHOD_FROZEN_NO_EXECUTION
 physical_gate_effect           = NONE
 physical_evidence_effect       = NONE
 ```
@@ -274,7 +296,7 @@ operative authority
 = FALSE
 
 CP01R4
-= FROZEN_NO_EXECUTION
+= METHOD_FROZEN_NO_EXECUTION
 
 physical gate effect
 = NONE
