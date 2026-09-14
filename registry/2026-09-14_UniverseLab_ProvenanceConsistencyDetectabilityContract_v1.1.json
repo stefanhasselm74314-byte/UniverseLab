@@ -51,9 +51,9 @@
   },
   "evidence_record_required_fields": [
     "claim_id", "claim_scope", "source_identifier", "source_version", "retrieval_status",
-    "observation_publication_and_retrieval_dates", "data_product_identifier", "data_level",
-    "calibration_and_processing", "noise_and_covariance", "model_and_parameter_domain",
-    "action_topology_and_boundary_domain", "prediction_derivation_reference",
+    "source_version_date", "observation_date", "publication_date", "retrieval_date",
+    "data_product_identifier", "data_level", "calibration_and_processing", "noise_and_covariance",
+    "model_and_parameter_domain", "action_topology_and_boundary_domain", "prediction_derivation_reference",
     "excitation_and_coupling_assumptions", "instrument_response",
     "search_statistic_threshold_and_trials", "selection_and_injection_recovery",
     "p_det_and_uncertainty_or_explicit_unknown", "nuisance_treatment", "dependency_map",
@@ -108,8 +108,9 @@
   "revision_provenance": {
     "previous_local_file": "2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityContract_v1.0.json",
     "previous_sha256": "1fe9f55ac1dfc37447bea5654a3b27a81d82f2a13c21206c50b39865d0b7cfcc",
-    "changed_scope": ["version_and_publication_metadata", "repository_document_path"],
+    "changed_scope": ["version_and_publication_metadata", "repository_document_path", "machine_checklist_alignment_with_existing_P1_separate_date_requirement"],
     "method_rules_changed": false,
-    "a1_historical_baseline_reverified": false
+    "a1_historical_baseline_reverified": false,
+    "review_fix": "PR235: source-version, observation, publication and retrieval dates are four distinct required fields, implementing the existing MD P1 requirement."
   }
 }
