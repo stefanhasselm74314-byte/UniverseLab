@@ -1,5 +1,5 @@
 {
-  "basis_commit": "c1114657fdd2003a458992334ddb2f0c7b6f559e",
+  "basis_commit": "a73dc494dfa9fed008bca999a6edbb6969c889a0",
   "candidates": [
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -418,7 +418,7 @@
       "preliminary_risk_score": 4,
       "region": "section",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "p",
       "text": "Primärer Pfad: HZT-M0 Forward Map → MOND/RAR → Kosmologie/Growth/Lensing → Identifizierbarkeit → Likelihoods → Falsifikationsatlas."
     },
@@ -438,7 +438,7 @@
       "preliminary_risk_score": 4,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "Parent→Reduced-Brücke + NR-Grundgerüst"
     },
@@ -1051,7 +1051,7 @@
       "preliminary_risk_score": 3,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "Falsifikation & frühes Universum"
     },
@@ -1071,7 +1071,7 @@
       "preliminary_risk_score": 3,
       "region": "document",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "title",
       "text": "UniverseLab · Hyperzeit 10M Research Program"
     },
@@ -1091,7 +1091,7 @@
       "preliminary_risk_score": 3,
       "region": "document",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "meta-description",
       "text": "Ratified UniverseLab/Hyperzeit 10-month CP01R4-independent research program 2026–2027."
     },
@@ -2917,7 +2917,7 @@
       "preliminary_risk_score": 2,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "WS5 COS-0/COS-1; WS4 DATA-3/4; WS6 STAB-1/2"
     },
@@ -2937,7 +2937,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "h2",
       "text": "Große kosmologische Rätsel – HZT-Relevanz- und No-Go-Audits"
     },
@@ -2957,7 +2957,7 @@
       "preliminary_risk_score": 2,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "Kosmologie-Schnittstellen"
     },
@@ -2977,7 +2977,7 @@
       "preliminary_risk_score": 2,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "Likelihood & Robustheit"
     },
@@ -2997,7 +2997,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "h2",
       "text": "Kosmologie, Growth und Lensing"
     },
@@ -3017,7 +3017,7 @@
       "preliminary_risk_score": 2,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "vollständige Parameter-/Claim-/Daten-/Dokustruktur"
     },
@@ -3037,7 +3037,7 @@
       "preliminary_risk_score": 2,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "WS1 FM-3/FM-4; WS2 RAR-1/RAR-2; WS4 DATA-1/2"
     },
@@ -3057,7 +3057,7 @@
       "preliminary_risk_score": 2,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "Falsifikationskarten + Vergleichs-SGWB"
     },
@@ -3077,7 +3077,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "h2",
       "text": "Beobachtungsdaten und Likelihood-Infrastruktur"
     },
@@ -3097,7 +3097,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "h2",
       "text": "HPVS / K1–K7: Identifizierbarkeit, Robustheit und Falsifizierbarkeit"
     },
@@ -3117,7 +3117,7 @@
       "preliminary_risk_score": 2,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "WS1 FM-0; WS3 HPVS-0; WS4 DATA-0; WS11 DOC-0"
     },
@@ -3137,7 +3137,7 @@
       "preliminary_risk_score": 2,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "WS4 DATA-5/6; WS3 K3–K7; WS6 STAB-3/4"
     },
@@ -5240,7 +5240,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "KOSMOLOGIE Öffnen →"
     },
@@ -5260,7 +5260,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 7,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "h3",
       "text": "Machine-Data-Viewer v1.1"
     },
@@ -6212,7 +6212,7 @@
       "preliminary_risk_score": 1,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "Growth/Lensing & Identifizierbarkeit"
     },
@@ -6230,7 +6230,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "p",
       "text": "Status: BACKLOG_GATED"
     },
@@ -6250,7 +6250,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "h2",
       "text": "Frühes Universum, Phasenübergänge und stochastische GW"
     },
@@ -6270,7 +6270,7 @@
       "preliminary_risk_score": 1,
       "region": "section",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "section",
       "text": "CP01R4-HOLD: kein operativer AuthorizationDecision, kein SingleUseGrant, kein Backendimport, kein Solverlauf, kein WP3/WP4-Start. physical background = NOT_ESTABLISHED · rank R = NOT_EXECUTED · K1-D = NOT_RELEASED · K1-E = NOT_ADMISSIBLE ."
     },
@@ -10447,7 +10447,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 2,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "KANONISCH Öffnen →"
     },
@@ -10465,7 +10465,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 3,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "AKTIV Programm öffnen →"
     },
@@ -10483,7 +10483,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 3,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "FM-0 Inventar öffnen → Registry JSON { }"
     },
@@ -10501,7 +10501,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 4,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "SCI-001/002 Öffnen →"
     },
@@ -10519,7 +10519,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 4,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "h3",
       "text": "Bibliographiekatalog"
     },
@@ -10537,7 +10537,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "VERGLEICH Öffnen →"
     },
@@ -10555,7 +10555,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "INTERAKTIV Öffnen →"
     },
@@ -10575,7 +10575,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "h3",
       "text": "Journey · Emergence · Universe 3D"
     },
@@ -10593,7 +10593,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 6,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "DIAGNOSTISCH Öffnen →"
     },
@@ -10611,7 +10611,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 6,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "ENTWICKLER Öffnen →"
     },
@@ -10629,7 +10629,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 10,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "HISTORISCH Öffnen →"
     },
@@ -10647,7 +10647,7 @@
       "preliminary_risk_score": 1,
       "region": "main",
       "source_line": 11,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "div",
       "text": "K1-D = NOT_RELEASED und K1-E = NOT_ADMISSIBLE bleiben unverändert."
     },
@@ -12458,7 +12458,7 @@
       "preliminary_risk_score": 0,
       "region": "main",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "td",
       "text": "Integration & No-Go Closure"
     },
@@ -12478,7 +12478,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "h2",
       "text": "ULSH-07 / Kaluza-Klein Spectrum Solver – Vorbereitung"
     },
@@ -12906,7 +12906,7 @@
       "preliminary_risk_score": 0,
       "region": "section",
       "source_line": 1,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "p",
       "text": "Kanonische Zugänge zuerst; Forschungsprogramm, Wissenschaft, Rechner, Solver, Entwickler, Support und historische Ziele sind klar getrennt."
     },
@@ -12926,7 +12926,7 @@
       "preliminary_risk_score": 0,
       "region": "document",
       "source_line": 1,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "meta-description",
       "text": "UniverseLab Wichtige Links: aktuelle kanonische Zugänge, Forschungsprogramm, Wissenschaft, Rechner, Solver, Entwickler und Archiv."
     },
@@ -12947,7 +12947,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "article",
       "text": "VISUALISIERUNG Journey → Emergence → Universe 3D → Conway →"
     },
@@ -12967,7 +12967,7 @@
       "preliminary_risk_score": 0,
       "region": "section",
       "source_line": 6,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
       "tag": "h2",
       "text": "Solver, Governance & Entwickler"
     },
@@ -15643,7 +15643,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "section",
       "text": "FM-G0 bleibt offen, bis jede Kerngröße einen expliziten Definition-/Unit-/Provenienzstatus besitzt."
     },
@@ -15663,7 +15663,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 1,
-      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
+      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
       "tag": "section",
       "text": "Programmdokumentation und QA haben physical_evidence_effect = NONE ."
     },
@@ -17969,6 +17969,48 @@
       "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
       "tag": "p",
       "text": "Als Theoriegeschichte und Testansatz bewahren; keine aktuelle Hyperzeit-Vorhersage."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-338CAF57DF1E7F94",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "DERIVATION_IDENTIFICATION",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
+      "path": "links.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 9,
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "tag": "p",
+      "text": "Kein verifizierter kanonischer Ersatz identifiziert."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-E701D6D6A13D5D3F",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "DERIVATION_IDENTIFICATION",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
+      "path": "links.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 9,
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "tag": "p",
+      "text": "Kein verifizierter Ersatz identifiziert."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
