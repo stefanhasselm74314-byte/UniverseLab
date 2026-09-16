@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.0.js'
       - 'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
       - 'assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js'
       - '2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js'
@@ -14,6 +15,7 @@ on:
     branches: [main]
     paths:
       - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.0.js'
       - 'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
       - 'assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js'
       - '2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js'

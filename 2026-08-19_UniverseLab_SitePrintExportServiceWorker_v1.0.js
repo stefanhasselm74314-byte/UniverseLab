@@ -19,7 +19,7 @@ self.addEventListener('fetch',event=>{
     let html=await response.text();const injections=[];
     const hasGlobalShell=html.includes('2026-08-16_UniverseLab_GlobalShell_v1.1.js');
     const hasSharedBootstrap=hasGlobalShell||html.includes('2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js')||html.includes('2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.0.js');
-    const hasLanguage=!hasGlobalShell&&(hasSharedBootstrap||html.includes('UniverseLab_SiteLanguageSwitcher'));
+    const hasLanguage=html.includes('2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js');
     const hasDocumentRouter=hasSharedBootstrap||html.includes('UniverseLab_DocumentLinkRouter');
     const hasPrint=hasSharedBootstrap||html.includes('2026-08-19_UniverseLab_SitePrintExport_v1.0.js');
     if(!hasLanguage)injections.push('<script data-ul-language-switcher-sw="1" src="'+LANGUAGE+'" defer></script>');

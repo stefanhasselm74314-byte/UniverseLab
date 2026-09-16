@@ -39,6 +39,14 @@ const assert = require('assert');
   assert.strictEqual(await page.locator('#ul-test-legacy-switcher').count(),0,'legacy switcher outside the gate row must be replaced');
   assert.deepStrictEqual(errors,[],'page must have no JS errors');
 
+  await page.goto('http://127.0.0.1:4173/UniverseLab/index.html',{waitUntil:'networkidle'});
+  const indexWrap=page.locator('[data-ul-language-switcher]');
+  await indexWrap.locator('select').waitFor({state:'visible',timeout:10000});
+  assert.strictEqual(await indexWrap.count(),1,'compatibility loader must mount exactly one current switcher');
+  assert.strictEqual(await page.locator('script[src*="2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.1.js"]').count(),0,'compatibility loader must not append the legacy v1.1 asset');
+  assert.strictEqual(await page.locator('script[src*="2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js"]').count(),1,'compatibility loader must append the current switcher asset');
+  assert.strictEqual(await indexWrap.evaluate(el=>getComputedStyle(el).position),'static','compatibility switcher must not float on mobile');
+
   await page.goto('http://127.0.0.1:4173/UniverseLab/navigator.html',{waitUntil:'networkidle'});
   const navWrap=page.locator('[data-ul-language-switcher]');
   const navSelect=navWrap.locator('select');
@@ -81,6 +89,14 @@ const assert = require('assert');
   }
 
   await assertControlledShell('controlled navigation 1');
+  await page.goto('http://127.0.0.1:4173/UniverseLab/index.html',{waitUntil:'networkidle'});
+  const controlledIndexSwitches=page.locator('[data-ul-language-switcher]');
+  await controlledIndexSwitches.locator('select').waitFor({state:'visible',timeout:10000});
+  assert.strictEqual(await controlledIndexSwitches.count(),1,'controlled compatibility navigation: expected exactly one switcher');
+  assert.strictEqual(await page.locator('script[src*="2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.1.js"]').count(),0,'controlled compatibility navigation: legacy asset must not load');
+  const controlledIndexScripts=await page.locator('script[src*="2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js"]').count();
+  assert(controlledIndexScripts>=1&&controlledIndexScripts<=2,'controlled compatibility navigation: expected current loader plus at most one worker recovery copy');
+  assert.strictEqual(await controlledIndexSwitches.evaluate(el=>getComputedStyle(el).position),'static','controlled compatibility switcher must not float on mobile');
   await page.goto('http://127.0.0.1:4173/UniverseLab/navigator.html',{waitUntil:'networkidle'});
   await page.goto('http://127.0.0.1:4173/UniverseLab/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html',{waitUntil:'networkidle'});
   await assertControlledShell('controlled navigation 2');
