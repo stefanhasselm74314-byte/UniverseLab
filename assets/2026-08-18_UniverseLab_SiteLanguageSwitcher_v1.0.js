@@ -1,6 +1,6 @@
-/* UniverseLab Site Language Switcher v1.0 compatibility loader.
- * Superseded by v1.1. Kept so existing pages automatically receive curated
- * English routing without requiring immediate HTML rewrites.
+/* UniverseLab Site Language Switcher v1.0 compatibility loader v1.0.1.
+ * Kept so existing pages automatically receive the current gate-aware switcher
+ * and curated English routing without requiring immediate HTML rewrites.
  * Also chains the site-wide print/export bootstrap so existing pages using this
  * shared loader receive the utility without page-by-page rewrites.
  */
@@ -12,6 +12,6 @@
     if(document.querySelector('script['+marker+']'))return;
     const s=document.createElement('script');s.src=new URL(src,assetBase).href;s.defer=true;s.setAttribute(marker,'1');(document.head||document.documentElement).appendChild(s);
   }
-  add('2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.1.js','data-ul-lang-v11');
+  add('2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js?v=1.0.3','data-ul-language-switcher-loader');
   add('2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js','data-ul-print-export-bootstrap-v10');
 })();
