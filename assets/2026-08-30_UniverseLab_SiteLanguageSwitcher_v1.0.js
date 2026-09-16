@@ -28,6 +28,7 @@ function mount(){const gates=document.querySelector('.ul-shell__gates');const ex
    if(expectsGates)return false;
    const canonical=existing.find(node=>node.classList.contains('ul-shell__language'));
    if(canonical){existing.filter(node=>node!==canonical).forEach(node=>node.remove());return true}
+   existing.forEach(node=>node.remove());
  }
  const host=gates||document.querySelector('.shell')||document.querySelector('header')||document.querySelector('nav')||document.body;if(!host)return false;injectStyle();
  const wrap=document.createElement('label');wrap.className='ul-shell__language';wrap.dataset.ulLanguageSwitcher=VERSION;wrap.title='Sprache auswählen';
