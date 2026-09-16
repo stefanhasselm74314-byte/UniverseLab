@@ -5,6 +5,9 @@ on:
     paths:
       - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
       - 'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
+      - 'assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js'
+      - '2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js'
+      - '2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html'
       - 'tests/2026-08-30_test_LanguageSwitcherShell_v1.0.js'
       - '.github/workflows/2026-08-30_UniverseLab_LanguageSwitcherShell_QA_v1.0.yml'
   push:
@@ -12,6 +15,9 @@ on:
     paths:
       - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
       - 'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
+      - 'assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js'
+      - '2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js'
+      - '2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html'
       - 'tests/2026-08-30_test_LanguageSwitcherShell_v1.0.js'
       - '.github/workflows/2026-08-30_UniverseLab_LanguageSwitcherShell_QA_v1.0.yml'
 
@@ -39,5 +45,5 @@ jobs:
           python3 -m http.server 4173 >/tmp/ul-http.log 2>&1 &
           echo $! > /tmp/ul-http.pid
           sleep 2
-      - name: Verify visible language selector and curated English routing
+      - name: Verify shell placement and controlled two-navigation parity
         run: node tests/2026-08-30_test_LanguageSwitcherShell_v1.0.js
