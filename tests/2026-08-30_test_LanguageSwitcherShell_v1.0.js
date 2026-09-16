@@ -89,6 +89,9 @@ const assert = require('assert');
   }
 
   await assertControlledShell('controlled navigation 1');
+  await page.goto('http://127.0.0.1:4173/UniverseLab/navigator.html',{waitUntil:'networkidle'});
+  await page.goto('http://127.0.0.1:4173/UniverseLab/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html',{waitUntil:'networkidle'});
+  await assertControlledShell('controlled navigation 2');
   await page.goto('http://127.0.0.1:4173/UniverseLab/index.html',{waitUntil:'networkidle'});
   const controlledIndexSwitches=page.locator('[data-ul-language-switcher]');
   await controlledIndexSwitches.locator('select').waitFor({state:'visible',timeout:10000});
@@ -97,9 +100,7 @@ const assert = require('assert');
   const controlledIndexScripts=await page.locator('script[src*="2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js"]').count();
   assert(controlledIndexScripts>=1&&controlledIndexScripts<=2,'controlled compatibility navigation: expected current loader plus at most one worker recovery copy');
   assert.strictEqual(await controlledIndexSwitches.evaluate(el=>getComputedStyle(el).position),'static','controlled compatibility switcher must not float on mobile');
-  await page.goto('http://127.0.0.1:4173/UniverseLab/navigator.html',{waitUntil:'networkidle'});
-  await page.goto('http://127.0.0.1:4173/UniverseLab/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html',{waitUntil:'networkidle'});
-  await assertControlledShell('controlled navigation 2');
+  await page.waitForFunction(async()=>!(await navigator.serviceWorker.getRegistrations()).length,null,{timeout:10000});
   await page.evaluate(async()=>{const registrations=await navigator.serviceWorker.getRegistrations();await Promise.all(registrations.map(reg=>reg.unregister()))});
   assert.deepStrictEqual(errors,[],'controlled navigation must have no JS errors');
   await browser.close();
