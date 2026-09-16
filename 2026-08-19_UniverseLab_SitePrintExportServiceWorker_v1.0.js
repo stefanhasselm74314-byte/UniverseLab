@@ -17,8 +17,9 @@ self.addEventListener('fetch',event=>{
   event.respondWith((async()=>{
     const response=await fetch(req);const type=(response.headers.get('content-type')||'').toLowerCase();if(!response.ok||!type.includes('text/html'))return response;
     let html=await response.text();const injections=[];
-    const hasSharedBootstrap=html.includes('2026-08-16_UniverseLab_GlobalShell_v1.1.js')||html.includes('2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js')||html.includes('2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.0.js');
-    const hasLanguage=hasSharedBootstrap||html.includes('UniverseLab_SiteLanguageSwitcher');
+    const hasGlobalShell=html.includes('2026-08-16_UniverseLab_GlobalShell_v1.1.js');
+    const hasSharedBootstrap=hasGlobalShell||html.includes('2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js')||html.includes('2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.0.js');
+    const hasLanguage=!hasGlobalShell&&(hasSharedBootstrap||html.includes('UniverseLab_SiteLanguageSwitcher'));
     const hasDocumentRouter=hasSharedBootstrap||html.includes('UniverseLab_DocumentLinkRouter');
     const hasPrint=hasSharedBootstrap||html.includes('2026-08-19_UniverseLab_SitePrintExport_v1.0.js');
     if(!hasLanguage)injections.push('<script data-ul-language-switcher-sw="1" src="'+LANGUAGE+'" defer></script>');

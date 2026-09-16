@@ -1,8 +1,8 @@
 # UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1
 
-**Extraktionsbasis:** `a73dc494dfa9fed008bca999a6edbb6969c889a0`  
+**Extraktionsbasis:** `c1114657fdd2003a458992334ddb2f0c7b6f559e`  
 **HTML-Dateien:** `72`  
-**Claim-Kandidaten:** `995`  
+**Claim-Kandidaten:** `993`  
 **HIGH/MEDIUM:** `46`  
 **Status:** `GENERATED_NOT_ADJUDICATED`  
 **Physical gate effect:** `NONE`  

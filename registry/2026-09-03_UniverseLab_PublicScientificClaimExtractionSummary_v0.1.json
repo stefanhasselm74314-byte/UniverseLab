@@ -1,23 +1,23 @@
 {
-  "basis_commit": "a73dc494dfa9fed008bca999a6edbb6969c889a0",
-  "claim_candidates": 995,
+  "basis_commit": "c1114657fdd2003a458992334ddb2f0c7b6f559e",
+  "claim_candidates": 993,
   "explicit_statuses": {
     "BLOCKED_OR_UNRELEASED": 66,
     "CONDITIONAL_OR_HEURISTIC": 55,
-    "EXPLICITLY_NEGATED_OR_LIMITED": 124,
+    "EXPLICITLY_NEGATED_OR_LIMITED": 122,
     "OPEN_OR_NOT_EXECUTED": 44,
     "UNCLASSIFIED": 706
   },
   "generated_by": "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py",
   "lexical_categories": {
     "CONDITIONAL_HEURISTIC": 64,
-    "DERIVATION_IDENTIFICATION": 70,
+    "DERIVATION_IDENTIFICATION": 68,
     "EVIDENCE_CONFIRMATION": 68,
     "NUMERICAL_METHOD": 124,
     "OBSERVATIONAL_DATA": 115,
     "PHYSICAL_COSMOLOGY": 171,
     "PREDICTION_SIGNATURE": 25,
-    "STATUS_FIREWALL": 234,
+    "STATUS_FIREWALL": 232,
     "THEORY_6D_PARENT": 141
   },
   "limitations": [
@@ -116,7 +116,7 @@
       "path": "2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": false,
-      "source_sha256": "5015e49e72c20f2e8bad3f45afe46241e975ccc70412f6d2e1b2c8e0998ffea0",
+      "source_sha256": "da9ef328bdd2bb5e898a2be782bc45a6f6783192ef1db8360998d6ec074559cd",
       "visible_blocks": 89
     },
     {
@@ -449,8 +449,8 @@
       "path": "links.html",
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
-      "visible_blocks": 80
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
+      "visible_blocks": 76
     },
     {
       "manifest_member": false,
@@ -683,12 +683,12 @@
     "PUBLIC_REPOSITORY_README": 34,
     "PUBLIC_SITEMAP_PAGE": 340,
     "TRACKED_ARCHIVE_OR_UTILITY_PAGE": 69,
-    "TRACKED_NON_SITEMAP_PAGE": 183
+    "TRACKED_NON_SITEMAP_PAGE": 181
   },
   "physical_evidence_effect": "NONE",
   "physical_gate_effect": "NONE",
   "risk_classes": {
-    "CONTEXT_OR_FIREWALL": 366,
+    "CONTEXT_OR_FIREWALL": 364,
     "LOW": 583,
     "MEDIUM": 46
   },
@@ -696,5 +696,5 @@
   "sitemap_pages": 34,
   "status": "PASS_AUTOMATED_EXTRACTION_NOT_SCIENTIFIC_ADJUDICATION",
   "tracked_html_files": 72,
-  "visible_blocks": 3451
+  "visible_blocks": 3447
 }
