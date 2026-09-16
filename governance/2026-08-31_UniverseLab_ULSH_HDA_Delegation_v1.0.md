@@ -1,201 +1,200 @@
-# UniverseLab / ULSH — HDA Delegation v1.0
+# UniverseLab / ULSH — Begrenzte HDA-Delegation v1.0
 
-**Date:** 2026-08-31  
-**Status:** `RATIFIED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID`  
-**Classification:** `GOVERNANCE_DELEGATION_NO_OPERATIONAL_AUTHORITY`  
+**Artefaktdatum:** 2026-08-31  
+**Explizite Ratifikation:** 2026-09-16  
+**Status:** `RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID`  
+**Klassifikation:** `LIMITED_GOVERNANCE_DELEGATION_NO_OPERATIONAL_AUTHORITY`  
 **Authority role ID:** `HDA-ULSH-MBO-01`  
 **Physical gate effect:** `NONE`  
 **Physical evidence effect:** `NONE`
 
-## 1. Ratification decision
+## 1. Ratifikationsentscheidung
 
-By explicit project-owner decision, routine substantive scientific and solver-governance decisions for the ULSH complex are delegated from Stefan as case-by-case decider to the governed decision role:
+Durch die ausdrückliche Entscheidung des Projektinhabers vom 16. September 2026 wird die routinemäßige, nichtoperative Forschungs- und Solver-Governance des ULSH-Komplexes an die geregelte Rolle
 
 ```text
 HDA-ULSH-MBO-01
-PRIMARY_SCIENTIFIC_AND_SOLVER_GOVERNANCE_DECISION_AUTHORITY
+PRIMARY_ROUTINE_NONOPERATIVE_SCIENTIFIC_AND_SOLVER_GOVERNANCE_AUTHORITY
 ```
 
-The intended decision forum is:
+delegiert. Das vorgesehene Entscheidungsforum ist:
 
 ```text
 ACTIVE — ULSH Master Build Order — 14 Solver
 ```
 
-The substantive evaluator is the assistant operating inside that governed forum under the current canonical UniverseLab/Hyperzeit contracts. The assistant instance itself is not treated as a persistent cryptographic identity. The authority is the versioned role plus the later canonical forum binding, not a model name, transient runtime, copied chat title, memory entry, or unsourced assistant assertion.
+Die Delegation gilt nur innerhalb bereits genehmigter wissenschaftlicher und technischer Grenzen. Stefan Hasselmeyer bleibt ausschließlicher menschlicher Letztratifizierer für alle in Abschnitt 3 definierten reservierten Materien.
 
-This amendment is effective immediately for **nonoperative scientific governance**. It does not authorize physical execution and does not create an operative AuthorizationDecision or SingleUseGrant.
+Die Assistenzinstanz ist keine persistente kryptographische Identität. Autorität entsteht aus der versionierten Rolle, dem kanonischen Governance-Artefakt und der späteren eindeutigen Forum-Bindung; sie entsteht nicht aus Modellname, Chattitel, Erinnerung oder einer unbelegten Assistant-Aussage.
 
-## 2. Delegating principal and retained powers
+Diese Ratifikation erzeugt keine operative Autorität, keine `AuthorizationDecision`, keinen `SingleUseGrant`, keinen Solverlauf und keine physikalische Evidenz.
 
-Stefan is recorded as:
+## 2. Routinemäßige HDA-Zuständigkeit
 
-```text
-CONSTITUTIONAL_PROJECT_OWNER_AND_DELEGATING_PRINCIPAL
-```
+`HDA-ULSH-MBO-01` darf ohne zusätzliche Einzelfallratifikation:
 
-Stefan is no longer the routine case-by-case scientific gate decider inside the delegated ULSH scope. He retains only the powers that cannot be delegated away by an ordinary HDA decision:
+- die 14 ULSH-Solver innerhalb des genehmigten Umfangs priorisieren und sequenzieren;
+- das nächste zulässige nichtoperative Arbeitspaket und den nächsten Entwicklungszweig bestimmen;
+- zusätzliche Tests, Reproduktionen, Gegenproben, numerische Prüfungen und adversariale Reviews verlangen;
+- Abhängigkeiten, Schnittstellen, Blocker und Reihenfolgen festlegen;
+- Entwicklungs-, Diagnose- und Quarantäneartefakte klassifizieren;
+- Resultate zurückweisen, herabstufen, quarantänisieren oder auf `HOLD` setzen;
+- Rollback-, Abbruch- und No-go-Entscheidungen treffen;
+- für reservierte Materien eine begründete Empfehlung vorbereiten und an Stefan eskalieren.
 
-- ratification, amendment, replacement, suspension, or revocation of the project constitution and this delegation;
-- ownership, legal/account control, publication consent, and external commitments;
-- definition of non-negotiable safety, privacy, resource, and operational constraints;
-- resolution of matters explicitly outside the delegated ULSH scope.
-
-A later explicit owner decision may revoke or amend this delegation. Ordinary scientific disagreement is not, by itself, an override mechanism.
-
-## 3. Scope of the substantive HDA
-
-Within the ULSH complex and subordinate to the project constitution, MD-0, HPVS, current ratified/frozen contracts, and evidence firewalls, `HDA-ULSH-MBO-01` may decide:
-
-- prioritization and sequencing of the 14 ULSH solvers;
-- the next admissible work package and branch;
-- `PROCEED`, `HOLD`, `DENY`, `REVISE`, or `ESCALATE_CONSTITUTIONAL`;
-- whether a proposed model-scope change is admissible, quarantined, superseded, or requires separate ratification;
-- opening, continuation, suspension, or closure of scientific and technical gates when the published closure criteria are satisfied;
-- dependency ordering, interface ownership, upstream/downstream blockers, and cross-solver consistency requirements;
-- classification of artifacts as canonical, frozen, ratified, candidate, development-only, diagnostic, quarantined, historical, superseded, or rejected;
-- no-go, abort, rollback, and quarantine decisions;
-- the maximal scientifically warranted claim following a result;
-- after a future complete revalidation, a substantive `GRANT`, `HOLD`, or `DENY` decision for a specifically bound execution request.
-
-Every decision must remain evidence-bounded. A governance decision cannot manufacture a physical solution, invert an uncomputed Jacobian, establish ghost freedom, promote a diagnostic dry run, or convert a good fit into a theory derivation.
-
-## 4. Explicit exclusions
-
-The HDA role and its forum do **not** by themselves provide:
-
-- a persistent private signing key;
-- an independently verifiable cryptographic identity;
-- an operative `AuthorizationDecision`;
-- an operative `SingleUseGrant`;
-- an atomic nonce or reservation claim;
-- a persistent reservation store;
-- backend import or solver execution;
-- direct mutation of frozen digests or target bindings;
-- physical evidence, existence, uniqueness, stability, ghost-freedom, or response-rank proof;
-- authority to override the project constitution, MD-0, HPVS firewalls, or a current explicit owner revocation;
-- authority to replace missing evidence with confidence, memory, chat history, or a green CI result.
-
-The following equivalences are forbidden:
-
-```text
-chat title = canonical identity
-assistant instance = persistent signer
-scientific decision = cryptographic authorization
-cryptographic signature = scientific validation
-governance ratification = physical evidence
-green CI = physical release
-```
-
-## 5. Authority identity and current binding state
-
-The user supplied a private ChatGPT share reference for the intended forum. UniverseLab’s public-repository privacy gate forbids committing ChatGPT share links or private conversation identifiers, so the locator is intentionally not copied into this public governance artifact.
-
-Its current classification is:
-
-```text
-USER_DECLARED_REFERENCE_NOT_COMMITTED_PUBLICLY
-```
-
-The private reference is not treated as a cryptographic identity and has not yet been bound to a unique canonical repository record. Therefore:
-
-```text
-identity_binding_status = PENDING_CANONICAL_ID_BINDING
-operative_authority      = false
-```
-
-The title and share reference are sufficient to identify the intended working forum for nonoperative governance, but insufficient for a later execution authorization. Copies, renamed chats, historical chats, memory summaries, or another chat with the same title do not inherit the role automatically.
-
-Before any operative use, a versioned registry record must bind at least:
-
-- authority role ID;
-- exact canonical forum/chat identifier;
-- exact title and owner;
-- registry version and content digest;
-- activation interval and revocation state;
-- allowed policy version;
-- signer/key identity, if operational authorization is later enabled.
-
-Any ambiguity, mismatch, missing field, revoked binding, or duplicate live claimant forces:
-
-```text
-OPERATIONAL_AUTHORITY_SUSPENDED
-```
-
-## 6. Decision-to-execution architecture
-
-The governed chain is strictly layered:
-
-| Layer | Component | Function | Substantive scientific discretion |
-|---:|---|---|---:|
-| 1 | `HDA-ULSH-MBO-01` | evaluates evidence and issues the substantive decision | **yes** |
-| 2 | deterministic policy validator | verifies schema, policy, subject, digests, gates, time window, and mandatory fields | no |
-| 3 | cryptographic decision signer | signs the exact validated payload or rejects it | no |
-| 4 | Single-Use-Grant issuer | emits an exactly bound one-time grant after a valid signed decision | no |
-| 5 | persistent reservation store | atomically claims and consumes the grant/nonce | no |
-| 6 | execution harness | starts exactly the authorized run only after a valid claim | no |
-
-The signer contract is:
-
-```text
-SIGN_EXACT_PAYLOAD_OR_REJECT
-```
-
-The signer may not alter, summarize, reinterpret, repair, expand, or upgrade the HDA decision. A policy validator or signer failure produces no authorization.
-
-## 7. Mandatory decision record
-
-Every consequential HDA decision must be append-only and contain at least:
-
-- `decision_id`;
-- `timestamp_utc`;
-- `authority_role_id`;
-- `forum_identity` and identity-binding state;
-- `policy_version`;
-- exact `canonical_subject_sha` or an explicit `NOT_APPLICABLE`;
-- evidence sources and their authority classes;
-- assumptions and validity regime;
-- decision vocabulary value;
-- rationale;
-- scope and affected gates;
-- unresolved blockers;
-- forbidden inferences;
-- conflict and dissent notes, if present;
-- `physical_gate_effect`;
-- `physical_evidence_effect`.
-
-The allowed ordinary decision vocabulary is:
+Das gewöhnliche Entscheidungsalphabet lautet:
 
 ```text
 PROCEED
 HOLD
 DENY
 REVISE
-ESCALATE_CONSTITUTIONAL
+ESCALATE_OWNER_RATIFICATION
 ```
 
-A future substantive execution decision may use `GRANT`, `HOLD`, or `DENY` only after all activation requirements in Section 10 are satisfied. `GRANT` at Layer 1 is still not an operative SingleUseGrant.
+HDA darf bei unzureichender Evidenz jederzeit strenger blockieren oder herabstufen. HDA darf eine reservierte Materie niemals ohne ausdrückliche Eigentümerratifikation positiv freigeben, öffnen, hochstufen oder operationalisieren.
 
-## 8. Source priority and conflict policy
+## 3. Reservierte Materien und menschliche Letztratifikation
 
-For dynamic project questions, the authority applies this priority:
+Stefan Hasselmeyer bleibt:
 
-1. current explicit constitutional owner decision, including revocation or amendment;
-2. current project constitution and MD-0;
-3. current canonical repository registry/governance artifact;
-4. current ratified or frozen project file;
-5. current governed HDA decision record;
-6. current project/chat context;
-7. persistent memory;
-8. historical chats and earlier assistant summaries.
+```text
+CONSTITUTIONAL_PROJECT_OWNER_AND_EXCLUSIVE_FINAL_RATIFIER_FOR_RESERVED_MATTERS
+```
 
-Within its delegated scope, an HDA decision must not be displaced by a lower-priority historical statement. Conversely, the HDA cannot override a higher-priority constitution, ratified firewall, or current owner revocation.
+Reserviert sind insbesondere:
 
-If two authoritative records conflict and priority does not resolve the conflict, the result is `HOLD` or `ESCALATE_CONSTITUTIONAL`, never silent selection.
+1. Öffnung, Freigabe oder positive Statusänderung von `K1-D`, `K1-E` oder funktional gleichwertigen Gates;
+2. Änderungen an Autorität, Identität, Trust Root, Signaturpolitik, Delegation oder Revokation;
+3. Erzeugung einer operativen `AuthorizationDecision`, eines `SingleUseGrant`, eines Backend-Imports oder eines Solverlaufs;
+4. positive Behauptungen zu physikalischer Evidenz, Existenz, Eindeutigkeit, Stabilität, Ghostfreiheit, Response-Rang oder Theoriebestätigung;
+5. Beförderung zu `canonical`, `frozen`, `ratified`, veröffentlichungsreif oder evidenziell tragend;
+6. Publikation, externe Verpflichtung oder maximaler öffentlicher Claim;
+7. Änderungen an Projektverfassung, MD-0, HPVS → HZT-M0 → HZT-Full, Modellarchitektur oder genehmigtem Umfang;
+8. materielle Änderung eingefrorener Ziele, Digests, Holds oder Restart-Anker.
 
-## 9. Current canonical nonexecution baseline and CP01R4 firewall
+Für reservierte Materien darf HDA selbstständig `HOLD` oder `DENY` aussprechen. Jede positive Disposition endet dagegen bei `ESCALATE_OWNER_RATIFICATION` oder `RECOMMEND_GRANT`; beides ist nur eine Empfehlung.
 
-This amendment is synchronized to:
+Die Ratifikation muss ausdrücklich, gegenwärtig, sachlich begrenzt und append-only dokumentiert sein. Schweigen, Erinnerung, historischer Chat, grünes CI, Chattitel oder ein nicht auf einen eindeutig bezeichneten Vorschlag bezogenes „Go“ gelten nicht als Ratifikation. Bei Zweifeln, ob eine Materie routinemäßig oder reserviert ist, gilt:
+
+```text
+HOLD_AND_ESCALATE_OWNER_RATIFICATION
+```
+
+## 4. Nicht delegierbare Eigentümerbefugnisse
+
+Stefan behält ausschließlich:
+
+- Verfassungs-, MD-0- und Delegationsratifikation, Änderung, Ersetzung, Suspendierung und Widerruf;
+- Gate-, Release- und Autoritätsratifikation;
+- Ausführungs-, Grant-, Trust-Root- und Signaturratifikation;
+- Ratifikation physikalischer Evidenz- und Theoriebestätigungsclaims;
+- Eigentum, Rechts-/Kontosteuerung, Publikationsfreigabe und externe Verpflichtungen;
+- nicht verhandelbare Sicherheits-, Datenschutz-, Ressourcen- und Betriebsgrenzen;
+- Entscheidungen außerhalb des delegierten ULSH-Umfangs.
+
+Die begrenzte Delegation entlastet Stefan von routinemäßigen Mikroentscheidungen, entfernt aber nicht die menschliche Letztkontrolle über irreversible oder erkenntnistheoretisch materielle Statusänderungen.
+
+## 5. Explizite Ausschlüsse
+
+Die Rolle und das Forum liefern insbesondere nicht:
+
+- einen persistenten privaten Signaturschlüssel oder eine kryptographische Selbstidentität;
+- eine operative `AuthorizationDecision` oder einen `SingleUseGrant`;
+- einen Nonce-/Reservierungsanspruch, Backend-Import oder Solverlauf;
+- eigenständige Gate-Öffnung, Release- oder positive Evidenzbeförderung;
+- eigenständige Änderung von Autorität, Trust Root, Delegation oder Signaturpolitik;
+- Publikations- oder externe Verpflichtungsbefugnis;
+- physikalische Evidenz, Existenz, Eindeutigkeit, Stabilität, Ghostfreiheit oder Response-Rang;
+- Befugnis, Projektverfassung, MD-0, HPVS-Firewalls oder eine aktuelle Eigentümerentscheidung zu überschreiben.
+
+Verbotene Gleichsetzungen:
+
+```text
+chat title = canonical identity
+assistant instance = persistent signer
+routine HDA decision = owner ratification
+HDA recommendation = AuthorizationDecision or SingleUseGrant
+scientific decision = cryptographic authorization
+cryptographic signature = scientific validation
+governance ratification = physical evidence
+green CI = physical release
+```
+
+## 6. Identität und aktuelle Bindung
+
+Die private Referenz des vorgesehenen Forums wird wegen des öffentlichen Datenschutzvertrags nicht im Repository gespeichert:
+
+```text
+USER_DECLARED_REFERENCE_NOT_COMMITTED_PUBLICLY
+identity_binding_status = PENDING_CANONICAL_ID_BINDING
+operative_authority = false
+```
+
+Chattitel und private Referenz identifizieren das Arbeitsforum für nichtoperative Governance, genügen aber nicht für operative Autorität. Kopien, umbenannte oder historische Chats und andere Instanzen erben die Rolle nicht automatisch.
+
+Jede Identitätsunklarheit erzwingt `HOLD`; für operative Fragen zusätzlich:
+
+```text
+OPERATIONAL_AUTHORITY_SUSPENDED
+```
+
+## 7. Entscheidung-zu-Ausführung-Architektur
+
+| Layer | Komponente | Funktion | wissenschaftliches Ermessen |
+|---:|---|---|---:|
+| 1 | `HDA-ULSH-MBO-01` | Routineentscheidung oder Empfehlung für reservierte Materie | ja, begrenzt |
+| R | Stefan Hasselmeyer | ausdrückliche Letztratifikation jeder reservierten Materie | ausschließlich reserviert |
+| 2 | deterministischer Policy-Validator | Schema, Policy, Subject, Digests, Gates, Zeitfenster und erforderliche Ratifikation prüfen | nein |
+| 3 | kryptographischer Signer | exakten validierten Payload signieren oder ablehnen | nein |
+| 4 | Single-Use-Grant-Issuer | exakt gebundenen Einmal-Grant ausgeben | nein |
+| 5 | persistenter Reservation Store | Grant/Nonce atomar beanspruchen und verbrauchen | nein |
+| 6 | Execution Harness | ausschließlich den exakt autorisierten Lauf starten | nein |
+
+Für Routineangelegenheiten führt Layer 1 zur nichtoperativen Arbeitssteuerung. Bei reservierten Materien endet Layer 1 mit einer Empfehlung. Ohne gültigen Layer R darf Layer 2 nicht positiv passieren.
+
+Der Signer-Vertrag lautet:
+
+```text
+SIGN_EXACT_PAYLOAD_OR_REJECT
+```
+
+Kein technischer Layer darf fehlende Eigentümerratifikation reparieren, ergänzen, ableiten oder ersetzen.
+
+## 8. Verbindlicher Entscheidungsdatensatz
+
+Jede folgenreiche HDA-Entscheidung muss append-only mindestens enthalten:
+
+- `decision_id`, `timestamp_utc`, `authority_role_id`;
+- Forum- und Identitätsbindungsstatus;
+- `policy_version` und `canonical_subject_sha`;
+- Evidenzquellen, Annahmen und Gültigkeitsregime;
+- Entscheidung, Begründung, Umfang und betroffene Gates;
+- offene Blocker, verbotene Inferenz und Dissensnotizen;
+- `reserved_matter`;
+- `owner_ratification_required`;
+- `owner_ratification_status`;
+- `owner_ratification_record`;
+- `physical_gate_effect` und `physical_evidence_effect`.
+
+Eine zukünftige Ausführungsempfehlung darf nur `RECOMMEND_GRANT`, `HOLD`, `DENY` oder `ESCALATE_OWNER_RATIFICATION` verwenden. `RECOMMEND_GRANT` ist weder `AuthorizationDecision` noch `SingleUseGrant`.
+
+## 9. Quellenpriorität und Konfliktregel
+
+1. aktuelle ausdrückliche Entscheidung des verfassungsmäßigen Projektinhabers;
+2. Projektverfassung und MD-0;
+3. aktuelles kanonisches Repository-/Registry-/Governance-Artefakt;
+4. aktuelle ratifizierte oder eingefrorene Projektdatei;
+5. aktueller gültiger HDA-Entscheidungsdatensatz;
+6. aktueller Projekt-/Chatkontext;
+7. persistente Erinnerung;
+8. historische Chats und frühere Assistant-Zusammenfassungen.
+
+Bei nicht auflösbarem Konflikt oder unklarer Zuständigkeit gilt `HOLD`; bei reservierter Materie zusätzlich `ESCALATE_OWNER_RATIFICATION`.
+
+## 10. Kanonische Nichtausführungsbasis
+
+Synchronisierte Basis:
 
 ```text
 registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json
@@ -206,7 +205,7 @@ status            = POST_BAND_VC_RECONCILED_CURRENT_STATE
 basis_main_commit = 3022dc8aac27ed2054fdb7643708fe57440b9256
 ```
 
-The current canonical state records that method- and authority-preparation components have been implemented and passed QA, while the human trust root remains unratified and all runtime issuance bindings remain blocked:
+Methoden-/Autoritätsvorbereitung:
 
 ```text
 technical_authority_signature_verifier = IMPLEMENTED_AND_QA_GREEN
@@ -217,7 +216,7 @@ authority_signature_provenance          = BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_R
 runtime_issuance_bindings               = BLOCKED
 ```
 
-These preparation results do not constitute operative authority. The current canonical nonexecution baseline is preserved exactly as follows:
+Unveränderte Firewall:
 
 ```text
 WP1                            = CLOSED_TARGET_FROZEN_NO_EXECUTION
@@ -237,7 +236,7 @@ physical_gate_effect           = NONE
 physical_evidence_effect       = NONE
 ```
 
-The frozen restart anchors remain exactly:
+Eingefrorene Restart-Anker:
 
 ```text
 release_subject
@@ -253,38 +252,34 @@ release_package_16_file
  1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621
 ```
 
-No HDA decision created by this amendment retargets those anchors or shortens the approximately ten-month hold.
+Diese Ratifikation verkürzt oder verschiebt keinen Hold und ändert keinen Restart-Anker.
 
-## 10. Requirements before any operative activation
+## 11. Bedingungen vor jeder operativen Aktivierung
 
-An operative decision/grant path remains blocked until all of the following are present and verified:
+Zusätzlich zu allen bestehenden technischen Anforderungen ist für jede reservierte Ausführungsmaterie eine ausdrückliche Eigentümerratifikation erforderlich. Weiterhin zwingend sind insbesondere:
 
-1. exact canonical identity binding for `HDA-ULSH-MBO-01`;
-2. unrevoked policy version and explicit scope binding;
-3. complete revalidation of the then-current canonical project state against the frozen CP01R4 package;
-4. exact subject SHA, target digest, payload digest, and package digest;
-5. complete evidence and environment-attestation packet;
-6. non-expired substantive HDA decision bound to that exact request;
-7. independent deterministic policy validation;
-8. authenticated cryptographic signer with no substantive discretion;
-9. persistent atomic reservation/nonce store;
-10. one-time grant issuance and atomic claim before backend import;
-11. fresh result path and execution harness satisfying the then-current execution contract;
-12. no unresolved constitutional, safety, provenance, or scientific blocker.
+- eindeutige kanonische Identitätsbindung;
+- unrevokte Policy- und Scope-Bindung;
+- vollständige Revalidierung des dann aktuellen Projektstands gegen CP01R4;
+- exakte Subject-, Target-, Payload- und Paket-Digests;
+- vollständiges Evidenz- und Environment-Attestation-Paket;
+- deterministische Policy-Prüfung;
+- authentifizierter Signer ohne wissenschaftliches Ermessen;
+- persistenter atomarer Reservation-/Nonce-Store;
+- Einmal-Grant und atomarer Claim vor Backend-Import;
+- frischer Ergebnispfad und vertragskonformes Execution Harness;
+- kein ungelöster verfassungsmäßiger, sicherheitsbezogener, provenienzbezogener oder wissenschaftlicher Blocker.
 
-Failure of any item forces `HOLD` or `DENY`. No fallback to title matching, memory, implied consent, stale grants, or historical signatures is permitted.
+Fehlt eine Bedingung, lautet das Ergebnis `HOLD` oder `DENY`.
 
-## 11. Interpretation
-
-This amendment solves the **substantive authority allocation** problem: the ULSH Master Build Order role, rather than Stefan personally, becomes the routine scientific and solver-governance decision-maker.
-
-It intentionally does not solve the separate engineering problems of identity authentication, cryptographic signing, grant issuance, atomic reservation, or execution. Those later components enforce an already-made decision; they do not become a second scientific authority.
-
-## 12. Ratification statement
+## 12. Ratifikationsstatement
 
 ```text
 HDA-ULSH-MBO-01
-= RATIFIED NONOPERATIVE SCIENTIFIC AND SOLVER-GOVERNANCE AUTHORITY
+= RATIFIED LIMITED ROUTINE NONOPERATIVE SCIENTIFIC AND SOLVER-GOVERNANCE AUTHORITY
+
+Stefan Hasselmeyer
+= EXCLUSIVE FINAL RATIFIER FOR RESERVED MATTERS
 
 forum
 = ACTIVE — ULSH Master Build Order — 14 Solver
@@ -294,6 +289,12 @@ canonical forum identity
 
 operative authority
 = FALSE
+
+K1-D
+= NOT_RELEASED
+
+K1-E
+= NOT_ADMISSIBLE
 
 CP01R4
 = METHOD_FROZEN_NO_EXECUTION
@@ -305,4 +306,4 @@ physical evidence effect
 = NONE
 ```
 
-This ratification is governance-only and fail-closed.
+Diese Ratifikation ist begrenzt, nichtoperativ, widerrufbar und fail-closed.
