@@ -25,7 +25,10 @@ CANONICAL_STATE = ROOT / "registry/2026-09-04_UniverseLab_CurrentMainCanonicalSt
 # Lists retain sequence, so every governed field, list type, entry, duplicate,
 # addition, omission, replacement, and order is pinned.
 EXPECTED_REGISTRY_CANONICAL_SHA256 = (
-    "fd66ba19767e1e3533b8400b3606cdc8b4717c4e2dd24772b28f41b854fbbb38"
+    "714999ee0e552286c31535ae66d43c9b793c5ea5dde8c0f9cdd34e3e874a6d8c"
+)
+EXPECTED_DOCUMENT_SHA256 = (
+    "dbe42cf87c296beb458ea4793f6c5aa5a8d7a195db1440b371201f9d6469c654"
 )
 
 EXPECTED_CANONICAL_BASIS = {
@@ -95,7 +98,29 @@ EXPECTED_AUTHORITY_HIERARCHY = [
     "HISTORICAL_CHATS_AND_EARLIER_ASSISTANT_SUMMARIES",
 ]
 
-EXPECTED_FUTURE_EXECUTION_DECISIONS = ["GRANT", "HOLD", "DENY"]
+EXPECTED_ORDINARY_DECISIONS = [
+    "PROCEED",
+    "HOLD",
+    "DENY",
+    "REVISE",
+    "ESCALATE_OWNER_RATIFICATION",
+]
+EXPECTED_FUTURE_EXECUTION_DECISIONS = [
+    "RECOMMEND_GRANT",
+    "HOLD",
+    "DENY",
+    "ESCALATE_OWNER_RATIFICATION",
+]
+EXPECTED_RESERVED_MATTERS = [
+    "K1_D_K1_E_OR_EQUIVALENT_GATE_OPENING_RELEASE_OR_STATUS_PROMOTION",
+    "AUTHORITY_IDENTITY_TRUST_ROOT_SIGNATURE_POLICY_OR_DELEGATION_CHANGE",
+    "AUTHORIZATION_DECISION_SINGLE_USE_GRANT_BACKEND_IMPORT_OR_SOLVER_EXECUTION",
+    "PHYSICAL_EVIDENCE_EXISTENCE_UNIQUENESS_STABILITY_GHOST_FREEDOM_OR_RESPONSE_RANK_CLAIM",
+    "CANONICAL_FROZEN_RATIFIED_OR_PUBLICATION_STATUS_PROMOTION",
+    "PUBLICATION_EXTERNAL_COMMITMENT_OR_MAXIMAL_PUBLIC_CLAIM",
+    "PROJECT_CONSTITUTION_MD0_HPVS_HZT_ARCHITECTURE_OR_SCOPE_CHANGE",
+    "MATERIAL_CHANGE_TO_FROZEN_TARGET_DIGEST_HOLD_OR_RESTART_ANCHOR",
+]
 EXPECTED_LAYER_IDS = [
     "SUBSTANTIVE_HDA",
     "DETERMINISTIC_POLICY_VALIDATOR",
@@ -179,13 +204,13 @@ def validate_registry(registry: dict[str, Any], errors: list[str]) -> None:
     )
     require(
         registry.get("status")
-        == "RATIFIED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
+        == "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
         "registry status mismatch",
         errors,
     )
     require(
         registry.get("classification")
-        == "GOVERNANCE_DELEGATION_NO_OPERATIONAL_AUTHORITY",
+        == "LIMITED_GOVERNANCE_DELEGATION_NO_OPERATIONAL_AUTHORITY",
         "registry classification mismatch",
         errors,
     )
@@ -212,13 +237,23 @@ def validate_registry(registry: dict[str, Any], errors: list[str]) -> None:
         errors,
     )
     require(
+        read_path(
+            registry,
+            "delegating_principal",
+            "exclusive_final_ratifier_for_reserved_matters",
+        )
+        is True,
+        "Stefan must remain exclusive final ratifier for reserved matters",
+        errors,
+    )
+    require(
         read_path(registry, "authority", "authority_id") == "HDA-ULSH-MBO-01",
         "authority ID mismatch",
         errors,
     )
     require(
         read_path(registry, "authority", "role")
-        == "PRIMARY_SCIENTIFIC_AND_SOLVER_GOVERNANCE_DECISION_AUTHORITY",
+        == "PRIMARY_ROUTINE_NONOPERATIVE_SCIENTIFIC_AND_SOLVER_GOVERNANCE_AUTHORITY",
         "authority role mismatch",
         errors,
     )
@@ -237,6 +272,24 @@ def validate_registry(registry: dict[str, Any], errors: list[str]) -> None:
     require(
         read_path(registry, "authority", "nonoperative_substantive_authority") is True,
         "nonoperative substantive authority must be true",
+        errors,
+    )
+    require(
+        read_path(registry, "authority", "routine_nonoperative_decision_authority")
+        is True,
+        "routine nonoperative decision authority must be true",
+        errors,
+    )
+    require(
+        read_path(registry, "authority", "reserved_matter_final_decision_authority")
+        is False,
+        "HDA must not have final reserved-matter authority",
+        errors,
+    )
+    require(
+        read_path(registry, "authority", "may_unilaterally_hold_or_deny_reserved_matter")
+        is True,
+        "HDA must retain fail-closed HOLD/DENY authority",
         errors,
     )
     require(
@@ -262,15 +315,73 @@ def validate_registry(registry: dict[str, Any], errors: list[str]) -> None:
         errors,
     )
     require(
-        read_path(registry, "substantive_scope", "future_execution_decision_vocabulary")
-        == EXPECTED_FUTURE_EXECUTION_DECISIONS,
-        "future execution decision vocabulary mismatch",
+        read_path(registry, "substantive_scope", "ordinary_decision_vocabulary")
+        == EXPECTED_ORDINARY_DECISIONS,
+        "ordinary decision vocabulary mismatch",
         errors,
     )
     require(
-        read_path(registry, "substantive_scope", "future_GRANT_is_operative_SingleUseGrant")
+        read_path(registry, "substantive_scope", "future_execution_decision_vocabulary")
+        == EXPECTED_FUTURE_EXECUTION_DECISIONS,
+        "future execution recommendation vocabulary mismatch",
+        errors,
+    )
+    require(
+        read_path(
+            registry,
+            "substantive_scope",
+            "future_RECOMMEND_GRANT_is_operative_AuthorizationDecision_or_SingleUseGrant",
+        )
         is False,
-        "substantive GRANT must not equal operative SingleUseGrant",
+        "HDA RECOMMEND_GRANT must not equal operative authorization or grant",
+        errors,
+    )
+    require(
+        read_path(
+            registry,
+            "substantive_scope",
+            "may_open_release_promote_or_operationalize_reserved_matter",
+        )
+        is False,
+        "HDA must not positively dispose reserved matters",
+        errors,
+    )
+    require(
+        read_path(registry, "reserved_matter_boundary", "owner_ratifier")
+        == "STEFAN_HASSELMEYER",
+        "reserved-matter owner ratifier mismatch",
+        errors,
+    )
+    require(
+        read_path(
+            registry,
+            "reserved_matter_boundary",
+            "explicit_owner_ratification_required",
+        )
+        is True,
+        "explicit owner ratification must be required",
+        errors,
+    )
+    require(
+        read_path(registry, "reserved_matter_boundary", "implied_consent_forbidden")
+        is True,
+        "implied owner consent must remain forbidden",
+        errors,
+    )
+    require(
+        read_path(
+            registry,
+            "reserved_matter_boundary",
+            "bare_go_without_unambiguous_proposal_reference_is_insufficient",
+        )
+        is True,
+        "unreferenced Go must remain insufficient for reserved ratification",
+        errors,
+    )
+    require(
+        read_path(registry, "reserved_matter_boundary", "reserved_matters")
+        == EXPECTED_RESERVED_MATTERS,
+        "reserved matters mismatch",
         errors,
     )
     require(
@@ -300,6 +411,15 @@ def validate_registry(registry: dict[str, Any], errors: list[str]) -> None:
             errors,
         )
         require(
+            read_path(
+                registry,
+                "decision_to_execution_layers",
+            )[0].get("reserved_matter_final_authority")
+            is False,
+            "layer 1 must not hold final reserved-matter authority",
+            errors,
+        )
+        require(
             [
                 item.get("id")
                 for item in layers
@@ -315,6 +435,16 @@ def validate_registry(registry: dict[str, Any], errors: list[str]) -> None:
         read_path(registry, "signer_contract", "behavior")
         == "SIGN_EXACT_PAYLOAD_OR_REJECT",
         "signer behavior mismatch",
+        errors,
+    )
+    require(
+        read_path(
+            registry,
+            "signer_contract",
+            "requires_explicit_owner_ratification_for_reserved_matter",
+        )
+        is True,
+        "signer must require explicit owner ratification for reserved matters",
         errors,
     )
     for field in (
@@ -427,6 +557,12 @@ def main() -> int:
         document_text = ""
     else:
         document_text = DOCUMENT.read_text(encoding="utf-8")
+        require(
+            hashlib.sha256(document_text.encode("utf-8")).hexdigest()
+            == EXPECTED_DOCUMENT_SHA256,
+            "governance document content digest mismatch",
+            errors,
+        )
 
     for label, pattern in PUBLIC_PRIVACY_PATTERNS.items():
         if pattern.search(registry_text) or pattern.search(document_text):
@@ -441,7 +577,7 @@ def main() -> int:
 
     for fragment in (
         "HDA-ULSH-MBO-01",
-        "PRIMARY_SCIENTIFIC_AND_SOLVER_GOVERNANCE_DECISION_AUTHORITY",
+        "PRIMARY_ROUTINE_NONOPERATIVE_SCIENTIFIC_AND_SOLVER_GOVERNANCE_AUTHORITY",
         "ACTIVE — ULSH Master Build Order — 14 Solver",
         "PENDING_CANONICAL_ID_BINDING",
         "USER_DECLARED_REFERENCE_NOT_COMMITTED_PUBLICLY",
@@ -452,7 +588,10 @@ def main() -> int:
         "ratified_human_trust_root               = NOT_RATIFIED",
         "runtime_issuance_bindings               = BLOCKED",
         "CP01R4                         = METHOD_FROZEN_NO_EXECUTION",
-        "RATIFIED NONOPERATIVE SCIENTIFIC AND SOLVER-GOVERNANCE AUTHORITY",
+        "RATIFIED LIMITED ROUTINE NONOPERATIVE SCIENTIFIC AND SOLVER-GOVERNANCE AUTHORITY",
+        "EXCLUSIVE FINAL RATIFIER FOR RESERVED MATTERS",
+        "ESCALATE_OWNER_RATIFICATION",
+        "RECOMMEND_GRANT",
         "CP01R4\n= METHOD_FROZEN_NO_EXECUTION",
         "physical gate effect\n= NONE",
         "physical evidence effect\n= NONE",
@@ -470,12 +609,14 @@ def main() -> int:
     print("all governed registry content is exactly pinned")
     print("canonical_state=v1.3.0 and physical_governance cross-check=PASS")
     print("authority=HDA-ULSH-MBO-01")
-    print("substantive_nonoperative_authority=true operative_authority=false")
+    print("routine_nonoperative_authority=true reserved_matter_final_authority=false")
+    print("exclusive_owner_final_ratifier=STEFAN_HASSELMEYER")
+    print("operative_authority=false")
     print("identity_binding=PENDING_CANONICAL_ID_BINDING")
     print("WP2=METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED")
     print("CP01R4=METHOD_FROZEN_NO_EXECUTION")
     print("physical_gate_effect=NONE physical_evidence_effect=NONE")
-    print("PASS is governance consistency, not execution authorization or physical evidence.")
+    print("PASS is limited-governance consistency, not owner ratification of a reserved matter, execution authorization, or physical evidence.")
     return 0
 
 
