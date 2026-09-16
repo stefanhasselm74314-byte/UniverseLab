@@ -1,0 +1,301 @@
+{
+  "schema": "universelab.ulsh.hda-delegation.v1.0",
+  "date": "2026-08-31",
+  "status": "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
+  "classification": "LIMITED_GOVERNANCE_DELEGATION_NO_OPERATIONAL_AUTHORITY",
+  "program_scope": "ULSH_SOLVER_COMPLEX_UNDER_HPVS_HZT_M0_HZT_FULL_ARCHITECTURE",
+  "ratification_basis": "CURRENT_EXPLICIT_PROJECT_OWNER_DECISION_2026-09-16_LIMITED_DELEGATION",
+  "governance_document": "governance/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.md",
+  "delegating_principal": {
+    "name": "Stefan Hasselmeyer",
+    "role": "CONSTITUTIONAL_PROJECT_OWNER_AND_DELEGATING_PRINCIPAL",
+    "routine_scientific_gate_decider": false,
+    "retained_powers": [
+      "CONSTITUTIONAL_RATIFICATION_AMENDMENT_REPLACEMENT_SUSPENSION_REVOCATION",
+      "FINAL_RATIFICATION_OF_GATE_RELEASE_OPENING_OR_STATUS_PROMOTION",
+      "FINAL_RATIFICATION_OF_AUTHORITY_IDENTITY_TRUST_ROOT_SIGNATURE_GRANT_OR_EXECUTION_CHANGE",
+      "FINAL_RATIFICATION_OF_PHYSICAL_EVIDENCE_OR_THEORY_CONFIRMATION_CLAIMS",
+      "OWNERSHIP_LEGAL_ACCOUNT_PUBLICATION_AND_EXTERNAL_COMMITMENT_CONTROL",
+      "NONNEGOTIABLE_SAFETY_PRIVACY_RESOURCE_AND_OPERATIONAL_CONSTRAINTS",
+      "PROJECT_CONSTITUTION_MD0_HPVS_HZT_ARCHITECTURE_OR_SCOPE_CHANGE",
+      "MATTERS_EXPLICITLY_OUTSIDE_DELEGATED_ULSH_SCOPE"
+    ],
+    "exclusive_final_ratifier_for_reserved_matters": true
+  },
+  "authority": {
+    "authority_id": "HDA-ULSH-MBO-01",
+    "role": "PRIMARY_ROUTINE_NONOPERATIVE_SCIENTIFIC_AND_SOLVER_GOVERNANCE_AUTHORITY",
+    "authority_class": "AI_ASSISTED_GOVERNED_DECISION_FORUM",
+    "decision_agent": "ASSISTANT_OPERATING_IN_GOVERNED_FORUM",
+    "assistant_instance_is_persistent_identity": false,
+    "forum_title": "ACTIVE — ULSH Master Build Order — 14 Solver",
+    "forum_reference": {
+      "reference_class": "USER_DECLARED_REFERENCE_NOT_COMMITTED_PUBLICLY",
+      "public_locator": "REDACTED_BY_PUBLIC_PRIVACY_GATE",
+      "private_locator_available_to_owner": true,
+      "cryptographic_identity": false,
+      "canonical_repository_identity": false
+    },
+    "identity_binding_status": "PENDING_CANONICAL_ID_BINDING",
+    "nonoperative_substantive_authority": true,
+    "operative_authority": false,
+    "operational_status_on_identity_ambiguity": "OPERATIONAL_AUTHORITY_SUSPENDED",
+    "routine_nonoperative_decision_authority": true,
+    "reserved_matter_final_decision_authority": false,
+    "may_unilaterally_hold_or_deny_reserved_matter": true,
+    "reserved_matter_positive_disposition": "ESCALATE_OWNER_RATIFICATION"
+  },
+  "authority_hierarchy": [
+    "CURRENT_EXPLICIT_CONSTITUTIONAL_OWNER_DECISION",
+    "PROJECT_CONSTITUTION_AND_MD_0",
+    "CURRENT_CANONICAL_REPOSITORY_REGISTRY_OR_GOVERNANCE_ARTIFACT",
+    "CURRENT_RATIFIED_OR_FROZEN_PROJECT_FILE",
+    "CURRENT_GOVERNED_HDA_DECISION_RECORD",
+    "CURRENT_PROJECT_OR_CHAT_CONTEXT",
+    "PERSISTENT_MEMORY",
+    "HISTORICAL_CHATS_AND_EARLIER_ASSISTANT_SUMMARIES"
+  ],
+  "substantive_scope": {
+    "allowed_decisions": [
+      "ULSH_14_SOLVER_PRIORITIZATION_AND_SEQUENCE_WITHIN_APPROVED_SCOPE",
+      "NEXT_ADMISSIBLE_NONOPERATIVE_WORK_PACKAGE_AND_BRANCH",
+      "ADDITIONAL_TEST_QA_REPRODUCTION_AND_ADVERSARIAL_CHECKS",
+      "UPSTREAM_DOWNSTREAM_DEPENDENCIES_AND_BLOCKERS",
+      "DEVELOPMENT_DIAGNOSTIC_QUARANTINE_SUPERSESSION_OR_REJECTION_CLASSIFICATION",
+      "NO_GO_ABORT_ROLLBACK_AND_QUARANTINE",
+      "SCIENTIFIC_CLAIM_RESTRICTION_OR_DOWNGRADE",
+      "RESERVED_MATTER_RECOMMENDATION_AND_ESCALATION_FOR_OWNER_RATIFICATION"
+    ],
+    "ordinary_decision_vocabulary": [
+      "PROCEED",
+      "HOLD",
+      "DENY",
+      "REVISE",
+      "ESCALATE_OWNER_RATIFICATION"
+    ],
+    "future_execution_decision_vocabulary": [
+      "RECOMMEND_GRANT",
+      "HOLD",
+      "DENY",
+      "ESCALATE_OWNER_RATIFICATION"
+    ],
+    "evidence_bounded": true,
+    "routine_only": true,
+    "future_RECOMMEND_GRANT_is_operative_AuthorizationDecision_or_SingleUseGrant": false,
+    "may_block_or_downgrade_reserved_matter": true,
+    "may_open_release_promote_or_operationalize_reserved_matter": false
+  },
+  "explicit_exclusions": [
+    "NO_PERSISTENT_PRIVATE_SIGNING_KEY_IN_CHAT_ROLE",
+    "NO_CRYPTOGRAPHIC_SELF_IDENTITY_FROM_CHAT_TITLE_OR_ASSISTANT_INSTANCE",
+    "NO_OPERATIVE_AUTHORIZATION_DECISION_FROM_THIS_AMENDMENT",
+    "NO_SINGLE_USE_GRANT_FROM_THIS_AMENDMENT",
+    "NO_NONCE_OR_RESERVATION_CLAIM",
+    "NO_PERSISTENT_RESERVATION_STORE",
+    "NO_BACKEND_IMPORT",
+    "NO_SOLVER_EXECUTION",
+    "NO_SILENT_RETARGETING_OF_FROZEN_DIGESTS",
+    "NO_PHYSICAL_EVIDENCE_FROM_GOVERNANCE",
+    "NO_OVERRIDE_OF_CONSTITUTION_MD0_HPVS_OR_CURRENT_OWNER_REVOCATION",
+    "NO_EVIDENCE_SUBSTITUTION_BY_MEMORY_CHAT_HISTORY_CONFIDENCE_OR_GREEN_CI",
+    "NO_FINAL_RESERVED_MATTER_DECISION_BY_HDA",
+    "NO_GATE_OPENING_RELEASE_OR_POSITIVE_STATUS_PROMOTION_BY_HDA",
+    "NO_AUTHORITY_IDENTITY_TRUST_ROOT_SIGNATURE_POLICY_OR_DELEGATION_CHANGE_BY_HDA",
+    "NO_AUTHORIZATION_DECISION_SINGLE_USE_GRANT_BACKEND_IMPORT_OR_SOLVER_EXECUTION_BY_HDA",
+    "NO_PHYSICAL_EVIDENCE_OR_THEORY_CONFIRMATION_PROMOTION_BY_HDA",
+    "NO_PUBLICATION_OR_EXTERNAL_COMMITMENT_RATIFICATION_BY_HDA"
+  ],
+  "forbidden_equivalences": [
+    "CHAT_TITLE_IS_NOT_CANONICAL_IDENTITY",
+    "ASSISTANT_INSTANCE_IS_NOT_PERSISTENT_SIGNER",
+    "SCIENTIFIC_DECISION_IS_NOT_CRYPTOGRAPHIC_AUTHORIZATION",
+    "CRYPTOGRAPHIC_SIGNATURE_IS_NOT_SCIENTIFIC_VALIDATION",
+    "GOVERNANCE_RATIFICATION_IS_NOT_PHYSICAL_EVIDENCE",
+    "GREEN_CI_IS_NOT_PHYSICAL_RELEASE",
+    "ROUTINE_HDA_DECISION_IS_NOT_OWNER_RATIFICATION",
+    "HDA_RECOMMEND_GRANT_IS_NOT_AUTHORIZATION_DECISION_OR_SINGLE_USE_GRANT"
+  ],
+  "decision_to_execution_layers": [
+    {
+      "layer": 1,
+      "id": "SUBSTANTIVE_HDA",
+      "component": "HDA-ULSH-MBO-01",
+      "function": "EVALUATE_EVIDENCE_AND_ISSUE_ROUTINE_DECISION_OR_RESERVED_MATTER_RECOMMENDATION",
+      "substantive_scientific_discretion": true,
+      "operational_execution_power": false,
+      "reserved_matter_final_authority": false
+    },
+    {
+      "layer": 2,
+      "id": "DETERMINISTIC_POLICY_VALIDATOR",
+      "function": "VERIFY_SCHEMA_POLICY_SUBJECT_DIGESTS_GATES_TIME_WINDOW_REQUIRED_FIELDS_AND_OWNER_RATIFICATION",
+      "substantive_scientific_discretion": false,
+      "operational_execution_power": false
+    },
+    {
+      "layer": 3,
+      "id": "CRYPTOGRAPHIC_DECISION_SIGNER",
+      "function": "SIGN_EXACT_VALIDATED_PAYLOAD_OR_REJECT",
+      "substantive_scientific_discretion": false,
+      "operational_execution_power": false
+    },
+    {
+      "layer": 4,
+      "id": "SINGLE_USE_GRANT_ISSUER",
+      "function": "ISSUE_EXACTLY_BOUND_ONE_TIME_GRANT_AFTER_VALID_SIGNED_DECISION",
+      "substantive_scientific_discretion": false,
+      "operational_execution_power": false
+    },
+    {
+      "layer": 5,
+      "id": "PERSISTENT_RESERVATION_STORE",
+      "function": "ATOMICALLY_CLAIM_AND_CONSUME_GRANT_NONCE",
+      "substantive_scientific_discretion": false,
+      "operational_execution_power": false
+    },
+    {
+      "layer": 6,
+      "id": "EXECUTION_HARNESS",
+      "function": "START_EXACTLY_AUTHORIZED_RUN_ONLY_AFTER_VALID_ATOMIC_CLAIM",
+      "substantive_scientific_discretion": false,
+      "operational_execution_power": true
+    }
+  ],
+  "signer_contract": {
+    "behavior": "SIGN_EXACT_PAYLOAD_OR_REJECT",
+    "may_modify_payload": false,
+    "may_summarize_payload": false,
+    "may_reinterpret_decision": false,
+    "may_repair_missing_fields": false,
+    "may_upgrade_gate": false,
+    "may_create_scientific_evidence": false,
+    "requires_explicit_owner_ratification_for_reserved_matter": true
+  },
+  "decision_record_contract": {
+    "append_only": true,
+    "required_fields": [
+      "decision_id",
+      "timestamp_utc",
+      "authority_role_id",
+      "forum_identity",
+      "identity_binding_status",
+      "policy_version",
+      "canonical_subject_sha",
+      "evidence_sources",
+      "assumptions",
+      "validity_regime",
+      "decision",
+      "rationale",
+      "scope",
+      "affected_gates",
+      "unresolved_blockers",
+      "forbidden_inferences",
+      "conflict_or_dissent_notes",
+      "physical_gate_effect",
+      "physical_evidence_effect",
+      "reserved_matter",
+      "owner_ratification_required",
+      "owner_ratification_status",
+      "owner_ratification_record"
+    ]
+  },
+  "fail_closed_conditions": [
+    "PENDING_OR_AMBIGUOUS_CANONICAL_FORUM_IDENTITY",
+    "DUPLICATE_LIVE_AUTHORITY_CLAIMANT",
+    "MISSING_OR_MISMATCHED_POLICY_VERSION",
+    "REVOKED_OR_EXPIRED_AUTHORITY_BINDING",
+    "MISSING_OR_MISMATCHED_CANONICAL_SUBJECT_SHA",
+    "MISSING_OR_MISMATCHED_FROZEN_DIGEST",
+    "INCOMPLETE_EVIDENCE_OR_REVALIDATION_PACKET",
+    "UNRESOLVED_CONSTITUTIONAL_SAFETY_PROVENANCE_OR_SCIENTIFIC_BLOCKER",
+    "AUTHORIZATION_OR_GRANT_REQUEST_DURING_CURRENT_HOLD",
+    "SIGNER_VALIDATOR_RESERVATION_OR_HARNESS_FAILURE",
+    "AMBIGUOUS_ROUTINE_VERSUS_RESERVED_CLASSIFICATION",
+    "RESERVED_MATTER_WITHOUT_EXPLICIT_OWNER_RATIFICATION",
+    "IMPLIED_OR_CONTEXT_INFERRED_OWNER_CONSENT"
+  ],
+  "fail_closed_result": "HOLD_NO_OPERATIONAL_AUTHORITY",
+  "future_operational_activation_requirements": [
+    "EXPLICIT_OWNER_RATIFICATION_FOR_RESERVED_EXECUTION_MATTER",
+    "EXACT_CANONICAL_IDENTITY_BINDING_FOR_HDA_ULSH_MBO_01",
+    "UNREVOKED_POLICY_VERSION_AND_SCOPE_BINDING",
+    "COMPLETE_REVALIDATION_OF_THEN_CURRENT_CANONICAL_PROJECT_STATE_AGAINST_FROZEN_CP01R4",
+    "EXACT_SUBJECT_SHA_TARGET_PAYLOAD_AND_PACKAGE_DIGESTS",
+    "COMPLETE_EVIDENCE_AND_ENVIRONMENT_ATTESTATION_PACKET",
+    "NONEXPIRED_SUBSTANTIVE_HDA_DECISION_BOUND_TO_EXACT_REQUEST",
+    "INDEPENDENT_DETERMINISTIC_POLICY_VALIDATION",
+    "AUTHENTICATED_CRYPTOGRAPHIC_SIGNER_WITH_NO_SUBSTANTIVE_DISCRETION",
+    "PERSISTENT_ATOMIC_RESERVATION_NONCE_STORE",
+    "ONE_TIME_GRANT_AND_ATOMIC_CLAIM_BEFORE_BACKEND_IMPORT",
+    "FRESH_RESULT_PATH_AND_COMPLIANT_EXECUTION_HARNESS",
+    "NO_UNRESOLVED_CONSTITUTIONAL_SAFETY_PROVENANCE_OR_SCIENTIFIC_BLOCKER"
+  ],
+  "firewall": {
+    "WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "WP2": "METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED",
+    "operative_AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_run": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "WP3": "NOT_STARTED",
+    "WP4": "BLOCKED_NOT_AUTHORIZED",
+    "rank_R": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "restart_anchors": {
+    "release_subject": "d8890b9ef47936edf8bb7e758b882c898241b314",
+    "target": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "cp01r4_payload": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+    "release_package_16_file": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621"
+  },
+  "cp01r4_state": "METHOD_FROZEN_NO_EXECUTION",
+  "current_hold_shortened_or_retargeted": false,
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "canonical_state_basis": {
+    "path": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+    "schema": "universelab.current-main-canonical-state.v1",
+    "version": "1.3.0",
+    "snapshot_date": "2026-09-04",
+    "status": "POST_BAND_VC_RECONCILED_CURRENT_STATE",
+    "basis_main_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+    "synchronization_class": "CURRENT_CANONICAL_NONEXECUTION_BASELINE"
+  },
+  "method_authority_preparation": {
+    "technical_authority_signature_verifier": "IMPLEMENTED_AND_QA_GREEN",
+    "human_trust_root_preparation_package": "IMPLEMENTED_AND_QA_GREEN",
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "human_trust_root_action": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
+    "authority_signature_provenance": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
+    "runtime_issuance_bindings": "BLOCKED"
+  },
+  "reserved_matter_boundary": {
+    "owner_ratifier": "STEFAN_HASSELMEYER",
+    "explicit_owner_ratification_required": true,
+    "implied_consent_forbidden": true,
+    "bare_go_without_unambiguous_proposal_reference_is_insufficient": true,
+    "classification_uncertainty_result": "HOLD_AND_ESCALATE_OWNER_RATIFICATION",
+    "hda_may_hold_or_deny_without_owner_ratification": true,
+    "hda_may_grant_open_release_promote_or_operationalize_without_owner_ratification": false,
+    "reserved_matters": [
+      "K1_D_K1_E_OR_EQUIVALENT_GATE_OPENING_RELEASE_OR_STATUS_PROMOTION",
+      "AUTHORITY_IDENTITY_TRUST_ROOT_SIGNATURE_POLICY_OR_DELEGATION_CHANGE",
+      "AUTHORIZATION_DECISION_SINGLE_USE_GRANT_BACKEND_IMPORT_OR_SOLVER_EXECUTION",
+      "PHYSICAL_EVIDENCE_EXISTENCE_UNIQUENESS_STABILITY_GHOST_FREEDOM_OR_RESPONSE_RANK_CLAIM",
+      "CANONICAL_FROZEN_RATIFIED_OR_PUBLICATION_STATUS_PROMOTION",
+      "PUBLICATION_EXTERNAL_COMMITMENT_OR_MAXIMAL_PUBLIC_CLAIM",
+      "PROJECT_CONSTITUTION_MD0_HPVS_HZT_ARCHITECTURE_OR_SCOPE_CHANGE",
+      "MATERIAL_CHANGE_TO_FROZEN_TARGET_DIGEST_HOLD_OR_RESTART_ANCHOR"
+    ]
+  },
+  "owner_ratification_boundary": {
+    "position": "AFTER_HDA_RECOMMENDATION_AND_BEFORE_ANY_RESERVED_MATTER_POLICY_VALIDATION",
+    "applies_to": "ALL_RESERVED_MATTERS",
+    "ratifier": "STEFAN_HASSELMEYER",
+    "ratification_must_be": "EXPLICIT_SCOPED_CURRENT_AND_APPEND_ONLY_RECORDED",
+    "absent_invalid_ambiguous_or_expired_result": "HOLD",
+    "cannot_be_inferred_from": "MEMORY_CHAT_TITLE_HISTORICAL_SUMMARY_GREEN_CI_OR_UNREFERENCED_GO"
+  }
+}
