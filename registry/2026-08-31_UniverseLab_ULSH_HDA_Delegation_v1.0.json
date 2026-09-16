@@ -1,25 +1,30 @@
 {
   "schema": "universelab.ulsh.hda-delegation.v1.0",
   "date": "2026-08-31",
-  "status": "RATIFIED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
-  "classification": "GOVERNANCE_DELEGATION_NO_OPERATIONAL_AUTHORITY",
+  "status": "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
+  "classification": "LIMITED_GOVERNANCE_DELEGATION_NO_OPERATIONAL_AUTHORITY",
   "program_scope": "ULSH_SOLVER_COMPLEX_UNDER_HPVS_HZT_M0_HZT_FULL_ARCHITECTURE",
-  "ratification_basis": "CURRENT_EXPLICIT_PROJECT_OWNER_DECISION_2026-08-31",
+  "ratification_basis": "CURRENT_EXPLICIT_PROJECT_OWNER_DECISION_2026-09-16_LIMITED_DELEGATION",
   "governance_document": "governance/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.md",
   "delegating_principal": {
-    "name": "Stefan",
+    "name": "Stefan Hasselmeyer",
     "role": "CONSTITUTIONAL_PROJECT_OWNER_AND_DELEGATING_PRINCIPAL",
     "routine_scientific_gate_decider": false,
     "retained_powers": [
       "CONSTITUTIONAL_RATIFICATION_AMENDMENT_REPLACEMENT_SUSPENSION_REVOCATION",
-      "OWNERSHIP_LEGAL_ACCOUNT_AND_PUBLICATION_CONTROL",
+      "FINAL_RATIFICATION_OF_GATE_RELEASE_OPENING_OR_STATUS_PROMOTION",
+      "FINAL_RATIFICATION_OF_AUTHORITY_IDENTITY_TRUST_ROOT_SIGNATURE_GRANT_OR_EXECUTION_CHANGE",
+      "FINAL_RATIFICATION_OF_PHYSICAL_EVIDENCE_OR_THEORY_CONFIRMATION_CLAIMS",
+      "OWNERSHIP_LEGAL_ACCOUNT_PUBLICATION_AND_EXTERNAL_COMMITMENT_CONTROL",
       "NONNEGOTIABLE_SAFETY_PRIVACY_RESOURCE_AND_OPERATIONAL_CONSTRAINTS",
+      "PROJECT_CONSTITUTION_MD0_HPVS_HZT_ARCHITECTURE_OR_SCOPE_CHANGE",
       "MATTERS_EXPLICITLY_OUTSIDE_DELEGATED_ULSH_SCOPE"
-    ]
+    ],
+    "exclusive_final_ratifier_for_reserved_matters": true
   },
   "authority": {
     "authority_id": "HDA-ULSH-MBO-01",
-    "role": "PRIMARY_SCIENTIFIC_AND_SOLVER_GOVERNANCE_DECISION_AUTHORITY",
+    "role": "PRIMARY_ROUTINE_NONOPERATIVE_SCIENTIFIC_AND_SOLVER_GOVERNANCE_AUTHORITY",
     "authority_class": "AI_ASSISTED_GOVERNED_DECISION_FORUM",
     "decision_agent": "ASSISTANT_OPERATING_IN_GOVERNED_FORUM",
     "assistant_instance_is_persistent_identity": false,
@@ -34,7 +39,11 @@
     "identity_binding_status": "PENDING_CANONICAL_ID_BINDING",
     "nonoperative_substantive_authority": true,
     "operative_authority": false,
-    "operational_status_on_identity_ambiguity": "OPERATIONAL_AUTHORITY_SUSPENDED"
+    "operational_status_on_identity_ambiguity": "OPERATIONAL_AUTHORITY_SUSPENDED",
+    "routine_nonoperative_decision_authority": true,
+    "reserved_matter_final_decision_authority": false,
+    "may_unilaterally_hold_or_deny_reserved_matter": true,
+    "reserved_matter_positive_disposition": "ESCALATE_OWNER_RATIFICATION"
   },
   "authority_hierarchy": [
     "CURRENT_EXPLICIT_CONSTITUTIONAL_OWNER_DECISION",
@@ -48,30 +57,33 @@
   ],
   "substantive_scope": {
     "allowed_decisions": [
-      "ULSH_14_SOLVER_PRIORITIZATION_AND_SEQUENCE",
-      "NEXT_ADMISSIBLE_WORK_PACKAGE_AND_BRANCH",
-      "SCIENTIFIC_AND_TECHNICAL_GATE_INTERPRETATION_AND_DISPOSITION",
-      "MODEL_SCOPE_ADMISSIBILITY_QUARANTINE_SUPERSESSION_OR_ESCALATION",
+      "ULSH_14_SOLVER_PRIORITIZATION_AND_SEQUENCE_WITHIN_APPROVED_SCOPE",
+      "NEXT_ADMISSIBLE_NONOPERATIVE_WORK_PACKAGE_AND_BRANCH",
+      "ADDITIONAL_TEST_QA_REPRODUCTION_AND_ADVERSARIAL_CHECKS",
       "UPSTREAM_DOWNSTREAM_DEPENDENCIES_AND_BLOCKERS",
-      "ARTIFACT_STATUS_CLASSIFICATION",
+      "DEVELOPMENT_DIAGNOSTIC_QUARANTINE_SUPERSESSION_OR_REJECTION_CLASSIFICATION",
       "NO_GO_ABORT_ROLLBACK_AND_QUARANTINE",
-      "MAXIMAL_SCIENTIFICALLY_WARRANTED_CLAIM",
-      "FUTURE_SUBSTANTIVE_GRANT_HOLD_OR_DENY_AFTER_COMPLETE_REVALIDATION"
+      "SCIENTIFIC_CLAIM_RESTRICTION_OR_DOWNGRADE",
+      "RESERVED_MATTER_RECOMMENDATION_AND_ESCALATION_FOR_OWNER_RATIFICATION"
     ],
     "ordinary_decision_vocabulary": [
       "PROCEED",
       "HOLD",
       "DENY",
       "REVISE",
-      "ESCALATE_CONSTITUTIONAL"
+      "ESCALATE_OWNER_RATIFICATION"
     ],
     "future_execution_decision_vocabulary": [
-      "GRANT",
+      "RECOMMEND_GRANT",
       "HOLD",
-      "DENY"
+      "DENY",
+      "ESCALATE_OWNER_RATIFICATION"
     ],
-    "future_GRANT_is_operative_SingleUseGrant": false,
-    "evidence_bounded": true
+    "evidence_bounded": true,
+    "routine_only": true,
+    "future_RECOMMEND_GRANT_is_operative_AuthorizationDecision_or_SingleUseGrant": false,
+    "may_block_or_downgrade_reserved_matter": true,
+    "may_open_release_promote_or_operationalize_reserved_matter": false
   },
   "explicit_exclusions": [
     "NO_PERSISTENT_PRIVATE_SIGNING_KEY_IN_CHAT_ROLE",
@@ -85,7 +97,13 @@
     "NO_SILENT_RETARGETING_OF_FROZEN_DIGESTS",
     "NO_PHYSICAL_EVIDENCE_FROM_GOVERNANCE",
     "NO_OVERRIDE_OF_CONSTITUTION_MD0_HPVS_OR_CURRENT_OWNER_REVOCATION",
-    "NO_EVIDENCE_SUBSTITUTION_BY_MEMORY_CHAT_HISTORY_CONFIDENCE_OR_GREEN_CI"
+    "NO_EVIDENCE_SUBSTITUTION_BY_MEMORY_CHAT_HISTORY_CONFIDENCE_OR_GREEN_CI",
+    "NO_FINAL_RESERVED_MATTER_DECISION_BY_HDA",
+    "NO_GATE_OPENING_RELEASE_OR_POSITIVE_STATUS_PROMOTION_BY_HDA",
+    "NO_AUTHORITY_IDENTITY_TRUST_ROOT_SIGNATURE_POLICY_OR_DELEGATION_CHANGE_BY_HDA",
+    "NO_AUTHORIZATION_DECISION_SINGLE_USE_GRANT_BACKEND_IMPORT_OR_SOLVER_EXECUTION_BY_HDA",
+    "NO_PHYSICAL_EVIDENCE_OR_THEORY_CONFIRMATION_PROMOTION_BY_HDA",
+    "NO_PUBLICATION_OR_EXTERNAL_COMMITMENT_RATIFICATION_BY_HDA"
   ],
   "forbidden_equivalences": [
     "CHAT_TITLE_IS_NOT_CANONICAL_IDENTITY",
@@ -93,21 +111,24 @@
     "SCIENTIFIC_DECISION_IS_NOT_CRYPTOGRAPHIC_AUTHORIZATION",
     "CRYPTOGRAPHIC_SIGNATURE_IS_NOT_SCIENTIFIC_VALIDATION",
     "GOVERNANCE_RATIFICATION_IS_NOT_PHYSICAL_EVIDENCE",
-    "GREEN_CI_IS_NOT_PHYSICAL_RELEASE"
+    "GREEN_CI_IS_NOT_PHYSICAL_RELEASE",
+    "ROUTINE_HDA_DECISION_IS_NOT_OWNER_RATIFICATION",
+    "HDA_RECOMMEND_GRANT_IS_NOT_AUTHORIZATION_DECISION_OR_SINGLE_USE_GRANT"
   ],
   "decision_to_execution_layers": [
     {
       "layer": 1,
       "id": "SUBSTANTIVE_HDA",
       "component": "HDA-ULSH-MBO-01",
-      "function": "EVALUATE_EVIDENCE_AND_ISSUE_SUBSTANTIVE_DECISION",
+      "function": "EVALUATE_EVIDENCE_AND_ISSUE_ROUTINE_DECISION_OR_RESERVED_MATTER_RECOMMENDATION",
       "substantive_scientific_discretion": true,
-      "operational_execution_power": false
+      "operational_execution_power": false,
+      "reserved_matter_final_authority": false
     },
     {
       "layer": 2,
       "id": "DETERMINISTIC_POLICY_VALIDATOR",
-      "function": "VERIFY_SCHEMA_POLICY_SUBJECT_DIGESTS_GATES_TIME_WINDOW_AND_REQUIRED_FIELDS",
+      "function": "VERIFY_SCHEMA_POLICY_SUBJECT_DIGESTS_GATES_TIME_WINDOW_REQUIRED_FIELDS_AND_OWNER_RATIFICATION",
       "substantive_scientific_discretion": false,
       "operational_execution_power": false
     },
@@ -147,7 +168,8 @@
     "may_reinterpret_decision": false,
     "may_repair_missing_fields": false,
     "may_upgrade_gate": false,
-    "may_create_scientific_evidence": false
+    "may_create_scientific_evidence": false,
+    "requires_explicit_owner_ratification_for_reserved_matter": true
   },
   "decision_record_contract": {
     "append_only": true,
@@ -170,7 +192,11 @@
       "forbidden_inferences",
       "conflict_or_dissent_notes",
       "physical_gate_effect",
-      "physical_evidence_effect"
+      "physical_evidence_effect",
+      "reserved_matter",
+      "owner_ratification_required",
+      "owner_ratification_status",
+      "owner_ratification_record"
     ]
   },
   "fail_closed_conditions": [
@@ -183,10 +209,14 @@
     "INCOMPLETE_EVIDENCE_OR_REVALIDATION_PACKET",
     "UNRESOLVED_CONSTITUTIONAL_SAFETY_PROVENANCE_OR_SCIENTIFIC_BLOCKER",
     "AUTHORIZATION_OR_GRANT_REQUEST_DURING_CURRENT_HOLD",
-    "SIGNER_VALIDATOR_RESERVATION_OR_HARNESS_FAILURE"
+    "SIGNER_VALIDATOR_RESERVATION_OR_HARNESS_FAILURE",
+    "AMBIGUOUS_ROUTINE_VERSUS_RESERVED_CLASSIFICATION",
+    "RESERVED_MATTER_WITHOUT_EXPLICIT_OWNER_RATIFICATION",
+    "IMPLIED_OR_CONTEXT_INFERRED_OWNER_CONSENT"
   ],
-  "fail_closed_result": "OPERATIONAL_AUTHORITY_SUSPENDED",
+  "fail_closed_result": "HOLD_NO_OPERATIONAL_AUTHORITY",
   "future_operational_activation_requirements": [
+    "EXPLICIT_OWNER_RATIFICATION_FOR_RESERVED_EXECUTION_MATTER",
     "EXACT_CANONICAL_IDENTITY_BINDING_FOR_HDA_ULSH_MBO_01",
     "UNREVOKED_POLICY_VERSION_AND_SCOPE_BINDING",
     "COMPLETE_REVALIDATION_OF_THEN_CURRENT_CANONICAL_PROJECT_STATE_AGAINST_FROZEN_CP01R4",
@@ -240,5 +270,32 @@
     "human_trust_root_action": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
     "authority_signature_provenance": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
     "runtime_issuance_bindings": "BLOCKED"
+  },
+  "reserved_matter_boundary": {
+    "owner_ratifier": "STEFAN_HASSELMEYER",
+    "explicit_owner_ratification_required": true,
+    "implied_consent_forbidden": true,
+    "bare_go_without_unambiguous_proposal_reference_is_insufficient": true,
+    "classification_uncertainty_result": "HOLD_AND_ESCALATE_OWNER_RATIFICATION",
+    "hda_may_hold_or_deny_without_owner_ratification": true,
+    "hda_may_grant_open_release_promote_or_operationalize_without_owner_ratification": false,
+    "reserved_matters": [
+      "K1_D_K1_E_OR_EQUIVALENT_GATE_OPENING_RELEASE_OR_STATUS_PROMOTION",
+      "AUTHORITY_IDENTITY_TRUST_ROOT_SIGNATURE_POLICY_OR_DELEGATION_CHANGE",
+      "AUTHORIZATION_DECISION_SINGLE_USE_GRANT_BACKEND_IMPORT_OR_SOLVER_EXECUTION",
+      "PHYSICAL_EVIDENCE_EXISTENCE_UNIQUENESS_STABILITY_GHOST_FREEDOM_OR_RESPONSE_RANK_CLAIM",
+      "CANONICAL_FROZEN_RATIFIED_OR_PUBLICATION_STATUS_PROMOTION",
+      "PUBLICATION_EXTERNAL_COMMITMENT_OR_MAXIMAL_PUBLIC_CLAIM",
+      "PROJECT_CONSTITUTION_MD0_HPVS_HZT_ARCHITECTURE_OR_SCOPE_CHANGE",
+      "MATERIAL_CHANGE_TO_FROZEN_TARGET_DIGEST_HOLD_OR_RESTART_ANCHOR"
+    ]
+  },
+  "owner_ratification_boundary": {
+    "position": "AFTER_HDA_RECOMMENDATION_AND_BEFORE_ANY_RESERVED_MATTER_POLICY_VALIDATION",
+    "applies_to": "ALL_RESERVED_MATTERS",
+    "ratifier": "STEFAN_HASSELMEYER",
+    "ratification_must_be": "EXPLICIT_SCOPED_CURRENT_AND_APPEND_ONLY_RECORDED",
+    "absent_invalid_ambiguous_or_expired_result": "HOLD",
+    "cannot_be_inferred_from": "MEMORY_CHAT_TITLE_HISTORICAL_SUMMARY_GREEN_CI_OR_UNREFERENCED_GO"
   }
 }
