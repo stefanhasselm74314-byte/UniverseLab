@@ -1,23 +1,23 @@
 {
-  "basis_commit": "c1114657fdd2003a458992334ddb2f0c7b6f559e",
-  "claim_candidates": 993,
+  "basis_commit": "5de0107701973cb157b733e66b92f5ecd91b522a",
+  "claim_candidates": 995,
   "explicit_statuses": {
     "BLOCKED_OR_UNRELEASED": 66,
     "CONDITIONAL_OR_HEURISTIC": 55,
-    "EXPLICITLY_NEGATED_OR_LIMITED": 122,
+    "EXPLICITLY_NEGATED_OR_LIMITED": 124,
     "OPEN_OR_NOT_EXECUTED": 44,
     "UNCLASSIFIED": 706
   },
   "generated_by": "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py",
   "lexical_categories": {
     "CONDITIONAL_HEURISTIC": 64,
-    "DERIVATION_IDENTIFICATION": 68,
+    "DERIVATION_IDENTIFICATION": 70,
     "EVIDENCE_CONFIRMATION": 68,
     "NUMERICAL_METHOD": 124,
     "OBSERVATIONAL_DATA": 115,
     "PHYSICAL_COSMOLOGY": 171,
     "PREDICTION_SIGNATURE": 25,
-    "STATUS_FIREWALL": 232,
+    "STATUS_FIREWALL": 234,
     "THEORY_6D_PARENT": 141
   },
   "limitations": [
@@ -311,6 +311,15 @@
     {
       "manifest_member": false,
       "manifest_status": null,
+      "path": "googlebc3b5b4a4888e35c.html",
+      "scope": "TRACKED_NON_SITEMAP_PAGE",
+      "sitemap_member": false,
+      "source_sha256": "a66cbf8c5fe3a458f5ea1d25091a7e918712fd84a8dbb2312063658e99723811",
+      "visible_blocks": 0
+    },
+    {
+      "manifest_member": false,
+      "manifest_status": null,
       "path": "guide-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
@@ -449,8 +458,8 @@
       "path": "links.html",
       "scope": "TRACKED_NON_SITEMAP_PAGE",
       "sitemap_member": false,
-      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
-      "visible_blocks": 76
+      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "visible_blocks": 80
     },
     {
       "manifest_member": false,
@@ -683,18 +692,18 @@
     "PUBLIC_REPOSITORY_README": 34,
     "PUBLIC_SITEMAP_PAGE": 340,
     "TRACKED_ARCHIVE_OR_UTILITY_PAGE": 69,
-    "TRACKED_NON_SITEMAP_PAGE": 181
+    "TRACKED_NON_SITEMAP_PAGE": 183
   },
   "physical_evidence_effect": "NONE",
   "physical_gate_effect": "NONE",
   "risk_classes": {
-    "CONTEXT_OR_FIREWALL": 364,
+    "CONTEXT_OR_FIREWALL": 366,
     "LOW": 583,
     "MEDIUM": 46
   },
   "schema": "universelab.public-scientific-claim-extraction-summary.v0.1",
   "sitemap_pages": 34,
   "status": "PASS_AUTOMATED_EXTRACTION_NOT_SCIENTIFIC_ADJUDICATION",
-  "tracked_html_files": 72,
-  "visible_blocks": 3447
+  "tracked_html_files": 73,
+  "visible_blocks": 3451
 }
