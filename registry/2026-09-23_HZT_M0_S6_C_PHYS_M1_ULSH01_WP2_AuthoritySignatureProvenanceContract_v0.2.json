@@ -171,7 +171,8 @@
     "operative_positive_result_authorizes_execution_by_itself": false,
     "additional_runtime_issuance_gate_required": true,
     "crypto_core_path": "tools/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityVerificationCore_v0.1.py",
-    "legacy_signed_envelope_contract_id": "ULSH01-WP2-AUTHORITY-SIGNATURE-PROVENANCE-v0.1"
+    "legacy_signed_envelope_contract_id": "ULSH01-WP2-AUTHORITY-SIGNATURE-PROVENANCE-v0.1",
+    "operative_result_for_trust_root_ratification_in_this_revision": "OWNER_RATIFICATION_NOT_VERIFIABLE"
   },
   "synthetic_qa_policy": {
     "synthetic_key_allowed_in_tests": true,
@@ -268,6 +269,12 @@
     "future_positive_path_requires_new_versioned_contract_or_dispatch": true,
     "implied_consent_forbidden": true,
     "unreferenced_go_is_owner_ratification": false,
-    "memory_chat_title_green_ci_or_repository_ownership_is_owner_ratification": false
+    "memory_chat_title_green_ci_or_repository_ownership_is_owner_ratification": false,
+    "positive_operational_verification_blocked_artifact_types": [
+      "AUTHORIZATION_DECISION",
+      "SINGLE_USE_GRANT",
+      "TRUST_ROOT_RATIFICATION"
+    ],
+    "trust_root_ratification_in_this_revision": "SYNTHETIC_CONTROL_ONLY_OR_FAIL_CLOSED"
   }
 }
