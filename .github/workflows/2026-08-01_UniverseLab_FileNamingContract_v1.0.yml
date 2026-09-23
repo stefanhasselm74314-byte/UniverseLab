@@ -26,15 +26,15 @@ jobs:
       - name: Compile validator and tests
         run: |
           python -m py_compile tools/2026-08-01_validate_file_naming_v1.0.py
-          python -m py_compile tests/2026-08-01_test_file_naming_v1.0.py
+          python -m py_compile tests/2026-08-01_test_file_naming_v1.0.py\n          python -m py_compile tests/2026-09-23_test_file_naming_v1.2.py
 
       - name: Validate machine-readable naming policy
         run: |
-          python -m json.tool registry/2026-08-20_UniverseLab_FileNamingPolicy_v1.1.json >/dev/null
+          python -m json.tool registry/2026-09-23_UniverseLab_FileNamingPolicy_v1.2.json >/dev/null
 
       - name: Run naming-contract tests
         run: |
-          python tests/2026-08-01_test_file_naming_v1.0.py
+          python tests/2026-08-01_test_file_naming_v1.0.py\n          python tests/2026-09-23_test_file_naming_v1.2.py
 
       - name: Collect added and renamed destination paths
         shell: bash
@@ -55,11 +55,11 @@ jobs:
                 $1 ~ /^R[0-9]+$/ { print $3 }
               ' \
             > /tmp/universelab-added-or-renamed-paths.txt
-          echo "Paths subject to UL-FNS-v1.1:"
+          echo "Paths subject to UL-FNS-v1.2:"
           cat /tmp/universelab-added-or-renamed-paths.txt
 
       - name: Enforce dated file naming contract
         run: |
           python tools/2026-08-01_validate_file_naming_v1.0.py \
-            --policy registry/2026-08-20_UniverseLab_FileNamingPolicy_v1.1.json \
+            --policy registry/2026-09-23_UniverseLab_FileNamingPolicy_v1.2.json \
             --paths-file /tmp/universelab-added-or-renamed-paths.txt
