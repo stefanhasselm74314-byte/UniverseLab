@@ -67,12 +67,15 @@ def main()->int:
                 if 'ul-curated-source' not in body:
                     errors.append(f"{p['id']} en: curated source metadata missing")
             rows.append({'id':p['id'],'side':side,'url':url,'status':status,'final':final,'lang':meta.lang,'canonical':meta.canonical})
-    # Live language-switcher asset must be reachable and carry all four newly governed routes.
-    asset=BASE+'/UniverseLab/assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.1.js'
+    # The deployed active language switcher must carry every governed canonical and alias route token.
+    asset=BASE+'/UniverseLab/assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
     st,_,js=fetch(asset)
-    if st!=200: errors.append(f'language switcher asset HTTP {st}')
-    for slug in ('about','journey','emergence','universe3d','navigator'):
-        if slug not in js: errors.append(f'language switcher live asset missing route token {slug}')
+    if st!=200: errors.append(f'active language switcher asset HTTP {st}')
+    for p in reg['route_pairs']:
+        governed=[p['de'],p['en'],*p.get('aliases_de',[])]
+        for route in governed:
+            token=route.rsplit('/',1)[-1] or 'index.html'
+            if token not in js: errors.append(f"{p['id']}: active language switcher missing route token {token}")
     report={'status':'PASS' if not errors else 'FAIL','base':BASE,'pairs':len(reg['route_pairs']),'checks':rows,'errors':errors,
             'scientific_firewall':'Runtime English mirrors execute the same canonical German page; this HTTP audit verifies deployment identity but does not claim independent numerical browser equivalence.'}
     out=ROOT/'production-smoke-report.json'; out.write_text(json.dumps(report,indent=2,ensure_ascii=False),encoding='utf-8')
