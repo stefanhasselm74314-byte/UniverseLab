@@ -5,7 +5,7 @@ on:
     paths:
       - '2026-08-20_UniverseLab_MultilingualRouteRegistry_v1.1.json'
       - 'sitemap.xml'
-      - 'assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.1.js'
+      - 'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
       - '*-en.html'
       - 'tools/2026-08-20_UniverseLab_ProductionSmokeAudit_v1.0.py'
       - '.github/workflows/2026-08-20_UniverseLab_ProductionSmokeAudit_v1.0.yml'
