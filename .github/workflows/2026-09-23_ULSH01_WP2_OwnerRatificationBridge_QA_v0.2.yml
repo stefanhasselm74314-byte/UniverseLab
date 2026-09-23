@@ -7,6 +7,7 @@ on:
       - 'registry/2026-09-23_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.2.md'
       - 'tools/2026-09-23_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.2.py'
       - 'tests/2026-09-23_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.2.py'
+      - 'tools/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityVerificationCore_v0.1.py'
       - 'tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py'
       - 'tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py'
       - '.github/workflows/2026-09-23_ULSH01_WP2_OwnerRatificationBridge_QA_v0.2.yml'
@@ -17,6 +18,7 @@ on:
       - 'registry/2026-09-23_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthoritySignatureProvenanceContract_v0.2.md'
       - 'tools/2026-09-23_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.2.py'
       - 'tests/2026-09-23_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.2.py'
+      - 'tools/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityVerificationCore_v0.1.py'
       - 'tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py'
       - 'tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorityAttestation_v0.1.py'
       - '.github/workflows/2026-09-23_ULSH01_WP2_OwnerRatificationBridge_QA_v0.2.yml'
@@ -131,6 +133,7 @@ jobs:
           - v0.2 bridge contract: DRAFT_NOT_RATIFIED
           - operative-shaped decision without owner ratification: FAIL-CLOSED
           - operative-shaped grant without owner ratification: FAIL-CLOSED
+          - operative TRUST_ROOT_RATIFICATION path: FAIL-CLOSED
           - forged owner fields / unreferenced Go: no bypass
           - synthetic controls: PASS, nonoperative
           - Trust Root: NOT RATIFIED
