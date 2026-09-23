@@ -195,6 +195,21 @@ def main() -> None:
     assert repo_contract["authority_and_key_policy"]["private_keys_may_be_committed"] is False
     expect_error("TRUST_ROOT_NOT_RATIFIED", lambda: verify(DECISION, "AUTHORIZATION_DECISION", contract=repo_contract, root=repo_root))
 
+    retired_contract = copy.deepcopy(repo_contract)
+    retired_contract["status"] = "RATIFIED_ACTIVE"
+    retired_root = synthetic_root()
+    retired_root["status"] = "RATIFIED_ACTIVE"
+    retired_root["authorities"][0]["synthetic_control_only"] = False
+    expect_error(
+        "CONTRACT_VERSION_SUPERSEDED_FOR_OPERATION",
+        lambda: verify(
+            DECISION,
+            "AUTHORIZATION_DECISION",
+            contract=retired_contract,
+            root=retired_root,
+        ),
+    )
+
     # RFC 8032 test vector 1, empty message.
     rfc_public = bytes.fromhex("d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a")
     rfc_signature = bytes.fromhex(
