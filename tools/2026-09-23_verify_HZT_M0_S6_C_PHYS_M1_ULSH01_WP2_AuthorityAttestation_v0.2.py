@@ -43,7 +43,7 @@ ed25519_verify=_core.ed25519_verify
 
 BRIDGE_SCHEMA = "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-authority-signature-provenance-contract.v0.2"
 BRIDGE_CONTRACT_ID = "ULSH01-WP2-AUTHORITY-SIGNATURE-PROVENANCE-v0.2"
-RESERVED_OPERATIVE_ARTIFACTS = {"AUTHORIZATION_DECISION", "SINGLE_USE_GRANT"}
+SUPPORTED_ARTIFACT_TYPES = {"AUTHORIZATION_DECISION", "SINGLE_USE_GRANT", "TRUST_ROOT_RATIFICATION"}
 
 def _find_unique(items: Any, key: str, expected: str, missing_code: str) -> dict[str, Any]:
     if not isinstance(items, list):
@@ -141,14 +141,21 @@ def verify_envelope(
             {"contract_status": contract_status, "trust_root_status": root_status},
         )
 
+    if expected_artifact_type not in SUPPORTED_ARTIFACT_TYPES:
+        raise AuthorityVerificationError(
+            "UNSUPPORTED_ARTIFACT_TYPE",
+            f"unsupported artifact type: {expected_artifact_type}",
+        )
+
     # PR #236 fail-closed bridge. This check deliberately precedes envelope,
-    # signature and payload validation: v0.2 has no independently verifiable
-    # concrete owner-ratification binding and therefore no positive operative
-    # path for reserved execution artifacts.
-    if operative and expected_artifact_type in RESERVED_OPERATIVE_ARTIFACTS:
+    # signature and payload validation. v0.2 exposes no positive operative
+    # result of any artifact class, including TRUST_ROOT_RATIFICATION.
+    # Trust-root proof-of-possession may still be exercised only through the
+    # synthetic-control path in this revision.
+    if operative:
         raise AuthorityVerificationError(
             "OWNER_RATIFICATION_NOT_VERIFIABLE",
-            "v0.2 blocks positive reserved authorization until a successor contract defines and verifies the concrete owner-ratification binding",
+            "v0.2 blocks every positive operative authority result until a successor contract defines and verifies the concrete owner-ratification binding",
             {
                 "expected_artifact_type": expected_artifact_type,
                 "bridge_contract_id": BRIDGE_CONTRACT_ID,
