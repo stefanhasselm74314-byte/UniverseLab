@@ -166,6 +166,20 @@ def synthetic_root() -> dict:
     }
 
 
+def operative_contract_without_owner_ratification() -> dict:
+    contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
+    contract["status"] = "RATIFIED_ACTIVE"
+    return contract
+
+
+def operative_root_without_owner_ratification() -> dict:
+    root = synthetic_root()
+    root["schema"] = "universelab.test-operative-authority-trust-root.v0.1"
+    root["status"] = "RATIFIED_ACTIVE"
+    root["authorities"][0]["synthetic_control_only"] = False
+    return root
+
+
 def expect_error(code: str, fn) -> None:
     try:
         fn()
@@ -194,6 +208,46 @@ def main() -> None:
     assert repo_root["firewall"]["this_file_establishes_an_authority"] is False
     assert repo_contract["authority_and_key_policy"]["private_keys_may_be_committed"] is False
     expect_error("TRUST_ROOT_NOT_RATIFIED", lambda: verify(DECISION, "AUTHORIZATION_DECISION", contract=repo_contract, root=repo_root))
+
+    # PR #236 regression: RATIFIED_ACTIVE contract + trust root must never
+    # authorize a reserved execution artifact until the concrete owner
+    # ratification can be independently verified and bound to that artifact.
+    operative_contract = operative_contract_without_owner_ratification()
+    operative_root = operative_root_without_owner_ratification()
+    for artifact_type, envelope in (
+        ("AUTHORIZATION_DECISION", DECISION),
+        ("SINGLE_USE_GRANT", GRANT),
+    ):
+        expect_error(
+            "OWNER_RATIFICATION_NOT_VERIFIABLE",
+            lambda artifact_type=artifact_type, envelope=envelope: V.verify_envelope(
+                operative_contract,
+                operative_root,
+                envelope,
+                expected_artifact_type=artifact_type,
+                now=datetime(2026, 9, 2, 1, 0, tzinfo=timezone.utc),
+            ),
+        )
+
+    # Ad-hoc or implied-consent fields are not a substitute for a governed,
+    # independently verifiable owner-ratification record.
+    for forged_fields in (
+        {"owner_ratification_status": "APPROVED"},
+        {"owner_ratification_record": {"owner": "STEFAN_HASSELMEYER"}},
+        {"owner_ratification_status": "APPROVED", "owner_ratification_record": "Go"},
+    ):
+        forged = copy.deepcopy(DECISION)
+        forged["payload"].update(forged_fields)
+        expect_error(
+            "OWNER_RATIFICATION_NOT_VERIFIABLE",
+            lambda forged=forged: V.verify_envelope(
+                operative_contract,
+                operative_root,
+                forged,
+                expected_artifact_type="AUTHORIZATION_DECISION",
+                now=datetime(2026, 9, 2, 1, 0, tzinfo=timezone.utc),
+            ),
+        )
 
     # RFC 8032 test vector 1, empty message.
     rfc_public = bytes.fromhex("d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a")
@@ -268,9 +322,13 @@ def main() -> None:
         root = Path(directory)
         synthetic_contract_path = root / "contract.json"
         synthetic_root_path = root / "root.json"
+        operative_contract_path = root / "operative-contract.json"
+        operative_root_path = root / "operative-root.json"
         envelope_path = root / "envelope.json"
         synthetic_contract_path.write_text(json.dumps(synthetic_contract()), encoding="utf-8")
         synthetic_root_path.write_text(json.dumps(synthetic_root()), encoding="utf-8")
+        operative_contract_path.write_text(json.dumps(operative_contract), encoding="utf-8")
+        operative_root_path.write_text(json.dumps(operative_root), encoding="utf-8")
         envelope_path.write_text(json.dumps(DECISION), encoding="utf-8")
         command = [
             sys.executable, str(VERIFIER_PATH),
@@ -301,6 +359,23 @@ def main() -> None:
         assert failure_payload["error_code"] == "TRUST_ROOT_NOT_RATIFIED"
         assert failure_payload["operative_authorization_allowed"] is False
         assert failure_payload["physical_evidence_effect"] == "NONE"
+
+        operative_failure = subprocess.run([
+            sys.executable, str(VERIFIER_PATH),
+            "--contract", str(operative_contract_path),
+            "--trust-root", str(operative_root_path),
+            "--envelope", str(envelope_path),
+            "--expected-artifact-type", "AUTHORIZATION_DECISION",
+            "--now-utc", "2026-09-02T01:00:00Z",
+        ], check=False, capture_output=True, text=True)
+        assert operative_failure.returncode == 2
+        operative_failure_payload = json.loads(operative_failure.stdout)
+        assert operative_failure_payload["status"] == "FAIL_CLOSED"
+        assert operative_failure_payload["error_code"] == "OWNER_RATIFICATION_NOT_VERIFIABLE"
+        assert operative_failure_payload["operative_authorization_allowed"] is False
+        assert operative_failure_payload["backend_imported"] is False
+        assert operative_failure_payload["solver_executed"] is False
+        assert operative_failure_payload["physical_evidence_effect"] == "NONE"
 
     source_text = VERIFIER_PATH.read_text(encoding="utf-8") + CORE_PATH.read_text(encoding="utf-8")
     assert "private_bytes" not in source_text
