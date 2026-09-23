@@ -133,6 +133,20 @@ def main() -> None:
             ),
         )
 
+    # v0.2 promises no positive operative result of any artifact class.
+    # The guard must therefore also fire before a TRUST_ROOT_RATIFICATION
+    # envelope can reach the common PASS_OPERATIVE return path.
+    expect_error(
+        "OWNER_RATIFICATION_NOT_VERIFIABLE",
+        lambda: V.verify_envelope(
+            operative_contract,
+            operative_root,
+            {},
+            expected_artifact_type="TRUST_ROOT_RATIFICATION",
+            now=datetime(2026, 9, 2, 1, 0, tzinfo=timezone.utc),
+        ),
+    )
+
     # Ad-hoc or implied-consent fields cannot bypass the bridge.
     for base, artifact_type in (
         (operative_decision, "AUTHORIZATION_DECISION"),
