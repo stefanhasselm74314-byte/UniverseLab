@@ -126,6 +126,18 @@ def verify_envelope(
             {"contract_status": contract_status, "trust_root_status": root_status},
         )
 
+    # PR #236 reserves any positive AuthorizationDecision / SingleUseGrant
+    # disposition to an explicit, scoped, current owner ratification.  The
+    # v0.1 envelope schema has no independently verifiable owner-ratification
+    # record or binding yet, so an operative RATIFIED_ACTIVE state must fail
+    # closed rather than treating contract + trust-root activation as enough.
+    if operative and expected_artifact_type in {"AUTHORIZATION_DECISION", "SINGLE_USE_GRANT"}:
+        raise AuthorityVerificationError(
+            "OWNER_RATIFICATION_NOT_VERIFIABLE",
+            "operative authorization is blocked until the concrete reserved decision carries an independently verifiable owner-ratification binding",
+            {"expected_artifact_type": expected_artifact_type},
+        )
+
     if env.get("schema") != "universelab.signed-authority-envelope.v0.1":
         raise AuthorityVerificationError("ENVELOPE_SCHEMA_MISMATCH", "signed envelope schema mismatch")
     protected = require_mapping(env.get("protected"), "envelope.protected")
