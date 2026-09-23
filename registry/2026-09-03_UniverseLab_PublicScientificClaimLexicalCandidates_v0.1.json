@@ -1,5 +1,5 @@
 {
-  "basis_commit": "5de0107701973cb157b733e66b92f5ecd91b522a",
+  "basis_commit": "c1114657fdd2003a458992334ddb2f0c7b6f559e",
   "candidates": [
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -5240,7 +5240,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "KOSMOLOGIE Öffnen →"
     },
@@ -5260,7 +5260,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 7,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "h3",
       "text": "Machine-Data-Viewer v1.1"
     },
@@ -10447,7 +10447,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 2,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "KANONISCH Öffnen →"
     },
@@ -10465,7 +10465,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 3,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "AKTIV Programm öffnen →"
     },
@@ -10483,7 +10483,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 3,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "FM-0 Inventar öffnen → Registry JSON { }"
     },
@@ -10501,7 +10501,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 4,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "SCI-001/002 Öffnen →"
     },
@@ -10519,7 +10519,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 4,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "h3",
       "text": "Bibliographiekatalog"
     },
@@ -10537,7 +10537,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "VERGLEICH Öffnen →"
     },
@@ -10555,7 +10555,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "INTERAKTIV Öffnen →"
     },
@@ -10575,7 +10575,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "h3",
       "text": "Journey · Emergence · Universe 3D"
     },
@@ -10593,7 +10593,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 6,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "DIAGNOSTISCH Öffnen →"
     },
@@ -10611,7 +10611,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 6,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "ENTWICKLER Öffnen →"
     },
@@ -10629,7 +10629,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 10,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "HISTORISCH Öffnen →"
     },
@@ -10647,7 +10647,7 @@
       "preliminary_risk_score": 1,
       "region": "main",
       "source_line": 11,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "div",
       "text": "K1-D = NOT_RELEASED und K1-E = NOT_ADMISSIBLE bleiben unverändert."
     },
@@ -12906,7 +12906,7 @@
       "preliminary_risk_score": 0,
       "region": "section",
       "source_line": 1,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "p",
       "text": "Kanonische Zugänge zuerst; Forschungsprogramm, Wissenschaft, Rechner, Solver, Entwickler, Support und historische Ziele sind klar getrennt."
     },
@@ -12926,7 +12926,7 @@
       "preliminary_risk_score": 0,
       "region": "document",
       "source_line": 1,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "meta-description",
       "text": "UniverseLab Wichtige Links: aktuelle kanonische Zugänge, Forschungsprogramm, Wissenschaft, Rechner, Solver, Entwickler und Archiv."
     },
@@ -12947,7 +12947,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 5,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "article",
       "text": "VISUALISIERUNG Journey → Emergence → Universe 3D → Conway →"
     },
@@ -12967,7 +12967,7 @@
       "preliminary_risk_score": 0,
       "region": "section",
       "source_line": 6,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
+      "source_sha256": "0002d96352d69ed2ea3dc60457528506cff4849555eff031c1a3c4222779ffc8",
       "tag": "h2",
       "text": "Solver, Governance & Entwickler"
     },
@@ -17969,48 +17969,6 @@
       "source_sha256": "cecc1ea193daa9742b08b3f83b8a3b905cd84c8f2448a689caa4648ee8fc452b",
       "tag": "p",
       "text": "Als Theoriegeschichte und Testansatz bewahren; keine aktuelle Hyperzeit-Vorhersage."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-338CAF57DF1E7F94",
-      "equation_like": false,
-      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
-      "lexical_categories": [
-        "DERIVATION_IDENTIFICATION",
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": null,
-      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
-      "path": "links.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "article",
-      "source_line": 9,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
-      "tag": "p",
-      "text": "Kein verifizierter kanonischer Ersatz identifiziert."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-E701D6D6A13D5D3F",
-      "equation_like": false,
-      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
-      "lexical_categories": [
-        "DERIVATION_IDENTIFICATION",
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": null,
-      "page_scope": "TRACKED_NON_SITEMAP_PAGE",
-      "path": "links.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "article",
-      "source_line": 9,
-      "source_sha256": "5c373c73ec460110b7adb4cf1217f77d51eee7654f5aae7bc12d7de55be0b24b",
-      "tag": "p",
-      "text": "Kein verifizierter Ersatz identifiziert."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
