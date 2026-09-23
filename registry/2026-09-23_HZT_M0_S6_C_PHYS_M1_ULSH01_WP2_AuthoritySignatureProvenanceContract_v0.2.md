@@ -41,7 +41,14 @@ operative-shaped reserved artifact
 
 Der Bridge-Verifier darf daher in dieser Revision niemals
 `operative_authorization_allowed=true`
-für `AUTHORIZATION_DECISION` oder `SINGLE_USE_GRANT` liefern.
+für irgendeinen unterstützten operativen Artefakttyp liefern. Das umfasst
+`AUTHORIZATION_DECISION`, `SINGLE_USE_GRANT` und
+`TRUST_ROOT_RATIFICATION`.
+
+Eine Trust-Root-Proof-of-Possession-Prüfung ist in v0.2 nur im
+synthetischen Kontrollpfad zulässig. Ein `RATIFIED_ACTIVE`-Pfad für
+`TRUST_ROOT_RATIFICATION` endet ebenfalls fail-closed mit
+`OWNER_RATIFICATION_NOT_VERIFIABLE`.
 
 ## 3. Warum v0.1 nicht stillschweigend umdefiniert wird
 
