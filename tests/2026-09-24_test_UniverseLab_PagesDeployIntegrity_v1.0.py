@@ -73,7 +73,9 @@ def main() -> None:
     assert "in_progress" in guardian
     assert "completed" in guardian
     assert "actions: write" in guardian
-    assert "github.event.workflow_run.head_sha != github.sha" in guardian
+    assert "steps.current-main.outputs.sha" in guardian
+    assert "/git/ref/heads/main" in guardian
+    assert "github.event.workflow_run.head_sha != steps.current-main.outputs.sha" in guardian
     assert "/actions/runs/${STALE_RUN_ID}/cancel" in guardian
     assert "/actions/workflows/deploy-pages.yml/dispatches" in guardian
 
