@@ -44,9 +44,6 @@ const initialMount=mount();
 if(!initialMount){
  const mo=new MutationObserver(()=>{if(mount())mo.disconnect()});mo.observe(document.documentElement,{childList:true,subtree:true});setTimeout(()=>mo.disconnect(),10000)
 }
-// A compatibility loader, service-worker recovery script, or late legacy widget can
-// append another switcher after the initial mount. Keep a short-lived guard so the
-// active provider deterministically converges back to exactly one canonical widget.
 if(document.documentElement){
  let cleaning=false;
  const guard=new MutationObserver(()=>{
