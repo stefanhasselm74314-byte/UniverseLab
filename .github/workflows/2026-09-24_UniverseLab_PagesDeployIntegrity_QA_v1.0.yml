@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/deploy-pages.yml'
       - '.github/workflows/2026-09-24_UniverseLab_PagesDeployIntegrity_QA_v1.0.yml'
+      - '.github/workflows/2026-09-24_UniverseLab_PagesDeploymentGuardian_v1.0.yml'
       - 'tools/2026-09-24_verify_UniverseLab_PagesDeploySource_v1.0.py'
       - 'tests/2026-09-24_test_UniverseLab_PagesDeployIntegrity_v1.0.py'
       - '2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js'
