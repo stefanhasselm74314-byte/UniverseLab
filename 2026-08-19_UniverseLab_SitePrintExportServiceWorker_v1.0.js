@@ -7,7 +7,7 @@
 const ROOT='/UniverseLab/';
 const TOOL=ROOT+'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js?v=1.0.6';
 const DOCUMENT_ROUTER=ROOT+'assets/2026-08-27_UniverseLab_DocumentLinkRouter_v1.0.js?v=1.1.0';
-const LANGUAGE=ROOT+'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js?v=1.0.3';
+const LANGUAGE=ROOT+'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js?v=1.0.4';
 const OWNER_EXPORT=ROOT+'2026-08-11_UniverseLab_OwnerPrintExport_v1.0.html';
 const PASSTHROUGH_PATHS=new Set([ROOT+'googlebc3b5b4a4888e35c.html']);
 self.addEventListener('install',()=>self.skipWaiting());

@@ -94,6 +94,18 @@ const assert = require('assert');
   await page.goto('http://127.0.0.1:4173/UniverseLab/navigator.html',{waitUntil:'networkidle'});
   await page.goto('http://127.0.0.1:4173/UniverseLab/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html',{waitUntil:'networkidle'});
   await assertControlledShell('controlled navigation 2');
+  // Legacy desktop wrapper must retain its curated English route under worker control.
+  await page.setViewportSize({width:1280,height:900});
+  await page.goto('http://127.0.0.1:4173/UniverseLab/compare-desktop.html',{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>!!navigator.serviceWorker.controller,null,{timeout:10000});
+  const desktopSwitches=page.locator('[data-ul-language-switcher]');
+  const desktopSelect=desktopSwitches.locator('select');
+  await desktopSelect.waitFor({state:'visible',timeout:10000});
+  assert.strictEqual(await desktopSwitches.count(),1,'compare desktop: expected exactly one current language switcher');
+  assert.strictEqual(await desktopSelect.inputValue(),'de','compare desktop: expected German source state');
+  await Promise.all([page.waitForURL(/compare-en\.html/,{timeout:10000}),desktopSelect.selectOption('en')]);
+  assert(/compare-en\.html$/.test(new URL(page.url()).pathname),'compare desktop: English must use curated compare-en route');
+
   await page.goto('http://127.0.0.1:4173/UniverseLab/index.html',{waitUntil:'networkidle'});
   const controlledIndexSwitches=page.locator('[data-ul-language-switcher]');
   await controlledIndexSwitches.locator('select').waitFor({state:'visible',timeout:10000});
@@ -103,6 +115,7 @@ const assert = require('assert');
   assert(controlledIndexScripts>=1&&controlledIndexScripts<=2,'controlled compatibility navigation: expected current loader plus at most one worker recovery copy');
   assert.strictEqual(await controlledIndexSwitches.evaluate(el=>getComputedStyle(el).position),'static','controlled compatibility switcher must not float on mobile');
   assert.strictEqual(await page.locator('#ul-test-legacy-switcher').count(),0,'controlled compatibility navigation: legacy DOM switcher must be replaced');
+
   await page.waitForFunction(async()=>!(await navigator.serviceWorker.getRegistrations()).length,null,{timeout:10000});
   await page.evaluate(async()=>{const registrations=await navigator.serviceWorker.getRegistrations();await Promise.all(registrations.map(reg=>reg.unregister()))});
   assert.deepStrictEqual(errors,[],'controlled navigation must have no JS errors');

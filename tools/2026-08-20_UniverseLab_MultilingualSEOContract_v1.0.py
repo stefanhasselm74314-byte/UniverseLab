@@ -15,7 +15,7 @@ import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
 REGISTRY=ROOT/'2026-08-20_UniverseLab_MultilingualRouteRegistry_v1.1.json'
 SITEMAP=ROOT/'sitemap.xml'
-SWITCHER=ROOT/'assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.1.js'
+SWITCHER=ROOT/'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
 ORIGIN='https://stefanhasselm74314-byte.github.io'
 BASE='/UniverseLab/'
 NS={'sm':'http://www.sitemaps.org/schemas/sitemap/0.9','x':'http://www.w3.org/1999/xhtml'}
@@ -29,6 +29,11 @@ def local_path(route:str)->Path:
 
 def abs_url(route:str)->str:
     return ORIGIN+route
+
+def switcher_token(route:str)->str:
+    if not route.startswith(BASE): raise ContractError(f'route outside {BASE}: {route}')
+    rel=route[len(BASE):]
+    return 'index.html' if rel=='' else rel
 
 def attr(html:str, rel:str, hreflang:str|None=None)->list[str]:
     tags=re.findall(r'<link\b[^>]*>',html,re.I)
@@ -80,7 +85,11 @@ def main()->int:
         if not de_path.is_file(): issues.append(f'{pid}: missing DE file {de_path.relative_to(ROOT)}')
         if not en_path.is_file(): issues.append(f'{pid}: missing EN file {en_path.relative_to(ROOT)}')
         for route in (de,en):
-            if route not in switcher: issues.append(f'{pid}: switcher missing route {route}')
+            token=switcher_token(route)
+            if token not in switcher: issues.append(f'{pid}: active switcher missing route token {token}')
+        for alias in p.get('aliases_de',[]):
+            token=switcher_token(alias)
+            if token not in switcher: issues.append(f'{pid}: active switcher missing alias token {token}')
         expected={'de':abs_url(de),'en':abs_url(en),'x-default':abs_url(xd)}
         for loc_route in (de,en):
             loc=abs_url(loc_route)
