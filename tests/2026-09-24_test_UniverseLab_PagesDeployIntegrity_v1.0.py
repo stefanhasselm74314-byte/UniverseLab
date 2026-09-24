@@ -84,7 +84,7 @@ def main() -> None:
     # gated on a successful conclusion.
     completed_guard = (
         "github.event.action == 'completed' && "
-        "github.event.workflow_run.head_sha != github.sha"
+        "github.event.workflow_run.head_sha != steps.current-main.outputs.sha"
     )
     assert completed_guard in guardian
     assert "github.event.workflow_run.conclusion == 'success'" not in guardian
