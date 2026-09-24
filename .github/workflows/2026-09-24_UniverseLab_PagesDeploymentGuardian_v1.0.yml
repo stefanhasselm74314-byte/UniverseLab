@@ -25,6 +25,7 @@ jobs:
           echo "Trigger action: ${{ github.event.action }}"
           echo "Deployment run id: ${{ github.event.workflow_run.id }}"
           echo "Deployment head SHA: ${{ github.event.workflow_run.head_sha }}"
+          echo "Deployment conclusion: ${{ github.event.workflow_run.conclusion }}"
           echo "Current default-branch SHA: ${{ github.sha }}"
 
       - name: Cancel stale deployment run
@@ -37,11 +38,11 @@ jobs:
           echo "::error::Stale Pages deployment detected; cancelling run $STALE_RUN_ID."
           gh api             --method POST             "/repos/${GITHUB_REPOSITORY}/actions/runs/${STALE_RUN_ID}/cancel"
 
-      - name: Repair if a stale deployment escaped cancellation
-        if: ${{ github.event.action == 'completed' && github.event.workflow_run.head_sha != github.sha && github.event.workflow_run.conclusion == 'success' }}
+      - name: Repair after any stale deployment completion
+        if: ${{ github.event.action == 'completed' && github.event.workflow_run.head_sha != github.sha }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          echo "::warning::A stale Pages deployment completed successfully; dispatching current main immediately."
+          echo "::warning::A stale Pages run completed with conclusion '${{ github.event.workflow_run.conclusion }}'; dispatching current main immediately."
           gh api             --method POST             "/repos/${GITHUB_REPOSITORY}/actions/workflows/deploy-pages.yml/dispatches"             -f ref=main
