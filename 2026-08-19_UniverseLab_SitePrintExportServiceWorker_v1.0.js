@@ -8,12 +8,12 @@ const ROOT='/UniverseLab/';
 const TOOL=ROOT+'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js?v=1.0.6';
 const DOCUMENT_ROUTER=ROOT+'assets/2026-08-27_UniverseLab_DocumentLinkRouter_v1.0.js?v=1.1.0';
 const LANGUAGE=ROOT+'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js?v=1.0.3';
-const OWNER_EXPORT=ROOT+'2026-08-11_UniverseLab_OwnerPrintExport_v1.0.html';
+const OWNER_EXPORT=ROOT+'2026-08-11_UniverseLab_OwnerPrintExport_v1.0.html';\nconst PASSTHROUGH_PATHS=new Set([ROOT+'googlebc3b5b4a4888e35c.html']);
 self.addEventListener('install',()=>self.skipWaiting());
 self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
 self.addEventListener('fetch',event=>{
   const req=event.request;if(req.method!=='GET'||req.mode!=='navigate')return;
-  const url=new URL(req.url);if(url.origin!==self.location.origin||!url.pathname.startsWith(ROOT)||url.searchParams.get('include-iframe')==='1'||url.pathname===OWNER_EXPORT)return;
+  const url=new URL(req.url);if(url.origin!==self.location.origin||!url.pathname.startsWith(ROOT)||url.searchParams.get('include-iframe')==='1'||url.pathname===OWNER_EXPORT||PASSTHROUGH_PATHS.has(url.pathname))return;
   event.respondWith((async()=>{
     const response=await fetch(req);const type=(response.headers.get('content-type')||'').toLowerCase();if(!response.ok||!type.includes('text/html'))return response;
     let html=await response.text();const injections=[];
