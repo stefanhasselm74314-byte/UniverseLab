@@ -77,6 +77,16 @@ def main() -> None:
     assert "/actions/runs/${STALE_RUN_ID}/cancel" in guardian
     assert "/actions/workflows/deploy-pages.yml/dispatches" in guardian
 
+    # A guardian-cancelled stale run finishes as "cancelled", not "success".
+    # Recovery therefore must run for ANY stale completion and must not be
+    # gated on a successful conclusion.
+    completed_guard = (
+        "github.event.action == 'completed' && "
+        "github.event.workflow_run.head_sha != github.sha"
+    )
+    assert completed_guard in guardian
+    assert "github.event.workflow_run.conclusion == 'success'" not in guardian
+
     print("UniverseLab Pages deploy integrity adversarial tests: PASS")
 
 
