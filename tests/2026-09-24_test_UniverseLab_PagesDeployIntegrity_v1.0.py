@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 GUARD = ROOT / "tools/2026-09-24_verify_UniverseLab_PagesDeploySource_v1.0.py"
 WORKFLOW = ROOT / ".github/workflows/deploy-pages.yml"
 SW = ROOT / "2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js"
+GUARDIAN = ROOT / ".github/workflows/2026-09-24_UniverseLab_PagesDeploymentGuardian_v1.0.yml"
 
 CURRENT = "a" * 40
 HISTORICAL = "b" * 40
@@ -65,6 +66,16 @@ def main() -> None:
     sw = SW.read_text(encoding="utf-8")
     assert "googlebc3b5b4a4888e35c.html" in sw
     assert "PASSTHROUGH_PATHS" in sw
+
+    # Legacy pre-guard runs need a current-default-branch workflow_run guardian.
+    guardian = GUARDIAN.read_text(encoding="utf-8")
+    assert "workflow_run:" in guardian
+    assert "in_progress" in guardian
+    assert "completed" in guardian
+    assert "actions: write" in guardian
+    assert "github.event.workflow_run.head_sha != github.sha" in guardian
+    assert "/actions/runs/${STALE_RUN_ID}/cancel" in guardian
+    assert "/actions/workflows/deploy-pages.yml/dispatches" in guardian
 
     print("UniverseLab Pages deploy integrity adversarial tests: PASS")
 
