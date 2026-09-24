@@ -1,7 +1,7 @@
 # UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1
 
-**Extraktionsbasis:** `c1114657fdd2003a458992334ddb2f0c7b6f559e`  
-**HTML-Dateien:** `72`  
+**Extraktionsbasis:** `7f46e829397cc7d572254d9ec16406d2af837f12`  
+**HTML-Dateien:** `73`  
 **Claim-Kandidaten:** `993`  
 **HIGH/MEDIUM:** `46`  
 **Status:** `GENERATED_NOT_ADJUDICATED`  
@@ -245,9 +245,9 @@
 
 ## `index-en.html`
 
-### UL-CLAIM-CANDIDATE-2A5F574A7ED88849 · MEDIUM +5
+### UL-CLAIM-CANDIDATE-8DA35AA2283D9C5F · MEDIUM +5
 
-- Quelle: Zeile `1`, Tag `p`, Region `section`
+- Quelle: Zeile `13`, Tag `p`, Region `section`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `NUMERICAL_METHOD, PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
@@ -265,9 +265,9 @@
 - Text: UniverseLab von Stefan Hasselmeyer ist ein interaktives Kosmologie-Labor für ΛCDM, kosmische Expansion, Strukturbildung, Modellvergleiche und klar gekennzeichnete experimentelle 6D-Hyperzeitmodelle.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-7FAC1625FAAC6926 · MEDIUM +5
+### UL-CLAIM-CANDIDATE-2A1B5F591D31DF61 · MEDIUM +5
 
-- Quelle: Zeile `59`, Tag `p`, Region `section`
+- Quelle: Zeile `66`, Tag `p`, Region `section`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
