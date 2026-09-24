@@ -46,21 +46,32 @@
 </style>
 <link rel="stylesheet" href="./assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css">
 <script defer src="./assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.0.js"></script>
+<link rel="stylesheet" href="./assets/2026-09-25_UniverseLab_LandingPaths_v1.0.css">
 </head>
-<body>
+<body class="ul-landing" data-ul-landing="v1">
+<a class="ul-home-skip" href="#ul-home-main">Zum Inhalt</a>
 <header class="shell">
-<a class="brand" href="./"><span class="mark">UL</span><strong>UniverseLab</strong></a>
-<nav class="nav" aria-label="Hauptnavigation">
-<a href="./emergence.html?v=07">UniverseLab</a><a href="./observatory.html">Observatory</a><a href="./journey.html">Journey</a><a href="./compare-safe.html?v=safe2">Vergleichsrechner</a><a href="./hyperlab.html">HyperLab</a><a href="./research-status.html">Forschungsstatus</a><a href="./universe3d.html">3D-Flug</a><a href="./validation.html">Validierung</a><a href="./guide.html">Handbuch</a>
-</nav>
+<a class="brand" href="./" aria-label="UniverseLab Startseite"><span class="mark">UL</span><strong>UniverseLab</strong></a>
+<details class="ul-home-menu"><summary>Menü</summary>
+<nav class="ul-home-nav" aria-label="Hauptnavigation">
+<a href="#ul-home-modules">Erkunden</a>
+<a href="./navigator.html">Forschung</a>
+<a href="./solver-hub.html">Solver</a>
+<a href="./research-status.html">Status</a>
+<a href="./guide.html">Handbuch</a>
+</nav></details>
 </header>
-<main class="app">
+<main class="app" id="ul-home-main" tabindex="-1">
 <section class="hero">
-<div><div class="eyebrow">Interactive Cosmology Laboratory · Stefan Hasselmeyer</div><h1>Das Universum <span>sichtbar machen.</span></h1><p class="lead">Erkunde kosmische Expansion, Epochen, Strukturbildung und Modellvarianten – vom etablierten ΛCDM-Hintergrund bis zu klar gekennzeichneten experimentellen 6D-Hypothesen.</p><div class="actions"><a class="button primary" href="./observatory.html">Observatory öffnen →</a><a class="button" href="./compare-safe.html?v=safe2">Vergleichsrechner starten</a></div><div class="facts"><span class="pill">● ΛCDM-Basis</span><span class="pill">● Numerische Validierung</span><span class="pill">● Spekulation klar getrennt</span></div></div>
+<div><div class="eyebrow">Interactive Cosmology Laboratory · Stefan Hasselmeyer</div><h1>Das Universum <span>sichtbar machen.</span></h1><p class="lead">Erkunde kosmische Expansion, Epochen, Strukturbildung und Modellvarianten – vom etablierten ΛCDM-Hintergrund bis zu klar gekennzeichneten experimentellen 6D-Hypothesen.</p><nav class="ul-home-paths" aria-label="Einstieg wählen">
+<a class="ul-home-path" data-ul-entry="explore" href="./observatory.html"><strong>Kosmologie erkunden</strong><span>Observatory öffnen <span aria-hidden="true">→</span></span></a>
+<a class="ul-home-path" data-ul-entry="research" href="./research-status.html"><strong>Forschungsstand prüfen</strong><span>Status und Quelldokumente <span aria-hidden="true">→</span></span></a>
+<a class="ul-home-path" data-ul-entry="solvers" href="./solver-hub.html"><strong>Solver kennenlernen</strong><span>Build Order und Work Packages <span aria-hidden="true">→</span></span></a>
+</nav><div class="facts"><span class="pill">● ΛCDM-Basis</span><span class="pill">● Numerische Validierung</span><span class="pill">● Spekulation klar getrennt</span></div></div>
 <div class="visual" aria-label="Kosmologische Referenzanzeige"><div class="stars"></div><div class="orbit o1"></div><div class="orbit o2"></div><div class="core"></div><div class="live"><div class="live-head"><b id="era">ΛCDM-Referenz · heute</b><span>● BERECHNET</span></div><div class="metrics"><div class="metric"><b id="aVal">1,000</b><small>Skalenfaktor a</small></div><div class="metric"><b id="zVal">0,000</b><small>Rotverschiebung z</small></div><div class="metric"><b id="hVal">67,4</b><small>H₀ km/s/Mpc</small></div><div class="metric"><b id="omVal">0,315</b><small>Ωₘ</small></div><div class="metric"><b id="olVal">0,685</b><small>ΩΛ</small></div><div class="metric"><b id="qVal">−0,527</b><small>q</small></div></div><div class="progress"><i id="fill"></i></div></div></div>
 </section>
 <div class="section-head"><h2>Ein Labor. Mehrere wissenschaftliche Ebenen.</h2><p>Jedes Modul zeigt sichtbar, ob es etablierte Physik, numerische Analyse, didaktische Modellierung oder eine spekulative Hypothese behandelt.</p></div>
-<section class="grid">
+<section class="grid" id="ul-home-modules" aria-label="Module">
 <article class="card featured"><div class="code">OBS / 01 · ΛCDM + ANALYSE</div><h3>Cosmology Observatory</h3><p>Variiere H₀, Ωₘ, ΩΛ, w und σ₈. Untersuche Expansion, Alter, Wachstum und Krümmung.</p><a href="./observatory.html"><span>Observatory öffnen</span><span>→</span></a></article>
 <article class="card featured"><div class="code">COMPARE / 02 · ANALYSE</div><h3>Vergleichsrechner & Tafelwerk</h3><p>Vergleiche ΛCDM, wCDM und effektive Erweiterungen. Berechne ausgewählte Formeln direkt.</p><a href="./compare-safe.html?v=safe2"><span>Vergleichsrechner öffnen</span><span>→</span></a></article>
 <article class="card"><div class="code">JOURNEY / 03 · ETABLIERT</div><h3>Cosmic Journey</h3><p>Reise durch Strahlungs-, Materie- und Vakuumära bis in die kosmische Zukunft.</p><a href="./journey.html"><span>Zeitreise starten</span><span>→</span></a></article>
@@ -69,6 +80,13 @@
 <article class="card"><div class="code">HYPER / 06 · SPEKULATIV</div><h3>HyperLab</h3><p>Audit- und Sensitivitätslabor mit sichtbaren Blockern und fehlenden Herleitungen.</p><a href="./hyperlab.html"><span>HyperLab öffnen</span><span>→</span></a></article>
 <article class="card"><div class="code">STATUS / 07 · FORSCHUNG</div><h3>Forschungsstatus</h3><p>Gate-Lage, offene Brücken, reproduzierbare Audits und der aktuelle Stand von HPVS und HZT-M0.</p><a href="./research-status.html"><span>Status öffnen</span><span>→</span></a></article>
 </section>
+<nav class="ul-home-more" aria-label="Weitere Bereiche">
+<a href="./emergence.html">Emergenz-Labor</a>
+<a href="./journey.html">Cosmic Journey</a>
+<a href="./universe3d.html">3D-Flug</a>
+<a href="./navigator.html">Alle Bereiche</a>
+</nav>
+
 <section class="status"><article><h2>Wissenschaft vor Inszenierung.</h2><p>UniverseLab zeigt nicht nur, was berechnet wird, sondern auch, wie belastbar die jeweilige Aussage ist.</p><ul><li>Etabliert: Standardphysik</li><li>Analyse: Vergleich und aktive Forschung</li><li>Modellabhängig: heuristisch oder didaktisch</li><li>Spekulativ: Hypothese ohne Evidenzfreigabe</li></ul></article><article><h2>Aktueller Projektstatus</h2><ul><li>ΛCDM-Hintergrund und Epochen aktiv</li><li>Vergleichsrechner als stabile Direktversion</li><li>Numerische Selbsttests verfügbar</li><li>6D-Forward-Map nicht freigegeben</li><li>Keine Evidenzbehauptung für Hyperzeit</li></ul></article></section>
 <footer class="footer"><strong>UniverseLab</strong> · Interaktive Kosmologie von Stefan Hasselmeyer · klar getrennte Modellhypothesen.</footer>
 </main>
