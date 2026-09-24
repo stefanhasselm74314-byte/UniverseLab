@@ -40,8 +40,22 @@ function mount(){const gates=document.querySelector('.ul-shell__gates');const ex
  LANGS.forEach(([value,label])=>{const o=document.createElement('option');o.value=value;o.textContent=label;select.appendChild(o)});
  select.value=REVERSE[file()]?'en':'de';select.addEventListener('change',()=>go(select.value));
  wrap.append(icon,select);host.appendChild(wrap);return true}
-if(!mount()){
+const initialMount=mount();
+if(!initialMount){
  const mo=new MutationObserver(()=>{if(mount())mo.disconnect()});mo.observe(document.documentElement,{childList:true,subtree:true});setTimeout(()=>mo.disconnect(),10000)
+}
+// A compatibility loader, service-worker recovery script, or late legacy widget can
+// append another switcher after the initial mount. Keep a short-lived guard so the
+// active provider deterministically converges back to exactly one canonical widget.
+if(document.documentElement){
+ let cleaning=false;
+ const guard=new MutationObserver(()=>{
+   if(cleaning||document.querySelectorAll('[data-ul-language-switcher]').length<=1)return;
+   cleaning=true;
+   try{mount()}finally{cleaning=false}
+ });
+ guard.observe(document.documentElement,{childList:true,subtree:true});
+ setTimeout(()=>guard.disconnect(),10000);
 }
 window.UniverseLabLanguageSwitcher={version:VERSION,languages:LANGS.map(x=>x[0])};
 })();
