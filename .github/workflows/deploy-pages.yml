@@ -25,6 +25,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Fail closed on stale deployment source
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEPLOY_SHA="$(git rev-parse HEAD)"
+          CURRENT_MAIN_SHA="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          echo "Deployment source SHA: $DEPLOY_SHA"
+          echo "Current origin/main SHA: $CURRENT_MAIN_SHA"
+
+          if [[ -z "$CURRENT_MAIN_SHA" ]]; then
+            echo "::error::Unable to resolve refs/heads/main from origin."
+            exit 1
+          fi
+
+          if [[ "$DEPLOY_SHA" != "$CURRENT_MAIN_SHA" ]]; then
+            echo "::error::Refusing stale Pages deployment: source $DEPLOY_SHA is not current main $CURRENT_MAIN_SHA."
+            exit 1
+          fi
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
@@ -32,6 +51,23 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: .
+
+      - name: Revalidate deployment source before publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEPLOY_SHA="$(git rev-parse HEAD)"
+          CURRENT_MAIN_SHA="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+
+          if [[ -z "$CURRENT_MAIN_SHA" ]]; then
+            echo "::error::Unable to resolve refs/heads/main from origin immediately before deployment."
+            exit 1
+          fi
+
+          if [[ "$DEPLOY_SHA" != "$CURRENT_MAIN_SHA" ]]; then
+            echo "::error::Refusing stale Pages deployment immediately before publish: source $DEPLOY_SHA is not current main $CURRENT_MAIN_SHA."
+            exit 1
+          fi
 
       - name: Deploy to GitHub Pages
         id: deployment
