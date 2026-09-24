@@ -30,19 +30,33 @@ jobs:
         run: |
           set -euo pipefail
           DEPLOY_SHA="$(git rev-parse HEAD)"
-          CURRENT_MAIN_SHA="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-          echo "Deployment source SHA: $DEPLOY_SHA"
-          echo "Current origin/main SHA: $CURRENT_MAIN_SHA"
+          python tools/2026-09-24_verify_UniverseLab_PagesDeploySource_v1.0.py \
+            --deploy-sha "$DEPLOY_SHA" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT"
+          echo "UNIVERSELAB_DEPLOY_SHA=$DEPLOY_SHA" >> "$GITHUB_ENV"
 
-          if [[ -z "$CURRENT_MAIN_SHA" ]]; then
-            echo "::error::Unable to resolve refs/heads/main from origin."
-            exit 1
-          fi
+      - name: Emit deployment source metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
 
-          if [[ "$DEPLOY_SHA" != "$CURRENT_MAIN_SHA" ]]; then
-            echo "::error::Refusing stale Pages deployment: source $DEPLOY_SHA is not current main $CURRENT_MAIN_SHA."
-            exit 1
-          fi
+          payload = {
+              "schema": "UniverseLab.PagesDeployment.v1",
+              "source_sha": os.environ["UNIVERSELAB_DEPLOY_SHA"],
+              "source_ref": os.environ.get("GITHUB_REF", ""),
+              "event_name": os.environ.get("GITHUB_EVENT_NAME", ""),
+              "workflow_run_id": os.environ.get("GITHUB_RUN_ID", ""),
+              "workflow_run_attempt": int(os.environ.get("GITHUB_RUN_ATTEMPT", "1")),
+          }
+          Path("deploy-meta.json").write_text(
+              json.dumps(payload, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          PY
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -56,19 +70,94 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          DEPLOY_SHA="$(git rev-parse HEAD)"
-          CURRENT_MAIN_SHA="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-
-          if [[ -z "$CURRENT_MAIN_SHA" ]]; then
-            echo "::error::Unable to resolve refs/heads/main from origin immediately before deployment."
-            exit 1
-          fi
-
-          if [[ "$DEPLOY_SHA" != "$CURRENT_MAIN_SHA" ]]; then
-            echo "::error::Refusing stale Pages deployment immediately before publish: source $DEPLOY_SHA is not current main $CURRENT_MAIN_SHA."
-            exit 1
-          fi
+          python tools/2026-09-24_verify_UniverseLab_PagesDeploySource_v1.0.py \
+            --deploy-sha "$UNIVERSELAB_DEPLOY_SHA" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT"
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Post-deploy attestation
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_SHA: ${{ env.UNIVERSELAB_DEPLOY_SHA }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Detect a main-head advance even if it happened after the pre-publish guard.
+          python tools/2026-09-24_verify_UniverseLab_PagesDeploySource_v1.0.py \
+            --deploy-sha "$EXPECTED_SHA" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT"
+
+          python - <<'PY'
+          import json
+          import os
+          import time
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+
+          base = os.environ["PAGE_URL"].rstrip("/") + "/"
+          expected_sha = os.environ["EXPECTED_SHA"]
+          run_id = os.environ.get("GITHUB_RUN_ID", "unknown")
+          attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
+          expected_google = "google-site-verification: googlebc3b5b4a4888e35c.html"
+
+          def fetch(path: str) -> tuple[int, bytes, str]:
+              last = None
+              for index in range(8):
+                  token = urllib.parse.quote(f"{run_id}-{attempt}-{index}", safe="")
+                  url = urllib.parse.urljoin(base, path) + f"?web50={token}"
+                  req = urllib.request.Request(
+                      url,
+                      headers={
+                          "User-Agent": "UniverseLab-Pages-Attestation/1.0",
+                          "Cache-Control": "no-cache",
+                          "Pragma": "no-cache",
+                      },
+                  )
+                  try:
+                      with urllib.request.urlopen(req, timeout=20) as response:
+                          body = response.read()
+                          if response.status == 200:
+                              return response.status, body, response.geturl()
+                          last = RuntimeError(f"HTTP {response.status}: {url}")
+                  except Exception as exc:
+                      last = exc
+                  time.sleep(min(2 + index, 8))
+              raise RuntimeError(f"FETCH_FAILED:{path}:{last}")
+
+          for route in ("", "navigator.html"):
+              status, body, final_url = fetch(route)
+              if status != 200:
+                  raise RuntimeError(f"ROUTE_NOT_200:{route}:{status}")
+              lower = body.lower()
+              if b"404" in lower and b"page not found" in lower:
+                  raise RuntimeError(f"OBVIOUS_404_BODY:{route}:{final_url}")
+
+          status, google_body, _ = fetch("googlebc3b5b4a4888e35c.html")
+          google_text = google_body.decode("utf-8", "strict").strip()
+          if status != 200 or google_text != expected_google:
+              raise RuntimeError(
+                  f"GOOGLE_VERIFICATION_MISMATCH:status={status}:body={google_text!r}"
+              )
+
+          status, meta_body, _ = fetch("deploy-meta.json")
+          metadata = json.loads(meta_body.decode("utf-8"))
+          if status != 200:
+              raise RuntimeError(f"DEPLOY_META_NOT_200:{status}")
+          if metadata.get("source_sha") != expected_sha:
+              raise RuntimeError(
+                  "DEPLOY_META_SHA_MISMATCH:"
+                  f"{metadata.get('source_sha')}:{expected_sha}"
+              )
+          if int(metadata.get("workflow_run_attempt", 0)) != 1:
+              raise RuntimeError("DEPLOY_META_RERUN_ATTEMPT_FORBIDDEN")
+
+          print(
+              "POST_DEPLOY_ATTESTATION_PASS "
+              f"source_sha={expected_sha} google_verification=PASS core_routes=PASS"
+          )
+          PY
