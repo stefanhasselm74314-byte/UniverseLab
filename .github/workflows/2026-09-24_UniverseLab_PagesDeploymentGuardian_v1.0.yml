@@ -1,0 +1,47 @@
+name: UniverseLab Pages deployment guardian v1.0
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy UniverseLab to GitHub Pages
+    types:
+      - in_progress
+      - completed
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: ${{ github.event.action == 'in_progress' && github.event.workflow_run.head_sha != github.sha && 'pages' || format('pages-guardian-{0}', github.run_id) }}
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report deployment identity
+        run: |
+          echo "Trigger action: ${{ github.event.action }}"
+          echo "Deployment run id: ${{ github.event.workflow_run.id }}"
+          echo "Deployment head SHA: ${{ github.event.workflow_run.head_sha }}"
+          echo "Current default-branch SHA: ${{ github.sha }}"
+
+      - name: Cancel stale deployment run
+        if: ${{ github.event.action == 'in_progress' && github.event.workflow_run.head_sha != github.sha }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STALE_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          set -euo pipefail
+          echo "::error::Stale Pages deployment detected; cancelling run $STALE_RUN_ID."
+          gh api             --method POST             "/repos/${GITHUB_REPOSITORY}/actions/runs/${STALE_RUN_ID}/cancel"
+
+      - name: Repair if a stale deployment escaped cancellation
+        if: ${{ github.event.action == 'completed' && github.event.workflow_run.head_sha != github.sha && github.event.workflow_run.conclusion == 'success' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          echo "::warning::A stale Pages deployment completed successfully; dispatching current main immediately."
+          gh api             --method POST             "/repos/${GITHUB_REPOSITORY}/actions/workflows/deploy-pages.yml/dispatches"             -f ref=main
