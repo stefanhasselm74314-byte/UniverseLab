@@ -195,6 +195,28 @@ def main() -> None:
     assert repo_contract["authority_and_key_policy"]["private_keys_may_be_committed"] is False
     expect_error("TRUST_ROOT_NOT_RATIFIED", lambda: verify(DECISION, "AUTHORIZATION_DECISION", contract=repo_contract, root=repo_root))
 
+    # Operative-looking status fields alone must never cross the owner-adoption firewall.
+    operative_contract = synthetic_contract()
+    operative_contract["status"] = "RATIFIED_ACTIVE"
+    operative_root = synthetic_root()
+    operative_root["status"] = "RATIFIED_ACTIVE"
+    operative_root["authorities"][0]["synthetic_control_only"] = False
+    expect_error(
+        "OWNER_ADOPTION_NOT_VERIFIED",
+        lambda: verify(
+            DECISION,
+            "AUTHORIZATION_DECISION",
+            contract=operative_contract,
+            root=operative_root,
+        ),
+    )
+
+    # Git repository object identity is a different type from an artifact SHA-256 digest.
+    assert V.require_git_oid("a" * 40, "test.git_oid") == "a" * 40
+    assert V.require_git_oid("b" * 64, "test.git_oid") == "b" * 64
+    expect_error("INVALID_GIT_OID", lambda: V.require_git_oid("c" * 39, "test.git_oid"))
+    expect_error("INVALID_GIT_OID", lambda: V.require_git_oid("g" * 40, "test.git_oid"))
+
     # RFC 8032 test vector 1, empty message.
     rfc_public = bytes.fromhex("d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a")
     rfc_signature = bytes.fromhex(
