@@ -111,6 +111,9 @@ def check_layout(page, *, shell=True, http=True):
 def browser_checks(base, out, offline=False):
     from playwright.sync_api import sync_playwright
     results=[];out.mkdir(parents=True,exist_ok=True)
+    def record(value):
+        results.append(value)
+        (out/'browser-progress.json').write_text(json.dumps(results,indent=2)+'\n')
     with sync_playwright() as p:
         opts={'headless':True}
         if os.getenv('WEB50_CHROMIUM'): opts['executable_path']=os.environ['WEB50_CHROMIUM']
@@ -128,11 +131,11 @@ def browser_checks(base, out, offline=False):
                 m=check_layout(page,http=not offline)
                 assert not errors, errors
                 page.screenshot(path=str(out/f'{name}-{width}x{height}.png'))
-                results.append({'page':name,'viewport':[width,height],'case':'layout','result':'PASS','metrics':m})
+                record({'page':name,'viewport':[width,height],'case':'layout','result':'PASS','metrics':m})
                 if width==390:
                     page.add_style_tag(content='html{font-size:200% !important}')
                     z=check_layout(page,http=not offline)
-                    results.append({'page':name,'case':'CSS-root-text-scale-200-percent','result':'PASS','metrics':z})
+                    record({'page':name,'case':'CSS-root-text-scale-200-percent','result':'PASS','metrics':z})
                 ctx.close()
         if not offline:
             for name in BASE_BLOBS:
@@ -143,18 +146,34 @@ def browser_checks(base, out, offline=False):
                     m=check_layout(page,shell=False)
                     page.locator('main .top a').focus()
                     assert page.locator('main .top a').evaluate('(e)=>e===document.activeElement')
-                    results.append({'page':name,'viewport':[width,height],'case':'no-JavaScript','result':'PASS','metrics':m});ctx.close()
+                    record({'page':name,'viewport':[width,height],'case':'no-JavaScript','result':'PASS','metrics':m});ctx.close()
             for name in BASE_BLOBS:
                 ctx=browser.new_context(viewport={'width':390,'height':844},service_workers='allow')
                 page=ctx.new_page();page.goto(urljoin(base,name),wait_until='networkidle')
+                # Production bootstrap intentionally registers on HTTPS only.
+                # Seed the unchanged worker ONLY in this trusted loopback fixture
+                # to exercise an already-controlled client, not auto-registration.
+                assert page.evaluate('isSecureContext'), 'worker fixture needs a secure context'
+                parsed=urlparse(base)
+                if parsed.scheme=='http':
+                    assert parsed.hostname in ('127.0.0.1','localhost','::1'), 'loopback fixture only'
+                    assert page.evaluate('navigator.serviceWorker.controller === null')
+                    page.evaluate('''async () => {
+                      const reg=await navigator.serviceWorker.register(
+                        '/UniverseLab/2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js',
+                        {scope:'/UniverseLab/'});
+                      await navigator.serviceWorker.ready;
+                      return reg.scope;
+                    }''')
                 page.wait_for_function('navigator.serviceWorker.controller !== null')
+                assert page.evaluate("navigator.serviceWorker.controller.scriptURL.endsWith('/2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js')")
                 page.reload(wait_until='networkidle')
                 m=check_layout(page)
-                results.append({'page':name,'case':'controlled-client-reload','result':'PASS','metrics':m})
+                record({'page':name,'case':'explicit-worker-fixture-controlled-reload','result':'PASS','metrics':m})
                 session=ctx.new_cdp_session(page)
                 session.send('Network.enable');session.send('Network.setCacheDisabled',{'cacheDisabled':True})
                 page.reload(wait_until='networkidle');m=check_layout(page)
-                results.append({'page':name,'case':'controlled-client-cache-disabled-reload','result':'PASS','metrics':m});ctx.close()
+                record({'page':name,'case':'explicit-worker-fixture-cache-disabled-reload','result':'PASS','metrics':m});ctx.close()
         browser.close()
     return results
 
