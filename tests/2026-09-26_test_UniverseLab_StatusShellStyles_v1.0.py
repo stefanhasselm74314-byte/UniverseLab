@@ -161,6 +161,14 @@ def browser_checks(base_url, out, offline=False):
                         page.evaluate('scrollTo(0,0)')
                         page.screenshot(path=str(out/f'{name}-{width}x{height}.png'))
                         if not offline and width==390:
+                            # Production bootstrap registers only on HTTPS. Provision the
+                            # unchanged worker explicitly for this localhost HTTP test.
+                            page.evaluate('''async()=>{
+                              await navigator.serviceWorker.register(
+                                '/UniverseLab/2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js',
+                                {scope:'/UniverseLab/'});
+                              await navigator.serviceWorker.ready;
+                            }''')
                             page.wait_for_function('!!navigator.serviceWorker.controller', timeout=15000)
                             for case in ('controlled-reload','controlled-return'):
                                 if case=='controlled-return':
