@@ -121,6 +121,30 @@ def inline_css(path, seen=None):
     seen.add(path); s=path.read_text()
     return re.sub(r'@import\s+url\(["\']?([^"\')]+)["\']?\);', lambda m:inline_css((path.parent/m[1]).resolve(),seen),s)
 
+def assert_brand_layout(page, name, width):
+    """Check rendered geometry, not a CSS keyword: a block mark must not stack EN."""
+    brand = page.locator('.ul-landing .shell .brand')
+    mark = brand.locator('.mark')
+    word = brand.locator('strong')
+    assert brand.count() == mark.count() == word.count() == 1
+    assert mark.is_visible(), f'{name}/{width}: brand mark missing'
+    outer, icon = brand.bounding_box(), mark.bounding_box()
+    assert outer and icon and outer['height'] >= 44
+    assert outer['x'] >= -1 and outer['x'] + outer['width'] <= width + 1
+    metrics = {'brand': outer, 'mark': icon, 'wordmark_visible': word.is_visible()}
+    if width <= 760:
+        assert not word.is_visible(), f'{name}/{width}: compact wordmark must stay hidden'
+    else:
+        assert word.is_visible(), f'{name}/{width}: desktop wordmark missing'
+        label = word.bounding_box()
+        assert label and label['width'] > 0 and label['height'] > 0
+        delta = abs((icon['y'] + icon['height']/2) - (label['y'] + label['height']/2))
+        metrics.update({'wordmark': label, 'center_y_delta': delta})
+        assert delta <= 1, f'{name}/{width}: brand stacked or vertically misaligned: {metrics}'
+        assert icon['x'] + icon['width'] <= label['x'] + 1, f'{name}/{width}: brand items overlap'
+        assert label['x'] + label['width'] <= outer['x'] + outer['width'] + 1
+    return metrics
+
 def render_checks(base_url, out, offline=False):
     from playwright.sync_api import sync_playwright
     out.mkdir(parents=True,exist_ok=True)
@@ -130,7 +154,7 @@ def render_checks(base_url, out, offline=False):
         if os.environ.get('WEB50_CHROMIUM'): kwargs['executable_path']=os.environ['WEB50_CHROMIUM']
         browser=p.chromium.launch(**kwargs)
         for name in ('index.html','index-en.html'):
-            for width,height in ((320,740),(360,800),(390,844),(412,915),(844,390),(768,1024),(1280,720),(1920,1080)):
+            for width,height in ((320,740),(360,800),(390,844),(412,915),(844,390),(760,900),(761,900),(768,1024),(1280,720),(1920,1080)):
                 ctx=browser.new_context(viewport={'width':width,'height':height},reduced_motion='reduce')
                 page=ctx.new_page();errors=[]
                 page.on('pageerror',lambda e:errors.append(str(e)))
@@ -150,6 +174,7 @@ def render_checks(base_url, out, offline=False):
                     assert response and response.status==200
                 page.locator('[data-ul-language-switcher] select').wait_for(state='visible')
                 assert page.locator('[data-ul-language-switcher]').count()==1
+                brand_metrics = assert_brand_layout(page, name, width)
                 menu=page.locator('.ul-home-menu'); summary=menu.locator('summary')
                 assert menu.get_attribute('open') is None
                 page.keyboard.press('Tab')
@@ -171,7 +196,7 @@ def render_checks(base_url, out, offline=False):
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), f'{name}/{width}: body overflow'
                 page.screenshot(path=str(out/f'{name}-{width}x{height}.png'))
                 assert not errors, errors
-                cases.append({'page':name,'viewport':[width,height],'mode':'offline-layout' if offline else 'HTTP-browser','result':'PASS'})
+                cases.append({'page':name,'viewport':[width,height],'mode':'offline-layout' if offline else 'HTTP-browser','result':'PASS','brand_geometry':brand_metrics})
                 ctx.close()
         if not offline:
             # Verify both curated language directions using the unchanged loaders.
@@ -183,12 +208,17 @@ def render_checks(base_url, out, offline=False):
             page.wait_for_url(re.compile(r'/UniverseLab/(?:index\.html)?$'))
             cases.append({'case':'DE-EN-DE','result':'PASS'})
             ctx.close()
-            ctx=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844})
-            page=ctx.new_page();page.goto(urljoin(base_url,'index.html'))
-            page.locator('.ul-home-menu summary').click()
-            assert page.locator('.ul-home-nav a').first.is_visible()
-            assert page.locator('[data-ul-entry]').count()==3
-            cases.append({'case':'no-JavaScript-navigation','result':'PASS'});ctx.close()
+            for name in ('index.html','index-en.html'):
+                for width,height in ((390,844),(1280,720)):
+                    ctx=browser.new_context(java_script_enabled=False,viewport={'width':width,'height':height})
+                    page=ctx.new_page();response=page.goto(urljoin(base_url,name))
+                    assert response and response.status==200
+                    brand_metrics = assert_brand_layout(page, name, width)
+                    page.locator('.ul-home-menu summary').click()
+                    assert page.locator('.ul-home-nav a').first.is_visible()
+                    assert page.locator('[data-ul-entry]').count()==3
+                    cases.append({'case':'no-JavaScript-navigation','page':name,'viewport':[width,height],
+                                  'result':'PASS','brand_geometry':brand_metrics});ctx.close()
         browser.close()
     return cases
 
