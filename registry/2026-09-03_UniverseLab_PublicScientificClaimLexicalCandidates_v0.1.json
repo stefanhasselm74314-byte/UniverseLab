@@ -1,5 +1,5 @@
 {
-  "basis_commit": "7f46e829397cc7d572254d9ec16406d2af837f12",
+  "basis_commit": "c5906ae686011f4f5fe03bf34b56a1d8052f89d9",
   "candidates": [
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -187,7 +187,7 @@
       "preliminary_risk_score": 6,
       "region": "article",
       "source_line": 37,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "div",
       "text": "Current-main Canonical State v1.3 SiteState v1.4 Session Checkpoint v1.34 Public Claim Census v1.0 Band V-B MEDIUM Summary Band V-C Evidence Crosswalk Band V-C Missing-Link Register Canonical Engine Contract Authority Signature Provenance FM-0 Gap Register v0.4"
     },
@@ -208,7 +208,7 @@
       "preliminary_risk_score": 6,
       "region": "article",
       "source_line": 40,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "div",
       "text": "Current-main Canonical State v1.3 SiteState v1.4 Session Checkpoint v1.34 Public Claim Census v1.0 Band V-B MEDIUM Summary Band V-C Evidence Crosswalk Band V-C Missing-Link-Register Canonical Engine Contract Authority Signature Provenance FM-0 Gap Register v0.4"
     },
@@ -356,7 +356,7 @@
       "preliminary_risk_score": 5,
       "region": "article",
       "source_line": 36,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "li",
       "text": "quantitative parent-derived multichannel predictions with operational falsification thresholds;"
     },
@@ -743,7 +743,7 @@
       "preliminary_risk_score": 4,
       "region": "article",
       "source_line": 28,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "div",
       "text": "10 scientific/empirical blockers"
     },
@@ -763,7 +763,7 @@
       "preliminary_risk_score": 4,
       "region": "article",
       "source_line": 36,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "li",
       "text": "the complete parent→reduced→observable map;"
     },
@@ -783,7 +783,7 @@
       "preliminary_risk_score": 4,
       "region": "article",
       "source_line": 31,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "div",
       "text": "10 wissenschaftlich/empirisch blockierend"
     },
@@ -803,7 +803,7 @@
       "preliminary_risk_score": 4,
       "region": "article",
       "source_line": 39,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "li",
       "text": "vollständige Parent→Reduced→Observable-Map;"
     },
@@ -2496,7 +2496,7 @@
       "preliminary_risk_score": 3,
       "region": "article",
       "source_line": 31,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "The local gauge-fixed transmission structure is conditionally ratified for smooth compatible data in the declared non-degenerate state domain."
     },
@@ -5422,7 +5422,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 30,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "An explicit rank-one counterexample falsifies the former claim that the target profile necessarily requires two non-vanishing orthogonal normal components."
     },
@@ -5442,7 +5442,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 34,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "h2",
       "text": "One shared public cosmology engine"
     },
@@ -5462,7 +5462,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 36,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "li",
       "text": "a bound HZT data/covariance/selection/nuisance/likelihood stack;"
     },
@@ -5482,7 +5482,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 37,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Die reduzierte Bridge-Skala lautet für jedes Rχ>0 exakt a_c=Rχ/(Rχ+2,5) ; Bridge-Growth und Bridge-Lensing bleiben ausdrücklich unveröffentlicht."
     },
@@ -5502,7 +5502,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 37,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "h2",
       "text": "Ein gemeinsamer öffentlicher Kosmologie-Rechenkern"
     },
@@ -5522,7 +5522,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 39,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "li",
       "text": "gebundener HZT-Daten-/Kovarianz-/Selection-/Nuisance-/Likelihood-Stack;"
     },
@@ -5542,7 +5542,7 @@
       "preliminary_risk_score": 2,
       "region": "article",
       "source_line": 39,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "li",
       "text": "quantitative parent-hergeleitete Mehrkanal-Vorhersagen mit operativen Falsifikationsschwellen;"
     },
@@ -11047,7 +11047,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 28,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "The lexical audit trail intentionally remains HIGH=0 and MEDIUM=42 ; contextually unadjudicated candidates are 0 ."
     },
@@ -11065,7 +11065,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 32,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "It has B²=0 and therefore does not establish non-trivial D2N-Q selection, a dark-sector explanation or bounce physics."
     },
@@ -11083,7 +11083,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 35,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "WP1 = CLOSED_TARGET_FROZEN_NO_EXECUTION , WP2 = METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED , WP3 = NOT_STARTED , WP4 = BLOCKED_NOT_AUTHORIZED ."
     },
@@ -11103,7 +11103,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 36,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "li",
       "text": "bridge growth, Poisson, slip and lensing maps;"
     },
@@ -11121,7 +11121,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 31,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Die lexikalische Auditspur bleibt absichtlich bei HIGH=0 und MEDIUM=42 ; kontextuell unadjudiziert bleiben 0 ."
     },
@@ -11143,7 +11143,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 34,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Die lokale gauge-fixierte Transmission-Struktur ist für glatte kompatible Daten in der deklarierten nichtdegenerierten Zustandsdomäne konditional ratifiziert."
     },
@@ -11161,7 +11161,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 35,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Er besitzt B²=0 und ist daher kein Nachweis der nichttrivialen D2N-Q-Selektion, Dunkelsektor-Erklärung oder Bounce-Physik."
     },
@@ -11181,7 +11181,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 37,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Validation, Observatory, Compare Safe und Emergence verwenden denselben kanonischen FLRW-/Distanz-/Growth-Kern."
     },
@@ -11199,7 +11199,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 38,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "WP1 = CLOSED_TARGET_FROZEN_NO_EXECUTION , WP2 = METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED , WP3 = NOT_STARTED , WP4 = BLOCKED_NOT_AUTHORIZED ."
     },
@@ -11219,7 +11219,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 39,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "li",
       "text": "Bridge-Growth-, Poisson-, Slip- und Lensing-Map;"
     },
@@ -13338,7 +13338,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 28,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "As a repository-audit mapping only — not physical evidence for HZT and not a parent derivation — Band V-C maps all 15 canonical claim families across Claim → equation/derivation → code → test → data → falsifier/gate."
     },
@@ -13363,7 +13363,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 34,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "Internal mathematical and numerical consistency is not a 6D-parent derivation, likelihood fit, ghost-freedom result or physical evidence."
     },
@@ -13383,7 +13383,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 34,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "article",
       "text": "Numerical reconciliation"
     },
@@ -13403,7 +13403,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 35,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "No operative AuthorizationDecision, SingleUseGrant, backend import, target solve or physical response-rank run exists."
     },
@@ -13427,7 +13427,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 31,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Als reine Repository-Auditzuordnung – keine physische Evidenz für HZT und keine Parent-Herleitung – ordnet Band V-C alle 15 kanonischen Claim-Familien der Kette Claim → Gleichung/Herleitung → Code → Test → Daten → Falsifikator/Gate zu."
     },
@@ -13447,7 +13447,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 33,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Ein explizites Rang-eins-Gegenbeispiel widerlegt die frühere Behauptung, das Zielprofil benötige zwingend zwei nichtverschwindende orthogonale Normalenkomponenten."
     },
@@ -13471,7 +13471,7 @@
       "preliminary_risk_score": 0,
       "region": "article",
       "source_line": 37,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Diese interne mathematische und numerische Konsistenz ist keine 6D-Parent-Herleitung, kein Likelihood-Fit, keine Ghostfreiheitsaussage und keine physische Evidenz."
     },
@@ -14153,7 +14153,7 @@
       "preliminary_risk_score": -1,
       "region": "article",
       "source_line": 34,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "Validation, Observatory, Compare Safe and Emergence use the same canonical FLRW, distance and linear-growth reference engine."
     },
@@ -14858,7 +14858,7 @@
       "preliminary_risk_score": -2,
       "region": "section",
       "source_line": 23,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Als reine Statusregel – keine Evidenz für HZT und keine physikalische Messung – trennt UniverseLab analytische Resultate, diagnostische Numerik, offene Parent→Observable-Brücken, Autorisierungsinfrastruktur und physische Evidenz strikt voneinander."
     },
@@ -15085,7 +15085,7 @@
       "preliminary_risk_score": -3,
       "region": "section",
       "source_line": 23,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "As a status rule only — not evidence for HZT and not a physical measurement — UniverseLab strictly separates analytical results, diagnostic numerics, open parent-to-observable maps, authorization infrastructure and physical evidence."
     },
@@ -15355,7 +15355,7 @@
       "preliminary_risk_score": -5,
       "region": "main",
       "source_line": 39,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "div",
       "text": "Technical feasibility is not physical identification; numerical stability is not ghost freedom; a good fit would not confirm the theory; green QA is not physical evidence."
     },
@@ -18354,7 +18354,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 23,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "Open pull requests have no canonical effect."
     },
@@ -18374,7 +18374,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 24,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "div",
       "text": "K1-E NOT ADMISSIBLE"
     },
@@ -18394,7 +18394,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 24,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "div",
       "text": "Runtime Issuance BLOCKED"
     },
@@ -18414,7 +18414,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 24,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "div",
       "text": "Physical Background NOT ESTABLISHED"
     },
@@ -18435,7 +18435,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 25,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "div",
       "text": "HPVS → HZT-M0 → HZT-Full CP01R4: METHOD FROZEN · NO EXECUTION Evidence effect: NONE"
     },
@@ -18456,7 +18456,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 28,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "Audit coverage is not physical confirmation of HZT."
     },
@@ -18477,7 +18477,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 29,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "The gate remains OPEN ; no executable parent→reduced→observable map has been released."
     },
@@ -18498,7 +18498,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 31,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "This is not a global pole theorem and not a proof of ghost freedom."
     },
@@ -18518,7 +18518,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 33,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "κ₆ has a canonical parent normalization; a₀ and βτ are only partially recovered; Rχ and 𝓘B remain open on the parent side."
     },
@@ -18539,7 +18539,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 34,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "The reduced bridge scale is exactly a_c=Rχ/(Rχ+2.5) for every Rχ>0 ; bridge growth and bridge lensing remain unreleased."
     },
@@ -18559,7 +18559,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 35,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "PR #137: remains open, draft and non-canonical."
     },
@@ -18579,7 +18579,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 35,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "p",
       "text": "No human trust root is ratified and runtime issuance remains blocked."
     },
@@ -18600,7 +18600,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 36,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "article",
       "text": "Open proof obligations"
     },
@@ -18620,7 +18620,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 36,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "h2",
       "text": "What is not identified"
     },
@@ -18642,7 +18642,7 @@
       "preliminary_risk_score": -6,
       "region": "main",
       "source_line": 39,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "65d2acaf7a19581ba10d2c94638080d857148dcea2d79d49f35a6278b2b7866c",
       "tag": "div",
       "text": "Status vocabulary: proven · conditional · diagnostic · open · blocked · not released."
     },
@@ -18662,7 +18662,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 25,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "div",
       "text": "Physical Background NOT ESTABLISHED"
     },
@@ -18682,7 +18682,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 25,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "div",
       "text": "K1-E NOT ADMISSIBLE"
     },
@@ -18702,7 +18702,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 25,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "div",
       "text": "Runtime Issuance BLOCKED"
     },
@@ -18723,7 +18723,7 @@
       "preliminary_risk_score": -6,
       "region": "section",
       "source_line": 27,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "div",
       "text": "HPVS → HZT-M0 → HZT-Full CP01R4: METHOD FROZEN · NO EXECUTION Evidence effect: NONE"
     },
@@ -18744,7 +18744,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 31,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Diese Audit-Abdeckung ist keine physische HZT-Bestätigung."
     },
@@ -18765,7 +18765,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 32,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Der Gate-Status bleibt OPEN ; eine ausführbare Parent→Reduced→Observable-Map ist nicht freigegeben."
     },
@@ -18785,7 +18785,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 32,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "div",
       "text": "7 vollständig offen"
     },
@@ -18805,7 +18805,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 36,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "κ₆ besitzt eine kanonische Parent-Normierung; a₀ und βτ sind nur teilweise wiedergewonnen; Rχ und 𝓘B bleiben parentseitig offen."
     },
@@ -18825,7 +18825,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 38,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Ein menschlich ratifizierter Trust Root existiert nicht; Runtime-Issuance bleibt blockiert."
     },
@@ -18846,7 +18846,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 38,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "Es existieren weder operative AuthorizationDecision noch SingleUseGrant, Backend-Import, Targetsolve oder physischer Response-Rank-Lauf."
     },
@@ -18866,7 +18866,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 38,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "p",
       "text": "PR #137: weiterhin offen, Draft und nichtkanonisch."
     },
@@ -18887,7 +18887,7 @@
       "preliminary_risk_score": -6,
       "region": "article",
       "source_line": 39,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "h2",
       "text": "Was nicht identifiziert ist"
     },
@@ -18909,7 +18909,7 @@
       "preliminary_risk_score": -6,
       "region": "main",
       "source_line": 42,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "div",
       "text": "Statussprache: bewiesen · konditional · diagnostisch · offen · blockiert · nicht freigegeben."
     },
@@ -18930,7 +18930,7 @@
       "preliminary_risk_score": -6,
       "region": "main",
       "source_line": 42,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "e2889b9d04ff6a34e923be4f09769d9fe5bc0bf44e6e3e9286cef130c45c771e",
       "tag": "div",
       "text": "Technische Ausführbarkeit ist keine physikalische Identifikation; numerische Stabilität ist keine Ghostfreiheit; ein guter Fit wäre keine Theoriebestätigung; grüne QA ist keine physische Evidenz."
     },
