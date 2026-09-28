@@ -54,7 +54,7 @@ It does **not** establish that HZT has the same divergence, nor does it select t
 
 ### Forbidden inferences
 
-- one regular saddle (Rightarrow) quantum consistency;
+- one regular saddle ⇒ quantum consistency;
 - the necklace divergence is already present in HZT;
 - the mostly Lorentzian contour used in the source is automatically the HZT prescription.
 
@@ -76,17 +76,7 @@ The minimum scale must be derived from the parent constraint/physical-invariant 
 
 Required logical chain:
 
-[
-S_{m parent}
-ightarrow
-	ext{constraints}
-ightarrow
-	ext{physical invariants / Casimirs / Dirac observables}
-ightarrow
-R_{min},A_{min},V_{min}
-ightarrow
-	ext{claimed singularity-avoidance consequence}.
-]
+`S_parent → constraints → physical invariants / Casimirs / Dirac observables → R_min / A_min / V_min → claimed singularity-avoidance consequence`
 
 A numerical floor, mesh cutoff, UV regulator or domain restriction may be useful computationally but is not, by itself, a fundamental geometric-gap proof.
 
@@ -119,15 +109,7 @@ This gate activates when a quantum HZT 6D→4D derivation traces out unobserved 
 
 The reduction must distinguish:
 
-[
-	ext{exact/controlled partial trace}
-
-eq
-	ext{nonlocal reduced effective description}
-
-eq
-	ext{local EFT}.
-]
+`exact/controlled partial trace ≠ nonlocal reduced effective description ≠ local EFT`
 
 Before a local 4D EFT is used, the derivation must provide, where applicable:
 
@@ -140,13 +122,7 @@ Before a local 4D EFT is used, the derivation must provide, where applicable:
 
 The useful conservative HZT screening relation
 
-[
-m_{m heavy}
-gg
-max!left(
-H,sqrt{|dot H|},	au_{m bounce}^{-1},k_{m phys}
-ight)
-]
+`m_heavy ≫ max(H, sqrt(|Hdot|), tau_bounce^-1, k_phys)`
 
 is **not** a theorem of arXiv:2609.30370 and cannot replace the actual derivative-expansion and adiabaticity checks.
 
@@ -160,9 +136,9 @@ This gate supplements, but does not replace or invalidate:
 
 ### Forbidden inferences
 
-- late-time decay of a heavy mode (Rightarrow) zero contribution to the finite-time trace;
-- tracing out (Rightarrow) local EFT;
-- (mgg H) alone is universally sufficient;
+- late-time decay of a heavy mode ⇒ zero contribution to the finite-time trace;
+- tracing out ⇒ local EFT;
+- `m ≫ H` alone is universally sufficient;
 - existing ULSH-07/08 classical/eigenvalue work is invalid.
 
 ### Current HZT status
