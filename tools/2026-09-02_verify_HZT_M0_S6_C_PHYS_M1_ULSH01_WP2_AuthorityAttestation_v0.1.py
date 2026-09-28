@@ -37,6 +37,7 @@ canonical_bytes=_core.canonical_bytes
 canonical_sha256=_core.canonical_sha256
 parse_utc=_core.parse_utc
 require_hex64=_core.require_hex64
+require_git_oid=_core.require_git_oid
 require_mapping=_core.require_mapping
 require_string=_core.require_string
 ed25519_verify=_core.ed25519_verify
@@ -70,7 +71,7 @@ def _verify_payload_bindings(payload: dict[str, Any], artifact_type: str, synthe
     if payload.get("run_payload_sha256") != RUN_PAYLOAD_DIGEST:
         raise AuthorityVerificationError("RUN_PAYLOAD_DIGEST_MISMATCH", "signed payload run-payload digest mismatch")
     if not synthetic:
-        require_hex64(payload.get("repository_commit_sha"), "payload.repository_commit_sha")
+        require_git_oid(payload.get("repository_commit_sha"), "payload.repository_commit_sha")
         require_hex64(payload.get("release_package_manifest_sha256"), "payload.release_package_manifest_sha256")
     if payload.get("automatic_execution") is not False:
         raise AuthorityVerificationError("AUTOMATIC_EXECUTION_FORBIDDEN", "signed payload must set automatic_execution=false")
@@ -118,11 +119,17 @@ def verify_envelope(
     contract_status = contract_meta.get("status")
     root_status = root.get("status")
     synthetic = contract_status == "RATIFIED_SYNTHETIC_CONTROL_ONLY" and root_status == "RATIFIED_SYNTHETIC_CONTROL_ONLY"
-    operative = contract_status == "RATIFIED_ACTIVE" and root_status == "RATIFIED_ACTIVE"
-    if not (synthetic or operative):
+    operative_requested = contract_status == "RATIFIED_ACTIVE" and root_status == "RATIFIED_ACTIVE"
+    if operative_requested:
+        raise AuthorityVerificationError(
+            "OWNER_ADOPTION_NOT_VERIFIED",
+            "operative RATIFIED_ACTIVE verification is blocked until this verifier binds and verifies the explicit project-owner adoption and final ratified trust-root artifact",
+            {"contract_status": contract_status, "trust_root_status": root_status},
+        )
+    if not synthetic:
         raise AuthorityVerificationError(
             "TRUST_ROOT_NOT_RATIFIED",
-            "contract and trust root are not jointly ratified for verification",
+            "contract and trust root are not jointly ratified for synthetic verification",
             {"contract_status": contract_status, "trust_root_status": root_status},
         )
 
@@ -208,13 +215,13 @@ def verify_envelope(
     _verify_payload_bindings(payload, artifact_type, synthetic)
 
     return VerificationResult(
-        status="PASS_SYNTHETIC_CONTROL_ONLY_NO_AUTHORIZATION" if synthetic else "PASS_OPERATIVE_AUTHORITY_ATTESTATION",
+        status="PASS_SYNTHETIC_CONTROL_ONLY_NO_AUTHORIZATION",
         artifact_type=artifact_type,
         authority_id=authority_id,
         key_id=key_id,
         signed_bytes_sha256=digest,
-        synthetic_control_only=synthetic,
-        operative_authorization_allowed=operative,
+        synthetic_control_only=True,
+        operative_authorization_allowed=False,
     )
 
 
