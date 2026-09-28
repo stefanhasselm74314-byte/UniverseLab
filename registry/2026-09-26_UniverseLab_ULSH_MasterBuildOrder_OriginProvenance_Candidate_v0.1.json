@@ -1,0 +1,57 @@
+{
+  "schema": "universelab.ulsh-master-build-order-origin-provenance-candidate.v0.1",
+  "version": "0.1",
+  "date": "2026-09-26",
+  "classification": "PROVENANCE_COORDINATION_GOVERNANCE_ONLY",
+  "status": "PROPOSED_PENDING_CTRL02",
+  "basis_main_commit": "9e34903a09db17fb6d3c338be13ab934f16f09f1",
+  "subject": "ULSH Master Build Order / 14 solvers / 56 work packages",
+  "current_findings": {
+    "conceptual_origin": "UNRESOLVED",
+    "chat_of_origin": "UNRESOLVED",
+    "first_repository_materialization": {
+      "commit": "c85d14b1f27f72f619cecc94eab009a1f8f162f1",
+      "timestamp_utc": "2026-08-10T11:52:16Z",
+      "message": "Add ULSH master build order v1.0",
+      "status": "CONFIRMED"
+    },
+    "pr83": {
+      "number": 83,
+      "relation": "SUPERSEDED_UNMERGED_REPOSITORY_PREDECESSOR"
+    },
+    "pr84": {
+      "number": 84,
+      "relation": "MERGED_SUCCESSOR",
+      "merge_commit": "b210c85b0ce46efd9a60cdb2e830294422b4e4a5"
+    },
+    "older_closed_chat_role": "HANDOFF_CARRIER_OF_COPIED_PRIOR_RESPONSE",
+    "later_2026_08_16_master_chat_role": "COORDINATION_SUCCESSOR",
+    "masterplan_origin_from_content_presence": "FORBIDDEN_INFERENCE"
+  },
+  "hypothesis_results": {
+    "H1_closed_chat_is_origin": "CONTRADICTED",
+    "H2_closed_chat_is_carrier": "CONFIRMED",
+    "H3_older_unidentified_chat_is_conceptual_origin": "SUPPORTED_NOT_PROVEN",
+    "H4_repository_agent_workflow_materialized_definitive_form": "SUPPORTED_NOT_PROVEN"
+  },
+  "proposed_successors": [
+    "registry/2026-09-26_UniverseLab_WorkstreamLinks_v1.6.json",
+    "registry/2026-09-26_UniverseLab_ChatInventory_v1.3.json",
+    "versioned ULSH Master Build Order origin-provenance record"
+  ],
+  "historical_predecessors_policy": "KEEP_AS_PROVENANCE",
+  "privacy": {
+    "private_conversation_ids_publishable": false,
+    "private_chat_urls_publishable": false
+  },
+  "negative_gates": [
+    "DO_NOT_CLAIM_CLOSED_CHAT_AS_ORIGIN_WITHOUT_NEW_EVIDENCE",
+    "DO_NOT_CLAIM_2026_08_16_MASTER_CHAT_AS_ORIGIN",
+    "DO_NOT_EQUATE_TITLE_WITH_CONVERSATION_IDENTITY",
+    "DO_NOT_EQUATE_TEXT_PRESENCE_WITH_CONTENT_ORIGIN",
+    "DO_NOT_EQUATE_REPOSITORY_COMMIT_WITH_SPECIFIC_CHAT_ORIGIN"
+  ],
+  "required_next_decision": "CTRL02",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
