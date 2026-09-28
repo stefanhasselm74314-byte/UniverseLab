@@ -1,0 +1,94 @@
+name: ULSH-01 SIM-70 CP01R4 pre-execution numerical QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/2026-09-28_ULSH01_SIM70_CP01R4_ManufacturedSolutionQA_v0.1.py'
+      - 'tools/2026-09-28_ULSH01_SIM70_CP01R4_EnvironmentHash_v0.1.py'
+      - 'tools/2026-09-28_ULSH01_SIM70_CP01R4_InitialStatePreflight_v0.1.py'
+      - 'tests/2026-09-28_ULSH01_SIM70_CP01R4_PreExecutionNumericalQA_v0.1.py'
+      - 'requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt'
+      - '.github/workflows/2026-09-28_ULSH01_SIM70_CP01R4_PreExecutionNumericalQA_v0.1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sim70-cp01r4-pre-execution:
+    runs-on: ubuntu-24.04
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      NUMEXPR_NUM_THREADS: '1'
+      ULSH01_NETWORK_ISOLATED: '1'
+      ULSH01_GPU_DISABLED: '1'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install frozen numerical dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt
+
+      - name: Compile SIM-70 pre-execution QA
+        run: |
+          python -m py_compile \
+            ulsh/ULSH-01/C-PHYS/2026-09-28_ULSH01_SIM70_CP01R4_ManufacturedSolutionQA_v0.1.py \
+            tools/2026-09-28_ULSH01_SIM70_CP01R4_EnvironmentHash_v0.1.py \
+            tools/2026-09-28_ULSH01_SIM70_CP01R4_InitialStatePreflight_v0.1.py \
+            tests/2026-09-28_ULSH01_SIM70_CP01R4_PreExecutionNumericalQA_v0.1.py
+
+      - name: Run adversarial MMS, environment-hash and initial-state QA
+        run: |
+          python tests/2026-09-28_ULSH01_SIM70_CP01R4_PreExecutionNumericalQA_v0.1.py
+
+      - name: Materialize deterministic environment-hash packet
+        run: |
+          python tools/2026-09-28_ULSH01_SIM70_CP01R4_EnvironmentHash_v0.1.py \
+            --repo-root . \
+            --strict \
+            --output 2026-09-28_ULSH01_SIM70_CP01R4_EnvironmentHashPacket_v0.1.json \
+            > /tmp/sim70_environment_hash.log
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('2026-09-28_ULSH01_SIM70_CP01R4_EnvironmentHashPacket_v0.1.json')
+          x=json.loads(p.read_text(encoding='utf-8'))
+          assert len(x['environment_hash_sha256']) == 64
+          assert x['attestation']['physical_interpretation'] == 'NONE'
+          assert x['attestation']['canonical_effect'] == 'NONE'
+          print('ENVIRONMENT_HASH =', x['environment_hash_sha256'])
+          PY
+
+      - name: Upload QA-only reproducibility packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: sim70-cp01r4-environment-hash
+          path: 2026-09-28_ULSH01_SIM70_CP01R4_EnvironmentHashPacket_v0.1.json
+          if-no-files-found: error
+
+      - name: Assert no physical execution surface
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          paths=[
+            'ulsh/ULSH-01/C-PHYS/2026-09-28_ULSH01_SIM70_CP01R4_ManufacturedSolutionQA_v0.1.py',
+            'tools/2026-09-28_ULSH01_SIM70_CP01R4_EnvironmentHash_v0.1.py',
+            'tools/2026-09-28_ULSH01_SIM70_CP01R4_InitialStatePreflight_v0.1.py',
+            'tests/2026-09-28_ULSH01_SIM70_CP01R4_PreExecutionNumericalQA_v0.1.py',
+          ]
+          text='\n'.join(Path(p).read_text(encoding='utf-8') for p in paths)
+          assert 'execute_authorized(' not in text
+          assert 'damped_newton(' not in text
+          assert 'PHYSICAL_INTERPRETATION = "NONE"' in text
+          print('SIM-70 execution firewall: PASS')
+          PY
