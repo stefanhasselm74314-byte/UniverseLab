@@ -93,13 +93,26 @@ def distribution_record_sha256(name: str) -> str | None:
 
 
 def cpu_model() -> str:
+    """Return a descriptive CPU model, never a logical processor index."""
     cpuinfo = Path("/proc/cpuinfo")
     if cpuinfo.is_file():
+        parsed: dict[str, str] = {}
         for line in cpuinfo.read_text(encoding="utf-8", errors="replace").splitlines():
-            if ":" in line:
-                key, value = line.split(":", 1)
-                if key.strip().lower() in {"model name", "hardware", "processor"} and value.strip():
-                    return value.strip()
+            if ":" not in line:
+                continue
+            key, value = line.split(":", 1)
+            key = key.strip().lower()
+            value = value.strip()
+            if value and key not in parsed:
+                parsed[key] = value
+        for key in ("model name", "hardware", "cpu model", "machine"):
+            if parsed.get(key):
+                return parsed[key]
+        # Some architectures expose a descriptive processor string.  Reject
+        # purely numeric logical-CPU indices such as x86 "processor: 0".
+        processor = parsed.get("processor", "")
+        if processor and not processor.isdigit():
+            return processor
     return platform.processor() or "UNKNOWN"
 
 
