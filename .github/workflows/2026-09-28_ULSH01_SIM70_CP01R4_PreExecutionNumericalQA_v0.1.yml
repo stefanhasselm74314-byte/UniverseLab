@@ -51,6 +51,22 @@ jobs:
         run: |
           python tests/2026-09-28_ULSH01_SIM70_CP01R4_PreExecutionNumericalQA_v0.1.py
 
+      - name: Materialize manufactured-solution audit packet
+        run: |
+          python ulsh/ULSH-01/C-PHYS/2026-09-28_ULSH01_SIM70_CP01R4_ManufacturedSolutionQA_v0.1.py \
+            > 2026-09-28_ULSH01_SIM70_CP01R4_ManufacturedSolutionPacket_v0.1.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('2026-09-28_ULSH01_SIM70_CP01R4_ManufacturedSolutionPacket_v0.1.json')
+          x=json.loads(p.read_text(encoding='utf-8'))
+          assert x['status'] == 'PASS_QA_ONLY'
+          print('MMS_LOW_ORDER_MAX_ABS_ERROR =', x['low_order_max_abs_error'])
+          print('MMS_HIGH_ORDER_FINE_MIN_ABS_ERROR =', x['high_order_fine_min_abs_error'])
+          for row in x['high_order_resolution_case']:
+              print('MMS_HIGH_ORDER_N', row['node_count'], 'ABS_ERROR', row['absolute_residual_reference_error_inf'])
+          PY
+
       - name: Materialize deterministic environment-hash packet
         run: |
           python tools/2026-09-28_ULSH01_SIM70_CP01R4_EnvironmentHash_v0.1.py \
@@ -69,11 +85,13 @@ jobs:
           print('ENVIRONMENT_HASH =', x['environment_hash_sha256'])
           PY
 
-      - name: Upload QA-only reproducibility packet
+      - name: Upload QA-only reproducibility packets
         uses: actions/upload-artifact@v4
         with:
-          name: sim70-cp01r4-environment-hash
-          path: 2026-09-28_ULSH01_SIM70_CP01R4_EnvironmentHashPacket_v0.1.json
+          name: sim70-cp01r4-preexecution-packets
+          path: |
+            2026-09-28_ULSH01_SIM70_CP01R4_EnvironmentHashPacket_v0.1.json
+            2026-09-28_ULSH01_SIM70_CP01R4_ManufacturedSolutionPacket_v0.1.json
           if-no-files-found: error
 
       - name: Assert no physical execution surface
