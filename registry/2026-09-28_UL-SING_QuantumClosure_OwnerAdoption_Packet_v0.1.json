@@ -1,0 +1,47 @@
+{
+  "schema": "universelab.ul-sing.quantum-closure-owner-adoption-packet.v0.1",
+  "version": "0.1",
+  "date": "2026-09-28",
+  "classification": "OWNER_RESERVED_GOVERNANCE_DECISION_PREPARATION",
+  "status": "PREPARED_AWAITING_EXPLICIT_OWNER_DECISION",
+  "basis_main_commit": "9e34903a09db17fb6d3c338be13ab934f16f09f1",
+  "source_review": {
+    "pull_request": 249,
+    "head_sha": "f2a9a16413cf0659bc05ffdb07b1be8c410bb2b8",
+    "review_status": "PASS_WITH_CONDITIONS_NONCANONICAL_CANDIDATES"
+  },
+  "generic_go_counts_as_adoption": false,
+  "candidates": [
+    {
+      "gate_id": "QG-PI-01",
+      "decision": null,
+      "canonical_effect": "NONE"
+    },
+    {
+      "gate_id": "QG-GAP-01",
+      "decision": null,
+      "canonical_effect": "NONE"
+    },
+    {
+      "gate_id": "KK-CTP-01",
+      "decision": null,
+      "canonical_effect": "NONE"
+    }
+  ],
+  "allowed_decisions": [
+    "ADOPT_AS_CANONICAL_METHOD_GATE",
+    "ADOPT_WITH_CONDITIONS",
+    "DEFER",
+    "REJECT"
+  ],
+  "canonicalization_requires_explicit_owner_decision": true,
+  "current_state": {
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_allowed_step": "EXPLICIT_OWNER_DECISION_NAMING_GATE_IDS_OR_EXPLICITLY_ADOPTING_ALL_THREE",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
