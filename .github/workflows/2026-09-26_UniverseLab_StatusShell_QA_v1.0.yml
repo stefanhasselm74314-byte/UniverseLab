@@ -2,14 +2,20 @@ name: UniverseLab status shell QA v1.0
 
 on:
   pull_request:
+    # Exact runtime dependency boundary; no claim of QA for unrelated assets.
     paths:
       - 'research-status.html'
       - 'research-status-en.html'
-      - 'assets/*GlobalShell*'
-      - 'assets/*LanguageSwitcher*'
-      - 'assets/*MobileTypography*'
-      - 'assets/*DesktopCompact*'
-      - 'assets/*Export*'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.css'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css'
+      - 'assets/2026-08-05_UniverseLab_DesktopCompact_v1.0.css'
+      - 'assets/2026-08-05_UniverseLab_Export_v1.0.css'
+      - 'assets/2026-08-05_UniverseLab_Export_v1.0.js'
+      - 'assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js'
+      - 'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js'
+      - 'assets/2026-08-27_UniverseLab_DocumentLinkRouter_v1.0.js'
+      - 'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
       - '2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js'
       - 'tests/2026-09-26_test_UniverseLab_StatusShell_v1.0.py'
       - '.github/workflows/2026-09-26_UniverseLab_StatusShell_QA_v1.0.yml'
@@ -26,11 +32,17 @@ jobs:
       - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Bind exact tested commit
-        run: git rev-parse HEAD
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          mkdir -p web50-status-report
+          git rev-parse HEAD > web50-status-report/source-sha.txt
       - name: Source and claim-location guards
         run: python tests/2026-09-26_test_UniverseLab_StatusShell_v1.0.py
       - name: Existing multilingual contract
