@@ -7,12 +7,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json"
+DOCUMENT = ROOT / "governance/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.md"
 
 EXPECTED_IDS = {"QG-PI-01", "QG-GAP-01", "KK-CTP-01"}
 
 
 def main() -> None:
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    document = DOCUMENT.read_text(encoding="utf-8")
 
     assert data["schema"] == "universelab.ul-sing.quantum-closure-method-gates.v1"
     assert data["version"] == "1.0.0"
@@ -74,6 +76,13 @@ def main() -> None:
     assert current["K1-D"] == "NOT_RELEASED"
     assert current["K1-E"] == "NOT_ADMISSIBLE"
     assert current["FM_G0"] == "OPEN"
+
+    # Human-readable canonical text must preserve the intended logical operators.
+    assert "one regular saddle ⇒ quantum consistency" in document
+    assert "exact/controlled partial trace ≠ nonlocal reduced effective description ≠ local EFT" in document
+    assert "m_heavy ≫ max(H, sqrt(|Hdot|), tau_bounce^-1, k_phys)" in document
+    assert "physical_gate_effect = NONE" in document
+    assert "physical_evidence_effect = NONE" in document
 
     assert data["physical_gate_effect"] == "NONE"
     assert data["physical_evidence_effect"] == "NONE"
