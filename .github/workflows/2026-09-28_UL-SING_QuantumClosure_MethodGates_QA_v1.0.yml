@@ -1,0 +1,55 @@
+name: UL-SING quantum-closure method gates QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json'
+      - 'governance/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.md'
+      - 'tests/2026-09-28_test_UL-SING_QuantumClosure_MethodGates_v1.0.py'
+      - '.github/workflows/2026-09-28_UL-SING_QuantumClosure_MethodGates_QA_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json'
+      - 'governance/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.md'
+      - 'tests/2026-09-28_test_UL-SING_QuantumClosure_MethodGates_v1.0.py'
+      - '.github/workflows/2026-09-28_UL-SING_QuantumClosure_MethodGates_QA_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ul-sing-quantum-closure-method-gates:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse canonical method-gate registry
+        run: python -m json.tool registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json >/dev/null
+
+      - name: Compile fail-closed gate QA
+        run: python -m py_compile tests/2026-09-28_test_UL-SING_QuantumClosure_MethodGates_v1.0.py
+
+      - name: Run canonical method-gate QA
+        run: python tests/2026-09-28_test_UL-SING_QuantumClosure_MethodGates_v1.0.py
+
+      - name: Publish nonphysical canonicalization summary
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## UL-SING canonical quantum-closure method gates
+
+          - QG-PI-01: owner-adopted canonical method gate
+          - QG-GAP-01: owner-adopted canonical method gate
+          - KK-CTP-01: owner-adopted canonical method gate
+          - source publication status: PREPRINT
+          - physical background: NOT ESTABLISHED
+          - physical response rank: NOT EXECUTED
+          - K1-D: NOT RELEASED
+          - K1-E: NOT ADMISSIBLE
+          - physical gate effect: NONE
+          - physical evidence effect: NONE
+          EOF
