@@ -41,6 +41,10 @@ require_mapping=_core.require_mapping
 require_string=_core.require_string
 ed25519_verify=_core.ed25519_verify
 
+BRIDGE_SCHEMA = "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-authority-signature-provenance-contract.v0.2"
+BRIDGE_CONTRACT_ID = "ULSH01-WP2-AUTHORITY-SIGNATURE-PROVENANCE-v0.2"
+SUPPORTED_ARTIFACT_TYPES = {"AUTHORIZATION_DECISION", "SINGLE_USE_GRANT", "TRUST_ROOT_RATIFICATION"}
+
 def _find_unique(items: Any, key: str, expected: str, missing_code: str) -> dict[str, Any]:
     if not isinstance(items, list):
         raise AuthorityVerificationError("INVALID_TRUST_ROOT", f"expected list for {key}")
@@ -113,8 +117,19 @@ def verify_envelope(
     root = require_mapping(trust_root, "trust_root")
     env = require_mapping(envelope, "envelope")
 
-    if contract_meta.get("contract_id") != CONTRACT_ID:
-        raise AuthorityVerificationError("CONTRACT_ID_MISMATCH", "authority contract id mismatch")
+    if contract_meta.get("schema") != BRIDGE_SCHEMA:
+        raise AuthorityVerificationError("CONTRACT_SCHEMA_MISMATCH", "owner-ratification bridge contract schema mismatch")
+    if contract_meta.get("contract_id") != BRIDGE_CONTRACT_ID:
+        raise AuthorityVerificationError("CONTRACT_ID_MISMATCH", "owner-ratification bridge contract id mismatch")
+    if contract_meta.get("signed_envelope_contract_id") != CONTRACT_ID:
+        raise AuthorityVerificationError("SIGNED_ENVELOPE_CONTRACT_ID_MISMATCH", "bridge does not bind the expected frozen signed-envelope contract id")
+
+    bridge = require_mapping(contract_meta.get("owner_ratification_bridge"), "contract.owner_ratification_bridge")
+    if bridge.get("positive_operational_verification_available_in_this_revision") is not False:
+        raise AuthorityVerificationError("UNSAFE_BRIDGE_CONFIGURATION", "v0.2 must not expose a positive operative path")
+    if bridge.get("independently_verifiable_owner_ratification_schema") != "NOT_IMPLEMENTED":
+        raise AuthorityVerificationError("UNSAFE_BRIDGE_CONFIGURATION", "v0.2 owner-ratification schema state changed without a successor contract")
+
     contract_status = contract_meta.get("status")
     root_status = root.get("status")
     synthetic = contract_status == "RATIFIED_SYNTHETIC_CONTROL_ONLY" and root_status == "RATIFIED_SYNTHETIC_CONTROL_ONLY"
@@ -126,14 +141,25 @@ def verify_envelope(
             {"contract_status": contract_status, "trust_root_status": root_status},
         )
 
-    # Security supersession: v0.1 remains valid for draft/synthetic control
-    # verification only. Any future operative path must use the versioned
-    # owner-ratification bridge/successor contract introduced after PR #236.
+    if expected_artifact_type not in SUPPORTED_ARTIFACT_TYPES:
+        raise AuthorityVerificationError(
+            "UNSUPPORTED_ARTIFACT_TYPE",
+            f"unsupported artifact type: {expected_artifact_type}",
+        )
+
+    # PR #236 fail-closed bridge. This check deliberately precedes envelope,
+    # signature and payload validation. v0.2 exposes no positive operative
+    # result of any artifact class, including TRUST_ROOT_RATIFICATION.
+    # Trust-root proof-of-possession may still be exercised only through the
+    # synthetic-control path in this revision.
     if operative:
         raise AuthorityVerificationError(
-            "CONTRACT_VERSION_SUPERSEDED_FOR_OPERATION",
-            "v0.1 is superseded for operative verification; use the current versioned owner-ratification policy path",
-            {"successor_contract_id": "ULSH01-WP2-AUTHORITY-SIGNATURE-PROVENANCE-v0.2"},
+            "OWNER_RATIFICATION_NOT_VERIFIABLE",
+            "v0.2 blocks every positive operative authority result until a successor contract defines and verifies the concrete owner-ratification binding",
+            {
+                "expected_artifact_type": expected_artifact_type,
+                "bridge_contract_id": BRIDGE_CONTRACT_ID,
+            },
         )
 
     if env.get("schema") != "universelab.signed-authority-envelope.v0.1":
