@@ -1,0 +1,119 @@
+{
+  "schema": "universelab.ulsh01.control-replay-audit-result.v1",
+  "version": "1.0.0",
+  "date": "2026-08-16",
+  "module_id": "ULSH-01",
+  "solver_id": "MD2S-BVP",
+  "replay_id": "ULSH01-AF0-CONTROL-REPLAY-v1",
+  "classification": "PERSISTED_FRESH_AF0_SOFTWARE_NUMERICAL_REPRODUCIBILITY_AUDIT_ONLY",
+  "status": "PASS_FRESH_AF0_CONTROL_REPLAY_NUMERICAL_MATCH",
+  "control_replay": "NUMERICAL_MATCH",
+  "physical_evidence_effect": "NONE",
+  "physical_gate_effect": "NONE",
+  "source_contract": "registry/2026-08-16_ULSH01_ControlReplayContract_v1.0.json",
+  "reference_package": "registry/2026-08-16_ULSH01_ReproducibilityContract_v1.0.json",
+  "canonical_main_execution": {
+    "repository_commit": "93bc5f7d2c95ec9f8ba3735ca60c52f7527c79ef",
+    "workflow_name": "ULSH-01 fresh a_F=0 control replay v1.0",
+    "workflow_run_id": 31933256761,
+    "workflow_job_id": 95131171072,
+    "workflow_conclusion": "success",
+    "runner": "ubuntu-24.04",
+    "python": "3.12",
+    "artifact": {
+      "id": 9259899329,
+      "name": "2026-08-16_ULSH01_ControlReplayStatus_v1.0",
+      "digest": "sha256:a76acd0c48fcff138570d83109dd93ba03867d7beb8b5d61be165a8b1041c9da",
+      "retention_days": 30,
+      "repository_audit_persists_after_artifact_expiry": true
+    }
+  },
+  "artifact_member_sha256": {
+    "2026-08-16_ULSH01_ControlReplayStatus_v1.0.json": "7f8422e581887c708b1c698c685c35266543bc3eb085413c5f04add26aabfd41",
+    "2026-08-16_ULSH01_FreshAF0ControlReplay_v1.0.json": "4d7909e78591c3855a1af2e398830dcd0a142c3cdcf486d26ef7d74732e3a231",
+    "2026-08-16_ULSH01_PhysicalTargetDenial_v1.0.json": "1e881257f878772f778e6812dc296f512f21725d368895d6133569c4379545be",
+    "2026-08-16_ULSH01_PhysicalTargetDenialExitCode_v1.0.txt": "c6ebc76be5dc1f8b433f8d6fd9bd85cd9325086038442db8614bb799fec6fd85",
+    "2026-08-16_ULSH01_StaticPackageStatus_v1.0.json": "715ee526eec5d65197e46b7cc6a82ce98f2bde60239185b1b5f141484e655585"
+  },
+  "reference_binding": {
+    "control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R3",
+    "reference_output_sha256": "87d36524a0e594d860d4ff8dc00f7129276a3af9e4fdc17cb0bb2ee3be12d965",
+    "closed_package_manifest_sha256": "a7b48c88061e00cc3dc44dd00a2a17855a7f8c65dd228f725101fde9a1839eb4",
+    "candidate_sha256": "6a00f71f4904574841d17eaebba7f8318fc136d477ab6fd324f3354f1b33e400",
+    "candidate_bitwise_digest_match": true,
+    "candidate_max_absolute_error": 0.0,
+    "candidate_numeric_tolerance_absolute": 1e-12,
+    "candidate_numeric_tolerance_relative": 1e-12
+  },
+  "fresh_replay_metrics": {
+    "metric_thresholds": "PASS",
+    "primary_bulk_fraction_of_limit": {
+      "24": 0.06845900235585844,
+      "48": 0.1929132270594991,
+      "96": 0.5675912115310489
+    },
+    "independent_cutoff_fraction_of_limit": [
+      {
+        "epsilon": 0.001,
+        "profile": 3.3306690738754696e-08,
+        "constraint": 1.0408340855860843e-07,
+        "boundary": 4.440892098500626e-08,
+        "backend_distance": 5.4289905904170155e-05
+      },
+      {
+        "epsilon": 0.0005,
+        "profile": 2.220446049250313e-08,
+        "constraint": 1.0408340855860843e-07,
+        "boundary": 1.1102230246251565e-08,
+        "backend_distance": 5.42565992134314e-05
+      },
+      {
+        "epsilon": 0.00025,
+        "profile": 2.220446049250313e-08,
+        "constraint": 1.0408340855860843e-07,
+        "boundary": 5.551115123125783e-09,
+        "backend_distance": 5.424549698318515e-05
+      }
+    ]
+  },
+  "execution_firewall": {
+    "status": "PASS",
+    "cp01r1_attempts": 0,
+    "target_a_F_one_quarter_solves": 0,
+    "primary_newton_calls": 0,
+    "independent_shooting_jacobian_calls": 0,
+    "nonlinear_root_calls": 0,
+    "operative_grants_created": 0,
+    "physical_result_artifacts_created": 0,
+    "physical_cli_denial": "PASS_EXIT_73",
+    "physical_target": "NOT_APPLICABLE_NOT_AUTHORIZED"
+  },
+  "governance_state_after_replay": {
+    "solver_release": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE",
+    "ULSH01_release_gate": "NOT_SATISFIED"
+  },
+  "scientific_semantics": {
+    "established": "Fresh deterministic software/numerical reproducibility of the audited a_F=0 real-backend analytic control under the frozen acceptance contract.",
+    "not_established": [
+      "physical CP01R1 background",
+      "continuum BVP existence or uniqueness",
+      "Fredholm property",
+      "continuum BVP Jacobian invertibility",
+      "perturbative stability",
+      "ghost freedom",
+      "K1-D release",
+      "K1-E admissibility",
+      "physical evidence"
+    ]
+  },
+  "forbidden_inferences": [
+    "NUMERICAL_MATCH of the a_F=0 control is not physical background identification.",
+    "A successful real-backend control replay is not a CP01R1 target execution.",
+    "No scientific release gate is promoted by this audit result."
+  ]
+}

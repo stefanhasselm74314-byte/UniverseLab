@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>UniverseLab · 10M Fresh Launch</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#050a10;color:#f2fbff;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}.card{width:min(560px,100%);padding:24px;border:1px solid #315368;border-radius:18px;background:#0b1822}.state{color:#9fdfff}small{display:block;margin-top:12px;color:#9fb4c1}
+</style>
+</head>
+<body>
+<main class="card"><h1>UniverseLab wird aktualisiert</h1><p class="state" id="state">Alte Offline-/Cache-Reste werden entfernt …</p><small>Nur UniverseLab-Speicher dieses Web-Ursprungs wird bereinigt. Danach öffnet sich automatisch das 10-Monats-Forschungsprogramm.</small></main>
+<script>
+(async()=>{
+  const state=document.getElementById('state');
+  try{
+    if('serviceWorker' in navigator){
+      const regs=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r=>r.unregister()));
+    }
+    if('caches' in window){
+      const keys=await caches.keys();
+      await Promise.all(keys.map(k=>caches.delete(k)));
+    }
+    state.textContent='Bereinigung abgeschlossen. Aktuelle Seite wird geladen …';
+  }catch(err){
+    state.textContent='Bereinigung teilweise blockiert. Aktuelle Seite wird trotzdem neu geladen …';
+  }
+  const target='./2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html?fresh=20260831-1';
+  setTimeout(()=>location.replace(target),350);
+})();
+</script>
+</body>
+</html>

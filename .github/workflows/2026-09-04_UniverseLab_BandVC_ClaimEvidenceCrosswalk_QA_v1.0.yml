@@ -1,0 +1,63 @@
+name: UniverseLab Band V-C claim evidence crosswalk QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json'
+      - 'registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json'
+      - 'science/audit/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.md'
+      - 'tests/2026-09-04_test_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.py'
+      - '.github/workflows/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_QA_v1.0.yml'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json'
+      - 'registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json'
+      - 'project-manifest.json'
+      - 'registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.2.json'
+      - 'registry/2026-09-03_UniverseLab_SiteState_v1.3.json'
+      - 'registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.33.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-band-vc-crosswalk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse V-C registries
+        run: |
+          python -m json.tool registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json >/dev/null
+          python -m json.tool registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json >/dev/null
+          python -m json.tool registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json >/dev/null
+          python -m json.tool registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json >/dev/null
+
+      - name: Compile V-C gate
+        run: |
+          python -m py_compile tests/2026-09-04_test_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.py
+
+      - name: Run V-C claim evidence crosswalk gate
+        run: |
+          python tests/2026-09-04_test_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.py
+
+      - name: Enforce nonoperative physical firewall
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for rel in [
+              'registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json',
+              'registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json',
+          ]:
+              d=json.loads(Path(rel).read_text(encoding='utf-8'))
+              assert d['physical_gate_effect']=='NONE'
+              assert d['physical_evidence_effect']=='NONE'
+          print('Band V-C nonoperative firewall: PASS')
+          PY

@@ -1,0 +1,137 @@
+{
+  "schema": "universelab.md2s.r1l.forensic-evidence-register.v1",
+  "version": "1.5.0",
+  "created_date": "2026-08-26",
+  "status": "PARTIALLY_UNBLOCKED_PRIMARY_FGHKL_RECOVERED_BUT_SOURCE_IDENTICAL_TWO_JUNCTION_REPLAY_STILL_BLOCKED",
+  "supersedes": [
+    "registry/2026-08-25_MD2S_R1L_ForensicEvidenceRegister_v1.4.json",
+    "registry/2026-08-26_MD2S_R1L_SourceIdenticalReplayClosure_v1.0.json"
+  ],
+  "identifier": {
+    "exact_string": "MD2S-R1-L",
+    "recovered_role": "LEGACY_REPRODUCTION_TRACK_ID",
+    "original_historical_solver_transaction_recovered": false
+  },
+  "evidence_classes": {
+    "E10_VERIFIED_HISTORICAL_TRANSCRIPT_REPORT": "Message-level report recovered in the official export; proves what was historically reported, not by itself the solver transaction.",
+    "E11_PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID": "Recovered package payload with ZIP/CRC and internal SHA-256 manifest validation. Scientific scope remains limited to that package.",
+    "E12_PRIMARY_NUMERIC_REPRODUCTION_PASS": "Selected numerical quantities independently recomputed from recovered primary package data within declared tolerances; does not imply solver re-execution unless solver generation code is present and run."
+  },
+  "current_recovery_state": {
+    "B1.4F": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+    "B1.4G": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+    "B1.4H": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID_PLUS_SELECTED_INTERNAL_NUMERIC_REPRODUCTION_PASS",
+    "B1.4K": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID_PLUS_NUMERIC_REPRODUCTION_PASS",
+    "B1.4L": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID_PLUS_NUMERIC_REPRODUCTION_PASS",
+    "B1.4E": "HISTORICAL_PACKAGE_NAME_RECOVERED_BINARY_NOT_YET_RECOVERED",
+    "source_identical_two_junction_replay": "BLOCKED"
+  },
+  "B1.4H": {
+    "classification": [
+      "E10_VERIFIED_HISTORICAL_TRANSCRIPT_REPORT",
+      "E11_PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+      "E12_PRIMARY_NUMERIC_REPRODUCTION_PASS_SELECTED_DERIVED_AND_INTERNAL_CONSISTENCY_ONLY"
+    ],
+    "historical_expected_package_name": "HZT_MD2S_B1_4H_RADION_STABILIZED_DESIGN_v0_1_PACKAGE.zip",
+    "recovered_uploaded_filename": "HZT_MD2S_B1_4H_RADION_STABILIZED_DESIGN_v0_1.zip",
+    "outer_filename_variation_from_historical_link": true,
+    "outer_zip_byte_identity_to_historical_wrapper_independently_established": false,
+    "internal_root": "HZT_MD2S_B1_4H_RADION_STABILIZED_DESIGN_v0_1/",
+    "recovered_zip_size_bytes": 55066,
+    "recovered_zip_sha256": "a73210f41362a00b69e169e424da9b8cdba790f0573a1d651cdfeb5d01837f7d",
+    "zip_entry_count_total": 19,
+    "payload_file_count": 14,
+    "zip_crc_status": "PASS",
+    "internal_manifest_entries": 14,
+    "internal_manifest_hashes_valid": 14,
+    "internal_manifest_hashes_invalid": 0,
+    "provenance_classification": "quarantined_non_evidential_boundary_radion_stabilization_design",
+    "historical_source_report_match": {
+      "project_phase": "MD-2S-B1.4H",
+      "critical_kappa_radion": 0.3927482460297915,
+      "benchmark_kappa_radion": 0.5,
+      "benchmark_lowest_m2_Rcap2": 0.5527569446937802,
+      "tachyon_removed_reported": true,
+      "factor16_release": "BLOCKED",
+      "K1D_release": "NOT_RELEASED",
+      "K1E_status": "NOT_ADMISSIBLE",
+      "evidential_status": "NONE"
+    },
+    "selected_independent_checks": {
+      "benchmark_spectrum_cross_file_match_max_abs": 0.0,
+      "regulator_spread_recomputed": 0.000030755086815714705,
+      "regulator_spread_reported": 0.000030755086815714705,
+      "margin_above_critical_fraction_recomputed": 0.2730801602665159,
+      "margin_above_critical_fraction_reported": 0.2730801602665159,
+      "canonical_total_Hessian_eigenvalues_recomputed": [0.7511587393033659, 1.1987060298329937],
+      "canonical_total_Hessian_eigenvalues_reported": [0.7511587393033659, 1.1987060298329937],
+      "zero_threshold_row_present_at_critical_kappa": true,
+      "status": "PASS_SELECTED_DERIVED_AND_INTERNAL_CONSISTENCY"
+    },
+    "reproduction_limit": {
+      "determinant_shooting_or_generation_solver_code_present": false,
+      "archived_spectrum_recomputed_from_field_equations": false,
+      "benchmark_spectrum_is_primary_archived_result": true,
+      "negative_scan_is_primary_archived_result_not_analytic_global_theorem": true
+    },
+    "scientific_scope": {
+      "background_geometry": "UNCHANGED",
+      "factor16_geometry": "RETAINED",
+      "axisymmetric_coupled_scalar_stability": "CONDITIONAL_PASS_AT_BENCHMARK",
+      "kappa_radion_derived_from_6D_action": false,
+      "naturalness": "NOT_ESTABLISHED",
+      "chi_dependent_modes": "OPEN",
+      "nonlinear_stability": "OPEN",
+      "full_ghost_freedom": "NOT_ESTABLISHED",
+      "factor16_prediction": "NOT_ESTABLISHED"
+    }
+  },
+  "remaining_recovery_priority": [
+    {
+      "rank": 1,
+      "priority": "P0",
+      "target": "HZT_MD2S_B1_4E_SMOOTH_TARGET_REPAIR_v0_1_PACKAGE.zip",
+      "status": "EXACT_HISTORICAL_NAME_RECOVERED_BINARY_NOT_YET_RECOVERED"
+    },
+    {
+      "rank": 2,
+      "priority": "P1",
+      "target": "run-bound two-sided Bulk/Cap interface export",
+      "required_fields": ["A_prime_bulk", "A_prime_cap", "Lprime_over_L_bulk", "Lprime_over_L_cap", "historically_bound_oriented_normals"]
+    },
+    {
+      "rank": 3,
+      "priority": "P2",
+      "target": "original two-junction residual/derivative/configuration bundle"
+    }
+  ],
+  "two_sided_interface": {
+    "required_historical_fields": [
+      "A_prime_bulk",
+      "A_prime_cap",
+      "Lprime_over_L_bulk",
+      "Lprime_over_L_cap",
+      "historically_bound_oriented_normals",
+      "full_precision_two_sided_interface_or_profile_derivative_tables",
+      "original_two_junction_solver_residual_logs",
+      "complete_generation_solver_tolerances_and_configuration"
+    ],
+    "source_identical_historical_replay": "STILL_BLOCKED"
+  },
+  "promotion_firewall": {
+    "B1.4H_recovery_closes_H_package_gap": true,
+    "B1.4H_recovery_closes_B1.4E_gap": false,
+    "B1.4H_recovery_closes_source_identical_two_junction_replay": false,
+    "selected_internal_checks_equal_full_solver_rerun": false,
+    "later_rebuild_or_C1_data_may_fill_historical_missing_fields": false,
+    "interpolation_may_be_labeled_historical_original": false
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}

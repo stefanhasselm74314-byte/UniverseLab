@@ -1,0 +1,31 @@
+{
+  "schema": "universelab.platform-rollout-plan.v1",
+  "version": "1.0.0",
+  "date": "2026-08-16",
+  "scope": "P6_MANIFEST_SYNC_AND_GLOBAL_SHELL_ROLLOUT",
+  "status": "IMPLEMENTED_AWAITING_CI_REVIEW",
+  "migration_commit": "98633b0b2222bcf353f4971788fdd5879037b90d",
+  "targets": [
+    "navigator.html",
+    "hyperlab.html",
+    "solver-hub.html",
+    "hyperzeit-material-v2.html",
+    "hyperzeit-methods.html",
+    "universelab-audit-2026-07-31.html",
+    "source.html"
+  ],
+  "canonical_navigator": "navigator.html",
+  "legacy_redirect": "navigator-app.html",
+  "global_shell": {
+    "css": "assets/2026-08-16_UniverseLab_GlobalShell_v1.1.css",
+    "js": "assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js"
+  },
+  "manifest": "project-manifest.json",
+  "site_state": "registry/2026-08-16_UniverseLab_SiteState_v1.0.json",
+  "governance": "governance/2026-08-16_UniverseLab_PlatformGovernance_v1.1.md",
+  "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT",
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE",
+  "physical_evidence_effect": "NONE",
+  "physical_gate_effect": "NONE"
+}

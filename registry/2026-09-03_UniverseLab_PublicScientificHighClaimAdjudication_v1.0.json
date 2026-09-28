@@ -1,0 +1,116 @@
+{
+  "schema": "universelab.public-scientific-high-claim-adjudication.v1",
+  "version": "1.0.0",
+  "date": "2026-09-03",
+  "basis_main_commit": "8351f2d7d9d0852768014c1fdfbbecfb4432fa55",
+  "basis_claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json",
+  "basis_family_assignments": "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json",
+  "status": "HIGH_CLAIMS_MANUALLY_CONTEXT_ADJUDICATED_NO_PHYSICAL_EVIDENCE_EFFECT",
+  "method": [
+    "read exact lexical candidate and source provenance",
+    "read full local page context including headings and neighboring qualifiers",
+    "compare routed claim families against their current repository contracts",
+    "separate page/governance truth from underlying physical truth",
+    "record allowed status and forbidden inference",
+    "require wording repair when sentence-level extraction can invert context"
+  ],
+  "high_candidate_count": 2,
+  "adjudicated_count": 2,
+  "unadjudicated_high_count": 0,
+  "records": [
+    {
+      "claim_id": "UL-CLAIM-CANDIDATE-978286FC7F925D9A",
+      "source_path": "observatory-en.html",
+      "band_va_source_sha256": "44020e92a52044316c78e3faec12b4eab854a5a5072ec3fcd45154acda3b23e8",
+      "band_va_risk_class": "HIGH",
+      "band_va_text": "Ghost freedom, derivation of fitted parameters from the six-dimensional parent action, uniqueness of a dark-sector interpretation, or observational confirmation of HZT.",
+      "local_heading": "What it may not establish",
+      "preceding_scope_statement": "Its calculators and plots are model-evaluation tools; they do not by themselves establish a released 6D forward model or empirical evidence for Hyperzeit.",
+      "normalized_contextual_claim": "The current Observatory may not establish ghost freedom, derivation of fitted parameters from the six-dimensional parent action, uniqueness of a dark-sector interpretation, or observational confirmation of HZT.",
+      "claim_class": "CURRENT_CAPABILITY_AND_EVIDENCE_SCOPE_FIREWALL",
+      "family_ids": [
+        "UL-CLM-DATA-LIKELIHOOD-001",
+        "UL-CLM-PARENT-FORWARD-MAP-001",
+        "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
+      ],
+      "adjudication": {
+        "public_statement_status": "BEWIESEN_AS_CURRENT_REPOSITORY_SCOPE_FIREWALL",
+        "is_positive_physical_hzt_claim": false,
+        "is_empirical_confirmation_claim": false,
+        "is_parent_derivation_claim": false,
+        "scanner_high_risk_is_substantive_overclaim": false,
+        "risk_disposition": "LEXICAL_FALSE_POSITIVE_CAUSED_BY_HEADING_CONTEXT_SEPARATION"
+      },
+      "underlying_physical_status": {
+        "ghost_freedom": "OFFEN",
+        "six_dimensional_parent_derivation_of_fitted_parameters": "OFFEN",
+        "unique_dark_sector_interpretation": "OFFEN_NOT_IDENTIFIED",
+        "observational_confirmation_of_hzt": "OFFEN_NOT_ESTABLISHED"
+      },
+      "repository_support": [
+        "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json#UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
+        "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json#UL-CLM-PARENT-FORWARD-MAP-001",
+        "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json#UL-CLM-DATA-LIKELIHOOD-001"
+      ],
+      "required_public_action": "REPHRASE_AS_SELF_CONTAINED_NEGATED_SENTENCE",
+      "public_action_status": "IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING",
+      "replacement_text": "The Observatory may not establish ghost freedom, derivation of fitted parameters from the six-dimensional parent action, uniqueness of a dark-sector interpretation, or observational confirmation of HZT.",
+      "forbidden_inference": "The list under 'What it may not establish' is evidence that any listed positive HZT proposition is true.",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "claim_id": "UL-CLAIM-CANDIDATE-AA0AA1DAAC06DFF6",
+      "source_path": "research-status.html",
+      "band_va_source_sha256": "8c3e9af0d57b24b7af2e71fe897d7025036da3c36303e0d5ef1b2b44fc77a9e7",
+      "band_va_risk_class": "HIGH",
+      "band_va_text": "UniverseLab trennt strikt zwischen analytischen Resultaten, diagnostischer Numerik, offenen Parent→Observable-Brücken, Autorisierungsinfrastruktur und physischer Evidenz.",
+      "normalized_contextual_claim": "UniverseLab reports analytical results, diagnostic numerics, open parent-to-observable bridges, authorization infrastructure and physical evidence as separate status axes.",
+      "claim_class": "PUBLIC_REPOSITORY_STATUS_AND_GOVERNANCE",
+      "family_ids": [
+        "UL-CLM-PARENT-FORWARD-MAP-001",
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "adjudication": {
+        "primary_status": "NICHT_WISSENSCHAFTLICHER_CLAIM",
+        "secondary_status": "BEWIESEN_AS_REPOSITORY_STATE_CONTRACT",
+        "is_positive_physical_hzt_claim": false,
+        "is_empirical_confirmation_claim": false,
+        "scanner_high_risk_is_substantive_overclaim": false,
+        "risk_disposition": "VALID_GOVERNANCE_SEPARATION_STATEMENT"
+      },
+      "content_validity": {
+        "status_axes_separation": "SUPPORTED",
+        "parent_to_observable_map": "OPEN",
+        "physical_evidence": "NONE"
+      },
+      "separate_provenance_defect": {
+        "status": "CONFIRMED_STALE_STATIC_CURRENT_STATE_POINTER",
+        "severity": "P1_GOVERNANCE_PROVENANCE",
+        "detail": "The static page lead and the referenced CurrentMainCanonicalState_v1.1 still use 30b781f... and describe Band IV-B as pending although PRs 204 and 205 are merged.",
+        "claim_content_invalidated_by_defect": false,
+        "required_action": "PUBLISH_APPEND_ONLY_CURRENT_STATE_SUCCESSOR_AND_UPDATE_CURRENT_POINTERS",
+        "repair_status": "IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING"
+      },
+      "required_public_action": "MAKE_GOVERNANCE_NON_EVIDENCE_SEMANTICS_SELF_CONTAINED",
+      "public_action_status": "IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING",
+      "forbidden_inference": "A repository/governance separation statement is a physical measurement, parent-theory proof or empirical HZT result.",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE"
+    }
+  ],
+  "global_result": {
+    "high_overclaim_count": 0,
+    "high_scope_firewall_count": 1,
+    "high_governance_claim_count": 1,
+    "confirmed_provenance_defects": 1,
+    "public_wording_repairs_required": 2,
+    "public_wording_repairs_completed_in_changeset": 2,
+    "public_wording_repairs_remaining": 0,
+    "provenance_repairs_implemented_in_changeset": 1,
+    "physical_claim_promotions": 0
+  },
+  "next_review_layer": "BAND_VB_MEDIUM_CLAIM_CONTEXT_ADJUDICATION_AFTER_HIGH_GATE_GREEN",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

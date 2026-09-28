@@ -1,0 +1,61 @@
+name: ULSH-01 reproducibility v1.0
+
+on:
+  pull_request:
+    paths:
+      - "registry/2026-08-16_ULSH01_ReproducibilityContract_v1.0.json"
+      - "registry/2026-08-16_UniverseLab_SiteState_v1.0.json"
+      - "schemas/2026-08-16_UniverseLab_SolverReferencePackageSchema_v1.0.json"
+      - "reproducibility/ulsh-01/**"
+      - "tests/2026-08-16_test_ULSH01_Reproducibility_v1.0.py"
+      - ".github/workflows/2026-08-16_ULSH01_Reproducibility_v1.0.yml"
+  push:
+    branches: [main]
+    paths:
+      - "registry/2026-08-16_ULSH01_ReproducibilityContract_v1.0.json"
+      - "registry/2026-08-16_UniverseLab_SiteState_v1.0.json"
+      - "schemas/2026-08-16_UniverseLab_SolverReferencePackageSchema_v1.0.json"
+      - "reproducibility/ulsh-01/**"
+      - "tests/2026-08-16_test_ULSH01_Reproducibility_v1.0.py"
+      - ".github/workflows/2026-08-16_ULSH01_Reproducibility_v1.0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  ulsh01-reproducibility:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      UL_REFERENCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON syntax
+        run: |
+          python -m json.tool schemas/2026-08-16_UniverseLab_SolverReferencePackageSchema_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-16_ULSH01_ReproducibilityContract_v1.0.json >/dev/null
+          python -m json.tool reproducibility/ulsh-01/2026-08-16_ULSH01_ControlReferenceInput_v1.0.json >/dev/null
+          python -m json.tool reproducibility/ulsh-01/2026-08-16_ULSH01_ControlReferenceOutput_v1.0.json >/dev/null
+          python -m json.tool reproducibility/ulsh-01/2026-08-16_ULSH01_ToleranceContract_v1.0.json >/dev/null
+          python -m json.tool reproducibility/ulsh-01/2026-08-16_ULSH01_RunProvenance_v1.0.json >/dev/null
+
+      - name: Compile reproducibility test
+        run: python -m py_compile tests/2026-08-16_test_ULSH01_Reproducibility_v1.0.py
+
+      - name: Validate reference package and emit machine status
+        run: |
+          python tests/2026-08-16_test_ULSH01_Reproducibility_v1.0.py \
+            --output "${RUNNER_TEMP}/2026-08-16_ULSH01_ReproducibilityTestStatus_v1.0.json"
+
+      - name: Upload machine-readable status
+        uses: actions/upload-artifact@v4
+        with:
+          name: 2026-08-16_ULSH01_ReproducibilityTestStatus_v1.0
+          path: ${{ runner.temp }}/2026-08-16_ULSH01_ReproducibilityTestStatus_v1.0.json
+          if-no-files-found: error
+          retention-days: 30

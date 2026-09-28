@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#060914">
+<meta name="description" content="UniverseLab Validation Console for the canonical cosmology engine: background, curved distances, linear growth and fail-closed domain tests.">
+<link rel="alternate" hreflang="de" href="./validation.html">
+<link rel="alternate" hreflang="en" href="./validation-en.html">
+<title>UniverseLab 2.0 · Validation Console</title>
+<style>
+:root{color-scheme:dark;--bg:#060914;--panel:#0d1325;--line:#293454;--text:#f4f6ff;--muted:#aab3d2;--good:#70dfb3;--warn:#ffd071;--bad:#ff7894;--accent:#8c7cff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 30% -10%,#22295d,var(--bg) 48%);color:var(--text);font:14px system-ui,-apple-system,"Segoe UI",sans-serif}.app{max-width:1120px;margin:auto;padding:18px 13px 42px}header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}h1{font-size:24px;margin:0}.sub{color:var(--muted);margin-top:4px}.badge{border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:var(--good);white-space:nowrap}.panel{background:#0d1325e8;border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:0 18px 60px #0007;margin-bottom:12px}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric{background:#080d1b;border:1px solid var(--line);border-radius:13px;padding:11px}.metric b{display:block;font-size:21px}.metric span{font-size:11px;color:var(--muted)}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px}table{width:100%;border-collapse:collapse;min-width:760px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-size:11px;background:#0b1122;position:sticky;top:0}tbody tr:last-child td{border-bottom:0}.state{display:inline-block;padding:4px 8px;border-radius:999px;font-weight:700;font-size:11px}.pass{background:#123629;color:var(--good)}.fail{background:#3c1721;color:var(--bad)}code{color:#d8d4ff}.note{line-height:1.55;color:var(--muted)}button,a{border:1px solid var(--line);background:#121a32;color:var(--text);padding:11px 13px;border-radius:12px;text-decoration:none;font-weight:750}button{cursor:pointer}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.scope{display:grid;grid-template-columns:1fr 1fr;gap:10px}.scope div{padding:10px;border:1px solid var(--line);border-radius:12px;background:#080d1b}.scope b{display:block;margin-bottom:4px}.scope span{color:var(--muted);font-size:12px}@media(max-width:700px){.summary{grid-template-columns:repeat(2,1fr)}.scope{grid-template-columns:1fr}.app{padding-inline:9px}}
+</style>
+<link rel="stylesheet" href="./assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css">
+<script src="./assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js" defer></script>
+<script src="./assets/2026-09-01_UniverseLab_ValidationConsole_v2.0.js" defer></script>
+<script src="./assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.1.js" defer></script>
+</head>
+<body data-ul-page-id="UL-PAGE-VALIDATION" data-ul-domain="validation">
+<main class="app">
+<header><div><h1>Validation Console</h1><div class="sub">Canonical reference engine · background · curved distances · linear growth · UniverseLab 2.0</div></div><span class="badge" id="engine">Loading engine</span></header>
+<section class="panel"><div class="summary"><div class="metric"><b id="passed">–</b><span>tests passed</span></div><div class="metric"><b id="failed">–</b><span>tests failed</span></div><div class="metric"><b id="maxerr">–</b><span>maximum normalized error</span></div><div class="metric"><b id="release">–</b><span>internal release status</span></div></div><div class="actions"><button id="run" type="button">Run tests again</button><a href="./observatory-en.html">Observatory</a><a href="./research-status-en.html">Research Status</a><a href="./index-en.html">Portal</a></div></section>
+<section class="panel"><div class="table-wrap"><table><thead><tr><th>Test</th><th>Status</th><th>Measured value</th><th>Criterion</th></tr></thead><tbody id="rows"><tr><td colspan="4">Loading canonical engine …</td></tr></tbody></table></div></section>
+<section class="panel"><div class="scope"><div><b>Validated scope</b><span>ΛCDM and constant w, fail-closed E² domain, D<sub>C</sub>→D<sub>M</sub>→D<sub>L</sub>/D<sub>A</sub>, Etherington reciprocity and the linear-GR growth reference.</span></div><div><b>Not released</b><span>Bridge perturbations, complete 6D dynamics, physical background, response rank, ghost freedom, likelihood or evidence claims.</span></div></div></section>
+<section class="panel note"><strong>Interpretation:</strong> PASS establishes only the internal mathematical, numerical and cross-language consistency of the canonical reference engine. Technical executability is not physical identification; numerical stability is not ghost freedom; an internal PASS is not empirical confirmation of a model.</section>
+</main>
+<noscript>JavaScript must be enabled for the Validation Console.</noscript>
+</body>
+</html>

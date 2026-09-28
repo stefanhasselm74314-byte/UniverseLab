@@ -1,0 +1,55 @@
+{
+  "schema": "universelab.ulsh01.control-reference-input.v1",
+  "version": "1.0.0",
+  "date": "2026-08-16",
+  "module_id": "ULSH-01",
+  "solver_id": "MD2S-BVP",
+  "classification": "AUDITED_ANALYTIC_CONTROL_REFERENCE_INPUT_NOT_PHYSICAL_TARGET",
+  "physical_evidence_effect": "NONE",
+  "source_contract": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json",
+  "source_run_input": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json",
+  "control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R3",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "track_id": "MD2S-R1-C-PHYS",
+  "control_override": {
+    "a_F": 0.0,
+    "target_a_F": "1/4_FORBIDDEN",
+    "classification": "EXACT_ANALYTIC_CONTROL_NOT_TARGET_BACKGROUND"
+  },
+  "primary_control": {
+    "node_counts": [
+      24,
+      48,
+      96
+    ],
+    "state_constructor": "control_seed_state"
+  },
+  "independent_control": {
+    "pole_cutoffs": [
+      0.001,
+      0.0005,
+      0.00025
+    ],
+    "sample_count": 513
+  },
+  "process_controls": {
+    "python_hash_seed": 0,
+    "thread_count": 1,
+    "network_allowed": false,
+    "randomness_allowed": false
+  },
+  "physical_target_context": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+    "frozen_run_payload_sha256": "0ecf1a2ecffb7b3b768a86ba889135982edcc118910085461760e66bc9b90302",
+    "a_F": "1/4",
+    "solver_authorized": false,
+    "execution_status": "NOT_EXECUTED",
+    "reference_output_status": "NOT_AVAILABLE"
+  },
+  "firewalls": {
+    "physical_target_execution": "FORBIDDEN_BY_THIS_REFERENCE_PACKAGE",
+    "parameter_scan": false,
+    "topology_scan": false,
+    "physical_result_artifact_creation": false
+  }
+}

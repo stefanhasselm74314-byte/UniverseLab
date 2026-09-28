@@ -1,0 +1,165 @@
+{
+  "schema": "universelab.ulsh05.wp1c4b1d.direct-moving-action-shape.v0.1",
+  "date": "2026-09-08",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1C4B1D",
+  "classification": "NONOPERATIVE_DIRECT_FIRST_MOVING_ACTION_INTERFACE_DECOMPOSITION",
+  "status": "DERIVED_DIRECT_FIRST_SHAPE_RESIDUAL_AND_EQUIVALENCE_TO_PASSIVE_CONSTRAINT_BOUNDARY_HESSIAN_NOT_CLOSED",
+  "basis_main": "09d9b075f3fc842f1158eb4cf8a56ed3c27185fb",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransportMaster_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.json",
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md"
+  ],
+  "normal_shape_chart": {
+    "scope": "pure common-normal interface channel; tangential displacement is a separate surface-reparameterization/Ward channel",
+    "common_normal": "N=n_N_out=-n_S_out",
+    "regional_displacements": [
+      "xi_N=+xi",
+      "xi_S=-xi"
+    ],
+    "total_induced_metric_variation": "H_ab=q_ab,s+2*xi_s*K_ab,s^out, common on the abstract Sigma",
+    "total_scalar_pullback_variation": "Phi_Sigma=varphi_s+xi_s*Qphi_s for tau^a=0, with Qphi_s=n_s^A nabla_A phibar_s",
+    "total_gauge_pullback_variation": "Acal_a=a_a,s+xi_s*F_na,s modulo an intrinsic U(1) exact term in a boundary-adapted gauge-covariant representation",
+    "cap_phase_variation": "s is intrinsic on the abstract Sigma and has no independent normal-embedding shift",
+    "critical_gluing_warning": "a pure coordinate displacement with frozen regional Eulerian fields is not an independent admissible interface variation in an asymmetric gravitating junction; the common pulled-back variables and embedding displacement must be varied together"
+  },
+  "one_region_gravity_identity": {
+    "action": "S_g,s=(M6^4/2)*int_Ms sqrt(-g)(R-2*Lambda6)+M6^4*int_Sigma sqrt(-h) K_s",
+    "fixed_embedding_boundary_momentum": "Pi_ab=K_ab-K*h_ab",
+    "direct_moving_boundary_decomposition": "delta S_g,s|Sigma=sqrt(-h)[-(M6^4/2)*Pi_s^ab*H_ab-xi_s*M6^4*(G_NN,s+Lambda6)] plus bulk Euler-Lagrange and tangential/corner terms",
+    "derivation_route": [
+      "use WP1C4B1A first moving-domain transport for the EH bulk top form",
+      "differentiate the moving GHY density in a local Gaussian-normal control neighborhood",
+      "replace the Eulerian induced metric variation by q_ab=H_ab-2*xi_s*K_ab",
+      "use R6=R5-K^2-K_ab*K^ab-2*nabla_n K in the Gaussian-normal control to combine the domain, GHY and Brown-York terms",
+      "the invariant result is the normal Einstein residual coefficient -(G_NN+Lambda6)"
+    ],
+    "gaussian_normal_control": "for ds6^2=dr^2+exp(2*c*r)*eta_ab dy^a dy^b, direct differentiation of EH+GHY at a moving upper boundary gives sqrt(-h)*(10*c^2-Lambda6), equal to the decomposition with H_ab=2*K_ab and G_NN=10*c^2"
+  },
+  "one_region_matter_identity": {
+    "scalar_boundary_flux": "Qphi_s=n_s^A nabla_A phibar_s because Z_phi=1 in C-PHYS-M1",
+    "scalar_decomposition": "delta S_phi,s|Sigma=sqrt(-h)[-Qphi_s*Phi_Sigma+xi_s*T_NN,phi,s] plus bulk scalar Euler-Lagrange terms",
+    "gauge_boundary_flux": "QF_s^a=n_A Z_F F^{Aa}",
+    "gauge_decomposition": "delta S_F,s|Sigma=sqrt(-h)[-QF_s^a*Acal_a+xi_s*T_NN,F,s] plus bulk Maxwell Euler-Lagrange and intrinsic-gauge-exact terms",
+    "combined_shape_coefficient": "xi_s*T_NN,s",
+    "interpretation": "the T_NN coefficient appears only after the Eulerian field variations are rewritten in terms of total pulled-back interface variations; the domain Lagrangian term alone is not the shape residual"
+  },
+  "intrinsic_cap_first_variation": {
+    "surface_stress_definition": "S_ab=-2/sqrt(-h) delta S_Sigma/delta h^ab",
+    "gauge_current": "j_Sigma^a=q_sigma*Z_sigma*D^a sigma",
+    "scalar_cap_source": "C_phi=lambda_,phi+0.5*Z_sigma,phi*X_sigma=0 in C-PHYS-M1",
+    "phase_residual": "R_sigma=D_a(Z_sigma D^a sigma)",
+    "formula": "delta S_Sigma=sqrt(-h)[+0.5*S^ab*H_ab-C_phi*Phi_Sigma+j_Sigma^a*Acal_a+R_sigma*s]",
+    "no_standalone_embedding_term": "the localized cap action is intrinsic on the fixed abstract Sigma; all embedding dependence enters through the pulled-back induced fields and H_ab/Phi_Sigma/Acal_a, not through an undeclared normal Lie derivative of the intrinsic five-form"
+  },
+  "assembled_interface_first_variation": {
+    "metric_residual": "R_h^ab=M6^4*(Pi_N^ab+Pi_S^ab)-S^ab",
+    "scalar_residual": "R_phi=Qphi_N+Qphi_S+C_phi",
+    "gauge_residual": "R_A^a=QF_N^a+QF_S^a-j_Sigma^a",
+    "phase_residual": "R_sigma=D_a(Z_sigma D^a sigma)",
+    "direct_shape_residual": "R_perp_direct=M6^4*[(G_NN+Lambda6)]_c-[T_NN]_c",
+    "boundary_formula": "delta S|Sigma=int_Sigma sqrt(-h)[-0.5*R_h^ab*H_ab-R_phi*Phi_Sigma-R_A^a*Acal_a+R_sigma*s+xi*R_perp_direct] plus tangential/corner terms",
+    "jump_convention": "[X]_c=X_S^c-X_N^c with N=n_N_out=-n_S_out; T_NN and G_NN are invariant under n->-n because the normal appears twice",
+    "common_lambda_reduction": "one common Lambda6 cancels from [(G_NN+Lambda6)]_c, but it is retained in the unreduced direct residual definition"
+  },
+  "equivalence_to_wp1c4b1c": {
+    "metric_israel_condition": "R_h^ab=0",
+    "gauss_israel_identity": "under induced-metric continuity and the project Gauss sign, M6^4*[G_NN]_c=S^ab*<K_ab>_c",
+    "equivalent_shape_residual": "R_perp_direct=S^ab*<K_ab>_c-[T_NN]_c after imposing metric Israel",
+    "regional_constraint_redundancy": "if each regional NN Einstein constraint M6^4*(G_NN,s+Lambda6)-T_NN,s=0 holds, then R_perp_direct=0 identically",
+    "logic": [
+      "regional NN constraints imply the direct shape residual vanishes without using Israel",
+      "Israel rewrites that vanishing condition as the C4B1C passive equation",
+      "Israel alone does not imply R_perp_direct=0 because the regional NN constraints may be violated"
+    ],
+    "classification": "DERIVED_DIRECT_ACTION_EQUIVALENCE_AND_REDUNDANCY"
+  },
+  "off_shell_ward_basis": {
+    "independent_interface_channels": [
+      "H_ab",
+      "Phi_Sigma",
+      "Acal_a modulo intrinsic U(1)",
+      "s",
+      "xi"
+    ],
+    "residual_channels": [
+      "R_h^ab",
+      "R_phi",
+      "R_A^a",
+      "R_sigma",
+      "R_perp_direct"
+    ],
+    "relation_to_wp1c4b1b": "this explicit first-variation residual basis realizes the previously abstract Shape-Ward decomposition; diffeomorphism invariance still makes the full set Noether-related rather than five independent physical equations",
+    "tangential_channel": "surface reparameterization/tangential momentum balance is not rederived in this normal-shape block"
+  },
+  "independent_controls": {
+    "gravity_moving_boundary": "direct finite difference of a six-dimensional warped EH+GHY interval action agrees with -0.5*M6^4*Pi^ab*H_ab-xi*M6^4*(G_NN+Lambda6)",
+    "scalar_moving_boundary": "direct finite difference of a scalar action on a moving interval agrees with -Qphi*Phi+xi*T_NN",
+    "maxwell_moving_boundary": "direct finite difference of a constant F_rchi Maxwell action agrees with -QF*Acal+xi*T_NN",
+    "two_side_shape_jump": "regional xi_N=+xi and xi_S=-xi assemble exactly to M6^4*[G_NN+Lambda6]_c-[T_NN]_c",
+    "c4b1c_equivalence": "deterministic anisotropic Israel data reproduce R_perp_direct=S^ab<K_ab>-[T_NN] after the Gauss/Israel reduction",
+    "israel_only_negative": "metric Israel may hold while one regional NN constraint is perturbed, leaving R_perp_direct nonzero",
+    "regional_constraint_control": "individually vanishing north and south NN residuals force R_perp_direct=0"
+  },
+  "not_closed": [
+    "second moving GHY plus localized-cap variation and the full boundary Hessian",
+    "configuration-space connection for a globally covariant off-shell Hessian",
+    "tangential surface Ward/momentum-balance component reduction in the same package",
+    "released full perturbed Israel/scalar/gauge/phase boundary-value operator",
+    "global fixed-interface gauge admissibility",
+    "S/V/T decomposition and constraint elimination",
+    "physical background",
+    "ghost freedom, kinetic positivity, gradient stability and spectrum",
+    "6D-to-4D perturbative reduction and mu eta Sigma growth/lensing"
+  ],
+  "gate_state": {
+    "WP1_shape_Ward_identity": "DERIVED_CONDITIONAL_REDUNDANCY",
+    "WP1_passive_shape_constraint": "DERIVED_FROM_NN_CONSTRAINTS_AND_ISRAEL",
+    "WP1_direct_moving_action_first_variation": "DERIVED_INTERFACE_DECOMPOSITION",
+    "WP1_direct_shape_residual": "DERIVED_AS_NN_CONSTRAINT_JUMP",
+    "WP1_first_shape_equivalence": "DERIVED_DIRECT_ACTION_TO_PASSIVE_CONSTRAINT",
+    "WP1_first_shape_level": "CLOSED_ANALYTICALLY_AS_REDUNDANT_CONSTRAINT_CHANNEL",
+    "WP1_full_boundary_hessian": "NOT_CLOSED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "Do not interpret the reference-domain Eulerian/shape split as separately gauge-invariant physics.",
+    "Do not infer that a pure cap displacement with frozen regional fields is an admissible independent variation in an asymmetric gravitating junction.",
+    "Do not infer that Israel alone closes the direct shape residual.",
+    "Do not impose R_perp_direct=0 as an additional independent physical boundary condition once both regional NN constraints are already imposed.",
+    "Do not infer a closed second-order boundary Hessian, configuration-space covariance, ghost freedom, stability or observable map.",
+    "Do not authorize backend import or solver execution."
+  ],
+  "next_block": {
+    "id": "ULSH-05/WP1C4B2A",
+    "title": "Moving GHY plus intrinsic-cap second variation in the declared affine chart",
+    "execution_type": "ANALYTIC_NONOPERATIVE",
+    "required_output": [
+      "differentiate the direct first-variation interface basis through second order using WP1C4B0 Q2 and chart-Hessian subtraction",
+      "assemble the moving GHY contribution without undeclared normal extension of intrinsic five-forms",
+      "differentiate the intrinsic cap stress/current/phase channels through induced-field pullbacks",
+      "recover WP1B and WP1C2 fixed-interface limits",
+      "separate terms proportional to first-order residuals from the declared-chart bilinear Hessian",
+      "retain WP1_full_boundary_hessian=NOT_CLOSED until the resulting operator is independently validated"
+    ]
+  }
+}

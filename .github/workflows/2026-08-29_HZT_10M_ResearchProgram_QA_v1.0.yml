@@ -1,0 +1,34 @@
+name: HZT 10M research program QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'governance/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_Ratification_v1.0.md'
+      - 'registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json'
+      - 'registry/2026-08-29_HZT_M0_ForwardMap_FM0_Inventory_v0.1.json'
+      - '2026-08-29_HZT_M0_ForwardMap_FM0_ParameterSymbolProvenanceInventory_v0.1.md'
+      - 'tests/2026-08-29_test_HZT_10M_ResearchProgramManifest_v1.0.py'
+      - '.github/workflows/2026-08-29_HZT_10M_ResearchProgram_QA_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'governance/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_Ratification_v1.0.md'
+      - 'registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json'
+      - 'registry/2026-08-29_HZT_M0_ForwardMap_FM0_Inventory_v0.1.json'
+      - '2026-08-29_HZT_M0_ForwardMap_FM0_ParameterSymbolProvenanceInventory_v0.1.md'
+      - 'tests/2026-08-29_test_HZT_10M_ResearchProgramManifest_v1.0.py'
+      - '.github/workflows/2026-08-29_HZT_10M_ResearchProgram_QA_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  program-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate ratified program and CP01R4 hold
+        run: python tests/2026-08-29_test_HZT_10M_ResearchProgramManifest_v1.0.py

@@ -1,0 +1,134 @@
+{
+  "schema": "universelab.ulsh05-wp1-quadratic-action-readiness.v0.1",
+  "version": "0.1.0",
+  "date": "2026-09-07",
+  "basis_main_commit": "6a94d098565655e36b750355499f29625d9cc2d4",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "module_id": "ULSH-05",
+  "work_package": "WP1_SECOND_VARIATION_READINESS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "classification": "NONOPERATIVE_ANALYTIC_READINESS_FREEZE",
+  "status": "OFFSHELL_SECOND_VARIATION_INPUTS_READY_FULL_QUADRATIC_SYSTEM_NOT_DERIVED",
+  "result": "ACTION_SIDE_READY_TO_DERIVE_OFFSHELL_HESSIAN_ONSHELL_PERTURBATION_SYSTEM_BLOCKED",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "scope": "Freeze the exact action-side inputs and perturbation bookkeeping required to derive the second variation of the HZT-M0-S6-C-PHYS-M1 Einstein-Maxwell-scalar-cap branch. This contract does not derive the full quadratic action, does not select a physical background, does not solve perturbations, and does not release growth/lensing observables.",
+  "authoritative_sources": [
+    "SCI-001-002_v0.1_Canonical_6D_Parent_Action_and_Boundary_Closure.md",
+    "hzt-s6-parent-action-v0.1.json",
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+    "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Kappa6Binding_v0.1.json",
+    "science/solver-hub/2026-08-07_ULSH-05_SVT-Perturbation_Roadmap_v1.0.md",
+    "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json"
+  ],
+  "parent_action_identity": {
+    "branch": "HZT-M0-S6",
+    "signature": "(-,+,+,+,+,+)",
+    "physical_time_count": 1,
+    "gravitational_normalization_used_here": "M6^4/2 multiplying (R-2 Lambda6)",
+    "kappa6_cross_binding_policy": "Do not require or promote kappa6^2=M6^-4 in this readiness gate; use the explicit M6 normalization of the parent action. The FM0 kappa6 binding remains only partially resolved for reduced/observable mapping.",
+    "bulk_fields": ["g_AB", "phi", "A_A"],
+    "cap_fields": ["induced h_ab", "sigma"],
+    "excluded_or_quarantined_sectors": ["Gauss_Bonnet", "four_form_baryogenesis", "Regge_Teitelboim_parent_branch", "HZT_Full_multi_time"]
+  },
+  "action_side_readiness_matrix": [
+    {"item": "Einstein_Hilbert_bulk", "status": "FROZEN", "basis": "parent action EQ-001"},
+    {"item": "cosmological_constant_sign_and_normalization", "status": "FROZEN", "basis": "parent action plus C-PHYS conventions"},
+    {"item": "GHY_each_region", "status": "STRUCTURALLY_FROZEN", "basis": "parent action and localized-action ledger"},
+    {"item": "canonical_scalar_kinetic", "status": "FROZEN", "basis": "Z_phi=1 in C-PHYS-M1"},
+    {"item": "U_phi_exact", "status": "FROZEN_FOR_C_PHYS_M1", "formula": "U(phi)=0.5*mhat_phi_sq*M6^6*(phi/M6^2)^2"},
+    {"item": "Maxwell_normalization", "status": "FROZEN"},
+    {"item": "Z_F_exact", "status": "FROZEN_FOR_C_PHYS_M1", "formula": "Z_F(phi)=exp(-2*a_F*phi/M6^2)"},
+    {"item": "cap_tension_lambda_exact", "status": "FROZEN_FOR_C_PHYS_M1", "formula": "lambda(phi)=lambda_hat*M6^5"},
+    {"item": "cap_winding_Z_sigma_exact", "status": "FROZEN_FOR_C_PHYS_M1", "formula": "Z_sigma(phi)=z_sigma_hat*M6^3"},
+    {"item": "charge_lattice_and_patch_orientation_conventions", "status": "FROZEN_STRUCTURE_PARAMETERS_MODEL_SPECIFIC"},
+    {"item": "first_variation_bulk_and_junction_structure", "status": "DERIVED_CONDITIONAL"},
+    {"item": "four_dimensional_or_brane_matter_action_for_Delta_m", "status": "MISSING_REQUIRED_LINK", "impact": "blocks G01 matter source and observable Poisson/slip/lensing reduction"}
+  ],
+  "perturbation_bookkeeping": {
+    "epsilon": "formal dimensionless expansion parameter",
+    "bulk_metric": "g_AB(epsilon)=gbar_AB+epsilon*h_AB",
+    "bulk_scalar": "phi(epsilon)=phibar+epsilon*varphi",
+    "bulk_gauge": "A_A(epsilon)=Abar_A+epsilon*a_A",
+    "field_strength": "F_AB(epsilon)=Fbar_AB+epsilon*f_AB with f_AB=2*nabla_bar_[A a_B]",
+    "cap_phase": "sigma(epsilon)=sigmabar+epsilon*s on Sigma5",
+    "cap_embedding": "NOT_DEFINED; either an explicit bending/embedding perturbation must be included or a fixed-interface gauge must be justified before boundary Hessian closure",
+    "index_policy": "h^AB and traces are raised/formed with gbar_AB at expansion order bookkeeping level"
+  },
+  "kinematic_second_order_identities": {
+    "inverse_metric": "g^AB=gbar^AB-epsilon*h^AB+epsilon^2*h^A_C*h^CB+O(epsilon^3)",
+    "metric_trace": "h=gbar^AB*h_AB",
+    "volume_element": "sqrt(-g)=sqrt(-gbar)*[1+epsilon*h/2+epsilon^2*(h^2/8-h_AB*h^AB/4)+O(epsilon^3)]",
+    "classification": "KINEMATIC_IDENTITIES_ONLY_NOT_DYNAMICS"
+  },
+  "m1_function_derivative_kernels": {
+    "varphi_background_definition": "phibar/M6^2",
+    "U_phi": "mhat_phi_sq*M6^2*phibar",
+    "U_phiphi": "mhat_phi_sq*M6^2",
+    "Z_F_phi": "(-2*a_F/M6^2)*Z_F(phibar)",
+    "Z_F_phiphi": "(4*a_F^2/M6^4)*Z_F(phibar)",
+    "lambda_phi": "0",
+    "lambda_phiphi": "0",
+    "Z_sigma_phi": "0",
+    "Z_sigma_phiphi": "0",
+    "classification": "ALGEBRAIC_SPECIALIZATION_OF_FROZEN_M1_FUNCTIONS"
+  },
+  "second_variation_convention": {
+    "expansion": "S[Psi_epsilon]=S0+epsilon*deltaS+epsilon^2*S_quad^(2)+O(epsilon^3)",
+    "definition": "S_quad^(2)=0.5*(d^2/d epsilon^2)S[Psi_epsilon]|epsilon=0",
+    "off_shell_rule": "deltaS need not vanish for an arbitrary background configuration",
+    "on_shell_rule": "Only after a background satisfies bulk equations plus all boundary/junction conditions may deltaS be set to zero and S_quad^(2) be interpreted as the physical quadratic perturbation action about that background"
+  },
+  "quadratic_action_sector_targets": [
+    "Einstein_Hilbert_plus_GHY_Hessian",
+    "scalar_metric_Hessian_and_mixing",
+    "Maxwell_scalar_metric_Hessian_and_mixing",
+    "cap_tension_and_winding_Hessian",
+    "perturbed_Israel_scalar_gauge_and_phase_boundary_conditions",
+    "cap_embedding_or_fixed_interface_gauge_treatment"
+  ],
+  "readiness_state": {
+    "action_data_for_offshell_second_variation": "READY_TO_DERIVE",
+    "full_S_quad_2": "NOT_DERIVED",
+    "EH_plus_GHY_second_variation": "NOT_DERIVED",
+    "bulk_scalar_Maxwell_second_variation": "NOT_DERIVED",
+    "cap_and_perturbed_junction_second_variation": "NOT_DERIVED",
+    "cap_bending_or_interface_gauge": "MISSING_REQUIRED_LINK",
+    "released_physical_background": "NOT_ESTABLISHED",
+    "on_shell_quadratic_action": "BLOCKED_BY_PHYSICAL_BACKGROUND_NOT_ESTABLISHED",
+    "SVT_harmonics": "NOT_DERIVED",
+    "gauge_invariant_variables_or_complete_gauge_fixing": "NOT_DERIVED",
+    "constraint_elimination": "NOT_DERIVED",
+    "matter_Delta_m_definition_and_coupling": "MISSING_REQUIRED_LINK",
+    "sixD_to_fourD_perturbative_reduction": "MISSING_REQUIRED_LINK",
+    "mu_eta_Sigma_growth_lensing_map": "UNRELEASED"
+  },
+  "wp1_decision": {
+    "ULSH05_WP1": "PREPARATORY_READY_TO_DERIVE_NOT_CLOSED",
+    "closure_allowed": false,
+    "next_analytic_block": "DERIVE_SECTORWISE_OFFSHELL_HESSIAN_WITH_EH_GHY_AND_CAP_BOUNDARY_TERMS_WHILE_KEEPING_BACKGROUND_AND_OBSERVABLE_GATES_CLOSED"
+  },
+  "forbidden_inferences": [
+    "Do not interpret action-side readiness as a derived quadratic perturbation action.",
+    "Do not set deltaS=0 without a released on-shell background satisfying all bulk and boundary equations.",
+    "Do not omit cap bending/embedding perturbations unless a fixed-interface gauge is explicitly derived and justified.",
+    "Do not borrow a GR matter source, GR growth equation, mu=1, eta=1 or Sigma=1 as an HZT-M0 prediction.",
+    "Do not infer perturbative stability or ghost freedom from existence of the action Hessian.",
+    "Do not infer a 6D-to-4D observable map from the background action alone.",
+    "Do not authorize solver execution, backend import, AuthorizationDecision or SingleUseGrant from this contract."
+  ],
+  "unchanged_firewalls": {
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  }
+}

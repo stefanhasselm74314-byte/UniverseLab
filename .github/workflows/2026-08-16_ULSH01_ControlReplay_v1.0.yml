@@ -1,0 +1,125 @@
+name: ULSH-01 fresh a_F=0 control replay v1.0
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/2026-08-16_ULSH01_ControlReplay_v1.0.yml"
+      - "registry/2026-08-16_ULSH01_ControlReplayContract_v1.0.json"
+      - "registry/2026-08-16_ULSH01_ReproducibilityContract_v1.0.json"
+      - "registry/2026-08-16_UniverseLab_SiteState_v1.0.json"
+      - "reproducibility/ulsh-01/**"
+      - "tests/2026-08-16_ULSH01_ControlReplayValidator_v1.0.py"
+      - "tests/2026-08-16_test_ULSH01_Reproducibility_v1.0.py"
+      - "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json"
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.1.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.2.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.1.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.2.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.3.py"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/2026-08-16_ULSH01_ControlReplay_v1.0.yml"
+      - "registry/2026-08-16_ULSH01_ControlReplayContract_v1.0.json"
+      - "registry/2026-08-16_ULSH01_ReproducibilityContract_v1.0.json"
+      - "registry/2026-08-16_UniverseLab_SiteState_v1.0.json"
+      - "reproducibility/ulsh-01/**"
+      - "tests/2026-08-16_ULSH01_ControlReplayValidator_v1.0.py"
+      - "tests/2026-08-16_test_ULSH01_Reproducibility_v1.0.py"
+      - "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt"
+      - "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json"
+      - "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.1.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.2.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.1.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.2.py"
+      - "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_worker_v0.3.py"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py"
+      - "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py"
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+  NUMEXPR_NUM_THREADS: "1"
+  VECLIB_MAXIMUM_THREADS: "1"
+
+jobs:
+  fresh-af0-control-replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate replay contract JSON
+        run: python -m json.tool registry/2026-08-16_ULSH01_ControlReplayContract_v1.0.json >/dev/null
+
+      - name: Compile replay and static package validators
+        run: |
+          python -m py_compile tests/2026-08-16_ULSH01_ControlReplayValidator_v1.0.py
+          python -m py_compile tests/2026-08-16_test_ULSH01_Reproducibility_v1.0.py
+
+      - name: Install frozen Background-3C dependency lock
+        run: |
+          python -m pip install --disable-pip-version-check --no-input \
+            -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt
+
+      - name: Revalidate static reference package before execution
+        run: |
+          python tests/2026-08-16_test_ULSH01_Reproducibility_v1.0.py \
+            --output "${RUNNER_TEMP}/2026-08-16_ULSH01_StaticPackageStatus_v1.0.json"
+
+      - name: Execute fresh real-backend a_F=0 control replay only
+        run: |
+          python tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py \
+            self-test --json \
+            > "${RUNNER_TEMP}/2026-08-16_ULSH01_FreshAF0ControlReplay_v1.0.json"
+
+      - name: Verify physical target CLI remains fail-closed
+        shell: bash
+        run: |
+          set +e
+          python tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py \
+            run --json \
+            > "${RUNNER_TEMP}/2026-08-16_ULSH01_PhysicalTargetDenial_v1.0.json"
+          code=$?
+          set -e
+          printf '%s\n' "$code" > "${RUNNER_TEMP}/2026-08-16_ULSH01_PhysicalTargetDenialExitCode_v1.0.txt"
+          test "$code" -eq 73
+
+      - name: Compare fresh replay with governed reference and tolerances
+        run: |
+          python tests/2026-08-16_ULSH01_ControlReplayValidator_v1.0.py \
+            --replay "${RUNNER_TEMP}/2026-08-16_ULSH01_FreshAF0ControlReplay_v1.0.json" \
+            --denied "${RUNNER_TEMP}/2026-08-16_ULSH01_PhysicalTargetDenial_v1.0.json" \
+            --denied-exit-code-file "${RUNNER_TEMP}/2026-08-16_ULSH01_PhysicalTargetDenialExitCode_v1.0.txt" \
+            --output "${RUNNER_TEMP}/2026-08-16_ULSH01_ControlReplayStatus_v1.0.json"
+
+      - name: Upload fresh replay evidence bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: 2026-08-16_ULSH01_ControlReplayStatus_v1.0
+          path: |
+            ${{ runner.temp }}/2026-08-16_ULSH01_StaticPackageStatus_v1.0.json
+            ${{ runner.temp }}/2026-08-16_ULSH01_FreshAF0ControlReplay_v1.0.json
+            ${{ runner.temp }}/2026-08-16_ULSH01_PhysicalTargetDenial_v1.0.json
+            ${{ runner.temp }}/2026-08-16_ULSH01_PhysicalTargetDenialExitCode_v1.0.txt
+            ${{ runner.temp }}/2026-08-16_ULSH01_ControlReplayStatus_v1.0.json
+          if-no-files-found: error
+          retention-days: 30

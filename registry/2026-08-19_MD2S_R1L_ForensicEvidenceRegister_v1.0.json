@@ -1,0 +1,106 @@
+{
+  "schema": "universelab.md2s.r1l.forensic-evidence-register.v1",
+  "version": "1.0.0",
+  "created_date": "2026-08-19",
+  "status": "FORENSIC_RECOVERY_ONLY",
+  "exact_identifier_status": "MD2S-R1-L_NOT_FOUND_AS_CANONICAL_ARTIFACT_IDENTIFIER",
+  "evidence_classes": {
+    "E1_VERIFIED_REPORTED_ARTIFACT": "Explicitly reported in a surviving project artifact; not automatically a rerunnable solver output.",
+    "E2_VERIFIED_CONTRACT_DEFINITION": "Explicitly defined in a surviving run-spec/method contract; not an executed result.",
+    "E3_DERIVED_CHECK": "Later consistency calculation from surviving values.",
+    "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT": "Historically reported in chat but primary solver/output/residual provenance has not been recovered.",
+    "E5_MISSING_SURVIVING_ARCHIVE": "Required for exact historical replay but absent from the surviving archive."
+  },
+  "a0": {
+    "classification": "E1_VERIFIED_REPORTED_ARTIFACT",
+    "values": {
+      "sqrt_K4_rho_cap": 1.1196329253611,
+      "kappa6sq_lambda_eff_over_4sqrtK4": 0.8931498683204,
+      "K4_rho_cap_sq": 1.2535778875527,
+      "V_W": 0.5318111250097,
+      "R_circle_at_K4_eq_beta_eq_1": 0.6661500466003
+    },
+    "claim_limit": "Reported surviving benchmark block only; not a recovered full historical solver transaction."
+  },
+  "derived_checks": {
+    "classification": "E3_DERIVED_CHECK",
+    "values": {
+      "a0_product": 0.9999999998534508,
+      "inverse_sqrt_K4_rho_cap": 0.8931498684512905
+    }
+  },
+  "bvp_contract": {
+    "classification": "E2_VERIFIED_CONTRACT_DEFINITION",
+    "run_status": "NOT_EXECUTED",
+    "fields": ["A(r)", "L(r)", "phi(r)", "s(r)", "A_chi(r)"],
+    "center_boundary_conditions": {
+      "L_0": 0,
+      "L_prime_0": 1,
+      "A_prime_0": 0,
+      "phi_prime_0": 0,
+      "s_0_if_n_nonzero": 0
+    },
+    "outer_contract": [
+      "match_to_bulk",
+      "scalar_layer_decay",
+      "gauge_regularity_and_flux_quantization"
+    ],
+    "finite_difference": {
+      "scheme": "central",
+      "relative_steps": [0.01, 0.005, 0.0025],
+      "derivative_convergence_relative_max": 0.01
+    },
+    "svd_gate": {
+      "relative_singular_value_threshold": 1e-08,
+      "required_rank": 4,
+      "condition_number_max": 1000000.0
+    }
+  },
+  "b14k": {
+    "classification": "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT",
+    "numerical_fingerprints": [0.842636731623, 0.018368812404, 0.163118759614, 0.499999960986],
+    "primary_solver_artifact_recovered": false
+  },
+  "b14l": {
+    "classification": "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT",
+    "numerical_fingerprints": [0.777738716721, 1.449864769136, -1.775714440211],
+    "primary_solver_artifact_recovered": false
+  },
+  "two_sided_interface": {
+    "classification": "E5_MISSING_SURVIVING_ARCHIVE",
+    "required_historical_fields": [
+      "A_prime_bulk",
+      "A_prime_cap",
+      "Lprime_over_L_bulk",
+      "Lprime_over_L_cap",
+      "oriented_normals_bound_to_run",
+      "solver_artifacts",
+      "derivative_tables",
+      "residual_logs"
+    ],
+    "exact_historical_replay": "NOT_REPRODUCIBLE_FROM_SURVIVING_ARCHIVE"
+  },
+  "ui_default_rule": {
+    "interactive_calculator_zero_defaults_are_historical_data": false,
+    "classification": "UI_DEFAULT_NOT_DATA"
+  },
+  "promotion_policy": {
+    "required_for_VERIFIED_SOLVER_OUTPUT": [
+      "primary_output_artifact",
+      "solver_code_identity",
+      "input_binding",
+      "run_identity",
+      "residual_or_convergence_information",
+      "unambiguous_branch_association"
+    ],
+    "reconstruction_must_use_separate_class": "RECONSTRUCTED"
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}

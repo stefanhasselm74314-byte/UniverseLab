@@ -1,0 +1,58 @@
+name: UniverseLab Pages deploy integrity QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/deploy-pages.yml'
+      - '.github/workflows/2026-09-24_UniverseLab_PagesDeployIntegrity_QA_v1.0.yml'
+      - '.github/workflows/2026-09-24_UniverseLab_PagesDeploymentGuardian_v1.0.yml'
+      - 'tools/2026-09-24_verify_UniverseLab_PagesDeploySource_v1.0.py'
+      - 'tests/2026-09-24_test_UniverseLab_PagesDeployIntegrity_v1.0.py'
+      - '2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pages-deploy-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile guard and tests
+        run: |
+          python -m py_compile tools/2026-09-24_verify_UniverseLab_PagesDeploySource_v1.0.py
+          python -m py_compile tests/2026-09-24_test_UniverseLab_PagesDeployIntegrity_v1.0.py
+
+      - name: Run adversarial deployment guard tests
+        run: python tests/2026-09-24_test_UniverseLab_PagesDeployIntegrity_v1.0.py
+
+      - name: Validate service worker syntax
+        run: node --check 2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js
+
+      - name: Read-only live recovery smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE='https://stefanhasselm74314-byte.github.io/UniverseLab/'
+          CB="pr-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+          fetch_exact() {
+            local path="$1"
+            curl --fail --location --silent --show-error \
+              --retry 8 --retry-all-errors --retry-delay 2 \
+              -H 'Cache-Control: no-cache' \
+              "${BASE}${path}?web50=${CB}"
+          }
+
+          fetch_exact '' >/dev/null
+          fetch_exact 'navigator.html' >/dev/null
+          GOOGLE="$(fetch_exact 'googlebc3b5b4a4888e35c.html')"
+          test "$GOOGLE" = 'google-site-verification: googlebc3b5b4a4888e35c.html'
+          echo 'Live recovery smoke: PASS'

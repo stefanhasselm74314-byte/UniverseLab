@@ -1,74 +1,27 @@
 (()=>{
-'use strict';
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const C=299792.458, OR=9.2e-5;
-const ids=['H0','Om','Ol','w','s8','beta','ib','rchi','zmax'];
-const fmt=(x,d=3)=>Number.isFinite(x)?x.toLocaleString('de-DE',{minimumFractionDigits:d,maximumFractionDigits:d}):'–';
-const pct=x=>(x>=0?'+':'')+fmt(x,3)+' %';
-const state={active:'compare',timer:0};
-function P(extra={}){const p={};ids.forEach(id=>p[id]=Number($('#'+id)?.value));return{...p,Or:OR,Ok:1-OR-p.Om-p.Ol,...extra};}
-const aOf=z=>1/(1+z);
-function eL(z,p=P()){const a=aOf(z);return Math.sqrt(Math.max(1e-12,p.Or/a**4+p.Om/a**3+p.Ok/a**2+p.Ol));}
-function eW(z,p=P()){const a=aOf(z);return Math.sqrt(Math.max(1e-12,p.Or/a**4+p.Om/a**3+p.Ok/a**2+p.Ol*a**(-3*(1+p.w))));}
-const zc=(p=P())=>2.5/Math.max(.02,p.rchi), ac=(p=P())=>1/(1+zc(p));
-function delta(z,p=P()){const a=aOf(z);return p.beta*p.ib*Math.exp(-((a/ac(p))**2));}
-function eB(z,p=P()){return eL(z,p)*Math.sqrt(Math.max(.02,1+delta(z,p)));}
-function H(z,p=P(),m='L'){return p.H0*(m==='W'?eW(z,p):m==='B'?eB(z,p):eL(z,p));}
-function simpson(fn,a,b,n=300){if(n%2)n++;const h=(b-a)/n;let s=fn(a)+fn(b);for(let i=1;i<n;i++)s+=(i%2?4:2)*fn(a+i*h);return s*h/3;}
-function q(z,p=P(),m='L'){const dz=Math.max(1e-5,(1+z)*2e-4),zm=Math.max(0,z-dz),zp=z+dz;return(1+z)*(H(zp,p,m)-H(zm,p,m))/(zp-zm)/H(z,p,m)-1;}
-function age(p=P(),m='L'){const f=x=>{const a=Math.exp(x),z=1/a-1;return 1/(m==='W'?eW(z,p):m==='B'?eB(z,p):eL(z,p));};return 9.778/(p.H0/100)*simpson(f,Math.log(1e-6),0,500);}
-function dc(z,p=P(),m='L'){if(z<=0)return 0;return C/p.H0*simpson(x=>1/(m==='W'?eW(x,p):m==='B'?eB(x,p):eL(x,p)),0,z,Math.max(120,Math.round(80*z)));}
-function transverse(z,p=P(),m='L'){const d=dc(z,p,m),ok=p.Ok;if(Math.abs(ok)<1e-7)return d;const dh=C/p.H0,s=Math.sqrt(Math.abs(ok))*d/dh;return ok>0?dh/Math.sqrt(ok)*Math.sinh(s):dh/Math.sqrt(-ok)*Math.sin(s);}
-function mu(z,p=P(),m='L'){if(z<=0)return 0;const dl=(1+z)*transverse(z,p,m);return 5*Math.log10(dl)+25;}
-function lookback(z,p=P(),m='L'){return 9.778/(p.H0/100)*simpson(x=>1/((1+x)*(m==='W'?eW(x,p):m==='B'?eB(x,p):eL(x,p))),0,z,Math.max(120,Math.round(80*z)));}
-function omz(z,p=P(),m='L'){const a=aOf(z),e=m==='W'?eW(z,p):m==='B'?eB(z,p):eL(z,p);return p.Om/a**3/e**2;}
-function fs8(z,p=P(),m='L'){const om=omz(z,p,m),f=om**.55,D=1/(1+z);return f*p.s8*D;}
-function setText(id,text){const el=$('#'+id);if(el)el.textContent=text;}
-function outputs(){const p=P();const map={oH0:fmt(p.H0,1),oOm:fmt(p.Om),oOl:fmt(p.Ol),ow:fmt(p.w),os8:fmt(p.s8),obeta:fmt(p.beta),oib:fmt(p.ib),orchi:fmt(p.rchi,2),ozmax:fmt(p.zmax,1)};Object.entries(map).forEach(([id,v])=>setText(id,v));setText('summary',`H₀ ${fmt(p.H0,1)} · Ωₘ ${fmt(p.Om)} · ΩDE ${fmt(p.Ol)} · Ωₖ ${fmt(p.Ok)} · w ${fmt(p.w)}`);const warn=$('#curvatureWarning');if(warn){warn.hidden=Math.abs(p.Ok)<=.02;warn.textContent=`Hinweis: Ωₖ,0=${fmt(p.Ok)} — gekrümmter bzw. nicht dichteabgeschlossener Vergleichsfall.`;}}
-function sizeCanvas(cv){const d=Math.min(2,devicePixelRatio||1),r=cv.getBoundingClientRect(),w=Math.max(280,r.width),h=Math.max(240,r.height);cv.width=w*d;cv.height=h*d;const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);return{g,w,h};}
-function lineChart(cv,series,xmax,yLabel){const {g,w,h}=sizeCanvas(cv),L=52,R=14,T=18,B=34,pw=w-L-R,ph=h-T-B;let ymin=Infinity,ymax=-Infinity;series.forEach(s=>s.data.forEach(p=>{if(Number.isFinite(p.y)){ymin=Math.min(ymin,p.y);ymax=Math.max(ymax,p.y);}}));if(!Number.isFinite(ymin)||ymin===ymax){ymin=0;ymax=1;}const pad=(ymax-ymin)*.08||1;ymin-=pad;ymax+=pad;g.clearRect(0,0,w,h);g.strokeStyle='#27334f';g.fillStyle='#9ca8c8';g.font='10px system-ui';for(let i=0;i<=5;i++){const x=L+pw*i/5;g.beginPath();g.moveTo(x,T);g.lineTo(x,T+ph);g.stroke();g.fillText(fmt(xmax*i/5,1),x-8,h-10);}for(let i=0;i<=4;i++){const y=T+ph*i/4,val=ymax-(ymax-ymin)*i/4;g.beginPath();g.moveTo(L,y);g.lineTo(w-R,y);g.stroke();g.fillText(fmt(val,1),3,y+3);}series.forEach(s=>{g.strokeStyle=s.color;g.lineWidth=2;g.beginPath();s.data.forEach((p,i)=>{const x=L+pw*p.x/xmax,y=T+ph*(1-(p.y-ymin)/(ymax-ymin));i?g.lineTo(x,y):g.moveTo(x,y);});g.stroke();});g.fillStyle='#9ca8c8';g.fillText(yLabel,5,12);g.fillText('z',w-16,h-10);}
-function compare(){const p=P(),zmax=p.zmax,N=150,mode=$('#chartMode').value,series=[{color:'#8d7cff',data:[]},{color:'#75dfb8',data:[]},{color:'#ff9f67',data:[]}];for(let i=0;i<=N;i++){const z=zmax*i/N;let vals;if(mode==='H')vals=[H(z,p,'L'),H(z,p,'W'),H(z,p,'B')];else if(mode==='E')vals=[eL(z,p),eW(z,p),eB(z,p)];else if(mode==='dev')vals=[0,(eW(z,p)/eL(z,p)-1)*100,(eB(z,p)/eL(z,p)-1)*100];else if(mode==='q')vals=[q(z,p,'L'),q(z,p,'W'),q(z,p,'B')];else if(mode==='mu')vals=[mu(Math.max(z,.001),p,'L'),mu(Math.max(z,.001),p,'W'),mu(Math.max(z,.001),p,'B')];else if(mode==='dc')vals=[dc(z,p,'L'),dc(z,p,'W'),dc(z,p,'B')];else vals=[fs8(z,p,'L'),fs8(z,p,'W'),fs8(z,p,'B')];vals.forEach((y,j)=>series[j].data.push({x:z,y}));}const labels={H:'H(z)',E:'E(z)',dev:'ΔH/H %',q:'q(z)',mu:'μ(z)',dc:'DC Mpc',growth:'fσ₈'};lineChart($('#mainChart'),series,zmax,labels[mode]);setText('ageL',fmt(age(p,'L'),2)+' Gyr');setText('ageW',fmt(age(p,'W'),2)+' Gyr');setText('ageB',fmt(age(p,'B'),2)+' Gyr');setText('dev1',pct((eB(1,p)/eL(1,p)-1)*100));setText('q0B',fmt(q(0,p,'B')));setText('S8',fmt(p.s8*Math.sqrt(p.Om/.3)));}
-function distances(){const p=P(),z=Number($('#zProbe').value);setText('ozProbe',fmt(z,3));const d=transverse(z,p,'L'),dl=(1+z)*d,da=d/(1+z);setText('distDc',fmt(dc(z,p,'L'),1)+' Mpc');setText('distDl',fmt(dl,1)+' Mpc');setText('distDa',fmt(da,1)+' Mpc');setText('distMu',fmt(mu(z,p,'L'),3));setText('distLookback',fmt(lookback(z,p,'L'),3)+' Gyr');setText('distHz',fmt(H(z,p,'L'),2));setText('distDmw',fmt(transverse(z,p,'W'),1));setText('distDmb',fmt(transverse(z,p,'B'),1));setText('distEther',fmt(dl/((1+z)**2*da),6));}
-function growth(){const p=P(),z=Number($('#zProbe').value),om=omz(z,p,'L'),f=om**.55;setText('gOm',fmt(om));setText('gf',fmt(f));setText('gfs8',fmt(fs8(z,p,'L')));setText('gS8',fmt(p.s8*Math.sqrt(p.Om/.3)));}
-const ranges={w:[-1.5,-.5],beta:[-.3,.3],ib:[0,1],rchi:[.1,6],Om:[.1,.6],Ol:[0,1.2],H0:[50,90]};
-function sweep(){const p=P(),key=$('#sweepParam').value,metric=$('#sweepMetric').value,z=Number($('#sweepZ').value),min=Number($('#sweepMin').value),max=Number($('#sweepMax').value),data=[];for(let i=0;i<=80;i++){const x=min+(max-min)*i/80,pp={...p,[key]:x};pp.Ok=1-OR-pp.Om-pp.Ol;let y;if(metric==='dev')y=(eB(z,pp)/eL(z,pp)-1)*100;else if(metric==='q')y=q(z,pp,'B');else if(metric==='mu')y=mu(z,pp,'B');else if(metric==='dc')y=dc(z,pp,'B');else if(metric==='growth')y=fs8(z,pp,'B');else y=age(pp,'B');data.push({x,y});}lineChart($('#sweepChart'),[{color:'#68cfff',data:data.map((d,i)=>({x:i,y:d.y}))}],Math.max(1,data.length-1),metric);setText('osweepMin',fmt(min,2));setText('osweepMax',fmt(max,2));setText('osweepZ',fmt(z,2));const ys=data.map(d=>d.y).filter(Number.isFinite);setText('swMin',fmt(Math.min(...ys),4));setText('swMax',fmt(Math.max(...ys),4));setText('swSlope',fmt((ys.at(-1)-ys[0])/(max-min),4));setText('swCount',String(data.length));state.sweepData=data;}
-function setSweepRange(){const [a,b]=ranges[$('#sweepParam').value]||[-1,1];$('#sweepMin').min=a;$('#sweepMin').max=b;$('#sweepMin').value=a;$('#sweepMax').min=a;$('#sweepMax').max=b;$('#sweepMax').value=b;setText('osweepMin',fmt(a,2));setText('osweepMax',fmt(b,2));sweep();}
-function table(){const p=P(),n=Number($('#tableRows').value),rows=[];setText('otableRows',String(n));for(let i=0;i<n;i++){const z=p.zmax*i/(n-1||1);rows.push(`<tr><td>${fmt(z,3)}</td><td>${fmt(aOf(z),5)}</td><td>${fmt(eL(z,p),5)}</td><td>${fmt(eW(z,p),5)}</td><td>${fmt(eB(z,p),5)}</td><td>${fmt(H(z,p,'L'),3)}</td><td>${fmt((eB(z,p)/eL(z,p)-1)*100,4)}</td><td>${fmt(q(z,p,'L'),4)}</td><td>${fmt(q(z,p,'B'),4)}</td><td>${fmt(dc(z,p,'L'),2)}</td><td>${fmt(mu(Math.max(z,.001),p,'L'),4)}</td><td>${fmt(fs8(z,p,'L'),4)}</td></tr>`);}$('#dataRows').innerHTML=rows.join('');}
-const formulas=[
-{id:'az',name:'Skalenfaktor aus Rotverschiebung',cat:'Hintergrund',status:'Etabliert',eq:'a = 1/(1+z)',desc:'Übersetzt Rotverschiebung in den kosmischen Skalenfaktor.',unit:'dimensionslos',inputs:[['z',1,'Rotverschiebung']],calc:v=>1/(1+v.z),hint:'Heute gilt z=0 und a=1.'},
-{id:'za',name:'Rotverschiebung aus Skalenfaktor',cat:'Hintergrund',status:'Etabliert',eq:'z = 1/a − 1',desc:'Inverse Beziehung zwischen a und z.',unit:'dimensionslos',inputs:[['a',.5,'Skalenfaktor']],calc:v=>1/v.a-1,hint:'Für a→0 wächst z stark an.'},
-{id:'H',name:'Hubble-Rate',cat:'Hintergrund',status:'Etabliert',eq:'H(z)=H₀E(z)',desc:'Expansionsrate bei einer gegebenen Rotverschiebung.',unit:'km s⁻¹ Mpc⁻¹',inputs:[['H0',67.4,'heutige Hubble-Rate'],['E',1.79,'dimensionslose Friedmann-Funktion']],calc:v=>v.H0*v.E,hint:'Bei z=0 ist E(0)=1.'},
-{id:'S8',name:'S₈',cat:'Wachstum',status:'Etabliert',eq:'S₈=σ₈√(Ωₘ/0,3)',desc:'Kombination aus Materiedichte und Strukturbildungsamplitude.',unit:'dimensionslos',inputs:[['s8',.811,'σ₈'],['Om',.315,'Ωₘ']],calc:v=>v.s8*Math.sqrt(v.Om/.3),hint:'Häufig in Cosmic-Shear-Analysen verwendet.'},
-{id:'f',name:'Wachstumsrate',cat:'Wachstum',status:'Näherung',eq:'f≈Ωₘ(z)^γ',desc:'Schnelle GR-Näherung für lineares Wachstum.',unit:'dimensionslos',inputs:[['Omz',.77,'Ωₘ(z)'],['gamma',.55,'Wachstumsindex']],calc:v=>v.Omz**v.gamma,hint:'Für ΛCDM ist γ≈0,55.'},
-{id:'dl',name:'Luminositätsentfernung',cat:'Distanzen',status:'Etabliert',eq:'D_L=(1+z)D_M',desc:'Entfernung, die aus der beobachteten Helligkeit folgt.',unit:'Mpc',inputs:[['z',1,'Rotverschiebung'],['DM',3300,'transverse komovierende Entfernung']],calc:v=>(1+v.z)*v.DM,hint:'Über Etherington gilt D_L=(1+z)²D_A.'},
-{id:'mu',name:'Distanzmodul',cat:'Distanzen',status:'Etabliert',eq:'μ=5log₁₀(D_L/Mpc)+25',desc:'Logarithmisches Helligkeitsmaß für Standardkerzen.',unit:'mag',inputs:[['DL',6600,'Luminositätsentfernung in Mpc']],calc:v=>5*Math.log10(v.DL)+25,hint:'Nur für D_L>0 definiert.'},
-{id:'delta',name:'Brückenkorrektur',cat:'Brückenmodell',status:'Modellabhängig',eq:'Δ(a)=βτ·𝓘B·exp[−(a/a_c)²]',desc:'Effektive Sensitivitätsfunktion des UniverseLab-Brückenmodells.',unit:'dimensionslos',inputs:[['beta',.05,'βτ'],['IB',.4,'Überlappungsmaß'],['a',.5,'Skalenfaktor'],['ac',.286,'Übergangsskala']],calc:v=>v.beta*v.IB*Math.exp(-((v.a/v.ac)**2)),hint:'Keine freigegebene fundamentale 6D-Vorhersage.'},
-{id:'dh',name:'Relative Hubble-Abweichung',cat:'Brückenmodell',status:'Abgeleitet',eq:'ΔH/H=√(1+Δ)−1',desc:'Exakte relative Hubble-Änderung innerhalb der gewählten Brückenform.',unit:'dimensionslos',inputs:[['delta',.01,'Δ']],calc:v=>Math.sqrt(1+v.delta)-1,hint:'Für |Δ|≪1 gilt näherungsweise ΔH/H≈Δ/2.'},
-{id:'qeff',name:'Effektiver Verzögerungsparameter',cat:'Brückenmodell',status:'Abgeleitet',eq:'q_eff=q₀+(a/a_c)²Δ/(1+Δ)',desc:'Konditionale Ableitung aus der exponentiellen Brückenkorrektur.',unit:'dimensionslos',inputs:[['q0',-.527,'ΛCDM-Wert'],['a',1,'Skalenfaktor'],['ac',.286,'Übergangsskala'],['delta',.001,'Δ']],calc:v=>v.q0+(v.a/v.ac)**2*v.delta/(1+v.delta),hint:'Gilt nur innerhalb dieser Funktionsform.'},
-{id:'Sigma',name:'Lensing-Funktion Σ',cat:'Gravitation',status:'Offen',eq:'Σ=μ(1+η)/2',desc:'Verknüpft effektive Gravitation und Gravitations-Slip.',unit:'dimensionslos',inputs:[['mu',1,'effektive Kopplung'],['eta',1,'Φ/Ψ']],calc:v=>v.mu*(1+v.eta)/2,hint:'GR-Grenze: μ=η=Σ=1.'},
-{id:'kk',name:'KK-Massenskala',cat:'GW / KK',status:'Konditional',eq:'m_n≈k x_n exp(−kπr_c)',desc:'RS-artige Näherung für einen Kaluza-Klein-Modenturm.',unit:'wie k',inputs:[['k',1,'Krümmungsskala'],['xn',3.8317,'J₁-Nullstelle'],['rc',1,'Kompaktifikationsradius']],calc:v=>v.k*v.xn*Math.exp(-v.k*Math.PI*v.rc),hint:'Erfordert passende Geometrie und Randbedingungen.'}
-];
-let activeFormula=formulas[0];
-function formulaList(){const q=$('#formulaSearch').value.toLowerCase(),cat=$('#formulaCategory').value,items=formulas.filter(f=>(cat==='all'||f.cat===cat)&&(!q||(f.name+' '+f.eq+' '+f.desc).toLowerCase().includes(q)));$('#formulaList').innerHTML=items.map(f=>`<button class="formula-item ${f.id===activeFormula.id?'active':''}" data-id="${f.id}"><b>${f.name}</b><span>${f.status} · ${f.cat}</span></button>`).join('')||'<p class="note">Keine Formel gefunden.</p>';$$('.formula-item').forEach(b=>b.onclick=()=>selectFormula(b.dataset.id));}
-function selectFormula(id){activeFormula=formulas.find(f=>f.id===id)||formulas[0];setText('fTitle',activeFormula.name);setText('fShort',activeFormula.desc);setText('fEquation',activeFormula.eq);setText('fUnit',activeFormula.unit);setText('fHint',activeFormula.hint);setText('fStatus',activeFormula.status);$('#fInputs').innerHTML=activeFormula.inputs.map(([k,v,d])=>`<label class="formula-input"><span>${k}</span><small>${d}</small><input type="number" step="any" data-key="${k}" value="${v}"></label>`).join('');$$('#fInputs input').forEach(i=>i.oninput=calcFormula);formulaList();calcFormula();}
-function calcFormula(){const v={};$$('#fInputs input').forEach(i=>v[i.dataset.key]=Number(i.value));let r=NaN;try{r=activeFormula.calc(v);}catch{}setText('fResult',Number.isFinite(r)?(Math.abs(r)>1e5?r.toExponential(5):fmt(r,6)):'nicht definiert');}
-function csvTable(){const p=P(),n=Number($('#tableRows').value),lines=['z,a,E_LCDM,E_wCDM,E_bridge,H_LCDM,deltaH_percent,q_LCDM,q_bridge,DC_Mpc,mu,fsigma8'];for(let i=0;i<n;i++){const z=p.zmax*i/(n-1||1);lines.push([z,aOf(z),eL(z,p),eW(z,p),eB(z,p),H(z,p,'L'),(eB(z,p)/eL(z,p)-1)*100,q(z,p,'L'),q(z,p,'B'),dc(z,p,'L'),mu(Math.max(z,.001),p,'L'),fs8(z,p,'L')].join(','));}download(lines.join('\n'),'universelab-vergleich.csv');}
-function csvSweep(){if(!state.sweepData)return;download('parameter,wert\n'+state.sweepData.map(d=>`${d.x},${d.y}`).join('\n'),'universelab-sweep.csv');}
-function download(text,name){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
-function render(){outputs();if(state.active==='compare')compare();else if(state.active==='distances')distances();else if(state.active==='growth'){distances();growth();}else if(state.active==='sweep')sweep();else if(state.active==='table')table();else calcFormula();}
-function schedule(){clearTimeout(state.timer);state.timer=setTimeout(render,90);}
-function setView(id){state.active=id;$$('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));$$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+id));if(innerWidth<900)$('#parameterPanel').open=false;requestAnimationFrame(render);}
-function init(){
-  if(innerWidth>=901)$('#parameterPanel').open=true;
-  ids.forEach(id=>$('#'+id)?.addEventListener('input',schedule));
-  ['zProbe','tableRows','sweepMin','sweepMax','sweepZ'].forEach(id=>$('#'+id)?.addEventListener('input',schedule));
-  $$('.tabs button').forEach(b=>b.onclick=()=>setView(b.dataset.view));
-  $('#chartMode').onchange=schedule;$('#sweepMetric').onchange=schedule;$('#sweepParam').onchange=setSweepRange;
-  $('#exportCsv').onclick=csvTable;$('#sweepCsv').onclick=csvSweep;$('#reset').onclick=()=>{const d={H0:67.4,Om:.315,Ol:.684908,w:-1,s8:.811,beta:.05,ib:.4,rchi:1,zmax:5};Object.entries(d).forEach(([k,v])=>$('#'+k).value=v);render();};
-  $('#formulaSearch').oninput=formulaList;$('#formulaCategory').onchange=formulaList;
-  addEventListener('resize',schedule);addEventListener('universelab:modelchange',schedule);
-  formulaList();selectFormula('az');outputs();setView('compare');
-  document.documentElement.classList.add('compare-ready');
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+  'use strict';
+
+  const CANONICAL_URL='./compare-safe.html?v=safe2';
+  const provenance=Object.freeze({
+    eq:'Δ(a)=βτ·𝓘B·exp[−(a/a_c)²]',
+    status:'Modellabhängig',
+    unit:'dimensionslos',
+    note:'Keine freigegebene fundamentale 6D-Vorhersage.'
+  });
+  const api=Object.freeze({
+    version:'1.0.0-retired',
+    status:'RETIRED_DUPLICATE_ENGINE',
+    canonicalUrl:CANONICAL_URL,
+    provenance,
+    physicalGateEffect:'NONE',
+    physicalEvidenceEffect:'NONE',
+    openCanonical(){
+      const target=new URL(CANONICAL_URL,location.href);
+      target.hash=location.hash;
+      location.assign(target.href);
+    }
+  });
+
+  globalThis.UniverseLabCompareLegacy=api;
+  globalThis.dispatchEvent(new CustomEvent('universelab:compare-legacy-retired',{detail:api}));
 })();

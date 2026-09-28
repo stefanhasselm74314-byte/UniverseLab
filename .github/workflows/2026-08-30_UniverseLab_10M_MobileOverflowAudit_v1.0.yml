@@ -1,0 +1,49 @@
+name: UniverseLab 10M mobile overflow audit
+
+on:
+  pull_request:
+    paths:
+      - '2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.css'
+      - 'tools/2026-08-30_UniverseLab_10M_MobileOverflowAudit_v1.0.mjs'
+      - '.github/workflows/2026-08-30_UniverseLab_10M_MobileOverflowAudit_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - '2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.css'
+      - 'tools/2026-08-30_UniverseLab_10M_MobileOverflowAudit_v1.0.mjs'
+      - '.github/workflows/2026-08-30_UniverseLab_10M_MobileOverflowAudit_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  mobile-overflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Mount branch like GitHub Pages
+        run: |
+          mkdir -p /tmp/ul-root
+          ln -s "$GITHUB_WORKSPACE" /tmp/ul-root/UniverseLab
+          cd /tmp/ul-root
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/universelab-mobile-http.log 2>&1 &
+          sleep 2
+          echo "UNIVERSELAB_BASE_URL=http://127.0.0.1:8000/UniverseLab/" >> "$GITHUB_ENV"
+      - name: Audit mobile viewport containment
+        run: node tools/2026-08-30_UniverseLab_10M_MobileOverflowAudit_v1.0.mjs
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universelab-10m-mobile-overflow-report
+          path: 10m-mobile-overflow-report.json
+          if-no-files-found: error

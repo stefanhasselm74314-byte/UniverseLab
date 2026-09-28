@@ -1,0 +1,124 @@
+{
+  "schema": "universelab.ulsh05.wp1c4a.gluing-normal-flux-junctions.v0.1",
+  "date": "2026-09-07",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1C4A",
+  "classification": "NONOPERATIVE_ANALYTIC_TWO_SIDE_GLUE_AND_NORMAL_FLUX_PREFLIGHT",
+  "status": "DERIVED_TWO_SIDE_BENDING_GLUE_AND_LINEAR_SCALAR_GAUGE_NORMAL_FLUX_JUNCTIONS_FULL_MOVING_BOUNDARY_HESSIAN_OPEN",
+  "basis_main": "91c2f2bc089f41f1e3168bf46d7b69f727e4a6a2",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-08-03_MD2S_R1_C_PHYS_GlobalConventionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.json"
+  ],
+  "interface_identification": {
+    "common_intrinsic_chart": "y^a shared across the glued cap",
+    "common_normal": "N^A points from N region toward S region",
+    "regional_outward_normals": [
+      "n_N^A=+N^A",
+      "n_S^A=-N^A"
+    ],
+    "reason": "r_N and r_S both increase from their own smooth pole toward the common cap, so their outward normals represent opposite physical directions after gluing",
+    "same_physical_displacement": "z^A=xi*N^A+tau^a*e_a^A",
+    "regional_decomposition": [
+      "z^A=xi_N*n_N^A+tau_N^a*e_a^A",
+      "z^A=xi_S*n_S^A+tau_S^a*e_a^A"
+    ],
+    "gluing_result": [
+      "xi_N=+xi",
+      "xi_S=-xi",
+      "tau_N^a=tau_S^a=tau^a"
+    ],
+    "equivalent_constraint": "xi_N+xi_S=0",
+    "status": "DERIVED_FROM_EXPLICIT_COMMON_NORMAL_IDENTIFICATION"
+  },
+  "moving_pullback_operator": {
+    "scalar_rule": "DeltaSigma[Q_s]=Xbar_s^*[delta Q_s+L_zs Qbar_s]",
+    "regional_bending": [
+      "z_N^A=+xi*n_N^A+tau^a*e_a^A",
+      "z_S^A=-xi*n_S^A+tau^a*e_a^A"
+    ],
+    "interpretation": "the Lie-drag term must use the regional displacement representation after the common gluing relation is imposed"
+  },
+  "scalar_normal_flux": {
+    "background_per_side": "Qphi_s=n_s^A*nabla_A phi_s",
+    "linear_moving_pullback_per_side": "deltaQphiSigma_s=Xbar_s^*[delta_n_s^A*nabla_A phibar_s+nbar_s^A*nabla_A varphi_s+L_zs(nbar_s^A*nabla_A phibar_s)]",
+    "m1_surface_scalar_source": "delta[lambda_,phi+0.5*Zsigma_,phi*X]=0 because lambda_,phi=Zsigma_,phi=0 in C-PHYS-M1",
+    "assembled_junction": "sum_s deltaQphiSigma_s=0",
+    "status": "DERIVED_LINEAR_MOVING_SCALAR_NORMAL_FLUX_JUNCTION"
+  },
+  "gauge_normal_flux": {
+    "background_intrinsic_flux_per_side": "QF_s^a=Xbar_s^*[e_B^a*n_{sA}*Z_F(phi_s)*F_s^{AB}]",
+    "linear_moving_pullback_per_side": "deltaQF_s^a=DeltaSigma[e_B^a*n_A*Z_F*F^{AB}]_s",
+    "expanded_definition": "deltaQF_s^a=Xbar_s^*[delta(e_B^a*n_A*Z_F*F^{AB})+L_zs(e_B^a*nbar_A*Zbar_F*Fbar^{AB})]",
+    "cap_current_background": "jSigma^a=q_sigma*Z_sigma*w^a",
+    "cap_current_variation": "deltajSigma^a=q_sigma*Z_sigma*(hbar^{ab}*dSigma_b-H^{ab}*w_b)",
+    "dSigma_b": "D_b s-q_sigma*aSigma_b",
+    "assembled_junction": "sum_s deltaQF_s^a=deltajSigma^a",
+    "u1_status": "INVARIANT_BECAUSE_dSigma_b_IS_LINEARIZED_U1_INVARIANT",
+    "status": "DERIVED_LINEAR_MOVING_GAUGE_NORMAL_FLUX_JUNCTION"
+  },
+  "independent_controls": {
+    "gluing_coordinate_control": "common coordinate y with r_N=rho_N+y and r_S=rho_S-y gives n_N=+partial_y, n_S=-partial_y and delta r_N=+xi, delta r_S=-xi",
+    "scalar_flux_control": "quadratic regional scalar profiles reproduce varphi_N_prime+xi*phi_N_second and varphi_S_prime-xi*phi_S_second",
+    "gauge_flux_control": "direct finite difference of a regional flux scalar Q_s(r_s,epsilon) evaluated at rho_s+epsilon*xi_s reproduces deltaQ_s+xi_s*d_r Qbar_s",
+    "u1_control": "dSigma_a remains invariant under s->s+q_sigma alphaSigma and aSigma_a->aSigma_a+D_a alphaSigma"
+  },
+  "not_closed": [
+    "second-order moving-boundary variation of GHY term",
+    "second-order moving-boundary variation of localized cap action including embedding perturbation",
+    "assembled full boundary Hessian",
+    "full perturbed Israel scalar gauge system as a released boundary-value operator",
+    "global fixed-interface gauge admissibility",
+    "S/V/T decomposition",
+    "constraint elimination",
+    "physical background",
+    "ghost freedom and stability",
+    "6D-to-4D reduction",
+    "mu eta Sigma growth and lensing"
+  ],
+  "gate_state": {
+    "WP1_bulk_gravity_matter_hessian": "ASSEMBLABLE_OFFSHELL",
+    "WP1_fixed_interface_localized_cap_hessian": "DERIVED",
+    "WP1_moving_interface_linear_geometry": "DERIVED_PREFLIGHT",
+    "WP1_two_side_bending_glue": "DERIVED",
+    "WP1_scalar_normal_flux_junction": "DERIVED_LINEAR_PREFLIGHT",
+    "WP1_gauge_normal_flux_junction": "DERIVED_LINEAR_PREFLIGHT",
+    "WP1_full_boundary_hessian": "NOT_CLOSED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "No claim that the full moving-boundary Hessian is closed.",
+    "No claim that the complete perturbed junction operator is released.",
+    "No claim that xi is globally pure gauge.",
+    "No physical background, stability, ghost-freedom or observable claim.",
+    "No authorization, grant, backend import or solver execution."
+  ],
+  "next_block": {
+    "id": "ULSH-05/WP1C4B",
+    "title": "Second-order moving-boundary GHY plus localized-action Hessian",
+    "execution_type": "ANALYTIC_NONOPERATIVE",
+    "required_output": [
+      "second variation of moving GHY boundary term",
+      "second variation of localized cap action including bending",
+      "cross-check fixed-interface WP1C2 limit",
+      "assembly with WP1B gravity and WP1C3 geometry",
+      "boundary Hessian closure verdict",
+      "no physical solver execution"
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+name: 2026-09-07 ULSH05 WP1A Fixed-Metric Scalar-Maxwell Hessian QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.md'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.py'
+      - '.github/workflows/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_QA_v0.1.yml'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json'
+      - 'registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json'
+      - 'registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse WP1A contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('registry/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          assert data['model_id'] == 'HZT-M0-S6-C-PHYS-M1'
+          assert data['status'] == 'DERIVED_CONTROL_SUBSECTOR_OFFSHELL_FIXED_METRIC_BULK_INTERIOR'
+          assert data['classification'] == 'NONOPERATIVE_ANALYTIC_CONTROL_SUBSECTOR'
+          assert data['physical_gate_effect'] == 'NONE'
+          assert data['physical_evidence_effect'] == 'NONE'
+          assert data['solver_authorized'] is False
+          assert data['wp1_progress_effect']['bulk_scalar_Maxwell_fixed_metric_control'] == 'DERIVED'
+          assert data['wp1_progress_effect']['full_S_quad_2'] == 'NOT_DERIVED'
+          print('PASS: WP1A contract parses and remains scoped/fail-closed')
+          PY
+
+      - name: Independently reconstruct WP1A epsilon-squared coefficient
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.py
+
+      - name: Re-run WP1 readiness regression
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.py
+
+      - name: Re-run C-PHYS-M1 function-freeze control
+        run: python tests/2026-08-03_test_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py
+
+      - name: Re-run G01 observable-interface firewall
+        run: python tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py
+
+      - name: Enforce non-promotion and control-subsector scope
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c = json.loads(Path('registry/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.json').read_text(encoding='utf-8'))
+          scope = c['scope_contract']
+          assert 'h_AB=0' in scope['metric']
+          assert scope['cap_and_junction_terms'] == 'excluded_from_WP1A'
+          assert scope['GHY'] == 'excluded_from_WP1A_because_metric_is_fixed'
+          assert c['wp1_progress_effect']['ULSH05_WP1'] == 'PREPARATORY_IN_PROGRESS_NOT_CLOSED'
+          assert c['wp1_progress_effect']['G01'] == 'OPEN_BLOCKING'
+          expected = {
+              'FM-G0': 'OPEN',
+              'AuthorizationDecision': 'NOT_CREATED',
+              'SingleUseGrant': 'NOT_CREATED',
+              'BACKEND_IMPORT': 'NOT_EXECUTED',
+              'SOLVER_EXECUTION': 'NOT_EXECUTED',
+              'PHYSICAL_BACKGROUND': 'NOT_ESTABLISHED',
+              'PHYSICAL_RESPONSE_RANK': 'NOT_EXECUTED',
+              'K1-D': 'NOT_RELEASED',
+              'K1-E': 'NOT_ADMISSIBLE',
+          }
+          assert c['unchanged_firewalls'] == expected
+          print('PASS: WP1A advances only the nonoperative control subsector')
+          PY

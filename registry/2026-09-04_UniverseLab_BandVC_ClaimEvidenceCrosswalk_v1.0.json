@@ -1,0 +1,201 @@
+{
+  "schema": "universelab.band-vc-claim-evidence-crosswalk.v1",
+  "version": "1.0.0",
+  "date": "2026-09-04",
+  "basis_main_commit": "e4e92090d313abf8a53d7b7354923983c9cda939",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "classification": "NONOPERATIVE_CLAIM_TO_EQUATION_CODE_TEST_DATA_FALSIFIER_CROSSWALK",
+  "source_claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
+  "source_medium_summary": "registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json",
+  "link_status_vocabulary": {
+    "VERIFIED_PRESENT": "The required link exists in the repository and is explicitly bound by the family contract or current canonical source.",
+    "REFERENCE_ONLY": "A reference or framework exists, but it is not the missing HZT physical derivation, observable map, data binding or proof itself.",
+    "BLOCKED_BY_UNRELEASED_MAP": "The repository intentionally fails closed because the required physical map is not released.",
+    "MISSING_REQUIRED_LINK": "The family requires this link for the claimed physical/empirical scope and it is not established.",
+    "NOT_APPLICABLE": "This axis is not required for the family because the family is governance, educational, historical, or a pure software-state proposition.",
+    "DECLARED_PROSPECTIVE": "The link is specified as a future research target or falsifier but is not operationally released."
+  },
+  "family_count": 15,
+  "families": [
+    {
+      "claim_family_id": "UL-CLM-FLRW-BACKGROUND-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "VERIFIED_PRESENT",
+      "code": "VERIFIED_PRESENT",
+      "test": "VERIFIED_PRESENT",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "REFERENCE_FLRW_IMPLEMENTATION_AND_NUMERICAL_QA_ONLY",
+      "notes": "No HZT parent derivation or empirical HZT preference follows."
+    },
+    {
+      "claim_family_id": "UL-CLM-DISTANCE-GEOMETRY-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "VERIFIED_PRESENT",
+      "code": "VERIFIED_PRESENT",
+      "test": "VERIFIED_PRESENT",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "FLRW_GEOMETRY_AND_NUMERICAL_QA_ONLY",
+      "notes": "D_C to D_M to D_L/D_A is established only inside declared FLRW metric/light-propagation assumptions."
+    },
+    {
+      "claim_family_id": "UL-CLM-LINEAR-GROWTH-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "VERIFIED_PRESENT",
+      "code": "VERIFIED_PRESENT",
+      "test": "VERIFIED_PRESENT",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "GR_SMOOTH_DARK_ENERGY_REFERENCE_ONLY",
+      "notes": "Bridge/HZT growth remains unreleased."
+    },
+    {
+      "claim_family_id": "UL-CLM-BRIDGE-BACKGROUND-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "VERIFIED_PRESENT",
+      "code": "VERIFIED_PRESENT",
+      "test": "VERIFIED_PRESENT",
+      "data": "REFERENCE_ONLY",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "REDUCED_EFFECTIVE_BACKGROUND_DIAGNOSTIC",
+      "notes": "Displayed/diagnostic points are not a bound empirical likelihood; no six-dimensional derivation is established."
+    },
+    {
+      "claim_family_id": "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "VERIFIED_PRESENT",
+      "code": "VERIFIED_PRESENT",
+      "test": "VERIFIED_PRESENT",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "LOCAL_IDENTIFIABILITY_WITHIN_CURRENT_BACKGROUND_CHANNEL",
+      "notes": "Only A_B=beta_tau I_B is identified by the currently implemented background dependence; global and 6D identifiability remain open."
+    },
+    {
+      "claim_family_id": "UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "MISSING_REQUIRED_LINK",
+      "code": "BLOCKED_BY_UNRELEASED_MAP",
+      "test": "VERIFIED_PRESENT",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "FAIL_CLOSED_RELEASE_FIREWALL",
+      "notes": "Tests establish refusal semantics, not the missing growth/Poisson/slip/lensing physics."
+    },
+    {
+      "claim_family_id": "UL-CLM-PARENT-FORWARD-MAP-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "MISSING_REQUIRED_LINK",
+      "code": "MISSING_REQUIRED_LINK",
+      "test": "MISSING_REQUIRED_LINK",
+      "data": "MISSING_REQUIRED_LINK",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "OPEN_PARENT_TO_REDUCED_TO_OBSERVABLE_MAP",
+      "notes": "FM-G0 remains OPEN; inventory and gap registers are provenance/reference artifacts, not closure."
+    },
+    {
+      "claim_family_id": "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "REFERENCE_ONLY",
+      "code": "BLOCKED_BY_UNRELEASED_MAP",
+      "test": "REFERENCE_ONLY",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "PHYSICAL_EXECUTION_AND_STABILITY_OPEN",
+      "notes": "Formal operator/IBVP work exists, but authorized physical background, response rank, continuum invertibility, Hamiltonian positivity and full ghost freedom are not established."
+    },
+    {
+      "claim_family_id": "UL-CLM-DATA-LIKELIHOOD-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "MISSING_REQUIRED_LINK",
+      "code": "MISSING_REQUIRED_LINK",
+      "test": "MISSING_REQUIRED_LINK",
+      "data": "MISSING_REQUIRED_LINK",
+      "falsifier_or_gate": "DECLARED_PROSPECTIVE",
+      "evidence_scope": "EMPIRICAL_IDENTIFICATION_OPEN",
+      "notes": "No bound versioned data vector, covariance, selection function, nuisance model and likelihood stack is present for HZT inference."
+    },
+    {
+      "claim_family_id": "UL-CLM-EMERGENCE-SEPARATION-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "NOT_APPLICABLE",
+      "code": "VERIFIED_PRESENT",
+      "test": "VERIFIED_PRESENT",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "SOFTWARE_ARCHITECTURE_ONLY",
+      "notes": "Physical interpretation of the automaton remains heuristic."
+    },
+    {
+      "claim_family_id": "UL-CLM-PREDICTIONS-FALSIFIERS-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "MISSING_REQUIRED_LINK",
+      "code": "MISSING_REQUIRED_LINK",
+      "test": "MISSING_REQUIRED_LINK",
+      "data": "DECLARED_PROSPECTIVE",
+      "falsifier_or_gate": "DECLARED_PROSPECTIVE",
+      "evidence_scope": "PROSPECTIVE_RESEARCH_TARGETS_NOT_RELEASED_PREDICTIONS",
+      "notes": "Mentioning RAR, expansion, growth, lensing or GW channels does not specify amplitudes, spectra or parent-derived parameter dependence."
+    },
+    {
+      "claim_family_id": "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "NOT_APPLICABLE",
+      "code": "REFERENCE_ONLY",
+      "test": "VERIFIED_PRESENT",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "REPOSITORY_STATE_CONTRACT_ONLY",
+      "notes": "Current v1.2/v1.3/v1.33 snapshots predate the merged completion of Band V-B and therefore require an append-only freshness successor; physical statuses themselves remain unchanged."
+    },
+    {
+      "claim_family_id": "UL-CLM-FM0-PROGRAM-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "NOT_APPLICABLE",
+      "code": "NOT_APPLICABLE",
+      "test": "REFERENCE_ONLY",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "PROJECT_STATE_ACCOUNTING_ONLY",
+      "notes": "FM-G0 OPEN with 10 blocking gaps = 3 partial + 7 fully unresolved; this is not physical evidence."
+    },
+    {
+      "claim_family_id": "UL-CLM-EDUCATIONAL-VISUAL-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "NOT_APPLICABLE",
+      "code": "NOT_APPLICABLE",
+      "test": "NOT_APPLICABLE",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "EDUCATIONAL_OR_HEURISTIC_ONLY",
+      "notes": "Qualifier/firewall is the relevant gate; no physical proposition is created by presentation."
+    },
+    {
+      "claim_family_id": "UL-CLM-HISTORICAL-ARCHIVE-001",
+      "claim": "VERIFIED_PRESENT",
+      "equation_or_derivation": "NOT_APPLICABLE",
+      "code": "NOT_APPLICABLE",
+      "test": "NOT_APPLICABLE",
+      "data": "NOT_APPLICABLE",
+      "falsifier_or_gate": "VERIFIED_PRESENT",
+      "evidence_scope": "PROVENANCE_ONLY",
+      "notes": "Historical artifacts cannot override current merged dated registries or explicit current user decisions."
+    }
+  ],
+  "current_gate_state": {
+    "FM-G0": "OPEN",
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "runtime_issuance_bindings": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-project-owner-adoption-record.v0.1",
+  "date": "2026-09-02",
+  "classification": "EMPTY_PROJECT_OWNER_ADOPTION_RECORD_TEMPLATE",
+  "status": "EMPTY_TEMPLATE_NO_HUMAN_ADOPTION",
+  "contract_id": "ULSH01-WP2-HUMAN-TRUST-ROOT-RATIFICATION-PACKAGE-v0.1",
+  "adoption_id": null,
+  "project_identity_or_pseudonym": null,
+  "adopted_at_utc": null,
+  "adoption_statement": "I explicitly adopt the exact candidate trust-root artifact identified by the bound digests for the stated project scope. I understand that this preparation record is not itself a ratified active trust root.",
+  "authority_binding": {
+    "authority_id": null,
+    "key_id": null,
+    "public_key_fingerprint_sha256": null,
+    "root_key_proof_attestation_id": null,
+    "candidate_roles": []
+  },
+  "candidate_binding": {
+    "candidate_trust_root_raw_sha256": null,
+    "candidate_trust_root_canonical_sha256": null,
+    "root_key_proof_raw_sha256": null,
+    "root_key_proof_canonical_sha256": null
+  },
+  "repository_provenance": {
+    "repository": "stefanhasselm74314-byte/UniverseLab",
+    "commit_or_tag": null,
+    "commit_or_tag_verified": null,
+    "verification_provider": null,
+    "verification_reason": null,
+    "verification_key_fingerprint_or_identity": null
+  },
+  "human_attribution_review": {
+    "status": "PENDING_MANUAL_REVIEW",
+    "reviewed_by": null,
+    "reviewed_at_utc": null,
+    "review_notes": null,
+    "single_human_project_self_review_disclosed": null
+  },
+  "custody_and_revocation": {
+    "private_key_not_in_repository": null,
+    "private_key_not_in_ci": null,
+    "private_key_not_shared_with_assistant_or_chat": null,
+    "offline_custody_location_class": null,
+    "backup_policy": null,
+    "revocation_contact_or_procedure": null,
+    "compromise_response": "fail closed; publish a versioned revocation artifact; block operative verification"
+  },
+  "ratified": false,
+  "final_ratified_trust_root_artifact": null,
+  "firewall": {
+    "this_template_is_human_adoption": false,
+    "this_record_alone_is_ratification": false,
+    "machine_verifier_may_assert_human_identity": false,
+    "operative_authorization_allowed": false,
+    "runtime_issuance_allowed": false,
+    "backend_import_allowed": false,
+    "solver_execution_allowed": false,
+    "physical_evidence_effect": "NONE"
+  },
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "governed_run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4"
+}

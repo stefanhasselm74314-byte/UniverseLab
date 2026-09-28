@@ -1,0 +1,140 @@
+{
+  "schema": "universelab.workstream-links.v1",
+  "version": "1.3.0",
+  "date": "2026-08-16",
+  "classification": "COORDINATION_AND_CHAT_NAMING_GOVERNANCE_ONLY",
+  "canonical_text_source": "ACTIVE_LINKS.md",
+  "chat_inventory_source": "registry/2026-08-16_UniverseLab_ChatInventory_v1.0.json",
+  "preferred_mobile_entry": "links.html",
+  "private_chat_urls_published": false,
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "title_contract": {
+    "pattern": "<STATUS> — <PROJECT/FUNCTION> — <OPTIONAL SCOPE>",
+    "allowed_status_prefixes": ["ACTIVE", "UTILITY", "AUDIT", "CLOSED", "ARCHIVE", "BLOCKED"],
+    "rule": "Chat title status is coordination metadata only and never promotes scientific or solver release state."
+  },
+  "identity_contract": {
+    "rule": "CHAT_TITLE_IS_NOT_CHAT_IDENTITY",
+    "public_identity_key": "chat_identity_alias",
+    "private_conversation_ids_published": false,
+    "inventory_rule": "The complete visible project-chat inventory is maintained separately from governed workstreams. A visible chat is not promoted to a governed workstream from title alone.",
+    "evidence_rule": "Title history may support identity resolution, but repository governance must mark unresolved or user-evidence-only identity claims explicitly."
+  },
+  "rules": [
+    "CHAT_CONTENT_IS_NOT_CANONICAL_PHYSICAL_EVIDENCE",
+    "GITHUB_ARTIFACTS_REGISTRIES_TESTS_PRS_AND_MERGE_COMMITS_CARRY_PROJECT_PROVENANCE",
+    "NO_AUTOMATIC_STATUS_TRANSFER_BETWEEN_WORKSTREAMS",
+    "PRIVATE_CHATGPT_CONVERSATION_IDENTIFIERS_ARE_NOT_PUBLISHED",
+    "CHAT_TITLE_IS_NOT_CHAT_IDENTITY",
+    "NO_WORKSTREAM_PROMOTION_FROM_TITLE_ALONE",
+    "GSRA01_REMAINS_REPOSITORY_SEPARATE_FROM_UNIVERSELAB"
+  ],
+  "workstreams": [
+    {
+      "id": "WS-PLATFORM-ARCH",
+      "observed_chat_title": "ACTIVE - UniverseLab Forschungsplattform",
+      "recommended_chat_title": "ACTIVE — UniverseLab Forschungsplattform",
+      "status": "ACTIVE",
+      "domain": "PLATFORM_GOVERNANCE",
+      "responsibility": "UniverseLab platform architecture, SiteState, reproducibility, navigation, status-axis separation and governed UI/registry integration.",
+      "canonical_outputs": ["https://github.com/stefanhasselm74314-byte/UniverseLab/pull/139"]
+    },
+    {
+      "id": "WS-ULSH01-BG3C5",
+      "observed_chat_title": null,
+      "candidate_visible_title": "ACTIVE - ULSH-07 C-PHYSX Solverentwicklung",
+      "chat_identity_resolution": "REVIEW_REQUIRED__DO_NOT_MAP_ULSH07_TO_ULSH01_FROM_TITLE_ALONE",
+      "status": "ACTIVE_CRITICAL_PATH_REPOSITORY_STATE",
+      "domain": "SCIENCE_SOLVER",
+      "responsibility": "Known ULSH-01 C-PHYS Background3C5 response-rank and finite-thickness critical path as represented by repository provenance.",
+      "current_task": "G5_FULL_FINITE_THICKNESS_OPERATOR_IDENTITY",
+      "canonical_outputs": ["https://github.com/stefanhasselm74314-byte/UniverseLab/pull/137"],
+      "scientific_state": {"rank_R":"OPEN_NOT_EXECUTED","K1-D":"NOT_RELEASED","K1-E":"NOT_ADMISSIBLE"}
+    },
+    {
+      "id": "WS-ACTIVE-LINKS",
+      "observed_chat_title": "UTILITY - Universelab Wichtige Links",
+      "recommended_chat_title": "UTILITY — UniverseLab Wichtige Links",
+      "status": "ACTIVE",
+      "domain": "LINK_GOVERNANCE",
+      "responsibility": "Maintain canonical active links and workstream destinations.",
+      "canonical_outputs": ["https://stefanhasselm74314-byte.github.io/UniverseLab/links.html","https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/ACTIVE_LINKS.md"]
+    },
+    {
+      "id": "WS-ULSH-MASTER-CP01R2-HISTORICAL-THREAD",
+      "chat_identity_alias": "CHAT-ULSH-MASTER-CP01R2-HISTORICAL",
+      "observed_current_title": "CLOSED - CPOTR2-08 Laufwache",
+      "historical_titles": ["ULSH Master Build Order", "CP01R2 D8 Laufwache", "CLOSED — CP01R2-D8 Laufwache"],
+      "recommended_chat_title": "ARCHIVE — ULSH Master / CP01R2 historische Ausführung",
+      "status": "ARCHIVE_REFERENCE_WITH_CLOSED_RUN_PHASE",
+      "domain": "SOLVER_PROGRAM_MANAGEMENT_AND_RUN_WATCH_PROVENANCE",
+      "responsibility": "Historical chat thread containing the ULSH 14-solver Master Build Order phase and later CP01R2-D8 run-watch provenance. No further execution from the closed run-watch phase.",
+      "identity_resolution": "USER_EVIDENCE_STRONGLY_SUPPORTS_SAME_CONVERSATION__PRIVATE_CHATGPT_ID_NOT_REPOSITORY_VERIFIED",
+      "replay_permitted": false,
+      "program_outputs": ["https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_MasterBuildOrder_v1.0.html"],
+      "run_watch_phase": {"status":"CLOSED_NON_REPLAYABLE","current_task":"NONE_COMPLETED"}
+    },
+    {
+      "id": "WS-C1-THEORY-LEGACY",
+      "observed_chat_title": "ARCHIVE - HIT-MI0-SG-C Theorie - Vorgänger",
+      "recommended_chat_title": "ARCHIVE — HZT-M0-S6-C1 Theorie — Vorgänger",
+      "status": "ARCHIVE_REFERENCE",
+      "domain": "THEORY_HISTORY",
+      "responsibility": "Original C1 theory workstream retained as provenance/reference after chat-length exhaustion.",
+      "superseded_by": "WS-C1-CONTINUATION"
+    },
+    {
+      "id": "WS-C1-CONTINUATION",
+      "observed_chat_title": "ACTIVE - HIT-M0-SG-CI continuation - SOlverplanung",
+      "recommended_chat_title": "ACTIVE — HZT-M0-S6-C1 Continuation — Solverplanung",
+      "status": "ACTIVE_CONTINUATION",
+      "domain": "THEORY_HANDOFF_SOLVER_PLANNING",
+      "responsibility": "Canonical continuation of C1 without C2 version jump; handoff and solver-wide planning.",
+      "canonical_outputs": ["https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_MasterBuildOrder_v1.0.html"]
+    },
+    {
+      "id": "WS-ULSH-MASTER-CONTINUATION",
+      "observed_chat_title": "ULSH Master Build Order",
+      "recommended_chat_title": "ACTIVE — ULSH Master Control — Continuation",
+      "status": "ACTIVE_CONTINUATION",
+      "domain": "SOLVER_PROGRAM_MANAGEMENT",
+      "responsibility": "Fresh continuation/control chat for the 14-solver development program, 56 work packages, critical paths and release-gate sequencing. It must not be confused with the historical chat thread that later became the CP01R2-D8 run watch.",
+      "supersedes_for_active_coordination": "WS-ULSH-MASTER-CP01R2-HISTORICAL-THREAD",
+      "canonical_outputs": ["https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_MasterBuildOrder_v1.0.html"]
+    },
+    {
+      "id": "WS-TECH-AUDIT",
+      "observed_chat_title": "Technischer Neben-/Analysechat: UniverseLab Fehleranalyse",
+      "recommended_chat_title": "AUDIT — UniverseLab Fehleranalyse",
+      "status": "ACTIVE",
+      "domain": "TECHNICAL_AUDIT_QA",
+      "responsibility": "Repository/CI error analysis, P0 verification, integration audits and technical exceptional cases.",
+      "canonical_outputs": ["https://stefanhasselm74314-byte.github.io/UniverseLab/source.html"]
+    },
+    {
+      "id": "WS-HZT-STATUS-LEGACY",
+      "observed_chat_title": "Hyperzeit Projektstatus Update",
+      "recommended_chat_title": "ARCHIVE — Hyperzeit Projektstatus Update — Übergabestand",
+      "status": "ARCHIVE_REFERENCE",
+      "domain": "THEORY_STATUS_HISTORY",
+      "responsibility": "Historical project-status and strategy snapshot retained for provenance; not the current solver execution authority."
+    },
+    {
+      "id": "WS-GSRA01-SYSTEM-ARCH",
+      "observed_chat_title": null,
+      "recommended_chat_title": "ACTIVE — Generationsschiff Sagittarius A* — Systemarchitektur",
+      "status": "ACTIVE_INDEPENDENT_PROJECT",
+      "domain": "GSRA01_SYSTEM_ENGINEERING",
+      "project": "GSRA-01 Generation Ship",
+      "responsibility": "Re-definition and system-level engineering of the interstellar generation ship toward Sagittarius A*.",
+      "separation_from_universelab": "STRICT_REPOSITORY_SEPARATION_INTERFACE_ONLY",
+      "physics_rule": "Unverified HZT/Hyperzeit mechanisms may be studied as research options but must not be treated as engineering requirements or demonstrated propulsion technology.",
+      "canonical_outputs": [
+        "https://github.com/stefanhasselm74314-byte/GSRA-01-Generation-Ship",
+        "https://github.com/stefanhasselm74314-byte/GSRA-01-Control-Center",
+        "https://stefanhasselm74314-byte.github.io/GSRA-01-Control-Center/"
+      ]
+    }
+  ]
+}

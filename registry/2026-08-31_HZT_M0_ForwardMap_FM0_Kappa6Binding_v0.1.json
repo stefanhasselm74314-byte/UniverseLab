@@ -1,0 +1,87 @@
+{
+  "schema": "hzt-m0.forward-map.fm0.kappa6-binding.v0.1",
+  "date": "2026-08-31",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "workstream": "WS1",
+  "work_package": "FM-0",
+  "item": "kappa_6",
+  "display": "κ_6",
+  "classification": "PROVENANCE_RECOVERY_NO_NEW_PHYSICS",
+  "recovery_status": "PARTIALLY_RESOLVED_CANONICAL_PARENT_RECOVERED",
+  "canonical_parent_binding": {
+    "source": "convention-registry.json",
+    "source_scope": "Canonical conventions for current controlled calculations. Branch-specific deviations require explicit rederivation.",
+    "branch": "HZT-M0-S6",
+    "einstein_hilbert_action": "S_EH = (1/(2 kappa_6^2)) integral d^6X sqrt(|g_6|) (R_6 - 2 Lambda_6)",
+    "kappa_relation": "kappa_6^2 = 8 pi G_6",
+    "canonical_dimension_statement": "kappa_6_squared: L^4 = M^-4",
+    "units": "natural; c=1; hbar=1; [L]=[M]^-1"
+  },
+  "corroborating_parent_action": {
+    "source": "SCI-001-002_v0.1_Canonical_6D_Parent_Action_and_Boundary_Closure.md",
+    "equation_id": "HZT-S6-PAR-v0.1-EQ-001",
+    "coefficient_statement": "The controlled HZT-M0-S6 core action uses M_6^4/2 multiplying (R-2 Lambda_6).",
+    "machine_source": "hzt-s6-parent-action-v0.1.json",
+    "machine_source_M6_mass_dimension": 1,
+    "checker_source": "hzt_parent_action_checker_v0_1.py",
+    "checker_dimension_statement": "M6^4 R has mass dimension 6"
+  },
+  "recovered_definition": "Six-dimensional gravitational coupling appearing in the canonical Einstein-Hilbert normalization 1/(2 kappa_6^2).",
+  "status_class": "CANONICAL_PARENT_GRAVITATIONAL_COUPLING_NORMALIZATION",
+  "dimension": {
+    "kappa_6_squared": "L^4 = M^-4",
+    "kappa_6": "L^2 = M^-2",
+    "kappa_6_dimension_class": "ALGEBRAIC_INFERENCE_FROM_CANONICAL_SQUARED_DIMENSION"
+  },
+  "upstream_inputs": [
+    "G_6 through canonical relation kappa_6^2 = 8 pi G_6"
+  ],
+  "downstream_observables": "OPEN_RECOVERY_REQUIRED",
+  "inferences": [
+    {
+      "id": "FM0-K6-INF-001",
+      "classification": "ALGEBRAIC_INFERENCE_NOT_CANONICAL_BINDING",
+      "statement": "[kappa_6] = L^2 = M^-2",
+      "basis": "convention-registry.json directly fixes [kappa_6^2] = L^4 = M^-4; taking the dimension of the squared quantity gives half the exponent.",
+      "canonical_binding_effect": "NONE"
+    },
+    {
+      "id": "FM0-K6-INF-002",
+      "classification": "ALGEBRAIC_INFERENCE_NOT_CANONICAL_BINDING",
+      "statement": "If convention-registry.json and HZT-S6-PAR-v0.1-EQ-001 are the same Einstein-Hilbert normalization with no additional gravitational prefactor, coefficient matching gives kappa_6^2 = M_6^-4.",
+      "basis": "Canonical convention coefficient 1/(2 kappa_6^2) compared with controlled parent-action coefficient M_6^4/2.",
+      "assumptions": [
+        "same HZT-M0-S6 Einstein-Hilbert sector",
+        "no hidden branch-specific multiplicative normalization",
+        "no transfer to P5 or HZT-Full"
+      ],
+      "canonical_binding_effect": "NONE",
+      "promotion_status": "NOT_PROMOTED_TO_DIRECT_CANONICAL_M6_IDENTITY"
+    }
+  ],
+  "corroborating_use": {
+    "source": "SCI-001-002_v0.2_MD-2S_Background_Substitution_Preflight.md",
+    "statement": "The source-supported benchmark uses the dimensionless combination kappa6^2 lambda_eff / (4 sqrt(K4)).",
+    "role": "CORROBORATES_SYMBOL_USE_NOT_DEFINITION_OR_FORWARD_MAP"
+  },
+  "remaining_blockers": [
+    "Explicit canonical normalization identity between kappa_6 and M_6 if that identity is required by the reduced parameter contract.",
+    "Parent-to-reduced role of kappa_6 in the HZT-M0 five-parameter Forward Map.",
+    "Downstream observable dependencies for O_RAR, O_cosmo, O_growth, O_lensing and O_GW."
+  ],
+  "gap_decision": {
+    "gap_id": "FM0-GAP-005",
+    "blocking": true,
+    "status": "PARTIALLY_RESOLVED_CANONICAL_PARENT_RECOVERED_MAPPING_OPEN",
+    "close_gap": false
+  },
+  "gate": "FM-G0",
+  "gate_status": "OPEN",
+  "cp01r4_state": "FROZEN_NO_EXECUTION",
+  "physical_background": "NOT_ESTABLISHED",
+  "rank_R": "OPEN_NOT_EXECUTED",
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

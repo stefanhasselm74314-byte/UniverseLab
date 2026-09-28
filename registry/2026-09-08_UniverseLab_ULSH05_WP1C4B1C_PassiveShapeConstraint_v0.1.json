@@ -1,0 +1,126 @@
+{
+  "schema": "universelab.ulsh05.wp1c4b1c.passive-shape-constraint.v0.1",
+  "date": "2026-09-08",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1C4B1C",
+  "classification": "NONOPERATIVE_COMPONENT_PASSIVE_SHAPE_CONSTRAINT_REDUCTION_PREFLIGHT",
+  "status": "DERIVED_PASSIVE_CONSTRAINT_RELATION_FROM_NN_CONSTRAINTS_AND_ISRAEL_FULL_MOVING_FIRST_VARIATION_NOT_YET_ASSEMBLED",
+  "basis_main": "9c4795b878360538125029fb1cf4905e2ae1c425",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "dependencies": [
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+    "registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json",
+    "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+    "science/hzt-m0/md2s/2026-08-03_MD2S_BulkLocalizedActionAndJunctionLedger_v0.1.md"
+  ],
+  "orientation_dictionary": {
+    "common_normal": "N=n_N_out=-n_S_out, directed from the north regional side toward the south regional side",
+    "common_normal_extrinsic_curvatures": [
+      "K_N^c=K_N^out",
+      "K_S^c=-K_S^out"
+    ],
+    "jump": "[X]_c=X_S^c-X_N^c",
+    "average": "<X>_c=(X_S^c+X_N^c)/2",
+    "outward_sum_israel": "Pi_N^out+Pi_S^out=kappa6^2*S",
+    "common_normal_israel": "[Pi]_c=-kappa6^2*S",
+    "Pi_ab": "K_ab-K*h_ab"
+  },
+  "gauss_hamiltonian_projection": {
+    "project_K_convention": "K_ab=+h_a^A h_b^B nabla_A n_B",
+    "normal_signature": "+1",
+    "formula": "G_NN=0.5*(K^2-K_ab*K^ab-R5)",
+    "einstein_equation": "M6^4*(G_AB+Lambda6*g_AB)=T_AB",
+    "jump_simplification": "continuity of the induced metric makes R5 identical on both sides; one common Lambda6 cancels in the jump",
+    "sign_control": "for ds6^2=dr^2+exp(2*c*r)*eta_ab dy^a dy^b with five tangential dimensions, direct curvature gives G_rr=+10*c^2, matching the frozen projection formula"
+  },
+  "israel_jump_algebra": {
+    "surface_dimension": 5,
+    "trace_result": "[K]_c=kappa6^2*S/4",
+    "metric_jump": "[K_ab]_c=-kappa6^2*(S_ab-S*h_ab/4)",
+    "quadratic_jump_identity": "[K^2-K_ab*K^ab]_c=2*kappa6^2*S^ab*<K_ab>_c",
+    "normal_einstein_jump": "[G_NN]_c=kappa6^2*S^ab*<K_ab>_c"
+  },
+  "passive_shape_constraint": {
+    "master": "S^ab*<K_ab>_c=[T_NN]_c=T_NN,S-T_NN,N",
+    "classification": "DERIVED_COMPONENT_CONSTRAINT_IDENTITY_IN_PROJECT_ORIENTATION",
+    "independence": "REDUNDANT_IF_BOTH_REGIONAL_NN_EINSTEIN_CONSTRAINTS_AND_FULL_METRIC_ISRAEL_JUNCTION_HOLD",
+    "israel_only_sufficiency": false,
+    "offshell_status": "the residual need not vanish if either regional NN constraint or Israel is nonzero",
+    "relation_to_wp1c4b1b": "explicit project-component realization of one gravitational constraint reduction underlying the abstract Shape-Ward redundancy; it does not replace the complete first-variation Ward identity"
+  },
+  "m1_static_specialization": {
+    "common_normal_averages": [
+      "Abar_n=0.5*(A_N,x-A_S,x)",
+      "Lbar_n=0.5*(ell_N,x/ell_Sigma-ell_S,x/ell_Sigma)"
+    ],
+    "surface_stress_mixed_components": [
+      "S_mu^nu/M6^5=(-lambda_hat-Y_hat_sigma/2)*delta_mu^nu",
+      "S_chi^chi/M6^5=-lambda_hat+Y_hat_sigma/2"
+    ],
+    "surface_contraction": "S^ab*<K_ab>/M6^6=4*(-lambda_hat-Y_hat_sigma/2)*Abar_n+(-lambda_hat+Y_hat_sigma/2)*Lbar_n",
+    "normal_bulk_stress": "t_NN,s=T_NN,s/M6^6=0.5*varphi_s,x^2-0.5*mhat_phi_sq*varphi_Sigma^2+rho_F,s",
+    "component_equation": "4*(-lambda_hat-Y_hat_sigma/2)*Abar_n+(-lambda_hat+Y_hat_sigma/2)*Lbar_n=t_NN,S-t_NN,N",
+    "scalar_junction_optional_reduction": "if varphi_N,x+varphi_S,x=0 and varphi is continuous, the scalar-gradient-square and potential contributions cancel in the jump, leaving t_NN,S-t_NN,N=rho_F,S-rho_F,N",
+    "z2_control": "reflection-symmetric two-side data give <K_ab>_c=0 and [T_NN]_c=0, so the passive equation is identically satisfied"
+  },
+  "independent_controls": {
+    "israel_algebra": "random deterministic anisotropic 4+1 cap slopes are converted to lambda_hat and Y_hat_sigma through the two project Israel equations; the resulting surface contraction equals the jump of the geometric rr-constraint term",
+    "m1_rr_constraint": "the dimensionless frozen rr constraint independently reproduces the same T_NN jump and hence the same passive equation sign",
+    "warped_sign": "direct connection/Ricci control for a six-dimensional constant warp gives G_rr=+10*c^2",
+    "israel_only_negative": "keep Israel satisfied but perturb the south NN stress away from its regional constraint value; the passive residual becomes nonzero",
+    "z2_limit": "equal outward regional slopes and equal normal stresses give zero common-normal average and zero stress jump"
+  },
+  "not_closed": [
+    "direct moving-action first-variation assembly showing the same passive residual without using the NN constraint reduction",
+    "full component Gauss-Codazzi/Bianchi Ward functional including scalar/gauge/phase residual terms away from their equations",
+    "moving GHY plus localized-cap second variation",
+    "assembled full boundary Hessian",
+    "configuration-space connection for a globally covariant off-shell Hessian",
+    "released perturbed junction boundary-value operator",
+    "global fixed-interface gauge admissibility",
+    "S/V/T reduction and constraint elimination",
+    "physical background",
+    "ghost freedom and stability",
+    "6D-to-4D perturbative reduction and observables"
+  ],
+  "gate_state": {
+    "WP1_shape_Ward_identity": "DERIVED_CONDITIONAL_REDUNDANCY",
+    "WP1_passive_shape_constraint": "DERIVED_FROM_NN_CONSTRAINTS_AND_ISRAEL",
+    "WP1_israel_only_shape_closure": "FALSE",
+    "WP1_full_shape_residual": "NOT_ASSEMBLED_FROM_DIRECT_MOVING_ACTION",
+    "WP1_full_boundary_hessian": "NOT_CLOSED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "Do not claim that Israel alone implies the passive equation.",
+    "Do not impose the passive residual as a solved physical equation before PHYSICAL_BACKGROUND is established.",
+    "Do not identify this constraint reduction with a direct derivation of the complete moving-action shape functional.",
+    "Do not infer a closed boundary Hessian, ghost freedom, stability, spectrum or 6D-to-4D observable map.",
+    "Do not authorize backend import or solver execution."
+  ],
+  "next_block": {
+    "id": "ULSH-05/WP1C4B1D",
+    "title": "Direct moving-action first shape residual assembly and equivalence check",
+    "execution_type": "ANALYTIC_NONOPERATIVE",
+    "required_output": [
+      "assemble regional bulk-domain transport with the moving GHY first variation and intrinsic localized-cap first variation",
+      "derive the coefficient of one common normal displacement without using the NN constraints as an input",
+      "compare the direct shape residual with the C4B1C passive constraint after imposing the regional NN constraints and Israel",
+      "track scalar/gauge/phase residual terms explicitly in the off-shell Ward identity",
+      "retain PHYSICAL_BACKGROUND=NOT_ESTABLISHED and all execution firewalls"
+    ]
+  }
+}

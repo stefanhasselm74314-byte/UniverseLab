@@ -1,0 +1,30 @@
+name: MD2S B1.4E primary package recovery v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-08-26_MD2S_R1L_ForensicEvidenceRegister_v1.6.json'
+      - 'recovery/2026-08-26_MD2S_B14E_PrimaryPackageRecovery_v1.0.md'
+      - 'tests/2026-08-26_test_MD2S_B14E_PrimaryPackageRecovery_v1.0.py'
+      - '.github/workflows/2026-08-26_MD2S_B14E_PrimaryPackageRecovery_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-08-26_MD2S_R1L_ForensicEvidenceRegister_v1.6.json'
+      - 'recovery/2026-08-26_MD2S_B14E_PrimaryPackageRecovery_v1.0.md'
+      - 'tests/2026-08-26_test_MD2S_B14E_PrimaryPackageRecovery_v1.0.py'
+      - '.github/workflows/2026-08-26_MD2S_B14E_PrimaryPackageRecovery_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate B1.4E recovery register
+        run: python tests/2026-08-26_test_MD2S_B14E_PrimaryPackageRecovery_v1.0.py

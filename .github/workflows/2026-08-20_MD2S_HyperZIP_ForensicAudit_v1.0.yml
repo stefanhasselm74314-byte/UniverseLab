@@ -1,0 +1,30 @@
+name: MD2S HyperZIP forensic audit v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'recovery/2026-08-20_MD2S_HyperZIP_ForensicAudit_v1.0.md'
+      - 'registry/2026-08-20_MD2S_R1L_ForensicEvidenceRegister_v1.2.json'
+      - 'tests/2026-08-20_test_MD2S_HyperZIP_ForensicAudit_v1.0.py'
+      - '.github/workflows/2026-08-20_MD2S_HyperZIP_ForensicAudit_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'recovery/2026-08-20_MD2S_HyperZIP_ForensicAudit_v1.0.md'
+      - 'registry/2026-08-20_MD2S_R1L_ForensicEvidenceRegister_v1.2.json'
+      - 'tests/2026-08-20_test_MD2S_HyperZIP_ForensicAudit_v1.0.py'
+      - '.github/workflows/2026-08-20_MD2S_HyperZIP_ForensicAudit_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  forensic-audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate archive-scoped forensic binding
+        run: python tests/2026-08-20_test_MD2S_HyperZIP_ForensicAudit_v1.0.py

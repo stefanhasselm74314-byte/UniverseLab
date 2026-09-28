@@ -1,0 +1,165 @@
+{
+  "schema": "hzt-m0.forward-map.fm0.inventory.v0.3",
+  "date": "2026-08-31",
+  "supersedes": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.2.json",
+  "status": "ACTIVE_TARGETED_PARENT_RECOVERY",
+  "classification": "PROVENANCE_INVENTORY_NO_NEW_PHYSICS",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "workstream": "WS1",
+  "workstream_status": "ACTIVE_FM0",
+  "work_package": "FM-0",
+  "work_package_status": "ACTIVE_TARGETED_PARENT_RECOVERY",
+  "gate": "FM-G0",
+  "gate_status": "OPEN",
+  "gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.2.json",
+  "recovery_report": "2026-08-31_HZT_M0_ForwardMap_FM0_Kappa6ParentRecovery_v0.1.md",
+  "parent_recovery_baseline": "2026-08-31_HZT_M0_ForwardMap_FM0_ParentCanonRecovery_v0.1.md",
+  "parameter_set": [
+    {
+      "symbol": "a0",
+      "recovery_status": "OPEN_RECOVERY_REQUIRED",
+      "definition": "OPEN_RECOVERY_REQUIRED",
+      "dimension": "OPEN_RECOVERY_REQUIRED",
+      "parent_provenance": "OPEN_RECOVERY_REQUIRED",
+      "status_class": "UNRESOLVED_FUNDAMENTAL_DERIVED_OR_EFFECTIVE",
+      "mapping_status": "NOT_YET_CLAIMED",
+      "identity_with_A0": "NO_IDENTITY_ASSERTED",
+      "blocking_gap": "FM0-GAP-001"
+    },
+    {
+      "symbol": "beta_tau",
+      "display": "β_τ",
+      "recovery_status": "OPEN_RECOVERY_REQUIRED",
+      "definition": "OPEN_RECOVERY_REQUIRED",
+      "dimension": "OPEN_RECOVERY_REQUIRED",
+      "parent_provenance": "OPEN_RECOVERY_REQUIRED",
+      "status_class": "UNRESOLVED_FUNDAMENTAL_DERIVED_OR_EFFECTIVE",
+      "mapping_status": "NOT_YET_CLAIMED",
+      "blocking_gap": "FM0-GAP-002"
+    },
+    {
+      "symbol": "R_chi",
+      "display": "R_χ",
+      "recovery_status": "OPEN_RECOVERY_REQUIRED",
+      "definition": "OPEN_RECOVERY_REQUIRED",
+      "dimension": "OPEN_RECOVERY_REQUIRED",
+      "parent_provenance": "OPEN_RECOVERY_REQUIRED",
+      "status_class": "UNRESOLVED_FUNDAMENTAL_DERIVED_OR_EFFECTIVE",
+      "mapping_status": "NOT_YET_CLAIMED",
+      "blocking_gap": "FM0-GAP-003"
+    },
+    {
+      "symbol": "I_B",
+      "display": "𝓘_B",
+      "recovery_status": "OPEN_RECOVERY_REQUIRED",
+      "definition": "OPEN_RECOVERY_REQUIRED",
+      "dimension": "OPEN_RECOVERY_REQUIRED",
+      "parent_provenance": "OPEN_RECOVERY_REQUIRED",
+      "status_class": "UNRESOLVED_FUNDAMENTAL_DERIVED_OR_EFFECTIVE",
+      "mapping_status": "NOT_YET_CLAIMED",
+      "blocking_gap": "FM0-GAP-004"
+    },
+    {
+      "symbol": "kappa_6",
+      "display": "κ_6",
+      "recovery_status": "PARTIALLY_RESOLVED_CANONICAL_PARENT_RECOVERED",
+      "definition": "Six-dimensional gravitational coupling appearing in the canonical Einstein-Hilbert normalization 1/(2 kappa_6^2).",
+      "dimension": "L^2 = M^-2",
+      "dimension_provenance": "Algebraic consequence of canonical convention-registry.json statement [kappa_6^2] = L^4 = M^-4.",
+      "parent_provenance": "convention-registry.json::gravity",
+      "status_class": "CANONICAL_PARENT_GRAVITATIONAL_COUPLING_NORMALIZATION",
+      "mapping_status": "PARENT_DEFINITION_RECOVERED_REDUCED_OBSERVABLE_MAPPING_OPEN",
+      "canonical_relations": [
+        "S_EH = (1/(2 kappa_6^2)) integral d^6X sqrt(|g_6|) (R_6 - 2 Lambda_6)",
+        "kappa_6^2 = 8 pi G_6",
+        "[kappa_6^2] = L^4 = M^-4"
+      ],
+      "upstream_inputs": [
+        "G_6 through canonical relation kappa_6^2 = 8 pi G_6"
+      ],
+      "downstream_observables": "OPEN_RECOVERY_REQUIRED",
+      "binding_artifact": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Kappa6Binding_v0.1.json",
+      "inferences": [
+        {
+          "id": "FM0-K6-INF-001",
+          "classification": "ALGEBRAIC_INFERENCE_NOT_CANONICAL_BINDING",
+          "statement": "[kappa_6] = L^2 = M^-2",
+          "basis": "Canonical [kappa_6^2] = L^4 = M^-4 in convention-registry.json."
+        },
+        {
+          "id": "FM0-K6-INF-002",
+          "classification": "ALGEBRAIC_INFERENCE_NOT_CANONICAL_BINDING",
+          "statement": "Conditional coefficient matching of the canonical kappa_6 normalization and HZT-S6-PAR-v0.1-EQ-001 gives kappa_6^2 = M_6^-4.",
+          "basis": "1/(2 kappa_6^2) versus M_6^4/2 for the HZT-M0-S6 Einstein-Hilbert coefficient; direct canonical kappa_6-to-M_6 identity has not been located."
+        }
+      ],
+      "blocking_gap": "FM0-GAP-005"
+    }
+  ],
+  "observable_blocks": [
+    {
+      "id": "O_RAR",
+      "recovery_status": "OPEN_RECOVERY_REQUIRED",
+      "provenance_class": "PROGRAM_DECLARATION_ONLY",
+      "mapping_status": "NOT_YET_CLAIMED",
+      "blocking_gap": "FM0-GAP-006"
+    },
+    {
+      "id": "O_cosmo",
+      "recovery_status": "OPEN_RECOVERY_REQUIRED",
+      "provenance_class": "PROGRAM_DECLARATION_ONLY",
+      "mapping_status": "NOT_YET_CLAIMED",
+      "blocking_gap": "FM0-GAP-007"
+    },
+    {
+      "id": "O_growth",
+      "recovery_status": "OPEN_RECOVERY_REQUIRED",
+      "provenance_class": "PROGRAM_DECLARATION_ONLY",
+      "mapping_status": "NOT_YET_CLAIMED",
+      "blocking_gap": "FM0-GAP-008"
+    },
+    {
+      "id": "O_lensing",
+      "recovery_status": "OPEN_RECOVERY_REQUIRED",
+      "provenance_class": "PROGRAM_DECLARATION_ONLY",
+      "mapping_status": "NOT_YET_CLAIMED",
+      "blocking_gap": "FM0-GAP-009"
+    },
+    {
+      "id": "O_GW",
+      "recovery_status": "OPEN_RECOVERY_REQUIRED",
+      "provenance_class": "PROGRAM_DECLARATION_ONLY",
+      "mapping_status": "NOT_YET_CLAIMED",
+      "blocking_gap": "FM0-GAP-010"
+    }
+  ],
+  "inference_policy": {
+    "canonical_source_statement_required_before_inference": true,
+    "required_inference_class": "ALGEBRAIC_INFERENCE_NOT_CANONICAL_BINDING",
+    "basis_required": true,
+    "inference_never_closes_parent_provenance_gap_by_itself": true
+  },
+  "firewall": {
+    "WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "WP2": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED",
+    "operative_AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_run": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "WP3": "NOT_STARTED",
+    "WP4": "BLOCKED_NOT_AUTHORIZED",
+    "rank_R": "OPEN_NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "restart_anchors": {
+    "release_subject": "d8890b9ef47936edf8bb7e758b882c898241b314",
+    "target": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "cp01r4_payload": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+    "release_package_16_file": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621"
+  },
+  "cp01r4_state": "FROZEN_NO_EXECUTION",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

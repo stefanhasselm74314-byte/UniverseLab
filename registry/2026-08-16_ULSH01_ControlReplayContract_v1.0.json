@@ -1,0 +1,78 @@
+{
+  "schema": "universelab.ulsh01.control-replay-contract.v1",
+  "version": "1.0.0",
+  "date": "2026-08-16",
+  "module_id": "ULSH-01",
+  "solver_id": "MD2S-BVP",
+  "replay_id": "ULSH01-AF0-CONTROL-REPLAY-v1",
+  "classification": "FRESH_REAL_BACKEND_ANALYTIC_CONTROL_REPLAY_ONLY",
+  "purpose": "Freshly execute the already-audited a_F=0 software control and compare it numerically with the governed reference package without authorizing or attempting the physical CP01R1 target.",
+  "reference_package": {
+    "contract": "registry/2026-08-16_ULSH01_ReproducibilityContract_v1.0.json",
+    "input": "reproducibility/ulsh-01/2026-08-16_ULSH01_ControlReferenceInput_v1.0.json",
+    "output": "reproducibility/ulsh-01/2026-08-16_ULSH01_ControlReferenceOutput_v1.0.json",
+    "tolerance": "reproducibility/ulsh-01/2026-08-16_ULSH01_ToleranceContract_v1.0.json",
+    "provenance": "reproducibility/ulsh-01/2026-08-16_ULSH01_RunProvenance_v1.0.json",
+    "sha256_manifest": "reproducibility/ulsh-01/2026-08-16_ULSH01_SHA256SUMS_v1.0.txt"
+  },
+  "execution_binding": {
+    "release_tool": "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c10_real_backend_control_release_v0.3.py",
+    "command": "self-test --json",
+    "control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R3",
+    "control_a_F": 0.0,
+    "dependency_lock": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt",
+    "runner": "ubuntu-24.04",
+    "python": "3.12",
+    "fresh_execution_required": true,
+    "runtime_commit_binding": "GITHUB_SHA",
+    "runtime_workflow_binding": "GITHUB_RUN_ID"
+  },
+  "determinism_controls": {
+    "PYTHONHASHSEED": "0",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1",
+    "network_during_solver_workers": false,
+    "randomness_allowed": false
+  },
+  "comparison_contract": {
+    "candidate_mode": "NUMERICAL_MATCH",
+    "candidate_absolute_tolerance": 1e-12,
+    "candidate_relative_tolerance": 1e-12,
+    "metric_mode": "FROZEN_ACCEPTANCE_THRESHOLDS",
+    "metric_thresholds_remain_authoritative": true,
+    "bitwise_float_identity_required": false,
+    "primary_node_schedule_exact": [24, 48, 96],
+    "independent_cutoff_schedule_exact": [0.001, 0.0005, 0.00025]
+  },
+  "required_firewalls": {
+    "cp01r1_attempts": 0,
+    "target_a_F_one_quarter_solves": 0,
+    "primary_newton_calls": 0,
+    "independent_shooting_jacobian_calls": 0,
+    "nonlinear_root_calls": 0,
+    "operative_grants_created": 0,
+    "physical_result_artifacts_created": 0,
+    "physical_run_cli_exit_code": 73,
+    "physical_target_authorized": false
+  },
+  "pass_status": "PASS_FRESH_AF0_CONTROL_REPLAY_NUMERICAL_MATCH",
+  "failure_status": "FAIL_CLOSED_CONTROL_REPLAY_MISMATCH",
+  "scientific_semantics": {
+    "control_replay_effect": "SOFTWARE_NUMERICAL_REPRODUCIBILITY_ONLY",
+    "physical_target": "NOT_APPLICABLE_NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "solver_release": "NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  },
+  "forbidden_inferences": [
+    "A fresh a_F=0 replay is not a physical CP01R1 background execution.",
+    "Numerical replay agreement is not continuum existence, uniqueness, Fredholmness, stability or ghost freedom.",
+    "No K1-D release, K1-E admissibility or physical evidence follows from this replay."
+  ]
+}

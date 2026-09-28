@@ -1,0 +1,59 @@
+name: UniverseLab browser runtime parity audit
+
+on:
+  pull_request:
+    paths:
+      - '**/*.html'
+      - 'assets/**'
+      - 'tools/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.mjs'
+      - '.github/workflows/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.yml'
+  push:
+    branches: [ main ]
+    paths:
+      - '**/*.html'
+      - 'assets/**'
+      - 'tools/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.mjs'
+      - '.github/workflows/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Select audit target
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            mkdir -p /tmp/universelab-pages
+            ln -s "$GITHUB_WORKSPACE" /tmp/universelab-pages/UniverseLab
+            cd /tmp/universelab-pages
+            python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/universelab-http.log 2>&1 &
+            echo $! >/tmp/universelab-http.pid
+            sleep 2
+            echo "UNIVERSELAB_BASE_URL=http://127.0.0.1:8000/UniverseLab/" >> "$GITHUB_ENV"
+          else
+            sleep 75
+            echo "UNIVERSELAB_BASE_URL=https://stefanhasselm74314-byte.github.io/UniverseLab/" >> "$GITHUB_ENV"
+          fi
+      - name: Run browser runtime and numerical parity audit
+        env:
+          UNIVERSELAB_PARITY_EPS: '1e-12'
+        run: node tools/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.mjs
+      - name: Upload parity report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universeLab-browser-parity-report
+          path: browser-parity-report.json
+          if-no-files-found: error

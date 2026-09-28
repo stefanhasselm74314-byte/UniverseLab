@@ -1,0 +1,79 @@
+name: 2026-09-08 ULSH05 WP1C4B2B Component Boundary Residual Linearization QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.json'
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.md'
+      - 'tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.py'
+      - '.github/workflows/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_QA_v0.1.yml'
+      - 'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.json'
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.md'
+      - 'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1D_DirectMovingActionShape_v0.1.json'
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B1D_DirectMovingActionShape_v0.1.md'
+      - 'registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.json'
+      - 'science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.md'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.md'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.md'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.md'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.md'
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.md'
+      - 'SCI-001-002_v0.1_Canonical_6D_Parent_Action_and_Boundary_Closure.md'
+      - 'registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json'
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  wp1c4b2b-component-boundary-residual:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run WP1C4B2B standalone controls
+        run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.py
+      - name: Rerun WP1C4B2A second-variation master
+        run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.py
+      - name: Rerun WP1C4B1D direct moving-action shape
+        run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B1D_DirectMovingActionShape_v0.1.py
+      - name: Rerun WP1C4B1C passive shape constraint
+        run: python tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.py
+      - name: Rerun WP1C4A gluing and normal-flux preflight
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.py
+      - name: Rerun WP1C3 moving-interface geometry
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.py
+      - name: Rerun WP1C2 fixed-interface cap Hessian
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.py
+      - name: Rerun WP1C1 bulk metric-matter Hessian
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.py
+      - name: Rerun WP1B EH+GHY Hessian master
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.py
+      - name: Verify hard firewalls
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+          p = Path('registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.json')
+          d = json.loads(p.read_text(encoding='utf-8'))
+          g = d['gate_state']
+          assert d['solver_authorized'] is False
+          assert d['physical_gate_effect'] == 'NONE'
+          assert d['physical_evidence_effect'] == 'NONE'
+          assert g['WP1_full_global_boundary_hessian'] == 'NOT_CLOSED_PHYSICAL_BC_AND_GLOBAL_CORNER_ADMISSIBILITY_OPEN'
+          assert g['WP1_full_quadratic_action'] == 'NOT_CLOSED'
+          assert g['PERTURBED_JUNCTION_SYSTEM'] == 'NOT_RELEASED'
+          assert g['PHYSICAL_BACKGROUND'] == 'NOT_ESTABLISHED'
+          assert g['BACKEND_IMPORT'] == 'NOT_EXECUTED'
+          assert g['SOLVER_EXECUTION'] == 'NOT_EXECUTED'
+          assert g['K1-D'] == 'NOT_RELEASED'
+          assert g['K1-E'] == 'NOT_ADMISSIBLE'
+          print('WP1C4B2B firewalls: PASS')

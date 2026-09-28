@@ -1,0 +1,54 @@
+name: UniverseLab canonical cosmology engine foundation QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json'
+      - 'science/cosmology/2026-09-01_UniverseLab_CanonicalCosmologyEngineFoundation_v1.0.md'
+      - 'tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs'
+      - 'tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py'
+      - '.github/workflows/2026-09-01_UniverseLab_CanonicalCosmologyEngineFoundation_QA_v1.0.yml'
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-engine-foundation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Parse contract
+        run: python -m json.tool registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json >/dev/null
+      - name: Compile Python regression test
+        run: python -m py_compile tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py
+      - name: Run Node reference validation
+        run: node tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs
+      - name: Run indepent Python reconstruction
+        run: python tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py
+      - name: Enforce no physical promotion
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('registry/2026-09-01_UniverseLab_CanonicalCosmologyEngineContract_v1.0.json')
+          d=json.loads(p.read_text())
+          assert d['physical_gate_effect']=='NONE'
+          assert d['physical_evidence_effect']=='NONE'
+          assert d['migration']['page_behavior_changed'] is False
+          assert d['models']['bridge']['growth']=='UNRELEASED_GROWTH_MAP'
+          print('Cosmology engine foundation firewall: PASS')
+          PY
+      - name: Upload numerical report
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-cosmology-engine-report
+          path: canonical-cosmology-engine-report.json

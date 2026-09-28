@@ -1,0 +1,573 @@
+{
+  "schema": "universelab.public-scientific-claim-census.v1",
+  "version": "1.0.0",
+  "date": "2026-09-03",
+  "basis_main_commit": "06479dc4b919496edcef471a67a75ca101c6af69",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "classification": "PUBLIC_CLAIM_INVENTORY_AND_EPISTEMIC_SCOPE_CONTRACT_NO_PHYSICAL_EVIDENCE_EFFECT",
+  "architecture": [
+    "HPVS",
+    "HZT-M0",
+    "HZT-Full"
+  ],
+  "scope": {
+    "tracked_html": "ALL_GIT_TRACKED_HTML_FILES",
+    "repository_readme": "README.md",
+    "canonical_page_source": "project-manifest.json",
+    "public_page_source": "sitemap.xml",
+    "exact_text_register": "registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json",
+    "extraction_summary": "registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json",
+    "review_queue": "science/audit/2026-09-03_UniverseLab_PublicScientificClaimReviewQueue_v0.1.md",
+    "extractor": "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py",
+    "coverage_test": "tests/2026-09-03_test_UniverseLab_BandVA_PublicScientificClaimCensus_v1.0.py"
+  },
+  "status_vocabulary": {
+    "BEWIESEN": "A mathematical or logical result follows from explicitly stated premises, or a software invariant is exhaustively established within its declared code contract. This does not by itself establish physical truth.",
+    "NUMERISCH_BESTAETIGT": "Independent numerical implementations or regression anchors agree within declared tolerances over the tested domain.",
+    "KONDITIONAL": "The statement follows only after adopting a stated model, reduction, approximation, boundary condition or unverified parent assumption.",
+    "HEURISTISCH": "The statement is an analogy, visualization, phenomenological guide or exploratory construction without a complete derivation.",
+    "OFFEN": "The required derivation, data identification, theorem, computation or source binding has not been established.",
+    "FALSIFIZIERT_ODER_BLOCKIERT": "A counterexample exists, or a required gate/map is deliberately unavailable and the inference is forbidden.",
+    "NICHT_WISSENSCHAFTLICHER_CLAIM": "Navigation, project description, governance state or user-interface text without an independent physical proposition."
+  },
+  "evidence_ladder": [
+    "PUBLIC_TEXT_ONLY",
+    "EQUATION_OR_MODEL_CONTRACT",
+    "CODE_IMPLEMENTATION",
+    "STATIC_TEST",
+    "INDEPENDENT_NUMERICAL_TEST",
+    "BROWSER_RUNTIME_TEST",
+    "VERSIONED_DATA_VECTOR_AND_COVARIANCE",
+    "LIKELIHOOD_AND_NUISANCE_MODEL",
+    "MODEL_COMPARISON_OR_FALSIFICATION"
+  ],
+  "global_rules": {
+    "good_fit_is_theory_confirmation": false,
+    "technical_feasibility_is_physical_identification": false,
+    "parameter_fit_is_parent_derivation": false,
+    "numerical_stability_is_ghost_freedom": false,
+    "visual_similarity_is_empirical_evidence": false,
+    "software_pass_is_physical_evidence": false,
+    "public_page_is_authoritative_over_current_registry": false,
+    "historical_page_is_current_operational_state": false,
+    "claim_requires_scope": true,
+    "strong_physical_claim_requires_parent_derivation_or_explicit_conditional_status": true,
+    "observational_claim_requires_versioned_data_covariance_and_likelihood_provenance": true,
+    "unreleased_observable_map_must_fail_closed": true
+  },
+  "claim_families": [
+    {
+      "claim_family_id": "UL-CLM-FLRW-BACKGROUND-001",
+      "title": "Standard FLRW background reference",
+      "precise_claim": "The canonical public engine implements LCDM and constant-w FLRW background functions with Omega_k=1-Omega_r-Omega_m-Omega_DE and fail-closed E^2>0 domain checks.",
+      "epistemic_status": [
+        "BEWIESEN_AS_IMPLEMENTATION_CONTRACT",
+        "NUMERISCH_BESTAETIGT_IN_TESTED_DOMAIN"
+      ],
+      "equations": [
+        "E^2(a)=Omega_r a^-4+Omega_m a^-3+Omega_k a^-2+Omega_DE a^[-3(1+w)]",
+        "Omega_k=1-Omega_r-Omega_m-Omega_DE"
+      ],
+      "code_paths": [
+        "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js"
+      ],
+      "test_paths": [
+        "tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs",
+        "tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py",
+        "tests/2026-09-03_test_UniverseLab_BandIVBCurrentMainReconciliation_v1.0.py"
+      ],
+      "public_surface_patterns": [
+        "validation*.html",
+        "observatory*.html",
+        "compare*.html",
+        "emergence*.html",
+        "tafelwerk*.html",
+        "guide*.html",
+        "hyperlab*.html"
+      ],
+      "validity_domain": "z>=0, 0<a<=1, declared parameter domains; homogeneous isotropic background only",
+      "falsifiers": [
+        "Failure of normalization E(0)=1 for a flat reference",
+        "Disagreement with independent FLRW reference integration",
+        "Acceptance of nonpositive or nonfinite E^2 as a real background"
+      ],
+      "not_established": [
+        "HZT six-dimensional parent derivation",
+        "empirical preference for HZT",
+        "perturbation or lensing dynamics",
+        "ghost freedom"
+      ]
+    },
+    {
+      "claim_family_id": "UL-CLM-DISTANCE-GEOMETRY-001",
+      "title": "Curvature-aware cosmological distance chain",
+      "precise_claim": "The public engine distinguishes radial comoving distance D_C from transverse comoving distance D_M and derives D_L and D_A through the FLRW curvature map.",
+      "epistemic_status": [
+        "BEWIESEN_FROM_DECLARED_FLRW_GEOMETRY",
+        "NUMERISCH_BESTAETIGT"
+      ],
+      "equations": [
+        "D_C=(c/H0) integral_0^z dz'/E(z')",
+        "D_M=D_H S_k[D_C/D_H]",
+        "D_L=(1+z)D_M",
+        "D_A=D_M/(1+z)",
+        "D_L=(1+z)^2 D_A"
+      ],
+      "code_paths": [
+        "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js"
+      ],
+      "test_paths": [
+        "tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs",
+        "tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py",
+        "tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs",
+        "tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs"
+      ],
+      "public_surface_patterns": [
+        "observatory*.html",
+        "compare*.html",
+        "validation*.html",
+        "tafelwerk*.html"
+      ],
+      "validity_domain": "FLRW background and declared redshift domain",
+      "falsifiers": [
+        "D_M not approaching D_C as Omega_k approaches zero",
+        "Wrong open/closed curvature direction",
+        "Violation of Etherington reciprocity inside the declared metric/light-propagation assumptions"
+      ],
+      "not_established": [
+        "Nonmetric photon propagation",
+        "HZT-specific distance-duality violation",
+        "observational likelihood"
+      ]
+    },
+    {
+      "claim_family_id": "UL-CLM-LINEAR-GROWTH-001",
+      "title": "Linear GR growth reference",
+      "precise_claim": "LCDM and constant-w public reference paths solve the scale-independent linear pressureless-matter GR growth equation and display D, f and f sigma8.",
+      "epistemic_status": [
+        "KONDITIONAL_ON_GR_SMOOTH_DARK_ENERGY",
+        "NUMERISCH_BESTAETIGT"
+      ],
+      "equations": [
+        "D''+[2+d ln H/d ln a]D'-(3/2)Omega_m(a)D=0",
+        "D(1)=1",
+        "f=d ln D/d ln a",
+        "f sigma8=f D sigma8_0"
+      ],
+      "code_paths": [
+        "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js"
+      ],
+      "test_paths": [
+        "tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs",
+        "tests/2026-09-01_test_UniverseLab_CanonicalCosmologyEngine_v1.0.py",
+        "tools/2026-09-01_UniverseLab_ObservatoryMigrationAudit_v1.5.mjs",
+        "tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs"
+      ],
+      "public_surface_patterns": [
+        "observatory*.html",
+        "emergence*.html",
+        "validation*.html",
+        "compare*.html"
+      ],
+      "validity_domain": "Linear pressureless matter perturbations in GR with smooth LCDM or constant-w dark energy; no released HZT perturbation map",
+      "falsifiers": [
+        "Failure of the Einstein-de Sitter D=a and f=1 limit",
+        "Disagreement with an independent ODE integration",
+        "Use of this equation for the Bridge path without a released perturbation contract"
+      ],
+      "not_established": [
+        "Bridge growth",
+        "scale-dependent modified gravity",
+        "radiation perturbations",
+        "massive-neutrino scale dependence",
+        "nonlinear structure formation"
+      ]
+    },
+    {
+      "claim_family_id": "UL-CLM-BRIDGE-BACKGROUND-001",
+      "title": "Reduced effective Bridge background",
+      "precise_claim": "Compare Safe implements the reduced diagnostic background E_B^2=E_LCDM^2[1+beta_tau I_B exp(-(a/a_c)^2)] with a_c=Rchi/(Rchi+2.5), Rchi>0.",
+      "epistemic_status": [
+        "KONDITIONAL_REDUCED_EFFECTIVE_MODEL",
+        "NUMERISCH_BESTAETIGT_AS_CODE_CONTRACT"
+      ],
+      "equations": [
+        "E_B^2=E_LCDM^2(1+Delta)",
+        "Delta=beta_tau I_B exp[-(a/a_c)^2]",
+        "a_c=Rchi/(Rchi+2.5)"
+      ],
+      "code_paths": [
+        "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+        "assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js"
+      ],
+      "test_paths": [
+        "tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py",
+        "tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs",
+        "tests/2026-09-03_test_UniverseLab_BandIVBCurrentMainReconciliation_v1.0.py"
+      ],
+      "public_surface_patterns": [
+        "compare-safe.html",
+        "compare-en.html",
+        "validation*.html",
+        "hyperlab*.html"
+      ],
+      "validity_domain": "Reduced background-only diagnostic; Rchi>0; 1+Delta>0; no independent constant-w Bridge parent contract",
+      "falsifiers": [
+        "Violation of the exact small-Rchi asymptotic a_c/Rchi->0.4",
+        "Acceptance of 1+Delta<=0",
+        "Failure of equal-product beta_tau I_B background identity"
+      ],
+      "not_established": [
+        "Derivation from the six-dimensional parent sector",
+        "physical parameter interpretation",
+        "empirical model preference",
+        "perturbation theory"
+      ]
+    },
+    {
+      "claim_family_id": "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
+      "title": "beta_tau times I_B product degeneracy",
+      "precise_claim": "Within the currently implemented Bridge background channel, beta_tau and I_B enter only through their product A_B=beta_tau I_B, so the corresponding local Jacobian subblock has rank at most one.",
+      "epistemic_status": [
+        "BEWIESEN_WITHIN_REDUCED_BACKGROUND_CONTRACT"
+      ],
+      "equations": [
+        "A_B=beta_tau I_B",
+        "partial O/partial beta_tau=I_B partial O/partial A_B",
+        "partial O/partial I_B=beta_tau partial O/partial A_B",
+        "rank J_(beta_tau,I_B)<=1"
+      ],
+      "code_paths": [
+        "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+        "assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js"
+      ],
+      "test_paths": [
+        "tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs",
+        "tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py",
+        "tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs"
+      ],
+      "public_surface_patterns": [
+        "compare-safe.html",
+        "compare-en.html"
+      ],
+      "validity_domain": "Current background observables only",
+      "falsifiers": [
+        "A released independent observable whose derivatives with respect to beta_tau and I_B are not collinear",
+        "A changed model contract in which beta_tau and I_B enter separately"
+      ],
+      "not_established": [
+        "Global identifiability",
+        "separate physical interpretation of beta_tau and I_B",
+        "identification from the 6D sector"
+      ]
+    },
+    {
+      "claim_family_id": "UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001",
+      "title": "Bridge perturbation, growth and lensing firewalls",
+      "precise_claim": "No Bridge growth, Poisson, slip or lensing map is released; requests must fail closed rather than borrowing the GR reference equation.",
+      "epistemic_status": [
+        "FALSIFIZIERT_ODER_BLOCKIERT"
+      ],
+      "status_literals": [
+        "UNRELEASED_GROWTH_MAP",
+        "UNRELEASED_LENSING_MAP"
+      ],
+      "code_paths": [
+        "assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js",
+        "assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js"
+      ],
+      "test_paths": [
+        "tools/2026-09-01_validate_UniverseLab_CanonicalCosmologyEngine_v1.0.mjs",
+        "tests/2026-09-01_test_UniverseLab_CompareSafeMigration_v2.0.py",
+        "tools/2026-09-01_UniverseLab_CompareSafeMigrationAudit_v2.0.mjs"
+      ],
+      "public_surface_patterns": [
+        "compare*.html",
+        "research-status*.html",
+        "solver-hub*.html",
+        "hyperzeit-methods*.html"
+      ],
+      "validity_domain": "Current repository state",
+      "falsifiers": [
+        "A separately reviewed and released perturbation/observable map with source, equations, code and tests"
+      ],
+      "forbidden_inference": "A defined H(z) background determines growth, lensing, mu(k,z), Sigma(k,z) or eta(k,z)."
+    },
+    {
+      "claim_family_id": "UL-CLM-PARENT-FORWARD-MAP-001",
+      "title": "HZT-M0 parent to reduced to observable forward map",
+      "precise_claim": "The full parent-to-reduced-to-observable map across rotation curves, background cosmology, growth, lensing and gravitational waves is not closed.",
+      "epistemic_status": [
+        "OFFEN"
+      ],
+      "architecture_layer": "HZT-M0",
+      "source_paths": [
+        "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+        "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+        "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json"
+      ],
+      "public_surface_patterns": [
+        "research-status*.html",
+        "hyperzeit-methods*.html",
+        "hyperzeit-material-v2*.html",
+        "sci-001-002-parent-closure*.html",
+        "solver-hub*.html"
+      ],
+      "validity_domain": "Current FM-G0 state",
+      "closure_conditions": [
+        "Versioned parent equations and boundary conditions",
+        "Reduced variables derived rather than fitted by label",
+        "Observable maps for all declared channels",
+        "Identifiability and rank analysis",
+        "Independent numerical validation"
+      ],
+      "forbidden_inference": "A good reduced background fit derives the parameters from the six-dimensional parent theory."
+    },
+    {
+      "claim_family_id": "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
+      "title": "Physical background, response rank and ghost freedom",
+      "precise_claim": "No authorized physical background solution, physical response-rank result, global M1 existence theorem, continuum BVP invertibility proof or full ghost-freedom result is established.",
+      "epistemic_status": [
+        "OFFEN",
+        "FALSIFIZIERT_ODER_BLOCKIERT_FOR_EXECUTION"
+      ],
+      "status_literals": [
+        "PHYSICAL_BACKGROUND=NOT_ESTABLISHED",
+        "PHYSICAL_RESPONSE_RANK=NOT_EXECUTED",
+        "K1-D=NOT_RELEASED",
+        "K1-E=NOT_ADMISSIBLE"
+      ],
+      "source_paths": [
+        "project-manifest.json",
+        "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+        "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json"
+      ],
+      "public_surface_patterns": [
+        "research-status*.html",
+        "solver-hub*.html",
+        "hyperzeit-methods*.html",
+        "sci-001-002-parent-closure*.html"
+      ],
+      "validity_domain": "Current canonical governance state",
+      "required_evidence": [
+        "Authorized exact target run",
+        "Physical background existence and boundary-condition verification",
+        "Dimensionless response-rank audit",
+        "Hamiltonian or kinetic positivity analysis",
+        "Independent solver agreement"
+      ],
+      "forbidden_inference": "Numerical convergence or a green CI workflow establishes physical existence or ghost freedom."
+    },
+    {
+      "claim_family_id": "UL-CLM-DATA-LIKELIHOOD-001",
+      "title": "Observational data and likelihood provenance",
+      "precise_claim": "Public Observatory and Compare points/curves are diagnostic or didactic unless a versioned data vector, covariance, selection function, nuisance model and likelihood are explicitly bound.",
+      "epistemic_status": [
+        "KONDITIONAL",
+        "OFFEN_FOR_EMPIRICAL_IDENTIFICATION"
+      ],
+      "public_surface_patterns": [
+        "observatory*.html",
+        "compare*.html",
+        "validation*.html",
+        "hyperlab*.html",
+        "research-status*.html"
+      ],
+      "source_paths": [
+        "registry/2026-09-01_UniverseLab_ObservatoryMigrationContract_v1.5.json",
+        "registry/2026-09-01_UniverseLab_CompareSafeMigrationContract_v2.0.json"
+      ],
+      "required_evidence": [
+        "Versioned observational release",
+        "Data vector",
+        "Covariance",
+        "Selection function",
+        "Nuisance model",
+        "Likelihood implementation",
+        "Prior and robustness specification"
+      ],
+      "falsifiers": [
+        "A source-backed likelihood showing the displayed model fails the bound data under declared assumptions"
+      ],
+      "forbidden_inference": "Visual curve proximity is a fit, evidence or theory confirmation."
+    },
+    {
+      "claim_family_id": "UL-CLM-EMERGENCE-SEPARATION-001",
+      "title": "Cellular automaton and cosmology separation",
+      "precise_claim": "The Emergence cellular automaton is dynamically independent of the canonical LCDM background/growth overlay; display resampling does not mutate the simulation lattice.",
+      "epistemic_status": [
+        "BEWIESEN_AS_SOFTWARE_ARCHITECTURE",
+        "HEURISTISCH_AS_PHYSICAL_VISUALIZATION"
+      ],
+      "code_paths": [
+        "assets/2026-09-01_UniverseLab_EmergenceAdapter_v1.0.js"
+      ],
+      "test_paths": [
+        "tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthAdapter_v1.0.py",
+        "tests/2026-09-01_test_UniverseLab_EmergenceCanonicalGrowthHardening_v1.0.py",
+        "tools/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapterAudit_v1.0.mjs"
+      ],
+      "public_surface_patterns": [
+        "emergence.html",
+        "emergence-en.html"
+      ],
+      "validity_domain": "Software state transition and rendering contract",
+      "falsifiers": [
+        "Different next cell hash for identical cell state/rule/noise under different cosmology display modes",
+        "Mutation of N or cells by displayN"
+      ],
+      "not_established": [
+        "Cell states as physical density perturbations",
+        "Cosmic structure formation from the automaton",
+        "Six-dimensional emergence mechanism"
+      ]
+    },
+    {
+      "claim_family_id": "UL-CLM-PREDICTIONS-FALSIFIERS-001",
+      "title": "Prospective HZT observables and falsifiers",
+      "precise_claim": "RAR/rotation curves, expansion history, growth, lensing and gravitational-wave channels are research targets; they are not simultaneous released HZT predictions until their parent-to-observable maps are closed.",
+      "epistemic_status": [
+        "HEURISTISCH_OR_KONDITIONAL",
+        "OFFEN"
+      ],
+      "observable_blocks": [
+        "O_RAR",
+        "O_cosmo",
+        "O_growth",
+        "O_lensing",
+        "O_GW"
+      ],
+      "public_surface_patterns": [
+        "hyperzeit-material-v2*.html",
+        "hyperzeit-methods*.html",
+        "research-status*.html",
+        "sci-001-002-parent-closure*.html",
+        "solver-hub*.html",
+        "observatory*.html"
+      ],
+      "required_release_conditions": [
+        "Parent derivation",
+        "Observable definition",
+        "Numerical implementation",
+        "Data and likelihood provenance where empirical",
+        "Parameter identifiability analysis",
+        "Alternative-explanation comparison"
+      ],
+      "forbidden_inference": "Mentioning a measurable channel is equivalent to predicting its amplitude, spectrum or parameter dependence."
+    },
+    {
+      "claim_family_id": "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001",
+      "title": "Public research status and authorization state",
+      "precise_claim": "Current public status pages report technical, governance and scientific axes separately and defer current authority to the manifest and dated current-state registries.",
+      "epistemic_status": [
+        "NICHT_WISSENSCHAFTLICHER_CLAIM",
+        "BEWIESEN_AS_REPOSITORY_STATE_CONTRACT"
+      ],
+      "source_paths": [
+        "project-manifest.json",
+        "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json",
+        "registry/2026-09-03_UniverseLab_SiteState_v1.2.json",
+        "registry/2026-09-03_UniverseLab_SessionCheckpoint_v1.32.json"
+      ],
+      "test_paths": [
+        "tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py",
+        "tests/2026-09-01_test_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py"
+      ],
+      "public_surface_patterns": [
+        "research-status*.html",
+        "navigator*.html",
+        "solver-hub*.html",
+        "source*.html"
+      ],
+      "forbidden_inference": "A governance status is a physical measurement or theory result."
+    },
+    {
+      "claim_family_id": "UL-CLM-FM0-PROGRAM-001",
+      "title": "FM-0 work programme and blocking gaps",
+      "precise_claim": "FM-G0 remains open with ten blocking gaps, of which three are partially resolved and seven fully unresolved; this is project-state accounting, not physical evidence.",
+      "epistemic_status": [
+        "NICHT_WISSENSCHAFTLICHER_CLAIM",
+        "BEWIESEN_AS_CURRENT_PROJECT_STATE"
+      ],
+      "source_paths": [
+        "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+        "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+        "registry/2026-09-03_UniverseLab_CurrentMainCanonicalState_v1.1.json"
+      ],
+      "public_surface_patterns": [
+        "research-status*.html",
+        "solver-hub*.html",
+        "navigator*.html"
+      ],
+      "forbidden_inference": "Closing project tasks demonstrates the physical theory."
+    },
+    {
+      "claim_family_id": "UL-CLM-EDUCATIONAL-VISUAL-001",
+      "title": "Educational, navigational and visual material",
+      "precise_claim": "Guides, journey pages, about pages, 3D views, portals and navigators may explain or visualize concepts but do not independently establish physical claims.",
+      "epistemic_status": [
+        "NICHT_WISSENSCHAFTLICHER_CLAIM",
+        "HEURISTISCH_WHERE_PHYSICAL_ANALOGY_IS_USED"
+      ],
+      "public_surface_patterns": [
+        "index*.html",
+        "portal.html",
+        "navigator*.html",
+        "guide*.html",
+        "about*.html",
+        "journey*.html",
+        "universe3d*.html",
+        "apps.html"
+      ],
+      "required_qualifier": "Educational or visualization context must not be phrased as empirical confirmation or parent derivation.",
+      "forbidden_inference": "A visual or narrative representation is an observable, simulation validation or physical proof."
+    },
+    {
+      "claim_family_id": "UL-CLM-HISTORICAL-ARCHIVE-001",
+      "title": "Historical, archived and legacy pages",
+      "precise_claim": "Archived audits, legacy routes and historical narratives are provenance records and cannot override current dated registries or the current manifest.",
+      "epistemic_status": [
+        "NICHT_WISSENSCHAFTLICHER_CLAIM"
+      ],
+      "public_surface_patterns": [
+        "*audit*.html",
+        "*legacy*.html",
+        "navigator-app.html",
+        "compare.html",
+        "compare-direct.html"
+      ],
+      "authority_rule": "CURRENT_EXPLICIT_USER_DECISION_THEN_CURRENT_MAIN_REGISTRY_THEN_HISTORICAL_MATERIAL",
+      "forbidden_inference": "A historically green or permissive artifact is the current operative state."
+    }
+  ],
+  "coverage_policy": {
+    "every_lexical_candidate_must_receive_a_claim_family": true,
+    "high_or_medium_candidate_may_be_silently_dropped": false,
+    "unmapped_candidates": "FAIL_CLOSED",
+    "automatic_family_assignment_is_scientific_adjudication": false,
+    "candidate_text_remains_authoritative_for_wording_review": true,
+    "family_contract_is_authoritative_for_scope_and_allowed_inference_after_review": true
+  },
+  "current_gate_state": {
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "authority_signature_provenance": "BLOCKED_PENDING_EXPLICIT_HUMAN_TRUST_ROOT_RATIFICATION",
+    "runtime_issuance_bindings": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "parked_external_human_action": {
+    "human_trust_root_ratification": "PARKED_UNTIL_EXCLUSIVELY_USER_CONTROLLED_COMPUTER_EXISTS",
+    "affects_band_va_completion": false,
+    "may_be_fabricated_by_ci_or_assistant": false
+  },
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

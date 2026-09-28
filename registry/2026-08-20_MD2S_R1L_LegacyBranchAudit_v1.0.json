@@ -1,0 +1,106 @@
+{
+  "schema": "universelab.md2s.r1l.legacy-branch-audit.v1",
+  "version": "1.0.0",
+  "created_date": "2026-08-20",
+  "status": "FORENSIC_BRANCH_AUDIT_COMPLETE_WITH_LIMITS",
+  "scope": "Historical agent/md2s-* and checkpoint branches plus surviving MD2S-R1 source-reconstruction records.",
+  "audit_method": {
+    "branch_name_inventory": "COMPLETE_FOR_MD2S_MATCHING_BRANCHES_RETURNED_BY_GITHUB",
+    "branch_delta_file_inventory": "COMPLETE_FOR_13_LEGACY_AGENT_MD2S_BRANCHES_VIA_MAIN_COMPARISON",
+    "content_review": "TARGETED_HIGH_VALUE_SCIENCE_LEDGERS_CHECKPOINTS_AND_SOURCE_RECONSTRUCTION_RECORDS",
+    "not_claimed": "BYTE_LEVEL_INSPECTION_OF_EVERY_FILE_ON_EVERY_BRANCH"
+  },
+  "identifier_finding": {
+    "identifier": "MD2S-R1-L",
+    "exact_string_recovered": true,
+    "recovered_role": "LEGACY_REPRODUCTION_TRACK_ID",
+    "source": "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
+    "source_track": "legacy_reproduction",
+    "source_goal": "Reproduce the historical A0 and B1.4N calculations with the original equations and conventions if they can be recovered.",
+    "may_define_current_canon": false,
+    "original_historical_artifact_identifier_recovered": false,
+    "interpretation": "The exact string is a surviving reconstruction/governance track label. It is not evidence that an original historical solver artifact named MD2S-R1-L survived."
+  },
+  "audited_branches": [
+    "agent/md2s-bulk-localized-junction-v0-1",
+    "agent/md2s-c1-bvp-rank-preflight-v0-1",
+    "agent/md2s-c1-dimensionless-jacobian-v0-1",
+    "agent/md2s-c1-independent-backend-continuation-v0-1",
+    "agent/md2s-checkpoint-2026-08-03",
+    "agent/md2s-checkpoint-v1-2",
+    "agent/md2s-checkpoint-v1-3",
+    "agent/md2s-checkpoint-v1-4",
+    "agent/md2s-checkpoint-v1-5",
+    "agent/md2s-checkpoint-v1-6",
+    "agent/md2s-oriented-junction-ledger-v0-1",
+    "agent/md2s-parameter-flux-dependency-v0-1",
+    "agent/md2s-radial-equation-ledger-v0-1"
+  ],
+  "branch_findings": {
+    "junction_rebuild_branches": {
+      "classification": "CURRENT_CANONICAL_REBUILD_STRUCTURE_NOT_HISTORICAL_OUTPUT",
+      "finding": "Bulk/localized and oriented-junction ledgers derive conditional junction structure and explicitly require genuine one-sided boundary values; they do not provide the missing historical numerical interface export."
+    },
+    "radial_and_parameter_rebuild_branches": {
+      "classification": "CURRENT_CANONICAL_REBUILD_STRUCTURE_NOT_HISTORICAL_OUTPUT",
+      "finding": "Radial equations, center series, parameter, angle and flux conventions are derived for the rebuild track and explicitly do not establish identity with the historical A0 solver."
+    },
+    "c1_preflight_branches": {
+      "classification": "NEW_C1_CANDIDATE_DIAGNOSTICS_NOT_MD2S_R1L_HISTORY",
+      "historical_A0_identity": "NOT_CLAIMED",
+      "finding": "C1 contains an exact analytic anchor and real diagnostic numerical Jacobian/backend results, but these belong to a newly defined candidate model and cannot be substituted for lost MD2S-R1-L historical data.",
+      "c1_anchor_interface_example": {
+        "x_cap": "pi/2",
+        "ell": 1,
+        "ell_x": 0,
+        "A_x": 0,
+        "varphi_x": 0,
+        "classification": "C1_ANALYTIC_ANCHOR_NOT_HISTORICAL_INTERFACE_DATA"
+      }
+    },
+    "checkpoint_branches": {
+      "classification": "GOVERNANCE_AND_STATE_CHECKPOINTS",
+      "finding": "Checkpoint-only branch deltas record model-freeze and diagnostic state; they do not add a recovered historical two-sided solver export."
+    }
+  },
+  "source_reconstruction_ledger_findings": {
+    "A0_benchmarks": "REPORTED_NUMERICAL_BENCHMARKS_REGRESSION_TARGET_ONLY",
+    "A0_reproduction": "REPORTED_RESULT_NOT_INDEPENDENTLY_REPRODUCIBLE",
+    "B1_4N": "REPORTED_NEGATIVE_RESULT_NOT_INDEPENDENTLY_REPRODUCIBLE",
+    "historical_radial_ODEs": "MISSING_PRIMARY_TECHNICAL_SOURCE",
+    "historical_cap_action_and_oriented_junction_conventions": "MISSING_PRIMARY_TECHNICAL_SOURCE",
+    "historical_benchmark_definitions": "PARTIAL_MISSING",
+    "B1_4K_primary_solver_artifact": "NOT_RECOVERED",
+    "B1_4L_primary_solver_artifact": "NOT_RECOVERED"
+  },
+  "historical_two_sided_interface": {
+    "status": "MISSING_SURVIVING_ARCHIVE",
+    "required_fields": [
+      "A_prime_bulk",
+      "A_prime_cap",
+      "Lprime_over_L_bulk",
+      "Lprime_over_L_cap",
+      "oriented_normals_bound_to_same_historical_run",
+      "solver_artifacts",
+      "derivative_tables",
+      "residual_logs"
+    ],
+    "exact_historical_replay": "NOT_REPRODUCIBLE_FROM_SURVIVING_ARCHIVE"
+  },
+  "promotion_firewall": {
+    "reported_is_verified_solver_output": false,
+    "C1_anchor_may_fill_historical_missing_fields": false,
+    "rebuild_junction_equations_may_be_assumed_historical": false,
+    "B1_4K_verified_solver_output": false,
+    "B1_4L_verified_solver_output": false
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  },
+  "next_forensic_target": "Locate and byte-inspect any still-unmatched export binaries or original long MD-2S chat/PDF sources that post-date 2025-12-17 and could contain the missing historical equations, one-sided interface export, B1.4K/B1.4L primary output or residual provenance."
+}

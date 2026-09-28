@@ -1,0 +1,90 @@
+name: UniverseLab Band V-C G01 perturbation observable interface QA v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json'
+      - 'registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json'
+      - 'science/audit/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.md'
+      - 'tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py'
+      - 'registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json'
+      - 'registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json'
+      - 'registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json'
+      - 'registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json'
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js'
+      - 'project-manifest.json'
+      - '.github/workflows/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_QA_v1.0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json'
+      - 'registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json'
+      - 'tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py'
+      - 'registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json'
+      - 'registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json'
+      - 'registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json'
+      - 'assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js'
+      - 'assets/2026-09-01_UniverseLab_CompareSafeAdapter_v2.0.js'
+      - 'project-manifest.json'
+      - '.github/workflows/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_QA_v1.0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-g01-reference-interface:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Parse machine-readable G01 artifacts
+        run: |
+          python -m json.tool registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json >/dev/null
+          python -m json.tool registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json >/dev/null
+          python -m json.tool registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json >/dev/null
+          python -m json.tool registry/2026-09-04_UniverseLab_BandVC_MissingLinkRegister_v1.0.json >/dev/null
+          python -m json.tool registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json >/dev/null
+          python -m json.tool project-manifest.json >/dev/null
+
+      - name: Compile G01 fail-closed regression gate
+        run: python -m py_compile tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py
+
+      - name: Run G01 provenance and interface gate
+        run: python tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py
+
+      - name: Enforce nonoperative physical firewall
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest=json.loads(Path('project-manifest.json').read_text(encoding='utf-8'))
+          interface=json.loads(Path('registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json').read_text(encoding='utf-8'))
+          expected={
+              'FM-G0':'OPEN',
+              'RATIFIED_HUMAN_TRUST_ROOT':'NOT_RATIFIED',
+              'RUNTIME_ISSUANCE_BINDINGS':'BLOCKED',
+              'AuthorizationDecision':'NOT_CREATED',
+              'SingleUseGrant':'NOT_CREATED',
+              'BACKEND_IMPORT':'NOT_EXECUTED',
+              'SOLVER_EXECUTION':'NOT_EXECUTED',
+              'PHYSICAL_BACKGROUND':'NOT_ESTABLISHED',
+              'PHYSICAL_RESPONSE_RANK':'NOT_EXECUTED',
+              'K1-D':'NOT_RELEASED',
+              'K1-E':'NOT_ADMISSIBLE',
+          }
+          for key,value in expected.items():
+              assert manifest['gates'][key]==value, (key,manifest['gates'].get(key),value)
+          assert interface['release_requirements']['G01']=='OPEN_BLOCKING'
+          assert interface['physical_gate_effect']=='NONE'
+          assert interface['physical_evidence_effect']=='NONE'
+          assert manifest['physical_gate_effect']=='NONE'
+          assert manifest['physical_evidence_effect']=='NONE'
+          PY

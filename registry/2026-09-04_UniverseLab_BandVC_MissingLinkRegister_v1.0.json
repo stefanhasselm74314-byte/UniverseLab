@@ -1,0 +1,139 @@
+{
+  "schema": "universelab.band-vc-missing-link-register.v1",
+  "version": "1.0.0",
+  "date": "2026-09-04",
+  "basis_main_commit": "e4e92090d313abf8a53d7b7354923983c9cda939",
+  "status": "IMPLEMENTED_REVIEW_PENDING",
+  "classification": "NONOPERATIVE_SCIENTIFIC_AND_PROVENANCE_GAP_REGISTER",
+  "crosswalk": "registry/2026-09-04_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.json",
+  "gap_count": 11,
+  "blocking_scientific_gap_count": 10,
+  "governance_provenance_gap_count": 1,
+  "gaps": [
+    {
+      "gap_id": "UL-BVC-G01",
+      "family_ids": ["UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001"],
+      "axis": "equation_or_derivation",
+      "severity": "P0_SCIENTIFIC",
+      "status": "OPEN_BLOCKING",
+      "statement": "Bridge growth, Poisson, slip and lensing equations/maps are not released.",
+      "closure_condition": "Separately reviewed parent/reduced perturbation and observable map with equations, scope, code and independent tests.",
+      "forbidden_shortcut": "Borrow the GR growth or lensing reference from the background H(z)."
+    },
+    {
+      "gap_id": "UL-BVC-G02",
+      "family_ids": ["UL-CLM-PARENT-FORWARD-MAP-001"],
+      "axis": "equation_or_derivation",
+      "severity": "P0_SCIENTIFIC",
+      "status": "OPEN_BLOCKING",
+      "statement": "The full HZT-M0 parent-to-reduced-to-observable derivation is not closed across the declared observable blocks.",
+      "closure_condition": "Versioned parent equations/boundary conditions plus explicit reduction and observable definitions with parameter provenance.",
+      "forbidden_shortcut": "Treat fitted reduced parameters or a good background curve as a 6D derivation."
+    },
+    {
+      "gap_id": "UL-BVC-G03",
+      "family_ids": ["UL-CLM-PARENT-FORWARD-MAP-001"],
+      "axis": "code_and_test",
+      "severity": "P0_SCIENTIFIC",
+      "status": "OPEN_BLOCKING",
+      "statement": "No complete executable forward-map implementation with independent numerical validation exists for all declared channels.",
+      "closure_condition": "Canonical implementation plus independent backend/reference tests and identifiability/rank audit.",
+      "forbidden_shortcut": "Promote infrastructure or partial adapters to a complete physical forward model."
+    },
+    {
+      "gap_id": "UL-BVC-G04",
+      "family_ids": ["UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"],
+      "axis": "physical_background",
+      "severity": "P0_SCIENTIFIC_AND_GOVERNANCE",
+      "status": "BLOCKED_NOT_AUTHORIZED",
+      "statement": "No authorized exact physical background solution is established.",
+      "closure_condition": "Valid human authority chain plus authorized target run and verified boundary-condition/existence result.",
+      "forbidden_shortcut": "Use green CI, manufactured controls or reduced diagnostics as a physical background solution."
+    },
+    {
+      "gap_id": "UL-BVC-G05",
+      "family_ids": ["UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"],
+      "axis": "physical_response_rank",
+      "severity": "P0_SCIENTIFIC_AND_GOVERNANCE",
+      "status": "BLOCKED_NOT_EXECUTED",
+      "statement": "Physical dimensionless response rank has not been executed or established.",
+      "closure_condition": "Authorized physical background followed by the frozen response-rank protocol and independent review.",
+      "forbidden_shortcut": "Infer physical response rank from manufactured or local tangent tests."
+    },
+    {
+      "gap_id": "UL-BVC-G06",
+      "family_ids": ["UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"],
+      "axis": "existence_and_invertibility",
+      "severity": "P0_SCIENTIFIC",
+      "status": "OPEN_BLOCKING",
+      "statement": "Generic global M1 existence and continuum BVP invertibility/Fredholm closure are not proven.",
+      "closure_condition": "Appropriate global existence/continuation theorem or verified continuum operator result with boundary complementing/invertibility analysis.",
+      "forbidden_shortcut": "Equate discrete Jacobian rank, local IBVP closure or numerical convergence with continuum invertibility."
+    },
+    {
+      "gap_id": "UL-BVC-G07",
+      "family_ids": ["UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"],
+      "axis": "hamiltonian_and_ghost_freedom",
+      "severity": "P0_SCIENTIFIC",
+      "status": "OPEN_BLOCKING",
+      "statement": "Hamiltonian/kinetic positivity and full ghost freedom are not established.",
+      "closure_condition": "Constraint-reduced physical phase-space or Hilbert-space analysis with positivity/no-ghost proof over the released physical sector.",
+      "forbidden_shortcut": "Treat numerical stability, finite energies or absence of solver divergence as ghost freedom."
+    },
+    {
+      "gap_id": "UL-BVC-G08",
+      "family_ids": ["UL-CLM-DATA-LIKELIHOOD-001", "UL-CLM-PARENT-FORWARD-MAP-001"],
+      "axis": "data",
+      "severity": "P0_EMPIRICAL",
+      "status": "OPEN_BLOCKING",
+      "statement": "No HZT empirical inference bundle is bound with versioned data vector, covariance, selection function and nuisance definitions for the declared observational claims.",
+      "closure_condition": "Versioned release-specific observational bundle with immutable provenance and selection/nuisance specification.",
+      "forbidden_shortcut": "Treat didactic points, visual proximity or literature compatibility as data evidence."
+    },
+    {
+      "gap_id": "UL-BVC-G09",
+      "family_ids": ["UL-CLM-DATA-LIKELIHOOD-001"],
+      "axis": "likelihood_code_and_test",
+      "severity": "P0_EMPIRICAL",
+      "status": "OPEN_BLOCKING",
+      "statement": "No bound HZT likelihood implementation, priors, nuisance treatment and validation suite exists for empirical model identification.",
+      "closure_condition": "Source-backed likelihood code, priors, nuisance model, covariance use, synthetic/recovery tests and robustness checks.",
+      "forbidden_shortcut": "Call a plotted diagnostic or parameter slider a fit, evidence calculation or model comparison."
+    },
+    {
+      "gap_id": "UL-BVC-G10",
+      "family_ids": ["UL-CLM-PREDICTIONS-FALSIFIERS-001"],
+      "axis": "quantitative_predictions_and_operational_falsifiers",
+      "severity": "P0_SCIENTIFIC",
+      "status": "OPEN_BLOCKING",
+      "statement": "Prospective RAR, expansion, growth, lensing and GW channels lack simultaneous released parent-derived amplitudes/spectra/parameter dependence and operational falsification thresholds.",
+      "closure_condition": "For each claimed channel: released parent map, observable definition, implementation, uncertainties/data provenance where empirical, and explicit rejection criterion.",
+      "forbidden_shortcut": "Equate naming a measurable channel with making a quantitative prediction."
+    },
+    {
+      "gap_id": "UL-BVC-G11",
+      "family_ids": ["UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"],
+      "axis": "provenance_freshness",
+      "severity": "P1_GOVERNANCE_PROVENANCE",
+      "status": "OPEN_NONPHYSICAL",
+      "statement": "CurrentMainCanonicalState v1.2, SiteState v1.3, SessionCheckpoint v1.33 and project-manifest still describe Band V-B as pending/not started although PRs 206-208 are merged.",
+      "closure_condition": "Publish append-only successor state snapshots and update current pointers on a separate reviewed changeset.",
+      "forbidden_shortcut": "Edit historical snapshots in place or infer any physical promotion from the pointer repair."
+    }
+  ],
+  "unchanged_firewalls": {
+    "FM-G0": "OPEN",
+    "ratified_human_trust_root": "NOT_RATIFIED",
+    "runtime_issuance_bindings": "BLOCKED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "backend_import": "NOT_EXECUTED",
+    "solver_execution": "NOT_EXECUTED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

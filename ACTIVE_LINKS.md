@@ -1,100 +1,81 @@
 # UniverseLab — Canonical Active Links
 
-**Status:** ACTIVE · CANONICAL  
-**Letzte Pflege:** 2026-08-15  
-**Zweck:** Single Source of Truth für aktuell wichtige und verwendbare Projektlinks.
+**Stand:** 09.09.2026  
+**Zweck:** kompakte, kanonische Link-Zentrale für aktuell relevante UniverseLab-Zugänge. Historische/Legacy-Ziele sind ausdrücklich getrennt.  
+**Governance-Firewall:** Diese Liste verändert keine wissenschaftlichen, Solver-, Gate- oder Evidenzzustände. `K1-D = NOT_RELEASED`, `K1-E = NOT_ADMISSIBLE` bleiben unberührt.
 
-> Regel: Nur aktive, aktuelle oder ausdrücklich als Arbeitslink benötigte Ziele gehören in dieses Register. Ersetzte oder historische Ziele werden aus dem aktiven Bereich entfernt bzw. unter `ARCHIV / ERSETZT` verschoben.
+## 1. Kernzugänge
 
-## Statuslegende
+- Portal: https://stefanhasselm74314-byte.github.io/UniverseLab/
+- Wissenschafts-Navigator: https://stefanhasselm74314-byte.github.io/UniverseLab/navigator.html
+- Forschungsstatus: https://stefanhasselm74314-byte.github.io/UniverseLab/research-status.html
+- Wichtige Links: https://stefanhasselm74314-byte.github.io/UniverseLab/links.html
 
-- **CANONICAL** — maßgeblicher aktueller Einstieg
-- **ACTIVE** — aktuell funktionsfähig und relevant
-- **WORKING** — temporärer aktiver Arbeitslink, z. B. offener PR
-- **PRIVATE** — nur mit berechtigtem GitHub-Zugang erreichbar
-- **ARCHIVE / ERSETZT** — nicht mehr als primärer Einstieg verwenden
+## 2. Aktives 10-Monats-Forschungsprogramm
 
----
+- 10-Monats-Arbeits- und Forschungsprogramm: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html
+- Programm-Manifest: https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json
+- FM-0 Parameter-/Symbol-/Provenienz-Inventar: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-29_HZT_M0_ForwardMap_FM0_ParameterSymbolProvenanceInventory_v0.1.md
+- FM-0 JSON: https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-29_HZT_M0_ForwardMap_FM0_Inventory_v0.1.json
 
-## 1. UniverseLab
+## 3. Wissenschaft, Methoden und Referenzen
 
-### UniverseLab Live
-**CANONICAL · ACTIVE**  
-https://stefanhasselm74314-byte.github.io/UniverseLab/
+- Methoden & QA: https://stefanhasselm74314-byte.github.io/UniverseLab/hyperzeit-methods.html
+- Materialatlas 2.0: https://stefanhasselm74314-byte.github.io/UniverseLab/hyperzeit-material-v2.html
+- Bibliographiekatalog: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-19_UniverseLab_BibliographyCatalog_v1.0.html
+- SCI-001/SCI-002 Parent Closure: https://stefanhasselm74314-byte.github.io/UniverseLab/sci-001-002-parent-closure-v0.1.html
 
-### UniverseLab GitHub Repository
-**CANONICAL · ACTIVE**  
-https://github.com/stefanhasselm74314-byte/UniverseLab
+## 4. Labore, Rechner und Visualisierung
 
-### UniverseLab Audit 2026-07-31
-**ACTIVE**  
-https://stefanhasselm74314-byte.github.io/UniverseLab/universelab-audit-2026-07-31.html?v=1
+- HyperLab: https://stefanhasselm74314-byte.github.io/UniverseLab/hyperlab.html
+- Cosmology Observatory: https://stefanhasselm74314-byte.github.io/UniverseLab/observatory.html
+- Validation Console: https://stefanhasselm74314-byte.github.io/UniverseLab/validation.html
+- Tafelwerk 2.0: https://stefanhasselm74314-byte.github.io/UniverseLab/tafelwerk.html
+- Vergleichsrechner: https://stefanhasselm74314-byte.github.io/UniverseLab/compare-safe.html
+- Cosmic Journey: https://stefanhasselm74314-byte.github.io/UniverseLab/journey.html
+- Emergence: https://stefanhasselm74314-byte.github.io/UniverseLab/emergence.html
+- Universe 3D: https://stefanhasselm74314-byte.github.io/UniverseLab/universe3d.html
+- Conway: https://stefanhasselm74314-byte.github.io/UniverseLab/conway.html
 
----
+## 5. Solver, Governance und Reproduzierbarkeit
 
-## 2. UniverseLab Solver Hub — ULSH
+- UniverseLab Solver Hub: https://stefanhasselm74314-byte.github.io/UniverseLab/solver-hub.html
+- MD2S Artefakt-Recovery & Rankaudit: https://stefanhasselm74314-byte.github.io/UniverseLab/md2s-artifact-recovery-rank-audit-v0.1.html
+- Governed Site State JSON: https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-16_UniverseLab_SiteState_v1.0.json
+- UniverseLab PR #137 — offener Arbeits-/Reviewpfad, **nicht** kanonischer Endstatus: https://github.com/stefanhasselm74314-byte/UniverseLab/pull/137
 
-### Solver Hub README / Governance
-**CANONICAL · ACTIVE**  
-https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/README_SOLVER_HUB.md
+## 6. Entwickler, Quellcode und Daten
 
-### Solver Workbench v1.1
-**CANONICAL · ACTIVE**  
-https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_SolverDevelopmentProgram_v1.1.html
+- Entwickler-/Quellcode-Hub: https://stefanhasselm74314-byte.github.io/UniverseLab/source.html
+- GitHub Repository: https://github.com/stefanhasselm74314-byte/UniverseLab
+- Dieses Register: https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/ACTIVE_LINKS.md
+- Dokument-Viewer: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-27_UniverseLab_DocumentViewer_v1.0.html
+- Source-Text-Viewer: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-27_UniverseLab_SourceTextViewer_v1.0.html
+- Machine-Data-Viewer v1.1: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-20_UniverseLab_MachineDataViewer_v1.1.html
 
-### Master Build Order v1.0
-**CANONICAL · ACTIVE**  
-https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-10_ULSH_MasterBuildOrder_v1.0.html
+## 7. Browser-/Cache-Recovery
 
-### ULSH-01 / C-PHYS — PR #137
-**WORKING · ACTIVE**  
-https://github.com/stefanhasselm74314-byte/UniverseLab/pull/137
+Nur verwenden, wenn eine aktuelle UniverseLab-Seite trotz Neuladen eine alte Shell oder alte Bedienelemente zeigt:
 
-**Primärer Solver:** `HZT-M0-S6_MD-2S_Background_BVP_Solver_v1.0`  
-**Kennung:** `ULSH-01 · MD2S-BVP`
+- 10M Fresh Launch: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-31_UniverseLab_10M_FreshLaunch_v1.0.html
 
----
+## 8. GSRA / Orion Pulse — separates Projekt
 
-## 3. GSRA-01 — Generation Ship
+Diese Ressourcen gehören **nicht** zum wissenschaftlichen UniverseLab-Kern. Die am 31.08.2026 hinterlegten externen Ziele wurden am 09.09.2026 geprüft und sind nicht mehr erreichbar. Sie werden deshalb nicht als aktive Links geführt.
 
-> GSRA-01 ist ein eigenständiges Projekt und bleibt technisch/repositorisch von UniverseLab getrennt. Die Links werden hier nur zentral referenziert.
+- GSRA Source Brief — **BLOCKIERT / KEIN KANONISCHES ZIEL**: früheres GitHub-Ziel liefert 404; kein verifizierter Ersatz identifiziert.
+- Telemetry Contract — **BLOCKIERT / KEIN KANONISCHES ZIEL**: frühere Google-Drive-Datei nicht mehr vorhanden/zugreifbar; kein verifizierter Ersatz identifiziert.
+- Release Notes — **BLOCKIERT / KEIN KANONISCHES ZIEL**: frühere Google-Drive-Datei nicht mehr vorhanden/zugreifbar; kein verifizierter Ersatz identifiziert.
 
-### GSRA-01 Control Center — Live
-**CANONICAL · ACTIVE · PUBLIC**  
-https://stefanhasselm74314-byte.github.io/GSRA-01-Control-Center/
+**Recovery-Regel:** Ein GSRA/Orion-Pulse-Ziel wird erst wieder verlinkt, wenn ein erreichbarer, eindeutig zugeordneter und kanonisch bestätigter Ersatz vorliegt. Alte 404-Ziele dürfen nicht reaktiviert werden.
 
-### GSRA-01 Control Center — GitHub
-**CANONICAL · ACTIVE · PUBLIC**  
-https://github.com/stefanhasselm74314-byte/GSRA-01-Control-Center
+## 9. Archiv / historischer Stand
 
-### GSRA-01 Generation Ship — Hauptrepository
-**CANONICAL · ACTIVE · PRIVATE**  
-https://github.com/stefanhasselm74314-byte/GSRA-01-Generation-Ship
+Nicht als aktuellen Projektstatus verwenden:
 
----
-
-## 4. Link-Zentrale selbst
-
-### UniverseLab Link Hub — Live
-**CANONICAL · ACTIVE**  
-https://stefanhasselm74314-byte.github.io/UniverseLab/links.html
-
-### Kanonisches Link-Register — GitHub
-**CANONICAL · ACTIVE**  
-https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/ACTIVE_LINKS.md
+- Gesamt-Audit 2026-07-31: https://stefanhasselm74314-byte.github.io/UniverseLab/universelab-audit-2026-07-31.html
+- Legacy-Bereich: https://stefanhasselm74314-byte.github.io/UniverseLab/legacy.html
 
 ---
 
-## ARCHIV / ERSETZT
-
-Derzeit keine Einträge. Historische Links sollen hier nur dann verbleiben, wenn sie für Reproduzierbarkeit oder Provenienz benötigt werden.
-
----
-
-## Pflegevertrag
-
-1. Ein neuer wichtiger Link wird zunächst auf Erreichbarkeit und Projektzuordnung geprüft.
-2. Bestehende kanonische Ziele werden nicht stillschweigend dupliziert.
-3. Ein ersetzter Link verliert `CANONICAL` und wird bei Bedarf in `ARCHIV / ERSETZT` verschoben.
-4. Temporäre PR-/Issue-Links tragen `WORKING` und werden nach Abschluss neu bewertet.
-5. `links.html` ist der bevorzugte mobile Einstieg; `ACTIVE_LINKS.md` ist die kanonische textuelle Quelle.
+**Pflegeregel:** Neue operative oder wissenschaftliche Links kommen erst in den kanonischen Bereich, wenn ihr aktueller Zweck eindeutig ist. Ersetzte, unerreichbare oder historische Ziele werden klar als blockiert bzw. Archiv/Legacy markiert.

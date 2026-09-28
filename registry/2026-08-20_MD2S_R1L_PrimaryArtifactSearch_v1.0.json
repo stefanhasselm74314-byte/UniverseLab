@@ -1,0 +1,100 @@
+{
+  "schema": "universelab.md2s.r1l.primary-artifact-search.v1",
+  "version": "1.0.0",
+  "created_date": "2026-08-20",
+  "status": "SCOPED_RECOVERY_SEARCH_COMPLETE_NO_PRIMARY_ARTIFACT_RECOVERED",
+  "track": "MD2S-R1-L",
+  "purpose": "Record a bounded multi-source search for the historical MD2S primary reproduction artifacts without promoting scoped absence to global nonexistence.",
+  "searched_targets": [
+    "MD2S_Gesamtpaket",
+    "MD2S_reproduction_script",
+    "MD2S_SHA256_manifest",
+    "run_bound_solver_input_output_package",
+    "run_bound_one_sided_bulk_cap_boundary_export",
+    "A_prime_bulk",
+    "A_prime_cap",
+    "Lprime_over_L_bulk",
+    "Lprime_over_L_cap"
+  ],
+  "search_channels": {
+    "file_library_index": {
+      "searched": true,
+      "primary_target_recovered": false,
+      "notes": [
+        "No file matching the referenced historical MD2S Gesamtpaket, reproduction script, or historical SHA-256 manifest was recovered in the scoped File Library searches.",
+        "Later SCI-001/SCI-002 SHA256 manifests were found but are later forensic packages and are not the missing historical MD2S manifest.",
+        "The later hzt-cap-junction forensic checker explicitly leaves historical interface derivatives unembedded because they are absent from the surviving archive."
+      ]
+    },
+    "github_current_code_index": {
+      "searched": true,
+      "queries": [
+        "MD2S_Gesamtpaket",
+        "MD2S_reproduction_script",
+        "MD2S_SHA256_manifest"
+      ],
+      "primary_target_recovered": false
+    },
+    "github_commit_message_index": {
+      "searched": true,
+      "queries": [
+        "MD2S Gesamtpaket",
+        "MD2S reproduction",
+        "0.842636731623"
+      ],
+      "primary_target_recovered": false,
+      "scope_note": "Recent forensic commits may match MD2S recovery terminology; no historical primary artifact was recovered from these commit-message searches."
+    },
+    "hyper_zip_archive_audit": {
+      "searched": true,
+      "source": "recovery/2026-08-20_MD2S_HyperZIP_ForensicAudit_v1.0.md",
+      "primary_target_recovered": false,
+      "archive_scope_only": true
+    },
+    "chatgpt_export_register": {
+      "searched": true,
+      "primary_file_artifact_recovered": false,
+      "transcript_targets_located": true,
+      "transcript_target_count": 2,
+      "public_labels": [
+        "PRIMARY_LONG_PROJECTSTATUS_TRANSCRIPT_TARGET",
+        "CONTINUATION_PROJECTSTATUS_TRANSCRIPT_TARGET"
+      ],
+      "private_identifiers_committed_to_public_repository": false,
+      "scope_note": "The private/export register establishes two exact conversation identities. Their private identifiers are intentionally not copied into this public repository. This audit does not claim message-level extraction and does not treat chat reports as solver artifacts."
+    }
+  },
+  "negative_result_scope": {
+    "statement": "No searched primary MD2S artifact was recovered in the enumerated search channels.",
+    "global_nonexistence_claim": false,
+    "local_device_or_unuploaded_archive_coverage": false,
+    "deleted_unexported_chat_coverage": false,
+    "unindexed_external_storage_coverage": false
+  },
+  "artifact_disambiguation": {
+    "SHA256_SCI_001_002_v0_2_is_historical_MD2S_manifest": false,
+    "SHA256_SCI_001_002_v0_3_is_historical_MD2S_manifest": false,
+    "later_C1_or_rebuild_outputs_may_substitute_for_historical_MD2S": false,
+    "chat_report_may_be_promoted_to_verified_solver_output_without_primary_artifact": false
+  },
+  "next_recovery_action": {
+    "priority": "HIGH",
+    "action": "Extract and search the two privately identified Hyperzeit Projektstatus Update transcripts from an official raw ChatGPT export, if available, for exact package filenames, attachment references, hashes, run IDs, output paths, or download links.",
+    "promotion_rule": "Transcript evidence may refine provenance and search targets but cannot by itself establish VERIFIED_SOLVER_OUTPUT."
+  },
+  "result": {
+    "primary_historical_solver_artifact_recovered": false,
+    "historical_two_sided_interface_export_recovered": false,
+    "historical_run_bound_solver_io_recovered": false,
+    "historical_sha256_manifest_recovered": false,
+    "search_status": "SCOPED_NEGATIVE_WITH_TRANSCRIPT_PROVENANCE_TARGETS"
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}

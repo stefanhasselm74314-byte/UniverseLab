@@ -1,0 +1,241 @@
+{
+  "schema": "universelab.ulsh05.wp1d2.kinematic-invariant-projector-solvability-preflight.v0.1",
+  "date": "2026-09-14",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-05/WP1D2",
+  "basis_main": "e8fd2594b5ac86e243b278a339a13705be03b725",
+  "classification": "ANALYTIC_NONOPERATIVE_KINEMATIC_INVARIANT_CANDIDATE_LEDGER_AND_PROJECTOR_SOLVABILITY_PREFLIGHT",
+  "status": "KINEMATIC_CANDIDATES_COMPONENTIZED_PROJECTOR_SOLVABILITY_FAIL_CLOSED_NO_PHYSICAL_REDUCTION_RELEASED",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "solver_authorized": false,
+  "successor_assignment": {
+    "predecessor": "ULSH-05/WP1D1",
+    "assigned_id": "ULSH-05/WP1D2",
+    "status": "FROZEN_BY_THIS_SUCCESSOR_CONTRACT",
+    "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.json",
+    "predecessor_continuation_title": "Kinematic invariant candidate ledger and projector solvability preflight"
+  },
+  "dependencies": [
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.json",
+    "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.md",
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
+    "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json",
+    "science/solver-hub/2026-08-07_ULSH-04_Constraint_Roadmap_v1.0.md",
+    "science/solver-hub/2026-08-07_ULSH-05_SVT-Perturbation_Roadmap_v1.0.md"
+  ],
+  "inherited_conditional_domain": {
+    "name": "D_cond",
+    "status": "FROZEN_CONDITIONAL",
+    "tangential_support_boundaryless_M4": "compact support in M4",
+    "tangential_support_finite_boundary_M4": "support compactly contained in int(M4)",
+    "chi_periodicity": "2pi periodic modulo the frozen U1 patch contract",
+    "pole_regularity": "smooth Cartesian extendibility at each disk pole",
+    "interface": "preserve two-side gluing and moving-interface kinematics from WP1C",
+    "gauge_closure": "G_zeta, G_lambda and G_rho each preserve the declared conditional domain",
+    "physical_release": false
+  },
+  "background_ansatz": {
+    "metric": "dsbar6^2 = exp(2A(r))*qbar_munu dx^mu dx^nu + dr^2 + L(r)^2 dchi^2",
+    "scalar": "phibar=phibar(r)",
+    "gauge_one_form": "Abar=Abar_chi(r) dchi",
+    "chi_period": "2pi",
+    "status": "CURRENT_STATIC_ANALYTIC_ANSATZ_NOT_AN_ESTABLISHED_PHYSICAL_BACKGROUND"
+  },
+  "gauge_operator_extension": {
+    "form": "G=(G_zeta,G_lambda,G_rho)",
+    "purpose": "component-level representative audit extending the structurally complete WP1D1 operator without changing its quotient semantics",
+    "bulk_diffeomorphism_rows": {
+      "h_AB": "delta h_AB = 2 nabla_(A zeta_B)",
+      "varphi": "delta varphi = zeta^A partial_A phibar",
+      "a_A": "delta a_A = Lie_zeta Abar_A",
+      "s": "delta s=0 for the pure bulk-diffeomorphism column in the independent intrinsic surface-field representation",
+      "xi_shape": "delta xi_shape = -zeta_perp",
+      "tau_a": "delta tau_a = -zeta_parallel_a",
+      "H_ab": "delta H_ab = 0 under the paired bulk-field/embedding transformation",
+      "Acal_a": "delta Acal_a = 0 under the paired bulk-field/embedding transformation",
+      "d_a": "delta d_a = 0 under the paired bulk-field/embedding transformation",
+      "generic_moving_pullback": "delta_zeta DeltaSigma(X*T)=0 in the paired doubly-covariant convention"
+    },
+    "u1_rows": {
+      "h_AB": "0",
+      "varphi": "0",
+      "a_A": "delta a_A = partial_A lambda",
+      "s": "delta s = q_sigma lambda",
+      "xi_shape": "0",
+      "tau_a": "0",
+      "H_ab": "0",
+      "Acal_a": "delta Acal_a = D_a lambda",
+      "d_a": "delta d_a = 0",
+      "generic_moving_pullback": "0; gauge-potential pullback uses the explicit Acal_a row"
+    },
+    "intrinsic_interface_rows": {
+      "bulk_fields": "no additional bulk transformation",
+      "tau_a": "delta tau^a = rho^a",
+      "xi_shape": "0",
+      "H_ab": "delta H_ab = Lie_rho hbar_ab = 2 D_(a rho_b)",
+      "s": "delta s = rho^a D_a sigma_bar",
+      "Acal_a": "delta Acal_a = (Lie_rho Abarcal)_a",
+      "d_a": "delta d_a = (Lie_rho wbar)_a",
+      "generic_moving_pullback": "delta t=Lie_rho Tbar"
+    }
+  },
+  "bulk_component_action_on_punctured_polar_chart": {
+    "domain": "L(r)>0",
+    "zeta_convention": "covector components zeta_A=(zeta_mu,zeta_r,zeta_chi)",
+    "fourD_split": "zeta_mu=zetaT_mu+D_mu zeta_L with D^mu zetaT_mu=0 only on a declared representative slice",
+    "delta_h_munu": "2 D_(mu zetaT_nu) + 2 D_mu D_nu zeta_L + 2 A_prime exp(2A) qbar_munu zeta_r",
+    "delta_h_mur": "(partial_r-2A_prime) zetaT_mu + D_mu[zeta_r+(partial_r-2A_prime)zeta_L]",
+    "delta_h_muchi": "partial_chi zetaT_mu + D_mu[zeta_chi+partial_chi zeta_L]",
+    "delta_h_rr": "2 partial_r zeta_r",
+    "delta_h_rchi": "partial_r zeta_chi + partial_chi zeta_r - 2(L_prime/L) zeta_chi",
+    "delta_h_chichi": "2 partial_chi zeta_chi + 2 L L_prime zeta_r",
+    "delta_varphi": "phibar_prime zeta_r",
+    "delta_alpha": "lambda + (Abar_chi/L^2) zeta_chi",
+    "delta_a_r": "partial_r lambda + Abar_chi partial_r(zeta_chi/L^2)",
+    "delta_a_chi": "partial_chi lambda + Abar_chi_prime zeta_r + Abar_chi partial_chi(zeta_chi/L^2)",
+    "global_pole_extension": "NOT_PROVEN_COMPONENTWISE"
+  },
+  "representative_compensators": {
+    "X_r": "B_r - 0.5*(partial_r-2A_prime)*B",
+    "X_chi": "B_chi - 0.5*partial_chi B",
+    "delta_X_r": "zeta_r",
+    "delta_X_chi": "zeta_chi",
+    "status": "CONDITIONAL_ON_COMMON_YORK_HODGE_REPRESENTATIVE_SLICE"
+  },
+  "kinematic_invariant_candidate_ledger": {
+    "scope": "G_zeta plus G_lambda on the common representative slice and punctured polar chart; full G_rho invariance not claimed unless separately stated",
+    "tensor_candidates": {
+      "hTT_munu": "hTT_munu"
+    },
+    "vector_candidates": {
+      "Vhat_mur": "VT_mur-(partial_r-2A_prime)VT_mu",
+      "Vhat_muchi": "VT_muchi-partial_chi VT_mu",
+      "AhatT_mu": "aT_mu"
+    },
+    "scalar_metric_and_scalar_field_candidates": {
+      "Hhat": "H-D2 B-8 A_prime exp(2A) X_r",
+      "hhat_rr": "h_rr-2 partial_r X_r",
+      "hhat_rchi": "h_rchi-partial_r X_chi-partial_chi X_r+2(L_prime/L)X_chi",
+      "hhat_chichi": "h_chichi-2 partial_chi X_chi-2 L L_prime X_r",
+      "varphihat": "varphi-phibar_prime X_r"
+    },
+    "maxwell_candidates": {
+      "u_r": "a_r-partial_r alpha",
+      "u_chi": "a_chi-partial_chi alpha",
+      "Ahat_r": "u_r+(Abar_chi_prime/L^2)X_chi",
+      "Ahat_chi": "u_chi-Abar_chi_prime X_r"
+    },
+    "interface_status": {
+      "H_ab": "COLUMNWISE_G_ZETA_INVARIANT_BUT_G_RHO_NONINVARIANT_IN_GENERAL",
+      "d_a": "COLUMNWISE_G_ZETA_AND_G_LAMBDA_INVARIANT_BUT_G_RHO_NONINVARIANT_IN_GENERAL",
+      "full_componentwise_rho_invariant_basis": "NOT_RELEASED"
+    },
+    "forbidden_denominators": [
+      "1/phibar_prime",
+      "1/Abar_chi_prime",
+      "1/n",
+      "1/k",
+      "D2_inverse",
+      "retarded_Green_operator",
+      "advanced_Green_operator"
+    ],
+    "status": "CANDIDATES_DERIVED_KINEMATICALLY_NOT_PHYSICAL_MODE_BASIS"
+  },
+  "projector_solvability_preflight": {
+    "abstract_operator": "P:D(P) subset H1 -> H2 densely defined",
+    "always_valid_identity": "ker(P^dagger) = (Ran P)^perp and closure(Ran P) = (ker(P^dagger))^perp",
+    "exact_solvability": "P u=f requires f in Ran P",
+    "orthogonality_condition": "f perpendicular ker(P^dagger) is necessary for exact solvability and characterizes membership in closure(Ran P)",
+    "closed_range_upgrade": "if Ran P is closed, f perpendicular ker(P^dagger) becomes sufficient for exact solvability",
+    "uniqueness": "solutions are unique only modulo ker P unless a complement or gauge/normalization condition is frozen",
+    "self_adjoint_special_case": "if a self-adjoint closed-range realization is separately proved, solvability reduces to f perpendicular ker P",
+    "current_projector_operators": [
+      "D2 scalar projector operator",
+      "Delta_1 one-form projector operator",
+      "Delta_L tensor/vector York-Lichnerowicz operator"
+    ],
+    "global_pairing_domain": "NOT_FROZEN_PHYSICALLY",
+    "closed_range_D2": "NOT_PROVEN",
+    "closed_range_Delta_1": "NOT_PROVEN",
+    "closed_range_Delta_L": "NOT_PROVEN",
+    "self_adjoint_physical_realization": "NOT_PROVEN",
+    "physical_Green_operator": "NOT_FROZEN",
+    "lorentzian_firewall": "4D-covariant York/Hodge bookkeeping does not define a canonical global elliptic projector on an unfrozen Lorentzian physical domain; no causal inverse is selected"
+  },
+  "polar_coordinate_firewall": {
+    "issue": "the polar chart degenerates at L=0, so L_prime/L, zeta_chi/L^2 and Abar_chi_prime/L^2 cannot be interpreted through boundedness of isolated polar components",
+    "smoothness_rule": "test smooth Cartesian or orthonormal-frame extendibility of the underlying field",
+    "counterexample": "the smooth Cartesian translation d/dx has polar contravariant angular component proportional to -sin(chi)/r near r=0 while its geometric norm remains finite",
+    "component_formula_domain": "punctured chart L>0 plus separate pole-extension condition",
+    "pole_extension_audit": "OPEN_NOT_PROVEN_COMPONENTWISE"
+  },
+  "regime_checks": {
+    "phibar_prime_zero": "varphihat remains regular because no division by phibar_prime occurs",
+    "Abar_chi_prime_zero": "Ahat_r and Ahat_chi reduce to the U1-invariant u_r and u_chi",
+    "internal_n_zero": "retained because no 1/n operation occurs",
+    "A_prime_zero": "metric compensator formulas reduce smoothly to the unwarped radial control",
+    "L_prime_zero_away_from_pole": "internal metric formulas reduce smoothly when L remains nonzero",
+    "smooth_pole_L_zero": "naive substitution into 1/L or 1/L^2 component formulas is forbidden",
+    "projector_kernel_nontrivial": "candidate representatives remain nonunique and physical mode counting remains forbidden"
+  },
+  "gate_state": {
+    "WP1_boundary_residual_linearizations": "COMPONENTIZED_LOCAL_INTERFACE_OPERATOR",
+    "WP1_local_weak_boundary_hessian": "SYMMETRIC_ON_DECLARED_TEST_DOMAIN",
+    "WP1_global_domain_preflight": "COMPLETED_CONDITIONAL_NO_PHYSICAL_DOMAIN_RELEASE",
+    "WP1_physical_boundary_domain": "BLOCKED_UNESTABLISHED_BACKGROUND_AND_GLOBAL_CORNER_DATA",
+    "WP1D_successor_identifier": "FROZEN_BY_THIS_SUCCESSOR_CONTRACT",
+    "WP1D_analytic_field_domain": "FROZEN_CONDITIONAL",
+    "WP1D_4D_covariant_SVT_bookkeeping": "DEFINED_CONDITIONAL_PROJECTOR_KERNELS_OPEN",
+    "WP1D_gauge_action": "DEFINED_KINEMATICALLY_WITH_INDEPENDENT_SURFACE_REPARAMETERIZATION",
+    "WP1D_constraint_elimination": "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
+    "WP1D_physical_3plus1_SVT": "NOT_RELEASED",
+    "WP1D_physical_DOF_count": "NOT_RELEASED",
+    "WP1D1_gauge_operator": "COMPONENTIZED_STRUCTURALLY",
+    "WP1D1_gauge_operator_interface_rows": "COMPONENTIZED_ALL_DECLARED_ROWS",
+    "WP1D1_projector_kernel_registry": "DEFINED_BACKGROUND_DEPENDENT",
+    "WP1D1_full_projector_inverse": "NOT_FROZEN",
+    "WP1D1_full_gauge_invariant_basis": "NOT_CLAIMED",
+    "WP1D1_closed_range_of_G": "NOT_PROVEN",
+    "WP1D1_Fredholm_property_of_G": "NOT_PROVEN",
+    "WP1D2_invariant_candidate_ledger": "DERIVED_KINEMATICALLY_CONDITIONAL_REPRESENTATIVE_LEVEL",
+    "WP1D2_projector_solvability_preflight": "DERIVED_FAIL_CLOSED_CLOSED_RANGE_NOT_PROVEN",
+    "WP1D2_pole_extension_audit": "OPEN_NOT_PROVEN_COMPONENTWISE",
+    "WP1_full_global_boundary_hessian": "NOT_CLOSED_PHYSICAL_DOMAIN_NOT_RELEASED",
+    "WP1_full_quadratic_action": "NOT_CLOSED",
+    "PERTURBED_JUNCTION_SYSTEM": "NOT_RELEASED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "FM-G0": "OPEN",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "forbidden_inferences": [
+    "Kinematic invariant candidates are not a physical gauge-fixed mode basis.",
+    "A common York/Hodge representative slice is not a released global projector.",
+    "Orthogonality to ker(P^dagger) alone does not prove exact solvability when Ran P is not known closed.",
+    "Projector zero modes are not automatically gauge modes or physical modes.",
+    "Component formulas on the punctured polar chart do not prove smooth pole extension.",
+    "Columnwise G_zeta or G_lambda invariance does not imply full G_rho invariance.",
+    "rank(G) is not a physical DOF count before ULSH-04 Dirac-Bergmann closure.",
+    "D_cond is not a released physical perturbation boundary domain.",
+    "PHYSICAL_BACKGROUND remains NOT_ESTABLISHED.",
+    "FM-G0 remains OPEN and no forward-map gap is closed.",
+    "No ghost freedom, stability, spectrum, observable, backend import or solver execution follows from this block."
+  ],
+  "continuation": {
+    "next_exact_id": "NOT_ASSIGNED_BY_THIS_PREFLIGHT",
+    "required_before_physical_reduction": [
+      "freeze a physically admissible time/ADM and boundary-domain structure",
+      "freeze projector domains, pairings, adjoints and zero-mode complements",
+      "prove or reject closed-range/Fredholm properties needed by any global inverse",
+      "complete smooth-pole extension in Cartesian or orthonormal-frame variables",
+      "complete ULSH-04 Dirac-Bergmann constraint classification"
+    ],
+    "physical_execution_allowed": false
+  }
+}

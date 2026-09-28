@@ -1,0 +1,22 @@
+name: UniverseLab print/export link coverage v1.0
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  print-export-link-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit human-facing internal link coverage
+        run: python tools/2026-08-28_validate_print_export_link_coverage_v1.0.py --root .

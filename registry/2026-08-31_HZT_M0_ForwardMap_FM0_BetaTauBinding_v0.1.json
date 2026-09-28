@@ -1,0 +1,169 @@
+{
+  "schema": "hzt-m0.forward-map.fm0.beta-tau-binding.v0.1",
+  "date": "2026-08-31",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "workstream": "WS1",
+  "work_package": "FM-0",
+  "gate": "FM-G0",
+  "gate_status": "OPEN",
+  "symbol": "beta_tau",
+  "display": "β_τ",
+  "decision": "PARTIALLY_RESOLVED_CURRENT_EFFECTIVE_PROXY_AND_MAPPING_ROLES_RECOVERED_PARENT_DERIVATION_OPEN",
+  "classification": "PROVENANCE_RECOVERY_NO_NEW_PHYSICS",
+  "recovery_sources": [
+    "guide.html",
+    "compare-app.js",
+    "hyperlab.html",
+    "science/hzt-m0/bridge/MD2F_H_I_INTEGRATION_AUDIT_v0.1.md",
+    "science/hzt-m0/bridge/MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1.md",
+    "science/hzt-m0/bridge/MD2P_CORR_OVERLAP_DERIVATION_v0.1.md",
+    "legacy-formeln-H1-H64.csv",
+    "legacy-snapshot-2026-06-29.json",
+    "legacy.html"
+  ],
+  "current_effective_implementation": {
+    "status": "RECOVERED_MODEL_DEPENDENT_DIAGNOSTIC_PROXY",
+    "definition": "Dimensionless effective mixing amplitude in the implemented UniverseLab 4D bridge sensitivity function.",
+    "relations": [
+      "Delta(a) = beta_tau I_B exp[-(a/a_c)^2]",
+      "E_eff(a)^2 = E_LCDM(a)^2 [1 + Delta(a)]",
+      "Delta H/H = sqrt(1 + Delta) - 1"
+    ],
+    "direct_source_statements": [
+      "guide.html: beta_tau is an effective mixing amplitude.",
+      "guide.html: beta_tau and I_B occur only as a product and are degenerate in this bridge model.",
+      "guide.html: beta_tau -> 0 removes the correction and reproduces LambdaCDM within the implementation.",
+      "compare-app.js: the bridge correction is model-dependent, dimensionless, and not a released fundamental 6D prediction.",
+      "hyperlab.html: displayed curves visualize effective ansatzes, not predictions calculated from the full 6D parent action."
+    ],
+    "effective_dimension": "1",
+    "effective_dimension_status": "DIRECT_IMPLEMENTATION_CONTRACT_PLUS_ALGEBRAIC_CONSISTENCY",
+    "effective_dimension_basis": "compare-app.js declares Delta dimensionless; guide.html declares I_B dimensionless; a/a_c and the exponential are dimensionless, so the implemented beta_tau proxy is dimensionless.",
+    "identifiability": {
+      "local_combination": "beta_tau * I_B",
+      "separate_identifiability_in_current_bridge": "NO",
+      "reason": "The current correction depends on beta_tau and I_B only through their product.",
+      "zero_limit": "beta_tau -> 0 gives Delta -> 0 and the implemented LambdaCDM limit."
+    },
+    "ui_parameter_range": {
+      "typical_implemented_range": "approximately -0.3 to 0.3",
+      "status": "DEMONSTRATION_RANGE_NOT_PHYSICAL_PRIOR"
+    },
+    "evidence_effect": "NONE"
+  },
+  "current_physical_mapping_declaration": {
+    "source": "science/hzt-m0/bridge/MD2F_H_I_INTEGRATION_AUDIT_v0.1.md",
+    "parameter_vector": "P_phys = (a0, beta_tau, R_chi, I_B, kappa_6)",
+    "declared_edges": [
+      {
+        "id": "MDS-02",
+        "edge": "(beta_tau, I_B, kappa_6) -> omega_c",
+        "status": "OPEN_CRITICAL_BLOCKER",
+        "reason": "Units, normalizations and dimensionless invariant combinations are not derived."
+      },
+      {
+        "id": "MDS-03",
+        "edge": "(a0, beta_tau, I_B) -> eta",
+        "status": "OPEN",
+        "reason": "No current 6D/4D response equation derives the dimensionless amplitude."
+      },
+      {
+        "id": "MDS-04",
+        "edge": "(R_chi, beta_tau) -> s",
+        "status": "OPEN_FIX_OR_EXCLUDE_CANDIDATE",
+        "reason": "No operator, spectral-density or asymptotic derivation fixes the form exponent from beta_tau."
+      }
+    ],
+    "later_audit_disposition": [
+      "MD2N_Q_PACKAGE_RIGOR_AUDIT_v0.1: MDS-02 remains OPEN/BYPASSED, MDS-03 is replaced by an alternative effective ansatz, and MDS-04 is fixed effectively at s=2.",
+      "MD2P_CORR_OVERLAP_DERIVATION_v0.1: MDS-02 is not addressed, MDS-03 remains an alternative effective closure, and MDS-04 remains fixed effective."
+    ],
+    "physical_parent_definition": "OPEN_RECOVERY_REQUIRED",
+    "physical_parent_dimension_and_normalization": "OPEN_RECOVERY_REQUIRED",
+    "parent_to_reduced_derivation": "OPEN_RECOVERY_REQUIRED",
+    "released_observable_mapping": "NOT_RELEASED"
+  },
+  "current_symbol_alignment": {
+    "observation": "The same beta_tau spelling is used for the program parameter, the bridge audits and the implemented diagnostic proxy.",
+    "classification": "PROJECT_LEVEL_SEMANTIC_ALIGNMENT_NOT_PARENT_DERIVATION",
+    "rule": "Shared notation and intended role permit provenance linkage between current artifacts but do not prove a 6D parent origin or a released physical map."
+  },
+  "historical_beta_candidate": {
+    "source": "legacy-formeln-H1-H64.csv",
+    "status": "HISTORICAL_OR_OPEN_LEGACY_BRANCH",
+    "relations": [
+      "H32: partial_tau vartheta = beta vartheta - lambda_Theta laplacian vartheta — open",
+      "H33: laplacian vartheta - (beta/lambda_Theta) vartheta = 0 — open",
+      "H34: a0 = lambda_Theta c beta — historical",
+      "H35: beta = H0 — historical",
+      "H36: a0 = lambda_Theta c H0 — historical",
+      "H52: delta_phi(f) = beta/f — open",
+      "H53: beta <-> H0 — open"
+    ],
+    "role": "Legacy drift/rate and cosmological anchoring parameter, plus a separate open GW-phase ansatz.",
+    "dimension_inference": {
+      "statement": "If H35 is adopted within the historical branch, beta has the dimension of a rate; H32 likewise requires beta to scale with the chosen tau derivative.",
+      "classification": "HISTORICAL_DIMENSIONAL_INFERENCE_NOT_CURRENT_BETA_TAU_BINDING",
+      "tau_normalization": "UNRESOLVED"
+    },
+    "identity_with_current_beta_tau": "NO_IDENTITY_ASSERTED",
+    "reason": "No explicit current canonical alias or reduction connects legacy beta to beta_tau."
+  },
+  "notation_collision_guards": [
+    {
+      "object": "legacy drift beta in H32-H36 and H52-H53",
+      "identity_with_beta_tau": "NO_IDENTITY_ASSERTED"
+    },
+    {
+      "object": "MD-2S potential coefficient beta in V(phi)=Lambda6+beta phi^2",
+      "identity_with_beta_tau": "NO_IDENTITY_ASSERTED"
+    },
+    {
+      "object": "normal-bundle/extrinsic-curvature component beta^i and invariant B^2=beta_i beta^i",
+      "identity_with_beta_tau": "NO_IDENTITY_ASSERTED"
+    },
+    {
+      "object": "internal conical/metric beta used in K4=beta=1 and baryogenesis geometry",
+      "identity_with_beta_tau": "NO_IDENTITY_ASSERTED"
+    },
+    {
+      "object": "beta_0 amplitude in the MD-2P-corr partition-mixing ansatz",
+      "identity_with_beta_tau": "NO_IDENTITY_ASSERTED"
+    },
+    {
+      "object": "renormalization-group beta functions",
+      "identity_with_beta_tau": "NO_IDENTITY_ASSERTED"
+    }
+  ],
+  "resolved_fields": [
+    "current_effective_proxy_definition",
+    "current_effective_proxy_dimensionless_contract",
+    "implemented_bridge_formula",
+    "implemented_beta_tau_I_B_degeneracy",
+    "implemented_beta_tau_zero_limit",
+    "current_declared_MDS_02_MDS_03_MDS_04_roles",
+    "later_audit_disposition_of_those_roles",
+    "historical_beta_candidate_context",
+    "notation_collision_guards"
+  ],
+  "open_requirements": [
+    "explicit current canonical 6D parent definition of beta_tau",
+    "physical parent dimension and normalization of beta_tau",
+    "derivation or rejection of MDS-02",
+    "derivation, fixation or exclusion of MDS-03",
+    "derivation, fixation or exclusion of MDS-04",
+    "explicit decision on whether the current effective proxy is the normalized image of the physical beta_tau parameter",
+    "independent treatment of the beta_tau-I_B degeneracy",
+    "released reduced-to-observable contract"
+  ],
+  "gap_id": "FM0-GAP-002",
+  "gap_status": "PARTIALLY_RESOLVED_EFFECTIVE_PROXY_AND_MAPPING_ROLES_RECOVERED_PARENT_DERIVATION_OPEN",
+  "gap_blocking": true,
+  "cp01r4_state": "FROZEN_NO_EXECUTION",
+  "physical_background": "NOT_ESTABLISHED",
+  "rank_R": "OPEN_NOT_EXECUTED",
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

@@ -1,0 +1,80 @@
+name: 2026-09-07 ULSH05 WP1 Quadratic Action Readiness QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json'
+      - 'science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.md'
+      - 'tests/2026-09-07_test_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.py'
+      - '.github/workflows/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_QA_v0.1.yml'
+      - 'hzt-s6-parent-action-v0.1.json'
+      - 'registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json'
+      - 'registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json'
+      - 'science/solver-hub/2026-08-07_ULSH-05_SVT-Perturbation_Roadmap_v1.0.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse readiness contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          assert data['model_id'] == 'HZT-M0-S6-C-PHYS-M1'
+          assert data['status'] == 'OFFSHELL_SECOND_VARIATION_INPUTS_READY_FULL_QUADRATIC_SYSTEM_NOT_DERIVED'
+          assert data['physical_gate_effect'] == 'NONE'
+          assert data['physical_evidence_effect'] == 'NONE'
+          assert data['solver_authorized'] is False
+          assert data['readiness_state']['full_S_quad_2'] == 'NOT_DERIVED'
+          assert data['readiness_state']['released_physical_background'] == 'NOT_ESTABLISHED'
+          assert data['readiness_state']['matter_Delta_m_definition_and_coupling'] == 'MISSING_REQUIRED_LINK'
+          print('PASS: readiness contract parses and remains fail-closed')
+          PY
+
+      - name: Run independent WP1 readiness regression
+        run: python tests/2026-09-07_test_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.py
+
+      - name: Re-run C-PHYS-M1 function-freeze control
+        run: python tests/2026-08-03_test_hzt_m0_s6_c_phys_m1_function_freeze_v0.1.py
+
+      - name: Re-run G01 observable-interface firewall
+        run: python tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py
+
+      - name: Enforce physical and authorization non-promotion
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r = json.loads(Path('registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json').read_text(encoding='utf-8'))
+          fw = r['unchanged_firewalls']
+          expected = {
+              'FM-G0': 'OPEN',
+              'AuthorizationDecision': 'NOT_CREATED',
+              'SingleUseGrant': 'NOT_CREATED',
+              'BACKEND_IMPORT': 'NOT_EXECUTED',
+              'SOLVER_EXECUTION': 'NOT_EXECUTED',
+              'PHYSICAL_BACKGROUND': 'NOT_ESTABLISHED',
+              'PHYSICAL_RESPONSE_RANK': 'NOT_EXECUTED',
+              'K1-D': 'NOT_RELEASED',
+              'K1-E': 'NOT_ADMISSIBLE',
+          }
+          assert fw == expected, (fw, expected)
+          assert r['wp1_decision']['closure_allowed'] is False
+          assert r['wp1_decision']['ULSH05_WP1'] == 'PREPARATORY_READY_TO_DERIVE_NOT_CLOSED'
+          print('PASS: no physical or authorization gate promotion')
+          PY

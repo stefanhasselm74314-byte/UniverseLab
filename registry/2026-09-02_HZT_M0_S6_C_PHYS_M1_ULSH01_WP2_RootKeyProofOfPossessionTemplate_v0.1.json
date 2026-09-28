@@ -1,0 +1,41 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-root-key-proof-of-possession.v0.1",
+  "date": "2026-09-02",
+  "classification": "UNSIGNED_ROOT_KEY_PROOF_OF_POSSESSION_TEMPLATE",
+  "status": "UNSIGNED_TEMPLATE_NO_PROOF",
+  "protected": {
+    "artifact_type": "TRUST_ROOT_PROOF_OF_POSSESSION",
+    "attestation_id": null,
+    "authority_id": null,
+    "contract_id": "ULSH01-WP2-HUMAN-TRUST-ROOT-RATIFICATION-PACKAGE-v0.1",
+    "key_id": null,
+    "profile": "UL-ED25519-CANONICAL-JSON-v1",
+    "signed_at_utc": null
+  },
+  "payload": {
+    "candidate_trust_root_raw_sha256": null,
+    "candidate_trust_root_canonical_sha256": null,
+    "public_key_fingerprint_sha256": null,
+    "challenge_nonce": null,
+    "proof_statement": "I control the Ed25519 private key corresponding to this candidate public key; this proof alone does not establish project authority.",
+    "expires_at_utc": null,
+    "governed_run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4"
+  },
+  "signature": {
+    "algorithm": "Ed25519-RFC8032",
+    "encoding": "base64",
+    "attestation_id": null,
+    "public_key_fingerprint_sha256": null,
+    "signed_bytes_sha256": null,
+    "value": null
+  },
+  "domain_separator_utf8_plus_nul": "UNIVERSELAB-TRUST-ROOT-PROOF-OF-POSSESSION-V1\\u0000",
+  "firewall": {
+    "proof_of_possession_is_project_authority": false,
+    "proof_of_possession_is_ratification": false,
+    "operative_authorization_allowed": false,
+    "backend_import_allowed": false,
+    "solver_execution_allowed": false,
+    "physical_evidence_effect": "NONE"
+  }
+}

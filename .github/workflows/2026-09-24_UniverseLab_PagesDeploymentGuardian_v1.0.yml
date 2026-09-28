@@ -1,0 +1,75 @@
+name: UniverseLab Pages deployment guardian v1.0
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy UniverseLab to GitHub Pages
+    types:
+      - in_progress
+      - completed
+
+permissions:
+  actions: write
+  contents: read
+
+# Fast-path only: github.sha is the workflow_run event's default-branch SHA.
+# Runtime cancellation/recovery below resolves refs/heads/main again via API.
+concurrency:
+  group: ${{ github.event.action == 'in_progress' && github.event.workflow_run.head_sha != github.sha && 'pages' || format('pages-guardian-{0}', github.run_id) }}
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve current main at guardian runtime
+        id: current-main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          CURRENT_MAIN_SHA="$(gh api \
+            -H 'Accept: application/vnd.github+json' \
+            "/repos/${GITHUB_REPOSITORY}/git/ref/heads/main" \
+            --jq '.object.sha')"
+
+          if [[ ! "$CURRENT_MAIN_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::Unable to resolve a valid current refs/heads/main SHA."
+            exit 1
+          fi
+
+          echo "sha=$CURRENT_MAIN_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Report deployment identity
+        run: |
+          echo "Trigger action: ${{ github.event.action }}"
+          echo "Deployment run id: ${{ github.event.workflow_run.id }}"
+          echo "Deployment head SHA: ${{ github.event.workflow_run.head_sha }}"
+          echo "Deployment conclusion: ${{ github.event.workflow_run.conclusion }}"
+          echo "workflow_run event default-branch SHA: ${{ github.sha }}"
+          echo "Runtime current main SHA: ${{ steps.current-main.outputs.sha }}"
+
+      - name: Cancel stale deployment run
+        if: ${{ github.event.action == 'in_progress' && github.event.workflow_run.head_sha != steps.current-main.outputs.sha }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STALE_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          set -euo pipefail
+          echo "::error::Stale Pages deployment detected; cancelling run $STALE_RUN_ID."
+          gh api \
+            --method POST \
+            "/repos/${GITHUB_REPOSITORY}/actions/runs/${STALE_RUN_ID}/cancel"
+
+      - name: Repair after any stale deployment completion
+        if: ${{ github.event.action == 'completed' && github.event.workflow_run.head_sha != steps.current-main.outputs.sha }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          echo "::warning::A stale Pages run completed with conclusion '${{ github.event.workflow_run.conclusion }}'; dispatching runtime-current main immediately."
+          gh api \
+            --method POST \
+            "/repos/${GITHUB_REPOSITORY}/actions/workflows/deploy-pages.yml/dispatches" \
+            -f ref=main

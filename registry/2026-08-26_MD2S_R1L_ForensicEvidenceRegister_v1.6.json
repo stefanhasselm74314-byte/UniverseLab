@@ -1,0 +1,144 @@
+{
+  "schema": "universelab.md2s.r1l.forensic-evidence-register.v1",
+  "version": "1.6.0",
+  "created_date": "2026-08-26",
+  "status": "PARTIALLY_UNBLOCKED_PRIMARY_EFGHKL_RECOVERED_BUT_SOURCE_IDENTICAL_TWO_JUNCTION_REPLAY_STILL_BLOCKED",
+  "supersedes": ["registry/2026-08-26_MD2S_R1L_ForensicEvidenceRegister_v1.5.json"],
+  "identifier": {
+    "exact_string": "MD2S-R1-L",
+    "recovered_role": "LEGACY_REPRODUCTION_TRACK_ID",
+    "original_historical_solver_transaction_recovered": false
+  },
+  "evidence_classes": {
+    "E10_VERIFIED_HISTORICAL_TRANSCRIPT_REPORT": "Message-level report recovered in the official export; proves what was historically reported, not by itself the solver transaction.",
+    "E11_PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID": "Recovered package payload with ZIP/CRC and internal SHA-256 manifest validation. Scientific scope remains limited to that package.",
+    "E12_PRIMARY_NUMERIC_REPRODUCTION_PASS": "Selected numerical quantities independently recomputed from recovered primary package data within declared tolerances; does not imply solver re-execution unless generation code is present and run."
+  },
+  "current_recovery_state": {
+    "B1.4E": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID_PLUS_SELECTED_INTERNAL_NUMERIC_REPRODUCTION_PASS",
+    "B1.4F": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+    "B1.4G": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+    "B1.4H": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID_PLUS_SELECTED_INTERNAL_NUMERIC_REPRODUCTION_PASS",
+    "B1.4K": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID_PLUS_NUMERIC_REPRODUCTION_PASS",
+    "B1.4L": "PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID_PLUS_NUMERIC_REPRODUCTION_PASS",
+    "source_identical_two_junction_replay": "BLOCKED"
+  },
+  "B1.4E": {
+    "classification": [
+      "E10_VERIFIED_HISTORICAL_TRANSCRIPT_REPORT",
+      "E11_PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+      "E12_PRIMARY_NUMERIC_REPRODUCTION_PASS_SELECTED_DERIVED_AND_INTERNAL_CONSISTENCY_ONLY"
+    ],
+    "historical_expected_package_name": "HZT_MD2S_B1_4E_SMOOTH_TARGET_REPAIR_v0_1_PACKAGE.zip",
+    "recovered_uploaded_filename": "HZT_MD2S_B1_4E_SMOOTH_TARGET_REPAIR_v0_1.zip",
+    "outer_filename_variation_from_historical_link": true,
+    "outer_zip_byte_identity_to_historical_wrapper_independently_established": false,
+    "internal_root": "HZT_MD2S_B1_4E_SMOOTH_TARGET_REPAIR_v0_1/",
+    "recovered_zip_size_bytes": 2770104,
+    "recovered_zip_sha256": "31b80fe24dcb45822b2edb8f24bf83ead40bc05d41b5080f9da8fcd528965c1b",
+    "zip_entry_count_total": 16,
+    "regular_file_count_including_manifest": 12,
+    "manifest_tracked_payload_file_count": 11,
+    "zip_crc_status": "PASS",
+    "internal_manifest_entries": 11,
+    "internal_manifest_hashes_valid": 11,
+    "internal_manifest_hashes_invalid": 0,
+    "provenance_classification": "quarantined_non_evidential_smooth_target_pole_repair",
+    "historical_source_report_match": {
+      "project_phase": "MD-2S-B1.4E",
+      "status": "smooth_target_pole_local_repair_constructed",
+      "target_Gaussian_curvature_at_origin": -28.598227282884665,
+      "factor16_geometry": "RETAINED",
+      "target_pole_C2_finite_curvature": "PASS",
+      "target_pole_Cinfinity": "NOT_PROVEN",
+      "full_scalar_radion_sector": "OPEN",
+      "factor16_release": "BLOCKED",
+      "K1D_release": "NOT_RELEASED",
+      "K1E_status": "NOT_ADMISSIBLE",
+      "evidential_status": "NONE"
+    },
+    "selected_independent_checks": {
+      "patch_delta_q2_recomputed": -27.847724300744908,
+      "patch_delta_q2_reported": -27.847724300744908,
+      "target_curvature_from_minus_6_c3_recomputed": -28.598227282884665,
+      "target_curvature_reported": -28.598227282884665,
+      "cap_global_minimum_recomputed": 3.8100903024938315,
+      "cap_global_minimum_reported": 3.8100903024938315,
+      "minimum_P_over_r2_recomputed": 0.3791193647165695,
+      "minimum_P_over_r2_reported": 0.37911936471656954,
+      "minimum_Q_over_r2_recomputed": 0.37907653343188696,
+      "minimum_Q_over_r2_reported": 0.3790765334318871,
+      "scalar_residual_max_r_ge_1e_minus_3_recomputed": 9.30694129763765e-07,
+      "scalar_residual_max_reported": 9.30694129763765e-07,
+      "scalar_residual_rms_r_ge_1e_minus_3_recomputed": 8.257094312235935e-08,
+      "scalar_residual_rms_reported": 8.257094312235935e-08,
+      "partial_spectra_cross_file_max_abs_difference": 5.684341886080802e-14,
+      "cap_A_prime_profile_endpoint": 1.0,
+      "cap_H_L_profile_endpoint": 1.0,
+      "status": "PASS_SELECTED_DERIVED_AND_INTERNAL_CONSISTENCY"
+    },
+    "reproduction_limit": {
+      "generation_solver_code_present": false,
+      "inspection_script_present": true,
+      "archived_profiles_recomputed_from_field_equations": false,
+      "archived_partial_spectra_recomputed_from_sturm_liouville_solver": false,
+      "primary_profiles_and_partial_spectra_recovered": true,
+      "selected_internal_and_derived_checks_recomputed": true
+    },
+    "scientific_scope": {
+      "target_curvature_pole_removed_in_archived_design": true,
+      "regularity_level_established": "C2_FINITE_CURVATURE_POLAR_POLE",
+      "C_infinity_analyticity": "NOT_PROVEN",
+      "factor16_geometry": "RETAINED",
+      "principal_sigma_kinetic_metric": "POSITIVE",
+      "bulk_potential_nonnegative": "PASS_AFTER_COSMOLOGICAL_SPLIT",
+      "partial_spectra": "NO_NEGATIVE_MODE_IN_ARCHIVED_THREE_PARTIAL_SECTORS_WITH_MASSLESS_PHASE_MODE",
+      "full_scalar_radion_sector": "OPEN",
+      "chi_dependent_modes": "OPEN",
+      "simple_natural_action": "NOT_ESTABLISHED",
+      "local_patch_naturalness": "NOT_ESTABLISHED",
+      "full_ghost_freedom": "NOT_ESTABLISHED",
+      "factor16_prediction": "NOT_ESTABLISHED"
+    }
+  },
+  "remaining_recovery_priority": [
+    {
+      "rank": 1,
+      "priority": "P0",
+      "target": "run-bound two-sided Bulk/Cap interface export",
+      "required_fields": ["A_prime_bulk", "A_prime_cap", "Lprime_over_L_bulk", "Lprime_over_L_cap", "historically_bound_oriented_normals"]
+    },
+    {"rank": 2, "priority": "P1", "target": "full-precision two-sided interface/profile derivative tables"},
+    {"rank": 3, "priority": "P1", "target": "original two-junction solver residual logs"},
+    {"rank": 4, "priority": "P2", "target": "complete generation solver tolerances/configuration and source-identical action/potential/coupling bindings"}
+  ],
+  "two_sided_interface": {
+    "required_historical_fields": [
+      "A_prime_bulk",
+      "A_prime_cap",
+      "Lprime_over_L_bulk",
+      "Lprime_over_L_cap",
+      "historically_bound_oriented_normals",
+      "full_precision_two_sided_interface_or_profile_derivative_tables",
+      "original_two_junction_solver_residual_logs",
+      "complete_generation_solver_tolerances_and_configuration"
+    ],
+    "source_identical_historical_replay": "STILL_BLOCKED"
+  },
+  "promotion_firewall": {
+    "B1.4E_recovery_closes_E_package_gap": true,
+    "B1.4E_and_B1.4H_package_gaps_both_closed": true,
+    "B1.4E_recovery_closes_source_identical_two_junction_replay": false,
+    "selected_internal_checks_equal_full_solver_rerun": false,
+    "later_rebuild_or_C1_data_may_fill_historical_missing_fields": false,
+    "interpolation_may_be_labeled_historical_original": false
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}

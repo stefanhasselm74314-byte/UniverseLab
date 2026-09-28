@@ -1,0 +1,298 @@
+{
+  "schema": "universelab.hyperzeit.10m-research-program.v1",
+  "program_id": "UL-HZT-10M-2026-2027",
+  "version": "1.0.0",
+  "ratification_date": "2026-08-29",
+  "status": "ACTIVE_RATIFIED_RESEARCH_PROGRAM",
+  "classification": "THEORY_METHODS_DATA_QA_DOCUMENTATION_PROGRAM_CP01R4_FAIL_CLOSED",
+  "program_horizon": {
+    "start": "2026-09-01",
+    "end": "2027-06-30"
+  },
+  "ratification_basis": {
+    "user_decision": "EXPLICIT_GO_2026-08-29",
+    "planning_source_filename": "UniverseLab_Hyperzeit_10M_Arbeits_und_Forschungsprogramm_v1.0.docx",
+    "planning_source_sha256": "cbf6cdd7f96a6aff74655aeda6729f6bec1153486367a06a20890a46ab2bd09d",
+    "canonical_repository_ratification": "governance/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_Ratification_v1.0.md"
+  },
+  "program_result": "Ein wissenschaftlich konsolidierter, reproduzierbarer und testbarer HZT-M0-Stack, der klar trennt, was aus dem 6D-Skelett folgt, was effektive Modellannahme ist, welche Observablen entstehen, welche Daten falsifizieren können und was einen späteren physischen Background-Solve benötigt.",
+  "primary_scientific_path": [
+    "HZT-M0 Forward Map",
+    "MOND/RAR",
+    "Kosmologie/Growth/Lensing",
+    "Identifizierbarkeit",
+    "Likelihoods",
+    "Falsifikationsatlas"
+  ],
+  "critical_chain": [
+    "FM-0",
+    "FM-1",
+    "RAR-0",
+    "COS-0",
+    "ID-0",
+    "DATA-0",
+    "FALS-0"
+  ],
+  "parallel_theory_path": [
+    "Ghost/Stability/Constraints",
+    "KK/GW-Vorbereitung",
+    "Frühes Universum/Phasenübergänge"
+  ],
+  "infrastructure_path": [
+    "Dissertation/Monographie",
+    "Tafelwerk",
+    "Quellen/Provenienz",
+    "UniverseLab material-change-getrieben"
+  ],
+  "wip_policy": {
+    "max_active_scientific_core_work_packages": 2,
+    "third_slot_only": "DOCUMENTATION_OR_QA"
+  },
+  "cp01r4_hold": {
+    "active": true,
+    "through_program_horizon": true,
+    "operative_authorization_decision_created": false,
+    "single_use_grant_created": false,
+    "backend_imported": false,
+    "solver_executed": false,
+    "automatic_wp3_wp4_start": false,
+    "gate_state": {
+      "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+      "ULSH-01-WP2": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED",
+      "CP01R4": "METHOD_FROZEN_NO_EXECUTION",
+      "physical_background": "NOT_ESTABLISHED",
+      "WP3": "NOT_STARTED",
+      "WP4": "BLOCKED_NOT_AUTHORIZED",
+      "physical_rank_R": "NOT_EXECUTED",
+      "K1-D": "NOT_RELEASED",
+      "K1-E": "NOT_ADMISSIBLE",
+      "physical_evidence_effect": "NONE"
+    },
+    "anchors": {
+      "release_subject": "d8890b9ef47936edf8bb7e758b882c898241b314",
+      "target_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+      "cp01r4_payload_sha256": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+      "release_package_sha256": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621"
+    }
+  },
+  "evidence_classes": [
+    "BEWIESEN",
+    "ABGELEITET",
+    "MODELLANNAHME",
+    "KANDIDAT",
+    "SPEKULATION",
+    "OFFEN_BLOCKIERT"
+  ],
+  "workstreams": [
+    {
+      "id": "WS1",
+      "title": "HZT-M0 Forward Map & Observables",
+      "lane": "A",
+      "initial_status": "ACTIVE_FM0"
+    },
+    {
+      "id": "WS2",
+      "title": "Rigorose MOND-/RAR-Brücke",
+      "lane": "A",
+      "initial_status": "QUEUED_AFTER_FM_G0"
+    },
+    {
+      "id": "WS3",
+      "title": "HPVS / K1–K7: Identifizierbarkeit, Robustheit und Falsifizierbarkeit",
+      "lane": "A",
+      "initial_status": "QUEUED_PARALLEL_HPVS0"
+    },
+    {
+      "id": "WS4",
+      "title": "Beobachtungsdaten und Likelihood-Infrastruktur",
+      "lane": "A",
+      "initial_status": "QUEUED_PARALLEL_DATA0"
+    },
+    {
+      "id": "WS5",
+      "title": "Kosmologie, Growth und Lensing",
+      "lane": "A",
+      "initial_status": "QUEUED"
+    },
+    {
+      "id": "WS6",
+      "title": "Ghost Freedom, Constraint- und Stabilitätsanalytik",
+      "lane": "B",
+      "initial_status": "QUEUED_PREPARATORY"
+    },
+    {
+      "id": "WS7",
+      "title": "ULSH-07 / Kaluza-Klein Spectrum Solver – Vorbereitung",
+      "lane": "B",
+      "initial_status": "PREPARATORY_ONLY_PHYSICAL_RELEASE_BLOCKED"
+    },
+    {
+      "id": "WS8",
+      "title": "Gravitationswellen- und Polarisationssignaturen",
+      "lane": "B",
+      "initial_status": "QUEUED_PREPARATORY"
+    },
+    {
+      "id": "WS9",
+      "title": "Frühes Universum, Phasenübergänge und stochastische GW",
+      "lane": "B",
+      "initial_status": "QUEUED"
+    },
+    {
+      "id": "WS10",
+      "title": "Große kosmologische Rätsel – HZT-Relevanz- und No-Go-Audits",
+      "lane": "B",
+      "initial_status": "BACKLOG_GATED"
+    },
+    {
+      "id": "WS11",
+      "title": "Dissertation, Monographie, Tafelwerk und wissenschaftliche Konsolidierung",
+      "lane": "C",
+      "initial_status": "CONTINUOUS_SUPPORT"
+    },
+    {
+      "id": "WS12",
+      "title": "UniverseLab Forschungsplattform – Maintenance- und Integrationstrack",
+      "lane": "C",
+      "initial_status": "MONITOR_DRIVEN_MAINTENANCE_ONLY"
+    }
+  ],
+  "roadmap": [
+    {
+      "month": "M1 · Sep 2026",
+      "focus": "Baseline & Inventar",
+      "activities": "WS1 FM-0; WS3 HPVS-0; WS4 DATA-0; WS11 DOC-0",
+      "gate_result": "vollständige Parameter-/Claim-/Daten-/Dokustruktur"
+    },
+    {
+      "month": "M2 · Okt 2026",
+      "focus": "Forward-Map Kern",
+      "activities": "WS1 FM-1/FM-2; WS2 RAR-0; WS6 STAB-0",
+      "gate_result": "Parent→Reduced-Brücke + NR-Grundgerüst"
+    },
+    {
+      "month": "M3 · Nov 2026",
+      "focus": "Grenzfälle & MOND",
+      "activities": "WS1 FM-3/FM-4; WS2 RAR-1/RAR-2; WS4 DATA-1/2",
+      "gate_result": "Forward Map Gate + erste RAR-Entscheidung"
+    },
+    {
+      "month": "M4 · Dez 2026",
+      "focus": "Kosmologie-Schnittstellen",
+      "activities": "WS5 COS-0/COS-1; WS4 DATA-3/4; WS6 STAB-1/2",
+      "gate_result": "Observablen-/Perturbationskonventionen eingefroren"
+    },
+    {
+      "month": "M5 · Jan 2027",
+      "focus": "Growth/Lensing & Identifizierbarkeit",
+      "activities": "WS5 COS-2/3; WS3 K1/K2; WS2 RAR-3/4",
+      "gate_result": "Degenerationsatlas v0.1 + RAR-Testinterface"
+    },
+    {
+      "month": "M6 · Feb 2027",
+      "focus": "Likelihood & Robustheit",
+      "activities": "WS4 DATA-5/6; WS3 K3–K7; WS6 STAB-3/4",
+      "gate_result": "reproduzierbare Likelihoods + HPVS Prüfstack"
+    },
+    {
+      "month": "M7 · Mär 2027",
+      "focus": "KK/GW Vorbereitung",
+      "activities": "WS7 KK-0–KK-3; WS8 GW-0–GW-2; WS11 DOC-2/3",
+      "gate_result": "Operator-/Signalverträge und Benchmarks"
+    },
+    {
+      "month": "M8 · Apr 2027",
+      "focus": "Falsifikation & frühes Universum",
+      "activities": "WS8 GW-3–GW-5; WS9 PT-0–PT-4; WS10 RIDDLE-0–2",
+      "gate_result": "Falsifikationskarten + Vergleichs-SGWB"
+    },
+    {
+      "month": "M9 · Mai 2027",
+      "focus": "Integration & No-Go Closure",
+      "activities": "WS2 RAR-5; WS3 Synthese; WS10 RIDDLE-3/4; WS11 DOC-4",
+      "gate_result": "integrierter Test-/No-Go-Atlas"
+    },
+    {
+      "month": "M10 · Jun 2027",
+      "focus": "Freeze & Re-entry Readiness",
+      "activities": "Gesamt-Audit; WS11 DOC-5; CP01R4 nur Revalidation-Checkliste",
+      "gate_result": "10M-Release + Revalidation-Auditplan, keine Ausführung"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "MS-1",
+      "name": "Forward-Map Baseline",
+      "target": "Ende M2",
+      "condition": "FM-0/FM-1 geschlossen"
+    },
+    {
+      "id": "MS-2",
+      "name": "RAR Decision Point",
+      "target": "Ende M3",
+      "condition": "RAR-0..2: Ableitung, bedingte Brücke oder dokumentiertes No-Go"
+    },
+    {
+      "id": "MS-3",
+      "name": "Observable Freeze",
+      "target": "Ende M4",
+      "condition": "COS-0/COS-1 + DATA core contracts"
+    },
+    {
+      "id": "MS-4",
+      "name": "Identifiability Atlas",
+      "target": "Ende M5",
+      "condition": "K1 structural rank + degenerations"
+    },
+    {
+      "id": "MS-5",
+      "name": "Reproducible Likelihood Stack",
+      "target": "Ende M6",
+      "condition": "DATA-5/6 reference recovery"
+    },
+    {
+      "id": "MS-6",
+      "name": "KK/GW Prepared",
+      "target": "Ende M7",
+      "condition": "operator/signal contracts + QA"
+    },
+    {
+      "id": "MS-7",
+      "name": "Falsification Atlas",
+      "target": "Ende M9",
+      "condition": "cross-domain falsification cards"
+    },
+    {
+      "id": "MS-8",
+      "name": "10M Research Freeze",
+      "target": "Ende M10",
+      "condition": "Monograph snapshot + gap register + re-entry audit plan"
+    }
+  ],
+  "program_metrics": {
+    "core_parameters_definition_unit_provenance": "100%",
+    "core_observables_interface_validity": "100%",
+    "open_bridges_without_gap_entry": 0,
+    "likelihood_blocks_reference_recovery_min": 4,
+    "claims_without_evidence_class": 0,
+    "negative_results_with_scope_doc": "100%",
+    "physical_cp01r4_executions": 0,
+    "operative_cp01r4_grants": 0,
+    "platform_feature_prs_without_research_or_reproducibility_value": 0
+  },
+  "active_start": {
+    "workstream": "WS1",
+    "work_package": "FM-0",
+    "status": "ACTIVE_INITIALIZATION_PROVENANCE_INVENTORY",
+    "gate": "FM-G0",
+    "gate_status": "OPEN",
+    "next_after_initialization": [
+      "HPVS-0",
+      "DATA-0"
+    ],
+    "physical_gate_effect": "NONE"
+  },
+  "reentry_rule": "aktueller kanonischer Stand → CP01R4-Vergleich → Toolchain/Environment-Revalidation → neuer Authorization Review → separate operative Entscheidung",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

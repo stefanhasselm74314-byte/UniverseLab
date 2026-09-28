@@ -1,0 +1,34 @@
+{
+  "schema": "universelab.ulsh01.run-provenance.v1",
+  "version": "1.0.0",
+  "date": "2026-08-16",
+  "module_id": "ULSH-01",
+  "classification": "HISTORICAL_AUDITED_CONTROL_PROVENANCE_PLUS_CI_PACKAGE_BINDING",
+  "physical_evidence_effect": "NONE",
+  "scientific_artifact_commit": "c5bf1e3e77c3245edd714fca5b05c86451df827b",
+  "source_audit": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlAuditResult_v0.3.json",
+  "source_contract": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10RealBackendAdapterControlContract_v0.3.json",
+  "source_run_input": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BRunInputFreezeContract_v0.2.json",
+  "historical_run": {
+    "control_run_id": "HZT-M0-S6-C-PHYS-M1-BG3C10-AF0-CONTROL-R3",
+    "workflow_run_id": 30993796695,
+    "workflow_job_id": 92265893548,
+    "workflow_artifact_id": 8925255573,
+    "workflow_artifact_zip_sha256": "85d92ae19d9f2437daa67a3e50bda7be5061228efe4c64172fe95389a578c24e",
+    "package_manifest_sha256": "a7b48c88061e00cc3dc44dd00a2a17855a7f8c65dd228f725101fde9a1839eb4",
+    "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f"
+  },
+  "ci_binding": {
+    "reference_package_commit": "GITHUB_SHA_AT_TEST_RUNTIME",
+    "test_run_id": "GITHUB_RUN_ID_AT_TEST_RUNTIME",
+    "test_job": "ulsh01-reproducibility",
+    "machine_status_output": "2026-08-16_ULSH01_ReproducibilityTestStatus_v1.0.json",
+    "repository_self_update": false
+  },
+  "physical_target": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+    "authorized": false,
+    "executed": false,
+    "reference_output_exists": false
+  }
+}

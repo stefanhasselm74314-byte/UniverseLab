@@ -1,0 +1,26 @@
+name: UniverseLab external-link regression guard v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'links.html'
+      - 'ACTIVE_LINKS.md'
+      - 'tests/2026-09-10_test_UniverseLab_LinksExternalTargetRegression_v1.0.py'
+      - '.github/workflows/2026-09-10_UniverseLab_LinksExternalTargetRegression_v1.0.yml'
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  known-dead-external-targets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify GSRA Orion Pulse fail-closed link state
+        run: python tests/2026-09-10_test_UniverseLab_LinksExternalTargetRegression_v1.0.py

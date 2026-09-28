@@ -1,0 +1,31 @@
+name: UniverseLab multilingual SEO contract
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate-multilingual-seo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate registry JSON
+        run: python -m json.tool 2026-08-20_UniverseLab_MultilingualRouteRegistry_v1.1.json >/dev/null
+
+      - name: Compile validator
+        run: python -m py_compile tools/2026-08-20_UniverseLab_MultilingualSEOContract_v1.0.py
+
+      - name: Validate route, sitemap and metadata consistency
+        run: python tools/2026-08-20_UniverseLab_MultilingualSEOContract_v1.0.py

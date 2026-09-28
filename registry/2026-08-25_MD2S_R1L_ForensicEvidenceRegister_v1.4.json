@@ -1,0 +1,172 @@
+{
+  "schema": "universelab.md2s.r1l.forensic-evidence-register.v1",
+  "version": "1.4.0",
+  "created_date": "2026-08-25",
+  "status": "PARTIALLY_UNBLOCKED_PRIMARY_FGKL_RECOVERED_BUT_SOURCE_IDENTICAL_TWO_JUNCTION_REPLAY_STILL_BLOCKED",
+  "supersedes": [
+    "registry/2026-08-20_MD2S_R1L_ForensicEvidenceRegister_v1.3.json",
+    "registry/2026-08-21_MD2S_R1L_KontoanalyseExtractionAttempt_v1.0.json"
+  ],
+  "identifier": {
+    "exact_string": "MD2S-R1-L",
+    "recovered_role": "LEGACY_REPRODUCTION_TRACK_ID",
+    "canonical_artifact_identifier_recovered": false,
+    "original_historical_solver_transaction_recovered": false
+  },
+  "evidence_classes": {
+    "E1_VERIFIED_REPORTED_ARTIFACT": "Explicitly reported in a surviving project artifact; not automatically a rerunnable solver transaction.",
+    "E2_VERIFIED_CONTRACT_DEFINITION": "Explicitly defined in a surviving run-spec or method contract; not an executed result.",
+    "E3_DERIVED_CHECK": "Later consistency calculation from surviving values.",
+    "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT": "Historical chat report without recovered source transcript or primary package provenance.",
+    "E5_MISSING_SURVIVING_ARCHIVE": "Required for source-identical historical replay but not recovered.",
+    "E6_REBUILD_OR_C1_DATA_NOT_HISTORICAL": "Later rebuild/C1 data that must not substitute for historical MD2S-R1-L data.",
+    "E7_ARCHIVE_LEVEL_FORENSIC_AUDIT": "Archive-scoped inventory/full-text result only.",
+    "E8_SCOPED_MULTI_SOURCE_RECOVERY_SEARCH": "Bounded search over enumerated indexes/registers only.",
+    "E9_RECOVERY_BUNDLE_BYTES_VERIFIED": "Recovery ZIP bytes directly available; ZIP integrity and internal manifest verified, without promoting embedded summaries to primary solver provenance.",
+    "E10_VERIFIED_HISTORICAL_TRANSCRIPT_REPORT": "Message-level report recovered in the official export; proves what was historically reported, not by itself the solver transaction.",
+    "E11_PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID": "Original generated package binary recovered; ZIP/CRC and internal SHA-256 manifest validate. Scientific scope remains limited to that package.",
+    "E12_PRIMARY_NUMERIC_REPRODUCTION_PASS": "Selected numerical quantities were independently recomputed from recovered primary package data within declared tolerances. This is not a physical release or global theory validation."
+  },
+  "recovery_bundle": {
+    "classification": "E9_RECOVERY_BUNDLE_BYTES_VERIFIED",
+    "file_name": "MD2S_Randdaten_Benchmark_RECOVERY_2026-08-18.zip",
+    "size_bytes": 14884,
+    "sha256": "dbee345414409f29f6fee5cc161807fd3f8a2d4b337460d3cf9bb8a307c3dff9",
+    "zip_entry_count": 12,
+    "zip_integrity": "PASS",
+    "internal_manifest_entries": 11,
+    "internal_manifest_hashes_valid": 11,
+    "internal_manifest_hashes_invalid": 0,
+    "source_chat_title_for_B14K_B14L": "Hyperzeit Projektstatus Update",
+    "recovery_workflow_chat_title": "Kontoanalyse ChatGPT",
+    "private_conversation_identifiers_committed": false
+  },
+  "historical_transcript": {
+    "classification": "E10_VERIFIED_HISTORICAL_TRANSCRIPT_REPORT",
+    "official_export_source_surfaced": true,
+    "public_source_labels": [
+      "conversations-003.json",
+      "ChatGPT-Hyperzeit Projektstatus Update.md"
+    ],
+    "B1.4K_message_report_recovered": true,
+    "B1.4L_message_report_recovered": true,
+    "exact_generated_package_names_recovered": true,
+    "private_conversation_identifiers_committed": false
+  },
+  "primary_package_recovery": {
+    "external_recovery_state_source": "md2s_r1l_scope_and_status_v5.json",
+    "external_inventory_source": "primary_package_inventory_v5.csv",
+    "B1.4F": {
+      "classification": "E11_PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+      "package": "HZT_MD2S_B1_4F_COUPLED_RADION_PREFLIGHT_v0_1_PACKAGE.zip",
+      "sha256": "d3dd01315784c5a11ddbb45c5857d35a01c54513232bf263036fe991969a25e2",
+      "zip_crc_status": "PASS",
+      "internal_manifest_valid": true,
+      "provenance_classification": "quarantined_non_evidential_full_radion_preflight"
+    },
+    "B1.4G": {
+      "classification": "E11_PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+      "package": "HZT_MD2S_B1_4G_FROBENIUS_CAP_PENCIL_v0_1_PACKAGE.zip",
+      "sha256": "60246dd749cdc8f48d6b78c77134a921953e6c6301c1ae4e32c9bed9aec928f0",
+      "zip_crc_status": "PASS",
+      "internal_manifest_valid": true,
+      "provenance_classification": "quarantined_non_evidential_physical_radion_spectrum"
+    },
+    "B1.4K": {
+      "classification": [
+        "E10_VERIFIED_HISTORICAL_TRANSCRIPT_REPORT",
+        "E11_PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+        "E12_PRIMARY_NUMERIC_REPRODUCTION_PASS"
+      ],
+      "package": "HZT_MD2S_B1_4K_RESOLVED_LOCALIZER_BVP_v0_1_PACKAGE.zip",
+      "sha256": "9cf13cd51baaef94258fcfa1690036798977565482acf2709a69494b0ed6e648",
+      "size_bytes": 2391636,
+      "zip_crc_status": "PASS",
+      "zip_payload_file_count": 12,
+      "internal_manifest_entries": 11,
+      "internal_manifest_hashes_valid": 11,
+      "internal_manifest_hashes_invalid": 0,
+      "provenance_classification": "quarantined_non_evidential_resolved_localizer_BVP_preflight",
+      "numeric_reproduction": "PASS_SELECTED_PACKAGE_CLAIMS",
+      "robin_precision_note": "Serialized primary profile reproduces the archived Robin residual to floating-serialization tolerance; the earlier ~1e-12 discrepancy was caused by rounded secondary recovery text."
+    },
+    "B1.4L": {
+      "classification": [
+        "E10_VERIFIED_HISTORICAL_TRANSCRIPT_REPORT",
+        "E11_PRIMARY_ARTIFACT_RECOVERED_MANIFEST_VALID",
+        "E12_PRIMARY_NUMERIC_REPRODUCTION_PASS"
+      ],
+      "package": "HZT_MD2S_B1_4L_OFFSHELL_BACKREACTION_AUDIT_v0_1_PACKAGE.zip",
+      "sha256": "d5faf820ca984b40a78bb643aec23885aae8f753733054fc65eff0a6366eca0b",
+      "size_bytes": 1890136,
+      "zip_crc_status": "PASS",
+      "zip_payload_file_count": 13,
+      "internal_manifest_entries": 12,
+      "internal_manifest_hashes_valid": 12,
+      "internal_manifest_hashes_invalid": 0,
+      "provenance_classification": "quarantined_non_evidential_offshell_backreaction_identifiability_audit",
+      "numeric_reproduction": "PASS_SELECTED_PACKAGE_CLAIMS"
+    }
+  },
+  "a0": {
+    "classification": "E1_VERIFIED_REPORTED_ARTIFACT",
+    "release_use": "REGRESSION_TARGET_ONLY",
+    "values": {
+      "sqrt_K4_rho_cap": 1.1196329253611,
+      "kappa6sq_lambda_eff_over_4sqrtK4": 0.8931498683204,
+      "K4_rho_cap_sq": 1.2535778875527,
+      "V_W": 0.5318111250097,
+      "R_circle_at_K4_eq_beta_eq_1": 0.6661500466003
+    },
+    "derived_checks_classification": "E3_DERIVED_CHECK"
+  },
+  "bvp_run_spec": {
+    "classification": "E2_VERIFIED_CONTRACT_DEFINITION",
+    "status": "NOT_EXECUTED",
+    "fields": ["A(r)", "L(r)", "phi(r)", "s(r)", "A_chi(r)"],
+    "required_response_rank": 4,
+    "condition_number_max": 1000000.0
+  },
+  "two_sided_interface": {
+    "classification": "E5_MISSING_SURVIVING_ARCHIVE",
+    "required_historical_fields": [
+      "A_prime_bulk",
+      "A_prime_cap",
+      "Lprime_over_L_bulk",
+      "Lprime_over_L_cap",
+      "historically_bound_oriented_normals",
+      "full_precision_two_sided_interface_or_profile_derivative_tables",
+      "original_two_junction_solver_residual_logs",
+      "complete_generation_solver_tolerances_and_configuration"
+    ],
+    "source_identical_historical_replay": "STILL_BLOCKED"
+  },
+  "remaining_recovery_requirements": [
+    "historical source-identical 6D action/potential/coupling set including prerequisite B1.4E/H inputs or source-identical equivalents",
+    "A_prime_bulk",
+    "A_prime_cap",
+    "Lprime_over_L_bulk",
+    "Lprime_over_L_cap",
+    "historically bound oriented normals",
+    "full-precision two-sided interface/profile derivative tables",
+    "original two-junction solver residual logs",
+    "complete generation solver tolerances/configuration for all prerequisite runs"
+  ],
+  "promotion_policy": {
+    "primary_artifact_recovery_may_upgrade_direct_package_claims": true,
+    "primary_numeric_reproduction_may_upgrade_only_reproduced_quantities": true,
+    "primary_package_recovery_implies_official_solver_authorization": false,
+    "primary_package_recovery_implies_physical_background": false,
+    "recovered_B14K_B14L_packages_close_source_identical_two_junction_replay": false,
+    "C1_or_rebuild_data_may_fill_historical_missing_fields": false,
+    "reconstruction_must_use_separate_class": "RECONSTRUCTED"
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}

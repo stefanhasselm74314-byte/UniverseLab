@@ -1,0 +1,25 @@
+name: HZT-M0 FM-0 BetaTau Provenance Scan v0.1
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  beta-tau-provenance-scan:
+    name: FM-0 beta_tau repository provenance scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Scan tracked text sources
+        run: python tools/2026-08-31_scan_hzt_m0_fm0_beta_tau_provenance_v0.1.py

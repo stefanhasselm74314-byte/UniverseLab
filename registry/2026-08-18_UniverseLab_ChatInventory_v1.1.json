@@ -1,0 +1,58 @@
+{
+  "schema": "universelab.chat-inventory.v1",
+  "version": "1.1.0",
+  "date": "2026-08-18",
+  "classification": "COORDINATION_AND_CHAT_INVENTORY_ONLY",
+  "source": "USER_SUPPLIED_PROJECT_CHATLIST_VIDEO_2026-08-16_PLUS_CANONICAL_ULSH_REGISTRIES",
+  "source_count": 28,
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "identity_rules": [
+    "CHAT_TITLE_IS_NOT_CHAT_IDENTITY",
+    "OBSERVED_TITLE_IS_RECORDED_VERBATIM",
+    "NO_RENAME_FROM_TITLE_ALONE_WHEN_IDENTITY_IS_AMBIGUOUS",
+    "CANONICAL_SOLVER_ID_MODULE_MAPPING_OVERRIDES_AMBIGUOUS_CHAT_SUFFIX",
+    "PRIVATE_CHATGPT_CONVERSATION_IDENTIFIERS_ARE_NOT_PUBLISHED",
+    "CHAT_STATUS_DOES_NOT_TRANSFER_TO_SCIENTIFIC_OR_SOLVER_STATUS"
+  ],
+  "canonical_solver_identity_sources": [
+    "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+    "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json"
+  ],
+  "counts": {
+    "total_visible_chats": 28,
+    "immediate_governed_or_normalizable": 9,
+    "identity_review_required": 0,
+    "content_review_or_reference_only": 19
+  },
+  "chats": [
+    {"inventory_id":"CHAT-01","observed_title":"ULSH Master Build Order","coordination_status":"ACTIVE_CONTINUATION","domain":"SOLVER_PROGRAM_MANAGEMENT","recommended_title":"ACTIVE — ULSH Master Control — Continuation","note":"Governed active continuation; distinct from historical thread."},
+    {"inventory_id":"CHAT-02","observed_title":"Relevanz des Repository-Standes","coordination_status":"REVIEW_PENDING","domain":"REPOSITORY_GOVERNANCE_AUDIT","recommended_title":null,"note":"Visible project chat; content review required before canonical renaming."},
+    {"inventory_id":"CHAT-03","observed_title":"CLOSED - CPOTR2-08 Laufwache","coordination_status":"ARCHIVE_REFERENCE_WITH_CLOSED_RUN_PHASE","domain":"SOLVER_PROGRAM_AND_RUN_WATCH_PROVENANCE","recommended_title":"ARCHIVE — ULSH Master / CP01R2 historische Ausführung","note":"User evidence strongly supports historical title evolution from the ULSH Master Build Order phase; no replay from closed run-watch phase."},
+    {"inventory_id":"CHAT-04","observed_title":"ACTIVE - HIT-M0-SG-CI continuation - SOlverplanung","coordination_status":"ACTIVE_CONTINUATION","domain":"THEORY_HANDOFF_SOLVER_PLANNING","recommended_title":"ACTIVE — HZT-M0-S6-C1 Continuation — Solverplanung","note":"Observed UI title contains apparent transcription/typing deviations from canonical HZT-M0-S6-C1 identifier."},
+    {"inventory_id":"CHAT-05","observed_title":"ARCHIVE - HIT-MI0-SG-C Theorie - Vorgänger","coordination_status":"ARCHIVE_REFERENCE","domain":"THEORY_HISTORY","recommended_title":"ARCHIVE — HZT-M0-S6-C1 Theorie — Vorgänger","note":"Observed UI title contains apparent transcription/typing deviations from canonical HZT-M0-S6-C1 identifier."},
+    {"inventory_id":"CHAT-06","observed_title":"UTILITY - Universelab Wichtige Links","coordination_status":"UTILITY_ACTIVE","domain":"LINK_GOVERNANCE","recommended_title":"UTILITY — UniverseLab Wichtige Links","note":"Normalize UniverseLab spelling and dash only."},
+    {"inventory_id":"CHAT-07","observed_title":"ACTIVE - ULSH-07 C-PHYSX Solverentwicklung","coordination_status":"ACTIVE_PREPARATORY_WORKSTREAM","domain":"SCIENCE_SOLVER_KK","canonical_solver_id":"ULSH-07","canonical_module_id":"KK","canonical_solver_name":"Kaluza-Klein Spectrum Solver","recommended_title":"ACTIVE — ULSH-07 KK-Spektrum — Solverentwicklung","identity_resolution":"RESOLVED_AS_DISTINCT_FROM_ULSH01_BY_CANONICAL_SOLVER_ID_MAPPING","note":"The suffix C-PHYSX is not a canonical ULSH-07 module identifier. ULSH-07 is KK in both the Solver Development Program and Master Build Order. This does not authorize physical KK execution; ULSH-07 remains upstream-dependent on ULSH-01."},
+    {"inventory_id":"CHAT-08","observed_title":"ACTIVE - UniverseLab Forschungsplattform","coordination_status":"ACTIVE","domain":"PLATFORM_GOVERNANCE","recommended_title":"ACTIVE — UniverseLab Forschungsplattform","note":"Already essentially canonical."},
+    {"inventory_id":"CHAT-09","observed_title":"Technischer Neben-/Analysechat: UniverseLab Fehleranalyse","coordination_status":"AUDIT_ACTIVE","domain":"TECHNICAL_AUDIT_QA","recommended_title":"AUDIT — UniverseLab Fehleranalyse","note":"Repository/CI/integration audit role."},
+    {"inventory_id":"CHAT-10","observed_title":"Hyperzeit Projektstatus Update","coordination_status":"ARCHIVE_REFERENCE","domain":"THEORY_STATUS_HISTORY","recommended_title":"ARCHIVE — Hyperzeit Projektstatus Update — Übergabestand","note":"Historical project status/strategy snapshot."},
+    {"inventory_id":"CHAT-11","observed_title":"UniverseLab Forschungsausbau","coordination_status":"REVIEW_PENDING","domain":"RESEARCH_PLATFORM_HISTORY","recommended_title":null,"note":"Needs content review before ACTIVE/ARCHIVE decision."},
+    {"inventory_id":"CHAT-12","observed_title":"6D Theorie und Singularität","coordination_status":"REFERENCE_RESEARCH","domain":"THEORY_RESEARCH","recommended_title":null,"note":"Research/reference thread; no active authority inferred from title."},
+    {"inventory_id":"CHAT-13","observed_title":"Kontoanalyse ChatGPT","coordination_status":"UTILITY_REFERENCE","domain":"ACCOUNT_EXPORT_ANALYSIS","recommended_title":null,"note":"Utility/reference; not a theory or solver authority."},
+    {"inventory_id":"CHAT-14","observed_title":"KI für theoretische Physik","coordination_status":"REFERENCE","domain":"METHODS_REFERENCE","recommended_title":null,"note":"Reference discussion; no project authority inferred."},
+    {"inventory_id":"CHAT-15","observed_title":"Hyperzeit-Analyse 2026","coordination_status":"REFERENCE_RESEARCH","domain":"THEORY_RESEARCH","recommended_title":null,"note":"Research/reference thread; status not promoted."},
+    {"inventory_id":"CHAT-16","observed_title":"6D Hyperzeit Theorie Überblick","coordination_status":"REFERENCE_RESEARCH","domain":"THEORY_OVERVIEW","recommended_title":null,"note":"Overview/reference thread."},
+    {"inventory_id":"CHAT-17","observed_title":"Kosmologischer Phasenübergang Analyse","coordination_status":"REFERENCE_RESEARCH","domain":"COSMOLOGY_RESEARCH","recommended_title":null,"note":"Research subthread."},
+    {"inventory_id":"CHAT-18","observed_title":"Beweis der MOND-Gleichung","coordination_status":"REFERENCE_RESEARCH","domain":"MOND_RESEARCH","recommended_title":null,"note":"Research subthread; overlap with CHAT-19 should be reviewed before consolidation."},
+    {"inventory_id":"CHAT-19","observed_title":"Rigoroser Beweis für MOND","coordination_status":"REFERENCE_RESEARCH","domain":"MOND_RESEARCH","recommended_title":null,"note":"Research subthread; overlap with CHAT-18 should be reviewed before consolidation."},
+    {"inventory_id":"CHAT-20","observed_title":"Hyperzeit-Theorie 2.0 Hilfe","coordination_status":"ARCHIVE_CANDIDATE","domain":"LEGACY_THEORY_SUPPORT","recommended_title":null,"note":"Legacy/title-only classification; content review required before archive action."},
+    {"inventory_id":"CHAT-21","observed_title":"Hyperzeit Analyse Projekt","coordination_status":"ARCHIVE_CANDIDATE","domain":"LEGACY_RESEARCH","recommended_title":null,"note":"Legacy/title-only classification; content review required."},
+    {"inventory_id":"CHAT-22","observed_title":"Mathematisches Formelwerk Hyperzeit Theorie","coordination_status":"UTILITY_REFERENCE","domain":"DOCUMENTATION_FORMULAE","recommended_title":null,"note":"Documentation/export/reference utility."},
+    {"inventory_id":"CHAT-23","observed_title":"Quanten, Entropie und Geometrie","coordination_status":"REFERENCE_RESEARCH","domain":"FOUNDATIONS_RESEARCH","recommended_title":null,"note":"Research subthread."},
+    {"inventory_id":"CHAT-24","observed_title":"Teilgespräch · Chat Analyse Anfrage","coordination_status":"UTILITY_ARCHIVE_CANDIDATE","domain":"CHAT_ANALYSIS_UTILITY","recommended_title":null,"note":"Likely temporary analysis/export utility; verify before archiving."},
+    {"inventory_id":"CHAT-25","observed_title":"Hyperzeit Dissertation Draft","coordination_status":"MANUSCRIPT_REFERENCE","domain":"MANUSCRIPT_DISSERTATION","recommended_title":null,"note":"Manuscript thread; no active authority inferred from title."},
+    {"inventory_id":"CHAT-26","observed_title":"PDF Analyse 6D","coordination_status":"UTILITY_REFERENCE","domain":"DOCUMENT_ANALYSIS","recommended_title":null,"note":"Document analysis utility/reference."},
+    {"inventory_id":"CHAT-27","observed_title":"Fortsetzung K131 Analyse","coordination_status":"ARCHIVE_REFERENCE","domain":"LEGACY_ANALYSIS_CONTINUATION","recommended_title":null,"note":"Historical analysis continuation; not current authority."},
+    {"inventory_id":"CHAT-28","observed_title":"Hinweise und Arbeitsweise","coordination_status":"GOVERNANCE_REFERENCE","domain":"WORKING_METHOD_REFERENCE","recommended_title":null,"note":"Working-method reference; content review may promote selected rules into repository governance."}
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-human-trust-root-candidate.v0.1",
+  "date": "2026-09-02",
+  "classification": "EMPTY_HUMAN_TRUST_ROOT_CANDIDATE_TEMPLATE",
+  "status": "EMPTY_TEMPLATE_NOT_A_TRUST_ROOT",
+  "contract_id": "ULSH01-WP2-HUMAN-TRUST-ROOT-RATIFICATION-PACKAGE-v0.1",
+  "authority_signature_contract_id": "ULSH01-WP2-AUTHORITY-SIGNATURE-PROVENANCE-v0.1",
+  "governed_run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+  "ratified": false,
+  "authorities": [],
+  "authority_template": {
+    "authority_id": null,
+    "display_name_or_pseudonymous_project_identity": null,
+    "controller_class": "HUMAN_CONTROLLED_PROJECT_AUTHORITY_REQUIRED",
+    "status": "CANDIDATE_NOT_RATIFIED",
+    "roles": [],
+    "keys": [
+      {
+        "key_id": null,
+        "algorithm": "Ed25519-RFC8032",
+        "public_key_base64": null,
+        "public_key_fingerprint_sha256": null,
+        "status": "CANDIDATE_NOT_RATIFIED",
+        "valid_from_utc": null,
+        "valid_until_utc": null,
+        "revoked": false,
+        "revoked_at_utc": null,
+        "roles": []
+      }
+    ]
+  },
+  "bootstrap": {
+    "root_key_proof_of_possession_required": true,
+    "project_owner_adoption_record_required": true,
+    "manual_human_attribution_review_required": true,
+    "new_versioned_ratified_artifact_required": true
+  },
+  "firewall": {
+    "this_template_establishes_an_authority": false,
+    "this_template_is_a_trust_root": false,
+    "this_template_may_validate_an_operative_signature": false,
+    "operative_authorization_decision_allowed": false,
+    "operative_single_use_grant_allowed": false,
+    "runtime_issuance_allowed": false,
+    "backend_import_allowed": false,
+    "solver_execution_allowed": false,
+    "physical_evidence_effect": "NONE"
+  },
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

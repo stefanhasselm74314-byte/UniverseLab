@@ -1,0 +1,129 @@
+name: ULSH-01 WP2 human trust-root ratification package QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json'
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidateTemplate_v0.1.json'
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RootKeyProofOfPossessionTemplate_v0.1.json'
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ProjectOwnerAdoptionRecordTemplate_v0.1.json'
+      - 'governance/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationProcedure_v0.1.md'
+      - 'tools/2026-09-02_prepare_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidate_v0.1.py'
+      - 'tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py'
+      - 'tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py'
+      - '.github/workflows/2026-09-02_ULSH01_WP2_HumanTrustRootRatificationPackage_QA_v0.1.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json'
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidateTemplate_v0.1.json'
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RootKeyProofOfPossessionTemplate_v0.1.json'
+      - 'registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ProjectOwnerAdoptionRecordTemplate_v0.1.json'
+      - 'governance/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationProcedure_v0.1.md'
+      - 'tools/2026-09-02_prepare_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidate_v0.1.py'
+      - 'tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py'
+      - 'tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py'
+      - '.github/workflows/2026-09-02_ULSH01_WP2_HumanTrustRootRatificationPackage_QA_v0.1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-human-trust-root-preparation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse machine-readable preparation artifacts
+        run: |
+          python -m json.tool registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidateTemplate_v0.1.json >/dev/null
+          python -m json.tool registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RootKeyProofOfPossessionTemplate_v0.1.json >/dev/null
+          python -m json.tool registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ProjectOwnerAdoptionRecordTemplate_v0.1.json >/dev/null
+
+      - name: Compile public-key-only tools and tests
+        run: |
+          python -m py_compile tools/2026-09-02_prepare_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidate_v0.1.py
+          python -m py_compile tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py
+          python -m py_compile tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py
+
+      - name: Run synthetic and adversarial preparation QA
+        run: python tests/2026-09-02_test_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py
+
+      - name: Verify committed empty templates remain non-ratifying
+        run: |
+          python tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py \
+            --output human-trust-root-preparation-report.json draft \
+            --contract registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json \
+            --candidate-template registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidateTemplate_v0.1.json \
+            --proof-template registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RootKeyProofOfPossessionTemplate_v0.1.json \
+            --adoption-template registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ProjectOwnerAdoptionRecordTemplate_v0.1.json
+
+      - name: Enforce no private-key ingestion or signing API
+        shell: bash
+        run: |
+          set -euo pipefail
+          production=(
+            tools/2026-09-02_prepare_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidate_v0.1.py
+            tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py
+            governance/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationProcedure_v0.1.md
+          )
+          if grep -En -- 'BEGIN (OPENSSH |EC |RSA )?PRIVATE KEY|PRIVATE KEY-----' "${production[@]}"; then
+            echo 'Private key material found.' >&2
+            exit 1
+          fi
+          python - <<'PY'
+          from pathlib import Path
+          paths=[
+              Path('tools/2026-09-02_prepare_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootCandidate_v0.1.py'),
+              Path('tools/2026-09-02_verify_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackage_v0.1.py'),
+          ]
+          text='\n'.join(path.read_text() for path in paths)
+          forbidden=['Ed25519PrivateKey','private_bytes(','.sign(','--private-key','PRIVATE_KEY_FILE']
+          found=[token for token in forbidden if token in text]
+          assert not found, found
+          assert '--public-key-file' in paths[0].read_text()
+          print('Public-key-only production tools: PASS')
+          PY
+
+      - name: Enforce human boundary and all downstream firewalls
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('registry/2026-09-02_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_HumanTrustRootRatificationPackageContract_v0.1.json').read_text())
+          assert d['status']=='PREPARATION_ONLY_NOT_RATIFIED'
+          assert d['bootstrap_logic']['proof_of_possession_is_authority'] is False
+          assert d['bootstrap_logic']['assistant_generated_record_is_human_ratification'] is False
+          assert d['verifier_statuses']['ratified_active_status_accepted_by_this_verifier'] is False
+          assert d['manual_human_boundary']['manual_review_required'] is True
+          assert d['key_custody_policy']['private_key_may_be_committed'] is False
+          assert d['key_custody_policy']['private_key_may_be_uploaded_to_ci'] is False
+          assert d['key_custody_policy']['private_key_may_be_pasted_into_chat'] is False
+          g=d['current_gate_state']
+          assert g['ratified_human_trust_root']=='NOT_RATIFIED'
+          assert g['runtime_issuance_bindings']=='BLOCKED'
+          assert g['AuthorizationDecision']=='NOT_CREATED'
+          assert g['SingleUseGrant']=='NOT_CREATED'
+          assert g['backend_import']=='NOT_EXECUTED'
+          assert g['solver_execution']=='NOT_EXECUTED'
+          assert g['K1-D']=='NOT_RELEASED'
+          assert g['K1-E']=='NOT_ADMISSIBLE'
+          assert d['physical_gate_effect']=='NONE'
+          assert d['physical_evidence_effect']=='NONE'
+          print('Human boundary and physical firewalls: PASS')
+          PY
+
+      - name: Upload nonoperative preparation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulsh01-human-trust-root-preparation-report
+          path: human-trust-root-preparation-report.json
+          if-no-files-found: error

@@ -1,0 +1,58 @@
+{
+  "schema": "universelab.md2s.r1l.kontoanalyse-extraction-attempt.v1",
+  "version": "1.0.0",
+  "date": "2026-08-21",
+  "status": "SCOPED_MESSAGE_LEVEL_EXTRACTION_BLOCKED_SOURCE_BYTES_NOT_SURFACED",
+  "track": "MD2S-R1-L",
+  "chat_target": {
+    "title": "Kontoanalyse ChatGPT",
+    "later_export_last_modified_date": "2026-08-18",
+    "private_conversation_identifier_committed": false
+  },
+  "file_library_date_slice": {
+    "date": "2026-08-18",
+    "navigation_result_count": 1,
+    "only_surfaced_file": "MD2S_Randdaten_Benchmark_RECOVERY_2026-08-18_SHA256.txt",
+    "zip_bytes_surfaced": false,
+    "raw_message_transcript_surfaced": false,
+    "individual_B14K_B14L_package_entries_surfaced": false
+  },
+  "recovery_package_integrity_record": {
+    "target_zip": "MD2S_Randdaten_Benchmark_RECOVERY_2026-08-18.zip",
+    "size_bytes": 14884,
+    "zip_entries": 12,
+    "integrity_test": "PASS",
+    "sha256": "dbee345414409f29f6fee5cc161807fd3f8a2d4b337460d3cf9bb8a307c3dff9",
+    "content_independently_verified_from_zip_bytes": false
+  },
+  "classification_effect": {
+    "B1.4K": "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT",
+    "B1.4L": "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT",
+    "eligible_future_upgrade_if_original_message_recovered": "VERIFIED_HISTORICAL_TRANSCRIPT_REPORT",
+    "verified_solver_output_established": false
+  },
+  "historical_missing_interface_fields": [
+    "A_prime_bulk",
+    "A_prime_cap",
+    "Lprime_over_L_bulk",
+    "Lprime_over_L_cap"
+  ],
+  "required_next_source": [
+    "actual_MD2S_recovery_zip_bytes",
+    "raw_Kontoanalyse_transcript_through_2026_08_18",
+    "direct_August_18_message_branch_extraction"
+  ],
+  "evidence_hygiene": {
+    "checksum_record_alone_proves_zip_contents": false,
+    "chat_message_alone_establishes_verified_solver_output": false,
+    "missing_interface_values_may_be_reconstructed_as_original": false
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}

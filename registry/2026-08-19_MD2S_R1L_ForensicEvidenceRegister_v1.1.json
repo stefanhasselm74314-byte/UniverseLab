@@ -1,0 +1,116 @@
+{
+  "schema": "universelab.md2s.r1l.forensic-evidence-register.v1",
+  "version": "1.1.0",
+  "created_date": "2026-08-19",
+  "revision_date": "2026-08-20",
+  "status": "FORENSIC_RECOVERY_ONLY",
+  "identifier": {
+    "exact_string": "MD2S-R1-L",
+    "exact_string_recovered": true,
+    "recovered_role": "LEGACY_REPRODUCTION_TRACK_ID",
+    "source": "science/hzt-m0/md2s/R1_SOURCE_RECONSTRUCTION_LEDGER_v0.1.json",
+    "canonical_artifact_identifier_recovered": false,
+    "original_historical_solver_artifact_recovered": false,
+    "interpretation": "The exact string survives as a reconstruction/governance track ID, not as a recovered original historical solver artifact identifier."
+  },
+  "evidence_classes": {
+    "E1_VERIFIED_REPORTED_ARTIFACT": "Explicitly reported in a surviving project artifact; not automatically a rerunnable solver output.",
+    "E2_VERIFIED_CONTRACT_DEFINITION": "Explicitly defined in a surviving run-spec/method contract; not an executed result.",
+    "E3_DERIVED_CHECK": "Later consistency calculation from surviving values.",
+    "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT": "Historically reported in chat but primary solver/output/residual provenance has not been recovered.",
+    "E5_MISSING_SURVIVING_ARCHIVE": "Required for exact historical replay but absent from the surviving archive.",
+    "E6_REBUILD_OR_C1_DATA_NOT_HISTORICAL": "Real derived/analytic/numerical data from the later canonical-rebuild or C1 candidate track that must not be substituted for historical MD2S-R1-L data."
+  },
+  "a0": {
+    "classification": "E1_VERIFIED_REPORTED_ARTIFACT",
+    "source_reconstruction_classification": "REPORTED_NUMERICAL_BENCHMARKS",
+    "release_use": "REGRESSION_TARGET_ONLY",
+    "values": {
+      "sqrt_K4_rho_cap": 1.1196329253611,
+      "kappa6sq_lambda_eff_over_4sqrtK4": 0.8931498683204,
+      "K4_rho_cap_sq": 1.2535778875527,
+      "V_W": 0.5318111250097,
+      "R_circle_at_K4_eq_beta_eq_1": 0.6661500466003
+    },
+    "claim_limit": "Reported surviving benchmark block only; not a recovered full historical solver transaction."
+  },
+  "derived_checks": {
+    "classification": "E3_DERIVED_CHECK",
+    "values": {
+      "a0_product": 0.9999999998534508,
+      "inverse_sqrt_K4_rho_cap": 0.8931498684512905
+    }
+  },
+  "bvp_contract": {
+    "classification": "E2_VERIFIED_CONTRACT_DEFINITION",
+    "run_status": "NOT_EXECUTED",
+    "fields": ["A(r)", "L(r)", "phi(r)", "s(r)", "A_chi(r)"],
+    "center_boundary_conditions": {
+      "L_0": 0,
+      "L_prime_0": 1,
+      "A_prime_0": 0,
+      "phi_prime_0": 0,
+      "s_0_if_n_nonzero": 0
+    },
+    "outer_contract": ["match_to_bulk", "scalar_layer_decay", "gauge_regularity_and_flux_quantization"]
+  },
+  "b14k": {
+    "classification": "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT",
+    "numerical_fingerprints": [0.842636731623, 0.018368812404, 0.163118759614, 0.499999960986],
+    "primary_solver_artifact_recovered": false
+  },
+  "b14l": {
+    "classification": "E4_UNVERIFIED_HISTORICAL_CHAT_REPORT",
+    "numerical_fingerprints": [0.777738716721, 1.449864769136, -1.775714440211],
+    "primary_solver_artifact_recovered": false
+  },
+  "legacy_branch_audit": {
+    "source": "registry/2026-08-20_MD2S_R1L_LegacyBranchAudit_v1.0.json",
+    "audited_legacy_agent_md2s_branch_count": 13,
+    "historical_primary_solver_export_recovered": false,
+    "historical_two_sided_interface_export_recovered": false,
+    "C1_historical_A0_identity": "NOT_CLAIMED",
+    "C1_data_classification": "E6_REBUILD_OR_C1_DATA_NOT_HISTORICAL"
+  },
+  "two_sided_interface": {
+    "classification": "E5_MISSING_SURVIVING_ARCHIVE",
+    "required_historical_fields": [
+      "A_prime_bulk",
+      "A_prime_cap",
+      "Lprime_over_L_bulk",
+      "Lprime_over_L_cap",
+      "oriented_normals_bound_to_run",
+      "solver_artifacts",
+      "derivative_tables",
+      "residual_logs"
+    ],
+    "exact_historical_replay": "NOT_REPRODUCIBLE_FROM_SURVIVING_ARCHIVE"
+  },
+  "source_reconstruction_gaps": {
+    "historical_radial_ODE_set": "MISSING_PRIMARY_TECHNICAL_SOURCE",
+    "historical_Hamiltonian_and_dependency_map": "MISSING_PRIMARY_TECHNICAL_SOURCE",
+    "historical_cap_localized_action": "MISSING_PRIMARY_TECHNICAL_SOURCE",
+    "historical_oriented_junction_conventions": "MISSING_PRIMARY_TECHNICAL_SOURCE",
+    "benchmark_definitions_and_integration_conventions": "PARTIAL_MISSING"
+  },
+  "promotion_policy": {
+    "required_for_VERIFIED_SOLVER_OUTPUT": [
+      "primary_output_artifact",
+      "solver_code_identity",
+      "input_binding",
+      "run_identity",
+      "residual_or_convergence_information",
+      "unambiguous_branch_association"
+    ],
+    "C1_or_rebuild_data_may_fill_historical_missing_fields": false,
+    "reconstruction_must_use_separate_class": "RECONSTRUCTED"
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}

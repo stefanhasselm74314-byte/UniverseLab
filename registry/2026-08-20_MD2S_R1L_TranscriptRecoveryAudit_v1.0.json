@@ -1,0 +1,73 @@
+{
+  "schema": "universelab.md2s.r1l.transcript-recovery-audit.v1",
+  "version": "1.0.0",
+  "date": "2026-08-20",
+  "status": "TARGET_TRANSCRIPTS_VERIFIED_RAW_MESSAGE_EXTRACTION_NOT_SURFACED",
+  "track": "MD2S-R1-L",
+  "purpose": "Record the privacy-safe result of the targeted historical transcript recovery step without promoting chat reports to primary solver provenance.",
+  "search_scope": {
+    "file_library_indexed_search": true,
+    "chat_register_inventory": true,
+    "refresh_package_integrity_record": true,
+    "later_html_continuation_checked_for_identity_guard": true
+  },
+  "historical_transcript_inventory": {
+    "title": "Hyperzeit Projektstatus Update",
+    "target_count": 2,
+    "target_dates": [
+      "2026-07-10",
+      "2026-07-21"
+    ],
+    "official_export_presence": "VERIFIED",
+    "full_transcript_presence_in_refresh_inventory": "VERIFIED",
+    "private_identifiers_committed_to_public_repository": false
+  },
+  "direct_extraction_result": {
+    "raw_individual_target_transcript_file_surfaced_in_current_file_library_search": false,
+    "historical_312_page_projectstatus_pdf_named_by_archive_audit": true,
+    "historical_312_page_projectstatus_pdf_directly_surfaced_as_searchable_file": false,
+    "refresh_archive_integrity_record_surfaced": true,
+    "refresh_archive_bytes_directly_surfaced": false,
+    "message_level_primary_target_extraction": "BLOCKED_IN_CURRENT_SEARCH_INTERFACE",
+    "primary_md2s_solver_artifact_recovered": false,
+    "historical_run_bound_solver_io_recovered": false,
+    "historical_two_sided_interface_export_recovered": false,
+    "historical_sha256_manifest_recovered": false
+  },
+  "identity_guard": {
+    "later_2026_07_31_html_continuation_exists": true,
+    "later_html_is_assumed_identical_to_historical_target": false,
+    "reason": "Matching title or opening wording is not sufficient to establish transcript identity or primary provenance."
+  },
+  "evidence_hygiene": {
+    "chat_report_may_establish_primary_solver_provenance": false,
+    "later_rebuild_or_c1_data_may_fill_historical_interface_gaps": false,
+    "missing_historical_interface_values_may_be_interpolated_as_original": false,
+    "scoped_search_failure_is_global_nonexistence_proof": false
+  },
+  "next_recovery_action": {
+    "priority": "HIGH",
+    "action": "Directly expose or upload either the refresh export archive, the exact historical transcript extraction, or the named 312-page ChatGPT-Hyperzeit Projektstatus Update PDF, then search message-level content for package filenames, attachment references, hashes, run IDs, output paths, and interface exports.",
+    "search_terms": [
+      "B1.4K",
+      "B1.4L",
+      "B1.4N",
+      "Gesamtpaket",
+      "Reproduktionsskript",
+      "SHA-256-Manifest",
+      "A_prime_bulk",
+      "A_prime_cap",
+      "Lprime_over_L_bulk",
+      "Lprime_over_L_cap"
+    ],
+    "promotion_rule": "Transcript evidence may refine provenance and recovery targets but cannot by itself establish VERIFIED_SOLVER_OUTPUT."
+  },
+  "governance": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_gate_effect": "NONE"
+  }
+}
