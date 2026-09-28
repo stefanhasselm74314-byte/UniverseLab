@@ -76,6 +76,8 @@ def test_environment_hash_is_deterministic_and_mutation_sensitive():
     assert att["dependencies"]["scipy"]["version"] == "1.14.1"
     assert att["dependencies"]["sympy"]["version"] == "1.13.3"
     assert att["dependencies"]["mpmath"]["version"] == "1.3.0"
+    assert att["hardware"]["cpu_model"] not in {"", "UNKNOWN"}
+    assert not str(att["hardware"]["cpu_model"]).isdigit()
     assert att["thread_environment"] == {
         "MKL_NUM_THREADS": "1",
         "NUMEXPR_NUM_THREADS": "1",
