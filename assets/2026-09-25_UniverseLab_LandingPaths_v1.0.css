@@ -7,7 +7,7 @@
   gap: 10px;
   padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right));
 }
-.ul-landing .brand { min-width: 0; min-height: 44px; }
+.ul-landing .brand { display: flex; align-items: center; gap: 8px; min-width: 0; min-height: 44px; }
 .ul-landing .mark { display: grid; place-items: center; min-width: 34px; }
 .ul-home-menu { padding: 0 !important; }
 .ul-home-menu summary {
