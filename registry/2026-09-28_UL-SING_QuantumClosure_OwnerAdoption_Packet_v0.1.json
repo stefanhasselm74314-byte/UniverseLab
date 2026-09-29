@@ -1,0 +1,52 @@
+{
+  "schema": "universelab.ul-sing.quantum-closure-owner-adoption-packet.v0.1",
+  "version": "0.1",
+  "date": "2026-09-28",
+  "classification": "OWNER_RESERVED_GOVERNANCE_DECISION_RECORD",
+  "status": "EXPLICIT_OWNER_ADOPTION_RECORDED_PENDING_CANONICAL_SUCCESSOR",
+  "basis_main_commit": "9e34903a09db17fb6d3c338be13ab934f16f09f1",
+  "source_review": {
+    "pull_request": 249,
+    "head_sha": "f2a9a16413cf0659bc05ffdb07b1be8c410bb2b8",
+    "merge_commit": "97f12c99d2c4c68881ebae4170567a15eec3eaf6",
+    "review_status": "PASS_WITH_CONDITIONS_NONCANONICAL_CANDIDATES"
+  },
+  "generic_go_counts_as_adoption": false,
+  "owner_decision": {
+    "explicit": true,
+    "decision_text": "Alle drei adoptieren",
+    "decision_scope_binding": "ALL_THREE_CANDIDATES_IN_THIS_PACKET",
+    "normalized_decision": "ADOPT_AS_CANONICAL_METHOD_GATE",
+    "decision_date": "2026-09-28",
+    "additional_conditions": [],
+    "private_conversation_id_published": false
+  },
+  "candidates": [
+    {
+      "gate_id": "QG-PI-01",
+      "decision": "ADOPT_AS_CANONICAL_METHOD_GATE",
+      "canonical_effect": "AUTHORIZED_FOR_CTRL01_VERSIONED_SUCCESSOR"
+    },
+    {
+      "gate_id": "QG-GAP-01",
+      "decision": "ADOPT_AS_CANONICAL_METHOD_GATE",
+      "canonical_effect": "AUTHORIZED_FOR_CTRL01_VERSIONED_SUCCESSOR"
+    },
+    {
+      "gate_id": "KK-CTP-01",
+      "decision": "ADOPT_AS_CANONICAL_METHOD_GATE",
+      "canonical_effect": "AUTHORIZED_FOR_CTRL01_VERSIONED_SUCCESSOR"
+    }
+  ],
+  "canonicalization_requires_explicit_owner_decision": true,
+  "explicit_owner_decision_requirement": "SATISFIED",
+  "current_state": {
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_allowed_step": "CTRL01_PREPARE_VERSIONED_CANONICAL_METHOD_GATE_SUCCESSOR",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
