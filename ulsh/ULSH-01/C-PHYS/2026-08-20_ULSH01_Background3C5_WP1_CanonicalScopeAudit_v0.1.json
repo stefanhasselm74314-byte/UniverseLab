@@ -1,0 +1,67 @@
+{
+  "schema": "universelab.ulsh01.background3c5.wp1-canonical-scope-audit.v0.1",
+  "date": "2026-08-20",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "master_build_order": "registry/2026-08-10_ULSH_MasterBuildOrder_v1.0.json",
+  "work_package": "ULSH-01-WP1",
+  "work_package_goal": "Freeze the physical BVP equation set together with boundary and regularity conditions.",
+  "classification": "GOVERNANCE_AND_PROVENANCE_AUDIT_NO_SOLVER_EXECUTION",
+  "status": "WP1_NOT_CLOSED_RECONSTRUCTION_REQUIRED_FOR_M1_FIELD_CONTENT_SCOPE",
+  "facts": {
+    "m1_function_parameter_freeze": "PRESERVED",
+    "normalization_bridges": "CLOSED",
+    "maxwell_current_coefficient": "PROVENANCE_CLOSED_GAMMA_SIGMA_EQ_M_LAYER_Q_HAT",
+    "local_constraint_propagation": "ANALYTICALLY_CLOSED_CONDITIONAL_ON_LOCAL_EOM_AND_REGULAR_BRANCH",
+    "canonical_outer_topology": "TWO_REGION_TWO_REGULAR_POLES_COMMON_CAP",
+    "finite_thickness_two_region_local_lift": "PASS_ANALYTIC",
+    "finite_thickness_support_identity_with_canonical_cap_sigma": "FALSE",
+    "supplementary_bulk_layer_path": "CONDITIONAL_MODEL_DEVELOPMENT_CHOICE",
+    "augmented_structural_bvp_count": "SQUARE_10x10_STRUCTURAL_ONLY",
+    "actual_10x10_functional_jacobian_rank": "NOT_PROVEN",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_execution_authorized": false
+  },
+  "restart_handoff_check": {
+    "cphys_m1_status": "FROZEN",
+    "explicit_sigma_ft_field_content_ratification_found": false,
+    "interpretation": "ABSENCE_IS_NOT_A_PROOF_OF_PROHIBITION",
+    "required_status": "RECONSTRUCTION_REQUIRED"
+  },
+  "work_package_mapping": {
+    "WP1_physical_equation_boundary_regularity_freeze": "NOT_CLOSED",
+    "WP2_backend_interface_and_result_schema": "ADVANCED_IMPLEMENTATION_ONLY",
+    "WP3_controls_and_source_provenance_QA": "ADVANCED_SOFTWARE_QA_NO_PHYSICAL_EVIDENCE",
+    "WP4_authorized_physical_background_execution_and_convergence": "BLOCKED_NOT_AUTHORIZED"
+  },
+  "blocking_question": "Is Sigma_FT a ratified additional degree of freedom of frozen HZT-M0-S6-C-PHYS-M1/C1, or must the finite-thickness work remain a noncanonical development extension until a separately governed model-scope change is authorized?",
+  "next_safe_action": "RECOVER_OR_RATIFY_M1_PARENT_FIELD_CONTENT_SCOPE_BEFORE_ANY_PHYSICAL_BINDING_OF_SIGMA_FT",
+  "forbidden_inferences": [
+    "10x10_structural_matching_implies_functional_rank",
+    "G3_10_dry_run_implies_physical_jacobian",
+    "green_software_QA_implies_physical_background",
+    "supplementary_layer_choice_is_automatically_part_of_frozen_M1",
+    "numerical_stability_implies_ghost_freedom",
+    "technical_readiness_implies_physical_identification"
+  ],
+  "gate_state": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "source_paths": [
+    "ulsh/ULSH-01/C-PHYS/2026-08-15_Background3C5_Equation_Freeze_Audit_v0.2.md",
+    "ulsh/ULSH-01/C-PHYS/2026-08-15_Background3C5_Normalization_Closure_v0.2.md",
+    "ulsh/ULSH-01/C-PHYS/2026-08-16_Background3C5_G4_Constraint_Propagation_Closure_v0.1.md",
+    "ulsh/ULSH-01/C-PHYS/2026-08-16_Background3C5_G5_Maxwell_Normalization_Closure_v0.2.md",
+    "ulsh/ULSH-01/C-PHYS/2026-08-17_Background3C5_G3_Canonical_Outer_Topology_Reconciliation_v0.2.md",
+    "ulsh/ULSH-01/C-PHYS/2026-08-17_Background3C5_G3_2_Two_Region_Finite_Thickness_Cap_Bridge_v0.1.md",
+    "ulsh/ULSH-01/C-PHYS/2026-08-17_Background3C5_G3_3_Parent_Cap_Layer_Sector_Identity_Audit_v0.1.md",
+    "ulsh/ULSH-01/C-PHYS/2026-08-17_Background3C5_G3_4_Model_Path_Decision_Augmented_BVP_Count_v0.1.md",
+    "ulsh/ULSH-01/C-PHYS/2026-08-17_Background3C5_G3_5_Augmented_Cap_Variation_Structural_Matching_v0.1.md",
+    "ulsh/ULSH-01/C-PHYS/2026-08-20_Background3C5_G3_10_Jacobian_Dry_Run_Harness_v0.1.md"
+  ]
+}

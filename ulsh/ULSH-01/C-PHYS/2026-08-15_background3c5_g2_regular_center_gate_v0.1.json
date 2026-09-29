@@ -1,0 +1,62 @@
+{
+  "schema": "universelab.ulsh01.background3c5.g2-regular-center-gate.v0.1",
+  "date": "2026-08-15",
+  "architecture": "HPVS->HZT-M0->S6->C-PHYS->ULSH-01",
+  "status": "CONDITIONAL_PASS_ANALYTIC",
+  "physical_evidence_effect": "NONE",
+  "authoritative_variables": ["A", "L", "phi", "s", "A_chi"],
+  "proper_radial_gauge": true,
+  "axis_conditions": {
+    "L_0": 0.0,
+    "L_prime_0": 1.0,
+    "A_prime_0": 0.0,
+    "phi_prime_0": 0.0,
+    "A_chi_0_regular_gauge": 0.0
+  },
+  "series": {
+    "A": "A0 + A2*r^2 + A4*r^4 + O(r^6)",
+    "L": "r + L3*r^3 + L5*r^5 + O(r^7)",
+    "phi": "phi0 + phi2*r^2 + phi4*r^4 + O(r^6)",
+    "A_chi": "a2*r^2 + a4*r^4 + O(r^6)",
+    "s_n_nonzero": "s_p*r^p*(1+alpha_s*r^2+O(r^4)), p=abs(n)",
+    "s_n_zero": "s0+s2*r^2+O(r^4)"
+  },
+  "proved_local_relations": {
+    "frobenius_exponent": "p=abs(n)",
+    "A2": "(Trr0/M6^4 + 6*K4*exp(-2*A0) - Lambda6)/8",
+    "L3": "(Tmumu0/M6^4 + 3*K4*exp(-2*A0) - Lambda6 - 12*A2)/6",
+    "phi2": "S_phi_0/4",
+    "axis_stress_consistency": "Trr0=Tchichi0",
+    "rhoF0": "2*Z_F(phi0)*a2^2/g6^2"
+  },
+  "local_free_data": {
+    "before_A0_gauge_fix_and_if_K4_eigenvalue": ["A0", "phi0", "a2", "layer_amplitude", "K4"],
+    "after_A0_gauge_fix_fixed_K4_n_nonzero": ["phi0", "a2", "s_abs_n"],
+    "after_A0_gauge_fix_fixed_K4_n_zero": ["phi0", "a2", "s0"],
+    "conical_slope_free_parameter": false
+  },
+  "operator_binding": {
+    "quarantined_file": "2026-08-15_hzt_background3c5_finite_thickness_operator_v0.1.py",
+    "reason": "B/C/Maxwell variable identity mismatch",
+    "may_seed_physical_solver": false
+  },
+  "remaining_g2_requirements": [
+    "bind scalar source notation to executable M1 derivative convention",
+    "implement replacement parent-equivalent kernel in authoritative variables",
+    "regression-test numerical center initializer against analytic coefficients"
+  ],
+  "global_gates_not_implied": {
+    "background_existence": "NOT_PROVEN",
+    "background_uniqueness": "NOT_PROVEN",
+    "outer_matching": "OPEN",
+    "flux_quantization_compatibility": "OPEN",
+    "Fredholm_property": "NOT_PROVEN",
+    "stability": "OPEN",
+    "ghost_freedom": "OPEN",
+    "rank_R": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "physical_execution_authorized": false,
+  "rank_R_claim_allowed": false
+}

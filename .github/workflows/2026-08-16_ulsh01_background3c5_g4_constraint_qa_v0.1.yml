@@ -1,0 +1,43 @@
+name: ULSH-01 Background3C5 G4 constraint QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-16_hzt_background3c5_full_operator_candidate_v0.3.py'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-16_test_hzt_background3c5_g4_constraint_propagation_v0.1.py'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-16_Background3C5_G4_Constraint_Propagation_Closure_v0.1.md'
+      - '.github/workflows/2026-08-16_ulsh01_background3c5_g4_constraint_qa_v0.1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  g4-constraint-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependency
+        run: python -m pip install --disable-pip-version-check numpy
+      - name: Compile operator and G4 QA
+        run: |
+          python -m py_compile ulsh/ULSH-01/C-PHYS/2026-08-16_hzt_background3c5_full_operator_candidate_v0.3.py
+          python -m py_compile ulsh/ULSH-01/C-PHYS/2026-08-16_test_hzt_background3c5_g4_constraint_propagation_v0.1.py
+      - name: Run G4 constraint propagation regression
+        run: python ulsh/ULSH-01/C-PHYS/2026-08-16_test_hzt_background3c5_g4_constraint_propagation_v0.1.py
+      - name: Governance firewall
+        run: |
+          python - <<'PY'
+          import importlib.util, pathlib, sys
+          p=pathlib.Path('ulsh/ULSH-01/C-PHYS/2026-08-16_hzt_background3c5_full_operator_candidate_v0.3.py')
+          spec=importlib.util.spec_from_file_location('g4gov',p)
+          m=importlib.util.module_from_spec(spec); sys.modules[spec.name]=m; spec.loader.exec_module(m)
+          g=m.governance()
+          assert g['physical_execution_authorized'] is False
+          assert g['rank_R_claim_allowed'] is False
+          assert g['evidence_effect'] == 'NONE_IMPLEMENTATION_ONLY'
+          print('Governance firewall: PASS')
+          PY

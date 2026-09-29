@@ -1,0 +1,85 @@
+{
+  "schema": "ulsh01.background3c5.g3-canonical-outer-topology-gate.v0.2",
+  "date": "2026-08-17",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "status": "CANONICAL_CAP_JUNCTION_IDENTIFIED__BACKGROUND3C5_TOPOLOGY_BRIDGE_BLOCKED",
+  "canonical_authority": {
+    "project_state_source": "current merged GitHub canon",
+    "primary_contracts": [
+      "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json",
+      "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3AAssemblyCorrectionContract_v0.3.json",
+      "registry/2026-08-13_ULSH-01_MD2S-BVP_WP3_D11_CP01R3ProtocolDesign_v1.0.json"
+    ]
+  },
+  "canonical_full_bvp": {
+    "outer_mode": "CAP_OR_BRANE_JUNCTION_HANDOFF",
+    "regions": ["N", "S"],
+    "regional_geometry": "smooth disk from regular pole to common codimension-1 cap",
+    "continuous_unknown_count": 8,
+    "independent_global_residual_count": 8,
+    "continuous_unknowns": [
+      "phi_N_0",
+      "Q_N",
+      "A_S_0",
+      "phi_S_0",
+      "Q_S",
+      "rho_N",
+      "rho_S",
+      "K4"
+    ],
+    "residuals": [
+      "R_A",
+      "R_L",
+      "R_phi",
+      "R_patch",
+      "R_4d",
+      "R_chi",
+      "R_scalar",
+      "R_gauge"
+    ],
+    "rr_constraint_policy": "PROPAGATED_QA_NOT_INDEPENDENT_BC",
+    "global_flux_policy": "COUNTED_ONCE_VIA_TWO_PATCH_RELATION"
+  },
+  "background3c5_local_candidate": {
+    "fields": ["A", "ell", "varphi", "s_hat", "a_chi"],
+    "local_results_retained": [
+      "G2_regular_center_local_structure",
+      "G5_coefficient_normalization",
+      "G5_Maxwell_current_normalization",
+      "G4_constraint_propagation"
+    ],
+    "one_region_to_two_region_equivalence": "NOT_RATIFIED",
+    "three_mismatch_full_bvp_interpretation": "SUPERSEDED_FOR_FULL_ULSH01",
+    "direct_physical_binding": "FORBIDDEN"
+  },
+  "required_bridge": {
+    "allowed_paths": [
+      "TWO_REGION_FINITE_THICKNESS_EXTENSION_WITH_PARENT_DERIVED_CAP_EQUATIONS",
+      "PROVEN_ONE_REGION_REDUCTION_WITH_DERIVED_EFFECTIVE_BOUNDARY_OPERATOR"
+    ],
+    "must_rederive_or_prove_preservation_of": [
+      "R_A",
+      "R_L",
+      "R_phi",
+      "R_patch",
+      "R_4d",
+      "R_chi",
+      "R_scalar",
+      "R_gauge"
+    ],
+    "must_preserve_fixed_discrete_sector": ["n", "N_F", "m_layer"],
+    "no_conical_rescue": true
+  },
+  "verdicts": {
+    "canonical_outer_mode": "PASS_CANONICAL_CAP_OR_BRANE_JUNCTION_HANDOFF",
+    "canonical_full_bvp_structural_square_count": "PASS_8_BY_8",
+    "background3c5_topology_operator_bridge": "OPEN_BLOCKER",
+    "g3_full_executable_target": "BLOCKED",
+    "physical_execution_authorized": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank_R": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}

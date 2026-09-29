@@ -1,0 +1,20 @@
+name: ULSH-01 Background3C5 G3.9 preregistration QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-19_Background3C5_G3_9_Functional_Jacobian_Evaluation_Preregistration_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-19_test_Background3C5_G3_9_Functional_Jacobian_Evaluation_Preregistration_v0.1.py'
+      - '.github/workflows/2026-08-19_ULSH01_Background3C5_G3_9_Preregistration_QA_v0.1.yml'
+  workflow_dispatch:
+
+jobs:
+  preregistration-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run G3.9 pure preregistration QA
+        run: python ulsh/ULSH-01/C-PHYS/2026-08-19_test_Background3C5_G3_9_Functional_Jacobian_Evaluation_Preregistration_v0.1.py

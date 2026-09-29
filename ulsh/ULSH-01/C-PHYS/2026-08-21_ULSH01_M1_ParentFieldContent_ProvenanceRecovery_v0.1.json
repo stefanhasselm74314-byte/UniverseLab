@@ -1,0 +1,105 @@
+{
+  "schema": "universelab.ulsh01.m1-parent-field-content-provenance-recovery.v0.1",
+  "date": "2026-08-21",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "pull_request": 137,
+  "work_package": "ULSH-01-WP1",
+  "classification": "GOVERNANCE_AND_PROVENANCE_RECOVERY_NO_SOLVER_EXECUTION",
+  "status": "RECOVERED_SIGMA_FT_NOT_RATIFIED_IN_FROZEN_M1_C1",
+  "physical_evidence_effect": "NONE",
+  "authority_basis": [
+    {
+      "path": "hzt-s6-parent-action-v0.1.json",
+      "blob_sha": "aab94691b3a960b744825393fd090da098f58e39",
+      "finding": "The canonical parent has Einstein-Hilbert, bulk scalar and bulk Maxwell sectors plus a codimension-one cap tension/winding-phase sector. sigma is a cap field; no independent smooth codimension-zero Sigma_FT field is declared."
+    },
+    {
+      "path": "sci-001-002-parent-closure-v0.1.html",
+      "blob_sha": "92b56645b852b26ad39a646b8c3e590a1c7aa00f",
+      "finding": "The canonical core action contains g_AB, phi and A_A in the six-dimensional bulk and sigma only through the five-dimensional cap Lagrangian L_Sigma."
+    },
+    {
+      "path": "registry/2026-08-03_MD2S_R1_C_PHYS_ParentActionOperatorEntryContract_v0.1.json",
+      "blob_sha": "9129e30b0cf27eea93e20a025b5de0dc6e123757",
+      "finding": "The C-PHYS parent operator specializes the same parent content. The cap sector is lambda(phi) plus Z_sigma(phi) D sigma squared; bulk profile unknowns are A_s, L_s, phi_s and A_chi_s."
+    },
+    {
+      "path": "registry/2026-08-03_HZT_M0_S6_C_PHYS_M1_FunctionFreezeContract_v0.1.json",
+      "blob_sha": "13fbe0084dcf91f2d0696d00947c9eed221a58ce",
+      "finding": "M1 freezes U, Z_F, lambda, Z_sigma and charge normalization for the pre-existing parent fields; it does not add a new bulk/layer degree of freedom."
+    },
+    {
+      "path": "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json",
+      "blob_sha": "87fc717df8864ee756a4a430733f03cc0477d672",
+      "finding": "The canonical C1 BVP has eight continuous global unknowns and eight independent residuals, with regular profiles A_s, L_s, phi_s and A_chi_s on two regions."
+    },
+    {
+      "path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3AAssemblyCorrectionContract_v0.3.json",
+      "blob_sha": "8354e4b93583f0eb30b1559e76d0b45443895791",
+      "finding": "The frozen discrete assembly is 8*N profile unknowns plus eight augmented unknowns against 8*N bulk residuals plus eight cap/global residuals; no extra smooth layer field is part of that assembly."
+    },
+    {
+      "path": "ulsh/ULSH-01/C-PHYS/2026-08-20_ULSH01_Background3C5_WP1_CanonicalScopeAudit_v0.1.json",
+      "blob_sha": "ba1dbceb2f1d68faa33381d3acfcba4c31b9b296",
+      "finding": "The newer WP1 audit correctly identified the missing Sigma_FT ratification as the blocking provenance question and required recovery before physical binding."
+    }
+  ],
+  "recovered_field_content": {
+    "six_dimensional_bulk": [
+      "g_AB",
+      "phi",
+      "A_A"
+    ],
+    "codimension_one_cap": [
+      "sigma_cap"
+    ],
+    "background_profile_unknowns_per_region": [
+      "A_s",
+      "L_s",
+      "phi_s",
+      "A_chi_s"
+    ],
+    "canonical_continuous_global_unknown_count": 8,
+    "canonical_independent_boundary_residual_count": 8,
+    "Sigma_FT_declared_as_independent_bulk_field": false
+  },
+  "decision": {
+    "M1_FIELD_CONTENT_SCOPE": "RECOVERED",
+    "SIGMA_FT_STATUS": "NONCANONICAL_DEVELOPMENT_EXTENSION_NOT_RATIFIED_IN_FROZEN_M1_C1",
+    "SUPPLEMENTARY_BULK_LAYER_PATH": "DEVELOPMENT_ONLY_NOT_PHYSICAL_TARGET_BINDING",
+    "RESOLVED_CAP_REPLACEMENT_PATH": "REQUIRES_SEPARATELY_GOVERNED_PARENT_MODEL_SCOPE_CHANGE",
+    "SILENT_MODEL_SCOPE_PROMOTION_ALLOWED": false,
+    "SILENT_C2_OR_NEW_MODEL_BRANCH_ALLOWED": false
+  },
+  "historical_3C11_3C12_reconciliation": {
+    "3C11_artifact": "registry/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C11RealBackendControlAuthorizationReview_v0.1.json",
+    "3C11_status": "DENIED_OPERATIVE_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_ABSENT",
+    "3C11_next_allowed_block": "C-PHYS-R1.0-BACKGROUND-3C12_SINGLE_USE_GRANT_AND_TARGET_PATH_RELEASE_IMPLEMENTATION_ONLY",
+    "3C12_scope": "HISTORICAL_IMPLEMENTATION_ONLY_PERMISSION",
+    "3C12_is_current_physical_execution_authorization": false,
+    "reason": "The historical 3C12 permission cannot authorize physical binding of the later Sigma_FT development extension and cannot override the newer WP1 field-content provenance result."
+  },
+  "work_package_effect": {
+    "WP1": "NOT_CLOSED_TARGET_MUST_BE_REBOUND_TO_CANONICAL_M1_C1_OR_EXPLICITLY_VERSIONED_MODEL_SCOPE_CHANGE",
+    "WP2": "IMPLEMENTATION_ASSETS_MAY_REMAIN_DEVELOPMENT_ONLY_PENDING_TARGET_REBIND",
+    "WP3": "SOFTWARE_QA_MAY_REMAIN_DEVELOPMENT_ONLY_NO_PHYSICAL_EVIDENCE",
+    "WP4": "BLOCKED_NOT_AUTHORIZED"
+  },
+  "next_safe_action": "FREEZE_AN_EXACT_CANONICAL_M1_C1_TWO_REGION_8X8_TARGET_CONTRACT_AND_RECONCILE_EXISTING_WP2_WP3_ASSETS_AGAINST_THAT_DIGEST; DO_NOT BIND SIGMA_FT UNLESS A SEPARATE EXPLICIT MODEL_SCOPE_CHANGE IS AUTHORIZED",
+  "forbidden_inferences": [
+    "This provenance recovery is not a physical background solution.",
+    "Excluding Sigma_FT from frozen M1 field content is not evidence against finite-thickness physics in another explicitly governed model version.",
+    "Historical 3C12 implementation-only eligibility is not a current physical-execution grant.",
+    "Green software QA does not close WP1 or authorize WP4.",
+    "Structural square counting does not prove functional Jacobian rank, existence, uniqueness, stability or ghost freedom."
+  ],
+  "gate_state": {
+    "official_MD2S_solver": "NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}

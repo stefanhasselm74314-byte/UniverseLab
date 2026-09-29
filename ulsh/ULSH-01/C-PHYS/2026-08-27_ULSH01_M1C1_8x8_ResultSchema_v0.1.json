@@ -1,0 +1,58 @@
+{
+  "schema": "universelab.ulsh01.m1c1-8x8-result-schema.v0.1",
+  "date": "2026-08-27",
+  "classification": "TARGET_BOUND_RESULT_SCHEMA_NO_PHYSICAL_RESULT",
+  "status": "SCHEMA_DEFINED_NOT_EXECUTED",
+  "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+  "identity": {
+    "run_id": null,
+    "code_commit_sha": null,
+    "environment_attestation_sha256": null,
+    "authorization_artifact_sha256": null
+  },
+  "solution": {
+    "converged": null,
+    "continuous_unknown_order": ["varphi_N_0", "q_N", "A_S_0", "varphi_S_0", "q_S", "rho_N", "rho_S", "k4"],
+    "continuous_unknown_vector": null,
+    "boundary_residual_order": ["R_A", "R_ell", "R_varphi", "R_patch", "R_4d", "R_chi", "R_scalar", "R_gauge_local"],
+    "boundary_residual_vector": null
+  },
+  "qa": {
+    "rr_constraint_trace": null,
+    "admissibility": {
+      "rho_N_positive": null,
+      "rho_S_positive": null,
+      "ell_positive_interior_N": null,
+      "ell_positive_interior_S": null,
+      "active_parameter_domains_hold": null,
+      "fixed_discrete_sector_unchanged": null
+    }
+  },
+  "interface_traces": {
+    "A_N_x_cap": null,
+    "A_S_x_cap": null,
+    "ell_N_x_over_ellSigma_cap": null,
+    "ell_S_x_over_ellSigma_cap": null,
+    "A_hat_Sigma": null,
+    "L_hat_Sigma": null
+  },
+  "patch_binding": {
+    "a_chi_Sigma_representation": "a_chi_S(cap)",
+    "R_patch_counted_once": true,
+    "R_flux_additional_residual": false
+  },
+  "provenance": {
+    "target_digest_verified": null,
+    "input_manifest_sha256": null,
+    "solver_tolerances": null,
+    "mesh_or_collocation_order": null,
+    "seed_or_initial_guess_provenance": null
+  },
+  "governance": {
+    "solver_authorized": false,
+    "rank_R_claim_allowed": false,
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  }
+}

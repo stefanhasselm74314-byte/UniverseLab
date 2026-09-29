@@ -1,0 +1,47 @@
+{
+  "schema": "ulsh01.background3c5.g3.10.dry-run-harness.v0.1",
+  "status": "DRY_RUN_ONLY_NOT_AUTHORIZED",
+  "evidence_effect": "NONE",
+  "source_contract": "2026-08-19_Background3C5_G3_9_Functional_Jacobian_Evaluation_Preregistration_v0.1.json",
+  "expected": {
+    "coordinate_count": 10,
+    "step_levels": [0.01, 0.005, 0.0025],
+    "scheme": "CENTRAL_ONLY",
+    "baseline_count": 1,
+    "nominal_perturbation_count": 60,
+    "refined_h3_perturbation_count": 20,
+    "total_plan_count": 81
+  },
+  "firewalls": {
+    "solver_invocation": "FORBIDDEN",
+    "remote_submission": "FORBIDDEN",
+    "physical_output_generation": "FORBIDDEN",
+    "one_sided_fallback": "FORBIDDEN",
+    "adaptive_step_mutation": "FORBIDDEN",
+    "execution_authorized": false,
+    "physical_background_established": false,
+    "physical_response_rank_R": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "manifest_requirements": {
+    "execute": false,
+    "evidence_effect": "NONE",
+    "execution_hook_keys_forbidden": ["command", "solver_command", "executable", "submit", "run"],
+    "branch_locks_identical_across_plan": true,
+    "bundle_constraint": "n_N-n_S=m_layer*N_F"
+  },
+  "dry_run_outputs": [
+    "plan_index_json",
+    "evaluation_manifests_jsonl",
+    "expected_artifact_index_json"
+  ],
+  "physical_outputs_forbidden": [
+    "R_hat_vectors",
+    "J_hat_h1",
+    "J_hat_h2",
+    "J_hat_h3",
+    "J_hat_h3_refined",
+    "physical_rank_verdict"
+  ]
+}

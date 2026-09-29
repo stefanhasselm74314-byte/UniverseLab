@@ -1,0 +1,101 @@
+{
+  "schema": "universelab.ulsh01.background3c5.g3_2.two_region_finite_thickness_cap_bridge.v0.1",
+  "date": "2026-08-17",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "classification": "TWO_REGION_BULK_LIFT_AND_CAP_SECTOR_IDENTITY_GATE_NO_EXECUTION",
+  "status": "TWO_REGION_BULK_LIFT_PASS_CAP_SECTOR_IDENTITY_BLOCKED",
+  "physical_evidence_effect": "NONE",
+  "canonical_outer_mode": "CAP_OR_BRANE_JUNCTION_HANDOFF",
+  "source_bindings": [
+    "registry/2026-08-03_MD2S_C1_BVPPreflightContract_v0.1.json",
+    "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3AAssemblyCorrectionContract_v0.3.json",
+    "CP01R3 protocol freeze preserving topology physical ODEs and eight boundary equations",
+    "ulsh/ULSH-01/C-PHYS/2026-08-16_Background3C5_G5_Maxwell_Normalization_Closure_v0.2.md",
+    "ulsh/ULSH-01/C-PHYS/2026-08-17_Background3C5_G3_Canonical_Outer_Topology_Reconciliation_v0.2.md"
+  ],
+  "two_region_lift": {
+    "regions": ["N", "S"],
+    "local_radial_orientation": "pole_to_common_cap",
+    "local_state_per_region": ["A_s", "ell_s", "varphi_s", "s_hat_s", "a_chi_s", "P_s"],
+    "P_s": "exp(4*A_s)*Z_F(varphi_s)*a_chi_s_x/ell_s",
+    "Z_F": "exp(-2*a_F*varphi_s)",
+    "w_s": "n-(m_layer*q_hat)*a_chi_s",
+    "maxwell_residual": "P_s_x+(m_layer*q_hat)*exp(4*A_s)*s_hat_s^2*w_s/ell_s",
+    "amplitude_residual": "s_hat_s_xx+(4*A_s_x+ell_s_x/ell_s)*s_hat_s_x-(w_s^2/ell_s^2)*s_hat_s-d_s_Vhat_layer",
+    "coefficient_change_under_region_label": false,
+    "verdict": "PASS_BY_LOCALITY_AND_LABEL_SYMMETRY"
+  },
+  "pole_rules": {
+    "regular_pole_each_region": true,
+    "ell_s_0": 0,
+    "A_s_x_0": 0,
+    "varphi_s_x_0": 0,
+    "nonzero_winding_layer_behavior": "s_hat_s proportional to x_s^abs(n)",
+    "global_warp_frame_redundancy_count": 1,
+    "independent_regional_discrete_topology_labels_forbidden": true
+  },
+  "canonical_cap_residuals": [
+    "R_A",
+    "R_L",
+    "R_phi",
+    "R_patch",
+    "R_4d",
+    "R_chi",
+    "R_scalar",
+    "R_gauge"
+  ],
+  "cap_rules": {
+    "canonical_eight_residual_target_preserved": true,
+    "rr_constraint_role": "PROPAGATED_QA_NOT_EXTRA_BOUNDARY_RESIDUAL",
+    "finite_smooth_bulk_stress_is_delta_source": false,
+    "may_add_bulk_layer_stress_directly_to_jump_equations": false,
+    "junction_source_modification_requires": "EXPLICIT_CAP_LOCALIZED_PARENT_TERM_OR_DERIVED_THIN_LIMIT"
+  },
+  "critical_open_identity": {
+    "id": "FINITE_THICKNESS_TO_CAP_SIGMA_IDENTITY",
+    "status": "OPEN_PROVENANCE_BLOCKER",
+    "mutually_distinct_possibilities": [
+      "SUPPLEMENT",
+      "RESOLUTION",
+      "REPLACEMENT",
+      "DECOUPLED_CONTROL"
+    ],
+    "risks_if_guessed": [
+      "DOUBLE_COUNT_LOCALIZED_STRESS_OR_CURRENT",
+      "DELETE_CANONICAL_CAP_SOURCE_WITHOUT_DERIVATION",
+      "MUTATE_JUNCTION_COEFFICIENTS_WITHOUT_PARENT_ACTION",
+      "INCORRECT_GLOBAL_BVP_COUNT"
+    ]
+  },
+  "bvp_count": {
+    "canonical_preflight_continuous_unknown_count": 8,
+    "canonical_global_residual_count": 8,
+    "one_region_three_mismatch_count_is_full_canonical_bvp": false,
+    "finite_thickness_augmented_global_count": "NOT_RATIFIED_PENDING_CAP_SECTOR_IDENTITY"
+  },
+  "next_required_block": {
+    "id": "G3.3_PARENT_CANON_SIGMA_SECTOR_IDENTITY_AUDIT",
+    "execution_allowed": false,
+    "questions": [
+      "Is finite-thickness Sigma identical to the localized cap Sigma sector?",
+      "If identical, what controlled thin-limit map reproduces the cap action and junction coefficients?",
+      "If distinct, what localized cap action remains independently present?",
+      "What exact finite-thickness field conditions apply at the common cap?",
+      "What is the resulting augmented unknown/residual count?"
+    ]
+  },
+  "gate_state": {
+    "G3_2_CANONICAL_OUTER_MODE": "CAP_OR_BRANE_JUNCTION_HANDOFF",
+    "G3_2_TWO_REGION_LOCAL_OPERATOR_LIFT": "PASS_ANALYTIC",
+    "G3_2_CANONICAL_EIGHT_RESIDUAL_TARGET": "PRESERVED",
+    "G3_2_FINITE_BULK_STRESS_IS_NOT_DELTA_JUNCTION_SOURCE": "PASS_DISTRIBUTIONAL_STRUCTURE",
+    "G3_2_FINITE_THICKNESS_TO_CAP_SIGMA_IDENTITY": "OPEN_PROVENANCE_BLOCKER",
+    "G3_2_FULL_GLOBAL_BVP_COUNT": "NOT_RATIFIED_FOR_FINITE_THICKNESS_EXTENSION",
+    "PHYSICAL_EXECUTION_AUTHORIZED": false,
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK_R": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "PHYSICAL_EVIDENCE_EFFECT": "NONE"
+  }
+}

@@ -1,0 +1,73 @@
+name: ULSH-01 WP2 CP01R2 target transaction QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.1.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ResourcePolicy_v0.1.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_BackendRebindContract_v0.1.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.1.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_TargetTransactionContract_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json'
+      - 'tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py'
+      - 'tests/2026-08-27_test_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py'
+      - '.github/workflows/2026-08-27_ULSH01_WP2_TargetTransaction_QA_v0.1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  transaction-preflight-no-backend-import:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate JSON contracts
+        run: |
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ResourcePolicy_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_BackendRebindContract_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_TargetTransactionContract_v0.1.json >/dev/null
+      - name: Compile transaction and QA
+        run: |
+          python -m py_compile tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py
+          python -m py_compile tests/2026-08-27_test_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py
+      - name: Enforce no physical backend import surface
+        run: |
+          ! grep -E '^\s*(import|from)\s+(scipy|numpy|importlib|subprocess)' tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py
+          ! grep -E '\b(solve_bvp|damped_newton\(|shooting_residual\(|AUTHORIZED_PHYSICAL_RUN)\b' tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py
+          grep -F 'PHYSICAL_EXECUTION_AUTHORIZED = False' tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py
+          grep -F 'PHYSICAL_BACKEND_IMPORT_ALLOWED = False' tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py
+      - name: Run source-bound transaction preflight
+        run: |
+          python tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py \
+            --repo-root . \
+            --manifest-output /tmp/ulsh01_wp2_release_manifest.json \
+            --json | tee /tmp/ulsh01_wp2_preflight.json
+          grep -F '"physical_execution_authorized": false' /tmp/ulsh01_wp2_preflight.json
+          grep -F '"backend_imported": false' /tmp/ulsh01_wp2_preflight.json
+          grep -F '"solver_executed": false' /tmp/ulsh01_wp2_preflight.json
+          grep -F '"WP2_closed": false' /tmp/ulsh01_wp2_preflight.json
+          grep -F '"physical_evidence_effect": "NONE"' /tmp/ulsh01_wp2_preflight.json
+      - name: Run atomic single-use control reservation and replay QA
+        run: python tests/2026-08-27_test_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py
+      - name: Verify generated package manifest is evidence-neutral
+        run: |
+          python -m json.tool /tmp/ulsh01_wp2_release_manifest.json >/dev/null
+          grep -F '"solver_executed": false' /tmp/ulsh01_wp2_release_manifest.json
+          grep -F '"backend_imported": false' /tmp/ulsh01_wp2_release_manifest.json
+          grep -F '"physical_evidence_effect": "NONE"' /tmp/ulsh01_wp2_release_manifest.json
+      - name: Upload implementation-QA release manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulsh01-wp2-cp01r2-release-manifest-qa-only
+          path: |
+            /tmp/ulsh01_wp2_release_manifest.json
+            /tmp/ulsh01_wp2_preflight.json

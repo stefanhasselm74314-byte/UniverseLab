@@ -1,0 +1,89 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-authorization-filling-checklist-qa-result.v0.1",
+  "date": "2026-08-31",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-01-WP2",
+  "classification": "APPEND_ONLY_NONOPERATIVE_QA_RESULT_NO_AUTHORIZATION_NO_GRANT_NO_BACKEND_IMPORT_NO_SOLVER_EXECUTION",
+  "status": "PASS_NONOPERATIVE_FILLING_CHECKLIST_QA_AUTHORITY_GATE_BLOCKED_NO_EXECUTION",
+  "reviewed_checklist": {
+    "path": "registry/2026-08-28_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionGrantFillingChecklist_v0.1.json",
+    "qa_subject_repository_commit_sha": "903acd61246818aa82256921507d92173434db9b",
+    "technical_field_mapping": "COMPLETE"
+  },
+  "workflow_provenance": {
+    "workflow_path": ".github/workflows/2026-08-28_ULSH01_WP2_CP01R4_AuthorizationFillingChecklist_QA_v0.1.yml",
+    "workflow_name": "ULSH-01 WP2 CP01R4 authorization filling checklist QA v0.1",
+    "workflow_run_id": 33384456202,
+    "job_id": 99463819036,
+    "workflow_conclusion": "success",
+    "checked_out_git_head_sha": "903acd61246818aa82256921507d92173434db9b",
+    "artifact_id": 9755009538,
+    "artifact_name": "ulsh01-wp2-cp01r4-authorization-filling-checklist-v01-qa-only",
+    "artifact_size_bytes": 824,
+    "artifact_digest_sha256": "023c2b80e0673803cf792d039e1b283bb799f5144821712493be5a277a26fafa"
+  },
+  "frozen_release_identity": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+    "release_subject_repository_commit_sha": "d8890b9ef47936edf8bb7e758b882c898241b314",
+    "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "run_payload_sha256": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+    "release_package_manifest_sha256": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621",
+    "qa_or_result_commit_retargets_release_subject": false
+  },
+  "verified_findings": {
+    "checklist_JSON_valid": true,
+    "checklist_schema_and_status_exact": true,
+    "release_subject_exact": true,
+    "target_and_run_payload_digests_exact": true,
+    "release_package_digest_and_member_count_exact": true,
+    "release_member_hash_bindings_exact": true,
+    "decision_template_remains_nonoperative": true,
+    "decision_id_and_validity_window_unfilled": true,
+    "grant_template_remains_nonoperative": true,
+    "grant_id_nonce_decision_binding_and_validity_window_unfilled": true,
+    "grant_authorized_false": true,
+    "grant_control_only_false": true,
+    "authority_fields_absent_from_current_technical_templates": true,
+    "authority_signature_provenance_gate_fail_closed": true,
+    "runtime_issuance_gate_fail_closed": true,
+    "ephemeral_operative_reservation_store_forbidden": true,
+    "WP3_not_started": true,
+    "WP4_blocked": true,
+    "backend_imported": false,
+    "solver_executed": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "blocking_gates": {
+    "authority_signature_provenance": "BLOCKED_MISSING_RATIFIED_ISSUING_AUTHORITY_AND_SIGNATURE_OR_EQUIVALENT_ATTESTATION_VERIFICATION_CONTRACT",
+    "runtime_issuance_bindings": "BLOCKED_RUNTIME_BINDINGS_NOT_YET_DESIGNATED",
+    "operative_authorization_decision": "NOT_CREATED",
+    "operative_single_use_grant": "NOT_CREATED"
+  },
+  "interpretation_firewall": [
+    "A complete filling checklist is not an authorization decision.",
+    "A green checklist QA is not a grant.",
+    "A chat command is not an operative authorization artifact.",
+    "No assistant or automation path may self-authorize.",
+    "Green governance/software QA is not physical evidence.",
+    "No background existence, uniqueness, Fredholmness, stability, ghost freedom, response rank, K1-D release or K1-E admissibility follows."
+  ],
+  "gate_state": {
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "READY_FOR_SEPARATE_AUTHORIZATION_DECISION_NOT_AUTHORIZED",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_safe_action": "CREATE_OR_RECOVER_AND_RATIFY_CANONICAL_AUTHORITY_AND_SIGNATURE_OR_EQUIVALENT_ATTESTATION_PROVENANCE_CONTRACT; THEN_IMPLEMENT_NONEXECUTING_FAIL_CLOSED_AUTHORITY_VERIFIER_QA_ONLY"
+}

@@ -1,0 +1,42 @@
+name: ULSH-01 Background3C5 G3.10 dry-run harness QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-20_background3c5_g3_10_dry_run_harness_v0.1.py'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-20_test_background3c5_g3_10_dry_run_harness_v0.1.py'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-20_background3c5_g3_10_dry_run_harness_gate_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-19_Background3C5_G3_9_Functional_Jacobian_Evaluation_Preregistration_v0.1.json'
+      - '.github/workflows/2026-08-20_ULSH01_Background3C5_G3_10_Dry_Run_Harness_QA_v0.1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dry-run-harness-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile
+        run: |
+          python -m py_compile ulsh/ULSH-01/C-PHYS/2026-08-20_background3c5_g3_10_dry_run_harness_v0.1.py
+          python -m py_compile ulsh/ULSH-01/C-PHYS/2026-08-20_test_background3c5_g3_10_dry_run_harness_v0.1.py
+      - name: Run non-executing harness QA
+        run: python ulsh/ULSH-01/C-PHYS/2026-08-20_test_background3c5_g3_10_dry_run_harness_v0.1.py
+      - name: Generate dry-run plan only
+        run: |
+          python ulsh/ULSH-01/C-PHYS/2026-08-20_background3c5_g3_10_dry_run_harness_v0.1.py \
+            ulsh/ULSH-01/C-PHYS/2026-08-19_Background3C5_G3_9_Functional_Jacobian_Evaluation_Preregistration_v0.1.json \
+            --output /tmp/g310_plan.json >/dev/null
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/g310_plan.json'))
+          assert x['count']==81
+          assert x['execute'] is False
+          assert x['physical_outputs_generated']==[]
+          print('G3.10 generated plan is non-executing: PASS')
+          PY

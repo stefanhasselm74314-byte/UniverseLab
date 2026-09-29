@@ -1,0 +1,92 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-authorization-review.v0.2",
+  "date": "2026-08-28",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-01-WP2",
+  "classification": "FAIL_CLOSED_RELEASE_PROVENANCE_REVIEW_NO_SOLVER_EXECUTION",
+  "status": "BLOCKED_RELEASE_SUBJECT_HEAD_NOT_EXPLICITLY_QA_BOUND",
+  "reviewed_run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+  "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+  "run_payload_sha256": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+  "release_package_manifest_path": "registry/2026-08-28_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ReleasePackageManifest_v0.2.json",
+  "release_package_digest_sha256": "1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621",
+  "passed_findings": {
+    "CP01R4_complete_method_freeze": true,
+    "mesh_prolongation_algorithm_frozen": true,
+    "candidate_tracking_algorithm_frozen": true,
+    "spectral_tail_algorithm_frozen": true,
+    "canonical_target_digest_bound": true,
+    "backend_interface_and_result_schema_bound": true,
+    "resource_policy_bound": true,
+    "historical_primary_source_hashes_verified": true,
+    "grant_gated_entrypoint_present": true,
+    "actual_git_head_runtime_check_implemented": true,
+    "result_no_overwrite_implemented": true,
+    "process_memory_limit_enforcement_implemented": true,
+    "single_use_atomic_reservation_before_resource_mutation_and_backend_import": true,
+    "synthetic_decision_grant_replay_QA_pass": true,
+    "release_v0_2_workflow_run_id": 33082448918,
+    "release_v0_2_workflow_conclusion": "success",
+    "release_package_member_count": 16,
+    "release_package_manifest_frozen_from_green_QA": true,
+    "backend_import_during_review": false,
+    "solver_execution_during_review": false
+  },
+  "blocking_findings": {
+    "release_subject_commit_provenance_fully_closed": false,
+    "workflow_event_pr_head_sha": "e151c1effbc14f1f95d5bc7a68c5a312ac4df753",
+    "workflow_checked_out_git_head_sha": "ad8b923d4f1ecc7ab11e7df4365aa2afd73d0ca7",
+    "reason": "The green pull_request workflow used actions/checkout default merge-ref semantics. The v0.2 release adapter correctly reports the actual checked-out Git HEAD, but the generated QA artifact therefore binds the temporary PR merge commit rather than explicitly exercising the immutable PR-head release subject. This is acceptable software QA but not sufficient provenance for a later single-use physical authorization decision.",
+    "required_fix": "Run the same nonexecuting release audit and synthetic QA under a workflow that explicitly checks out github.event.pull_request.head.sha (or github.sha for workflow_dispatch), asserts git rev-parse HEAD equals that expected release-subject SHA, and records that SHA in the preflight artifact.",
+    "physical_execution_authorizable_now": false
+  },
+  "authorization_decision": {
+    "authorized": false,
+    "authorization_decision_artifact_created": false,
+    "operative_grant_created": false,
+    "primary_backend_import_allowed": false,
+    "primary_newton_allowed": false,
+    "target_a_F_one_quarter_solve_allowed": false,
+    "physical_result_allowed": false,
+    "automatic_execution_after_merge": false
+  },
+  "required_next_release": {
+    "block": "ULSH-01-WP2-CP01R4_HEAD_BOUND_RELEASE_QA_ONLY",
+    "requirements": [
+      "explicitly checkout the immutable PR head SHA instead of the synthetic PR merge ref",
+      "assert actual git rev-parse HEAD equals the expected release-subject SHA",
+      "rerun the identical CP01R4 v0.2 nonexecuting audit and synthetic replay QA",
+      "regenerate the 16-member content package manifest and confirm the package digest remains content-consistent",
+      "freeze workflow run ID, workflow head SHA, actual checked-out SHA and artifact digest",
+      "repeat WP2 authorization review only after the head-bound QA is green"
+    ],
+    "must_remain_no_backend_import": true,
+    "must_remain_no_solver_execution": true,
+    "must_not_create_operative_decision": true,
+    "must_not_create_operative_grant": true,
+    "must_not_create_physical_result": true
+  },
+  "gate_state": {
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "BLOCKED_RELEASE_SUBJECT_HEAD_QA_BINDING",
+    "ULSH-01-WP3": "NOT_STARTED",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "R1.1": "BLOCKED",
+    "R1.2": "BLOCKED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "forbidden_inference": [
+    "Green implementation QA is not a physical authorization.",
+    "A temporary PR merge-ref checkout is not an immutable release-subject binding.",
+    "A content package digest is not an operative authorization decision or grant.",
+    "No background existence, uniqueness, Fredholmness, stability, ghost freedom or response-rank claim follows."
+  ],
+  "solver_executed": false,
+  "physical_evidence_effect": "NONE",
+  "next_safe_action": "ADD_EXPLICIT_PR_HEAD_CHECKOUT_QA_AND_RERUN_CP01R4_RELEASE_PREFLIGHT_WITHOUT_BACKEND_IMPORT"
+}

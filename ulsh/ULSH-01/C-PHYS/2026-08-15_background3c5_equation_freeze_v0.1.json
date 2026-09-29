@@ -1,0 +1,97 @@
+{
+  "schema": "ulsh01.cphys.background3c5.equation-freeze.v0.1",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "status": "PARTIAL_FREEZE_ONLY",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "fields": ["A(r)", "L(r)", "phi(r)", "s(r)", "A_chi(r)"],
+  "metric_ansatz": "ds6^2=exp(2A) gbar_mn dx^m dx^n + dr^2 + L^2 dchi^2",
+  "four_curvature_convention": "gbar_R_mn = 3 K4 gbar_mn",
+  "discrete_branch": {
+    "winding_n": "FIXED_INTEGER",
+    "flux_N": "FIXED_INTEGER",
+    "continuous_jacobian_columns": false
+  },
+  "finite_thickness_layer": {
+    "status": "FROZEN",
+    "Sigma": "s/sqrt(2) exp(i n chi)",
+    "w": "n-gSigma*A_chi",
+    "potential": "Lambda_layer(phi)+1/2*mSigma2(phi)*s^2+lambdaSigma/4*s^4",
+    "mass_profile": "mSigma0^2+etaSigma*(phi-phi_star)",
+    "layer_thickness": "DERIVED_NOT_FREE",
+    "amplitude_equation": "s''+(4A'+L'/L)s'-(w^2/L^2)s-mSigma2(phi)s-lambdaSigma*s^3=0"
+  },
+  "maxwell": {
+    "structure": "FROZEN",
+    "equation_structure": "nabla_A F^(A chi) proportional_to -gSigma*s^2*w/L^2",
+    "exact_normalization": "BLOCKED",
+    "blocker": "canonical Z_F and gauge normalization register not provenance-bound"
+  },
+  "stabilizer": {
+    "full_equation": "BLOCKED",
+    "known_layer_phi_source": "d_phi Lambda_layer + 1/2 etaSigma s^2",
+    "blocker": "complete canonical bulk scalar action and V(phi) normalization not recovered"
+  },
+  "einstein": {
+    "metric_structure": "FROZEN",
+    "layer_stress_structure": "FROZEN",
+    "executable_coefficients": "BLOCKED",
+    "required_missing_items": [
+      "Einstein-Hilbert normalization",
+      "cosmological-term sign and placement",
+      "stabilizer kinetic normalization",
+      "stabilizer potential normalization",
+      "Maxwell normalization and Z_F convention",
+      "M6^4 versus kappa6 inverse-square relation"
+    ]
+  },
+  "boundary_conditions": {
+    "center": {
+      "L": 0,
+      "L_prime": 1,
+      "A_prime": 0,
+      "phi_prime": 0,
+      "s_if_n_nonzero": 0
+    },
+    "outer": {
+      "scalar_layer_decay": true,
+      "gauge_regularity": true,
+      "flux_quantization": true,
+      "match_to_bulk": true
+    }
+  },
+  "junction_system": {
+    "status": "FROZEN",
+    "A_Sigma": "sum_s n_s^r A_s_prime",
+    "L_Sigma": "sum_s n_s^r L_s_prime/L_s",
+    "eq_4D": "M6^4(-3 A_Sigma-L_Sigma)=-lambda-1/2 Y_sigma",
+    "eq_chichi": "M6^4(-4 A_Sigma)=-lambda+1/2 Y_sigma",
+    "derived": "Y_sigma=M6^4(L_Sigma-A_Sigma)",
+    "pure_tension_gate": "A_Sigma=L_Sigma"
+  },
+  "response_rank": {
+    "controls": [
+      "Lambda6/Lambda_ref",
+      "Lambda_layer/Lambda_ref",
+      "mSigma2/mref2",
+      "gSigma",
+      "lambdaSigma"
+    ],
+    "outputs": [
+      "delta_beta_over_beta",
+      "delta_Xi",
+      "delta_U_umb",
+      "delta_m0sq_Rcap2"
+    ],
+    "structural_incidence_rank": 4,
+    "global_physical_response_rank": "OPEN"
+  },
+  "authorization": {
+    "background3c5_physical_execution_authorized": false,
+    "reason": "CANONICAL_BULK_ACTION_AND_ZF_GAUGE_REGISTER_NOT_PROVENANCE_BOUND",
+    "next_admissible_action": "recover authoritative SCI-001 v0.1 bulk action and convention register, then independently vary and audit dimensions/signs"
+  }
+}

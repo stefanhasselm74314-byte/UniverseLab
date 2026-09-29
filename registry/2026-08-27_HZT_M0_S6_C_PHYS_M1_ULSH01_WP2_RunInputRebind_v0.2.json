@@ -1,0 +1,156 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-run-input-rebind.v0.2",
+  "date": "2026-08-27",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-01-WP2",
+  "classification": "COMPLETE_METHOD_FREEZE_TARGET_DIGEST_REBIND_NO_SOLVER_EXECUTION",
+  "status": "RUN_INPUT_FROZEN_CP01R3_EXECUTION_NOT_AUTHORIZED",
+  "supersedes_before_execution": "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.1.json",
+  "rebind_reason": "The CP01R2 transaction preflight passed, but the fail-closed WP2 authorization review found that the complete preregistered numerical method and tolerance set was not self-contained in the frozen CP01R2 payload. CP01R2 was never executed; the immutable-run rule therefore requires a new CP01R3 run identity rather than silently rewriting CP01R2.",
+  "frozen_run_payload": {
+    "run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R3",
+    "classification": "COMPLETE_METHOD_FREEZE_TARGET_DIGEST_REBIND_FROM_NEVER_EXECUTED_CP01R2",
+    "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "backend_interface_contract": "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json",
+    "result_schema": "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json",
+    "background_method_source": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3APreregistrationContract_v0.1.json",
+    "model_parameters_ordered": {
+      "Lambda_hat": "1",
+      "mhat_phi_sq": "1",
+      "a_F": "1/4",
+      "lambda_hat": "1",
+      "z_sigma_hat": "1",
+      "q_hat": "1"
+    },
+    "topological_sector_ordered": {
+      "N_F": 1,
+      "N_sigma": 1,
+      "m_sigma": 1
+    },
+    "alpha_H": "1/2",
+    "seed_set_id": "M1-BG3B-CP01-SEEDS-01",
+    "seed_spec_path": "registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json",
+    "seed_spec_sha256": "b6e4319cc29736799a0b46320002e51cd17b70b724a6b4c6e86567a316996161",
+    "dependency_lock_path": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt",
+    "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f",
+    "primary_discretization": {
+      "method": "CHEBYSHEV_LOBATTO_COLLOCATION_IN_TAU",
+      "regional_node_counts": [24, 32, 48, 64, 96],
+      "degree_rule": "degree=node_count-1",
+      "adaptive_mesh_or_order_selection": false,
+      "floating_point": "IEEE_754_BINARY64_PRIMARY",
+      "higher_precision_audit": "80_BIT_OR_GREATER_REQUIRED_FOR_ANY_BORDERLINE_ACCEPTANCE"
+    },
+    "nonlinear_method": {
+      "method": "DAMPED_NEWTON_TRUST_REGION",
+      "jacobian": "EXACT_COMPLEX_STEP_EQUIVALENT",
+      "linear_solver": "RANK_REVEALING_QR_PRIMARY_WITH_SVD_DIAGNOSTIC",
+      "maximum_newton_iterations_per_mesh": 60,
+      "maximum_backtracking_steps": 20,
+      "armijo_parameter": 0.0001,
+      "minimum_step_fraction": 9.5367431640625e-07,
+      "trust_region_initial_radius": 1.0,
+      "trust_region_minimum_radius": 1e-12,
+      "stagnation_window_iterations": 6,
+      "stagnation_relative_improvement_floor": 0.001,
+      "failure_action": "RETURN_NO_CANDIDATE_UNDER_PREREGISTERED_PROTOCOL",
+      "complex_step_size": 1e-30,
+      "rrqr_rank_rtol": 1e-12,
+      "residual_tolerance": 1e-10,
+      "step_tolerance": 1e-11
+    },
+    "seed_protocol": {
+      "seed_count": 7,
+      "seed_amplitude_scale": "1/20",
+      "seed_multipliers": ["0", "1/8", "-1/8", "1/4", "-1/4", "1/2", "-1/2"],
+      "seed_order": [0, 1, 2, 3, 4, 5, 6],
+      "random_seed_use": false,
+      "warm_start_across_parameter_points": false,
+      "mesh_prolongation": "ACCEPTED_LOWER_ORDER_CANDIDATE_INTERPOLATED_TO_NEXT_PREREGISTERED_NODE_LEVEL",
+      "multiple_converged_candidates": "RETAIN_AND_REPORT_EVERY_DISTINCT_CANDIDATE",
+      "distinctness_threshold": 1e-06
+    },
+    "normalization_and_norms": {
+      "bulk_component_scaling": "UNIT_DIMENSIONLESS",
+      "boundary_component_scaling": "UNIT_DIMENSIONLESS",
+      "bulk_norm": "MAX_ABSOLUTE_COLLOCATION_RESIDUAL",
+      "boundary_norm": "MAX_ABSOLUTE_EIGHT_BOUNDARY_RESIDUALS",
+      "constraint_norm": "MAX_ABSOLUTE_NORMALIZED_C_RR",
+      "profile_difference_norm": "MAX_ABSOLUTE_AFTER_INTERPOLATION_TO_FINER_COMMON_TAU_GRID",
+      "augmented_difference_norm": "MAX_ABSOLUTE_COMPONENT_DIFFERENCE",
+      "combined_candidate_distance": "MAX_OF_PROFILE_AND_AUGMENTED_DISTANCE"
+    },
+    "acceptance_thresholds": {
+      "bulk_residual_max": 1e-10,
+      "boundary_residual_max": 1e-10,
+      "rr_constraint_max": 1e-09,
+      "fine_mesh_profile_difference_max": 1e-08,
+      "fine_mesh_augmented_difference_max": 1e-09,
+      "independent_backend_candidate_distance_max": 1e-07,
+      "minimum_rho_N": 0.0001,
+      "minimum_rho_S": 0.0001,
+      "minimum_interior_ell_margin": 1e-08,
+      "minimum_cap_ell_margin": 1e-08,
+      "minimum_positive_winding_margin": -1e-12,
+      "maximum_reported_discrete_condition_number_without_high_precision_audit": 1000000000000.0,
+      "all_thresholds_must_pass_simultaneously": true
+    },
+    "convergence_requirements": {
+      "required_successful_levels": [48, 64, 96],
+      "residual_monotonicity_max_increase_factor": 1.25,
+      "fine_pair": [64, 96],
+      "fine_pair_profile_difference_max": 1e-08,
+      "fine_pair_augmented_difference_max": 1e-09,
+      "spectral_tail_last_coefficients": 8,
+      "spectral_tail_max_magnitude_at_N96": 1e-09,
+      "single_mesh_acceptance_forbidden": true
+    },
+    "admissibility_gates": {
+      "rho_N_positive": true,
+      "rho_S_positive": true,
+      "ell_positive_on_open_intervals": true,
+      "ell_cap_positive": true,
+      "finite_all_profiles_and_first_required_derivatives": true,
+      "M1_active_domain_respected": true,
+      "charge_lattice_and_patch_sector_respected": true,
+      "positive_winding_minimum": -1e-12,
+      "no_nan_or_infinity": true,
+      "failure_of_any_gate": "REJECT_NUMERICAL_CANDIDATE"
+    },
+    "wp3_crosscheck_contract": {
+      "required_for_candidate_status": true,
+      "backend": "INDEPENDENT_DOP853_SHOOTING",
+      "minimum_grid_resolution": "2x129_OR_EQUIVALENT",
+      "candidate_distance_max": 1e-07,
+      "execution_work_package": "ULSH-01-WP3"
+    },
+    "continuous_unknown_order": ["varphi_N_0", "q_N", "A_S_0", "varphi_S_0", "q_S", "rho_N", "rho_S", "k4"],
+    "boundary_residual_order": ["R_A", "R_ell", "R_varphi", "R_patch", "R_4d", "R_chi", "R_scalar", "R_gauge_local"],
+    "constraint_channel": "C_rr_QA_ONLY",
+    "patch_binding": "a_chi_Sigma := a_chi_S(cap)",
+    "dimensional_anchor": {
+      "M6": "1_as_dimensionless_computational_unit_only",
+      "physical_value_assigned": false
+    }
+  },
+  "frozen_run_payload_sha256": "009cea0c78494f61ed76fed03b3f987fc77d8119b7afcc3082660533a3cdbbf3",
+  "immutability_rules": {
+    "same_run_id_may_not_be_reused_after_payload_or_method_change": true,
+    "target_digest_change_requires_new_run_id": true,
+    "method_change_requires_new_run_id": true,
+    "parameter_change_requires_new_run_id": true,
+    "topology_change_requires_new_run_id": true,
+    "seed_change_requires_new_seed_id_and_hash": true,
+    "dependency_change_requires_new_lock_hash_and_review": true
+  },
+  "execution_firewall": {
+    "solver_authorized": false,
+    "physical_backend_import_allowed": false,
+    "target_solve_allowed": false,
+    "result_artifact_creation_allowed": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_safe_action": "BIND_CP01R3_TO_NEW_RESOURCE_BACKEND_GRANT_AND_TRANSACTION_RELEASE_WITH_STATIC_OR_SYNTHETIC_QA_ONLY"
+}

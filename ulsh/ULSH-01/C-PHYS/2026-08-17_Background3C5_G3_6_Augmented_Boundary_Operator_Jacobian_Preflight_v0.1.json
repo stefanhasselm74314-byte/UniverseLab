@@ -1,0 +1,83 @@
+{
+  "schema": "universelab.ulsh01.cphys.background3c5.g3_6_augmented_boundary_jacobian_preflight.v0.1",
+  "date": "2026-08-17",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "status": "BOUNDARY_OPERATOR_10_DEFINED_JACOBIAN_SCHUR_PREFLIGHT_PASS_ACTUAL_RANK_OPEN_EXECUTION_BLOCKED",
+  "development_path": "SUPPLEMENTARY_BULK_LAYER_WITH_CANONICAL_CAP",
+  "discrete_branch": {
+    "fixed": ["N_F", "m_layer", "n_S"],
+    "derived_relation": "n_N = n_S + m_layer*N_F",
+    "continuous_variation_of_local_windings": false
+  },
+  "continuous_unknowns": [
+    "phi_N0",
+    "Q_N0",
+    "A_S0",
+    "phi_S0",
+    "Q_S0",
+    "rho_N",
+    "rho_S",
+    "K4",
+    "c_N",
+    "c_S"
+  ],
+  "boundary_residuals": [
+    "R_A",
+    "R_L",
+    "R_phi",
+    "R_patch",
+    "R_4d",
+    "R_chi",
+    "R_scalar",
+    "R_gauge_FT",
+    "R_s",
+    "R_s_flux"
+  ],
+  "not_independent_residuals": {
+    "rr_constraints": "PROPAGATED_QA_CHANNELS",
+    "patch_winding_relation": "DISCRETE_BRANCH_CONSTRAINT"
+  },
+  "jacobian": {
+    "dimension": [10, 10],
+    "block_form": "J10=[[J8,B],[C,D]]",
+    "schur_condition_if_J8_invertible": "det(J10)=det(J8)*det(D-C*J8^-1*B)",
+    "full_rank_condition_if_J8_invertible": "det(J8)!=0 AND det(D-C*J8^-1*B)!=0",
+    "actual_rank": "OPEN_NOT_EVALUATED"
+  },
+  "raw_layer_block": {
+    "D": "[[a_N,-a_S],[b_N,b_S]]",
+    "determinant": "a_N*b_S+a_S*b_N",
+    "interpretation": "RAW_FIXED_INHERITED_VARIABLE_LAYER_RANK_RISK_ONLY_NOT_FULL_AUGMENTED_RANK"
+  },
+  "rank_risks": [
+    "RISK_J8_INHERITED_NULL_DIRECTION",
+    "RISK_LAYER_RAW_DETERMINANT_ZERO",
+    "RISK_LAYER_SCHUR_DETERMINANT_ZERO",
+    "RISK_POLE_REGULARITY_FAILURE",
+    "RISK_PATCH_BRANCH_DRIFT",
+    "RISK_CAP_OPERATOR_CHANGED_BY_NEW_LOCALIZED_SIGMA_FT_INTERACTION"
+  ],
+  "proof_status": {
+    "boundary_operator_dimension_10": "PASS_ANALYTIC",
+    "patch_compatibility": "PASS_CANONICAL",
+    "block_jacobian_identity": "PASS_ANALYTIC",
+    "schur_complement_criterion": "PASS_ANALYTIC",
+    "raw_layer_determinant": "PASS_ANALYTIC",
+    "actual_J8_rank": "OPEN",
+    "actual_Schur_rank": "OPEN",
+    "actual_J10_rank": "OPEN",
+    "existence": "OPEN",
+    "uniqueness": "OPEN",
+    "stability": "OPEN",
+    "ghost_freedom": "OPEN"
+  },
+  "governance": {
+    "physical_execution_authorized": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank_R": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_allowed_block": "G3_7_DIMENSIONLESS_BOUNDARY_RESIDUAL_NORMALIZATION_AND_FUNCTIONAL_JACOBIAN_QA_ONLY"
+}

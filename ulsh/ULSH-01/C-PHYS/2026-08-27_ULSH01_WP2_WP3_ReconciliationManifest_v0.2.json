@@ -1,0 +1,63 @@
+{
+  "schema": "universelab.ulsh01.wp2-wp3-reconciliation-manifest.v0.2",
+  "date": "2026-08-27",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "classification": "APPEND_ONLY_TARGET_BOUND_IMPLEMENTATION_AND_QA_NO_EXECUTION",
+  "supersedes_for_current_status": "ulsh/ULSH-01/C-PHYS/2026-08-26_ULSH01_WP2_WP3_ReconciliationManifest_v0.1.json",
+  "authority": {
+    "target_contract_path": "ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json",
+    "target_digest": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "target_shape": "TWO_REGION_COMMON_CAP_8x8",
+    "continuous_unknown_order": ["varphi_N_0", "q_N", "A_S_0", "varphi_S_0", "q_S", "rho_N", "rho_S", "k4"],
+    "boundary_residual_order": ["R_A", "R_ell", "R_varphi", "R_patch", "R_4d", "R_chi", "R_scalar", "R_gauge_local"]
+  },
+  "wp2_patch_binding": {
+    "status": "IMPLEMENTED_REPRESENTATION_BOUND_NO_TARGET_SEMANTICS_CHANGE",
+    "representation": "a_chi_Sigma := a_chi_S(cap)",
+    "patch_residual": "a_chi_N(cap)-a_chi_S(cap)-N_F/q_hat=0",
+    "cap_combination": "N_sigma-m_sigma*q_hat*a_chi_Sigma",
+    "R_patch_counted_exactly_once": true,
+    "R_flux_additional_residual": false,
+    "implementation_path": "ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py"
+  },
+  "canonical_8x8_backend_interface": {
+    "status": "IMPLEMENTED_TARGET_BOUND_NO_SOLVER_EXECUTION_QA_PENDING",
+    "compatible_rebound_assets": [
+      "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json",
+      "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json",
+      "ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py",
+      "ulsh/ULSH-01/C-PHYS/2026-08-27_test_hzt_m1c1_8x8_backend_interface_v0.1.py"
+    ],
+    "exact_digest_verification_implemented": true,
+    "exact_unknown_order_verification_implemented": true,
+    "exact_boundary_residual_order_verification_implemented": true,
+    "south_patch_binding_implemented": true,
+    "noncanonical_field_firewall_implemented": true,
+    "result_schema_defined": true,
+    "solver_call_surface_present": false,
+    "physical_backend_import_surface_present": false
+  },
+  "development_firewall": {
+    "Sigma_FT": "DEVELOPMENT_ONLY_NOT_RATIFIED_IN_FROZEN_M1_C1",
+    "augmented_10x10": "DEVELOPMENT_ONLY_NOT_CANONICAL_TARGET",
+    "old_background3c5_response_stack": "DEVELOPMENT_ONLY_NOT_TARGET_BOUND",
+    "old_layer_control_vector": "NOT_CANONICAL_M1C1_RESPONSE_CONTROL_VECTOR"
+  },
+  "reconciliation_verdict": {
+    "ULSH-01-WP1": "CLOSED_TARGET_FROZEN_NO_EXECUTION",
+    "ULSH-01-WP2": "TARGET_BOUND_INTERFACE_IMPLEMENTED_QA_PENDING_NO_EXECUTION",
+    "ULSH-01-WP3": "RECONCILED_SOFTWARE_QA_ONLY",
+    "ULSH-01-WP4": "BLOCKED_NOT_AUTHORIZED"
+  },
+  "firewall": {
+    "solver_authorized": false,
+    "target_solve_allowed": false,
+    "physical_jacobian_allowed": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_safe_action": "RUN_NONEXECUTING_WP2_INTERFACE_CI; IF GREEN RECORD_QA_CLOSURE_THEN_REQUEST_SEPARATE_WP4_AUTHORIZATION_REVIEW"
+}

@@ -1,0 +1,53 @@
+name: ULSH-01 M1C1 8x8 backend interface QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_test_hzt_m1c1_8x8_backend_interface_v0.1.py'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_WP2_WP3_ReconciliationManifest_v0.2.json'
+      - '.github/workflows/2026-08-27_ULSH01_M1C1_8x8_BackendInterface_QA_v0.1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  target-bound-interface-qa-no-execution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate target-bound JSON contracts
+        run: |
+          python -m json.tool ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json >/dev/null
+          python -m json.tool ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json >/dev/null
+          python -m json.tool ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_WP2_WP3_ReconciliationManifest_v0.2.json >/dev/null
+      - name: Compile interface and tests
+        run: |
+          python -m py_compile ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py
+          python -m py_compile ulsh/ULSH-01/C-PHYS/2026-08-27_test_hzt_m1c1_8x8_backend_interface_v0.1.py
+      - name: Run nonexecuting interface regression
+        run: python ulsh/ULSH-01/C-PHYS/2026-08-27_test_hzt_m1c1_8x8_backend_interface_v0.1.py
+      - name: Run CLI target-binding validation
+        run: |
+          python ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py \
+            --target ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json \
+            --interface-contract ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json \
+            --result-schema ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json \
+            --json | tee /tmp/ulsh01-wp2-interface.json
+          grep -F '"solver_executed": false' /tmp/ulsh01-wp2-interface.json
+          grep -F '"physical_execution_authorized": false' /tmp/ulsh01-wp2-interface.json
+          grep -F '"rank_R_claim_allowed": false' /tmp/ulsh01-wp2-interface.json
+          grep -F '"physical_evidence_effect": "NONE"' /tmp/ulsh01-wp2-interface.json
+      - name: Enforce no physical solver surface
+        run: |
+          ! grep -E '\b(subprocess|solve_bvp|scipy\.integrate|AUTHORIZED_PHYSICAL_RUN)\b' ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py
+          grep -F 'PHYSICAL_EXECUTION_AUTHORIZED = False' ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py
+          grep -F 'RANK_R_CLAIM_ALLOWED = False' ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py

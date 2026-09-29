@@ -1,0 +1,58 @@
+{
+  "schema": "ulsh01.cphys.background3c5.normalization-closure.v0.2",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "status": "NORMALIZATION_BRIDGES_CLOSED_RESPONSE_CONTROL_AMENDMENT_REQUIRED",
+  "governance": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE",
+    "physical_execution_authorized": false
+  },
+  "scalar_normalization": {
+    "phi_dimension": "M^2",
+    "varphi_definition": "varphi=phi/M6^2",
+    "canonical_scalar_kinetic": "Z_phi=1",
+    "U": "0.5*mhat_phi_sq*M6^6*varphi^2",
+    "Z_F": "exp(-2*a_F*varphi)",
+    "verdict": "PASS_FROZEN"
+  },
+  "gauge_normalization": {
+    "Delta_chi": "2*pi",
+    "q_ref": "q_hat/M6",
+    "patch_transition": "Lambda_NS=(N_F/q_ref)*chi",
+    "charge_lattice": "q=m_integer*q_ref",
+    "finite_thickness_charge": "gSigma=m_layer*q_ref=m_layer*q_hat/M6",
+    "m_layer": "FIXED_INTEGER_PER_JACOBIAN_SCAN",
+    "gauge_rescaling": "REMOVED_BY_MAXWELL_NORMALIZATION_AND_Z_F_AT_ZERO_EQUAL_1",
+    "verdict": "PASS_LATTICE_CONSTRAINED"
+  },
+  "response_control_amendment": {
+    "old_fourth_control": "gSigma",
+    "canonical_fourth_control": "q_hat",
+    "derived_relation": "delta_gSigma_over_gSigma=delta_q_hat_over_q_hat at fixed m_layer and M6",
+    "independent_gSigma_variation_at_fixed_q_hat": "FORBIDDEN",
+    "continuous_controls": [
+      "Lambda6/Lambda_ref",
+      "Lambda_layer/Lambda_ref",
+      "mSigma2/mref2",
+      "q_hat/qhat_ref",
+      "lambdaSigma/lambda_ref"
+    ],
+    "fixed_discrete_labels_minimum": ["n", "N_F", "m_layer"]
+  },
+  "dimensional_check": {
+    "A_chi_dimension": "M",
+    "gSigma_dimension": "M^-1",
+    "gSigma_times_A_chi": "dimensionless",
+    "w": "n-gSigma*A_chi"
+  },
+  "remaining_open": [
+    "finite_thickness_global_BVP_solution",
+    "physical_response_rank_R",
+    "stability_and_ghost_gates",
+    "generic_M1_global_existence",
+    "K1-D",
+    "K1-E"
+  ],
+  "next_action": "amend RunSpec and runner to q_hat-derived-gSigma control, then bind physical kernel after authorization"
+}

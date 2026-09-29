@@ -1,0 +1,59 @@
+{
+  "schema": "universelab.ulsh01.m1c1-8x8-backend-interface-contract.v0.1",
+  "date": "2026-08-27",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "classification": "APPEND_ONLY_TARGET_BOUND_BACKEND_INTERFACE_NO_SOLVER_EXECUTION",
+  "status": "IMPLEMENTED_INTERFACE_CONTRACT_NO_PHYSICAL_EXECUTION",
+  "authority": {
+    "target_contract_path": "ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json",
+    "target_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "model_id": "HZT-M0-S6-C-PHYS-M1",
+    "target_shape": "TWO_REGION_COMMON_CAP_8x8"
+  },
+  "interface": {
+    "regions": ["N", "S"],
+    "profile_order_per_region": ["A_s", "ell_s", "varphi_s", "a_chi_s"],
+    "fixed_discrete_sector_order": ["N_F", "N_sigma", "m_sigma"],
+    "m1_parameter_order": ["Lambda_hat", "mhat_phi_sq", "a_F", "lambda_hat", "z_sigma_hat", "q_hat"],
+    "continuous_unknown_order": ["varphi_N_0", "q_N", "A_S_0", "varphi_S_0", "q_S", "rho_N", "rho_S", "k4"],
+    "bulk_residual_order_per_region": ["E_A", "E_ell", "E_varphi", "E_gauge"],
+    "boundary_residual_order": ["R_A", "R_ell", "R_varphi", "R_patch", "R_4d", "R_chi", "R_scalar", "R_gauge_local"]
+  },
+  "patch_binding": {
+    "representation": "a_chi_Sigma := a_chi_S(cap)",
+    "patch_residual": "a_chi_N(cap)-a_chi_S(cap)-N_F/q_hat=0",
+    "cap_combination": "d_chi=N_sigma-m_sigma*q_hat*a_chi_Sigma",
+    "gauge_rule": "a_chi_Sigma is evaluated in the south regular-pole gauge; any patch change must carry the corresponding integer transition of N_sigma",
+    "R_patch_count": 1,
+    "R_flux_additional_residual_allowed": false
+  },
+  "qa_channels": {
+    "C_rr": "PROPAGATED_QA_CHANNEL_NOT_ADDITIONAL_NONLINEAR_OR_ENDPOINT_RESIDUAL",
+    "R_flux": "EQUIVALENT_TO_R_PATCH_COUNT_ONCE"
+  },
+  "forbidden_in_canonical_backend": {
+    "fields": ["Sigma_FT", "s_hat", "c_N", "c_S"],
+    "target_shapes": ["10x10", "AUGMENTED_FINITE_THICKNESS"],
+    "independent_layer_controls": ["Lambda_layer_over_Lambda_ref", "mSigma2_over_mref2", "lambdaSigma", "gSigma"]
+  },
+  "required_result_contract": {
+    "path": "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json",
+    "one_sided_cap_traces": ["A_N_x_cap", "A_S_x_cap", "ell_N_x_over_ellSigma_cap", "ell_S_x_over_ellSigma_cap"],
+    "full_boundary_residual_vector_required": true,
+    "rr_constraint_trace_required": true,
+    "provenance_required": true
+  },
+  "firewall": {
+    "solver_authorized": false,
+    "physical_backend_import_allowed": false,
+    "target_solve_allowed": false,
+    "physical_jacobian_allowed": false,
+    "rank_R_claim_allowed": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "next_safe_action": "RUN_NONEXECUTING_SCHEMA_AND_PATCH_BINDING_QA_ONLY"
+}
