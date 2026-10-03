@@ -1,0 +1,89 @@
+{
+  "schema": "universelab.ul-sing.quantum-closure-gate-candidates.v0.1",
+  "version": "0.1",
+  "date": "2026-09-28",
+  "classification": "NONCANONICAL_SCIENTIFIC_REVIEW_METHOD_GATE_CANDIDATES",
+  "status": "PASS_WITH_CONDITIONS_NONCANONICAL_CANDIDATES",
+  "basis_main_commit": "9e34903a09db17fb6d3c338be13ab934f16f09f1",
+  "sources": [
+    {
+      "arxiv": "2609.29859",
+      "title": "The cosmological necklace problem",
+      "publication_status": "PREPRINT"
+    },
+    {
+      "arxiv": "2609.31123",
+      "title": "Global variables and dynamics of emergent cosmology in loop gravity",
+      "publication_status": "PREPRINT"
+    },
+    {
+      "arxiv": "2609.30370",
+      "title": "Tracing out massive fields in cosmology",
+      "publication_status": "PREPRINT"
+    }
+  ],
+  "candidates": [
+    {
+      "gate_id": "QG-PI-01",
+      "name": "Gravitational path-integral / saddle-family closure",
+      "sci30": "PASS_WITH_CONDITIONS",
+      "sci31": "PASS_WITH_CONDITIONS",
+      "ctrl02": "PASS_WITH_CONDITIONS_NONCANONICAL_GATE_CANDIDATE",
+      "priority": "P0_WHEN_QUANTUM_BOUNCE_OR_NO_BOUNDARY_BRANCH_IS_ACTIVATED",
+      "applicability": "FUTURE_QUANTUM_COSMOLOGY_BRANCH_ONLY",
+      "requirement": "Specify contour, gauge/redundancy quotient, relevant saddle family, semiclassical weights and a controlled definition of the saddle sum/path integral.",
+      "forbidden_inferences": [
+        "ONE_REGULAR_SADDLE_PROVES_QUANTUM_CONSISTENCY",
+        "ARXIV_2609_29859_PROVES_HZT_HAS_NECKLACE_DIVERGENCE",
+        "MOSTLY_LORENTZIAN_CONTOUR_IS_AUTOMATICALLY_THE_CORRECT_HZT_CONTOUR"
+      ]
+    },
+    {
+      "gate_id": "QG-GAP-01",
+      "name": "Invariant geometric-gap derivation",
+      "sci30": "PASS_WITH_CONDITIONS",
+      "sci31": "PASS_WITH_CONDITIONS_CONDITIONAL_APPLICABILITY",
+      "ctrl02": "PASS_WITH_CONDITIONS_NONCANONICAL_GATE_CANDIDATE",
+      "priority": "P1_CONDITIONAL",
+      "applicability": "ONLY_IF_HZT_CLAIMS_FUNDAMENTAL_MINIMUM_RADIUS_AREA_OR_VOLUME",
+      "requirement": "Derive any claimed fundamental geometric gap from parent constraints and physical invariants rather than treating a regulator/cutoff as the proof.",
+      "forbidden_inferences": [
+        "NUMERICAL_CUTOFF_EQUALS_PHYSICAL_GEOMETRIC_GAP",
+        "TWO_VERTEX_LQG_RESULT_PROVES_HZT_BOUNCE",
+        "FINITE_GRAPH_ANISOTROPY_CLOSES_BKL_CONTINUUM_DYNAMICS"
+      ]
+    },
+    {
+      "gate_id": "KK-CTP-01",
+      "name": "Finite-time in-in heavy-mode closure",
+      "sci30": "PASS_WITH_CONDITIONS",
+      "sci31": "PASS_WITH_CONDITIONS",
+      "ctrl02": "PASS_WITH_CONDITIONS_NONCANONICAL_GATE_CANDIDATE",
+      "priority": "P0_FOR_FUTURE_QUANTUM_6D_TO_4D_OBSERVABLE_REDUCTION",
+      "applicability": "QUANTUM_REDUCTION_OF_UNOBSERVED_KK_RADION_OR_BULK_MODES",
+      "requirement": "Construct the finite-time reduced state/influence functional; test nonlocality and Schwinger-Keldysh branch mixing; use a local 4D EFT only after controlled hierarchy and adiabaticity checks.",
+      "hzt_screening_condition_status": "SUFFICIENT_CONSERVATIVE_CANDIDATE_NOT_PAPER_THEOREM",
+      "forbidden_inferences": [
+        "LATE_TIME_DECAY_IMPLIES_TRACE_CONTRIBUTION_ZERO",
+        "TRACING_OUT_IMPLIES_LOCAL_EFT",
+        "M_HEAVY_GREATER_THAN_H_ALONE_IS_UNIVERSALLY_SUFFICIENT",
+        "CURRENT_ULSH07_ULSH08_CLASSICAL_ROADMAP_IS_INVALID"
+      ]
+    }
+  ],
+  "repository_context": {
+    "ulsh07_kk": "PLANNED",
+    "ulsh08_radion": "PLANNED",
+    "fm0_gate": "OPEN",
+    "gw_forward_map": "OPEN_RECOVERY_REQUIRED",
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "k1d": "NOT_RELEASED",
+    "k1e": "NOT_ADMISSIBLE"
+  },
+  "canonical_effect": "NONE",
+  "owner_adoption_required_for_canonical_gate_creation": true,
+  "next_allowed_step": "OWNER_REVIEW_AND_CTRL01_VERSIONED_SUCCESSOR_ONLY_IF_EXPLICITLY_ADOPTED",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
