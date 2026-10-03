@@ -25,6 +25,8 @@
   },
   "current_program":{"program_manifest":"registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json","program_id":"UL-HZT-10M-2026-2027","status":"ACTIVE_RATIFIED_RESEARCH_PROGRAM","active_workstream":"WS1","active_work_package":"FM-0","gate":"FM-G0","gate_status":"OPEN"},
   "public_numerical_platform":{"canonical_engine":"assets/2026-09-01_UniverseLab_CosmologyEngine_v1.0.js","api_version":"1.0.0","implementation_revision":"1.0.2","migrations":"COMPLETE","observatory":"ACTIVE_MERGED_QA_RECONCILED","compare_safe":"ACTIVE_MERGED_QA_RECONCILED","emergence":"ACTIVE_MERGED_QA_RECONCILED","remaining_independent_engines":0,"bridge_scale":"a_c=Rchi/(Rchi+2.5), Rchi>0, no hidden floor","bridge_growth":"UNRELEASED_GROWTH_MAP","bridge_lensing":"UNRELEASED_LENSING_MAP","likelihood_fit":"NOT_PRESENT","physical_evidence_effect":"NONE"},
+  "public_claim_binding_addendum":"registry/2026-10-03_UniverseLab_ClaimProvenanceBinding_v1.0.json",
+  "public_claim_binding_scope":"CLAIM_ID_AND_INVENTORY_ONLY_GLOBAL_SNAPSHOT_REMAINS_2026-09-04",
   "public_claim_audit": {
     "band_v_a":"MERGED_HISTORICAL_989_CANDIDATES_15_FAMILIES",
     "band_v_b_high":"COMPLETE_MERGED_HISTORICAL_ADJUDICATION",
