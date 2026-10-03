@@ -1,0 +1,125 @@
+{
+  "schema": "universelab.ul-sing.quantum-closure-method-integration.v1",
+  "version": "1.0.0",
+  "date": "2026-10-03",
+  "basis_main_commit": "312e767628f003494a51edf685cf679469e35f13",
+  "classification": "METHOD_PROVENANCE_AND_CONDITIONAL_DEPENDENCY_ADDENDUM",
+  "canonical_effect": "ONLY_AFTER_MERGE_NO_PHYSICAL_PROMOTION",
+  "architecture": [
+    "HPVS",
+    "HZT-M0",
+    "HZT-Full"
+  ],
+  "method_gate_registry": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.1.json",
+  "document": "governance/2026-10-03_UL-SING_QuantumClosure_MethodIntegration_v1.0.md",
+  "scope": {
+    "global_current_state_reconciliation": false,
+    "physical_gate_override": false,
+    "new_physical_fm0_blockers": 0,
+    "activation_is_closure": false,
+    "closure_is_physical_authorization": false,
+    "applies_by_method_not_project_level": true
+  },
+  "preserved_sources": {
+    "current_state": {
+      "path": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+      "sha256": "bfecfadd2e7c789792f45cd72067ff76884feb67ce8644aa26d0bf7f3f00fa00"
+    },
+    "site_state": {
+      "path": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+      "sha256": "1a5ddb3686ac2f509e8c6a1d16af20fd659320a22f6c54e57c9747f89bebaa14"
+    },
+    "checkpoint": {
+      "path": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
+      "sha256": "f8ddf7172e6e79f4974c20caecf76e596ce8561a7b80fefe8fc90f6d2d883711"
+    },
+    "checkpoint_alias": {
+      "path": "registry/session-checkpoint-latest.json",
+      "sha256": "f8ddf7172e6e79f4974c20caecf76e596ce8561a7b80fefe8fc90f6d2d883711"
+    },
+    "ulsh07": {
+      "path": "science/solver-hub/2026-08-07_ULSH-07_KK_Roadmap_v1.0.md",
+      "sha256": "511bf9ab257bc2b67a01cee2e78c4d7020bb7be1acd17335460bbcdedd0acfe6"
+    },
+    "ulsh08": {
+      "path": "science/solver-hub/2026-08-07_ULSH-08_Radion_Roadmap_v1.0.md",
+      "sha256": "51cc1a58ef9f2028d423bbb792c53a5df1acbf12a3a82a90154327e2da0516e9"
+    },
+    "solver_program": {
+      "path": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+      "sha256": "b1b70a327f3e7e196f899d8a14f71b6552da240528a0611a4d8769b5e7b97f91"
+    },
+    "fm0_inventory": {
+      "path": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+      "sha256": "a5715838fd45f44dbcc199420632e2f7b2f970bbbb8957b86d7831616f0d05fb"
+    },
+    "fm0_gaps": {
+      "path": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json",
+      "sha256": "216e6523188615d1be81a4d7e6f8e4640297267f77a5cbc693fd1e3bdf97ab19"
+    },
+    "adopted_method_registry": {
+      "path": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json",
+      "sha256": "395b0b709e3b5189a0c513c42ff42ccc0e53f72395f3d74ffd653bc75d4a3de4"
+    },
+    "adopted_method_document": {
+      "path": "governance/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.md",
+      "sha256": "b000d8b81d25e96014431ac03f81c83f5a10ee510fc5d18a15ddfdfb0174c671"
+    }
+  },
+  "conditional_dependencies": [
+    {
+      "consumer_id": "ULSH-07",
+      "consumer_ref": "science/solver-hub/2026-08-07_ULSH-07_KK_Roadmap_v1.0.md",
+      "gate_id": "KK-CTP-01",
+      "role": "NORMALIZED_KK_MODES_AS_INPUT_TO_FUTURE_QUANTUM_REDUCTION",
+      "applicability_ref": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.1.json#/gates/2/applicability",
+      "requirements_ref": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.1.json#/gates/2/closure_evidence_required",
+      "current_activation_state": "DORMANT_UNTIL_QUANTUM_HEAVY_MODE_REDUCTION_IS_USED_FOR_HZT_OBSERVABLES",
+      "current_closure_status": "NOT_EVALUATED_NO_RELEASED_QUANTUM_6D_TO_4D_OBSERVABLE_REDUCTION",
+      "existing_release_gate_replaced": false
+    },
+    {
+      "consumer_id": "ULSH-08",
+      "consumer_ref": "science/solver-hub/2026-08-07_ULSH-08_Radion_Roadmap_v1.0.md",
+      "gate_id": "KK-CTP-01",
+      "role": "NORMALIZED_RADION_AND_MATTER_COUPLING_AS_INPUT_TO_FUTURE_QUANTUM_REDUCTION",
+      "applicability_ref": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.1.json#/gates/2/applicability",
+      "requirements_ref": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.1.json#/gates/2/closure_evidence_required",
+      "current_activation_state": "DORMANT_UNTIL_QUANTUM_HEAVY_MODE_REDUCTION_IS_USED_FOR_HZT_OBSERVABLES",
+      "current_closure_status": "NOT_EVALUATED_NO_RELEASED_QUANTUM_6D_TO_4D_OBSERVABLE_REDUCTION",
+      "existing_release_gate_replaced": false
+    },
+    {
+      "consumer_id": "FM-0",
+      "consumer_ref": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json",
+      "gate_id": "KK-CTP-01",
+      "role": "PARENT_TO_REDUCED_TO_COSMOLOGICAL_OBSERVABLE_INTERFACE",
+      "applicability_ref": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.1.json#/gates/2/applicability",
+      "requirements_ref": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.1.json#/gates/2/closure_evidence_required",
+      "current_activation_state": "DORMANT_UNTIL_QUANTUM_HEAVY_MODE_REDUCTION_IS_USED_FOR_HZT_OBSERVABLES",
+      "current_closure_status": "NOT_EVALUATED_NO_RELEASED_QUANTUM_6D_TO_4D_OBSERVABLE_REDUCTION",
+      "existing_release_gate_replaced": false,
+      "observable_gap_refs": [
+        {
+          "observable_id": "O_cosmo",
+          "gap_id": "FM0-GAP-007"
+        },
+        {
+          "observable_id": "O_growth",
+          "gap_id": "FM0-GAP-008"
+        },
+        {
+          "observable_id": "O_lensing",
+          "gap_id": "FM0-GAP-009"
+        },
+        {
+          "observable_id": "O_GW",
+          "gap_id": "FM0-GAP-010"
+        }
+      ],
+      "gap_register": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json"
+    }
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
