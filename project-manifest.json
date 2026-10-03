@@ -9,6 +9,7 @@
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
   "project": {"name":"UniverseLab","research_program":"Hyperzeit / HPVS","author":"Stefan Hasselmeyer","language_primary":"de","language_planned":["de","en"]},
   "manifest_strategy": "COMPACT_CURRENT_STATE_WITH_APPEND_ONLY_VERSIONED_SOURCE_REGISTRIES",
+  "method_governance":{"registry":"registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.1.json","integration_registry":"registry/2026-10-03_UL-SING_QuantumClosure_MethodIntegration_v1.0.json","scope":"METHOD_ADDENDUM_ONLY_EXISTING_GLOBAL_SNAPSHOT_DATE_UNCHANGED","physical_gate_effect":"NONE","physical_evidence_effect":"NONE"},
   "canonical_state": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
   "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
   "session_checkpoint": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
@@ -46,6 +47,8 @@
     "physical_evidence_effect":"NONE"
   },
   "current_status_sources": {
+    "quantum_closure_method_gates":"registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.1.json",
+    "quantum_closure_method_integration":"registry/2026-10-03_UL-SING_QuantumClosure_MethodIntegration_v1.0.json",
     "canonical_state":"registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
     "site_state":"registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
     "session_checkpoint":"registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
@@ -94,6 +97,8 @@
   "physical_gate_effect":"NONE",
   "physical_evidence_effect":"NONE",
   "central_registries": {
+    "quantum_closure_method_gates":"registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.1.json",
+    "quantum_closure_method_integration":"registry/2026-10-03_UL-SING_QuantumClosure_MethodIntegration_v1.0.json",
     "current_main_canonical_state":"registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
     "site_state":"registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
     "site_state_schema":"schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json",
