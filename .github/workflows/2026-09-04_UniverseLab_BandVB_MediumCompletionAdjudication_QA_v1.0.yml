@@ -106,25 +106,29 @@ jobs:
       - name: Emit nonoperative MEDIUM completion report
         run: |
           python - <<'PY'
-          import json
+          import json, runpy
           from pathlib import Path
           summary=json.loads(Path('registry/2026-09-04_UniverseLab_PublicScientificMediumAdjudicationSummary_v1.0.json').read_text())
+          binding=runpy.run_path("tools/2026-10-03_validate_UniverseLab_ClaimProvenanceBinding_v1.0.py")["validate"](Path.cwd())
+          binding.pop("historical_id_view")
           report={
+            'current_identity_binding':binding,
+            'historical_snapshot_date':'2026-09-04',
             'schema':'universelab.band-vb-medium-completion-gate-report.v1',
-            'status':'PASS_ALL_MATERIALIZED_MEDIUM_CONTEXT_ADJUDICATED',
-            'materialized_high':summary['materialized_high_candidates'],
-            'materialized_medium':summary['materialized_medium_candidates'],
-            'contextually_adjudicated_medium':summary['result']['medium_contextually_adjudicated_total'],
-            'contextually_unadjudicated_medium':summary['result']['medium_contextually_unadjudicated'],
+            'status':'PASS_HISTORICAL_ADJUDICATION_AND_EXPLICIT_CURRENT_IDENTITY_BINDING',
+            'historical_materialized_high':summary['materialized_high_candidates'],
+            'historical_materialized_medium':summary['materialized_medium_candidates'],
+            'historical_contextually_adjudicated_medium':summary['result']['medium_contextually_adjudicated_total'],
+            'historical_contextually_unadjudicated_medium':summary['result']['medium_contextually_unadjudicated'],
             'positive_physical_hzt_overclaims':summary['result']['positive_physical_hzt_overclaims'],
             'physical_claim_promotions':summary['result']['physical_claim_promotions'],
             'physical_gate_effect':'NONE',
             'physical_evidence_effect':'NONE',
           }
-          assert report['materialized_high']==0
-          assert report['materialized_medium']==42
-          assert report['contextually_adjudicated_medium']==42
-          assert report['contextually_unadjudicated_medium']==0
+          assert report['historical_materialized_high']==0
+          assert report['historical_materialized_medium']==42
+          assert report['historical_contextually_adjudicated_medium']==42
+          assert report['historical_contextually_unadjudicated_medium']==0
           assert report['positive_physical_hzt_overclaims']==0
           assert report['physical_claim_promotions']==0
           Path('band-vb-medium-completion-gate-report.json').write_text(json.dumps(report,sort_keys=True,indent=2)+'\n')
