@@ -1,0 +1,74 @@
+name: UniverseLab status shell QA v1.0
+
+on:
+  pull_request:
+    # Exact runtime dependency boundary; no claim of QA for unrelated assets.
+    paths:
+      - 'research-status.html'
+      - 'research-status-en.html'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.css'
+      - 'assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js'
+      - 'assets/2026-08-01_UniverseLab_MobileTypography_v1.1.css'
+      - 'assets/2026-08-05_UniverseLab_DesktopCompact_v1.0.css'
+      - 'assets/2026-08-05_UniverseLab_Export_v1.0.css'
+      - 'assets/2026-08-05_UniverseLab_Export_v1.0.js'
+      - 'assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js'
+      - 'assets/2026-08-19_UniverseLab_SitePrintExport_v1.0.js'
+      - 'assets/2026-08-27_UniverseLab_DocumentLinkRouter_v1.0.js'
+      - 'assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js'
+      - '2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js'
+      - 'tests/2026-09-26_test_UniverseLab_StatusShell_v1.0.py'
+      - '.github/workflows/2026-09-26_UniverseLab_StatusShell_QA_v1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  status-shell:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Bind exact tested commit
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          mkdir -p web50-status-report
+          git rev-parse HEAD > web50-status-report/source-sha.txt
+      - name: Source and claim-location guards
+        run: python tests/2026-09-26_test_UniverseLab_StatusShell_v1.0.py
+      - name: Existing multilingual contract
+        run: python tools/2026-08-20_UniverseLab_MultilingualSEOContract_v1.0.py
+      - name: Install browser test tooling
+        run: |
+          python -m pip install 'playwright==1.57.0'
+          python -m playwright install --with-deps chromium
+      - name: HTTP browser and unchanged worker lifecycle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/web50-status-site
+          ln -s "$GITHUB_WORKSPACE" /tmp/web50-status-site/UniverseLab
+          python -m http.server 4173 --bind 127.0.0.1 --directory /tmp/web50-status-site > /tmp/web50-status-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          for attempt in $(seq 1 20); do
+            if curl --fail --silent http://127.0.0.1:4173/UniverseLab/research-status.html >/dev/null; then break; fi
+            sleep 1
+          done
+          python tests/2026-09-26_test_UniverseLab_StatusShell_v1.0.py --browser
+      - name: Preserve evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web50-status-shell-${{ github.event.pull_request.head.sha || github.sha }}
+          path: web50-status-report/
+          if-no-files-found: error
