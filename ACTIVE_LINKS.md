@@ -4,6 +4,10 @@
 **Zweck:** kompakte, kanonische Link-Zentrale für aktuell relevante UniverseLab-Zugänge. Historische/Legacy-Ziele sind ausdrücklich getrennt.  
 **Governance-Firewall:** Diese Liste verändert keine wissenschaftlichen, Solver-, Gate- oder Evidenzzustände. `K1-D = NOT_RELEASED`, `K1-E = NOT_ADMISSIBLE` bleiben unberührt.
 
+**Begrenzter Pointer-Abgleich:** 03.10.2026, gegen `main`-Commit `312e767628f003494a51edf685cf679469e35f13`. Nur die FM-0- und Site-State-Verweise wurden mit den Manifest-Pointern abgeglichen; die übrigen Link- und Statusangaben wurden dabei nicht erneut geprüft. Historische Fassungen bleiben in Abschnitt 9 erhalten. Dieser Abgleich schließt weder wissenschaftliche Nachweislücken noch das gesamte G11-Provenienz-Gate.
+
+Maßgeblicher Einstieg für spätere Pointer-Abgleiche: https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/project-manifest.json
+
 ## 1. Kernzugänge
 
 - Portal: https://stefanhasselm74314-byte.github.io/UniverseLab/
@@ -15,8 +19,8 @@
 
 - 10-Monats-Arbeits- und Forschungsprogramm: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgram_v1.0.html
 - Programm-Manifest: https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-29_UniverseLab_Hyperzeit_10M_ResearchProgramManifest_v1.0.json
-- FM-0 Parameter-/Symbol-/Provenienz-Inventar: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-29_HZT_M0_ForwardMap_FM0_ParameterSymbolProvenanceInventory_v0.1.md
-- FM-0 JSON: https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-29_HZT_M0_ForwardMap_FM0_Inventory_v0.1.json
+- FM-0 JSON (aktueller Manifest-Pointer): https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json
+- FM-0 Gap-Register (aktueller Manifest-Pointer): https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-31_HZT_M0_ForwardMap_FM0_GapRegister_v0.4.json
 
 ## 3. Wissenschaft, Methoden und Referenzen
 
@@ -41,7 +45,7 @@
 
 - UniverseLab Solver Hub: https://stefanhasselm74314-byte.github.io/UniverseLab/solver-hub.html
 - MD2S Artefakt-Recovery & Rankaudit: https://stefanhasselm74314-byte.github.io/UniverseLab/md2s-artifact-recovery-rank-audit-v0.1.html
-- Governed Site State JSON: https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-16_UniverseLab_SiteState_v1.0.json
+- Governed Site State JSON (aktueller Manifest-Pointer; Snapshot 04.09.2026): https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-09-04_UniverseLab_SiteState_v1.4.json
 - UniverseLab PR #137 — offener Arbeits-/Reviewpfad, **nicht** kanonischer Endstatus: https://github.com/stefanhasselm74314-byte/UniverseLab/pull/137
 
 ## 6. Entwickler, Quellcode und Daten
@@ -72,6 +76,10 @@ Diese Ressourcen gehören **nicht** zum wissenschaftlichen UniverseLab-Kern. Die
 ## 9. Archiv / historischer Stand
 
 Nicht als aktuellen Projektstatus verwenden:
+
+- FM-0 Ursprungsinventar, Erläuterung vom 29.08.2026: https://stefanhasselm74314-byte.github.io/UniverseLab/2026-08-29_HZT_M0_ForwardMap_FM0_ParameterSymbolProvenanceInventory_v0.1.md
+- FM-0 Ursprungsinventar JSON v0.1 vom 29.08.2026: https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-29_HZT_M0_ForwardMap_FM0_Inventory_v0.1.json
+- Historischer Site State JSON v1.0 vom 16.08.2026: https://stefanhasselm74314-byte.github.io/UniverseLab/registry/2026-08-16_UniverseLab_SiteState_v1.0.json
 
 - Gesamt-Audit 2026-07-31: https://stefanhasselm74314-byte.github.io/UniverseLab/universelab-audit-2026-07-31.html
 - Legacy-Bereich: https://stefanhasselm74314-byte.github.io/UniverseLab/legacy.html
