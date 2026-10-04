@@ -1,0 +1,239 @@
+{
+  "schema": "universelab.ul-sing.quantum-closure-method-gates.v1",
+  "version": "1.1.0",
+  "date": "2026-09-28",
+  "classification": "CANONICAL_METHOD_GOVERNANCE_NO_PHYSICAL_PROMOTION",
+  "status": "OWNER_ADOPTED_CANONICAL_METHOD_GATES",
+  "basis_main_commit": "21655418df14874857cfbfa189fdd43a9c0d54c6",
+  "architecture": [
+    "HPVS",
+    "HZT-M0",
+    "HZT-Full"
+  ],
+  "source_review": {
+    "pull_request": 249,
+    "head_sha": "f2a9a16413cf0659bc05ffdb07b1be8c410bb2b8",
+    "merge_commit": "97f12c99d2c4c68881ebae4170567a15eec3eaf6",
+    "candidate_registry": "registry/2026-09-28_UL-SING_QuantumClosure_GateCandidates_v0.1.json",
+    "review_report": "science/audit/2026-09-28_UL-SING_QuantumClosure_GateCandidate_Review_v0.1.md",
+    "review_status": "PASS_WITH_CONDITIONS_NONCANONICAL_CANDIDATES"
+  },
+  "owner_adoption": {
+    "pull_request": 250,
+    "owner_decision_record": "registry/2026-09-28_UL-SING_QuantumClosure_OwnerAdoption_Packet_v0.1.json",
+    "merge_commit": "21655418df14874857cfbfa189fdd43a9c0d54c6",
+    "decision_text": "Alle drei adoptieren",
+    "decision_scope_binding": "QG-PI-01;QG-GAP-01;KK-CTP-01",
+    "normalized_decision": "ADOPT_AS_CANONICAL_METHOD_GATE",
+    "explicit_owner_decision_requirement": "SATISFIED"
+  },
+  "canonical_rules": {
+    "method_gate_adoption_is_physical_evidence": false,
+    "method_gate_adoption_opens_physical_release_gate": false,
+    "method_gate_adoption_retroactively_promotes_historical_claims": false,
+    "preprint_source_status_must_remain_visible": true,
+    "applicability_conditions_are_binding": true,
+    "forbidden_inferences_are_binding": true
+  },
+  "gates": [
+    {
+      "gate_id": "QG-PI-01",
+      "name": "Gravitational path-integral / saddle-family closure",
+      "canonical_status": "ADOPTED_CANONICAL_METHOD_GATE",
+      "method_axis": "QUANTUM_COSMOLOGY_PATH_INTEGRAL_CLOSURE",
+      "source": {
+        "arxiv": "2609.29859",
+        "title": "The cosmological necklace problem",
+        "publication_status": "PREPRINT",
+        "direct_hzt_evidence": false,
+        "source_identifier": "arXiv:2609.29859v1",
+        "source_version": "v1",
+        "source_version_date": "2026-09-24T14:20:08Z",
+        "source_version_date_semantics": "ARXIV_V1_SUBMISSION_TIMESTAMP_UTC",
+        "source_version_url": "https://arxiv.org/html/2609.29859v1",
+        "metadata_url": "https://arxiv.org/abs/2609.29859v1",
+        "retrieval_status": "PRIMARY_METADATA_AND_VERSIONED_HTML_RETRIEVED",
+        "retrieval_date": "2026-10-03",
+        "retrieval_scope": "VERSION_IDENTITY_SUBMISSION_METADATA_AND_EXISTING_REVIEW_LOCATORS; NOT_A_NEW_FULL_SCIENTIFIC_REVIEW",
+        "historical_review_retrieval_date": "UNKNOWN_NOT_RECONSTRUCTED",
+        "publication_date": "UNKNOWN_PUBLIC_ANNOUNCEMENT_DATE_NOT_SEPARATELY_VERIFIED",
+        "journal_publication_date": "UNKNOWN_NOT_VERIFIED",
+        "observation_date": "NOT_APPLICABLE_THEORETICAL_PREPRINT",
+        "source_locators": [
+          "sections 1.1-1.2",
+          "section 2",
+          "section 5"
+        ],
+        "locator_provenance": "PR249_REVIEW_SECTIONS_3_1_TO_3_3_RETAINED_AS_REVIEW_LOCATORS",
+        "source_revision_policy": "REVALIDATE_DEPENDENT_CLAIMS_BEFORE_ADOPTING_ANOTHER_SOURCE_VERSION"
+      },
+      "source_supported_core": "In the studied 3D de Sitter axion-wormhole model, an infinite Euclidean necklace saddle family can make the naive saddle sum/path integral divergent; a mostly Lorentzian lapse-contour treatment yields a finite dominant-saddle description in the analyzed minisuperspace setting.",
+      "hzt_transfer_status": "CONDITIONAL_METHOD_TRANSFER",
+      "applicability": "FUTURE_QUANTUM_BOUNCE_NO_BOUNDARY_OR_EUCLIDEAN_COMPLEX_SADDLE_BRANCH",
+      "activation_state": "DORMANT_UNTIL_APPLICABLE_BRANCH_EXISTS",
+      "canonical_requirement": "A future quantum-cosmological HZT branch is not closed by exhibiting one regular saddle. It must specify the path-integral contour, gauge/redundancy quotient, relevant saddle family, semiclassical weights, and a controlled definition of the resulting saddle sum/path integral.",
+      "closure_evidence_required": [
+        "PARENT_ACTION_AND_BOUNDARY_TERMS",
+        "GAUGE_FIXING_OR_REDUNDANCY_QUOTIENT",
+        "INTEGRATION_CONTOUR_OR_EQUIVALENT_PATH_INTEGRAL_PRESCRIPTION",
+        "RELEVANT_SADDLE_FAMILY_AND_INCLUSION_RULE",
+        "SEMICLASSICAL_WEIGHTS_AND_FLUCTUATION_DATA_WHERE_REQUIRED",
+        "CONVERGENCE_RESUMMATION_OR_OTHER_EXPLICIT_DEFINITION_OF_Z"
+      ],
+      "hzt_extensions_not_source_theorem": [
+        "NEGATIVE_MODE_AND_FLUCTUATION_DETERMINANT_AUDIT_WHERE_APPLICABLE"
+      ],
+      "forbidden_inferences": [
+        "ONE_REGULAR_SADDLE_PROVES_QUANTUM_CONSISTENCY",
+        "ARXIV_2609_29859_PROVES_HZT_HAS_NECKLACE_DIVERGENCE",
+        "MOSTLY_LORENTZIAN_CONTOUR_IS_AUTOMATICALLY_THE_CORRECT_HZT_CONTOUR"
+      ],
+      "closure_status": "NOT_EVALUATED_CURRENTLY_NOT_APPLICABLE_TO_CLASSICAL_HZT_STATE",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "gate_id": "QG-GAP-01",
+      "name": "Invariant geometric-gap derivation",
+      "canonical_status": "ADOPTED_CANONICAL_METHOD_GATE",
+      "method_axis": "QUANTUM_GEOMETRIC_GAP_PROVENANCE",
+      "source": {
+        "arxiv": "2609.31123",
+        "title": "Global variables and dynamics of emergent cosmology in loop gravity",
+        "publication_status": "PREPRINT",
+        "direct_hzt_evidence": false,
+        "source_identifier": "arXiv:2609.31123v1",
+        "source_version": "v1",
+        "source_version_date": "2026-09-25T11:14:27Z",
+        "source_version_date_semantics": "ARXIV_V1_SUBMISSION_TIMESTAMP_UTC",
+        "source_version_url": "https://arxiv.org/html/2609.31123v1",
+        "metadata_url": "https://arxiv.org/abs/2609.31123v1",
+        "retrieval_status": "PRIMARY_METADATA_AND_VERSIONED_HTML_RETRIEVED",
+        "retrieval_date": "2026-10-03",
+        "retrieval_scope": "VERSION_IDENTITY_SUBMISSION_METADATA_AND_EXISTING_REVIEW_LOCATORS; NOT_A_NEW_FULL_SCIENTIFIC_REVIEW",
+        "historical_review_retrieval_date": "UNKNOWN_NOT_RECONSTRUCTED",
+        "publication_date": "UNKNOWN_PUBLIC_ANNOUNCEMENT_DATE_NOT_SEPARATELY_VERIFIED",
+        "journal_publication_date": "UNKNOWN_NOT_VERIFIED",
+        "observation_date": "NOT_APPLICABLE_THEORETICAL_PREPRINT",
+        "source_locators": [
+          "equations (9)-(10)",
+          "equations (21)-(23)"
+        ],
+        "locator_provenance": "PR249_REVIEW_SECTIONS_3_1_TO_3_3_RETAINED_AS_REVIEW_LOCATORS",
+        "source_revision_policy": "REVALIDATE_DEPENDENT_CLAIMS_BEFORE_ADOPTING_ANOTHER_SOURCE_VERSION"
+      },
+      "source_supported_core": "In the fixed two-vertex loop-gravity model, Casimir invariants of a closed Poisson subalgebra imply a lower bound on total area and enter the derived effective Friedmann dynamics; continuum and multi-vertex generalization remain open.",
+      "hzt_transfer_status": "CONDITIONAL_METHOD_TRANSFER",
+      "applicability": "ONLY_IF_HZT_CLAIMS_A_FUNDAMENTAL_MINIMUM_RADIUS_AREA_OR_VOLUME",
+      "activation_state": "DORMANT_UNTIL_FUNDAMENTAL_GEOMETRIC_GAP_IS_CLAIMED",
+      "canonical_requirement": "Any fundamental HZT minimum radius, area, or volume used as part of singularity avoidance must be derived from the parent constraint and physical-invariant structure. A numerical cutoff or regulator is not by itself a fundamental singularity-resolution proof.",
+      "closure_evidence_required": [
+        "PARENT_ACTION_OR_HAMILTONIAN_STRUCTURE",
+        "CONSTRAINT_ALGEBRA",
+        "PHYSICAL_DIRAC_INVARIANTS_OR_CASIMIRS",
+        "DERIVED_LOWER_BOUND",
+        "EXPLICIT_LINK_FROM_BOUND_TO_BOUNCE_OR_SINGULARITY_AVOIDANCE_CLAIM"
+      ],
+      "forbidden_inferences": [
+        "NUMERICAL_CUTOFF_EQUALS_PHYSICAL_GEOMETRIC_GAP",
+        "TWO_VERTEX_LQG_RESULT_PROVES_HZT_BOUNCE",
+        "FINITE_GRAPH_ANISOTROPY_CLOSES_BKL_CONTINUUM_DYNAMICS",
+        "EVERY_VALID_BOUNCE_REQUIRES_A_GEOMETRIC_GAP"
+      ],
+      "closure_status": "NOT_EVALUATED_CURRENTLY_NOT_APPLICABLE_WITHOUT_HZT_GAP_CLAIM",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "gate_id": "KK-CTP-01",
+      "name": "Finite-time in-in heavy-mode closure",
+      "canonical_status": "ADOPTED_CANONICAL_METHOD_GATE",
+      "method_axis": "QUANTUM_6D_TO_4D_HEAVY_MODE_REDUCTION",
+      "source": {
+        "arxiv": "2609.30370",
+        "title": "Tracing out massive fields in cosmology",
+        "publication_status": "PREPRINT",
+        "direct_hzt_evidence": false,
+        "source_identifier": "arXiv:2609.30370v1",
+        "source_version": "v1",
+        "source_version_date": "2026-09-24T18:00:01Z",
+        "source_version_date_semantics": "ARXIV_V1_SUBMISSION_TIMESTAMP_UTC",
+        "source_version_url": "https://arxiv.org/html/2609.30370v1",
+        "metadata_url": "https://arxiv.org/abs/2609.30370",
+        "retrieval_status": "PRIMARY_METADATA_AND_VERSIONED_HTML_RETRIEVED",
+        "retrieval_date": "2026-10-03",
+        "retrieval_scope": "VERSION_IDENTITY_SUBMISSION_METADATA_AND_EXISTING_REVIEW_LOCATORS; NOT_A_NEW_FULL_SCIENTIFIC_REVIEW",
+        "historical_review_retrieval_date": "UNKNOWN_NOT_RECONSTRUCTED",
+        "publication_date": "UNKNOWN_PUBLIC_ANNOUNCEMENT_DATE_NOT_SEPARATELY_VERIFIED",
+        "journal_publication_date": "UNKNOWN_NOT_VERIFIED",
+        "observation_date": "NOT_APPLICABLE_THEORETICAL_PREPRINT",
+        "source_locators": [
+          "section 2",
+          "sections 3.2 and 3.7",
+          "section 4.1",
+          "section 5"
+        ],
+        "locator_provenance": "PR249_REVIEW_SECTIONS_3_1_TO_3_3_RETAINED_AS_REVIEW_LOCATORS",
+        "source_revision_policy": "REVALIDATE_DEPENDENT_CLAIMS_BEFORE_ADOPTING_ANOTHER_SOURCE_VERSION",
+        "retrieval_note": "The versioned abstract URL failed on this date; the abstract submission history and explicitly versioned v1 HTML were successfully retrieved."
+      },
+      "source_supported_core": "In the studied quasi-de Sitter heavy/light system, finite-time tracing out produces a reduced density-matrix/influence-functional description with Schwinger-Keldysh branch mixing and generally nonlocal kernels. A local EFT requires additional hierarchy and adiabaticity conditions.",
+      "hzt_transfer_status": "CONDITIONAL_METHOD_TRANSFER_HIGH_RELEVANCE",
+      "applicability": "QUANTUM_REDUCTION_OF_UNOBSERVED_KK_RADION_OR_BULK_MODES_TO_4D_COSMOLOGICAL_OBSERVABLES",
+      "activation_state": "DORMANT_UNTIL_QUANTUM_HEAVY_MODE_REDUCTION_IS_USED_FOR_HZT_OBSERVABLES",
+      "canonical_requirement": "A quantum HZT 6D-to-4D reduction that traces out KK, radion, or bulk modes must construct the finite-time reduced state or influence functional, test nonlocality and Schwinger-Keldysh branch mixing, and invoke a local 4D EFT only after controlled hierarchy and adiabaticity checks.",
+      "closure_evidence_required": [
+        "HEAVY_LIGHT_DECOMPOSITION_WITH_MODE_PROVENANCE",
+        "FINITE_TIME_REDUCED_STATE_OR_INFLUENCE_FUNCTIONAL",
+        "SCHWINGER_KELDYSH_BRANCH_MIXING_AUDIT",
+        "NONLOCAL_KERNEL_OR_DERIVATIVE_EXPANSION_CONTROL",
+        "MODEWISE_ADIABATICITY_AND_SCALE_HIERARCHY_WHERE_LOCAL_EFT_IS_USED",
+        "KK_TOWER_SUM_OR_TRUNCATION_CONTROL_WHERE_APPLICABLE"
+      ],
+      "hzt_screening_condition": {
+        "expression": "m_heavy >> max(H, sqrt(|Hdot|), tau_bounce^-1, k_phys)",
+        "status": "CONSERVATIVE_HZT_SCREENING_CANDIDATE_NOT_SOURCE_THEOREM",
+        "does_not_replace": [
+          "DERIVATIVE_EXPANSION_CONTROL",
+          "MODEWISE_ADIABATICITY",
+          "FINITE_TIME_REDUCED_STATE_ANALYSIS"
+        ]
+      },
+      "forbidden_inferences": [
+        "LATE_TIME_DECAY_IMPLIES_TRACE_CONTRIBUTION_ZERO",
+        "TRACING_OUT_IMPLIES_LOCAL_EFT",
+        "M_HEAVY_GREATER_THAN_H_ALONE_IS_UNIVERSALLY_SUFFICIENT",
+        "CURRENT_ULSH07_ULSH08_CLASSICAL_ROADMAP_IS_INVALID"
+      ],
+      "repository_links": {
+        "ulsh07_kk_roadmap": "science/solver-hub/2026-08-07_ULSH-07_KK_Roadmap_v1.0.md",
+        "ulsh08_radion_roadmap": "science/solver-hub/2026-08-07_ULSH-08_Radion_Roadmap_v1.0.md",
+        "fm0_inventory": "registry/2026-08-31_HZT_M0_ForwardMap_FM0_Inventory_v0.5.json"
+      },
+      "closure_status": "NOT_EVALUATED_NO_RELEASED_QUANTUM_6D_TO_4D_OBSERVABLE_REDUCTION",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE"
+    }
+  ],
+  "unchanged_current_state": {
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_response_rank": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "FM_G0": "OPEN"
+  },
+  "next_allowed_use": "APPLY_THESE_METHOD_GATES_WHEN_THEIR_BINDING_APPLICABILITY_CONDITIONS_ARE_TRIGGERED",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "updated": "2026-10-03",
+  "supersedes": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json",
+  "revision_provenance": {
+    "basis_main_commit": "312e767628f003494a51edf685cf679469e35f13",
+    "scope": "SOURCE_PROVENANCE_AND_CONDITIONAL_DEPENDENCY_INTEGRATION_ONLY",
+    "adopted_method_semantics_changed": false,
+    "integration_authority": "CANONICAL_ONLY_AFTER_THIS_SUCCESSOR_IS_MERGED",
+    "global_state_reconciliation_claimed": false,
+    "document": "governance/2026-10-03_UL-SING_QuantumClosure_MethodIntegration_v1.0.md",
+    "integration_registry": "registry/2026-10-03_UL-SING_QuantumClosure_MethodIntegration_v1.0.json"
+  }
+}
