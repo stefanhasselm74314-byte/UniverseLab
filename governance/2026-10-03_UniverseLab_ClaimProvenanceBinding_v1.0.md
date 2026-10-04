@@ -54,6 +54,18 @@ bestehenden HIGH/MEDIUM/G11-Tests konsumieren diese geprüfte Zuordnung;
 der neue Workflow führt sie auch dann aus, wenn bisherige Pfadfilter nicht greifen.
 Historische Git-Objekte sind für diese Prüfung erforderlich.
 
+### Review-Nachtrag vom 04.10.2026: maschinenlesbare Scope-Grenzen
+
+Der unabhängige P2-Befund zu PR #257 betrifft vier bislang ungeprüfte
+Metadatenfelder. Der Validator verlangt jetzt die vorhandenen exakten Werte
+für Registry-`scope`, `historical_snapshot_date`, Manifest-
+`public_claim_binding_scope` und `transfer_scope` jeder einzelnen Zuordnung.
+Fehlende oder erweiterte Geltungsbereiche sowie ein abweichendes Snapshot-Datum
+werden ausdrücklich zurückgewiesen. Acht zusätzliche Testmethoden decken zehn
+Mutationsfälle ab, einschließlich beider Zuordnungen. Die Reproduktion nutzt
+den vollständigen Repository-Korpus und reale historische Git-Objekte.
+Diese Härtung verändert keine Claims, Ledger, Materialisierung oder Statuswerte.
+
 Diese Reparatur ist unabhängig vom Methoden-Addendum in Draft-PR #256 und
 kann mit ihm kombiniert geprüft werden. Die vier automatisch erzeugten
 Census-Herkunftsänderungen auf #256 sind keine physischen Änderungen.

@@ -48,6 +48,40 @@ class BindingTests(unittest.TestCase):
         result = MOD.validate(self.root)
         self.assertEqual((result['direct_historical_ids'], result['explicit_landing_aliases'], result['status_delta_ids']), (37, 2, 7))
 
+    def test_missing_registry_scope_fails(self):
+        self.reject(MOD.REGISTRY, lambda d: d.pop('scope'), 'REGISTRY_SCOPE_CHANGED')
+
+    def test_global_registry_scope_fails(self):
+        self.reject(MOD.REGISTRY, lambda d: d.update(scope='GLOBAL_STATE_FRESHNESS_CLOSED'), 'REGISTRY_SCOPE_CHANGED')
+
+    def test_missing_historical_snapshot_date_fails(self):
+        self.reject(MOD.REGISTRY, lambda d: d.pop('historical_snapshot_date'), 'HISTORICAL_SNAPSHOT_DATE_CHANGED')
+
+    def test_refreshed_historical_snapshot_date_fails(self):
+        self.reject(MOD.REGISTRY, lambda d: d.update(historical_snapshot_date='2099-01-01'), 'HISTORICAL_SNAPSHOT_DATE_CHANGED')
+
+    def test_missing_manifest_scope_fails(self):
+        self.reject('project-manifest.json', lambda d: d.pop('public_claim_binding_scope'), 'MANIFEST_BINDING_SCOPE_CHANGED')
+
+    def test_global_manifest_scope_fails(self):
+        self.reject('project-manifest.json', lambda d: d.update(public_claim_binding_scope='GLOBAL_STATE_FRESHNESS_CLOSED'), 'MANIFEST_BINDING_SCOPE_CHANGED')
+
+    def reject_each_transfer_scope(self, mutate):
+        registry = self.root / MOD.REGISTRY
+        original = registry.read_bytes()
+        for index in range(2):
+            with self.subTest(binding=index):
+                try:
+                    self.reject(MOD.REGISTRY, lambda d: mutate(d['bindings'][index]), 'TRANSFER_SCOPE_CHANGED')
+                finally:
+                    registry.write_bytes(original)
+
+    def test_missing_transfer_scope_fails(self):
+        self.reject_each_transfer_scope(lambda binding: binding.pop('transfer_scope'))
+
+    def test_expanded_transfer_scope_fails(self):
+        self.reject_each_transfer_scope(lambda binding: binding.update(transfer_scope='ALL_CURRENT_AND_FUTURE_CLAIMS'))
+
     def test_missing_alias_fails(self):
         self.reject(MOD.REGISTRY, lambda d: d['bindings'].pop(), 'ONLY_TWO_EXPLICIT')
 

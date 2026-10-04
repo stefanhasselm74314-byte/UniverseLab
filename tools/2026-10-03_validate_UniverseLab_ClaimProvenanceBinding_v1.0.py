@@ -81,6 +81,9 @@ def validate(root=ROOT):
     root = Path(root)
     record = load(root, REGISTRY)
     require(record['basis_main_commit'] == BASE, 'BASIS_CHANGED')
+    require(record.get('scope') == 'BOUNDED_CLAIM_ID_AND_HTML_INVENTORY_RECONCILIATION_NOT_GLOBAL_STATE_FRESHNESS',
+            'REGISTRY_SCOPE_CHANGED')
+    require(record.get('historical_snapshot_date') == '2026-09-04', 'HISTORICAL_SNAPSHOT_DATE_CHANGED')
     require(record['physical_gate_effect'] == record['physical_evidence_effect'] == 'NONE', 'EFFECT_CHANGED')
     require(set(record['protected_sources']) == PROTECTED, 'PROTECTED_SOURCE_SET_CHANGED')
     for path, expected in record['protected_sources'].items():
@@ -89,6 +92,8 @@ def validate(root=ROOT):
     require({PRIORITY, COMPLETION, DELTA} <= set(record['protected_sources']), 'LEDGER_PROTECTION_MISSING')
     manifest = load(root, 'project-manifest.json')
     require(manifest['public_claim_binding_addendum'] == REGISTRY, 'BINDING_POINTER_CHANGED')
+    require(manifest.get('public_claim_binding_scope') == 'CLAIM_ID_AND_INVENTORY_ONLY_GLOBAL_SNAPSHOT_REMAINS_2026-09-04',
+            'MANIFEST_BINDING_SCOPE_CHANGED')
     original_manifest = json.loads(git(root, 'show', BASE + ':project-manifest.json'))
     require(manifest['gates'] == original_manifest['gates'], 'PHYSICAL_OR_AUTHORIZATION_GATE_CHANGED')
     require(manifest['public_claim_audit'] == original_manifest['public_claim_audit'], 'HISTORICAL_AUDIT_CHANGED')
@@ -127,6 +132,8 @@ def validate(root=ROOT):
     require(len(bindings) == 2 and actual == ALIASES, 'ONLY_TWO_EXPLICIT_ALIASES_ALLOWED')
     ignored = {'claim_id', 'source_line', 'source_sha256'}
     for binding in bindings:
+        require(binding.get('transfer_scope') == 'EXACT_TEXT_TAG_REGION_SCOPE_AND_RISK_EQUAL_ONLY_LINE_AND_FILE_HASH_CHANGED',
+                'TRANSFER_SCOPE_CHANGED')
         old, new = binding['historical_candidate'], binding['current_candidate']
         require(old == original[old['claim_id']] and new == medium[new['claim_id']], 'BINDING_SOURCE_MISMATCH')
         require(candidate_id(old) == old['claim_id'] and candidate_id(new) == new['claim_id'], 'CANDIDATE_ID_MISMATCH')
