@@ -17415,7 +17415,7 @@
       "source_sha256": "356185eedc9eced4df057c9cf9f90ac82b29fcdb0cefa0756cb119ebe3e4cc22"
     }
   ],
-  "candidate_basis_commit": "bb6f1e88394f285a1f44a747d15ddae6254128d3",
+  "candidate_basis_commit": "377d737c4ee072c975fb9e508ae4dede6afc9c20",
   "candidate_count": 993,
   "fallback_assignment_count": 209,
   "family_counts": {
