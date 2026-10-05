@@ -1,0 +1,49 @@
+name: WEB50 status-provenance compatibility diagnosis v1.0
+
+on:
+  pull_request:
+    paths:
+      - 'tests/2026-10-05_test_UniverseLab_StatusProvenanceCompatibility_v1.0.py'
+      - '.github/workflows/2026-10-05_UniverseLab_StatusProvenanceCompatibility_QA_v1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Bind diagnostic source and complete history
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test "$(git rev-parse --is-shallow-repository)" = false
+          mkdir -p web50-provenance-compatibility-report
+          git rev-parse HEAD > web50-provenance-compatibility-report/source-sha.txt
+      - name: Negative controls of diagnostic helpers
+        run: python tests/2026-10-05_test_UniverseLab_StatusProvenanceCompatibility_v1.0.py --self-test
+      - name: Pinned full-history combination and reversible counterfactual
+        run: python tests/2026-10-05_test_UniverseLab_StatusProvenanceCompatibility_v1.0.py --integration
+      - name: Preserve nonauthorizing evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web50-provenance-compatibility-${{ github.event.pull_request.head.sha || github.sha }}
+          path: web50-provenance-compatibility-report/
+          if-no-files-found: error
+      - name: State the result boundary
+        if: always()
+        run: |
+          echo 'DIAGNOSTIC ONLY: a successful job verifies expected rejection and a reversible scratch counterfactual, not repaired production gates.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'No adoption, merge, deployment or physical execution. physical_gate_effect=NONE; physical_evidence_effect=NONE; release_approval=false.' >> "$GITHUB_STEP_SUMMARY"

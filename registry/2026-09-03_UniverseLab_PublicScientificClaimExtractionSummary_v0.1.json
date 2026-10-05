@@ -1,5 +1,5 @@
 {
-  "basis_commit": "7f46e829397cc7d572254d9ec16406d2af837f12",
+  "basis_commit": "9f26e3759b91b053cfd8eba54b7fbb5d81cae975",
   "claim_candidates": 993,
   "explicit_statuses": {
     "BLOCKED_OR_UNRELEASED": 66,
@@ -539,7 +539,7 @@
       "path": "research-status-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "e081eed184da1dfe11a793325b06db1ec11355c65d9cf4214f756a8c3075ea62",
       "visible_blocks": 62
     },
     {
@@ -548,7 +548,7 @@
       "path": "research-status.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "b741c764201f912c40aae4421543a3dbc682a9c92c674dfef4f41f60ffd95170",
       "visible_blocks": 62
     },
     {
