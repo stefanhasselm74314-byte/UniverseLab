@@ -1,24 +1,24 @@
 {
-  "basis_commit": "7f46e829397cc7d572254d9ec16406d2af837f12",
-  "claim_candidates": 993,
+  "basis_commit": "2246fdb9c8e79411070ddcc63fc3755d398fcaf8",
+  "claim_candidates": 998,
   "explicit_statuses": {
     "BLOCKED_OR_UNRELEASED": 66,
-    "CONDITIONAL_OR_HEURISTIC": 55,
+    "CONDITIONAL_OR_HEURISTIC": 56,
     "EXPLICITLY_NEGATED_OR_LIMITED": 124,
     "OPEN_OR_NOT_EXECUTED": 43,
-    "UNCLASSIFIED": 705
+    "UNCLASSIFIED": 709
   },
   "generated_by": "tools/2026-09-03_extract_UniverseLab_PublicScientificClaims_v1.0.py",
   "lexical_categories": {
-    "CONDITIONAL_HEURISTIC": 64,
+    "CONDITIONAL_HEURISTIC": 65,
     "DERIVATION_IDENTIFICATION": 70,
     "EVIDENCE_CONFIRMATION": 68,
-    "NUMERICAL_METHOD": 123,
+    "NUMERICAL_METHOD": 125,
     "OBSERVATIONAL_DATA": 115,
-    "PHYSICAL_COSMOLOGY": 171,
+    "PHYSICAL_COSMOLOGY": 173,
     "PREDICTION_SIGNATURE": 25,
     "STATUS_FIREWALL": 233,
-    "THEORY_6D_PARENT": 141
+    "THEORY_6D_PARENT": 144
   },
   "limitations": [
     "Lexical extraction cannot establish whether a scientific claim is true.",
@@ -143,7 +143,7 @@
       "path": "about.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "09d6b1aa2ed017821a959a01c83994952aa18755990cb6962647bf82ef83d6e4",
+      "source_sha256": "4969216262effa2052cd5ae2fc0d9681ce2e8c713c6cac1ef97298aa734cdbfd",
       "visible_blocks": 42
     },
     {
@@ -260,7 +260,7 @@
       "path": "compare-safe.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "54c62ef6cbb118ed938e422eb1d3f0f8c586a6d7e6a0786b2717c93414fbac38",
+      "source_sha256": "0f89de16815611260238c6c61818e6e65b7cd9d189bb182ea517439769f40c79",
       "visible_blocks": 60
     },
     {
@@ -296,7 +296,7 @@
       "path": "emergence.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "3ca21a0a723b2d650fde1ea585770f4113f3ddb66c25769d954bc483e551b252",
+      "source_sha256": "245ea757dfe1a5a56e48998cf180b8e09cb2adef82447168ba3a2075905360b9",
       "visible_blocks": 53
     },
     {
@@ -323,7 +323,7 @@
       "path": "guide-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "5b3c867167074b41397c3cbd8674756f35a26e88f1e32bdde5037d8f66d4a67e",
+      "source_sha256": "e6345b47ed0b5c2a846243dbba5ea46c9e72f722b53ebbcc77775833a5dacfe3",
       "visible_blocks": 25
     },
     {
@@ -332,7 +332,7 @@
       "path": "guide.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "228550875ffa960e3a31a25be638ea461c9e4757683b89e5f6893e188987456a",
+      "source_sha256": "47d2ca7470e8c0d248365be0f2b6aee5d691eb5086893fb9eb988d6f7130e9f7",
       "visible_blocks": 240
     },
     {
@@ -341,7 +341,7 @@
       "path": "hyperlab-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "dec698afe549aed004182834af1ade418567c7769d51187fa452d3453f191218",
+      "source_sha256": "b38c99477cc44d87b1288e039b0eb7601bd208f5de4ca83c20b2a054ae4aefdb",
       "visible_blocks": 28
     },
     {
@@ -350,7 +350,7 @@
       "path": "hyperlab.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "130fe0174579c39dec679fc0564315f5374f03f8d23cb056c57435f9877d6c72",
+      "source_sha256": "f1c9d141b17ab481c4ee98f153b2147957df31c24f582b7d77f1cf10a7702042",
       "visible_blocks": 99
     },
     {
@@ -359,7 +359,7 @@
       "path": "hyperzeit-material-v2-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "d65bbd3b44932727a44ca4b50459aaafde6795cec37c21757057ea620f5e5c3c",
+      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc",
       "visible_blocks": 63
     },
     {
@@ -368,7 +368,7 @@
       "path": "hyperzeit-material-v2.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "71347477124edc9baac003eb1882050ac3bde335b7ef6b853b3b2037bacb1823",
+      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd",
       "visible_blocks": 204
     },
     {
@@ -386,7 +386,7 @@
       "path": "hyperzeit-methods-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "9e6726cfbcd6ee5598816542596225a12cf01551dfaff2b406e12b8d5e09fab5",
+      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c",
       "visible_blocks": 32
     },
     {
@@ -395,7 +395,7 @@
       "path": "hyperzeit-methods.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "13f4afd47ea7a424f5b0d1a83ff9d7fe1a1636b27cfe3e221b1e8a0fd6124200",
+      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69",
       "visible_blocks": 195
     },
     {
@@ -413,7 +413,7 @@
       "path": "index-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "b6df6f2d28010d4e249002b47b3ff839b1be44708a9214a7a48cc9737b040d20",
+      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
       "visible_blocks": 27
     },
     {
@@ -422,7 +422,7 @@
       "path": "index.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "fa11759541238cf239f090bb5cc8ae397252a28897d3ec12290327d2736d9050",
+      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
       "visible_blocks": 62
     },
     {
@@ -440,8 +440,8 @@
       "path": "journey.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "e49f4ec3fa514db037ba3d266859253b1cf7387d0cd6f06d7e2c1ecf3976522c",
-      "visible_blocks": 35
+      "source_sha256": "c352fea76d464e806fcb78abb4fa44f57968bf4e2968c003a10b8fb82dfbf2c9",
+      "visible_blocks": 36
     },
     {
       "manifest_member": false,
@@ -485,7 +485,7 @@
       "path": "navigator-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "067bf0df03fceb0b19cb6fdc65ef0781eac3f977554a3cb2e0450cad30e61f22",
+      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
       "visible_blocks": 26
     },
     {
@@ -494,7 +494,7 @@
       "path": "navigator.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "b135e977807e7a8e529a2d9fe46e82bc3c91451d0b67e07f86a853b4125f60b6",
+      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
       "visible_blocks": 96
     },
     {
@@ -503,7 +503,7 @@
       "path": "observatory-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "8c017dcc3fb71a7869463b993e074a4f1ce09a0cbd15a51f412c21cc0644b6dc",
+      "source_sha256": "251b1ba68dfbca459cca5ad65a8566ec98f253fd2c530c2eeccf6ea07a478ab0",
       "visible_blocks": 12
     },
     {
@@ -512,7 +512,7 @@
       "path": "observatory.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "f9b92abeac46261c576fd36794655a97e5ddc5270c260ac411864edadcfd7ffb",
+      "source_sha256": "651e13736508254de152f4d05252a93611ac01cb3d0d3497fbd16379fc85b2f2",
       "visible_blocks": 25
     },
     {
@@ -539,7 +539,7 @@
       "path": "research-status-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "9df46bb9832efb2bab18f1582e60f1c58ea18f0c0b68c29b2dfb6a1f40893bee",
+      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
       "visible_blocks": 62
     },
     {
@@ -548,7 +548,7 @@
       "path": "research-status.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "66b0905bbfd0238f0aab0de8a7952f3557a01bdc5590901f5f16879095755e3c",
+      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
       "visible_blocks": 62
     },
     {
@@ -575,7 +575,7 @@
       "path": "sci-001-002-parent-closure-v0.1-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "2af0e157e5d5e7a6b7f5283944b1a6293c80991c1e3d9bb401116624ffa31696",
+      "source_sha256": "10b9024718f3fa0b8e0ac33909d2b5852dc16609ef14a4946a107c092d32464e",
       "visible_blocks": 35
     },
     {
@@ -584,8 +584,8 @@
       "path": "sci-001-002-parent-closure-v0.1.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "1abbcf7580d2077ad7bf503c728f1917e80b91a11d2c322f89a1518d8d215333",
-      "visible_blocks": 34
+      "source_sha256": "5037abd26f2ee0cbc1d30b801ad3368ad7ff5a0397f3b2d7db631952535271a5",
+      "visible_blocks": 35
     },
     {
       "manifest_member": false,
@@ -593,8 +593,8 @@
       "path": "solver-hub-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "2bf6b135f1b4ead0f0ec9ae86312cc2bf3680d8268b0b4d4ca07e123f7601498",
-      "visible_blocks": 34
+      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
+      "visible_blocks": 35
     },
     {
       "manifest_member": true,
@@ -602,8 +602,8 @@
       "path": "solver-hub.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "54f7f51ca9fbf57cc7eb8f4994f3e48a7cb54cb7261ba73b8fbc670844a7bfa1",
-      "visible_blocks": 48
+      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "visible_blocks": 49
     },
     {
       "manifest_member": false,
@@ -629,7 +629,7 @@
       "path": "tafelwerk-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "e5d950942660d2afdb4141836537fe6b16028770740e5d6c5df0076a211d27e1",
+      "source_sha256": "a53b9556fbf0b6b8f8947ffa2c9d797694c643062930351c2cf78e672a4a1f37",
       "visible_blocks": 29
     },
     {
@@ -638,7 +638,7 @@
       "path": "tafelwerk.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "16a11cf0fbf7c9ae529292f9c06f665e7609fce2cf25d67e2ed49e6ca164cd15",
+      "source_sha256": "a1ae8c98ccbd1b98937a3954b44aed5beeda63d03dfc4e0bcd904bd5c3add229",
       "visible_blocks": 36
     },
     {
@@ -656,8 +656,8 @@
       "path": "universe3d.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "e515fa1cb12c83e086dcaa35835091214702cc187aa0a204f6980e64e057d77e",
-      "visible_blocks": 16
+      "source_sha256": "8ae7c0b1f540430808a648062e16750bfc25e724df77becf278d77c0cb490f94",
+      "visible_blocks": 17
     },
     {
       "manifest_member": true,
@@ -674,7 +674,7 @@
       "path": "validation-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "d45d1f053806a8cf671ab31dd9ed431a524262425bd4a95be788f9bc6edc4a34",
+      "source_sha256": "3886676cca9cfdb31080dbb2b5abe917d3e8a23798be97a62465d6235c714830",
       "visible_blocks": 19
     },
     {
@@ -683,27 +683,27 @@
       "path": "validation.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "356185eedc9eced4df057c9cf9f90ac82b29fcdb0cefa0756cb119ebe3e4cc22",
+      "source_sha256": "1e95c90e99c596d154cb5f1fc85f7381f56e9371b576f0570623ed89f4208c2a",
       "visible_blocks": 19
     }
   ],
   "page_scopes": {
-    "CANONICAL_MANIFEST_PAGE": 368,
+    "CANONICAL_MANIFEST_PAGE": 369,
     "PUBLIC_REPOSITORY_README": 34,
-    "PUBLIC_SITEMAP_PAGE": 339,
+    "PUBLIC_SITEMAP_PAGE": 343,
     "TRACKED_ARCHIVE_OR_UTILITY_PAGE": 69,
     "TRACKED_NON_SITEMAP_PAGE": 183
   },
   "physical_evidence_effect": "NONE",
   "physical_gate_effect": "NONE",
   "risk_classes": {
-    "CONTEXT_OR_FIREWALL": 365,
-    "LOW": 582,
+    "CONTEXT_OR_FIREWALL": 366,
+    "LOW": 586,
     "MEDIUM": 46
   },
   "schema": "universelab.public-scientific-claim-extraction-summary.v0.1",
   "sitemap_pages": 34,
   "status": "PASS_AUTOMATED_EXTRACTION_NOT_SCIENTIFIC_ADJUDICATION",
   "tracked_html_files": 73,
-  "visible_blocks": 3455
+  "visible_blocks": 3460
 }
