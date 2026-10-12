@@ -1,8 +1,8 @@
 # UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1
 
-**Extraktionsbasis:** `2258e975b14f92c4f722f22b91e80c7778d2d03a`  
+**Extraktionsbasis:** `7f46e829397cc7d572254d9ec16406d2af837f12`  
 **HTML-Dateien:** `73`  
-**Claim-Kandidaten:** `998`  
+**Claim-Kandidaten:** `993`  
 **HIGH/MEDIUM:** `46`  
 **Status:** `GENERATED_NOT_ADJUDICATED`  
 **Physical gate effect:** `NONE`  
@@ -54,9 +54,9 @@
 
 ## `about.html`
 
-### UL-CLAIM-CANDIDATE-32ACE03E5822817E · MEDIUM +4
+### UL-CLAIM-CANDIDATE-8547CC3EBF7A2D3B · MEDIUM +4
 
-- Quelle: Zeile `74`, Tag `div`, Region `section`
+- Quelle: Zeile `71`, Tag `div`, Region `section`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `EVIDENCE_CONFIRMATION`
 - Limiter vorhanden: `false`
@@ -76,9 +76,9 @@
 
 ## `guide-en.html`
 
-### UL-CLAIM-CANDIDATE-4081802FCED9FCB8 · MEDIUM +6
+### UL-CLAIM-CANDIDATE-E57BCD10CED0C7C3 · MEDIUM +6
 
-- Quelle: Zeile `5`, Tag `div`, Region `article`
+- Quelle: Zeile `1`, Tag `div`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `OBSERVATIONAL_DATA, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
@@ -87,9 +87,9 @@
 
 ## `guide.html`
 
-### UL-CLAIM-CANDIDATE-3644943DCED8A918 · MEDIUM +4
+### UL-CLAIM-CANDIDATE-AFB59D1E8901F74E · MEDIUM +4
 
-- Quelle: Zeile `30`, Tag `p`, Region `section`
+- Quelle: Zeile `26`, Tag `p`, Region `section`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `DERIVATION_IDENTIFICATION`
 - Limiter vorhanden: `false`
@@ -98,9 +98,9 @@
 
 ## `hyperlab-en.html`
 
-### UL-CLAIM-CANDIDATE-E95BFD10854E484B · MEDIUM +5
+### UL-CLAIM-CANDIDATE-C68357F7266E034F · MEDIUM +5
 
-- Quelle: Zeile `5`, Tag `li`, Region `article`
+- Quelle: Zeile `1`, Tag `li`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `DERIVATION_IDENTIFICATION, PHYSICAL_COSMOLOGY`
 - Limiter vorhanden: `false`
@@ -423,9 +423,9 @@
 
 ## `tafelwerk.html`
 
-### UL-CLAIM-CANDIDATE-99AD1F81AC71A202 · MEDIUM +5
+### UL-CLAIM-CANDIDATE-C595D97F5EA6F2C6 · MEDIUM +5
 
-- Quelle: Zeile `33`, Tag `p`, Region `section`
+- Quelle: Zeile `29`, Tag `p`, Region `section`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
@@ -454,9 +454,9 @@
 
 ## `validation-en.html`
 
-### UL-CLAIM-CANDIDATE-30B8C38FA72417C0 · MEDIUM +4
+### UL-CLAIM-CANDIDATE-36B8376E86A372B2 · MEDIUM +4
 
-- Quelle: Zeile `27`, Tag `div`, Region `section`
+- Quelle: Zeile `25`, Tag `div`, Region `section`
 - Statussignal: `CONDITIONAL_OR_HEURISTIC`
 - Kategorien: `CONDITIONAL_HEURISTIC, EVIDENCE_CONFIRMATION, PHYSICAL_COSMOLOGY`
 - Limiter vorhanden: `false`
@@ -465,9 +465,9 @@
 
 ## `validation.html`
 
-### UL-CLAIM-CANDIDATE-2B7CE41EBB3DB9A7 · MEDIUM +4
+### UL-CLAIM-CANDIDATE-DC0C140C7240B187 · MEDIUM +4
 
-- Quelle: Zeile `29`, Tag `section`, Region `section`
+- Quelle: Zeile `27`, Tag `section`, Region `section`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `EVIDENCE_CONFIRMATION`
 - Limiter vorhanden: `false`
