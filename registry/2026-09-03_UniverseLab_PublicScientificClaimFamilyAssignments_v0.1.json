@@ -5,7 +5,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-383E773C5B458FEC",
+      "claim_id": "UL-CLAIM-CANDIDATE-DEADAD88A45BD4C2",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
       ],
@@ -15,7 +15,7 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -78,7 +78,7 @@
         "BOUNDED_TEXT_HINT:stability->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -96,13 +96,13 @@
         "BOUNDED_TEXT_HINT:stabilität->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-08F13C9BBDA3A38D",
+      "claim_id": "UL-CLAIM-CANDIDATE-77A2A1C9E6CBF71E",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PARENT-FORWARD-MAP-001"
@@ -115,7 +115,7 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -458,7 +458,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-2960F2FC5C545C0E",
+      "claim_id": "UL-CLAIM-CANDIDATE-165CB6247CDC81B2",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
@@ -468,13 +468,13 @@
         "BOUNDED_TEXT_HINT:stability->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-FB5F1052C7B9E557",
+      "claim_id": "UL-CLAIM-CANDIDATE-E9D4B78479F61C63",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-DISTANCE-GEOMETRY-001",
@@ -493,13 +493,13 @@
         "BOUNDED_TEXT_HINT:gw->UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-01AC883BB6E262AE",
+      "claim_id": "UL-CLAIM-CANDIDATE-2036BB1729C8602D",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
@@ -509,13 +509,13 @@
         "BOUNDED_TEXT_HINT:stabilität->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-0A73A39AE4A55D25",
+      "claim_id": "UL-CLAIM-CANDIDATE-281394EA990B61FB",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -525,7 +525,7 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -543,13 +543,13 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-2131E4848173A19C",
+      "claim_id": "UL-CLAIM-CANDIDATE-C56D0258D9737125",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
       ],
@@ -560,7 +560,7 @@
         "BOUNDED_TEXT_HINT:6d→4d->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -578,13 +578,13 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-9ABA3C7C6A97C4C1",
+      "claim_id": "UL-CLAIM-CANDIDATE-9FA66BC91462D617",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
       ],
@@ -595,13 +595,13 @@
         "BOUNDED_TEXT_HINT:6d→4d->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "MEDIUM",
-      "claim_id": "UL-CLAIM-CANDIDATE-B08A314729B58B46",
+      "claim_id": "UL-CLAIM-CANDIDATE-995A6CBD51DBB278",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
       ],
@@ -612,7 +612,7 @@
         "BOUNDED_TEXT_HINT:6d→4d->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -1546,6 +1546,38 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-3EE47640C78E54E5",
+      "family_ids": [
+        "UL-CLM-PARENT-FORWARD-MAP-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-material-v2-en.html",
+      "routing_basis": [
+        "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-678C7720557DA13E",
+      "family_ids": [
+        "UL-CLM-EDUCATIONAL-VISUAL-001"
+      ],
+      "manual_review_required": true,
+      "path": "hyperzeit-material-v2-en.html",
+      "routing_basis": [
+        "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
+      ],
+      "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
       "claim_id": "UL-CLAIM-CANDIDATE-C8485F38C970BC22",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
@@ -1556,39 +1588,7 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-3695FDA02613EB34",
-      "family_ids": [
-        "UL-CLM-EDUCATIONAL-VISUAL-001"
-      ],
-      "manual_review_required": true,
-      "path": "hyperzeit-material-v2-en.html",
-      "routing_basis": [
-        "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
-      ],
-      "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-594A6620E6E35600",
-      "family_ids": [
-        "UL-CLM-PARENT-FORWARD-MAP-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-material-v2-en.html",
-      "routing_basis": [
-        "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -1604,13 +1604,13 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-25E3ADDE77F94716",
+      "claim_id": "UL-CLAIM-CANDIDATE-B97A51A4C0F6E796",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
       ],
@@ -1620,13 +1620,13 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-055077518475E96E",
+      "claim_id": "UL-CLAIM-CANDIDATE-8595856E79D8A24F",
       "family_ids": [
         "UL-CLM-BRIDGE-IDENTIFIABILITY-001",
         "UL-CLM-PARENT-FORWARD-MAP-001"
@@ -1638,13 +1638,13 @@
         "BOUNDED_TEXT_HINT:identifizier->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-192A075578786D71",
+      "claim_id": "UL-CLAIM-CANDIDATE-CD7ADAF35E7EF49E",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -1654,13 +1654,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-572084503FD06031",
+      "claim_id": "UL-CLAIM-CANDIDATE-E5A9544D370AC1C4",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
       ],
@@ -1670,7 +1670,7 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -1726,6 +1726,22 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-2E454FC6036C1012",
+      "family_ids": [
+        "UL-CLM-PARENT-FORWARD-MAP-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-methods-en.html",
+      "routing_basis": [
+        "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
       "claim_id": "UL-CLAIM-CANDIDATE-70D66A328C15BF76",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
@@ -1736,13 +1752,13 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-6AEABDEF3689763D",
+      "claim_id": "UL-CLAIM-CANDIDATE-8BE3A86AFC0B0EC7",
       "family_ids": [
         "UL-CLM-HISTORICAL-ARCHIVE-001",
         "UL-CLM-PARENT-FORWARD-MAP-001"
@@ -1754,23 +1770,7 @@
         "BOUNDED_TEXT_HINT:historical->UL-CLM-HISTORICAL-ARCHIVE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-F845C40A769C9245",
-      "family_ids": [
-        "UL-CLM-PARENT-FORWARD-MAP-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-methods-en.html",
-      "routing_basis": [
-        "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -1786,13 +1786,13 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-AA0BCE8B93E61113",
+      "claim_id": "UL-CLAIM-CANDIDATE-55D7FEEE5F14BEAA",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
       ],
@@ -1802,13 +1802,13 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-567FCEAF2B98B27A",
+      "claim_id": "UL-CLAIM-CANDIDATE-7AF2BE2C864B5879",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -1818,13 +1818,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-06ACAC959BEF9E4C",
+      "claim_id": "UL-CLAIM-CANDIDATE-37A1ED46A31EFA1C",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
       ],
@@ -1834,13 +1834,13 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-D9AC771B4BE2556B",
+      "claim_id": "UL-CLAIM-CANDIDATE-2FEEF32164BD63A5",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001"
       ],
@@ -1850,7 +1850,7 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -3648,7 +3648,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-0AE290CB7F8FB75E",
+      "claim_id": "UL-CLAIM-CANDIDATE-5E448D30F480E72E",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -3659,13 +3659,13 @@
         "BOUNDED_TEXT_HINT:desi->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-5EFA71957ED71BDB",
+      "claim_id": "UL-CLAIM-CANDIDATE-C3A05008649947A0",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -3675,13 +3675,13 @@
         "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-F65B7AAE49277916",
+      "claim_id": "UL-CLAIM-CANDIDATE-FA4BD5A92799E0DD",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-HISTORICAL-ARCHIVE-001"
@@ -3694,13 +3694,13 @@
         "BOUNDED_TEXT_HINT:legacy->UL-CLM-HISTORICAL-ARCHIVE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-2AFEB99CE304FEE1",
+      "claim_id": "UL-CLAIM-CANDIDATE-B88D606CF72BE1E5",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -3711,13 +3711,13 @@
         "BOUNDED_TEXT_HINT:kovarianz->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-79D954166881C3A0",
+      "claim_id": "UL-CLAIM-CANDIDATE-BC336DE8590F6072",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -3728,13 +3728,13 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-6B708C63D6480B45",
+      "claim_id": "UL-CLAIM-CANDIDATE-71A0B24B7BE6D1BC",
       "family_ids": [
         "UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
@@ -3744,13 +3744,13 @@
         "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-56FCFA30D0790CAD",
+      "claim_id": "UL-CLAIM-CANDIDATE-21D1CE900EDC7BBB",
       "family_ids": [
         "UL-CLM-PREDICTIONS-FALSIFIERS-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -3763,7 +3763,7 @@
         "BOUNDED_TEXT_HINT:status->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -3824,7 +3824,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-005E0063F7A574D0",
+      "claim_id": "UL-CLAIM-CANDIDATE-1C95A8A0F7A783F0",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PARENT-FORWARD-MAP-001"
@@ -3837,13 +3837,13 @@
         "BOUNDED_TEXT_HINT:desi->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-32F197656826B240",
+      "claim_id": "UL-CLAIM-CANDIDATE-0665DE6ADF049E82",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -3854,13 +3854,47 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-57A9C4C5D1A499FA",
+      "claim_id": "UL-CLAIM-CANDIDATE-073DE18010BCDDBA",
+      "family_ids": [
+        "UL-CLM-PREDICTIONS-FALSIFIERS-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-methods.html",
+      "routing_basis": [
+        "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001",
+        "BOUNDED_TEXT_HINT:messbar->UL-CLM-PREDICTIONS-FALSIFIERS-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-26BFAF22BD3F108D",
+      "family_ids": [
+        "UL-CLM-DATA-LIKELIHOOD-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-methods.html",
+      "routing_basis": [
+        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
+        "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-33B1E65550BD1A67",
       "family_ids": [
         "UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001",
         "UL-CLM-DATA-LIKELIHOOD-001"
@@ -3873,47 +3907,13 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-722EDB453EB936A6",
-      "family_ids": [
-        "UL-CLM-PREDICTIONS-FALSIFIERS-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-methods.html",
-      "routing_basis": [
-        "LEXICAL_CATEGORY:PREDICTION_SIGNATURE->UL-CLM-PREDICTIONS-FALSIFIERS-001",
-        "BOUNDED_TEXT_HINT:messbar->UL-CLM-PREDICTIONS-FALSIFIERS-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-95CE8D9DB9D8CFC3",
-      "family_ids": [
-        "UL-CLM-DATA-LIKELIHOOD-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-methods.html",
-      "routing_basis": [
-        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
-        "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-CF42E15A20A5A2B8",
+      "claim_id": "UL-CLAIM-CANDIDATE-778E2EFA1B5DB846",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -3924,13 +3924,13 @@
         "BOUNDED_TEXT_HINT:kovarianz->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-D82D7B408B3EFA2D",
+      "claim_id": "UL-CLAIM-CANDIDATE-D0D64ADA62CF59A9",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -3941,13 +3941,30 @@
         "BOUNDED_TEXT_HINT:kovarianz->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-43A226454FB25DAC",
+      "claim_id": "UL-CLAIM-CANDIDATE-2954FE42DB78F077",
+      "family_ids": [
+        "UL-CLM-DATA-LIKELIHOOD-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-methods.html",
+      "routing_basis": [
+        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
+        "BOUNDED_TEXT_HINT:desi->UL-CLM-DATA-LIKELIHOOD-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-58024A56A35CB6FF",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-DISTANCE-GEOMETRY-001",
@@ -3964,13 +3981,13 @@
         "BOUNDED_TEXT_HINT:legacy->UL-CLM-HISTORICAL-ARCHIVE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-50706609EBC62C28",
+      "claim_id": "UL-CLAIM-CANDIDATE-683197075FE32EFD",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -3981,13 +3998,13 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-57F4CD130C0030E4",
+      "claim_id": "UL-CLAIM-CANDIDATE-B614B6F72FE76604",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-HISTORICAL-ARCHIVE-001"
@@ -4000,30 +4017,13 @@
         "BOUNDED_TEXT_HINT:legacy->UL-CLM-HISTORICAL-ARCHIVE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-7BEF4CBD5D923979",
-      "family_ids": [
-        "UL-CLM-DATA-LIKELIHOOD-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-methods.html",
-      "routing_basis": [
-        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
-        "BOUNDED_TEXT_HINT:desi->UL-CLM-DATA-LIKELIHOOD-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-7CDE072DF8138D08",
+      "claim_id": "UL-CLAIM-CANDIDATE-BC3B952EC7932B05",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -4034,13 +4034,47 @@
         "BOUNDED_TEXT_HINT:kovarianz->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-9E363387AE8F23FF",
+      "claim_id": "UL-CLAIM-CANDIDATE-D2852851FEDD56BA",
+      "family_ids": [
+        "UL-CLM-DATA-LIKELIHOOD-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-methods.html",
+      "routing_basis": [
+        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
+        "BOUNDED_TEXT_HINT:kovarianz->UL-CLM-DATA-LIKELIHOOD-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-D8407C30EA444E94",
+      "family_ids": [
+        "UL-CLM-DATA-LIKELIHOOD-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-methods.html",
+      "routing_basis": [
+        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
+        "BOUNDED_TEXT_HINT:kovarianz->UL-CLM-DATA-LIKELIHOOD-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-D851D8DFFE42E9AC",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -4051,47 +4085,13 @@
         "BOUNDED_TEXT_HINT:pantheon->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-DD78757B1DA86EB5",
-      "family_ids": [
-        "UL-CLM-DATA-LIKELIHOOD-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-methods.html",
-      "routing_basis": [
-        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
-        "BOUNDED_TEXT_HINT:kovarianz->UL-CLM-DATA-LIKELIHOOD-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-E5AB1C2779F9FBD1",
-      "family_ids": [
-        "UL-CLM-DATA-LIKELIHOOD-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-methods.html",
-      "routing_basis": [
-        "LEXICAL_CATEGORY:OBSERVATIONAL_DATA->UL-CLM-DATA-LIKELIHOOD-001",
-        "BOUNDED_TEXT_HINT:kovarianz->UL-CLM-DATA-LIKELIHOOD-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-17D4086DF007D3AE",
+      "claim_id": "UL-CLAIM-CANDIDATE-856208A473C9247E",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -4102,13 +4102,13 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-1E94C168DAB23666",
+      "claim_id": "UL-CLAIM-CANDIDATE-B3DFA683C7CB5A3B",
       "family_ids": [
         "UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
@@ -4118,13 +4118,13 @@
         "BOUNDED_TEXT_HINT:produkt->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-7D8F1EAEB640CF80",
+      "claim_id": "UL-CLAIM-CANDIDATE-F58A46B07BCFDA74",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -4135,13 +4135,13 @@
         "BOUNDED_TEXT_HINT:desi->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-CC8A841F0F46F175",
+      "claim_id": "UL-CLAIM-CANDIDATE-FE43BCCCF5479543",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -4152,7 +4152,7 @@
         "BOUNDED_TEXT_HINT:kovarianz->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -7844,7 +7844,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-09379AF976B5C808",
+      "claim_id": "UL-CLAIM-CANDIDATE-93D0CA312727B360",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -7854,13 +7854,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-09C78AB67C4611E0",
+      "claim_id": "UL-CLAIM-CANDIDATE-147ABCFC045DC68D",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -7870,13 +7870,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-1CEBF9AEFBC8FFA9",
+      "claim_id": "UL-CLAIM-CANDIDATE-50311E75D1EB519F",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -7886,13 +7886,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-792B1B462E3C4DA2",
+      "claim_id": "UL-CLAIM-CANDIDATE-7C4A3FF521227C80",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -7902,13 +7902,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-A4658D455A062BFC",
+      "claim_id": "UL-CLAIM-CANDIDATE-D96A9D540CBFF68C",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -7918,13 +7918,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-66ABC1ED82BFC1E9",
+      "claim_id": "UL-CLAIM-CANDIDATE-D84B757C9EE62645",
       "family_ids": [
         "UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
@@ -7934,13 +7934,13 @@
         "BOUNDED_TEXT_HINT:rang->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-0FEBB424DC29A913",
+      "claim_id": "UL-CLAIM-CANDIDATE-8647A84B3E9755F5",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -7950,13 +7950,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-1D4525634C36B6C2",
+      "claim_id": "UL-CLAIM-CANDIDATE-8FF3040E4117DD72",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -7966,13 +7966,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-8240878395620141",
+      "claim_id": "UL-CLAIM-CANDIDATE-0D10FF6AD5E62949",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -7982,13 +7982,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-A056F8060F9CE50D",
+      "claim_id": "UL-CLAIM-CANDIDATE-9896A87E6B056AED",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -7998,13 +7998,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-6943C518D8B42F90",
+      "claim_id": "UL-CLAIM-CANDIDATE-54B9F86C5C62DB58",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8014,13 +8014,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-7EA6F810055E7615",
+      "claim_id": "UL-CLAIM-CANDIDATE-E9F778C5BF573C38",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8030,13 +8030,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-6E635BF2F447E47E",
+      "claim_id": "UL-CLAIM-CANDIDATE-BEDFF1A6CA2DAB20",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8046,13 +8046,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-C33AB35E668B2012",
+      "claim_id": "UL-CLAIM-CANDIDATE-C455C89E3F14C492",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8062,13 +8062,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-155C76E389727AC6",
+      "claim_id": "UL-CLAIM-CANDIDATE-9BD291CE3B0A9E1D",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8078,13 +8078,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-C1EB8B0AC6B6EA52",
+      "claim_id": "UL-CLAIM-CANDIDATE-A34F4CFF47AC9BB5",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8094,13 +8094,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-F5596F2A6F3A53BC",
+      "claim_id": "UL-CLAIM-CANDIDATE-ACCBECAC3728D59E",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8110,13 +8110,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-F7A2B2444487272D",
+      "claim_id": "UL-CLAIM-CANDIDATE-B522EEA97246D790",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8126,13 +8126,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-0FB6CDBA04C220E5",
+      "claim_id": "UL-CLAIM-CANDIDATE-375E403098BB14CF",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8142,13 +8142,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-5D47895C0829AA33",
+      "claim_id": "UL-CLAIM-CANDIDATE-9B0E09E684FA0EF7",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8158,13 +8158,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-EB45A71652FC7679",
+      "claim_id": "UL-CLAIM-CANDIDATE-FA5E19A62044319A",
       "family_ids": [
         "UL-CLM-DISTANCE-GEOMETRY-001",
         "UL-CLM-FLRW-BACKGROUND-001"
@@ -8176,13 +8176,13 @@
         "BOUNDED_TEXT_HINT:d_m->UL-CLM-DISTANCE-GEOMETRY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-99D61DE4FD429EFE",
+      "claim_id": "UL-CLAIM-CANDIDATE-592E00D8C47B7FC1",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
@@ -8192,13 +8192,13 @@
         "BOUNDED_TEXT_HINT:ghost->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-2B27C347E9F20B54",
+      "claim_id": "UL-CLAIM-CANDIDATE-0B3E50ABAE738662",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8208,13 +8208,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-D300D3CADA89F5EC",
+      "claim_id": "UL-CLAIM-CANDIDATE-267AB8F40BE6BE67",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8224,13 +8224,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-E8C8AF0E384D71FB",
+      "claim_id": "UL-CLAIM-CANDIDATE-4C3BF43BEB291087",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8240,13 +8240,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-F3AC85295BE1C51E",
+      "claim_id": "UL-CLAIM-CANDIDATE-E7F2711478AF6A7D",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8256,13 +8256,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-6D40A1CA3D0D3021",
+      "claim_id": "UL-CLAIM-CANDIDATE-404C6D2337FA29AA",
       "family_ids": [
         "UL-CLM-LINEAR-GROWTH-001",
         "UL-CLM-PREDICTIONS-FALSIFIERS-001"
@@ -8274,13 +8274,13 @@
         "BOUNDED_TEXT_HINT:lensing->UL-CLM-PREDICTIONS-FALSIFIERS-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-0F1F7598D0664C6F",
+      "claim_id": "UL-CLAIM-CANDIDATE-5D69709399D3D164",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8290,13 +8290,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-566929D09D2C4931",
+      "claim_id": "UL-CLAIM-CANDIDATE-1E1CBAC0A083702C",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8306,13 +8306,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-94B492CDB61AAC20",
+      "claim_id": "UL-CLAIM-CANDIDATE-A858CB3511F8CD99",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8322,13 +8322,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-262D4DB195CE7D38",
+      "claim_id": "UL-CLAIM-CANDIDATE-F743F61B75731244",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8338,7 +8338,7 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -8376,7 +8376,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-1DE7066DE3142467",
+      "claim_id": "UL-CLAIM-CANDIDATE-045575B8E2E2BC6C",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8386,13 +8386,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-D8C215EF98DC45DD",
+      "claim_id": "UL-CLAIM-CANDIDATE-45CDC5DC5BD73F65",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8402,13 +8402,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-6ED1DC76E13C6D7E",
+      "claim_id": "UL-CLAIM-CANDIDATE-F45045F1E910D128",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8418,13 +8418,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-012D1E9B254E8E91",
+      "claim_id": "UL-CLAIM-CANDIDATE-2A6DA7980CA75185",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8434,13 +8434,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-9441040585BFF934",
+      "claim_id": "UL-CLAIM-CANDIDATE-5860CD3904E187E8",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8450,13 +8450,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-480F116D7417E3E2",
+      "claim_id": "UL-CLAIM-CANDIDATE-9B8324C4CF19BFA5",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8466,13 +8466,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-6C47483EBD8A5294",
+      "claim_id": "UL-CLAIM-CANDIDATE-DED6CCC8DC11B30B",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8482,13 +8482,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-AD3D23E0575DA646",
+      "claim_id": "UL-CLAIM-CANDIDATE-08F7AEF0CE45B646",
       "family_ids": [
         "UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001"
       ],
@@ -8498,13 +8498,13 @@
         "BOUNDED_TEXT_HINT:poisson->UL-CLM-BRIDGE-UNRELEASED-OBSERVABLES-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-FF10DE709ABE8B0C",
+      "claim_id": "UL-CLAIM-CANDIDATE-C9A29DFD9947AAB3",
       "family_ids": [
         "UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
@@ -8514,13 +8514,13 @@
         "BOUNDED_TEXT_HINT:rang->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-F2CB7576126C7038",
+      "claim_id": "UL-CLAIM-CANDIDATE-0DF3ED77FA0D9A8D",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8530,13 +8530,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-0F093B91D1620CEC",
+      "claim_id": "UL-CLAIM-CANDIDATE-A7A18D99BA0CB05A",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8546,13 +8546,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-219247AF7C717EAD",
+      "claim_id": "UL-CLAIM-CANDIDATE-B9DBDACC72CC84A5",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8562,13 +8562,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-54A0154CA2159486",
+      "claim_id": "UL-CLAIM-CANDIDATE-C01173E7230FB22A",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8578,13 +8578,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-821D7D74F8FB3062",
+      "claim_id": "UL-CLAIM-CANDIDATE-F33CE9AFD9642E6E",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8594,13 +8594,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-407384BCDD4AD925",
+      "claim_id": "UL-CLAIM-CANDIDATE-3726F9FBEB4CF32B",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8610,13 +8610,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-E3635ECCDCADF489",
+      "claim_id": "UL-CLAIM-CANDIDATE-45E20A5E4F89DB94",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8626,13 +8626,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-FF2DBBD97252851E",
+      "claim_id": "UL-CLAIM-CANDIDATE-96C00276AFEF757D",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8642,13 +8642,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-DECE7EA136DF8AD8",
+      "claim_id": "UL-CLAIM-CANDIDATE-B077AB5623087C61",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8658,13 +8658,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-6360551573F122F4",
+      "claim_id": "UL-CLAIM-CANDIDATE-1A36E7773D0C47EB",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8674,13 +8674,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-7BD1E2332D8D6810",
+      "claim_id": "UL-CLAIM-CANDIDATE-C05802EC6D564BFD",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8690,13 +8690,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-BCEEDE17D8F8DB9D",
+      "claim_id": "UL-CLAIM-CANDIDATE-BFD5933B8E677D88",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8706,13 +8706,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-59C180A9965158FB",
+      "claim_id": "UL-CLAIM-CANDIDATE-71F768380E89AC71",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8722,13 +8722,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-713200B9E6EF67E8",
+      "claim_id": "UL-CLAIM-CANDIDATE-C3007594299DF2B7",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8738,29 +8738,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-2D498369BFC85569",
-      "family_ids": [
-        "UL-CLM-EDUCATIONAL-VISUAL-001"
-      ],
-      "manual_review_required": true,
-      "path": "hyperzeit-methods.html",
-      "routing_basis": [
-        "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
-      ],
-      "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-DBD6B169582A37D8",
+      "claim_id": "UL-CLAIM-CANDIDATE-1AECF48342FC5D63",
       "family_ids": [
         "UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
@@ -8770,13 +8754,29 @@
         "BOUNDED_TEXT_HINT:rang->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-F79EFABF190927D1",
+      "claim_id": "UL-CLAIM-CANDIDATE-44BE1C2B751D42C7",
+      "family_ids": [
+        "UL-CLM-BRIDGE-IDENTIFIABILITY-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-methods.html",
+      "routing_basis": [
+        "BOUNDED_TEXT_HINT:rang->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-6281AFA785CB0244",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8786,61 +8786,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-FC28C7B5E0EC62D3",
-      "family_ids": [
-        "UL-CLM-BRIDGE-IDENTIFIABILITY-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-methods.html",
-      "routing_basis": [
-        "BOUNDED_TEXT_HINT:rang->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-BED03CE217DA724B",
-      "family_ids": [
-        "UL-CLM-BRIDGE-IDENTIFIABILITY-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-methods.html",
-      "routing_basis": [
-        "BOUNDED_TEXT_HINT:rang->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-8D472AEDE204F6C9",
-      "family_ids": [
-        "UL-CLM-BRIDGE-IDENTIFIABILITY-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-methods.html",
-      "routing_basis": [
-        "BOUNDED_TEXT_HINT:rang->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "UNCLASSIFIED",
-      "candidate_risk_class": "LOW",
-      "claim_id": "UL-CLAIM-CANDIDATE-49732AF6C0951D78",
+      "claim_id": "UL-CLAIM-CANDIDATE-C0D0ACEA50EF0B2F",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -8850,7 +8802,55 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-61E03A6A673E2F1A",
+      "family_ids": [
+        "UL-CLM-BRIDGE-IDENTIFIABILITY-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-methods.html",
+      "routing_basis": [
+        "BOUNDED_TEXT_HINT:rang->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-420AA21DEC5CFD1C",
+      "family_ids": [
+        "UL-CLM-BRIDGE-IDENTIFIABILITY-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-methods.html",
+      "routing_basis": [
+        "BOUNDED_TEXT_HINT:rang->UL-CLM-BRIDGE-IDENTIFIABILITY-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "UNCLASSIFIED",
+      "candidate_risk_class": "LOW",
+      "claim_id": "UL-CLAIM-CANDIDATE-659F96DFC04CE61D",
+      "family_ids": [
+        "UL-CLM-EDUCATIONAL-VISUAL-001"
+      ],
+      "manual_review_required": true,
+      "path": "hyperzeit-methods.html",
+      "routing_basis": [
+        "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
+      ],
+      "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -11369,7 +11369,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-4506CD7D827B7B7D",
+      "claim_id": "UL-CLAIM-CANDIDATE-782BF73BE7A30DA0",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -11379,13 +11379,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "UNCLASSIFIED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-5F35D907F31BD11D",
+      "claim_id": "UL-CLAIM-CANDIDATE-4427B494A304125D",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -11395,13 +11395,13 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-73F21E1EE2F5E9B5",
+      "claim_id": "UL-CLAIM-CANDIDATE-39C6E7153203C0C4",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001"
       ],
@@ -11412,7 +11412,7 @@
         "BOUNDED_TEXT_HINT:kids->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -12972,7 +12972,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-6C7CDE97D9777B33",
+      "claim_id": "UL-CLAIM-CANDIDATE-32CDD2437238CD5B",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -12984,13 +12984,13 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-F5598F2599C94829",
+      "claim_id": "UL-CLAIM-CANDIDATE-A1BF8098644BBC7A",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
@@ -13000,13 +13000,13 @@
         "BOUNDED_TEXT_HINT:stability->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-B6CCC5EA0E1570F4",
+      "claim_id": "UL-CLAIM-CANDIDATE-FA8BD1362F5AE10D",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -13016,7 +13016,7 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -13038,7 +13038,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-38DE994A4E0905AD",
+      "claim_id": "UL-CLAIM-CANDIDATE-8DA2CF45B08915BA",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001",
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
@@ -13053,13 +13053,13 @@
         "BOUNDED_TEXT_HINT:ghost->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-6E59839F250D6D34",
+      "claim_id": "UL-CLAIM-CANDIDATE-DB32332E008B9536",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -13071,13 +13071,13 @@
         "LEXICAL_CATEGORY:THEORY_6D_PARENT->UL-CLM-PARENT-FORWARD-MAP-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-C0ABFA9A8BF5A404",
+      "claim_id": "UL-CLAIM-CANDIDATE-2E7FDC1C36084F70",
       "family_ids": [
         "UL-CLM-EDUCATIONAL-VISUAL-001"
       ],
@@ -13087,7 +13087,7 @@
         "FALLBACK:UNRESOLVED_BY_AUTOMATIC_HINTS"
       ],
       "routing_status": "AUTOMATED_FALLBACK_ROUTING_MANUAL_REVIEW_REQUIRED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -13589,7 +13589,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-BC8614E7F6AB7B04",
+      "claim_id": "UL-CLAIM-CANDIDATE-7DD6DD008681FAE1",
       "family_ids": [
         "UL-CLM-PARENT-FORWARD-MAP-001",
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
@@ -13604,7 +13604,7 @@
         "BOUNDED_TEXT_HINT:not released->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -15391,7 +15391,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-778293B48DB25A39",
+      "claim_id": "UL-CLAIM-CANDIDATE-F26D7E0965D5D5E3",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -15403,13 +15403,13 @@
         "BOUNDED_TEXT_HINT:ghost->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc"
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-90501DC935578882",
+      "claim_id": "UL-CLAIM-CANDIDATE-C1891F070834114E",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-HISTORICAL-ARCHIVE-001",
@@ -15426,13 +15426,13 @@
         "BOUNDED_TEXT_HINT:legacy->UL-CLM-HISTORICAL-ARCHIVE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-7C739A5ED972522E",
+      "claim_id": "UL-CLAIM-CANDIDATE-835ECA8EF0DF3F12",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -15444,13 +15444,13 @@
         "BOUNDED_TEXT_HINT:k1-d->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-2B12CC71BFE11A86",
+      "claim_id": "UL-CLAIM-CANDIDATE-9939F77C8014B3F8",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -15460,13 +15460,13 @@
         "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-D34ADE3335F3E51C",
+      "claim_id": "UL-CLAIM-CANDIDATE-FC38C7C8147856AE",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -15478,13 +15478,13 @@
         "BOUNDED_TEXT_HINT:ghost->UL-CLM-PHYSICAL-SOLUTION-STABILITY-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-E42CFD7CC916BE34",
+      "claim_id": "UL-CLAIM-CANDIDATE-5C1CC01DB8AB2769",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -15497,7 +15497,7 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd"
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -15537,7 +15537,7 @@
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-B90F819E8CE753FF",
+      "claim_id": "UL-CLAIM-CANDIDATE-E22B9BE82FF9066D",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -15551,13 +15551,13 @@
         "BOUNDED_TEXT_HINT:not released->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-28007CDD1BF26ECF",
+      "claim_id": "UL-CLAIM-CANDIDATE-A61F857467C19D0C",
       "family_ids": [
         "UL-CLM-FLRW-BACKGROUND-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -15569,13 +15569,13 @@
         "BOUNDED_TEXT_HINT:expansion->UL-CLM-FLRW-BACKGROUND-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c"
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-054452A752E800A9",
+      "claim_id": "UL-CLAIM-CANDIDATE-3677960FA7F4F85F",
       "family_ids": [
         "UL-CLM-DATA-LIKELIHOOD-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -15588,29 +15588,13 @@
         "BOUNDED_TEXT_HINT:likelihood->UL-CLM-DATA-LIKELIHOOD-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
-    },
-    {
-      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
-      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-B9DF1E2325485AD3",
-      "family_ids": [
-        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "manual_review_required": false,
-      "path": "hyperzeit-methods.html",
-      "routing_basis": [
-        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
-      ],
-      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "OPEN_OR_NOT_EXECUTED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-F0925BCF356362B5",
+      "claim_id": "UL-CLAIM-CANDIDATE-4CC976844701BA2F",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -15620,13 +15604,13 @@
         "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-DADF0D0D91AC3015",
+      "claim_id": "UL-CLAIM-CANDIDATE-51DAE05790CCF666",
       "family_ids": [
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
@@ -15636,13 +15620,29 @@
         "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
+    },
+    {
+      "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "candidate_explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "candidate_risk_class": "CONTEXT_OR_FIREWALL",
+      "claim_id": "UL-CLAIM-CANDIDATE-C62309DB4031D9F3",
+      "family_ids": [
+        "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "manual_review_required": false,
+      "path": "hyperzeit-methods.html",
+      "routing_basis": [
+        "LEXICAL_CATEGORY:STATUS_FIREWALL->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
+      ],
+      "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "candidate_explicit_status": "BLOCKED_OR_UNRELEASED",
       "candidate_risk_class": "CONTEXT_OR_FIREWALL",
-      "claim_id": "UL-CLAIM-CANDIDATE-6D1AD36C1F5A3F40",
+      "claim_id": "UL-CLAIM-CANDIDATE-703E8832E9DB2342",
       "family_ids": [
         "UL-CLM-PHYSICAL-SOLUTION-STABILITY-001",
         "UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
@@ -15655,7 +15655,7 @@
         "BOUNDED_TEXT_HINT:not released->UL-CLM-PUBLIC-STATUS-GOVERNANCE-001"
       ],
       "routing_status": "AUTOMATED_FAMILY_ROUTING_NOT_ADJUDICATED",
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69"
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443"
     },
     {
       "candidate_adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -17507,7 +17507,7 @@
       "source_sha256": "1e95c90e99c596d154cb5f1fc85f7381f56e9371b576f0570623ed89f4208c2a"
     }
   ],
-  "candidate_basis_commit": "2ee5d1218ef26460e856784a27cce81fa4224253",
+  "candidate_basis_commit": "2258e975b14f92c4f722f22b91e80c7778d2d03a",
   "candidate_count": 998,
   "fallback_assignment_count": 209,
   "family_counts": {

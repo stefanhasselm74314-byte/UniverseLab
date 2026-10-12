@@ -1,5 +1,5 @@
 {
-  "basis_commit": "2ee5d1218ef26460e856784a27cce81fa4224253",
+  "basis_commit": "2258e975b14f92c4f722f22b91e80c7778d2d03a",
   "claim_candidates": 998,
   "explicit_statuses": {
     "BLOCKED_OR_UNRELEASED": 66,
@@ -359,7 +359,7 @@
       "path": "hyperzeit-material-v2-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "000c64f64cfe6023b9e4b4a41f2dfd480209d6370f0cb737dd1aeba9013efcdc",
+      "source_sha256": "8f6060ae7dbfa08a328d8dd6d5801b21440a060c5e80a9da7eeebbc9bb55ce2a",
       "visible_blocks": 63
     },
     {
@@ -368,7 +368,7 @@
       "path": "hyperzeit-material-v2.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "e16c4142a7f26675c5c1669961818b71ccac787bfdb9ec0b9645ba610865cdbd",
+      "source_sha256": "01105391763c2e6bd4db541c9ed28c5941d1911d735f3b3ce97cc9e864fef5ba",
       "visible_blocks": 204
     },
     {
@@ -386,7 +386,7 @@
       "path": "hyperzeit-methods-en.html",
       "scope": "PUBLIC_SITEMAP_PAGE",
       "sitemap_member": true,
-      "source_sha256": "74020a22976101be6e388650405f28dbd0d3821088cc24e1d0245c1f1ec7678c",
+      "source_sha256": "64af30aff02d7512bdd5d48e08ae5e67b24d12a9a574ccc6bf62307ae0043879",
       "visible_blocks": 32
     },
     {
@@ -395,7 +395,7 @@
       "path": "hyperzeit-methods.html",
       "scope": "CANONICAL_MANIFEST_PAGE",
       "sitemap_member": true,
-      "source_sha256": "87e20a0bf3b368409548b9eb38ad7520ef0258d695e9d22845817e33564b4c69",
+      "source_sha256": "cd6ca91d12946a5ccdbd6e008b7e176afc35d04a69f9348481af07bd59157443",
       "visible_blocks": 195
     },
     {
