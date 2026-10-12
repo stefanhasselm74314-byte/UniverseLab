@@ -1,6 +1,6 @@
 # UniverseLab Band V-A · Öffentliche Claim-Review-Queue v0.1
 
-**Extraktionsbasis:** `2246fdb9c8e79411070ddcc63fc3755d398fcaf8`  
+**Extraktionsbasis:** `2ee5d1218ef26460e856784a27cce81fa4224253`  
 **HTML-Dateien:** `73`  
 **Claim-Kandidaten:** `998`  
 **HIGH/MEDIUM:** `46`  
@@ -245,9 +245,9 @@
 
 ## `index-en.html`
 
-### UL-CLAIM-CANDIDATE-C20D93798E947363 · MEDIUM +5
+### UL-CLAIM-CANDIDATE-8DA35AA2283D9C5F · MEDIUM +5
 
-- Quelle: Zeile `17`, Tag `p`, Region `section`
+- Quelle: Zeile `13`, Tag `p`, Region `section`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `NUMERICAL_METHOD, PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
@@ -265,9 +265,9 @@
 - Text: UniverseLab von Stefan Hasselmeyer ist ein interaktives Kosmologie-Labor für ΛCDM, kosmische Expansion, Strukturbildung, Modellvergleiche und klar gekennzeichnete experimentelle 6D-Hyperzeitmodelle.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-7FBABFF1389C697B · MEDIUM +5
+### UL-CLAIM-CANDIDATE-2A1B5F591D31DF61 · MEDIUM +5
 
-- Quelle: Zeile `69`, Tag `p`, Region `section`
+- Quelle: Zeile `66`, Tag `p`, Region `section`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `PHYSICAL_COSMOLOGY, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
@@ -314,9 +314,9 @@
 
 ## `navigator.html`
 
-### UL-CLAIM-CANDIDATE-B4AB08FAC1F741CF · MEDIUM +6
+### UL-CLAIM-CANDIDATE-81BFEAE4C1F181E3 · MEDIUM +6
 
-- Quelle: Zeile `34`, Tag `p`, Region `article`
+- Quelle: Zeile `31`, Tag `p`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `OBSERVATIONAL_DATA, THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
@@ -325,36 +325,36 @@
 
 ## `research-status-en.html`
 
-### UL-CLAIM-CANDIDATE-55AEB17C40FF72D6 · MEDIUM +6
+### UL-CLAIM-CANDIDATE-96D51E71A2B48F98 · MEDIUM +6
 
-- Quelle: Zeile `39`, Tag `div`, Region `article`
+- Quelle: Zeile `37`, Tag `div`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `EVIDENCE_CONFIRMATION, PREDICTION_SIGNATURE`
 - Limiter vorhanden: `false`
 - Text: Current-main Canonical State v1.3 SiteState v1.4 Session Checkpoint v1.34 Public Claim Census v1.0 Band V-B MEDIUM Summary Band V-C Evidence Crosswalk Band V-C Missing-Link Register Canonical Engine Contract Authority Signature Provenance FM-0 Gap Register v0.4
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-F33AC43BDD154C0D · MEDIUM +5
+### UL-CLAIM-CANDIDATE-D2C8919501F1635B · MEDIUM +5
 
-- Quelle: Zeile `38`, Tag `li`, Region `article`
+- Quelle: Zeile `36`, Tag `li`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `DERIVATION_IDENTIFICATION, PREDICTION_SIGNATURE`
 - Limiter vorhanden: `false`
 - Text: quantitative parent-derived multichannel predictions with operational falsification thresholds;
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-1AB68C8AA25BECAF · MEDIUM +4
+### UL-CLAIM-CANDIDATE-56B6792E9F85C517 · MEDIUM +4
 
-- Quelle: Zeile `30`, Tag `div`, Region `article`
+- Quelle: Zeile `28`, Tag `div`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `EVIDENCE_CONFIRMATION`
 - Limiter vorhanden: `false`
 - Text: 10 scientific/empirical blockers
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-2B0313DAA3FFFF71 · MEDIUM +4
+### UL-CLAIM-CANDIDATE-C522F0894845C85C · MEDIUM +4
 
-- Quelle: Zeile `38`, Tag `li`, Region `article`
+- Quelle: Zeile `36`, Tag `li`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
@@ -363,27 +363,27 @@
 
 ## `research-status.html`
 
-### UL-CLAIM-CANDIDATE-952BB278FEDD6BC3 · MEDIUM +6
+### UL-CLAIM-CANDIDATE-564A8251149D78C4 · MEDIUM +6
 
-- Quelle: Zeile `44`, Tag `div`, Region `article`
+- Quelle: Zeile `40`, Tag `div`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `EVIDENCE_CONFIRMATION, PREDICTION_SIGNATURE`
 - Limiter vorhanden: `false`
 - Text: Current-main Canonical State v1.3 SiteState v1.4 Session Checkpoint v1.34 Public Claim Census v1.0 Band V-B MEDIUM Summary Band V-C Evidence Crosswalk Band V-C Missing-Link-Register Canonical Engine Contract Authority Signature Provenance FM-0 Gap Register v0.4
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-10A55237C3836B34 · MEDIUM +4
+### UL-CLAIM-CANDIDATE-BFD848A8933FE2AF · MEDIUM +4
 
-- Quelle: Zeile `35`, Tag `div`, Region `article`
+- Quelle: Zeile `31`, Tag `div`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `EVIDENCE_CONFIRMATION`
 - Limiter vorhanden: `false`
 - Text: 10 wissenschaftlich/empirisch blockierend
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-57CDDEEA66B5750D · MEDIUM +4
+### UL-CLAIM-CANDIDATE-ECF721D85B555B00 · MEDIUM +4
 
-- Quelle: Zeile `43`, Tag `li`, Region `article`
+- Quelle: Zeile `39`, Tag `li`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `THEORY_6D_PARENT`
 - Limiter vorhanden: `false`
@@ -392,9 +392,9 @@
 
 ## `solver-hub-en.html`
 
-### UL-CLAIM-CANDIDATE-9A33AFADC581C943 · MEDIUM +4
+### UL-CLAIM-CANDIDATE-55B0A8FFE882DBFE · MEDIUM +4
 
-- Quelle: Zeile `8`, Tag `h3`, Region `article`
+- Quelle: Zeile `3`, Tag `h3`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `OBSERVATIONAL_DATA, PHYSICAL_COSMOLOGY`
 - Limiter vorhanden: `false`
@@ -403,18 +403,18 @@
 
 ## `solver-hub.html`
 
-### UL-CLAIM-CANDIDATE-934131FEFDCCB18F · MEDIUM +4
+### UL-CLAIM-CANDIDATE-117A086E6B2C4D4A · MEDIUM +4
 
-- Quelle: Zeile `22`, Tag `div`, Region `article`
+- Quelle: Zeile `17`, Tag `div`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `NUMERICAL_METHOD, OBSERVATIONAL_DATA, PHYSICAL_COSMOLOGY`
 - Limiter vorhanden: `false`
 - Text: CP-A: Background → Junction → Rank → Cosmology → Likelihood CP-B: Background → Constraint → Perturbation → Ghost/Stability → Cosmology/GW CP-C: Background → KK/Flux → Cosmology → Baryogenesis/GW CP-D: Background → Constraint/Radion → Cosmology → MOND/RAR Work-package completion != solver release.
 - Adjudikation: `AUTOMATED_CANDIDATE_NOT_ADJUDICATED`
 
-### UL-CLAIM-CANDIDATE-5F19A615F764CD20 · MEDIUM +4
+### UL-CLAIM-CANDIDATE-BF3639D5C59B252F · MEDIUM +4
 
-- Quelle: Zeile `32`, Tag `h3`, Region `article`
+- Quelle: Zeile `27`, Tag `h3`, Region `article`
 - Statussignal: `UNCLASSIFIED`
 - Kategorien: `OBSERVATIONAL_DATA, PHYSICAL_COSMOLOGY`
 - Limiter vorhanden: `false`

@@ -1,5 +1,5 @@
 {
-  "basis_commit": "2246fdb9c8e79411070ddcc63fc3755d398fcaf8",
+  "basis_commit": "2ee5d1218ef26460e856784a27cce81fa4224253",
   "candidates": [
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -151,7 +151,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-B4AB08FAC1F741CF",
+      "claim_id": "UL-CLAIM-CANDIDATE-81BFEAE4C1F181E3",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -165,14 +165,14 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 6,
       "region": "article",
-      "source_line": 34,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 31,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "p",
       "text": "Hilbertraum, RG, kontrollierte 6D→4D-Reduktion, Likelihood- und Solverstandards."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-55AEB17C40FF72D6",
+      "claim_id": "UL-CLAIM-CANDIDATE-96D51E71A2B48F98",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -186,14 +186,14 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 6,
       "region": "article",
-      "source_line": 39,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 37,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "div",
       "text": "Current-main Canonical State v1.3 SiteState v1.4 Session Checkpoint v1.34 Public Claim Census v1.0 Band V-B MEDIUM Summary Band V-C Evidence Crosswalk Band V-C Missing-Link Register Canonical Engine Contract Authority Signature Provenance FM-0 Gap Register v0.4"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-952BB278FEDD6BC3",
+      "claim_id": "UL-CLAIM-CANDIDATE-564A8251149D78C4",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -207,8 +207,8 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 6,
       "region": "article",
-      "source_line": 44,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 40,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "div",
       "text": "Current-main Canonical State v1.3 SiteState v1.4 Session Checkpoint v1.34 Public Claim Census v1.0 Band V-B MEDIUM Summary Band V-C Evidence Crosswalk Band V-C Missing-Link-Register Canonical Engine Contract Authority Signature Provenance FM-0 Gap Register v0.4"
     },
@@ -277,7 +277,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-C20D93798E947363",
+      "claim_id": "UL-CLAIM-CANDIDATE-8DA35AA2283D9C5F",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -292,8 +292,8 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 5,
       "region": "section",
-      "source_line": 17,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
+      "source_line": 13,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
       "tag": "p",
       "text": "An interactive research and cosmology platform that keeps established physics, numerical diagnostics, model-dependent calculations and speculative 6D Hyperzeit hypotheses explicitly separated."
     },
@@ -314,13 +314,13 @@
       "preliminary_risk_score": 5,
       "region": "document",
       "source_line": 7,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "meta-description",
       "text": "UniverseLab von Stefan Hasselmeyer ist ein interaktives Kosmologie-Labor für ΛCDM, kosmische Expansion, Strukturbildung, Modellvergleiche und klar gekennzeichnete experimentelle 6D-Hyperzeitmodelle."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-7FBABFF1389C697B",
+      "claim_id": "UL-CLAIM-CANDIDATE-2A1B5F591D31DF61",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -334,14 +334,14 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 5,
       "region": "section",
-      "source_line": 69,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 66,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "p",
       "text": "Erkunde kosmische Expansion, Epochen, Strukturbildung und Modellvarianten – vom etablierten ΛCDM-Hintergrund bis zu klar gekennzeichneten experimentellen 6D-Hypothesen."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-F33AC43BDD154C0D",
+      "claim_id": "UL-CLAIM-CANDIDATE-D2C8919501F1635B",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -355,8 +355,8 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 5,
       "region": "article",
-      "source_line": 38,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 36,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "li",
       "text": "quantitative parent-derived multichannel predictions with operational falsification thresholds;"
     },
@@ -729,7 +729,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-1AB68C8AA25BECAF",
+      "claim_id": "UL-CLAIM-CANDIDATE-56B6792E9F85C517",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -742,14 +742,14 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 4,
       "region": "article",
-      "source_line": 30,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 28,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "div",
       "text": "10 scientific/empirical blockers"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-2B0313DAA3FFFF71",
+      "claim_id": "UL-CLAIM-CANDIDATE-C522F0894845C85C",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -762,14 +762,14 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 4,
       "region": "article",
-      "source_line": 38,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 36,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "li",
       "text": "the complete parent→reduced→observable map;"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-10A55237C3836B34",
+      "claim_id": "UL-CLAIM-CANDIDATE-BFD848A8933FE2AF",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -782,14 +782,14 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 4,
       "region": "article",
-      "source_line": 35,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 31,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "div",
       "text": "10 wissenschaftlich/empirisch blockierend"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-57CDDEEA66B5750D",
+      "claim_id": "UL-CLAIM-CANDIDATE-ECF721D85B555B00",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -802,14 +802,14 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 4,
       "region": "article",
-      "source_line": 43,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 39,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "li",
       "text": "vollständige Parent→Reduced→Observable-Map;"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-9A33AFADC581C943",
+      "claim_id": "UL-CLAIM-CANDIDATE-55B0A8FFE882DBFE",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -823,14 +823,14 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 4,
       "region": "article",
-      "source_line": 8,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
+      "source_line": 3,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
       "tag": "h3",
       "text": "Cosmology / Likelihood"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-934131FEFDCCB18F",
+      "claim_id": "UL-CLAIM-CANDIDATE-117A086E6B2C4D4A",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -845,14 +845,14 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 4,
       "region": "article",
-      "source_line": 22,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 17,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "div",
       "text": "CP-A: Background → Junction → Rank → Cosmology → Likelihood CP-B: Background → Constraint → Perturbation → Ghost/Stability → Cosmology/GW CP-C: Background → KK/Flux → Cosmology → Baryogenesis/GW CP-D: Background → Constraint/Radion → Cosmology → MOND/RAR Work-package completion != solver release."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5F19A615F764CD20",
+      "claim_id": "UL-CLAIM-CANDIDATE-BF3639D5C59B252F",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -866,8 +866,8 @@
       "preliminary_risk_class": "MEDIUM",
       "preliminary_risk_score": 4,
       "region": "article",
-      "source_line": 32,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 27,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "h3",
       "text": "Cosmology / Likelihood"
     },
@@ -2174,13 +2174,13 @@
       "preliminary_risk_score": 3,
       "region": "document",
       "source_line": 1,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
       "tag": "meta-description",
       "text": "UniverseLab by Stefan Hasselmeyer: interactive cosmology, numerical validation, model comparison and explicitly separated experimental 6D Hyperzeit research."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-8D04A1AFDB34598E",
+      "claim_id": "UL-CLAIM-CANDIDATE-A184DCA613F1ECD2",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -2193,8 +2193,8 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 3,
       "region": "article",
-      "source_line": 93,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 90,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "li",
       "text": "Keine Evidenzbehauptung für Hyperzeit"
     },
@@ -2420,7 +2420,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5A41AEEE416A361F",
+      "claim_id": "UL-CLAIM-CANDIDATE-0D72380A9D6D2112",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -2433,14 +2433,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 3,
       "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
       "tag": "p",
       "text": "Literature context, mixed-term derivation, radion stability, no-go theorems, DeWitt geometry, BRST and observables."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-BF55486E9B3E326A",
+      "claim_id": "UL-CLAIM-CANDIDATE-E92E4FCF62958FFF",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -2454,14 +2454,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 3,
       "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
       "tag": "p",
       "text": "Self-adjointness, multitime integrability, RG fixed points, controlled dimensional reduction, likelihood logic and numerical firewalls."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-DB031EEABD946841",
+      "claim_id": "UL-CLAIM-CANDIDATE-F31F02304D1DAB0D",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -2474,14 +2474,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 3,
       "region": "article",
-      "source_line": 38,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 35,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "p",
       "text": "Einzeitige 6D-Geometrie, kompakter interner Zweiraum, Flux, Caps, schwerer Radion und GR-nahe Niedrigenergiegrenze."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-20FCB6E47E93C4EE",
+      "claim_id": "UL-CLAIM-CANDIDATE-3DBAD5B43A6885D7",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -2495,8 +2495,8 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 3,
       "region": "article",
-      "source_line": 33,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 31,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "The local gauge-fixed transmission structure is conditionally ratified for smooth compatible data in the declared non-degenerate state domain."
     },
@@ -2542,28 +2542,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-1ED67E70D68F3980",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD",
-        "THEORY_6D_PARENT"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "solver-hub-en.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 3,
-      "region": "document",
-      "source_line": 2,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
-      "tag": "meta-description",
-      "text": "UniverseLab Solver Hub: numerical research infrastructure for Hyperzeit/HPVS with solver contracts, work packages, dependencies, QA and separated release gates."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-CEBCB0CEF98DA8E9",
+      "claim_id": "UL-CLAIM-CANDIDATE-18A11D80DF7D8B8E",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -2577,14 +2556,35 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 3,
       "region": "section",
-      "source_line": 6,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
+      "source_line": 1,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
       "tag": "p",
       "text": "A common solver contract for Hyperzeit/HPVS."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-B09865037D6AFF73",
+      "claim_id": "UL-CLAIM-CANDIDATE-C3E89FA309214E19",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD",
+        "THEORY_6D_PARENT"
+      ],
+      "limiter_present": false,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "solver-hub-en.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 3,
+      "region": "document",
+      "source_line": 1,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
+      "tag": "meta-description",
+      "text": "UniverseLab Solver Hub: numerical research infrastructure for Hyperzeit/HPVS with solver contracts, work packages, dependencies, QA and separated release gates."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-238F66210A66FE5F",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -2598,14 +2598,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 3,
       "region": "document",
-      "source_line": 8,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 7,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "meta-description",
       "text": "UniverseLab Solver Hub: numerische Forschungsinfrastruktur für Hyperzeit/HPVS mit Solververträgen, Work Packages, Abhängigkeiten, QA und getrennten Freigabegates."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-3650DDB62D759184",
+      "claim_id": "UL-CLAIM-CANDIDATE-24D7AD8A542EC21A",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -2618,8 +2618,8 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 3,
       "region": "section",
-      "source_line": 21,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 16,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "p",
       "text": "Gemeinsamer Solververtrag für Hyperzeit/HPVS."
     },
@@ -4761,53 +4761,13 @@
       "preliminary_risk_score": 2,
       "region": "document",
       "source_line": 1,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
       "tag": "title",
       "text": "UniverseLab by Stefan Hasselmeyer | Interactive Cosmology Laboratory"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-352A1C6CC6DEB1DF",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "PHYSICAL_COSMOLOGY"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "index-en.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 2,
-      "region": "article",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
-      "tag": "h2",
-      "text": "Cosmology Observatory"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-39E196B8FEAB034D",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "PHYSICAL_COSMOLOGY"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "index-en.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 2,
-      "region": "article",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
-      "tag": "p",
-      "text": "Compare ΛCDM, wCDM and explicitly model-dependent extensions."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-98EC9DC1C24A05CA",
+      "claim_id": "UL-CLAIM-CANDIDATE-16BDA07F1674C7B7",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -4821,14 +4781,54 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
       "tag": "p",
       "text": "Shared numerical infrastructure for background BVPs, junction diagnostics, rank audits and future perturbation, spectrum and likelihood solvers."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-DD8DFB8C1692F680",
+      "claim_id": "UL-CLAIM-CANDIDATE-614B6944CA28A477",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "PHYSICAL_COSMOLOGY"
+      ],
+      "limiter_present": false,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "index-en.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 2,
+      "region": "article",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
+      "tag": "p",
+      "text": "Compare ΛCDM, wCDM and explicitly model-dependent extensions."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-9787F1661A0ECA59",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "PHYSICAL_COSMOLOGY"
+      ],
+      "limiter_present": false,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "index-en.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 2,
+      "region": "article",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
+      "tag": "h2",
+      "text": "Cosmology Observatory"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-DAE5F7B46DF89624",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -4841,14 +4841,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "document",
-      "source_line": 21,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 22,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "title",
       "text": "UniverseLab von Stefan Hasselmeyer | Interaktives Kosmologie-Labor"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-290ABC6241C60AFA",
+      "claim_id": "UL-CLAIM-CANDIDATE-F2B340EE611325B2",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -4861,14 +4861,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "section",
-      "source_line": 69,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 66,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "div",
       "text": "Interactive Cosmology Laboratory · Stefan Hasselmeyer"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-16F5892763F16518",
+      "claim_id": "UL-CLAIM-CANDIDATE-1E54D25214FF26FB",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -4881,14 +4881,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "section",
-      "source_line": 73,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 70,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "div",
       "text": "● ΛCDM-Basis ● Numerische Validierung ● Spekulation klar getrennt"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-CE7E98B7F0FCA176",
+      "claim_id": "UL-CLAIM-CANDIDATE-9A4002A383237AC4",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -4901,34 +4901,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 78,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
-      "tag": "div",
-      "text": "OBS / 01 · ΛCDM + ANALYSE"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-FA8A615C056A4DC1",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "PHYSICAL_COSMOLOGY"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "index.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 2,
-      "region": "article",
-      "source_line": 78,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 75,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "h3",
       "text": "Cosmology Observatory"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-A147CBF10354F9EC",
+      "claim_id": "UL-CLAIM-CANDIDATE-F2C9F0B192272E6A",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -4941,14 +4921,34 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 79,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 75,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
+      "tag": "div",
+      "text": "OBS / 01 · ΛCDM + ANALYSE"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-5CC642F319424E51",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "PHYSICAL_COSMOLOGY"
+      ],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "index.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 2,
+      "region": "article",
+      "source_line": 76,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "p",
       "text": "Vergleiche ΛCDM, wCDM und effektive Erweiterungen."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-B69E9C1A81450BA2",
+      "claim_id": "UL-CLAIM-CANDIDATE-7722820015491707",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -4961,14 +4961,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 93,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 90,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "li",
       "text": "ΛCDM-Hintergrund und Epochen aktiv"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-57B90A068A13E111",
+      "claim_id": "UL-CLAIM-CANDIDATE-5634637D540C0035",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -4981,8 +4981,8 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "footer",
-      "source_line": 94,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 91,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "footer",
       "text": "UniverseLab · Interaktive Kosmologie von Stefan Hasselmeyer · klar getrennte Modellhypothesen."
     },
@@ -5348,7 +5348,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-7108CB3C8964441C",
+      "claim_id": "UL-CLAIM-CANDIDATE-4376C7710BCDC2B2",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -5361,14 +5361,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 23,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 20,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "h3",
       "text": "Cosmology Observatory"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-938B08CEFA40DD3D",
+      "claim_id": "UL-CLAIM-CANDIDATE-4D895191CD4B1E9F",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -5381,14 +5381,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 23,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 20,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "p",
       "text": "ΛCDM-Hintergrund, Epochen, Expansion und kosmologische Parameter."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-19FB5054256BF872",
+      "claim_id": "UL-CLAIM-CANDIDATE-8666BD0C17E92A4B",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -5401,14 +5401,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "section",
-      "source_line": 39,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 36,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "h2",
       "text": "Entwickler und maschinenlesbare Daten"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-49C862991E95A254",
+      "claim_id": "UL-CLAIM-CANDIDATE-B5E6653AD797F6F0",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -5421,8 +5421,8 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "footer",
-      "source_line": 43,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 40,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "footer",
       "text": "UniverseLab · Wissenschaft vor Inszenierung · Status, Oberfläche und Daten klar getrennt."
     },
@@ -5489,7 +5489,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-8AAD8942474B62A2",
+      "claim_id": "UL-CLAIM-CANDIDATE-6C679B62CDCCDD62",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -5503,14 +5503,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 32,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 30,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "An explicit rank-one counterexample falsifies the former claim that the target profile necessarily requires two non-vanishing orthogonal normal components."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-34A1DA882FBD40B5",
+      "claim_id": "UL-CLAIM-CANDIDATE-1781F67E85DBE05F",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -5523,14 +5523,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 36,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 34,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "h2",
       "text": "One shared public cosmology engine"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-55E613FDCE70BB68",
+      "claim_id": "UL-CLAIM-CANDIDATE-D2E09886CE15078E",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -5543,14 +5543,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 38,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 36,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "li",
       "text": "a bound HZT data/covariance/selection/nuisance/likelihood stack;"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-3E4DD639D6F75AFF",
+      "claim_id": "UL-CLAIM-CANDIDATE-00ECC93A14D5063D",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -5563,34 +5563,54 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 41,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
-      "tag": "h2",
-      "text": "Ein gemeinsamer öffentlicher Kosmologie-Rechenkern"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-B343E715DCD65947",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "PHYSICAL_COSMOLOGY"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "research-status.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 2,
-      "region": "article",
-      "source_line": 41,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 37,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Die reduzierte Bridge-Skala lautet für jedes Rχ>0 exakt a_c=Rχ/(Rχ+2,5) ; Bridge-Growth und Bridge-Lensing bleiben ausdrücklich unveröffentlicht."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-1218AED79E4DC204",
+      "claim_id": "UL-CLAIM-CANDIDATE-08702A975E5FE61D",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "PHYSICAL_COSMOLOGY"
+      ],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "research-status.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 2,
+      "region": "article",
+      "source_line": 37,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
+      "tag": "h2",
+      "text": "Ein gemeinsamer öffentlicher Kosmologie-Rechenkern"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-4AE9A919D8362C9B",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "OBSERVATIONAL_DATA"
+      ],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "research-status.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 2,
+      "region": "article",
+      "source_line": 39,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
+      "tag": "li",
+      "text": "gebundener HZT-Daten-/Kovarianz-/Selection-/Nuisance-/Likelihood-Stack;"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-F904B254E04B471C",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -5603,30 +5623,10 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 2,
       "region": "article",
-      "source_line": 43,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 39,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "li",
       "text": "quantitative parent-hergeleitete Mehrkanal-Vorhersagen mit operativen Falsifikationsschwellen;"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-E7FC59E64A6F1E7B",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "OBSERVATIONAL_DATA"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "research-status.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 2,
-      "region": "article",
-      "source_line": 43,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
-      "tag": "li",
-      "text": "gebundener HZT-Daten-/Kovarianz-/Selection-/Nuisance-/Likelihood-Stack;"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -9994,7 +9994,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-1C022644120E48F4",
+      "claim_id": "UL-CLAIM-CANDIDATE-0B609C2DF8FFF0C3",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -10005,14 +10005,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "main",
-      "source_line": 28,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
+      "source_line": 24,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
       "tag": "div",
       "text": "Other languages may use automatic translation and must not be treated as authoritative for technical terminology or gate status."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-1BA6968F21493420",
+      "claim_id": "UL-CLAIM-CANDIDATE-02424FF8E7D19C9E",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -10025,14 +10025,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "section",
-      "source_line": 69,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 66,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "h1",
       "text": "Das Universum sichtbar machen."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-8DF409A48540285D",
+      "claim_id": "UL-CLAIM-CANDIDATE-5F804BE784CC0FF6",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -10045,14 +10045,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 78,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 75,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "p",
       "text": "Untersuche Expansion, Alter, Wachstum und Krümmung."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-BD9B016FE84DB200",
+      "claim_id": "UL-CLAIM-CANDIDATE-6D8DBED8E61571C2",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -10063,14 +10063,86 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 78,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 75,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "p",
       "text": "Variiere H₀, Ωₘ, ΩΛ, w und σ₈."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-FA0721F3E16E9B45",
+      "claim_id": "UL-CLAIM-CANDIDATE-CEEF0B2E77A864DC",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "index.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 75,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
+      "tag": "article",
+      "text": "Observatory öffnen →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-11B9C1ECEC69F99F",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "index.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 76,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
+      "tag": "article",
+      "text": "Vergleichsrechner öffnen →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-BE17FA6F327BD44F",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "index.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 76,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
+      "tag": "p",
+      "text": "Berechne ausgewählte Formeln direkt."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-DDEC0F4C42C6ACA1",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "index.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 77,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
+      "tag": "article",
+      "text": "Zeitreise starten →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-6273C1ACB4562B58",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -10082,79 +10154,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 78,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
-      "tag": "article",
-      "text": "Observatory öffnen →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-0BF02E25E58AF708",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "index.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 79,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
-      "tag": "p",
-      "text": "Berechne ausgewählte Formeln direkt."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-57BB351C0EDB0FBC",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "index.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 79,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
-      "tag": "article",
-      "text": "Vergleichsrechner öffnen →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-48428707E98CD102",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "index.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 80,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
-      "tag": "article",
-      "text": "Zeitreise starten →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-750E27DC857A7C60",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "index.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 81,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "article",
       "text": "Validierung starten →"
     },
@@ -10807,7 +10807,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-59F20F80C832384C",
+      "claim_id": "UL-CLAIM-CANDIDATE-47E4CABE308C4013",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -10818,14 +10818,68 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
       "tag": "article",
       "text": "GATES Review gates →"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-807C34CF4A1E08F8",
+      "claim_id": "UL-CLAIM-CANDIDATE-D5B459024951E341",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "navigator.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 20,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
+      "tag": "div",
+      "text": "Observatory öffnen → Cosmic Journey →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-439E94C000F9DB9F",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "navigator.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 21,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
+      "tag": "div",
+      "text": "Vergleichsrechner → Tafelwerk 2.0 → Formelbibel H1–H64 →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-63D203B68D87C6EC",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "navigator.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 21,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
+      "tag": "p",
+      "text": "Modellvergleich, Distanzen, Referenzformeln und Tafelwerk."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-BCCE744D022741F5",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -10837,67 +10891,13 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 23,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
-      "tag": "div",
-      "text": "Observatory öffnen → Cosmic Journey →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-58C862B4F4A82225",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "navigator.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 24,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
-      "tag": "div",
-      "text": "Vergleichsrechner → Tafelwerk 2.0 → Formelbibel H1–H64 →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-9F3966A224AE8AD6",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "navigator.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 24,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
-      "tag": "p",
-      "text": "Modellvergleich, Distanzen, Referenzformeln und Tafelwerk."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-7F359FF6FD25D754",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "navigator.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 26,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "div",
       "text": "Labor öffnen → Zwangsaudit lesen →"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-8558BC661FBCDF28",
+      "claim_id": "UL-CLAIM-CANDIDATE-B86FE1DD0BB93839",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -10908,14 +10908,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 28,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 25,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "div",
       "text": "Validierung öffnen →"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-69067D04CCB1D89E",
+      "claim_id": "UL-CLAIM-CANDIDATE-631754ADE1DDAD0A",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -10928,14 +10928,68 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 31,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 28,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "div",
       "text": "Solver Hub öffnen →"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-48960D9B25935232",
+      "claim_id": "UL-CLAIM-CANDIDATE-4385653803279493",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "navigator.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 29,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
+      "tag": "div",
+      "text": "Recovery-Plan öffnen →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-F922F8C045A88AAF",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "navigator.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 30,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
+      "tag": "div",
+      "text": "Parent-Closure öffnen →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-6EDC33A9CD1055A5",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "navigator.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 31,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
+      "tag": "div",
+      "text": "Methodenkatalog öffnen →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-1E06F526345E97A3",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -10947,13 +11001,31 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 32,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "div",
-      "text": "Recovery-Plan öffnen →"
+      "text": "Materialatlas öffnen →"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-2E853A1E7E3583F2",
+      "claim_id": "UL-CLAIM-CANDIDATE-4EDF3F89AD06849B",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "navigator.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 32,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
+      "tag": "p",
+      "text": "Literaturkatalog, Herleitungen, Mischterme, Radionpotential und No-Go-Einordnung."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-152CAC649C1CCE1F",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -10965,85 +11037,13 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 33,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
-      "tag": "div",
-      "text": "Parent-Closure öffnen →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-C0E0EDE5E5F75D15",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "navigator.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 34,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
-      "tag": "div",
-      "text": "Methodenkatalog öffnen →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-1EADA0D8CDFB79DD",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "navigator.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 35,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
-      "tag": "p",
-      "text": "Literaturkatalog, Herleitungen, Mischterme, Radionpotential und No-Go-Einordnung."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5675971CBF02B1EB",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "navigator.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 35,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
-      "tag": "div",
-      "text": "Materialatlas öffnen →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-87F2E45AD655213A",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "navigator.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 36,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "div",
       "text": "Archiv-Audit öffnen → Legacy-Audit öffnen →"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-43A7CCB4CAD4916C",
+      "claim_id": "UL-CLAIM-CANDIDATE-AD68AD61B5592C95",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -11054,8 +11054,8 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 41,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 38,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "div",
       "text": "Quellcode-Hub öffnen → GitHub Repository ↗"
     },
@@ -11117,7 +11117,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-291CA0035C079E59",
+      "claim_id": "UL-CLAIM-CANDIDATE-08A3770C7D8ED92D",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -11128,14 +11128,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 30,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 28,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "The lexical audit trail intentionally remains HIGH=0 and MEDIUM=42 ; contextually unadjudicated candidates are 0 ."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-CAD102F22EF07CF3",
+      "claim_id": "UL-CLAIM-CANDIDATE-DD4A0C3B958CD8B7",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -11146,14 +11146,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 34,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 32,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "It has B²=0 and therefore does not establish non-trivial D2N-Q selection, a dark-sector explanation or bounce physics."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5964903EBB740403",
+      "claim_id": "UL-CLAIM-CANDIDATE-E3E364C9944E6E34",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -11164,14 +11164,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 37,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 35,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "WP1 = CLOSED_TARGET_FROZEN_NO_EXECUTION , WP2 = METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED , WP3 = NOT_STARTED , WP4 = BLOCKED_NOT_AUTHORIZED ."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-13D228F70F6387C4",
+      "claim_id": "UL-CLAIM-CANDIDATE-AA00BD95DEEC630B",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -11184,14 +11184,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 38,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 36,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "li",
       "text": "bridge growth, Poisson, slip and lensing maps;"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-BDA15F1F623C24AC",
+      "claim_id": "UL-CLAIM-CANDIDATE-107B88DBEB1F1BD2",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
@@ -11202,14 +11202,14 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 35,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 31,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Die lexikalische Auditspur bleibt absichtlich bei HIGH=0 und MEDIUM=42 ; kontextuell unadjudiziert bleiben 0 ."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-36093C0D2E884288",
+      "claim_id": "UL-CLAIM-CANDIDATE-7F7F87E0F1B9CFB6",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "lexical_categories": [
@@ -11224,17 +11224,75 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 38,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 34,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Die lokale gauge-fixierte Transmission-Struktur ist für glatte kompatible Daten in der deklarierten nichtdegenerierten Zustandsdomäne konditional ratifiziert."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-05281A3D8CC45DD4",
+      "claim_id": "UL-CLAIM-CANDIDATE-49302134332EDCB0",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "research-status.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 35,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
+      "tag": "p",
+      "text": "Er besitzt B²=0 und ist daher kein Nachweis der nichttrivialen D2N-Q-Selektion, Dunkelsektor-Erklärung oder Bounce-Physik."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-1A71678590EF280A",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "PHYSICAL_COSMOLOGY"
+      ],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "research-status.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 37,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
+      "tag": "p",
+      "text": "Validation, Observatory, Compare Safe und Emergence verwenden denselben kanonischen FLRW-/Distanz-/Growth-Kern."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-5882C474B1E6D762",
+      "equation_like": true,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "research-status.html",
+      "preliminary_risk_class": "LOW",
+      "preliminary_risk_score": 1,
+      "region": "article",
+      "source_line": 38,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
+      "tag": "p",
+      "text": "WP1 = CLOSED_TARGET_FROZEN_NO_EXECUTION , WP2 = METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED , WP3 = NOT_STARTED , WP4 = BLOCKED_NOT_AUTHORIZED ."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-1C5BBD254605299C",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "PHYSICAL_COSMOLOGY"
+      ],
       "limiter_present": false,
       "manifest_status": "ACTIVE_CURRENT_RECONCILED",
       "page_scope": "CANONICAL_MANIFEST_PAGE",
@@ -11243,65 +11301,7 @@
       "preliminary_risk_score": 1,
       "region": "article",
       "source_line": 39,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
-      "tag": "p",
-      "text": "Er besitzt B²=0 und ist daher kein Nachweis der nichttrivialen D2N-Q-Selektion, Dunkelsektor-Erklärung oder Bounce-Physik."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-528B89C76DA384B5",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "PHYSICAL_COSMOLOGY"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "research-status.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 41,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
-      "tag": "p",
-      "text": "Validation, Observatory, Compare Safe und Emergence verwenden denselben kanonischen FLRW-/Distanz-/Growth-Kern."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-113269BB066AB6C8",
-      "equation_like": true,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "research-status.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 42,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
-      "tag": "p",
-      "text": "WP1 = CLOSED_TARGET_FROZEN_NO_EXECUTION , WP2 = METHOD_AUTHORITY_PREPARATION_IMPLEMENTED_NOT_AUTHORIZED , WP3 = NOT_STARTED , WP4 = BLOCKED_NOT_AUTHORIZED ."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-7A17048845418219",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "PHYSICAL_COSMOLOGY"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "research-status.html",
-      "preliminary_risk_class": "LOW",
-      "preliminary_risk_score": 1,
-      "region": "article",
-      "source_line": 43,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "li",
       "text": "Bridge-Growth-, Poisson-, Slip- und Lensing-Map;"
     },
@@ -11723,7 +11723,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-171A50EC8D6806D5",
+      "claim_id": "UL-CLAIM-CANDIDATE-4DF7F9A7B1E43784",
       "equation_like": true,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -11736,8 +11736,8 @@
       "preliminary_risk_class": "LOW",
       "preliminary_risk_score": 1,
       "region": "article",
-      "source_line": 32,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 27,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "p",
       "text": "Zwei unabhängige Junctions, Pure-Tension-Residual und erforderliches Yσ."
     },
@@ -12852,28 +12852,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-081DE6276048086A",
-      "equation_like": true,
-      "explicit_status": "CONDITIONAL_OR_HEURISTIC",
-      "lexical_categories": [
-        "CONDITIONAL_HEURISTIC",
-        "PHYSICAL_COSMOLOGY"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "index-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "article",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
-      "tag": "p",
-      "text": "Explore expansion, cosmic epochs, background parameters and selected structure-growth quantities using standard cosmological reference models."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-D2BC13C949F5F12F",
+      "claim_id": "UL-CLAIM-CANDIDATE-7BF2950A7A8007C8",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -12886,14 +12865,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
       "tag": "h2",
       "text": "UniverseLab Solver Hub"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-EC336B06E561499C",
+      "claim_id": "UL-CLAIM-CANDIDATE-835802C9CF656EA7",
       "equation_like": true,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "lexical_categories": [
@@ -12907,14 +12886,35 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
       "tag": "div",
       "text": "ΛCDM reference cosmology"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-24299CEA55E11F0D",
+      "claim_id": "UL-CLAIM-CANDIDATE-F6CAF75E352870B6",
+      "equation_like": true,
+      "explicit_status": "CONDITIONAL_OR_HEURISTIC",
+      "lexical_categories": [
+        "CONDITIONAL_HEURISTIC",
+        "PHYSICAL_COSMOLOGY"
+      ],
+      "limiter_present": false,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "index-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "article",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
+      "tag": "p",
+      "text": "Explore expansion, cosmic epochs, background parameters and selected structure-growth quantities using standard cosmological reference models."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-DE9A7699A54E6292",
       "equation_like": true,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "lexical_categories": [
@@ -12928,14 +12928,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 74,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 71,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "div",
       "text": "ΛCDM-Referenz · heute ● BERECHNET"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-81000AE4703C6FC3",
+      "claim_id": "UL-CLAIM-CANDIDATE-43DAD73E58DC49B8",
       "equation_like": true,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "lexical_categories": [
@@ -12949,8 +12949,8 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 82,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 79,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "p",
       "text": "Räumliche, kosmologisch synchronisierte Visualisierung – keine N-Körper-Simulation."
     },
@@ -13157,7 +13157,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-673F98566282E8C6",
+      "claim_id": "UL-CLAIM-CANDIDATE-346406A97962088A",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13170,14 +13170,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
       "tag": "p",
-      "text": "Shared numerical contracts, provenance, residuals and the MD-2S BVP infrastructure."
+      "text": "Current gate state across HPVS, HZT-M0-S6, HZT-M0-P5 and HZT-Full, with explicit separation between historical reconstruction, physical rebuild and numerical verification."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-6779EA96659A3F24",
+      "claim_id": "UL-CLAIM-CANDIDATE-A04BF8724737A109",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13190,14 +13190,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
       "tag": "p",
       "text": "Direct access to the research-status, methods, literature, parent-action and solver layers."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-F4EB1139272DE318",
+      "claim_id": "UL-CLAIM-CANDIDATE-D07A2EDE8007500D",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13210,10 +13210,10 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
       "tag": "p",
-      "text": "Current gate state across HPVS, HZT-M0-S6, HZT-M0-P5 and HZT-Full, with explicit separation between historical reconstruction, physical rebuild and numerical verification."
+      "text": "Shared numerical contracts, provenance, residuals and the MD-2S BVP infrastructure."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -13231,13 +13231,13 @@
       "preliminary_risk_score": 0,
       "region": "document",
       "source_line": 7,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "meta-description",
       "text": "UniverseLab Wissenschafts-Navigator: Labore, Dokumentation, Solver, Methoden, Audit und Entwicklerzugänge klar getrennt."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-DC3E64B544A7188B",
+      "claim_id": "UL-CLAIM-CANDIDATE-DF2ABD5A41260ED4",
       "equation_like": true,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "lexical_categories": [
@@ -13251,14 +13251,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 27,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 24,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "p",
       "text": "Emergenz, Anfangsmuster und kosmologische Visualisierung."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5AE60ACED0D1203D",
+      "claim_id": "UL-CLAIM-CANDIDATE-B167232F18E5EC8D",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13271,14 +13271,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 30,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 27,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "h2",
       "text": "Dokumentation, Solver und Audit"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-8D1B0196A24E3D31",
+      "claim_id": "UL-CLAIM-CANDIDATE-6ABB6A6C4F81C21F",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13291,34 +13291,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 31,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
-      "tag": "h3",
-      "text": "UniverseLab Solver Hub"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-E15393BD3D16A04C",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "navigator.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "article",
-      "source_line": 31,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 28,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "p",
       "text": "14 Solver, 56 Work Packages, kritische Entwicklungspfade und strikte Release-Gates."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-17A1401B7B64BC08",
+      "claim_id": "UL-CLAIM-CANDIDATE-C8DCB0F326AB5782",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13331,14 +13311,34 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 32,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 28,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
+      "tag": "h3",
+      "text": "UniverseLab Solver Hub"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-8A36BD0A8007EB9F",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD"
+      ],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "navigator.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "article",
+      "source_line": 29,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "p",
       "text": "Recovery, reproduzierbarer Neuaufbau und anschließender Rang-/Konditionsaudit ohne Evidenzwirkung."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-9D5775ECE15C7B4D",
+      "claim_id": "UL-CLAIM-CANDIDATE-6F4D0AAAC286BA8F",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13351,8 +13351,8 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 38,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 35,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "p",
       "text": "Reproduzierbarer physischer MD-2S-Hintergrund mit einseitigem Randexport ist das nächste Solver-Release-Gate; derzeit nicht erfüllt."
     },
@@ -13402,7 +13402,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-0AE91384F07D0680",
+      "claim_id": "UL-CLAIM-CANDIDATE-C92D954A87CF59DE",
       "equation_like": true,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -13419,34 +13419,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 30,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 28,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "As a repository-audit mapping only — not physical evidence for HZT and not a parent derivation — Band V-C maps all 15 canonical claim families across Claim → equation/derivation → code → test → data → falsifier/gate."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-83247C1F31BC738C",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "research-status-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "article",
-      "source_line": 36,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
-      "tag": "article",
-      "text": "Numerical reconciliation"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-D04DEF6DAC9A9E36",
+      "claim_id": "UL-CLAIM-CANDIDATE-660C10A8A69802D5",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -13464,14 +13444,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 36,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 34,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "Internal mathematical and numerical consistency is not a 6D-parent derivation, likelihood fit, ghost-freedom result or physical evidence."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-D56DF19F4A405E01",
+      "claim_id": "UL-CLAIM-CANDIDATE-B5D01BF9CD7906A9",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13484,14 +13464,34 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 37,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 34,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
+      "tag": "article",
+      "text": "Numerical reconciliation"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-301B918E1A7C7A63",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD"
+      ],
+      "limiter_present": false,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "research-status-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "article",
+      "source_line": 35,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "No operative AuthorizationDecision, SingleUseGrant, backend import, target solve or physical response-rank run exists."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-0EC4524A8A156571",
+      "claim_id": "UL-CLAIM-CANDIDATE-A1004A7B25E758C2",
       "equation_like": true,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -13508,14 +13508,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 35,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 31,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Als reine Repository-Auditzuordnung – keine physische Evidenz für HZT und keine Parent-Herleitung – ordnet Band V-C alle 15 kanonischen Claim-Familien der Kette Claim → Gleichung/Herleitung → Code → Test → Daten → Falsifikator/Gate zu."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-63DC66C7574B6B01",
+      "claim_id": "UL-CLAIM-CANDIDATE-E088011B718A87EC",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13528,14 +13528,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 37,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 33,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Ein explizites Rang-eins-Gegenbeispiel widerlegt die frühere Behauptung, das Zielprofil benötige zwingend zwei nichtverschwindende orthogonale Normalenkomponenten."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-CD3DA2ACA425F621",
+      "claim_id": "UL-CLAIM-CANDIDATE-F87CD1E6B85801C3",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -13552,8 +13552,8 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 41,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 37,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Diese interne mathematische und numerische Konsistenz ist keine 6D-Parent-Herleitung, kein Likelihood-Fit, keine Ghostfreiheitsaussage und keine physische Evidenz."
     },
@@ -13579,6 +13579,46 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-13E167A4EC75CE62",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD"
+      ],
+      "limiter_present": false,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "solver-hub-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "article",
+      "source_line": 1,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
+      "tag": "p",
+      "text": "The numerical core can solve a boundary-value problem only after the complete physical ODE system and boundary conditions have been rederived from the canonical parent action and connected through the declared model callback contract."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-30476DC846E59D52",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD"
+      ],
+      "limiter_present": false,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "solver-hub-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "section",
+      "source_line": 1,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
+      "tag": "p",
+      "text": "No solver status changes K1-D or K1-E."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
       "claim_id": "UL-CLAIM-CANDIDATE-95DEE49ECB9642F7",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
@@ -13593,13 +13633,13 @@
       "preliminary_risk_score": 0,
       "region": "document",
       "source_line": 1,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
       "tag": "title",
       "text": "UniverseLab · Solver Hub · Numerical Research Infrastructure"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-2601FCACE919912F",
+      "claim_id": "UL-CLAIM-CANDIDATE-C9E0AACE0536E7D1",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13612,54 +13652,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 6,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
-      "tag": "p",
-      "text": "No solver status changes K1-D or K1-E."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-269304EA2E99909B",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "solver-hub-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "article",
-      "source_line": 6,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
-      "tag": "p",
-      "text": "The numerical core can solve a boundary-value problem only after the complete physical ODE system and boundary conditions have been rederived from the canonical parent action and connected through the declared model callback contract."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5AD99590F81DB42F",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "solver-hub-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "section",
-      "source_line": 6,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
+      "source_line": 1,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
       "tag": "h1",
       "text": "Numerical research infrastructure"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5DA0C9BA63A33AB8",
+      "claim_id": "UL-CLAIM-CANDIDATE-E8B5D40C5E45B2A2",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13672,14 +13672,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 6,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
+      "source_line": 1,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
       "tag": "h3",
       "text": "MD2S Background BVP Solver"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-C47D2DDA7FD22790",
+      "claim_id": "UL-CLAIM-CANDIDATE-F00B11D35EC3A4F4",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13692,14 +13692,74 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 6,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
+      "source_line": 1,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
       "tag": "div",
       "text": "UniverseLab Solver Hub · ULSH"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-213C408E7211AD04",
+      "claim_id": "UL-CLAIM-CANDIDATE-073A14CA87E9B40D",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD"
+      ],
+      "limiter_present": false,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "solver-hub-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "article",
+      "source_line": 3,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
+      "tag": "h3",
+      "text": "S/V/T Perturbation Solver"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-16EEEAD9A9E4F16F",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD"
+      ],
+      "limiter_present": false,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "solver-hub-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "article",
+      "source_line": 3,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
+      "tag": "p",
+      "text": "Designed to evaluate response rank, singular values and conditioning once a controlled background and boundary export exist."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-7619B5BF01BED77D",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD"
+      ],
+      "limiter_present": false,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "solver-hub-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "article",
+      "source_line": 3,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
+      "tag": "p",
+      "text": "Evaluates the independent junction conditions, pure-tension residual and required anisotropic cap contribution."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-E9D1FBFFA38BFFBF",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13712,70 +13772,10 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 8,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
+      "source_line": 3,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
       "tag": "div",
       "text": "Firewall: the MD2S-BVP implementation is real numerical infrastructure, but it is not an authorized physical MD-2S solver by itself."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-7D057504D3B93951",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "solver-hub-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "article",
-      "source_line": 8,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
-      "tag": "p",
-      "text": "Designed to evaluate response rank, singular values and conditioning once a controlled background and boundary export exist."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-8D80D1E3BE6522E1",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "solver-hub-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "article",
-      "source_line": 8,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
-      "tag": "h3",
-      "text": "S/V/T Perturbation Solver"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-BDA5A14C8C61B573",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "solver-hub-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "article",
-      "source_line": 8,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
-      "tag": "p",
-      "text": "Evaluates the independent junction conditions, pure-tension residual and required anisotropic cap contribution."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -13793,13 +13793,13 @@
       "preliminary_risk_score": 0,
       "region": "document",
       "source_line": 7,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "title",
       "text": "UniverseLab · Solver Hub · Numerische Forschungsinfrastruktur"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-1C287BC493BD8170",
+      "claim_id": "UL-CLAIM-CANDIDATE-6BF51004DA04724C",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13812,34 +13812,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 21,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
-      "tag": "div",
-      "text": "UniverseLab Solver Hub · ULSH v1.0-alpha3"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-F70A48639EA93E0B",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "solver-hub.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "section",
-      "source_line": 21,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 16,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "div",
       "text": "Solver Workbench Build Order Baseline v1.0 MD-2S v0.2 Recovery"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-085397E873BBDD7B",
+      "claim_id": "UL-CLAIM-CANDIDATE-745185567DF2AD06",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13852,14 +13832,34 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 22,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 16,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
+      "tag": "div",
+      "text": "UniverseLab Solver Hub · ULSH v1.0-alpha3"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-25C7F24706463E3D",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD"
+      ],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "solver-hub.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "section",
+      "source_line": 17,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "h2",
       "text": "Solver Development Program"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-3702D15F75C3B35B",
+      "claim_id": "UL-CLAIM-CANDIDATE-2CEB8AB4F7844969",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13872,14 +13872,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 22,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 17,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "p",
       "text": "Für jeden Solver sind Upstream-Abhängigkeiten, fehlende Arbeit, Kontrollen, Pflicht-Outputs und ein Freigabegate versioniert."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-74A66021A8409A46",
+      "claim_id": "UL-CLAIM-CANDIDATE-F8A04DC505F61735",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13892,14 +13892,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 22,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 17,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "h3",
       "text": "14 Solver · 56 Work Packages · vier kritische Pfade"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-E0FFE343C2E6266B",
+      "claim_id": "UL-CLAIM-CANDIDATE-F4B751470F839E1B",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13912,14 +13912,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 28,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 23,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "div",
       "text": "Solver Workbench öffnen Master Build Order öffnen Build JSON Site State JSON"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-08863C440AF942D9",
+      "claim_id": "UL-CLAIM-CANDIDATE-6B5AFF098F71D833",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13932,14 +13932,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 29,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 24,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "h2",
       "text": "Kanonischer erster Solver"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-CAF4DFD6AA2D0929",
+      "claim_id": "UL-CLAIM-CANDIDATE-C92EAC4F917E34BD",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13952,14 +13952,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "section",
-      "source_line": 29,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 24,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "p",
       "text": "HZT-M0-S6 MD-2S Background BVP Solver"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-188C8A16E7DD3FD9",
+      "claim_id": "UL-CLAIM-CANDIDATE-9AA1FB9419BF3CDD",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -13972,54 +13972,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 32,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
-      "tag": "p",
-      "text": "Branchenspezifische Solver; derzeit keine Freigabe als geschlossene physikalische Pipeline."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-9ACBD4258068BD78",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "solver-hub.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "article",
-      "source_line": 32,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
-      "tag": "h3",
-      "text": "MD2S B1.4O Rank Audit"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-D294EF5BC35EB6C2",
-      "equation_like": false,
-      "explicit_status": "UNCLASSIFIED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD"
-      ],
-      "limiter_present": false,
-      "manifest_status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "solver-hub.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": 0,
-      "region": "article",
-      "source_line": 32,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 27,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "h3",
       "text": "S/V/T Perturbation Solver"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-FE5F8E1C6D1E9AC2",
+      "claim_id": "UL-CLAIM-CANDIDATE-A23691EF93234D39",
       "equation_like": false,
       "explicit_status": "UNCLASSIFIED",
       "lexical_categories": [
@@ -14032,10 +13992,50 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": 0,
       "region": "article",
-      "source_line": 32,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 27,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "p",
       "text": "Antwortmatrix, Rang, Singulärwerte und Kondition nach Wiedergewinnung des Hintergrundsolvers."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-ACB53875C325E727",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD"
+      ],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "solver-hub.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "article",
+      "source_line": 27,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
+      "tag": "h3",
+      "text": "MD2S B1.4O Rank Audit"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-C89044BC352A3DCB",
+      "equation_like": false,
+      "explicit_status": "UNCLASSIFIED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD"
+      ],
+      "limiter_present": false,
+      "manifest_status": "ACTIVE_DIAGNOSTIC_NO_EXECUTION_AUTHORITY",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "solver-hub.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": 0,
+      "region": "article",
+      "source_line": 27,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
+      "tag": "p",
+      "text": "Branchenspezifische Solver; derzeit keine Freigabe als geschlossene physikalische Pipeline."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -14241,7 +14241,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-1747003E499F94CD",
+      "claim_id": "UL-CLAIM-CANDIDATE-700978EF46EAA07E",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "lexical_categories": [
@@ -14255,8 +14255,8 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -1,
       "region": "article",
-      "source_line": 36,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 34,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "Validation, Observatory, Compare Safe and Emergence use the same canonical FLRW, distance and linear-growth reference engine."
     },
@@ -14800,7 +14800,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-28091D562B22908F",
+      "claim_id": "UL-CLAIM-CANDIDATE-9B82A360C11C37E7",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "lexical_categories": [
@@ -14813,14 +14813,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -2,
       "region": "article",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
       "tag": "h2",
       "text": "Comparison Calculator & Formula Reference"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-75C1B1B6C70B5699",
+      "claim_id": "UL-CLAIM-CANDIDATE-27D53DFA296E5E79",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "lexical_categories": [
@@ -14833,14 +14833,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -2,
       "region": "article",
-      "source_line": 82,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 79,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "div",
       "text": "FLIGHT / 05 · DIDAKTISCH"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-E8F497DAB8DF41A9",
+      "claim_id": "UL-CLAIM-CANDIDATE-697B2F047866D8B8",
       "equation_like": false,
       "explicit_status": "CONDITIONAL_OR_HEURISTIC",
       "lexical_categories": [
@@ -14853,8 +14853,8 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -2,
       "region": "article",
-      "source_line": 93,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 90,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "li",
       "text": "Modellabhängig: heuristisch oder didaktisch"
     },
@@ -14944,7 +14944,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-66B1319447313C70",
+      "claim_id": "UL-CLAIM-CANDIDATE-6E83AA1994FA3AA7",
       "equation_like": true,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -14960,8 +14960,8 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -2,
       "region": "section",
-      "source_line": 27,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 23,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Als reine Statusregel – keine Evidenz für HZT und keine physikalische Messung – trennt UniverseLab analytische Resultate, diagnostische Numerik, offene Parent→Observable-Brücken, Autorisierungsinfrastruktur und physische Evidenz strikt voneinander."
     },
@@ -15171,7 +15171,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-F47221CD6B415E43",
+      "claim_id": "UL-CLAIM-CANDIDATE-8616E22A209BA956",
       "equation_like": false,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -15187,8 +15187,8 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -3,
       "region": "section",
-      "source_line": 25,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 23,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "As a status rule only — not evidence for HZT and not a physical measurement — UniverseLab strictly separates analytical results, diagnostic numerics, open parent-to-observable maps, authorization infrastructure and physical evidence."
     },
@@ -15441,7 +15441,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-4663F688797E7756",
+      "claim_id": "UL-CLAIM-CANDIDATE-89D9AA8C49B1B288",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -15457,8 +15457,8 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -5,
       "region": "main",
-      "source_line": 41,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 39,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "div",
       "text": "Technical feasibility is not physical identification; numerical stability is not ghost freedom; a good fit would not confirm the theory; green QA is not physical evidence."
     },
@@ -17706,27 +17706,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-0F98DE2B4333BA49",
-      "equation_like": false,
-      "explicit_status": "BLOCKED_OR_UNRELEASED",
-      "lexical_categories": [
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "index-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "section",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
-      "tag": "div",
-      "text": "K1-E NOT ADMISSIBLE"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-170FF22FBEF88FE1",
+      "claim_id": "UL-CLAIM-CANDIDATE-5AD8ECD96D696564",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -17740,54 +17720,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
       "tag": "p",
       "text": "Calculators are diagnostic tools and do not establish physical identification."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-202C6F7FD9380062",
-      "equation_like": true,
-      "explicit_status": "OPEN_OR_NOT_EXECUTED",
-      "lexical_categories": [
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "index-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "article",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
-      "tag": "article",
-      "text": "Open Observatory →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-C08D055DCF08664C",
-      "equation_like": true,
-      "explicit_status": "OPEN_OR_NOT_EXECUTED",
-      "lexical_categories": [
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "index-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "article",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
-      "tag": "article",
-      "text": "Open comparison tools →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-D221870F0B079A07",
+      "claim_id": "UL-CLAIM-CANDIDATE-822CA626428403BC",
       "equation_like": false,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -17800,34 +17740,74 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 21,
-      "source_sha256": "078943d901e3e345c74f04e34ec6856c45cb45d926c7f704431c60ee19626fd1",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
       "tag": "p",
       "text": "Open derivations, blockers and non-released bridges are shown rather than hidden."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-CF9B609F50DF77F7",
-      "equation_like": false,
-      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "claim_id": "UL-CLAIM-CANDIDATE-879DE9B301E386BE",
+      "equation_like": true,
+      "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
         "STATUS_FIREWALL"
       ],
       "limiter_present": true,
-      "manifest_status": "ACTIVE",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "index.html",
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "index-en.html",
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 93,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
-      "tag": "p",
-      "text": "UniverseLab zeigt nicht nur, was berechnet wird, sondern auch, wie belastbar die jeweilige Aussage ist."
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
+      "tag": "article",
+      "text": "Open comparison tools →"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-E20549F80C3FFE36",
+      "claim_id": "UL-CLAIM-CANDIDATE-8C302AEA1F510AB7",
+      "equation_like": false,
+      "explicit_status": "BLOCKED_OR_UNRELEASED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "index-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "section",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
+      "tag": "div",
+      "text": "K1-E NOT ADMISSIBLE"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-EE7EE43262A02C02",
+      "equation_like": true,
+      "explicit_status": "OPEN_OR_NOT_EXECUTED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "index-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 17,
+      "source_sha256": "8b18cde0f1d1e76f80ee8942aaad5ee2e189595241f993d37b118dae903a850f",
+      "tag": "article",
+      "text": "Open Observatory →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-0256A3E7B837A2B5",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -17841,10 +17821,30 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 93,
-      "source_sha256": "bb49dbc9b360b3cec1d727a0d4b5ebfa322664eb70ad27f21f13ebe577e98be6",
+      "source_line": 90,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
       "tag": "li",
       "text": "6D-Forward-Map nicht freigegeben"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-0768CDCF5C172004",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "index.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 90,
+      "source_sha256": "7b957344152eb4a0035fbe403efb3df8aad8f273315e0b6eb533a40b3759e04c",
+      "tag": "p",
+      "text": "UniverseLab zeigt nicht nur, was berechnet wird, sondern auch, wie belastbar die jeweilige Aussage ist."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -18118,7 +18118,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-239DBE00FFCFCFE1",
+      "claim_id": "UL-CLAIM-CANDIDATE-1EE6F09D5B3698DC",
       "equation_like": true,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18131,97 +18131,16 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
-      "tag": "article",
-      "text": "METHODS Open methods →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-389117FFEBBCD74C",
-      "equation_like": true,
-      "explicit_status": "OPEN_OR_NOT_EXECUTED",
-      "lexical_categories": [
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "navigator-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
-      "tag": "article",
-      "text": "STATUS Open status →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-502143443216EAAA",
-      "equation_like": true,
-      "explicit_status": "OPEN_OR_NOT_EXECUTED",
-      "lexical_categories": [
-        "NUMERICAL_METHOD",
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "navigator-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
-      "tag": "article",
-      "text": "ULSH Open Solver Hub →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-6027EF6EC3D18FC0",
-      "equation_like": true,
-      "explicit_status": "OPEN_OR_NOT_EXECUTED",
-      "lexical_categories": [
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "navigator-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
       "tag": "article",
       "text": "MATERIAL Open atlas →"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-6191537EFC01ACD1",
+      "claim_id": "UL-CLAIM-CANDIDATE-28F53764778347F2",
       "equation_like": true,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
-      "lexical_categories": [
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "navigator-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
-      "tag": "article",
-      "text": "SCI-001/002 Open parent closure →"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-A40C3B7DA4E3C0BF",
-      "equation_like": false,
-      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
         "NUMERICAL_METHOD",
         "STATUS_FIREWALL"
@@ -18233,14 +18152,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
-      "tag": "p",
-      "text": "Solver execution does not imply physical authorization."
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
+      "tag": "article",
+      "text": "ULSH Open Solver Hub →"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-C466BBD7428E1DF8",
+      "claim_id": "UL-CLAIM-CANDIDATE-31AD9D7CBBDBCBF2",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18254,14 +18173,34 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
       "tag": "p",
       "text": "German remains the canonical research language; these English pages are curated translations and do not change formulas, gate states or evidence classifications."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-DC18DFE4924B3E71",
+      "claim_id": "UL-CLAIM-CANDIDATE-56B5DB47ABF90EAF",
+      "equation_like": true,
+      "explicit_status": "OPEN_OR_NOT_EXECUTED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "navigator-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
+      "tag": "article",
+      "text": "SCI-001/002 Open parent closure →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-5FC8D857701130C5",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -18274,14 +18213,75 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 5,
-      "source_sha256": "032b490f15a0834912fc8d0a1eeccc680b88625b6da0ad9f073a08574a92c920",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
       "tag": "p",
       "text": "K1-D remains NOT RELEASED and K1-E remains NOT ADMISSIBLE."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-46814B9280522F1F",
+      "claim_id": "UL-CLAIM-CANDIDATE-915BFC6E249D9AB5",
+      "equation_like": true,
+      "explicit_status": "OPEN_OR_NOT_EXECUTED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "navigator-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
+      "tag": "article",
+      "text": "STATUS Open status →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-9FFDC1CD95B60B86",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "NUMERICAL_METHOD",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "navigator-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
+      "tag": "p",
+      "text": "Solver execution does not imply physical authorization."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-E0838F20A15F95B7",
+      "equation_like": true,
+      "explicit_status": "OPEN_OR_NOT_EXECUTED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "navigator-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 1,
+      "source_sha256": "c7bde69dc939b58ce9d444ccc9184e57177417244fca7611bcfbcfad97c887fb",
+      "tag": "article",
+      "text": "METHODS Open methods →"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-05E71F6B3D641D68",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -18294,14 +18294,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 21,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 18,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "div",
       "text": "Blockiert Präziser untersuchter Mechanismus scheitert oder Gate sperrt"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-E7AA971A26E90C67",
+      "claim_id": "UL-CLAIM-CANDIDATE-533247D7EBD05444",
       "equation_like": false,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18315,14 +18315,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 21,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 18,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "div",
       "text": "Offen Herleitung oder physische Freigabe fehlt"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-604344980E967172",
+      "claim_id": "UL-CLAIM-CANDIDATE-9AE7EA9E461E4B51",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18335,14 +18335,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 25,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 22,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "p",
       "text": "Kontrollierter HPVS-Status, Blocker, Rechner und Roadmap."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-EB93A51289CB90BC",
+      "claim_id": "UL-CLAIM-CANDIDATE-75BE667B37BA467B",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -18355,14 +18355,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 38,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 35,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "p",
       "text": "K1-D ist nicht freigegeben."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-4B5B91BCF404BEFD",
+      "claim_id": "UL-CLAIM-CANDIDATE-9EE51359CCA60889",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18375,14 +18375,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 39,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 36,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "div",
-      "text": "Ein guter Fit ist keine Theoriebestätigung."
+      "text": "Entwickler-Firewall: Eine technisch erfolgreiche Ausführung ist keine physikalische Identifikation."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-E17C15F888DABEF8",
+      "claim_id": "UL-CLAIM-CANDIDATE-CE0D8E0B3063FBDD",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18395,10 +18395,10 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 39,
-      "source_sha256": "2fa150fe5f93f3f215e0f7633df77c156926334e29d73371b7fbbf630dd8ae8c",
+      "source_line": 36,
+      "source_sha256": "2d15228cfd3ee0be0020fb02ad5c3fb215522ec899d2ec5e8aea69c77eb8ed49",
       "tag": "div",
-      "text": "Entwickler-Firewall: Eine technisch erfolgreiche Ausführung ist keine physikalische Identifikation."
+      "text": "Ein guter Fit ist keine Theoriebestätigung."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -18443,7 +18443,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-1A40534F34073A7C",
+      "claim_id": "UL-CLAIM-CANDIDATE-90D402D2A1884D89",
       "equation_like": false,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18456,14 +18456,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 25,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 23,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "Open pull requests have no canonical effect."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5E4C0F2946226CA6",
+      "claim_id": "UL-CLAIM-CANDIDATE-671FEA49FA337543",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -18476,14 +18476,34 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 26,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 24,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "div",
       "text": "K1-E NOT ADMISSIBLE"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-D25B98882CED11DA",
+      "claim_id": "UL-CLAIM-CANDIDATE-A7557D7A5F554572",
+      "equation_like": false,
+      "explicit_status": "BLOCKED_OR_UNRELEASED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": null,
+      "page_scope": "PUBLIC_SITEMAP_PAGE",
+      "path": "research-status-en.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "section",
+      "source_line": 24,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
+      "tag": "div",
+      "text": "Runtime Issuance BLOCKED"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-C6649CB996A1A832",
       "equation_like": false,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18496,34 +18516,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 26,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 24,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "div",
       "text": "Physical Background NOT ESTABLISHED"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-E2EA28449DD708A0",
-      "equation_like": false,
-      "explicit_status": "BLOCKED_OR_UNRELEASED",
-      "lexical_categories": [
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": null,
-      "page_scope": "PUBLIC_SITEMAP_PAGE",
-      "path": "research-status-en.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "section",
-      "source_line": 26,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
-      "tag": "div",
-      "text": "Runtime Issuance BLOCKED"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-CDAE41060DE171D3",
+      "claim_id": "UL-CLAIM-CANDIDATE-C8A5622CFBCB4AFC",
       "equation_like": true,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18537,14 +18537,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 27,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 25,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "div",
       "text": "HPVS → HZT-M0 → HZT-Full CP01R4: METHOD FROZEN · NO EXECUTION Evidence effect: NONE"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-AE1578DE3AE4A81A",
+      "claim_id": "UL-CLAIM-CANDIDATE-2632EFB78FFE9E46",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18558,14 +18558,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 30,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 28,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "Audit coverage is not physical confirmation of HZT."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-35186C89CBCDA16F",
+      "claim_id": "UL-CLAIM-CANDIDATE-1D9DD265B7C59DAE",
       "equation_like": true,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18579,14 +18579,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 31,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 29,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "The gate remains OPEN ; no executable parent→reduced→observable map has been released."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-3FDB935A5F506017",
+      "claim_id": "UL-CLAIM-CANDIDATE-9921E31BE438E301",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18600,14 +18600,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 33,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 31,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "This is not a global pole theorem and not a proof of ghost freedom."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-471C260861F2C773",
+      "claim_id": "UL-CLAIM-CANDIDATE-60D7B3C197042010",
       "equation_like": true,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18620,14 +18620,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 35,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 33,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "κ₆ has a canonical parent normalization; a₀ and βτ are only partially recovered; Rχ and 𝓘B remain open on the parent side."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-B2B2A5540C9D2529",
+      "claim_id": "UL-CLAIM-CANDIDATE-DAF732E27076804A",
       "equation_like": true,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -18641,14 +18641,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 36,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 34,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "The reduced bridge scale is exactly a_c=Rχ/(Rχ+2.5) for every Rχ>0 ; bridge growth and bridge lensing remain unreleased."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-2CE7846E0840F719",
+      "claim_id": "UL-CLAIM-CANDIDATE-78D8F456175E6986",
       "equation_like": false,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18661,14 +18661,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 37,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 35,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "PR #137: remains open, draft and non-canonical."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-77692217D19BFA25",
+      "claim_id": "UL-CLAIM-CANDIDATE-EA4CEBD1A49B4F92",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -18681,14 +18681,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 37,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 35,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "p",
       "text": "No human trust root is ratified and runtime issuance remains blocked."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-C05A4CD8FAE793A9",
+      "claim_id": "UL-CLAIM-CANDIDATE-1C8E6555823C254B",
       "equation_like": false,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18702,14 +18702,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 38,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 36,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "article",
       "text": "Open proof obligations"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-CAFFB029D70C726D",
+      "claim_id": "UL-CLAIM-CANDIDATE-4B4C377534DB3FCC",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18722,14 +18722,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 38,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 36,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "h2",
       "text": "What is not identified"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-EA32352148455D2A",
+      "claim_id": "UL-CLAIM-CANDIDATE-D6735536FDE73A8F",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -18744,34 +18744,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "main",
-      "source_line": 41,
-      "source_sha256": "74d4c056eec3e9e3c78f3275cb8f520de315d5706062c641ef0102e4075378ca",
+      "source_line": 39,
+      "source_sha256": "74fde6a6dd1d3601c2e391bcdeffad08b521ff43e227a4f3c8d563317b0414a5",
       "tag": "div",
       "text": "Status vocabulary: proven · conditional · diagnostic · open · blocked · not released."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-4117A9C0177B62F6",
-      "equation_like": false,
-      "explicit_status": "BLOCKED_OR_UNRELEASED",
-      "lexical_categories": [
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "research-status.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "section",
-      "source_line": 29,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
-      "tag": "div",
-      "text": "Runtime Issuance BLOCKED"
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-5DC6F654DB45E1F5",
+      "claim_id": "UL-CLAIM-CANDIDATE-30322FCEB33AFD25",
       "equation_like": false,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18784,14 +18764,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 29,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 25,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "div",
       "text": "Physical Background NOT ESTABLISHED"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-BA26581D7D34E15C",
+      "claim_id": "UL-CLAIM-CANDIDATE-9B1F0728219A3B12",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -18804,14 +18784,34 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 29,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 25,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "div",
       "text": "K1-E NOT ADMISSIBLE"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-23DC1D6CBB7B591E",
+      "claim_id": "UL-CLAIM-CANDIDATE-A54FA2A03F6B390D",
+      "equation_like": false,
+      "explicit_status": "BLOCKED_OR_UNRELEASED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "research-status.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "section",
+      "source_line": 25,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
+      "tag": "div",
+      "text": "Runtime Issuance BLOCKED"
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-C39A2C558647F418",
       "equation_like": true,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18825,14 +18825,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 31,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 27,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "div",
       "text": "HPVS → HZT-M0 → HZT-Full CP01R4: METHOD FROZEN · NO EXECUTION Evidence effect: NONE"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-F5F3BF64C41762A2",
+      "claim_id": "UL-CLAIM-CANDIDATE-6C3FD45F99347DA6",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18846,14 +18846,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 35,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 31,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Diese Audit-Abdeckung ist keine physische HZT-Bestätigung."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-93F3E17327C9A25A",
+      "claim_id": "UL-CLAIM-CANDIDATE-11C49452803C569C",
       "equation_like": true,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -18867,14 +18867,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 36,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 32,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Der Gate-Status bleibt OPEN ; eine ausführbare Parent→Reduced→Observable-Map ist nicht freigegeben."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-9AE2942C76E0C708",
+      "claim_id": "UL-CLAIM-CANDIDATE-B02A8966D6698BE0",
       "equation_like": false,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18887,14 +18887,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 36,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 32,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "div",
       "text": "7 vollständig offen"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-C71E448215371CF4",
+      "claim_id": "UL-CLAIM-CANDIDATE-55F008D0010A73FE",
       "equation_like": true,
       "explicit_status": "OPEN_OR_NOT_EXECUTED",
       "lexical_categories": [
@@ -18907,34 +18907,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 40,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 36,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "κ₆ besitzt eine kanonische Parent-Normierung; a₀ und βτ sind nur teilweise wiedergewonnen; Rχ und 𝓘B bleiben parentseitig offen."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-2AC744699DD8C024",
-      "equation_like": false,
-      "explicit_status": "OPEN_OR_NOT_EXECUTED",
-      "lexical_categories": [
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "research-status.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "article",
-      "source_line": 42,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
-      "tag": "p",
-      "text": "PR #137: weiterhin offen, Draft und nichtkanonisch."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-B5DC25315E421C3E",
+      "claim_id": "UL-CLAIM-CANDIDATE-0D65315747D44572",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -18947,14 +18927,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 42,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 38,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Ein menschlich ratifizierter Trust Root existiert nicht; Runtime-Issuance bleibt blockiert."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-B958BEBDCFBCD90D",
+      "claim_id": "UL-CLAIM-CANDIDATE-1FAAD6D1F182E58B",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18968,14 +18948,34 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 42,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 38,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "p",
       "text": "Es existieren weder operative AuthorizationDecision noch SingleUseGrant, Backend-Import, Targetsolve oder physischer Response-Rank-Lauf."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-AD1F8AB3E0DE9D09",
+      "claim_id": "UL-CLAIM-CANDIDATE-95E0602A574696F1",
+      "equation_like": false,
+      "explicit_status": "OPEN_OR_NOT_EXECUTED",
+      "lexical_categories": [
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "research-status.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "article",
+      "source_line": 38,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
+      "tag": "p",
+      "text": "PR #137: weiterhin offen, Draft und nichtkanonisch."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-56CC6BCF2C4ABD21",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -18989,35 +18989,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 43,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 39,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "h2",
       "text": "Was nicht identifiziert ist"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-7D84D0DF496265B3",
-      "equation_like": false,
-      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
-      "lexical_categories": [
-        "EVIDENCE_CONFIRMATION",
-        "STATUS_FIREWALL"
-      ],
-      "limiter_present": true,
-      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
-      "page_scope": "CANONICAL_MANIFEST_PAGE",
-      "path": "research-status.html",
-      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
-      "preliminary_risk_score": -6,
-      "region": "main",
-      "source_line": 46,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
-      "tag": "div",
-      "text": "Technische Ausführbarkeit ist keine physikalische Identifikation; numerische Stabilität ist keine Ghostfreiheit; ein guter Fit wäre keine Theoriebestätigung; grüne QA ist keine physische Evidenz."
-    },
-    {
-      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-AB00D023E0BCA1B4",
+      "claim_id": "UL-CLAIM-CANDIDATE-0A2D4AB38CE1FF37",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -19032,10 +19011,31 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "main",
-      "source_line": 46,
-      "source_sha256": "de31365400df5ae0f615ab36dec044b3f1511ea635c37aae1a4cbcc330ddf290",
+      "source_line": 42,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
       "tag": "div",
       "text": "Statussprache: bewiesen · konditional · diagnostisch · offen · blockiert · nicht freigegeben."
+    },
+    {
+      "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
+      "claim_id": "UL-CLAIM-CANDIDATE-743A5BE1B2C4C7AD",
+      "equation_like": false,
+      "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
+      "lexical_categories": [
+        "EVIDENCE_CONFIRMATION",
+        "STATUS_FIREWALL"
+      ],
+      "limiter_present": true,
+      "manifest_status": "ACTIVE_CURRENT_RECONCILED",
+      "page_scope": "CANONICAL_MANIFEST_PAGE",
+      "path": "research-status.html",
+      "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
+      "preliminary_risk_score": -6,
+      "region": "main",
+      "source_line": 42,
+      "source_sha256": "055092e3aa2708cf80d64b37ba775d33a7cf1f2760c87304ede5d5bedb0f0a2c",
+      "tag": "div",
+      "text": "Technische Ausführbarkeit ist keine physikalische Identifikation; numerische Stabilität ist keine Ghostfreiheit; ein guter Fit wäre keine Theoriebestätigung; grüne QA ist keine physische Evidenz."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
@@ -19199,7 +19199,7 @@
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-2859D5F52D6E95E3",
+      "claim_id": "UL-CLAIM-CANDIDATE-12D97535390D8466",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -19212,14 +19212,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 6,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
+      "source_line": 1,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
       "tag": "div",
       "text": "K1-E NOT ADMISSIBLE"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-E23D1F61161B491F",
+      "claim_id": "UL-CLAIM-CANDIDATE-DCBD6D53ADE42F57",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -19234,14 +19234,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 6,
-      "source_sha256": "ec33ad1e964cab23520eed9c5677b4594a8cc13cdeacc28194e3867955e2e52a",
+      "source_line": 1,
+      "source_sha256": "dc2993b304eb5bc235b9196d1482fa3a0642865bb15c4f0c129bf21da684519b",
       "tag": "div",
       "text": "Fields: A(r), L(r), φ(r), Aχ(r) Required export: one-sided boundary values + oriented normals + residuals + provenance Governance: numerical execution ≠ physical identification"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-49807CE4938E4C03",
+      "claim_id": "UL-CLAIM-CANDIDATE-1D4773F1950B6345",
       "equation_like": false,
       "explicit_status": "BLOCKED_OR_UNRELEASED",
       "lexical_categories": [
@@ -19254,14 +19254,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 21,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 16,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "div",
       "text": "K1-E NOT ADMISSIBLE"
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-6B3CC522355598EA",
+      "claim_id": "UL-CLAIM-CANDIDATE-291AF252616E2B3D",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -19275,14 +19275,14 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "article",
-      "source_line": 22,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 17,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "p",
       "text": "Die Workbench visualisiert Arbeitsreihenfolge und Blocker; der Master Build Order zerlegt die 14 Solver in je vier Work Packages und definiert zulässige Parallel-Lanes."
     },
     {
       "adjudication_status": "AUTOMATED_CANDIDATE_NOT_ADJUDICATED",
-      "claim_id": "UL-CLAIM-CANDIDATE-0D67CAEFAF786C8C",
+      "claim_id": "UL-CLAIM-CANDIDATE-DEA9311588D7E579",
       "equation_like": false,
       "explicit_status": "EXPLICITLY_NEGATED_OR_LIMITED",
       "lexical_categories": [
@@ -19295,8 +19295,8 @@
       "preliminary_risk_class": "CONTEXT_OR_FIREWALL",
       "preliminary_risk_score": -6,
       "region": "section",
-      "source_line": 33,
-      "source_sha256": "3f2b1d6b09efe753c1da1ecec02724d20cdf6c68936b3e0165f88d5b0e265644",
+      "source_line": 28,
+      "source_sha256": "0ca065aae2bf938e38977807cca0cb145a745243f4e938629949e05b2501fc09",
       "tag": "div",
       "text": "Ein erfolgreicher Test oder Work-Package-Abschluss kann weder Solverfreigabe noch physikalische Identifikation erzeugen."
     },
