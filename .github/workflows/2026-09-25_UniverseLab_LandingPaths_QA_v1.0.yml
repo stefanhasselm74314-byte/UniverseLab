@@ -11,6 +11,7 @@ on:
       - 'assets/*DesktopCompact*'
       - '2026-08-20_UniverseLab_MultilingualRouteRegistry_v1.1.json'
       - 'tests/2026-09-25_test_UniverseLab_LandingPaths_v1.0.py'
+      - 'tests/2026-10-16_test_UniverseLab_LandingPaths_MetadataContract_v1.1.py'
       - '.github/workflows/2026-09-25_UniverseLab_LandingPaths_QA_v1.0.yml'
   workflow_dispatch:
 
@@ -25,13 +26,14 @@ jobs:
       - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Bind report to exact tested commit
         run: git rev-parse HEAD
       - name: Static navigation and scientific-copy guard
-        run: python tests/2026-09-25_test_UniverseLab_LandingPaths_v1.0.py
+        run: python tests/2026-10-16_test_UniverseLab_LandingPaths_MetadataContract_v1.1.py
       - name: Existing multilingual contract
         run: python tools/2026-08-20_UniverseLab_MultilingualSEOContract_v1.0.py
       - name: Install browser test tooling
@@ -51,7 +53,7 @@ jobs:
             if curl --fail --silent http://127.0.0.1:4173/UniverseLab/index.html >/dev/null; then break; fi
             sleep 1
           done
-          python tests/2026-09-25_test_UniverseLab_LandingPaths_v1.0.py --browser
+          python tests/2026-10-16_test_UniverseLab_LandingPaths_MetadataContract_v1.1.py --browser
       - name: Preserve evidence
         if: always()
         uses: actions/upload-artifact@v4
