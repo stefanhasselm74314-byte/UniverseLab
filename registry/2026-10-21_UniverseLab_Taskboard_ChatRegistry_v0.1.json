@@ -1,0 +1,150 @@
+{
+  "schema": "universelab.taskboard.chat-registry.v0.1",
+  "task_id": "UL-TASKBOARD-01",
+  "date": "2026-10-21",
+  "status": "DRAFT_OWNER_CONFIRMATION_REQUIRED",
+  "source_rule": "Only names explicitly confirmed in project context are included. Unknown names are blocked.",
+  "chats": [
+    {
+      "slug": "chat-ueberwachung-master",
+      "visible_name": "Chat Überwachung Master",
+      "machine_label": "chat-chat-ueberwachung-master",
+      "role_hint": "COORDINATION",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "hyperzeit-projektstatus-update",
+      "visible_name": "Hyperzeit Projektstatus Update",
+      "machine_label": "chat-hyperzeit-projektstatus-update",
+      "role_hint": "STATUS_COORDINATION",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "web-ux-wartung",
+      "visible_name": "Web UX Wartung",
+      "machine_label": "chat-web-ux-wartung",
+      "role_hint": "WEB_IMPLEMENTATION",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "universelab-ux-wartung",
+      "visible_name": "UniversaLab UX Wartung",
+      "machine_label": "chat-universelab-ux-wartung",
+      "role_hint": "UX_ARCHITECTURE",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "interaktive-projektzentrale",
+      "visible_name": "Interaktive Projektzentrale",
+      "machine_label": "chat-interaktive-projektzentrale",
+      "role_hint": "PRODUCT_SPECIFICATION",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "universelab-ueberwachung-frequenz",
+      "visible_name": "UniverseLab Überwachung Frequenz",
+      "machine_label": "chat-universelab-ueberwachung-frequenz",
+      "role_hint": "LIVE_MONITORING",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "universelab-qa-gatekeeper",
+      "visible_name": "UniversaLab QA & Gatekeeper",
+      "machine_label": "chat-universelab-qa-gatekeeper",
+      "role_hint": "INDEPENDENT_QA",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "provenienz-supersession-auditen",
+      "visible_name": "Provenienz und Supersession Auditen",
+      "machine_label": "chat-provenienz-supersession-auditen",
+      "role_hint": "PROVENANCE_PRIMARY",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "provenance-supersession",
+      "visible_name": "Provenance und Supersession",
+      "machine_label": "chat-provenance-supersession",
+      "role_hint": "PROVENANCE_SECOND_REVIEW",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "wissenschaftliche-pruefung",
+      "visible_name": "Wissenschaftliche Prüfung",
+      "machine_label": "chat-wissenschaftliche-pruefung",
+      "role_hint": "SCIENCE_REVIEW",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "hzt-konsistenzpruefung",
+      "visible_name": "HZT Konsistenzprüfung",
+      "machine_label": "chat-hzt-konsistenzpruefung",
+      "role_hint": "FORMAL_MATHEMATICS",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "computational-engine-auditor",
+      "visible_name": "Computational Engine Auditor",
+      "machine_label": "chat-computational-engine-auditor",
+      "role_hint": "NUMERICAL_QA",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "universelab-medien-designer",
+      "visible_name": "UniverseLab Medien Designer",
+      "machine_label": "chat-universelab-medien-designer",
+      "role_hint": "MEDIA_DESIGN",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "bauplan-hyperzeit-raumschiff-engineering",
+      "visible_name": "Bauplan Hyperzeit Raumschiff — Engineering",
+      "machine_label": "chat-bauplan-hyperzeit-raumschiff-engineering",
+      "role_hint": "ENGINEERING",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "utility-universelab-wichtige-links",
+      "visible_name": "UTILITY - Universelab Wichtige Links",
+      "machine_label": "chat-utility-universelab-wichtige-links",
+      "role_hint": "LINK_REGISTRY",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "universelab-chat-audit-worker-a",
+      "visible_name": "UniverseLab Chat Audit Worker A",
+      "machine_label": "chat-universelab-chat-audit-worker-a",
+      "role_hint": "HISTORICAL_AUDIT",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "ereignishorizont-erforschen",
+      "visible_name": "Ereignishorizont erforschen",
+      "machine_label": "chat-ereignishorizont-erforschen",
+      "role_hint": "EVENT_HORIZON_SCIENCE",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "analyse-meiner-taetigkeit",
+      "visible_name": "Analyse meiner Tätigkeit",
+      "machine_label": "chat-analyse-meiner-taetigkeit",
+      "role_hint": "SOURCE_STATE_BACKGROUND",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "a1-macs-j0308-watch",
+      "visible_name": "A1 MACS J0308 Watch",
+      "machine_label": "chat-a1-macs-j0308-watch",
+      "role_hint": "OBSERVATIONAL_WATCH",
+      "confirmed_for_draft": true
+    },
+    {
+      "slug": "eigener-helfer-chat",
+      "visible_name": "Eigener Helfer Chat",
+      "machine_label": "chat-eigener-helfer-chat",
+      "role_hint": "UTILITY_ASSISTANT",
+      "confirmed_for_draft": true
+    }
+  ],
+  "unknown_chat_policy": "BLOCKED_CHAT_NAME_UNCONFIRMED"
+}
