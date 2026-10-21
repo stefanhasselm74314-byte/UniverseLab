@@ -1,0 +1,136 @@
+{
+  "schema": "universelab.taskboard.project-schema.v0.1",
+  "task_id": "UL-TASKBOARD-01",
+  "date": "2026-10-21",
+  "status": "DRAFT_NOT_CREATED",
+  "basis_main": "312e767628f003494a51edf685cf679469e35f13",
+  "project": {
+    "name": "UniverseLab — Aufgabenregister",
+    "visibility": "PRIVATE_OR_PUBLIC_OWNER_DECISION_REQUIRED",
+    "repository": "stefanhasselm74314-byte/UniverseLab",
+    "fields": [
+      {
+        "name": "Status",
+        "type": "single_select",
+        "required": true,
+        "options": [
+          "EINGANG",
+          "READY_FOR_TARGET_CHAT",
+          "IN_PROGRESS",
+          "WAITING_FOR_DEPENDENCY",
+          "REVIEW",
+          "BLOCKED",
+          "RETURNED_TO_MASTER",
+          "DONE",
+          "SUPERSEDED"
+        ]
+      },
+      {
+        "name": "TASK_ID",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "Zielchat (sichtbar)",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "Quellchat (sichtbar)",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "Eigentum",
+        "type": "single_select",
+        "required": true,
+        "options": [
+          "EIGENE_FEDERFUEHRUNG",
+          "MITWIRKUNG_REVIEW",
+          "NUR_INFORMATION"
+        ]
+      },
+      {
+        "name": "Priorität",
+        "type": "single_select",
+        "required": true,
+        "options": [
+          "P0",
+          "P1",
+          "P2",
+          "P3"
+        ]
+      },
+      {
+        "name": "Abhängigkeit",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "Rückgabe an",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "Anweisungslink",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "Ownerentscheidung nötig",
+        "type": "single_select",
+        "required": true,
+        "options": [
+          "JA",
+          "NEIN"
+        ]
+      },
+      {
+        "name": "Letzte Statusänderung",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "views": [
+      {
+        "name": "Alle offenen Aufgaben",
+        "filter": "is:open label:ul-task"
+      },
+      {
+        "name": "READY",
+        "filter": "is:open label:ul-task label:status-ready"
+      },
+      {
+        "name": "BLOCKIERT",
+        "filter": "is:open label:ul-task label:status-blocked"
+      },
+      {
+        "name": "Wartet auf Abhängigkeit",
+        "filter": "is:open label:ul-task label:status-waiting"
+      },
+      {
+        "name": "Rückgabe an Master",
+        "filter": "is:open label:ul-task label:status-returned"
+      },
+      {
+        "name": "Nach Zielchat",
+        "group_by": "Zielchat (sichtbar)"
+      }
+    ]
+  },
+  "activation": {
+    "project_created": false,
+    "labels_created": false,
+    "monitor_created": false,
+    "issues_migrated": false,
+    "owner_adoption": "OPEN"
+  },
+  "firewall": {
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE",
+    "canonical_effect": "NONE",
+    "merge_authorization": "NONE",
+    "deployment_authorization": "NONE",
+    "solver_execution": "NONE"
+  }
+}
