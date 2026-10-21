@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 project = json.loads((ROOT / "registry/2026-10-21_UniverseLab_Taskboard_ProjectSchema_v0.1.json").read_text(encoding="utf-8"))
 labels = json.loads((ROOT / "registry/2026-10-21_UniverseLab_Taskboard_LabelContract_v0.1.json").read_text(encoding="utf-8"))
 chats = json.loads((ROOT / "registry/2026-10-21_UniverseLab_Taskboard_ChatRegistry_v0.1.json").read_text(encoding="utf-8"))
-form = yaml.safe_load((ROOT / ".github/ISSUE_TEMPLATE/universelab_task.yml").read_text(encoding="utf-8"))
+form = yaml.safe_load((ROOT / ".github/ISSUE_TEMPLATE/2026-10-21_UniverseLab_Task_v0.1.yml").read_text(encoding="utf-8"))
 example = yaml.safe_load((ROOT / "governance/taskboard/examples/2026-10-21_UniverseLab_Taskboard_MonitorWorkflow_EXAMPLE_v0.1.yml").read_text(encoding="utf-8"))
 
 errors: list[str] = []
