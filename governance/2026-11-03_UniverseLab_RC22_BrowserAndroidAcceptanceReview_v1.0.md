@@ -1,10 +1,13 @@
 # UniverseLab — RC-VALIDATION-22: Browser, Service Worker und Android-Abnahme
 
 **Datum:** 2026-11-03  
-**Status:** `CHROMIUM_CI_PENDING / CANDIDATE_OVERLAY_NOT_INSTALLED / REAL_ANDROID_OPEN / RELEASE_HOLD`  
+**Status:** `ACTUAL_CHROMIUM_CI_PASS / CANDIDATE_OVERLAY_NOT_INSTALLED / REAL_ANDROID_OPEN / RELEASE_HOLD`  
 **Abhängigkeit:** RC19-Draft-PR #265 → RC20-Draft-PR #266 → RC21-Draft-PR #267 → RC22 eigener gestapelter Draft.  
 **Nichtkanonischer Basis-Head RC21:** `3c4fedf5cb84fa8fc76da6f0b86c1fff8e80792f`.  
 **Kritische Schranke:** GitHub-Pages-Publikation, PR-Merge und aktive Router-Installation bleiben nicht autorisiert.
+**GitHub-Actions-Evidenz:** Draft-PR #268, vor dieser dokumentarischen Nachbindung geprüfter Head `91c7eb5cbde55c9f795769555387a8869daac46a`; Run `41677703565`, Job `126062664372`, Conclusion `SUCCESS` (sieben deklarierte fachliche Setup-/Prüf-/Upload-Schritte).  
+**Chromium-Version auf Runner:** `151.0.7922.34`; Playwright `1.62.1`; insgesamt **532 Assertions**, darunter **446 Dateipräsenzprüfungen** und **86 weitere Browser-/Kontext-/Vertragsbedingungen**.  
+**Evidenz-Artefakt:** `rc22-draft-chromium-evidence`, ID `13250922184`, vier Dateien (ein JSON und drei PNGs), ZIP-SHA-256 `99447276d9057c5a279f7c0c9096036a184d9ceca39eb245782728821dc1d888`, Ablauf 2026-11-17 16:48 UTC. Diese Bilder wurden automatisch erzeugt und noch nicht manuell visuell beurteilt.
 
 ## 1. Fragestellung und Testtrennung
 
@@ -43,6 +46,8 @@ Getrennte Evidenzbereiche:
 - Ein JSON-Protokoll und Screenshots werden **nur als kurzlebiges, nichtkanonisches GitHub-Actions-Artefakt** abgelegt, nicht in `main` oder Pages. Screenshots sind technisch erzeugte Spuren, noch keine manuell bewertete visuelle Abnahme.
 - Ein grüner Workflow besagt ausschließlich `CHROMIUM_STAGING_QA_PASS_NOT_RELEASE`, **niemals** `PRODUCTION_APPROVED` oder `ANDROID_REAL_DEVICE_PASS`.
 
+**[GITHUB-CI NUMERISCH BESTÄTIGT]** Der echte Chromium-Lauf hat diese Kontrollen erfolgreich abgeschlossen. Die Baseline reproduzierte einen 404 aus dem bisherigen Dokument-Viewer, während die Kandidaten-Overlay-Navigation die getesteten erlaubten Markdown-/JS-Dateien mit HTTP 200 und zugehörigem Viewer-Inhalt darstellen konnte. Alle 14 Registry-Roadmaps blieben nach SW-Injektion GitHub-Links. Die nachgestellte Offline-Navigation schlug erwartungsgemäß fehl und erholte sich im Onlinezustand. Zwei Browserkontexte verwendeten Desktop bzw. mobile Emulation; insgesamt gab es drei Sitzungen. Der Browserbericht enthält `visual_overflow_warnings=[]`. Dies belegt **keine** manuell geprüfte visuelle Fehlerfreiheit.
+
 ## 4. Offene technische und semantische Punkte
 
 1. RC22 kann ohne autorisierte Test-URL weder den RC21-Kandidaten auf **echtem GitHub Pages** noch auf Stefans realem Galaxy S24 Ultra prüfen. Das separate manuelle Akzeptanzprotokoll ist eine **Vorbereitung**, keine durchgeführte Messung.
@@ -54,10 +59,13 @@ Getrennte Evidenzbereiche:
 ## 5. Freigabestatus
 
 ```text
-RC22_CHROMIUM_DESKTOP = CI_PENDING
-RC22_CHROMIUM_MOBILE_EMULATION = CI_PENDING
-RC22_BASELINE_NEGATIVE_404 = CI_PENDING
-RC22_SERVICE_WORKER_INJECTION = CI_PENDING
+RC22_CHROMIUM_DESKTOP = CI_PASS_LOCAL_STAGING
+RC22_CHROMIUM_MOBILE_EMULATION = CI_PASS_NOT_REAL_ANDROID
+RC22_BASELINE_NEGATIVE_404 = CONFIRMED_REAL_BROWSER
+RC22_SERVICE_WORKER_INJECTION = CI_PASS_EXPLICIT_LOOPBACK_REGISTRATION
+RC22_DYNAMIC_REGISTRY_ROADMAPS = PASS_14_OF_14
+RC22_VISUAL_OVERFLOW_DIAGNOSTIC = ZERO_WARNINGS_NOT_VISUAL_REVIEW
+RC22_GITHUB_ACTIONS = SUCCESS_RUN_41677703565_JOB_126062664372
 RC22_REAL_ANDROID_S24_ULTRA = NOT_TESTED
 RC22_OPERA_ANDROID = NOT_TESTED
 RC22_REAL_GITHUB_PAGES_ARTIFACT = NOT_TESTED
@@ -71,4 +79,4 @@ PHYSICAL_GATE_EFFECT = NONE
 PHYSICAL_EVIDENCE_EFFECT = NONE
 ```
 
-**Urteil:** RC22 stellt einen auswertbaren, später in CI real ausführbaren Chromium-Testpfad und eine eigenständige Sperre für echte Android-/Pages-Freigabe bereit. Erst ein **ausgeführter, ausgewerteter** CI-Run kann den Chromium-Teilstatus verändern. Der Verteilungs- und Forschungsgate bleibt unabhängig davon `HOLD`.
+**Urteil:** Die Browser-Abnahmestufe ist als isolierter tatsächlicher Chromium-Test **bestanden**. Der beobachtete Erfolg betrifft eine per HTTP im RAM überlagerte Vorschau, nicht die autoritative Pages-Veröffentlichung. Die echte Android-/Opera-Prüfung und der nachfolgende Betreiberentscheid stehen weiter aus; der Verteilungs- und Forschungsgate bleibt `HOLD`.
