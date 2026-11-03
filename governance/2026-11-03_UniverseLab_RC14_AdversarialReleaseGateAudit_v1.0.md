@@ -44,19 +44,26 @@ Der positive achtteilige Release-Fixture-Test belegt ausschließlich, dass ein e
 9. **Kein laufender physikalischer Solver / keine Evidenz:** `FM-G0=OPEN`, `K1-D=NOT_RELEASED`, `K1-E=NOT_ADMISSIBLE`, `PHYSICAL_BACKGROUND=NOT_ESTABLISHED`, `PHYSICAL_RESPONSE_RANK=NOT_EXECUTED` bleiben unangetastet.
 10. **Merge Queue nicht unterstützt:** Kein erforderliches `merge_group`-Ereignis und kein Nachweis bei aktivierter Merge Queue; ein solches Ruleset darf deshalb nicht ohne spätere Anpassung als kompatibel behauptet werden.
 
-## 4. Nachweisansprüche und Grenzziehung
+## 4. Prüfergebnis
+
+Der geprüfte GitHub-Actions-Kandidatenlauf `41651694900` ergab `SUCCESS`. Im tatsächlichen Jobprotokoll sind **9/9 Python-Unittest-Methoden** mit `ok` dokumentiert. Die Testquelle enthält **44 separat benannte negative Manipulationsfälle**, ausgeführt als `subTest` innerhalb der adversarialen Testmethode. Diese Fälle sind für den simulierten Datenraum bestanden; eine reale Prüfung von GitHub-Merge-Blockaden auf `main` fand nicht statt.
+
+## 5. Nachweisansprüche und Grenzziehung
 
 - **[NUMERISCH/TECHNISCH BESTÄTIGT]** Nach erfolgreichem Kandidaten-CI-Lauf: reproduzierbare Python-Unittests inklusive adversarialer Mock-Szenarien und Prüfung der No-Head-Checkout-Vertrauensgrenze.
 - **[KONDITIONAL]** Für einen späteren PR gelten die Aussagen nur bei tatsächlich installierter Base-Version, read-only Token, wirksamer Ruleset-Required-Check-Pflicht und nachgewiesener Owner-Authentifizierung.
 - **[OFFEN]** Effektive GitHub-Merge-Blockade, Umgehungsmöglichkeiten durch administrative Änderung, externe Security-Attestierung sowie zeitlich aktuelle Release-Metadaten.
 - **[NICHT HERGELEITET]** Mathematische Konsistenz der vollständigen 6D-Theorie, Ghostfreiheit, empirische Signaturen, Forward-Map-Vollständigkeit und wissenschaftliche Evidenz.
 
-## 5. Konsequenz
+## 6. Konsequenz
 
 **RC14 ist eine zusätzliche adversariale Kandidatenprüfung, keine Installationsfreigabe.** PR #264 muss Draft bleiben; PR #263 bleibt davon unabhängig Draft. Weder Repository-Ruleset noch `main` dürfen aufgrund eines grünen Kandidaten-Selbsttests automatisch geändert werden.
 
 ```text
-RC14_ADVERSARIAL_CANDIDATE_QA = RUN_RESULTS_REQUIRED
+RC14_ADVERSARIAL_CANDIDATE_QA = PASS_MOCKED_FIXTURES_ONLY
+RC14_UNIT_TEST_METHODS = 9_PASSED
+RC14_ADVERSARIAL_NEGATIVE_CASES = 44_REJECTED
+RC14_VERIFIED_CI_RUN = 41651694900
 EXTERNAL_SECURITY_AUDIT = NOT_PERFORMED
 TRUSTED_MAIN_GATE_INSTALLED = NO
 REQUIRED_CHECK_ENFORCED = NO
