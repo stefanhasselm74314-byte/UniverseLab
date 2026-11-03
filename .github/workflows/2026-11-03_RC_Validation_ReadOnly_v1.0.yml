@@ -1,0 +1,60 @@
+name: RC-VALIDATION-05 read-only exact-baseline audit
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout fixed canonical baseline
+        uses: actions/checkout@v4
+        with:
+          ref: 312e767628f003494a51edf685cf679469e35f13
+          persist-credentials: false
+      - name: Validate baseline and fail-closed invariants
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, subprocess, hashlib
+          from pathlib import Path
+          head='312e767628f003494a51edf685cf679469e35f13'
+          tree='d743643419d812f6f8e8f3830328a3a9d24ed5ed'
+          assert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==head
+          assert subprocess.check_output(['git','rev-parse','HEAD^{tree}'],text=True).strip()==tree
+          paths={
+            'manifest':('project-manifest.json','7ac83f72373b20b2fe3c9130f1856ce222eb73c9'),
+            'state':('registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json','59ada8630bb424969898bfc1fbd02bbf67935226'),
+            'checkpoint':('registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json','279bc338070af0f5e1498108b8eb127581084ad4'),
+            'alias':('registry/session-checkpoint-latest.json','279bc338070af0f5e1498108b8eb127581084ad4')}
+          data={}
+          for key,(name,expected) in paths.items():
+            raw=Path(name).read_bytes()
+            sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+bytes([0])+raw).hexdigest()
+            assert sha==expected,(name,sha,expected)
+            data[key]=json.loads(raw)
+          assert data['checkpoint']==data['alias']
+          old='3022dc8aac27ed2054fdb7643708fe57440b9256'
+          assert data['manifest']['basis_main_commit']==old
+          assert data['state']['basis_main_commit']==old
+          assert data['checkpoint']['basis_commit']==old
+          expected={'K1-D':'NOT_RELEASED','K1-E':'NOT_ADMISSIBLE','FM-G0':'OPEN'}
+          for key,value in expected.items():
+            assert data['manifest']['gates'][key]==value
+            assert data['checkpoint']['gate_state'][key]==value
+          for x in (data['manifest'],data['state'],data['checkpoint']):
+            assert x['physical_gate_effect']=='NONE'
+            assert x['physical_evidence_effect']=='NONE'
+          sources=[
+            'registry/2026-09-14_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.json',
+            'registry/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityContract_v1.1.json',
+            'registry/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.json',
+            'registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json',
+            'registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json']
+          for p in sources:
+            assert Path(p).is_file(),p
+            json.loads(Path(p).read_text(encoding='utf-8'))
+          print('PASS: exact baseline, four blob hashes, alias, gates, source existence')
+          print('NOT TESTED: full successor builder, schemas, scientific release, PR merge')
+          PY
