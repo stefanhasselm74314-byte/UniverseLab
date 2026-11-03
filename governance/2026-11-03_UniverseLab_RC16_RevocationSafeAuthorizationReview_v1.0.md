@@ -1,10 +1,14 @@
 # UniverseLab — RC-VALIDATION-16: Widerrufssichere Freigabestrategie und Routinebetrieb
 
 **Stand:** 2026-11-03  
-**Status:** `DRAFT — POLICY DECISION REQUIRED — NO INSTALLATION`  
+**Status:** `DRAFT — RC16-B ALS ZIELARCHITEKTUR BEVORZUGT — NO INSTALLATION`  
 **Betroffener Entwurf:** Draft-PR #264, ohne Änderung an `main` oder PR #263  
 **Nachweismatrix:** `drafts/2026-11-03_UniverseLab_RC16_AuthorizationAlternatives_v1.0_DRAFT.json`  
 **Nicht installierter Simulator:** `tools/2026-11-03_UniverseLab_RC16_AuthorizationModel_v1.0.py`
+
+## Projektinhaber-Präferenz (nach RC16-Modellprüfung)
+
+Der Projektinhaber bevorzugt ausdrücklich **RC16-B: Ein-Personen-Betrieb mit automatischen Prüfungen und gesperrten kritischen Freigaben**. Das ist die Auswahl der **weiterzuentwickelnden Zielarchitektur**, keine Freigabe für den Merge von PR #264, die Installation eines GitHub-Guards oder eine Aktivierung neuer Rulesets. Die genaue Routine-Ausnahme, ein späterer Notfall-/Freigabeprozess und GitHub-native Schutzwirkung sind noch zu spezifizieren und zu testen.
 
 ## 1. Kernresultat — formaler Gegenfall zum bisherigen Kommentar-Gate
 
@@ -31,7 +35,7 @@ durch das Kommentar-Gate **nicht nachgewiesen**. Noch mehr Negativtests bei der 
 | **RC16-B — Ein-Personen-HOLD** | Technische Required Checks für exakt abgegrenzte nichtkanonische Draft-JSONs | Standardmäßig **HOLD** bis gesondert autorisierter, technisch verifizierter Ausnahme-/Releaseprozess | Keine implizite Selbstgenehmigung; Eigentümer wählt ausdrücklich die Betriebsregel |
 | **RC16-C — Bestehender Kommentaransatz** | Hoher Aufwand mit Kommentar bei jeder Änderung | Einmalige Kommentarprüfung vor grünem CI | **Nicht als sicherer Ersatz empfohlen**; Post-Green-Widerruf offen |
 
-Der Vergleich entscheidet **nicht** stellvertretend für den Eigentümer. Varianten A und B sind derzeit ebenfalls nicht produktiv installierbar.
+Der Projektinhaber hat **RC16-B als bevorzugte Zielarchitektur** ausgewählt. Die eigentliche Implementierung, Freigabepolitik und Installation sind damit **noch nicht ratifiziert oder produktiv aktiviert**. Variante A bleibt als Alternative dokumentiert.
 
 ### Enger Routine-Fall für einen späteren Ein-Personen-Betrieb
 
@@ -85,10 +89,10 @@ Vor einer tatsächlichen GitHub-Installation sind separat zu entscheiden:
 
 ```text
 RC16_COMMENT_BASED_REVOKABILITY = FALSIFIED_AS_DURABLE_AUTHORIZATION
-RC16_MODEL_ALTERNATIVES = PREPARED_NOT_SELECTED
+RC16_MODEL_ALTERNATIVES = RC16_B_PREFERRED_DRAFT_ONLY
 RC16_GITHUB_ACTIONS_EVENT_POLICY = UNKNOWN_REQUIRES_OWNER_VERIFICATION
 RC16_NATIVE_GITHUB_REQUIRED_REVIEWS = NOT_CONFIGURED
-RC16_ROUTINE_DRAFT_EXEMPTION = NOT_RATIFIED
+RC16_ROUTINE_DRAFT_EXEMPTION = SCOPE_AND_TESTS_OPEN_NOT_RATIFIED
 RC16_EXTERNAL_SECURITY_REVIEW = NOT_PERFORMED
 PR263 = DRAFT_UNMERGED
 PR264 = DRAFT_UNMERGED
