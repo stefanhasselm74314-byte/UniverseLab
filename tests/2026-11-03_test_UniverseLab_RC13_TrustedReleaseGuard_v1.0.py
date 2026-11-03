@@ -218,14 +218,18 @@ class TrustGateTests(TestCase):
         with self.assertRaises(g.GateError):
             g.classify("../registry/site.json")
 
-    def test_02_ordinary_pr_not_release(self):
-        api=FakeAPI(files=[{"filename":"README.md","status":"modified"}])
-        self.assertIn("PASS_ORDINARY",g.run_event(event_for(api),api))
+    def test_02_public_page_requires_owner_ack(self):
+        api=FakeAPI(files=[{"filename":"README.md","status":"modified"}],
+                    scopes={"PUBLIC_SURFACE"})
+        self.assertIn("NONSTATE_SENSITIVE_OWNER_ACK",g.run_event(event_for(api),api))
+        api.comment_owner=False
+        with self.assertRaises(g.GateError):
+            g.run_event(event_for(api),api)
 
     def test_03_owner_control_plane_explicit_scope(self):
         api=FakeAPI(files=[{"filename":g.TRUSTED_WORKFLOW,"status":"modified"}],
                     scopes={"CONTROL_PLANE"})
-        self.assertIn("CONTROL_PLANE_OWNER_ACK",
+        self.assertIn("NONSTATE_SENSITIVE_OWNER_ACK",
                       g.run_event(event_for(api),api))
 
     def test_04_atomic_state_release(self):
@@ -308,7 +312,8 @@ class TrustGateTests(TestCase):
                     g.run_event(event_for(api),api)
 
     def test_06_ordinary_PR_race_is_fail_closed(self):
-        api=FakeAPI(files=[{"filename":"README.md","status":"modified"}])
+        api=FakeAPI(files=[{"filename":"README.md","status":"modified"}],
+                    scopes={"PUBLIC_SURFACE"})
         api.race_after_first=True
         with self.assertRaises(g.GateError):
             g.run_event(event_for(api),api)
