@@ -171,6 +171,11 @@ class FakeAPI:
         self.strict_policy=True
         self.ruleset_bypass=False
         self.ruleset_exclude_main=False
+        self.current_user_can_bypass="never"
+        self.comment_revoked_after_first=False
+        self.ruleset_removed_after_first=False
+        self.comment_list_calls=0
+        self.ruleset_list_calls=0
         self.comment_owner=True
         self.comment_exact=comment
         self.pr_calls=0
@@ -208,6 +213,7 @@ class FakeAPI:
                 "conditions":{"ref_name":{"include":["refs/heads/main"],"exclude":[
                     "refs/heads/main"] if self.ruleset_exclude_main else []}},
                 "bypass_actors":[{"actor_id":1}] if self.ruleset_bypass else [],
+                "current_user_can_bypass":self.current_user_can_bypass,
                 "rules":[
                     {"type":"pull_request"},
                     *([{"type":"required_status_checks",
@@ -222,12 +228,18 @@ class FakeAPI:
         if path.startswith("/pulls/999/files"):
             return self.files
         if path.startswith("/issues/999/comments"):
+            self.comment_list_calls+=1
+            if self.comment_revoked_after_first and self.comment_list_calls>1:
+                return []
             author=("stefanhasselm74314-byte" if self.comment_owner
                     else "unknown-reviewer")
             sha=HEAD if self.comment_exact else "0"*40
             return [{"user":{"login":author},"author_association":"OWNER",
                      "body":g.approval_message(999,sha,self.scopes)}]
         if path.startswith("/rulesets?"):
+            self.ruleset_list_calls+=1
+            if self.ruleset_removed_after_first and self.ruleset_list_calls>1:
+                return []
             return ([{"id":42,"enforcement":"active"}]
                     if self.ruleset_enabled else [])
         raise AssertionError("Unexpected paging: "+path)
@@ -308,6 +320,9 @@ class TrustGateTests(TestCase):
         case("non_strict_check",lambda a:setattr(a,"strict_policy",False))
         case("ruleset_bypass_present",lambda a:setattr(a,"ruleset_bypass",True))
         case("ruleset_excludes_main",lambda a:setattr(a,"ruleset_exclude_main",True))
+        case("ruleset_user_bypass",lambda a:setattr(a,"current_user_can_bypass","always"))
+        case("owner_comment_revoked_midrun",lambda a:setattr(a,"comment_revoked_after_first",True))
+        case("required_check_removed_midrun",lambda a:setattr(a,"ruleset_removed_after_first",True))
         case("live_main_drift",lambda a:setattr(a,"main_sha","0"*40))
         case("live_head_drift",lambda a:setattr(a,"head","0"*40))
         case("missing_checkpoint_alias_change",lambda a:setattr(
@@ -390,7 +405,7 @@ class TrustGateTests(TestCase):
                 with self.assertRaises((g.GateError,KeyError)):
                     g.run_event(event_for(api),api)
 
-    def test_06_ordinary_PR_race_is_fail_closed(self):
+    def test_06_public_PR_race_is_fail_closed(self):
         api=FakeAPI(files=[{"filename":"README.md","status":"modified"}],
                     scopes={"PUBLIC_SURFACE"})
         api.race_after_first=True
