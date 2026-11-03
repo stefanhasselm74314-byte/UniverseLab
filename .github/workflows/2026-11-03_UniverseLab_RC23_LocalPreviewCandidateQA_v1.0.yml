@@ -1,0 +1,77 @@
+name: RC23 local Android preview candidate build QA (not distributable)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/2026-11-03_UniverseLab_RC23_LocalPreviewCandidateQA_v1.0.yml'
+      - 'tools/2026-11-03_UniverseLab_RC23_LocalPreviewBuilder_v1.0.py'
+      - 'tests/2026-11-03_test_UniverseLab_RC23_LocalPreviewBuilder_v1.0.py'
+      - 'governance/2026-11-03_UniverseLab_RC23_PreviewApprovalReview_v1.0.md'
+      - 'governance/2026-11-03_UniverseLab_RC23_AndroidLocalPreviewInstructions_v1.0.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hold-preview-local-only:
+    name: rc23-zip-build-verified-not-uploaded-not-deployed
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout unmerged candidate read-only
+        uses: actions/checkout@v6
+
+      - name: Verify RC21 ancestor candidate and pinned manifest provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/2026-11-03_UniverseLab_RC21_RenderSafeRouter_v1.0.py \
+            --root . \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --template tools/2026-11-03_UniverseLab_RC21_SafeRouterTemplate_v1.0.js \
+            --output drafts/2026-11-03_UniverseLab_RC21_SafeDocumentRouter_v1.0_DRAFT.js \
+            --provenance-out drafts/2026-11-03_UniverseLab_RC21_RouterProvenance_v1.0_DRAFT.json \
+            --check-existing
+
+      - name: Run twelve manifest, ZIP, tamper and loopback HTTP controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tests/2026-11-03_test_UniverseLab_RC23_LocalPreviewBuilder_v1.0.py
+
+      - name: Reproduce exact candidate ZIP strictly in runner temp
+        shell: bash
+        env:
+          RC23_DIR: ${{ runner.temp }}/rc23-local-only
+        run: |
+          set -euo pipefail
+          mkdir -p "$RC23_DIR"
+          python tools/2026-11-03_UniverseLab_RC23_LocalPreviewBuilder_v1.0.py \
+            --root . \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --candidate drafts/2026-11-03_UniverseLab_RC21_SafeDocumentRouter_v1.0_DRAFT.js \
+            --provenance drafts/2026-11-03_UniverseLab_RC21_RouterProvenance_v1.0_DRAFT.json \
+            --template tools/2026-11-03_UniverseLab_RC21_SafeRouterTemplate_v1.0.js \
+            --out "$RC23_DIR/preview-NOT-FOR-DISTRIBUTION.zip"
+          python tools/2026-11-03_UniverseLab_RC23_LocalPreviewBuilder_v1.0.py \
+            --root . \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --candidate drafts/2026-11-03_UniverseLab_RC21_SafeDocumentRouter_v1.0_DRAFT.js \
+            --provenance drafts/2026-11-03_UniverseLab_RC21_RouterProvenance_v1.0_DRAFT.json \
+            --template tools/2026-11-03_UniverseLab_RC21_SafeRouterTemplate_v1.0.js \
+            --out "$RC23_DIR/preview-NOT-FOR-DISTRIBUTION.zip" \
+            --verify-only
+          python - <<'PY'
+          import hashlib
+          import os
+          from pathlib import Path
+
+          p = Path(os.environ['RC23_DIR']) / 'preview-NOT-FOR-DISTRIBUTION.zip'
+          digest = hashlib.sha256(p.read_bytes()).hexdigest()
+          assert digest == '6de483211a4f42eb42584d9c9d1acc65d48e76a8a87afdf70dd73b0566d5dea7'
+          assert p.stat().st_size == 5_121_637
+          print('RC23_LOCAL_PREVIEW_QA_PASS_SHA_PINNED_NOT_DISTRIBUTED')
+          PY
+
+      # No upload-artifact, pages deployment, preview URL, release, or main write.
