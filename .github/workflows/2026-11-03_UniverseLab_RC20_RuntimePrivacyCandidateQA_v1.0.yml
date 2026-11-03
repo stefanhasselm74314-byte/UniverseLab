@@ -1,0 +1,112 @@
+name: RC20 runtime/privacy compatibility candidate QA (expected HOLD)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/2026-11-03_UniverseLab_RC20_RuntimePrivacyCandidateQA_v1.0.yml'
+      - 'tools/2026-11-03_UniverseLab_RC20_RuntimePrivacyAudit_v1.0.py'
+      - 'tests/2026-11-03_test_UniverseLab_RC20_RuntimePrivacyAudit_v1.0.py'
+      - 'tests/2026-11-03_test_UniverseLab_RC20_HttpSmoke_v1.0.py'
+      - 'drafts/2026-11-03_UniverseLab_RC20_RuntimePrivacyFindings_v1.0_DRAFT.json'
+      - 'drafts/2026-11-03_UniverseLab_RC20_HttpSmoke_v1.0_DRAFT.json'
+      - 'governance/2026-11-03_UniverseLab_RC20_RuntimePrivacyReview_v1.0.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  expected-hold-audit:
+    name: rc20-runtime-privacy-expected-hold
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout untrusted, noncanonical candidate (read-only token)
+        uses: actions/checkout@v6
+
+      - name: Validate fixed adversarial controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tests/2026-11-03_test_UniverseLab_RC20_RuntimePrivacyAudit_v1.0.py
+
+      - name: RC19 exact-hash staging, without publishing
+        shell: bash
+        env:
+          RC20_STAGE: ${{ runner.temp }}/universe-rc20-stage
+        run: |
+          set -euo pipefail
+          python tools/2026-11-03_UniverseLab_RC19_PublicOnlyBuild_v1.0.py \
+            --source . \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --out "$RC20_STAGE"
+
+      - name: Reproduce actual repository HOLD without converting to PASS
+        shell: bash
+        env:
+          RC20_STAGE: ${{ runner.temp }}/universe-rc20-stage
+          RC20_DYNAMIC_REPORT: ${{ runner.temp }}/rc20-runtime-findings.json
+        run: |
+          set -euo pipefail
+          set +e
+          python tools/2026-11-03_UniverseLab_RC20_RuntimePrivacyAudit_v1.0.py \
+            --source . \
+            --stage "$RC20_STAGE" \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --report "$RC20_DYNAMIC_REPORT"
+          audit_exit=$?
+          set -e
+          if [ "$audit_exit" -ne 2 ]; then
+            echo "RC20_EXPECTED_HOLD_MISSING_OR_AUDIT_ERROR:$audit_exit"
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          actual = json.loads(Path(os.environ['RC20_DYNAMIC_REPORT']).read_text())
+          pinned = json.loads(Path('drafts/2026-11-03_UniverseLab_RC20_RuntimePrivacyFindings_v1.0_DRAFT.json').read_text())
+          assert actual == pinned, 'RC20_PROVENANCE_FINDINGS_CHANGED_REVIEW_REQUIRED'
+          links = actual['source_link_router']
+          assert links['status'] == 'HOLD_EXCLUDED_ROUTED_TARGETS'
+          assert len(links['excluded_existing_file_links']) == 4
+          assert len({x['target'] for x in links['excluded_existing_file_links']}) == 3
+          assert len(links['data_driven_excluded_roadmap_targets']) == 14
+          assert len(actual['privacy']['findings']) == 0
+          assert actual['privacy']['scope']['files_scanned'] == 446
+          assert actual['browser']['android_real_device'] == 'NOT_RUN'
+          assert actual['release_gate'] == 'HOLD'
+          print('RC20_EXPECTED_HOLD_QA_PASS routed=4 unique_targets=3 dynamic=14 privacy_patterns=0 release=HOLD')
+          PY
+
+      - name: HTTP transport and known 404 negative replay
+        shell: bash
+        env:
+          RC20_STAGE: ${{ runner.temp }}/universe-rc20-stage
+          RC20_DYNAMIC_REPORT: ${{ runner.temp }}/rc20-runtime-findings.json
+          RC20_HTTP_REPORT: ${{ runner.temp }}/rc20-http-findings.json
+        run: |
+          set -euo pipefail
+          python tests/2026-11-03_test_UniverseLab_RC20_HttpSmoke_v1.0.py \
+            --stage "$RC20_STAGE" \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --runtime-report "$RC20_DYNAMIC_REPORT" \
+            --report "$RC20_HTTP_REPORT"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          actual = json.loads(Path(os.environ['RC20_HTTP_REPORT']).read_text())
+          pinned = json.loads(Path('drafts/2026-11-03_UniverseLab_RC20_HttpSmoke_v1.0_DRAFT.json').read_text())
+          assert actual == pinned, 'RC20_HTTP_EVIDENCE_CHANGED_REVIEW_REQUIRED'
+          assert actual['desktop_sha256_200'] == 446
+          assert actual['mobile_user_agent_html_200'] == 73
+          assert len(actual['excluded_router_target_http_404']) == 3
+          assert actual['javascript_executed'] is False
+          assert actual['actual_github_pages_artifact_verified'] is False
+          print('RC20_HTTP_EXPECTED_HOLD_PASS only_transport_tested=TRUE release=HOLD')
+          PY
+
+      # No Pages upload, no deploy, no branch/ruleset writes, no scientific status changes.

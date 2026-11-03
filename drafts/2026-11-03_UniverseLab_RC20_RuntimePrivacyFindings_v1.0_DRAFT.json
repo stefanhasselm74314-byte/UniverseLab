@@ -1,0 +1,161 @@
+{
+  "schema": "universelab.rc20.runtime-privacy-audit.v1",
+  "date": "2026-11-03",
+  "source_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "staging_files": 446,
+  "source_link_router": {
+    "status": "HOLD_EXCLUDED_ROUTED_TARGETS",
+    "excluded_existing_file_links": [
+      {
+        "source_html": "solver-hub-en.html",
+        "target": "md2s_bvp_solver_v1_0.py",
+        "router_activation": "SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "source_html": "solver-hub.html",
+        "target": "md2s_bvp_solver_v1_0.py",
+        "router_activation": "GLOBAL_SHELL_CHAIN"
+      },
+      {
+        "source_html": "solver-hub.html",
+        "target": "science/solver-hub/2026-08-07_ULSH-01_MD2S-BVP_Roadmap_v1.0.md",
+        "router_activation": "GLOBAL_SHELL_CHAIN"
+      },
+      {
+        "source_html": "source.html",
+        "target": "tools/2026-08-03_validate_public_repository_privacy_v1.0.py",
+        "router_activation": "GLOBAL_SHELL_CHAIN"
+      }
+    ],
+    "data_driven_excluded_roadmap_targets": [
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-01_MD2S-BVP_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-02_Junction_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-03_RankAudit_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-04_Constraint_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-05_SVT-Perturbation_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-06_GhostKinetic_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-07_KK_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-08_Radion_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-09_Flux_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-10_Cosmology_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-11_Likelihood_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-12_Baryogenesis_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-13_GW_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      },
+      {
+        "renderer": "2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.html",
+        "registry": "registry/2026-08-07_ULSH_SolverDevelopmentProgram_v1.0.json",
+        "field": "solvers[*].roadmap_path",
+        "target": "science/solver-hub/2026-08-07_ULSH-14_MOND-RAR_Roadmap_v1.0.md",
+        "router_activation": "ASYNCHRONOUS_DOM_RACE_OR_SERVICE_WORKER_CONDITIONAL"
+      }
+    ],
+    "already_missing_repository_targets": [],
+    "required_chain_missing": [],
+    "summary": {
+      "html_files_checked": 73,
+      "pages_with_direct_global_shell": 16,
+      "eligible_static_document_source_links": 11,
+      "external_executable_hosts": {},
+      "runtime_generated_links": "NOT_ENUMERATED"
+    }
+  },
+  "privacy": {
+    "status": "PATTERN_PASS_NOT_PRIVACY_ATTESTATION",
+    "findings": [],
+    "scope": {
+      "files_scanned": 446,
+      "bytes_scanned": 4932132,
+      "pattern_set": "2026-08-03_public_repository_privacy_v1.0_plus_strict_json_and_extra_types",
+      "semantic_personal_data_review": "NOT_PERFORMED"
+    }
+  },
+  "browser": {
+    "desktop": "NOT_RUN",
+    "android_real_device": "NOT_RUN",
+    "android_emulation": "NOT_RUN",
+    "dynamic_javascript_and_serviceworker_parity": "NOT_PROVEN"
+  },
+  "release_gate": "HOLD",
+  "main_changed": false,
+  "canonical_promotion": "BLOCKED",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
