@@ -1,10 +1,11 @@
 # UniverseLab — RC-VALIDATION-19: Public-Only-Pages-Build (isolierter Kandidat)
 
 **Datum:** 2026-11-03  
-**Status:** `LOCAL_CANDIDATE_QA_PASS / INSTALLATION_NOT_AUTHORIZED / PRODUCTION_DEPLOY_UNCHANGED`  
+**Status:** `LOCAL_AND_GITHUB_CANDIDATE_QA_PASS / INSTALLATION_NOT_AUTHORIZED / PRODUCTION_DEPLOY_UNCHANGED`  
 **Architektur:** RC16-B — Ein-Personen-Betrieb, automatische technische QA, gesperrte kritische Freigaben.  
 **Quellen:** verifizierter `main`-Commit `51bcc8fccb092c104ac0fca5fc98a5b996dcb914`, Tree `65f423f04bbb2f1462f120a6b31073644cdc28cc`; RC18-Publikationsaudit; produktiver Workflow `.github/workflows/deploy-pages.yml`.  
 **Realisierung:** `tools/2026-11-03_UniverseLab_RC19_PublicOnlyBuild_v1.0.py`, explizites `governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json`, isolierte PR-QA und 27 Negativ-/Positivtests.
+**GitHub-PR / CI:** PR #265 (Draft, separat von PR #263/#264); GitHub Actions Run `41667982541`, Job `126028367513`, Conclusion `SUCCESS` für den ersten unveränderten Kandidaten-Commit `86291f1bc6ae72bad51f62a7eefe0f531c3227da`.
 
 ## 1. Befund und Entscheidung
 
@@ -61,7 +62,7 @@ pages_deployment_changed           = FALSE
 - vorhandene lokale Linkziele außerhalb der Allowlist lösen HOLD aus;
 - korrektes dynamisches Metadatum als kontrollierter Einzelfall; falsche Source-SHA, zweiter Lauf, ungeeignete Ref, boolescher Laufnummer-Typ und fremde Felder werden abgelehnt.
 
-Die PR-QA ergänzt zwei Canary-Dateien ausschließlich im temporären Runner-Checkout, erstellt ein isoliertes Staging sowie eine **simulierte `.tar.gz`-Pages-Dateiliste** und prüft, dass weder Dateien noch Canary-Marker darin auftauchen. Dieser CI-Lauf ist erst nach dem Speichern der Kandidaten-Dateien auf einem PR-Branch beobachtbar; ein **echter** GitHub-Pages-Upload ist bewusst nicht Teil von RC19.
+**[GITHUB-CI BESTÄTIGT]** Die PR-QA (Run `41667982541`) hat alle 27 Testmethoden erfolgreich ausgeführt. Sie ergänzte zwei Canary-Dateien ausschließlich im temporären Runner-Checkout, erstellte ein isoliertes Staging sowie eine **simulierte `.tar.gz`-Pages-Dateiliste**. Die GitHub-Logs bestätigen `RC19_CANDIDATE_STAGE_PASS files=446 deploy=NOT_PERFORMED` und `RC19_SIMULATED_ARTIFACT_PASS files=446 no_real_upload=TRUE`, ohne Canary-Marker. Ein **echter** GitHub-Pages-Upload ist bewusst nicht Teil von RC19.
 
 ## 5. Installationsvorschlag – keine autorisierte Änderung
 
@@ -80,7 +81,7 @@ Anschließend müssen mindestens diese unabhängigen Nachweise vorliegen:
 ```text
 RC19_LOCAL_BUILD                 = PASS_446_FILES
 RC19_LOCAL_UNIT_TESTS            = PASS_27_OF_27
-RC19_SIMULATED_ARTIFACT_CI       = PENDING_BRANCH_RUN
+RC19_SIMULATED_ARTIFACT_CI       = PASS_RUN_41667982541
 RC19_BROWSER_RUNTIME_PARITY      = NOT_VERIFIED
 RC19_PUBLIC_CONTENT_OWNER_REVIEW = NOT_RATIFIED
 RC19_MAIN_INSTALLATION           = NOT_AUTHORIZED
@@ -88,6 +89,7 @@ RC18_PUBLICATION_BLOCKER         = OPEN_ON_MAIN
 RC17_ROUTINE_AUTO_MERGE          = BLOCKED
 PR263                            = DRAFT_UNMERGED
 PR264                            = DRAFT_UNMERGED
+PR265                            = DRAFT_UNMERGED
 CANONICAL_PROMOTION              = BLOCKED
 PHYSICAL_GATE_EFFECT             = NONE
 PHYSICAL_EVIDENCE_EFFECT         = NONE
