@@ -17,9 +17,9 @@ Der neue Workflow `.github/workflows/2026-11-03_UniverseLab_RC13_TrustedReleaseG
 
 ## 2. Risikoklassen
 
-**Normaler PR (keine kritischen Pfade):** Der Guard bestätigt nur `PASS_ORDINARY_NONRELEASE_PR_NO_OWNER_RELEASE_CLAIM`. Das ist keine wissenschaftliche Validierung.
+**Andere PR-Dateien (konservativer RC14-Entwurf):** Kein beliebiger Pfad darf unkontrolliert als harmlos gelten. Alle Nicht-Release-Dateien werden mindestens als `PUBLIC_SURFACE` (insbesondere HTML/JS/Markdown/Assets) oder `CONTROL_PLANE` (einschließlich unbekannter Registry-/Daten-/Quellpfade) eingestuft. Damit ist **jeder PR vorläufig owner-acknowledgment-pflichtig**; das ist eine potenziell erhebliche Einschränkung für Routinearbeit. Eine spätere Ausnahmeliste erfordert eigene ausdrückliche Policy-Entscheidung und Tests.
 
-**Control Plane:** Änderungen an Workflows, Skripten, Tests, Governance-Regeln, Schemas oder registrierten Eigentümer-/Autoritätsverträgen erfordern einen **expliziten GitHub-Owner-Kommentar**, der PR, den exakten Head-SHA und `CONTROL_PLANE` fest bindet. Kein allgemeines `Go`.
+**Control Plane / Public Surface:** Änderungen an Workflows, Skripten, Tests, Registry-Daten und sonstigen Quellen erfordern `CONTROL_PLANE`; alle öffentlichen HTML-, JavaScript-, Markdown- und Assetänderungen erfordern `PUBLIC_SURFACE`. Beides verlangt einen **expliziten GitHub-Owner-Kommentar**, der PR, den exakten Head-SHA und sämtliche betroffenen Scopes fest bindet. Kein allgemeines `Go`. Diese Prüfung bestätigt nur technische Kontrollhoheit, nicht die physikalische Wahrheit veröffentlichter Aussagen.
 
 **State Release:** Änderungen am aktiven Manifest, Checkpoint-Alias, State/Checkpoint/SiteState in `registry/`, den DE/EN-Forschungsstatusseiten oder der GlobalShell erfordern:
 
@@ -30,6 +30,7 @@ Der neue Workflow `.github/workflows/2026-11-03_UniverseLab_RC13_TrustedReleaseG
 5. Byteidentischer Checkpoint-Alias, kanonisch konsistente Status-/Manifest-Pointer, valide **echte** und zeitlich konsistente Releasezeitstempel, verifizierter Baseline-Git-Tree.
 6. Keine physikalische Gate-/Evidenzänderung: `FM-G0=OPEN`, `K1-D=NOT_RELEASED`, `K1-E=NOT_ADMISSIBLE`, kein behaupteter etablierter Hintergrund oder Response-Rank.
 7. Gesamtscan des getrackten HTML-/JS-Baums des PR-Heads auf alle bisherigen aktiven Snapshot-Verweise, ohne PR-Code auszuführen. Bei unvollständigem Scan: **HOLD**.
+8. RC14-Negativprüfung: nicht-poin­termäßige Änderungen an Wissenschafts-/Claim-/Evidenzfeldern, G11-Checkpoint-Verlauf, HTML-Fließtext und GlobalShell-JavaScript-Code sind auch bei unveränderten K1-D/K1-E-Werten **BLOCKIERT**. Die öffentliche Migration darf außer konkreten Pfaden, den bekannten Versionsbezeichnungen und der GlobalShell-Versionsnummer keine stillen Publikationsänderungen enthalten.
 
 Dieser Guard testet technische Invarianten. Selbst ein vollständig bestandener Release-Test ist **kein unabhängiger mathematischer Beweis, keine empirische Bestätigung und keine Ghostfreiheitsprüfung**.
 
@@ -41,11 +42,11 @@ Der Guard akzeptiert keinen Freitext wie `Go`. Für einen sensiblen PR ist auf *
 UniverseLab RC13 RELEASE-AUTHORIZATION
 PR: #<EXAKTE_PR_NUMMER>
 HEAD: <EXAKTER_40_ZEICHEN_SHA>
-SCOPE: <CONTROL_PLANE,STATE_RELEASE ODER BEIDE KOMMAGETRENNT IN ALPHABETISCHER REIHENFOLGE>
+SCOPE: <CONTROL_PLANE,PUBLIC_SURFACE,STATE_RELEASE — ALLE BETROFFENEN SCOPES KOMMAGETRENNT UND ALPHABETISCH>
 DECISION: APPROVE THIS EXACT HEAD
 ```
 
-Die tatsächlichen konkreten Werte werden erst nach der vollständigen Quellenprüfung und **ausdrücklichen Entscheidung des Owners** eingesetzt. Wird der PR-Head geändert, verfällt die SHA-Bindung; der Nutzer muss die Entscheidung gegen den neuen Head neu treffen. Dies ist GitHub-authentifizierte Kontozuordnung, **keine kryptographische Personen-/Geräte-Attestierung**. Ein grünes Release-Gate ersetzt darüber hinaus keinen unabhängigen Code-/Wissenschaftsreview.
+Die tatsächlichen konkreten Werte werden erst nach der vollständigen Quellenprüfung und **ausdrücklichen Entscheidung des Owners** eingesetzt. Wird der PR-Head geändert, verfällt die SHA-Bindung; der Nutzer muss die Entscheidung gegen den neuen Head neu treffen. Ein nachträglich hinzugefügter Owner-Kommentar triggert selbst **keinen** `pull_request_target`-Check; ein neues PR-Label (`labeled`), ein `ready_for_review`-Ereignis oder eine kontrollierte Wiederholung des Checks ist für den erneuten Lauf erforderlich. Der GitHub-Required-Check-Kontext ist anschließend tatsächlich in der PR-Oberfläche zu kontrollieren. Dies ist GitHub-authentifizierte Kontozuordnung, **keine kryptographische Personen-/Geräte-Attestierung**. Ein grünes Release-Gate ersetzt darüber hinaus keinen unabhängigen Code-/Wissenschaftsreview.
 
 Ein Owner-Kommentar wird **nicht** durch eine Antwort `Go` in einem Chat erstellt und ist ausdrücklich nicht Gegenstand dieses RC13-Bootstraps.
 
