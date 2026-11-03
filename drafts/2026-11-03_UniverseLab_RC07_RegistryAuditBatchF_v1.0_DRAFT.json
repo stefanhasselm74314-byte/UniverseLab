@@ -1,0 +1,49 @@
+{
+  "schema": "universelab.rc07.registry-audit-batch.v1",
+  "status": "DRAFT_PARTIAL",
+  "pinned_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "results": [
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.json",
+      "blob_sha": "ccb1c08f6dce69507ac40aa6c9f449d1c2c9a1c4",
+      "source_status": "COMPONENTIZED_LOCAL_INTERFACE_OPERATOR_WEAK_HESSIAN_SYMMETRIC_ON_DECLARED_TEST_DOMAIN_GLOBAL_PHYSICAL_BOUNDARY_DOMAIN_OPEN",
+      "classification": "ANALYTIC_NONOPERATIVE_LOCAL_BOUNDARY_RESIDUAL_LINEARIZATION_AND_WEAK_HESSIAN_SYMMETRY",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json",
+      "blob_sha": "94570f682f4dbda3e6f9cce74e64989aa59c06d7",
+      "source_status": "GLOBAL_DOMAIN_PREFLIGHT_COMPLETE_PHYSICAL_DOMAIN_BLOCKED_BY_UNESTABLISHED_BACKGROUND_AND_UNFROZEN_OUTER_BOUNDARY_CORNER_DATA",
+      "classification": "ANALYTIC_NONOPERATIVE_GLOBAL_TANGENTIAL_CORNER_ADMISSIBILITY_AND_BOUNDARY_DOMAIN_PREFLIGHT",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.json",
+      "blob_sha": "6ab2c81db94a1f516e2ba717639f26cc943fe2ce",
+      "source_status": "GAUGE_OPERATOR_STRUCTURALLY_COMPONENTIZED_KERNELS_REGISTERED_NO_PHYSICAL_REDUCTION_RELEASED",
+      "classification": "ANALYTIC_NONOPERATIVE_GAUGE_OPERATOR_KERNEL_AND_CONSTRAINT_HANDOFF_PREFLIGHT",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json",
+      "blob_sha": "7ddaf206f3a36a6377cbf53d4facadedf1b089df",
+      "source_status": "IMPLEMENTED_REVIEW_PENDING",
+      "classification": "NONOPERATIVE_G01_FORENSIC_INVENTORY",
+      "solver_authorized": null,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    }
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
