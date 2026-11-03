@@ -1,0 +1,115 @@
+{
+  "schema": "universelab.rc16.authorization-alternatives.v1",
+  "date": "2026-11-03",
+  "status": "DRAFT_TARGET_ARCHITECTURE_PREFERRED_INSTALLATION_BLOCKED",
+  "repo": "stefanhasselm74314-byte/UniverseLab",
+  "main_baseline": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "reviewed_pr": 264,
+  "previous_model": {
+    "name": "COMMENT_DRIVEN_ALL_PR_REVIEW",
+    "status": "BLOCKED_TEMPORAL_REVOCATION_AND_HIGH_OPERATIONAL_COST",
+    "failure_model": "An issue comment approval can be removed or edited after a green check without a new eligible PR check automatically invalidating the previous result.",
+    "not_an_immutable_grant": true
+  },
+  "alternatives": [
+    {
+      "id": "RC16-A",
+      "name": "NATIVE_INDEPENDENT_REVIEW",
+      "reviewer": "INDEPENDENT_PERSON_WITH_WRITE_ACCESS",
+      "routine_draft_json": "AUTOMATIC_CHECK_ONCE_VALIDATED",
+      "sensitive_release": "BLOCKED_UNLESS_ACTUAL_NATIVE_REQUIRED_REVIEW_AT_CURRENT_HEAD_AND_BASE_TRUSTED_REQUIRED_CHECK",
+      "native_requirements": [
+        "required_pull_request",
+        "required_status_checks_strict",
+        "required_approving_reviews_from_other_than_author",
+        "dismiss_stale_approvals",
+        "trusted_job_source_verified",
+        "merge_ui_canary_blocking"
+      ],
+      "owner_comment": "INFORMATION_ONLY_NOT_A_REQUIRED_CHECK_AUTHORITY",
+      "current_fitness": "NOT_YET_AVAILABLE_INDEPENDENT_REVIEWER_UNVERIFIED",
+      "security_advantage": "Native GitHub PR review is persisted in merge policy and can be dismissed / renewed with new head. Comment after-green races removed from authorization path."
+    },
+    {
+      "id": "RC16-B",
+      "name": "SOLO_MAINTAINER_FAIL_CLOSED",
+      "reviewer": "NOT_ASSUMED",
+      "routine_draft_json": "AUTOMATIC_CHECK_ONCE_VALIDATED",
+      "sensitive_release": "PERMANENT_HOLD_UNTIL_SEPARATE_AUTHORIZATION_MECHANISM_IS_DEFINED_AND_CANARY_TESTED",
+      "native_requirements": [
+        "required_pull_request",
+        "required_status_checks_strict",
+        "trusted_job_source_verified",
+        "merge_ui_canary_blocking"
+      ],
+      "owner_comment": "INFORMATION_ONLY_NOT_A_REQUIRED_CHECK_AUTHORITY",
+      "current_fitness": "PRACTICAL_FOR_ROUTINE_AUDITS_NOT_FOR_SENSITIVE_RELEASE",
+      "security_advantage": "Cannot accidentally promote a release from a mutable comment, but no sensitive PR can be released without later approved route."
+    },
+    {
+      "id": "RC16-C",
+      "name": "COMMENT_DRIVEN_PREMERGE",
+      "reviewer": "GITHUB_OWNER_COMMENT",
+      "routine_draft_json": "OWNER_COMMENT_PER_COMMIT",
+      "sensitive_release": "CHECK_PASSES_ON_APPROVAL_COMMENT_IF_PRESENT_AT_TEST_TIME",
+      "native_requirements": [
+        "required_pull_request",
+        "required_status_checks_strict",
+        "trusted_job_source_verified"
+      ],
+      "owner_comment": "USED_AS_AUTHORITY_WITH_TOCTOU_REVOCATION",
+      "current_fitness": "NOT_RECOMMENDED_UNMITIGATED_RISK",
+      "security_advantage": "LOW_CODE_CHANGE_BUT_NOT_DURABLE_AUTHORIZATION"
+    }
+  ],
+  "nonoperative_routine_scope": {
+    "candidate_files": "ADDED_DATED_JSON_UNDER_DRAFTS_ONLY",
+    "filename_regex": "^drafts/\\d{4}-\\d{2}-\\d{2}_UniverseLab_[A-Za-z0-9_.-]+_DRAFT\\.json$",
+    "must_have_status_containing": "DRAFT",
+    "must_have_physical_gate_effect": "NONE",
+    "must_have_physical_evidence_effect": "NONE",
+    "must_be_noncanonical": true,
+    "may_not_edit_existing_trusted_or_public_path": true,
+    "never_implies_scientific_validation": true
+  },
+  "other_requirements": {
+    "actions_event_policy_read": "UNAVAILABLE_IN_CONNECTED_GITHUB_FETCH",
+    "github_default_public_pull_request_target_policy": "CURRENTLY_EVALUATE_MODE_ENFORCEMENT_2026-12-02_PER_CURRENT_GITHUB_DOCS",
+    "default_policy_applicability_for_repo": "UNKNOWN",
+    "read_only_permission_to_get_action_policies": "NOT_AVAILABLE",
+    "trusted_base_release_check_installed": false,
+    "required_rules_enforced": false,
+    "independent_external_security_review": false,
+    "owner_acceptance_of_new_workflow": false
+  },
+  "owner_decision_requirements": [
+    "confirm precise implementation limits and exception process for selected RC16-B before adopting any operative rules",
+    "decide_scope_of_routine_draft_exemption",
+    "independent security review",
+    "Actions event policy reachability verification",
+    "install via separately authorized PR",
+    "canary test required checks on real merge context"
+  ],
+  "effect": {
+    "changes_to_main": 0,
+    "changes_to_rulesets": 0,
+    "installation_authorization": false,
+    "release_authorization": false,
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE"
+  },
+  "decision": "RC16-B_SOLO_HOLD_PREFERRED_AS_TARGET_ARCHITECTURE",
+  "installation_status": "BLOCKED",
+  "owner_preference_record": {
+    "selection": "RC16-B_SOLO_HOLD",
+    "basis": "User explicitly prefers one-person operation with automated checks and blocked critical approvals",
+    "scope": "TARGET_ARCHITECTURE_PREFERENCE_ONLY",
+    "default_sensitive_releases": "HOLD",
+    "ordinary_workflow": "LIMITED_AUTOMATED_NONOPERATIVE_QA_SUBJECT_TO_REVIEW",
+    "policy_ratification": "NOT_CLAIMED",
+    "installation_authorization": false,
+    "merge_authorization": false,
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE"
+  }
+}

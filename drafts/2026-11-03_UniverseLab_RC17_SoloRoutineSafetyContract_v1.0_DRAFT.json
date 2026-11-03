@@ -1,0 +1,108 @@
+{
+  "schema": "universelab.rc17.solo-routine-safety-contract.v1",
+  "date": "2026-11-03",
+  "status": "DRAFT_PROPOSAL_NOT_INSTALLED",
+  "selected_target": "RC16-B_SOLO_HOLD_PREFERRED_AS_TARGET_ARCHITECTURE",
+  "approval_scope": "ARCHITECTURE_PREFERENCE_ONLY_NO_OPERATIVE_RULE",
+  "limits": {
+    "only_new_git_blobs": true,
+    "allowed_mode": "100644",
+    "max_files_per_pr": 12,
+    "max_file_bytes": 32768,
+    "max_note_count": 16,
+    "max_note_chars": 1600,
+    "max_total_note_chars": 12000,
+    "max_title_chars": 120,
+    "max_json_nesting": 3,
+    "filename": "drafts/YYYY-MM-DD_UniverseLab_<slug>_vX.Y_DRAFT.json",
+    "allowed_schema": "universelab.rc17.routine-note.v1",
+    "allowed_status": "DRAFT_NONCANONICAL",
+    "required_field_names": [
+      "schema",
+      "status",
+      "date",
+      "title",
+      "basis_main_commit",
+      "physical_gate_effect",
+      "physical_evidence_effect",
+      "authority_status",
+      "publication_status",
+      "scientific_evidence_status",
+      "solver_execution",
+      "notes"
+    ],
+    "required_field_values": {
+      "status": "DRAFT_NONCANONICAL",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "authority_status": "NO_AUTHORITY",
+      "publication_status": "NOT_PUBLISHED",
+      "scientific_evidence_status": "NOT_VALIDATED",
+      "solver_execution": "NOT_AUTHORIZED"
+    },
+    "no_extra_fields": true,
+    "notes_are_plain_text_not_canonical_claims": true,
+    "source_commit_must_match_live_main": true,
+    "reject_nonfinite_duplicate_json_keys": true,
+    "reject_embedded_xml_html_code_links_as_workflow": true,
+    "git_blob_sha_and_mode_must_match_head_tree": true
+  },
+  "modes": {
+    "routine_qa": "ALLOW_READ_ONLY_TECHNICAL_QA_WHILE_PR_IS_DRAFT",
+    "routine_merge": "BLOCKED_BY_RC18_UNFILTERED_PAGES_PUBLICATION_AND_PUBLIC_REPOSITORY_EXPOSURE",
+    "mixed_or_modified_files": "HOLD_ALL",
+    "active_registry_web_governance_tests_tools_workflows": "HOLD_CRITICAL",
+    "scientific_gate_promotion": "FORBIDDEN",
+    "automatic_merge": "FORBIDDEN",
+    "release_authorization": "NOT_GRANTED"
+  },
+  "required_merge_preconditions": [
+    "trusted_base_guard_installed_and_independently_reviewed",
+    "GitHub_event_policy_support_verified_or_base_trusted_alternative_used",
+    "main_required_pull_request_rule_active",
+    "unique_strict_current_HEAD_required_checks_pinned_to_GitHub_Actions",
+    "current_main_and_PR_head_verified",
+    "test_negative_real_GitHub_merge_block",
+    "owner_accepts_exact_routine_exception_and_recovery_path",
+    "public_only_pages_build_with_allowlisted_outputs_and_negative_exposure_canary_passed",
+    "owner_explicitly_accepts_public_visibility_of_any_committed_routine_drafts",
+    "privacy_scan_includes_new_publicly_visible_draft_notes",
+    "global_provenance_scans_prove_draft_hits_are_not_canonical_evidence"
+  ],
+  "recovery": {
+    "syntax_or_schema_error": "CORRECT_DRAFT_ON_OWN_BRANCH_AND_RERUN; NO_OVERRIDE",
+    "stale_baseline_sha": "REBASE_OR_RECREATE_FROM_VERIFIED_MAIN; RECHECK",
+    "duplicate_or_wrong_git_mode": "RECREATE_VALID_REGULAR_BLOB; NO_AUTO_FIX_ON_MAIN",
+    "incomplete_API_or_missing_check": "WAIT_RETRY_WITH_SAME_HEAD_AND_SOURCE; NO_ASSUME_PASS",
+    "unexpected_public_consumer_or_sensitive_edit": "RECLASSIFY_CRITICAL_AND_HOLD; SEPARATE_REVIEW",
+    "broken_trusted_main_guard": "SEPARATE_REPAIR_PR_FROM_KNOWN_GOOD_MAIN; NO_UNRECORDED_DIRECT_PUSH",
+    "urgent_control_plane_change": "OWNER_EXPLICIT_SCOPE_AND_HUMAN_SECURITY_REVIEW_REQUIRED; RELEASE_REMAINS_HOLD",
+    "physical_claim_or_solver_request": "REJECT_ROUTINE_EXCEPTION; SCIENTIFIC_GATE_KEEP_FAIL_CLOSED",
+    "recovery_test_status": "NOT_LIVE_VERIFIED"
+  },
+  "limitations": [
+    "new draft notes are not automatically safe if preexisting production code discovers/consumes drafts; that dataflow has not been proven absent",
+    "allowing only flat textual notes is intentionally restrictive; structured scientific evidence or numerical artifacts require separate review",
+    "unit and mock QA do not establish GitHub-native Merge enforcement",
+    "no direct GitHub settings/branch mutation, no Owner grant and no scientific validation"
+  ],
+  "release_effect": {
+    "main": "UNCHANGED",
+    "ruleset": "UNCHANGED",
+    "pr263": "DRAFT_UNMERGED",
+    "pr264": "DRAFT_UNMERGED",
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE",
+    "installation": "NOT_AUTHORIZED"
+  },
+  "rc18_publication_findings": {
+    "audit_run_id": 41661852782,
+    "full_git_tree_blobs_scanned": 1157,
+    "pages_deploy_upload_path": ".",
+    "risk": "PUBLIC_REPOSITORY_AND_UNFILTERED_PAGES_ROOT_EXPOSE_FUTURE_MERGED_DRAFT_FILES",
+    "privacy_draft_scanner_coverage": "MISSING",
+    "beta_tau_provenance_scan": "POSSIBLE_INDIRECT_DRAFT_TEXT_INGESTION",
+    "user_owner_acceptance": "NOT_REQUESTED",
+    "mitigated": false
+  }
+}

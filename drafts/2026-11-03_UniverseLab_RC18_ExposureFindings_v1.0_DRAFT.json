@@ -1,0 +1,133 @@
+{
+  "schema": "universelab.rc18.draft-autodiscovery-publication-review.v1",
+  "date": "2026-11-03",
+  "status": "DRAFT_SECURITY_PUBLICATION_HOLD",
+  "repo": "stefanhasselm74314-byte/UniverseLab",
+  "source_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "source_main_tree": "65f423f04bbb2f1462f120a6b31073644cdc28cc",
+  "github_actions_evidence": {
+    "run_id": 41661852782,
+    "job_id": 126006795889,
+    "conclusion": "success",
+    "tracked_blobs_scanned": 1157,
+    "bytes_scanned": 9242253,
+    "scanner_test_methods": 13,
+    "direct_draft_refs": 0,
+    "generic_discovery_files": 50,
+    "main_draft_files": 0
+  },
+  "pages_exposure": {
+    "source": ".github/workflows/deploy-pages.yml",
+    "source_blob_sha": "c79cc880dba1daa5e778b4514bd9259188b4d9de",
+    "upload_action": "actions/upload-pages-artifact@v4",
+    "upload_path": ".",
+    "risk": "FILES_UNDER_DRAFTS_WOULD_BE_INCLUDED_IN_STATIC_PAGES_ARTIFACT_AFTER_MAIN_MERGE",
+    "actual_current_draft_deployed": false,
+    "actual_deployed_file_test": "NOT_PERFORMED",
+    "mitigation": "BUILD_EXPLICIT_PUBLIC_ONLY_STAGING_DIRECTORY_AND_VERIFY_ALLOWLIST_AND_LINK_COVERAGE_BEFORE_SWITCHING"
+  },
+  "public_github_visibility": {
+    "repo_public": true,
+    "meaning": "PR branch drafts are accessible through public GitHub regardless of Pages; even an explicit Pages allowlist would not make drafts private",
+    "confidential_data_policy": "DO_NOT_COMMIT_PRIVATE_RESEARCH_NOTES_TO_THIS_PUBLIC_REPO"
+  },
+  "privacy_gap": {
+    "path": "tools/2026-08-03_validate_public_repository_privacy_v1.0.py",
+    "source_blob_sha": "0b045c097235e9a18a6366af80c6c692578af56a",
+    "scanner_roots": [
+      "registry",
+      "governance",
+      "prompts",
+      "science"
+    ],
+    "drafts_in_scope": false,
+    "consequence": "ROUTINE_DRAFT_NOT_COVERED_BY_EXISTING_PRIVACY_VALIDATOR"
+  },
+  "indirect_reader": {
+    "path": "tools/2026-08-31_scan_hzt_m0_fm0_beta_tau_provenance_v0.1.py",
+    "source_blob_sha": "56eb50a744217ea99dededb7b1856f051d048a31",
+    "invocation_workflow": ".github/workflows/2026-08-31_HZT_M0_FM0_BetaTauProvenanceScan_v0.1.yml",
+    "invocation_workflow_blob_sha": "585d8d36195de117fba53eea3db3251881e95c21",
+    "mechanism": "ROOT.rglob('*') scans eligible text extensions including json; future draft notes may enter diagnostic lexical counts if they contain beta_tau",
+    "publication_or_canon_impact": "NOT_ESTABLISHED"
+  },
+  "candidate_inventory": {
+    "count": 50,
+    "by_directory": {
+      ".github": 28,
+      "tests": 3,
+      "tools": 18,
+      "verify_universelab_p0_v0_1.py": 1
+    },
+    "files": [
+      ".github/workflows/2026-08-03_HZT_M0_S6_C1_V_G1_1_SymmetricPredictor_v0.1.yml",
+      ".github/workflows/2026-08-05_HZT_M0_S6_C_PHYS_M1_Background3C10_RealBackendControl_v0.3.yml",
+      ".github/workflows/2026-08-11_ULSH-01_MD2S-BVP_WP3_CP01R1ImmediateExecution_v1.0.yml",
+      ".github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D5_CP01R2ImmediateExecution_v1.0.yml",
+      ".github/workflows/2026-08-12_ULSH-01_MD2S-BVP_WP3_D8_CP01R2ImmediateExecution_v2.0.yml",
+      ".github/workflows/2026-08-12_UniverseLab_AIP-LENS-01-NULL-N1_v0.1.yml",
+      ".github/workflows/2026-08-16_ULSH01_ControlReplayAudit_v1.0.yml",
+      ".github/workflows/2026-08-16_ULSH01_ControlReplay_v1.0.yml",
+      ".github/workflows/2026-08-16_ULSH01_Reproducibility_v1.0.yml",
+      ".github/workflows/2026-08-20_UniverseLab_BrowserParityAudit_v1.0.yml",
+      ".github/workflows/2026-08-20_UniverseLab_NumericalCoverageAudit_v1.0.yml",
+      ".github/workflows/2026-08-20_UniverseLab_ProductionSmokeAudit_v1.0.yml",
+      ".github/workflows/2026-08-30_UniverseLab_10M_MobileOverflowAudit_v1.0.yml",
+      ".github/workflows/2026-08-31_UniverseLab_SiteWideIntegrityAudit_v1.0.yml",
+      ".github/workflows/2026-09-01_UniverseLab_CanonicalCosmologyEngineFoundation_QA_v1.0.yml",
+      ".github/workflows/2026-09-01_UniverseLab_CompareRouteConsolidation_QA_v1.0.yml",
+      ".github/workflows/2026-09-01_UniverseLab_CompareSafeMigration_QA_v2.0.yml",
+      ".github/workflows/2026-09-01_UniverseLab_EmergenceCanonicalGrowthAdapter_QA_v1.0.yml",
+      ".github/workflows/2026-09-01_UniverseLab_ObservatoryMigration_QA_v1.5.yml",
+      ".github/workflows/2026-09-02_ULSH01_WP2_HumanTrustRootRatificationPackage_QA_v0.1.yml",
+      ".github/workflows/2026-09-03_UniverseLab_BandIVB_CurrentMainReconciliation_QA_v1.0.yml",
+      ".github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_QA_v1.0.yml",
+      ".github/workflows/2026-09-03_UniverseLab_BandVA_PublicScientificClaimCensus_Report_v1.1.yml",
+      ".github/workflows/2026-09-03_UniverseLab_BandVB_HighClaimAdjudication_QA_v1.0.yml",
+      ".github/workflows/2026-09-04_UniverseLab_BandVB_MediumCompletionAdjudication_QA_v1.0.yml",
+      ".github/workflows/2026-09-04_UniverseLab_BandVB_MediumPriorityAdjudication_QA_v1.0.yml",
+      ".github/workflows/2026-09-25_UniverseLab_LandingPaths_QA_v1.0.yml",
+      ".github/workflows/deploy-pages.yml",
+      "tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D2_CP01R2ImplementationReviewTest_v1.0.py",
+      "tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3H1_RR1_TransactionClosureTest_v1.0.py",
+      "tests/2026-08-12_ULSH-01_MD2S-BVP_WP3_D6H1_CP01R2HardeningTest_v1.0.py",
+      "tools/2026-08-03_validate_public_repository_privacy_v1.0.py",
+      "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_execution_runner_v0.1.py",
+      "tools/2026-08-05_hzt_m0_s6_c_phys_m1_background_3c8_physical_execution_adapter_v0.1.py",
+      "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.1.py",
+      "tools/2026-08-11_ulsh_01_md2s_bvp_wp2_transaction_v1.2.py",
+      "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d1_failure_diagnosis_v1.0.py",
+      "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d2_cp01r2_etrn_v1.0.py",
+      "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d2_independent_protocol_review_v1.0.py",
+      "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_cp01r2_physical_binding_v1.0.py",
+      "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_cp01r2_physical_target_binding_v1.0.py",
+      "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3_independent_release_readiness_review_v1.0.py",
+      "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d3h1_cp01r2_transaction_v1.0.py",
+      "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6h1_cp01r2_target_v1.1.py",
+      "tools/2026-08-12_ulsh_01_md2s_bvp_wp3_d6r1_cp01r2_independent_review_v1.0.py",
+      "tools/2026-08-28_validate_print_export_link_coverage_v1.0.py",
+      "tools/2026-08-31_UniverseLab_SiteWideIntegrityAudit_v1.0.py",
+      "tools/2026-08-31_scan_hzt_m0_fm0_beta_tau_provenance_v0.1.py",
+      "tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py",
+      "verify_universelab_p0_v0_1.py"
+    ],
+    "meaning": "Lexical generic discovery / artifact uploader occurrences only; not proof of 50 affected dataflows"
+  },
+  "remaining_uncertainties": [
+    "LIVE_RUNTIME_FLOWS_AND_EXTERNAL_READERS_NOT_FULLY_VERIFIED",
+    "PAGES_ARTIFACT_ARCHIVE_CONTENT_AFTER_FUTURE_MAIN_MERGE_NOT_OBSERVED",
+    "GLOBAL_JSON_CONSUMER_SEMANTIC_AUDIT_NOT_FULLY_CONCLUDED",
+    "RUNTIME_DEPLOY_PIPELINE_SAFE_STAGING_NOT_IMPLEMENTED",
+    "REQUIRED_CHECK_MERGE_ENFORCEMENT_ABSENT"
+  ],
+  "release_decision": {
+    "routine_draft_auto_merge": "BLOCKED",
+    "noncanonical_draft_privacy": "NOT_PRIVATE_IN_PUBLIC_REPOSITORY",
+    "pages_publishing": "UNFILTERED_REPOSITORY_ROOT",
+    "owner_exception_ratification": "NOT_GRANTED",
+    "canonical_promotion": "BLOCKED",
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE"
+  },
+  "limitation": "Complete lexical scan of 1157 pinned files, not proof of absence of dynamically constructed import paths or third-party watchers"
+}
