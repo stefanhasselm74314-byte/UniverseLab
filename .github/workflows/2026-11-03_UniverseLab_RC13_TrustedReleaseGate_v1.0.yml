@@ -1,0 +1,41 @@
+name: UniverseLab RC13 trusted-base release gate
+# INSTALLATION CANDIDATE. Does not execute until independently merged to main.
+# pull_request_target executes the BASE BRANCH workflow, never the PR's code.
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, edited, ready_for_review, converted_to_draft]
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+concurrency:
+  group: rc13-release-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  trusted-release-gate:
+    name: trusted-release-gate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout trusted base only (never PR head)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify trusted guard syntax
+        run: python3 -m py_compile tools/2026-11-03_UniverseLab_RC13_TrustedReleaseGuard_v1.0.py
+      - name: Read-only authenticated PR / release review
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 tools/2026-11-03_UniverseLab_RC13_TrustedReleaseGuard_v1.0.py
+      - name: Check trusted checkout unchanged
+        run: |
+          git diff --quiet
+          git diff --cached --quiet
+      - name: State trust boundary
+        run: |
+          echo 'The checked workflow and policy came from the PR base, not PR head.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'No secrets beyond a read-only GitHub token; no untrusted code executed.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'This check is NOT an enforced merge requirement until ruleset required checks is configured.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'No scientific gate/evidence promotion. No owner authorization is inferred.' >> "$GITHUB_STEP_SUMMARY"
