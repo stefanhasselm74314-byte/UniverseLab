@@ -1,0 +1,106 @@
+name: RC19 public-only Pages candidate QA (no deployment)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/2026-11-03_UniverseLab_RC19_PublicOnlyCandidateQA_v1.0.yml'
+      - 'tools/2026-11-03_UniverseLab_RC19_PublicOnlyBuild_v1.0.py'
+      - 'tests/2026-11-03_test_UniverseLab_RC19_PublicOnlyBuild_v1.0.py'
+      - 'governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json'
+      - 'governance/2026-11-03_UniverseLab_RC19_PublicOnlyBuildReview_v1.0.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-only:
+    name: rc19-public-only-candidate-qa
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout this noncanonical QA candidate
+        uses: actions/checkout@v6
+
+      - name: Adversarial fixtures including synthetic draft canary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tests/2026-11-03_test_UniverseLab_RC19_PublicOnlyBuild_v1.0.py
+
+      - name: Build exact-pinned site into private runner staging
+        shell: bash
+        env:
+          RC19_STAGING: ${{ runner.temp }}/universelab-rc19-staging
+        run: |
+          set -euo pipefail
+          # Harmless runtime-only canaries: new Draft and new Registry file.
+          python - <<'PY'
+          from pathlib import Path
+          for path in (
+              Path('drafts/2026-11-03_RC19_SyntheticCanary_DRAFT.json'),
+              Path('registry/2026-11-03_RC19_SyntheticCanary.json'),
+          ):
+              path.parent.mkdir(exist_ok=True)
+              path.write_text('RC19_SYNTHETIC_NONSECRET_CANARY_X9F', encoding='utf-8')
+          PY
+          python tools/2026-11-03_UniverseLab_RC19_PublicOnlyBuild_v1.0.py \
+            --source . \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --out "$RC19_STAGING"
+
+      - name: Confirm staging excludes sensitive source directories
+        shell: bash
+        env:
+          RC19_STAGING: ${{ runner.temp }}/universelab-rc19-staging
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          stage = Path(os.environ['RC19_STAGING'])
+          manifest = json.loads(Path('governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json').read_text())
+          expected = {item['path'] for item in manifest['files']}
+          actual = {p.relative_to(stage).as_posix() for p in stage.rglob('*') if p.is_file()}
+          assert actual == expected, 'STAGING_MANIFEST_SET_MISMATCH'
+          for forbidden in ('.github', '.git', 'drafts', 'governance', 'science', 'tests', 'tools', 'prompts', 'recovery', 'reproducibility', 'requirements'):
+              assert not (stage / forbidden).exists(), f'FORBIDDEN_STAGING_DIR:{forbidden}'
+          assert (stage / 'index.html').is_file(), 'INDEX_MISSING'
+          assert (stage / 'navigator.html').is_file(), 'NAVIGATOR_MISSING'
+          print(f'RC19_CANDIDATE_STAGE_PASS files={len(actual)} deploy=NOT_PERFORMED')
+          PY
+
+      - name: Simulated Pages tar artifact rejects both synthetic canaries
+        shell: bash
+        env:
+          RC19_STAGING: ${{ runner.temp }}/universelab-rc19-staging
+          RC19_TAR: ${{ runner.temp }}/universelab-rc19-simulated-pages.tar.gz
+        run: |
+          set -euo pipefail
+          tar -czf "$RC19_TAR" -C "$RC19_STAGING" .
+          python - <<'PY'
+          import io
+          import json
+          import os
+          from pathlib import Path
+          import tarfile
+
+          manifest = json.loads(Path('governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json').read_text())
+          expected = {item['path'] for item in manifest['files']}
+          actual = set()
+          with tarfile.open(os.environ['RC19_TAR'], mode='r:gz') as tar:
+              for member in tar.getmembers():
+                  assert not member.issym() and not member.islnk(), 'ARCHIVE_LINK_FORBIDDEN'
+                  if not member.isfile():
+                      continue
+                  path = member.name.removeprefix('./')
+                  actual.add(path)
+                  data = tar.extractfile(member).read()
+                  assert b'RC19_SYNTHETIC_NONSECRET_CANARY_X9F' not in data, 'CANARY_LEAK'
+          assert actual == expected, 'SIMULATED_PAGES_CONTENT_MISMATCH'
+          print(f'RC19_SIMULATED_ARTIFACT_PASS files={len(actual)} no_real_upload=TRUE')
+          PY
+
+      # No upload-pages-artifact, deploy-pages, push, release, or approval step.
