@@ -3,7 +3,7 @@
   "release": "2.35-reconciliation-DRAFT",
   "release_date": "2026-11-03",
   "basis_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
-  "basis_main_tree": null,
+  "basis_main_tree": "65f423f04bbb2f1462f120a6b31073644cdc28cc",
   "basis_semantics": "Draft additive candidate; preserve original project-manifest.json until separately approved",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
@@ -321,7 +321,10 @@
     "open_pull_request_has_no_canonical_effect_until_merged",
     "readiness_or_preparation_is_not_authorization",
     "trust_root_preparation_is_not_human_ratification",
-    "green_ci_is_not_physical_evidence"
+    "green_ci_is_not_physical_evidence",
+    "hda_routine_nonoperative_authority_is_not_solver_execution",
+    "method_gate_adoption_is_not_physical_closure",
+    "ratified_provenance_rule_is_not_automatic_evidence_validation"
   ],
   "c_phys_operator_entry": {
     "track_id": "MD2S-R1-C-PHYS",
@@ -393,7 +396,8 @@
     "provenance_rule": "registry/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityContract_v1.1.json",
     "hda_delegation": "registry/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.json",
     "ul_sing_method_gates": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json",
-    "band_vc_g01": "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json"
+    "band_vc_g01": "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json",
+    "band_vc_g11_state_freshness": "registry/2026-09-04_UniverseLab_BandVC_G11_StateFreshnessClosure_v1.0.json"
   },
   "platform_governance": {
     "version": "1.2.0",
@@ -427,6 +431,60 @@
     "physical_evidence_effect": "NONE",
     "review_required": true,
     "source_pointer_status": "PENDING_CANONICAL_MERGE",
-    "current_merge_tree_status": "NOT_VERIFIED"
+    "current_merge_tree_status": "VERIFIED_GIT_OBJECT_PINNED_MERGE_COMMIT",
+    "semantic_rc08": {
+      "scope": "BOUNDED_SIX_SOURCE_SEMANTIC_RECONCILIATION_NOT_39_SOURCE_CLEARANCE",
+      "crosswalk": "drafts/2026-11-03_UniverseLab_RC08_SemanticFieldCrosswalk_v1.0_DRAFT.json",
+      "band_vc_g11": {
+        "september_chain_integration": "MERGED_PR210",
+        "merge_commit": "c3698b36860f7268a71ba259b36c64c105dd48a9",
+        "historical_source_status": "IMPLEMENTED_REVIEW_PENDING",
+        "scientific_missing_links_after_closure": 10,
+        "governance_provenance_missing_links_after_closure": 0,
+        "current_snapshot_reconciliation": "OPEN_DRAFT"
+      },
+      "band_vc_g01": {
+        "scope": "REFERENCE_ONLY",
+        "gate": "OPEN_BLOCKING",
+        "mu_eta_sigma_parent_values": "NOT_RELEASED",
+        "growth": "UNRELEASED_GROWTH_MAP",
+        "lensing": "UNRELEASED_LENSING_MAP"
+      },
+      "ulsh05_wp1d2": {
+        "scope": "KINEMATIC_NONOPERATIVE",
+        "physical_DOF_count": "NOT_RELEASED",
+        "constraint_elimination": "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
+        "closed_range": "NOT_PROVEN",
+        "Fredholm_property": "NOT_PROVEN",
+        "global_physical_boundary_domain": "NOT_RELEASED"
+      },
+      "provenance_rule": {
+        "status": "USER_RATIFIED_METHOD_RULE",
+        "merged_pr": 235,
+        "merge_commit": "71bd7ff368334ecab708ca09a5f4a3bc92b89035",
+        "automatic_evidence_evaluator": false,
+        "global_pipeline_enforcement": false
+      },
+      "hda": {
+        "status": "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
+        "identity_binding": "PENDING_CANONICAL_ID_BINDING",
+        "operative_authority": false,
+        "reserved_matters_require_owner_ratification": true
+      },
+      "ul_sing": {
+        "method_gates": [
+          "QG-PI-01",
+          "QG-GAP-01",
+          "KK-CTP-01"
+        ],
+        "canonical_method_governance": "MERGED_PR254",
+        "physical_closure": "NOT_EVALUATED",
+        "source_preprint_not_hzt_evidence": true
+      },
+      "historical_public_claim_count_policy": "PRESERVE_HISTORICAL_COUNTS_CURRENT_G11_CLOSURE_SEPARATE",
+      "gate_promotion": "NONE",
+      "snapshot_timestamp_status": "HISTORICAL_VALUE_INHERITED_RELEASE_BLOCKER",
+      "checkpoint_snapshot_pointer_status": "HISTORICAL_VALUE_INHERITED_RELEASE_BLOCKER"
+    }
   }
 }
