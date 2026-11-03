@@ -1,12 +1,13 @@
 # UniverseLab — RC-VALIDATION-20: Website-Laufzeitpfade, Quellenviewer und Datenschutz
 
 **Datum:** 2026-11-03  
-**Status:** `HOLD_CONFIRMED_STATIC_ROUTER_COMPATIBILITY / PRIVACY_PATTERN_QA_PASS / BROWSER_NOT_RUN`  
+**Status:** `HOLD_CONFIRMED_LOCAL_AND_GITHUB_CI / PRIVACY_PATTERN_QA_PASS / BROWSER_NOT_RUN`  
 **Governance:** RC16-B Ein-Personen-Betrieb mit nichtoperativer automatischer QA und gesperrten kritischen Freigaben.  
 **Main-Basis:** Commit `51bcc8fccb092c104ac0fca5fc98a5b996dcb914`, Tree `65f423f04bbb2f1462f120a6b31073644cdc28cc`.  
 **RC19-Abhängigkeit:** Draft-PR #265, letzter geprüfter Head `81154e120ff5b64c28db43c0f1596c93d501ce3a`, exact-hash manifest mit 446 Dateien.  
 **Maschinenlesbare Evidenz:** `drafts/2026-11-03_UniverseLab_RC20_RuntimePrivacyFindings_v1.0_DRAFT.json` und `drafts/2026-11-03_UniverseLab_RC20_HttpSmoke_v1.0_DRAFT.json`.  
 **Auditor:** `tools/2026-11-03_UniverseLab_RC20_RuntimePrivacyAudit_v1.0.py`; Testfixture 21 Methoden; HTTP-Replay unter `/UniverseLab/`.
+**GitHub-CI:** Draft-PR #266 (gestapelt auf #265), Run `41671846984`, Job `126042000873`, Conclusion `SUCCESS` beim Head `4898cc6be31b761fe8500e2505b2f720fc7b967b`. Der erste Workflow-Parsingversuch `41671567982` war vor Jobstart fehlerhaft, weil `runner.temp` auf Job- statt Step-Ebene verwendet wurde. Dies wurde im Branch behoben; die korrigierte CI führte alle fünf deklarierten Steps erfolgreich aus.
 
 ## 1. Kernergebnis
 
@@ -31,6 +32,8 @@ Für die 73 HTML-Dateien wurden im statischen Audit 16 Seiten mit unmittelbarem 
 
 **[LOKAL NUMERISCH BESTÄTIGT]** Alle 446 RC19-Dateien / 4.932.132 Byte wurden in UTF-8 auf bekannte Muster gescannt. Das Verfahren erweitert den bisherigen öffentlichen Privacy-Validator auf den **tatsächlichen Manifestumfang** einschließlich bisher ausgelassener Root-, SVG-/XML-/CSV-/Webmanifest-Dateien. Auch verschachtelte JSON-Schlüssel, doppelte Schlüssel, NaN/Infinity, ungültige JSONL-Zeilen und fehlerhafte UTF-8-Dekodierung werden beurteilt.
 
+**[GITHUB-CI NUMERISCH BESTÄTIGT]** Der korrigierte Read-only-Lauf reproduzierte die 21/21 adversarial fixture PASS sowie 4 ausgeschlossene statische Linkvorkommen, 3 einzigartige Ziele, 14 Datenpfad-Kandidaten und 0 Datenschutzmuster-Treffer. Das erwartete Audit-Exit-`2` wurde als `HOLD` validiert und ausdrücklich nicht als Release-PASS umklassifiziert.
+
 ```text
 RC20_PUBLIC_FILE_SCAN = 446/446
 RC20_PRIVACY_PATTERN_FINDINGS = 0
@@ -44,6 +47,8 @@ SEMANTIC_PERSONAL_DATA_REVIEW = NOT_PERFORMED
 ## 3. HTTP-Transportreplay – keine Browserprüfung
 
 **[LOKAL NUMERISCH BESTÄTIGT]** Mit einem frischen Python-HTTP-Testserver auf dem Pfad `/UniverseLab/` wurden sämtliche 446 Public-Dateien per HTTP 200 abgerufen und **bytegenau** gegen die Manifest-SHA-256-Werte verifiziert. Für alle **73 HTML-Seiten** wurde der HTTP-Abruf zusätzlich mit einem Galaxy-S24-Ultra-/Android-User-Agent wiederholt. Im selben lokalen Staging antworteten die drei ausgenommenen, vom Router adressierbaren Quellpfade und ein synthetischer Draft-Pfad mit **HTTP 404**.
+
+**[GITHUB-CI NUMERISCH BESTÄTIGT]** Der Transportreplay wurde im PR-Runner mit denselben Ergebnissen bestanden und gegen beide fixierten JSON-Provenienzberichte abgeglichen.
 
 ```text
 HTTP_DESKTOP_FILES_200_AND_SHA_MATCH = 446/446
@@ -83,12 +88,14 @@ RC20_MOBILE_UA_HTTP = PASS_73_OF_73_NOT_ANDROID_EMULATION
 RC20_BROWSER_RUNTIME_PARITY = NOT_PERFORMED
 RC20_SEMANTIC_PRIVACY_REVIEW = NOT_PERFORMED
 RC20_REAL_PAGES_ARTIFACT = NOT_TESTED
+RC20_GITHUB_EXPECTED_HOLD_CI = SUCCESS_RUN_41671846984
 RC20_RELEASE_GATE = HOLD
 RC19_INSTALLATION = NOT_AUTHORIZED
 RC17_ROUTINE_AUTO_MERGE = BLOCKED
 PR263 = DRAFT_UNMERGED
 PR264 = DRAFT_UNMERGED
 PR265 = DRAFT_UNMERGED
+PR266 = DRAFT_UNMERGED_STACKED_ON_PR265
 MAIN = 51bcc8fccb092c104ac0fca5fc98a5b996dcb914
 CANONICAL_PROMOTION = BLOCKED
 PHYSICAL_GATE_EFFECT = NONE
