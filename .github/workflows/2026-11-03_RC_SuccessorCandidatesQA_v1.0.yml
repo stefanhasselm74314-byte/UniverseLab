@@ -2,7 +2,7 @@ name: RC-VALIDATION-06 successor candidates QA
 on:
   pull_request:
     paths:
-      - 'registry/2026-11-03_UniverseLab_*_DRAFT.json'
+      - 'drafts/2026-11-03_UniverseLab_*_DRAFT.json'
       - '.github/workflows/2026-11-03_RC_SuccessorCandidatesQA_v1.0.yml'
 permissions:
   contents: read
@@ -16,9 +16,9 @@ jobs:
           python3 - <<'PY'
           import json, pathlib, subprocess
           root=pathlib.Path('.')
-          p=['registry/2026-11-03_UniverseLab_CurrentMainCanonicalState_v1.4_DRAFT.json',
-             'registry/2026-11-03_UniverseLab_SessionCheckpoint_v1.35_DRAFT.json',
-             'registry/2026-11-03_UniverseLab_ProjectManifest_v2.35_DRAFT.json']
+          p=['drafts/2026-11-03_UniverseLab_CurrentMainCanonicalState_v1.4_DRAFT.json',
+             'drafts/2026-11-03_UniverseLab_SessionCheckpoint_v1.35_DRAFT.json',
+             'drafts/2026-11-03_UniverseLab_ProjectManifest_v2.35_DRAFT.json']
           old=['registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json',
                'registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json',
                'project-manifest.json']
