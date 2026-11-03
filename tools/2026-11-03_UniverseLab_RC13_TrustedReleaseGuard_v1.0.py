@@ -69,11 +69,11 @@ def classify(path: str) -> set[str]:
     scopes: set[str] = set()
     if path in RELEASE_REQUIRED or any(p.fullmatch(path) for p in SNAPSHOT_PATTERNS.values()):
         scopes.add("STATE_RELEASE")
-    if (path.startswith((".github/workflows/", "governance/", "schemas/",
+    if (path.startswith((".github/", "governance/", "schemas/",
                          "tools/", "tests/")) or
         path in (".github/CODEOWNERS", ".github/dependabot.yml") or
         (path.startswith("registry/") and any(t in path for t in (
-            "OwnerAdoption", "Delegation", "AuthoritySignature",
+            "OwnerAdoption", "Delegation", "AuthoritySignature", "FileNamingPolicy", "Ruleset",
             "TrustRootRatification", "MethodGates", "AuthorizationDecision")))):
         scopes.add("CONTROL_PLANE")
     if path.startswith("assets/") and "GlobalShell" in path:
@@ -229,6 +229,10 @@ def validate_live_release(files: list[dict], base_sha: str, head_sha: str,
 
     base = decode_json(api.contents("project-manifest.json", base_sha),
                        "baseline manifest")
+    base_checkpoint = decode_json(api.contents(base["session_checkpoint"], base_sha),
+                                   "baseline checkpoint")
+    base_site = decode_json(api.contents(base["site_state"], base_sha),
+                             "baseline site")
     manifest_bytes = api.contents("project-manifest.json", head_sha)
     manifest = decode_json(manifest_bytes, "release manifest")
     state_p, cp_p, site_p = (new_snapshots[x] for x in ("state","checkpoint","site"))
@@ -290,6 +294,12 @@ def validate_live_release(files: list[dict], base_sha: str, head_sha: str,
             api.contents(base["canonical_state"], base_sha),
             "baseline state").get("physical_governance"),
             "State physical governance changed")
+    require(manifest.get("gates") == base.get("gates"),
+            "Full manifest gate ledger changed during governance-only release")
+    require(cp.get("gate_state") == base_checkpoint.get("gate_state"),
+            "Full checkpoint gate ledger changed during governance-only release")
+    require(site.get("governance") == base_site.get("governance"),
+            "SiteState governance ledger changed during governance-only release")
     for k, value in GATE_EXPECTED.items():
         require(manifest.get("gates", {}).get(k) == base.get("gates", {}).get(k) == value,
                 "Manifest scientific gate promotion")
@@ -341,7 +351,9 @@ def validate_ruleset_enforcement(rulesets: list[dict], trusted_job: str) -> None
         if ruleset.get("enforcement") != "active" or ruleset.get("target") != "branch":
             continue
         conditions = ruleset.get("conditions",{}).get("ref_name",{})
-        if "refs/heads/main" not in conditions.get("include", []):
+        if ("refs/heads/main" not in conditions.get("include", []) or
+            "refs/heads/main" in conditions.get("exclude", []) or
+            ruleset.get("bypass_actors")):
             continue
         types = {r.get("type") for r in ruleset.get("rules",[])}
         pr_rule = pr_rule or ("pull_request" in types)
@@ -384,6 +396,13 @@ def run_event(event: dict, api: GitHubReadOnly) -> str:
     files = api.paged("/pulls/" + str(number) + "/files", MAX_PR_FILES)
     scopes = scopes_for_files(files)
     if not scopes:
+        latest = api.get("/pulls/" + str(number))
+        require(latest.get("head",{}).get("sha") == head_sha and
+                latest.get("base",{}).get("sha") == base_sha and
+                latest.get("draft") == payload.get("draft"),
+                "Ordinary PR changed mid-validation")
+        require(api.get("/branches/main").get("commit",{}).get("sha") == base_sha,
+                "main changed mid-validation")
         return "PASS_ORDINARY_NONRELEASE_PR_NO_OWNER_RELEASE_CLAIM"
     require(live_pr.get("draft") is False,
             "Sensitive PR is Draft; cannot be treated as a release")
