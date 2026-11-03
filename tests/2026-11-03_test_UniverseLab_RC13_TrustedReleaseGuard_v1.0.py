@@ -319,7 +319,21 @@ class TrustGateTests(TestCase):
         self.assertFalse(g.has_scoped_owner_approval(
             [comment],999,"0"*40,{"CONTROL_PLANE","STATE_RELEASE"}))
 
-    def test_08_no_pr_script_execution(self):
+    def test_08_trusted_workflow_base_boundary(self):
+        workflow=(ROOT / g.TRUSTED_WORKFLOW).read_text(encoding="utf-8")
+        self.assertIn("  pull_request_target:", workflow)
+        self.assertNotIn("\n  pull_request:\n", workflow)
+        self.assertIn("ref: ${{ github.event.pull_request.base.sha }}", workflow)
+        self.assertNotIn("github.event.pull_request.head.sha", workflow)
+        self.assertIn("persist-credentials: false", workflow)
+        self.assertIn("contents: read", workflow)
+        self.assertIn("pull-requests: read", workflow)
+        self.assertIn("issues: read", workflow)
+        self.assertIn("name: trusted-release-gate", workflow)
+        self.assertIn("tools/2026-11-03_UniverseLab_RC13_TrustedReleaseGuard_v1.0.py", workflow)
+        self.assertNotIn("  if:", workflow)
+
+    def test_09_no_pr_script_execution(self):
         source=SCRIPT.read_text(encoding="utf-8")
         self.assertNotIn("subprocess",source)
         self.assertNotIn("os.system",source)
