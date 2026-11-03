@@ -1,0 +1,27 @@
+name: RC09 pinned semantic source contract QA
+on:
+  pull_request:
+    paths:
+      - 'drafts/2026-11-03_UniverseLab_RC09_SemanticSourceContract_v1.0_DRAFT.json'
+      - 'drafts/2026-11-03_UniverseLab_RC07_ChangedFileInventory_v1.0_DRAFT.json'
+      - 'tests/2026-11-03_test_UniverseLab_RC09_SemanticSourceContract_v1.0.py'
+      - '.github/workflows/2026-11-03_RC09_SemanticSourceContract_QA_v1.0.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rc09:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check Python syntax
+        run: python3 -m py_compile tests/2026-11-03_test_UniverseLab_RC09_SemanticSourceContract_v1.0.py
+      - name: Validate source assertions and negative tests
+        run: python3 tests/2026-11-03_test_UniverseLab_RC09_SemanticSourceContract_v1.0.py
+      - name: Summarize noncanonical scope
+        run: |
+          echo 'RC09 checks source-bound semantic declarations only.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'No scientific proof, physical release, or canonical promotion.' >> "$GITHUB_STEP_SUMMARY"
