@@ -18,6 +18,7 @@ RUN_ID = "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4"
 TARGET_DIGEST = "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823"
 RUN_PAYLOAD_DIGEST = "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c"
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
+GIT_OID_RE = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 KEY_ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9._:-]{2,127}$")
 AUTHORITY_ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9._:-]{2,127}$")
 MAX_SAFE_INTEGER = (1 << 53) - 1
@@ -165,6 +166,21 @@ def require_hex64(value: Any, field: str) -> str:
     return value
 
 
+def require_git_oid(value: Any, field: str) -> str:
+    """Validate a Git object ID independently of SHA-256 artifact digests.
+
+    UniverseLab currently uses SHA-1 Git object IDs (40 hex), while Git also
+    supports SHA-256 repositories (64 hex). Do not conflate either form with
+    an artifact SHA-256 digest merely because both may be hexadecimal.
+    """
+    if not isinstance(value, str) or GIT_OID_RE.fullmatch(value) is None:
+        raise AuthorityVerificationError(
+            "INVALID_GIT_OID",
+            f"{field} must be a 40- or 64-character lowercase hexadecimal Git object ID",
+        )
+    return value
+
+
 def require_mapping(value: Any, field: str) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise AuthorityVerificationError("MISSING_OR_INVALID_OBJECT", f"{field} must be an object")
@@ -297,5 +313,4 @@ def ed25519_verify(public_key: bytes, message: bytes, signature: bytes) -> bool:
         return _point_equal(lhs, rhs)
     except AuthorityVerificationError:
         return False
-
 
