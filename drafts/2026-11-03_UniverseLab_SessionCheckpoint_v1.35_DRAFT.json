@@ -9,7 +9,7 @@
   "canonical_snapshot": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
   "supersedes": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
   "canonical_state": "drafts/2026-11-03_UniverseLab_CurrentMainCanonicalState_v1.4_DRAFT.json",
-  "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+  "site_state": "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
   "architecture": [
     "HPVS",
     "HZT-M0",
@@ -324,6 +324,9 @@
       "gate_promotion": "NONE",
       "snapshot_timestamp_status": "HISTORICAL_VALUE_INHERITED_RELEASE_BLOCKER",
       "checkpoint_snapshot_pointer_status": "HISTORICAL_VALUE_INHERITED_RELEASE_BLOCKER"
-    }
+    },
+    "site_state_draft": "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
+    "public_status_pointers": "SEPTEMBER_LIVE_UNCHANGED_RELEASE_BLOCKER",
+    "rc09_source_contract": "drafts/2026-11-03_UniverseLab_RC09_SemanticSourceContract_v1.0_DRAFT.json"
   }
 }
