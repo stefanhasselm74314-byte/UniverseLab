@@ -1,0 +1,109 @@
+name: RC21 safe document router candidate QA (no release)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/2026-11-03_UniverseLab_RC21_SafeRouterCandidateQA_v1.0.yml'
+      - 'tools/2026-11-03_UniverseLab_RC21_SafeRouterTemplate_v1.0.js'
+      - 'tools/2026-11-03_UniverseLab_RC21_RenderSafeRouter_v1.0.py'
+      - 'tests/2026-11-03_test_UniverseLab_RC21_SafeRouter_v1.0.js'
+      - 'tests/2026-11-03_test_UniverseLab_RC21_RenderSafeRouter_v1.0.py'
+      - 'drafts/2026-11-03_UniverseLab_RC21_SafeDocumentRouter_v1.0_DRAFT.js'
+      - 'drafts/2026-11-03_UniverseLab_RC21_RouterProvenance_v1.0_DRAFT.json'
+      - 'governance/2026-11-03_UniverseLab_RC21_SafeDocumentRoutingReview_v1.0.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  nonoperative-router-candidate:
+    name: rc21-safe-router-candidate-not-deployed
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout candidate without write permissions
+        uses: actions/checkout@v6
+
+      - name: Rebuild and verify exact-manifest router and provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/2026-11-03_UniverseLab_RC21_RenderSafeRouter_v1.0.py \
+            --root . \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --template tools/2026-11-03_UniverseLab_RC21_SafeRouterTemplate_v1.0.js \
+            --output drafts/2026-11-03_UniverseLab_RC21_SafeDocumentRouter_v1.0_DRAFT.js \
+            --provenance-out drafts/2026-11-03_UniverseLab_RC21_RouterProvenance_v1.0_DRAFT.json \
+            --check-existing
+
+      - name: Python generator fail-closed tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tests/2026-11-03_test_UniverseLab_RC21_RenderSafeRouter_v1.0.py
+
+      - name: Browser-like Node VM positive/negative DOM controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tests/2026-11-03_test_UniverseLab_RC21_SafeRouter_v1.0.js
+
+      - name: Prove neither router nor manifest is published by RC19 staging
+        shell: bash
+        env:
+          RC21_STAGE: ${{ runner.temp }}/universe-rc21-public-candidate
+        run: |
+          set -euo pipefail
+          python tools/2026-11-03_UniverseLab_RC19_PublicOnlyBuild_v1.0.py \
+            --source . \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --out "$RC21_STAGE"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          stage = Path(os.environ['RC21_STAGE'])
+          manifest = json.loads(Path('governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json').read_text())
+          expected = {item['path'] for item in manifest['files']}
+          actual = {p.relative_to(stage).as_posix() for p in stage.rglob('*') if p.is_file()}
+          assert len(expected) == len(actual) == 446
+          assert expected == actual
+          assert not any('RC21' in p for p in actual)
+          assert 'assets/2026-08-27_UniverseLab_DocumentLinkRouter_v1.0.js' in actual
+          print('RC21_NONINSTALLATION_PASS staged=446 original_router_present=TRUE candidate_absent=TRUE')
+          PY
+
+      - name: Reassert inherited RC20 release HOLD
+        shell: bash
+        env:
+          RC21_STAGE: ${{ runner.temp }}/universe-rc21-public-candidate
+          RC21_RC20_REPORT: ${{ runner.temp }}/rc21-inherited-rc20-hold.json
+        run: |
+          set -euo pipefail
+          set +e
+          python tools/2026-11-03_UniverseLab_RC20_RuntimePrivacyAudit_v1.0.py \
+            --source . \
+            --stage "$RC21_STAGE" \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --report "$RC21_RC20_REPORT"
+          rc20_exit=$?
+          set -e
+          if [ "$rc20_exit" -ne 2 ]; then
+            echo "RC20_INHERITED_HOLD_NOT_REPRODUCED:$rc20_exit"
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          actual = json.loads(Path(os.environ['RC21_RC20_REPORT']).read_text())
+          pinned = json.loads(Path('drafts/2026-11-03_UniverseLab_RC20_RuntimePrivacyFindings_v1.0_DRAFT.json').read_text())
+          assert actual == pinned, 'INHERITED_RC20_FINDINGS_CHANGED'
+          assert actual['release_gate'] == 'HOLD'
+          print('RC21_EXPECTED_RC20_RELEASE_HOLD_PASS')
+          PY
+
+      # No deploy, Pages upload, merge, branch/ruleset write, or gate promotion.
