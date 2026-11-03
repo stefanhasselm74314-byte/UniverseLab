@@ -206,7 +206,12 @@ class TrustGateTests(TestCase):
         self.env.stop()
 
     def test_01_scope_classifier(self):
-        self.assertEqual(g.classify("drafts/2026-11-03_Test_DRAFT.json"),set())
+        self.assertEqual(g.classify("index.html"),{"PUBLIC_SURFACE"})
+        self.assertEqual(g.classify("navigator.html"),{"PUBLIC_SURFACE"})
+        self.assertEqual(g.classify("assets/graphs/analysis.svg"),{"PUBLIC_SURFACE"})
+        self.assertEqual(g.classify("README.md"),{"PUBLIC_SURFACE"})
+        self.assertEqual(g.classify("registry/2026-11-03_UniverseLab_ScientificClaims_v0.2.json"),{"CONTROL_PLANE"})
+        self.assertEqual(g.classify("drafts/2026-11-03_Test_DRAFT.json"),{"CONTROL_PLANE"})
         self.assertEqual(g.classify("project-manifest.json"),{"STATE_RELEASE"})
         self.assertEqual(g.classify(g.TRUSTED_WORKFLOW),{"CONTROL_PLANE"})
         self.assertEqual(g.classify("registry/session-checkpoint-latest.json"),{"STATE_RELEASE"})
