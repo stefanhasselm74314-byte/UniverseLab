@@ -56,7 +56,8 @@
     "RELEASE_TIMESTAMP_UNASSIGNED",
     "RELEASE_COMMIT_NONEXISTENT",
     "OWNER_SCOPED_RATIFICATION_NOT_RECORDED_FOR_THIS_RELEASE",
-    "PR263_REMAINS_DRAFT"
+    "PR263_REMAINS_DRAFT",
+    "PROTECTED_MAIN_WORKFLOW_OR_REQUIRED_CHECK_POLICY_NOT_VERIFIED"
   ],
   "drift_policy": {
     "if_main_moves": "FAIL_CLOSED_AND_REQUIRE_NEW_EXPLICIT_BASELINE_RECONCILIATION",
@@ -65,9 +66,10 @@
     "if_live_main_unreachable": "FAIL_CLOSED",
     "if_any_required_predecessor_test_fails": "FAIL_CLOSED",
     "if_source_blob_mismatch": "FAIL_CLOSED",
-    "if_pr_head_changed_during_validation": "CHECK_EVENT_AND_SYNTHETIC_MERGE; REVERIFY_AT_MERGE"
+    "if_pr_head_changed_during_validation": "CHECK_EVENT_AND_SYNTHETIC_MERGE; REVERIFY_AT_MERGE",
+    "ci_workflow_editability": "THIS_PR_CAN_EDIT_ITS_OWN_WORKFLOW; GREEN_DRAFT_CI_IS_NOT_AN_IMMUTABLE_PROTECTED_RELEASE_GATE"
   },
-  "attestation_limitation": "CI green attests only to bounded draft provenance and reference invariants; it does not attest owner authorization, physical truth, or future release commit.",
+  "attestation_limitation": "CI green attests only to bounded draft provenance and reference invariants; it does not attest owner authorization, physical truth, or future release commit. A test workflow supplied by the draft PR is not equivalent to mandatory protected-main branch protection.",
   "effect": {
     "writes_to_main": false,
     "writes_to_registry": false,
