@@ -66,22 +66,27 @@ def safe_path(path: str) -> str:
     return path
 
 def classify(path: str) -> set[str]:
+    """Conservative default: no repository path can evade sensitive review.
+
+    State release has an exact eight-file contract. Other web publications
+    are PUBLIC_SURFACE; all remaining paths are CONTROL_PLANE, including
+    unrecognized registry/source or binary artifacts. This may deliberately
+    require more owner acknowledgments than ordinary development would.
+    """
     path = safe_path(path)
-    scopes: set[str] = set()
-    if path in RELEASE_REQUIRED or any(p.fullmatch(path) for p in SNAPSHOT_PATTERNS.values()):
-        scopes.add("STATE_RELEASE")
-    if (path.startswith((".github/", "governance/", "schemas/",
-                         "tools/", "tests/")) or
-        path in (".github/CODEOWNERS", ".github/dependabot.yml") or
-        (path.startswith("registry/") and any(t in path for t in (
-            "OwnerAdoption", "Delegation", "AuthoritySignature", "FileNamingPolicy", "Ruleset",
-            "TrustRootRatification", "MethodGates", "AuthorizationDecision")))):
-        scopes.add("CONTROL_PLANE")
+    if (path in RELEASE_REQUIRED or
+        any(p.fullmatch(path) for p in SNAPSHOT_PATTERNS.values())):
+        return {"STATE_RELEASE"}
     if path.startswith("assets/") and "GlobalShell" in path:
-        scopes.add("STATE_RELEASE")
+        return {"STATE_RELEASE"}
     if path.startswith("research-status") and path.endswith(".html"):
-        scopes.add("STATE_RELEASE")
-    return scopes
+        return {"STATE_RELEASE"}
+    if (path.endswith((".html", ".htm", ".js", ".mjs", ".css",
+                       ".md", ".mdx", ".svg", ".webp", ".png",
+                       ".jpg", ".jpeg")) or
+        path.startswith(("assets/", "public/", "site/", "docs/"))):
+        return {"PUBLIC_SURFACE"}
+    return {"CONTROL_PLANE"}
 
 def scopes_for_files(files: list[dict]) -> set[str]:
     require(len(files) > 0 and len(files) <= MAX_PR_FILES, "Unexpected PR file count")
@@ -102,7 +107,7 @@ def scopes_for_files(files: list[dict]) -> set[str]:
 def approval_message(number: int, head_sha: str, scopes: set[str]) -> str:
     require(isinstance(number, int) and number > 0, "Invalid PR number")
     require(bool(re.fullmatch(r"[0-9a-f]{40}", head_sha)), "Invalid SHA")
-    require(scopes and scopes <= {"STATE_RELEASE", "CONTROL_PLANE"},
+    require(scopes and scopes <= {"STATE_RELEASE", "CONTROL_PLANE", "PUBLIC_SURFACE"},
             "Invalid scope")
     return ("UniverseLab RC13 RELEASE-AUTHORIZATION\n"
             f"PR: #{number}\nHEAD: {head_sha}\nSCOPE: {','.join(sorted(scopes))}\n"
@@ -427,7 +432,7 @@ def run_event(event: dict, api: GitHubReadOnly) -> str:
         # authorization; only safe finite list of statuses is accepted.
         require(all(item.get("status") in ("added","modified") for item in files),
                 "No rename/removal of trusted control-plane paths")
-        result = "CONTROL_PLANE_OWNER_ACK_BOUND_TO_EXACT_PR_HEAD"
+        result = "NONSTATE_SENSITIVE_OWNER_ACK_BOUND_TO_EXACT_PR_HEAD"
     # Re-read the live PR and baseline to detect a mid-validation race.
     latest = api.get("/pulls/" + str(number))
     require(latest.get("head",{}).get("sha") == head_sha
