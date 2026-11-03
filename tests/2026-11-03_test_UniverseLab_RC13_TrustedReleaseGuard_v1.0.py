@@ -44,46 +44,101 @@ def fixture():
                  "physical_background":"NOT_ESTABLISHED",
                  "physical_response_rank":"NOT_EXECUTED"}
     fields={"physical_gate_effect":"NONE","physical_evidence_effect":"NONE"}
-    oldmanifest={"canonical_state":OLD_STATE,"session_checkpoint":OLD_CP,
-                 "site_state":OLD_SITE,"gates":copy.deepcopy(g.GATE_EXPECTED)}
+    science={"forward_map":"OPEN","full_ghost_freedom":"OPEN"}
+    claims={"physical_claim_promotions":0,"manual_review_required":251}
+    program={"FM-G0":"OPEN"}
+    numerics={"physics_authorization":False}
+    blocks=[{"id":"ULSH05","status":"ANALYTIC_NONOPERATIVE"}]
+    analysis_base={"blocking_scientific_or_empirical_gaps":10,
+                   "physical_claim_promotions":0,
+                   "governance_provenance_gap":"STALE"}
+    analysis_current={**analysis_base,"governance_provenance_gap":"MERGED_G11"}
+    state_shared={"scientific_open_state":science,"merged_analysis_blocks":blocks,
+                  "active_program":program,"public_claim_governance":claims,
+                  "public_numerical_platform":numerics,
+                  "open_noncanonical_work":["WP1D2_NOT_RELEASED"]}
+    manifest_shared={"gates":copy.deepcopy(g.GATE_EXPECTED),
+                     "public_claim_audit":claims,"current_program":program,
+                     "architecture":["HPVS","HZT-M0","HZT-Full"],
+                     "public_numerical_platform":numerics,
+                     "c_phys_operator_entry":{"status":"OPEN"}}
+    checkpoint_shared={
+        "gate_state":copy.deepcopy(g.GATE_EXPECTED),
+        "verified_results":[{"status":"ANALYTIC_NONOPERATIVE"}],
+        "open_blockers":[{"id":"G01","status":"OPEN"}],
+        "completed_blocks":["G11_GOVERNANCE"],
+        "active_program":program,
+        "active_assumptions":["NO_BACKGROUND"],
+        "forbidden_inferences":["NO_PHYSICAL_EVIDENCE"],
+        "physical_governance":oldphysical,
+    }
+    site_shared={
+        "governance":copy.deepcopy(oldphysical),
+        "analysis_state":{"physical_claim_promotions":0,
+                          "band_vc_scientific_or_empirical_blocking_missing_links":10},
+        "pages":{"research_status":"NOT_SCIENTIFICALLY_RELEASED"},
+        "modules":{"bridge":"UNRELEASED"}
+    }
+    oldmanifest={
+        **copy.deepcopy(manifest_shared),
+        "canonical_state":OLD_STATE,"session_checkpoint":OLD_CP,
+        "site_state":OLD_SITE
+    }
     newmanifest={
-        **fields,"canonical_state":STATE,"session_checkpoint":CP,"site_state":SITE,
+        **copy.deepcopy(manifest_shared),**fields,
+        "canonical_state":STATE,"session_checkpoint":CP,"site_state":SITE,
         "release_date":DATE,"basis_main_commit":BASE,"basis_main_tree":TREE,
-        "gates":copy.deepcopy(g.GATE_EXPECTED),
         "current_status_sources":{"canonical_state":STATE,"site_state":SITE,
                                   "session_checkpoint":CP},
         "central_registries":{"current_main_canonical_state":STATE,
                               "site_state":SITE,"session_checkpoint":CP}
     }
-    state={**fields,"status":"POST_STATE_RECONCILED",
+    oldstate={**fields,**copy.deepcopy(state_shared),
+              "physical_governance":copy.deepcopy(oldphysical),
+              "active_analysis_block":analysis_base}
+    state={**fields,**copy.deepcopy(state_shared),
+           "status":"POST_STATE_RECONCILED",
            "basis_main_commit":BASE,"basis_main_tree":TREE,
            "snapshot_date":DATE,"snapshot_timestamp":TIME,
            "physical_governance":copy.deepcopy(oldphysical),
+           "active_analysis_block":analysis_current,
            "status_sources":{"site_state":SITE,"session_checkpoint":CP}}
-    cp={**fields,"basis_commit":BASE,"basis_tree":TREE,
+    oldcp={**fields,**copy.deepcopy(checkpoint_shared)}
+    cp={**fields,**copy.deepcopy(checkpoint_shared),
+        "basis_commit":BASE,"basis_tree":TREE,
         "timestamp":TIME,"canonical_snapshot":CP,
-        "canonical_state":STATE,"site_state":SITE,
-        "gate_state":copy.deepcopy(g.GATE_EXPECTED)}
-    site={**fields,"basis_main_commit":BASE,"basis_main_tree":TREE,
+        "canonical_state":STATE,"site_state":SITE}
+    oldsite={**fields,**copy.deepcopy(site_shared)}
+    site={**fields,**copy.deepcopy(site_shared),
+          "basis_main_commit":BASE,"basis_main_tree":TREE,
           "snapshot_date":DATE,"snapshot_timestamp":TIME,"canonical_state":STATE,
-          "status_sources":{"canonical_state":STATE,"session_checkpoint":CP},
-          "governance":copy.deepcopy(oldphysical)}
-    de=("\n".join([STATE,CP,SITE])).encode("utf-8")
-    en=de
-    script=("./"+SITE+"\n").encode("utf-8")
+          "status_sources":{"canonical_state":STATE,"session_checkpoint":CP}}
+    baseline_page="\n".join([OLD_STATE,OLD_CP,OLD_SITE,
+        "Current-main Canonical State v1.3",
+        "SiteState v1.4","Session Checkpoint v1.34"])
+    new_page=(baseline_page.replace(OLD_STATE,STATE).replace(OLD_CP,CP)
+              .replace(OLD_SITE,SITE)
+              .replace("Canonical State v1.3","Canonical State v1.4")
+              .replace("SiteState v1.4","SiteState v1.5")
+              .replace("Checkpoint v1.34","Checkpoint v1.35"))
+    base_js="const VERSION='1.1.6';\nconst STATE_URL='./"+OLD_SITE+"';\n"
+    js="const VERSION='1.1.7';\nconst STATE_URL='./"+SITE+"';\n"
     contents={
         (MANIFEST,BASE):encoded(oldmanifest),
-        (OLD_STATE,BASE):encoded({"physical_governance":oldphysical}),
-        (OLD_CP,BASE):encoded({"gate_state":copy.deepcopy(g.GATE_EXPECTED)}),
-        (OLD_SITE,BASE):encoded({"governance":copy.deepcopy(oldphysical)}),
+        (OLD_STATE,BASE):encoded(oldstate),
+        (OLD_CP,BASE):encoded(oldcp),
+        (OLD_SITE,BASE):encoded(oldsite),
         (MANIFEST,HEAD):encoded(newmanifest),
         (STATE,HEAD):encoded(state),
         (CP,HEAD):encoded(cp),
         (SITE,HEAD):encoded(site),
         (ALIAS,HEAD):encoded(cp),
-        ("research-status.html",HEAD):de,
-        ("research-status-en.html",HEAD):en,
-        (SHELL,HEAD):script,
+        ("research-status.html",BASE):baseline_page.encode("utf-8"),
+        ("research-status-en.html",BASE):baseline_page.encode("utf-8"),
+        ("research-status.html",HEAD):new_page.encode("utf-8"),
+        ("research-status-en.html",HEAD):new_page.encode("utf-8"),
+        (SHELL,BASE):base_js.encode("utf-8"),
+        (SHELL,HEAD):js.encode("utf-8"),
     }
     filelist=[
         {"filename":MANIFEST,"status":"modified"},
