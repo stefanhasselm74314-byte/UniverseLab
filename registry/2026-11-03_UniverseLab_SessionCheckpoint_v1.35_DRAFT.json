@@ -4,7 +4,7 @@
   "timestamp": "2026-11-03T00:00:00+01:00",
   "privacy_classification": "PUBLIC_SANITIZED",
   "basis_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
-  "basis_tree": "d743643419d812f6f8e8f3830328a3a9d24ed5ed",
+  "basis_tree": null,
   "basis_semantics": "Draft reconciliation; not active session checkpoint",
   "canonical_snapshot": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
   "supersedes": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
@@ -269,6 +269,7 @@
     "physical_gate_effect": "NONE",
     "physical_evidence_effect": "NONE",
     "review_required": true,
-    "source_pointer_status": "PENDING_CANONICAL_MERGE"
+    "source_pointer_status": "PENDING_CANONICAL_MERGE",
+    "current_merge_tree_status": "NOT_VERIFIED"
   }
 }
