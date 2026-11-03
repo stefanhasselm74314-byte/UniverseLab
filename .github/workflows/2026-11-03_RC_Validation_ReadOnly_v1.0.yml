@@ -1,5 +1,8 @@
 name: RC-VALIDATION-05 read-only exact-baseline audit
 on:
+  pull_request:
+    paths:
+      - '.github/workflows/2026-11-03_RC_Validation_ReadOnly_v1.0.yml'
   workflow_dispatch:
 permissions:
   contents: read
