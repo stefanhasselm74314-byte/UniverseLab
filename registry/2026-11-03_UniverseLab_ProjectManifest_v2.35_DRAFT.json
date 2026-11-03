@@ -3,7 +3,7 @@
   "release": "2.35-reconciliation-DRAFT",
   "release_date": "2026-11-03",
   "basis_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
-  "basis_main_tree": "d743643419d812f6f8e8f3830328a3a9d24ed5ed",
+  "basis_main_tree": null,
   "basis_semantics": "Draft additive candidate; preserve original project-manifest.json until separately approved",
   "canonical_base": "https://stefanhasselm74314-byte.github.io/UniverseLab/",
   "repository": "https://github.com/stefanhasselm74314-byte/UniverseLab",
@@ -426,6 +426,7 @@
     "physical_gate_effect": "NONE",
     "physical_evidence_effect": "NONE",
     "review_required": true,
-    "source_pointer_status": "PENDING_CANONICAL_MERGE"
+    "source_pointer_status": "PENDING_CANONICAL_MERGE",
+    "current_merge_tree_status": "NOT_VERIFIED"
   }
 }
