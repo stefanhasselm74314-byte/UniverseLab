@@ -1,0 +1,36 @@
+name: UniverseLab RC17 routine Draft exception mock QA (noninstalled)
+on:
+  pull_request:
+    paths:
+      - 'drafts/2026-11-03_UniverseLab_RC17_SoloRoutineSafetyContract_v1.0_DRAFT.json'
+      - 'governance/2026-11-03_UniverseLab_RC17_SoloRoutineRecoveryRunbook_v1.0.md'
+      - 'tools/2026-11-03_UniverseLab_RC17_RoutineDraftValidator_v1.0.py'
+      - 'tests/2026-11-03_test_UniverseLab_RC17_RoutineDraftValidator_v1.0.py'
+      - '.github/workflows/2026-11-03_UniverseLab_RC17_RoutineDraftPolicyQA_v1.0.yml'
+permissions:
+  contents: read
+jobs:
+  rc17-routine-model:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Compile RC17 routine model
+        run: |
+          python3 -m py_compile tools/2026-11-03_UniverseLab_RC17_RoutineDraftValidator_v1.0.py
+          python3 -m py_compile tests/2026-11-03_test_UniverseLab_RC17_RoutineDraftValidator_v1.0.py
+      - name: Run fail-closed routine JSON, SHA/mode and recovery tests
+        run: python3 tests/2026-11-03_test_UniverseLab_RC17_RoutineDraftValidator_v1.0.py -v
+      - name: Recheck selected RC16-B preference model
+        run: python3 tests/2026-11-03_test_UniverseLab_RC16_AuthorizationModel_v1.0.py -v
+      - name: Confirm no tracked working-tree mutation
+        run: |
+          git diff --quiet
+          git diff --cached --quiet
+      - name: Release hold
+        run: |
+          echo 'RC17 MODEL-ONLY QA: even success does not permit merge or scientific promotion.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Routine exception and recovery not approved as live GitHub Ruleset policy.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'CANONICAL_PROMOTION=BLOCKED; NO GITHUB SETTINGS MUTATED.' >> "$GITHUB_STEP_SUMMARY"
