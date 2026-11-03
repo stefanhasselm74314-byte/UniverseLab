@@ -31,7 +31,7 @@ jobs:
           data={}
           for key,(name,expected) in paths.items():
             raw=Path(name).read_bytes()
-            sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\\0'+raw).hexdigest()
+            sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+bytes([0])+raw).hexdigest()
             assert sha==expected,(name,sha,expected)
             data[key]=json.loads(raw)
           assert data['checkpoint']==data['alias']
