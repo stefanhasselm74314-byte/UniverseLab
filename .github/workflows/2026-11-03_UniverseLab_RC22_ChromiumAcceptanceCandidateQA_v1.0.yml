@@ -1,0 +1,82 @@
+name: RC22 real Chromium staging acceptance (release HOLD)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/2026-11-03_UniverseLab_RC22_ChromiumAcceptanceCandidateQA_v1.0.yml'
+      - 'tests/2026-11-03_test_UniverseLab_RC22_ChromiumAcceptance_v1.0.js'
+      - 'governance/2026-11-03_UniverseLab_RC22_BrowserAndroidAcceptanceReview_v1.0.md'
+      - 'governance/2026-11-03_UniverseLab_RC22_RealAndroidManualGate_v1.0.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chromium-staged-browser-only:
+    name: rc22-actual-chromium-staging-and-emulated-mobile-no-deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout draft with read-only token
+        uses: actions/checkout@v6
+
+      - name: Prepare pinned Node and real browser runner
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify RC21 deterministic candidate and Node VM precedent
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/2026-11-03_UniverseLab_RC21_RenderSafeRouter_v1.0.py \
+            --root . \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --template tools/2026-11-03_UniverseLab_RC21_SafeRouterTemplate_v1.0.js \
+            --output drafts/2026-11-03_UniverseLab_RC21_SafeDocumentRouter_v1.0_DRAFT.js \
+            --provenance-out drafts/2026-11-03_UniverseLab_RC21_RouterProvenance_v1.0_DRAFT.json \
+            --check-existing
+          node tests/2026-11-03_test_UniverseLab_RC21_SafeRouter_v1.0.js
+          node --check tests/2026-11-03_test_UniverseLab_RC22_ChromiumAcceptance_v1.0.js
+
+      - name: Exact-SHA RC19 public-only staging without publishing
+        shell: bash
+        env:
+          RC22_STAGE: ${{ runner.temp }}/rc22-stage/UniverseLab
+        run: |
+          set -euo pipefail
+          mkdir -p "$(dirname "$RC22_STAGE")"
+          python tools/2026-11-03_UniverseLab_RC19_PublicOnlyBuild_v1.0.py \
+            --source . \
+            --manifest governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json \
+            --out "$RC22_STAGE"
+
+      - name: Install pinned Playwright and genuine Chromium (runner-local only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --prefix "$RUNNER_TEMP/rc22-playwright" \
+            --no-save --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.62.1
+          "$RUNNER_TEMP/rc22-playwright/node_modules/.bin/playwright" install --with-deps chromium
+
+      - name: Actual Chromium desktop, mobile emulation and service-worker overlay
+        shell: bash
+        env:
+          NODE_PATH: ${{ runner.temp }}/rc22-playwright/node_modules
+          RC22_STAGE: ${{ runner.temp }}/rc22-stage/UniverseLab
+          RC22_EVIDENCE: ${{ runner.temp }}/rc22-browser-evidence
+        run: |
+          set -euo pipefail
+          node tests/2026-11-03_test_UniverseLab_RC22_ChromiumAcceptance_v1.0.js \
+            "$RC22_STAGE" "$RC22_EVIDENCE"
+
+      - name: Upload noncanonical candidate browser evidence only
+        uses: actions/upload-artifact@v4
+        with:
+          name: rc22-draft-chromium-evidence
+          path: ${{ runner.temp }}/rc22-browser-evidence/
+          if-no-files-found: error
+          retention-days: 14
+
+      # No deployment, Pages publish, main mutation, auto-merge, or owner approval.
