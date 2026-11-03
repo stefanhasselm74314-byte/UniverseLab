@@ -1,0 +1,31 @@
+name: RC12 read-only protected-main policy audit
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, edited, ready_for_review]
+permissions:
+  contents: read
+jobs:
+  rc12-read-only-policy:
+    if: ${{ github.event.pull_request.number == 263 }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout PR without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Compile RC12 read-only audit
+        run: python3 -m py_compile tests/2026-11-03_test_UniverseLab_RC12_ProtectedMainPolicyAudit_v1.0.py
+      - name: Inspect real ruleset and validate 12 negative controls
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 tests/2026-11-03_test_UniverseLab_RC12_ProtectedMainPolicyAudit_v1.0.py --live
+      - name: Confirm no working-tree mutations
+        run: |
+          git diff --quiet
+          git diff --cached --quiet
+      - name: Explicit release hold
+        run: |
+          echo 'RC12 verifies the read-only snapshot of actual main rules; it is not branch-protection enforcement.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'MAIN RULESET: deletion/non_fast_forward only; required PR/status checks NOT VERIFIED.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'RELEASE HOLD: owner-scoped ratification, protected required checks, and independent review pending.' >> "$GITHUB_STEP_SUMMARY"
