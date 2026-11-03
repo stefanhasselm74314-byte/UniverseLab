@@ -80,7 +80,7 @@ def fixture():
         "modules":{"bridge":"UNRELEASED"}
     }
     oldmanifest={
-        **copy.deepcopy(manifest_shared),
+        **copy.deepcopy(manifest_shared),**fields,
         "canonical_state":OLD_STATE,"session_checkpoint":OLD_CP,
         "site_state":OLD_SITE
     }
