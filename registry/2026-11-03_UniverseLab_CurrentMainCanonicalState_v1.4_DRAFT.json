@@ -6,7 +6,7 @@
   "privacy_classification": "PUBLIC_SANITIZED",
   "status": "DRAFT_NOT_CANONICAL",
   "basis_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
-  "basis_main_tree": "d743643419d812f6f8e8f3830328a3a9d24ed5ed",
+  "basis_main_tree": null,
   "basis_semantics": "Draft snapshot of exact merged main at PR262; no scientific gate promotion; does not become canonical without separate reviewed merge.",
   "supersedes": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
   "architecture": [
@@ -237,6 +237,7 @@
     "physical_gate_effect": "NONE",
     "physical_evidence_effect": "NONE",
     "review_required": true,
-    "source_pointer_status": "PENDING_CANONICAL_MERGE"
+    "source_pointer_status": "PENDING_CANONICAL_MERGE",
+    "current_merge_tree_status": "NOT_VERIFIED"
   }
 }
