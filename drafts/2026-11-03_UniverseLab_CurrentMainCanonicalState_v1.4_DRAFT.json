@@ -202,7 +202,7 @@
   ],
   "status_sources": {
     "project_manifest": "project-manifest.json",
-    "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+    "site_state": "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
     "session_checkpoint": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
     "claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
     "high_claim_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
@@ -292,6 +292,9 @@
       "gate_promotion": "NONE",
       "snapshot_timestamp_status": "HISTORICAL_VALUE_INHERITED_RELEASE_BLOCKER",
       "checkpoint_snapshot_pointer_status": "HISTORICAL_VALUE_INHERITED_RELEASE_BLOCKER"
-    }
+    },
+    "site_state_draft": "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
+    "public_status_pointers": "SEPTEMBER_LIVE_UNCHANGED_RELEASE_BLOCKER",
+    "rc09_source_contract": "drafts/2026-11-03_UniverseLab_RC09_SemanticSourceContract_v1.0_DRAFT.json"
   }
 }
