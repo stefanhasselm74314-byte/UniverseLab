@@ -239,6 +239,8 @@ def validate_live_release(files: list[dict], base_sha: str, head_sha: str,
                                    "baseline checkpoint")
     base_site = decode_json(api.contents(base["site_state"], base_sha),
                              "baseline site")
+    base_state = decode_json(api.contents(base["canonical_state"], base_sha),
+                              "baseline state")
     manifest_bytes = api.contents("project-manifest.json", head_sha)
     manifest = decode_json(manifest_bytes, "release manifest")
     state_p, cp_p, site_p = (new_snapshots[x] for x in ("state","checkpoint","site"))
@@ -296,10 +298,41 @@ def validate_live_release(files: list[dict], base_sha: str, head_sha: str,
         serialized = json.dumps(obj, ensure_ascii=False)
         require(not any(tok in serialized for tok in BLOCKED_TOKENS),
                 "DRAFT marker or unresolved release timestamp in release output")
-    require(state.get("physical_governance") == decode_json(
-            api.contents(base["canonical_state"], base_sha),
-            "baseline state").get("physical_governance"),
+    require(state.get("physical_governance") == base_state.get("physical_governance"),
             "State physical governance changed")
+    # RC14: a governance-only pointer repair cannot manufacture a result by
+    # changing another status field while leaving K1-D/K1-E untouched.
+    for key in ("scientific_open_state", "merged_analysis_blocks",
+                "active_program", "public_claim_governance",
+                "public_numerical_platform", "open_noncanonical_work"):
+        require(key in base_state and state.get(key) == base_state[key],
+                "Scientific state ledger changed without a separate review: " + key)
+    active_old = dict(base_state.get("active_analysis_block",{}))
+    active_new = dict(state.get("active_analysis_block",{}))
+    active_old.pop("governance_provenance_gap", None)
+    active_new.pop("governance_provenance_gap", None)
+    require(active_new == active_old,
+            "Scientific missing-link/claim status changed in active analysis block")
+    for key in ("public_claim_audit", "current_program", "architecture",
+                "public_numerical_platform", "c_phys_operator_entry"):
+        require(key in base and manifest.get(key) == base[key],
+                "Manifest science or public-claim ledger changed: " + key)
+    for key in ("analysis_state", "pages", "modules"):
+        require(key in base_site and site.get(key) == base_site[key],
+                "SiteState scientific or publication ledger changed: " + key)
+    for key in ("verified_results", "open_blockers", "completed_blocks",
+                "active_program", "active_assumptions", "forbidden_inferences",
+                "physical_governance"):
+        require(key in base_checkpoint and cp.get(key) == base_checkpoint[key],
+                "Checkpoint evidence or blocker ledger changed: " + key)
+    require(base_state.get("active_analysis_block",{}).get(
+                "blocking_scientific_or_empirical_gaps") == 10,
+            "Unknown baseline scientific missing-link count")
+    require(state.get("active_analysis_block",{}).get(
+                "blocking_scientific_or_empirical_gaps") == 10,
+            "Ten scientific missing links were unjustifiably closed")
+    require(site.get("analysis_state",{}).get("physical_claim_promotions") == 0,
+            "Physical claims were promoted through a non-gate field")
     require(manifest.get("gates") == base.get("gates"),
             "Full manifest gate ledger changed during governance-only release")
     require(cp.get("gate_state") == base_checkpoint.get("gate_state"),
@@ -322,15 +355,44 @@ def validate_live_release(files: list[dict], base_sha: str, head_sha: str,
     baseline_cp_p = base["session_checkpoint"]
     target_map = {baseline_state_p:state_p, baseline_site_p:site_p,
                   baseline_cp_p:cp_p}
+    # A pointer-only release must not secretly rewrite the scientific story
+    # in public HTML or run arbitrary JavaScript under the same eight-file PR.
+    label_changes = (
+        ("Canonical State v1.3", "Canonical State v1.4"),
+        ("SiteState v1.4", "SiteState v1.5"),
+        ("Checkpoint v1.34", "Checkpoint v1.35"),
+    )
     for page in ("research-status.html", "research-status-en.html"):
-        text = api.contents(page,head_sha).decode("utf-8")
+        baseline_page = api.contents(page, base_sha).decode("utf-8")
+        expected_page = baseline_page
         for old,new in target_map.items():
-            require(new in text and old not in text,
-                    "Public page has incomplete state pointer migration: " + page)
-    script = api.contents("assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js",
-                          head_sha).decode("utf-8")
-    require("./"+site_p in script and baseline_site_p not in script,
-            "GlobalShell not moved to new SiteState")
+            require(old in expected_page,
+                    "Baseline public page lacks old reference: " + page)
+            expected_page = expected_page.replace(old,new)
+        for old,new in label_changes:
+            expected_page = expected_page.replace(old,new)
+        actual_page = api.contents(page, head_sha).decode("utf-8")
+        require(actual_page == expected_page,
+                "Public release page has unauthorized non-pointer content edits: " + page)
+    script_path = "assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js"
+    baseline_script = api.contents(script_path, base_sha).decode("utf-8")
+    script = api.contents(script_path, head_sha).decode("utf-8")
+    version_pattern = r"const VERSION='(\\d+)\\.(\\d+)\\.(\\d+)';"
+    old_versions = list(re.finditer(version_pattern, baseline_script))
+    new_versions = list(re.finditer(version_pattern, script))
+    require(len(old_versions)==len(new_versions)==1,
+            "GlobalShell needs exactly one conventional version declaration")
+    old_version = tuple(int(x) for x in old_versions[0].groups())
+    new_version = tuple(int(x) for x in new_versions[0].groups())
+    require(new_version > old_version, "GlobalShell version must increase")
+    require("./"+baseline_site_p in baseline_script,
+            "Baseline GlobalShell lacks the expected old SiteState")
+    expected_script = baseline_script.replace(
+        "./"+baseline_site_p, "./"+site_p)
+    expected_script = expected_script.replace(
+        old_versions[0].group(0), new_versions[0].group(0))
+    require(script == expected_script,
+            "GlobalShell contains unauthorized code edits beyond path/version")
 
     # Recursively scan the *entire tracked HTML/JS tree* for stale active
     # state references. The GitHub tree and blobs are read; never executed.
