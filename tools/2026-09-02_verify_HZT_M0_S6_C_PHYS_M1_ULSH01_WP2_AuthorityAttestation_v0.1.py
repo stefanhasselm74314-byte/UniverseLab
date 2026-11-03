@@ -126,6 +126,16 @@ def verify_envelope(
             {"contract_status": contract_status, "trust_root_status": root_status},
         )
 
+    # Security supersession: v0.1 remains valid for draft/synthetic control
+    # verification only. Any future operative path must use the versioned
+    # owner-ratification bridge/successor contract introduced after PR #236.
+    if operative:
+        raise AuthorityVerificationError(
+            "CONTRACT_VERSION_SUPERSEDED_FOR_OPERATION",
+            "v0.1 is superseded for operative verification; use the current versioned owner-ratification policy path",
+            {"successor_contract_id": "ULSH01-WP2-AUTHORITY-SIGNATURE-PROVENANCE-v0.2"},
+        )
+
     if env.get("schema") != "universelab.signed-authority-envelope.v0.1":
         raise AuthorityVerificationError("ENVELOPE_SCHEMA_MISMATCH", "signed envelope schema mismatch")
     protected = require_mapping(env.get("protected"), "envelope.protected")
