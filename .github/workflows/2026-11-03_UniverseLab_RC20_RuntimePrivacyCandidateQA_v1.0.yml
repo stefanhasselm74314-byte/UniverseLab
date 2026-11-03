@@ -20,10 +20,6 @@ jobs:
     name: rc20-runtime-privacy-expected-hold
     runs-on: ubuntu-latest
     timeout-minutes: 12
-    env:
-      RC20_STAGE: ${{ runner.temp }}/universe-rc20-stage
-      RC20_DYNAMIC_REPORT: ${{ runner.temp }}/rc20-runtime-findings.json
-      RC20_HTTP_REPORT: ${{ runner.temp }}/rc20-http-findings.json
     steps:
       - name: Checkout untrusted, noncanonical candidate (read-only token)
         uses: actions/checkout@v6
@@ -36,6 +32,8 @@ jobs:
 
       - name: RC19 exact-hash staging, without publishing
         shell: bash
+        env:
+          RC20_STAGE: ${{ runner.temp }}/universe-rc20-stage
         run: |
           set -euo pipefail
           python tools/2026-11-03_UniverseLab_RC19_PublicOnlyBuild_v1.0.py \
@@ -45,6 +43,9 @@ jobs:
 
       - name: Reproduce actual repository HOLD without converting to PASS
         shell: bash
+        env:
+          RC20_STAGE: ${{ runner.temp }}/universe-rc20-stage
+          RC20_DYNAMIC_REPORT: ${{ runner.temp }}/rc20-runtime-findings.json
         run: |
           set -euo pipefail
           set +e
@@ -81,6 +82,10 @@ jobs:
 
       - name: HTTP transport and known 404 negative replay
         shell: bash
+        env:
+          RC20_STAGE: ${{ runner.temp }}/universe-rc20-stage
+          RC20_DYNAMIC_REPORT: ${{ runner.temp }}/rc20-runtime-findings.json
+          RC20_HTTP_REPORT: ${{ runner.temp }}/rc20-http-findings.json
         run: |
           set -euo pipefail
           python tests/2026-11-03_test_UniverseLab_RC20_HttpSmoke_v1.0.py \
