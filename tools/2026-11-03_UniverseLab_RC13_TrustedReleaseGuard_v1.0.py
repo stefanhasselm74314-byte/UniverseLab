@@ -542,15 +542,7 @@ def run_event(event: dict, api: GitHubReadOnly) -> str:
     require(payload.get("draft") == live_pr.get("draft"), "PR draft state changed")
     files = api.paged("/pulls/" + str(number) + "/files", MAX_PR_FILES)
     scopes = scopes_for_files(files)
-    if not scopes:
-        latest = api.get("/pulls/" + str(number))
-        require(latest.get("head",{}).get("sha") == head_sha and
-                latest.get("base",{}).get("sha") == base_sha and
-                latest.get("draft") == payload.get("draft"),
-                "Ordinary PR changed mid-validation")
-        require(api.get("/branches/main").get("commit",{}).get("sha") == base_sha,
-                "main changed mid-validation")
-        return "PASS_ORDINARY_NONRELEASE_PR_NO_OWNER_RELEASE_CLAIM"
+    require(bool(scopes), "A PR may not silently bypass review by using unclassified paths")
     require(live_pr.get("draft") is False,
             "Sensitive PR is Draft; cannot be treated as a release")
     comments = api.paged("/issues/" + str(number) + "/comments", MAX_COMMENTS)
