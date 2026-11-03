@@ -1,0 +1,68 @@
+{
+  "schema": "universelab.ulsh01.background3c5.g2-regular-center-gate.v0.2",
+  "date": "2026-08-15",
+  "architecture": "HPVS->HZT-M0->S6->C-PHYS->ULSH-01",
+  "status": "CONDITIONAL_PASS_ANALYTIC_WITH_FROZEN_CONTROL_LIMIT",
+  "supersedes": "2026-08-15_background3c5_g2_regular_center_gate_v0.1.json",
+  "physical_evidence_effect": "NONE",
+  "canonical_dimensionless_variables": {
+    "x": "M6*r",
+    "ell": "M6*L",
+    "varphi": "phi/M6^2",
+    "a_chi": "A_chi/M6"
+  },
+  "frozen_axis_frame": {
+    "A_0": 0.0,
+    "ell_0": 0.0,
+    "ell_x_0": 1.0,
+    "varphi_x_0": 0.0,
+    "a_chi_0_regular_gauge": 0.0,
+    "free_conical_slope": false,
+    "free_warp_additive_shift": false
+  },
+  "series": {
+    "A": "a2*x^2+a4*x^4+O(x^6)",
+    "ell": "x+l3*x^3+l5*x^5+O(x^7)",
+    "varphi": "f0+f2*x^2+f4*x^4+O(x^6)",
+    "a_chi": "g2*x^2+g4*x^4+O(x^6)",
+    "s_n_nonzero": "s_p*x^p*(1+alpha_s*x^2+O(x^4)), p=abs(n)",
+    "s_n_zero": "s0+s2*x^2+O(x^4)"
+  },
+  "proved": {
+    "winding_indicial_equation": "p^2-n^2=0",
+    "regular_winding_exponent": "p=abs(n)",
+    "axis_stress_compatibility": "Trr0=Tchichi0",
+    "no_independent_conical_shooting_mode": true
+  },
+  "frozen_bulk_control_pole_coefficients": {
+    "a2": "(6*k4-Lambda_hat-0.5*mhat_phi_sq*f0^2+rho_F0)/8",
+    "f2": "(mhat_phi_sq*f0-2*a_F*rho_F0)/4",
+    "g2": "0.5*q_s*exp(2*a_F*f0)",
+    "l3": "(3*k4-12*a2-Lambda_hat-0.5*mhat_phi_sq*f0^2-rho_F0)/6",
+    "rho_F0": "0.5*q_s^2*exp(2*a_F*f0)"
+  },
+  "mandatory_regression": "finite-thickness coefficients must approach frozen bulk pole coefficients when layer stress/current is removed",
+  "local_free_data_fixed_K4": {
+    "n_nonzero": ["f0", "g2", "s_abs_n"],
+    "n_zero": ["f0", "g2", "s0"]
+  },
+  "quarantine": {
+    "file": "2026-08-15_hzt_background3c5_finite_thickness_operator_v0.1.py",
+    "status": "QUARANTINED_IDENTITY_MISMATCH",
+    "qa_cannot_promote_G2": true
+  },
+  "remaining": {
+    "finite_thickness_dimensionless_potential_binding": "OPEN",
+    "replacement_parent_equivalent_kernel": "NOT_IMPLEMENTED",
+    "center_initializer_regression": "NOT_EXECUTED",
+    "outer_matching_G3": "OPEN",
+    "constraint_propagation_G4": "OPEN",
+    "operator_identity_G5": "OPEN",
+    "H4R4B_regression_G6": "OPEN",
+    "convergence_G7": "OPEN"
+  },
+  "physical_execution_authorized": false,
+  "rank_R_claim_allowed": false,
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE"
+}

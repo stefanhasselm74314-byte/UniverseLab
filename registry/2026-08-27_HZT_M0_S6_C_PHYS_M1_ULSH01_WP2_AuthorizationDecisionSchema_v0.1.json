@@ -1,0 +1,44 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-authorization-decision.v0.1",
+  "date": "2026-08-27",
+  "classification": "NONOPERATIVE_AUTHORIZATION_DECISION_SCHEMA_TEMPLATE",
+  "status": "TEMPLATE_ONLY_NOT_AUTHORIZED",
+  "decision": {
+    "authorization_decision_id": null,
+    "decision_status": "NOT_AUTHORIZED",
+    "authorized_run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+    "authorized_scope": "PRIMARY_TARGET_EXECUTION_ONLY",
+    "repository_commit_sha": null,
+    "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "run_payload_sha256": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+    "release_package_manifest_sha256": null,
+    "resource_policy_sha256": null,
+    "backend_rebind_contract_sha256": null,
+    "result_schema_sha256": null,
+    "backend_interface_contract_sha256": null,
+    "not_before_utc": null,
+    "expires_at_utc": null,
+    "single_use_grant_required": true,
+    "automatic_execution": false,
+    "wp3_authorized": false,
+    "wp4_authorized": false,
+    "physical_response_rank_authorized": false,
+    "K1_D_release_authorized": false,
+    "K1_E_admissible": false
+  },
+  "ratification_rules": {
+    "required_operational_status_literal": "AUTHORIZED_SINGLE_USE_WP2_CP01R4_PRIMARY_TARGET_EXECUTION",
+    "authorization_review_file_alone_is_insufficient": true,
+    "filled_grant_file_alone_is_insufficient_without_this_decision": true,
+    "decision_and_grant_must_bind_same_commit_and_package_digest": true,
+    "expired_decision_must_fail_closed": true,
+    "decision_change_requires_new_decision_id": true
+  },
+  "firewall": {
+    "this_template_authorizes_execution": false,
+    "backend_import_allowed": false,
+    "solver_execution_allowed": false,
+    "physical_result_allowed": false,
+    "physical_evidence_effect": "NONE"
+  }
+}

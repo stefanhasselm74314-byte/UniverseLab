@@ -1,0 +1,124 @@
+schema: ulsh01.cphys.response-rank.v1.1
+status: NOT_EXECUTED
+architecture: "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01"
+governance:
+  K1_D: NOT_RELEASED
+  K1_E: NOT_ADMISSIBLE
+  physical_execution_authorized: false
+
+discrete_branch:
+  winding_n: FIX_BEFORE_SCAN
+  flux_N_F: FIX_BEFORE_SCAN
+  layer_charge_integer_m_layer: FIX_BEFORE_SCAN
+
+normalization_contract:
+  scalar_field_dimension: M^2
+  dimensionless_scalar: "varphi = phi/M6^2"
+  canonical_scalar_kinetic: "Z_phi = 1"
+  gauge_minimal_charge: "q_ref = q_hat/M6"
+  layer_charge: "gSigma = m_layer*q_ref = m_layer*q_hat/M6"
+  independent_gSigma_variation_at_fixed_q_hat: FORBIDDEN
+  gauge_rescaling_status: FIXED
+
+fields:
+  - A(r)
+  - L(r)
+  - phi(r)
+  - s(r)
+  - A_chi(r)
+
+continuous_controls:
+  - Lambda6_over_Lambda_ref
+  - Lambda_layer_over_Lambda_ref
+  - mSigma2_over_mref2
+  - q_hat
+  - lambdaSigma
+
+derived_controls:
+  gSigma: "m_layer*q_hat/M6"
+
+outputs:
+  - delta_beta_over_beta
+  - delta_Xi
+  - delta_U_umb
+  - delta_m0sq_Rcap2
+
+finite_difference:
+  scheme: central
+  relative_steps: [1.0e-2, 5.0e-3, 2.5e-3]
+  richardson_order: 2
+  derivative_convergence_relative_max: 1.0e-2
+  require_step_plateau: true
+  require_solver_tolerance_refinement: true
+
+normalization:
+  required: true
+  convention: "J = Sy^{-1} R Sc"
+  control_scales: FREEZE_BEFORE_EXECUTION
+  output_scales: FREEZE_BEFORE_EXECUTION
+  preferred_scale_basis: PHYSICAL_ADMISSIBILITY_OR_TOLERANCE_SCALE
+  zero_reference_policy: USE_DOCUMENTED_NONZERO_CHARACTERISTIC_SCALE
+  scale_sensitivity_audit: required
+
+svd_gate:
+  matrix: dimensionless_J
+  required_row_rank: 4
+  historical_relative_singular_value_threshold: 1.0e-8
+  condition_number_max: 1.0e6
+  uncertainty_norm: spectral
+  sigma_min_separation_factor_q: 5.0
+  criterion: "sigma_4 > q * epsilon_J"
+  smallest_direction_stability: required
+  verdict_stable_under_step_halving: required
+  verdict_stable_under_regulator_variation: required
+
+branch_continuity:
+  required: true
+  same_winding_n: true
+  same_flux_N_F: true
+  same_layer_charge_integer_m_layer: true
+  same_profile_node_class: true
+  continuation_trace_required: true
+  conical_rescue_mode_forbidden: true
+
+boundary_conditions:
+  center:
+    L: 0
+    L_prime: 1
+    A_prime: 0
+    phi_prime: 0
+    s_if_n_nonzero: 0
+  outer:
+    match_to_bulk: true
+    scalar_layer_decay: true
+    gauge_flux_quantization: true
+    patch_charge_lattice_consistency: true
+
+physics_gates:
+  smooth_center: required
+  simultaneous_metric_scalar_gauge_matching: required
+  charge_lattice_consistency: required
+  m0_squared_nonnegative: required
+  reduced_kinetic_matrix_positive: required
+  off_shell_tube: required
+  discrete_branch_unchanged_during_jacobian: required
+
+verdicts:
+  pass: PHYSICAL_RESPONSE_RANK_4_CONFIRMED
+  blocked: PHYSICAL_RESPONSE_RANK_DEFICIENT
+  inconclusive: NUMERICAL_OR_BRANCH_RESOLUTION_INSUFFICIENT
+
+evidence_bundle:
+  - baseline_manifest
+  - perturbed_run_manifests
+  - raw_output_vectors
+  - physics_gate_flags
+  - charge_lattice_provenance
+  - raw_response_matrices
+  - normalization_scales_and_rationale
+  - normalized_jacobians
+  - singular_values_and_condition_numbers
+  - left_nullspace_and_right_singular_vectors
+  - jacobian_uncertainty_epsilon_J
+  - branch_continuity_evidence
+  - machine_readable_final_verdict

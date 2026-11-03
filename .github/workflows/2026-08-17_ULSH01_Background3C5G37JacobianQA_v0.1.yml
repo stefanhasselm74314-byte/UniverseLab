@@ -1,0 +1,28 @@
+name: ULSH-01 Background3C5 G3.7 Jacobian normalization QA v0.1
+
+on:
+  pull_request:
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-17_Background3C5_G3_7_Dimensionless_Boundary_Jacobian_QA_v0.1.md'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-17_Background3C5_G3_7_Dimensionless_Boundary_Jacobian_Gate_v0.1.json'
+      - 'tests/2026-08-17_ULSH01_Background3C5G37JacobianQA_v0.1.py'
+      - '.github/workflows/2026-08-17_ULSH01_Background3C5G37JacobianQA_v0.1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  algebraic-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile QA test
+        run: python -m py_compile tests/2026-08-17_ULSH01_Background3C5G37JacobianQA_v0.1.py
+      - name: Run exact-arithmetic normalization QA
+        run: python tests/2026-08-17_ULSH01_Background3C5G37JacobianQA_v0.1.py
+      - name: Validate machine gate JSON
+        run: python -m json.tool ulsh/ULSH-01/C-PHYS/2026-08-17_Background3C5_G3_7_Dimensionless_Boundary_Jacobian_Gate_v0.1.json >/dev/null

@@ -1,0 +1,50 @@
+{
+  "schema": "universelab.ulsh01.cphys.background3c5.g3_8.jacobian_rank_certification.v0.1",
+  "date": "2026-08-18",
+  "status": "DEFINED_NOT_EXECUTED",
+  "physical_evidence_effect": "NONE",
+  "branch_contract": {
+    "fixed_discrete_sector": ["N_F", "m_layer", "n_N", "n_S"],
+    "compatibility": "n_N-n_S=m_layer*N_F",
+    "branch_drift_forbidden": true
+  },
+  "jacobians_required": ["Jhat_h", "Jhat_h2", "Jhat_h4", "Jhat_h4_ref"],
+  "uncertainty": {
+    "epsilon_step": "norm2(Jhat_h2-Jhat_h4)",
+    "epsilon_solver": "norm2(Jhat_h4-Jhat_h4_ref)",
+    "epsilon_J": "epsilon_step+epsilon_solver",
+    "delta_rel": "epsilon_step/max(1,norm2(Jhat_h4))",
+    "richardson_difference_ratio": "norm2(Jhat_h-Jhat_h2)/norm2(Jhat_h2-Jhat_h4)"
+  },
+  "guardrails_inherited_from_ulsh01_response_auditor_v1_3": {
+    "q": 5.0,
+    "condition_max": 1000000.0,
+    "derivative_relative_change_max": 0.01,
+    "direction_angle_max_deg": 10.0,
+    "formal_relative_svd_tolerance": 1e-8
+  },
+  "certification": {
+    "formal_rank": "count(sigma_i > 1e-8*sigma_1)",
+    "rank10_uncertainty_separation": "sigma_10 > 5*epsilon_J",
+    "condition_gate": "kappa_2(Jhat_h4)<=1e6",
+    "direction_gate": "weakest right-singular direction/subspace stable within 10 deg unless clustered",
+    "weyl_bound": "abs(delta sigma_i)<=norm2(delta J)",
+    "equilibrated_matrix_may_certify_rank": false
+  },
+  "verdicts": [
+    "RANK10_CERTIFIED_NUMERICALLY",
+    "NUMERICAL_RESOLUTION_INSUFFICIENT",
+    "RANK_DEFICIENT_CANDIDATE_REQUIRES_PHYSICAL_INTERPRETATION",
+    "NOT_EVALUATED"
+  ],
+  "claim_firewall": {
+    "bvp_rank10_is_physical_response_rank4": false,
+    "rank10_implies_existence": false,
+    "rank10_implies_uniqueness_global": false,
+    "rank10_implies_stability": false,
+    "rank10_implies_ghost_freedom": false,
+    "physical_execution_authorized": false,
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  }
+}

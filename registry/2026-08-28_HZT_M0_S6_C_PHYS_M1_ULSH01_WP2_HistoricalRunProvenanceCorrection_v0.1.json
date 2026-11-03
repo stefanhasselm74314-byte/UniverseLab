@@ -1,0 +1,92 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-historical-run-provenance-correction.v0.1",
+  "date": "2026-08-28",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-01-WP2",
+  "classification": "APPEND_ONLY_HISTORICAL_PROVENANCE_CORRECTION_NO_EXECUTION_NO_STATUS_UPGRADE",
+  "status": "CORRECTS_FALSE_NEVER_EXECUTED_ASSERTION_FOR_HISTORICAL_BG3B_CP01R1",
+  "correction_scope": {
+    "source_artifact": "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.1.json",
+    "incorrect_assertions": [
+      "rebind_reason: CP01R1 was frozen but never executed",
+      "compatibility_basis.historical_cp01r1_never_executed = true",
+      "frozen_run_payload.classification implies rebinding from never-executed historical CP01R1"
+    ],
+    "append_only_semantics": "DO_NOT_REWRITE_OR_RECLASSIFY_THE_SOURCE_ARTIFACT; THIS CONTRACT CORRECTS ITS HISTORICAL FACT CLAIM FOR ALL CURRENT_AND_FUTURE_INTERPRETATION"
+  },
+  "corrected_historical_fact": {
+    "full_run_id": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+    "executed": true,
+    "transaction_completed": true,
+    "scheduled_primary_entries_executed": 35,
+    "github_actions_run_id": "31495350499",
+    "github_actions_attempt": 1,
+    "reviewed_source_commit": "63af440955431f8a1315ec29271887c5ae2d442b",
+    "numerical_outcome": "NO_CANDIDATE_FOUND_UNDER_PREREGISTERED_PROTOCOL",
+    "actions_artifact_id": "9104240692",
+    "actions_artifact_sha256": "ddbec713207748bcdedc50486624effa14924a92beb476a746641f314f9843e8",
+    "result_sha256": "8562ba77cb0aeda87aceee3b7be301c06e948070beebc8916769c38d99b45ec8",
+    "artifact_manifest_sha256": "f85a077a9327708f194596a0873b608c404a8c81a2b72c08df3a11b9608c3e07",
+    "authorization_decision": "UL-DEC-CP01R1-31495350499-1",
+    "grant_sha256": "764cb65f12071ad756fdbe5112f4b9fb1556830a1ef1801309311c29b47bd0da",
+    "release_sha256": "ce3dc84134198867f08804cc56063f12c2cc67189ec643fe1f2c54166ee8e9fa",
+    "single_use_grant_state": "SUCCEEDED_SPENT_NON_REPLAYABLE",
+    "physical_evidence_effect_at_result_ledger": "NONE"
+  },
+  "primary_evidence": [
+    "science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP3_CP01R1ImmediateExecutionLedger_v1.0.md",
+    "science/hzt-m0/md2s/2026-08-11_ULSH-01_MD2S-BVP_WP3_RR1_CP01R1ResultLedger_v1.0.md",
+    "science/hzt-m0/md2s/2026-08-12_ULSH-01_MD2S-BVP_WP3_D3_CP01R2PhysicalBindingLedger_v1.0.md"
+  ],
+  "run_identity_separation": {
+    "historical_executed_run": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R1",
+    "historical_successor_run": "HZT-M0-S6-C-PHYS-M1-BG3B-CP01R2",
+    "current_rebind_chain": [
+      "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R2",
+      "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R3",
+      "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4"
+    ],
+    "full_run_id_reuse_conflict": false
+  },
+  "current_target_reconciliation": {
+    "manifest": "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_WP2_WP3_ReconciliationManifest_v0.2.json",
+    "current_target_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+    "current_target_shape": "TWO_REGION_COMMON_CAP_8x8",
+    "historical_background3c5_stack_status": "DEVELOPMENT_ONLY_NOT_TARGET_BOUND",
+    "historical_execution_retained_as_fact": true,
+    "historical_execution_promoted_to_current_target_evidence": false
+  },
+  "current_cp01r4": {
+    "full_run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R4",
+    "run_payload_sha256": "8e5976a22c4be78b5e4fe7834c9947de8a4acea7781363c7aeb83aa73982ac8c",
+    "executed": false,
+    "execution_authorized": false,
+    "operative_authorization_decision_created": false,
+    "operative_grant_created": false,
+    "physical_result_created": false
+  },
+  "firewall": {
+    "changes_current_target_semantics": false,
+    "changes_cp01r4_payload_or_method": false,
+    "authorizes_solver_execution": false,
+    "authorizes_backend_import": false,
+    "authorizes_target_solve": false,
+    "authorizes_physical_jacobian": false,
+    "reopens_spent_historical_grant": false,
+    "WP2_closed": false,
+    "WP3_started": false,
+    "WP4_started": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "physical_evidence_effect": "NONE"
+  },
+  "interpretation": [
+    "Historical execution fact and current-target evidentiary authority are distinct.",
+    "BG3B-CP01R1 executed and produced a negative numerical result under its preregistered protocol.",
+    "The later reconciliation classifies the old Background3C5 stack as development-only and not bound to the current 8x8 target.",
+    "This correction does not convert the historical result into current canonical physical evidence."
+  ],
+  "next_safe_action": "SEPARATE_WP2_PROVENANCE_STATUS_REVIEW_ONLY_NO_EXECUTION"
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-release-package-manifest.v0.1",
+  "date": "2026-08-27",
+  "classification": "FROZEN_FROM_GREEN_IMPLEMENTATION_QA_NO_PHYSICAL_RESULT_NO_AUTHORIZATION",
+  "status": "FROZEN_QA_PACKAGE_AUTHORIZATION_REVIEW_PENDING",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R2",
+  "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+  "run_payload_sha256": "990cb9902aabf740db34ce03d69d845588a4b0c6337f9e48633829bbd6a7cea7",
+  "member_sha256": {
+    "ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json": "1b3f410e837371f11b50d8550c86c2d6409efeb25232114284f778754d1ae31f",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.1.json": "27e25341ed0114b7b864d9af2899083889897ee75d35180a03607762681d1531",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ResourcePolicy_v0.1.json": "21dfdbd880e2c0461ad832066ece2822d4a579f88b1df0fd63e20b5b49d2a46c",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_BackendRebindContract_v0.1.json": "0367523caa84478f7c0f599cb84725436e5d40ad585da54de0b0d016519a79f1",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.1.json": "538d5bad387ebe1165d97def85c55ad45e8f2698a3df255b100ca231ac978fb2",
+    "registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_TargetTransactionContract_v0.1.json": "d2aabbce549fb7126fd72a66b6b7b726b57b62040bea34c3b214802bc7d56e1b",
+    "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json": "ce40d78f3ab50ebab5ca2bc7d43b86ab54371a492bfab6a8bedb6e1d0de23048",
+    "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json": "c9ed6807d36872ebcb2070d861fe472f4fd168b0c2f3abd630bbd3250d1d581d",
+    "ulsh/ULSH-01/C-PHYS/2026-08-27_hzt_m1c1_8x8_backend_interface_v0.1.py": "54d73bb1bc998d1fafe7737aa8f8d8bce4775e94bb925f68d1fc8a22d006245e",
+    "tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_target_transaction_v0.1.py": "4c911d298674068a74cb4c2195c1c70a5cf0e92b4f2f0d4b8fa9e7ceea9eb332",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py": "8ce1c0eceed64245d091d4bed492f3cf2a9c8314f631a03045aaa9696fb11c92",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py": "830d4b4fdd28c8888876125479df3542eeb3864d4328764feb96b5d34bd91599",
+    "tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_independent_backend_v0.1.py": "a8afd7b548366acf9f5ac72e91bcf07372913cc21a8790d86d0a989a89f03e7b",
+    "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f"
+  },
+  "package_digest_sha256": "33c4626688e5a9a4a001b631e1f5d58727addffe5e7e884c082be72c51c500a6",
+  "package_digest_definition": "SHA256(canonical JSON mapping member path -> raw file SHA256, sort_keys=true, separators=(',',':'), ensure_ascii=false)",
+  "qa_provenance": {
+    "workflow": "ULSH-01 WP2 CP01R2 target transaction QA v0.1",
+    "workflow_run_id": 33078877304,
+    "workflow_head_sha": "f0d6edd88f65ccb4eb765cb75f6596f8515a0fbf",
+    "workflow_conclusion": "success",
+    "artifact_id": 9649092169,
+    "artifact_name": "ulsh01-wp2-cp01r2-release-manifest-qa-only",
+    "artifact_digest_sha256": "fb3672be7596cef6e913315837c395136aeaee741d44491edc2ea35f872bd436"
+  },
+  "execution_state": {
+    "solver_executed": false,
+    "backend_imported": false,
+    "operative_grant_created": false,
+    "physical_result_created": false,
+    "physical_background": "NOT_ESTABLISHED",
+    "physical_evidence_effect": "NONE"
+  },
+  "gate_state": {
+    "WP2": "TRANSACTION_PREFLIGHT_QA_PASS_EXECUTION_RELEASE_NOT_YET_AUTHORIZED",
+    "WP3": "NOT_STARTED",
+    "WP4": "NOT_STARTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  },
+  "next_safe_action": "REVIEW_AND_IMPLEMENT_OPERATIVE_ENTRYPOINT_BEHIND_SEPARATE_EXPLICIT_SINGLE_USE_GRANT_WITHOUT_EXECUTING_IT"
+}

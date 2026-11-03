@@ -1,0 +1,59 @@
+{
+  "schema": "universelab.hzt-m0-s6-c-phys-m1.ulsh01-wp2-resource-policy.v0.1",
+  "date": "2026-08-27",
+  "track_id": "MD2S-R1-C-PHYS",
+  "model_id": "HZT-M0-S6-C-PHYS-M1",
+  "work_package": "ULSH-01-WP2",
+  "classification": "TARGET_BOUND_FUTURE_EXECUTION_RESOURCE_POLICY_NO_EXECUTION",
+  "status": "FROZEN_CP01R2_EXECUTION_NOT_AUTHORIZED",
+  "run_id": "HZT-M0-S6-C-PHYS-M1-ULSH01-WP2-CP01R2",
+  "target_contract_digest_sha256": "237c4b5e08a2106e13e985c4af7925f1899e2ae2e4b7253c7ab73cc2db5f1823",
+  "run_payload_sha256": "990cb9902aabf740db34ce03d69d845588a4b0c6337f9e48633829bbd6a7cea7",
+  "result_schema_path": "ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json",
+  "execution_environment": {
+    "python": "3.12.x",
+    "dependency_lock": "requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt",
+    "dependency_lock_sha256": "4f0095cc5e8c2a9eff7f22140c05cadb571a4809b87ce74aa79f460cfa2ab95f",
+    "floating_point_primary": "IEEE_754_BINARY64",
+    "thread_count": 1,
+    "gpu_allowed": false,
+    "network_access": false,
+    "external_services": false,
+    "randomness": false
+  },
+  "resource_limits": {
+    "maximum_wall_clock_seconds_total": 21600,
+    "maximum_wall_clock_seconds_per_seed_per_level": 1800,
+    "maximum_memory_bytes": 8589934592,
+    "maximum_cpu_threads": 1,
+    "maximum_result_bytes": 1073741824,
+    "timeout_action": "FAIL_CLOSED_PRESERVE_LOG_NO_METHOD_CHANGE_RETRY",
+    "memory_limit_action": "ABORT_IMPLEMENTATION_FAILURE_NO_ADAPTIVE_RESOURCE_INCREASE"
+  },
+  "execution_order": {
+    "primary_node_counts": [24, 32, 48, 64, 96],
+    "seed_order": [0, 1, 2, 3, 4, 5, 6],
+    "independent_backend_after_primary_candidate_only": true,
+    "parallel_seed_execution": false,
+    "adaptive_resource_increase": false
+  },
+  "reproducibility": {
+    "environment_attestation_required_before_backend_import": true,
+    "cpu_and_blas_metadata_required": true,
+    "dependency_versions_required": true,
+    "implementation_hashes_required": true,
+    "target_digest_required": true,
+    "run_payload_hash_required": true,
+    "resource_policy_hash_required": true,
+    "result_schema_hash_required": true,
+    "authorization_decision_required": true,
+    "single_use_grant_required": true
+  },
+  "current_state": {
+    "execution_authorized": false,
+    "resource_budget_consumed": false,
+    "backend_imported": false,
+    "output_path_created": false
+  },
+  "physical_evidence_effect": "NONE"
+}

@@ -1,0 +1,133 @@
+name: ULSH-01 WP2 CP01R4 head-bound release QA v0.3
+
+on:
+  pull_request:
+    paths:
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.3.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ResourcePolicy_v0.2.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_BackendRebindContract_v0.2.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json'
+      - 'registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_TargetTransactionContract_v0.3.json'
+      - 'registry/2026-08-28_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ReleasePackageManifest_v0.2.json'
+      - 'registry/2026-08-28_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationReview_v0.2.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-21_ULSH01_M1C1_8x8_TargetContract_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_BackendInterfaceContract_v0.1.json'
+      - 'ulsh/ULSH-01/C-PHYS/2026-08-27_ULSH01_M1C1_8x8_ResultSchema_v0.1.json'
+      - 'registry/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3BSeedSpecification_v0.1.json'
+      - 'tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.2.py'
+      - 'tools/2026-08-04_hzt_m0_s6_c_phys_m1_background_3c_primary_kernel_v0.1.py'
+      - 'requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt'
+      - 'tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.1.py'
+      - 'tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py'
+      - 'tests/2026-08-27_test_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py'
+      - '.github/workflows/2026-08-28_ULSH01_WP2_CP01R4_HeadBoundRelease_QA_v0.3.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cp01r4-head-bound-preflight-no-physical-execution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_RELEASE_SUBJECT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      EXPECTED_PACKAGE_DIGEST: 1d6f45725a66b145d2907943ddc7fe3a989411e5ccfe6c0f29053c91253c7621
+    steps:
+      - name: Checkout exact release subject
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Verify exact release-subject Git HEAD
+        shell: bash
+        run: |
+          set -euo pipefail
+          ACTUAL="$(git rev-parse HEAD)"
+          test "$ACTUAL" = "$EXPECTED_RELEASE_SUBJECT_SHA"
+          echo "release_subject_sha=$ACTUAL"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate release and review contracts
+        run: |
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_RunInputRebind_v0.3.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ResourcePolicy_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_BackendRebindContract_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json >/dev/null
+          python -m json.tool registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_TargetTransactionContract_v0.3.json >/dev/null
+          python -m json.tool registry/2026-08-28_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_ReleasePackageManifest_v0.2.json >/dev/null
+          python -m json.tool registry/2026-08-28_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationReview_v0.2.json >/dev/null
+
+      - name: Compile release implementation and QA
+        run: |
+          python -m py_compile tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.1.py
+          python -m py_compile tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py
+          python -m py_compile tests/2026-08-27_test_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py
+
+      - name: Assert templates remain nonoperative
+        run: |
+          grep -F '"status": "TEMPLATE_ONLY_NO_GRANT_CREATED"' registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json
+          grep -F '"authorized": false' registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_SingleUseGrantSchema_v0.2.json
+          grep -F '"status": "TEMPLATE_ONLY_NOT_AUTHORIZED"' registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json
+          grep -F '"solver_execution_allowed": false' registry/2026-08-27_HZT_M0_S6_C_PHYS_M1_ULSH01_WP2_AuthorizationDecisionSchema_v0.1.json
+
+      - name: Run exact-head source-bound audit only
+        run: |
+          python tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py audit \
+            --repo-root . \
+            --manifest-output /tmp/ulsh01_wp2_cp01r4_release_manifest_head_bound.json \
+            --json | tee /tmp/ulsh01_wp2_cp01r4_preflight_head_bound.json
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = json.loads(Path('/tmp/ulsh01_wp2_cp01r4_preflight_head_bound.json').read_text())
+          m = json.loads(Path('/tmp/ulsh01_wp2_cp01r4_release_manifest_head_bound.json').read_text())
+          expected_sha = os.environ['EXPECTED_RELEASE_SUBJECT_SHA']
+          expected_digest = os.environ['EXPECTED_PACKAGE_DIGEST']
+          assert p['status'] == 'PASS_CP01R4_RELEASE_V02_PREFLIGHT_IMPLEMENTATION_ONLY', p
+          assert p['release_subject_git_head_sha'] == expected_sha, (p['release_subject_git_head_sha'], expected_sha)
+          assert p['release_package_member_count'] == 16, p
+          assert p['release_package_manifest_sha256'] == expected_digest, p
+          assert m['package_digest_sha256'] == expected_digest, m
+          assert p['backend_imported'] is False and p['solver_executed'] is False, p
+          assert p['physical_execution_authorized'] is False, p
+          assert p['WP2_closed'] is False, p
+          assert p['physical_evidence_effect'] == 'NONE', p
+          print('CP01R4 exact-head release audit: PASS')
+          PY
+
+      - name: Run synthetic authorization and replay self-test only
+        run: |
+          mkdir -p /tmp/ulsh01_wp2_cp01r4_head_bound_reservations
+          python tools/2026-08-27_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py self-test \
+            --repo-root . \
+            --reservation-dir /tmp/ulsh01_wp2_cp01r4_head_bound_reservations \
+            --json | tee /tmp/ulsh01_wp2_cp01r4_selftest_head_bound.json
+          grep -F '"status": "PASS_SYNTHETIC_DECISION_GRANT_BINDING_AND_REPLAY_QA"' /tmp/ulsh01_wp2_cp01r4_selftest_head_bound.json
+          grep -F '"backend_imported": false' /tmp/ulsh01_wp2_cp01r4_selftest_head_bound.json
+          grep -F '"solver_executed": false' /tmp/ulsh01_wp2_cp01r4_selftest_head_bound.json
+
+      - name: Run complete Python QA
+        run: python tests/2026-08-27_test_hzt_m0_s6_c_phys_m1_ulsh01_wp2_cp01r4_target_release_v0.2.py
+
+      - name: Verify evidence-neutral output
+        run: |
+          grep -F '"backend_imported":false' /tmp/ulsh01_wp2_cp01r4_release_manifest_head_bound.json
+          grep -F '"solver_executed":false' /tmp/ulsh01_wp2_cp01r4_release_manifest_head_bound.json
+          grep -F '"physical_evidence_effect":"NONE"' /tmp/ulsh01_wp2_cp01r4_release_manifest_head_bound.json
+
+      - name: Upload head-bound implementation-QA manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulsh01-wp2-cp01r4-head-bound-release-manifest-v03-qa-only
+          path: |
+            /tmp/ulsh01_wp2_cp01r4_release_manifest_head_bound.json
+            /tmp/ulsh01_wp2_cp01r4_preflight_head_bound.json
+            /tmp/ulsh01_wp2_cp01r4_selftest_head_bound.json

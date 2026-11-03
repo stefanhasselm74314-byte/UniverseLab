@@ -1,0 +1,78 @@
+{
+  "schema": "ulsh01.background3c5.g3.9.functional-jacobian-preregistration.v0.1",
+  "status": "PREREGISTERED_NOT_AUTHORIZED",
+  "evidence_effect": "NONE",
+  "operator": {
+    "dimension": 10,
+    "residuals": ["R_A","R_L","R_phi","R_patch","R_4d","R_chi","R_scalar","R_gauge^FT","R_s","R_s_flux"],
+    "coordinates": ["phi_N0_hat","Q_N0_hat","A_S0_hat","phi_S0_hat","Q_S0_hat","rho_N_hat","rho_S_hat","K4_hat","c_N_hat","c_S_hat"]
+  },
+  "branch_lock": {
+    "fixed": ["N_F","m_layer","n_N","n_S","topology","pole_frobenius_branch","profile_node_class","boundary_operator_identity"],
+    "constraint": "n_N-n_S=m_layer*N_F",
+    "conical_rescue_mode": "FORBIDDEN"
+  },
+  "finite_difference": {
+    "scheme": "CENTRAL_ONLY",
+    "dimensionless_step_levels": [0.01,0.005,0.0025],
+    "adaptive_coordinate_rescaling": "FORBIDDEN_WITHIN_CERTIFICATE",
+    "one_sided_fallback": "FORBIDDEN",
+    "domain_or_branch_violation": "FAIL_CLOSED"
+  },
+  "solver_settings": {
+    "nominal": {"relative_tolerance": 1e-8, "max_nodes": 20000},
+    "refined_h3": {"relative_tolerance": 1e-10, "max_nodes": 50000},
+    "refinement_required": true
+  },
+  "evaluation_schedule": {
+    "baseline_nominal": 1,
+    "nominal_perturbations": 60,
+    "refined_h3_perturbations": 20,
+    "total_bvp_evaluations": 81,
+    "execution_authorized": false
+  },
+  "rank_certification": {
+    "derivative_relative_change_max": 0.01,
+    "sigma_min_uncertainty_factor_q": 5.0,
+    "condition_number_max": 1000000.0,
+    "smallest_direction_angle_max_deg": 10.0,
+    "formal_relative_singular_value_threshold_reporting_only": 1e-8,
+    "robust_rank10_criterion": "sigma_10 > 5*epsilon_J"
+  },
+  "required_artifacts": [
+    "baseline_manifest",
+    "all_evaluation_manifests",
+    "all_R_hat_vectors",
+    "branch_lock_diagnostics",
+    "J_hat_h1",
+    "J_hat_h2",
+    "J_hat_h3",
+    "J_hat_h3_refined",
+    "epsilon_step",
+    "epsilon_solver",
+    "epsilon_J",
+    "singular_spectra",
+    "condition_numbers",
+    "smallest_right_singular_directions",
+    "direction_angles",
+    "schur_diagnostics",
+    "machine_readable_rank_verdict"
+  ],
+  "verdict_classes": [
+    "BVP_EVALUATION_FAILED",
+    "BRANCH_OR_DOMAIN_INVALID",
+    "DERIVATIVE_PLATEAU_FAILED",
+    "SOLVER_REFINEMENT_FAILED",
+    "CONDITIONING_GUARDRAIL_FAILED",
+    "SIGMA10_DIRECTION_UNSTABLE",
+    "RANK10_UNCERTAINTY_NOT_SEPARATED",
+    "RANK10_CERTIFIED_NUMERICALLY"
+  ],
+  "firewall": {
+    "physical_execution_authorized": false,
+    "physical_background_established": false,
+    "physical_response_rank_R": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  }
+}

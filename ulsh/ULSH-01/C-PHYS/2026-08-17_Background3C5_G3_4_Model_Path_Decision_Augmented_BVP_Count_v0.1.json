@@ -1,0 +1,65 @@
+{
+  "schema": "universelab.ulsh01.cphys.background3c5.g3_4_model_path_decision.v0.1",
+  "date": "2026-08-17",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "status": "DEVELOPMENT_PATH_SELECTED_CONDITIONALLY_AUGMENTED_BVP_STRUCTURAL_COUNT_CLOSED_EXECUTION_BLOCKED",
+  "selected_development_path": "SUPPLEMENTARY_BULK_LAYER_WITH_CANONICAL_CAP",
+  "selection_basis": [
+    "preserves_canonical_two_region_topology",
+    "preserves_existing_cap_action_and_eight_cap_global_residuals",
+    "does_not_assume_sigma_cap_equals_Sigma_FT",
+    "requires_no_unproven_thin_limit_replacement"
+  ],
+  "rejected_as_current_path": {
+    "path": "RESOLVED_CAP_REPLACEMENT_WITH_NEW_PARENT_DERIVATION",
+    "reason": "Requires new parent action plus controlled thin/distributional limit and rederivation of cap metric/scalar/gauge laws."
+  },
+  "field_identity_firewall": {
+    "sigma_cap": "hypersurface_localized_canonical_cap_field",
+    "Sigma_FT": "smooth_bulk_finite_thickness_field",
+    "sigma_cap_equals_Sigma_FT": false,
+    "physical_equivalence_established": false
+  },
+  "continuous_unknown_count": {
+    "canonical_count": 8,
+    "new_regular_layer_amplitudes": ["c_N", "c_S"],
+    "added_count": 2,
+    "total": 10
+  },
+  "global_residual_count": {
+    "canonical_residuals": ["R_A", "R_L", "R_phi", "R_patch", "R_4d", "R_chi", "R_scalar", "R_gauge"],
+    "new_layer_residuals": ["R_s", "R_s_flux"],
+    "total": 10
+  },
+  "new_layer_cap_structure": {
+    "condition": "No new cap-localized coupling of Sigma_FT is introduced.",
+    "R_s": "s_N(rho_N)-s_S(rho_S)=0",
+    "R_s_flux": "Pi_s,N+Pi_s,S=0 with canonical normal orientation",
+    "Pi_s": "n_s^r * d_r s_s for canonical kinetic normalization",
+    "exact_orientation_signs": "REQUIRES_CANONICAL_ORIENTATION_BINDING_BEFORE_EXECUTABLE_USE"
+  },
+  "finite_thickness_flux": {
+    "P_s": "exp(4A_s)*Z_F*a_chi_s_x/ell_s",
+    "evolution": "P_s_x=-(m_layer*q_hat)*exp(4A_s)*s_hat_s^2*w_s/ell_s",
+    "Q_N_Q_S_role": "pole_or_initial_flux_data_or_equivalent_global_parameters_not_regionwide_constants_when_layer_active",
+    "R_patch_R_gauge_rewrite_required": true
+  },
+  "bvp_count_verdict": "STRUCTURALLY_SQUARE_10x10",
+  "not_proven": [
+    "actual_10x10_Jacobian_rank",
+    "existence",
+    "uniqueness",
+    "conditioning",
+    "continuum_convergence",
+    "stability",
+    "ghost_freedom",
+    "physical_response_rank_R"
+  ],
+  "next_required_gate": "G3_5_AUGMENTED_CAP_VARIATION_AND_10x10_STRUCTURAL_MATCHING",
+  "physical_execution_authorized": false,
+  "physical_background": "NOT_ESTABLISHED",
+  "physical_response_rank_R": "NOT_EXECUTED",
+  "K1-D": "NOT_RELEASED",
+  "K1-E": "NOT_ADMISSIBLE",
+  "physical_evidence_effect": "NONE"
+}

@@ -1,0 +1,108 @@
+name: ULSH-01 C-PHYS response smoke
+
+on:
+  push:
+    branches:
+      - ulsh-01-response-rank-gate-v1
+  pull_request:
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/**'
+      - '.github/workflows/2026-08-15_ulsh01_cphys_response_smoke_v1.1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-contract-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile v1.1 runner and synthetic solver
+        run: |
+          python -m py_compile \
+            ulsh/ULSH-01/C-PHYS/2026-08-15_hzt_background3c5_response_runner_v1.1.py \
+            ulsh/ULSH-01/C-PHYS/2026-08-15_mock_background3c5_solver_v1.1.py
+
+      - name: Build QA-only config
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base = Path('ulsh/ULSH-01/C-PHYS/2026-08-15_background3c5_response_run_config_template_v1.1.json')
+          cfg = json.loads(base.read_text(encoding='utf-8'))
+          cfg['evidence_mode'] = 'SOFTWARE_QA_ONLY'
+          cfg['solver_command'] = [
+              'python',
+              'ulsh/ULSH-01/C-PHYS/2026-08-15_mock_background3c5_solver_v1.1.py',
+              '{input}',
+              '{output}',
+          ]
+          Path('ulsh01_smoke_config.json').write_text(json.dumps(cfg, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Execute 41-job synthetic smoke
+        run: |
+          python ulsh/ULSH-01/C-PHYS/2026-08-15_hzt_background3c5_response_runner_v1.1.py \
+            ulsh01_smoke_config.json \
+            ulsh01_smoke_out
+
+      - name: Assert fail-closed provenance and lattice-aware controls
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+
+          root = Path('ulsh01_smoke_out')
+          m = json.loads((root / 'manifest.json').read_text(encoding='utf-8'))
+
+          assert m['job_count'] == 41, m
+          assert m['perturbation_job_count'] == 30, m
+          assert m['solver_refinement_job_count'] == 10, m
+          assert m['status'] == 'COMPLETED_SOFTWARE_QA_ONLY', m
+          assert m['rank_claim_allowed'] is False, m
+          assert m['evidence_effect'] == 'NONE_SYNTHETIC_OR_QA', m
+          assert m['failed_physics_gate_jobs'] == [], m
+          assert len(m['synthetic_jobs']) == 41, m
+          assert m['branch']['m_layer'] == 1, m
+          assert m['charge_lattice']['gSigma'] == 'm_layer*q_hat/M6', m
+          assert m['charge_lattice']['independent_gSigma_variation'] is False, m
+          assert m['control_vector'] == [
+              'Lambda6_over_Lambda_ref',
+              'Lambda_layer_over_Lambda_ref',
+              'mSigma2_over_mref2',
+              'q_hat',
+              'lambdaSigma',
+          ], m
+
+          for name in ('R_h.csv', 'R_h2.csv', 'R_h4.csv', 'R_h4_refined.csv'):
+              p = root / name
+              assert p.exists(), name
+              with p.open(newline='', encoding='utf-8') as f:
+                  rows = list(csv.reader(f))
+              assert len(rows) == 5, (name, len(rows))
+              assert rows[0][1:] == m['control_vector'], (name, rows[0])
+              assert 'gSigma' not in rows[0], (name, rows[0])
+
+          baseline = json.loads((root / 'jobs' / 'baseline.input.json').read_text(encoding='utf-8'))
+          qhat = float(baseline['controls']['q_hat'])
+          M6 = float(baseline['M6'])
+          mlayer = int(baseline['branch']['m_layer'])
+          assert baseline['derived_couplings']['q_ref'] == qhat / M6
+          assert baseline['derived_couplings']['gSigma'] == mlayer * qhat / M6
+
+          print('ULSH-01 C-PHYS v1.1 synthetic smoke: PASS (software QA only)')
+          PY
+
+      - name: Upload QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulsh01-cphys-v1.1-synthetic-smoke
+          path: |
+            ulsh01_smoke_config.json
+            ulsh01_smoke_out/

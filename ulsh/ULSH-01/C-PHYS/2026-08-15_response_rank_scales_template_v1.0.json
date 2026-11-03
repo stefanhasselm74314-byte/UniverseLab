@@ -1,0 +1,19 @@
+{
+  "schema": "ulsh01.cphys.response-rank.scales.v1",
+  "status": "MUST_BE_FROZEN_BEFORE_EXECUTION",
+  "basis": "PHYSICAL_ADMISSIBILITY_OR_TOLERANCE_SCALE_PREFERRED",
+  "control_scales": {
+    "Lambda6_over_Lambda_ref": 1.0,
+    "Lambda_layer_over_Lambda_ref": 1.0,
+    "mSigma2_over_mref2": 1.0,
+    "gSigma": 1.0,
+    "lambdaSigma": 1.0
+  },
+  "output_scales": {
+    "delta_beta_over_beta": 1.0,
+    "delta_Xi": 1.0,
+    "delta_U_umb": 1.0,
+    "delta_m0sq_Rcap2": 1.0
+  },
+  "warning": "Values 1.0 are placeholders only. Replace with physically justified characteristic/tolerance scales and freeze before looking at the final rank result."
+}

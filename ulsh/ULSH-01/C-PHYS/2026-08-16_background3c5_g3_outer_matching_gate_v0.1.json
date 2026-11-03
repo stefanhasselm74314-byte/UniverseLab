@@ -1,0 +1,50 @@
+{
+  "schema": "ulsh01.background3c5.g3-outer-matching-gate.v0.1",
+  "architecture": "HPVS -> HZT-M0 -> S6 -> C-PHYS -> ULSH-01",
+  "status": "NECESSARY_OUTER_STRUCTURE_CLOSED__UNIQUE_TARGET_OPEN",
+  "physical_execution_authorized": false,
+  "physical_evidence_effect": "NONE",
+  "K1_D": "NOT_RELEASED",
+  "K1_E": "NOT_ADMISSIBLE",
+  "canonical_fields": ["A", "ell", "varphi", "s_hat", "a_chi"],
+  "maxwell_flux_variable": "P = exp(4A)*Z_F*a_chi_x/ell",
+  "layer_off_flux_law": "s_hat -> 0 => P_x -> 0",
+  "discrete_branch_fixed": ["n", "N_F", "m_layer"],
+  "center_continuous_data_fixed_k4": {
+    "n_nonzero": ["varphi_0", "g_2", "s_abs_n"],
+    "n_zero": ["varphi_0", "g_2", "s_0"]
+  },
+  "outer_modes": {
+    "allowed": ["SMOOTH_BULK_HANDOFF", "CAP_OR_BRANE_JUNCTION_HANDOFF"],
+    "must_select_exactly_one": true
+  },
+  "smooth_handoff_continuity": ["A", "A_x", "ell", "ell_x", "varphi", "varphi_x", "a_chi", "P"],
+  "layer_decay": {
+    "condition": "stable_manifold",
+    "linearized_mu_eff_sq": "w^2/ell^2 + mhat_Sigma^2(varphi)",
+    "finite_boundary_double_dirichlet_forbidden_as_default": true
+  },
+  "constraint": {
+    "rr_constraint_as_independent_outer_bc": false,
+    "reason": "G4 propagation identity"
+  },
+  "global_flux": {
+    "quantization_required": true,
+    "patch_regularity_required": true,
+    "unique_executable_endpoint_equation": "OPEN"
+  },
+  "bvp_count": {
+    "status": "SQUARE_CONDITIONAL_ONLY",
+    "required_independent_continuous_outer_mismatches": 3,
+    "executable_mismatch_map": "OPEN"
+  },
+  "blocking_requirements": [
+    "select outer_mode",
+    "freeze outer location rule",
+    "freeze target bulk/cap family",
+    "freeze exactly three independent continuous mismatch functions or explicit eigenparameter promotion",
+    "freeze gauge patch / flux quantization endpoint equation"
+  ],
+  "physical_background": "NOT_ESTABLISHED",
+  "physical_response_rank_R": "NOT_EXECUTED"
+}

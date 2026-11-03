@@ -1,0 +1,80 @@
+{
+  "schema": "universelab.ulsh01.cphys.background3c5.g3-7-dimensionless-boundary-jacobian.v0.1",
+  "date": "2026-08-17",
+  "architecture": "HPVS->HZT-M0->S6->C-PHYS->ULSH-01",
+  "status": "DIMENSIONAL_NORMALIZATION_PASS_FUNCTIONAL_JACOBIAN_QA_DEFINED_PHYSICAL_EXECUTION_BLOCKED",
+  "physical_evidence_effect": "NONE",
+  "fixed_discrete_branch": {
+    "independent": ["N_F", "m_layer", "n_S"],
+    "derived": "n_N=n_S+m_layer*N_F",
+    "continuous_jacobian_branch_drift_forbidden": true
+  },
+  "unknown_order": ["phi_N0", "Q_N0", "A_S0", "phi_S0", "Q_S0", "rho_N", "rho_S", "K4", "c_N", "c_S"],
+  "unknown_mass_dimensions": [2, 3, 0, 2, 3, -1, -1, 2, "2+abs(n_N)", "2+abs(n_S)"],
+  "residual_order": ["R_A", "R_L", "R_phi", "R_patch", "R_4d", "R_chi", "R_scalar", "R_gauge_FT", "R_s", "R_s_flux"],
+  "residual_mass_dimensions": [0, -1, 2, 1, 5, 5, 3, 4, 2, 3],
+  "dimensionless_unknown_map": [
+    "phi_N0/M6^2",
+    "Q_N0/M6^3",
+    "A_S0",
+    "phi_S0/M6^2",
+    "Q_S0/M6^3",
+    "M6*rho_N",
+    "M6*rho_S",
+    "K4/M6^2",
+    "c_N/M6^(2+abs(n_N))",
+    "c_S/M6^(2+abs(n_S))"
+  ],
+  "dimensionless_residual_map": [
+    "R_A",
+    "M6*R_L",
+    "R_phi/M6^2",
+    "R_patch/M6",
+    "R_4d/M6^5",
+    "R_chi/M6^5",
+    "R_scalar/M6^3",
+    "R_gauge_FT/M6^4",
+    "R_s/M6^2",
+    "R_s_flux/M6^3"
+  ],
+  "jacobian_identity": "J_hat=D_R^-1*J10*D_U",
+  "exact_rank_invariance": "rank(J_hat)=rank(J10)_for_finite_positive_M6",
+  "equilibration_policy": {
+    "optional_matrix": "J_eq=E_R*J_hat*E_U",
+    "allowed_use": ["linear_solver_preconditioning", "conditioning_diagnostic"],
+    "forbidden_use": ["sole_basis_for_physical_rank_pass", "undocumented_adaptive_rank_rescue"],
+    "report_separately": ["kappa2(J_hat)", "kappa2(J_eq)_if_used"]
+  },
+  "future_derivative_qa": {
+    "allowed_methods": ["analytic_or_AD_with_directional_FD_check", "central_FD_nested_steps"],
+    "central_fd_levels_minimum": ["h", "h/2", "h/4"],
+    "uncertainty_concept": "matrix_disagreement_between_converged_derivative_levels",
+    "numerical_rank_threshold": "UNSET_REQUIRES_SEPARATE_PREREGISTRATION_BEFORE_PHYSICAL_USE",
+    "rank10_requires": [
+      "fixed_discrete_branch",
+      "regular_pole_branch_preserved",
+      "finite_BVP_evaluations",
+      "derivative_convergence",
+      "sigma_10_separated_from_derivative_uncertainty_by_preregistered_margin",
+      "full_singular_spectrum_reported",
+      "kappa2_J_hat_reported"
+    ]
+  },
+  "schur_diagnostics": {
+    "partition": "8+2",
+    "S_hat": "D_hat-C_hat*J8_hat^-1*B_hat_when_J8_hat_nonsingular",
+    "full_svd_remains_mandatory": true
+  },
+  "gate_state": {
+    "G3_7_DIMENSION_TABLE": "PASS",
+    "G3_7_CANONICAL_NORMALIZATION": "PASS_ANALYTIC",
+    "G3_7_EXACT_RANK_INVARIANCE": "PASS_ANALYTIC",
+    "G3_7_FUNCTIONAL_JACOBIAN_QA": "DEFINED_NOT_EXECUTED_PHYSICALLY",
+    "ACTUAL_10x10_JACOBIAN_RANK": "OPEN_NOT_EVALUATED",
+    "PHYSICAL_EXECUTION_AUTHORIZED": false,
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK_R": "NOT_EXECUTED",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE"
+  }
+}

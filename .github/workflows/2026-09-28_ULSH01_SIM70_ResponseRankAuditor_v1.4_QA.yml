@@ -1,0 +1,69 @@
+name: ULSH-01 SIM-70 response-rank auditor v1.4 QA
+
+on:
+  pull_request:
+    paths:
+      - 'ulsh/ULSH-01/C-PHYS/2026-09-28_hzt_physical_response_rank_auditor_v1.4.py'
+      - 'ulsh/ULSH-01/C-PHYS/2026-09-28_test_hzt_physical_response_rank_auditor_v1.4.py'
+      - 'requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt'
+      - '.github/workflows/2026-09-28_ULSH01_SIM70_ResponseRankAuditor_v1.4_QA.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sim70-response-rank-auditor:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install frozen numerical dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            -r requirements/2026-08-04_HZT_M0_S6_C_PHYS_M1_Background3C_v0.1.txt
+          python - <<'PY'
+          import importlib.metadata as md
+          expected = {
+              'numpy': '2.1.3',
+              'scipy': '1.14.1',
+              'sympy': '1.13.3',
+              'mpmath': '1.3.0',
+          }
+          got = {name: md.version(name) for name in expected}
+          assert got == expected, (got, expected)
+          print('SIM-70 dependency lock: PASS', got)
+          PY
+
+      - name: Compile auditor and adversarial tests
+        run: |
+          python -m py_compile \
+            ulsh/ULSH-01/C-PHYS/2026-09-28_hzt_physical_response_rank_auditor_v1.4.py \
+            ulsh/ULSH-01/C-PHYS/2026-09-28_test_hzt_physical_response_rank_auditor_v1.4.py
+
+      - name: Run SIM-70 adversarial numerical QA
+        run: |
+          python ulsh/ULSH-01/C-PHYS/2026-09-28_test_hzt_physical_response_rank_auditor_v1.4.py
+
+      - name: Assert numerical-only firewalls
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('ulsh/ULSH-01/C-PHYS/2026-09-28_hzt_physical_response_rank_auditor_v1.4.py')
+          source = p.read_text(encoding='utf-8')
+          forbidden = [
+              'physical_execution_authorized = True',
+              'K1-D": "RELEASED',
+              'K1-E": "ADMISSIBLE',
+              'canonical_effect": "PROMOTE',
+          ]
+          for token in forbidden:
+              assert token not in source, token
+          assert '"physical_interpretation": "NONE"' in source
+          assert '"canonical_effect": "NONE"' in source
+          print('SIM-70 numerical/firewall QA: PASS')
+          PY
