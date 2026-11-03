@@ -295,6 +295,9 @@ class TrustGateTests(TestCase):
         self.assertEqual(g.classify("navigator.html"),{"PUBLIC_SURFACE"})
         self.assertEqual(g.classify("assets/graphs/analysis.svg"),{"PUBLIC_SURFACE"})
         self.assertEqual(g.classify("README.md"),{"PUBLIC_SURFACE"})
+        self.assertEqual(g.classify("assets/styles/research.css"),{"PUBLIC_SURFACE"})
+        self.assertEqual(g.classify("science/2026-11-03_BraneModel.fits"),{"CONTROL_PLANE"})
+        self.assertEqual(g.classify(".github/ruleset.json"),{"CONTROL_PLANE"})
         self.assertEqual(g.classify("registry/2026-11-03_UniverseLab_ScientificClaims_v0.2.json"),{"CONTROL_PLANE"})
         self.assertEqual(g.classify("drafts/2026-11-03_Test_DRAFT.json"),{"CONTROL_PLANE"})
         self.assertEqual(g.classify("project-manifest.json"),{"STATE_RELEASE"})
@@ -391,6 +394,22 @@ class TrustGateTests(TestCase):
             (SHELL,HEAD),a.contents_map[(SHELL,HEAD)]+b"\nalert('inject')"))
         case("manifest_silent_architecture_change",lambda a:forged_field(
             a,MANIFEST,["architecture"],["HZT-Full-PROVEN"]))
+        case("checkpoint_hidden_science_gap_rewrite",lambda a:forged_field(
+            a,CP,["active_block","remaining_scientific_or_empirical_blocking_missing_links"],0))
+        case("checkpoint_defect_fabrication",lambda a:forged_field(
+            a,CP,["confirmed_defects"],[{"defect_id":"UL-BVC-G11",
+                "statement":"Ghost freedom proven","repair_status":"CLOSED"}]))
+        case("checkpoint_entrypoint_hijack",lambda a:forged_field(
+            a,CP,["entry_points"],["https://external.invalid/forged"]))
+        case("fabricated_state_top_level",lambda a:forged_field(
+            a,STATE,["status"],"PHYSICAL_BACKGROUND_ESTABLISHED"))
+        case("new_fabricated_state_field",lambda a:forged_field(
+            a,STATE,["hidden_evidence"],"CONFIRMED"))
+        case("extra_manifest_governance_rule",lambda a:forged_field(
+            a,MANIFEST,["governance_rules"],["CLAIMS_CAN_BE_PROMOTED"]))
+        case("public_module_physical_release",lambda a:forged_field(
+            a,SITE,["modules","bridge"],"RELEASED"))
+
         def change_timestamp(a):
             obj=json.loads(a.contents_map[(STATE,HEAD)])
             obj["snapshot_timestamp"]="2026-09-04T12:00:00+02:00"
@@ -444,6 +463,7 @@ class TrustGateTests(TestCase):
     def test_08_trusted_workflow_base_boundary(self):
         workflow=(ROOT / g.TRUSTED_WORKFLOW).read_text(encoding="utf-8")
         self.assertIn("  pull_request_target:", workflow)
+        self.assertIn("labeled", workflow)
         self.assertNotIn("\n  pull_request:\n", workflow)
         self.assertIn("ref: ${{ github.event.pull_request.base.sha }}", workflow)
         self.assertNotIn("github.event.pull_request.head.sha", workflow)
