@@ -74,6 +74,8 @@ def fixture():
     contents={
         (MANIFEST,BASE):encoded(oldmanifest),
         (OLD_STATE,BASE):encoded({"physical_governance":oldphysical}),
+        (OLD_CP,BASE):encoded({"gate_state":copy.deepcopy(g.GATE_EXPECTED)}),
+        (OLD_SITE,BASE):encoded({"governance":copy.deepcopy(oldphysical)}),
         (MANIFEST,HEAD):encoded(newmanifest),
         (STATE,HEAD):encoded(state),
         (CP,HEAD):encoded(cp),
@@ -110,6 +112,8 @@ class FakeAPI:
         self.main_sha=BASE
         self.ruleset_enabled=True
         self.check_enabled=True
+        self.ruleset_bypass=False
+        self.ruleset_exclude_main=False
         self.comment_owner=True
         self.comment_exact=comment
         self.pr_calls=0
@@ -144,7 +148,9 @@ class FakeAPI:
         if path=="/rulesets/42":
             return {
                 "target":"branch","enforcement":"active",
-                "conditions":{"ref_name":{"include":["refs/heads/main"],"exclude":[]}},
+                "conditions":{"ref_name":{"include":["refs/heads/main"],"exclude":[
+                    "refs/heads/main"] if self.ruleset_exclude_main else []}},
+                "bypass_actors":[{"actor_id":1}] if self.ruleset_bypass else [],
                 "rules":[
                     {"type":"pull_request"},
                     *([{"type":"required_status_checks",
@@ -230,6 +236,8 @@ class TrustGateTests(TestCase):
         case("untrusted_comment_author",lambda a:setattr(a,"comment_owner",False))
         case("no_active_ruleset",lambda a:setattr(a,"ruleset_enabled",False))
         case("no_required_check",lambda a:setattr(a,"check_enabled",False))
+        case("ruleset_bypass_present",lambda a:setattr(a,"ruleset_bypass",True))
+        case("ruleset_excludes_main",lambda a:setattr(a,"ruleset_exclude_main",True))
         case("live_main_drift",lambda a:setattr(a,"main_sha","0"*40))
         case("live_head_drift",lambda a:setattr(a,"head","0"*40))
         case("missing_checkpoint_alias_change",lambda a:setattr(
@@ -241,6 +249,21 @@ class TrustGateTests(TestCase):
             o["gates"]["K1-D"]="RELEASED"
             a.contents_map[(MANIFEST,HEAD)]=encoded(o)
         case("physical_gate_promotion",promote)
+        def inject_other_gate(a):
+            obj=json.loads(a.contents_map[(MANIFEST,HEAD)])
+            obj["gates"]["OTHER_METHOD_GATE"]="RELEASED"
+            a.contents_map[(MANIFEST,HEAD)]=encoded(obj)
+        case("extra_promoted_manifest_gate",inject_other_gate)
+        def inject_runtime_authorization(a):
+            obj=json.loads(a.contents_map[(CP,HEAD)])
+            obj["gate_state"]["AuthorizationDecision"]="CREATED"
+            a.contents_map[(CP,HEAD)]=encoded(obj)
+        case("checkpoint_runtime_authorization",inject_runtime_authorization)
+        def inject_site_governance(a):
+            obj=json.loads(a.contents_map[(SITE,HEAD)])
+            obj["governance"]["RATIFIED_HUMAN_TRUST_ROOT"]="RATIFIED"
+            a.contents_map[(SITE,HEAD)]=encoded(obj)
+        case("site_governance_promotion",inject_site_governance)
         def change_timestamp(a):
             obj=json.loads(a.contents_map[(STATE,HEAD)])
             obj["snapshot_timestamp"]="2026-09-04T12:00:00+02:00"
@@ -273,7 +296,13 @@ class TrustGateTests(TestCase):
                 with self.assertRaises((g.GateError,KeyError)):
                     g.run_event(event_for(api),api)
 
-    def test_06_no_owner_scope_shortcuts(self):
+    def test_06_ordinary_PR_race_is_fail_closed(self):
+        api=FakeAPI(files=[{"filename":"README.md","status":"modified"}])
+        api.race_after_first=True
+        with self.assertRaises(g.GateError):
+            g.run_event(event_for(api),api)
+
+    def test_07_no_owner_scope_shortcuts(self):
         msg=g.approval_message(999,HEAD,{"CONTROL_PLANE","STATE_RELEASE"})
         comment={"user":{"login":g.OWNER_LOGIN},"author_association":"OWNER",
                  "body":msg}
@@ -284,7 +313,7 @@ class TrustGateTests(TestCase):
         self.assertFalse(g.has_scoped_owner_approval(
             [comment],999,"0"*40,{"CONTROL_PLANE","STATE_RELEASE"}))
 
-    def test_07_no_pr_script_execution(self):
+    def test_08_no_pr_script_execution(self):
         source=SCRIPT.read_text(encoding="utf-8")
         self.assertNotIn("subprocess",source)
         self.assertNotIn("os.system",source)
