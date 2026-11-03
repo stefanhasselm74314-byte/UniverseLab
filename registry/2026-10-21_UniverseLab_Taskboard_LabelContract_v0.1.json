@@ -1,0 +1,242 @@
+{
+  "schema": "universelab.taskboard.label-contract.v0.1",
+  "task_id": "UL-TASKBOARD-01",
+  "date": "2026-10-21",
+  "status": "DRAFT_LABELS_NOT_CREATED",
+  "rules": {
+    "exactly_one_task_label": true,
+    "exactly_one_target_chat_label": true,
+    "exactly_one_status_label": true,
+    "exactly_one_ownership_label": true,
+    "exactly_one_priority_label": true,
+    "visible_chat_name_in_body_is_authoritative": true,
+    "label_body_mismatch": "BLOCKED_ROUTING_CONFLICT"
+  },
+  "labels": [
+    {
+      "name": "ul-task",
+      "color": "1F6FEB",
+      "description": "UniverseLab taskboard item"
+    },
+    {
+      "name": "role-lead",
+      "color": "0E8A16",
+      "description": "Target chat has lead ownership"
+    },
+    {
+      "name": "role-review",
+      "color": "FBCA04",
+      "description": "Target chat reviews or supports"
+    },
+    {
+      "name": "role-info",
+      "color": "D4C5F9",
+      "description": "Information only; no ownership transfer"
+    },
+    {
+      "name": "status-input",
+      "color": "BFDADC",
+      "description": "New task intake"
+    },
+    {
+      "name": "status-ready",
+      "color": "0E8A16",
+      "description": "Ready for target chat"
+    },
+    {
+      "name": "status-in-progress",
+      "color": "FBCA04",
+      "description": "In progress"
+    },
+    {
+      "name": "status-waiting",
+      "color": "7057FF",
+      "description": "Waiting for dependency"
+    },
+    {
+      "name": "status-review",
+      "color": "5319E7",
+      "description": "Under review"
+    },
+    {
+      "name": "status-blocked",
+      "color": "B60205",
+      "description": "Blocked by a named blocker"
+    },
+    {
+      "name": "status-returned",
+      "color": "006B75",
+      "description": "Returned to master"
+    },
+    {
+      "name": "status-done",
+      "color": "0E8A16",
+      "description": "Deliverable returned and accepted"
+    },
+    {
+      "name": "status-superseded",
+      "color": "6E7781",
+      "description": "Superseded or aborted"
+    },
+    {
+      "name": "priority-p0",
+      "color": "B60205",
+      "description": "Critical owner-approved priority"
+    },
+    {
+      "name": "priority-p1",
+      "color": "D93F0B",
+      "description": "High priority"
+    },
+    {
+      "name": "priority-p2",
+      "color": "FBCA04",
+      "description": "Normal priority"
+    },
+    {
+      "name": "priority-p3",
+      "color": "C2E0C6",
+      "description": "Low priority"
+    },
+    {
+      "name": "chat-chat-ueberwachung-master",
+      "color": "BFD4F2",
+      "description": "Target chat: Chat Überwachung Master",
+      "visible_chat_name": "Chat Überwachung Master",
+      "role_hint": "COORDINATION"
+    },
+    {
+      "name": "chat-hyperzeit-projektstatus-update",
+      "color": "BFD4F2",
+      "description": "Target chat: Hyperzeit Projektstatus Update",
+      "visible_chat_name": "Hyperzeit Projektstatus Update",
+      "role_hint": "STATUS_COORDINATION"
+    },
+    {
+      "name": "chat-web-ux-wartung",
+      "color": "BFD4F2",
+      "description": "Target chat: Web UX Wartung",
+      "visible_chat_name": "Web UX Wartung",
+      "role_hint": "WEB_IMPLEMENTATION"
+    },
+    {
+      "name": "chat-universelab-ux-wartung",
+      "color": "BFD4F2",
+      "description": "Target chat: UniversaLab UX Wartung",
+      "visible_chat_name": "UniversaLab UX Wartung",
+      "role_hint": "UX_ARCHITECTURE"
+    },
+    {
+      "name": "chat-interaktive-projektzentrale",
+      "color": "BFD4F2",
+      "description": "Target chat: Interaktive Projektzentrale",
+      "visible_chat_name": "Interaktive Projektzentrale",
+      "role_hint": "PRODUCT_SPECIFICATION"
+    },
+    {
+      "name": "chat-universelab-ueberwachung-frequenz",
+      "color": "BFD4F2",
+      "description": "Target chat: UniverseLab Überwachung Frequenz",
+      "visible_chat_name": "UniverseLab Überwachung Frequenz",
+      "role_hint": "LIVE_MONITORING"
+    },
+    {
+      "name": "chat-universelab-qa-gatekeeper",
+      "color": "BFD4F2",
+      "description": "Target chat: UniversaLab QA & Gatekeeper",
+      "visible_chat_name": "UniversaLab QA & Gatekeeper",
+      "role_hint": "INDEPENDENT_QA"
+    },
+    {
+      "name": "chat-provenienz-supersession-auditen",
+      "color": "BFD4F2",
+      "description": "Target chat: Provenienz und Supersession Auditen",
+      "visible_chat_name": "Provenienz und Supersession Auditen",
+      "role_hint": "PROVENANCE_PRIMARY"
+    },
+    {
+      "name": "chat-provenance-supersession",
+      "color": "BFD4F2",
+      "description": "Target chat: Provenance und Supersession",
+      "visible_chat_name": "Provenance und Supersession",
+      "role_hint": "PROVENANCE_SECOND_REVIEW"
+    },
+    {
+      "name": "chat-wissenschaftliche-pruefung",
+      "color": "BFD4F2",
+      "description": "Target chat: Wissenschaftliche Prüfung",
+      "visible_chat_name": "Wissenschaftliche Prüfung",
+      "role_hint": "SCIENCE_REVIEW"
+    },
+    {
+      "name": "chat-hzt-konsistenzpruefung",
+      "color": "BFD4F2",
+      "description": "Target chat: HZT Konsistenzprüfung",
+      "visible_chat_name": "HZT Konsistenzprüfung",
+      "role_hint": "FORMAL_MATHEMATICS"
+    },
+    {
+      "name": "chat-computational-engine-auditor",
+      "color": "BFD4F2",
+      "description": "Target chat: Computational Engine Auditor",
+      "visible_chat_name": "Computational Engine Auditor",
+      "role_hint": "NUMERICAL_QA"
+    },
+    {
+      "name": "chat-universelab-medien-designer",
+      "color": "BFD4F2",
+      "description": "Target chat: UniverseLab Medien Designer",
+      "visible_chat_name": "UniverseLab Medien Designer",
+      "role_hint": "MEDIA_DESIGN"
+    },
+    {
+      "name": "chat-bauplan-hyperzeit-raumschiff-engineering",
+      "color": "BFD4F2",
+      "description": "Target chat: Bauplan Hyperzeit Raumschiff — Engineering",
+      "visible_chat_name": "Bauplan Hyperzeit Raumschiff — Engineering",
+      "role_hint": "ENGINEERING"
+    },
+    {
+      "name": "chat-utility-universelab-wichtige-links",
+      "color": "BFD4F2",
+      "description": "Target chat: UTILITY - Universelab Wichtige Links",
+      "visible_chat_name": "UTILITY - Universelab Wichtige Links",
+      "role_hint": "LINK_REGISTRY"
+    },
+    {
+      "name": "chat-universelab-chat-audit-worker-a",
+      "color": "BFD4F2",
+      "description": "Target chat: UniverseLab Chat Audit Worker A",
+      "visible_chat_name": "UniverseLab Chat Audit Worker A",
+      "role_hint": "HISTORICAL_AUDIT"
+    },
+    {
+      "name": "chat-ereignishorizont-erforschen",
+      "color": "BFD4F2",
+      "description": "Target chat: Ereignishorizont erforschen",
+      "visible_chat_name": "Ereignishorizont erforschen",
+      "role_hint": "EVENT_HORIZON_SCIENCE"
+    },
+    {
+      "name": "chat-analyse-meiner-taetigkeit",
+      "color": "BFD4F2",
+      "description": "Target chat: Analyse meiner Tätigkeit",
+      "visible_chat_name": "Analyse meiner Tätigkeit",
+      "role_hint": "SOURCE_STATE_BACKGROUND"
+    },
+    {
+      "name": "chat-a1-macs-j0308-watch",
+      "color": "BFD4F2",
+      "description": "Target chat: A1 MACS J0308 Watch",
+      "visible_chat_name": "A1 MACS J0308 Watch",
+      "role_hint": "OBSERVATIONAL_WATCH"
+    },
+    {
+      "name": "chat-eigener-helfer-chat",
+      "color": "BFD4F2",
+      "description": "Target chat: Eigener Helfer Chat",
+      "visible_chat_name": "Eigener Helfer Chat",
+      "role_hint": "UTILITY_ASSISTANT"
+    }
+  ]
+}

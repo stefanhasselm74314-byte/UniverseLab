@@ -1,0 +1,38 @@
+name: EXAMPLE — UniverseLab taskboard read-only monitor
+
+# This file is deliberately stored outside .github/workflows and is NOT active.
+# It is a reference only. Owner adoption and a separate activation change are required.
+
+on:
+  schedule:
+    - cron: "17 */2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  validate-taskboard-issues:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Read open task issues and emit a summary
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh api --paginate \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${GH_REPO}/issues?state=open&labels=ul-task&per_page=100" \
+            --jq '.[] | select(.pull_request|not) | [.number,.title,.html_url] | @tsv' \
+            > /tmp/ul-taskboard.tsv
+          {
+            echo "## UniverseLab taskboard — read-only example"
+            echo
+            echo "Open task Issues: $(wc -l < /tmp/ul-taskboard.tsv)"
+            echo
+            sed 's/^/- #/' /tmp/ul-taskboard.tsv || true
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          # No write command is permitted in this example.

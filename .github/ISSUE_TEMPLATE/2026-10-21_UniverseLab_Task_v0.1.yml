@@ -1,0 +1,146 @@
+name: UniverseLab Aufgabe
+description: Eine neue Aufgabe für das zentrale UniverseLab-Aufgabenregister erfassen.
+title: "[UL-TASK] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Verwende ausschließlich bestätigte sichtbare Chatnamen. Dieses Formular erzeugt keine Merge-, Deployment-, Kanon-, Solver- oder Evidenzfreigabe.
+
+  - type: input
+    id: task_id
+    attributes:
+      label: TASK_ID
+      description: Eindeutige, stabile Aufgabenkennung.
+      placeholder: z. B. Z8B-SOURCE-STATE-BACKGROUND-01
+    validations:
+      required: true
+
+  - type: input
+    id: target_chat
+    attributes:
+      label: ZIELCHAT (exakter sichtbarer Chatname)
+      description: Muss exakt dem Namen in Stefans linker Chatseitenleiste entsprechen.
+      placeholder: z. B. HZT Konsistenzprüfung
+    validations:
+      required: true
+
+  - type: input
+    id: source_chat
+    attributes:
+      label: QUELLCHAT (exakter sichtbarer Chatname)
+      placeholder: z. B. Chat Überwachung Master
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ownership
+    attributes:
+      label: EIGENTUM
+      options:
+        - EIGENE_FEDERFUEHRUNG
+        - MITWIRKUNG_REVIEW
+        - NUR_INFORMATION
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: STATUS
+      options:
+        - EINGANG
+        - READY_FOR_TARGET_CHAT
+        - IN_PROGRESS
+        - WAITING_FOR_DEPENDENCY
+        - REVIEW
+        - BLOCKED
+        - RETURNED_TO_MASTER
+        - DONE
+        - SUPERSEDED
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: PRIORITAET
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+    validations:
+      required: true
+
+  - type: textarea
+    id: source_state
+    attributes:
+      label: QUELLE / AUSGANGSSTAND
+      description: Versionen, SHA-Werte, Dateien, PRs oder andere gebundene Eingänge.
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: ABHAENGIGKEITEN
+      description: TASK_ID plus erforderlicher Status. Bei keiner Abhängigkeit NONE eintragen.
+      placeholder: |-
+        - task_id: Z8A-FORMAL-REVIEW-01
+          required_status: PASS_WITH_CONDITIONS
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: LIEFEROBJEKT
+    validations:
+      required: true
+
+  - type: input
+    id: return_to
+    attributes:
+      label: RUECKGABE AN (exakter sichtbarer Chatname)
+    validations:
+      required: true
+
+  - type: input
+    id: instruction_download
+    attributes:
+      label: ANWEISUNG_DOWNLOAD
+      description: Link oder Repositorypfad zur chatbezogenen Anweisungsdatei. Falls noch nicht vorhanden OPEN eintragen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: blockers
+    attributes:
+      label: BLOCKER
+      description: Konkrete Blocker oder NONE.
+    validations:
+      required: true
+
+  - type: textarea
+    id: next_step
+    attributes:
+      label: GENAU NAECHSTER SCHRITT
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: firewall
+    attributes:
+      label: GOVERNANCE-FIREWALL
+      options:
+        - label: Dieser Issue erteilt keine Mergefreigabe.
+          required: true
+        - label: Dieser Issue erteilt keine Deploymentfreigabe.
+          required: true
+        - label: Dieser Issue erzeugt keine Kanonwirkung.
+          required: true
+        - label: Dieser Issue autorisiert keinen Solverlauf.
+          required: true
+        - label: Dieser Issue erzeugt keine physikalische Evidenzwirkung.
+          required: true
