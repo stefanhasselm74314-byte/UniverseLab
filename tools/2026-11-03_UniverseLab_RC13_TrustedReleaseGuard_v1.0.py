@@ -377,7 +377,7 @@ def validate_live_release(files: list[dict], base_sha: str, head_sha: str,
     script_path = "assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js"
     baseline_script = api.contents(script_path, base_sha).decode("utf-8")
     script = api.contents(script_path, head_sha).decode("utf-8")
-    version_pattern = r"const VERSION='(\\d+)\\.(\\d+)\\.(\\d+)';"
+    version_pattern = r"const VERSION='(\d+)\.(\d+)\.(\d+)';"
     old_versions = list(re.finditer(version_pattern, baseline_script))
     new_versions = list(re.finditer(version_pattern, script))
     require(len(old_versions)==len(new_versions)==1,
