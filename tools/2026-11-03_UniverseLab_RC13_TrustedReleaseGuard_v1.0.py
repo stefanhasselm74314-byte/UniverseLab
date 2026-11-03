@@ -200,6 +200,15 @@ def decode_json(data: bytes, label: str) -> dict:
     require(isinstance(result, dict), "Expected JSON object: " + label)
     return result
 
+def allow_only_declared_changes(before: dict, after: dict,
+                                allowed: set[str], name: str) -> None:
+    """Fail closed on any undeclared top-level ledger change or key removal."""
+    require(set(before) - set(after) == set(), name + " removed a baseline field")
+    for key in set(before) | set(after):
+        if key not in allowed:
+            require(key in before and key in after and before[key] == after[key],
+                    name + " changed non-pointer field without independent review: " + key)
+
 def require_timestamp(value: str, expected_date: str) -> None:
     require(isinstance(value, str) and
             re.fullmatch(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?[+-]\d\d:\d\d", value),
@@ -298,6 +307,29 @@ def validate_live_release(files: list[dict], base_sha: str, head_sha: str,
         serialized = json.dumps(obj, ensure_ascii=False)
         require(not any(tok in serialized for tok in BLOCKED_TOKENS),
                 "DRAFT marker or unresolved release timestamp in release output")
+    allow_only_declared_changes(base_state, state, {
+        "version", "snapshot_date", "snapshot_timestamp", "basis_main_commit",
+        "basis_main_tree", "basis_semantics", "supersedes", "status_sources",
+        "active_analysis_block", "reconciliation_addendum"
+    }, "CurrentMainCanonicalState")
+    allow_only_declared_changes(base_checkpoint, cp, {
+        "checkpoint_id", "timestamp", "basis_commit", "basis_tree",
+        "basis_semantics", "canonical_snapshot", "supersedes",
+        "canonical_state", "site_state", "entry_points", "active_block",
+        "confirmed_defects", "reconciliation_addendum"
+    }, "SessionCheckpoint")
+    allow_only_declared_changes(base_site, site, {
+        "version", "snapshot_date", "snapshot_timestamp", "basis_main_commit",
+        "basis_main_tree", "basis_semantics", "canonical_state", "supersedes",
+        "status_sources", "reconciliation_addendum"
+    }, "SiteState")
+    allow_only_declared_changes(base, manifest, {
+        "release", "release_date", "basis_main_commit", "basis_main_tree",
+        "basis_semantics", "canonical_base", "canonical_state",
+        "site_state", "session_checkpoint", "current_status_sources",
+        "central_registries", "platform_governance", "supersedes_release",
+        "reconciliation_addendum"
+    }, "ProjectManifest")
     require(state.get("physical_governance") == base_state.get("physical_governance"),
             "State physical governance changed")
     # RC14: a governance-only pointer repair cannot manufacture a result by
