@@ -10,6 +10,7 @@ import json
 import os
 import re
 import sys
+from datetime import datetime
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -81,7 +82,9 @@ def guard(observation, report):
     assert types == sorted(report["active_ruleset"]["rule_types"]) == ["deletion","non_fast_forward"]
     assert ruleset.get("bypass_actors", []) == report["active_ruleset"]["bypass_actors"] == []
     assert ruleset.get("current_user_can_bypass") == report["active_ruleset"]["current_user_can_bypass"] == "never"
-    assert ruleset["updated_at"] == report["active_ruleset"]["last_updated_at"]
+    # GitHub can serialize an identical instant in UTC (seconds precision) or local-offset milliseconds.
+    instant = lambda x: datetime.fromisoformat(x.replace("Z", "+00:00"))
+    assert abs((instant(ruleset["updated_at"]) - instant(report["active_ruleset"]["last_updated_at"])).total_seconds()) < 1.0, "Ruleset timestamp materially changed"
     assessment = report["required_enforcement_assessment"]
     assert assessment["verdict"] == "BLOCKED_NO_VERIFIED_MANDATORY_PR_OR_STATUS_CHECK_GATES"
     for field in ("required_pull_request_rule_present_in_readable_active_ruleset",
