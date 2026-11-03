@@ -76,10 +76,54 @@
       "value": "HISTORICAL_SNAPSHOT_INHERITED",
       "effect": "BLOCKER",
       "review": "REQUIRES_NEW_SNAPSHOT_POINTER_AFTER_PROMOTION"
+    },
+    {
+      "id": "RC07-009",
+      "source": "registry/2026-09-04_UniverseLab_BandVC_G11_StateFreshnessClosure_v1.0.json",
+      "source_field": "closure_status",
+      "target": "state.reconciliation_addendum.band_vc_g11",
+      "value": "IMPLEMENTED_REVIEW_PENDING (source-local); merged provenance must be separately adjudicated",
+      "effect": "GOVERNANCE_PROVENANCE_ONLY",
+      "review": "DO_NOT_PROMOTE_TO_CLOSED_WITHOUT_MERGE_PROVENANCE"
+    },
+    {
+      "id": "RC07-010",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json",
+      "source_field": "status",
+      "target": "state.reconciliation_addendum.ulsh05_wp1",
+      "value": "OFFSHELL_SECOND_VARIATION_INPUTS_READY_FULL_QUADRATIC_SYSTEM_NOT_DERIVED",
+      "effect": "ANALYTIC_NONOPERATIVE",
+      "review": "FULL_QUADRATIC_SYSTEM_NOT_DERIVED"
+    },
+    {
+      "id": "RC07-011",
+      "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
+      "source_field": "gate_state.WP1D_constraint_elimination",
+      "target": "state.reconciliation_addendum.ulsh05_wp1d",
+      "value": "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
+      "effect": "BLOCKING",
+      "review": "NO_PHYSICAL_DOF_COUNT_OR_SVT_RELEASE"
+    },
+    {
+      "id": "RC07-012",
+      "source": "registry/2026-09-23_UniverseLab_FileNamingPolicy_v1.2.json",
+      "source_field": "status / canonical_pattern",
+      "target": "governance.file_naming",
+      "value": "ACTIVE; YYYY-MM-DD_Bereich_Kurztitel_vX.Y.ext",
+      "effect": "GOVERNANCE",
+      "review": "CANONICAL_SNAPSHOT_DISCOVERY_REQUIRES_DRAFT_ISOLATION"
     }
   ],
   "unreviewed_scope": "Full merged post-September commit-by-commit semantic audit not completed",
   "physical_gate_effect": "NONE",
   "physical_evidence_effect": "NONE",
-  "canonical_promotion": "BLOCKED"
+  "canonical_promotion": "BLOCKED",
+  "audit_scope": {
+    "compared_base": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+    "compared_head": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+    "github_compare_ahead_by": 298,
+    "github_compare_changed_files_returned": 148,
+    "coverage": "PARTIAL_MATERIAL_SOURCES_ONLY",
+    "warning": "Commit count and changed-file listing do not establish semantic review of every commit."
+  }
 }
