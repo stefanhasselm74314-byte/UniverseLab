@@ -1,0 +1,41 @@
+{
+  "schema": "universelab.rc07.registry-audit-batch.v1",
+  "status": "DRAFT_PARTIAL",
+  "pinned_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "results": [
+    {
+      "path": "registry/2026-09-14_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.json",
+      "blob_sha": "fc378618467646262a55ea36b2b686f4fc91252a",
+      "source_status": "KINEMATIC_CANDIDATES_COMPONENTIZED_PROJECTOR_SOLVABILITY_FAIL_CLOSED_NO_PHYSICAL_REDUCTION_RELEASED",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityContract_v1.1.json",
+      "blob_sha": "1686a504ce451bc4f0a67fb311fd0ee5bdf99c94",
+      "source_status": "USER_RATIFIED_METHOD_RULE",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.json",
+      "blob_sha": "0a13444e9aa1dce4e91ea2815cadb99ed42c2030",
+      "source_status": "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json",
+      "blob_sha": "2b3fd87e22fe5d7296f914fa3cb2704cee55eb16",
+      "source_status": "OWNER_ADOPTED_CANONICAL_METHOD_GATES",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    }
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
