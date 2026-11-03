@@ -49,7 +49,7 @@
   },
   "modes": {
     "routine_qa": "ALLOW_READ_ONLY_TECHNICAL_QA_WHILE_PR_IS_DRAFT",
-    "routine_merge": "BLOCK_UNTIL_PROTECTED_MAIN_POLICY_INSTALLED_AND_CANARY_VERIFIED",
+    "routine_merge": "BLOCKED_BY_RC18_UNFILTERED_PAGES_PUBLICATION_AND_PUBLIC_REPOSITORY_EXPOSURE",
     "mixed_or_modified_files": "HOLD_ALL",
     "active_registry_web_governance_tests_tools_workflows": "HOLD_CRITICAL",
     "scientific_gate_promotion": "FORBIDDEN",
@@ -63,7 +63,11 @@
     "unique_strict_current_HEAD_required_checks_pinned_to_GitHub_Actions",
     "current_main_and_PR_head_verified",
     "test_negative_real_GitHub_merge_block",
-    "owner_accepts_exact_routine_exception_and_recovery_path"
+    "owner_accepts_exact_routine_exception_and_recovery_path",
+    "public_only_pages_build_with_allowlisted_outputs_and_negative_exposure_canary_passed",
+    "owner_explicitly_accepts_public_visibility_of_any_committed_routine_drafts",
+    "privacy_scan_includes_new_publicly_visible_draft_notes",
+    "global_provenance_scans_prove_draft_hits_are_not_canonical_evidence"
   ],
   "recovery": {
     "syntax_or_schema_error": "CORRECT_DRAFT_ON_OWN_BRANCH_AND_RERUN; NO_OVERRIDE",
@@ -90,5 +94,15 @@
     "physical_gate_effect": "NONE",
     "physical_evidence_effect": "NONE",
     "installation": "NOT_AUTHORIZED"
+  },
+  "rc18_publication_findings": {
+    "audit_run_id": 41661852782,
+    "full_git_tree_blobs_scanned": 1157,
+    "pages_deploy_upload_path": ".",
+    "risk": "PUBLIC_REPOSITORY_AND_UNFILTERED_PAGES_ROOT_EXPOSE_FUTURE_MERGED_DRAFT_FILES",
+    "privacy_draft_scanner_coverage": "MISSING",
+    "beta_tau_provenance_scan": "POSSIBLE_INDIRECT_DRAFT_TEXT_INGESTION",
+    "user_owner_acceptance": "NOT_REQUESTED",
+    "mitigated": false
   }
 }
