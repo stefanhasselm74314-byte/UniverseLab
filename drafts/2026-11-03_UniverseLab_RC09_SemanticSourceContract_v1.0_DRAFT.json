@@ -1,0 +1,1452 @@
+{
+  "schema": "universelab.rc09.source-level-semantic-contract.v1",
+  "date": "2026-11-03",
+  "status": "DRAFT_SOURCE_SEMANTIC_CLASSIFICATION_NOT_INDEPENDENT_SCIENTIFIC_AUDIT",
+  "pinned_merged_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "pinned_tree": "65f423f04bbb2f1462f120a6b31073644cdc28cc",
+  "priority_source_count": 39,
+  "source_rows": [
+    {
+      "id": "RC09-01",
+      "source": "governance/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.md",
+      "blob_sha": "b435cd0841808fd6d4f17e5309afd5cc7a851515",
+      "format": "md",
+      "source_declared_status": "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
+      "semantic_class": "GOVERNANCE_HUMAN_READABLE",
+      "scope_result": "Quellengetreue Dokumentation; keine selbstständige physikalische Statuspromotion",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "b435cd0841808fd6d4f17e5309afd5cc7a851515"
+        },
+        {
+          "kind": "text_contains",
+          "value": "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-02",
+      "source": "governance/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityRule_v1.1.md",
+      "blob_sha": "fbe7a5c7ce3605c25750e063d392cb598c7693de",
+      "format": "md",
+      "source_declared_status": "REVIEW_CANDIDATE_SEE_PULL_REQUEST_NOT_A_MERGE_CLAIM",
+      "semantic_class": "GOVERNANCE_HUMAN_READABLE",
+      "scope_result": "Quellengetreue Dokumentation; keine selbstständige physikalische Statuspromotion",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "fbe7a5c7ce3605c25750e063d392cb598c7693de"
+        },
+        {
+          "kind": "text_contains",
+          "value": "USER_RATIFIED_METHOD_RULE"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-03",
+      "source": "governance/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.md",
+      "blob_sha": "cfb434e4c228f1a03494ad52d254bedf5f96d3d7",
+      "format": "md",
+      "source_declared_status": "OWNER_ADOPTED_CANONICAL_METHOD_GATES",
+      "semantic_class": "GOVERNANCE_HUMAN_READABLE",
+      "scope_result": "Quellengetreue Dokumentation; keine selbstständige physikalische Statuspromotion",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "cfb434e4c228f1a03494ad52d254bedf5f96d3d7"
+        },
+        {
+          "kind": "text_contains",
+          "value": "OWNER_ADOPTED_CANONICAL_METHOD_GATES"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-04",
+      "source": "governance/2026-09-28_UL-SING_QuantumClosure_OwnerAdoption_Packet_v0.1.md",
+      "blob_sha": "ea233103eda61ee001fb53030462fdda267d87f0",
+      "format": "md",
+      "source_declared_status": "EXPLICIT_OWNER_ADOPTION_RECORDED_PENDING_CANONICAL_SUCCESSOR",
+      "semantic_class": "GOVERNANCE_HUMAN_READABLE",
+      "scope_result": "Quellengetreue Dokumentation; keine selbstständige physikalische Statuspromotion",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "ea233103eda61ee001fb53030462fdda267d87f0"
+        },
+        {
+          "kind": "text_contains",
+          "value": "Alle drei adoptieren"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-05",
+      "source": "registry/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.json",
+      "blob_sha": "0a13444e9aa1dce4e91ea2815cadb99ed42c2030",
+      "format": "json",
+      "source_declared_status": "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
+      "semantic_class": "LIMITED_NONOPERATIVE_AUTHORITY",
+      "scope_result": "Nur nichtoperative Delegation; reserved matters brauchen ausdrückliche Eigentümerratifikation",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "0a13444e9aa1dce4e91ea2815cadb99ed42c2030"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "authority.operative_authority",
+          "value": false
+        },
+        {
+          "kind": "source_field",
+          "path": "authority.identity_binding_status",
+          "value": "PENDING_CANONICAL_ID_BINDING"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-06",
+      "source": "registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json",
+      "blob_sha": "c00675988dff11770ddb3f7d15f30fe782a5042b",
+      "format": "json",
+      "source_declared_status": "PASS_AUTOMATED_EXTRACTION_NOT_SCIENTIFIC_ADJUDICATION",
+      "semantic_class": "AUTOMATED_CLAIM_CLASSIFICATION_NOT_SCIENCE",
+      "scope_result": "Lexikalische/automatische Erfassung, keine wissenschaftliche Validierung",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "c00675988dff11770ddb3f7d15f30fe782a5042b"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "PASS_AUTOMATED_EXTRACTION_NOT_SCIENTIFIC_ADJUDICATION"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "claim_candidates",
+          "value": 993
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-07",
+      "source": "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json",
+      "blob_sha": "8c81a02ecdb28178d4e1626b4ffe0c172d8b9228",
+      "format": "json",
+      "source_declared_status": "PASS_COMPLETE_AUTOMATED_ROUTING_NOT_SCIENTIFIC_ADJUDICATION",
+      "semantic_class": "AUTOMATED_CLAIM_CLASSIFICATION_NOT_SCIENCE",
+      "scope_result": "Lexikalische/automatische Erfassung, keine wissenschaftliche Validierung",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "8c81a02ecdb28178d4e1626b4ffe0c172d8b9228"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "PASS_COMPLETE_AUTOMATED_ROUTING_NOT_SCIENTIFIC_ADJUDICATION"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "manual_review_required_count",
+          "value": 251
+        },
+        {
+          "kind": "source_field",
+          "path": "assignment_count",
+          "value": 993
+        },
+        {
+          "kind": "source_field",
+          "path": "unmapped_candidates",
+          "value": 0
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-08",
+      "source": "registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json",
+      "blob_sha": "392f3c37ed265c5c5418fd753ec09de664140d82",
+      "format": "json",
+      "source_declared_status": "AUTOMATED_CANDIDATES_NOT_ADJUDICATED",
+      "semantic_class": "AUTOMATED_CLAIM_CLASSIFICATION_NOT_SCIENCE",
+      "scope_result": "Lexikalische/automatische Erfassung, keine wissenschaftliche Validierung",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "392f3c37ed265c5c5418fd753ec09de664140d82"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "AUTOMATED_CANDIDATES_NOT_ADJUDICATED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-09",
+      "source": "registry/2026-09-04_UniverseLab_BandVC_G11_StateFreshnessClosure_v1.0.json",
+      "blob_sha": "cb98d726da5def5c9a470e9faf80c5811ee52998",
+      "format": "json",
+      "source_declared_status": "IMPLEMENTED_REVIEW_PENDING",
+      "semantic_class": "HISTORICAL_STATE_FRESHNESS_CLOSURE_202609",
+      "scope_result": "September-Pointerreparatur nur in historischem G11-Scope, keine aktuelle Promotion",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "cb98d726da5def5c9a470e9faf80c5811ee52998"
+        },
+        {
+          "kind": "source_field",
+          "path": "closure_status",
+          "value": "IMPLEMENTED_REVIEW_PENDING"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "scientific_missing_links_after_closure",
+          "value": 10
+        },
+        {
+          "kind": "source_field",
+          "path": "governance_provenance_missing_links_after_closure",
+          "value": 0
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-10",
+      "source": "registry/2026-09-04_UniverseLab_BandVC_StatusPageMediumDeltaAdjudication_v1.0.json",
+      "blob_sha": "28e7b4c973b36a005496250ee41ba6a5cbc8ab8e",
+      "format": "json",
+      "source_declared_status": "CONTEXTUALLY_ADJUDICATED_IN_CHANGESET_REVIEW_PENDING",
+      "semantic_class": "CONTEXTUAL_CLAIM_ADJUDICATION_NOT_PHYSICAL",
+      "scope_result": "Kontextbewertung, keine Theoriebestätigung",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "28e7b4c973b36a005496250ee41ba6a5cbc8ab8e"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "CONTEXTUALLY_ADJUDICATED_IN_CHANGESET_REVIEW_PENDING"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-11",
+      "source": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+      "blob_sha": "59ada8630bb424969898bfc1fbd02bbf67935226",
+      "format": "json",
+      "source_declared_status": "POST_BAND_VC_RECONCILED_CURRENT_STATE",
+      "semantic_class": "HISTORICAL_ACTIVE_POINTER_SNAPSHOT",
+      "scope_result": "Provenienzbasierte historische Zeiger; niemals automatisch November-Canon",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "59ada8630bb424969898bfc1fbd02bbf67935226"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "basis_main_commit",
+          "value": "3022dc8aac27ed2054fdb7643708fe57440b9256"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-12",
+      "source": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
+      "blob_sha": "279bc338070af0f5e1498108b8eb127581084ad4",
+      "format": "json",
+      "source_declared_status": "HISTORICAL_CHECKPOINT",
+      "semantic_class": "HISTORICAL_ACTIVE_POINTER_SNAPSHOT",
+      "scope_result": "Provenienzbasierte historische Zeiger; niemals automatisch November-Canon",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "279bc338070af0f5e1498108b8eb127581084ad4"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "basis_commit",
+          "value": "3022dc8aac27ed2054fdb7643708fe57440b9256"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-13",
+      "source": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+      "blob_sha": "d44ace0fc5c2c5ad530439627daafb1f437436ae",
+      "format": "json",
+      "source_declared_status": "HISTORICAL_CHECKPOINT",
+      "semantic_class": "HISTORICAL_ACTIVE_POINTER_SNAPSHOT",
+      "scope_result": "Provenienzbasierte historische Zeiger; niemals automatisch November-Canon",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "d44ace0fc5c2c5ad530439627daafb1f437436ae"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "basis_main_commit",
+          "value": "3022dc8aac27ed2054fdb7643708fe57440b9256"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-14",
+      "source": "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json",
+      "blob_sha": "81582ce7c395b1199e066e89ff44a053eed649ec",
+      "format": "json",
+      "source_declared_status": "IMPLEMENTED_REVIEW_PENDING",
+      "semantic_class": "REFERENCE_ONLY_PERTURBATION_OBSERVABLE",
+      "scope_result": "Zieldefinitionen, keine abgeleitete HZT-Perturbations-Forward-Map",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "81582ce7c395b1199e066e89ff44a053eed649ec"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "IMPLEMENTED_REVIEW_PENDING"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "release_requirements.G01",
+          "value": "OPEN_BLOCKING"
+        },
+        {
+          "kind": "source_field",
+          "path": "hzt_outputs.mu_k_a",
+          "value": "NOT_RELEASED"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-15",
+      "source": "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json",
+      "blob_sha": "7ddaf206f3a36a6377cbf53d4facadedf1b089df",
+      "format": "json",
+      "source_declared_status": "IMPLEMENTED_REVIEW_PENDING",
+      "semantic_class": "REFERENCE_ONLY_PERTURBATION_OBSERVABLE",
+      "scope_result": "Zieldefinitionen, keine abgeleitete HZT-Perturbations-Forward-Map",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "7ddaf206f3a36a6377cbf53d4facadedf1b089df"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "IMPLEMENTED_REVIEW_PENDING"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "gap_status_after_inventory",
+          "value": "OPEN_BLOCKING_TARGET_INTERFACE_CAN_BE_FROZEN"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-16",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.json",
+      "blob_sha": "a9c94f144dd7275a5bf1dea3a3835f856a4d047e",
+      "format": "json",
+      "source_declared_status": "DERIVED_CONTROL_SUBSECTOR_OFFSHELL_FIXED_METRIC_BULK_INTERIOR",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "a9c94f144dd7275a5bf1dea3a3835f856a4d047e"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_CONTROL_SUBSECTOR_OFFSHELL_FIXED_METRIC_BULK_INTERIOR"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-17",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+      "blob_sha": "132255c5fda7aee5c2e652e5dc89e5d453e5706c",
+      "format": "json",
+      "source_declared_status": "DERIVED_VARIATIONAL_HESSIAN_MASTER_FIXED_INTERFACE_GN_BOUNDARY_CONTROL_FULL_COUPLED_SYSTEM_NOT_CLOSED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "132255c5fda7aee5c2e652e5dc89e5d453e5706c"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_VARIATIONAL_HESSIAN_MASTER_FIXED_INTERFACE_GN_BOUNDARY_CONTROL_FULL_COUPLED_SYSTEM_NOT_CLOSED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-18",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.json",
+      "blob_sha": "fc004b64853f43c64d26e2d1336607bbf6ca3fc5",
+      "format": "json",
+      "source_declared_status": "DERIVED_OFFSHELL_BULK_METRIC_SCALAR_MAXWELL_SECOND_ORDER_DENSITY_BOUNDARY_AND_GAUGE_REDUCTION_NOT_CLOSED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "fc004b64853f43c64d26e2d1336607bbf6ca3fc5"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_OFFSHELL_BULK_METRIC_SCALAR_MAXWELL_SECOND_ORDER_DENSITY_BOUNDARY_AND_GAUGE_REDUCTION_NOT_CLOSED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-19",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json",
+      "blob_sha": "1007cbba87d3b79dc5004b46515acc105a0bbf5d",
+      "format": "json",
+      "source_declared_status": "DERIVED_OFFSHELL_FIXED_INTERFACE_LOCALIZED_CAP_HESSIAN_BENDING_AND_PERTURBED_JUNCTIONS_OPEN",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "1007cbba87d3b79dc5004b46515acc105a0bbf5d"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_OFFSHELL_FIXED_INTERFACE_LOCALIZED_CAP_HESSIAN_BENDING_AND_PERTURBED_JUNCTIONS_OPEN"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-20",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.json",
+      "blob_sha": "5591e92c592ad16a4a2404c0f76682e32dab9b55",
+      "format": "json",
+      "source_declared_status": "DERIVED_DOUBLY_COVARIANT_LINEAR_MOVING_INTERFACE_GEOMETRY_PREFLIGHT_FULL_PERTURBED_JUNCTION_AND_BOUNDARY_HESSIAN_OPEN",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "5591e92c592ad16a4a2404c0f76682e32dab9b55"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_DOUBLY_COVARIANT_LINEAR_MOVING_INTERFACE_GEOMETRY_PREFLIGHT_FULL_PERTURBED_JUNCTION_AND_BOUNDARY_HESSIAN_OPEN"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-21",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json",
+      "blob_sha": "c2ddf17a6071949f56f16c25437b99c899417c73",
+      "format": "json",
+      "source_declared_status": "DERIVED_TWO_SIDE_BENDING_GLUE_AND_LINEAR_SCALAR_GAUGE_NORMAL_FLUX_JUNCTIONS_FULL_MOVING_BOUNDARY_HESSIAN_OPEN",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "c2ddf17a6071949f56f16c25437b99c899417c73"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_TWO_SIDE_BENDING_GLUE_AND_LINEAR_SCALAR_GAUGE_NORMAL_FLUX_JUNCTIONS_FULL_MOVING_BOUNDARY_HESSIAN_OPEN"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-22",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json",
+      "blob_sha": "146c16f26a9d276f1a03a150d24b1feb0fa0b8d1",
+      "format": "json",
+      "source_declared_status": "DERIVED_SECOND_ORDER_EMBEDDING_AND_PULLBACK_PATH_CONTRACT_MOVING_BOUNDARY_HESSIAN_NOT_YET_ASSEMBLED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "146c16f26a9d276f1a03a150d24b1feb0fa0b8d1"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_SECOND_ORDER_EMBEDDING_AND_PULLBACK_PATH_CONTRACT_MOVING_BOUNDARY_HESSIAN_NOT_YET_ASSEMBLED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-23",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransportMaster_v0.1.json",
+      "blob_sha": "0521a07de97bb7f9ebd5b647c2912b74d2b8308b",
+      "format": "json",
+      "source_declared_status": "DERIVED_FIRST_SECOND_MOVING_DOMAIN_TRANSPORT_MASTER_DYNAMICAL_SHAPE_RESIDUAL_NOT_ASSEMBLED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "0521a07de97bb7f9ebd5b647c2912b74d2b8308b"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_FIRST_SECOND_MOVING_DOMAIN_TRANSPORT_MASTER_DYNAMICAL_SHAPE_RESIDUAL_NOT_ASSEMBLED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-24",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.json",
+      "blob_sha": "0b9a9c2263d8e4094c6c1503a8ea1e6146b39862",
+      "format": "json",
+      "source_declared_status": "DERIVED_CONDITIONAL_SHAPE_REDUNDANCY_FULL_COMPONENT_SHAPE_RESIDUAL_NOT_ASSEMBLED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "0b9a9c2263d8e4094c6c1503a8ea1e6146b39862"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_CONDITIONAL_SHAPE_REDUNDANCY_FULL_COMPONENT_SHAPE_RESIDUAL_NOT_ASSEMBLED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-25",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json",
+      "blob_sha": "6d18236526a9a2178b1a73e318e63e83a4d6ece6",
+      "format": "json",
+      "source_declared_status": "OFFSHELL_SECOND_VARIATION_INPUTS_READY_FULL_QUADRATIC_SYSTEM_NOT_DERIVED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "6d18236526a9a2178b1a73e318e63e83a4d6ece6"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "OFFSHELL_SECOND_VARIATION_INPUTS_READY_FULL_QUADRATIC_SYSTEM_NOT_DERIVED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-26",
+      "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.json",
+      "blob_sha": "55f64484455014091ce4a2324b02985b6b71662b",
+      "format": "json",
+      "source_declared_status": "DERIVED_PASSIVE_CONSTRAINT_RELATION_FROM_NN_CONSTRAINTS_AND_ISRAEL_FULL_MOVING_FIRST_VARIATION_NOT_YET_ASSEMBLED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "55f64484455014091ce4a2324b02985b6b71662b"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_PASSIVE_CONSTRAINT_RELATION_FROM_NN_CONSTRAINTS_AND_ISRAEL_FULL_MOVING_FIRST_VARIATION_NOT_YET_ASSEMBLED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-27",
+      "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1D_DirectMovingActionShape_v0.1.json",
+      "blob_sha": "f35c778f081c4aa05da3e3065c71397d3353636c",
+      "format": "json",
+      "source_declared_status": "DERIVED_DIRECT_FIRST_SHAPE_RESIDUAL_AND_EQUIVALENCE_TO_PASSIVE_CONSTRAINT_BOUNDARY_HESSIAN_NOT_CLOSED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "f35c778f081c4aa05da3e3065c71397d3353636c"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_DIRECT_FIRST_SHAPE_RESIDUAL_AND_EQUIVALENCE_TO_PASSIVE_CONSTRAINT_BOUNDARY_HESSIAN_NOT_CLOSED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-28",
+      "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.json",
+      "blob_sha": "8496b0df8b735b9f964bc6e5fc4f0049ad06ad92",
+      "format": "json",
+      "source_declared_status": "DERIVED_SECOND_ORDER_BOUNDARY_CHAIN_RULE_CAP_MOVING_PATH_CLOSED_COMPONENT_RESIDUAL_OPERATOR_NOT_YET_ASSEMBLED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "8496b0df8b735b9f964bc6e5fc4f0049ad06ad92"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "DERIVED_SECOND_ORDER_BOUNDARY_CHAIN_RULE_CAP_MOVING_PATH_CLOSED_COMPONENT_RESIDUAL_OPERATOR_NOT_YET_ASSEMBLED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-29",
+      "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.json",
+      "blob_sha": "ccb1c08f6dce69507ac40aa6c9f449d1c2c9a1c4",
+      "format": "json",
+      "source_declared_status": "COMPONENTIZED_LOCAL_INTERFACE_OPERATOR_WEAK_HESSIAN_SYMMETRIC_ON_DECLARED_TEST_DOMAIN_GLOBAL_PHYSICAL_BOUNDARY_DOMAIN_OPEN",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "ccb1c08f6dce69507ac40aa6c9f449d1c2c9a1c4"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "COMPONENTIZED_LOCAL_INTERFACE_OPERATOR_WEAK_HESSIAN_SYMMETRIC_ON_DECLARED_TEST_DOMAIN_GLOBAL_PHYSICAL_BOUNDARY_DOMAIN_OPEN"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-30",
+      "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json",
+      "blob_sha": "94570f682f4dbda3e6f9cce74e64989aa59c06d7",
+      "format": "json",
+      "source_declared_status": "GLOBAL_DOMAIN_PREFLIGHT_COMPLETE_PHYSICAL_DOMAIN_BLOCKED_BY_UNESTABLISHED_BACKGROUND_AND_UNFROZEN_OUTER_BOUNDARY_CORNER_DATA",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "94570f682f4dbda3e6f9cce74e64989aa59c06d7"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "GLOBAL_DOMAIN_PREFLIGHT_COMPLETE_PHYSICAL_DOMAIN_BLOCKED_BY_UNESTABLISHED_BACKGROUND_AND_UNFROZEN_OUTER_BOUNDARY_CORNER_DATA"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-31",
+      "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.json",
+      "blob_sha": "6ab2c81db94a1f516e2ba717639f26cc943fe2ce",
+      "format": "json",
+      "source_declared_status": "GAUGE_OPERATOR_STRUCTURALLY_COMPONENTIZED_KERNELS_REGISTERED_NO_PHYSICAL_REDUCTION_RELEASED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "6ab2c81db94a1f516e2ba717639f26cc943fe2ce"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "GAUGE_OPERATOR_STRUCTURALLY_COMPONENTIZED_KERNELS_REGISTERED_NO_PHYSICAL_REDUCTION_RELEASED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-32",
+      "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
+      "blob_sha": "8d52358b4cd4a9620f0d06d6fe95e28c5a6a958f",
+      "format": "json",
+      "source_declared_status": "CONDITIONAL_KINEMATIC_GAUGE_REDUCTION_DOMAIN_FROZEN_CONSTRAINT_ELIMINATION_BLOCKED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "8d52358b4cd4a9620f0d06d6fe95e28c5a6a958f"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "CONDITIONAL_KINEMATIC_GAUGE_REDUCTION_DOMAIN_FROZEN_CONSTRAINT_ELIMINATION_BLOCKED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-33",
+      "source": "registry/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityContract_v1.1.json",
+      "blob_sha": "1686a504ce451bc4f0a67fb311fd0ee5bdf99c94",
+      "format": "json",
+      "source_declared_status": "USER_RATIFIED_METHOD_RULE",
+      "semantic_class": "RATIFIED_METHOD_RULE_NO_AUTOMATIC_EVALUATOR",
+      "scope_result": "P1–P5 Methodenregel übernommen, keine automatische wissenschaftliche Bewertungsmaschine",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "1686a504ce451bc4f0a67fb311fd0ee5bdf99c94"
+        },
+        {
+          "kind": "source_field",
+          "path": "adoption.status",
+          "value": "USER_RATIFIED_METHOD_RULE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "implementation.automatic_evidence_evaluator",
+          "value": false
+        },
+        {
+          "kind": "source_field",
+          "path": "implementation.global_pipeline_enforcement",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-34",
+      "source": "registry/2026-09-14_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.json",
+      "blob_sha": "fc378618467646262a55ea36b2b686f4fc91252a",
+      "format": "json",
+      "source_declared_status": "KINEMATIC_CANDIDATES_COMPONENTIZED_PROJECTOR_SOLVABILITY_FAIL_CLOSED_NO_PHYSICAL_REDUCTION_RELEASED",
+      "semantic_class": "ANALYTIC_NONOPERATIVE_6D_PERTURBATION",
+      "scope_result": "Analytische Teilmethodik dokumentiert; kein vollständiger physikalischer Hintergrund, kein Modenraum, keine Solverfreigabe",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "fc378618467646262a55ea36b2b686f4fc91252a"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "KINEMATIC_CANDIDATES_COMPONENTIZED_PROJECTOR_SOLVABILITY_FAIL_CLOSED_NO_PHYSICAL_REDUCTION_RELEASED"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "solver_authorized",
+          "value": false
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-35",
+      "source": "registry/2026-09-23_UniverseLab_FileNamingPolicy_v1.2.json",
+      "blob_sha": "77d753f282748426e664ca114afd02d6aa2aeec9",
+      "format": "json",
+      "source_declared_status": "ACTIVE",
+      "semantic_class": "NAMING_CONTRACT",
+      "scope_result": "Dateibenennung aktiv, DRAFT aus kanonischem registry-Namensraum auslagern",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "77d753f282748426e664ca114afd02d6aa2aeec9"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "ACTIVE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "ACTIVE"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-36",
+      "source": "registry/2026-09-28_UL-SING_QuantumClosure_GateCandidates_v0.1.json",
+      "blob_sha": "7e784a4e67a0dfe49fc2014e5978ce69880836d1",
+      "format": "json",
+      "source_declared_status": "PASS_WITH_CONDITIONS_NONCANONICAL_CANDIDATES",
+      "semantic_class": "NONCANONICAL_METHOD_GATE_CANDIDATE",
+      "scope_result": "Kandidatenhistorie; späterer Canon ausschließlich aus adoptiertem Methodengatevertrag",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "7e784a4e67a0dfe49fc2014e5978ce69880836d1"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "PASS_WITH_CONDITIONS_NONCANONICAL_CANDIDATES"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-37",
+      "source": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json",
+      "blob_sha": "2b3fd87e22fe5d7296f914fa3cb2704cee55eb16",
+      "format": "json",
+      "source_declared_status": "OWNER_ADOPTED_CANONICAL_METHOD_GATES",
+      "semantic_class": "CANONICAL_CONDITIONAL_METHOD_GATES",
+      "scope_result": "Methodengates ratifiziert, Aktivierung nach Bedingung, keine HZT-Evidenz",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "2b3fd87e22fe5d7296f914fa3cb2704cee55eb16"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "OWNER_ADOPTED_CANONICAL_METHOD_GATES"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "unchanged_current_state.K1-D",
+          "value": "NOT_RELEASED"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-38",
+      "source": "registry/2026-09-28_UL-SING_QuantumClosure_OwnerAdoption_Packet_v0.1.json",
+      "blob_sha": "075bca42016e3f2bbc77b5befd5ebd5f55653f2a",
+      "format": "json",
+      "source_declared_status": "EXPLICIT_OWNER_ADOPTION_RECORDED_PENDING_CANONICAL_SUCCESSOR",
+      "semantic_class": "OWNER_DECISION_PROVENANCE_PENDING_SUCCESSOR",
+      "scope_result": "Historischer Besitzerentscheid; späterer kanonischer Nachfolger separat",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "075bca42016e3f2bbc77b5befd5ebd5f55653f2a"
+        },
+        {
+          "kind": "source_field",
+          "path": "status",
+          "value": "EXPLICIT_OWNER_ADOPTION_RECORDED_PENDING_CANONICAL_SUCCESSOR"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    },
+    {
+      "id": "RC09-39",
+      "source": "registry/session-checkpoint-latest.json",
+      "blob_sha": "279bc338070af0f5e1498108b8eb127581084ad4",
+      "format": "json",
+      "source_declared_status": "HISTORICAL_CHECKPOINT",
+      "semantic_class": "HISTORICAL_ACTIVE_POINTER_SNAPSHOT",
+      "scope_result": "Provenienzbasierte historische Zeiger; niemals automatisch November-Canon",
+      "assertions": [
+        {
+          "kind": "git_blob_sha",
+          "value": "279bc338070af0f5e1498108b8eb127581084ad4"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_gate_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "physical_evidence_effect",
+          "value": "NONE"
+        },
+        {
+          "kind": "source_field",
+          "path": "basis_commit",
+          "value": "3022dc8aac27ed2054fdb7643708fe57440b9256"
+        }
+      ],
+      "source_present_at_merged_base": true,
+      "physical_inference_authorized": false,
+      "independent_mathematical_rederivation": "NOT_PERFORMED",
+      "target": "DRAFT_RECONCILIATION_ONLY"
+    }
+  ],
+  "additional_audit_obligation": {
+    "manual_claim_review_required": 251,
+    "original_claim_candidates": 993,
+    "remaining_scientific_missing_links": 10
+  },
+  "release_blockers": [
+    "INDEPENDENT_MATH_PROOFS_NOT_PERFORMED",
+    "CURRENT_PUBLIC_POINTER_CHAIN_NOT_SYNCHRONIZED",
+    "SITE_STATE_SUCCESSOR_REQUIRED",
+    "CURRENT_STATE_TIMESTAMP_AND_CANONICAL_SNAPSHOT_UNRECONCILED",
+    "CANONICAL_PROMOTION_NOT_AUTHORIZED"
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "note": "39/39 covers provenance-bound source assertions, historical authority boundaries and evidence classifications; not 39 independently validated physical proofs."
+}
