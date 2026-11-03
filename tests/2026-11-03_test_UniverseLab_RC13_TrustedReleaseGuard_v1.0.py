@@ -112,6 +112,8 @@ class FakeAPI:
         self.main_sha=BASE
         self.ruleset_enabled=True
         self.check_enabled=True
+        self.check_integration=g.GITHUB_ACTIONS_APP_ID
+        self.strict_policy=True
         self.ruleset_bypass=False
         self.ruleset_exclude_main=False
         self.comment_owner=True
@@ -154,8 +156,9 @@ class FakeAPI:
                 "rules":[
                     {"type":"pull_request"},
                     *([{"type":"required_status_checks",
-                        "parameters":{"required_status_checks":[
-                            {"context":g.TRUSTED_JOB}]}}] if self.check_enabled else [])
+                        "parameters":{"strict_required_status_checks_policy":self.strict_policy,
+                                      "required_status_checks":[
+                            {"context":g.TRUSTED_JOB,"integration_id":self.check_integration}]}}] if self.check_enabled else [])
                 ],
             }
         raise AssertionError("Unexpected GET: "+path)
@@ -236,6 +239,9 @@ class TrustGateTests(TestCase):
         case("untrusted_comment_author",lambda a:setattr(a,"comment_owner",False))
         case("no_active_ruleset",lambda a:setattr(a,"ruleset_enabled",False))
         case("no_required_check",lambda a:setattr(a,"check_enabled",False))
+        case("any_source_context",lambda a:setattr(a,"check_integration",None))
+        case("wrong_status_app",lambda a:setattr(a,"check_integration",12345))
+        case("non_strict_check",lambda a:setattr(a,"strict_policy",False))
         case("ruleset_bypass_present",lambda a:setattr(a,"ruleset_bypass",True))
         case("ruleset_excludes_main",lambda a:setattr(a,"ruleset_exclude_main",True))
         case("live_main_drift",lambda a:setattr(a,"main_sha","0"*40))
