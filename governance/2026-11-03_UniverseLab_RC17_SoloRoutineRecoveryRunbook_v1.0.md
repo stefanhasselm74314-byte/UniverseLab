@@ -65,6 +65,17 @@ Nach `QA_HOLD`: `FIX_BRANCH → VERIFY_CURRENT_MAIN → NEW_HEAD → RECHECK`. K
 
 Bei einem technischen Guard-Defekt: `INCIDENT_HOLD → DIAGNOSTIC → SEPARATE_REPAIR_PR → REQUIRED_CHECK_REPLAY → OWNER_DECISION_IF_RESERVED`. Das ist ein Arbeitsplan, **kein freigegebener GitHub-Notfall-Bypass**.
 
+## 2.2 Erste gezielte Autodiscovery-Stichprobe auf verifiziertem `main`
+
+Zusätzlich zur Fixture-Validierung wurde die Git-Tree-Liste des bestätigten `main`-Trees `65f423f04bbb2f1462f120a6b31073644cdc28cc` read-only gelesen: 1.157 Blob-Dateien, rekursives Tree-Resultat **nicht abgeschnitten**. Sechs konkrete potenzielle Verbraucher wurden auf `drafts/`, `glob`, `rglob`, Registry-Pfade oder JSON-Quellen hin untersucht:
+
+- `tools/2026-08-31_UniverseLab_SiteWideIntegrityAudit_v1.0.py`: verarbeitet laut sichtbarem Code `rglob('*.html')`; kein wörtlicher Draft-Importer festgestellt.
+- `tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py`: verarbeitet laut sichtbarem Code `(root/'registry').glob('*.json')`; kein wörtlicher Draft-Importer festgestellt.
+- `model-state.js`, `app-shell.js`, `portal-live.js`: in dieser gezielten Textsuche keine einschlägigen `drafts/`-/Dateiglobbing-Treffer.
+- `lab-snapshots.js`: verarbeitet lokale JSON-Import-/Exportdaten; daraus folgt kein belegter automatischer Zugriff auf das Repository-Verzeichnis `drafts/`.
+
+**Grenze:** Das ist eine **gezielte Stichprobe**, keine Prüfung sämtlicher 638 getrackter HTML-/JS-/Python-/Workflow-Dateien, keine vollständige Abhängigkeitsanalyse und kein positiver Beweis, dass `drafts/` niemals von einem anderen Dienst oder einer GitHub-Pages-Routine automatisch verwendet wird. Das Freigabegate für produktives automatisches Mergen bleibt daher offen.
+
 ## 3. Risiken, die bewusst nicht als geschlossen gelten
 
 1. **Datenfluss:** Ein vorhandener Registry-/Website-Verbraucher könnte auch neue Draft-Dateien automatisch entdecken. Der RC17-Selbsttest prüft solche globalen Abhängigkeiten derzeit nicht.
