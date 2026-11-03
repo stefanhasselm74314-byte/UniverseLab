@@ -1,7 +1,7 @@
 {
   "schema": "universelab.rc16.authorization-alternatives.v1",
   "date": "2026-11-03",
-  "status": "DRAFT_DECISION_REQUIRED_NO_POLICY_SELECTED",
+  "status": "DRAFT_TARGET_ARCHITECTURE_PREFERRED_INSTALLATION_BLOCKED",
   "repo": "stefanhasselm74314-byte/UniverseLab",
   "main_baseline": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
   "reviewed_pr": 264,
@@ -83,7 +83,7 @@
     "owner_acceptance_of_new_workflow": false
   },
   "owner_decision_requirements": [
-    "explicitly_choose_workflow_A_or_B_or_new_option",
+    "confirm precise implementation limits and exception process for selected RC16-B before adopting any operative rules",
     "decide_scope_of_routine_draft_exemption",
     "independent security review",
     "Actions event policy reachability verification",
@@ -98,6 +98,18 @@
     "physical_gate_effect": "NONE",
     "physical_evidence_effect": "NONE"
   },
-  "decision": "NOT_SELECTED",
-  "installation_status": "BLOCKED"
+  "decision": "RC16-B_SOLO_HOLD_PREFERRED_AS_TARGET_ARCHITECTURE",
+  "installation_status": "BLOCKED",
+  "owner_preference_record": {
+    "selection": "RC16-B_SOLO_HOLD",
+    "basis": "User explicitly prefers one-person operation with automated checks and blocked critical approvals",
+    "scope": "TARGET_ARCHITECTURE_PREFERENCE_ONLY",
+    "default_sensitive_releases": "HOLD",
+    "ordinary_workflow": "LIMITED_AUTOMATED_NONOPERATIVE_QA_SUBJECT_TO_REVIEW",
+    "policy_ratification": "NOT_CLAIMED",
+    "installation_authorization": false,
+    "merge_authorization": false,
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE"
+  }
 }
