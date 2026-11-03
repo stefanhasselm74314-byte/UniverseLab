@@ -6,6 +6,7 @@
   "status": "ARCHITECTURE_DEFINED_ROADMAP_WORKBENCH_ACTIVE_MD2S_KERNEL_INITIALIZED",
   "release_date": "2026-08-10",
   "governance": {
+    "conditional_method_dependency_registry": "registry/2026-10-03_UL-SING_QuantumClosure_MethodIntegration_v1.0.json",
     "K1-D": "NOT_RELEASED",
     "K1-E": "NOT_ADMISSIBLE",
     "physical_evidence_effect": "NONE",

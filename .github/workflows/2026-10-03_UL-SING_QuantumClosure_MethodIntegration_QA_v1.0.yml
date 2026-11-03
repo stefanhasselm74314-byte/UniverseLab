@@ -1,0 +1,26 @@
+name: UL-SING conditional method integration QA v1.0
+
+# No path filter: consumers, source pointers and frozen dependencies also matter.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  conditional-method-integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate method integration and preserved physical states
+        run: python tools/2026-10-03_validate_UL-SING_QuantumClosure_MethodIntegration_v1.0.py
+      - name: Run adversarial integration regressions
+        run: python tests/2026-10-03_test_UL-SING_QuantumClosure_MethodIntegration_v1.0.py
+      - name: Recheck existing canonical state chain
+        run: python tools/2026-09-01_validate_UniverseLab_CurrentMainCanonicalStateReconciliation_v1.0.py --strict-source-existence
