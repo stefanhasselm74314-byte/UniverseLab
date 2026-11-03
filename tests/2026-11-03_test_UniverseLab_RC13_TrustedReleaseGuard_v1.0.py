@@ -94,6 +94,7 @@ def fixture():
                               "site_state":SITE,"session_checkpoint":CP}
     }
     oldstate={**fields,**copy.deepcopy(state_shared),
+              "status":"POST_STATE_RECONCILED",
               "physical_governance":copy.deepcopy(oldphysical),
               "active_analysis_block":analysis_base}
     state={**fields,**copy.deepcopy(state_shared),
