@@ -30,6 +30,7 @@ MAX_LIVE_WEB_FILES = 250
 MAX_BLOB_BYTES = 1_000_000
 MAIN = "main"
 TRUSTED_JOB = "trusted-release-gate"
+GITHUB_ACTIONS_APP_ID = 15368  # expected required-check source, not "any source"
 TRUSTED_WORKFLOW = ".github/workflows/2026-11-03_UniverseLab_RC13_TrustedReleaseGate_v1.0.yml"
 TRUSTED_GUARD = "tools/2026-11-03_UniverseLab_RC13_TrustedReleaseGuard_v1.0.py"
 RELEASE_REQUIRED = frozenset({
@@ -360,8 +361,12 @@ def validate_ruleset_enforcement(rulesets: list[dict], trusted_job: str) -> None
         for r in ruleset.get("rules",[]):
             if r.get("type") != "required_status_checks":
                 continue
-            required = r.get("parameters",{}).get("required_status_checks",[])
-            if any(x.get("context") == trusted_job for x in required):
+            parameters = r.get("parameters",{})
+            required = parameters.get("required_status_checks",[])
+            if (parameters.get("strict_required_status_checks_policy") is True and
+                any(x.get("context") == trusted_job and
+                    x.get("integration_id") == GITHUB_ACTIONS_APP_ID
+                    for x in required)):
                 check_rule = True
     require(pr_rule and check_rule,
             "Trusted release gate is not mandatory in active main rulesets")
