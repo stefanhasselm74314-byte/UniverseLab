@@ -1,7 +1,7 @@
 # UniverseLab — RC-VALIDATION-21: Manifestgebundener Dokumentenrouter
 
 **Datum:** 2026-11-03  
-**Status:** `LOCAL_CANDIDATE_QA_PASS / UNINSTALLED / RELEASE_HOLD / CI_PENDING`  
+**Status:** `LOCAL_AND_GITHUB_CI_CANDIDATE_QA_PASS / UNINSTALLED / RELEASE_HOLD`  
 **Governance:** RC16-B, Ein-Personen-Betrieb, QA ohne automatische Freigabe.  
 **Herkunft:** `main`-Basis `51bcc8fccb092c104ac0fca5fc98a5b996dcb914`; RC19-Draft-PR #265 → RC20-Draft-PR #266 → RC21 eigener gestapelter Draft.  
 **RC19-Allowlist:** `governance/2026-11-03_UniverseLab_RC19_PublicFiles_v1.0_DRAFT.json`, 446 Einträge.  
@@ -10,6 +10,7 @@
 **Nichtinstallierter Kandidat:** `drafts/2026-11-03_UniverseLab_RC21_SafeDocumentRouter_v1.0_DRAFT.js`.  
 **Router-SHA-256:** `1fdcdfe472832d600e5ad2232dec25e0df52e2a6651cdfd5fe66a95bb0f1d0e6`.  
 **Provenienz:** `drafts/2026-11-03_UniverseLab_RC21_RouterProvenance_v1.0_DRAFT.json`.
+**GitHub-CI:** Draft-PR #267, Head `93a0dfe96955fb60f21c6c7dd86b3b75cd821977`, Run `41675103974`, Job `126053496053`, Conclusion `SUCCESS`; die sechs fachlichen Workflow-Steps bestanden. Die dokumentarische Nachbindung dieses Runs ändert keine Public-Datei.
 
 ## 1. Kernergebnis und Geltungsbereich
 
@@ -18,6 +19,8 @@
 **[KONDITIONAL — KANDIDAT, NICHT LIVE]** Bei GitHub- oder Pages-Links zu einer manifestierten Markdown-/Text-/Quelltextdatei wird lokal zu `DocumentViewer` beziehungsweise `SourceTextViewer` mit einem exakt aufgebauten `src` navigiert. Bei einem **nicht freigegebenen** GitHub-Pfad wird die Original-URL unverändert gelassen. Das verhindert im beabsichtigten Einbauzustand den von RC20 identifizierten lokalen 404 durch die bisherige pauschale Umschreibung; die tatsächliche Produktivwirkung ist ausdrücklich **nicht** festgestellt.
 
 **[BESTÄTIGT — NICHTINSTALLATION]** Der aktive `assets/2026-08-27_UniverseLab_DocumentLinkRouter_v1.0.js` wurde **nicht verändert**. Der Kandidat liegt nur unter `drafts/`, ist in keinem HTML-/Shell-/Service-Worker-Loader eingetragen und wird durch das RC19-Staging aus der Website ausgeschlossen. Weder `main` noch der Pages-Deployment-Workflow wurden verändert.
+
+**[GITHUB-CI NUMERISCH BESTÄTIGT]** Im read-only PR-Runner bestätigten die 9 Python-Fälle, alle 1.095 JavaScript-VM-Assertions, die Bytegleichheit des generierten Routers, das weiterhin 446 Dateien umfassende RC19-Staging ohne RC21-Kandidat sowie den erneut erwarteten RC20-Exit-2 mit `release_gate=HOLD`. Die Tatsache, dass der Workflow erfolgreich abschloss, entspricht einem **erfolgreich nachgewiesenen HOLD**, nicht einer Freigabe.
 
 ## 2. Positive und negative Abdeckung
 
@@ -81,7 +84,7 @@ RC21_CANDIDATE_INSTALLED = FALSE
 RC21_ACTIVE_ROUTER_CHANGED = FALSE
 RC21_RC19_MANIFEST_CHANGED = FALSE
 RC21_PUBLIC_PAGES_CHANGED = FALSE
-RC21_GITHUB_CI = PENDING
+RC21_GITHUB_CI = SUCCESS_RUN_41675103974_JOB_126053496053
 RC21_INHERITED_RC20_RELEASE_GATE = HOLD
 RC21_AUTOMATIC_MERGE_OR_DEPLOY = FORBIDDEN
 CANONICAL_PROMOTION = BLOCKED
