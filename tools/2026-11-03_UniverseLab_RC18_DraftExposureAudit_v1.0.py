@@ -44,6 +44,8 @@ def analyze(contents):
     require(isinstance(contents,dict) and
       1<=len(contents)<=LIMIT_FILES,"UNBOUNDED_SOURCE_INVENTORY")
     require(DEPLOY in contents,"NO_DEPLOY_WORKFLOW")
+    require(all(isinstance(path,str) and isinstance(blob,bytes) for path,blob in contents.items()),
+            "INVALID_TREE_ENTRY")
     total=sum(len(b) for b in contents.values())
     require(total<=LIMIT_BYTES,"INVENTORY_TOO_LARGE")
     binary=0;scanned=0;discovered=set();explicit=set();samples=[]
