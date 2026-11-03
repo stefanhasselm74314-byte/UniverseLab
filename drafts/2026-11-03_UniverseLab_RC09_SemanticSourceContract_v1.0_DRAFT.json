@@ -1195,12 +1195,12 @@
         },
         {
           "kind": "source_field",
-          "path": "physical_gate_effect",
+          "path": "effects.physical_gate_effect",
           "value": "NONE"
         },
         {
           "kind": "source_field",
-          "path": "physical_evidence_effect",
+          "path": "effects.physical_evidence_effect",
           "value": "NONE"
         },
         {
