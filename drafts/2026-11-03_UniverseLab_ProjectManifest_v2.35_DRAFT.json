@@ -19,7 +19,7 @@
   },
   "manifest_strategy": "COMPACT_CURRENT_STATE_WITH_APPEND_ONLY_VERSIONED_SOURCE_REGISTRIES",
   "canonical_state": "drafts/2026-11-03_UniverseLab_CurrentMainCanonicalState_v1.4_DRAFT.json",
-  "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+  "site_state": "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
   "session_checkpoint": "drafts/2026-11-03_UniverseLab_SessionCheckpoint_v1.35_DRAFT.json",
   "architecture": {
     "governing_document": "MD-0",
@@ -171,7 +171,7 @@
   },
   "current_status_sources": {
     "canonical_state": "drafts/2026-11-03_UniverseLab_CurrentMainCanonicalState_v1.4_DRAFT.json",
-    "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+    "site_state": "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
     "session_checkpoint": "drafts/2026-11-03_UniverseLab_SessionCheckpoint_v1.35_DRAFT.json",
     "claim_census": "registry/2026-09-03_UniverseLab_PublicScientificClaimCensus_v1.0.json",
     "high_claim_adjudication": "registry/2026-09-03_UniverseLab_PublicScientificHighClaimAdjudication_v1.0.json",
@@ -372,7 +372,7 @@
   "physical_evidence_effect": "NONE",
   "central_registries": {
     "current_main_canonical_state": "drafts/2026-11-03_UniverseLab_CurrentMainCanonicalState_v1.4_DRAFT.json",
-    "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+    "site_state": "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
     "site_state_schema": "schemas/2026-09-01_UniverseLab_SiteStateSchema_v1.1.json",
     "session_checkpoint": "drafts/2026-11-03_UniverseLab_SessionCheckpoint_v1.35_DRAFT.json",
     "session_checkpoint_alias": "registry/session-checkpoint-latest.json",
@@ -403,7 +403,7 @@
     "version": "1.2.0",
     "status": "ACTIVE_GOVERNED_PLATFORM_CURRENT_STATE_RECONCILED_2026_09_03",
     "navigator_authority": "CANONICAL_DIRECT_DOCUMENT",
-    "site_state": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+    "site_state": "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
     "physical_gate_effect": "NONE",
     "physical_evidence_effect": "NONE",
     "status_axes_rule": "TECHNICAL_GOVERNANCE_SCIENTIFIC_ARE_INDEPENDENT"
@@ -485,6 +485,9 @@
       "gate_promotion": "NONE",
       "snapshot_timestamp_status": "HISTORICAL_VALUE_INHERITED_RELEASE_BLOCKER",
       "checkpoint_snapshot_pointer_status": "HISTORICAL_VALUE_INHERITED_RELEASE_BLOCKER"
-    }
+    },
+    "site_state_draft": "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
+    "public_status_pointers": "SEPTEMBER_LIVE_UNCHANGED_RELEASE_BLOCKER",
+    "rc09_source_contract": "drafts/2026-11-03_UniverseLab_RC09_SemanticSourceContract_v1.0_DRAFT.json"
   }
 }
