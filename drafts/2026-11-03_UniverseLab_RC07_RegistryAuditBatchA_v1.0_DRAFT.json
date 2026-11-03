@@ -1,0 +1,37 @@
+{
+  "schema": "universelab.rc07.registry-audit-batch.v1",
+  "status": "DRAFT_PARTIAL",
+  "pinned_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "results": [
+    {
+      "path": "registry/2026-09-04_UniverseLab_BandVC_G11_StateFreshnessClosure_v1.0.json",
+      "blob_sha": "cb98d726da5def5c9a470e9faf80c5811ee52998",
+      "source_status": "IMPLEMENTED_REVIEW_PENDING",
+      "physical_gate_effect": "NONE",
+      "semantic_review": "PENDING"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json",
+      "blob_sha": "6d18236526a9a2178b1a73e318e63e83a4d6ece6",
+      "source_status": "OFFSHELL_SECOND_VARIATION_INPUTS_READY_FULL_QUADRATIC_SYSTEM_NOT_DERIVED",
+      "physical_gate_effect": "NONE",
+      "semantic_review": "PENDING"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
+      "blob_sha": "8d52358b4cd4a9620f0d06d6fe95e28c5a6a958f",
+      "source_status": "CONDITIONAL_KINEMATIC_GAUGE_REDUCTION_DOMAIN_FROZEN_CONSTRAINT_ELIMINATION_BLOCKED",
+      "physical_gate_effect": "NONE",
+      "semantic_review": "PENDING"
+    },
+    {
+      "path": "registry/2026-09-23_UniverseLab_FileNamingPolicy_v1.2.json",
+      "blob_sha": "77d753f282748426e664ca114afd02d6aa2aeec9",
+      "source_status": "ACTIVE",
+      "physical_gate_effect": "NONE",
+      "semantic_review": "PENDING"
+    }
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
