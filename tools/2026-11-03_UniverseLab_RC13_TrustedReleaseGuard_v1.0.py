@@ -365,6 +365,48 @@ def validate_live_release(files: list[dict], base_sha: str, head_sha: str,
             "Ten scientific missing links were unjustifiably closed")
     require(site.get("analysis_state",{}).get("physical_claim_promotions") == 0,
             "Physical claims were promoted through a non-gate field")
+    # Checkpoint is a historical/provenance document: the only permitted
+    # exceptions are the explicitly reviewed G11 governance status transitions
+    # and replacements of the state/site entry-point paths.
+    old_block = dict(base_checkpoint.get("active_block",{}))
+    new_block = dict(cp.get("active_block",{}))
+    require(bool(old_block), "Missing predecessor active-block ledger")
+    before_action = old_block.pop("state_freshness_action", None)
+    after_action = new_block.pop("state_freshness_action", None)
+    require(new_block == old_block, "Checkpoint scientific active-block fields changed")
+    require(before_action == "APPEND_ONLY_SUCCESSOR_CHAIN_AND_PUBLIC_POINTER_REPAIR",
+            "Unexpected predecessor G11 repair action")
+    require(after_action in (
+        "PR210_MERGED_SEPTEMBER_CHAIN_NEW_RC08_CANONICAL_RECONCILIATION_PENDING",
+        "PR210_MERGED_SEPTEMBER_CHAIN_POINTER_RECONCILIATION_COMPLETE_NO_PHYSICAL_EFFECT"
+    ), "Unreviewed G11 repair-status promotion")
+    old_defects = base_checkpoint.get("confirmed_defects")
+    new_defects = cp.get("confirmed_defects")
+    require(isinstance(old_defects,list) and len(old_defects) == 1
+            and isinstance(new_defects,list) and len(new_defects) == 1,
+            "Checkpoint must preserve exactly the reviewed G11 defect")
+    old_defect, new_defect = dict(old_defects[0]), dict(new_defects[0])
+    require(old_defect.get("defect_id") == new_defect.get("defect_id") == "UL-BVC-G11",
+            "Checkpoint G11 defect identity changed")
+    old_defect.pop("repair_status", None)
+    new_status = new_defect.pop("repair_status", None)
+    require(old_defect == new_defect
+            and new_status in (
+              "MERGED_PR210_HISTORICAL_SCOPE_ONLY_RC08_NEW_SNAPSHOT_PENDING",
+              "MERGED_PR210_HISTORICAL_SCOPE_CURRENT_POINTERS_RECONCILED_NO_PHYSICAL_EFFECT"
+            ), "Unreviewed checkpoint defect/evidence claim")
+    require(isinstance(base_checkpoint.get("entry_points"),list)
+            and isinstance(cp.get("entry_points"),list),
+            "Checkpoint entry-point list missing")
+    entry_map = {
+        base["canonical_state"]: state_p,
+        base["site_state"]: site_p,
+        base["session_checkpoint"]: cp_p,
+    }
+    require(cp["entry_points"] == [
+        entry_map.get(p,p) for p in base_checkpoint["entry_points"]
+    ], "Checkpoint entry points changed beyond verified pointer migration")
+
     require(manifest.get("gates") == base.get("gates"),
             "Full manifest gate ledger changed during governance-only release")
     require(cp.get("gate_state") == base_checkpoint.get("gate_state"),
