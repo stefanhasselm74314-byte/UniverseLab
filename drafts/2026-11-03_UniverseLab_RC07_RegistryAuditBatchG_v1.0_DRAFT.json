@@ -1,0 +1,106 @@
+{
+  "schema": "universelab.rc07.registry-audit-batch.v1",
+  "status": "DRAFT_PARTIAL",
+  "pinned_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "results": [
+    {
+      "path": "registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json",
+      "blob_sha": "c00675988dff11770ddb3f7d15f30fe782a5042b",
+      "source_status": "PASS_AUTOMATED_EXTRACTION_NOT_SCIENTIFIC_ADJUDICATION",
+      "classification": null,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "top_level_keys": [
+        "basis_commit",
+        "claim_candidates",
+        "explicit_statuses",
+        "generated_by",
+        "lexical_categories",
+        "limitations",
+        "manifest_pages",
+        "page_index",
+        "page_scopes",
+        "physical_evidence_effect",
+        "physical_gate_effect",
+        "risk_classes",
+        "schema",
+        "sitemap_pages",
+        "status",
+        "tracked_html_files",
+        "visible_blocks"
+      ],
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json",
+      "blob_sha": "8c81a02ecdb28178d4e1626b4ffe0c172d8b9228",
+      "source_status": "PASS_COMPLETE_AUTOMATED_ROUTING_NOT_SCIENTIFIC_ADJUDICATION",
+      "classification": null,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "top_level_keys": [
+        "assignment_count",
+        "assignments",
+        "candidate_basis_commit",
+        "candidate_count",
+        "fallback_assignment_count",
+        "family_counts",
+        "high_medium_candidate_count",
+        "manual_review_required_count",
+        "physical_evidence_effect",
+        "physical_gate_effect",
+        "schema",
+        "semantics",
+        "status",
+        "unknown_family_ids",
+        "unmapped_candidates"
+      ],
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json",
+      "blob_sha": "392f3c37ed265c5c5418fd753ec09de664140d82",
+      "source_status": "AUTOMATED_CANDIDATES_NOT_ADJUDICATED",
+      "classification": null,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "top_level_keys": [
+        "basis_commit",
+        "candidates",
+        "canonical_status",
+        "generated_by",
+        "physical_evidence_effect",
+        "physical_gate_effect",
+        "schema",
+        "status"
+      ],
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-04_UniverseLab_BandVC_StatusPageMediumDeltaAdjudication_v1.0.json",
+      "blob_sha": "28e7b4c973b36a005496250ee41ba6a5cbc8ab8e",
+      "source_status": "CONTEXTUALLY_ADJUDICATED_IN_CHANGESET_REVIEW_PENDING",
+      "classification": null,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "top_level_keys": [
+        "schema",
+        "version",
+        "date",
+        "basis_materialized_claim_commit",
+        "basis_main_before_g11_changeset",
+        "status",
+        "scope",
+        "records",
+        "global_result",
+        "interpretation",
+        "physical_gate_effect",
+        "physical_evidence_effect"
+      ],
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    }
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "warning": "Absent source-level gate field must not be interpreted as NONE; bundle-level effects refer to this audit only."
+}
