@@ -1,0 +1,1054 @@
+{
+  "schema": "universelab.rc07.changed-file-inventory.v1",
+  "date": "2026-11-03",
+  "status": "DRAFT_FILE_INVENTORY_NOT_SEMANTIC_RECONCILIATION",
+  "base": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+  "head": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "ahead_by": 298,
+  "returned_file_count": 148,
+  "entries": [
+    {
+      "path": ".github/workflows/2026-08-01_UniverseLab_FileNamingContract_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-08-03_UniverseLab_G0_ThreeTrackContract_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-08-20_UniverseLab_ProductionSmokeAudit_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-08-30_UniverseLab_LanguageSwitcherShell_QA_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-08-31_UniverseLab_ULSH_HDA_Delegation_QA_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-04_UniverseLab_BandVC_StateFreshnessClosure_QA_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_QA_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPath_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransport_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-08_UniverseLab_ULSH05_WP1C4B1D_DirectMovingActionShape_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-10_UniverseLab_LinksExternalTargetRegression_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-14_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_QA_v0.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-15_UniverseLab_ProvenanceConsistencyDetectability_QA_v1.1.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-24_UniverseLab_PagesDeployIntegrity_QA_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-24_UniverseLab_PagesDeploymentGuardian_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-25_UniverseLab_LandingPaths_QA_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-09-28_UL-SING_QuantumClosure_MethodGates_QA_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/2026-11-03_RC_Validation_ReadOnly_v1.0.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": ".github/workflows/deploy-pages.yml",
+      "class": "WORKFLOW",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "2026-08-19_UniverseLab_SitePrintExportServiceWorker_v1.0.js",
+      "class": "OTHER",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "ACTIVE_LINKS.md",
+      "class": "OTHER",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "assets/2026-08-18_UniverseLab_SiteLanguageSwitcher_v1.0.js",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "assets/2026-08-19_UniverseLab_SitePrintExportBootstrap_v1.0.js",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "assets/2026-08-30_UniverseLab_SiteLanguageSwitcher_v1.0.js",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "assets/2026-09-25_UniverseLab_LandingPaths_v1.0.css",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "googlebc3b5b4a4888e35c.html",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "governance/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.md",
+      "class": "GOVERNANCE",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "governance/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityRule_v1.1.md",
+      "class": "GOVERNANCE",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "governance/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.md",
+      "class": "GOVERNANCE",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "governance/2026-09-28_UL-SING_QuantumClosure_OwnerAdoption_Packet_v0.1.md",
+      "class": "GOVERNANCE",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "index-en.html",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "index.html",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "links.html",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "project-manifest.json",
+      "class": "OTHER",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-03_UniverseLab_PublicScientificClaimExtractionSummary_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-03_UniverseLab_PublicScientificClaimFamilyAssignments_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-03_UniverseLab_PublicScientificClaimLexicalCandidates_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-04_UniverseLab_BandVC_G11_StateFreshnessClosure_v1.0.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-04_UniverseLab_BandVC_StatusPageMediumDeltaAdjudication_v1.0.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransportMaster_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1D_DirectMovingActionShape_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityContract_v1.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-14_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-23_UniverseLab_FileNamingPolicy_v1.2.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-28_UL-SING_QuantumClosure_GateCandidates_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/2026-09-28_UL-SING_QuantumClosure_OwnerAdoption_Packet_v0.1.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "registry/session-checkpoint-latest.json",
+      "class": "REGISTRY",
+      "priority": "P1",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "research-status-en.html",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "research-status.html",
+      "class": "SITE",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/audit/2026-09-03_UniverseLab_PublicScientificClaimReviewQueue_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/audit/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInventory_v1.0.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/audit/2026-09-28_UL-SING_QuantumClosure_GateCandidate_Review_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransportMaster_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B1D_DirectMovingActionShape_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "science/solver-hub/2026-09-14_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.md",
+      "class": "SCIENCE",
+      "priority": "P2",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "sitemap.xml",
+      "class": "OTHER",
+      "priority": "P4",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-08-30_test_LanguageSwitcherShell_v1.0.js",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-03_test_UniverseLab_BandIVBCurrentMainReconciliation_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-03_test_UniverseLab_BandVB_HighClaimAdjudication_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-04_test_UniverseLab_BandVB_MediumCompletionAdjudication_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-04_test_UniverseLab_BandVB_MediumPriorityAdjudication_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-04_test_UniverseLab_BandVC_ClaimEvidenceCrosswalk_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-04_test_UniverseLab_BandVC_StateFreshnessClosure_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransportMaster_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-07_test_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B1D_DirectMovingActionShape_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2B_ComponentBoundaryResidualLinearization_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-08_test_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-08_test_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-08_test_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-10_test_UniverseLab_LinksExternalTargetRegression_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-14_test_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-15_test_UniverseLab_ProvenanceConsistencyDetectability_v1.1.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-23_test_file_naming_v1.2.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-24_test_UniverseLab_PagesDeployIntegrity_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-25_test_UniverseLab_LandingPaths_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tests/2026-09-28_test_UL-SING_QuantumClosure_MethodGates_v1.0.py",
+      "class": "TEST",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tools/2026-08-20_UniverseLab_MultilingualSEOContract_v1.0.py",
+      "class": "TOOL",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tools/2026-08-20_UniverseLab_ProductionSmokeAudit_v1.0.py",
+      "class": "TOOL",
+      "priority": "P3",
+      "change": "modified",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tools/2026-08-31_validate_universelab_ulsh_hda_delegation_v1.0.py",
+      "class": "TOOL",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tools/2026-09-08_prepare_UniverseLab_ULSH05_WP1C4B2C_GlobalBoundaryDomainPreflight_v0.1.py",
+      "class": "TOOL",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tools/2026-09-08_prepare_UniverseLab_ULSH05_WP1D1_GaugeOperatorKernelPreflight_v0.1.py",
+      "class": "TOOL",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tools/2026-09-08_prepare_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.py",
+      "class": "TOOL",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tools/2026-09-14_prepare_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.py",
+      "class": "TOOL",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    },
+    {
+      "path": "tools/2026-09-24_verify_UniverseLab_PagesDeploySource_v1.0.py",
+      "class": "TOOL",
+      "priority": "P3",
+      "change": "added",
+      "review": "NOT_INDIVIDUALLY_SEMANTICALLY_AUDITED"
+    }
+  ],
+  "notes": [
+    "File inventory is a path-level classification only, not per-file scientific review.",
+    "No claim that returned compare file list is exhaustive without pagination/truncation check.",
+    "P1 registry/governance changes require source-level crosswalk and merge provenance before canonical promotion."
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
