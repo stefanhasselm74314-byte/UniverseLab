@@ -421,7 +421,8 @@ def validate_ruleset_enforcement(rulesets: list[dict], trusted_job: str) -> None
         conditions = ruleset.get("conditions",{}).get("ref_name",{})
         if ("refs/heads/main" not in conditions.get("include", []) or
             "refs/heads/main" in conditions.get("exclude", []) or
-            ruleset.get("bypass_actors")):
+            ruleset.get("bypass_actors") or
+            ruleset.get("current_user_can_bypass") != "never"):
             continue
         types = {r.get("type") for r in ruleset.get("rules",[])}
         pr_rule = pr_rule or ("pull_request" in types)
@@ -502,6 +503,16 @@ def run_event(event: dict, api: GitHubReadOnly) -> str:
             and latest.get("draft") is False, "PR changed mid-validation")
     require(api.get("/branches/main").get("commit",{}).get("sha") == base_sha,
             "main changed mid-validation")
+    # Approval comments and required-check enforcement are mutable while CI
+    # runs. Re-read both sources immediately before reporting a green result.
+    final_comments = api.paged("/issues/" + str(number) + "/comments", MAX_COMMENTS)
+    require(has_scoped_owner_approval(final_comments,number,head_sha,scopes),
+            "Owner acknowledgment was withdrawn during validation")
+    final_list = api.paged("/rulesets?includes_parents=true", 100)
+    final_rulesets = [api.get("/rulesets/" + str(item["id"]))
+                      for item in final_list
+                      if item.get("enforcement") == "active"]
+    validate_ruleset_enforcement(final_rulesets,TRUSTED_JOB)
     return "PASS_TECHNICAL_PREMERGE_GATE: " + result
 
 def main() -> None:
