@@ -1,13 +1,14 @@
 # UniverseLab — RC-VALIDATION-23: kontrollierbare lokale Android-Preview, ohne Distribution
 
 **Datum:** 2026-11-03  
-**Status:** `LOCAL_ZIP_QA_PASS / GITHUB_CI_PENDING / NOT_DISTRIBUTED / RELEASE_HOLD`.  
+**Status:** `LOCAL_AND_GITHUB_CI_ZIP_QA_PASS / NOT_DISTRIBUTED / RELEASE_HOLD`.  
 **Abhängigkeit:** RC19-Draft #265 → RC20-Draft #266 → RC21-Draft #267 → RC22-Draft #268 → RC23 eigener gestapelter Draft.  
 **RC22-Basis:** Commit `84563af5fb2840f607d70c05bbd07874a0193c2c`, tatsächliche Chromium-CI erfolgreich, echter Android-/Opera-Test offen.  
 **Kanonische Basis:** `main` `51bcc8fccb092c104ac0fca5fc98a5b996dcb914` (vor RC23 geprüft).  
 **Generator:** `tools/2026-11-03_UniverseLab_RC23_LocalPreviewBuilder_v1.0.py`.  
 **Tests:** `tests/2026-11-03_test_UniverseLab_RC23_LocalPreviewBuilder_v1.0.py`.  
 **Wichtig:** Kein lokales Preview-ZIP wird im Repository oder als Actions-Artefakt abgelegt. Der CI-Runner verwirft seinen temporären Prüfaufbau nach dem Lauf.
+**GitHub-CI:** Draft-PR #269, erster geprüfter Head `db6daf8958b49c657799f318f687121636a1076c`, Run `41680288993`, Job `126071829444`, Conclusion `SUCCESS`. Die vier fachlichen Schritte wurden erfolgreich ausgeführt; das Artefakt-Listing für diesen Run ist nachweislich leer (`artifacts=[]`). Die Nachbindung dieser Prüfspur ist rein dokumentarisch.
 
 ## 1. Sicherheitsarchitektur des lokalen Entwurfs
 
@@ -46,6 +47,8 @@ Der vollständige ZIP-Hash ist ein **Identitätsanker**, keine inhaltliche Verö
 5. Unerlaubter Zusatzpfad, Archiv-Traversal, Inhaltsänderung und Symlink-/Ausführbarkeits-Metadaten → `HOLD`.
 6. Entpacktes ZIP wird **ausschließlich auf `127.0.0.1`** durch einen Python-Testserver ausgeliefert: 446 Public-Dateien per HTTP 200 und Hashvergleich; drei negative ausgeschlossene Ziele per HTTP 404.
 
+**[GITHUB-CI NUMERISCH BESTÄTIGT]** Dieselben zwölf Kontrollfälle und der feste Gesamt-ZIP-SHA wurden in GitHub Actions mit read-only Repository-Berechtigung bestanden. Es existiert **kein** herunterladbares Actions-Artefakt dieses Runs. Der Build liegt nur temporär in einem CI-Arbeitsverzeichnis; die erfolgreiche Pipeline ist keine Distributionsfreigabe.
+
 **Keine echte Android-Ausführung.** HTTP-Test und Testbrowser-Engine aus RC22 begründen eine reproduzierbare Testbasis, aber keine Messung in Stefans Opera/Android-17-Umgebung. Das RC23-ZIP wird nicht automatisch verteilt und startet keinen Server von selbst.
 
 ## 3. Technische Freigabesicherung von GitHub – separat geprüft
@@ -79,7 +82,7 @@ RC23_REAL_ANDROID_OPERA = NOT_TESTED
 RC23_SEMANTIC_PUBLIC_CONTENT_APPROVAL = NOT_PERFORMED
 RC23_REQUIRED_STATUS_CHECK_ENFORCEMENT = NOT_PROVEN
 RC23_OWNER_DISTRIBUTION_APPROVAL = NOT_GRANTED
-RC23_GITHUB_CI = PENDING
+RC23_GITHUB_CI = SUCCESS_RUN_41680288993_JOB_126071829444
 RC23_PAGES_DEPLOYMENT_CHANGED = FALSE
 RC23_RELEASE_GATE = HOLD
 CANONICAL_PROMOTION = BLOCKED
