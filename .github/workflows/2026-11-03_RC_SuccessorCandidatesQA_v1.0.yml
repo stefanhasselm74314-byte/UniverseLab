@@ -4,6 +4,7 @@ on:
     paths:
       - 'drafts/2026-11-03_UniverseLab_*_DRAFT.json'
       - '.github/workflows/2026-11-03_RC_SuccessorCandidatesQA_v1.0.yml'
+      - 'tests/2026-11-03_test_UniverseLab_RC08_SemanticState_v1.0.py'
 permissions:
   contents: read
 jobs:
@@ -31,7 +32,7 @@ jobs:
             assert n['reconciliation_addendum']['status']=='DRAFT_NOT_CANONICAL'
             assert n['reconciliation_addendum']['nonoperative_only'] is True
             assert n['reconciliation_addendum']['review_required'] is True
-            assert n['reconciliation_addendum']['current_merge_tree_status']=='NOT_VERIFIED'
+            assert n['reconciliation_addendum']['current_merge_tree_status']=='VERIFIED_GIT_OBJECT_PINNED_MERGE_COMMIT'
             assert n['reconciliation_addendum']['reconciliation_basis_commit']=='51bcc8fccb092c104ac0fca5fc98a5b996dcb914'
             for src in n['reconciliation_addendum']['source_registry'].values():
               assert (root/src).is_file(),src
@@ -45,5 +46,7 @@ jobs:
           assert new[2]['session_checkpoint']==p[1]
           assert new[0]['basis_main_commit']==new[2]['basis_main_commit']==new[1]['basis_commit']
           print('PASS: draft candidates, original keys, source paths, pointer and gate firewalls')
-          print('NOT VALIDATED: current merge tree, full scientific state reconciliation, final schema release')
+          print('NOT VALIDATED: full scientific state reconciliation, final schema release')
           PY
+      - name: RC08 source-bound semantic audit and negative controls
+        run: python3 tests/2026-11-03_test_UniverseLab_RC08_SemanticState_v1.0.py
