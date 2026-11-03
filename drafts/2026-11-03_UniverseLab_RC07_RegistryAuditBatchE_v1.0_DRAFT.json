@@ -1,0 +1,49 @@
+{
+  "schema": "universelab.rc07.registry-audit-batch.v1",
+  "status": "DRAFT_PARTIAL",
+  "pinned_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "results": [
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1B_ShapeWardResidual_v0.1.json",
+      "blob_sha": "0b9a9c2263d8e4094c6c1503a8ea1e6146b39862",
+      "source_status": "DERIVED_CONDITIONAL_SHAPE_REDUNDANCY_FULL_COMPONENT_SHAPE_RESIDUAL_NOT_ASSEMBLED",
+      "classification": "NONOPERATIVE_OFFSHELL_SHAPE_WARD_IDENTITY_PREFLIGHT",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1C_PassiveShapeConstraint_v0.1.json",
+      "blob_sha": "55f64484455014091ce4a2324b02985b6b71662b",
+      "source_status": "DERIVED_PASSIVE_CONSTRAINT_RELATION_FROM_NN_CONSTRAINTS_AND_ISRAEL_FULL_MOVING_FIRST_VARIATION_NOT_YET_ASSEMBLED",
+      "classification": "NONOPERATIVE_COMPONENT_PASSIVE_SHAPE_CONSTRAINT_REDUCTION_PREFLIGHT",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B1D_DirectMovingActionShape_v0.1.json",
+      "blob_sha": "f35c778f081c4aa05da3e3065c71397d3353636c",
+      "source_status": "DERIVED_DIRECT_FIRST_SHAPE_RESIDUAL_AND_EQUIVALENCE_TO_PASSIVE_CONSTRAINT_BOUNDARY_HESSIAN_NOT_CLOSED",
+      "classification": "NONOPERATIVE_DIRECT_FIRST_MOVING_ACTION_INTERFACE_DECOMPOSITION",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-08_UniverseLab_ULSH05_WP1C4B2A_BoundarySecondVariationMaster_v0.1.json",
+      "blob_sha": "8496b0df8b735b9f964bc6e5fc4f0049ad06ad92",
+      "source_status": "DERIVED_SECOND_ORDER_BOUNDARY_CHAIN_RULE_CAP_MOVING_PATH_CLOSED_COMPONENT_RESIDUAL_OPERATOR_NOT_YET_ASSEMBLED",
+      "classification": "NONOPERATIVE_SECOND_ORDER_BOUNDARY_CHAIN_RULE_AND_CHART_HESSIAN_MASTER",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    }
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
