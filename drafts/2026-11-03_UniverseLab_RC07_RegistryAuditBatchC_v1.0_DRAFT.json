@@ -1,0 +1,49 @@
+{
+  "schema": "universelab.rc07.registry-audit-batch.v1",
+  "status": "DRAFT_PARTIAL",
+  "pinned_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "results": [
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1A_FixedMetricScalarMaxwellHessian_v0.1.json",
+      "blob_sha": "a9c94f144dd7275a5bf1dea3a3835f856a4d047e",
+      "source_status": "DERIVED_CONTROL_SUBSECTOR_OFFSHELL_FIXED_METRIC_BULK_INTERIOR",
+      "classification": "NONOPERATIVE_ANALYTIC_CONTROL_SUBSECTOR",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1B_EHGHYHessianMaster_v0.1.json",
+      "blob_sha": "132255c5fda7aee5c2e652e5dc89e5d453e5706c",
+      "source_status": "DERIVED_VARIATIONAL_HESSIAN_MASTER_FIXED_INTERFACE_GN_BOUNDARY_CONTROL_FULL_COUPLED_SYSTEM_NOT_CLOSED",
+      "classification": "NONOPERATIVE_ANALYTIC_GRAVITY_HESSIAN_CONTROL",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C1_BulkMetricMatterHessian_v0.1.json",
+      "blob_sha": "fc004b64853f43c64d26e2d1336607bbf6ca3fc5",
+      "source_status": "DERIVED_OFFSHELL_BULK_METRIC_SCALAR_MAXWELL_SECOND_ORDER_DENSITY_BOUNDARY_AND_GAUGE_REDUCTION_NOT_CLOSED",
+      "classification": "NONOPERATIVE_ANALYTIC_BULK_MATTER_HESSIAN",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C2_FixedInterfaceCapHessian_v0.1.json",
+      "blob_sha": "1007cbba87d3b79dc5004b46515acc105a0bbf5d",
+      "source_status": "DERIVED_OFFSHELL_FIXED_INTERFACE_LOCALIZED_CAP_HESSIAN_BENDING_AND_PERTURBED_JUNCTIONS_OPEN",
+      "classification": "FORMAL_SECOND_VARIATION_ONLY",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    }
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

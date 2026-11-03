@@ -1,0 +1,82 @@
+{
+  "schema": "universelab.rc10.hypothetical-migration-contract.v1",
+  "status": "DRAFT_SIMULATION_ONLY_NOT_A_RELEASE",
+  "date": "2026-11-03",
+  "scope": "Full pointer-link rehearsal from four DRAFT successors to a proposed registry-root-site release chain. Existing production/canonical references remain unchanged.",
+  "source_verified_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "source_verified_tree": "65f423f04bbb2f1462f120a6b31073644cdc28cc",
+  "draft_inputs": {
+    "state": "drafts/2026-11-03_UniverseLab_CurrentMainCanonicalState_v1.4_DRAFT.json",
+    "checkpoint": "drafts/2026-11-03_UniverseLab_SessionCheckpoint_v1.35_DRAFT.json",
+    "site": "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
+    "manifest": "drafts/2026-11-03_UniverseLab_ProjectManifest_v2.35_DRAFT.json"
+  },
+  "historical_live_paths": {
+    "state": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+    "checkpoint": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
+    "site": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+    "manifest": "project-manifest.json",
+    "alias": "registry/session-checkpoint-latest.json",
+    "de": "research-status.html",
+    "en": "research-status-en.html",
+    "shell": "assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js"
+  },
+  "proposed_future_targets": {
+    "state": "registry/2026-11-03_UniverseLab_CurrentMainCanonicalState_v1.4.json",
+    "checkpoint": "registry/2026-11-03_UniverseLab_SessionCheckpoint_v1.35.json",
+    "site": "registry/2026-11-03_UniverseLab_SiteState_v1.5.json",
+    "manifest": "project-manifest.json",
+    "alias": "registry/session-checkpoint-latest.json",
+    "de": "research-status.html",
+    "en": "research-status-en.html",
+    "shell": "assets/2026-08-16_UniverseLab_GlobalShell_v1.1.js"
+  },
+  "scope_of_changes": [
+    "New dated state/checkpoint/site JSONs after authorized future promotion",
+    "Update project-manifest.json as a single active pointer",
+    "Replace session-checkpoint-latest.json with exact bytes of final dated checkpoint",
+    "Retarget German and English research-status links and labels",
+    "Change GlobalShell STATE_URL to SiteState successor and retain same script location",
+    "Scan for additional live HTML / JS consumers"
+  ],
+  "no_write_policy": {
+    "allowed_in_this_rc": "READ_AND_TEST_DRAFT_FILES_ONLY",
+    "writes_to_registry": false,
+    "writes_to_project_manifest": false,
+    "writes_to_public_html": false,
+    "writes_to_shell": false,
+    "writes_to_checkpoint_alias": false,
+    "merge_permission": false
+  },
+  "timing": {
+    "candidate_date": "2026-11-03",
+    "snapshot_timestamp": "__RELEASE_TIMESTAMP_NOT_ASSIGNED__",
+    "checkpoint_timestamp": "__RELEASE_TIMESTAMP_NOT_ASSIGNED__",
+    "release_date": "__RELEASE_DATE_NOT_ASSIGNED__",
+    "timestamp_policy": "Do not invent or backdate release time; supply at actual separately authorized release and validate offset-aware ISO 8601.",
+    "commit_semantics": "source_verified_main_commit is an audited predecessor, not future release commit. Never embed a self-referential release SHA; record actual merge SHA externally afterward."
+  },
+  "gate_firewalls": {
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "FM-G0": "OPEN",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED"
+  },
+  "release_blockers": [
+    "EXPLICIT_OWNER_SCOPED_RATIFICATION_ABSENT",
+    "RELEASE_TIMESTAMP_NOT_ASSIGNED",
+    "RELEASE_COMMIT_NOT_YET_EXISTS",
+    "CURRENT_DRAFT_STATUSES_NOT_ADOPTED",
+    "FULL_LIVE_REFERENCE_SCAN_NOT_RELEASE_VERIFIED",
+    "CANONICAL_POINTER_QA_NOT_RERUN_ON_RELEASE_TREE",
+    "39_SOURCE_METHOD_REVIEW_NOT_INDEPENDENT_PHYSICAL_PROOF",
+    "TEN_BAND_VC_SCIENTIFIC_LINKS_STILL_OPEN"
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

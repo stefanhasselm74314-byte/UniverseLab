@@ -1,0 +1,30 @@
+name: RC10 nonoperative release migration rehearsal
+on:
+  pull_request:
+    paths:
+      - 'drafts/2026-11-03_UniverseLab_RC10_ReleaseMigrationContract_v1.0_DRAFT.json'
+      - 'tests/2026-11-03_test_UniverseLab_RC10_MigrationDryRun_v1.0.py'
+      - '.github/workflows/2026-11-03_RC10_MigrationDryRun_QA_v1.0.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  simulate-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Syntax preflight
+        run: python3 -m py_compile tests/2026-11-03_test_UniverseLab_RC10_MigrationDryRun_v1.0.py
+      - name: No-write eight-output release rehearsal
+        run: python3 tests/2026-11-03_test_UniverseLab_RC10_MigrationDryRun_v1.0.py
+      - name: Ensure active repository files were not edited
+        run: |
+          git diff --quiet
+          git diff --cached --quiet
+      - name: Mark simulation-only result
+        run: |
+          echo 'Release migration test is in-memory only, with no release permissions.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'No merge, no timestamp assignment, no owner ratification, no gate promotion.' >> "$GITHUB_STEP_SUMMARY"

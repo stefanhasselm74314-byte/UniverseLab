@@ -1,0 +1,28 @@
+name: RC11 draft provenance and live-main drift guard
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review, edited]
+permissions:
+  contents: read
+jobs:
+  rc11-drift-guard:
+    if: ${{ github.event.pull_request.number == 263 }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GIT_TERMINAL_PROMPT: '0'
+    steps:
+      - name: Checkout exact PR merge graph with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Compile fail-closed guard
+        run: python3 -m py_compile tests/2026-11-03_test_UniverseLab_RC11_ReleaseDriftGuard_v1.0.py
+      - name: Check live refs, scoped additions, predecessor QA, and negatives
+        run: python3 tests/2026-11-03_test_UniverseLab_RC11_ReleaseDriftGuard_v1.0.py --ci
+      - name: Preserve draft release hold
+        run: |
+          echo 'PASS means this exact Draft PR event was checked against live refs and pinned source objects.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'A PR-authored workflow is not an immutable protected-main release rule.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'CANONICAL_PROMOTION=BLOCKED; OWNER_SCOPED_RATIFICATION=NOT_RECORDED_FOR_RELEASE.' >> "$GITHUB_STEP_SUMMARY"

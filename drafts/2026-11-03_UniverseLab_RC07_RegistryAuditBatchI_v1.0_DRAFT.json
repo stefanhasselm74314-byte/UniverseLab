@@ -1,0 +1,79 @@
+{
+  "schema": "universelab.rc07.registry-audit-batch.v1",
+  "status": "DRAFT_PROVENANCE_ONLY",
+  "pinned_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "results": [
+    {
+      "path": "governance/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.md",
+      "blob_sha": "b435cd0841808fd6d4f17e5309afd5cc7a851515",
+      "format": "md",
+      "source_status": "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
+      "source_read": "PASS",
+      "physical_gate_effect": null,
+      "physical_evidence_effect": null,
+      "semantic_limit": "PROPOSED_SCOPE_REQUIRES_DOCUMENT_CONSISTENCY"
+    },
+    {
+      "path": "governance/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityRule_v1.1.md",
+      "blob_sha": "fbe7a5c7ce3605c25750e063d392cb598c7693de",
+      "format": "md",
+      "source_status": "REVIEW_CANDIDATE_SEE_PULL_REQUEST_NOT_A_MERGE_CLAIM",
+      "source_read": "PASS",
+      "physical_gate_effect": null,
+      "physical_evidence_effect": null,
+      "semantic_limit": "PROPOSED_SCOPE_REQUIRES_DOCUMENT_CONSISTENCY"
+    },
+    {
+      "path": "governance/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.md",
+      "blob_sha": "cfb434e4c228f1a03494ad52d254bedf5f96d3d7",
+      "format": "md",
+      "source_status": "OWNER_ADOPTED_CANONICAL_METHOD_GATES",
+      "source_read": "PASS",
+      "physical_gate_effect": null,
+      "physical_evidence_effect": null,
+      "semantic_limit": "PROPOSED_SCOPE_REQUIRES_DOCUMENT_CONSISTENCY"
+    },
+    {
+      "path": "governance/2026-09-28_UL-SING_QuantumClosure_OwnerAdoption_Packet_v0.1.md",
+      "blob_sha": "ea233103eda61ee001fb53030462fdda267d87f0",
+      "format": "md",
+      "source_status": "EXPLICIT_OWNER_ADOPTION_RECORDED_PENDING_CANONICAL_SUCCESSOR",
+      "source_read": "PASS",
+      "physical_gate_effect": null,
+      "physical_evidence_effect": null,
+      "semantic_limit": "PROPOSED_SCOPE_REQUIRES_DOCUMENT_CONSISTENCY"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json",
+      "blob_sha": "81582ce7c395b1199e066e89ff44a053eed649ec",
+      "format": "json",
+      "source_status": "IMPLEMENTED_REVIEW_PENDING",
+      "source_read": "PASS",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "semantic_limit": "SOURCE_DECLARED_STATUS_ONLY"
+    },
+    {
+      "path": "registry/2026-09-28_UL-SING_QuantumClosure_GateCandidates_v0.1.json",
+      "blob_sha": "7e784a4e67a0dfe49fc2014e5978ce69880836d1",
+      "format": "json",
+      "source_status": "PASS_WITH_CONDITIONS_NONCANONICAL_CANDIDATES",
+      "source_read": "PASS",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "semantic_limit": "SOURCE_DECLARED_STATUS_ONLY"
+    },
+    {
+      "path": "registry/2026-09-28_UL-SING_QuantumClosure_OwnerAdoption_Packet_v0.1.json",
+      "blob_sha": "075bca42016e3f2bbc77b5befd5ebd5f55653f2a",
+      "format": "json",
+      "source_status": "EXPLICIT_OWNER_ADOPTION_RECORDED_PENDING_CANONICAL_SUCCESSOR",
+      "source_read": "PASS",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "semantic_limit": "SOURCE_DECLARED_STATUS_ONLY"
+    }
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

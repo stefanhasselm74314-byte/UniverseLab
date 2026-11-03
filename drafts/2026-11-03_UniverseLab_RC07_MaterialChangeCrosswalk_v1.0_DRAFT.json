@@ -1,0 +1,129 @@
+{
+  "schema": "universelab.rc07.material-change-crosswalk.v1",
+  "date": "2026-11-03",
+  "status": "DRAFT_PARTIAL_NOT_EXHAUSTIVE",
+  "basis_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "candidate_pr": 263,
+  "records": [
+    {
+      "id": "RC07-001",
+      "source": "registry/2026-09-14_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.json",
+      "source_field": "status",
+      "target": "state.reconciliation_addendum.ulsh05",
+      "value": "KINEMATIC_CANDIDATES_COMPONENTIZED_PROJECTOR_SOLVABILITY_FAIL_CLOSED_NO_PHYSICAL_REDUCTION_RELEASED",
+      "effect": "METHOD_ONLY",
+      "review": "SOURCE_VERIFIED_NO_PHYSICAL_PROMOTION"
+    },
+    {
+      "id": "RC07-002",
+      "source": "registry/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityContract_v1.1.json",
+      "source_field": "adoption.status / rules.P1-P5",
+      "target": "state.reconciliation_addendum.provenance",
+      "value": "UL-PKNR-v1.1 USER_RATIFIED_METHOD_RULE; P1-P5",
+      "effect": "GOVERNANCE",
+      "review": "MERGE_PROVENANCE_MUST_OVERRIDE_STALE_PUBLICATION_FIELD"
+    },
+    {
+      "id": "RC07-003",
+      "source": "registry/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.json",
+      "source_field": "status",
+      "target": "state.reconciliation_addendum.hda",
+      "value": "RATIFIED_LIMITED_NONOPERATIVE_GOVERNANCE_PENDING_CANONICAL_FORUM_ID",
+      "effect": "GOVERNANCE_NONOPERATIVE",
+      "review": "NO_OWNER_RESERVED_MATTER_DELEGATION"
+    },
+    {
+      "id": "RC07-004",
+      "source": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json",
+      "source_field": "gates[].gate_id / status",
+      "target": "state.reconciliation_addendum.method_gate_status",
+      "value": "QG-PI-01;QG-GAP-01;KK-CTP-01 ADOPTED_CANONICAL_METHOD_GATE",
+      "effect": "METHOD_GATES_ONLY",
+      "review": "CONDITIONAL_APPLICABILITY_NO_PHYSICAL_EVIDENCE"
+    },
+    {
+      "id": "RC07-005",
+      "source": "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json",
+      "source_field": "gap_status_effect",
+      "target": "state.scientific_open_state.bridge_growth_poisson_slip_lensing_map",
+      "value": "PARTIAL_TARGET_SEMANTICS_ONLY_G01_REMAINS_OPEN_BLOCKING",
+      "effect": "NO_PHYSICAL_DERIVATION",
+      "review": "SOURCE_FILE_REVIEW_PENDING_NOT_A_MERGE_STATUS"
+    },
+    {
+      "id": "RC07-006",
+      "source": "project-manifest.json",
+      "source_field": "gates.K1-D / K1-E / FM-G0",
+      "target": "all physical gates",
+      "value": "NOT_RELEASED / NOT_ADMISSIBLE / OPEN",
+      "effect": "NO_CHANGE",
+      "review": "FAIL_CLOSED"
+    },
+    {
+      "id": "RC07-007",
+      "source": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+      "source_field": "snapshot_timestamp",
+      "target": "candidate.snapshot_timestamp",
+      "value": "HISTORICAL_TIMESTAMP_INHERITED",
+      "effect": "BLOCKER",
+      "review": "REQUIRES_CURRENT_TIMESTAMP_WITH_ACTUAL_RECONCILIATION_EVENT"
+    },
+    {
+      "id": "RC07-008",
+      "source": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
+      "source_field": "canonical_snapshot",
+      "target": "candidate.canonical_snapshot",
+      "value": "HISTORICAL_SNAPSHOT_INHERITED",
+      "effect": "BLOCKER",
+      "review": "REQUIRES_NEW_SNAPSHOT_POINTER_AFTER_PROMOTION"
+    },
+    {
+      "id": "RC07-009",
+      "source": "registry/2026-09-04_UniverseLab_BandVC_G11_StateFreshnessClosure_v1.0.json",
+      "source_field": "closure_status",
+      "target": "state.reconciliation_addendum.band_vc_g11",
+      "value": "IMPLEMENTED_REVIEW_PENDING (source-local); merged provenance must be separately adjudicated",
+      "effect": "GOVERNANCE_PROVENANCE_ONLY",
+      "review": "DO_NOT_PROMOTE_TO_CLOSED_WITHOUT_MERGE_PROVENANCE"
+    },
+    {
+      "id": "RC07-010",
+      "source": "registry/2026-09-07_UniverseLab_ULSH05_WP1_QuadraticActionReadiness_v0.1.json",
+      "source_field": "status",
+      "target": "state.reconciliation_addendum.ulsh05_wp1",
+      "value": "OFFSHELL_SECOND_VARIATION_INPUTS_READY_FULL_QUADRATIC_SYSTEM_NOT_DERIVED",
+      "effect": "ANALYTIC_NONOPERATIVE",
+      "review": "FULL_QUADRATIC_SYSTEM_NOT_DERIVED"
+    },
+    {
+      "id": "RC07-011",
+      "source": "registry/2026-09-08_UniverseLab_ULSH05_WP1D_ConditionalSVTGaugeConstraintReduction_v0.1.json",
+      "source_field": "gate_state.WP1D_constraint_elimination",
+      "target": "state.reconciliation_addendum.ulsh05_wp1d",
+      "value": "BLOCKED_BY_ULSH04_AND_UNFROZEN_PHYSICAL_TIME_SLICING",
+      "effect": "BLOCKING",
+      "review": "NO_PHYSICAL_DOF_COUNT_OR_SVT_RELEASE"
+    },
+    {
+      "id": "RC07-012",
+      "source": "registry/2026-09-23_UniverseLab_FileNamingPolicy_v1.2.json",
+      "source_field": "status / canonical_pattern",
+      "target": "governance.file_naming",
+      "value": "ACTIVE; YYYY-MM-DD_Bereich_Kurztitel_vX.Y.ext",
+      "effect": "GOVERNANCE",
+      "review": "CANONICAL_SNAPSHOT_DISCOVERY_REQUIRES_DRAFT_ISOLATION"
+    }
+  ],
+  "unreviewed_scope": "Full merged post-September commit-by-commit semantic audit not completed",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "canonical_promotion": "BLOCKED",
+  "audit_scope": {
+    "compared_base": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+    "compared_head": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+    "github_compare_ahead_by": 298,
+    "github_compare_changed_files_returned": 148,
+    "coverage": "PARTIAL_MATERIAL_SOURCES_ONLY",
+    "warning": "Commit count and changed-file listing do not establish semantic review of every commit."
+  }
+}

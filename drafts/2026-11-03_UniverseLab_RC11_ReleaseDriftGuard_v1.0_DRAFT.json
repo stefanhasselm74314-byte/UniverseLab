@@ -1,0 +1,81 @@
+{
+  "schema": "universelab.rc11.draft-release-drift-guard.v1",
+  "date": "2026-11-03",
+  "status": "DRAFT_GUARD_ONLY_RELEASE_HOLD",
+  "repository": "stefanhasselm74314-byte/UniverseLab",
+  "protected_main_branch": "main",
+  "tracked_draft_pr": 263,
+  "draft_pr_head_branch": "audit/rc-validation-06-successor-candidates-20261103",
+  "pinned_merged_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "pinned_merged_main_tree": "65f423f04bbb2f1462f120a6b31073644cdc28cc",
+  "semantic_source_contract": "drafts/2026-11-03_UniverseLab_RC09_SemanticSourceContract_v1.0_DRAFT.json",
+  "candidate_file_group": [
+    "drafts/2026-11-03_UniverseLab_CurrentMainCanonicalState_v1.4_DRAFT.json",
+    "drafts/2026-11-03_UniverseLab_SessionCheckpoint_v1.35_DRAFT.json",
+    "drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json",
+    "drafts/2026-11-03_UniverseLab_ProjectManifest_v2.35_DRAFT.json"
+  ],
+  "checks": {
+    "live_main_sha_equals_pinned": true,
+    "pull_event_base_sha_equals_pinned": true,
+    "pr_must_be_open_and_draft": true,
+    "event_head_sha_matches_checked_out_merge_second_parent": true,
+    "pinned_base_tree_matches_actual_git_object": true,
+    "changed_files_must_be_only_added_in_drafts_tests_scoped_workflows": true,
+    "all_39_source_blob_shas_match_pinned_provenance": true,
+    "all_39_semantic_source_assertions_remain_passed": true,
+    "all_8_simulated_release_outputs_remain_nonoperative": true,
+    "negative_controls_must_reject_stale_or_promoted_state": true,
+    "owner_scoped_authorization_not_inferred_from_go": true
+  },
+  "allowed_additions": {
+    "drafts_regex": "^drafts/2026-11-03_UniverseLab_[A-Za-z0-9_.-]+_DRAFT\\.(json|md)$",
+    "tests_regex": "^tests/2026-11-03_test_UniverseLab_RC[0-9]+_[A-Za-z0-9_.-]+\\.py$",
+    "workflows_regex": "^\\.github/workflows/2026-11-03_RC[A-Za-z0-9_.-]+\\.yml$"
+  },
+  "mandatory_predecessor_test_modules": [
+    "tests/2026-11-03_test_UniverseLab_RC08_SemanticState_v1.0.py",
+    "tests/2026-11-03_test_UniverseLab_RC09_SemanticSourceContract_v1.0.py",
+    "tests/2026-11-03_test_UniverseLab_RC09_PointerChainPreflight_v1.0.py",
+    "tests/2026-11-03_test_UniverseLab_RC10_MigrationDryRun_v1.0.py"
+  ],
+  "positive_gate_values_forbidden": {
+    "FM-G0": "OPEN",
+    "K1-D": "NOT_RELEASED",
+    "K1-E": "NOT_ADMISSIBLE",
+    "PHYSICAL_BACKGROUND": "NOT_ESTABLISHED",
+    "PHYSICAL_RESPONSE_RANK": "NOT_EXECUTED",
+    "AuthorizationDecision": "NOT_CREATED",
+    "SingleUseGrant": "NOT_CREATED",
+    "BACKEND_IMPORT": "NOT_EXECUTED",
+    "SOLVER_EXECUTION": "NOT_EXECUTED"
+  },
+  "current_release_blockers": [
+    "INDEPENDENT_SCIENTIFIC_VALIDATION_NOT_COMPLETED",
+    "PUBLIC_POINTER_CHAIN_NOT_PROMOTED",
+    "RELEASE_TIMESTAMP_UNASSIGNED",
+    "RELEASE_COMMIT_NONEXISTENT",
+    "OWNER_SCOPED_RATIFICATION_NOT_RECORDED_FOR_THIS_RELEASE",
+    "PR263_REMAINS_DRAFT",
+    "PROTECTED_MAIN_WORKFLOW_OR_REQUIRED_CHECK_POLICY_NOT_VERIFIED"
+  ],
+  "drift_policy": {
+    "if_main_moves": "FAIL_CLOSED_AND_REQUIRE_NEW_EXPLICIT_BASELINE_RECONCILIATION",
+    "if_pr_changes_outside_scoped_additions": "FAIL_CLOSED",
+    "if_pr_becomes_ready_to_merge": "FAIL_CLOSED_PENDING_NEW_OWNER_RELEASE_REVIEW",
+    "if_live_main_unreachable": "FAIL_CLOSED",
+    "if_any_required_predecessor_test_fails": "FAIL_CLOSED",
+    "if_source_blob_mismatch": "FAIL_CLOSED",
+    "if_pr_head_changed_during_validation": "CHECK_EVENT_AND_SYNTHETIC_MERGE; REVERIFY_AT_MERGE",
+    "ci_workflow_editability": "THIS_PR_CAN_EDIT_ITS_OWN_WORKFLOW; GREEN_DRAFT_CI_IS_NOT_AN_IMMUTABLE_PROTECTED_RELEASE_GATE"
+  },
+  "attestation_limitation": "CI green attests only to bounded draft provenance and reference invariants; it does not attest owner authorization, physical truth, or future release commit. A test workflow supplied by the draft PR is not equivalent to mandatory protected-main branch protection.",
+  "effect": {
+    "writes_to_main": false,
+    "writes_to_registry": false,
+    "solver_execution": false,
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE",
+    "canonical_promotion": false
+  }
+}

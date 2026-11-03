@@ -1,0 +1,179 @@
+{
+  "schema": "universelab.rc08.semantic-field-crosswalk.v1",
+  "date": "2026-11-03",
+  "classification": "NONCANONICAL_PARTIAL_SEMANTIC_RECONCILIATION",
+  "status": "DRAFT_WITH_RELEASE_BLOCKERS",
+  "pinned_merged_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "verified_git_tree": "65f423f04bbb2f1462f120a6b31073644cdc28cc",
+  "historical_baseline_tree": "d743643419d812f6f8e8f3830328a3a9d24ed5ed",
+  "source_provenance": {
+    "G11": {
+      "path": "registry/2026-09-04_UniverseLab_BandVC_G11_StateFreshnessClosure_v1.0.json",
+      "blob_sha": "cb98d726da5def5c9a470e9faf80c5811ee52998",
+      "merge_pr": 210,
+      "merge_commit": "c3698b36860f7268a71ba259b36c64c105dd48a9"
+    },
+    "G01": {
+      "path": "registry/2026-09-07_UniverseLab_BandVC_G01_PerturbationObservableInterface_v1.0.json",
+      "blob_sha": "81582ce7c395b1199e066e89ff44a053eed649ec"
+    },
+    "WP1D2": {
+      "path": "registry/2026-09-14_UniverseLab_ULSH05_WP1D2_KinematicInvariantProjectorSolvabilityPreflight_v0.1.json",
+      "blob_sha": "fc378618467646262a55ea36b2b686f4fc91252a"
+    },
+    "PKNR": {
+      "path": "registry/2026-09-14_UniverseLab_ProvenanceConsistencyDetectabilityContract_v1.1.json",
+      "blob_sha": "1686a504ce451bc4f0a67fb311fd0ee5bdf99c94",
+      "merge_pr": 235,
+      "merge_commit": "71bd7ff368334ecab708ca09a5f4a3bc92b89035"
+    },
+    "HDA": {
+      "path": "registry/2026-08-31_UniverseLab_ULSH_HDA_Delegation_v1.0.json",
+      "blob_sha": "0a13444e9aa1dce4e91ea2815cadb99ed42c2030"
+    },
+    "ULSING": {
+      "path": "registry/2026-09-28_UL-SING_QuantumClosure_MethodGates_v1.0.json",
+      "blob_sha": "2b3fd87e22fe5d7296f914fa3cb2704cee55eb16",
+      "merge_pr": 254,
+      "merge_commit": "312e767628f003494a51edf685cf679469e35f13"
+    }
+  },
+  "field_decisions": [
+    {
+      "id": "RC08-01",
+      "field": "basis_main_tree / basis_tree",
+      "prior": "NULL_IN_DRAFT",
+      "candidate": "65f423f04bbb2f1462f120a6b31073644cdc28cc",
+      "evidence": "git commit 51bcc8f (exact git tree)",
+      "verification": "GIT_OBJECT_VERIFIED",
+      "impact": "PROVENANCE_ONLY"
+    },
+    {
+      "id": "RC08-02",
+      "field": "state.active_analysis_block.governance_provenance_gap",
+      "prior": "UL-BVC-G11_STATE_FRESHNESS_BEING_REPAIRED_BY_SUCCESSOR_CHAIN",
+      "candidate": "UL-BVC-G11_SEPTEMBER_CHAIN_MERGED_PR210_CURRENT_RECONCILIATION_OPEN",
+      "evidence": "G11 + PR210 merge; scope September 2026 successor only",
+      "verification": "MERGE_AND_SOURCE_CHECKED",
+      "impact": "GOVERNANCE_PROVENANCE_ONLY"
+    },
+    {
+      "id": "RC08-03",
+      "field": "state.reconciliation_addendum.semantic_rc08.band_vc_g11",
+      "candidate": {
+        "sept_2026_governance_missing_links": 0,
+        "remaining_scientific_links": 10,
+        "nov_2026_canonical_snapshot": "PENDING"
+      },
+      "evidence": "G11.governance_provenance_missing_links_after_closure, scientific_missing_links_after_closure",
+      "verification": "CONDITIONAL_SCOPE",
+      "impact": "NO_PHYSICAL_EFFECT"
+    },
+    {
+      "id": "RC08-04",
+      "field": "checkpoint.confirmed_defects[UL-BVC-G11].repair_status",
+      "prior": "IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING",
+      "candidate": "MERGED_PR210_HISTORICAL_SCOPE_ONLY_RC08_CURRENT_RECONCILIATION_PENDING",
+      "evidence": "G11 + PR210",
+      "verification": "MERGE_AND_SOURCE_CHECKED",
+      "impact": "GOVERNANCE_PROVENANCE_ONLY"
+    },
+    {
+      "id": "RC08-05",
+      "field": "state.scientific_open_state.bridge_growth_poisson_slip_lensing_map",
+      "candidate": "OPEN_UNRELEASED (preserve)",
+      "evidence": "G01.hzt_outputs; G01.release_requirements; G01.existing_runtime_firewalls",
+      "verification": "SOURCE_CHECKED_NO_DERIVATION",
+      "impact": "NO_CHANGE"
+    },
+    {
+      "id": "RC08-06",
+      "field": "state.reconciliation_addendum.semantic_rc08.ulsh05_wp1d2",
+      "candidate": {
+        "constraint_elimination": "BLOCKED",
+        "physical_DOF_count": "NOT_RELEASED",
+        "closed_range": "NOT_PROVEN",
+        "Fredholm_property": "NOT_PROVEN"
+      },
+      "evidence": "WP1D2.gate_state and projector_solvability_preflight",
+      "verification": "SOURCE_CHECKED_NOT_INDEPENDENT_MATH_PROOF",
+      "impact": "METHOD_ONLY"
+    },
+    {
+      "id": "RC08-07",
+      "field": "state.reconciliation_addendum.semantic_rc08.provenance_rule",
+      "candidate": {
+        "ratification": "USER_RATIFIED_METHOD_RULE",
+        "merge_pr": 235,
+        "automatic_evidence_evaluator": false,
+        "global_pipeline_enforcement": false
+      },
+      "evidence": "PKNR.adoption; PKNR.implementation + PR235 merge",
+      "verification": "MERGE_AND_SOURCE_CHECKED",
+      "impact": "METHOD_GOVERNANCE_ONLY"
+    },
+    {
+      "id": "RC08-08",
+      "field": "state.reconciliation_addendum.semantic_rc08.hda",
+      "candidate": {
+        "identity_binding": "PENDING_CANONICAL_ID_BINDING",
+        "operative_authority": false,
+        "owner_reserved_ratification": true
+      },
+      "evidence": "HDA.authority; HDA.owner_ratification_boundary",
+      "verification": "SOURCE_CHECKED",
+      "impact": "NONOPERATIVE_ONLY"
+    },
+    {
+      "id": "RC08-09",
+      "field": "state.reconciliation_addendum.semantic_rc08.ul_sing",
+      "candidate": {
+        "method_gates": [
+          "QG-PI-01",
+          "QG-GAP-01",
+          "KK-CTP-01"
+        ],
+        "adopted": true,
+        "closure_evidence": "NOT_EVALUATED_OR_NOT_APPLICABLE"
+      },
+      "evidence": "ULSING.gates; PR250; PR254",
+      "verification": "MERGE_AND_SOURCE_CHECKED",
+      "impact": "METHOD_ONLY"
+    },
+    {
+      "id": "RC08-10",
+      "field": "all.physical_gate_effect / all.physical_evidence_effect",
+      "candidate": "NONE / NONE (preserve)",
+      "evidence": "Six sources + original 2026-09-04 snapshot",
+      "verification": "FAIL_CLOSED_CONSISTENCY",
+      "impact": "NO_PROMOTION"
+    },
+    {
+      "id": "RC08-11",
+      "field": "checkpoint.canonical_snapshot + state.snapshot_timestamp",
+      "candidate": "UNRESOLVED_HISTORICAL_VALUES_RETAINED_FOR_DRAFT",
+      "evidence": "September 2026 predecessor fields",
+      "verification": "BLOCKER",
+      "impact": "NO_RELEASE"
+    },
+    {
+      "id": "RC08-12",
+      "field": "manifest.public_claim_audit.band_v_c_governance_provenance_missing_links",
+      "candidate": "PRESERVE_HISTORICAL_VALUE_1; TRACK_CURRENT_SCOPE_0_IN_ADDENDUM",
+      "evidence": "historical 11 missing links vs G11.post_closure 0 governance",
+      "verification": "HISTORICAL_AND_CURRENT_DISTINGUISHED",
+      "impact": "NO_REWRITE"
+    }
+  ],
+  "scope": "Semantically reconcile six decisive method/governance source objects, not all 39 sources or all 298 commits.",
+  "release_blockers": [
+    "FULL_39_SOURCE_SEMANTIC_REVIEW_NOT_COMPLETE",
+    "NOV_2026_CHECKPOINT_CANONICAL_SNAPSHOT_POINTER_NOT_RECONCILED",
+    "CURRENT_SNAPSHOT_TIMESTAMP_NOT_RECONCILED",
+    "EXISTING_CANONICAL_POINTER_CHECKS_NOT_RE_RUN_FOR_PROMOTION",
+    "PHYSICAL_GATES_REMAIN_BLOCKED"
+  ],
+  "canonical_effect": "NONE",
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "universelab.rc07.registry-audit-batch.v1",
+  "status": "DRAFT_PARTIAL",
+  "pinned_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "results": [
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C3_CapBendingJunctionGeometry_v0.1.json",
+      "blob_sha": "5591e92c592ad16a4a2404c0f76682e32dab9b55",
+      "source_status": "DERIVED_DOUBLY_COVARIANT_LINEAR_MOVING_INTERFACE_GEOMETRY_PREFLIGHT_FULL_PERTURBED_JUNCTION_AND_BOUNDARY_HESSIAN_OPEN",
+      "classification": "NONOPERATIVE_ANALYTIC_GEOMETRY_PREFLIGHT",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4A_GluingNormalFluxJunctions_v0.1.json",
+      "blob_sha": "c2ddf17a6071949f56f16c25437b99c899417c73",
+      "source_status": "DERIVED_TWO_SIDE_BENDING_GLUE_AND_LINEAR_SCALAR_GAUGE_NORMAL_FLUX_JUNCTIONS_FULL_MOVING_BOUNDARY_HESSIAN_OPEN",
+      "classification": "NONOPERATIVE_ANALYTIC_TWO_SIDE_GLUE_AND_NORMAL_FLUX_PREFLIGHT",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B0_SecondOrderEmbeddingPathContract_v0.1.json",
+      "blob_sha": "146c16f26a9d276f1a03a150d24b1feb0fa0b8d1",
+      "source_status": "DERIVED_SECOND_ORDER_EMBEDDING_AND_PULLBACK_PATH_CONTRACT_MOVING_BOUNDARY_HESSIAN_NOT_YET_ASSEMBLED",
+      "classification": "NONOPERATIVE_SECOND_ORDER_VARIATIONAL_KINEMATICS_CONTRACT",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "path": "registry/2026-09-07_UniverseLab_ULSH05_WP1C4B1A_MovingDomainTransportMaster_v0.1.json",
+      "blob_sha": "0521a07de97bb7f9ebd5b647c2912b74d2b8308b",
+      "source_status": "DERIVED_FIRST_SECOND_MOVING_DOMAIN_TRANSPORT_MASTER_DYNAMICAL_SHAPE_RESIDUAL_NOT_ASSEMBLED",
+      "classification": "NONOPERATIVE_MOVING_DOMAIN_VARIATIONAL_KINEMATICS_MASTER",
+      "solver_authorized": false,
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE",
+      "review": "SOURCE_PROVENANCE_CAPTURED_SEMANTIC_REVIEW_PENDING"
+    }
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}

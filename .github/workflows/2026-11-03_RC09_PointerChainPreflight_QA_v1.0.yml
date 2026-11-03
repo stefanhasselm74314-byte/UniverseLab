@@ -1,0 +1,31 @@
+name: RC09 draft four-way pointer chain QA
+on:
+  pull_request:
+    paths:
+      - 'drafts/2026-11-03_UniverseLab_CurrentMainCanonicalState_v1.4_DRAFT.json'
+      - 'drafts/2026-11-03_UniverseLab_SessionCheckpoint_v1.35_DRAFT.json'
+      - 'drafts/2026-11-03_UniverseLab_SiteState_v1.5_DRAFT.json'
+      - 'drafts/2026-11-03_UniverseLab_ProjectManifest_v2.35_DRAFT.json'
+      - 'drafts/2026-11-03_UniverseLab_RC09_PromotionPreflight_v1.0_DRAFT.md'
+      - 'tests/2026-11-03_test_UniverseLab_RC09_PointerChainPreflight_v1.0.py'
+      - '.github/workflows/2026-11-03_RC09_PointerChainPreflight_QA_v1.0.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rc09-pointers:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Compile pointer chain checks
+        run: python3 -m py_compile tests/2026-11-03_test_UniverseLab_RC09_PointerChainPreflight_v1.0.py
+      - name: Check draft pointers and negative controls
+        run: python3 tests/2026-11-03_test_UniverseLab_RC09_PointerChainPreflight_v1.0.py
+      - name: Mark release hold in job summary
+        run: |
+          echo 'Four-way candidate pointer consistency only.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Historical live references remain intentionally unchanged.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'CANONICAL_PROMOTION=BLOCKED; PHYSICAL_GATE_EFFECT=NONE.' >> "$GITHUB_STEP_SUMMARY"

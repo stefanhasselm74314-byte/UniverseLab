@@ -1,0 +1,50 @@
+{
+  "schema": "universelab.rc07.registry-audit-batch.v1",
+  "status": "DRAFT_PROVENANCE_ONLY",
+  "pinned_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "results": [
+    {
+      "path": "registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json",
+      "blob_sha": "59ada8630bb424969898bfc1fbd02bbf67935226",
+      "source_status": "POST_BAND_VC_RECONCILED_CURRENT_STATE",
+      "historical_basis_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+      "source_read": "PASS",
+      "semantic_limit": "HISTORICAL_STATE_NOT_NOVEMBER_RELEASE",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "path": "registry/2026-09-04_UniverseLab_SessionCheckpoint_v1.34.json",
+      "blob_sha": "279bc338070af0f5e1498108b8eb127581084ad4",
+      "source_status": "HISTORICAL_CHECKPOINT",
+      "historical_basis_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+      "source_read": "PASS",
+      "semantic_limit": "HISTORICAL_STATE_NOT_NOVEMBER_RELEASE",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "path": "registry/2026-09-04_UniverseLab_SiteState_v1.4.json",
+      "blob_sha": "d44ace0fc5c2c5ad530439627daafb1f437436ae",
+      "source_status": "HISTORICAL_CHECKPOINT",
+      "historical_basis_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+      "source_read": "PASS",
+      "semantic_limit": "HISTORICAL_STATE_NOT_NOVEMBER_RELEASE",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE"
+    },
+    {
+      "path": "registry/session-checkpoint-latest.json",
+      "blob_sha": "279bc338070af0f5e1498108b8eb127581084ad4",
+      "source_status": "HISTORICAL_CHECKPOINT",
+      "historical_basis_commit": "3022dc8aac27ed2054fdb7643708fe57440b9256",
+      "source_read": "PASS",
+      "semantic_limit": "HISTORICAL_STATE_NOT_NOVEMBER_RELEASE",
+      "physical_gate_effect": "NONE",
+      "physical_evidence_effect": "NONE"
+    }
+  ],
+  "checkpoint_alias_blob_identical": true,
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
