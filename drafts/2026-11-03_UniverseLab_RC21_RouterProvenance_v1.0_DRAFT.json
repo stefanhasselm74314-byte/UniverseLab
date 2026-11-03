@@ -1,0 +1,11 @@
+{
+  "schema": "universelab.rc21.router-candidate-provenance.v1",
+  "status": "CANDIDATE_NOT_INSTALLED",
+  "manifest_sha256": "b0b517002349fc158eddb0676fc764986c9a909fc873f5edf6bf75e42a57753b",
+  "basis_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "public_source_paths": 77,
+  "generated_router_sha256": "1fdcdfe472832d600e5ad2232dec25e0df52e2a6651cdfd5fe66a95bb0f1d0e6",
+  "website_changed": false,
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE"
+}
