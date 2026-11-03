@@ -1,0 +1,37 @@
+name: UniverseLab RC16 revocation and routine-policy model QA
+on:
+  pull_request:
+    paths:
+      - 'drafts/2026-11-03_UniverseLab_RC16_AuthorizationAlternatives_v1.0_DRAFT.json'
+      - 'governance/2026-11-03_UniverseLab_RC16_RevocationSafeAuthorizationReview_v1.0.md'
+      - 'tools/2026-11-03_UniverseLab_RC16_AuthorizationModel_v1.0.py'
+      - 'tests/2026-11-03_test_UniverseLab_RC16_AuthorizationModel_v1.0.py'
+      - '.github/workflows/2026-11-03_UniverseLab_RC16_AuthorizationModelQA_v1.0.yml'
+permissions:
+  contents: read
+jobs:
+  rc16-policy-model:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Compile both guard and policy prototypes
+        run: |
+          python3 -m py_compile tools/2026-11-03_UniverseLab_RC13_TrustedReleaseGuard_v1.0.py
+          python3 -m py_compile tools/2026-11-03_UniverseLab_RC16_AuthorizationModel_v1.0.py
+          python3 -m py_compile tests/2026-11-03_test_UniverseLab_RC16_AuthorizationModel_v1.0.py
+      - name: RC16 mock policy and revocation regression
+        run: python3 tests/2026-11-03_test_UniverseLab_RC16_AuthorizationModel_v1.0.py -v
+      - name: Keep RC13 original candidate tests green
+        run: python3 tests/2026-11-03_test_UniverseLab_RC13_TrustedReleaseGuard_v1.0.py -v
+      - name: Preserve repository and policy untouched
+        run: |
+          git diff --quiet
+          git diff --cached --quiet
+      - name: Explicit noninstallation disclaimer
+        run: |
+          echo 'RC16 is a noninstalled MODEL; candidate self-tests do not change GitHub Required Checks.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Owner must separately choose policy mode and review event protections before installation.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'CANONICAL_PROMOTION=BLOCKED; MAIN=UNCHANGED; NO PHYSICS APPROVAL.' >> "$GITHUB_STEP_SUMMARY"
