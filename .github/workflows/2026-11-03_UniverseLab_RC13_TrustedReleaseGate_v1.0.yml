@@ -3,7 +3,7 @@ name: UniverseLab RC13 trusted-base release gate
 # pull_request_target executes the BASE BRANCH workflow, never the PR's code.
 on:
   pull_request_target:
-    types: [opened, reopened, synchronize, edited, ready_for_review, converted_to_draft]
+    types: [opened, reopened, synchronize, edited, labeled, ready_for_review, converted_to_draft]
 permissions:
   contents: read
   pull-requests: read
