@@ -334,6 +334,30 @@ class TrustGateTests(TestCase):
             obj["governance"]["RATIFIED_HUMAN_TRUST_ROOT"]="RATIFIED"
             a.contents_map[(SITE,HEAD)]=encoded(obj)
         case("site_governance_promotion",inject_site_governance)
+        def forged_field(a,path,field_chain,value):
+            obj=json.loads(a.contents_map[(path,HEAD)])
+            cur=obj
+            for token in field_chain[:-1]:
+                cur=cur[token]
+            cur[field_chain[-1]]=value
+            a.contents_map[(path,HEAD)]=encoded(obj)
+        case("fake_ghost_freedom",lambda a:forged_field(
+            a,STATE,["scientific_open_state","full_ghost_freedom"],"PROVEN"))
+        case("fake_missing_link_closure",lambda a:forged_field(
+            a,STATE,["active_analysis_block","blocking_scientific_or_empirical_gaps"],0))
+        case("fake_claims_in_manifest",lambda a:forged_field(
+            a,MANIFEST,["public_claim_audit","physical_claim_promotions"],1))
+        case("fake_lensing_release",lambda a:forged_field(
+            a,SITE,["analysis_state","band_vc_scientific_or_empirical_blocking_missing_links"],0))
+        case("fabricated_checkpoint_evidence",lambda a:forged_field(
+            a,CP,["verified_results"],["GHOST_FREE"]))
+        case("fabricated_public_html_claim",lambda a:a.contents_map.__setitem__(
+            ("research-status.html",HEAD),
+            a.contents_map[("research-status.html",HEAD)]+b"\nHZT ghosts solved"))
+        case("global_shell_script_injection",lambda a:a.contents_map.__setitem__(
+            (SHELL,HEAD),a.contents_map[(SHELL,HEAD)]+b"\nalert('inject')"))
+        case("manifest_silent_architecture_change",lambda a:forged_field(
+            a,MANIFEST,["architecture"],["HZT-Full-PROVEN"]))
         def change_timestamp(a):
             obj=json.loads(a.contents_map[(STATE,HEAD)])
             obj["snapshot_timestamp"]="2026-09-04T12:00:00+02:00"
