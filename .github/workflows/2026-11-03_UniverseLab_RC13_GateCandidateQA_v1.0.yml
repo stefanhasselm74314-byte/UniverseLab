@@ -7,6 +7,7 @@ on:
       - 'tools/2026-11-03_UniverseLab_RC13_TrustedReleaseGuard_v1.0.py'
       - 'tests/2026-11-03_test_UniverseLab_RC13_TrustedReleaseGuard_v1.0.py'
       - 'governance/2026-11-03_UniverseLab_RC13_TrustedReleaseGateBootstrap_v1.0.md'
+      - 'governance/2026-11-03_UniverseLab_RC14_AdversarialReleaseGateAudit_v1.0.md'
 permissions:
   contents: read
 jobs:
