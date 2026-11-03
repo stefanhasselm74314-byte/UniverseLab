@@ -1,0 +1,19 @@
+{
+  "schema": "universelab.rc20.local-http-prefix-smoke.v1",
+  "status": "HTTP_TRANSPORT_PASS_RUNTIME_BROWSER_NOT_PROVEN",
+  "host": "127.0.0.1 ephemeral ephemeral-port (not public Pages)",
+  "prefix": "/UniverseLab/",
+  "desktop_sha256_200": 446,
+  "bytes_identical_to_manifest": 4932132,
+  "mobile_user_agent_html_200": 73,
+  "excluded_router_target_http_404": [
+    "md2s_bvp_solver_v1_0.py",
+    "science/solver-hub/2026-08-07_ULSH-01_MD2S-BVP_Roadmap_v1.0.md",
+    "tools/2026-08-03_validate_public_repository_privacy_v1.0.py"
+  ],
+  "synthetic_draft_http_404": true,
+  "javascript_executed": false,
+  "real_android_device_executed": false,
+  "actual_github_pages_artifact_verified": false,
+  "physical_evidence_effect": "NONE"
+}
