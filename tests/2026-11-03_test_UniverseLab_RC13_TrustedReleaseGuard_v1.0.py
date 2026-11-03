@@ -71,6 +71,18 @@ def fixture():
         "active_assumptions":["NO_BACKGROUND"],
         "forbidden_inferences":["NO_PHYSICAL_EVIDENCE"],
         "physical_governance":oldphysical,
+        "active_block":{
+            "id":"BAND_VC_STATE_FRESHNESS_AND_MISSING_LINK_REMEDIATION",
+            "state_freshness_action":"APPEND_ONLY_SUCCESSOR_CHAIN_AND_PUBLIC_POINTER_REPAIR",
+            "remaining_scientific_or_empirical_blocking_missing_links":10,
+            "physical_claim_promotions":0
+        },
+        "confirmed_defects":[{
+            "defect_id":"UL-BVC-G11",
+            "statement":"Historical provenance pointer freshness needed",
+            "repair_status":"IMPLEMENTED_IN_CHANGESET_REVIEW_PENDING"
+        }],
+        "entry_points":[MANIFEST,OLD_STATE,OLD_SITE,"research-status.html"]
     }
     site_shared={
         "governance":copy.deepcopy(oldphysical),
@@ -109,6 +121,11 @@ def fixture():
         "basis_commit":BASE,"basis_tree":TREE,
         "timestamp":TIME,"canonical_snapshot":CP,
         "canonical_state":STATE,"site_state":SITE}
+    cp["active_block"]["state_freshness_action"]=(
+        "PR210_MERGED_SEPTEMBER_CHAIN_NEW_RC08_CANONICAL_RECONCILIATION_PENDING")
+    cp["confirmed_defects"][0]["repair_status"]=(
+        "MERGED_PR210_HISTORICAL_SCOPE_ONLY_RC08_NEW_SNAPSHOT_PENDING")
+    cp["entry_points"]=[MANIFEST,STATE,SITE,"research-status.html"]
     oldsite={**fields,**copy.deepcopy(site_shared)}
     site={**fields,**copy.deepcopy(site_shared),
           "basis_main_commit":BASE,"basis_main_tree":TREE,
