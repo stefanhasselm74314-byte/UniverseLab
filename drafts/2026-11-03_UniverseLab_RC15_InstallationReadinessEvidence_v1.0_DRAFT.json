@@ -1,0 +1,156 @@
+{
+  "schema": "universelab.rc15.installation-readiness-evidence.v1",
+  "date": "2026-11-03",
+  "status": "DRAFT_READINESS_HOLD",
+  "repository": "stefanhasselm74314-byte/UniverseLab",
+  "baseline_main_sha": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "tracked_audit_pr": {
+    "number": 263,
+    "release_state": "DRAFT_UNMERGED"
+  },
+  "tracked_gate_pr": {
+    "number": 264,
+    "head_sha": "96225f051830735ffc2d5b22581cd66a1a333846",
+    "state": "DRAFT_UNMERGED"
+  },
+  "observed_github": {
+    "default_branch": "main",
+    "ruleset": {
+      "id": 24417933,
+      "name": "UniverseLab-main-Basisschutz",
+      "enforcement": "active",
+      "rule_types": [
+        "deletion",
+        "non_fast_forward"
+      ],
+      "required_pull_request": false,
+      "required_status_checks": false
+    },
+    "candidate_ci": {
+      "job": "rc13-candidate-selftest",
+      "conclusion": "success",
+      "run_id": 41651889235,
+      "head_sha": "96225f051830735ffc2d5b22581cd66a1a333846",
+      "check_run_app_id": 15368,
+      "check_run_app_slug": "github-actions"
+    },
+    "trusted_check": {
+      "name": "trusted-release-gate",
+      "observed_on_pr264_head": false,
+      "installed_in_main": false,
+      "verified_as_required": false
+    },
+    "legacy_branch_protection_detail": "CONNECTOR_HTTP403_NOT_INDEPENDENTLY_VERIFIED"
+  },
+  "readiness_gates": [
+    {
+      "id": "R15-A",
+      "name": "Candidate script mock QA",
+      "result": "PASS_SCOPED",
+      "evidence": "RC14 9 unittest methods, 44 mocked negative cases"
+    },
+    {
+      "id": "R15-B",
+      "name": "Application identity for candidate QA",
+      "result": "PASS_OBSERVED",
+      "evidence": "GitHub commit check-runs: rc13-candidate-selftest app_id 15368"
+    },
+    {
+      "id": "R15-C",
+      "name": "Trusted-base guard independently installed in main",
+      "result": "BLOCKED_NOT_INSTALLED",
+      "evidence": "RC13 files only on PR264 draft"
+    },
+    {
+      "id": "R15-D",
+      "name": "GitHub main ruleset requires PR + trusted-release-gate",
+      "result": "BLOCKED_ABSENT",
+      "evidence": "Ruleset 24417933: deletion;non_fast_forward only"
+    },
+    {
+      "id": "R15-E",
+      "name": "Owner accepts all-PR scoped GitHub acknowledgment operational burden",
+      "result": "BLOCKED_OWNER_DECISION_UNRECORDED",
+      "evidence": "RC14 fail-closed classifier conservatively treats all paths as sensitive"
+    },
+    {
+      "id": "R15-F",
+      "name": "Owner expressly approves scoped nonoperative gate installation",
+      "result": "BLOCKED_OWNER_DECISION_UNRECORDED",
+      "evidence": "Neither generic chat Go nor candidate green QA is a reserved release decision"
+    },
+    {
+      "id": "R15-G",
+      "name": "Trusted pull_request_target check attaches to correct PR head/merge and is enforceable",
+      "result": "UNVERIFIED_NEEDS_LIVE_CANARY",
+      "evidence": "Official GitHub Docs say event eligible; actual check must be selected and tested in PR merge box"
+    },
+    {
+      "id": "R15-H",
+      "name": "Trusted job name unique / status identity not ambiguous",
+      "result": "UNVERIFIED_CHECK_NAME_COLLISION_RISK",
+      "evidence": "GitHub Docs warn duplicate job names may cause ambiguity and merge blockers"
+    },
+    {
+      "id": "R15-I",
+      "name": "Owner approval revocation after green check handled by native enforcement",
+      "result": "BLOCKED_TEMPORAL_REVOCATION_RISK",
+      "evidence": "Guard re-reads at run finish but issue comment delete/edit is not included in pull_request_target triggers; existing check may remain green"
+    },
+    {
+      "id": "R15-J",
+      "name": "Invalid sensitive canary PR demonstrably blocked by GitHub Merge UI",
+      "result": "UNVERIFIED_NEEDS_LIVE_CANARY",
+      "evidence": "No main-based trusted guard or required check enforced yet"
+    },
+    {
+      "id": "R15-K",
+      "name": "Human external independent code/security review",
+      "result": "NOT_PERFORMED",
+      "evidence": "RC13/14 authored and reviewed in one AI-assisted workflow"
+    },
+    {
+      "id": "R15-L",
+      "name": "No scientific or physical promotion",
+      "result": "PASS_DECLARED_NONOPERATIVE",
+      "evidence": "PR264 only adds docs/workflows/tool/tests; main unchanged and gates fail-closed"
+    }
+  ],
+  "operational_model": {
+    "owner_action_bound_to": "PR_NUMBER + EXACT_HEAD_SHA + ALL_SCOPES",
+    "owner_ack_source": "GitHub-authenticated issue comment, not cryptographic identity attestation",
+    "rerun_after_owner_comment": "PR label action or other supported pull_request_target event; comment alone does not retrigger that job",
+    "comment_revocation_after_green": "UNMITIGATED_IN_PERSISTENT_REQUIRED_CHECK",
+    "all_pr_owner_review_burden": "HIGH_REQUIRE_EXPLICIT_POLICY_ACCEPTANCE",
+    "required_check_name": "trusted-release-gate",
+    "required_check_app_id": 15368,
+    "required_check_strict": true,
+    "check_sha_association": "REQUIRES_CANARY_VERIFICATION",
+    "github_ruleset_ui": "https://github.com/stefanhasselm74314-byte/UniverseLab/rules/24417933"
+  },
+  "installation_order": [
+    "Do not merge PR263 or PR264 during RC15.",
+    "Obtain independent human security review and owner decision to accept all-PR owner-ack governance.",
+    "Resolve mandatory-check origin/uniqueness and owner-comment post-green revocation issue; record residual risk if operationally accepted.",
+    "Obtain explicit scoped owner authorization for installing only the nonoperative base-trusted guard.",
+    "After separate approval, merge only isolated PR264 into main; do not canonicalize science.",
+    "Create controlled positive/negative canary PRs to observe actual check SHA, origin and merge blockers.",
+    "Configure required pull_request and strict GitHub-Actions-pinned trusted-release-gate in main ruleset only after canary identity is proved.",
+    "Revalidate with real failure scenarios, including check-name collisions, comment revocation and owner-authorization re-trigger.",
+    "Only later consider separate release PR; repeat scientific and provenance review on exact release tree."
+  ],
+  "nonoperational_firewalls": {
+    "main_mutation": "NONE",
+    "ruleset_mutation": "NONE",
+    "owner_ratification": "NOT_REQUESTED",
+    "trusted_guard_installation": "NOT_AUTHORIZED",
+    "pr263_merge": "BLOCKED",
+    "pr264_merge": "BLOCKED",
+    "canonical_promotion": "BLOCKED",
+    "solver_execution": "NOT_AUTHORIZED",
+    "physical_gate_effect": "NONE",
+    "physical_evidence_effect": "NONE"
+  },
+  "overall_verdict": "NOT_READY_FOR_INSTALLATION",
+  "evidence_scope": "Current observed public GitHub API and mocked candidate CI only. No real required-check installation, bypass test or independent external audit."
+}
