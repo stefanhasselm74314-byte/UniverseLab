@@ -1,0 +1,118 @@
+{
+  "schema": "universelab.rc12.protected-main-policy-evidence.v1",
+  "date": "2026-11-03",
+  "status": "DRAFT_READ_ONLY_POLICY_AUDIT_RELEASE_HOLD",
+  "repository": "stefanhasselm74314-byte/UniverseLab",
+  "default_branch": "main",
+  "pinned_source_main_commit": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+  "observed_main": {
+    "sha": "51bcc8fccb092c104ac0fca5fc98a5b996dcb914",
+    "protected": true,
+    "legacy_protection_summary": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    }
+  },
+  "ruleset_collection": {
+    "includes_parents": true,
+    "count": 1,
+    "items": [
+      {
+        "id": 24417933,
+        "name": "UniverseLab-main-Basisschutz",
+        "target": "branch",
+        "source_type": "Repository",
+        "enforcement": "active"
+      }
+    ]
+  },
+  "active_ruleset": {
+    "id": 24417933,
+    "name": "UniverseLab-main-Basisschutz",
+    "target": "branch",
+    "source_type": "Repository",
+    "source": "stefanhasselm74314-byte/UniverseLab",
+    "enforcement": "active",
+    "conditions": {
+      "ref_name": {
+        "include": [
+          "refs/heads/main"
+        ],
+        "exclude": []
+      }
+    },
+    "rule_types": [
+      "deletion",
+      "non_fast_forward"
+    ],
+    "bypass_actors": [],
+    "current_user_can_bypass": "never",
+    "last_updated_at": "2026-10-03T15:27:57.114+02:00",
+    "read_only_ui_url": "https://github.com/stefanhasselm74314-byte/UniverseLab/rules/24417933"
+  },
+  "legacy_branch_protection_details": {
+    "endpoint": "https://api.github.com/repos/stefanhasselm74314-byte/UniverseLab/branches/main/protection",
+    "result": "HTTP_403_RESOURCE_NOT_ACCESSIBLE_BY_INTEGRATION",
+    "meaning": "NOT_AUDITED_DO_NOT_INFER_NO_OTHER_LEGACY_SETTINGS"
+  },
+  "required_enforcement_assessment": {
+    "deletion_protected_by_ruleset": true,
+    "non_fast_forward_protected_by_ruleset": true,
+    "required_pull_request_rule_present_in_readable_active_ruleset": false,
+    "required_status_checks_rule_present_in_readable_active_ruleset": false,
+    "required_approving_reviews_rule_present_in_readable_active_ruleset": false,
+    "legacy_summary_required_checks_active": false,
+    "immutable_release_check_enforcement_verified": false,
+    "verdict": "BLOCKED_NO_VERIFIED_MANDATORY_PR_OR_STATUS_CHECK_GATES"
+  },
+  "candidate_existing_always_on_checks": [
+    {
+      "workflow": ".github/workflows/2026-08-01_UniverseLab_FileNamingContract_v1.0.yml",
+      "name": "UniverseLab dated file naming contract",
+      "job_id": "validate-file-names",
+      "pr_trigger": "UNFILTERED",
+      "is_required_now": false
+    },
+    {
+      "workflow": ".github/workflows/2026-08-16_UniverseLab_PlatformGovernance_v1.1.yml",
+      "name": "UniverseLab platform governance v1.2 current-state aware",
+      "job_id": "platform-governance",
+      "pr_trigger": "UNFILTERED",
+      "is_required_now": false
+    }
+  ],
+  "conditional_canonical_check": {
+    "workflow": ".github/workflows/2026-09-01_UniverseLab_CurrentMainCanonicalStateReconciliation_QA_v1.0.yml",
+    "name": "UniverseLab current-main canonical state reconciliation QA",
+    "job_id": "validate-current-main-state",
+    "pr_trigger": "PATH_FILTERED",
+    "recommendation": "DO_NOT_MARK_GLOBALLY_REQUIRED_UNTIL_UNCONDITIONAL_RELEASE_WRAPPER_OR_TRIGGER_COVERAGE_FIXED"
+  },
+  "recommended_owner_UI_changes": [
+    "Repository Settings > Rules > Rulesets > UniverseLab-main-Basisschutz: review current active scope.",
+    "Retain deletion and non_fast_forward restrictions and no bypass by default.",
+    "Add required_pull_request rule for main after reviewing maintainer workflow.",
+    "Add required_status_checks for always-running naming and platform-governance jobs, binding checks to GitHub Actions; verify exact check names in GitHub UI.",
+    "For canonical releases, design a trusted always-on release-guard on main before requiring a formerly path-filtered current-state validation check.",
+    "Choose approving-review requirement only if an independent reviewer exists; single-maintainer self-approval can create an unmergeable PR.",
+    "After UI changes, re-read live rulesets and confirm a deliberately failing test blocks merging; report exact observations before any release."
+  ],
+  "policy_caveats": [
+    "PR-authored CI files can be modified by the PR and therefore are not equivalent to independently protected release enforcement.",
+    "Required check names should be verified from live check-run selectors; workflow title alone is not sufficient to configure required status contexts.",
+    "Legacy branch-protection details were inaccessible (403); do not assert the absence of every possible legacy policy.",
+    "Ruleset observation is a time-scoped read-only snapshot, not persistent monitoring or an owner release authorization."
+  ],
+  "actions_taken": [
+    "READ_ONLY_RULESET_AUDIT",
+    "DRAFT_POLICY_EVIDENCE_ONLY"
+  ],
+  "physical_gate_effect": "NONE",
+  "physical_evidence_effect": "NONE",
+  "canonical_promotion": "BLOCKED",
+  "owner_release_ratification": "NOT_REQUESTED"
+}
