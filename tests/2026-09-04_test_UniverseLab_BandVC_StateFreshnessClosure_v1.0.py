@@ -53,6 +53,7 @@ def module(name: str, path: Path):
 
 
 def main() -> None:
+    binding = module("ul_claim_binding", ROOT / "tools/2026-10-03_validate_UniverseLab_ClaimProvenanceBinding_v1.0.py").validate(ROOT)
     # Existing strict validator remains authoritative for pointer/firewall shape.
     validator = module("ul_state_reconcile_post_vc_current", VALIDATOR)
     validator.validate(ROOT, strict_source_existence=True)
@@ -77,15 +78,16 @@ def main() -> None:
     assert historical["result"]["medium_contextually_unadjudicated"] == 0
     assert historical["result"]["physical_claim_promotions"] == 0
 
-    # Current materialized corpus and exact seven-ID successor delta.
+    # Current corpus: raw 37+2+7; validated identity view preserves the historical 39+7 layer.
     current_medium = {row["claim_id"] for row in candidates["candidates"] if row["preliminary_risk_class"] == "MEDIUM"}
     current_high = [row for row in candidates["candidates"] if row["preliminary_risk_class"] == "HIGH"]
     assert len(candidates["candidates"]) == 993
     assert current_high == []
     assert len(current_medium) == 46
-    still_live = current_medium & historical_ids
-    retired = historical_ids - current_medium
-    new_ids = current_medium - historical_ids
+    normalized_medium = binding["historical_id_view"]
+    still_live = normalized_medium & historical_ids
+    retired = historical_ids - normalized_medium
+    new_ids = normalized_medium - historical_ids
     assert len(still_live) == 39
     assert len(retired) == 3
     assert len(new_ids) == 7
@@ -178,7 +180,7 @@ def main() -> None:
     assert live_summary["physical_gate_effect"] == live_summary["physical_evidence_effect"] == "NONE"
 
     print(
-        "UniverseLab Band V-C G11 closure: PASS successor=v1.3/v1.4/v1.34 "
+        "UniverseLab Band V-C G11 historical contract + current binding: PASS snapshot=2026-09-04 successor=v1.3/v1.4/v1.34 "
         "historical_medium=42/42 current_claims=993 current_medium=46/46 delta=7/7 "
         "current_high=0 scientific_missing_links=10 governance_provenance_missing_links=0 "
         "physical_gate_effect=NONE physical_evidence_effect=NONE"

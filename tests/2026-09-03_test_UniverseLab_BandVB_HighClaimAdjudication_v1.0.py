@@ -66,6 +66,7 @@ def assert_closed(value: dict) -> None:
 
 
 def main() -> None:
+    binding = module("ul_claim_binding", ROOT / "tools/2026-10-03_validate_UniverseLab_ClaimProvenanceBinding_v1.0.py").validate(ROOT)
     validator = module("ul_state_validator_high_current", VALIDATOR)
     validator.validate(ROOT, strict_source_existence=True)
 
@@ -122,7 +123,7 @@ def main() -> None:
     assignments = load(ASSIGNMENTS)
     delta = load(DELTA)
     assert summary["claim_candidates"] == 993
-    assert summary["tracked_html_files"] == 72
+    assert summary["tracked_html_files"] == binding["tracked_html_files"] == 73
     assert summary["risk_classes"].get("HIGH", 0) == 0
     assert summary["risk_classes"]["MEDIUM"] == 46
     assert summary["physical_gate_effect"] == summary["physical_evidence_effect"] == "NONE"

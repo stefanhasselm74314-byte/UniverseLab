@@ -1,0 +1,34 @@
+name: UniverseLab bounded claim provenance binding QA v1.0
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-binding:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate historical originals and live corpus
+        run: python tools/2026-10-03_validate_UniverseLab_ClaimProvenanceBinding_v1.0.py
+      - name: Reject false transfer and shallow-history controls
+        run: python tests/2026-10-03_test_UniverseLab_ClaimProvenanceBinding_v1.0.py
+      - name: Retain HIGH, MEDIUM and historical G11 gates
+        run: |
+          python tests/2026-09-03_test_UniverseLab_BandVB_HighClaimAdjudication_v1.0.py
+          python tests/2026-09-04_test_UniverseLab_BandVB_MediumCompletionAdjudication_v1.0.py
+          python tests/2026-09-04_test_UniverseLab_BandVC_StateFreshnessClosure_v1.0.py
+      - name: Verify sitemap against complete committed history
+        run: |
+          python tools/2026-09-03_generate_UniverseLab_SitemapLastmod_v1.0.py --check
+          python tests/2026-09-03_test_UniverseLab_BandVB_SitemapLastmod_v1.0.py

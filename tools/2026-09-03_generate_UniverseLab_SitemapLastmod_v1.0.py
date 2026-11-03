@@ -73,6 +73,10 @@ def latest_commit_date(repo: Path, repository_path: str) -> str:
 
 
 def generate(repo: Path, sitemap_path: Path) -> tuple[str, list[Entry]]:
+    history = subprocess.run(["git", "-C", str(repo), "rev-parse", "--is-shallow-repository"],
+                             check=False, capture_output=True, text=True)
+    if history.returncode != 0 or history.stdout.strip() != "false":
+        raise SitemapError("COMPLETE_GIT_HISTORY_REQUIRED_FOR_LASTMOD")
     source = sitemap_path.read_text(encoding="utf-8")
     lines = source.splitlines(keepends=True)
     entries: list[Entry] = []

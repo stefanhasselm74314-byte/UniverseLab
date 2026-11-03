@@ -47,6 +47,7 @@ def contains(path: str, *needles: str) -> None:
 
 
 def main() -> None:
+    binding = module("ul_claim_binding", ROOT / "tools/2026-10-03_validate_UniverseLab_ClaimProvenanceBinding_v1.0.py").validate(ROOT)
     priority = load(PRIORITY)
     completion = load(COMPLETION)
     historical = load(HISTORICAL_SUMMARY)
@@ -81,9 +82,10 @@ def main() -> None:
     assert assignments["unknown_family_ids"] == 0
     assert assignments["unmapped_candidates"] == 0
 
-    still_live_historical = current_medium_ids & historical_ids
-    retired_historical = historical_ids - current_medium_ids
-    successor_delta = current_medium_ids - historical_ids
+    normalized_medium_ids = binding["historical_id_view"]
+    still_live_historical = normalized_medium_ids & historical_ids
+    retired_historical = historical_ids - normalized_medium_ids
+    successor_delta = normalized_medium_ids - historical_ids
     assert len(still_live_historical) == 39
     assert len(retired_historical) == 3
     assert len(successor_delta) == 7
@@ -126,7 +128,7 @@ def main() -> None:
 
     print(
         "UniverseLab MEDIUM closure: PASS historical=42/42 current=46/46 "
-        "still_live_historical=39 retired_historical=3 successor_delta=7/7 "
+        "direct_historical=37 explicit_aliases=2 retired_status_ids=3 successor_delta=7/7 "
         "current_high=0 physical_promotions=0"
     )
 
