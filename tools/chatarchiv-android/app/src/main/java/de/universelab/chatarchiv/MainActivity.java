@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.content.Context;
+import android.database.Cursor;
+import android.provider.DocumentsContract;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -24,12 +26,16 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class MainActivity extends Activity {
     private static final int PICK_JSON = 801;
+    private static final int PICK_FOLDER = 802;
+    private static final String PREFS = "chatarchiv-import";
+    private static final String FOLDER_PREF = "read-only-tree-uri";
 
     private ChatStore store;
     private final ExecutorService importWorker = Executors.newSingleThreadExecutor();
@@ -40,6 +46,7 @@ public final class MainActivity extends Activity {
     private ChatAdapter adapter;
     private TextView status;
     private TextView counts;
+    private TextView firstRunHint;
     private EditText search;
     private String category = ChatStore.PROJECT;
     private String importSummary = "";
@@ -70,12 +77,12 @@ public final class MainActivity extends Activity {
         Ui.addGap(this, root, 8);
 
         LinearLayout actions = Ui.row(this);
-        android.widget.Button importButton = Ui.button(this, "Import / Update");
+        android.widget.Button importButton = Ui.button(this, "Chats importieren");
         android.widget.Button githubButton = Ui.button(this, "GitHub ansehen");
         actions.addView(importButton, Ui.weight(1));
         actions.addView(githubButton, Ui.weight(1));
         root.addView(actions);
-        importButton.setOnClickListener(view -> chooseJson());
+        importButton.setOnClickListener(view -> showImportOptions());
         githubButton.setOnClickListener(view -> startActivity(new Intent(this, GitHubActivity.class)));
 
         Ui.addGap(this, root, 10);
@@ -111,6 +118,19 @@ public final class MainActivity extends Activity {
         status = Ui.text(this, "", 12, false);
         status.setTextColor(Ui.ACCENT);
         root.addView(status);
+
+        firstRunHint = Ui.text(this,
+                "NOCH KEINE CHATS IMPORTIERT\n\n" +
+                "Deine 545 geretteten Gespräche sind auf dem Handy, nicht in dieser APK.\n\n" +
+                "1. Oben auf „Chats importieren“ tippen.\n" +
+                "2. „Rettungsordner auswählen“ wählen.\n" +
+                "3. Den Ordner „ChatGPT_Rettung_2026-11-08“ in Downloads auswählen.\n\n" +
+                "Die sechs conversations-*.json werden dann gemeinsam eingelesen. " +
+                "Die Dateien verlassen dein Smartphone nicht.", 15, false);
+        firstRunHint.setTextColor(Ui.TEXT);
+        firstRunHint.setBackgroundColor(Ui.SURFACE);
+        firstRunHint.setPadding(Ui.dp(this, 13), Ui.dp(this, 14), Ui.dp(this, 13), Ui.dp(this, 14));
+        root.addView(firstRunHint);
 
         ListView list = new ListView(this);
         list.setDividerHeight(Ui.dp(this, 6));
@@ -156,6 +176,27 @@ public final class MainActivity extends Activity {
                 }).show();
     }
 
+    private void showImportOptions() {
+        if (importing) return;
+        String saved = getPreferences(MODE_PRIVATE).getString(FOLDER_PREF, null);
+        String[] options = saved == null
+                ? new String[] {"Rettungsordner auswählen (empfohlen)", "Einzelne JSON-Dateien auswählen"}
+                : new String[] {"Gespeicherten Ordner aktualisieren", "Anderen Rettungsordner auswählen", "Einzelne JSON-Dateien auswählen"};
+        new AlertDialog.Builder(this)
+                .setTitle("Chats lokal importieren · kein Upload")
+                .setItems(options, (dialog, which) -> {
+                    if (saved != null && which == 0) importFolder(Uri.parse(saved));
+                    else if ((saved == null && which == 0) || (saved != null && which == 1)) chooseFolder();
+                    else chooseJson();
+                }).setNegativeButton("Abbrechen", null).show();
+    }
+
+    private void chooseFolder() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        startActivityForResult(intent, PICK_FOLDER);
+    }
+
     private void chooseJson() {
         if (importing) return;
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -168,7 +209,20 @@ public final class MainActivity extends Activity {
 
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode != PICK_JSON || resultCode != RESULT_OK || data == null) return;
+        if (resultCode != RESULT_OK || data == null) return;
+        if (requestCode == PICK_FOLDER) {
+            Uri tree = data.getData();
+            if (tree == null) return;
+            try {
+                getContentResolver().takePersistableUriPermission(tree, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                getPreferences(MODE_PRIVATE).edit().putString(FOLDER_PREF, tree.toString()).apply();
+            } catch (SecurityException exception) {
+                status.setText("Ordnerfreigabe nicht dauerhaft möglich: " + exception.getMessage());
+            }
+            importFolder(tree);
+            return;
+        }
+        if (requestCode != PICK_JSON) return;
         ArrayList<Uri> files = new ArrayList<>();
         ClipData clip = data.getClipData();
         if (clip != null) {
@@ -176,7 +230,47 @@ public final class MainActivity extends Activity {
         } else if (data.getData() != null) {
             files.add(data.getData());
         }
-        if (files.isEmpty()) return;
+        startImport(files);
+    }
+
+    private void importFolder(Uri tree) {
+        if (importing) return;
+        status.setText("Suche conversations-*.json im ausgewählten Ordner …");
+        importWorker.execute(() -> {
+            try {
+                TreeMap<String, Uri> selected = new TreeMap<>();
+                String treeId = DocumentsContract.getTreeDocumentId(tree);
+                Uri children = DocumentsContract.buildChildDocumentsUriUsingTree(tree, treeId);
+                String[] projection = {
+                        DocumentsContract.Document.COLUMN_DOCUMENT_ID,
+                        DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+                        DocumentsContract.Document.COLUMN_MIME_TYPE
+                };
+                try (Cursor cursor = getContentResolver().query(children, projection, null, null, null)) {
+                    if (cursor == null) throw new IOException("Ordnerinhalt nicht lesbar");
+                    while (cursor.moveToNext()) {
+                        String id = cursor.getString(0);
+                        String name = cursor.getString(1);
+                        String mime = cursor.getString(2);
+                        if (name == null || DocumentsContract.Document.MIME_TYPE_DIR.equals(mime)) continue;
+                        if (!name.matches("conversations(-[0-9]+)?\\.json")) continue;
+                        selected.put(name, DocumentsContract.buildDocumentUriUsingTree(tree, id));
+                    }
+                }
+                if (selected.isEmpty()) throw new IOException("Keine conversations-*.json gefunden. Bitte den Unterordner ChatGPT_Rettung_2026-11-08 auswählen.");
+                runOnUiThread(() -> startImport(new ArrayList<>(selected.values())));
+            } catch (Exception exception) {
+                runOnUiThread(() -> new AlertDialog.Builder(this)
+                        .setTitle("Importordner nicht lesbar")
+                        .setMessage(exception.getMessage())
+                        .setPositiveButton("Ordner neu auswählen", (dialog, which) -> chooseFolder())
+                        .setNegativeButton("Schließen", null).show());
+            }
+        });
+    }
+
+    private void startImport(List<Uri> files) {
+        if (files.isEmpty() || importing) return;
         importing = true;
         status.setText("Import läuft … (" + files.size() + " Datei(en))");
         importWorker.execute(() -> {
@@ -197,6 +291,7 @@ public final class MainActivity extends Activity {
         for (ChatStore.Entry entry : all) if (ChatStore.PROJECT.equals(entry.category)) project++;
         counts.setText(all.size() + " Gespräche · " + project + " UniverseLab · "
                 + (all.size() - project) + " weitere");
+        if (firstRunHint != null) firstRunHint.setVisibility(all.isEmpty() ? View.VISIBLE : View.GONE);
         scheduleSearch();
     }
 

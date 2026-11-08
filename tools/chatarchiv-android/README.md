@@ -40,6 +40,6 @@ Ausgabe: `app/build/outputs/apk/debug/app-debug.apk`. GitHub Actions stellt dies
 ## Import auf dem Telefon
 
 1. APK installieren (Android fragt ggf. nach Erlaubnis zur Installation aus dieser Quelle).
-2. **Import / Update** wählen und im Dateiauswahldialog die sechs `conversations-000.json` bis `conversations-005.json` markieren, die sich im zuvor angelegten Ordner `Download/ChatGPT_Rettung_2026-11-08` befinden.
+2. **Chats importieren** → **Rettungsordner auswählen (empfohlen)** wählen und `Download/ChatGPT_Rettung_2026-11-08` freigeben. Die App findet `conversations-000.json` bis `conversations-005.json` automatisch. Alternativ können einzelne JSON-Dateien ausgewählt werden.
 3. Import abwarten und über **UniverseLab**, **Weitere Chats** oder **Alle** navigieren.
-4. Später weitere ChatGPT-Exportdateien über **Import / Update** hinzufügen.
+4. Später weitere ChatGPT-Exportdateien in den freigegebenen Ordner kopieren und **Chats importieren** → **Gespeicherten Ordner aktualisieren** wählen. Die Kategoriezuordnung bleibt erhalten.
