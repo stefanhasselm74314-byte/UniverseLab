@@ -9,9 +9,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,11 +32,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /** Private, offline storage. This class never performs network operations. */
 final class ChatStore {
     static final String PROJECT = "projekt";
     static final String OTHER = "andere";
+    private static final long MAX_ZIP_JSON_BYTES = 800L * 1024 * 1024;
+    private static final int MAX_ZIP_JSON_ENTRIES = 100;
     private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
 
     static final class Entry {
@@ -163,26 +168,18 @@ final class ChatStore {
             if (Thread.currentThread().isInterrupted()) break;
             try (InputStream input = context.getContentResolver().openInputStream(fileUri)) {
                 if (input == null) throw new IOException("Datei kann nicht geöffnet werden");
-                try (JsonReader reader = new JsonReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
-                    if (reader.peek() != JsonToken.BEGIN_ARRAY) {
-                        throw new IOException("Erwartet wird conversations-xxx.json mit JSON-Array");
+                try (BufferedInputStream buffered = new BufferedInputStream(input, 65536)) {
+                    buffered.mark(8);
+                    int first = buffered.read();
+                    int second = buffered.read();
+                    buffered.reset();
+                    if (first == 'P' && second == 'K') {
+                        importZip(buffered, result, progress);
+                    } else {
+                        try (JsonReader reader = new JsonReader(new InputStreamReader(buffered, StandardCharsets.UTF_8))) {
+                            importJsonArray(reader, result, progress);
+                        }
                     }
-                    reader.beginArray();
-                    while (reader.hasNext()) {
-                        if (Thread.currentThread().isInterrupted()) throw new IOException("Import unterbrochen");
-                        Object value = readValue(reader, 0);
-                        if (!(value instanceof JSONObject)) continue;
-                        JSONObject conversation = (JSONObject) value;
-                        String id = conversation.optString("id", "");
-                        if (id.isEmpty() || conversation.optJSONObject("mapping") == null) continue;
-                        ImportChange change = upsert(conversation, id);
-                        if (change == ImportChange.UNCHANGED) result.unchanged++;
-                        else if (change == ImportChange.UPDATED) result.updated++;
-                        else result.imported++;
-                        int total = result.imported + result.updated + result.unchanged;
-                        if (total % 10 == 0) progress.onProgress(result.imported, result.updated, result.unchanged);
-                    }
-                    reader.endArray();
                 }
                 synchronized (this) { saveIndex(); }
             } catch (Exception exception) {
@@ -198,6 +195,87 @@ final class ChatStore {
         }
         progress.onProgress(result.imported, result.updated, result.unchanged);
         return result;
+    }
+
+    private void importZip(InputStream stream, ImportResult result, Progress progress) throws IOException {
+        boolean foundConversations = false;
+        int relevantEntries = 0;
+        long extractedBytes = 0;
+        try (ZipInputStream zip = new ZipInputStream(stream, StandardCharsets.UTF_8)) {
+            ZipEntry entry;
+            while ((entry = zip.getNextEntry()) != null) {
+                if (Thread.currentThread().isInterrupted()) throw new IOException("ZIP-Import unterbrochen");
+                String fullName = entry.getName();
+                String name = fullName.substring(fullName.lastIndexOf('/') + 1);
+                boolean isChatJson = name.matches("conversations(-[0-9]+)?\\.json") && !entry.isDirectory();
+                if (!isChatJson) {
+                    // ChatGPT archives usually put their JSON files first. Stop at the
+                    // first media blob after them; never traverse tens of GB of attachments.
+                    if (foundConversations && name.startsWith("file-") && name.endsWith(".dat")) break;
+                    zip.closeEntry();
+                    continue;
+                }
+                foundConversations = true;
+                relevantEntries++;
+                if (relevantEntries > MAX_ZIP_JSON_ENTRIES) {
+                    throw new IOException("ZIP-Grenze: zu viele Gesprächs-JSON-Einträge");
+                }
+                long remaining = MAX_ZIP_JSON_BYTES - extractedBytes;
+                if (remaining <= 0) throw new IOException("ZIP-Grenze: Gesprächsdaten zu groß");
+                CountingInputStream bounded = new CountingInputStream(zip, remaining);
+                // Deliberately do not close the reader: that would also close the ZIP
+                // stream and prevent importing conversations-001.json etc.
+                JsonReader reader = new JsonReader(new InputStreamReader(bounded, StandardCharsets.UTF_8));
+                importJsonArray(reader, result, progress);
+                extractedBytes += bounded.count;
+                zip.closeEntry();
+            }
+        }
+        if (!foundConversations) throw new IOException("Im ZIP wurde keine conversations*.json gefunden");
+    }
+
+    private void importJsonArray(JsonReader reader, ImportResult result, Progress progress) throws IOException {
+        if (reader.peek() != JsonToken.BEGIN_ARRAY) {
+            throw new IOException("Erwartet wird conversations*.json als JSON-Array");
+        }
+        reader.beginArray();
+        while (reader.hasNext()) {
+            if (Thread.currentThread().isInterrupted()) throw new IOException("Import unterbrochen");
+            Object value = readValue(reader, 0);
+            if (!(value instanceof JSONObject)) continue;
+            JSONObject conversation = (JSONObject) value;
+            String id = conversation.optString("id", "");
+            if (id.isEmpty() || conversation.optJSONObject("mapping") == null) continue;
+            ImportChange change = upsert(conversation, id);
+            if (change == ImportChange.UNCHANGED) result.unchanged++;
+            else if (change == ImportChange.UPDATED) result.updated++;
+            else result.imported++;
+            int total = result.imported + result.updated + result.unchanged;
+            if (total % 10 == 0) progress.onProgress(result.imported, result.updated, result.unchanged);
+        }
+        reader.endArray();
+    }
+
+    private static final class CountingInputStream extends FilterInputStream {
+        private final long maximum;
+        long count;
+
+        CountingInputStream(InputStream source, long maximum) {
+            super(source);
+            this.maximum = maximum;
+        }
+
+        @Override public int read() throws IOException {
+            int value = in.read();
+            if (value != -1 && ++count > maximum) throw new IOException("ZIP-Grenze überschritten");
+            return value;
+        }
+
+        @Override public int read(byte[] bytes, int offset, int length) throws IOException {
+            int n = in.read(bytes, offset, length);
+            if (n > 0 && (count += n) > maximum) throw new IOException("ZIP-Grenze überschritten");
+            return n;
+        }
     }
 
     private enum ImportChange { ADDED, UPDATED, UNCHANGED }

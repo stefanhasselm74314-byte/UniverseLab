@@ -34,6 +34,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class MainActivity extends Activity {
     private static final int PICK_JSON = 801;
     private static final int PICK_FOLDER = 802;
+    private static final int PICK_ZIP = 803;
     private static final String PREFS = "chatarchiv-import";
     private static final String FOLDER_PREF = "read-only-tree-uri";
 
@@ -126,6 +127,7 @@ public final class MainActivity extends Activity {
                 "2. „Rettungsordner auswählen“ wählen.\n" +
                 "3. Den Ordner „ChatGPT_Rettung_2026-11-08“ in Downloads auswählen.\n\n" +
                 "Die sechs conversations-*.json werden dann gemeinsam eingelesen. " +
+                "Ältere Export-ZIPs kannst du ebenfalls über „Chats importieren“ auswählen. " +
                 "Die Dateien verlassen dein Smartphone nicht.", 15, false);
         firstRunHint.setTextColor(Ui.TEXT);
         firstRunHint.setBackgroundColor(Ui.SURFACE);
@@ -180,13 +182,14 @@ public final class MainActivity extends Activity {
         if (importing) return;
         String saved = getPreferences(MODE_PRIVATE).getString(FOLDER_PREF, null);
         String[] options = saved == null
-                ? new String[] {"Rettungsordner auswählen (empfohlen)", "Einzelne JSON-Dateien auswählen"}
-                : new String[] {"Gespeicherten Ordner aktualisieren", "Anderen Rettungsordner auswählen", "Einzelne JSON-Dateien auswählen"};
+                ? new String[] {"Rettungsordner auswählen (empfohlen)", "Einzelne JSON-Dateien auswählen", "Ältere Export-ZIPs auswählen"}
+                : new String[] {"Gespeicherten Ordner aktualisieren", "Anderen Rettungsordner auswählen", "Einzelne JSON-Dateien auswählen", "Ältere Export-ZIPs auswählen"};
         new AlertDialog.Builder(this)
                 .setTitle("Chats lokal importieren · kein Upload")
                 .setItems(options, (dialog, which) -> {
                     if (saved != null && which == 0) importFolder(Uri.parse(saved));
                     else if ((saved == null && which == 0) || (saved != null && which == 1)) chooseFolder();
+                    else if (which == options.length - 1) chooseZip();
                     else chooseJson();
                 }).setNegativeButton("Abbrechen", null).show();
     }
@@ -207,6 +210,16 @@ public final class MainActivity extends Activity {
         startActivityForResult(intent, PICK_JSON);
     }
 
+    private void chooseZip() {
+        if (importing) return;
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivityForResult(intent, PICK_ZIP);
+    }
+
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK || data == null) return;
@@ -222,7 +235,7 @@ public final class MainActivity extends Activity {
             importFolder(tree);
             return;
         }
-        if (requestCode != PICK_JSON) return;
+        if (requestCode != PICK_JSON && requestCode != PICK_ZIP) return;
         ArrayList<Uri> files = new ArrayList<>();
         ClipData clip = data.getClipData();
         if (clip != null) {
