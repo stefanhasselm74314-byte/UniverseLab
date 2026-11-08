@@ -13,6 +13,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FilterInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,11 +29,13 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 /** Private, offline storage. This class never performs network operations. */
@@ -41,6 +44,7 @@ final class ChatStore {
     static final String OTHER = "andere";
     private static final long MAX_ZIP_JSON_BYTES = 800L * 1024 * 1024;
     private static final int MAX_ZIP_JSON_ENTRIES = 100;
+    private static final long MAX_SAVED_VERSIONS_BYTES = 1024L * 1024 * 1024;
     private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
 
     static final class Entry {
@@ -89,17 +93,17 @@ final class ChatStore {
         int imported;
         int updated;
         int unchanged;
-        int olderSkipped;
-        int conflicts;
+        int archived;
         int failed;
+        boolean cancelled;
         final List<String> errors = new ArrayList<>();
 
         String summary() {
             String output = "Neu: " + imported + " · Geändert: " + updated
                     + " · Bereits identisch: " + unchanged;
-            if (olderSkipped > 0) output += " · Ältere Versionen geschützt: " + olderSkipped;
-            if (conflicts > 0) output += " · Unklare Änderungen nicht ersetzt: " + conflicts;
+            if (archived > 0) output += " · Ältere/abweichende Versionen gesichert: " + archived;
             if (failed > 0) output += " · Fehler: " + failed;
+            if (cancelled) output += " · Abgebrochen (bisheriger Stand gesichert)";
             if (!errors.isEmpty()) output += "\n" + errors.get(0);
             return output;
         }
@@ -107,7 +111,9 @@ final class ChatStore {
 
     private final Context context;
     private final File conversations;
+    private final File versions;
     private final File index;
+    private long savedVersionBytes;
     private final Map<String, Entry> entries = new LinkedHashMap<>();
 
     ChatStore(Context context) throws IOException {
@@ -115,6 +121,14 @@ final class ChatStore {
         conversations = new File(context.getFilesDir(), "conversations");
         if (!conversations.isDirectory() && !conversations.mkdirs()) {
             throw new IOException("Interner Speicher konnte nicht erstellt werden");
+        }
+        versions = new File(context.getFilesDir(), "conversation-versions");
+        if (!versions.isDirectory() && !versions.mkdirs()) {
+            throw new IOException("Versionsspeicher konnte nicht erstellt werden");
+        }
+        File[] previousVersions = versions.listFiles();
+        if (previousVersions != null) {
+            for (File saved : previousVersions) if (saved.isFile()) savedVersionBytes += saved.length();
         }
         index = new File(context.getFilesDir(), "index.json");
         loadIndex();
@@ -201,6 +215,78 @@ final class ChatStore {
         return result;
     }
 
+    /** Imports only the explicit, scanned local files; never opens other files. */
+    ImportResult importLocalFiles(List<File> files, Progress progress, Cancelled cancelled) {
+        ImportResult result = new ImportResult();
+        for (File file : files) {
+            if (cancelled.isCancelled() || Thread.currentThread().isInterrupted()) {
+                result.cancelled = true;
+                break;
+            }
+            try {
+                if (!file.isFile()) throw new IOException("Datei nicht mehr vorhanden: " + file.getName());
+                if (file.getName().toLowerCase(Locale.ROOT).endsWith(".zip")) {
+                    importZipIndexed(file, result, progress, cancelled);
+                } else if (StorageScanner.isConversationJson(file.getName())) {
+                    try (InputStream input = new BufferedInputStream(new FileInputStream(file), 65536);
+                         JsonReader reader = new JsonReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
+                        importJsonArray(reader, result, progress, cancelled);
+                    }
+                } else {
+                    throw new IOException("Nicht unterstützter Export: " + file.getName());
+                }
+                synchronized (this) { saveIndex(); }
+            } catch (Exception exception) {
+                if (cancelled.isCancelled() || Thread.currentThread().isInterrupted()) {
+                    result.cancelled = true;
+                } else {
+                    result.failed++;
+                    if (result.errors.size() < 3) result.errors.add(file.getName() + ": "
+                            + (exception.getMessage() == null ? "Importfehler" : exception.getMessage()));
+                }
+                try { synchronized (this) { saveIndex(); } }
+                catch (IOException secondary) {
+                    if (result.errors.size() < 3) result.errors.add("Indexspeicherung fehlgeschlagen: " + secondary.getMessage());
+                }
+                if (result.cancelled) break;
+            }
+        }
+        progress.onProgress(result.imported, result.updated, result.unchanged);
+        return result;
+    }
+
+    /** ZIP central directory allows random access without scanning huge media entries. */
+    private void importZipIndexed(File file, ImportResult result, Progress progress,
+                                  Cancelled cancelled) throws IOException {
+        try (ZipFile zip = new ZipFile(file)) {
+            Enumeration<? extends ZipEntry> entries = zip.entries();
+            int relevantEntries = 0;
+            long extractedBytes = 0;
+            while (entries.hasMoreElements()) {
+                if (cancelled.isCancelled()) throw new IOException("Import abgebrochen");
+                ZipEntry entry = entries.nextElement();
+                if (entry.isDirectory()) continue;
+                String name = entry.getName();
+                name = name.substring(name.lastIndexOf('/') + 1);
+                if (!StorageScanner.isConversationJson(name)) continue;
+                if (++relevantEntries > MAX_ZIP_JSON_ENTRIES) {
+                    throw new IOException("ZIP-Grenze: mehr als 100 Gesprächsdateien");
+                }
+                long remaining = MAX_ZIP_JSON_BYTES - extractedBytes;
+                if (remaining <= 0 || (entry.getSize() >= 0 && entry.getSize() > remaining)) {
+                    throw new IOException("ZIP-Grenze: Gesprächsdateien über 800 MiB");
+                }
+                try (InputStream input = new BufferedInputStream(zip.getInputStream(entry), 65536)) {
+                    CountingInputStream bounded = new CountingInputStream(input, remaining);
+                    JsonReader reader = new JsonReader(new InputStreamReader(bounded, StandardCharsets.UTF_8));
+                    importJsonArray(reader, result, progress, cancelled);
+                    extractedBytes += bounded.count;
+                }
+            }
+            if (relevantEntries == 0) throw new IOException("ZIP enthält keine Gesprächs-JSON");
+        }
+    }
+
     private void importZip(InputStream stream, ImportResult result, Progress progress) throws IOException {
         boolean foundConversations = false;
         int relevantEntries = 0;
@@ -208,10 +294,10 @@ final class ChatStore {
         try (ZipInputStream zip = new ZipInputStream(stream, StandardCharsets.UTF_8)) {
             ZipEntry entry;
             while ((entry = zip.getNextEntry()) != null) {
-                if (Thread.currentThread().isInterrupted()) throw new IOException("ZIP-Import unterbrochen");
+            if (Thread.currentThread().isInterrupted()) throw new IOException("ZIP-Import unterbrochen");
                 String fullName = entry.getName();
                 String name = fullName.substring(fullName.lastIndexOf('/') + 1);
-                boolean isChatJson = name.matches("conversations(-[0-9]+)?\\.json") && !entry.isDirectory();
+                boolean isChatJson = StorageScanner.isConversationJson(name) && !entry.isDirectory();
                 if (!isChatJson) {
                     // ChatGPT archives usually put their JSON files first. Stop at the
                     // first media blob after them; never traverse tens of GB of attachments.
@@ -239,12 +325,19 @@ final class ChatStore {
     }
 
     private void importJsonArray(JsonReader reader, ImportResult result, Progress progress) throws IOException {
+        importJsonArray(reader, result, progress, () -> false);
+    }
+
+    private void importJsonArray(JsonReader reader, ImportResult result, Progress progress,
+                                 Cancelled cancelled) throws IOException {
         if (reader.peek() != JsonToken.BEGIN_ARRAY) {
             throw new IOException("Erwartet wird conversations*.json als JSON-Array");
         }
         reader.beginArray();
         while (reader.hasNext()) {
-            if (Thread.currentThread().isInterrupted()) throw new IOException("Import unterbrochen");
+            if (Thread.currentThread().isInterrupted() || cancelled.isCancelled()) {
+                throw new IOException("Import unterbrochen");
+            }
             Object value = readValue(reader, 0);
             if (!(value instanceof JSONObject)) continue;
             JSONObject conversation = (JSONObject) value;
@@ -253,11 +346,9 @@ final class ChatStore {
             ImportChange change = upsert(conversation, id);
             if (change == ImportChange.UNCHANGED) result.unchanged++;
             else if (change == ImportChange.UPDATED) result.updated++;
-            else if (change == ImportChange.OLDER) result.olderSkipped++;
-            else if (change == ImportChange.CONFLICT) result.conflicts++;
+            else if (change == ImportChange.ARCHIVED) result.archived++;
             else result.imported++;
-            int total = result.imported + result.updated + result.unchanged
-                    + result.olderSkipped + result.conflicts;
+            int total = result.imported + result.updated + result.unchanged;
             if (total % 10 == 0) progress.onProgress(result.imported, result.updated, result.unchanged);
         }
         reader.endArray();
@@ -285,7 +376,7 @@ final class ChatStore {
         }
     }
 
-    private enum ImportChange { ADDED, UPDATED, UNCHANGED, OLDER, CONFLICT }
+    private enum ImportChange { ADDED, UPDATED, UNCHANGED, ARCHIVED }
 
     private ImportChange upsert(JSONObject data, String id) throws IOException {
         String fileName = sha256(id) + ".json";
@@ -296,69 +387,52 @@ final class ChatStore {
         if (time instanceof Number) created = ((Number) time).longValue();
         String serialized = data.toString();
         String digest = sha256(serialized);
-
-        Entry previous;
         synchronized (this) {
-            previous = entries.get(id);
-            if (previous != null && digest.equals(previous.digest)) {
-                return ImportChange.UNCHANGED;
-            }
-        }
-
-        if (previous != null) {
-            // Historic exports often contain older snapshots of the same ChatGPT ID.
-            // Never replace the only local copy solely because the JSON differs.
-            File oldFile = new File(conversations, previous.file);
-            String storedText = new String(Files.readAllBytes(oldFile.toPath()), StandardCharsets.UTF_8);
-            if (digest.equals(sha256(storedText))) {
-                // Repair a stale digest after an interrupted prior import.
-                synchronized (this) {
-                    entries.put(id, new Entry(previous.id, previous.title, previous.file,
-                            previous.created, previous.category, digest));
+            Entry previous = entries.get(id);
+            if (previous != null && digest.equals(previous.digest)) return ImportChange.UNCHANGED;
+            File current = new File(conversations, fileName);
+            if (previous != null && current.isFile()) {
+                String older = new String(Files.readAllBytes(current.toPath()), StandardCharsets.UTF_8);
+                JSONObject oldObject;
+                try { oldObject = new JSONObject(older); }
+                catch (JSONException exception) { throw new IOException("Vorhandene Chatversion nicht lesbar", exception); }
+                long oldTime = updatedAt(oldObject);
+                long incomingTime = updatedAt(data);
+                int oldNodes = oldObject.optJSONObject("mapping") == null ? 0
+                        : oldObject.optJSONObject("mapping").length();
+                int newNodes = data.optJSONObject("mapping").length();
+                // Older exports must not replace a newer conversation. Ties
+                // favor the richer node map; other variants remain recoverable.
+                if (incomingTime < oldTime || (incomingTime == oldTime && newNodes <= oldNodes)) {
+                    return archiveVersion(id, digest, serialized)
+                            ? ImportChange.ARCHIVED : ImportChange.UNCHANGED;
                 }
-                return ImportChange.UNCHANGED;
+                archiveVersion(id, sha256(older), older);
             }
-            JSONObject storedData;
-            try {
-                storedData = new JSONObject(storedText);
-            } catch (JSONException exception) {
-                throw new IOException("Gespeicherte Gesprächsversion ist beschädigt", exception);
-            }
-            ConversationRevisionPolicy.Action decision =
-                    ConversationRevisionPolicy.decide(storedData, data);
-            if (decision == ConversationRevisionPolicy.Action.KEEP_OLDER) {
-                return ImportChange.OLDER;
-            }
-            if (decision == ConversationRevisionPolicy.Action.REQUIRE_REVIEW) {
-                return ImportChange.CONFLICT;
-            }
-            // Newer snapshots may update the active view only after an immutable
-            // local backup of the previous snapshot was created successfully.
-            savePreviousVersion(id, storedText);
-        }
-
-        String indexed = ConversationLogic.indexText(data);
-        writeAtomic(new File(conversations, fileName), serialized);
-        writeAtomic(new File(conversations, sha256(id) + ".search"), indexed);
-
-        synchronized (this) {
-            Entry latest = entries.get(id);
-            String category = latest != null ? latest.category : categoryFromTitle(title);
+            String indexed = ConversationLogic.indexText(data);
+            writeAtomic(current, serialized);
+            writeAtomic(new File(conversations, sha256(id) + ".search"), indexed);
+            String category = previous != null ? previous.category : categoryFromTitle(title);
             entries.put(id, new Entry(id, title, fileName, created, category, digest));
-            return latest != null ? ImportChange.UPDATED : ImportChange.ADDED;
+            return previous != null ? ImportChange.UPDATED : ImportChange.ADDED;
         }
     }
 
-    private void savePreviousVersion(String id, String serialized) throws IOException {
-        File backups = new File(context.getFilesDir(), "previous_versions");
-        if (!backups.isDirectory() && !backups.mkdirs()) {
-            throw new IOException("Versionssicherung konnte nicht erstellt werden");
+    private boolean archiveVersion(String id, String digest, String serialized) throws IOException {
+        File preserved = new File(versions, sha256(id) + "-" + digest + ".json");
+        if (preserved.isFile()) return false;
+        long bytes = serialized.getBytes(StandardCharsets.UTF_8).length;
+        if (savedVersionBytes + bytes > MAX_SAVED_VERSIONS_BYTES) {
+            throw new IOException("Versionsspeicher-Limit (1 GiB) erreicht; aktuelle Chatfassung unverändert");
         }
-        String backupName = sha256(id) + "-" + sha256(serialized) + ".json";
-        File backup = new File(backups, backupName);
-        if (!backup.exists()) {
-            writeAtomic(backup, serialized);
-        }
+        writeAtomic(preserved, serialized);
+        savedVersionBytes += bytes;
+        return true;
+    }
+
+    private static long updatedAt(JSONObject conversation) {
+        double timestamp = conversation.optDouble("update_time", 0);
+        return Double.isFinite(timestamp) && timestamp > 0 ? (long) timestamp : 0;
     }
 
     private static String categoryFromTitle(String title) {
