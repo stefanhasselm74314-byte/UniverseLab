@@ -2,10 +2,11 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
-## Funktionen (Version 0.2.2)
+## Funktionen (Version 0.2.3)
 
 - **UniverseLab**, **Weitere Chats**, **Alle** als getrennte Ansichten.
 - Mehrfachimport per Android-Dateiauswahl von `conversations-000.json`, `conversations-001.json` usw. aus einem ChatGPT-Datenexport.
+- **Eigene JSON-Dateiliste:** Über „Nur JSON-Dateien im Ordner anzeigen“ wird ein freigegebener Unterordner ausgelesen und eine Mehrfachauswahl angezeigt, die ausschließlich tatsächliche `.json`-Dateinamen enthält. Andere Dateitypen erscheinen in dieser App-Liste nie. Android kann die Freigabe des Download-Hauptordners sperren; dann die gewünschten Exporte in einen Unterordner wie `Download/ChatGPT_Altexporte` kopieren und diesen wählen. Originaldateien werden nicht verändert.
 - **Gefilterte System-Dateiauswahl:** Einzelne Chat-Dateien über den MIME-Filter `application/json` wählen; Bilder, Videos und andere Dateitypen werden nicht angefordert. Für Export-ZIPs gibt es einen separaten ZIP-Dialog. Vor dem Import prüft die App zusätzlich die Endung `.json` bzw. `.zip`. Android-Dokumentanbieter bestimmen letztlich, welche Dateien der Systemdialog anzeigt; falsch klassifizierte JSON-Dateien können ggf. fehlen.
 - **ZIP-Import ohne Vollentpackung:** Mehrere ältere ChatGPT-Export-ZIPs über den Android-Dateipicker auswählen. Die App liest nur `conversations.json`/`conversations-000.json` usw. direkt aus dem ZIP-Stream und integriert sie über dieselbe Dublettenprüfung. Medienanhänge werden nicht extrahiert.
 - Wiederholter Import gleicht Chat-IDs ab: neue Gespräche werden ergänzt; identische Inhalte übersprungen. Eine geänderte Fassung ersetzt den Bestand nur bei **eindeutig neuerem numerischem `update_time`**; dabei wird die alte Fassung zuerst privat gesichert. Ältere Fassungen oder Konflikte mit fehlenden/gleichen Zeitstempeln ersetzen den aktuellen Stand **nicht**. Die Importanzeige zählt sie getrennt. Manuell verschobene Chats behalten ihre Zuordnung.
@@ -44,9 +45,9 @@ Ausgabe: `app/build/outputs/apk/debug/app-debug.apk`. GitHub Actions stellt dies
 ## Import auf dem Telefon
 
 1. APK installieren (Android fragt ggf. nach Erlaubnis zur Installation aus dieser Quelle).
-2. **Chats importieren** → **Rettungsordner auswählen (empfohlen)** wählen und `Download/ChatGPT_Rettung_2026-11-08` freigeben. Die App findet `conversations-000.json` bis `conversations-005.json` automatisch. Alternativ können einzelne JSON-Dateien ausgewählt werden.
+2. **Chats importieren** → **Rettungsordner auswählen (empfohlen)** wählen und `Download/ChatGPT_Rettung_2026-11-08` freigeben. Die App findet `conversations-000.json` bis `conversations-005.json` automatisch. Für eine sichtbare Liste ausschließlich von JSON-Dateien „Nur JSON-Dateien im Ordner anzeigen“ wählen: Ordner freigeben, gewünschte JSON-Dateien anhaken und importieren.
 3. Import abwarten und über **UniverseLab**, **Weitere Chats** oder **Alle** navigieren.
 4. Später weitere ChatGPT-Exportdateien in den freigegebenen Ordner kopieren und **Chats importieren** → **Gespeicherten Ordner aktualisieren** wählen. Die Kategoriezuordnung bleibt erhalten.
 5. Für ältere Exporte **Chats importieren** → **Ältere Export-ZIPs auswählen** verwenden und eine oder mehrere `.zip`-Dateien auswählen. Bereits vorhandene Chats werden anhand ihrer IDs/Inhaltshashes nicht doppelt gespeichert.
-6. Für ältere, einzeln aus ChatGPT Space heruntergeladene `conversations-*.json`-Dateien **Einzelne JSON-Dateien auswählen** benutzen; das funktioniert auch bei Dateinamen mit Kopie-Suffixen wie `(1)`. **Nicht den gesamten Downloadordner mit mehreren GB fremder Dokumente importieren.**
+6. Für ältere, einzeln aus ChatGPT Space heruntergeladene `conversations-*.json`-Dateien am besten **Nur JSON-Dateien im Ordner anzeigen** benutzen. Die Dateien müssen direkt im gewählten Unterordner liegen. Alternativ steht **Einzelne JSON-Dateien (Android-Dialog)** bereit; dort können Android-Dateianbieter trotz MIME-Filter auch andere Dateien auflisten, die App weist falsch benannte Dateien jedoch ab. **Nicht den gesamten Downloadordner mit mehreren GB fremder Dokumente importieren.**
 7. Nach dem Import die Statusangaben **Ältere Versionen geschützt** und **Unklare Änderungen nicht ersetzt** prüfen. In diesen Fällen bleiben die vorher gespeicherten Fassungen unverändert; die Quell-JSON/ZIPs behalten, bis ein Vergleich durchgeführt wurde.

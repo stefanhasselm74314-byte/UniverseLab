@@ -37,6 +37,8 @@ public final class MainActivity extends Activity {
     private static final int PICK_JSON = 801;
     private static final int PICK_FOLDER = 802;
     private static final int PICK_ZIP = 803;
+    private static final int PICK_JSON_FOLDER = 804;
+    private static final int MAX_JSON_CHOICES = 2000;
     private static final String PREFS = "chatarchiv-import";
     private static final String FOLDER_PREF = "read-only-tree-uri";
 
@@ -54,6 +56,16 @@ public final class MainActivity extends Activity {
     private String category = ChatStore.PROJECT;
     private String importSummary = "";
     private boolean importing;
+
+    private static final class JsonChoice {
+        final String name;
+        final Uri uri;
+
+        JsonChoice(String name, Uri uri) {
+            this.name = name;
+            this.uri = uri;
+        }
+    }
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -184,14 +196,15 @@ public final class MainActivity extends Activity {
         if (importing) return;
         String saved = getPreferences(MODE_PRIVATE).getString(FOLDER_PREF, null);
         String[] options = saved == null
-                ? new String[] {"Rettungsordner auswählen (empfohlen)", "Einzelne JSON-Dateien auswählen", "Ältere Export-ZIPs auswählen"}
-                : new String[] {"Gespeicherten Ordner aktualisieren", "Anderen Rettungsordner auswählen", "Einzelne JSON-Dateien auswählen", "Ältere Export-ZIPs auswählen"};
+                ? new String[] {"Rettungsordner auswählen (empfohlen)", "Nur JSON-Dateien im Ordner anzeigen", "Einzelne JSON-Dateien (Android-Dialog)", "Ältere Export-ZIPs auswählen"}
+                : new String[] {"Gespeicherten Ordner aktualisieren", "Anderen Rettungsordner auswählen", "Nur JSON-Dateien im Ordner anzeigen", "Einzelne JSON-Dateien (Android-Dialog)", "Ältere Export-ZIPs auswählen"};
         new AlertDialog.Builder(this)
                 .setTitle("Chats lokal importieren · kein Upload")
                 .setItems(options, (dialog, which) -> {
                     if (saved != null && which == 0) importFolder(Uri.parse(saved));
                     else if ((saved == null && which == 0) || (saved != null && which == 1)) chooseFolder();
                     else if (which == options.length - 1) chooseZip();
+                    else if (which == options.length - 3) chooseJsonFolder();
                     else chooseJson();
                 }).setNegativeButton("Abbrechen", null).show();
     }
@@ -202,11 +215,18 @@ public final class MainActivity extends Activity {
         startActivityForResult(intent, PICK_FOLDER);
     }
 
+    private void chooseJsonFolder() {
+        if (importing) return;
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivityForResult(intent, PICK_JSON_FOLDER);
+    }
+
     private void chooseJson() {
         if (importing) return;
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        // Android\'s system picker filters by MIME type, not by filename.
+        // Android's system picker filters by MIME type, not by filename.
         // Never request */* here: it exposes every video/image in Downloads.
         intent.setType("application/json");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -237,6 +257,11 @@ public final class MainActivity extends Activity {
                 status.setText("Ordnerfreigabe nicht dauerhaft möglich: " + exception.getMessage());
             }
             importFolder(tree);
+            return;
+        }
+        if (requestCode == PICK_JSON_FOLDER) {
+            Uri tree = data.getData();
+            if (tree != null) showJsonChoices(tree);
             return;
         }
         if (requestCode != PICK_JSON && requestCode != PICK_ZIP) return;
@@ -273,6 +298,81 @@ public final class MainActivity extends Activity {
             // Reject the file if the provider cannot supply a filename.
         }
         return null;
+    }
+
+    private void showJsonChoices(Uri tree) {
+        if (importing) return;
+        status.setText("Suche ausschließlich .json-Dateien im gewählten Ordner …");
+        importWorker.execute(() -> {
+            try {
+                List<JsonChoice> matches = new ArrayList<>();
+                String treeId = DocumentsContract.getTreeDocumentId(tree);
+                Uri children = DocumentsContract.buildChildDocumentsUriUsingTree(tree, treeId);
+                String[] projection = {
+                        DocumentsContract.Document.COLUMN_DOCUMENT_ID,
+                        DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+                        DocumentsContract.Document.COLUMN_MIME_TYPE
+                };
+                try (Cursor cursor = getContentResolver().query(children, projection, null, null, null)) {
+                    if (cursor == null) throw new IOException("Ordner kann nicht aufgelistet werden");
+                    while (cursor.moveToNext()) {
+                        String name = cursor.getString(1);
+                        if (name == null || !name.toLowerCase(Locale.ROOT).endsWith(".json")
+                                || DocumentsContract.Document.MIME_TYPE_DIR.equals(cursor.getString(2))) continue;
+                        if (matches.size() >= MAX_JSON_CHOICES) {
+                            throw new IOException("Mehr als " + MAX_JSON_CHOICES + " JSON-Dateien. Bitte einen kleineren Ordner wählen.");
+                        }
+                        Uri file = DocumentsContract.buildDocumentUriUsingTree(tree, cursor.getString(0));
+                        matches.add(new JsonChoice(name, file));
+                    }
+                }
+                matches.sort((a, b) -> a.name.compareToIgnoreCase(b.name));
+                runOnUiThread(() -> presentJsonChoices(matches));
+            } catch (Exception exception) {
+                runOnUiThread(() -> new AlertDialog.Builder(this)
+                        .setTitle("Ordner nicht lesbar")
+                        .setMessage(exception.getMessage())
+                        .setPositiveButton("Anderen Ordner auswählen", (dialog, which) -> chooseJsonFolder())
+                        .setNegativeButton("Schließen", null).show());
+            }
+        });
+    }
+
+    private void presentJsonChoices(List<JsonChoice> choices) {
+        if (choices.isEmpty()) {
+            status.setText("In diesem Ordner wurden keine .json-Dateien gefunden.");
+            new AlertDialog.Builder(this)
+                    .setTitle("Keine JSON-Dateien")
+                    .setMessage("Bitte den Ordner wählen, der die Gesprächsdateien direkt enthält. "
+                            + "Android lässt den Download-Hauptordner möglicherweise nicht auswählen; "
+                            + "verwende bei Bedarf einen Unterordner in Downloads.")
+                    .setPositiveButton("Ordner erneut wählen", (dialog, which) -> chooseJsonFolder())
+                    .setNegativeButton("Schließen", null).show();
+            return;
+        }
+
+        String[] names = new String[choices.size()];
+        boolean[] selected = new boolean[choices.size()];
+        for (int i = 0; i < choices.size(); i++) names[i] = choices.get(i).name;
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Nur JSON · " + choices.size() + " Datei(en)")
+                .setMultiChoiceItems(names, selected, (whichDialog, index, checked) -> {
+                    selected[index] = checked;
+                    boolean any = false;
+                    for (boolean value : selected) if (value) { any = true; break; }
+                    ((AlertDialog) whichDialog).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(any);
+                })
+                .setNegativeButton("Abbrechen", null)
+                .setPositiveButton("Ausgewählte importieren", (whichDialog, which) -> {
+                    List<Uri> files = new ArrayList<>();
+                    for (int i = 0; i < selected.length; i++) {
+                        if (selected[i]) files.add(choices.get(i).uri);
+                    }
+                    startImport(files);
+                }).create();
+        dialog.setOnShowListener(ignored -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false));
+        status.setText("Nur JSON-Dateien · bitte Dateien auswählen");
+        dialog.show();
     }
 
     private void importFolder(Uri tree) {
