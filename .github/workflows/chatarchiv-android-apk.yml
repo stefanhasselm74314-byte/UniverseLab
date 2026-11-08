@@ -46,3 +46,10 @@ jobs:
           path: tools/chatarchiv-android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 90
+      - name: Export signing verification utility
+        uses: actions/upload-artifact@v4
+        with:
+          name: Android-APK-Signing-Utility
+          path: ${{ env.ANDROID_HOME }}/build-tools/35.0.0/lib/apksigner.jar
+          if-no-files-found: error
+          retention-days: 7
