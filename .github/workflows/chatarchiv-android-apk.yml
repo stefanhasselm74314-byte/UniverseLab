@@ -1,0 +1,46 @@
+name: ChatArchiv Android APK (isolierter Branch)
+
+on:
+  push:
+    branches:
+      - app/chatarchiv-android-readonly-v1
+    paths:
+      - 'tools/chatarchiv-android/**'
+      - '.github/workflows/chatarchiv-android-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Debug APK & Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install Android platform
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Gradle 8.9
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Test parser and assemble debug APK
+        working-directory: tools/chatarchiv-android
+        run: gradle --no-daemon --stacktrace :app:testDebugUnitTest :app:assembleDebug
+      - name: Verify APK exists
+        run: test -s tools/chatarchiv-android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Upload installierbare APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: UniverseLab-ChatArchiv-Android-APK
+          path: tools/chatarchiv-android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 90
