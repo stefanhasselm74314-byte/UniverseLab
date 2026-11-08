@@ -2,12 +2,12 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
-## Funktionen (Version 0.1)
+## Funktionen (Version 0.2.1)
 
 - **UniverseLab**, **Weitere Chats**, **Alle** als getrennte Ansichten.
 - Mehrfachimport per Android-Dateiauswahl von `conversations-000.json`, `conversations-001.json` usw. aus einem ChatGPT-Datenexport.
 - **ZIP-Import ohne Vollentpackung:** Mehrere ältere ChatGPT-Export-ZIPs über den Android-Dateipicker auswählen. Die App liest nur `conversations.json`/`conversations-000.json` usw. direkt aus dem ZIP-Stream und integriert sie über dieselbe Dublettenprüfung. Medienanhänge werden nicht extrahiert.
-- Wiederholter Import ist die **Update-Funktion**: IDs werden abgeglichen, vorhandene Gespräche aktualisiert, neue ergänzt. Manuell verschobene Chats behalten ihre Zuordnung.
+- Wiederholter Import gleicht Chat-IDs ab: neue Gespräche werden ergänzt; identische Inhalte übersprungen. Eine geänderte Fassung ersetzt den Bestand nur bei **eindeutig neuerem numerischem `update_time`**; dabei wird die alte Fassung zuerst privat gesichert. Ältere Fassungen oder Konflikte mit fehlenden/gleichen Zeitstempeln ersetzen den aktuellen Stand **nicht**. Die Importanzeige zählt sie getrennt. Manuell verschobene Chats behalten ihre Zuordnung.
 - Identische Gesprächsinhalte derselben Chat-ID werden über einen lokalen SHA-256-Hash erkannt und **nicht erneut gespeichert**. Die Importanzeige meldet neu/geändert/bereits identisch getrennt. Unterschiedliche Chat-IDs werden nicht wegen ähnlicher Titel automatisch zusammengelegt.
 - Volltextsuche über die sichtbaren Nachrichten und Titelsuche, Suche innerhalb eines Gesprächs, Kopieren einzelner Beiträge.
 - Der tatsächliche aktive Nachrichtenpfad aus `mapping`/`current_node` wird verfolgt; alternative Versionen und versteckte interne Inhalte werden nicht als normale Chat-Beiträge ausgegeben.
@@ -20,14 +20,14 @@ Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 - Die App fordert keine Berechtigung für den vollständigen Downloadordner an: die Dateien werden explizit über den Android-Systempicker gewählt.
 - **Kein automatischer ChatGPT-Kontosync:** Dafür gibt es hier weder ChatGPT-Login noch eine autorisierte Schnittstelle. Updates erfolgen durch Auswahl eines neuen Exports.
 - Die `.json`-Dateien enthalten Text und Nachrichtenstruktur. Bilder/Dateianhänge benötigen die separaten Exportdateien, die bei einem unvollständigen ZIP möglicherweise nicht gerettet wurden.
-- Formeln/Markdown werden in Version 0.1 **als Originaltext** angezeigt; kein vollständiger TeX-Renderer.
+- Formeln/Markdown werden in Version 0.2.1 **als Originaltext** angezeigt; kein vollständiger TeX-Renderer.
 - Die automatische Kategorie basiert auf Stichworten im Gesprächstittel. Per langem Tippen lässt sich die Zuordnung korrigieren.
 - `chat.html` und die 40-GB-ZIP müssen **nicht** in die App importiert werden; die sechs `conversations-*.json` genügen.
 - Alternativ kann die App ZIP-Archive direkt lesen. Bei abgeschnittenen ZIPs können früh liegende intakte Gesprächs-JSONs gerettet werden, eine vollständige Wiederherstellung ist nicht garantiert. Sobald nach den Gesprächs-JSONs große `file-*.dat`-Anhänge beginnen, beendet der Import die ZIP-Durchsuchung, damit keine Dutzenden GB an Medien verarbeitet werden. Gesprächs-JSONs sind pro ZIP auf insgesamt 800 MiB und 100 Einträge begrenzt.
 
 ## Repository-Isolation
 
-Der gesamte Android-Code liegt in `tools/chatarchiv-android/`. Der Build-Workflow `.github/workflows/chatarchiv-android-apk.yml` reagiert ausschließlich auf den isolierten Branch `app/chatarchiv-android-readonly-v1`. Keine privaten Exportdaten oder realen Gespräche werden eingecheckt oder in GitHub Actions verarbeitet. Der Build erstellt ein installierbares, automatisch mit dem Android-Debug-Schlüssel signiertes APK-**Testpaket**. Es ist keine Play-Store-Veröffentlichung.
+Der gesamte Android-Code liegt in `tools/chatarchiv-android/`. Der Build-Workflow `.github/workflows/chatarchiv-android-apk.yml` reagiert ausschließlich auf den isolierten Branch `app/chatarchiv-android-readonly-v1`. Keine privaten Exportdaten oder realen Gespräche werden eingecheckt oder in GitHub Actions verarbeitet. Der Build erstellt ein mit einem kurzlebigen Android-Debug-Schlüssel signiertes APK-**Testpaket**. Die auf dem Telefon installierbare Version wird anschließend außerhalb des öffentlichen Repositories mit einem **privat aufbewahrten stabilen Schlüssel** signiert, damit Folgeversionen regulär aktualisiert werden können. Schlüssel und private Dateien werden nicht in GitHub gespeichert. Es ist keine Play-Store-Veröffentlichung.
 
 ## Build
 
@@ -47,3 +47,5 @@ Ausgabe: `app/build/outputs/apk/debug/app-debug.apk`. GitHub Actions stellt dies
 3. Import abwarten und über **UniverseLab**, **Weitere Chats** oder **Alle** navigieren.
 4. Später weitere ChatGPT-Exportdateien in den freigegebenen Ordner kopieren und **Chats importieren** → **Gespeicherten Ordner aktualisieren** wählen. Die Kategoriezuordnung bleibt erhalten.
 5. Für ältere Exporte **Chats importieren** → **Ältere Export-ZIPs auswählen** verwenden und eine oder mehrere `.zip`-Dateien auswählen. Bereits vorhandene Chats werden anhand ihrer IDs/Inhaltshashes nicht doppelt gespeichert.
+6. Für ältere, einzeln aus ChatGPT Space heruntergeladene `conversations-*.json`-Dateien **Einzelne JSON-Dateien auswählen** benutzen; das funktioniert auch bei Dateinamen mit Kopie-Suffixen wie `(1)`. **Nicht den gesamten Downloadordner mit mehreren GB fremder Dokumente importieren.**
+7. Nach dem Import die Statusangaben **Ältere Versionen geschützt** und **Unklare Änderungen nicht ersetzt** prüfen. In diesen Fällen bleiben die vorher gespeicherten Fassungen unverändert; die Quell-JSON/ZIPs behalten, bis ein Vergleich durchgeführt wurde.
