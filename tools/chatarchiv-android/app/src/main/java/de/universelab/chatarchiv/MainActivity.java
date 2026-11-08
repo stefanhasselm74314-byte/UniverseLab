@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.DocumentsContract;
+import android.provider.OpenableColumns;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -204,7 +206,9 @@ public final class MainActivity extends Activity {
         if (importing) return;
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
+        // Android\'s system picker filters by MIME type, not by filename.
+        // Never request */* here: it exposes every video/image in Downloads.
+        intent.setType("application/json");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivityForResult(intent, PICK_JSON);
@@ -214,7 +218,7 @@ public final class MainActivity extends Activity {
         if (importing) return;
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
+        intent.setType("application/zip");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivityForResult(intent, PICK_ZIP);
@@ -243,7 +247,32 @@ public final class MainActivity extends Activity {
         } else if (data.getData() != null) {
             files.add(data.getData());
         }
+        // The picker is provided by Android/other document providers. Some
+        // providers incorrectly report file MIME types, so verify the names
+        // again before any file is opened or imported.
+        String extension = requestCode == PICK_JSON ? ".json" : ".zip";
+        for (Uri file : files) {
+            String name = documentName(file);
+            if (name == null || !name.toLowerCase(Locale.ROOT).endsWith(extension)) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Falscher Dateityp")
+                        .setMessage("Für diesen Import sind nur " + extension + "-Dateien erlaubt. "
+                                + "Nicht akzeptiert: " + (name == null ? "unbekannter Dateiname" : name))
+                        .setPositiveButton("OK", null).show();
+                return;
+            }
+        }
         startImport(files);
+    }
+
+    private String documentName(Uri file) {
+        try (Cursor cursor = getContentResolver().query(file,
+                new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null)) {
+            if (cursor != null && cursor.moveToFirst()) return cursor.getString(0);
+        } catch (Exception ignored) {
+            // Reject the file if the provider cannot supply a filename.
+        }
+        return null;
     }
 
     private void importFolder(Uri tree) {

@@ -2,10 +2,11 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
-## Funktionen (Version 0.2.1)
+## Funktionen (Version 0.2.2)
 
 - **UniverseLab**, **Weitere Chats**, **Alle** als getrennte Ansichten.
 - Mehrfachimport per Android-Dateiauswahl von `conversations-000.json`, `conversations-001.json` usw. aus einem ChatGPT-Datenexport.
+- **Gefilterte System-Dateiauswahl:** Einzelne Chat-Dateien über den MIME-Filter `application/json` wählen; Bilder, Videos und andere Dateitypen werden nicht angefordert. Für Export-ZIPs gibt es einen separaten ZIP-Dialog. Vor dem Import prüft die App zusätzlich die Endung `.json` bzw. `.zip`. Android-Dokumentanbieter bestimmen letztlich, welche Dateien der Systemdialog anzeigt; falsch klassifizierte JSON-Dateien können ggf. fehlen.
 - **ZIP-Import ohne Vollentpackung:** Mehrere ältere ChatGPT-Export-ZIPs über den Android-Dateipicker auswählen. Die App liest nur `conversations.json`/`conversations-000.json` usw. direkt aus dem ZIP-Stream und integriert sie über dieselbe Dublettenprüfung. Medienanhänge werden nicht extrahiert.
 - Wiederholter Import gleicht Chat-IDs ab: neue Gespräche werden ergänzt; identische Inhalte übersprungen. Eine geänderte Fassung ersetzt den Bestand nur bei **eindeutig neuerem numerischem `update_time`**; dabei wird die alte Fassung zuerst privat gesichert. Ältere Fassungen oder Konflikte mit fehlenden/gleichen Zeitstempeln ersetzen den aktuellen Stand **nicht**. Die Importanzeige zählt sie getrennt. Manuell verschobene Chats behalten ihre Zuordnung.
 - Identische Gesprächsinhalte derselben Chat-ID werden über einen lokalen SHA-256-Hash erkannt und **nicht erneut gespeichert**. Die Importanzeige meldet neu/geändert/bereits identisch getrennt. Unterschiedliche Chat-IDs werden nicht wegen ähnlicher Titel automatisch zusammengelegt.
