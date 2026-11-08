@@ -2,7 +2,7 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
-## Funktionen (Version 0.2.4)
+## Funktionen (Version 0.3.0)
 
 - **UniverseLab**, **Weitere Chats**, **Alle** als getrennte Ansichten.
 - Mehrfachimport per Android-Dateiauswahl von `conversations-000.json`, `conversations-001.json` usw. aus einem ChatGPT-Datenexport.
@@ -12,6 +12,10 @@ Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 - Wiederholter Import ist die **Update-Funktion**: IDs werden abgeglichen, vorhandene Gespräche aktualisiert, neue ergänzt. Manuell verschobene Chats behalten ihre Zuordnung.
 - Identische Gesprächsinhalte derselben Chat-ID werden über einen lokalen SHA-256-Hash erkannt und **nicht erneut gespeichert**. Die Importanzeige meldet neu/geändert/bereits identisch getrennt. Unterschiedliche Chat-IDs werden nicht wegen ähnlicher Titel automatisch zusammengelegt.
 - Volltextsuche über die sichtbaren Nachrichten und Titelsuche, Suche innerhalb eines Gesprächs, Kopieren einzelner Beiträge.
+- **Einzelne Gespräche exportieren:** Über „Exportieren“ im Chat kann wahlweise eine vollständige JSON mit dem gespeicherten Mapping und allen vorhandenen Antwortzweigen, eine lesbare Markdown-, TXT- oder HTML-Datei erstellt werden. Die Text-/Markdown-/HTML-Varianten enthalten den aktiven sichtbaren Pfad; die HTML-Variante verwendet eine offlinefähige, rein lokale Formeldarstellung. Über Androids „Dokument erstellen“-Auswahl bestimmt der Nutzer selbst das Ziel.
+- **Gesamtes aktives Archiv als ZIP sichern:** Auf dem Startbildschirm kann ein ZIP mit allen derzeitigen Chat-Hauptfassungen erzeugt werden. Es enthält eine reimportierbare `conversations-000.json` als JSON-Array und ein `chatarchiv_manifest.json` mit den Kategoriezuordnungen. Beim späteren Import werden die Kategoriezuordnungen auf neu hinzugekommene Chat-IDs angewendet. Medienanhänge und der separate Altversionsspeicher sind aus Speichergründen **nicht** Teil dieses ZIPs.
+- **Drei Formeldarstellungen:** Originaltext unverändert, selektive Unicode-Umsetzung gebräuchlicher LaTeX-Befehle oder Monospace-Quelltextansicht. Der Unicode-Modus ist bewusst ein linearer, nicht vollständiger TeX-Renderer; die gespeicherten Chatdaten und Exporte bleiben unverändert (außer der expliziten lesbaren HTML-Variante).
+- **Markiermodus über mehrere Beiträge:** Während die normale Chatliste eine Auswahl innerhalb einzelner Beiträge unterstützt, stellt der zusätzliche Markiermodus den sichtbaren Gesprächspfad in einem durchgehenden auswählbaren Text dar. Zum Schutz vor übergroßen Android-Textansichten sind 2 Millionen Zeichen anzeigbar; für größere Gespräche den Export verwenden.
 - Der tatsächliche aktive Nachrichtenpfad aus `mapping`/`current_node` wird verfolgt; alternative Versionen und versteckte interne Inhalte werden nicht als normale Chat-Beiträge ausgegeben.
 - **GitHub nur lesen:** Öffentliches UniverseLab-Repository auf `main` per anonymen GET-Abfragen durchsuchen und Quelltext kleiner Dateien ansehen. Daneben eingeschränkter GitHub-Pages-Lesemodus ohne JavaScript, Anmeldung, Cookies und fremde Domains.
 
@@ -22,10 +26,11 @@ Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 - Der bestehende Ordner-/Datei-/ZIP-Import über den Android-Systempicker bleibt ohne Vollspeicherberechtigung nutzbar. Die **neue** Sonderberechtigung `MANAGE_EXTERNAL_STORAGE` wird nur bei Auswahl der Vollspeicher-Suche von Android angefordert. Sie erlaubt technisch auch weitere Zugriffe auf den gemeinsamen Speicher; die implementierte Scan-/Import-Funktion nutzt sie ausschließlich lesend. Android sperrt weiterhin geschützte App-Datenbereiche. Diese Sideload-App ist nicht für die Play-Store-Veröffentlichung vorgesehen.
 - **Kein automatischer ChatGPT-Kontosync:** Dafür gibt es hier weder ChatGPT-Login noch eine autorisierte Schnittstelle. Updates erfolgen durch Auswahl eines neuen Exports.
 - Die `.json`-Dateien enthalten Text und Nachrichtenstruktur. Bilder/Dateianhänge benötigen die separaten Exportdateien, die bei einem unvollständigen ZIP möglicherweise nicht gerettet wurden.
-- Formeln/Markdown werden in Version 0.1 **als Originaltext** angezeigt; kein vollständiger TeX-Renderer.
+- Formeln bleiben im Archiv originalgetreu gespeichert. Der optionale Unicode-Modus ist eine Annäherung für häufige Befehle, keine verlustfreie mathematische Satzengine. Für exakte Provenienz und Kopien weiterhin „Original“ oder vollständigen JSON-Export verwenden.
+- Bei allen Exporten können Android-Dokumentanbieter auch Cloud-Dienste anbieten. **Nur der vom Nutzer gewählte Zielanbieter** erhält die Datei; es gibt keinen selbsttätigen Chat-Upload durch die App.
 - Die automatische Kategorie basiert auf Stichworten im Gesprächstittel. Per langem Tippen lässt sich die Zuordnung korrigieren.
 - `chat.html` und eine 40-GB-ZIP müssen **nicht** importiert werden, wenn die darin enthaltenen Chat-JSON-Dateien bereits vorhanden sind. Die neue Vollspeicher-Suche kann auch große vollständige ZIPs erkennen und daraus nur Chat-JSONs lesen; beschädigte oder mehrteilige Archive sind davon ausgenommen.
-- Alternativ kann die App ZIP-Archive direkt lesen. Bei abgeschnittenen ZIPs können früh liegende intakte Gesprächs-JSONs gerettet werden, eine vollständige Wiederherstellung ist nicht garantiert. Sobald nach den Gesprächs-JSONs große `file-*.dat`-Anhänge beginnen, beendet der Import die ZIP-Durchsuchung, damit keine Dutzenden GB an Medien verarbeitet werden. Gesprächs-JSONs sind pro ZIP auf insgesamt 800 MiB und 100 Einträge begrenzt.
+- Alternativ kann die App ZIP-Archive direkt lesen. Bei abgeschnittenen ZIPs können früh liegende intakte Gesprächs-JSONs gerettet werden, eine vollständige Wiederherstellung ist nicht garantiert. Sobald nach den Gesprächs-JSONs große `file-*.dat`-Anhänge beginnen, beendet der Import die ZIP-Durchsuchung, damit keine Dutzenden GB an Medien verarbeitet werden. Gesprächs-JSONs sind pro ZIP auf insgesamt 3 GiB und 100 Einträge begrenzt.
 
 ## Repository-Isolation
 
@@ -50,3 +55,6 @@ Ausgabe: `app/build/outputs/apk/debug/app-debug.apk`. GitHub Actions stellt dies
 4. Später weitere ChatGPT-Exportdateien in den freigegebenen Ordner kopieren und **Chats importieren** → **Gespeicherten Ordner aktualisieren** wählen. Die Kategoriezuordnung bleibt erhalten.
 5. Für ältere Exporte **Chats importieren** → **Ältere Export-ZIPs auswählen** verwenden und eine oder mehrere `.zip`-Dateien auswählen. Bereits vorhandene Chats werden anhand ihrer IDs/Inhaltshashes nicht doppelt gespeichert.
 6. **Optional:** **Chats importieren** → **Gesamten Handyspeicher nach Chat-Exporten durchsuchen** → Android-Berechtigung ausdrücklich erteilen. Nach der Suche zeigt die App die Anzahl gefundener Gesprächs-JSONs/ZIPs und wartet auf die Importbestätigung. Die Berechtigung kann jederzeit in den Android-App-Einstellungen entzogen werden.
+7. Einen Chat öffnen → **Exportieren** und zwischen vollständigem JSON, Markdown, TXT und HTML auswählen. Die JSON-Datei enthält auch inaktive Zweige der gespeicherten Unterhaltung; die lesbaren Formate enthalten den aktiven sichtbaren Verlauf.
+8. Einen Chat öffnen → **Original / Unicode / Monospace** für die Anzeige wählen. Mit **Markieren** eine durchgehende Markieransicht über mehrere Beiträge öffnen.
+9. Auf der Hauptseite **Alle Gespräche als ZIP sichern** für ein reimportierbares Backup der aktuellen Hauptfassungen und ihrer Kategoriezuordnungen wählen. Altversionen und externe Medienanhänge sind dabei nicht eingeschlossen.

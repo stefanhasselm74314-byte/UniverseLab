@@ -17,6 +17,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.AtomicMoveNotSupportedException;
@@ -30,10 +31,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.zip.ZipOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -42,8 +46,9 @@ import java.util.zip.ZipInputStream;
 final class ChatStore {
     static final String PROJECT = "projekt";
     static final String OTHER = "andere";
-    private static final long MAX_ZIP_JSON_BYTES = 800L * 1024 * 1024;
+    private static final long MAX_ZIP_JSON_BYTES = 3L * 1024 * 1024 * 1024;
     private static final int MAX_ZIP_JSON_ENTRIES = 100;
+    private static final long MAX_MANIFEST_BYTES = 2L * 1024 * 1024;
     private static final long MAX_SAVED_VERSIONS_BYTES = 1024L * 1024 * 1024;
     private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
 
@@ -89,6 +94,10 @@ final class ChatStore {
         boolean isCancelled();
     }
 
+    interface ExportProgress {
+        void onProgress(int done, int total);
+    }
+
     static final class ImportResult {
         int imported;
         int updated;
@@ -96,6 +105,7 @@ final class ChatStore {
         int archived;
         int failed;
         boolean cancelled;
+        final Set<String> newIds = new HashSet<>();
         final List<String> errors = new ArrayList<>();
 
         String summary() {
@@ -255,6 +265,54 @@ final class ChatStore {
         return result;
     }
 
+    /** Interoperable backup ZIP; media and historical versions are not included. */
+    void exportAllToZip(OutputStream destination, ExportProgress progress,
+                        Cancelled cancelled) throws IOException {
+        List<Entry> records = snapshot();
+        try (ZipOutputStream zip = new ZipOutputStream(destination, StandardCharsets.UTF_8)) {
+            zip.putNextEntry(new ZipEntry("conversations-000.json"));
+            zip.write('[');
+            byte[] buffer = new byte[65536];
+            for (int i = 0; i < records.size(); i++) {
+                if (cancelled.isCancelled() || Thread.currentThread().isInterrupted()) {
+                    throw new IOException("Archiv-Export abgebrochen");
+                }
+                Entry record = records.get(i);
+                if (i > 0) zip.write(',');
+                try (InputStream input = new BufferedInputStream(
+                        new FileInputStream(new File(conversations, record.file)), 65536)) {
+                    int length;
+                    while ((length = input.read(buffer)) != -1) {
+                        if (cancelled.isCancelled() || Thread.currentThread().isInterrupted()) {
+                            throw new IOException("Archiv-Export abgebrochen");
+                        }
+                        zip.write(buffer, 0, length);
+                    }
+                }
+                progress.onProgress(i + 1, records.size());
+            }
+            zip.write(']');
+            zip.closeEntry();
+
+            JSONObject categories = new JSONObject();
+            JSONObject manifest = new JSONObject();
+            try {
+                for (Entry record : records) categories.put(record.id, record.category);
+                manifest.put("format", "universelab-chatarchiv");
+                manifest.put("version", 1);
+                manifest.put("conversation_count", records.size());
+                manifest.put("category_by_id", categories);
+                manifest.put("notice", "Nur gespeicherte Hauptfassungen der Chat-JSONs; Medien und Altversionen nicht enthalten.");
+            } catch (JSONException exception) {
+                throw new IOException("Backup-Metadaten konnten nicht geschrieben werden", exception);
+            }
+            zip.putNextEntry(new ZipEntry("chatarchiv_manifest.json"));
+            zip.write(manifest.toString().getBytes(StandardCharsets.UTF_8));
+            zip.closeEntry();
+            zip.finish();
+        }
+    }
+
     /** ZIP central directory allows random access without scanning huge media entries. */
     private void importZipIndexed(File file, ImportResult result, Progress progress,
                                   Cancelled cancelled) throws IOException {
@@ -274,7 +332,7 @@ final class ChatStore {
                 }
                 long remaining = MAX_ZIP_JSON_BYTES - extractedBytes;
                 if (remaining <= 0 || (entry.getSize() >= 0 && entry.getSize() > remaining)) {
-                    throw new IOException("ZIP-Grenze: Gesprächsdateien über 800 MiB");
+                    throw new IOException("ZIP-Grenze: Gesprächsdateien über 3 GiB");
                 }
                 try (InputStream input = new BufferedInputStream(zip.getInputStream(entry), 65536)) {
                     CountingInputStream bounded = new CountingInputStream(input, remaining);
@@ -284,6 +342,12 @@ final class ChatStore {
                 }
             }
             if (relevantEntries == 0) throw new IOException("ZIP enthält keine Gesprächs-JSON");
+            ZipEntry manifest = zip.getEntry("chatarchiv_manifest.json");
+            if (manifest != null && manifest.getSize() <= MAX_MANIFEST_BYTES) {
+                try (InputStream input = zip.getInputStream(manifest)) {
+                    applyBackupCategories(new CountingInputStream(input, MAX_MANIFEST_BYTES), result);
+                }
+            }
         }
     }
 
@@ -299,6 +363,11 @@ final class ChatStore {
                 String name = fullName.substring(fullName.lastIndexOf('/') + 1);
                 boolean isChatJson = StorageScanner.isConversationJson(name) && !entry.isDirectory();
                 if (!isChatJson) {
+                    if ("chatarchiv_manifest.json".equals(name)) {
+                        applyBackupCategories(new CountingInputStream(zip, MAX_MANIFEST_BYTES), result);
+                        zip.closeEntry();
+                        continue;
+                    }
                     // ChatGPT archives usually put their JSON files first. Stop at the
                     // first media blob after them; never traverse tens of GB of attachments.
                     if (foundConversations && name.startsWith("file-") && name.endsWith(".dat")) break;
@@ -347,11 +416,31 @@ final class ChatStore {
             if (change == ImportChange.UNCHANGED) result.unchanged++;
             else if (change == ImportChange.UPDATED) result.updated++;
             else if (change == ImportChange.ARCHIVED) result.archived++;
-            else result.imported++;
+            else { result.imported++; result.newIds.add(id); }
             int total = result.imported + result.updated + result.unchanged;
             if (total % 10 == 0) progress.onProgress(result.imported, result.updated, result.unchanged);
         }
         reader.endArray();
+    }
+
+    private void applyBackupCategories(InputStream source, ImportResult result) throws IOException {
+        JsonReader reader = new JsonReader(new InputStreamReader(source, StandardCharsets.UTF_8));
+        Object decoded = readValue(reader, 0);
+        if (!(decoded instanceof JSONObject)) return;
+        JSONObject manifest = (JSONObject) decoded;
+        if (!"universelab-chatarchiv".equals(manifest.optString("format", ""))) return;
+        JSONObject map = manifest.optJSONObject("category_by_id");
+        if (map == null) return;
+        synchronized (this) {
+            for (String id : result.newIds) {
+                Entry previous = entries.get(id);
+                if (previous == null) continue;
+                String category = map.optString(id, "");
+                if (!PROJECT.equals(category) && !OTHER.equals(category)) continue;
+                entries.put(id, new Entry(id, previous.title, previous.file, previous.created,
+                        category, previous.digest));
+            }
+        }
     }
 
     private static final class CountingInputStream extends FilterInputStream {

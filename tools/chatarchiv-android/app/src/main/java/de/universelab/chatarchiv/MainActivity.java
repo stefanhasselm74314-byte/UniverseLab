@@ -32,6 +32,8 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.File;
+import java.io.OutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -47,6 +49,7 @@ public final class MainActivity extends Activity {
     private static final int PICK_ZIP = 803;
     private static final int PICK_JSON_FOLDER = 804;
     private static final int ASK_LEGACY_STORAGE = 805;
+    private static final int SAVE_ARCHIVE = 806;
     private static final int MAX_JSON_CHOICES = 2000;
     private static final String PREFS = "chatarchiv-import";
     private static final String FOLDER_PREF = "read-only-tree-uri";
@@ -111,6 +114,10 @@ public final class MainActivity extends Activity {
         root.addView(actions);
         importButton.setOnClickListener(view -> showImportOptions());
         githubButton.setOnClickListener(view -> startActivity(new Intent(this, GitHubActivity.class)));
+
+        android.widget.Button backupButton = Ui.button(this, "Alle Gespräche als ZIP sichern");
+        backupButton.setOnClickListener(view -> offerArchiveExport());
+        root.addView(backupButton);
 
         Ui.addGap(this, root, 10);
         LinearLayout tabs = Ui.row(this);
@@ -263,6 +270,60 @@ public final class MainActivity extends Activity {
         }
     }
 
+    private void offerArchiveExport() {
+        if (importing) return;
+        int count = store.snapshot().size();
+        if (count == 0) {
+            status.setText("Noch keine Chats vorhanden, die gesichert werden können.");
+            return;
+        }
+        new AlertDialog.Builder(this).setTitle("Gesprächsarchiv als ZIP sichern")
+                .setMessage("Die Sicherung enthält " + count + " gespeicherte Hauptfassungen "
+                        + "als importierbare Chat-JSONs sowie ein Manifest mit den Kategoriezuordnungen. "
+                        + "Gesondert gesicherte Altversionen und Medienanhänge sind nicht enthalten. "
+                        + "Du wählst das Ziel selbst; ein Cloud-Speicheranbieter würde die Datei gegebenenfalls hochladen.")
+                .setNegativeButton("Abbrechen", null)
+                .setPositiveButton("Speicherort wählen", (dialog, which) -> {
+                    Intent save = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                    save.addCategory(Intent.CATEGORY_OPENABLE);
+                    save.setType("application/zip");
+                    save.putExtra(Intent.EXTRA_TITLE, "UniverseLab_ChatArchiv_"
+                            + LocalDate.now() + ".zip");
+                    save.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    startActivityForResult(save, SAVE_ARCHIVE);
+                }).show();
+    }
+
+    private void startArchiveExport(Uri target) {
+        if (importing) return;
+        importing = true;
+        cancelStorageScan.set(false);
+        cancelScanButton.setVisibility(View.VISIBLE);
+        status.setText("Sicherung aller Chats wird geschrieben …");
+        importWorker.execute(() -> {
+            try (OutputStream output = getContentResolver().openOutputStream(target, "w")) {
+                if (output == null) throw new IOException("Ziel-Datei nicht beschreibbar");
+                store.exportAllToZip(output, (done, total) -> runOnUiThread(() ->
+                        status.setText("ZIP-Export: " + done + " / " + total + " Gespräche …")),
+                        cancelStorageScan::get);
+                runOnUiThread(() -> {
+                    importing = false;
+                    cancelScanButton.setVisibility(View.GONE);
+                    importSummary = "Archiv-ZIP erfolgreich erstellt. "
+                            + "Alle Hauptfassungen sind für einen späteren Reimport enthalten.";
+                    refresh();
+                });
+            } catch (Exception exception) {
+                runOnUiThread(() -> {
+                    importing = false;
+                    cancelScanButton.setVisibility(View.GONE);
+                    status.setText("ZIP-Export nicht abgeschlossen: " + exception.getMessage()
+                            + " · Die angelegte Zieldatei kann unvollständig sein.");
+                });
+            }
+        });
+    }
+
     @Override protected void onResume() {
         super.onResume();
         if (scanningAfterSettings) {
@@ -410,6 +471,10 @@ public final class MainActivity extends Activity {
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK || data == null) return;
+        if (requestCode == SAVE_ARCHIVE) {
+            if (data.getData() != null) startArchiveExport(data.getData());
+            return;
+        }
         if (requestCode == PICK_FOLDER) {
             Uri tree = data.getData();
             if (tree == null) return;
