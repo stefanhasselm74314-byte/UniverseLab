@@ -51,7 +51,7 @@ final class Ui {
     static Button button(Context context, String value) {
         Button button = new Button(context);
         button.setText(value);
-        button.setTextAllCaps(false);
+        button.setAllCaps(false);
         button.setTextColor(TEXT);
         button.setTextSize(13);
         GradientDrawable bg = new GradientDrawable();

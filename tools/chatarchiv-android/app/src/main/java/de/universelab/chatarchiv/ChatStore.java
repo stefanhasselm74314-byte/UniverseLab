@@ -109,7 +109,7 @@ final class ChatStore {
     private synchronized void loadIndex() throws IOException {
         if (!index.isFile()) return;
         try {
-            JSONArray json = new JSONArray(Files.readString(index.toPath(), StandardCharsets.UTF_8));
+            JSONArray json = new JSONArray(new String(Files.readAllBytes(index.toPath()), StandardCharsets.UTF_8));
             for (int i = 0; i < json.length(); i++) {
                 JSONObject record = json.optJSONObject(i);
                 if (record == null) continue;
@@ -144,7 +144,7 @@ final class ChatStore {
         synchronized (this) { entry = entries.get(id); }
         if (entry == null) throw new IOException("Gespräch nicht gefunden");
         try {
-            return new JSONObject(Files.readString(new File(conversations, entry.file).toPath(),
+            return new JSONObject(new String(Files.readAllBytes(new File(conversations, entry.file).toPath()),
                     StandardCharsets.UTF_8));
         } catch (JSONException exception) {
             throw new IOException("Gesprächsdaten ungültig", exception);
@@ -271,7 +271,7 @@ final class ChatStore {
 
     private static void writeAtomic(File target, String value) throws IOException {
         File temp = new File(target.getParentFile(), target.getName() + ".tmp");
-        Files.writeString(temp.toPath(), value, StandardCharsets.UTF_8);
+        Files.write(temp.toPath(), value.getBytes(StandardCharsets.UTF_8));
         try {
             Files.move(temp.toPath(), target.toPath(), StandardCopyOption.ATOMIC_MOVE,
                     StandardCopyOption.REPLACE_EXISTING);
