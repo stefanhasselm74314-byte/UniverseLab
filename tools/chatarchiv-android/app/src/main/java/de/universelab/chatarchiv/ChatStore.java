@@ -89,12 +89,16 @@ final class ChatStore {
         int imported;
         int updated;
         int unchanged;
+        int olderSkipped;
+        int conflicts;
         int failed;
         final List<String> errors = new ArrayList<>();
 
         String summary() {
             String output = "Neu: " + imported + " · Geändert: " + updated
                     + " · Bereits identisch: " + unchanged;
+            if (olderSkipped > 0) output += " · Ältere Versionen geschützt: " + olderSkipped;
+            if (conflicts > 0) output += " · Unklare Änderungen nicht ersetzt: " + conflicts;
             if (failed > 0) output += " · Fehler: " + failed;
             if (!errors.isEmpty()) output += "\n" + errors.get(0);
             return output;
@@ -249,8 +253,11 @@ final class ChatStore {
             ImportChange change = upsert(conversation, id);
             if (change == ImportChange.UNCHANGED) result.unchanged++;
             else if (change == ImportChange.UPDATED) result.updated++;
+            else if (change == ImportChange.OLDER) result.olderSkipped++;
+            else if (change == ImportChange.CONFLICT) result.conflicts++;
             else result.imported++;
-            int total = result.imported + result.updated + result.unchanged;
+            int total = result.imported + result.updated + result.unchanged
+                    + result.olderSkipped + result.conflicts;
             if (total % 10 == 0) progress.onProgress(result.imported, result.updated, result.unchanged);
         }
         reader.endArray();
@@ -278,7 +285,7 @@ final class ChatStore {
         }
     }
 
-    private enum ImportChange { ADDED, UPDATED, UNCHANGED }
+    private enum ImportChange { ADDED, UPDATED, UNCHANGED, OLDER, CONFLICT }
 
     private ImportChange upsert(JSONObject data, String id) throws IOException {
         String fileName = sha256(id) + ".json";
@@ -289,20 +296,68 @@ final class ChatStore {
         if (time instanceof Number) created = ((Number) time).longValue();
         String serialized = data.toString();
         String digest = sha256(serialized);
-        synchronized (this) {
-            Entry previous = entries.get(id);
-            if (previous != null && digest.equals(previous.digest)) return ImportChange.UNCHANGED;
-        }
-        String indexed = ConversationLogic.indexText(data);
 
+        Entry previous;
+        synchronized (this) {
+            previous = entries.get(id);
+            if (previous != null && digest.equals(previous.digest)) {
+                return ImportChange.UNCHANGED;
+            }
+        }
+
+        if (previous != null) {
+            // Historic exports often contain older snapshots of the same ChatGPT ID.
+            // Never replace the only local copy solely because the JSON differs.
+            File oldFile = new File(conversations, previous.file);
+            String storedText = new String(Files.readAllBytes(oldFile.toPath()), StandardCharsets.UTF_8);
+            if (digest.equals(sha256(storedText))) {
+                // Repair a stale digest after an interrupted prior import.
+                synchronized (this) {
+                    entries.put(id, new Entry(previous.id, previous.title, previous.file,
+                            previous.created, previous.category, digest));
+                }
+                return ImportChange.UNCHANGED;
+            }
+            JSONObject storedData;
+            try {
+                storedData = new JSONObject(storedText);
+            } catch (JSONException exception) {
+                throw new IOException("Gespeicherte Gesprächsversion ist beschädigt", exception);
+            }
+            ConversationRevisionPolicy.Action decision =
+                    ConversationRevisionPolicy.decide(storedData, data);
+            if (decision == ConversationRevisionPolicy.Action.KEEP_OLDER) {
+                return ImportChange.OLDER;
+            }
+            if (decision == ConversationRevisionPolicy.Action.REQUIRE_REVIEW) {
+                return ImportChange.CONFLICT;
+            }
+            // Newer snapshots may update the active view only after an immutable
+            // local backup of the previous snapshot was created successfully.
+            savePreviousVersion(id, storedText);
+        }
+
+        String indexed = ConversationLogic.indexText(data);
         writeAtomic(new File(conversations, fileName), serialized);
         writeAtomic(new File(conversations, sha256(id) + ".search"), indexed);
 
         synchronized (this) {
-            Entry previous = entries.get(id);
-            String category = previous != null ? previous.category : categoryFromTitle(title);
+            Entry latest = entries.get(id);
+            String category = latest != null ? latest.category : categoryFromTitle(title);
             entries.put(id, new Entry(id, title, fileName, created, category, digest));
-            return previous != null ? ImportChange.UPDATED : ImportChange.ADDED;
+            return latest != null ? ImportChange.UPDATED : ImportChange.ADDED;
+        }
+    }
+
+    private void savePreviousVersion(String id, String serialized) throws IOException {
+        File backups = new File(context.getFilesDir(), "previous_versions");
+        if (!backups.isDirectory() && !backups.mkdirs()) {
+            throw new IOException("Versionssicherung konnte nicht erstellt werden");
+        }
+        String backupName = sha256(id) + "-" + sha256(serialized) + ".json";
+        File backup = new File(backups, backupName);
+        if (!backup.exists()) {
+            writeAtomic(backup, serialized);
         }
     }
 
