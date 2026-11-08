@@ -274,8 +274,9 @@ public final class MainActivity extends Activity {
         importing = true;
         status.setText("Import läuft … (" + files.size() + " Datei(en))");
         importWorker.execute(() -> {
-            ChatStore.ImportResult result = store.importFiles(files, (added, updated) ->
-                    runOnUiThread(() -> status.setText("Import: " + added + " neu, " + updated + " aktualisiert …")));
+            ChatStore.ImportResult result = store.importFiles(files, (added, updated, unchanged) ->
+                    runOnUiThread(() -> status.setText("Import: " + added + " neu, " + updated
+                            + " geändert, " + unchanged + " bereits identisch …")));
             runOnUiThread(() -> {
                 importing = false;
                 importSummary = result.summary();

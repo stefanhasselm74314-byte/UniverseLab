@@ -44,13 +44,15 @@ final class ChatStore {
         final String file;
         final long created;
         final String category;
+        final String digest;
 
-        Entry(String id, String title, String file, long created, String category) {
+        Entry(String id, String title, String file, long created, String category, String digest) {
             this.id = id;
             this.title = title;
             this.file = file;
             this.created = created;
             this.category = category;
+            this.digest = digest;
         }
 
         String prettyDate() {
@@ -65,12 +67,13 @@ final class ChatStore {
             json.put("file", file);
             json.put("created", created);
             json.put("category", category);
+            json.put("digest", digest);
             return json;
         }
     }
 
     interface Progress {
-        void onProgress(int imported, int updated);
+        void onProgress(int imported, int updated, int unchanged);
     }
 
     interface Cancelled {
@@ -80,11 +83,13 @@ final class ChatStore {
     static final class ImportResult {
         int imported;
         int updated;
+        int unchanged;
         int failed;
         final List<String> errors = new ArrayList<>();
 
         String summary() {
-            String output = "Neu: " + imported + " · Aktualisiert: " + updated;
+            String output = "Neu: " + imported + " · Geändert: " + updated
+                    + " · Bereits identisch: " + unchanged;
             if (failed > 0) output += " · Fehler: " + failed;
             if (!errors.isEmpty()) output += "\n" + errors.get(0);
             return output;
@@ -117,7 +122,8 @@ final class ChatStore {
                 String file = record.optString("file", "");
                 if (id.isEmpty() || !file.matches("[0-9a-f]{64}\\.json")) continue;
                 entries.put(id, new Entry(id, record.optString("title", "Ohne Titel"),
-                        file, record.optLong("created", 0), record.optString("category", OTHER)));
+                        file, record.optLong("created", 0), record.optString("category", OTHER),
+                        record.optString("digest", "")));
             }
         } catch (JSONException exception) {
             throw new IOException("Gesprächsindex beschädigt: " + exception.getMessage(), exception);
@@ -135,7 +141,7 @@ final class ChatStore {
         if (previous == null) return;
         if (!PROJECT.equals(category) && !OTHER.equals(category)) return;
         entries.put(id, new Entry(previous.id, previous.title, previous.file,
-                previous.created, category));
+                previous.created, category, previous.digest));
         saveIndex();
     }
 
@@ -169,11 +175,12 @@ final class ChatStore {
                         JSONObject conversation = (JSONObject) value;
                         String id = conversation.optString("id", "");
                         if (id.isEmpty() || conversation.optJSONObject("mapping") == null) continue;
-                        boolean replaced = upsert(conversation, id);
-                        if (replaced) result.updated++;
+                        ImportChange change = upsert(conversation, id);
+                        if (change == ImportChange.UNCHANGED) result.unchanged++;
+                        else if (change == ImportChange.UPDATED) result.updated++;
                         else result.imported++;
-                        int total = result.imported + result.updated;
-                        if (total % 10 == 0) progress.onProgress(result.imported, result.updated);
+                        int total = result.imported + result.updated + result.unchanged;
+                        if (total % 10 == 0) progress.onProgress(result.imported, result.updated, result.unchanged);
                     }
                     reader.endArray();
                 }
@@ -189,27 +196,35 @@ final class ChatStore {
                 }
             }
         }
-        progress.onProgress(result.imported, result.updated);
+        progress.onProgress(result.imported, result.updated, result.unchanged);
         return result;
     }
 
-    private boolean upsert(JSONObject data, String id) throws IOException {
+    private enum ImportChange { ADDED, UPDATED, UNCHANGED }
+
+    private ImportChange upsert(JSONObject data, String id) throws IOException {
         String fileName = sha256(id) + ".json";
         String title = data.optString("title", "Ohne Titel");
         if (title.trim().isEmpty()) title = "Ohne Titel";
         long created = 0;
         Object time = data.opt("create_time");
         if (time instanceof Number) created = ((Number) time).longValue();
+        String serialized = data.toString();
+        String digest = sha256(serialized);
+        synchronized (this) {
+            Entry previous = entries.get(id);
+            if (previous != null && digest.equals(previous.digest)) return ImportChange.UNCHANGED;
+        }
         String indexed = ConversationLogic.indexText(data);
 
-        writeAtomic(new File(conversations, fileName), data.toString());
+        writeAtomic(new File(conversations, fileName), serialized);
         writeAtomic(new File(conversations, sha256(id) + ".search"), indexed);
 
         synchronized (this) {
             Entry previous = entries.get(id);
             String category = previous != null ? previous.category : categoryFromTitle(title);
-            entries.put(id, new Entry(id, title, fileName, created, category));
-            return previous != null;
+            entries.put(id, new Entry(id, title, fileName, created, category, digest));
+            return previous != null ? ImportChange.UPDATED : ImportChange.ADDED;
         }
     }
 
