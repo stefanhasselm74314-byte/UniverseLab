@@ -74,7 +74,9 @@ final class HandoffBuilder {
                 .append(" mögliche Prüfaufträge und ").append(selectedClosures.size())
                 .append(" spätere Abschlussaussagen zur Statusprüfung.\n");
         if (unreadableChats > 0) out.append("- ACHTUNG: ")
-                .append(unreadableChats).append(" Gespräche konnten nicht gelesen werden.\n");
+                .append(unreadableChats)
+                .append(unreadableChats == 1 ? " Gespräch konnte " : " Gespräche konnten ")
+                .append("nicht gelesen werden.\n");
         out.append("- Suchgrenzen: maximal 350 letzte sichtbare Beiträge pro Chat, ")
                 .append("120.000 Zeichen pro Beitrag und 5 Fundstellen pro Chat; ")
                 .append("diese Auswahl ist **nicht vollständig**.\n\n");
@@ -169,7 +171,9 @@ final class HandoffBuilder {
                         (ResearchFinder.Finding f) -> Double.isFinite(f.created) ? f.created : 0)
                         .reversed())
                 .thenComparing(f -> clean(f.chatTitle, 140))
-                .thenComparingInt(f -> -f.messageNumber));
+                .thenComparing(f -> clean(f.chatId, 100))
+                .thenComparingInt(f -> -f.messageNumber)
+                .thenComparing(f -> clean(f.excerpt, 360)));
         List<ResearchFinder.Finding> selected = new ArrayList<>();
         Map<String, Integer> byChat = new HashMap<>();
         Map<String, Integer> byField = new HashMap<>();
