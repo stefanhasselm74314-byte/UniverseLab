@@ -31,6 +31,12 @@ Der Navigator ist zunächst ein **regelbasierter Such- und Priorisierungsassiste
 - Der angezeigte Prüfweg ist ein **Vorschlag**: Definitionsprüfung, Rechnungs-/Dimensionskontrolle, Konvergenz- oder Datenabgleich je nach erkanntem Thema. Es werden keine physikalischen Behauptungen automatisch verifiziert, keine neuen Sätze bewiesen und keine Ergebnisse kanonisiert.
 - Für eine spätere, wirklich eigenständigere Fragenfindung sind nachvollziehbare Hypothesenbildung, Statusabgleich gegen aktuelle Quellen, Widerspruchspaare, reproduzierbare Prüftests und explizite Nutzerfreigabe als eigene Ausbauetappen erforderlich.
 
+### Sicheres Testen auf dem Smartphone
+
+Die in GitHub Actions erzeugte **Debug-APK** hat in diesem Forschungszweig die gesonderte Android-Paketkennung `de.universelab.chatarchiv.researchpreview` und den Icon-Titel `UniverseLab Forschung (Test)`. Sie wird parallel zur bestehenden `de.universelab.chatarchiv` installiert; die bisherigen privaten Daten bleiben unabhängig und unverändert.
+
+Ein Austausch von Chatdaten zwischen den getrennten App-Speichern erfolgt **nicht automatisch**. Wer die Vorschau testen möchte, kann in der bisherigen App zunächst **Alle Gespräche als ZIP sichern** wählen und diese Sicherung bewusst in die Vorschau importieren. Der ZIP-Export enthält aktive Chat-Hauptfassungen und Kategorien, **nicht** Altversionsverläufe oder externe Medienanhänge. Das ist ein Testpaket; nicht die bestehende App deinstallieren, um eine Signaturkollision zu umgehen.
+
 ## Datenschutz und Grenzen
 
 - Gespräche, Suchindex und Titel liegen **ausschließlich im privaten App-Speicher auf dem Android-Gerät**; keine Uploads, Analytics oder Werbung. Android-Backup ist deaktiviert.
