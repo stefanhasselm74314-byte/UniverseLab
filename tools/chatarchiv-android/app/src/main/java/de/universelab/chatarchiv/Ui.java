@@ -4,8 +4,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +32,40 @@ final class Ui {
                 dp(context, paddingDp), dp(context, paddingDp));
         root.setBackgroundColor(BACKGROUND);
         return root;
+    }
+
+    /**
+     * Prevent actionable content from sitting behind Android's status/navigation bars.
+     * Capture the original padding once; new inset dispatches must not accumulate it.
+     */
+    static void applySystemBarInsets(LinearLayout root) {
+        final int baseLeft = root.getPaddingLeft();
+        final int baseTop = root.getPaddingTop();
+        final int baseRight = root.getPaddingRight();
+        final int baseBottom = root.getPaddingBottom();
+        root.setOnApplyWindowInsetsListener((view, windowInsets) -> {
+            int left;
+            int top;
+            int right;
+            int bottom;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                android.graphics.Insets safe = windowInsets.getInsets(
+                        WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+                left = safe.left;
+                top = safe.top;
+                right = safe.right;
+                bottom = safe.bottom;
+            } else {
+                left = windowInsets.getSystemWindowInsetLeft();
+                top = windowInsets.getSystemWindowInsetTop();
+                right = windowInsets.getSystemWindowInsetRight();
+                bottom = windowInsets.getSystemWindowInsetBottom();
+            }
+            view.setPadding(baseLeft + Math.max(0, left), baseTop + Math.max(0, top),
+                    baseRight + Math.max(0, right), baseBottom + Math.max(0, bottom));
+            return windowInsets;
+        });
+        root.post(root::requestApplyInsets);
     }
 
     static LinearLayout row(Context context) {
