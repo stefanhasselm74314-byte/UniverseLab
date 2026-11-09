@@ -44,6 +44,15 @@ final class HandoffBuilder {
     static Packet build(String focus, String timestamp, int scannedChats, int unreadableChats,
             List<ResearchFinder.Finding> candidates,
             Map<ResearchFinder.Finding, ResearchTimeline.Review> reviews) {
+        return buildSelected(focus, timestamp, scannedChats, unreadableChats,
+                candidates, reviews, null, "Nicht festgelegt");
+    }
+
+    /** Explicit selection only governs the exported quotes, never the factual status. */
+    static Packet buildSelected(String focus, String timestamp, int scannedChats,
+            int unreadableChats, List<ResearchFinder.Finding> candidates,
+            Map<ResearchFinder.Finding, ResearchTimeline.Review> reviews,
+            List<ResearchFinder.Finding> explicitlyChosen, String scope) {
         List<ResearchFinder.Finding> all = candidates == null
                 ? Collections.emptyList() : candidates;
         Map<ResearchFinder.Finding, ResearchTimeline.Review> check = reviews == null
@@ -59,13 +68,34 @@ final class HandoffBuilder {
                 work.add(finding);
             }
         }
-        List<ResearchFinder.Finding> selectedWork = selectWorkBalanced(work, ACTIVE_LIMIT, focus);
-        List<ResearchFinder.Finding> selectedClosures = select(laterClosing, STATUS_LIMIT);
+        List<ResearchFinder.Finding> selectedWork;
+        List<ResearchFinder.Finding> selectedClosures;
+        if (explicitlyChosen == null) {
+            selectedWork = selectWorkBalanced(work, ACTIVE_LIMIT, focus);
+            selectedClosures = select(laterClosing, STATUS_LIMIT);
+        } else {
+            selectedWork = new ArrayList<>();
+            selectedClosures = new ArrayList<>();
+            for (ResearchFinder.Finding f : explicitlyChosen) {
+                if (f == null || !all.contains(f)) continue;
+                ResearchTimeline.Review review = check.get(f);
+                if (review != null && "LATER_CLOSURE".equals(review.code)) {
+                    if (selectedClosures.size() + selectedWork.size() < ACTIVE_LIMIT)
+                        selectedClosures.add(f);
+                } else if (selectedClosures.size() + selectedWork.size() < ACTIVE_LIMIT)
+                    selectedWork.add(f);
+            }
+        }
 
         StringBuilder out = new StringBuilder(18_000);
         out.append("# UniverseLab · Übergabe für einen neuen Chat\n\n");
         out.append("**Status: [HEURISTISCH] · NUR ARBEITSENTWURF · KEINE PROJEKTFREIGABE**\n\n");
         out.append("- Fokus: ").append(clean(focus, 180)).append('\n');
+        out.append("- Bereich: ").append(clean(scope, 80)).append('\n');
+        out.append("- Fundstellen-Auswahl: ").append(explicitlyChosen == null
+                ? "Automatischer Vorschlag, **noch nicht vom Nutzer bestätigt**."
+                : "Vom Nutzer bewusst ausgewählt; **fachlich weiterhin unbestätigt**.")
+                .append('\n');
         out.append("- Erstellt auf dem Gerät: ").append(clean(timestamp, 60)).append('\n');
         out.append("- Datenbasis: ").append(Math.max(0, scannedChats))
                 .append(" lokal gespeicherte UniverseLab-Hauptfassungen; nur sichtbarer Gesprächspfad.\n");
@@ -82,7 +112,7 @@ final class HandoffBuilder {
                 .append("nicht gelesen werden.\n");
         out.append("- Auswahl: unterschiedliche Hinweisarten und Quellchats; der Themenfokus wird nur begrenzt als Textgewichtung genutzt.\n");
         out.append("- Suchgrenzen: maximal 350 letzte sichtbare Beiträge pro Chat, ")
-                .append("120.000 Zeichen pro Beitrag und 5 Fundstellen pro Chat; ")
+                .append("120.000 Zeichen pro Beitrag und höchstens 8 gefilterte Fundstellen pro Chat; ")
                 .append("diese Auswahl ist **nicht vollständig**.\n\n");
 
         out.append("## Verbindliche Arbeitsdisziplin im Folgedialog\n\n");
@@ -94,6 +124,23 @@ final class HandoffBuilder {
                 .append("Technische Ausführbarkeit ist keine physikalische Evidenz; ein Fit kein 6D-Beweis.\n");
         out.append("5. Wenn ein Originalbeitrag oder ein aktueller Nachweis fehlt, sage es ausdrücklich. ")
                 .append("Behaupte keinen Zugriff auf den vollständigen Archivbestand.\n\n");
+
+        out.append("## Kontext und Quellenhierarchie für den Folgedialog\n\n");
+        out.append("- Projekt: UniverseLab; physikalische Arbeitsfolge **HPVS → HZT-M0 → HZT-Full**. ")
+                .append("Engineering- und App-Aufgaben sind getrennte Arbeitsspuren.\n");
+        out.append("- Autorität: Projektkanon und Governance auf **GitHub/main**, ")
+                .append("vorläufiger Chattext darunter, externe Primärquellen gesondert. ")
+                .append("Ein offener oder ungemergter PR ist **kein** gültiger Kanonstand.\n");
+        out.append("- Zu prüfende Gate-Kennungen: **K1-D**, **K1-E**, ")
+                .append("Ghostfreiheit, Normierung und physikalische Background-Map. ")
+                .append("Frühere Referenz K1-D=NOT_RELEASED / K1-E=NOT_ADMISSIBLE; ")
+                .append("**aktueller Status offline nicht verifiziert**.\n");
+        out.append("- Freigabeprüfung: ")
+                .append("[aktuelles main-Projektmanifest](https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/project-manifest.json), ")
+                .append("[Current-Main-Statusregister](https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/registry/2026-09-04_UniverseLab_CurrentMainCanonicalState_v1.3.json), ")
+                .append("[Research-Continuation-Programm](https://github.com/stefanhasselm74314-byte/UniverseLab/blob/main/governance/2026-08-03_UNIVERSELAB_RESEARCH_CONTINUATION_PROGRAM_v0.2.md).\n");
+        out.append("- Bei unklarem oder nicht zugreifbarem Beleg: **[OFFEN]** kennzeichnen, ")
+                .append("nicht aus Chat-Aussagen hochstufen.\n\n");
 
         out.append("## A · Priorisierte historische Prüfkandidaten\n\n");
         if (selectedWork.isEmpty()) {

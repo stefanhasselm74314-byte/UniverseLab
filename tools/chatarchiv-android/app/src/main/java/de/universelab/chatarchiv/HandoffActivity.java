@@ -1,6 +1,7 @@
 package de.universelab.chatarchiv;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -58,6 +59,11 @@ public final class HandoffActivity extends Activity {
     private Button cancelButton;
     private Button copyButton;
     private Button saveButton;
+    private Button scopeButton;
+    private Button chooseButton;
+    private HandoffQuality.Scope currentScope = HandoffQuality.Scope.PHYSICS;
+    private final List<ResearchFinder.Finding> approved = new ArrayList<>();
+    private boolean selectionApproved;
 
     private boolean scanning;
     private boolean ready;
@@ -96,6 +102,21 @@ public final class HandoffActivity extends Activity {
                 android.content.res.ColorStateList.valueOf(Ui.ACCENT));
         focus.setText(state == null ? DEFAULT_FOCUS : state.getString("focus", DEFAULT_FOCUS));
         root.addView(focus);
+
+        if (state != null) {
+            int saved = state.getInt("scope", 0);
+            HandoffQuality.Scope[] values = HandoffQuality.Scope.values();
+            if (saved >= 0 && saved < values.length) currentScope = values[saved];
+        }
+        LinearLayout optionsRow = Ui.row(this);
+        scopeButton = Ui.button(this, "Bereich: " + currentScope.label);
+        chooseButton = Ui.button(this, "Fundstellen auswählen");
+        chooseButton.setEnabled(false);
+        optionsRow.addView(scopeButton, Ui.weight(1.1f));
+        optionsRow.addView(chooseButton, Ui.weight(1.2f));
+        root.addView(optionsRow);
+        scopeButton.setOnClickListener(view -> selectScope());
+        chooseButton.setOnClickListener(view -> selectFindings());
 
         LinearLayout scanRow = Ui.row(this);
         scanButton = Ui.button(this, "Übergabe neu sammeln");
@@ -164,7 +185,10 @@ public final class HandoffActivity extends Activity {
         focus.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (ready && !scanning) regeneratePreview();
+                if (ready && !scanning) {
+                    revokeSelection();
+                    regeneratePreview();
+                }
             }
             @Override public void afterTextChanged(Editable value) { }
         });
@@ -179,6 +203,8 @@ public final class HandoffActivity extends Activity {
         ready = false;
         cancelled.set(false);
         handoffText = "";
+        revokeSelection();
+        chooseButton.setEnabled(false);
         copyButton.setEnabled(false);
         saveButton.setEnabled(false);
         scanButton.setEnabled(false);
@@ -201,7 +227,10 @@ public final class HandoffActivity extends Activity {
                         JSONObject conversation = store.loadConversation(entry.id);
                         List<ConversationLogic.Message> visible =
                                 ConversationLogic.visibleMessages(conversation);
-                        next.addAll(ResearchFinder.extract(entry.id, entry.title, visible, 5));
+                        List<ResearchFinder.Finding> raw = ResearchFinder.extract(
+                                entry.id, entry.title, visible, 40);
+                        next.addAll(HandoffQuality.screen(
+                                raw, visible, HandoffQuality.Scope.ALL, 8));
                         chronology.addAll(ResearchTimeline.collect(
                                 entry.id, entry.title, visible));
                     } catch (Exception unavailable) {
@@ -237,12 +266,13 @@ public final class HandoffActivity extends Activity {
                 inspectedChats = checked;
                 unreadableChats = failed;
                 findings.clear();
-                findings.addAll(next);
+                findings.addAll(HandoffQuality.deduplicate(next));
                 reviews.clear();
                 reviews.putAll(matching);
                 snapshotTime = DateTimeFormatter.ofPattern(
                         "dd.MM.yyyy HH:mm z", Locale.GERMAN).format(ZonedDateTime.now());
                 ready = true;
+                chooseButton.setEnabled(!findings.isEmpty());
                 regeneratePreview();
             });
         });
@@ -252,8 +282,10 @@ public final class HandoffActivity extends Activity {
         if (!ready || scanning) return;
         String subject = focus.getText().toString().trim();
         if (subject.isEmpty()) subject = "UniverseLab · Thema noch festlegen";
-        HandoffBuilder.Packet packet = HandoffBuilder.build(
-                subject, snapshotTime, inspectedChats, unreadableChats, findings, reviews);
+        List<ResearchFinder.Finding> visible = scopedFindings();
+        HandoffBuilder.Packet packet = HandoffBuilder.buildSelected(
+                subject, snapshotTime, inspectedChats, unreadableChats,
+                visible, reviews, selectionApproved ? approved : null, currentScope.label);
         handoffText = packet.markdown;
         preview.setText(handoffText);
         scroll.scrollTo(0, 0);
@@ -262,18 +294,99 @@ public final class HandoffActivity extends Activity {
             if (!isFinishing() && !isDestroyed())
                 seek.setEnabled(preview.getHeight() > scroll.getHeight());
         });
-        copyButton.setEnabled(true);
-        saveButton.setEnabled(true);
-        status.setText("Übergabe erstellt · " + inspectedChats + " Projektchats · "
-                + packet.totalCandidates + " heuristische Hinweise · "
+        copyButton.setEnabled(selectionApproved);
+        saveButton.setEnabled(selectionApproved);
+        status.setText((selectionApproved ? "Auswahl bestätigt" : "Vorschau · Auswahl erforderlich")
+                + " · " + inspectedChats + " Projektchats · "
+                + packet.totalCandidates + " passende Hinweise · "
                 + packet.includedWork + " Prüfkandidaten · "
                 + packet.includedStatus + " spätere Abschlussaussagen zur Kontrolle"
                 + (unreadableChats > 0 ? " · " + unreadableChats + " nicht lesbar" : "")
                 + ". Nur manuelles Kopieren/Speichern überträgt Text.");
     }
 
+    private List<ResearchFinder.Finding> scopedFindings() {
+        List<ResearchFinder.Finding> scoped = new ArrayList<>();
+        for (ResearchFinder.Finding f : findings) {
+            if (currentScope == HandoffQuality.Scope.ALL
+                    || HandoffQuality.classify(f) == currentScope) scoped.add(f);
+        }
+        return scoped;
+    }
+
+    private void revokeSelection() {
+        selectionApproved = false;
+        approved.clear();
+        if (copyButton != null) copyButton.setEnabled(false);
+        if (saveButton != null) saveButton.setEnabled(false);
+    }
+
+    private void selectScope() {
+        HandoffQuality.Scope[] options = HandoffQuality.Scope.values();
+        String[] labels = new String[options.length];
+        for (int n = 0; n < options.length; n++) labels[n] = options[n].label;
+        new AlertDialog.Builder(this)
+                .setTitle("Arbeitsbereich für die Übergabe")
+                .setSingleChoiceItems(labels, currentScope.ordinal(), (dialog, which) -> {
+                    currentScope = options[which];
+                    scopeButton.setText("Bereich: " + currentScope.label);
+                    revokeSelection();
+                    if (ready) regeneratePreview();
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Abbrechen", null)
+                .show();
+    }
+
+    /** A deliberate user decision before text leaves the app via clipboard or SAF. */
+    private void selectFindings() {
+        if (!ready || scanning) return;
+        String subject = focus.getText().toString().trim();
+        List<ResearchFinder.Finding> choices = HandoffBuilder.selectWorkBalanced(
+                scopedFindings(), 36, subject);
+        if (choices.isEmpty()) {
+            new AlertDialog.Builder(this).setTitle("Keine Kandidaten")
+                    .setMessage("In diesem Bereich wurden keine passenden Prüfkandidaten "
+                            + "gefunden. Das ist kein Beweis, dass alle Aufgaben erledigt sind.")
+                    .setPositiveButton("OK", null).show();
+            return;
+        }
+        List<ResearchFinder.Finding> proposed = HandoffBuilder.selectWorkBalanced(
+                choices, HandoffBuilder.ACTIVE_LIMIT, subject);
+        boolean[] checked = new boolean[choices.size()];
+        String[] labels = new String[choices.size()];
+        for (int n = 0; n < choices.size(); n++) {
+            ResearchFinder.Finding f = choices.get(n);
+            checked[n] = selectionApproved ? approved.contains(f) : proposed.contains(f);
+            labels[n] = f.kind + " · " + HandoffBuilder.clean(f.chatTitle, 45)
+                    + "\n" + HandoffBuilder.clean(f.excerpt, 120);
+        }
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Bis zu 12 Fundstellen auswählen (alle unbestätigt)")
+                .setMultiChoiceItems(labels, checked, (panel, which, enabled) -> {
+                    checked[which] = enabled;
+                    int count = 0;
+                    for (boolean value : checked) if (value) count++;
+                    if (count > HandoffBuilder.ACTIVE_LIMIT) {
+                        checked[which] = false;
+                        ((AlertDialog) panel).getListView().setItemChecked(which, false);
+                        Toast.makeText(this, "Höchstens 12 Fundstellen", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setPositiveButton("Auswahl übernehmen", (panel, ignored) -> {
+                    approved.clear();
+                    for (int n = 0; n < choices.size(); n++)
+                        if (checked[n]) approved.add(choices.get(n));
+                    selectionApproved = true;
+                    regeneratePreview();
+                })
+                .setNegativeButton("Abbrechen", null)
+                .create();
+        dialog.show();
+    }
+
     private void copyToClipboard() {
-        if (!ready || handoffText.isEmpty()) return;
+        if (!ready || !selectionApproved || handoffText.isEmpty()) return;
         ClipboardManager manager = (ClipboardManager) getSystemService(
                 Context.CLIPBOARD_SERVICE);
         if (manager == null) {
@@ -288,7 +401,7 @@ public final class HandoffActivity extends Activity {
     }
 
     private void requestSave() {
-        if (!ready || handoffText.isEmpty()) return;
+        if (!ready || !selectionApproved || handoffText.isEmpty()) return;
         pendingSave = handoffText;
         Intent save = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         save.addCategory(Intent.CATEGORY_OPENABLE);
@@ -314,14 +427,14 @@ public final class HandoffActivity extends Activity {
                 output.flush();
                 runOnUiThread(() -> {
                     if (isFinishing() || isDestroyed()) return;
-                    saveButton.setEnabled(ready);
+                    saveButton.setEnabled(ready && selectionApproved);
                     Toast.makeText(this, "Übergabe als Markdown gespeichert",
                             Toast.LENGTH_LONG).show();
                 });
             } catch (Exception failure) {
                 runOnUiThread(() -> {
                     if (isFinishing() || isDestroyed()) return;
-                    saveButton.setEnabled(ready);
+                    saveButton.setEnabled(ready && selectionApproved);
                     status.setText("Speichern fehlgeschlagen: " + failure.getMessage());
                 });
             }
@@ -330,6 +443,7 @@ public final class HandoffActivity extends Activity {
 
     @Override protected void onSaveInstanceState(Bundle outState) {
         outState.putString("focus", focus.getText().toString());
+        outState.putInt("scope", currentScope.ordinal());
         if (pendingSave != null) outState.putString("pending-save", pendingSave);
         super.onSaveInstanceState(outState);
     }
