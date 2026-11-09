@@ -58,6 +58,7 @@ public final class GitHubActivity extends Activity {
         super.onCreate(state);
         LinearLayout root = Ui.column(this, 12);
         setContentView(root);
+        Ui.applySystemBarInsets(root);
         root.addView(Ui.text(this, "UniverseLab GitHub · nur lesen", 20, true));
         TextView privacy = Ui.text(this, "Öffentliches Repository, Branch main. Nur anonyme GET-Abfragen; kein Login und keine Schreibfunktion.", 12, false);
         privacy.setTextColor(Ui.MUTED);
