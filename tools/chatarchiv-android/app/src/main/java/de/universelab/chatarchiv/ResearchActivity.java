@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.IdentityHashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -30,6 +32,8 @@ public final class ResearchActivity extends Activity {
     private final AtomicBoolean cancel = new AtomicBoolean();
     private final List<ResearchFinder.Finding> allFindings = new ArrayList<>();
     private final List<ResearchFinder.Finding> findings = new ArrayList<>();
+    private final Map<ResearchFinder.Finding, ResearchTimeline.Review> reviews =
+            new IdentityHashMap<>();
     private TextView status;
     private Button cancelButton;
     private Button filterButton;
@@ -106,6 +110,18 @@ public final class ResearchActivity extends Activity {
             intent.putExtra("focusMessageIndex", findings.get(position).messageNumber - 1);
             startActivity(intent);
         });
+        // Short tap keeps the original source link. Long tap opens a later candidate
+        // status statement, when a uniquely keyed link could be made.
+        list.setOnItemLongClickListener((parent, view, position, id) -> {
+            if (position < 0 || position >= findings.size()) return false;
+            ResearchTimeline.Review review = reviews.get(findings.get(position));
+            if (review == null || review.source == null) return false;
+            Intent intent = new Intent(this, ConversationActivity.class);
+            intent.putExtra("chatId", review.source.chatId);
+            intent.putExtra("focusMessageIndex", review.source.messageNumber - 1);
+            startActivity(intent);
+            return true;
+        });
         root.addView(list, Ui.fillRemaining());
 
         moreButton = Ui.button(this, "Weitere Fundstellen anzeigen");
@@ -124,6 +140,7 @@ public final class ResearchActivity extends Activity {
         cancel.set(false);
         allFindings.clear();
         findings.clear();
+        reviews.clear();
         adapter.notifyDataSetChanged();
         showLimit = 100;
         filterButton.setEnabled(false);
@@ -132,6 +149,7 @@ public final class ResearchActivity extends Activity {
         status.setText("Suche nach expliziten offenen Punkten und Prüfaufträgen …");
         worker.execute(() -> {
             List<ResearchFinder.Finding> next = new ArrayList<>();
+            List<ResearchTimeline.StatusEvidence> chronology = new ArrayList<>();
             int checked = 0;
             int errors = 0;
             try {
@@ -142,8 +160,10 @@ public final class ResearchActivity extends Activity {
                     if (!includeAll && !ChatStore.PROJECT.equals(entry.category)) continue;
                     try {
                         JSONObject conversation = store.loadConversation(entry.id);
-                        next.addAll(ResearchFinder.extract(entry.id, entry.title,
-                                ConversationLogic.visibleMessages(conversation), 5));
+                        List<ConversationLogic.Message> visible =
+                                ConversationLogic.visibleMessages(conversation);
+                        next.addAll(ResearchFinder.extract(entry.id, entry.title, visible, 5));
+                        chronology.addAll(ResearchTimeline.collect(entry.id, entry.title, visible));
                     } catch (Exception unreadable) {
                         errors++;
                     }
@@ -159,6 +179,8 @@ public final class ResearchActivity extends Activity {
                 errors++;
             }
             next.sort(Comparator.comparingInt((ResearchFinder.Finding f) -> f.priority).reversed());
+            Map<ResearchFinder.Finding, ResearchTimeline.Review> statusReviews =
+                    ResearchTimeline.reconcile(next, chronology);
             List<ResearchFinder.Finding> result = next;
             int done = checked;
             int failed = errors;
@@ -167,6 +189,8 @@ public final class ResearchActivity extends Activity {
                 if (isFinishing() || isDestroyed()) return;
                 allFindings.clear();
                 allFindings.addAll(result);
+                reviews.clear();
+                reviews.putAll(statusReviews);
                 scanning = false;
                 scanInterrupted = interrupted;
                 checkedChats = done;
@@ -187,12 +211,18 @@ public final class ResearchActivity extends Activity {
             if (findings.size() < showLimit) findings.add(finding);
         }
         adapter.notifyDataSetChanged();
+        int linked = 0;
+        for (ResearchFinder.Finding finding : findings) {
+            ResearchTimeline.Review review = reviews.get(finding);
+            if (review != null && review.source != null) linked++;
+        }
         int remaining = matching - findings.size();
         moreButton.setVisibility(remaining > 0 ? View.VISIBLE : View.GONE);
         if (remaining > 0) moreButton.setText("Weitere 100 anzeigen · " + remaining + " übrig");
         status.setText((scanInterrupted ? "Abgebrochen · " : "Prüfung abgeschlossen · ")
                 + checkedChats + " Chats · " + allFindings.size() + " heuristische Hinweise · "
                 + findings.size() + " von " + matching + " im Filter angezeigt"
+                + " · " + linked + " verknüpfte spätere Chat-Statusaussagen"
                 + (unreadableChats > 0 ? " · " + unreadableChats + " nicht lesbar" : "")
                 + ". Antippen öffnet den Originalbeitrag.");
     }
@@ -227,6 +257,24 @@ public final class ResearchActivity extends Activity {
                     "[HEURISTISCH] · Stand nicht verifiziert · Tippen: Quellchat öffnen", 11, false);
             warning.setTextColor(Ui.MUTED);
             card.addView(warning);
+
+            ResearchTimeline.Review review = reviews.get(f);
+            if (review != null) {
+                TextView current = Ui.text(ResearchActivity.this,
+                        "Verlaufsabgleich [HEURISTISCH]: " + review.summary, 11, false);
+                current.setTextColor(review.source == null ? Ui.MUTED : Ui.ACCENT);
+                card.addView(current);
+                if (review.source != null) {
+                    card.addView(Ui.text(ResearchActivity.this,
+                            "Spätere Aussage zu " + review.identifier + ": "
+                                    + review.source.chatTitle + " · "
+                                    + review.source.role + "-Beitrag "
+                                    + review.source.messageNumber + "\n"
+                                    + review.source.excerpt
+                                    + "\nLange tippen: diesen späteren Beitrag öffnen.",
+                            11, false));
+                }
+            }
             return card;
         }
     }
