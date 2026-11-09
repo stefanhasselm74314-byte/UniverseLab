@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.res.ColorStateList;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,7 +16,9 @@ import android.view.View;
 import android.view.Window;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -299,7 +302,8 @@ public final class HandoffActivity extends Activity {
         });
         copyButton.setEnabled(selectionApproved);
         saveButton.setEnabled(selectionApproved);
-        status.setText((selectionApproved ? "Auswahl bestätigt" : "Vorschau · Auswahl erforderlich")
+        status.setText((selectionApproved ? "Auswahl bestätigt"
+                : "Kompakte Vorschau · bis zu 12 Fundstellen manuell auswählbar")
                 + " · " + inspectedChats + " Projektchats · "
                 + packet.totalCandidates + " passende Hinweise · "
                 + packet.includedWork + " Prüfkandidaten · "
@@ -346,7 +350,7 @@ public final class HandoffActivity extends Activity {
         if (!ready || scanning) return;
         String subject = focus.getText().toString().trim();
         List<ResearchFinder.Finding> choices = HandoffBuilder.selectWorkBalanced(
-                scopedFindings(), 36, subject);
+                scopedFindings(), 150, subject);
         if (choices.isEmpty()) {
             new AlertDialog.Builder(this).setTitle("Keine Kandidaten")
                     .setMessage("In diesem Bereich wurden keine passenden Prüfkandidaten "
@@ -355,25 +359,78 @@ public final class HandoffActivity extends Activity {
             return;
         }
         boolean[] checked = new boolean[choices.size()];
-        String[] labels = new String[choices.size()];
-        for (int n = 0; n < choices.size(); n++) {
-            ResearchFinder.Finding f = choices.get(n);
-            checked[n] = selectionApproved && approved.contains(f);
-            labels[n] = f.kind + " · " + HandoffBuilder.clean(f.chatTitle, 36)
-                    + "\n" + HandoffBuilder.clean(f.excerpt, 90);
-        }
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Punkte selbst markieren · max. 12")
-                .setMultiChoiceItems(labels, checked, (panel, which, enabled) -> {
-                    checked[which] = enabled;
-                    int count = 0;
-                    for (boolean value : checked) if (value) count++;
-                    if (count > HandoffBuilder.ACTIVE_LIMIT) {
-                        checked[which] = false;
-                        ((AlertDialog) panel).getListView().setItemChecked(which, false);
-                        Toast.makeText(this, "Höchstens 12 Fundstellen", Toast.LENGTH_SHORT).show();
+        for (int n = 0; n < choices.size(); n++)
+            checked[n] = selectionApproved && approved.contains(choices.get(n));
+
+        // The stock multi-choice row vertically centers its checkbox next to a
+        // long excerpt. A custom recycling list puts each checkbox at the TOP
+        // and separates entries with generous touch spacing.
+        BaseAdapter adapter = new BaseAdapter() {
+            @Override public int getCount() { return choices.size(); }
+            @Override public Object getItem(int index) { return choices.get(index); }
+            @Override public long getItemId(int index) { return index; }
+            @Override public View getView(int index, View recycled, ViewGroup parent) {
+                LinearLayout row;
+                CheckBox mark;
+                TextView excerpt;
+                if (recycled instanceof LinearLayout
+                        && ((LinearLayout) recycled).getChildCount() == 2) {
+                    row = (LinearLayout) recycled;
+                    mark = (CheckBox) row.getChildAt(0);
+                    excerpt = (TextView) row.getChildAt(1);
+                } else {
+                    row = new LinearLayout(HandoffActivity.this);
+                    row.setOrientation(LinearLayout.HORIZONTAL);
+                    row.setGravity(Gravity.TOP);
+                    row.setPadding(Ui.dp(HandoffActivity.this, 12),
+                            Ui.dp(HandoffActivity.this, 13),
+                            Ui.dp(HandoffActivity.this, 16),
+                            Ui.dp(HandoffActivity.this, 13));
+                    row.setMinimumHeight(Ui.dp(HandoffActivity.this, 60));
+                    row.setBackgroundResource(android.R.drawable.list_selector_background);
+                    mark = new CheckBox(HandoffActivity.this);
+                    mark.setGravity(Gravity.TOP | Gravity.START);
+                    mark.setButtonTintList(ColorStateList.valueOf(Ui.ACCENT));
+                    mark.setMinHeight(0);
+                    LinearLayout.LayoutParams box = new LinearLayout.LayoutParams(
+                            Ui.dp(HandoffActivity.this, 44),
+                            ViewGroup.LayoutParams.WRAP_CONTENT);
+                    box.topMargin = Ui.dp(HandoffActivity.this, 2);
+                    row.addView(mark, box);
+                    excerpt = Ui.text(HandoffActivity.this, "", 14, false);
+                    excerpt.setMaxLines(6);
+                    excerpt.setLineSpacing(Ui.dp(HandoffActivity.this, 2), 1.07f);
+                    row.addView(excerpt, new LinearLayout.LayoutParams(
+                            0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+                }
+                ResearchFinder.Finding item = choices.get(index);
+                excerpt.setText(item.kind + " · " + HandoffBuilder.clean(item.chatTitle, 55)
+                        + "\n" + HandoffBuilder.clean(item.excerpt, 200));
+                mark.setOnCheckedChangeListener(null);
+                mark.setChecked(checked[index]);
+                CheckBox itemCheck = mark;
+                mark.setOnCheckedChangeListener((button, enabled) -> {
+                    if (enabled && !checked[index]) {
+                        int count = 0;
+                        for (boolean selected : checked) if (selected) count++;
+                        if (count >= HandoffBuilder.MANUAL_LIMIT) {
+                            itemCheck.setChecked(false);
+                            Toast.makeText(HandoffActivity.this,
+                                    "Maximal 12 Fundstellen pro Übergabe",
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                     }
-                })
+                    checked[index] = enabled;
+                });
+                row.setOnClickListener(view ->
+                        itemCheck.setChecked(!itemCheck.isChecked()));
+                return row;
+            }
+        };
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Fundstellen wählen · maximal 12")
+                .setAdapter(adapter, null)
                 .setPositiveButton("Übernehmen", (panel, ignored) -> {
                     approved.clear();
                     for (int n = 0; n < choices.size(); n++)

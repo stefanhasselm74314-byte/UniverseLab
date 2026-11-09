@@ -135,6 +135,17 @@ public final class HandoffQualityTest {
         assertEquals(HandoffQuality.Scope.SOFTWARE, HandoffQuality.classify(scanner));
     }
 
+    @Test public void mathRenderedGateAndMonitoringRemainSourceContextOnly() {
+        ResearchFinder.Finding mathGate = finding("c", "Status",
+                "\\boxed{\\mathrm{K1\\-D}=\\texttt{NOT RELEASED}}",
+                "Blocker", 100, 1);
+        assertTrue(HandoffQuality.falsePositive(mathGate));
+        ResearchFinder.Finding monitoring = finding("c", "UniverseLab Überwachung Frequenz",
+                "BLOCKER: Der digitale Monitor benötigt einen erneuten Pipeline-Test.",
+                "Blocker", 100, 2);
+        assertEquals(HandoffQuality.Scope.SOFTWARE, HandoffQuality.classify(monitoring));
+    }
+
     @Test public void approvedPacketIncludesOnlyTheChosenQuote() {
         ResearchFinder.Finding a = finding("a", "HZT",
                 "[OFFEN] erster Normbeweis fehlt", "Offener Punkt", 100, 1);
