@@ -80,8 +80,10 @@ final class HandoffBuilder {
                 if (f == null || !all.contains(f)) continue;
                 ResearchTimeline.Review review = check.get(f);
                 if (review != null && "LATER_CLOSURE".equals(review.code)) {
-                    if (selectedClosures.size() < STATUS_LIMIT) selectedClosures.add(f);
-                } else if (selectedWork.size() < ACTIVE_LIMIT) selectedWork.add(f);
+                    if (selectedClosures.size() + selectedWork.size() < ACTIVE_LIMIT)
+                        selectedClosures.add(f);
+                } else if (selectedClosures.size() + selectedWork.size() < ACTIVE_LIMIT)
+                    selectedWork.add(f);
             }
         }
 
