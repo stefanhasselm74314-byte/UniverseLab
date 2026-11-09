@@ -110,7 +110,7 @@ public final class ConversationActivity extends Activity {
         jumpButton.setOnClickListener(view -> showJumpDialog());
         root.addView(jumpButton);
 
-        list = new ListView(this);
+        list = new WideGripListView(this);
         list.setDivider(null);
         list.setDividerHeight(Ui.dp(this, 9));
         Ui.configurePersistentFastScroll(list);

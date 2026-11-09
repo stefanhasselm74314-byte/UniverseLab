@@ -96,7 +96,7 @@ public final class ResearchActivity extends Activity {
                 }).setNegativeButton("Abbrechen", null).show());
         root.addView(filterButton);
 
-        ListView list = new ListView(this);
+        ListView list = new WideGripListView(this);
         list.setDivider(null);
         list.setDividerHeight(Ui.dp(this, 7));
         Ui.configurePersistentFastScroll(list);

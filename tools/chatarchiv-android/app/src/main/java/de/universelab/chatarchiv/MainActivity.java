@@ -181,7 +181,7 @@ public final class MainActivity extends Activity {
         firstRunHint.setPadding(Ui.dp(this, 13), Ui.dp(this, 14), Ui.dp(this, 13), Ui.dp(this, 14));
         root.addView(firstRunHint);
 
-        ListView list = new ListView(this);
+        ListView list = new WideGripListView(this);
         Ui.configurePersistentFastScroll(list);
         list.setDividerHeight(Ui.dp(this, 6));
         list.setDivider(null);
