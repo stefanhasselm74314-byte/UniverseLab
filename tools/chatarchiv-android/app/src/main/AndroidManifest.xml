@@ -13,6 +13,7 @@
         android:fullBackupContent="false"
         android:usesCleartextTraffic="false">
         <activity android:name=".ConversationActivity" android:exported="false" />
+        <activity android:name=".ResearchActivity" android:exported="false" />
         <activity android:name=".SelectionActivity" android:exported="false" />
         <activity android:name=".GitHubActivity" android:exported="false" />
         <activity android:name=".WebsiteActivity" android:exported="false" />

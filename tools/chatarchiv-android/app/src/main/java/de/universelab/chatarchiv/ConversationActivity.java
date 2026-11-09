@@ -52,6 +52,7 @@ public final class ConversationActivity extends Activity {
         super.onCreate(state);
         chatId = getIntent().getStringExtra("chatId");
         if (chatId == null || chatId.isEmpty()) { finish(); return; }
+        final int focusMessage = getIntent().getIntExtra("focusMessageIndex", -1);
         displayMode = getSharedPreferences(DISPLAY_PREFS, MODE_PRIVATE).getInt(DISPLAY_MODE, 0);
         if (state != null && state.containsKey("pending-format")) {
             int ordinal = state.getInt("pending-format", -1);
@@ -122,6 +123,9 @@ public final class ConversationActivity extends Activity {
                     information.setText(title + " · " + full.size() + " sichtbare Beiträge");
                     exportButton.setEnabled(true);
                     applyFilter();
+                    if (focusMessage >= 0 && focusMessage < full.size()) {
+                        list.post(() -> list.setSelection(focusMessage));
+                    }
                 });
             } catch (IOException exception) {
                 runOnUiThread(() -> information.setText("Lesefehler: " + exception.getMessage()));

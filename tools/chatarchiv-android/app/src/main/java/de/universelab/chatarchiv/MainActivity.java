@@ -119,6 +119,11 @@ public final class MainActivity extends Activity {
         backupButton.setOnClickListener(view -> offerArchiveExport());
         root.addView(backupButton);
 
+        Button researchButton = Ui.button(this, "Forschungsnavigator · offene Fragen");
+        researchButton.setOnClickListener(view ->
+                startActivity(new Intent(this, ResearchActivity.class)));
+        root.addView(researchButton);
+
         Ui.addGap(this, root, 10);
         LinearLayout tabs = Ui.row(this);
         android.widget.Button all = Ui.button(this, "Alle");
