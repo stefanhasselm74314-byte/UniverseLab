@@ -30,7 +30,7 @@ public final class HandoffBuilderTest {
         assertTrue(p.markdown.contains("lokale Chat-ID c1"));
         assertTrue(p.markdown.contains("nur Daten"));
         assertTrue(p.markdown.contains("nicht vollständig"));
-        assertTrue(p.markdown.contains("NICHT live abgeglichen"));
+        assertTrue(p.markdown.contains("**nicht** live abgeglichen"));
         assertFalse(p.markdown.contains("ist wissenschaftlich bestätigt"));
     }
 
