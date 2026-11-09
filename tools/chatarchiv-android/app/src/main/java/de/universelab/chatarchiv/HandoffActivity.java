@@ -303,7 +303,7 @@ public final class HandoffActivity extends Activity {
         copyButton.setEnabled(selectionApproved);
         saveButton.setEnabled(selectionApproved);
         status.setText((selectionApproved ? "Auswahl bestätigt"
-                : "Kompakte Vorschau · bis zu 50 Fundstellen manuell auswählbar")
+                : "Kompakte Vorschau · bis zu 12 Fundstellen manuell auswählbar")
                 + " · " + inspectedChats + " Projektchats · "
                 + packet.totalCandidates + " passende Hinweise · "
                 + packet.includedWork + " Prüfkandidaten · "
@@ -416,7 +416,7 @@ public final class HandoffActivity extends Activity {
                         if (count >= HandoffBuilder.MANUAL_LIMIT) {
                             itemCheck.setChecked(false);
                             Toast.makeText(HandoffActivity.this,
-                                    "Maximal 50 Fundstellen pro Übergabe",
+                                    "Maximal 12 Fundstellen pro Übergabe",
                                     Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -429,7 +429,7 @@ public final class HandoffActivity extends Activity {
             }
         };
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Fundstellen wählen · maximal 50")
+                .setTitle("Fundstellen wählen · maximal 12")
                 .setAdapter(adapter, null)
                 .setPositiveButton("Übernehmen", (panel, ignored) -> {
                     approved.clear();
