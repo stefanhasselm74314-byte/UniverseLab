@@ -13,15 +13,36 @@ import java.util.regex.Pattern;
  * A finding is evidence of a statement in a chat, never proof that it is still open.
  */
 final class ResearchFinder {
+    // Explicit status claims are stronger evidence than a mere mention of a column name.
     private static final Pattern BLOCKED = Pattern.compile(
-            "(?iu)\\b(?:BLOCKER|BLOCKIERT|NOT[_ -]?(?:RELEASED|ADMISSIBLE|READY))\\b");
+            "(?iu)\\b(?:BLOCKIERT|NOT[_ -]?(?:RELEASED|ADMISSIBLE|READY))\\b");
+    private static final Pattern BLOCKER_ASSIGNMENT = Pattern.compile(
+            "(?iu)\\bBLOCKER\\s*[:=]\\s*(?!KEIN(?:E|EN|ER|ES)?\\b|NEIN\\b|0\\b|N/A\\b).{12,}");
+    private static final Pattern BLOCKER_CLAIM = Pattern.compile(
+            "(?iu)(?:\\b(?:IST|BLEIBT|WIRD)\\s+(?:EIN(?:E|EN)?\\s+)?BLOCKER\\b|"
+                    + "\\bGILT\\s+ALS\\s+BLOCKER\\b|\\bBLOCKER\\s+BESTEHT\\b)");
+    private static final Pattern NEGATED_BLOCKER = Pattern.compile(
+            "(?iu)(?:\\b(?:KEIN(?:E|EN|ER|ES)?|OHNE)\\s+(?:AKTUELLE[NMR]?\\s+)?"
+                    + "(?:BLOCKER|BLOCKADE|BLOCKIERUNG)\\b|\\bNICHT\\s+BLOCKIERT\\b|"
+                    + "\\bBLOCKER\\s*(?:/\\s*ABHÄNGIGKEIT)?\\s*[:=]\\s*"
+                    + "(?:KEIN(?:E|EN|ER|ES)?|NEIN|0|N/A)\\b)");
     private static final Pattern CONFLICT = Pattern.compile(
-            "(?iu)\\b(?:WIDERSPRUCH|INKONSISTENZ|KONFLIKT)\\b");
+            "(?iu)(?:\\[\\s*(?:WIDERSPRUCH|KONFLIKT|INKONSISTENZ)\\s*\\]|"
+                    + "\\b(?:WIDERSPRUCH|INKONSISTENZ|KONFLIKT)\\s*[:=]|\\bWIDERSPRICHT\\b)");
+    private static final Pattern NEGATED_CONFLICT = Pattern.compile(
+            "(?iu)(?:\\b(?:KEIN(?:E|EN|ER|ES)?|OHNE)\\s+(?:MATERIELLE[NMR]?\\s+)?"
+                    + "(?:WIDERSPRUCH|INKONSISTENZ|KONFLIKT)\\b|\\bWIDERSPRUCHSFREI\\b)");
+    private static final Pattern FIELD_LIST = Pattern.compile(
+            "(?iu)(?:\\bTASK[-_ ]?ID\\s*,[^:=]{0,120}\\bBLOCKER\\b|"
+                    + "\\b(?:FELDER|SCHEMA|VORLAGE|TEMPLATE|CHECKLISTE)\\b[^:=]{0,120}"
+                    + "\\b(?:BLOCKER|WIDERSPRUCH|TODO)\\b)");
     private static final Pattern OPEN = Pattern.compile(
-            "(?iu)(?:\\[\\s*OFFEN\\s*\\]|\\bOFFEN\\b|\\bUNGEKLÄRT\\b|\\bPENDING(?:_[A-Z]+)*\\b|"
-                    + "\\bNICHT\\s+(?:NACHGEWIESEN|QUALIFIZIERT|BELEGT|VALIDIERT)\\b)");
+            "(?iu)(?:\\[\\s*OFFEN\\s*\\]|\\bUNGEKLÄRT\\b|\\bPENDING(?:_[A-Z]+)*\\b|"
+                    + "\\bNICHT\\s+(?:NACHGEWIESEN|QUALIFIZIERT|BELEGT|VALIDIERT)\\b|"
+                    + "\\b(?:BLEIBT|IST|NOCH|WEITERHIN)\\s+OFFEN\\b|\\bOFFEN\\s*[:=])");
     private static final Pattern NEXT = Pattern.compile(
-            "(?iu)(?:\\bNÄCHSTER\\s+SCHRITT\\b|\\bNEXT\\s+STEP\\b|\\bTODO\\b|"
+            "(?iu)(?:\\bNÄCHSTER\\s+SCHRITT\\s*[:=]|\\bNEXT\\s+STEP\\s*[:=]|"
+                    + "(?:^|\\[)\\s*TODO\\s*[:=\\]]|"
                     + "\\bNOCH\\s+ZU\\s+PRÜFEN\\b)");
 
     static final class Finding {
@@ -101,8 +122,13 @@ final class ResearchFinder {
     }
 
     private static int priority(String line) {
-        if (BLOCKED.matcher(line).find()) return 100;
-        if (CONFLICT.matcher(line).find()) return 90;
+        // Lists of field names (e.g. "Task-ID, Quelle, Blocker, Rückgaberoute")
+        // document a template, not an unresolved research issue.
+        if (FIELD_LIST.matcher(line).find()) return 0;
+        if (!NEGATED_BLOCKER.matcher(line).find()
+                && (BLOCKED.matcher(line).find() || BLOCKER_ASSIGNMENT.matcher(line).find()
+                || BLOCKER_CLAIM.matcher(line).find())) return 100;
+        if (!NEGATED_CONFLICT.matcher(line).find() && CONFLICT.matcher(line).find()) return 90;
         if (OPEN.matcher(line).find()) return 70;
         if (NEXT.matcher(line).find()) return 50;
         return 0;
@@ -110,8 +136,13 @@ final class ResearchFinder {
 
     private static String field(String line) {
         String lower = line.toLowerCase(Locale.ROOT);
+        if (lower.matches(".*(governance|freigabe|not[_ -]?(released|admissible|ready)|"
+                + "projektkanon|entscheidungsprotokoll|gate[- _]|k1-[de]).*"))
+            return "Governance";
         if (lower.matches(".*(ghost|kinetik|nullmod|jacobi|wirkung|symmetrie|randbedingung).*"))
             return "Mathematik";
+        if (lower.matches(".*(radion|brane|moden|gravit|kk[- _]|geometrie|fünfte kraft).*"))
+            return "Physikalisches Modell";
         if (lower.matches(".*(solver|fem|mesh|konvergenz|residual|simulation|numerisch).*"))
             return "Numerik";
         if (lower.matches(".*(desi|kids|euclid|sparc|beobachtung|messung|datenpunkt|kovarianz).*"))
@@ -131,8 +162,12 @@ final class ResearchFinder {
 
     private static String verification(String field) {
         switch (field) {
+            case "Governance":
+                return "Kanonischen Status prüfen → Freigabebedingung → aktuellen Beleg → Entscheidung.";
             case "Mathematik":
                 return "Definitionen und Annahmen → Herleitung → Dimensionen/Grenzfälle → Gegenbeispiel.";
+            case "Physikalisches Modell":
+                return "Freiheitsgrade und Annahmen → Dynamik → Grenzfälle → beobachtbarer Test.";
             case "Numerik":
                 return "Originalcode und Eingaben → reproduzierbarer Lauf → Konvergenz → unabhängiger Test.";
             case "Empirie":
