@@ -99,7 +99,7 @@ public final class ResearchActivity extends Activity {
         ListView list = new ListView(this);
         list.setDivider(null);
         list.setDividerHeight(Ui.dp(this, 7));
-        list.setFastScrollEnabled(true);
+        Ui.configurePersistentFastScroll(list);
         adapter = new FindingsAdapter();
         list.setAdapter(adapter);
         list.setOnItemClickListener((parent, view, position, id) -> {

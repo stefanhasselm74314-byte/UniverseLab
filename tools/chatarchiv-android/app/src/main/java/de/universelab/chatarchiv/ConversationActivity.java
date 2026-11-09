@@ -17,6 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,8 @@ public final class ConversationActivity extends Activity {
     private TextView information;
     private EditText filter;
     private ConversationAdapter adapter;
+    private ListView list;
+    private Button jumpButton;
     private String chatId;
     private String chatTitle = "Gespräch";
     private int displayMode;
@@ -102,10 +105,15 @@ public final class ConversationActivity extends Activity {
             @Override public void afterTextChanged(Editable editable) { }
         });
 
-        ListView list = new ListView(this);
+        jumpButton = Ui.button(this, "Zu Beitrag springen");
+        jumpButton.setEnabled(false);
+        jumpButton.setOnClickListener(view -> showJumpDialog());
+        root.addView(jumpButton);
+
+        list = new ListView(this);
         list.setDivider(null);
         list.setDividerHeight(Ui.dp(this, 9));
-        list.setFastScrollEnabled(true);
+        Ui.configurePersistentFastScroll(list);
         adapter = new ConversationAdapter();
         list.setAdapter(adapter);
         root.addView(list, Ui.fillRemaining());
@@ -143,6 +151,40 @@ public final class ConversationActivity extends Activity {
             if (message.body.toLowerCase(Locale.ROOT).contains(query)) visible.add(message);
         }
         adapter.notifyDataSetChanged();
+        if (jumpButton != null) {
+            jumpButton.setEnabled(!visible.isEmpty());
+            jumpButton.setText(visible.isEmpty()
+                    ? "Keine passenden Beiträge"
+                    : "Zu Beitrag springen · " + visible.size() + " Beiträge");
+        }
+    }
+
+    private void showJumpDialog() {
+        if (visible.isEmpty() || list == null) return;
+        LinearLayout panel = Ui.column(this, 12);
+        TextView chosen = Ui.text(this, "", 14, true);
+        chosen.setTextColor(Ui.ACCENT);
+        panel.addView(chosen);
+        SeekBar selector = new SeekBar(this);
+        selector.setMax(visible.size() - 1);
+        selector.setProgress(Math.max(0,
+                Math.min(visible.size() - 1, list.getFirstVisiblePosition())));
+        chosen.setText("Beitrag " + (selector.getProgress() + 1) + " von " + visible.size());
+        selector.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override public void onProgressChanged(SeekBar bar, int progress, boolean fromUser) {
+                chosen.setText("Beitrag " + (progress + 1) + " von " + visible.size());
+            }
+            @Override public void onStartTrackingTouch(SeekBar bar) { }
+            @Override public void onStopTrackingTouch(SeekBar bar) { }
+        });
+        panel.addView(selector);
+        new AlertDialog.Builder(this)
+                .setTitle("Zu einem Beitrag springen")
+                .setView(panel)
+                .setNegativeButton("Abbrechen", null)
+                .setPositiveButton("Springen",
+                        (dialog, choice) -> list.setSelectionFromTop(selector.getProgress(), 0))
+                .show();
     }
 
     private String modeLabel() {
@@ -236,6 +278,16 @@ public final class ConversationActivity extends Activity {
             bar.addView(role, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
             android.widget.Button copy = Ui.button(ConversationActivity.this, "Kopieren");
             bar.addView(copy);
+            android.widget.Button reader = Ui.button(ConversationActivity.this, "Lesen");
+            reader.setOnClickListener(view -> {
+                int index = full.indexOf(message);
+                if (index < 0) return;
+                Intent intent = new Intent(ConversationActivity.this, ReadingActivity.class);
+                intent.putExtra("chatId", chatId);
+                intent.putExtra("sourceMessageIndex", index);
+                startActivity(intent);
+            });
+            bar.addView(reader);
             copy.setOnClickListener(view -> {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 clipboard.setPrimaryClip(ClipData.newPlainText("Gesprächsbeitrag", message.body));

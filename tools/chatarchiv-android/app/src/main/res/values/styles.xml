@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="ChatArchivFastScroll">
+        <item name="android:fastScrollThumbDrawable">@drawable/chatarchiv_fastscroll_thumb</item>
+        <item name="android:fastScrollTrackDrawable">@drawable/chatarchiv_fastscroll_track</item>
+    </style>
+
     <style name="ChatArchivTheme" parent="android:style/Theme.Material.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <item name="android:colorAccent">#81C5FF</item>

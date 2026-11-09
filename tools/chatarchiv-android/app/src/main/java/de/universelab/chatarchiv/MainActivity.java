@@ -182,6 +182,7 @@ public final class MainActivity extends Activity {
         root.addView(firstRunHint);
 
         ListView list = new ListView(this);
+        Ui.configurePersistentFastScroll(list);
         list.setDividerHeight(Ui.dp(this, 6));
         list.setDivider(null);
         adapter = new ChatAdapter();

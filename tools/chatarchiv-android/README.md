@@ -2,10 +2,11 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
-## Funktionen (Version 0.4.3 · lokaler Verlaufsabgleich im Forschungsnavigator)
+## Funktionen (Version 0.4.4 · dauerhafte Scrollnavigation)
 
 - **UniverseLab**, **Weitere Chats**, **Alle** als getrennte Ansichten.
 - **Forschungsnavigator (neu, rein lokal):** Durchsucht gespeicherte sichtbare Gesprächsbeiträge nach ausdrücklich benannten offenen Punkten, Blockern, Widersprüchen und nächsten Schritten, zeigt Fundstelle und heuristische Prüffrage/Prüfweg und springt zum Originalbeitrag. Projektchats oder auf Wunsch alle Chats; Abbruch jederzeit. Keine automatischen Änderungen oder Cloud-Anfragen.
+- **Scrollnavigation 0.4.4:** In den Chat-, Hauptlisten- und Forschungsnavigator-Ansichten erhält die native Schnellscroll-Leiste eine dauerhaft sichtbare 24-dp-Grifffläche und eine abgesetzte Spur. `SCROLLBARS_INSIDE_INSET` hält sie vom Text fern. Im Einzelchat hilft der zusätzliche Dialog **„Zu Beitrag springen“** beim Sprung zu einem der sichtbaren (gegebenenfalls gefilterten) Beiträge. Die Schaltfläche **„Lesen“** öffnet einen einzelnen langen Beitrag in einer eigenen Textansicht mit einem horizontalen 0–100-%-Regler für die pixelbasierte Navigation. Originaltext bleibt auswählbar, der Beitrag wird nicht umgeschrieben, Kopieren nutzt den vollständigen Originalinhalt. Bei über 2 Mio. Zeichen wird nur die Anzeige gekürzt und darauf hingewiesen.
 - **Verlaufsabgleich 0.4.3 (heuristisch):** Für Fundstellen mit genau einer erkennbaren Aufgabenkennung (beispielsweise `K1-D` oder `Z8B-01`) sucht die App in den gesichteten Chats nach zeitlich nachfolgenden, ausdrücklich formulierten Statusaussagen. Sie zeigt Originalquelle und spätere Chat-Aussage getrennt an. Kurzes Tippen öffnet den ursprünglichen Beitrag, langes Tippen bei vorhandener Verknüpfung die spätere Aussage. Aussagen ohne eindeutige Kennung, hypothetische Formulierungen, Fragen und nicht chronologisch zuordenbare chatübergreifende Erwähnungen werden **nicht** als Abschluss eingeordnet. Alle Befunde sind [HEURISTISCH], kein Abgleich mit dem Projektkanon oder GitHub. Belege bleiben unverändert und rein lokal.
 - **Korrektur 0.4.2:** Die Hauptansichten berücksichtigen die Android-Status-, Navigations- und Kameraausschnittbereiche. Insbesondere bleibt **„Weitere 100 anzeigen“** oberhalb der Navigation bedienbar (Build-Prüfung; endgültige Bestätigung am Gerät steht aus).
 - **QA-Verbesserung 0.4.1:** Nicht jeder Worttreffer ist ein Blocker. Explizite Negationen und reine Aufgaben-/Feldvorlagen werden nun konservativ ausgefiltert; echte Statussperren wie `NOT RELEASED` bleiben erhalten. Hinweise sind nach Art filterbar und über 100 Fundstellen hinaus in Schritten zu je 100 nachladbar. Der Bildschirm bleibt rein lesend.
@@ -37,7 +38,7 @@ Der Navigator ist zunächst ein **regelbasierter Such- und Priorisierungsassiste
 ### Signaturkompatible Aktualisierung ab 0.4.2
 
 Die produktive APK hat unverändert die Paketkennung `de.universelab.chatarchiv`,
-`versionCode 13` und wird **außerhalb von GitHub Actions** mit dem bereits vorhandenen
+`versionCode 14` und wird **außerhalb von GitHub Actions** mit dem bereits vorhandenen
 **privaten UniverseLab-Signaturschlüssel** signiert. Der Schlüssel darf niemals in das
 öffentliche Repository, Buildprotokolle oder GitHub-Artefakte gelangen.
 So erkennt Android bei einem bereits mit diesem Schlüssel signierten ChatArchiv die
@@ -76,7 +77,7 @@ Ein Austausch von Chatdaten zwischen den getrennten App-Speichern erfolgt **nich
 
 ## Repository-Isolation
 
-Der gesamte Android-Code liegt in `tools/chatarchiv-android/`. Der Build-Workflow `.github/workflows/chatarchiv-android-apk.yml` reagiert auf die isolierten App-Zweige `app/chatarchiv-android-readonly-v1` und `app/chatarchiv-research-navigator-v0` sowie die isolierten QA-/Update-Zweige `app/chatarchiv-research-qa-v041`, `app/chatarchiv-stable-update-v042` und `app/chatarchiv-timeline-qa-v043`; `main` bleibt unberührt. Keine privaten Exportdaten oder realen Gespräche werden eingecheckt oder in GitHub Actions verarbeitet. Der Build erstellt ein mit dem Android-Debug-Schlüssel signiertes APK-**Testpaket** und eine **unsignierte Release-APK** zur späteren privaten Signierung. Es ist keine Play-Store-Veröffentlichung.
+Der gesamte Android-Code liegt in `tools/chatarchiv-android/`. Der Build-Workflow `.github/workflows/chatarchiv-android-apk.yml` reagiert auf die isolierten App-Zweige `app/chatarchiv-android-readonly-v1` und `app/chatarchiv-research-navigator-v0` sowie die isolierten QA-/Update-Zweige `app/chatarchiv-research-qa-v041`, `app/chatarchiv-stable-update-v042`, `app/chatarchiv-timeline-qa-v043` und `app/chatarchiv-scroll-navigation-v044`; `main` bleibt unberührt. Keine privaten Exportdaten oder realen Gespräche werden eingecheckt oder in GitHub Actions verarbeitet. Der Build erstellt ein mit dem Android-Debug-Schlüssel signiertes APK-**Testpaket** und eine **unsignierte Release-APK** zur späteren privaten Signierung. Es ist keine Play-Store-Veröffentlichung.
 
 ## Build
 

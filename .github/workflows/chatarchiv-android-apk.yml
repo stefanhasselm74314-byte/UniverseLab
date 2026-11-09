@@ -8,6 +8,7 @@ on:
       - app/chatarchiv-research-qa-v041
       - app/chatarchiv-stable-update-v042
       - app/chatarchiv-timeline-qa-v043
+      - app/chatarchiv-scroll-navigation-v044
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'

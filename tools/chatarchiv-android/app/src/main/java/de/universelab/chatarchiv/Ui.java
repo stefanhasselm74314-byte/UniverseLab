@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 final class Ui {
@@ -66,6 +67,16 @@ final class Ui {
             return windowInsets;
         });
         root.post(root::requestApplyInsets);
+    }
+
+    /** Permanent, inset and larger native fast-scroller for message/list navigation. */
+    static void configurePersistentFastScroll(ListView list) {
+        list.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
+        list.setFastScrollStyle(R.style.ChatArchivFastScroll);
+        list.setFastScrollEnabled(true);
+        list.setFastScrollAlwaysVisible(true);
+        list.setVerticalScrollBarEnabled(true);
+        list.setScrollbarFadingEnabled(false);
     }
 
     static LinearLayout row(Context context) {
