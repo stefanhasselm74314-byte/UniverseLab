@@ -46,6 +46,7 @@ public final class ResearchActivity extends Activity {
         super.onCreate(saved);
         LinearLayout root = Ui.column(this, 12);
         setContentView(root);
+        Ui.applySystemBarInsets(root);
 
         Button back = Ui.button(this, "‹ Zurück zum ChatArchiv");
         back.setOnClickListener(view -> finish());
