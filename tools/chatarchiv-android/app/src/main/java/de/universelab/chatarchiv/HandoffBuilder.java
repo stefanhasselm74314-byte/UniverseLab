@@ -202,6 +202,7 @@ final class HandoffBuilder {
         // First prefer different chats, then allow at most two per chat to
         // achieve the per-kind targets where the local archive permits it.
         for (int chatCap = 1; chatCap <= 2 && result.size() < maximum; chatCap++) {
+            int fieldCap = chatCap == 1 ? 3 : maximum;
             for (int n = 0; n < kinds.length && result.size() < maximum; n++) {
                 String kind = kinds[n];
                 int target = Math.min(maximum, quotas[n]);
@@ -209,7 +210,7 @@ final class HandoffBuilder {
                     if (result.size() >= maximum
                             || byKind.getOrDefault(kind, 0) >= target) break;
                     if (kind.equals(f.kind))
-                        addWork(result, f, chatCap, 3, byChat, byField, byKind, seen);
+                        addWork(result, f, chatCap, fieldCap, byChat, byField, byKind, seen);
                 }
             }
         }
