@@ -76,6 +76,23 @@ final class WideGripListView extends ListView {
     }
 
     @Override public boolean onTouchEvent(MotionEvent event) {
+        // Some rows let ListView itself own ACTION_DOWN (rather than a child).
+        // In that case Android skips later interception callbacks: handle the
+        // additional grip gesture here as well, without losing short item taps.
+        int action = event.getActionMasked();
+        if (candidate && !dragging && action == MotionEvent.ACTION_MOVE) {
+            if (Math.abs(event.getY() - downY) > touchSlop) {
+                dragging = true;
+                ViewParent parent = getParent();
+                if (parent != null) parent.requestDisallowInterceptTouchEvent(true);
+                scrollToDragPosition(event.getY());
+            }
+            return true;
+        }
+        if (candidate && !dragging
+                && (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)) {
+            candidate = false;
+        }
         if (dragging) {
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_MOVE:
