@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
  */
 final class HandoffBuilder {
     static final int ACTIVE_LIMIT = 12;
+    static final int MANUAL_LIMIT = 50;
     static final int STATUS_LIMIT = 3;
 
     static final class Packet {
@@ -80,9 +81,9 @@ final class HandoffBuilder {
                 if (f == null || !all.contains(f)) continue;
                 ResearchTimeline.Review review = check.get(f);
                 if (review != null && "LATER_CLOSURE".equals(review.code)) {
-                    if (selectedClosures.size() + selectedWork.size() < ACTIVE_LIMIT)
+                    if (selectedClosures.size() + selectedWork.size() < MANUAL_LIMIT)
                         selectedClosures.add(f);
-                } else if (selectedClosures.size() + selectedWork.size() < ACTIVE_LIMIT)
+                } else if (selectedClosures.size() + selectedWork.size() < MANUAL_LIMIT)
                     selectedWork.add(f);
             }
         }
