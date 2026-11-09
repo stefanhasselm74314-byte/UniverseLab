@@ -2,9 +2,10 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
-## Funktionen (Version 0.3.0)
+## Funktionen (Version 0.4.0 · Forschungsnavigator-Vorschau)
 
 - **UniverseLab**, **Weitere Chats**, **Alle** als getrennte Ansichten.
+- **Forschungsnavigator (neu, rein lokal):** Durchsucht gespeicherte sichtbare Gesprächsbeiträge nach ausdrücklich benannten offenen Punkten, Blockern, Widersprüchen und nächsten Schritten, zeigt Fundstelle und heuristische Prüffrage/Prüfweg und springt zum Originalbeitrag. Projektchats oder auf Wunsch alle Chats; Abbruch jederzeit. Keine automatischen Änderungen oder Cloud-Anfragen.
 - Mehrfachimport per Android-Dateiauswahl von `conversations-000.json`, `conversations-001.json` usw. aus einem ChatGPT-Datenexport.
 - **ZIP-Import ohne Vollentpackung:** Mehrere ältere ChatGPT-Export-ZIPs über den Android-Dateipicker auswählen. Die App liest nur `conversations.json`/`conversations-000.json` usw. direkt aus dem ZIP-Stream und integriert sie über dieselbe Dublettenprüfung. Medienanhänge werden nicht extrahiert.
 - **Optionale Vollspeicher-Suche:** Nach ausdrücklich erteilter Android-Sonderberechtigung „Zugriff auf alle Dateien“ kann die App den gemeinsam genutzten internen Speicher samt Unterordnern rekursiv durchsuchen. Gefunden werden ausschließlich `conversations*.json` und `.zip`-Archive, die solche Dateien enthalten. Eine Ergebnisvorschau verlangt eine weitere Bestätigung vor dem Import; Abbruch ist möglich. Bei großen ZIPs wird nur deren Inhaltsverzeichnis geprüft; der Import liest Gesprächs-JSONs per gezieltem ZIP-Zugriff und überspringt die übrigen Dateien. Suchen und Importieren laufen ohne Cloud-Upload.
@@ -18,6 +19,17 @@ Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 - **Markiermodus über mehrere Beiträge:** Während die normale Chatliste eine Auswahl innerhalb einzelner Beiträge unterstützt, stellt der zusätzliche Markiermodus den sichtbaren Gesprächspfad in einem durchgehenden auswählbaren Text dar. Zum Schutz vor übergroßen Android-Textansichten sind 2 Millionen Zeichen anzeigbar; für größere Gespräche den Export verwenden.
 - Der tatsächliche aktive Nachrichtenpfad aus `mapping`/`current_node` wird verfolgt; alternative Versionen und versteckte interne Inhalte werden nicht als normale Chat-Beiträge ausgegeben.
 - **GitHub nur lesen:** Öffentliches UniverseLab-Repository auf `main` per anonymen GET-Abfragen durchsuchen und Quelltext kleiner Dateien ansehen. Daneben eingeschränkter GitHub-Pages-Lesemodus ohne JavaScript, Anmeldung, Cookies und fremde Domains.
+
+## Forschungsnavigator: Aussagekraft und Grenzen
+
+Der Navigator ist zunächst ein **regelbasierter Such- und Priorisierungsassistent**, kein eigenständig mathematisch argumentierendes KI-System. Er erkennt ausdrücklich markierte Textstellen mit Stichwörtern wie `[OFFEN]`, `BLOCKER`, `WIDERSPRUCH`, `PENDING`, `TODO` oder `Nächster Schritt` und legt eine nach Priorität geordnete Prüfliste an.
+
+- Lokal und lesend: Datenquelle sind allein die bereits importierten Chats auf dem Android-Gerät. Weder Chattext noch daraus erzeugte Fundstellen werden an GitHub oder einen KI-Dienst gesendet.
+- Quellengebunden: Pro Fundstelle werden Chat-Titel, Rolle, Nummer des sichtbaren Beitrags und ein Textausschnitt angezeigt. Antippen springt zum passenden Beitrag des Originalchats.
+- Bewusst begrenzt: Für einen schnellen Screening-Durchlauf betrachtet die App die letzten 350 sichtbaren Beiträge pro Chat, höchstens 120.000 Zeichen pro Beitrag, maximal fünf Funde pro Chat und insgesamt 100 sichtbare Funde.
+- Kein Statusabgleich: Wiederholte oder inzwischen erledigte Aufgaben können weiterhin auftauchen. Ein Worttreffer ist **kein Beweis**, dass die Frage sachlich ungelöst oder aktuell ist. Die Priorität ist eine Heuristik, kein wissenschaftlicher Schweregrad.
+- Der angezeigte Prüfweg ist ein **Vorschlag**: Definitionsprüfung, Rechnungs-/Dimensionskontrolle, Konvergenz- oder Datenabgleich je nach erkanntem Thema. Es werden keine physikalischen Behauptungen automatisch verifiziert, keine neuen Sätze bewiesen und keine Ergebnisse kanonisiert.
+- Für eine spätere, wirklich eigenständigere Fragenfindung sind nachvollziehbare Hypothesenbildung, Statusabgleich gegen aktuelle Quellen, Widerspruchspaare, reproduzierbare Prüftests und explizite Nutzerfreigabe als eigene Ausbauetappen erforderlich.
 
 ## Datenschutz und Grenzen
 
@@ -34,7 +46,7 @@ Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
 ## Repository-Isolation
 
-Der gesamte Android-Code liegt in `tools/chatarchiv-android/`. Der Build-Workflow `.github/workflows/chatarchiv-android-apk.yml` reagiert ausschließlich auf den isolierten Branch `app/chatarchiv-android-readonly-v1`. Keine privaten Exportdaten oder realen Gespräche werden eingecheckt oder in GitHub Actions verarbeitet. Der Build erstellt ein installierbares, automatisch mit dem Android-Debug-Schlüssel signiertes APK-**Testpaket**. Es ist keine Play-Store-Veröffentlichung.
+Der gesamte Android-Code liegt in `tools/chatarchiv-android/`. Der Build-Workflow `.github/workflows/chatarchiv-android-apk.yml` reagiert auf die isolierten App-Zweige `app/chatarchiv-android-readonly-v1` und `app/chatarchiv-research-navigator-v0`; `main` bleibt unberührt. Keine privaten Exportdaten oder realen Gespräche werden eingecheckt oder in GitHub Actions verarbeitet. Der Build erstellt ein installierbares, automatisch mit dem Android-Debug-Schlüssel signiertes APK-**Testpaket**. Es ist keine Play-Store-Veröffentlichung.
 
 ## Build
 
@@ -58,3 +70,4 @@ Ausgabe: `app/build/outputs/apk/debug/app-debug.apk`. GitHub Actions stellt dies
 7. Einen Chat öffnen → **Exportieren** und zwischen vollständigem JSON, Markdown, TXT und HTML auswählen. Die JSON-Datei enthält auch inaktive Zweige der gespeicherten Unterhaltung; die lesbaren Formate enthalten den aktiven sichtbaren Verlauf.
 8. Einen Chat öffnen → **Original / Unicode / Monospace** für die Anzeige wählen. Mit **Markieren** eine durchgehende Markieransicht über mehrere Beiträge öffnen.
 9. Auf der Hauptseite **Alle Gespräche als ZIP sichern** für ein reimportierbares Backup der aktuellen Hauptfassungen und ihrer Kategoriezuordnungen wählen. Altversionen und externe Medienanhänge sind dabei nicht eingeschlossen.
+10. **Forschungsnavigator · offene Fragen** öffnen: Projektchats werden zunächst lokal gesichtet. **Alle Chats prüfen** erweitert den Suchbereich; eine Fundstelle antippen, um den Originalbeitrag zu sehen.
