@@ -195,8 +195,8 @@ final class HandoffBuilder {
 
     static String clean(String source, int limit) {
         String normalized = (source == null ? "" : source)
-                .replaceAll("[\p{Cntrl}\p{Cf}]+", " ")
-                .replaceAll("\s+", " ").trim();
+                .replaceAll("[\\p{Cntrl}\\p{Cf}]+", " ")
+                .replaceAll("\\s+", " ").trim();
         if (limit > 0 && normalized.length() > limit)
             return normalized.substring(0, Math.max(0, limit - 1)) + "…";
         return normalized;
