@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.time.Instant;
 
 import static org.junit.Assert.*;
 
@@ -71,6 +72,66 @@ public final class HandoffBuilderTest {
                 f -> "Doppelter Satz".equals(f.excerpt)).count());
         assertTrue(selected.stream().filter(
                 f -> "same-chat".equals(f.chatId)).count() <= 3);
+    }
+
+
+    private static ResearchFinder.Finding withKind(String chat, String kind, String field,
+            double when) {
+        int score = "Blocker".equals(kind) ? 100 : "Konflikt".equals(kind) ? 90
+                : "Offener Punkt".equals(kind) ? 70 : 50;
+        return new ResearchFinder.Finding(chat, "Chat " + chat, 10,
+                "assistant", kind + ": spezifischer Nachweis " + chat,
+                kind, field, "Wie prüfen?", "Quelltext lesen", score, when);
+    }
+
+    @Test public void handoffShowsOpenIssuesConflictsAndNextStepsAlongsideBlockers() {
+        List<ResearchFinder.Finding> list = new ArrayList<>();
+        for (int i = 0; i < 25; i++)
+            list.add(withKind("block-" + i, "Blocker", "Governance", 10000 + i));
+        for (int i = 0; i < 8; i++) {
+            list.add(withKind("open-" + i, "Offener Punkt", "Mathematik", 9000 + i));
+            list.add(withKind("conflict-" + i, "Konflikt", "Empirie", 8000 + i));
+            list.add(withKind("next-" + i, "Nächster Schritt", "Daten/Archiv", 7000 + i));
+        }
+        List<ResearchFinder.Finding> selected =
+                HandoffBuilder.selectWorkBalanced(list, 12, "HZT-M0");
+        assertEquals(12, selected.size());
+        assertEquals(5, selected.stream().filter(f -> "Blocker".equals(f.kind)).count());
+        assertEquals(3, selected.stream().filter(f -> "Offener Punkt".equals(f.kind)).count());
+        assertEquals(2, selected.stream().filter(f -> "Konflikt".equals(f.kind)).count());
+        assertEquals(2, selected.stream().filter(f -> "Nächster Schritt".equals(f.kind)).count());
+        assertEquals(12, selected.stream().map(f -> f.chatId).distinct().count());
+    }
+
+    @Test public void chosenFocusHasLimitedRecencyBonusAndDoesNotOverrideYears() {
+        double reference = Instant.parse("2026-11-09T12:00:00Z").getEpochSecond();
+        ResearchFinder.Finding recent = withKind(
+                "newest", "Offener Punkt", "Empirie", reference);
+        ResearchFinder.Finding focused = new ResearchFinder.Finding(
+                "focused", "Nullmoden Prüfung", 5, "assistant",
+                "[OFFEN] Nullmoden normalisieren", "Offener Punkt", "Mathematik",
+                "Prüffrage", "Quellnachweis", 70, reference - 5 * 86400);
+        ResearchFinder.Finding ancient = new ResearchFinder.Finding(
+                "ancient", "Nullmoden Test", 5, "assistant",
+                "[OFFEN] alte Nullmoden", "Offener Punkt", "Mathematik",
+                "Prüffrage", "Quellnachweis", 70, reference - 365 * 86400);
+        List<ResearchFinder.Finding> selected = HandoffBuilder.selectWorkBalanced(
+                List.of(recent, focused, ancient), 1, "Nullmoden");
+        assertEquals("focused", selected.get(0).chatId);
+        assertNotEquals("ancient", selected.get(0).chatId);
+    }
+
+    @Test public void sourceDateIsIncludedAndDoesNotImplyFreshCanon() {
+        double when = Instant.parse("2026-11-09T12:00:00Z").getEpochSecond();
+        ResearchFinder.Finding f = new ResearchFinder.Finding(
+                "c1", "Projektstatus", 25, "assistant",
+                "K1-D NOT RELEASED", "Blocker", "Governance",
+                "Prüffrage", "Kanon prüfen", 100, when);
+        HandoffBuilder.Packet p = HandoffBuilder.build(
+                "HZT", "10.11.2026", 1, 0, List.of(f), null);
+        assertTrue(p.markdown.contains("Beitragsdatum 09.11.2026"));
+        assertTrue(p.markdown.contains("Projektkanon"));
+        assertTrue(p.markdown.contains("nicht** live abgeglichen"));
     }
 
     @Test public void boundedOutputRemainsSmallEvenWithManyFindings() {
