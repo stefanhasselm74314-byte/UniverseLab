@@ -83,6 +83,11 @@ final class WideGripListView extends ListView {
         if (candidate && !dragging && action == MotionEvent.ACTION_MOVE) {
             if (Math.abs(event.getY() - downY) > touchSlop) {
                 dragging = true;
+                // ListView owned DOWN; explicitly cancel its pending click/long-press.
+                MotionEvent cancelEvent = MotionEvent.obtain(event);
+                cancelEvent.setAction(MotionEvent.ACTION_CANCEL);
+                super.onTouchEvent(cancelEvent);
+                cancelEvent.recycle();
                 ViewParent parent = getParent();
                 if (parent != null) parent.requestDisallowInterceptTouchEvent(true);
                 scrollToDragPosition(event.getY());
