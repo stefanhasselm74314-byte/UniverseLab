@@ -14,7 +14,7 @@ public final class WideGripMathTest {
 
     @Test public void noVerticalMotionDoesNotJumpAtFirstTouch() {
         assertEquals(100, WideGripMath.targetIndex(100, 0f, 1000, 641));
-        assertEquals(100, WideGripMath.targetIndex(100, 0f, 1000, 24));
+        assertEquals(12, WideGripMath.targetIndex(12, 0f, 1000, 24));
     }
 
     @Test public void draggingHalfViewportMovesHalfConversation() {
