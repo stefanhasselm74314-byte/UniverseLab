@@ -84,7 +84,7 @@ public final class HandoffBuilderTest {
                 "HZT", "heute", 500, 1, many, null);
         assertEquals(12, p.includedWork);
         assertTrue(p.markdown.length() < 25_000);
-        assertTrue(p.markdown.contains("1 Gespräche konnten nicht gelesen werden"));
+        assertTrue(p.markdown.contains("1 Gespräch konnte nicht gelesen werden"));
     }
 
     @Test public void emptyArchiveIsNotMisreportedAsResearchSolved() {
