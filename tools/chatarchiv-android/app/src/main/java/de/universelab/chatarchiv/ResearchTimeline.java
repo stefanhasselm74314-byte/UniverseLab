@@ -91,6 +91,9 @@ final class ResearchTimeline {
                 String line = raw.trim();
                 // Very long data rows are not reliable standalone status statements.
                 if (line.length() < 8 || line.length() > 1200) continue;
+                // Questions, examples and conditional statements are not status assertions.
+                if (line.indexOf('?') >= 0 || CONDITIONAL.matcher(line).find()
+                        || DISPUTED.matcher(line).find()) continue;
                 Matcher matcher = KEY.matcher(line);
                 List<int[]> ranges = new ArrayList<>();
                 List<String> keys = new ArrayList<>();
@@ -160,8 +163,11 @@ final class ResearchTimeline {
             String id = oneIdentifier(finding.excerpt);
             if (id == null) {
                 reviews.put(finding, new Review("NO_ID",
-                        "Keine eindeutige Aufgabenkennung: historischer Chat-Hinweis, "
-                                + "kein automatisch bestätigter offener Projektpunkt.", null, null));
+                        ("user".equals(finding.role)
+                                ? "Nutzerbeitrag ohne eindeutige Aufgabenkennung; "
+                                : "Fundstelle ohne eindeutige Aufgabenkennung; ")
+                                + "keine automatisch bestätigte Projektentscheidung oder Forschungslücke.",
+                        null, null));
                 continue;
             }
             StatusEvidence latest = null;
