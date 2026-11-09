@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - app/chatarchiv-android-readonly-v1
+      - app/chatarchiv-research-navigator-v0
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'
