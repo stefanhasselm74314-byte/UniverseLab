@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
  */
 final class HandoffBuilder {
     static final int ACTIVE_LIMIT = 12;
-    static final int MANUAL_LIMIT = 50;
+    static final int MANUAL_LIMIT = 12;
     static final int STATUS_LIMIT = 3;
 
     static final class Packet {
