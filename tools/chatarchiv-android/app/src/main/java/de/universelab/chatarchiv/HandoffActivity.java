@@ -302,7 +302,8 @@ public final class HandoffActivity extends Activity {
         });
         copyButton.setEnabled(selectionApproved);
         saveButton.setEnabled(selectionApproved);
-        status.setText((selectionApproved ? "Auswahl bestätigt" : "Vorschau · Auswahl erforderlich")
+        status.setText((selectionApproved ? "Auswahl bestätigt"
+                : "Kompakte Vorschau · bis zu 50 Fundstellen manuell auswählbar")
                 + " · " + inspectedChats + " Projektchats · "
                 + packet.totalCandidates + " passende Hinweise · "
                 + packet.includedWork + " Prüfkandidaten · "
