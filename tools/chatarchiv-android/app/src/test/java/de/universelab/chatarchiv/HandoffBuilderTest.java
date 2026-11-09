@@ -155,21 +155,21 @@ public final class HandoffBuilderTest {
         assertTrue(p.markdown.contains("bedeutet **nicht**, dass keine offenen Forschungsfragen existieren"));
     }
 
-    @Test public void manuallyChosenHandoffCanContainFortyFiveRelevantFindings() {
+    @Test public void manuallyChosenHandoffPreservesTwelveChoices() {
         List<ResearchFinder.Finding> options = new ArrayList<>();
         for (int n = 0; n < 60; n++)
             options.add(candidate("c" + n, n + 1, "Mathematik",
                     "[OFFEN] Prüfkandidat Nummer " + n + " benötigt einen Nachweis.", 70));
         HandoffBuilder.Packet full = HandoffBuilder.buildSelected(
                 "6D", "heute", 71, 0, options, new IdentityHashMap<>(),
-                new ArrayList<>(options.subList(0, 45)), "6D-Physik");
-        assertEquals(45, full.includedWork);
-        assertTrue(full.markdown.contains("Prüfkandidat Nummer 44"));
-        assertFalse(full.markdown.contains("Prüfkandidat Nummer 45"));
+                new ArrayList<>(options.subList(0, 12)), "6D-Physik");
+        assertEquals(12, full.includedWork);
+        assertTrue(full.markdown.contains("Prüfkandidat Nummer 11"));
+        assertFalse(full.markdown.contains("Prüfkandidat Nummer 12"));
         assertTrue(full.markdown.contains("fachlich weiterhin unbestätigt"));
     }
 
-    @Test public void manualHandoffCannotGrowBeyondFiftyFindings() {
+    @Test public void manualHandoffCannotGrowBeyondTwelveFindings() {
         List<ResearchFinder.Finding> options = new ArrayList<>();
         for (int n = 0; n < 80; n++)
             options.add(candidate("c" + n, n + 1, "Empirie",
@@ -177,8 +177,8 @@ public final class HandoffBuilderTest {
         HandoffBuilder.Packet limited = HandoffBuilder.buildSelected(
                 "6D", "heute", 71, 0, options, new IdentityHashMap<>(), options,
                 "6D-Physik");
-        assertEquals(50, limited.includedWork);
-        assertFalse(limited.markdown.contains("Datensatzprüfung Nummer 50"));
+        assertEquals(12, limited.includedWork);
+        assertFalse(limited.markdown.contains("Datensatzprüfung Nummer 12"));
     }
 
     @Test public void controlsAndNewlinesDoNotBreakSourceAnchors() {
