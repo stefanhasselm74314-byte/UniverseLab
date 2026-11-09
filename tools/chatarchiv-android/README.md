@@ -2,6 +2,15 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
+## Funktionen (Version 0.5.0 · Chat-Übergabe mit Quellenankern)
+
+- **„Chat-Übergabe · neuen Chat vorbereiten“:** Neuer, ausdrücklich nutzergesteuerter Bildschirm. Er untersucht offline ausschließlich die aktuell als **UniverseLab** eingeordneten importierten Chat-Hauptfassungen (kein Zugriff auf den live geöffneten ChatGPT-Chat, keine Cloud-Abfrage). Die vorhandenen Regeln `ResearchFinder` und `ResearchTimeline` liefern priorisierte historische Prüfkandidaten und später formulierte Statusaussagen.
+- **Deterministisches Übergabepaket:** Bis zu 12 priorisierte Prüfkandidaten sowie bis zu 3 ältere Fundstellen mit späterer Abschlussaussage; pro Fundstelle Quellchat, Chat-ID, Beitragsnummer, Rolle, Zitat, Prüffrage, Prüfweg und gegebenenfalls eine später zu prüfende Statusbehauptung. Zwei Auswahl-Durchgänge begrenzen Wiederholungen einzelner Chats/Fachgebiete. Das Paket dokumentiert Screening-Grenzen und ist ausdrücklich **[HEURISTISCH]**; später formulierte Abschlüsse gelten nicht automatisch als freigegeben.
+- **Fortsetzungsroutine:** Ein in der App anpassbarer Fokus (standardmäßig HPVS → HZT-M0 → HZT-Full) und ein wissenschaftlich konservativer Arbeitsauftrag für den neuen Chat. Die Vorlage verlangt Originalquellen, aktuellen Kanon, Gegenbeispiele, getrennte Evidenzklassen und explizite Freigaben. Eine neue ChatGPT-Sitzung muss **manuell** erstellt und die Übergabe **manuell** eingefügt werden.
+- **Sichtbarkeit/Kontrolle:** Vorschau mit Textauswahl und 0–100-%-Navigationsregler; nur per Schaltfläche **„Für neuen Chat kopieren“** gelangt der Text in die Zwischenablage, nur per Android-Dokumentauswahl **„Als .md speichern“** entsteht eine neue externe Datei. Keine automatische Übertragung, keine Änderung der privaten Chatarchive oder GitHub-Schreibzugriffe.
+- **Grenzen:** Nur die letzten 350 sichtbaren Nachrichten je Chat, 120.000 Zeichen je Nachricht und maximal 5 Funde je Chat bilden den vorhandenen heuristischen Screening-Input. Das Übergabepaket ist absichtlich begrenzt und ersetzt weder vollständige Chatarchive noch das kanonische Projektregister; es führt keine eigenen neuen physikalischen Beweise.
+- **Updatefähigkeit:** Produktive `applicationId` unverändert, `versionCode 16`, `versionName 0.5.0`; private Release-Signatur außerhalb von GitHub bleibt dieselbe wie in den vorigen stabilen APKs. Bestehende 641 Chats werden bei einem regulären Android-Update nicht neu importiert.
+
 ## Funktionen (Version 0.4.5 · leichter greifbare Scrollleiste)
 
 - **Unsichtbar vergrößerte Griffzone 0.4.5:** Die native Schnellscroll-Leiste bleibt optisch unverändert (24 dp). Direkt links davon ist eine zusätzliche unsichtbare Touch-Zone aktiviert; zusammen sind die horizontalen Griffbereiche 56 dp breit. Ein kurzes Tippen in der Erweiterung löst weiterhin die normale Chat-/Schaltflächenaktion aus. Erst eine deutliche vertikale Wisch-/Ziehbewegung übernimmt die Schnellnavigation relativ zur aktuellen Listenposition. Der ursprüngliche Scrollgriff bleibt für Standardgesten erhalten. Auch Forschungsnavigator und Hauptarchiv nutzen diese Navigation.
