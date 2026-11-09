@@ -11,6 +11,7 @@ on:
       - app/chatarchiv-scroll-navigation-v044
       - app/chatarchiv-scroll-touchzone-v045
       - app/chatarchiv-chat-handoff-v050
+      - app/chatarchiv-chat-handoff-qa-v051
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'
