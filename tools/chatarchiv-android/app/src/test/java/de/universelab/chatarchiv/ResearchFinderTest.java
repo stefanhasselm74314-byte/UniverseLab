@@ -60,4 +60,56 @@ public final class ResearchFinderTest {
         assertEquals("Blocker", results.get(0).kind);
         assertEquals(1, results.get(0).messageNumber);
     }
+
+    @Test public void ignoresTemplateFieldListFromRealDeviceScreenshot() {
+        List<ResearchFinder.Finding> results = ResearchFinder.extract("id", "Medien Designer",
+                Collections.singletonList(new ConversationLogic.Message("assistant",
+                        "vollständiger Aufgabenblock mit Task-ID, Quelle, Lieferobjekt, "
+                                + "Blocker, nächstem Schritt und Rückgaberoute;")), 5);
+        assertTrue(results.isEmpty());
+    }
+
+    @Test public void ignoresExplicitNoBlockerEvenIfOpenIsMentionedAsALabel() {
+        List<ResearchFinder.Finding> results = ResearchFinder.extract("id", "Medien Designer",
+                Collections.singletonList(new ConversationLogic.Message("assistant",
+                        "BLOCKER / ABHÄNGIGKEIT = keine für die technische Kommunikationsgrafik; "
+                                + "offene Engineeringgeometrie bleibt sichtbar als OPEN, APPROX oder ENVELOPE gekennzeichnet")), 5);
+        assertTrue(results.isEmpty());
+    }
+
+    @Test public void keepsActualBlockedBranchFromRealDeviceScreenshot() {
+        List<ResearchFinder.Finding> results = ResearchFinder.extract("id", "Relativitätstheorien",
+                Collections.singletonList(new ConversationLogic.Message("assistant",
+                        "Radion | Möglicher zusätzlicher Freiheitsgrad | Leichter, "
+                                + "ungescreenter Minimalzweig blockiert |")), 5);
+        assertEquals(1, results.size());
+        assertEquals("Blocker", results.get(0).kind);
+        assertEquals("Physikalisches Modell", results.get(0).field);
+    }
+
+    @Test public void keepsExplicitNonReleaseGateAndItsGovernanceScope() {
+        List<ResearchFinder.Finding> results = ResearchFinder.extract("id", "Website Absicherung",
+                Collections.singletonList(new ConversationLogic.Message("assistant",
+                        "Die Freigabesperren bleiben korrekt dokumentiert: "
+                                + "K1-D NOT RELEASED und K1-E NOT ADMISSIBLE.")), 5);
+        assertEquals(1, results.size());
+        assertEquals("Blocker", results.get(0).kind);
+        assertEquals("Governance", results.get(0).field);
+    }
+
+    @Test public void metadataPrefaceMustNotHideARealTaskBlocker() {
+        List<ResearchFinder.Finding> results = ResearchFinder.extract("id", "HZT",
+                Collections.singletonList(new ConversationLogic.Message("assistant",
+                        "TASK-ID = Z8B-01; BLOCKER: Nullmoden-Norm ist nicht nachgewiesen.")), 5);
+        assertEquals(1, results.size());
+        assertEquals("Blocker", results.get(0).kind);
+    }
+
+    @Test public void ignoresNegatedConflictAndIncidentalKeyword() {
+        List<ResearchFinder.Finding> results = ResearchFinder.extract("id", "Titel",
+                Collections.singletonList(new ConversationLogic.Message("assistant",
+                        "Es gibt keinen Widerspruch zwischen diesen beiden Definitionen.\n"
+                                + "Die Tabelle hat eine Spalte Blocker für jeden Aufgabenblock.")), 5);
+        assertTrue(results.isEmpty());
+    }
 }
