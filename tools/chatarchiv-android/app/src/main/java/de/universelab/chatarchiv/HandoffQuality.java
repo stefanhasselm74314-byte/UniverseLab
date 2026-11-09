@@ -28,8 +28,9 @@ final class HandoffQuality {
                     + "BLOCKER(?:\\s*/\\s*ABHÄNGIGKEIT)?|RÜCKGABE\\s+AN|"
                     + "TASK[-_ ]?ID|LIEFEROBJEKT)\\s*[:=]\\s*(?:[-–—.]|\\[\\s*\\])?\\s*$");
     private static final Pattern BARE_TABLE = Pattern.compile(
-            "(?iu)^.{2,85}\\|\\s*(?:\\*|\\[|\\s)*(?:BLOCKIERT|OFFEN|NOCH\\s+OFFEN|"
-                    + "NOT[_ -]?(?:RELEASED|ADMISSIBLE|READY))\\s*(?:\\]|\\*|\\s)*\\|?\\s*$");
+            "(?iu)^.{2,85}\\|\\s*(?:\\*|\\[|\\s)*(?:(?:WEITERHIN|NOCH)\\s+)?"
+                    + "(?:BLOCKIERT|OFFEN|NOT[_ -]?(?:RELEASED|ADMISSIBLE|READY))"
+                    + "(?:\\s*/\\s*(?:OFFEN|BLOCKIERT))?\\s*(?:\\]|\\*|\\s)*\\|?\\s*$");
     private static final Pattern CODE_OFFER = Pattern.compile(
             "(?iu)^(?:NÄCHSTER\\s+SCHRITT|NEXT\\s+STEP)\\s*[:=]\\s*"
                     + "(?:ICH\\s+(?:KANN|KÖNNTE|WÜRDE|WERDE\\s+DIR)|"
@@ -67,7 +68,8 @@ final class HandoffQuality {
                 "schiffsplanung", "bauplan", "raumfahrttechnik")) return Scope.ENGINEERING;
         if (has(title, "tagesmonitor", "chatarchiv", "chat archiv", "website",
                 "webseite", "portal", "software", "github", "programmierung",
-                "app-entwicklung", "browser", "dashboard")) return Scope.SOFTWARE;
+                "app-entwicklung", "browser", "dashboard",
+                "forschungsplattform", "forschungsaufbau")) return Scope.SOFTWARE;
         if (has(text, "rotor", "reaktor", "schubkraft", "schubsystem",
                 "fan-web", "rootblock", "taper", "eclss", "engineeringgeometrie",
                 "hzt-last", "antrieb", "triebwerk", "werkstoff")) {
@@ -76,7 +78,8 @@ final class HandoffQuality {
         if (has(text, "android", "quellcode", "browser", "scrollbalken",
                 "css", "javascript", "webseite", "app-modul", "frontend", "html",
                 "export-datei", "importfunktion", "cache", "deployment",
-                "github actions", "ci pipeline", "chatarchiv")) return Scope.SOFTWARE;
+                "github actions", "ci pipeline", "chatarchiv", "scanner",
+                "connector", "pr-aufruf", "pull request", "im branch")) return Scope.SOFTWARE;
         return Scope.PHYSICS;
     }
 
@@ -89,7 +92,11 @@ final class HandoffQuality {
             return true;
         // Repeated gate labels belong in the source-hierarchy context, not as
         // multiple newly discovered research problems.
-        if (GATE_ECHO.matcher(quote).find()
+        boolean latexGate = has(q, "k1\\text{d}", "k1\\text{e}",
+                "k1\\mathrm{d}", "k1\\mathrm{e}")
+                && has(q, "not released", "not admissible", "not_released",
+                        "not_admissible");
+        if ((GATE_ECHO.matcher(quote).find() || latexGate)
                 && !has(q, "nullmod", "ghost", "herleitung", "beweis",
                         "falsifikation", "radion", "kovarianz", "forward map"))
             return true;

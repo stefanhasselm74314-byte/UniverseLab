@@ -10,7 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -351,18 +354,16 @@ public final class HandoffActivity extends Activity {
                     .setPositiveButton("OK", null).show();
             return;
         }
-        List<ResearchFinder.Finding> proposed = HandoffBuilder.selectWorkBalanced(
-                choices, HandoffBuilder.ACTIVE_LIMIT, subject);
         boolean[] checked = new boolean[choices.size()];
         String[] labels = new String[choices.size()];
         for (int n = 0; n < choices.size(); n++) {
             ResearchFinder.Finding f = choices.get(n);
-            checked[n] = selectionApproved ? approved.contains(f) : proposed.contains(f);
-            labels[n] = f.kind + " · " + HandoffBuilder.clean(f.chatTitle, 45)
-                    + "\n" + HandoffBuilder.clean(f.excerpt, 120);
+            checked[n] = selectionApproved && approved.contains(f);
+            labels[n] = f.kind + " · " + HandoffBuilder.clean(f.chatTitle, 36)
+                    + "\n" + HandoffBuilder.clean(f.excerpt, 90);
         }
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Bis zu 12 Fundstellen auswählen (alle unbestätigt)")
+                .setTitle("Punkte selbst markieren · max. 12")
                 .setMultiChoiceItems(labels, checked, (panel, which, enabled) -> {
                     checked[which] = enabled;
                     int count = 0;
@@ -373,7 +374,7 @@ public final class HandoffActivity extends Activity {
                         Toast.makeText(this, "Höchstens 12 Fundstellen", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setPositiveButton("Auswahl übernehmen", (panel, ignored) -> {
+                .setPositiveButton("Übernehmen", (panel, ignored) -> {
                     approved.clear();
                     for (int n = 0; n < choices.size(); n++)
                         if (checked[n]) approved.add(choices.get(n));
@@ -383,6 +384,19 @@ public final class HandoffActivity extends Activity {
                 .setNegativeButton("Abbrechen", null)
                 .create();
         dialog.show();
+        // On narrow Android 17 screens an unconstrained multi-choice AlertDialog
+        // can extend into the gesture/navigation area. Keep both action buttons
+        // within a centred, bounded window while the candidate list scrolls.
+        Window window = dialog.getWindow();
+        if (window != null) {
+            DisplayMetrics display = getResources().getDisplayMetrics();
+            int maxHeight = Math.min((int) (display.heightPixels * 0.76f),
+                    Ui.dp(this, 680));
+            int width = Math.min(display.widthPixels - Ui.dp(this, 28),
+                    Ui.dp(this, 470));
+            window.setLayout(width, maxHeight);
+            window.setGravity(Gravity.CENTER);
+        }
     }
 
     private void copyToClipboard() {
