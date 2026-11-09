@@ -2,16 +2,17 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
-## Funktionen (Version 0.4.1 · Forschungsnavigator-QA-Vorschau)
+## Funktionen (Version 0.4.2 · signiertes Update & Systemleisten-Korrektur)
 
 - **UniverseLab**, **Weitere Chats**, **Alle** als getrennte Ansichten.
 - **Forschungsnavigator (neu, rein lokal):** Durchsucht gespeicherte sichtbare Gesprächsbeiträge nach ausdrücklich benannten offenen Punkten, Blockern, Widersprüchen und nächsten Schritten, zeigt Fundstelle und heuristische Prüffrage/Prüfweg und springt zum Originalbeitrag. Projektchats oder auf Wunsch alle Chats; Abbruch jederzeit. Keine automatischen Änderungen oder Cloud-Anfragen.
+- **Korrektur 0.4.2:** Die Hauptansichten berücksichtigen die Android-Status-, Navigations- und Kameraausschnittbereiche. Insbesondere bleibt **„Weitere 100 anzeigen“** oberhalb der Navigation bedienbar (Build-Prüfung; endgültige Bestätigung am Gerät steht aus).
 - **QA-Verbesserung 0.4.1:** Nicht jeder Worttreffer ist ein Blocker. Explizite Negationen und reine Aufgaben-/Feldvorlagen werden nun konservativ ausgefiltert; echte Statussperren wie `NOT RELEASED` bleiben erhalten. Hinweise sind nach Art filterbar und über 100 Fundstellen hinaus in Schritten zu je 100 nachladbar. Der Bildschirm bleibt rein lesend.
 - Mehrfachimport per Android-Dateiauswahl von `conversations-000.json`, `conversations-001.json` usw. aus einem ChatGPT-Datenexport.
 - **ZIP-Import ohne Vollentpackung:** Mehrere ältere ChatGPT-Export-ZIPs über den Android-Dateipicker auswählen. Die App liest nur `conversations.json`/`conversations-000.json` usw. direkt aus dem ZIP-Stream und integriert sie über dieselbe Dublettenprüfung. Medienanhänge werden nicht extrahiert.
 - **Optionale Vollspeicher-Suche:** Nach ausdrücklich erteilter Android-Sonderberechtigung „Zugriff auf alle Dateien“ kann die App den gemeinsam genutzten internen Speicher samt Unterordnern rekursiv durchsuchen. Gefunden werden ausschließlich `conversations*.json` und `.zip`-Archive, die solche Dateien enthalten. Eine Ergebnisvorschau verlangt eine weitere Bestätigung vor dem Import; Abbruch ist möglich. Bei großen ZIPs wird nur deren Inhaltsverzeichnis geprüft; der Import liest Gesprächs-JSONs per gezieltem ZIP-Zugriff und überspringt die übrigen Dateien. Suchen und Importieren laufen ohne Cloud-Upload.
 - **Versionsschutz bei älteren Exporten:** Bei identischen Chat-IDs wird der Inhalt verglichen. Abweichende ältere oder gleich alte, nicht umfangreichere Varianten landen im privaten Versionsordner; sie überschreiben keine aktuellere Chatfassung. Bei neuerer Fassung wird die alte lokal gesichert. Für den privaten Versionsbestand gilt zum Speicherschutz ein Limit von 1 GiB; bei Erreichen meldet die App einen Fehler und lässt die bisherige Chatfassung unverändert. Die aktuelle App zeigt weiterhin nur die Hauptfassung an; eine Oberfläche zur Ansicht der archivierten Varianten ist noch nicht enthalten.
-- Wiederholter Import ist die **Update-Funktion**: IDs werden abgeglichen, vorhandene Gespräche aktualisiert, neue ergänzt. Manuell verschobene Chats behalten ihre Zuordnung.
+- Wiederholter Import ist die **Datenaktualisierung**: IDs werden abgeglichen, vorhandene Gespräche aktualisiert, neue ergänzt. Manuell verschobene Chats behalten ihre Zuordnung.
 - Identische Gesprächsinhalte derselben Chat-ID werden über einen lokalen SHA-256-Hash erkannt und **nicht erneut gespeichert**. Die Importanzeige meldet neu/geändert/bereits identisch getrennt. Unterschiedliche Chat-IDs werden nicht wegen ähnlicher Titel automatisch zusammengelegt.
 - Volltextsuche über die sichtbaren Nachrichten und Titelsuche, Suche innerhalb eines Gesprächs, Kopieren einzelner Beiträge.
 - **Einzelne Gespräche exportieren:** Über „Exportieren“ im Chat kann wahlweise eine vollständige JSON mit dem gespeicherten Mapping und allen vorhandenen Antwortzweigen, eine lesbare Markdown-, TXT- oder HTML-Datei erstellt werden. Die Text-/Markdown-/HTML-Varianten enthalten den aktiven sichtbaren Pfad; die HTML-Variante verwendet eine offlinefähige, rein lokale Formeldarstellung. Über Androids „Dokument erstellen“-Auswahl bestimmt der Nutzer selbst das Ziel.
@@ -31,6 +32,27 @@ Der Navigator ist zunächst ein **regelbasierter Such- und Priorisierungsassiste
 - Kein Statusabgleich: Wiederholte oder inzwischen erledigte Aufgaben können weiterhin auftauchen. Ein Worttreffer ist **kein Beweis**, dass die Frage sachlich ungelöst oder aktuell ist. Die Priorität ist eine Heuristik, kein wissenschaftlicher Schweregrad.
 - Der angezeigte Prüfweg ist ein **Vorschlag**: Definitionsprüfung, Rechnungs-/Dimensionskontrolle, Konvergenz- oder Datenabgleich je nach erkanntem Thema. Es werden keine physikalischen Behauptungen automatisch verifiziert, keine neuen Sätze bewiesen und keine Ergebnisse kanonisiert.
 - Für eine spätere, wirklich eigenständigere Fragenfindung sind nachvollziehbare Hypothesenbildung, Statusabgleich gegen aktuelle Quellen, Widerspruchspaare, reproduzierbare Prüftests und explizite Nutzerfreigabe als eigene Ausbauetappen erforderlich.
+
+### Signaturkompatible Aktualisierung 0.4.2
+
+Die produktive APK hat unverändert die Paketkennung `de.universelab.chatarchiv`,
+`versionCode 12` und wird **außerhalb von GitHub Actions** mit dem bereits vorhandenen
+**privaten UniverseLab-Signaturschlüssel** signiert. Der Schlüssel darf niemals in das
+öffentliche Repository, Buildprotokolle oder GitHub-Artefakte gelangen.
+So erkennt Android bei einem bereits mit diesem Schlüssel signierten ChatArchiv die
+Installation als **Aktualisieren** und erhält alle dort gespeicherten Chats.
+Die zuvor erstellte ZIP-Sicherung bleibt als Rückfalloption erforderlich.
+
+Die QA-Test-App `de.universelab.chatarchiv.researchqa` ist eine **andere Installation**
+mit einer anderen Signatur und getrennten 641-Chat-Daten. Eine signierte produktive APK
+kann sie **nicht** verlustfrei direkt ersetzen. Falls die ursprüngliche ChatArchiv-App
+die 641 Chats noch nicht enthält, kann ihre vorhandene ZIP-Sicherung dort **einmal**
+importiert werden. Danach erfolgen Produktiv-Updates ohne erneuten Import.
+
+GitHub Actions baut die Release-APK nur **unsigniert** und lädt sie als
+`UniverseLab-ChatArchiv-Unsigned-Release` hoch. Die lokale, private Signatur
+und Zertifikatsprüfung müssen **nach** jedem Build erfolgen. Das GitHub-Debug-APK
+bleibt ein separates Testpaket, keine signaturkompatible Produktivaktualisierung.
 
 ### Sicheres Testen auf dem Smartphone
 
@@ -53,7 +75,7 @@ Ein Austausch von Chatdaten zwischen den getrennten App-Speichern erfolgt **nich
 
 ## Repository-Isolation
 
-Der gesamte Android-Code liegt in `tools/chatarchiv-android/`. Der Build-Workflow `.github/workflows/chatarchiv-android-apk.yml` reagiert auf die isolierten App-Zweige `app/chatarchiv-android-readonly-v1` und `app/chatarchiv-research-navigator-v0` sowie den isolierten QA-Zweig `app/chatarchiv-research-qa-v041`; `main` bleibt unberührt. Keine privaten Exportdaten oder realen Gespräche werden eingecheckt oder in GitHub Actions verarbeitet. Der Build erstellt ein installierbares, automatisch mit dem Android-Debug-Schlüssel signiertes APK-**Testpaket**. Es ist keine Play-Store-Veröffentlichung.
+Der gesamte Android-Code liegt in `tools/chatarchiv-android/`. Der Build-Workflow `.github/workflows/chatarchiv-android-apk.yml` reagiert auf die isolierten App-Zweige `app/chatarchiv-android-readonly-v1` und `app/chatarchiv-research-navigator-v0` sowie die isolierten QA-/Update-Zweige `app/chatarchiv-research-qa-v041` und `app/chatarchiv-stable-update-v042`; `main` bleibt unberührt. Keine privaten Exportdaten oder realen Gespräche werden eingecheckt oder in GitHub Actions verarbeitet. Der Build erstellt ein mit dem Android-Debug-Schlüssel signiertes APK-**Testpaket** und eine **unsignierte Release-APK** zur späteren privaten Signierung. Es ist keine Play-Store-Veröffentlichung.
 
 ## Build
 
@@ -61,10 +83,10 @@ Android SDK 35, JDK 17, Gradle 8.9, Android Gradle Plugin 8.7.3:
 
 ```bash
 cd tools/chatarchiv-android
-gradle :app:testDebugUnitTest :app:assembleDebug
+gradle :app:testDebugUnitTest :app:assembleDebug :app:assembleRelease
 ```
 
-Ausgabe: `app/build/outputs/apk/debug/app-debug.apk`. GitHub Actions stellt diese Datei als `UniverseLab-ChatArchiv-Android-APK` bereit.
+Ausgabe: `app/build/outputs/apk/debug/app-debug.apk` (QA, signiert mit wechselndem Debug-Schlüssel) und `app/build/outputs/apk/release/app-release-unsigned.apk` (Produktivpaket, **noch nicht installierbar**). GitHub Actions liefert beide getrennt; der private signierte Update-Build erfolgt lokal.
 
 ## Import auf dem Telefon
 
