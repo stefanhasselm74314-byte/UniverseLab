@@ -99,6 +99,7 @@ public final class MainActivity extends Activity {
     private void buildScreen() {
         LinearLayout root = Ui.column(this, 12);
         setContentView(root);
+        Ui.applySystemBarInsets(root);
 
         root.addView(Ui.text(this, "UniverseLab ChatArchiv", 23, true));
         TextView subtitle = Ui.text(this, "Lokal · private Chats · GitHub nur lesen", 12, false);

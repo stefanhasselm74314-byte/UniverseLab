@@ -6,6 +6,7 @@ on:
       - app/chatarchiv-android-readonly-v1
       - app/chatarchiv-research-navigator-v0
       - app/chatarchiv-research-qa-v041
+      - app/chatarchiv-stable-update-v042
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'
@@ -38,7 +39,7 @@ jobs:
           gradle-version: '8.9'
       - name: Test parser and assemble debug APK
         working-directory: tools/chatarchiv-android
-        run: gradle --no-daemon --stacktrace :app:testDebugUnitTest :app:assembleDebug
+        run: gradle --no-daemon --stacktrace :app:testDebugUnitTest :app:assembleDebug :app:assembleRelease
       - name: Verify APK exists
         run: test -s tools/chatarchiv-android/app/build/outputs/apk/debug/app-debug.apk
       - name: Upload installierbare APK
@@ -48,6 +49,17 @@ jobs:
           path: tools/chatarchiv-android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 90
+      # Signing keys NEVER enter public CI or public repository. Release is unsigned here;
+      # the project owner's existing private keystore signs it offline after download.
+      - name: Verify unsigned release APK
+        run: test -s tools/chatarchiv-android/app/build/outputs/apk/release/app-release-unsigned.apk
+      - name: Upload unsigned release for private signing
+        uses: actions/upload-artifact@v4
+        with:
+          name: UniverseLab-ChatArchiv-Unsigned-Release
+          path: tools/chatarchiv-android/app/build/outputs/apk/release/app-release-unsigned.apk
+          if-no-files-found: error
+          retention-days: 30
       - name: Stage signing verification utility
         run: |
           APKSIGNER_JAR=$(find "$ANDROID_HOME/build-tools" -type f -name apksigner.jar | sort -V | tail -1)

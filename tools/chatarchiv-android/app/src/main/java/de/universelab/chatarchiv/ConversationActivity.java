@@ -63,6 +63,7 @@ public final class ConversationActivity extends Activity {
 
         LinearLayout root = Ui.column(this, 12);
         setContentView(root);
+        Ui.applySystemBarInsets(root);
         android.widget.Button back = Ui.button(this, "‹ Zurück zum Archiv");
         back.setOnClickListener(view -> finish());
         root.addView(back);

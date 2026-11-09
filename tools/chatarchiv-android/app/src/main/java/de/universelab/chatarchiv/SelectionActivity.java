@@ -32,6 +32,7 @@ public final class SelectionActivity extends Activity {
 
         LinearLayout root = Ui.column(this, 12);
         setContentView(root);
+        Ui.applySystemBarInsets(root);
         Button back = Ui.button(this, "‹ Zurück zum Gespräch");
         back.setOnClickListener(view -> finish());
         root.addView(back);
