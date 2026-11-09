@@ -125,6 +125,11 @@ public final class MainActivity extends Activity {
                 startActivity(new Intent(this, ResearchActivity.class)));
         root.addView(researchButton);
 
+        Button handoffButton = Ui.button(this, "Chat-Übergabe · neuen Chat vorbereiten");
+        handoffButton.setOnClickListener(view ->
+                startActivity(new Intent(this, HandoffActivity.class)));
+        root.addView(handoffButton);
+
         Ui.addGap(this, root, 10);
         LinearLayout tabs = Ui.row(this);
         android.widget.Button all = Ui.button(this, "Alle");
