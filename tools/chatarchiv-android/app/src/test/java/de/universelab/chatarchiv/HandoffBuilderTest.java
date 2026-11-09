@@ -155,6 +155,32 @@ public final class HandoffBuilderTest {
         assertTrue(p.markdown.contains("bedeutet **nicht**, dass keine offenen Forschungsfragen existieren"));
     }
 
+    @Test public void manuallyChosenHandoffCanContainFortyFiveRelevantFindings() {
+        List<ResearchFinder.Finding> options = new ArrayList<>();
+        for (int n = 0; n < 60; n++)
+            options.add(candidate("c" + n, n + 1, "Mathematik",
+                    "[OFFEN] Prüfkandidat Nummer " + n + " benötigt einen Nachweis.", 70));
+        HandoffBuilder.Packet full = HandoffBuilder.buildSelected(
+                "6D", "heute", 71, 0, options, new IdentityHashMap<>(),
+                new ArrayList<>(options.subList(0, 45)), "6D-Physik");
+        assertEquals(45, full.includedWork);
+        assertTrue(full.markdown.contains("Prüfkandidat Nummer 44"));
+        assertFalse(full.markdown.contains("Prüfkandidat Nummer 45"));
+        assertTrue(full.markdown.contains("fachlich weiterhin unbestätigt"));
+    }
+
+    @Test public void manualHandoffCannotGrowBeyondFiftyFindings() {
+        List<ResearchFinder.Finding> options = new ArrayList<>();
+        for (int n = 0; n < 80; n++)
+            options.add(candidate("c" + n, n + 1, "Empirie",
+                    "[OFFEN] Datensatzprüfung Nummer " + n + " benötigt Kontrolle.", 70));
+        HandoffBuilder.Packet limited = HandoffBuilder.buildSelected(
+                "6D", "heute", 71, 0, options, new IdentityHashMap<>(), options,
+                "6D-Physik");
+        assertEquals(50, limited.includedWork);
+        assertFalse(limited.markdown.contains("Datensatzprüfung Nummer 50"));
+    }
+
     @Test public void controlsAndNewlinesDoNotBreakSourceAnchors() {
         String sanitized = HandoffBuilder.clean("Titel\n\r\tTest\u200B", 140);
         assertEquals("Titel Test", sanitized);
