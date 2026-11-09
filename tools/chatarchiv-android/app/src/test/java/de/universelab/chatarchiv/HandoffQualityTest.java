@@ -110,6 +110,31 @@ public final class HandoffQualityTest {
         assertFalse(dedup.contains(a));
     }
 
+    @Test public void shortStatusTablesAreNotDuplicateResearchOrders() {
+        assertTrue(HandoffQuality.falsePositive(finding("d", "Projekt",
+                "6D-Identifikation | weiterhin blockiert |",
+                "Blocker", 10, 1)));
+        assertTrue(HandoffQuality.falsePositive(finding("d", "Projekt",
+                "6D-Identifikation | weiterhin offen/blockiert |",
+                "Offener Punkt", 10, 2)));
+        assertFalse(HandoffQuality.falsePositive(finding("d", "Projekt",
+                "6D-Identifikation | blockiert, solange die Forward Map nicht vorliegt |",
+                "Blocker", 10, 3)));
+    }
+
+    @Test public void latexGateAndPlatformWorkStayOutOfPhysicsSelection() {
+        assertTrue(HandoffQuality.falsePositive(finding("d", "Projekt",
+                "K1\\text{D}=\\texttt{NOT RELEASED}", "Blocker", 10, 1)));
+        ResearchFinder.Finding platform = finding("p", "UniverseLab Forschungsplattform",
+                "BLOCKER: Der Status des aktiven Webmoduls ist unklar.",
+                "Blocker", 10, 2);
+        ResearchFinder.Finding scanner = finding("p", "Technischer Nebenchat",
+                "BLOCKER: Scanner ist im Branch, der Connector ist nicht verfügbar.",
+                "Blocker", 10, 3);
+        assertEquals(HandoffQuality.Scope.SOFTWARE, HandoffQuality.classify(platform));
+        assertEquals(HandoffQuality.Scope.SOFTWARE, HandoffQuality.classify(scanner));
+    }
+
     @Test public void approvedPacketIncludesOnlyTheChosenQuote() {
         ResearchFinder.Finding a = finding("a", "HZT",
                 "[OFFEN] erster Normbeweis fehlt", "Offener Punkt", 100, 1);
