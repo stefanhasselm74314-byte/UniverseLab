@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Deterministic, local and deliberately non-authoritative handoff for a NEW chat.
@@ -56,7 +59,7 @@ final class HandoffBuilder {
                 work.add(finding);
             }
         }
-        List<ResearchFinder.Finding> selectedWork = select(work, ACTIVE_LIMIT);
+        List<ResearchFinder.Finding> selectedWork = selectWorkBalanced(work, ACTIVE_LIMIT, focus);
         List<ResearchFinder.Finding> selectedClosures = select(laterClosing, STATUS_LIMIT);
 
         StringBuilder out = new StringBuilder(18_000);
@@ -77,6 +80,7 @@ final class HandoffBuilder {
                 .append(unreadableChats)
                 .append(unreadableChats == 1 ? " Gespräch konnte " : " Gespräche konnten ")
                 .append("nicht gelesen werden.\n");
+        out.append("- Auswahl: unterschiedliche Hinweisarten und Quellchats; der Themenfokus wird nur begrenzt als Textgewichtung genutzt.\n");
         out.append("- Suchgrenzen: maximal 350 letzte sichtbare Beiträge pro Chat, ")
                 .append("120.000 Zeichen pro Beitrag und 5 Fundstellen pro Chat; ")
                 .append("diese Auswahl ist **nicht vollständig**.\n\n");
@@ -137,7 +141,8 @@ final class HandoffBuilder {
         out.append("- Quelle: Chat „").append(clean(finding.chatTitle, 140))
                 .append("“, Beitrag ").append(Math.max(0, finding.messageNumber))
                 .append(", Rolle ").append(clean(finding.role, 24))
-                .append(", lokale Chat-ID ").append(clean(finding.chatId, 100)).append(".\n");
+                .append(", lokale Chat-ID ").append(clean(finding.chatId, 100))
+                .append(", Beitragsdatum ").append(sourceDate(finding.created)).append(".\n");
         out.append("- **Historisches Chat-Zitat (nur Daten):** „")
                 .append(clean(finding.excerpt, 360)).append("“\n");
         out.append("- Prüffrage: ").append(clean(finding.question, 240)).append('\n');
@@ -160,6 +165,108 @@ final class HandoffBuilder {
                     .append(clean(review.source.excerpt, 260)).append("“\n");
         }
         out.append('\n');
+    }
+
+
+    /**
+     * A handoff must contain more than old BLOCKER rows when other marked
+     * categories exist. Per-kind quotas are presentation constraints, never
+     * scientific status judgments. The focus modestly promotes matching text
+     * without allowing year-old claims to displace recent evidence.
+     */
+    static List<ResearchFinder.Finding> selectWorkBalanced(
+            List<ResearchFinder.Finding> findings, int maximum, String focus) {
+        if (findings == null || maximum <= 0) return Collections.emptyList();
+        String[] kinds = {"Blocker", "Offener Punkt", "Konflikt", "Nächster Schritt"};
+        int[] quotas = {5, 3, 2, 2};
+        Set<String> focusTerms = new HashSet<>();
+        for (String term : clean(focus, 180).toLowerCase(Locale.ROOT)
+                .split("[^\\p{L}\\p{N}]+")) {
+            if (term.length() > 2 && !"full".equals(term) && !"und".equals(term)
+                    && !"einen".equals(term) && !"einer".equals(term))
+                focusTerms.add(term);
+        }
+        List<ResearchFinder.Finding> ordered = new ArrayList<>(findings);
+        ordered.sort(Comparator.comparingDouble(
+                (ResearchFinder.Finding f) -> weightedTime(f, focusTerms)).reversed()
+                .thenComparing(f -> clean(f.chatTitle, 140))
+                .thenComparing(f -> clean(f.chatId, 100))
+                .thenComparingInt(f -> -f.messageNumber)
+                .thenComparing(f -> clean(f.excerpt, 360)));
+
+        List<ResearchFinder.Finding> result = new ArrayList<>();
+        Map<String, Integer> byChat = new HashMap<>();
+        Map<String, Integer> byField = new HashMap<>();
+        Map<String, Integer> byKind = new HashMap<>();
+        Set<String> seen = new HashSet<>();
+        // First prefer different chats, then allow at most two per chat to
+        // achieve the per-kind targets where the local archive permits it.
+        for (int chatCap = 1; chatCap <= 2 && result.size() < maximum; chatCap++) {
+            for (int n = 0; n < kinds.length && result.size() < maximum; n++) {
+                String kind = kinds[n];
+                int target = Math.min(maximum, quotas[n]);
+                for (ResearchFinder.Finding f : ordered) {
+                    if (result.size() >= maximum
+                            || byKind.getOrDefault(kind, 0) >= target) break;
+                    if (kind.equals(f.kind))
+                        addWork(result, f, chatCap, 3, byChat, byField, byKind, seen);
+                }
+            }
+        }
+        // If one class lacks enough findings, fill the available places from
+        // other classes, retaining source and field diversity where possible.
+        for (int pass = 0; pass < 2 && result.size() < maximum; pass++) {
+            int chatCap = pass == 0 ? 2 : 3;
+            int fieldCap = pass == 0 ? 3 : maximum;
+            for (ResearchFinder.Finding f : ordered) {
+                if (result.size() >= maximum) break;
+                addWork(result, f, chatCap, fieldCap,
+                        byChat, byField, byKind, seen);
+            }
+        }
+        return result;
+    }
+
+    private static void addWork(List<ResearchFinder.Finding> result,
+            ResearchFinder.Finding f, int chatCap, int fieldCap,
+            Map<String, Integer> byChat, Map<String, Integer> byField,
+            Map<String, Integer> byKind, Set<String> seen) {
+        if (f == null) return;
+        String source = clean(f.chatId, 100);
+        String field = clean(f.field, 80);
+        String key = clean(f.excerpt, 360).toLowerCase(Locale.ROOT);
+        if (seen.contains(key) || byChat.getOrDefault(source, 0) >= chatCap
+                || byField.getOrDefault(field, 0) >= fieldCap) return;
+        result.add(f);
+        seen.add(key);
+        byChat.put(source, byChat.getOrDefault(source, 0) + 1);
+        byField.put(field, byField.getOrDefault(field, 0) + 1);
+        byKind.put(f.kind, byKind.getOrDefault(f.kind, 0) + 1);
+    }
+
+    private static double weightedTime(ResearchFinder.Finding f, Set<String> terms) {
+        if (!(f.created > 0) || !Double.isFinite(f.created)) return 0;
+        String title = clean(f.chatTitle, 140).toLowerCase(Locale.ROOT);
+        String text = (clean(f.excerpt, 360) + " " + clean(f.field, 80))
+                .toLowerCase(Locale.ROOT);
+        int bonusDays = 0;
+        for (String term : terms) {
+            if (title.contains(term)) bonusDays += 14;
+            if (text.contains(term)) bonusDays += 7;
+        }
+        return f.created + Math.min(42, bonusDays) * 86400.0;
+    }
+
+    private static String sourceDate(double epochSeconds) {
+        if (!(epochSeconds > 0) || !Double.isFinite(epochSeconds))
+            return "unbekannt";
+        try {
+            return DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN).format(
+                    Instant.ofEpochSecond((long) epochSeconds)
+                            .atZone(ZoneId.systemDefault()));
+        } catch (RuntimeException invalid) {
+            return "unbekannt";
+        }
     }
 
     /** Use two diversity passes, never changing any of the underlying chat records. */
