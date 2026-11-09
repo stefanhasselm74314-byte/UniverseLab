@@ -388,14 +388,15 @@ public final class HandoffActivity extends Activity {
                             Ui.dp(HandoffActivity.this, 13));
                     row.setMinimumHeight(Ui.dp(HandoffActivity.this, 60));
                     row.setBackgroundResource(android.R.drawable.list_selector_background);
+                    // A zero-height WRAP_CONTENT CheckBox clips its bottom edge on
+                    // some Android 17 devices. Reserve the full native touch box.
                     mark = new CheckBox(HandoffActivity.this);
-                    mark.setGravity(Gravity.TOP | Gravity.START);
+                    mark.setGravity(Gravity.CENTER_VERTICAL | Gravity.START);
                     mark.setButtonTintList(ColorStateList.valueOf(Ui.ACCENT));
-                    mark.setMinHeight(0);
+                    mark.setMinHeight(Ui.dp(HandoffActivity.this, 48));
                     LinearLayout.LayoutParams box = new LinearLayout.LayoutParams(
-                            Ui.dp(HandoffActivity.this, 44),
-                            ViewGroup.LayoutParams.WRAP_CONTENT);
-                    box.topMargin = Ui.dp(HandoffActivity.this, 2);
+                            Ui.dp(HandoffActivity.this, 48),
+                            Ui.dp(HandoffActivity.this, 48));
                     row.addView(mark, box);
                     excerpt = Ui.text(HandoffActivity.this, "", 14, false);
                     excerpt.setMaxLines(6);
