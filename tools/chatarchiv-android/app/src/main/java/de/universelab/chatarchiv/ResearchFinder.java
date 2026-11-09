@@ -56,10 +56,11 @@ final class ResearchFinder {
         final String question;
         final String verification;
         final int priority;
+        final double created;
 
         Finding(String chatId, String chatTitle, int messageNumber, String role,
                 String excerpt, String kind, String field, String question,
-                String verification, int priority) {
+                String verification, int priority, double created) {
             this.chatId = chatId;
             this.chatTitle = chatTitle;
             this.messageNumber = messageNumber;
@@ -70,6 +71,7 @@ final class ResearchFinder {
             this.question = question;
             this.verification = verification;
             this.priority = priority;
+            this.created = created;
         }
     }
 
@@ -104,7 +106,7 @@ final class ResearchFinder {
                         : priority >= 70 ? "Offener Punkt" : "Nächster Schritt";
                 String field = field(line);
                 candidates.add(new Finding(chatId, chatTitle, i + 1, message.role, line,
-                        kind, field, question(kind), verification(field), priority));
+                        kind, field, question(kind), verification(field), priority, message.created));
                 if (++inMessage >= 2 || candidates.size() >= 120) break;
             }
         }

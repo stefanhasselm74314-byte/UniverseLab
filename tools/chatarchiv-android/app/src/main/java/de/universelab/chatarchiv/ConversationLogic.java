@@ -15,10 +15,17 @@ final class ConversationLogic {
     static final class Message {
         final String role;
         final String body;
+        /** Source timestamp in epoch seconds, if present in the export; 0 means unknown. */
+        final double created;
 
         Message(String role, String body) {
+            this(role, body, 0.0);
+        }
+
+        Message(String role, String body, double created) {
             this.role = role;
             this.body = body;
+            this.created = Double.isFinite(created) && created > 0 ? created : 0.0;
         }
     }
 
@@ -95,7 +102,7 @@ final class ConversationLogic {
         }
         String visible = body.toString().trim();
         if (visible.isEmpty()) return null;
-        return new Message(role, visible);
+        return new Message(role, visible, message.optDouble("create_time", 0.0));
     }
 
     static String indexText(JSONObject conversation) {
