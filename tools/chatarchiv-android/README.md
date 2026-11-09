@@ -2,6 +2,11 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
+## Funktionen (Version 0.4.5 · leichter greifbare Scrollleiste)
+
+- **Unsichtbar vergrößerte Griffzone 0.4.5:** Die native Schnellscroll-Leiste bleibt optisch unverändert (24 dp). Direkt links davon ist eine zusätzliche unsichtbare Touch-Zone aktiviert; zusammen sind die horizontalen Griffbereiche 56 dp breit. Ein kurzes Tippen in der Erweiterung löst weiterhin die normale Chat-/Schaltflächenaktion aus. Erst eine deutliche vertikale Wisch-/Ziehbewegung übernimmt die Schnellnavigation relativ zur aktuellen Listenposition. Der ursprüngliche Scrollgriff bleibt für Standardgesten erhalten. Auch Forschungsnavigator und Hauptarchiv nutzen diese Navigation.
+- **Rückwärtskompatible Aktualisierung:** Identische Android-Paketkennung und private Release-Signatur mit erhöhtem Versionscode (15); keine Datenbankmigration und kein erneuter Chatimport nötig.
+
 ## Funktionen (Version 0.4.4 · dauerhafte Scrollnavigation)
 
 - **UniverseLab**, **Weitere Chats**, **Alle** als getrennte Ansichten.
