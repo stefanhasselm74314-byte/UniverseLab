@@ -354,18 +354,16 @@ public final class HandoffActivity extends Activity {
                     .setPositiveButton("OK", null).show();
             return;
         }
-        List<ResearchFinder.Finding> proposed = HandoffBuilder.selectWorkBalanced(
-                choices, HandoffBuilder.ACTIVE_LIMIT, subject);
         boolean[] checked = new boolean[choices.size()];
         String[] labels = new String[choices.size()];
         for (int n = 0; n < choices.size(); n++) {
             ResearchFinder.Finding f = choices.get(n);
-            checked[n] = selectionApproved ? approved.contains(f) : proposed.contains(f);
+            checked[n] = selectionApproved && approved.contains(f);
             labels[n] = f.kind + " · " + HandoffBuilder.clean(f.chatTitle, 36)
                     + "\n" + HandoffBuilder.clean(f.excerpt, 90);
         }
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Fundstellen auswählen · max. 12")
+                .setTitle("Punkte selbst markieren · max. 12")
                 .setMultiChoiceItems(labels, checked, (panel, which, enabled) -> {
                     checked[which] = enabled;
                     int count = 0;
