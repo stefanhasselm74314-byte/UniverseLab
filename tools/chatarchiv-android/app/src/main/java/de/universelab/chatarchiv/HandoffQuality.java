@@ -69,7 +69,8 @@ final class HandoffQuality {
         if (has(title, "tagesmonitor", "chatarchiv", "chat archiv", "website",
                 "webseite", "portal", "software", "github", "programmierung",
                 "app-entwicklung", "browser", "dashboard",
-                "forschungsplattform", "forschungsaufbau")) return Scope.SOFTWARE;
+                "forschungsplattform", "forschungsaufbau", "überwachung",
+                "chat audit worker")) return Scope.SOFTWARE;
         if (has(text, "rotor", "reaktor", "schubkraft", "schubsystem",
                 "fan-web", "rootblock", "taper", "eclss", "engineeringgeometrie",
                 "hzt-last", "antrieb", "triebwerk", "werkstoff")) {
@@ -92,10 +93,13 @@ final class HandoffQuality {
             return true;
         // Repeated gate labels belong in the source-hierarchy context, not as
         // multiple newly discovered research problems.
-        boolean latexGate = has(q, "k1\\text{d}", "k1\\text{e}",
-                "k1\\mathrm{d}", "k1\\mathrm{e}")
-                && has(q, "not released", "not admissible", "not_released",
-                        "not_admissible");
+        // LaTeX may split gate identifiers across \mathrm{K1\-D}, etc.
+        // Normalize only for screening of bare gate-status echoes.
+        String compact = q.replace("\\texttt", "").replace("\\text", "")
+                .replace("\\mathrm", "").replace("\\boxed", "")
+                .replaceAll("[^a-z0-9]+", "");
+        boolean latexGate = (compact.contains("k1d") || compact.contains("k1e"))
+                && (compact.contains("notreleased") || compact.contains("notadmissible"));
         if ((GATE_ECHO.matcher(quote).find() || latexGate)
                 && !has(q, "nullmod", "ghost", "herleitung", "beweis",
                         "falsifikation", "radion", "kovarianz", "forward map"))
