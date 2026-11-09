@@ -1,6 +1,7 @@
 package de.universelab.chatarchiv;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,13 +24,23 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /** Local screening, no AI service, account access, uploads or repository mutations. */
 public final class ResearchActivity extends Activity {
+    private static final String[] TYPE_FILTERS = {
+            "Alle Kategorien", "Blocker", "Konflikt", "Offener Punkt", "Nächster Schritt"};
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
     private final AtomicBoolean cancel = new AtomicBoolean();
+    private final List<ResearchFinder.Finding> allFindings = new ArrayList<>();
     private final List<ResearchFinder.Finding> findings = new ArrayList<>();
     private TextView status;
     private Button cancelButton;
+    private Button filterButton;
+    private Button moreButton;
     private FindingsAdapter adapter;
     private boolean scanning;
+    private boolean scanInterrupted;
+    private int checkedChats;
+    private int unreadableChats;
+    private int selectedFilter;
+    private int showLimit = 100;
 
     @Override public void onCreate(Bundle saved) {
         super.onCreate(saved);
@@ -68,9 +79,22 @@ public final class ResearchActivity extends Activity {
         status.setTextColor(Ui.ACCENT);
         root.addView(status);
 
+        filterButton = Ui.button(this, "Filter: Alle Kategorien ▾");
+        filterButton.setOnClickListener(view -> new AlertDialog.Builder(this)
+                .setTitle("Hinweisarten auswählen")
+                .setSingleChoiceItems(TYPE_FILTERS, selectedFilter, (dialog, which) -> {
+                    selectedFilter = which;
+                    showLimit = 100;
+                    filterButton.setText("Filter: " + TYPE_FILTERS[which] + " ▾");
+                    showFilteredResults();
+                    dialog.dismiss();
+                }).setNegativeButton("Abbrechen", null).show());
+        root.addView(filterButton);
+
         ListView list = new ListView(this);
         list.setDivider(null);
         list.setDividerHeight(Ui.dp(this, 7));
+        list.setFastScrollEnabled(true);
         adapter = new FindingsAdapter();
         list.setAdapter(adapter);
         list.setOnItemClickListener((parent, view, position, id) -> {
@@ -82,6 +106,14 @@ public final class ResearchActivity extends Activity {
             startActivity(intent);
         });
         root.addView(list, Ui.fillRemaining());
+
+        moreButton = Ui.button(this, "Weitere Fundstellen anzeigen");
+        moreButton.setVisibility(View.GONE);
+        moreButton.setOnClickListener(view -> {
+            showLimit += 100;
+            showFilteredResults();
+        });
+        root.addView(moreButton);
         beginScan(false);
     }
 
@@ -89,8 +121,12 @@ public final class ResearchActivity extends Activity {
         if (scanning) return;
         scanning = true;
         cancel.set(false);
+        allFindings.clear();
         findings.clear();
         adapter.notifyDataSetChanged();
+        showLimit = 100;
+        filterButton.setEnabled(false);
+        moreButton.setVisibility(View.GONE);
         cancelButton.setVisibility(View.VISIBLE);
         status.setText("Suche nach expliziten offenen Punkten und Prüfaufträgen …");
         worker.execute(() -> {
@@ -122,25 +158,42 @@ public final class ResearchActivity extends Activity {
                 errors++;
             }
             next.sort(Comparator.comparingInt((ResearchFinder.Finding f) -> f.priority).reversed());
-            int total = next.size();
-            if (next.size() > 100) next = new ArrayList<>(next.subList(0, 100));
             List<ResearchFinder.Finding> result = next;
             int done = checked;
             int failed = errors;
             boolean interrupted = cancel.get();
             runOnUiThread(() -> {
                 if (isFinishing() || isDestroyed()) return;
-                findings.clear();
-                findings.addAll(result);
-                adapter.notifyDataSetChanged();
+                allFindings.clear();
+                allFindings.addAll(result);
                 scanning = false;
+                scanInterrupted = interrupted;
+                checkedChats = done;
+                unreadableChats = failed;
                 cancelButton.setVisibility(View.GONE);
-                status.setText((interrupted ? "Abgebrochen · " : "Prüfung abgeschlossen · ")
-                        + done + " Chats · " + total + " Hinweise (max. 100 angezeigt)"
-                        + (failed > 0 ? " · " + failed + " nicht lesbar" : "")
-                        + ". Antippen öffnet den Originalchat.");
+                filterButton.setEnabled(true);
+                showFilteredResults();
             });
         });
+    }
+
+    private void showFilteredResults() {
+        findings.clear();
+        int matching = 0;
+        for (ResearchFinder.Finding finding : allFindings) {
+            if (selectedFilter != 0 && !TYPE_FILTERS[selectedFilter].equals(finding.kind)) continue;
+            matching++;
+            if (findings.size() < showLimit) findings.add(finding);
+        }
+        adapter.notifyDataSetChanged();
+        int remaining = matching - findings.size();
+        moreButton.setVisibility(remaining > 0 ? View.VISIBLE : View.GONE);
+        if (remaining > 0) moreButton.setText("Weitere 100 anzeigen · " + remaining + " übrig");
+        status.setText((scanInterrupted ? "Abgebrochen · " : "Prüfung abgeschlossen · ")
+                + checkedChats + " Chats · " + allFindings.size() + " heuristische Hinweise · "
+                + findings.size() + " von " + matching + " im Filter angezeigt"
+                + (unreadableChats > 0 ? " · " + unreadableChats + " nicht lesbar" : "")
+                + ". Antippen öffnet den Originalbeitrag.");
     }
 
     @Override protected void onDestroy() {
