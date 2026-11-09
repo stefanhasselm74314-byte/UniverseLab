@@ -24,6 +24,7 @@ public final class WebsiteActivity extends Activity {
         super.onCreate(state);
         LinearLayout root = Ui.column(this, 10);
         setContentView(root);
+        Ui.applySystemBarInsets(root);
         root.addView(Ui.text(this, "UniverseLab Webseite · Lesemodus", 19, true));
         TextView explanation = Ui.text(this,
                 "Skript-Ausführung, Anmeldung und externe Domains sind gesperrt. Interaktive Elemente können deshalb fehlen.",
