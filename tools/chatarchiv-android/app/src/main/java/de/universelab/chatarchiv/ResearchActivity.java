@@ -37,6 +37,7 @@ public final class ResearchActivity extends Activity {
     private TextView status;
     private Button cancelButton;
     private Button filterButton;
+    private Button scopeButton;
     private Button moreButton;
     private FindingsAdapter adapter;
     private boolean scanning;
@@ -44,6 +45,7 @@ public final class ResearchActivity extends Activity {
     private int checkedChats;
     private int unreadableChats;
     private int selectedFilter;
+    private int selectedScope;
     private int showLimit = 100;
 
     @Override public void onCreate(Bundle saved) {
@@ -96,6 +98,18 @@ public final class ResearchActivity extends Activity {
                 }).setNegativeButton("Abbrechen", null).show());
         root.addView(filterButton);
 
+        scopeButton = Ui.button(this, "Bereich: Alle Bereiche ▾");
+        scopeButton.setOnClickListener(view -> new AlertDialog.Builder(this)
+                .setTitle("Heuristischen Fachbereich auswählen")
+                .setSingleChoiceItems(ResearchScope.FILTERS, selectedScope, (dialog, which) -> {
+                    selectedScope = which;
+                    showLimit = 100;
+                    scopeButton.setText("Bereich: " + ResearchScope.FILTERS[which] + " ▾");
+                    showFilteredResults();
+                    dialog.dismiss();
+                }).setNegativeButton("Abbrechen", null).show());
+        root.addView(scopeButton);
+
         ListView list = new WideGripListView(this);
         list.setDivider(null);
         list.setDividerHeight(Ui.dp(this, 7));
@@ -144,6 +158,7 @@ public final class ResearchActivity extends Activity {
         adapter.notifyDataSetChanged();
         showLimit = 100;
         filterButton.setEnabled(false);
+        scopeButton.setEnabled(false);
         moreButton.setVisibility(View.GONE);
         cancelButton.setVisibility(View.VISIBLE);
         status.setText("Suche nach expliziten offenen Punkten und Prüfaufträgen …");
@@ -197,6 +212,7 @@ public final class ResearchActivity extends Activity {
                 unreadableChats = failed;
                 cancelButton.setVisibility(View.GONE);
                 filterButton.setEnabled(true);
+                scopeButton.setEnabled(true);
                 showFilteredResults();
             });
         });
@@ -207,6 +223,7 @@ public final class ResearchActivity extends Activity {
         int matching = 0;
         for (ResearchFinder.Finding finding : allFindings) {
             if (selectedFilter != 0 && !TYPE_FILTERS[selectedFilter].equals(finding.kind)) continue;
+            if (selectedScope != 0 && !ResearchScope.FILTERS[selectedScope].equals(finding.scope)) continue;
             matching++;
             if (findings.size() < showLimit) findings.add(finding);
         }
@@ -218,7 +235,7 @@ public final class ResearchActivity extends Activity {
         }
         int remaining = matching - findings.size();
         moreButton.setVisibility(remaining > 0 ? View.VISIBLE : View.GONE);
-        if (remaining > 0) moreButton.setText("Weitere 100 anzeigen · " + remaining + " übrig");
+        if (remaining > 0) moreButton.setText("Weitere " + Math.min(100, remaining) + " anzeigen · " + remaining + " übrig");
         status.setText((scanInterrupted ? "Abgebrochen · " : "Prüfung abgeschlossen · ")
                 + checkedChats + " Chats · " + allFindings.size() + " heuristische Hinweise · "
                 + findings.size() + " von " + matching + " im Filter angezeigt"
@@ -246,6 +263,10 @@ public final class ResearchActivity extends Activity {
                     f.kind + " · " + f.field + "\n" + f.chatTitle, 15, true);
             title.setTextColor(Ui.ACCENT);
             card.addView(title);
+            TextView scopeLabel = Ui.text(ResearchActivity.this,
+                    "Bereich [HEURISTISCH]: " + f.scope, 11, false);
+            scopeLabel.setTextColor(Ui.MUTED);
+            card.addView(scopeLabel);
             TextView evidence = Ui.text(ResearchActivity.this,
                     "Fundstelle aus " + f.role + "-Beitrag " + f.messageNumber + ": " + f.excerpt,
                     13, false);
