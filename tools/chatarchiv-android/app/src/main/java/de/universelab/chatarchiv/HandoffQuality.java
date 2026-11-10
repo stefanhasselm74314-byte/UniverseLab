@@ -88,7 +88,10 @@ final class HandoffQuality {
         String quote = f.excerpt == null ? "" : f.excerpt.trim();
         String q = lower(quote);
         if (EMPTY_FIELD.matcher(quote).matches() || BARE_TABLE.matcher(quote).matches()
-                || CODE_OFFER.matcher(quote).find()) return true;
+                || CODE_OFFER.matcher(quote).find()
+                || ResearchFinder.isGenericOutline(quote)
+                || ("Konflikt".equals(f.kind)
+                        && ResearchFinder.isConversationalNonConflict(quote))) return true;
         if (q.matches("(?s)^(?:genau\\s+)?(?:nächster schritt|next step)\\s*[:=]\\s*$"))
             return true;
         // Repeated gate labels belong in the source-hierarchy context, not as

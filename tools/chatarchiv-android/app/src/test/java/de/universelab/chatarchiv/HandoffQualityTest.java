@@ -162,4 +162,20 @@ public final class HandoffQualityTest {
         assertTrue(p.markdown.contains("aktueller Status offline nicht verifiziert"));
         assertTrue(p.markdown.contains("github.com/stefanhasselm74314-byte/UniverseLab/blob/main"));
     }
+
+    @Test public void handoffRejectsPoliteSpeechAndBareChapterHeadings() {
+        assertTrue(HandoffQuality.falsePositive(finding("p", "Kapitel 4",
+                "Ich möchte dir da nicht reinreden, falls es deiner "
+                        + "professionellen Meinung widerspricht, wähle eine andere.",
+                "Konflikt", 100, 1)));
+        assertTrue(HandoffQuality.falsePositive(finding("p", "Kapitel 4",
+                "2.3 Noch offen / späterer Ausbau", "Offener Punkt", 100, 2)));
+        assertTrue(HandoffQuality.falsePositive(finding("p", "6D-Test",
+                "Die Vorhersage widerspricht der Datenlage nicht.",
+                "Konflikt", 100, 3)));
+        assertFalse(HandoffQuality.falsePositive(finding("p", "6D-Test",
+                "Die Nullmodenlösung widerspricht der Eichinvarianz.",
+                "Konflikt", 100, 4)));
+    }
+
 }

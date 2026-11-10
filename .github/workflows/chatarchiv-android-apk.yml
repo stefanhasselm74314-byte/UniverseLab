@@ -16,6 +16,7 @@ on:
       - app/chatarchiv-handoff-dialog-v053
       - app/chatarchiv-handoff-selection-v054
       - app/chatarchiv-checkbox-fully-visible-v055
+      - app/chatarchiv-finding-quality-v056
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'
