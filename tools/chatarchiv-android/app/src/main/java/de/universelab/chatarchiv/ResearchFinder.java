@@ -69,6 +69,7 @@ final class ResearchFinder {
         final String excerpt;
         final String kind;
         final String field;
+        final String scope;
         final String question;
         final String verification;
         final int priority;
@@ -84,6 +85,7 @@ final class ResearchFinder {
             this.excerpt = excerpt;
             this.kind = kind;
             this.field = field;
+            this.scope = ResearchScope.classify(chatTitle, excerpt, field);
             this.question = question;
             this.verification = verification;
             this.priority = priority;
