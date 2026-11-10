@@ -112,4 +112,44 @@ public final class ResearchFinderTest {
                                 + "Die Tabelle hat eine Spalte Blocker für jeden Aufgabenblock.")), 5);
         assertTrue(results.isEmpty());
     }
+
+    @Test public void politeConditionalDisagreementIsNotAResearchConflict() {
+        List<ConversationLogic.Message> chat = Arrays.asList(
+                new ConversationLogic.Message("user",
+                        "Ich möchte dir da nicht reinreden, falls es deiner professionellen "
+                                + "Meinung widerspricht, wähle eine andere."),
+                new ConversationLogic.Message("assistant",
+                        "Wenn das deiner fachlichen Einschätzung widerspricht, "
+                                + "können wir die Darstellung ändern."));
+        assertTrue(ResearchFinder.extract("id", "Hyperzeit Kapitel 4 Fortsetzung",
+                chat, 20).isEmpty());
+    }
+
+    @Test public void ignoresSectionPlaceholdersAndNegatedContradiction() {
+        List<ConversationLogic.Message> chat = Arrays.asList(
+                new ConversationLogic.Message("assistant", "2.3 Noch offen / späterer Ausbau"),
+                new ConversationLogic.Message("assistant",
+                        "Die Vorhersage widerspricht den DESI-Daten nicht."));
+        assertTrue(ResearchFinder.extract("id", "Hyperzeit Kapitel 4 Fortsetzung",
+                chat, 20).isEmpty());
+    }
+
+    @Test public void stillReportsExplicitAndTechnicalContradictions() {
+        List<ConversationLogic.Message> chat = Arrays.asList(
+                new ConversationLogic.Message("assistant",
+                        "Die D_M(z)-Vorhersage widerspricht den DESI-Messungen signifikant."),
+                new ConversationLogic.Message("assistant",
+                        "Wenn die Nullmode unnormiert bleibt, widerspricht die "
+                                + "Randbedingung der Eichinvarianz."),
+                new ConversationLogic.Message("assistant",
+                        "[KONFLIKT] Z8B-01: Verschiedene Randbedingungen liefern "
+                                + "unvereinbare Nullmoden."),
+                new ConversationLogic.Message("assistant",
+                        "Die Vorhersage widerspricht nicht nur DESI, sondern auch KiDS."));
+        List<ResearchFinder.Finding> findings =
+                ResearchFinder.extract("id", "6D-Hyperzeit", chat, 20);
+        assertEquals(4, findings.size());
+        for (ResearchFinder.Finding f : findings) assertEquals("Konflikt", f.kind);
+    }
+
 }

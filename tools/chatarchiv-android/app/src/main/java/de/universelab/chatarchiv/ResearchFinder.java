@@ -32,6 +32,22 @@ final class ResearchFinder {
     private static final Pattern NEGATED_CONFLICT = Pattern.compile(
             "(?iu)(?:\\b(?:KEIN(?:E|EN|ER|ES)?|OHNE)\\s+(?:MATERIELLE[NMR]?\\s+)?"
                     + "(?:WIDERSPRUCH|INKONSISTENZ|KONFLIKT)\\b|\\bWIDERSPRUCHSFREI\\b)");
+    // Only a technical assertion, not a courteous hypothetical disagreement,
+    // should be recorded as a candidate contradiction.
+    private static final Pattern EXPLICIT_CONFLICT = Pattern.compile(
+            "(?iu)(?:\\[\\s*(?:WIDERSPRUCH|KONFLIKT|INKONSISTENZ)\\s*\\]|"
+                    + "\\b(?:WIDERSPRUCH|INKONSISTENZ|KONFLIKT)\\s*[:=])");
+    private static final Pattern POLITE_HYPOTHETICAL = Pattern.compile(
+            "(?iu)\\b(?:FALLS|WENN|SOFERN)\\b.{0,180}"
+                    + "\\b(?:DEIN\\p{L}*|MEIN\\p{L}*|IHR\\p{L}*|UNSER\\p{L}*)\\b"
+                    + ".{0,75}\\b(?:MEINUNG|ANSICHT|EINSCHÄTZUNG)\\b"
+                    + ".{0,60}\\bWIDERSPRICHT\\b");
+    private static final Pattern NEGATED_VERBAL_CONFLICT = Pattern.compile(
+            "(?iu)\\bWIDERSPRICHT\\b[^.,!?;:]{0,75}\\bNICHT\\b(?!\\s+NUR\\b)");
+    private static final Pattern SECTION_PLACEHOLDER = Pattern.compile(
+            "(?iu)^(?:\\d+(?:\\.\\d+){0,4}\\.?\\s+)?(?:NOCH\\s+)?OFFEN"
+                    + "(?:\\s*[/|–—-]\\s*(?:SPÄTERE[RNS]?\\s+)?"
+                    + "(?:AUSBAU|FORTSETZUNG|ERGÄNZUNG))?\\s*\\.?$");
     private static final Pattern FIELD_LIST = Pattern.compile(
             "(?iu)(?:\\bTASK[-_ ]?ID\\s*,[^:=]{0,120}\\bBLOCKER\\b|"
                     + "\\b(?:FELDER|SCHEMA|VORLAGE|TEMPLATE|CHECKLISTE)\\b[^:=]{0,120}"
@@ -123,14 +139,25 @@ final class ResearchFinder {
         return line.trim();
     }
 
+    static boolean isGenericOutline(String line) {
+        return line != null && SECTION_PLACEHOLDER.matcher(clean(line)).matches();
+    }
+
+    static boolean isConversationalNonConflict(String line) {
+        if (line == null || EXPLICIT_CONFLICT.matcher(line).find()) return false;
+        return POLITE_HYPOTHETICAL.matcher(line).find()
+                || NEGATED_VERBAL_CONFLICT.matcher(line).find();
+    }
+
     private static int priority(String line) {
         // Lists of field names (e.g. "Task-ID, Quelle, Blocker, Rückgaberoute")
         // document a template, not an unresolved research issue.
-        if (FIELD_LIST.matcher(line).find()) return 0;
+        if (FIELD_LIST.matcher(line).find() || isGenericOutline(line)) return 0;
         if (!NEGATED_BLOCKER.matcher(line).find()
                 && (BLOCKED.matcher(line).find() || BLOCKER_ASSIGNMENT.matcher(line).find()
                 || BLOCKER_CLAIM.matcher(line).find())) return 100;
-        if (!NEGATED_CONFLICT.matcher(line).find() && CONFLICT.matcher(line).find()) return 90;
+        if (!NEGATED_CONFLICT.matcher(line).find()
+                && !isConversationalNonConflict(line) && CONFLICT.matcher(line).find()) return 90;
         if (OPEN.matcher(line).find()) return 70;
         if (NEXT.matcher(line).find()) return 50;
         return 0;
