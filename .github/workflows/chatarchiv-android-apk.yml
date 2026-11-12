@@ -18,6 +18,7 @@ on:
       - app/chatarchiv-checkbox-fully-visible-v055
       - app/chatarchiv-finding-quality-v056
       - app/chatarchiv-research-scope-v057
+      - app/chatarchiv-signal-quality-v058
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'
