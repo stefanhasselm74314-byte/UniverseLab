@@ -2,7 +2,15 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
-## Aktueller Sicherheitsstand (Version 0.5.9 · SAF-Ordnersuche)
+## Version 0.5.10 · gespeicherte SAF-Ordner sichtbar und einzeln verwaltbar (Gerätetest offen)
+
+- **Ordnertransparenz:** Unter „Gewählten Ordner inkl. Unterordner nach Chat-JSON durchsuchen“ → „Gespeicherte Ordner einzeln verwalten“ zeigt die App bei Androids lokalen Dokumentanbietern einen lesbaren Pfad wie „Interner Speicher/Download/ChatGPT_Rettung_2026-11-08“. Bei externen Anbietern wird nur ein vom Anbieter verfügbarer Ordnername gezeigt, nicht aus einer opaken Dokument-ID ein Pfad erfunden. Alles bleibt lokal.
+- **Einzelverwaltung:** Jede Freigabe lässt sich getrennt erneut durchsuchen oder nach ausdrücklicher Bestätigung aufheben. Die übernommene ältere Rettungsordner-Freigabe wird beim Entfernen desselben Ordners ebenfalls aus den Einstellungen gelöscht; importierte Chats und Quelldateien bleiben erhalten. Andere Freigaben bleiben unangetastet.
+- **Quellenbericht:** Die Suchvorschau zählt durchsuchte Ordner, Dateien, Chat-JSON und unlesbare Ordner pro freigegebenem Stammordner. Dies erleichtert die Kontrolle bei mehreren Freigaben.
+- **Kopienkennzeichnung ohne Evidenzsprung:** Mehrfachreferenzen auf dieselbe Dokument-ID desselben Anbieters werden nur einmal zum Import vorgemerkt. Gleicher Dateiname plus gleiche bekannte Bytezahl wird als **mögliche** Kopie angezeigt; unterschiedliche Dateien werden ohne Inhaltsvergleich nicht automatisch übersprungen. Die bewährte Chat-ID-/SHA-256-Duplikatprüfung bleibt für den eigentlichen Import zuständig.
+- **Keine neuen Berechtigungen:** `versionCode 26`, `versionName 0.5.10`; Produktiv-Paketkennung und privater Release-Signierschlüssel bleiben unverändert. `main` und der v0.5.9-PR bleiben unverändert. Android-Gerätetest und Play-Protect-Verhalten sind für diese neue APK noch nicht bestätigt.
+
+## Sicherheitsstand (Version 0.5.9 · SAF-Ordnersuche, auf Galaxy S24 Ultra getestet)
  
 - **Keine Vollspeicherberechtigung:** Die produktive App fordert weder `MANAGE_EXTERNAL_STORAGE` noch `READ_EXTERNAL_STORAGE` an. Das APK-Manifest wird im CI-Build auf sensible Berechtigungen geprüft.
 - **Automatische, begrenzte Ordnersuche:** Nutzer wählen einen oder mehrere Ordner über Androids Dokumentauswahl. Der Suchlauf durchläuft alle zugänglichen Unterordner nach `conversations*.json` und listet Treffer mit Bestätigung vor dem lokalen Import auf. Die Freigaben bleiben für spätere Aktualisierungen gespeichert; die bestehende Rettungsordner-Freigabe wird übernommen. Keine eigenständige Suche über den kompletten Handyspeicher mehr.
