@@ -76,13 +76,26 @@ public final class MainActivity extends Activity {
         final String documentId;
         final String relativePath;
         final int depth;
+        final ScanRootStats root;
 
-        ScanFolder(Uri tree, String documentId, String relativePath, int depth) {
+        ScanFolder(Uri tree, String documentId, String relativePath, int depth, ScanRootStats root) {
             this.tree = tree;
             this.documentId = documentId;
             this.relativePath = relativePath;
             this.depth = depth;
+            this.root = root;
         }
+    }
+
+    private static final class ScanRootStats {
+        final String label;
+        int folders;
+        int files;
+        int json;
+        int zips;
+        int unreadable;
+
+        ScanRootStats(String label) { this.label = label; }
     }
 
     private static final class JsonChoice {
@@ -329,6 +342,21 @@ public final class MainActivity extends Activity {
         return result;
     }
 
+    private String scanRootLabel(Uri tree) {
+        try {
+            String documentId = DocumentsContract.getTreeDocumentId(tree);
+            String name = null;
+            if (!ScanPathLabel.hasLocalPath(documentId)) {
+                Uri document = DocumentsContract.buildDocumentUriUsingTree(tree, documentId);
+                name = documentName(document);
+            }
+            return ScanPathLabel.describe(documentId, name, tree.getAuthority());
+        } catch (RuntimeException providerError) {
+            // An old or revoked grant must not prevent the other roots from being displayed.
+            return ScanPathLabel.describe(null, null, tree.getAuthority());
+        }
+    }
+
     private void chooseScanFolder() {
         if (importing) return;
         Set<String> saved = savedScanFolders();
@@ -336,12 +364,16 @@ public final class MainActivity extends Activity {
             explainScanAndPick();
             return;
         }
+        String scanAllLabel = "Alle " + saved.size() + " gespeicherten Ordner erneut durchsuchen";
+        if (saved.size() == 1) {
+            scanAllLabel += "\n" + scanRootLabel(Uri.parse(saved.iterator().next()));
+        }
         new AlertDialog.Builder(this)
                 .setTitle("Automatische Suche in freigegebenen Ordnern")
                 .setItems(new String[] {
-                        "Alle " + saved.size() + " gespeicherten Ordner erneut durchsuchen",
+                        scanAllLabel,
                         "Einen weiteren Ordner hinzufügen",
-                        "Gespeicherte Ordnerfreigaben entfernen"
+                        "Gespeicherte Ordner einzeln verwalten"
                 }, (dialog, which) -> {
                     if (which == 0) {
                         List<Uri> roots = new ArrayList<>();
@@ -350,27 +382,66 @@ public final class MainActivity extends Activity {
                     } else if (which == 1) {
                         explainScanAndPick();
                     } else {
-                        new AlertDialog.Builder(this).setTitle("Ordnerfreigaben entfernen?")
-                                .setMessage("Die Chatdaten bleiben erhalten; nur die gespeicherten "
-                                        + "Ordnerfreigaben für spätere Scans werden entfernt.")
-                                .setNegativeButton("Abbrechen", null)
-                                .setPositiveButton("Freigaben entfernen", (confirm, ignored) -> {
-                                    for (String value : saved) {
-                                        try {
-                                            getContentResolver().releasePersistableUriPermission(
-                                                    Uri.parse(value), Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                        } catch (SecurityException alreadyRevoked) {
-                                            // Android may already have revoked the grant.
-                                        }
-                                    }
-                                    getPreferences(MODE_PRIVATE).edit()
-                                            .remove(SCAN_FOLDERS_PREF)
-                                            .remove(FOLDER_PREF).apply();
-                                    status.setText("Gespeicherte Scan-Ordner entfernt; "
-                                            + "die importierten Chats bleiben erhalten.");
-                                }).show();
+                        manageScanFolders();
                     }
                 }).setNegativeButton("Abbrechen", null).show();
+    }
+
+    private void manageScanFolders() {
+        if (importing) return;
+        List<String> saved = new ArrayList<>(savedScanFolders());
+        if (saved.isEmpty()) {
+            status.setText("Keine gespeicherten Ordnerfreigaben vorhanden.");
+            return;
+        }
+        String[] labels = new String[saved.size()];
+        for (int i = 0; i < saved.size(); i++) {
+            labels[i] = (i + 1) + ". " + scanRootLabel(Uri.parse(saved.get(i)));
+        }
+        new AlertDialog.Builder(this)
+                .setTitle("Gespeicherte Ordner verwalten")
+                .setItems(labels, (dialog, index) -> manageScanFolder(Uri.parse(saved.get(index))))
+                .setNegativeButton("Schließen", null).show();
+    }
+
+    private void manageScanFolder(Uri tree) {
+        String label = scanRootLabel(tree);
+        new AlertDialog.Builder(this)
+                .setTitle(label)
+                .setItems(new String[] {"Nur diesen Ordner durchsuchen", "Diese Ordnerfreigabe entfernen"},
+                        (dialog, which) -> {
+                            if (which == 0) scanSelectedTree(tree);
+                            else confirmRemoveScanFolder(tree, label);
+                        }).setNegativeButton("Zurück", (dialog, ignored) -> manageScanFolders()).show();
+    }
+
+    private void confirmRemoveScanFolder(Uri tree, String label) {
+        new AlertDialog.Builder(this)
+                .setTitle("Diese Ordnerfreigabe entfernen?")
+                .setMessage(label + "\n\nNur diese gespeicherte Freigabe wird entfernt. "
+                        + "Falls dies der bisherige Rettungsordner ist, wird auch dessen "
+                        + "gespeicherte Importfreigabe aufgehoben. Bereits importierte Chats "
+                        + "und die Dateien im Ordner bleiben unverändert.")
+                .setNegativeButton("Abbrechen", null)
+                .setPositiveButton("Freigabe entfernen", (dialog, ignored) -> {
+                    String value = tree.toString();
+                    android.content.SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                    Set<String> remaining = new TreeSet<>(prefs.getStringSet(
+                            SCAN_FOLDERS_PREF, java.util.Collections.emptySet()));
+                    remaining.remove(value);
+                    android.content.SharedPreferences.Editor edit = prefs.edit();
+                    if (remaining.isEmpty()) edit.remove(SCAN_FOLDERS_PREF);
+                    else edit.putStringSet(SCAN_FOLDERS_PREF, remaining);
+                    if (value.equals(prefs.getString(FOLDER_PREF, null))) edit.remove(FOLDER_PREF);
+                    edit.apply();
+                    try {
+                        getContentResolver().releasePersistableUriPermission(
+                                tree, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    } catch (SecurityException | IllegalArgumentException alreadyRevoked) {
+                        // Keep the local list consistent even if Android already revoked it.
+                    }
+                    status.setText("Freigabe für „" + label + "“ entfernt; private Chats erhalten.");
+                }).show();
     }
 
     private void explainScanAndPick() {
@@ -407,10 +478,14 @@ public final class MainActivity extends Activity {
                 Deque<ScanFolder> queue = new ArrayDeque<>();
                 Set<String> visited = new HashSet<>();
                 TreeMap<String, Uri> matches = new TreeMap<>();
+                ScanSourceIndex sources = new ScanSourceIndex();
+                List<ScanRootStats> rootStats = new ArrayList<>();
                 int rootNumber = 0;
                 for (Uri tree : roots) {
+                    ScanRootStats root = new ScanRootStats(scanRootLabel(tree));
+                    rootStats.add(root);
                     queue.add(new ScanFolder(tree, DocumentsContract.getTreeDocumentId(tree),
-                            "Ordner " + (++rootNumber) + "/", 0));
+                            "Ordner " + (++rootNumber) + "/", 0, root));
                 }
                 int scannedFolders = 0;
                 int scannedFiles = 0;
@@ -420,7 +495,8 @@ public final class MainActivity extends Activity {
                 String[] projection = {
                         DocumentsContract.Document.COLUMN_DOCUMENT_ID,
                         DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-                        DocumentsContract.Document.COLUMN_MIME_TYPE
+                        DocumentsContract.Document.COLUMN_MIME_TYPE,
+                        DocumentsContract.Document.COLUMN_SIZE
                 };
                 while (!queue.isEmpty()) {
                     if (cancelStorageScan.get() || Thread.currentThread().isInterrupted()) {
@@ -429,6 +505,7 @@ public final class MainActivity extends Activity {
                     }
                     ScanFolder folder = queue.removeFirst();
                     if (folder.depth > 64 || !visited.add(folder.tree.toString() + "|" + folder.documentId)) continue;
+                    folder.root.folders++;
                     if (++scannedFolders > 100_000) {
                         throw new IOException("Mehr als 100.000 Ordner; bitte den Suchbereich verkleinern.");
                     }
@@ -438,6 +515,7 @@ public final class MainActivity extends Activity {
                             children, projection, null, null, null)) {
                         if (cursor == null) {
                             unreadableFolders++;
+                            folder.root.unreadable++;
                             continue;
                         }
                         while (cursor.moveToNext()) {
@@ -452,21 +530,29 @@ public final class MainActivity extends Activity {
                             if (DocumentsContract.Document.MIME_TYPE_DIR.equals(mime)) {
                                 if (folder.depth < 64) {
                                     queue.addLast(new ScanFolder(folder.tree, id, folder.relativePath
-                                            + name + "/", folder.depth + 1));
+                                            + name + "/", folder.depth + 1, folder.root));
                                 }
                                 continue;
                             }
                             if (++scannedFiles > 500_000) {
                                 throw new IOException("Mehr als 500.000 Dateien; bitte kleineren Ordner wählen.");
                             }
+                            folder.root.files++;
                             if (StorageScanner.isConversationJson(name)) {
-                                matches.put(folder.relativePath + name,
-                                        DocumentsContract.buildDocumentUriUsingTree(folder.tree, id));
-                                if (matches.size() > 15_000) {
-                                    throw new IOException("Mehr als 15.000 Chat-Dateien; Suche begrenzt.");
+                                String path = folder.relativePath + name;
+                                long size = cursor.getColumnCount() > 3 && !cursor.isNull(3)
+                                        ? cursor.getLong(3) : -1L;
+                                if (sources.register(folder.tree.getAuthority(), id, name, size, path)) {
+                                    matches.put(path,
+                                            DocumentsContract.buildDocumentUriUsingTree(folder.tree, id));
+                                    folder.root.json++;
+                                    if (matches.size() > 15_000) {
+                                        throw new IOException("Mehr als 15.000 Chat-Dateien; Suche begrenzt.");
+                                    }
                                 }
                             } else if (name.toLowerCase(Locale.ROOT).endsWith(".zip")) {
                                 zipCandidates++;
+                                folder.root.zips++;
                             }
                             if (scannedFiles % 250 == 0) {
                                 final int countFolders = scannedFolders;
@@ -479,6 +565,7 @@ public final class MainActivity extends Activity {
                         }
                     } catch (SecurityException exception) {
                         unreadableFolders++;
+                        folder.root.unreadable++;
                     }
                     if (cancelled) break;
                 }
@@ -494,7 +581,7 @@ public final class MainActivity extends Activity {
                         status.setText("Ordnersuche abgebrochen; keine Datei importiert.");
                     } else {
                         showSelectedTreeResults(matches, foundFolders, foundFiles,
-                                foundZips, unreadable);
+                                foundZips, unreadable, rootStats, sources);
                     }
                 });
             } catch (Exception exception) {
@@ -508,13 +595,35 @@ public final class MainActivity extends Activity {
     }
 
     private void showSelectedTreeResults(TreeMap<String, Uri> matches, int folders,
-                                         int files, int zips, int unreadable) {
+                                         int files, int zips, int unreadable,
+                                         List<ScanRootStats> roots, ScanSourceIndex sources) {
         StringBuilder details = new StringBuilder("Durchsucht: " + folders
                 + " Ordner und " + files + " Dateien.\n"
                 + "Chat-JSON gefunden: " + matches.size()
                 + "\nZIP-Dateien gesehen: " + zips
                 + " (Inhalt nicht geprüft; ZIPs bitte separat auswählen).\n"
                 + "Nicht lesbare Ordner: " + unreadable + ".\n\n");
+        details.append("Suchbereiche:\n");
+        for (int i = 0; i < roots.size() && i < 8; i++) {
+            ScanRootStats root = roots.get(i);
+            details.append("• ").append(i + 1).append(": ").append(root.label)
+                    .append("\n  ").append(root.folders).append(" Ordner, ")
+                    .append(root.files).append(" Dateien, ").append(root.json)
+                    .append(" Chat-JSON, ").append(root.unreadable)
+                    .append(" nicht lesbar\n");
+        }
+        if (roots.size() > 8) details.append("… und ").append(roots.size() - 8)
+                .append(" weitere Suchbereiche\n");
+        if (sources.repeatedReferences() > 0) details.append("Mehrfachreferenzen auf dieselbe Datei: ")
+                .append(sources.repeatedReferences()).append(" (nur einmal zum Import vorgemerkt).\n");
+        if (sources.possibleCopyGroups() > 0) {
+            details.append("Mögliche Dateikopien mit gleichem Namen und gleicher Größe: ")
+                    .append(sources.possibleCopyGroups())
+                    .append(" Gruppen (Inhalt nicht verglichen; keine automatische Auslassung).\n");
+            for (String example : sources.possibleCopyExamples(2))
+                details.append("  • ").append(example).append('\n');
+        }
+        details.append("\nGefundene Pfade (bis zu 12):\n");
         int shown = 0;
         for (String path : matches.keySet()) {
             if (shown++ >= 12) break;

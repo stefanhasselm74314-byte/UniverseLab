@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -115,4 +116,81 @@ final class StorageScanner {
     }
 
     private StorageScanner() { }
+}
+
+/** Human-readable SAF locations; never assumes that an opaque provider ID is a file path. */
+final class ScanPathLabel {
+    static boolean hasLocalPath(String documentId) {
+        if (documentId == null) return false;
+        int separator = documentId.indexOf(':');
+        if (separator < 0) return false;
+        String volume = documentId.substring(0, separator);
+        return "primary".equalsIgnoreCase(volume)
+                || volume.matches("(?i)[0-9a-f]{4}-[0-9a-f]{4}");
+    }
+
+    static String describe(String documentId, String displayName, String authority) {
+        if (hasLocalPath(documentId)) {
+            int separator = documentId.indexOf(':');
+            String volume = documentId.substring(0, separator);
+            String suffix = clean(documentId.substring(separator + 1).replace('\\', '/'));
+            String prefix = "primary".equalsIgnoreCase(volume)
+                    ? "Interner Speicher" : "Speicher " + volume.toUpperCase(Locale.ROOT);
+            return suffix.isEmpty() ? prefix : prefix + "/" + suffix;
+        }
+        String name = clean(displayName);
+        String provider = clean(authority);
+        if (!name.isEmpty()) return provider.isEmpty() ? name : name + " (Anbieter: " + provider + ")";
+        return provider.isEmpty() ? "Unbekannter freigegebener Ordner"
+                : "Ordner bei " + provider + " (Pfad nicht verfügbar)";
+    }
+
+    private static String clean(String value) {
+        if (value == null) return "";
+        String singleLine = value.replaceAll("[\\p{Cntrl}]+", " ").trim();
+        return singleLine.length() > 100 ? singleLine.substring(0, 100) + "…" : singleLine;
+    }
+
+    private ScanPathLabel() { }
+}
+
+/**
+ * Deduplicates references to one provider document without reopening it.
+ * Matching filename and size is only a possible copy: distinct documents are
+ * always left for the established content-aware ChatStore importer.
+ */
+final class ScanSourceIndex {
+    private final Set<String> documentIds = new HashSet<>();
+    private final TreeMap<String, List<String>> sameNameAndSize = new TreeMap<>();
+    private int repeatedReferences;
+
+    boolean register(String authority, String documentId, String name, long size, String relativePath) {
+        if (!documentIds.add(authority + '\0' + documentId)) {
+            repeatedReferences++;
+            return false;
+        }
+        if (size >= 0 && name != null) {
+            String key = name.toLowerCase(Locale.ROOT) + '\0' + size;
+            sameNameAndSize.computeIfAbsent(key, ignored -> new ArrayList<>()).add(relativePath);
+        }
+        return true;
+    }
+
+    int repeatedReferences() { return repeatedReferences; }
+
+    int possibleCopyGroups() {
+        int total = 0;
+        for (List<String> paths : sameNameAndSize.values()) if (paths.size() > 1) total++;
+        return total;
+    }
+
+    List<String> possibleCopyExamples(int maxGroups) {
+        List<String> examples = new ArrayList<>();
+        for (List<String> paths : sameNameAndSize.values()) {
+            if (paths.size() < 2) continue;
+            if (examples.size() == maxGroups) break;
+            examples.add(paths.get(0) + " ↔ " + paths.get(1));
+        }
+        return examples;
+    }
 }

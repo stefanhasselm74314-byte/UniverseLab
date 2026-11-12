@@ -59,4 +59,38 @@ public final class StorageScannerTest {
         assertTrue(result.cancelled);
         assertEquals(0, result.matches.size());
     }
+
+    @Test public void labelsPersistedSamsungRescueFolderWithoutGuessingOpaquePaths() {
+        assertTrue(ScanPathLabel.hasLocalPath("primary:Download/ChatGPT_Rettung_2026-11-08"));
+        assertEquals("Interner Speicher/Download/ChatGPT_Rettung_2026-11-08",
+                ScanPathLabel.describe("primary:Download/ChatGPT_Rettung_2026-11-08", null,
+                        "com.android.externalstorage.documents"));
+        assertEquals("Interner Speicher", ScanPathLabel.describe("primary:", null, null));
+        assertEquals("Speicher ABCD-1234/Exports",
+                ScanPathLabel.describe("abcd-1234:Exports", null, null));
+        assertFalse(ScanPathLabel.hasLocalPath("opaque-token:abc-984"));
+        assertEquals("Exportarchiv (Anbieter: documents.example)",
+                ScanPathLabel.describe("opaque-token:abc-984", "Exportarchiv", "documents.example"));
+        assertEquals("Ordner bei documents.example (Pfad nicht verfügbar)",
+                ScanPathLabel.describe("opaque-token:abc-984", null, "documents.example"));
+    }
+
+    @Test public void sourceIndexSkipsReferencesButPreservesDistinctPossibleCopies() {
+        ScanSourceIndex index = new ScanSourceIndex();
+        assertTrue(index.register("media", "doc1", "conversations-005.json", 6333444L,
+                "Ordner 1/conversations-005.json"));
+        assertFalse(index.register("media", "doc1", "conversations-005.json", 6333444L,
+                "Ordner 2/conversations-005.json"));
+        assertTrue(index.register("media", "doc2", "conversations-005.json", 6333444L,
+                "Ordner 1/SAF-Test/conversations-005.json"));
+        assertEquals(1, index.repeatedReferences());
+        assertEquals(1, index.possibleCopyGroups());
+        assertEquals(1, index.possibleCopyExamples(2).size());
+
+        ScanSourceIndex different = new ScanSourceIndex();
+        assertTrue(different.register("provider", "a", "conversations-000.json", 10, "A"));
+        assertTrue(different.register("provider", "b", "conversations-000.json", 11, "B"));
+        assertTrue(different.register("provider", "c", "conversations-000.json", -1, "C"));
+        assertEquals(0, different.possibleCopyGroups());
+    }
 }

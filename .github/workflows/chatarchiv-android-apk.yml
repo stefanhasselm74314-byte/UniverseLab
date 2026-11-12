@@ -20,6 +20,7 @@ on:
       - app/chatarchiv-research-scope-v057
       - app/chatarchiv-signal-quality-v058
       - app/chatarchiv-saf-security-v059
+      - app/chatarchiv-saf-folder-control-v0510
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'
