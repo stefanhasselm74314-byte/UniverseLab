@@ -114,6 +114,15 @@ final class ResearchFinder {
             this.priority = priority;
             this.created = created;
         }
+
+        // Preserve the constructor contract for existing handoff and quality tests.
+        Finding(String chatId, String chatTitle, int messageNumber, String role,
+                String excerpt, String kind, String field, String question,
+                String verification, int priority, double created) {
+            this(chatId, chatTitle, messageNumber, role, excerpt, excerpt,
+                    "", kind, field, ResearchScope.classify(chatTitle, excerpt, field),
+                    question, verification, priority, created);
+        }
     }
 
     private ResearchFinder() { }
