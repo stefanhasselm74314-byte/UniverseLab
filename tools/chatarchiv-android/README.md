@@ -2,13 +2,20 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
-## Version 0.5.10 · gespeicherte SAF-Ordner sichtbar und einzeln verwaltbar (Gerätetest offen)
+## Version 0.5.11 · Suchdialog mit stets erreichbaren Schaltflächen (Gerätetest offen)
+
+- **Behobener Layoutfehler im Code:** Der Ergebnisdialog der rekursiven SAF-Suche wird auf maximal 76 % der Bildschirmhöhe (höchstens 680 dp) begrenzt und mittig angezeigt. Die ausführlichen Suchstatistiken, möglichen Dateikopien und Pfade bleiben innerhalb des Android-Dialogtexts scrollbar; der untere Schaltflächenbereich erhält Platz.
+- **Lesbare Aktionen:** „Nicht importieren“ bleibt ausgeschrieben, die Bestätigung heißt kürzer „Alle importieren“. Beide Schaltflächen sollen auch bei langen Berichten vollständig sichtbar sein; dies muss auf dem Galaxy S24 Ultra/Android 17 bestätigt werden.
+- **Keine Änderung von Speicherung oder Sicherheit:** `versionCode 27`, `versionName 0.5.11`; Paketkennung, SAF-Freigaben, Import-/Duplikatlogik, Berechtigungen und private Signatur bleiben unverändert. Die Korrektur liegt isoliert auf `app/chatarchiv-scan-dialog-layout-v0511`, nicht auf `main`.
+
+## Version 0.5.10 · gespeicherte SAF-Ordner sichtbar und einzeln verwaltbar (Suchtest am Gerät bestätigt)
 
 - **Ordnertransparenz:** Unter „Gewählten Ordner inkl. Unterordner nach Chat-JSON durchsuchen“ → „Gespeicherte Ordner einzeln verwalten“ zeigt die App bei Androids lokalen Dokumentanbietern einen lesbaren Pfad wie „Interner Speicher/Download/ChatGPT_Rettung_2026-11-08“. Bei externen Anbietern wird nur ein vom Anbieter verfügbarer Ordnername gezeigt, nicht aus einer opaken Dokument-ID ein Pfad erfunden. Alles bleibt lokal.
 - **Einzelverwaltung:** Jede Freigabe lässt sich getrennt erneut durchsuchen oder nach ausdrücklicher Bestätigung aufheben. Die übernommene ältere Rettungsordner-Freigabe wird beim Entfernen desselben Ordners ebenfalls aus den Einstellungen gelöscht; importierte Chats und Quelldateien bleiben erhalten. Andere Freigaben bleiben unangetastet.
 - **Quellenbericht:** Die Suchvorschau zählt durchsuchte Ordner, Dateien, Chat-JSON und unlesbare Ordner pro freigegebenem Stammordner. Dies erleichtert die Kontrolle bei mehreren Freigaben.
 - **Kopienkennzeichnung ohne Evidenzsprung:** Mehrfachreferenzen auf dieselbe Dokument-ID desselben Anbieters werden nur einmal zum Import vorgemerkt. Gleicher Dateiname plus gleiche bekannte Bytezahl wird als **mögliche** Kopie angezeigt; unterschiedliche Dateien werden ohne Inhaltsvergleich nicht automatisch übersprungen. Die bewährte Chat-ID-/SHA-256-Duplikatprüfung bleibt für den eigentlichen Import zuständig.
-- **Keine neuen Berechtigungen:** `versionCode 26`, `versionName 0.5.10`; Produktiv-Paketkennung und privater Release-Signierschlüssel bleiben unverändert. `main` und der v0.5.9-PR bleiben unverändert. Android-Gerätetest und Play-Protect-Verhalten sind für diese neue APK noch nicht bestätigt.
+- **Gerätebefund auf Galaxy S24 Ultra/Android 17:** Ein gespeicherter Ordner wurde mit lokalem Pfad angezeigt. Rekursive Suche fand 2 Ordner, 15 Dateien, 7 Chat-JSON sowie eine *mögliche* Kopie, ohne Lesefehler; 641 Chats blieben erhalten. **Bekannter UI-Fehler:** Bei langem Suchbericht wurde die untere Schaltfläche „Nicht importieren“ abgeschnitten; hierfür ist v0.5.11 vorgesehen.
+- **Keine neuen Berechtigungen:** `versionCode 26`, `versionName 0.5.10`; Produktiv-Paketkennung und privater Release-Signierschlüssel bleiben unverändert. `main` und der v0.5.9-PR bleiben unverändert. Das Play-Protect-Verhalten dieser neuen APK ist nicht gesondert dokumentiert.
 
 ## Sicherheitsstand (Version 0.5.9 · SAF-Ordnersuche, auf Galaxy S24 Ultra getestet)
  

@@ -11,8 +11,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.content.Context;
 import android.database.Cursor;
@@ -635,19 +638,36 @@ public final class MainActivity extends Activity {
                 + "Vorhandene Chats werden abgeglichen; die Originaldateien bleiben unverändert.");
         if (matches.isEmpty()) {
             status.setText("Keine Chat-JSON-Dateien im freigegebenen Ordner gefunden.");
-            new AlertDialog.Builder(this)
+            showBoundedScanDialog(new AlertDialog.Builder(this)
                     .setTitle("Ordnersuche abgeschlossen")
                     .setMessage(details)
-                    .setPositiveButton("OK", null).show();
+                    .setPositiveButton("OK", null).create());
             return;
         }
         status.setText(matches.size() + " Chat-JSON-Dateien gefunden; bitte Import bestätigen.");
-        new AlertDialog.Builder(this)
+        showBoundedScanDialog(new AlertDialog.Builder(this)
                 .setTitle("Gefundene Chat-JSON prüfen")
                 .setMessage(details)
                 .setNegativeButton("Nicht importieren", null)
-                .setPositiveButton("Alle Chat-JSON importieren", (dialog, which) ->
-                        startImport(new ArrayList<>(matches.values()))).show();
+                .setPositiveButton("Alle importieren", (dialog, which) ->
+                        startImport(new ArrayList<>(matches.values()))).create());
+    }
+
+    private void showBoundedScanDialog(AlertDialog dialog) {
+        dialog.show();
+        // Native setMessage() remains scrollable, but the dialog must not grow
+        // behind the navigation bar when the search report has many paths.
+        // Reserve space for both action buttons independently of report length.
+        Window window = dialog.getWindow();
+        if (window != null) {
+            DisplayMetrics display = getResources().getDisplayMetrics();
+            int maxHeight = Math.min((int) (display.heightPixels * 0.76f),
+                    Ui.dp(this, 680));
+            int width = Math.min(display.widthPixels - Ui.dp(this, 28),
+                    Ui.dp(this, 470));
+            window.setLayout(width, maxHeight);
+            window.setGravity(Gravity.CENTER);
+        }
     }
 
     private void chooseFolder() {

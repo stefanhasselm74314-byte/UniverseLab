@@ -21,6 +21,7 @@ on:
       - app/chatarchiv-signal-quality-v058
       - app/chatarchiv-saf-security-v059
       - app/chatarchiv-saf-folder-control-v0510
+      - app/chatarchiv-scan-dialog-layout-v0511
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'
