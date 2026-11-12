@@ -58,6 +58,10 @@ public final class MainActivity extends Activity {
     private static final int SAVE_ARCHIVE = 806;
     private static final int PICK_SCAN_TREE = 807;
     private static final int MAX_JSON_CHOICES = 2000;
+    // Read-only preview only: never hash entire exports or read huge media payloads.
+    private static final int MAX_COPY_CHECK_GROUPS = 8;
+    private static final long MAX_COPY_CHECK_FILE_BYTES = 32L * 1024 * 1024;
+    private static final long MAX_COPY_CHECK_TOTAL_BYTES = 128L * 1024 * 1024;
     private static final String PREFS = "chatarchiv-import";
     private static final String FOLDER_PREF = "read-only-tree-uri";
     private static final String SCAN_FOLDERS_PREF = "authorized-scan-tree-uris";
@@ -577,6 +581,13 @@ public final class MainActivity extends Activity {
                     }
                     if (cancelled) break;
                 }
+                String contentCheck = "";
+                if (!cancelled && sources.possibleCopyGroups() > 0) {
+                    runOnUiThread(() -> status.setText("Prüfe mögliche Dateikopien lokal per SHA-256 …"));
+                    contentCheck = checkCandidateFileContents(matches, sources);
+                }
+                if (cancelStorageScan.get() || Thread.currentThread().isInterrupted()) cancelled = true;
+                final String contentCheckResult = contentCheck;
                 final int foundFolders = scannedFolders;
                 final int foundFiles = scannedFiles;
                 final int foundZips = zipCandidates;
@@ -589,7 +600,7 @@ public final class MainActivity extends Activity {
                         status.setText("Ordnersuche abgebrochen; keine Datei importiert.");
                     } else {
                         showSelectedTreeResults(matches, foundFolders, foundFiles,
-                                foundZips, unreadable, rootStats, sources);
+                                foundZips, unreadable, rootStats, sources, contentCheckResult);
                     }
                 });
             } catch (Exception exception) {
@@ -602,9 +613,58 @@ public final class MainActivity extends Activity {
         });
     }
 
+    /**
+     * A conservative, bounded, read-only file-level comparison.
+     * Only same-name/known-size candidates are opened, never ZIPs or unrelated files.
+     * Neither matching metadata nor matching hashes cause automatic import omissions.
+     */
+    private String checkCandidateFileContents(TreeMap<String, Uri> matches, ScanSourceIndex sources) {
+        int equal = 0, different = 0, unavailable = 0;
+        List<ScanSourceIndex.CopyCandidate> candidates = sources.contentCheckCandidates(MAX_COPY_CHECK_GROUPS);
+        int notChecked = Math.max(0, sources.possibleCopyGroups() - candidates.size());
+        long budget = MAX_COPY_CHECK_TOTAL_BYTES;
+        for (ScanSourceIndex.CopyCandidate group : candidates) {
+            if (cancelStorageScan.get() || Thread.currentThread().isInterrupted()) return "";
+            if (group.size < 0 || group.size > MAX_COPY_CHECK_FILE_BYTES
+                    || group.size > budget / group.paths.size()) {
+                notChecked++;
+                continue;
+            }
+            // Reserve the full declared bytes up front, even when a provider is slow.
+            budget -= group.size * group.paths.size();
+            String first = null;
+            boolean mismatch = false;
+            boolean error = false;
+            for (String path : group.paths) {
+                Uri file = matches.get(path);
+                if (file == null) { error = true; break; }
+                try (java.io.InputStream input = getContentResolver().openInputStream(file)) {
+                    if (input == null) { error = true; break; }
+                    String digest = StorageScanner.sha256(input, group.size,
+                            () -> cancelStorageScan.get());
+                    if (first == null) first = digest;
+                    else if (!first.equals(digest)) mismatch = true;
+                } catch (IOException | SecurityException problem) {
+                    if (cancelStorageScan.get() || Thread.currentThread().isInterrupted()) return "";
+                    error = true;
+                    break;
+                }
+            }
+            if (error) unavailable++;
+            else if (mismatch) different++;
+            else equal++;
+        }
+        return "SHA-256-Inhaltsprüfung (nur mögliche Kopien, begrenzt): "
+                + equal + " identische Gruppen, " + different + " unterschiedliche, "
+                + (notChecked + unavailable) + " ungeprüft"
+                + (unavailable > 0 ? " (davon " + unavailable + " nicht lesbar)" : "")
+                + ". Keine Dateien automatisch ausgelassen.\n";
+    }
+
     private void showSelectedTreeResults(TreeMap<String, Uri> matches, int folders,
                                          int files, int zips, int unreadable,
-                                         List<ScanRootStats> roots, ScanSourceIndex sources) {
+                                         List<ScanRootStats> roots, ScanSourceIndex sources,
+                                         String contentCheck) {
         StringBuilder details = new StringBuilder("Durchsucht: " + folders
                 + " Ordner und " + files + " Dateien.\n"
                 + "Chat-JSON gefunden: " + matches.size()
@@ -627,10 +687,11 @@ public final class MainActivity extends Activity {
         if (sources.possibleCopyGroups() > 0) {
             details.append("Mögliche Dateikopien mit gleichem Namen und gleicher Größe: ")
                     .append(sources.possibleCopyGroups())
-                    .append(" Gruppen (Inhalt nicht verglichen; keine automatische Auslassung).\n");
+                    .append(" Gruppen (nur Kandidaten; keine automatische Auslassung).\n");
             for (String example : sources.possibleCopyExamples(2))
                 details.append("  • ").append(example).append('\n');
         }
+        if (!contentCheck.isEmpty()) details.append(contentCheck);
         details.append("\nGefundene Pfade (bis zu 12):\n");
         int shown = 0;
         for (String path : matches.keySet()) {

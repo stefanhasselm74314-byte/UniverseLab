@@ -2,6 +2,9 @@ package de.universelab.chatarchiv;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.nio.file.Files;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -115,6 +118,31 @@ final class StorageScanner {
         return false;
     }
 
+    /** Digest an explicitly opened, bounded stream; never buffers private JSON files in memory. */
+    static String sha256(InputStream input, long maxBytes, Cancelled cancelled) throws IOException {
+        if (maxBytes < 0) throw new IllegalArgumentException("maxBytes must be nonnegative");
+        final MessageDigest digest;
+        try { digest = MessageDigest.getInstance("SHA-256"); }
+        catch (NoSuchAlgorithmException unavailable) { throw new IllegalStateException("SHA-256 unavailable", unavailable); }
+        byte[] block = new byte[32768];
+        long total = 0;
+        for (;;) {
+            if (cancelled.isCancelled() || Thread.currentThread().isInterrupted())
+                throw new IOException("Inhaltsprüfung abgebrochen");
+            int count = input.read(block);
+            if (count == -1) break;
+            total += count;
+            if (total > maxBytes) throw new IOException("Dateigröße überschreitet Prüfgrenze");
+            digest.update(block, 0, count);
+        }
+        StringBuilder hex = new StringBuilder(64);
+        for (byte value : digest.digest()) {
+            hex.append(Character.forDigit((value >>> 4) & 0xf, 16));
+            hex.append(Character.forDigit(value & 0xf, 16));
+        }
+        return hex.toString();
+    }
+
     private StorageScanner() { }
 }
 
@@ -174,6 +202,29 @@ final class ScanSourceIndex {
             sameNameAndSize.computeIfAbsent(key, ignored -> new ArrayList<>()).add(relativePath);
         }
         return true;
+    }
+
+    /** File-size metadata is a candidate filter only; it cannot prove identical bytes. */
+    static final class CopyCandidate {
+        final long size;
+        final List<String> paths;
+        CopyCandidate(long size, List<String> paths) {
+            this.size = size;
+            this.paths = new ArrayList<>(paths);
+        }
+    }
+
+    List<CopyCandidate> contentCheckCandidates(int maximumGroups) {
+        List<CopyCandidate> result = new ArrayList<>();
+        if (maximumGroups < 1) return result;
+        for (java.util.Map.Entry<String, List<String>> entry : sameNameAndSize.entrySet()) {
+            if (entry.getValue().size() < 2) continue;
+            if (result.size() >= maximumGroups) break;
+            String key = entry.getKey();
+            long size = Long.parseLong(key.substring(key.lastIndexOf('\0') + 1));
+            result.add(new CopyCandidate(size, entry.getValue()));
+        }
+        return result;
     }
 
     int repeatedReferences() { return repeatedReferences; }

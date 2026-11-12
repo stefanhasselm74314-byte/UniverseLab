@@ -1,5 +1,14 @@
 # UniverseLab ChatArchiv — Android
 
+## Version 0.5.13 · begrenzter SHA-256-Abgleich lokaler Exportkopien (Gerätetest offen)
+
+- Prüft nach dem freigegebenen SAF-Ordnerscan ausschließlich **Kandidaten mit gleichem Dateinamen und bekannter gleicher Dateigröße** durch tatsächliches Lesen der JSON-Dateien (SHA-256, 32-KiB-Blöcke, ohne ZIP-Entpacken).
+- Die Prüfung ist begrenzt auf höchstens 8 Kandidatengruppen, 32 MiB pro Datei und 128 MiB insgesamt. Größere, unlesbare oder nicht berücksichtigte Gruppen bleiben ausdrücklich **ungeprüft** und dürfen nicht als identisch gelten.
+- Die Vorschau unterscheidet **inhaltlich identische**, **unterschiedliche** und **ungeprüfte** Gruppen. Keine Hashes oder Gesprächsinhalte verlassen das Gerät.
+- Keine automatische Auslassung oder Veränderung von Quelldateien; Import, Chat-ID-Prüfung, Versionsschutz und bestehende Chat-Archive bleiben unverändert. Es handelt sich ausdrücklich **nicht** um eine Anbindung an das angemeldete ChatGPT-Konto.
+- Keine neuen Android-Berechtigungen. Private Chats/Schlüssel werden nicht nach GitHub übertragen. CI- und Samsung-Geräteprüfung erforderlich.
+
+
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
 ## Version 0.5.12 · kleine Schaltflächen nebeneinander, fester Dialogfuß (Gerätetest offen)
