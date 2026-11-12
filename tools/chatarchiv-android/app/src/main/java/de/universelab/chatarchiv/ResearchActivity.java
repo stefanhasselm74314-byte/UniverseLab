@@ -239,7 +239,7 @@ public final class ResearchActivity extends Activity {
         status.setText((scanInterrupted ? "Abgebrochen · " : "Prüfung abgeschlossen · ")
                 + checkedChats + " Chats · " + allFindings.size() + " heuristische Hinweise · "
                 + findings.size() + " von " + matching + " im Filter angezeigt"
-                + " · " + linked + " verknüpfte spätere Chat-Statusaussagen"
+                + " · " + linked + " spätere Statusverknüpfungen unter angezeigten Fundstellen"
                 + (unreadableChats > 0 ? " · " + unreadableChats + " nicht lesbar" : "")
                 + ". Antippen öffnet den Originalbeitrag.");
     }
@@ -267,9 +267,13 @@ public final class ResearchActivity extends Activity {
                     "Bereich [HEURISTISCH]: " + f.scope, 11, false);
             scopeLabel.setTextColor(Ui.MUTED);
             card.addView(scopeLabel);
+            TextView triggerLabel = Ui.text(ResearchActivity.this,
+                    "Auslöser [HEURISTISCH]: " + f.signal, 11, false);
+            triggerLabel.setTextColor(Ui.ACCENT);
+            card.addView(triggerLabel);
             TextView evidence = Ui.text(ResearchActivity.this,
-                    "Fundstelle aus " + f.role + "-Beitrag " + f.messageNumber + ": " + f.excerpt,
-                    13, false);
+                    "Fundstelle aus " + f.role + "-Beitrag " + f.messageNumber + ": "
+                            + f.displayExcerpt, 13, false);
             evidence.setMaxLines(5);
             card.addView(evidence);
             card.addView(Ui.text(ResearchActivity.this,

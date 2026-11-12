@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -48,6 +49,11 @@ final class ResearchFinder {
             "(?iu)^(?:\\d+(?:\\.\\d+){0,4}\\.?\\s+)?(?:NOCH\\s+)?OFFEN"
                     + "(?:\\s*[/|–—-]\\s*(?:SPÄTERE[RNS]?\\s+)?"
                     + "(?:AUSBAU|FORTSETZUNG|ERGÄNZUNG))?\\s*\\.?$");
+    private static final Pattern EMPTY_OPEN_HEADING = Pattern.compile(
+            "(?iu)^(?:\\d+(?:\\.\\d+){0,4}\\.?\\s+)?"
+                    + "(?:WAS\\s+)?(?:NOCH\\s+)?OFFEN"
+                    + "(?:\\s+IST|\\s+FÜR\\s+DIE\\s+NÄCHSTE\\s+STUFE"
+                    + "|\\s+PUNKTE)?\\s*[:.!?]?$");
     private static final Pattern FIELD_LIST = Pattern.compile(
             "(?iu)(?:\\bTASK[-_ ]?ID\\s*,[^:=]{0,120}\\bBLOCKER\\b|"
                     + "\\b(?:FELDER|SCHEMA|VORLAGE|TEMPLATE|CHECKLISTE)\\b[^:=]{0,120}"
@@ -61,12 +67,26 @@ final class ResearchFinder {
                     + "(?:^|\\[)\\s*TODO\\s*[:=\\]]|"
                     + "\\bNOCH\\s+ZU\\s+PRÜFEN\\b)");
 
+    private static final class Signal {
+        final int start;
+        final int end;
+        final String label;
+
+        Signal(int start, int end, String label) {
+            this.start = start;
+            this.end = end;
+            this.label = label;
+        }
+    }
+
     static final class Finding {
         final String chatId;
         final String chatTitle;
         final int messageNumber;
         final String role;
         final String excerpt;
+        final String displayExcerpt;
+        final String signal;
         final String kind;
         final String field;
         final String scope;
@@ -76,20 +96,32 @@ final class ResearchFinder {
         final double created;
 
         Finding(String chatId, String chatTitle, int messageNumber, String role,
-                String excerpt, String kind, String field, String question,
-                String verification, int priority, double created) {
+                String excerpt, String displayExcerpt, String signal, String kind,
+                String field, String scope, String question, String verification,
+                int priority, double created) {
             this.chatId = chatId;
             this.chatTitle = chatTitle;
             this.messageNumber = messageNumber;
             this.role = role;
             this.excerpt = excerpt;
+            this.displayExcerpt = displayExcerpt;
+            this.signal = signal;
             this.kind = kind;
             this.field = field;
-            this.scope = ResearchScope.classify(chatTitle, excerpt, field);
+            this.scope = scope;
             this.question = question;
             this.verification = verification;
             this.priority = priority;
             this.created = created;
+        }
+
+        // Preserve the constructor contract for existing handoff and quality tests.
+        Finding(String chatId, String chatTitle, int messageNumber, String role,
+                String excerpt, String kind, String field, String question,
+                String verification, int priority, double created) {
+            this(chatId, chatTitle, messageNumber, role, excerpt, excerpt,
+                    "", kind, field, ResearchScope.classify(chatTitle, excerpt, field),
+                    question, verification, priority, created);
         }
     }
 
@@ -112,19 +144,26 @@ final class ResearchFinder {
                     ? message.body.substring(message.body.length() - 120000) : message.body;
             int inMessage = 0;
             for (String rawLine : body.split("\\R")) {
-                String line = clean(rawLine);
-                if (line.length() < 18) continue;
-                int priority = priority(line);
+                String sourceLine = clean(rawLine);
+                if (sourceLine.length() < 18) continue;
+                int priority = priority(sourceLine);
                 if (priority == 0) continue;
-                if (line.length() > 360) line = line.substring(0, 357) + "…";
-                String key = line.toLowerCase(Locale.ROOT).replaceAll("\\s+", " ");
+                Signal signal = signalFor(sourceLine, priority);
+                String excerpt = sourceLine.length() > 360
+                        ? sourceLine.substring(0, 357) + "…" : sourceLine;
+                String displayExcerpt = evidenceWindow(sourceLine, signal);
+                String key = excerpt.toLowerCase(Locale.ROOT).replaceAll("\\s+", " ")
+                        + " | " + signal.label.toLowerCase(Locale.ROOT);
                 if (!seen.add(key)) continue;
 
                 String kind = priority >= 100 ? "Blocker" : priority >= 90 ? "Konflikt"
                         : priority >= 70 ? "Offener Punkt" : "Nächster Schritt";
-                String field = field(line);
-                candidates.add(new Finding(chatId, chatTitle, i + 1, message.role, line,
-                        kind, field, question(kind), verification(field), priority, message.created));
+                String field = field(excerpt);
+                String scope = ResearchScope.classify(chatTitle,
+                        displayExcerpt + " " + excerpt, field);
+                candidates.add(new Finding(chatId, chatTitle, i + 1, message.role,
+                        excerpt, displayExcerpt, signal.label, kind, field, scope,
+                        question(kind), verification(field), priority, message.created));
                 if (++inMessage >= 2 || candidates.size() >= 120) break;
             }
         }
@@ -142,13 +181,51 @@ final class ResearchFinder {
     }
 
     static boolean isGenericOutline(String line) {
-        return line != null && SECTION_PLACEHOLDER.matcher(clean(line)).matches();
+        if (line == null) return false;
+        String cleaned = clean(line);
+        return SECTION_PLACEHOLDER.matcher(cleaned).matches()
+                || EMPTY_OPEN_HEADING.matcher(cleaned).matches();
     }
 
     static boolean isConversationalNonConflict(String line) {
         if (line == null || EXPLICIT_CONFLICT.matcher(line).find()) return false;
         return POLITE_HYPOTHETICAL.matcher(line).find()
                 || NEGATED_VERBAL_CONFLICT.matcher(line).find();
+    }
+
+    /** Identify the literal keyword that caused the heuristic candidate. */
+    private static Signal signalFor(String line, int priority) {
+        Pattern[] patterns = priority >= 100
+                ? new Pattern[] {BLOCKED, BLOCKER_ASSIGNMENT, BLOCKER_CLAIM}
+                : priority >= 90 ? new Pattern[] {CONFLICT}
+                : priority >= 70 ? new Pattern[] {OPEN}
+                : new Pattern[] {NEXT};
+        Signal earliest = null;
+        for (Pattern pattern : patterns) {
+            Matcher match = pattern.matcher(line);
+            if (!match.find()) continue;
+            String token = pattern == BLOCKER_ASSIGNMENT ? "BLOCKER:"
+                    : match.group().trim();
+            if (token.length() > 72) token = token.substring(0, 69) + "…";
+            if (earliest == null || match.start() < earliest.start) {
+                earliest = new Signal(match.start(), match.end(), token);
+            }
+        }
+        return earliest == null ? new Signal(0, 0, "Regel nicht bestimmbar") : earliest;
+    }
+
+    /** Expose a late trigger without changing the archived quote used for chronology. */
+    private static String evidenceWindow(String fullLine, Signal signal) {
+        if (fullLine.length() <= 360) return fullLine;
+        if (signal.start < 280) return fullLine.substring(0, 357) + "…";
+        int from = Math.max(0, signal.start - 90);
+        int to = Math.min(fullLine.length(), from + 350);
+        if (to < signal.end) {
+            to = Math.min(fullLine.length(), signal.end + 100);
+            from = Math.max(0, to - 350);
+        }
+        return (from > 0 ? "… " : "") + fullLine.substring(from, to)
+                + (to < fullLine.length() ? " …" : "");
     }
 
     private static int priority(String line) {
@@ -221,12 +298,14 @@ final class ResearchScope {
     static final String PHYSICS = "Physik/Mathematik";
     static final String GOVERNANCE = "Governance/Freigabe";
     static final String ORGANIZATION = "Organisation/Prozess";
+    static final String DOCUMENTATION = "Dokumentation/Redaktion";
     static final String SOFTWARE = "Software/Archiv";
     static final String ENGINEERING = "Engineering";
     static final String UNCLEAR = "Unklar/Gemischt";
 
     static final String[] FILTERS = {
-            "Alle Bereiche", PHYSICS, GOVERNANCE, ORGANIZATION, SOFTWARE, ENGINEERING, UNCLEAR
+            "Alle Bereiche", PHYSICS, GOVERNANCE, ORGANIZATION,
+            DOCUMENTATION, SOFTWARE, ENGINEERING, UNCLEAR
     };
 
     private static final Pattern GOVERNANCE_CUE = Pattern.compile(
@@ -234,8 +313,16 @@ final class ResearchScope {
                     + "\\bGOVERNANCE\\b|\\bFREIGABESPERRE\\b|\\bFREIGABEGATE\\b)");
     private static final Pattern ORGANIZATION_CUE = Pattern.compile(
             "(?iu)\\b(?:EINREICHUNG|ANTRAG|FORMULAR|REGISTRIERUNG|TERMINPLAN|"
-                    + "PROJEKTBOARD|WORD|DOCX|POWERPOINT|PRÄSENTATION|"
-                    + "GLIEDERUNG|DRUCKAUFTRAG|AUSHANG)\\b");
+                    + "PROJEKTBOARD)\\b");
+    private static final Pattern DOCUMENTATION_CUE = Pattern.compile(
+            "(?iu)(?:\\b(?:TAFEL|KAPITEL)\\s+\\d+\\b|"
+                    + "\\b(?:WORD|DOCX|POWERPOINT|PRÄSENTATION|GLIEDERUNG|"
+                    + "POSTER|LAYOUT|FORMATIERUNG|ABBILDUNG|REDAKTION|"
+                    + "LEKTORAT|DRUCKAUFTRAG|AUSHANG)\\b)");
+    private static final Pattern SUBSTANTIVE_PHYSICS_CUE = Pattern.compile(
+            "(?iu)\\b(?:GHOSTFREIHEIT|NULLMODEN?|RANDBEDINGUNGEN?|"
+                    + "EICHINVARIANZ|KOPPLUNG|GLEICHUNGEN?|ASYMPTOTIK|"
+                    + "HERLEITUNG|BEWEIS|FALSIFIKATION|KOVARIANZ)\\b");
     private static final Pattern SOFTWARE_CUE = Pattern.compile(
             "(?iu)\\b(?:APK|ANDROID|GITHUB|HTML|CSS|JAVASCRIPT|SOFTWARE|"
                     + "IMPORT|EXPORT|ZIP|ARCHIV|CACHE|SCROLLBALKEN|BENUTZEROBERFLÄCHE)\\b");
@@ -259,6 +346,10 @@ final class ResearchScope {
         }
         if (ORGANIZATION_CUE.matcher(line).find()) {
             return ORGANIZATION;
+        }
+        if (DOCUMENTATION_CUE.matcher(line).find()
+                && !SUBSTANTIVE_PHYSICS_CUE.matcher(line).find()) {
+            return DOCUMENTATION;
         }
         if ("Daten/Archiv".equals(field) || SOFTWARE_CUE.matcher(line).find()) {
             return SOFTWARE;
