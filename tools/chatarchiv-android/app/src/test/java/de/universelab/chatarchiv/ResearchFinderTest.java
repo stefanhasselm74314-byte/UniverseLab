@@ -196,4 +196,51 @@ public final class ResearchFinderTest {
                 "[OFFEN] Die Reaktor-Thermik ist noch nicht validiert.");
         assertEquals(ResearchScope.ENGINEERING, found.scope);
     }
+
+    @Test public void ignoresEmptyOpenHeadingsWithoutDroppingRealWork() {
+        List<ConversationLogic.Message> chat = Arrays.asList(
+                new ConversationLogic.Message("assistant", "Noch offen für die nächste Stufe:"),
+                new ConversationLogic.Message("assistant", "Was noch offen ist:"),
+                new ConversationLogic.Message("assistant",
+                        "[OFFEN] Die Nullmoden-Norm ist nicht nachgewiesen."));
+        List<ResearchFinder.Finding> found =
+                ResearchFinder.extract("id", "6D Hyperzeit", chat, 8);
+        assertEquals(1, found.size());
+        assertTrue(found.get(0).excerpt.contains("Nullmoden"));
+    }
+
+    @Test public void explicitOpenStatementAfterHeadingIsNotSuppressed() {
+        ResearchFinder.Finding found = find("6D Hyperzeit",
+                "Noch offen für die nächste Stufe: Die Norm der Nullmode ist nicht nachgewiesen.");
+        assertEquals("Offener Punkt", found.kind);
+    }
+
+    @Test public void displayShowsActualLateSignalNotJustBeginningOfLongLine() {
+        String line = "Status [SCREENING PASS]: " + "Abschnitt bereits bearbeitet. ".repeat(17)
+                + "Das technische Teilmodul bleibt blockiert, weil die Randbedingung fehlt.";
+        ResearchFinder.Finding found = find("6D Hyperzeit", line);
+        assertEquals("Blocker", found.kind);
+        assertTrue(found.signal.toLowerCase(java.util.Locale.ROOT).contains("blockiert"));
+        assertTrue(found.displayExcerpt.contains("blockiert"));
+        assertFalse(found.excerpt.contains("blockiert"));
+    }
+
+    @Test public void documentTaskInPhysicsChatHasItsOwnScope() {
+        ResearchFinder.Finding found = find("6D Hyperzeit",
+                "Nächster Schritt: Tafel 29 – Lokalisierung.");
+        assertEquals(ResearchScope.DOCUMENTATION, found.scope);
+    }
+
+    @Test public void physicalProofOnATafelRemainsPhysics() {
+        ResearchFinder.Finding found = find("6D Hyperzeit",
+                "Nächster Schritt: Tafel 29 – Nullmoden-Norm formal beweisen.");
+        assertEquals(ResearchScope.PHYSICS, found.scope);
+    }
+
+    @Test public void wordEditingInPhysicsChatIsDocumentation() {
+        ResearchFinder.Finding found = find("6D Hyperzeit",
+                "Nächster Schritt: Kapitel 4 in Word als Druckfassung setzen.");
+        assertEquals(ResearchScope.DOCUMENTATION, found.scope);
+    }
+
 }
