@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -14,6 +16,8 @@ import java.util.zip.ZipOutputStream;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
 
 public final class StorageScannerTest {
     @Rule public TemporaryFolder temp = new TemporaryFolder();
@@ -75,6 +79,28 @@ public final class StorageScannerTest {
                 ScanPathLabel.describe("opaque-token:abc-984", null, "documents.example"));
     }
 
+    @Test public void sha256ComparesActualBytesWithoutTrustingMetadata() throws Exception {
+        byte[] a = "private-json-A".getBytes(StandardCharsets.UTF_8);
+        byte[] copy = "private-json-A".getBytes(StandardCharsets.UTF_8);
+        byte[] different = "private-json-B".getBytes(StandardCharsets.UTF_8);
+        assertEquals(StorageScanner.sha256(new ByteArrayInputStream(a), a.length, () -> false),
+                StorageScanner.sha256(new ByteArrayInputStream(copy), copy.length, () -> false));
+        assertNotEquals(StorageScanner.sha256(new ByteArrayInputStream(a), a.length, () -> false),
+                StorageScanner.sha256(new ByteArrayInputStream(different), different.length, () -> false));
+        try {
+            StorageScanner.sha256(new ByteArrayInputStream(a), a.length - 1, () -> false);
+            fail("Exceeded bound must not be accepted");
+        } catch (IOException expected) {
+            assertTrue(expected.getMessage().contains("Prüfgrenze"));
+        }
+        try {
+            StorageScanner.sha256(new ByteArrayInputStream(a), a.length, () -> true);
+            fail("Cancelled inspection must not read");
+        } catch (IOException expected) {
+            assertTrue(expected.getMessage().contains("abgebrochen"));
+        }
+    }
+
     @Test public void sourceIndexSkipsReferencesButPreservesDistinctPossibleCopies() {
         ScanSourceIndex index = new ScanSourceIndex();
         assertTrue(index.register("media", "doc1", "conversations-005.json", 6333444L,
@@ -86,6 +112,9 @@ public final class StorageScannerTest {
         assertEquals(1, index.repeatedReferences());
         assertEquals(1, index.possibleCopyGroups());
         assertEquals(1, index.possibleCopyExamples(2).size());
+        assertEquals(1, index.contentCheckCandidates(8).size());
+        assertEquals(6333444L, index.contentCheckCandidates(8).get(0).size);
+        assertEquals(2, index.contentCheckCandidates(8).get(0).paths.size());
 
         ScanSourceIndex different = new ScanSourceIndex();
         assertTrue(different.register("provider", "a", "conversations-000.json", 10, "A"));
