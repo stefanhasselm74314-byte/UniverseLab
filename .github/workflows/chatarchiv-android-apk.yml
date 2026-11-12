@@ -19,6 +19,7 @@ on:
       - app/chatarchiv-finding-quality-v056
       - app/chatarchiv-research-scope-v057
       - app/chatarchiv-signal-quality-v058
+      - app/chatarchiv-saf-security-v059
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'
@@ -52,6 +53,16 @@ jobs:
       - name: Test parser and assemble debug APK
         working-directory: tools/chatarchiv-android
         run: gradle --no-daemon --stacktrace :app:testDebugUnitTest :app:assembleDebug :app:assembleRelease
+      - name: Verify minimal release permissions
+        run: |
+          AAPT="$ANDROID_HOME/build-tools/35.0.0/aapt"
+          test -x "$AAPT"
+          PERMISSIONS=$("$AAPT" dump permissions tools/chatarchiv-android/app/build/outputs/apk/release/app-release-unsigned.apk)
+          printf '%s\n' "$PERMISSIONS"
+          if printf '%s\n' "$PERMISSIONS" | grep -Eq 'android\.permission\.(MANAGE_EXTERNAL_STORAGE|READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE|REQUEST_INSTALL_PACKAGES|READ_SMS|RECEIVE_SMS|BIND_ACCESSIBILITY_SERVICE)'; then
+            echo "Unexpected sensitive permission in APK" >&2
+            exit 1
+          fi
       - name: Verify APK exists
         run: test -s tools/chatarchiv-android/app/build/outputs/apk/debug/app-debug.apk
       - name: Upload installierbare APK
