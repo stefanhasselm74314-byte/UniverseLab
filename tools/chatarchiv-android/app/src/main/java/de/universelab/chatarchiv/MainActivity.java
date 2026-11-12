@@ -2,9 +2,12 @@ package de.universelab.chatarchiv;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +15,7 @@ import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +30,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -638,26 +643,76 @@ public final class MainActivity extends Activity {
                 + "Vorhandene Chats werden abgeglichen; die Originaldateien bleiben unverändert.");
         if (matches.isEmpty()) {
             status.setText("Keine Chat-JSON-Dateien im freigegebenen Ordner gefunden.");
-            showBoundedScanDialog(new AlertDialog.Builder(this)
-                    .setTitle("Ordnersuche abgeschlossen")
-                    .setMessage(details)
-                    .setPositiveButton("OK", null).create());
+            showScanReportDialog("Ordnersuche abgeschlossen", details, null);
             return;
         }
         status.setText(matches.size() + " Chat-JSON-Dateien gefunden; bitte Import bestätigen.");
-        showBoundedScanDialog(new AlertDialog.Builder(this)
-                .setTitle("Gefundene Chat-JSON prüfen")
-                .setMessage(details)
-                .setNegativeButton("Nicht importieren", null)
-                .setPositiveButton("Alle importieren", (dialog, which) ->
-                        startImport(new ArrayList<>(matches.values()))).create());
+        showScanReportDialog("Gefundene Chat-JSON prüfen", details,
+                () -> startImport(new ArrayList<>(matches.values())));
     }
 
-    private void showBoundedScanDialog(AlertDialog dialog) {
+    private void showScanReportDialog(String title, CharSequence details, Runnable onImport) {
+        // The Android 17 platform AlertDialog stacks its action buttons on this
+        // device even after bounding the window. The lower button then clips.
+        // Use a fixed horizontal action row; only the report itself may scroll.
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        LinearLayout panel = new LinearLayout(this);
+        panel.setOrientation(LinearLayout.VERTICAL);
+        panel.setPadding(Ui.dp(this, 16), Ui.dp(this, 12),
+                Ui.dp(this, 16), Ui.dp(this, 8));
+        GradientDrawable background = new GradientDrawable();
+        background.setColor(Color.rgb(66, 66, 66));
+        background.setCornerRadius(Ui.dp(this, 5));
+        panel.setBackground(background);
+
+        TextView heading = new TextView(this);
+        heading.setText(title);
+        heading.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        heading.setTextColor(Color.WHITE);
+        heading.setPadding(Ui.dp(this, 6), Ui.dp(this, 8),
+                Ui.dp(this, 6), Ui.dp(this, 12));
+        panel.addView(heading, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        ScrollView report = new ScrollView(this);
+        report.setFillViewport(false);
+        report.setVerticalScrollBarEnabled(true);
+        TextView body = new TextView(this);
+        body.setText(details);
+        body.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        body.setTextColor(Color.WHITE);
+        body.setPadding(Ui.dp(this, 6), Ui.dp(this, 8),
+                Ui.dp(this, 6), Ui.dp(this, 12));
+        report.addView(body, new ScrollView.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        panel.addView(report, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
+
+        View separator = new View(this);
+        separator.setBackgroundColor(Color.rgb(92, 92, 92));
+        panel.addView(separator, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, Ui.dp(this, 1)));
+
+        LinearLayout actions = new LinearLayout(this);
+        actions.setOrientation(LinearLayout.HORIZONTAL);
+        actions.setGravity(Gravity.CENTER_VERTICAL);
+        if (onImport == null) {
+            actions.addView(scanDialogButton("Schließen", dialog, null),
+                    new LinearLayout.LayoutParams(0, Ui.dp(this, 52), 1f));
+        } else {
+            actions.addView(scanDialogButton("Nicht importieren", dialog, null),
+                    new LinearLayout.LayoutParams(0, Ui.dp(this, 52), 1f));
+            actions.addView(scanDialogButton("Alle importieren", dialog, onImport),
+                    new LinearLayout.LayoutParams(0, Ui.dp(this, 52), 1f));
+        }
+        panel.addView(actions, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        dialog.setContentView(panel, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         dialog.show();
-        // Native setMessage() remains scrollable, but the dialog must not grow
-        // behind the navigation bar when the search report has many paths.
-        // Reserve space for both action buttons independently of report length.
         Window window = dialog.getWindow();
         if (window != null) {
             DisplayMetrics display = getResources().getDisplayMetrics();
@@ -665,9 +720,29 @@ public final class MainActivity extends Activity {
                     Ui.dp(this, 680));
             int width = Math.min(display.widthPixels - Ui.dp(this, 28),
                     Ui.dp(this, 470));
+            window.setBackgroundDrawableResource(android.R.color.transparent);
             window.setLayout(width, maxHeight);
             window.setGravity(Gravity.CENTER);
         }
+    }
+
+    private Button scanDialogButton(String label, Dialog dialog, Runnable action) {
+        Button button = new Button(this);
+        button.setText(label);
+        button.setAllCaps(false);
+        button.setSingleLine(true);
+        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        button.setAutoSizeTextTypeUniformWithConfiguration(10, 12, 1,
+                TypedValue.COMPLEX_UNIT_SP);
+        button.setTextColor(Color.rgb(132, 201, 255));
+        button.setPadding(Ui.dp(this, 2), 0, Ui.dp(this, 2), 0);
+        button.setMinimumWidth(0);
+        button.setBackgroundColor(Color.TRANSPARENT);
+        button.setOnClickListener(view -> {
+            dialog.dismiss();
+            if (action != null) action.run();
+        });
+        return button;
     }
 
     private void chooseFolder() {

@@ -2,10 +2,17 @@
 
 Eigenständige Android-App für lokal wiederhergestellte ChatGPT-Gespräche.
 
-## Version 0.5.11 · Suchdialog mit stets erreichbaren Schaltflächen (Gerätetest offen)
+## Version 0.5.12 · kleine Schaltflächen nebeneinander, fester Dialogfuß (Gerätetest offen)
+
+- **Gezielter Layoutwechsel:** Eigener, begrenzter Suchdialog mit festem Titel, separat scrollbar gehaltenem Suchbericht und *fester horizontaler Aktionszeile*. Die beiden Aktionen stehen in gleich breiten Feldern nebeneinander; nur der Bericht darüber scrollt.
+- **Kleinere, vollständige Beschriftung:** „Nicht importieren“ und „Alle importieren“ ohne automatische Großschreibung in 12 sp; bei schmaleren Darstellungen kann die Schrift bis 10 sp verkleinert werden. Jede Schaltfläche bleibt mindestens 52 dp hoch und auch bei langem Bericht zugänglich.
+- **Nur Darstellung:** `versionCode 28`, `versionName 0.5.12`; keine Änderung von Paketkennung, Importablauf, Chatdateien, Scanner, SAF-Freigaben oder Berechtigungen. Ausschließlich isolierter Entwurf `app/chatarchiv-scan-actions-row-v0512`, `main` bleibt unverändert.
+- **[OFFEN]** Sichtprüfung auf Samsung Galaxy S24 Ultra/Android 17 einschließlich Play-Protect-Verhalten. Eine erneute Sicherheitsblockade nicht umgehen.
+
+## Version 0.5.11 · begrenzter nativer Suchdialog (am Gerät als unzureichend bestätigt)
 
 - **Behobener Layoutfehler im Code:** Der Ergebnisdialog der rekursiven SAF-Suche wird auf maximal 76 % der Bildschirmhöhe (höchstens 680 dp) begrenzt und mittig angezeigt. Die ausführlichen Suchstatistiken, möglichen Dateikopien und Pfade bleiben innerhalb des Android-Dialogtexts scrollbar; der untere Schaltflächenbereich erhält Platz.
-- **Lesbare Aktionen:** „Nicht importieren“ bleibt ausgeschrieben, die Bestätigung heißt kürzer „Alle importieren“. Beide Schaltflächen sollen auch bei langen Berichten vollständig sichtbar sein; dies muss auf dem Galaxy S24 Ultra/Android 17 bestätigt werden.
+- **Gerätebefund:** Trotz Höhenbegrenzung und kürzerer Bestätigung blieb „Nicht importieren“ auf dem Galaxy S24 Ultra/Android 17 unten teilweise verdeckt. Der systemeigene Dialog stellte die beiden Aktionen weiterhin untereinander dar. v0.5.12 ersetzt diesen Teil des Dialoglayouts.
 - **Keine Änderung von Speicherung oder Sicherheit:** `versionCode 27`, `versionName 0.5.11`; Paketkennung, SAF-Freigaben, Import-/Duplikatlogik, Berechtigungen und private Signatur bleiben unverändert. Die Korrektur liegt isoliert auf `app/chatarchiv-scan-dialog-layout-v0511`, nicht auf `main`.
 
 ## Version 0.5.10 · gespeicherte SAF-Ordner sichtbar und einzeln verwaltbar (Suchtest am Gerät bestätigt)
