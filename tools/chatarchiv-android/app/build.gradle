@@ -12,12 +12,15 @@ android {
         targetSdk 35
         versionCode 31
         versionName '0.5.15'
+        manifestPlaceholders = [appTitle: 'UniverseLab ChatArchiv']
     }
 
     buildTypes {
         // Preview APK is a separate app: never replace the user's private chat archive.
         debug {
-            applicationIdSuffix '.researchqa'
+            // Unique QA package: never replace existing 0.5.14 QA with its private data.
+            applicationIdSuffix '.researchqa15'
+            manifestPlaceholders = [appTitle: 'UniverseLab Forschung QA v0.5.15']
         }
         release {
             minifyEnabled false

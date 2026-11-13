@@ -8,6 +8,7 @@
 - Crash-Sicherheit beim endgültigen Löschen: Bevor Dateien entfernt werden, wird der Zustand `loeschung-ausstehend` atomar im bestehenden Index gesichert. Bei Unterbrechung bleibt der Eintrag im Papierkorb und die Dateilöschung lässt sich erneut ausführen; die Wiederherstellung teilweise gelöschter Daten wird unterbunden. Indexänderungen werden bei Schreibfehlern im Speicher zurückgerollt.
 - **Explizit aus Papierkorb ausgeschlossene Chats werden bei späterem Massenimport nicht unbemerkt zurückgeholt.** Der Import meldet deren Anzahl gesondert als „Im Papierkorb belassen“. Nach endgültiger Löschung können bereits vorhandene externe Exporte diesen Chat bei bewusstem Re-Import erneut anlegen.
 - **0 sichtbare Beiträge ≠ nachweislich leere Originaldaten** (versteckte Zweige, Metadaten und Medien können existieren); es erfolgt keine automatische Löschung nach dem Titel „New chat“. Alle Löschvorgänge müssen bewusst vom Nutzer ausgelöst werden.
+- Zusätzlich eindeutige QA-Paketkennung `de.universelab.chatarchiv.researchqa15` und App-Anzeigename `UniverseLab Forschung QA v0.5.15`. Damit kann die Testversion unabhängig von einer bereits gefüllten QA-v0.5.14 und der produktiven App installiert werden. Für künftige Updates des neuen QA-Pakets ist weiterhin ein konstanter QA-Signierschlüssel notwendig.
 - `versionCode 31`, `versionName 0.5.15`. Keine neue Android-Berechtigung, keine ChatGPT-Webanmeldung, keine privaten Daten auf GitHub. Nur isolierter Draft-PR, CI- und Samsung-Test vor Freigabe.
 
 
