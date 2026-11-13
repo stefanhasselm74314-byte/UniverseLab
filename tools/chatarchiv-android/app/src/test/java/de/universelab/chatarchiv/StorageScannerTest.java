@@ -79,6 +79,33 @@ public final class StorageScannerTest {
                 ScanPathLabel.describe("opaque-token:abc-984", null, "documents.example"));
     }
 
+    @Test public void trashEntryRetainsItsCategoryAndNeverBecomesAnActiveRecord() throws Exception {
+        ChatStore.Entry active = new ChatStore.Entry("test-id", "New chat", "a".repeat(64) + ".json",
+                123L, ChatStore.OTHER, "b".repeat(64));
+        assertFalse(active.inTrash());
+        ChatStore.Entry deleted = active.moveToTrash(456L);
+        assertTrue(deleted.inTrash());
+        assertEquals(ChatStore.TRASH, deleted.category);
+        assertEquals(ChatStore.OTHER, deleted.originCategory);
+        assertEquals(456L, deleted.trashedAt);
+        assertEquals(ChatStore.TRASH, deleted.asJson().getString("category"));
+        assertEquals(ChatStore.OTHER, deleted.asJson().getString("origin_category"));
+        assertEquals(456L, deleted.asJson().getLong("trashed_at"));
+
+        ChatStore.Entry restored = deleted.restoreFromTrash();
+        assertEquals(ChatStore.OTHER, restored.category);
+        assertFalse(restored.inTrash());
+        assertEquals(active.id, restored.id);
+        assertEquals(active.digest, restored.digest);
+        assertTrue(deleted.beginPermanentDeletion().inTrash());
+        try {
+            deleted.beginPermanentDeletion().restoreFromTrash();
+            fail("Pending permanent deletion must never restore a possibly incomplete chat");
+        } catch (IllegalStateException expected) {
+            // Marker prevents partially deleted records reappearing.
+        }
+    }
+
     @Test public void archivedVersionFilesAreBoundToOneChatAndValidSha256() {
         String digest = "0123456789abcdef".repeat(4);
         String oneChat = ChatStore.archivedVersionFilename("id-one", digest);

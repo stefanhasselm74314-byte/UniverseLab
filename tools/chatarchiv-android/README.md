@@ -1,5 +1,17 @@
 # UniverseLab ChatArchiv — Android
 
+## Version 0.5.15 · bestätigte Chat-Löschung mit Papierkorb und Wiederherstellung (Gerätetest offen)
+
+- Langes Drücken auf einen Chat öffnet statt direkter Kategorieänderung das Menü **Bereich ändern** / **Chat löschen**. Vor jeder Löschung erscheint eine eindeutige Sicherheitsabfrage **„Wollen Sie wirklich diesen Chat löschen?“**, mit **Abbrechen** als sichere Alternative.
+- Das erste bestätigte Löschen legt den Chat im **lokalen Papierkorb** ab. Chat und seine zugehörigen privaten Daten bleiben wiederherstellbar; die normale Liste, Suche, Forschungsnavigator und Archiv-ZIP-Sicherung enthalten nur aktive Chats. Die Kategorie UniverseLab/Weitere Chats wird beim Wiederherstellen beibehalten.
+- Der sichtbare **Papierkorb (N)** zeigt entfernte Gespräche einschließlich kurzer ID zur Unterscheidung vieler „New chat“. Einzelne Chats können daraus **wiederhergestellt** oder nach einer **zweiten ausdrücklichen Sicherheitsabfrage endgültig gelöscht** werden. Endgültiges Löschen entfernt nur die app-internen JSON-/Suchdateien und gespeicherte Altversionen; nie die ursprünglichen ChatGPT-Exportdateien unter Downloads.
+- Crash-Sicherheit beim endgültigen Löschen: Bevor Dateien entfernt werden, wird der Zustand `loeschung-ausstehend` atomar im bestehenden Index gesichert. Bei Unterbrechung bleibt der Eintrag im Papierkorb und die Dateilöschung lässt sich erneut ausführen; die Wiederherstellung teilweise gelöschter Daten wird unterbunden. Indexänderungen werden bei Schreibfehlern im Speicher zurückgerollt.
+- **Explizit aus Papierkorb ausgeschlossene Chats werden bei späterem Massenimport nicht unbemerkt zurückgeholt.** Der Import meldet deren Anzahl gesondert als „Im Papierkorb belassen“. Nach endgültiger Löschung können bereits vorhandene externe Exporte diesen Chat bei bewusstem Re-Import erneut anlegen.
+- **0 sichtbare Beiträge ≠ nachweislich leere Originaldaten** (versteckte Zweige, Metadaten und Medien können existieren); es erfolgt keine automatische Löschung nach dem Titel „New chat“. Alle Löschvorgänge müssen bewusst vom Nutzer ausgelöst werden.
+- `versionCode 31`, `versionName 0.5.15`. Keine neue Android-Berechtigung, keine ChatGPT-Webanmeldung, keine privaten Daten auf GitHub. Nur isolierter Draft-PR, CI- und Samsung-Test vor Freigabe.
+
+
+
 ## Version 0.5.14 · geschützte Ansicht bereits gesicherter Chatfassungen (Gerätetest offen)
 
 - Das Gespräch zeigt eine zusätzliche Schaltfläche **„Gesicherte Altversionen ansehen“** mit Anzahl. Ein Dialog listet ausschließlich Dateimetadaten der gespeicherten Fassungen dieses Chat-IDs, nicht die privaten JSON-Inhalte im Repository.
