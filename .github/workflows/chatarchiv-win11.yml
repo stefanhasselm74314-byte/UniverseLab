@@ -1,0 +1,39 @@
+name: "ChatArchiv Win11 – portable release"
+
+on:
+  push:
+    branches:
+      - app/chatarchiv-windows-v010
+  pull_request:
+    paths:
+      - "tools/chatarchiv-win11/**"
+      - ".github/workflows/chatarchiv-win11.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-desktop:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Build self-contained Windows executable
+        shell: pwsh
+        run: |
+          dotnet publish tools/chatarchiv-win11/UniverseLab.ChatArchiv.Win11.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -o out/win11
+      - name: Run offline self-test
+        shell: pwsh
+        run: |
+          & "out/win11/UniverseLab.ChatArchiv.Win11.exe" --self-test
+          if ($LASTEXITCODE -ne 0) { throw "Self-test failed: $LASTEXITCODE" }
+      - name: Upload Windows 11 portable EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: UniverseLab-ChatArchiv-Win11-v0.1.0
+          path: out/win11/UniverseLab.ChatArchiv.Win11.exe
+          if-no-files-found: error
+          retention-days: 30
