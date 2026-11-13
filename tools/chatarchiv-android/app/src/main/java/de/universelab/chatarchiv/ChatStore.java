@@ -50,6 +50,7 @@ final class ChatStore {
     private static final int MAX_ZIP_JSON_ENTRIES = 100;
     private static final long MAX_MANIFEST_BYTES = 2L * 1024 * 1024;
     private static final long MAX_SAVED_VERSIONS_BYTES = 1024L * 1024 * 1024;
+    private static final long MAX_ARCHIVED_PREVIEW_BYTES = 32L * 1024 * 1024;
     private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
 
     static final class Entry {
@@ -83,6 +84,28 @@ final class ChatStore {
             json.put("category", category);
             json.put("digest", digest);
             return json;
+        }
+    }
+
+    /** Metadata for a previously preserved conversation; no chat contents are loaded for inventory. */
+    static final class SavedVersion {
+        final String digest;
+        final long bytes;
+        final long savedAt;
+
+        SavedVersion(String digest, long bytes, long savedAt) {
+            this.digest = digest;
+            this.bytes = bytes;
+            this.savedAt = savedAt;
+        }
+
+        String displayName() {
+            String timestamp = savedAt > 0
+                    ? java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm", Locale.GERMAN)
+                        .format(Instant.ofEpochMilli(savedAt).atZone(ZoneId.systemDefault()))
+                    : "Datum unbekannt";
+            return "Lokal gesichert: " + timestamp + " · " + (bytes / 1024L) + " KiB"
+                    + "\nSHA-256: " + digest.substring(0, 12) + "…";
         }
     }
 
@@ -176,6 +199,53 @@ final class ChatStore {
         entries.put(id, new Entry(previous.id, previous.title, previous.file,
                 previous.created, category, previous.digest));
         saveIndex();
+    }
+
+    /** No modification, deletion, automatic selection or restoration of previous versions. */
+    List<SavedVersion> listArchivedVersions(String chatId) throws IOException {
+        if (chatId == null || chatId.isEmpty()) throw new IOException("Chat-ID fehlt");
+        String prefix = sha256(chatId) + "-";
+        File[] files = versions.listFiles();
+        if (files == null) throw new IOException("Versionsspeicher nicht lesbar");
+        List<SavedVersion> found = new ArrayList<>();
+        for (File file : files) {
+            String name = file.getName();
+            if (!file.isFile() || !name.startsWith(prefix) || !name.endsWith(".json")) continue;
+            String digest = name.substring(prefix.length(), name.length() - 5);
+            if (!digest.matches("[0-9a-f]{64}")) continue;
+            found.add(new SavedVersion(digest, file.length(), file.lastModified()));
+        }
+        found.sort(Comparator.comparingLong((SavedVersion v) -> v.savedAt).reversed());
+        return found;
+    }
+
+    /** Integrity-checked, bounded, read-only access to one explicitly selected historical JSON. */
+    JSONObject loadArchivedVersion(String chatId, String digest) throws IOException {
+        final String fileName;
+        try { fileName = archivedVersionFilename(chatId, digest); }
+        catch (IllegalArgumentException invalid) { throw new IOException("Ungültige Archivversion", invalid); }
+        File source = new File(versions, fileName);
+        if (!source.isFile()) throw new IOException("Archivversion nicht vorhanden");
+        long length = Files.size(source.toPath());
+        if (length > MAX_ARCHIVED_PREVIEW_BYTES) {
+            throw new IOException("Archivversion größer als 32 MiB: Anzeige zum Speicherschutz begrenzt");
+        }
+        String raw = new String(Files.readAllBytes(source.toPath()), StandardCharsets.UTF_8);
+        if (!sha256(raw).equals(digest)) throw new IOException("Integritätsfehler: Archivversion verändert");
+        try {
+            JSONObject conversation = new JSONObject(raw);
+            if (!chatId.equals(conversation.optString("id", "")))
+                throw new IOException("Integritätsfehler: andere Chat-ID in Archivversion");
+            return conversation;
+        } catch (JSONException invalidJson) {
+            throw new IOException("Archivversion enthält kein gültiges JSON", invalidJson);
+        }
+    }
+
+    static String archivedVersionFilename(String chatId, String digest) {
+        if (chatId == null || chatId.isEmpty() || digest == null || !digest.matches("[0-9a-f]{64}"))
+            throw new IllegalArgumentException("Invalid archive reference");
+        return sha256(chatId) + "-" + digest + ".json";
     }
 
     JSONObject loadConversation(String id) throws IOException {
@@ -508,7 +578,7 @@ final class ChatStore {
     }
 
     private boolean archiveVersion(String id, String digest, String serialized) throws IOException {
-        File preserved = new File(versions, sha256(id) + "-" + digest + ".json");
+        File preserved = new File(versions, archivedVersionFilename(id, digest));
         if (preserved.isFile()) return false;
         long bytes = serialized.getBytes(StandardCharsets.UTF_8).length;
         if (savedVersionBytes + bytes > MAX_SAVED_VERSIONS_BYTES) {

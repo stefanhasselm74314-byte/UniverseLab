@@ -79,6 +79,26 @@ public final class StorageScannerTest {
                 ScanPathLabel.describe("opaque-token:abc-984", null, "documents.example"));
     }
 
+    @Test public void archivedVersionFilesAreBoundToOneChatAndValidSha256() {
+        String digest = "0123456789abcdef".repeat(4);
+        String oneChat = ChatStore.archivedVersionFilename("id-one", digest);
+        String another = ChatStore.archivedVersionFilename("id-two", digest);
+        assertNotEquals(oneChat, another);
+        assertTrue(oneChat.matches("[0-9a-f]{64}-[0-9a-f]{64}\\.json"));
+        try {
+            ChatStore.archivedVersionFilename("id-one", "../" + digest);
+            fail("Untrusted file name must not be accepted");
+        } catch (IllegalArgumentException expected) {
+            // Checked before any file can be accessed.
+        }
+        try {
+            ChatStore.archivedVersionFilename("", digest);
+            fail("An empty chat identity must not be accepted");
+        } catch (IllegalArgumentException expected) {
+            // Checked before any file can be accessed.
+        }
+    }
+
     @Test public void sha256ComparesActualBytesWithoutTrustingMetadata() throws Exception {
         byte[] a = "private-json-A".getBytes(StandardCharsets.UTF_8);
         byte[] copy = "private-json-A".getBytes(StandardCharsets.UTF_8);

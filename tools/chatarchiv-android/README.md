@@ -1,5 +1,15 @@
 # UniverseLab ChatArchiv — Android
 
+## Version 0.5.14 · geschützte Ansicht bereits gesicherter Chatfassungen (Gerätetest offen)
+
+- Das Gespräch zeigt eine zusätzliche Schaltfläche **„Gesicherte Altversionen ansehen“** mit Anzahl. Ein Dialog listet ausschließlich Dateimetadaten der gespeicherten Fassungen dieses Chat-IDs, nicht die privaten JSON-Inhalte im Repository.
+- Nach expliziter Auswahl wird eine historische Fassung **nur lesend** geöffnet. Anzeige prüft SHA-256 des Archivtextes und Chat-ID; ungültige Referenzen oder Fassungen über 32 MiB werden abgewiesen. Erstell-/Änderungsdaten des Chats werden nicht aus dem Dateidatum erfunden: „Lokal gesichert“ bezieht sich auf den Änderungszeitpunkt der privaten Archivdatei.
+- In der Altversionsansicht sind das Exportieren und Markieren der **aktuellen** Fassung sowie der auf aktuelle Beiträge gerichtete „Lesen“-Sprung deaktiviert. Die aktuelle Hauptfassung bleibt unberührt; keinerlei automatische Wiederherstellung, Überschreiben oder Löschen.
+- Für Chats ohne gesicherte Altversion erscheint ein eindeutiger Hinweis. Keine Migration, keine neuen Berechtigungen, keine Anbindung an ChatGPT-Webkonten oder neue Datenexporte.
+- Nur QA-/Buildnachweis, keine produktive Aktualisierung ohne bisheriges privates Release-Zertifikat. Android-17-Gerätetest ausstehend.
+
+
+
 ## Version 0.5.13 · begrenzter SHA-256-Abgleich lokaler Exportkopien (Gerätetest offen)
 
 - Prüft nach dem freigegebenen SAF-Ordnerscan ausschließlich **Kandidaten mit gleichem Dateinamen und bekannter gleicher Dateigröße** durch tatsächliches Lesen der JSON-Dateien (SHA-256, 32-KiB-Blöcke, ohne ZIP-Entpacken).

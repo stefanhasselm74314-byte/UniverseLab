@@ -45,7 +45,9 @@ public final class ConversationActivity extends Activity {
     private ListView list;
     private Button jumpButton;
     private String chatId;
+    private String archivedDigest;
     private String chatTitle = "Gespräch";
+    private Button versionsButton;
     private int displayMode;
     private Button exportButton;
     private Button displayButton;
@@ -54,6 +56,7 @@ public final class ConversationActivity extends Activity {
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
         chatId = getIntent().getStringExtra("chatId");
+        archivedDigest = getIntent().getStringExtra("archivedDigest");
         if (chatId == null || chatId.isEmpty()) { finish(); return; }
         final int focusMessage = getIntent().getIntExtra("focusMessageIndex", -1);
         displayMode = getSharedPreferences(DISPLAY_PREFS, MODE_PRIVATE).getInt(DISPLAY_MODE, 0);
@@ -91,6 +94,16 @@ public final class ConversationActivity extends Activity {
         tools.addView(displayButton, Ui.weight(1));
         tools.addView(selectButton, Ui.weight(1));
         root.addView(tools);
+        if (archivedDigest != null) {
+            // An archived view must not accidentally export/mark/read the current version.
+            exportButton.setVisibility(View.GONE);
+            selectButton.setVisibility(View.GONE);
+        } else {
+            versionsButton = Ui.button(this, "Gesicherte Altversionen prüfen");
+            versionsButton.setEnabled(false);
+            versionsButton.setOnClickListener(view -> showArchivedVersions());
+            root.addView(versionsButton);
+        }
 
         filter = new EditText(this);
         filter.setSingleLine(true);
@@ -121,7 +134,10 @@ public final class ConversationActivity extends Activity {
         loader.execute(() -> {
             try {
                 ChatStore store = new ChatStore(this);
-                JSONObject conversation = store.loadConversation(chatId);
+                JSONObject conversation = archivedDigest == null
+                        ? store.loadConversation(chatId) : store.loadArchivedVersion(chatId, archivedDigest);
+                List<ChatStore.SavedVersion> saved = archivedDigest == null
+                        ? store.listArchivedVersions(chatId) : java.util.Collections.emptyList();
                 List<ConversationLogic.Message> messages = ConversationLogic.visibleMessages(conversation);
                 String title = conversation.optString("title", "Gespräch");
                 runOnUiThread(() -> {
@@ -129,8 +145,14 @@ public final class ConversationActivity extends Activity {
                     full.clear();
                     full.addAll(messages);
                     chatTitle = title;
-                    information.setText(title + " · " + full.size() + " sichtbare Beiträge");
-                    exportButton.setEnabled(true);
+                    information.setText((archivedDigest == null ? "" : "ALTVERSION · NUR LESEN\n")
+                            + title + " · " + full.size() + " sichtbare Beiträge");
+                    if (versionsButton != null) {
+                        versionsButton.setEnabled(true);
+                        versionsButton.setText(saved.isEmpty() ? "Keine gesicherten Altversionen"
+                                : "Gesicherte Altversionen ansehen · " + saved.size());
+                    }
+                    if (archivedDigest == null) exportButton.setEnabled(true);
                     applyFilter();
                     if (focusMessage >= 0 && focusMessage < full.size()) {
                         list.post(() -> list.setSelection(focusMessage));
@@ -138,6 +160,45 @@ public final class ConversationActivity extends Activity {
                 });
             } catch (IOException exception) {
                 runOnUiThread(() -> information.setText("Lesefehler: " + exception.getMessage()));
+            }
+        });
+    }
+
+    private void showArchivedVersions() {
+        if (archivedDigest != null || versionsButton == null) return;
+        versionsButton.setEnabled(false);
+        loader.execute(() -> {
+            try {
+                List<ChatStore.SavedVersion> saved = new ChatStore(this).listArchivedVersions(chatId);
+                runOnUiThread(() -> {
+                    if (isFinishing() || isDestroyed()) return;
+                    versionsButton.setEnabled(true);
+                    if (saved.isEmpty()) {
+                        new AlertDialog.Builder(this)
+                                .setTitle("Gesicherte Altversionen")
+                                .setMessage("Für dieses Gespräch sind keine zusätzlichen Fassungen im lokalen Versionsspeicher hinterlegt.")
+                                .setPositiveButton("OK", null).show();
+                        return;
+                    }
+                    String[] labels = new String[saved.size()];
+                    for (int i = 0; i < labels.length; i++) labels[i] = saved.get(i).displayName();
+                    new AlertDialog.Builder(this)
+                            .setTitle("Gesicherte Altversionen · nur lesen")
+                            .setItems(labels, (dialog, index) -> {
+                                Intent intent = new Intent(this, ConversationActivity.class);
+                                intent.putExtra("chatId", chatId);
+                                intent.putExtra("archivedDigest", saved.get(index).digest);
+                                startActivity(intent);
+                            }).setNegativeButton("Schließen", null).show();
+                });
+            } catch (IOException exception) {
+                runOnUiThread(() -> {
+                    if (isFinishing() || isDestroyed()) return;
+                    versionsButton.setEnabled(true);
+                    new AlertDialog.Builder(this)
+                            .setTitle("Versionsspeicher nicht lesbar")
+                            .setMessage(exception.getMessage()).setPositiveButton("OK", null).show();
+                });
             }
         });
     }
@@ -287,7 +348,7 @@ public final class ConversationActivity extends Activity {
                 intent.putExtra("sourceMessageIndex", index);
                 startActivity(intent);
             });
-            bar.addView(reader);
+            if (archivedDigest == null) bar.addView(reader);
             copy.setOnClickListener(view -> {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 clipboard.setPrimaryClip(ClipData.newPlainText("Gesprächsbeitrag", message.body));

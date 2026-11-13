@@ -24,6 +24,7 @@ on:
       - app/chatarchiv-scan-dialog-layout-v0511
       - app/chatarchiv-scan-actions-row-v0512
       - app/chatarchiv-local-copy-hash-v0513
+      - app/chatarchiv-version-reader-v0514
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'
