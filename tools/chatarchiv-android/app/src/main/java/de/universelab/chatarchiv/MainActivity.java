@@ -275,7 +275,8 @@ public final class MainActivity extends Activity {
         if (importing) return;
         new AlertDialog.Builder(this)
                 .setTitle("Chat löschen")
-                .setMessage("Wollen Sie wirklich diesen Chat löschen?\n\n„" + entry.title + "“\n\n"
+                .setMessage("Wollen Sie wirklich diesen Chat löschen?\n\n„" + entry.title
+                        + "“ · " + entry.prettyDate() + "\nChat-ID: " + entry.id + "\n\n"
                         + "Er wird zunächst in den lokalen Papierkorb verschoben und kann "
                         + "dort wiederhergestellt werden. Originale ChatGPT-Exportdateien "
                         + "bleiben unverändert. Es wird kein anderer Chat gelöscht.")
@@ -359,8 +360,8 @@ public final class MainActivity extends Activity {
                                 importSummary = "„" + entry.title + "“ endgültig lokal gelöscht.";
                                 refresh();
                             } else {
+                                importSummary = "Löschung unvollständig, im Papierkorb erneut versuchen: " + outcome;
                                 refresh();
-                                status.setText("Löschung unvollständig, im Papierkorb erneut versuchen: " + outcome);
                             }
                         });
                     });
