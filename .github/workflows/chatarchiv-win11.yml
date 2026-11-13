@@ -28,8 +28,10 @@ jobs:
       - name: Run offline self-test
         shell: pwsh
         run: |
-          & "out/win11/UniverseLab.ChatArchiv.Win11.exe" --self-test
-          if ($LASTEXITCODE -ne 0) { throw "Self-test failed: $LASTEXITCODE" }
+          # WinExe is a GUI-subsystem process; PowerShell's $LASTEXITCODE may stay null.
+          # Start-Process -Wait -PassThru obtains its actual termination status.
+          $test = Start-Process -FilePath "out/win11/UniverseLab.ChatArchiv.Win11.exe" -ArgumentList "--self-test" -Wait -PassThru -NoNewWindow
+          if ($test.ExitCode -ne 0) { throw "Self-test failed: $($test.ExitCode)" }
       - name: Upload Windows 11 portable EXE
         uses: actions/upload-artifact@v4
         with:
