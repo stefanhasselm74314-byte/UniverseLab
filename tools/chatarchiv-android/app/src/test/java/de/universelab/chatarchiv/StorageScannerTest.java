@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.FileOutputStream;
+import java.util.List;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.zip.ZipEntry;
@@ -183,12 +184,18 @@ public final class StorageScannerTest {
         ChatStore.Entry chat = new ChatStore.Entry("boundary-id", "Unerwarteter Titel",
                 filename, 0, ChatStore.OTHER, "");
         String padding = "x".repeat(8190);
-        Files.writeString(new File(index, "boundary.search").toPath(),
-                padding + " New Chats are searchable.", StandardCharsets.UTF_8);
+        Files.write(new File(index, "boundary.search").toPath(),
+                (padding + " New Chats are searchable.").getBytes(StandardCharsets.UTF_8));
         assertEquals(1, ChatStore.search(java.util.Collections.singletonList(chat), "alle",
                 "\"New Chats\"", () -> false, index).size());
         assertEquals(0, ChatStore.search(java.util.Collections.singletonList(chat), "alle",
                 "\"New Chat\"", () -> false, index).size());
+
+        // Guard against a false word boundary at the end of an 8192-character block.
+        Files.write(new File(index, "boundary.search").toPath(),
+                ("x".repeat(8188) + " New" + "spaper").getBytes(StandardCharsets.UTF_8));
+        assertEquals(0, ChatStore.search(java.util.Collections.singletonList(chat), "alle",
+                "New", () -> false, index).size());
     }
 
     @Test public void sourceIndexSkipsReferencesButPreservesDistinctPossibleCopies() {

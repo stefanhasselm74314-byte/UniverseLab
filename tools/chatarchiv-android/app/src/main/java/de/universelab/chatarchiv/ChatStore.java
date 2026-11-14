@@ -765,22 +765,25 @@ final class ChatStore {
                 || kind == Character.ENCLOSING_MARK;
     }
 
-    private static boolean containsCompleteTerm(String lowerCaseText, String lowerCaseTerm) {
+    private static boolean containsCompleteTerm(String lowerCaseText, String lowerCaseTerm,
+                                                boolean realBeginning, boolean realEnd) {
         int offset = 0;
         while ((offset = lowerCaseText.indexOf(lowerCaseTerm, offset)) >= 0) {
             int end = offset + lowerCaseTerm.length();
-            boolean left = offset == 0 || !wordCodePoint(lowerCaseText.codePointBefore(offset));
-            boolean right = end == lowerCaseText.length()
-                    || !wordCodePoint(lowerCaseText.codePointAt(end));
+            boolean left = offset == 0 ? realBeginning
+                    : !wordCodePoint(lowerCaseText.codePointBefore(offset));
+            boolean right = end == lowerCaseText.length() ? realEnd
+                    : !wordCodePoint(lowerCaseText.codePointAt(end));
             if (left && right) return true;
             offset++;
         }
         return false;
     }
 
-    private static boolean anySearchTermMatches(String lowerCaseText, List<SearchTerm> terms) {
+    private static boolean anySearchTermMatches(String lowerCaseText, List<SearchTerm> terms,
+                                                 boolean realBeginning, boolean realEnd) {
         for (SearchTerm term : terms)
-            if (containsCompleteTerm(lowerCaseText, term.value)) return true;
+            if (containsCompleteTerm(lowerCaseText, term.value, realBeginning, realEnd)) return true;
         return false;
     }
 
@@ -800,7 +803,7 @@ final class ChatStore {
             }
             if (terms.isEmpty()) continue;
             String title = item.title.toLowerCase(Locale.ROOT);
-            if (anySearchTermMatches(title, terms)) {
+            if (anySearchTermMatches(title, terms, true, true)) {
                 matching.add(item);
                 continue;
             }
@@ -826,17 +829,23 @@ final class ChatStore {
             char[] block = new char[8192];
             String suffix = "";
             int n;
+            long processedChars = 0;
             while ((n = reader.read(block)) != -1) {
                 if (cancelled.isCancelled()) return false;
                 String chunk = suffix + new String(block, 0, n);
+                processedChars += n;
                 String lower = chunk.toLowerCase(Locale.ROOT);
-                if (anySearchTermMatches(lower, terms)) return true;
-                // Keep a character before and after possible terms across block boundaries.
+                // The last character needs a look-ahead: "New" at the end of a
+                // block must not match if the next block starts with "spaper".
+                boolean beginning = processedChars == n;
+                if (anySearchTermMatches(lower, terms, beginning, false)) return true;
                 int overlap = Math.min(chunk.length(), longest + 4);
                 suffix = chunk.substring(chunk.length() - overlap);
             }
+            if (cancelled.isCancelled()) return false;
+            return !suffix.isEmpty() && anySearchTermMatches(suffix.toLowerCase(Locale.ROOT),
+                    terms, processedChars == suffix.length(), true);
         }
-        return false;
     }
 
     private synchronized void saveIndex() throws IOException {
