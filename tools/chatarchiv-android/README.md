@@ -1,5 +1,85 @@
 # UniverseLab ChatArchiv — Android
 
+## Gerahmte Untermenüs – v0.5.19, kein Versionssprung
+
+Auf ausdrücklichen Nutzerwunsch bekommen die bereits kompakten Hauptmenüs und ihre Untermenüs eine **klar sichtbare hellgraue Außenumrandung** und **einzeln umrissene Menüzeilen** mit 5-dp-Zwischenraum. Jede Zeile färbt sich beim Drücken/Fokussieren in einen etwas helleren neutralen Grauton. Alle Farben bleiben echte Grautöne (R=G=B); keine blauen Akzente, kein zusätzlicher Kasten um jeden Textabschnitt.
+
+Zentrale Android-Hilfsfunktionen in bestehender `Ui.java`: `showFramedMenu(...)` und `showFramedChoices(...)`, für Menüauswahl bzw. Auswahl mit radiobuttonartiger Markierung. Der Dialog verwendet einen 2-dp-Außenrahmen und pro Auswahloption einen mindestens 52-dp hohen, 1,2-dp umrandeten Bereich. Längere Listen sind scrollbar, die Dialoghöhe wird auf 78 % des Displays begrenzt, damit die untere Abbrechen-/Schließen-Aktion erreichbar bleibt. Die bewährte Scrollfunktion und alle zugeordneten Klickaktionen bleiben erhalten.
+
+Die neue Darstellung betrifft die Untermenüs **Archiv**, **Forschung**, **Werkzeuge**, Importoptionen, Gespräche verwalten (inkl. Umbenennen), Papierkorb- und Sammelaktionen, Speicherordner-Auswahl, Forschungsnavigator-Filter, Fundstellen- und Forschungsregisteraktionen, Gesprächsexport, Formelanzeige und Chat-Übergabe. Sicherheitsabfragen zum endgültigen Löschen bleiben zusätzlich als gesonderte Bestätigung erhalten; Mehrfachauswahl-Checkboxen bleiben unverändert.
+
+Android-CI und Samsung-Gerätetest sind für die Gestaltung erforderlich. Kein neues Version-Release, keine Änderung an gespeicherten Chatdaten oder Forschungsregister, keine neuen Berechtigungen. Wegen CI-Debug-Zertifikatswechsel wird allein der neue Testbuild unter `de.universelab.chatarchiv.researchqa19submenus` installiert; bestehende produktive und QA-Archive bleiben unverändert. `main` und kritische Freigaben bleiben gesperrt.
+
+
+
+## Kontrastkorrektur in derselben Version 0.5.19
+
+Nach Samsung-Gerätetest mit der grauen v0.5.19 wünschte der Nutzer deutlich **hellere Texte und vorhandene Umrahmungen**, ausdrücklich **ohne blaue Farbakzente und ohne separate Rahmen um jedes Wort**. Die neue zentrale Palette nutzt echte Grautöne (R=G=B): `#121212` Hintergrund, `#303030` Karten, `#FAFAFA` Haupttext, `#D2D2D2` Sekundärtext, `#E6E6E6` Auswahlakzente und `#BEBEBE` Rahmen. Bestehende Buttons haben 1,6-dp-Umrandungen; Chat-, Beitrags- und Forschungskarten 1,2-dp-Umrandungen, ohne jede Textzeile in einen eigenen Kasten zu packen. Für native Dialoge und Eingabefelder sind Haupt-, Neben- und Hinweistextfarben ebenfalls auf helles Grau gesetzt. Der Fastscroll-Griff ist heller, die Laufschiene besser sichtbar; die exportierte lokale HTML-Darstellung spiegelt die neue Palette inklusive Rahmen.
+
+**Wichtig:** Eine Modal-Dialoganzeige blendet Androids Hintergrund standardmäßig ab; der Hintergrund soll absichtlich nicht genauso hell sein wie der aktive Dialog. Die bestehende Version v0.5.19 wird beibehalten; wegen unterschiedlicher CI-Debugsignaturen bekommt nur der neue Layout-Kontrasttest die separate Debug-Paketkennung `de.universelab.chatarchiv.researchqa19contrast`, damit die frühere mit Chats befüllte v0.5.19 QA-App nicht durch einen Signaturkonflikt ersetzt oder deinstalliert werden muss. `main` bleibt unverändert. Samsung-Sichtprüfung ist nach Android-CI erforderlich.
+
+
+
+## Durchgängige Monochrom-Gestaltung – v0.5.19-Sammelupdate
+
+Die gesamte lokale App-Oberfläche verwendet ausschließlich **echte Grautöne** (R=G=B): Hintergrund `#121212`, Flächen `#262626`, Haupttext `#F0F0F0`, zurückhaltende Texte `#B0B0B0`, Bedienelemente und Hervorhebungen `#D3D3D3`. Dies gilt zentral für Menüs, Listenelemente, wissenschaftliche Fundstellen, Labels und Schaltflächen. Androids systemeigene Interaktionsfarben für Textfelder, Checkboxen und Dialog-Buttons sind ebenfalls auf Grau gesetzt; Fast-Scroll-Daumen und -Leiste verwenden Grautöne. Auch die lokal exportierte HTML-Ansicht enthält keinen blauen CSS-Wert mehr. Die öffentlich eingebundene GitHub-Webseite wird nicht verändert und behält ihr externes Design.
+
+Die Kontraste zwischen Hintergrund, Flächen, Sekundärtext und aktiver Markierung bleiben deutlich. Keine neue Versionsnummer und keine Änderung an privaten Chats, Import-/Löschlogik, Signatur oder Berechtigungen. Android-Gerätetest erforderlich.
+
+
+
+## v0.5.19 Sammelupdate: Navigation, lokale Chat-Titel und Forschungsregister
+
+**Startseite als Menü statt Schaltflächenstapel:** Drei kompakte Menüs `Archiv ▾`, `Forschung ▾`, `Werkzeuge ▾`. Suchen, Bereichsfilter, Zähler und Chatliste bleiben direkt sichtbar. Archiv bietet Import, klassisches Export-ZIP, Papierkorb und Mehrfachauswahl; Forschung öffnet Finder, manuelles Forschungsregister und Chat-Übergabe; Werkzeuge bieten Audit, Vollbackup inkl. Register, unabhängige SHA-256-ZIP-Verifikation und öffentlichen GitHub-Bereich. Forschungsnavigator enthält eine gemeinsame Zeile `Chats prüfen ▾` / `Forschungsregister` sowie zwei nebeneinander angeordnete Fundstellenfilter.
+
+**Titel jedes Chats lokal ändern:** Langes Tippen auf einen aktiven Chat → `Umbenennen`; auch im Papierkorb möglich. Originaltitel kann ausdrücklich zurückgesetzt werden. Neue Bezeichnung wird separat in `index.json` als `title`, `original_title`, `custom_title` gespeichert und über Kategorieänderungen, Papierkorb und erneuten Import einer neueren Quelldatei bewahrt. Original-ChatGPT-JSON, Prüfsumme und gespeicherte Altversionen werden **nicht umgeschrieben**. Der klassische Export erhält das Original-JSON, aber seine `chatarchiv_manifest.json` enthält zusätzlich `title_overrides_by_id` für spätere ChatArchiv-Neuimporte. Der Vollbackup-Index enthält die lokalen Aliase samt Provenienz.
+
+**Forschungsregister – erste funktionale Stufe:** Heuristische Fundstellen sind weiterhin unverifiziert. Langes Antippen einer Fundstelle im Navigator → bewusstes manuelles Aufnehmen ins Register; dabei lassen sich Stufe (`HPVS`, `HZT-M0`, `HZT-Full`, `Übergreifend`, `Nicht zugeordnet`), Bearbeitungsstatus (`Unbewertet`, `Offen`, `In Prüfung`, `Zurückgestellt`, `Abgeschlossen (manuell)`) und persönliche Prüfnotiz festhalten. Jeder Registereintrag referenziert die spezifische Chat-ID, Beitragsnummer, Rollenangabe und eine Quelle als Textauszug. Die Registeransicht hat Bereichsfilter, springt auf Originalbeiträge und erlaubt kontrolliertes Bearbeiten oder Entfernen des **Verweises**, nicht des Chats. Kein Status gilt als mathematisch/empirisch bewiesen, weil er manuell gesetzt wurde.
+
+**Sicherung und Isolation:** `research-register.json` wird als optionale, SHA-256-verifizierbare Datei in das bestehende Vollbackup aufgenommen. Die neue Registerfunktion und Titeländerungen benötigen keine Android-Berechtigung und greifen nicht auf den ChatGPT-Account oder GitHub-Schreibzugriff zu. Keine One-Click-Restore-Freigabe. Android-Debug-Build verwendet wegen unverträglicher einmaliger CI-Signatur ein neues isoliertes QA-Paket `de.universelab.chatarchiv.researchqa19menu`; `versionName 0.5.19`, `versionCode 35` unverändert. Keine Überschreibung produktiver oder vorheriger QA-Archive. `main` unverändert, Draft-PR #296.
+
+**Abnahme:** JVM-Tests für Titelübernahme, Titelpersistenz über Import/Kategorie/Papierkorb, Register-JSON/Prüfstatus, Backup-Verifikation; anschließend Android-CI und Samsung-Screenshottest für kompakte Menüs, längere Titel und Registeraktion. Verbindliche wissenschaftliche Bewertung/Quellenvalidierung bleibt offen.
+
+
+
+### QA-Nachkorrektur v0.5.19: horizontale Dialogschaltflächen
+
+- Im Mehrfachauswahldialog stehen **Weiter** und **Abbrechen** wieder nebeneinander am unteren Rand, ohne dritte native Schaltfläche.
+- **Alle auswählen** bzw. **Auswahl aufheben** ist als eigener feststehender Button über der Chatliste erreichbar. Auswahlzähler und Checkboxen bleiben synchron.
+- Bei langen Listen wird die Dialoghöhe auf 78 % der Displayhöhe begrenzt; die Liste scrollt unabhängig von der unteren Aktionszeile.
+- Singularmeldungen korrigiert: „1 Chat“ und „1 Gespräch aktualisiert“.
+- **Signaturschutz:** Der bisherige v0.5.19-Build ist mit einem anderen einmaligen GitHub-Debugzertifikat signiert als spätere Runs. Android verhindert deshalb ein In-place-Update. Das neue Layouttest-APK erhält die eindeutige QA-Paketkennung `de.universelab.chatarchiv.researchqa19layout` und die Bezeichnung `UniverseLab Forschung QA v0.5.19 Layout`, damit weder die alte gefüllte v0.5.19 noch andere Archive überschrieben werden. Die Versionsnummer bleibt unverändert. Nur einige synthetische Testchats zum UI-Test importieren; niemals bestehende QA-Daten löschen oder deinstallieren, um eine Signaturprüfung zu umgehen. Keine Änderung an `main`; Draft-PR #296 bleibt bestehend.
+
+
+## Sammelupdate v0.5.19 · Archivwerkzeuge (Draft, Samsung-Gerätetest offen)
+
+Diese Version bündelt **drei** zusammengehörige Funktionen – ohne separate Zwischenversionen:
+
+### A. Archiv-Gesundheitsbericht (nur lesen)
+- Neuer Hauptmenü-Eintrag **„Archivwerkzeuge · Prüfen, Auswählen, Sichern“** → „Archiv-Gesundheitsprüfung“.
+- Untersucht aktive und im Papierkorb liegende Chats auf fehlende Hauptfassungen, abweichende SHA-256-Prüfsummen, unlesbare JSON-Daten, unpassende Chat-IDs, fehlende Suchindizes und 0 sichtbare Beiträge. Zeigt Anzahl gesicherter Altversionen und höchstens 16 Beispiele mit Kurz-ID.
+- Begrenzung: Chatdateien über 16 MiB werden nicht vollständig geladen; sie erscheinen als **ungeprüft**, nicht fälschlich als leer oder beschädigt. Prüflauf abbrechbar. **Kein automatisches Löschen**.
+
+### B. Mehrfachauswahl und geschützte Sammelaktionen
+- Mehrfachauswahl bezieht sich **ausschließlich auf die gerade angezeigten Suchtreffer**. Android-Auswahlliste mit Mehrfachauswahl und „Alle auswählen / Auswahl aufheben“, inklusive kurzem Chat-ID-Hinweis für identische Titel.
+- Nach erneuter expliziter Bestätigung können ausgewählte aktive Chats gesammelt **UniverseLab**, **Weitere Chats** oder dem **Papierkorb** zugeordnet werden.
+- Die Änderung wird nur nach Prüfung sämtlicher Chat-IDs in **einem gemeinsamen Index-Schreibvorgang** gespeichert; bei Schreibfehlern wird der vorherige In-Memory-Zustand zurückgesetzt. Im Stapelmodus gibt es keine endgültige Löschung und keine Änderung an Original-Exportdateien.
+
+### C. Umfangreicheres ZIP-Backup mit nachprüfbaren Prüfsummen
+- Gesonderte Funktion **„Vollbackup inklusive Papierkorb und Altversionen“**. Sicherung umfasst private Hauptfassungen (aktiv und Papierkorb), vorhandene Altversionsdateien, Suchindizes und den originalen Gesprächsindex (Kategorien, Papierkorb-Metadaten).
+- ZIP-Einträge werden speicherschonend übertragen und in `manifest.json` mit SHA-256 und Dateigröße referenziert; die unabhängige Funktion **„Vollbackup mit SHA-256 prüfen“** vergleicht sämtliche Dateien ohne Extraktion.
+- Nur die beim ChatArchiv tatsächlich lokal gespeicherten Daten sind enthalten. Medienanhänge, die bislang ausschließlich in externen ChatGPT-Exporten liegen, bleiben außerhalb dieser Sicherung. Fehlende Suchindizes werden im Manifest vermerkt.
+- Das neue Gesamtformat ist **noch nicht für eine automatische Wiederherstellung freigegeben**. Das gewohnte ZIP für aktive Hauptfassungen bleibt zusätzlich unverändert verfügbar. Bei unvollständigem Export nicht von einer erfolgreichen Sicherung ausgehen.
+- ZIP-Ausgabe nur nach Auswahl eines konkreten Ziels über Android-SAF; ein Cloud-Anbieter als Ziel könnte die Datei hochladen. Keine Daten an GitHub.
+
+### Version und Testregeln
+- `versionName 0.5.19`, `versionCode 35`; isolierter Debug-QA-Paketname `de.universelab.chatarchiv.researchqa19`.
+- Bestehende Installationen, insbesondere v0.5.12 produktiv und v0.5.16 mit Papierkorb, bleiben unangetastet. Keine neue Android-Berechtigung, kein ChatGPT-Weblogin und keine Änderung an Quell-Exportdateien.
+- Build und JVM-Testfälle für das Backup samt Prüfsummen-/Abbruchschutz sowie vorhandene Such-/Archivtests sind Voraussetzungen für die Geräteabnahme.
+- `main` bleibt unverändert. **[OFFEN]** GitHub-CI, signierte QA-APK und Gerätetest; keine automatische Freigabe.
+
+
+
 ## Version 0.5.18 · ODER-Suche nach Anzahl verschiedener Trefferwörter sortieren
 
 - `chats Ui New` sucht weiterhin alle Chats mit mindestens einem der drei **verschiedenen** Wörter. Ausgabe-Reihenfolge: **3 von 3**, dann **2 von 3**, zuletzt **1 von 3** passenden Wörtern.
