@@ -334,6 +334,83 @@ public final class StorageScannerTest {
         assertTrue(report.summary().contains("nur Prüfkandidaten"));
     }
 
+    @Test public void localTitleSurvivesReimportCategoryAndTrashWithoutChangingOriginal() throws Exception {
+        ChatStore.Entry original = new ChatStore.Entry("test-rename", "New chat",
+                "a".repeat(64) + ".json", 123, ChatStore.OTHER, "hash1");
+        ChatStore.Entry renamed = original.withLocalTitle("Gravitationskonstanten");
+        assertEquals("New chat", renamed.originalTitle);
+        assertEquals("Gravitationskonstanten", renamed.title);
+        assertTrue(renamed.customTitle);
+        org.json.JSONObject serialized = renamed.asJson();
+        assertTrue(serialized.getBoolean("custom_title"));
+        assertEquals("New chat", serialized.getString("original_title"));
+
+        ChatStore.Entry categorized = renamed.withCategory(ChatStore.PROJECT);
+        ChatStore.Entry trashed = categorized.moveToTrash(999L);
+        assertEquals("Gravitationskonstanten", trashed.title);
+        assertEquals("New chat", trashed.originalTitle);
+        ChatStore.Entry restored = trashed.restoreFromTrash();
+        assertEquals(ChatStore.PROJECT, restored.category);
+        assertTrue(restored.customTitle);
+        ChatStore.Entry imported = restored.withImportedTitle("New chat – Export 2", 124, "hash2");
+        assertEquals("Gravitationskonstanten", imported.title);
+        assertEquals("New chat – Export 2", imported.originalTitle);
+        assertTrue(imported.customTitle);
+        ChatStore.Entry reverted = imported.withLocalTitle(imported.originalTitle);
+        assertEquals("New chat – Export 2", reverted.title);
+        assertFalse(reverted.customTitle);
+        assertEquals("Neue Quelle", reverted.withImportedTitle("Neue Quelle", 125, "hash3").title);
+
+        assertEquals("Gültiger Name", ChatStore.validateLocalTitle("  Gültiger Name  "));
+        try { ChatStore.validateLocalTitle("\n"); fail("Empty title accepted"); }
+        catch (IOException expected) { assertTrue(expected.getMessage().contains("leer")); }
+        try { ChatStore.validateLocalTitle("A\nB"); fail("Newline accepted"); }
+        catch (IOException expected) { assertTrue(expected.getMessage().contains("Zeilenumbrüche")); }
+    }
+
+    @Test public void researchRecordHasStableProvenanceAndReviewIsExplicit() throws Exception {
+        ResearchRegister.Record source = new ResearchRegister.Record(
+                ResearchRegister.fingerprint("c1\n12\nBlocker\nOPEN"),
+                "c1", "Chat mit Theorie", 12, "assistant",
+                "Das ist ein offener Prüfpunkt", "Blocker",
+                "HPVS", "Unbewertet", "Beweiskette ausstehend", 100, 100);
+        org.json.JSONObject encoded = source.toJson();
+        ResearchRegister.Record decoded = ResearchRegister.Record.fromJson(encoded);
+        assertEquals(source.id, decoded.id);
+        assertEquals("c1", decoded.chatId);
+        assertEquals(12, decoded.messageNumber);
+        assertEquals("HPVS", decoded.stage);
+        assertEquals("Unbewertet", decoded.state);
+        ResearchRegister.Record updated = decoded.withReview("HZT-M0", "In Prüfung", "Quelle neu prüfen");
+        assertEquals(source.id, updated.id);
+        assertEquals(source.chatId, updated.chatId);
+        assertEquals(source.messageNumber, updated.messageNumber);
+        assertEquals("In Prüfung", updated.state);
+        try {
+            ResearchRegister.validateReview("HZT-M0", "Physikalisch bewiesen", "Ungesichert");
+            fail("Unrecognized automatic proof status accepted");
+        } catch (IOException expected) {
+            assertTrue(expected.getMessage().contains("Ungültige Forschungsstufe"));
+        }
+    }
+
+    @Test public void archiveBundleIncludesOptionalManualResearchRegister() throws Exception {
+        File folder = temp.newFolder("register-backup");
+        File idx = new File(folder, "index.json");
+        File reg = new File(folder, "research-register.json");
+        Files.write(idx.toPath(), "[]".getBytes(StandardCharsets.UTF_8));
+        Files.write(reg.toPath(), "{\"format\":\"universelab-research-register\",\"version\":1,\"entries\":[]}"
+                .getBytes(StandardCharsets.UTF_8));
+        ByteArrayOutputStream zipped = new ByteArrayOutputStream();
+        ArchiveBundle.create(zipped, Arrays.asList(
+                new ArchiveBundle.Item("index.json", idx),
+                new ArchiveBundle.Item("research-register.json", reg)),
+                0, 0, 0, 0, () -> false, (done, total) -> {});
+        ArchiveBundle.Report verified = ArchiveBundle.verify(
+                new ByteArrayInputStream(zipped.toByteArray()), () -> false, (done, total) -> {});
+        assertEquals(2, verified.files);
+    }
+
     @Test public void sourceIndexSkipsReferencesButPreservesDistinctPossibleCopies() {
         ScanSourceIndex index = new ScanSourceIndex();
         assertTrue(index.register("media", "doc1", "conversations-005.json", 6333444L,

@@ -13,6 +13,7 @@
         <activity android:name=".ConversationActivity" android:exported="false" />
         <activity android:name=".ReadingActivity" android:exported="false" />
         <activity android:name=".ResearchActivity" android:exported="false" />
+        <activity android:name=".ResearchRegisterActivity" android:exported="false" />
         <activity android:name=".HandoffActivity" android:exported="false" />
         <activity android:name=".SelectionActivity" android:exported="false" />
         <activity android:name=".GitHubActivity" android:exported="false" />

@@ -139,7 +139,11 @@ public final class ConversationActivity extends Activity {
                 List<ChatStore.SavedVersion> saved = archivedDigest == null
                         ? store.listArchivedVersions(chatId) : java.util.Collections.emptyList();
                 List<ConversationLogic.Message> messages = ConversationLogic.visibleMessages(conversation);
-                String title = conversation.optString("title", "Gespräch");
+                // Show the local alias for the current version; archived snapshots
+                // retain their own original title and are never rewritten.
+                ChatStore.Entry metadata = archivedDigest == null ? store.entryForDisplay(chatId) : null;
+                String title = metadata != null
+                        ? metadata.title : conversation.optString("title", "Gespräch");
                 runOnUiThread(() -> {
                     if (isFinishing() || isDestroyed()) return;
                     full.clear();

@@ -1,5 +1,19 @@
 # UniverseLab ChatArchiv — Android
 
+## v0.5.19 Sammelupdate: Navigation, lokale Chat-Titel und Forschungsregister
+
+**Startseite als Menü statt Schaltflächenstapel:** Drei kompakte Menüs `Archiv ▾`, `Forschung ▾`, `Werkzeuge ▾`. Suchen, Bereichsfilter, Zähler und Chatliste bleiben direkt sichtbar. Archiv bietet Import, klassisches Export-ZIP, Papierkorb und Mehrfachauswahl; Forschung öffnet Finder, manuelles Forschungsregister und Chat-Übergabe; Werkzeuge bieten Audit, Vollbackup inkl. Register, unabhängige SHA-256-ZIP-Verifikation und öffentlichen GitHub-Bereich. Forschungsnavigator enthält eine gemeinsame Zeile `Chats prüfen ▾` / `Forschungsregister` sowie zwei nebeneinander angeordnete Fundstellenfilter.
+
+**Titel jedes Chats lokal ändern:** Langes Tippen auf einen aktiven Chat → `Umbenennen`; auch im Papierkorb möglich. Originaltitel kann ausdrücklich zurückgesetzt werden. Neue Bezeichnung wird separat in `index.json` als `title`, `original_title`, `custom_title` gespeichert und über Kategorieänderungen, Papierkorb und erneuten Import einer neueren Quelldatei bewahrt. Original-ChatGPT-JSON, Prüfsumme und gespeicherte Altversionen werden **nicht umgeschrieben**. Der klassische Export erhält das Original-JSON, aber seine `chatarchiv_manifest.json` enthält zusätzlich `title_overrides_by_id` für spätere ChatArchiv-Neuimporte. Der Vollbackup-Index enthält die lokalen Aliase samt Provenienz.
+
+**Forschungsregister – erste funktionale Stufe:** Heuristische Fundstellen sind weiterhin unverifiziert. Langes Antippen einer Fundstelle im Navigator → bewusstes manuelles Aufnehmen ins Register; dabei lassen sich Stufe (`HPVS`, `HZT-M0`, `HZT-Full`, `Übergreifend`, `Nicht zugeordnet`), Bearbeitungsstatus (`Unbewertet`, `Offen`, `In Prüfung`, `Zurückgestellt`, `Abgeschlossen (manuell)`) und persönliche Prüfnotiz festhalten. Jeder Registereintrag referenziert die spezifische Chat-ID, Beitragsnummer, Rollenangabe und eine Quelle als Textauszug. Die Registeransicht hat Bereichsfilter, springt auf Originalbeiträge und erlaubt kontrolliertes Bearbeiten oder Entfernen des **Verweises**, nicht des Chats. Kein Status gilt als mathematisch/empirisch bewiesen, weil er manuell gesetzt wurde.
+
+**Sicherung und Isolation:** `research-register.json` wird als optionale, SHA-256-verifizierbare Datei in das bestehende Vollbackup aufgenommen. Die neue Registerfunktion und Titeländerungen benötigen keine Android-Berechtigung und greifen nicht auf den ChatGPT-Account oder GitHub-Schreibzugriff zu. Keine One-Click-Restore-Freigabe. Android-Debug-Build verwendet wegen unverträglicher einmaliger CI-Signatur ein neues isoliertes QA-Paket `de.universelab.chatarchiv.researchqa19menu`; `versionName 0.5.19`, `versionCode 35` unverändert. Keine Überschreibung produktiver oder vorheriger QA-Archive. `main` unverändert, Draft-PR #296.
+
+**Abnahme:** JVM-Tests für Titelübernahme, Titelpersistenz über Import/Kategorie/Papierkorb, Register-JSON/Prüfstatus, Backup-Verifikation; anschließend Android-CI und Samsung-Screenshottest für kompakte Menüs, längere Titel und Registeraktion. Verbindliche wissenschaftliche Bewertung/Quellenvalidierung bleibt offen.
+
+
+
 ### QA-Nachkorrektur v0.5.19: horizontale Dialogschaltflächen
 
 - Im Mehrfachauswahldialog stehen **Weiter** und **Abbrechen** wieder nebeneinander am unteren Rand, ohne dritte native Schaltfläche.

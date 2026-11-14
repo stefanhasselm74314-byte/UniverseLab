@@ -65,14 +65,20 @@ public final class ResearchActivity extends Activity {
         note.setTextColor(Ui.MUTED);
         root.addView(note);
 
+        // Two compact navigation controls instead of a growing stack of scan buttons.
         LinearLayout actions = Ui.row(this);
-        Button project = Ui.button(this, "UniverseLab prüfen");
-        Button all = Ui.button(this, "Alle Chats prüfen");
-        actions.addView(project, Ui.weight(1));
-        actions.addView(all, Ui.weight(1));
+        Button scanMenu = Ui.button(this, "Chats prüfen ▾");
+        Button registerButton = Ui.button(this, "Forschungsregister");
+        actions.addView(scanMenu, Ui.weight(1));
+        actions.addView(registerButton, Ui.weight(1));
         root.addView(actions);
-        project.setOnClickListener(view -> beginScan(false));
-        all.setOnClickListener(view -> beginScan(true));
+        scanMenu.setOnClickListener(view -> new AlertDialog.Builder(this)
+                .setTitle("Chats für Fundstellenprüfung")
+                .setItems(new String[]{"UniverseLab prüfen", "Alle Chats prüfen"},
+                        (dialog, index) -> beginScan(index == 1))
+                .setNegativeButton("Abbrechen", null).show());
+        registerButton.setOnClickListener(view ->
+                startActivity(new Intent(this, ResearchRegisterActivity.class)));
 
         cancelButton = Ui.button(this, "Prüfung abbrechen");
         cancelButton.setVisibility(View.GONE);
@@ -86,29 +92,31 @@ public final class ResearchActivity extends Activity {
         status.setTextColor(Ui.ACCENT);
         root.addView(status);
 
-        filterButton = Ui.button(this, "Filter: Alle Kategorien ▾");
+        filterButton = Ui.button(this, "Hinweisart ▾");
         filterButton.setOnClickListener(view -> new AlertDialog.Builder(this)
                 .setTitle("Hinweisarten auswählen")
                 .setSingleChoiceItems(TYPE_FILTERS, selectedFilter, (dialog, which) -> {
                     selectedFilter = which;
                     showLimit = 100;
-                    filterButton.setText("Filter: " + TYPE_FILTERS[which] + " ▾");
+                    filterButton.setText(selectedFilter == 0 ? "Hinweisart ▾" : TYPE_FILTERS[which] + " ▾");
                     showFilteredResults();
                     dialog.dismiss();
                 }).setNegativeButton("Abbrechen", null).show());
-        root.addView(filterButton);
 
-        scopeButton = Ui.button(this, "Bereich: Alle Bereiche ▾");
+        scopeButton = Ui.button(this, "Fachbereich ▾");
         scopeButton.setOnClickListener(view -> new AlertDialog.Builder(this)
                 .setTitle("Heuristischen Fachbereich auswählen")
                 .setSingleChoiceItems(ResearchScope.FILTERS, selectedScope, (dialog, which) -> {
                     selectedScope = which;
                     showLimit = 100;
-                    scopeButton.setText("Bereich: " + ResearchScope.FILTERS[which] + " ▾");
+                    scopeButton.setText(selectedScope == 0 ? "Fachbereich ▾" : ResearchScope.FILTERS[which] + " ▾");
                     showFilteredResults();
                     dialog.dismiss();
                 }).setNegativeButton("Abbrechen", null).show());
-        root.addView(scopeButton);
+        LinearLayout filters = Ui.row(this);
+        filters.addView(filterButton, Ui.weight(1));
+        filters.addView(scopeButton, Ui.weight(1));
+        root.addView(filters);
 
         ListView list = new WideGripListView(this);
         list.setDivider(null);
@@ -118,22 +126,14 @@ public final class ResearchActivity extends Activity {
         list.setAdapter(adapter);
         list.setOnItemClickListener((parent, view, position, id) -> {
             if (position < 0 || position >= findings.size()) return;
-            Intent intent = new Intent(this, ConversationActivity.class);
-            intent.putExtra("chatId", findings.get(position).chatId);
-            // Message numbers are 1-based in the result card, 0-based in the list.
-            intent.putExtra("focusMessageIndex", findings.get(position).messageNumber - 1);
-            startActivity(intent);
+            ResearchFinder.Finding finding = findings.get(position);
+            openContribution(finding.chatId, finding.messageNumber);
         });
-        // Short tap keeps the original source link. Long tap opens a later candidate
-        // status statement, when a uniquely keyed link could be made.
+        // A heuristic candidate is never automatically promoted to a reviewed item.
+        // Long press offers an explicit, manually confirmed research registration.
         list.setOnItemLongClickListener((parent, view, position, id) -> {
             if (position < 0 || position >= findings.size()) return false;
-            ResearchTimeline.Review review = reviews.get(findings.get(position));
-            if (review == null || review.source == null) return false;
-            Intent intent = new Intent(this, ConversationActivity.class);
-            intent.putExtra("chatId", review.source.chatId);
-            intent.putExtra("focusMessageIndex", review.source.messageNumber - 1);
-            startActivity(intent);
+            showFindingActions(findings.get(position));
             return true;
         });
         root.addView(list, Ui.fillRemaining());
@@ -146,6 +146,46 @@ public final class ResearchActivity extends Activity {
         });
         root.addView(moreButton);
         beginScan(false);
+    }
+
+    private void openContribution(String chatId, int messageNumber) {
+        Intent intent = new Intent(this, ConversationActivity.class);
+        intent.putExtra("chatId", chatId);
+        intent.putExtra("focusMessageIndex", messageNumber - 1);
+        startActivity(intent);
+    }
+
+    private void showFindingActions(ResearchFinder.Finding finding) {
+        ResearchTimeline.Review review = reviews.get(finding);
+        boolean hasLater = review != null && review.source != null;
+        String[] actions = hasLater
+                ? new String[]{"Fundstelle ins Forschungsregister aufnehmen",
+                        "Originalbeitrag öffnen", "Spätere Statusaussage öffnen"}
+                : new String[]{"Fundstelle ins Forschungsregister aufnehmen",
+                        "Originalbeitrag öffnen"};
+        new AlertDialog.Builder(this).setTitle("Fundstelle: " + finding.kind)
+                .setItems(actions, (dialog, index) -> {
+                    if (index == 0) saveManualFinding(finding);
+                    else if (index == 1) openContribution(finding.chatId, finding.messageNumber);
+                    else if (hasLater) openContribution(
+                            review.source.chatId, review.source.messageNumber);
+                }).setNegativeButton("Abbrechen", null).show();
+    }
+
+    private void saveManualFinding(ResearchFinder.Finding finding) {
+        if (scanning) return;
+        try {
+            ResearchRegister register = new ResearchRegister(this);
+            ResearchRegister.Record existing = register.get(ResearchRegister.idForFinding(finding));
+            ResearchRegisterActivity.promptReview(this, existing, (stage, state, note) -> {
+                register.addFinding(finding, stage, state, note);
+            }, () -> status.setText("Fundstelle manuell im Forschungsregister gespeichert. "
+                    + "Das ist keine wissenschaftliche Bestätigung."));
+        } catch (IOException unreadable) {
+            new AlertDialog.Builder(this).setTitle("Forschungsregister nicht verfügbar")
+                    .setMessage(unreadable.getMessage())
+                    .setPositiveButton("Schließen", null).show();
+        }
     }
 
     private void beginScan(boolean includeAll) {
@@ -279,7 +319,7 @@ public final class ResearchActivity extends Activity {
             card.addView(Ui.text(ResearchActivity.this,
                     "Prüffrage: " + f.question + "\nPrüfweg: " + f.verification, 12, false));
             TextView warning = Ui.text(ResearchActivity.this,
-                    "[HEURISTISCH] · Stand nicht verifiziert · Tippen: Quellchat öffnen", 11, false);
+                    "[HEURISTISCH] · Tippen: Quelle · lange tippen: Register / Optionen", 11, false);
             warning.setTextColor(Ui.MUTED);
             card.addView(warning);
 

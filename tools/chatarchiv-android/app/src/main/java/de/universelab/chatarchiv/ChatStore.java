@@ -62,6 +62,8 @@ final class ChatStore {
     static final class Entry {
         final String id;
         final String title;
+        final String originalTitle;
+        final boolean customTitle;
         final String file;
         final long created;
         final String category;
@@ -70,13 +72,20 @@ final class ChatStore {
         final long trashedAt;
 
         Entry(String id, String title, String file, long created, String category, String digest) {
-            this(id, title, file, created, category, digest, "", 0);
+            this(id, title, file, created, category, digest, "", 0, title, false);
         }
 
         Entry(String id, String title, String file, long created, String category, String digest,
               String originCategory, long trashedAt) {
+            this(id, title, file, created, category, digest, originCategory, trashedAt, title, false);
+        }
+
+        Entry(String id, String title, String file, long created, String category, String digest,
+              String originCategory, long trashedAt, String originalTitle, boolean customTitle) {
             this.id = id;
             this.title = title;
+            this.originalTitle = originalTitle;
+            this.customTitle = customTitle;
             this.file = file;
             this.created = created;
             this.category = category;
@@ -89,20 +98,39 @@ final class ChatStore {
             return TRASH.equals(category) || PURGE_PENDING.equals(category);
         }
 
+        Entry withCategory(String target) {
+            return new Entry(id, title, file, created, target, digest,
+                    originCategory, trashedAt, originalTitle, customTitle);
+        }
+
+        Entry withLocalTitle(String requested) {
+            boolean changed = !originalTitle.equals(requested);
+            return new Entry(id, changed ? requested : originalTitle, file, created, category, digest,
+                    originCategory, trashedAt, originalTitle, changed);
+        }
+
+        Entry withImportedTitle(String imported, long time, String newDigest) {
+            return new Entry(id, customTitle ? title : imported, file, time, category, newDigest,
+                    originCategory, trashedAt, imported, customTitle && !title.equals(imported));
+        }
+
         Entry moveToTrash(long when) {
             if (inTrash()) return this;
-            return new Entry(id, title, file, created, TRASH, digest, category, when);
+            return new Entry(id, title, file, created, TRASH, digest,
+                    category, when, originalTitle, customTitle);
         }
 
         Entry restoreFromTrash() {
             if (!TRASH.equals(category)) throw new IllegalStateException("Chat nicht wiederherstellbar");
             String target = PROJECT.equals(originCategory) ? PROJECT : OTHER;
-            return new Entry(id, title, file, created, target, digest);
+            return new Entry(id, title, file, created, target, digest,
+                    "", 0, originalTitle, customTitle);
         }
 
         Entry beginPermanentDeletion() {
             if (!inTrash()) throw new IllegalStateException("Chat muss im Papierkorb liegen");
-            return new Entry(id, title, file, created, PURGE_PENDING, digest, originCategory, trashedAt);
+            return new Entry(id, title, file, created, PURGE_PENDING, digest,
+                    originCategory, trashedAt, originalTitle, customTitle);
         }
 
         String prettyDate() {
@@ -118,6 +146,10 @@ final class ChatStore {
             json.put("created", created);
             json.put("category", category);
             json.put("digest", digest);
+            if (customTitle) {
+                json.put("custom_title", true);
+                json.put("original_title", originalTitle);
+            }
             if (inTrash()) {
                 json.put("origin_category", originCategory);
                 json.put("trashed_at", trashedAt);
@@ -224,9 +256,12 @@ final class ChatStore {
                 String origin = record.optString("origin_category", "");
                 if (!PROJECT.equals(origin) && !OTHER.equals(origin)) origin = OTHER;
                 long trashedAt = Math.max(0, record.optLong("trashed_at", 0));
-                entries.put(id, new Entry(id, record.optString("title", "Ohne Titel"),
+                String title = record.optString("title", "Ohne Titel");
+                boolean custom = record.optBoolean("custom_title", false);
+                String original = custom ? record.optString("original_title", title) : title;
+                entries.put(id, new Entry(id, title,
                         file, record.optLong("created", 0), category,
-                        record.optString("digest", ""), origin, trashedAt));
+                        record.optString("digest", ""), origin, trashedAt, original, custom));
             }
         } catch (JSONException exception) {
             throw new IOException("Gesprächsindex beschädigt: " + exception.getMessage(), exception);
@@ -267,8 +302,7 @@ final class ChatStore {
         for (String id : unique) {
             Entry original = entries.get(id);
             Entry next = TRASH.equals(destination) ? original.moveToTrash(now)
-                    : new Entry(original.id, original.title, original.file, original.created,
-                                destination, original.digest);
+                    : original.withCategory(destination);
             if (original.category.equals(next.category)) continue;
             originals.put(id, original);
             entries.put(id, next);
@@ -337,13 +371,52 @@ final class ChatStore {
         catch (IOException error) { entries.put(id, current); throw error; }
     }
 
+    /** Renames the LOCAL display title only. Original ChatGPT JSON and indexes remain intact. */
+    synchronized void renameChat(String id, String requested) throws IOException {
+        Entry old = entries.get(id);
+        if (old == null || PURGE_PENDING.equals(old.category))
+            throw new IOException("Gespräch nicht zum Umbenennen verfügbar");
+        String name = validateLocalTitle(requested);
+        Entry updated = old.withLocalTitle(name);
+        if (old.title.equals(updated.title) && old.customTitle == updated.customTitle) return;
+        entries.put(id, updated);
+        try { saveIndex(); }
+        catch (IOException error) { entries.put(id, old); throw error; }
+    }
+
+    static String validateLocalTitle(String value) throws IOException {
+        if (value == null) throw new IOException("Titel fehlt");
+        String title = value.trim();
+        if (title.isEmpty()) throw new IOException("Titel darf nicht leer sein");
+        if (title.length() > 180) throw new IOException("Titel darf maximal 180 Zeichen lang sein");
+        for (int i = 0; i < title.length(); i++) {
+            if (Character.isISOControl(title.charAt(i)))
+                throw new IOException("Titel darf keine Zeilenumbrüche oder Steuerzeichen enthalten");
+        }
+        return title;
+    }
+
+    synchronized Entry entryForDisplay(String id) {
+        return entries.get(id);
+    }
+
+    synchronized void restoreOriginalTitle(String id) throws IOException {
+        Entry old = entries.get(id);
+        if (old == null || PURGE_PENDING.equals(old.category))
+            throw new IOException("Gespräch nicht zum Zurücksetzen verfügbar");
+        if (!old.customTitle) return;
+        entries.put(id, old.withLocalTitle(old.originalTitle));
+        try { saveIndex(); }
+        catch (IOException error) { entries.put(id, old); throw error; }
+    }
+
     synchronized void setCategory(String id, String category) throws IOException {
         Entry previous = entries.get(id);
         if (previous == null || previous.inTrash()) return;
         if (!PROJECT.equals(category) && !OTHER.equals(category)) return;
-        entries.put(id, new Entry(previous.id, previous.title, previous.file,
-                previous.created, category, previous.digest));
-        saveIndex();
+        entries.put(id, previous.withCategory(category));
+        try { saveIndex(); }
+        catch (IOException failure) { entries.put(id, previous); throw failure; }
     }
 
     /** No modification, deletion, automatic selection or restoration of previous versions. */
@@ -510,9 +583,14 @@ final class ChatStore {
             zip.closeEntry();
 
             JSONObject categories = new JSONObject();
+            JSONObject localTitles = new JSONObject();
             JSONObject manifest = new JSONObject();
             try {
-                for (Entry record : records) categories.put(record.id, record.category);
+                for (Entry record : records) {
+                    categories.put(record.id, record.category);
+                    if (record.customTitle) localTitles.put(record.id, record.title);
+                }
+                manifest.put("title_overrides_by_id", localTitles);
                 manifest.put("format", "universelab-chatarchiv");
                 manifest.put("version", 1);
                 manifest.put("conversation_count", records.size());
@@ -646,15 +724,23 @@ final class ChatStore {
         JSONObject manifest = (JSONObject) decoded;
         if (!"universelab-chatarchiv".equals(manifest.optString("format", ""))) return;
         JSONObject map = manifest.optJSONObject("category_by_id");
-        if (map == null) return;
+        JSONObject titles = manifest.optJSONObject("title_overrides_by_id");
+        if (map == null && titles == null) return;
         synchronized (this) {
             for (String id : result.newIds) {
                 Entry previous = entries.get(id);
-                if (previous == null) continue;
-                String category = map.optString(id, "");
-                if (!PROJECT.equals(category) && !OTHER.equals(category)) continue;
-                entries.put(id, new Entry(id, previous.title, previous.file, previous.created,
-                        category, previous.digest));
+                if (previous == null || previous.inTrash()) continue;
+                Entry updated = previous;
+                if (map != null) {
+                    String category = map.optString(id, "");
+                    if (PROJECT.equals(category) || OTHER.equals(category))
+                        updated = updated.withCategory(category);
+                }
+                if (titles != null && titles.has(id) && !updated.customTitle) {
+                    try { updated = updated.withLocalTitle(validateLocalTitle(titles.optString(id, ""))); }
+                    catch (IOException ignored) { /* Ignore invalid optional title alias. */ }
+                }
+                entries.put(id, updated);
             }
         }
     }
@@ -720,7 +806,9 @@ final class ChatStore {
             writeAtomic(current, serialized);
             writeAtomic(new File(conversations, sha256(id) + ".search"), indexed);
             String category = previous != null ? previous.category : categoryFromTitle(title);
-            entries.put(id, new Entry(id, title, fileName, created, category, digest));
+            entries.put(id, previous == null
+                    ? new Entry(id, title, fileName, created, category, digest)
+                    : previous.withImportedTitle(title, created, digest));
             return previous != null ? ImportChange.UPDATED : ImportChange.ADDED;
         }
     }
@@ -1037,6 +1125,9 @@ final class ChatStore {
         if (!index.isFile()) throw new IOException("Gesprächsindex fehlt – Backup nicht möglich");
         List<ArchiveBundle.Item> files = new ArrayList<>();
         files.add(new ArchiveBundle.Item("index.json", index));
+        File registerFile = new File(context.getFilesDir(), ResearchRegister.FILE_NAME);
+        if (registerFile.isFile())
+            files.add(new ArchiveBundle.Item(ResearchRegister.FILE_NAME, registerFile));
         List<Entry> snapshot;
         synchronized (this) { snapshot = new ArrayList<>(entries.values()); }
         int active = 0, trashed = 0, missingSearch = 0;
@@ -1173,6 +1264,7 @@ final class ArchiveBundle {
 
     private static boolean validName(String name) {
         return "index.json".equals(name)
+                || ResearchRegister.FILE_NAME.equals(name)
                 || name.matches("conversations/[0-9a-f]{64}\\.(json|search)")
                 || name.matches("conversation-versions/[0-9a-f]{64}-[0-9a-f]{64}\\.json");
     }

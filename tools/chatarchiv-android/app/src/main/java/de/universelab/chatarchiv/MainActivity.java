@@ -81,7 +81,6 @@ public final class MainActivity extends Activity {
     private TextView firstRunHint;
     private EditText search;
     private Button cancelScanButton;
-    private Button trashButton;
     private String category = ChatStore.PROJECT;
     private String importSummary = "";
     private boolean importing;
@@ -148,36 +147,19 @@ public final class MainActivity extends Activity {
         root.addView(subtitle);
         Ui.addGap(this, root, 8);
 
-        LinearLayout actions = Ui.row(this);
-        android.widget.Button importButton = Ui.button(this, "Chats importieren");
-        android.widget.Button githubButton = Ui.button(this, "GitHub ansehen");
-        actions.addView(importButton, Ui.weight(1));
-        actions.addView(githubButton, Ui.weight(1));
-        root.addView(actions);
-        importButton.setOnClickListener(view -> showImportOptions());
-        githubButton.setOnClickListener(view -> startActivity(new Intent(this, GitHubActivity.class)));
-
-        android.widget.Button backupButton = Ui.button(this, "Alle Gespräche als ZIP sichern");
-        backupButton.setOnClickListener(view -> offerArchiveExport());
-        root.addView(backupButton);
-
-        Button researchButton = Ui.button(this, "Forschungsnavigator · offene Fragen");
-        researchButton.setOnClickListener(view ->
-                startActivity(new Intent(this, ResearchActivity.class)));
-        root.addView(researchButton);
-
-        Button handoffButton = Ui.button(this, "Chat-Übergabe · neuen Chat vorbereiten");
-        handoffButton.setOnClickListener(view ->
-                startActivity(new Intent(this, HandoffActivity.class)));
-        root.addView(handoffButton);
-
-        Button toolsButton = Ui.button(this, "Archivwerkzeuge · Prüfen, Auswählen, Sichern");
-        toolsButton.setOnClickListener(view -> showArchiveTools());
-        root.addView(toolsButton);
-
-        trashButton = Ui.button(this, "Papierkorb (0)");
-        trashButton.setOnClickListener(view -> showTrash());
-        root.addView(trashButton);
+        // Three compact menus replace the growing stack of full-width actions.
+        // Search, scope selectors and the chat list remain directly accessible.
+        LinearLayout menus = Ui.row(this);
+        Button archiveMenu = Ui.button(this, "Archiv ▾");
+        Button researchMenu = Ui.button(this, "Forschung ▾");
+        Button toolsMenu = Ui.button(this, "Werkzeuge ▾");
+        menus.addView(archiveMenu, Ui.weight(1));
+        menus.addView(researchMenu, Ui.weight(1));
+        menus.addView(toolsMenu, Ui.weight(1));
+        root.addView(menus);
+        archiveMenu.setOnClickListener(view -> showArchiveMenu());
+        researchMenu.setOnClickListener(view -> showResearchMenu());
+        toolsMenu.setOnClickListener(view -> showArchiveTools());
 
         Ui.addGap(this, root, 10);
         LinearLayout tabs = Ui.row(this);
@@ -263,19 +245,55 @@ public final class MainActivity extends Activity {
         refresh();
     }
 
+    private void showArchiveMenu() {
+        if (importing) return;
+        int trashCount = store.trashSnapshot().size();
+        new AlertDialog.Builder(this)
+                .setTitle("Archiv")
+                .setItems(new String[]{
+                        "Chats importieren",
+                        "Alle aktiven Chats als ZIP sichern",
+                        "Papierkorb (" + trashCount + ")",
+                        "Mehrfachauswahl: aktuelle Treffer"
+                }, (dialog, which) -> {
+                    if (which == 0) showImportOptions();
+                    else if (which == 1) offerArchiveExport();
+                    else if (which == 2) showTrash();
+                    else if (which == 3) showBatchSelection();
+                })
+                .setNegativeButton("Schließen", null).show();
+    }
+
+    private void showResearchMenu() {
+        if (importing) return;
+        new AlertDialog.Builder(this)
+                .setTitle("Forschung")
+                .setItems(new String[]{
+                        "Forschungsnavigator · Fundstellen prüfen",
+                        "Forschungsregister · geprüfte Einträge",
+                        "Chat-Übergabe · neuen Chat vorbereiten"
+                }, (dialog, which) -> {
+                    if (which == 0) startActivity(new Intent(this, ResearchActivity.class));
+                    else if (which == 1) startActivity(new Intent(this, ResearchRegisterActivity.class));
+                    else startActivity(new Intent(this, HandoffActivity.class));
+                })
+                .setNegativeButton("Schließen", null).show();
+    }
+
     private void showArchiveTools() {
         if (importing) return;
-        new AlertDialog.Builder(this).setTitle("Archivwerkzeuge · lokal")
+        new AlertDialog.Builder(this).setTitle("Werkzeuge · lokal")
                 .setItems(new String[] {
                         "Archiv-Gesundheitsprüfung (nur lesen)",
-                        "Mehrfachauswahl: aktuelle Treffer",
-                        "Vollbackup inklusive Papierkorb und Altversionen",
-                        "Vollbackup mit SHA-256 prüfen"
+                        "Vollbackup mit Papierkorb, Altversionen und Register",
+                        "Vollbackup mit SHA-256 prüfen",
+                        "GitHub · öffentliches Projekt ansehen"
                 }, (dialog, which) -> {
                     if (which == 0) startArchiveAudit();
-                    else if (which == 1) showBatchSelection();
-                    else if (which == 2) offerCompleteBackup();
-                    else if (which == 3) chooseBackupToVerify();
+                    else if (which == 1) offerCompleteBackup();
+                    else if (which == 2) chooseBackupToVerify();
+                    else if (which == 3)
+                        startActivity(new Intent(this, GitHubActivity.class));
                 })
                 .setNegativeButton("Schließen", null).show();
     }
@@ -545,17 +563,86 @@ public final class MainActivity extends Activity {
         String shortTitle = entry.title.length() > 48
                 ? entry.title.substring(0, 48) + "…" : entry.title;
         String shortId = entry.id.length() > 8 ? entry.id.substring(0, 8) : entry.id;
-        // Never combine setMessage() and setItems(): on Android 17 the message
-        // wins and both action choices disappear (reproduced on Galaxy S24 Ultra).
+        String[] actions = entry.customTitle
+                ? new String[] {"Umbenennen", "Originaltitel wiederherstellen", "Bereich ändern", "Chat löschen"}
+                : new String[] {"Umbenennen", "Bereich ändern", "Chat löschen"};
+        // Android 17: never combine setMessage and setItems.
         new AlertDialog.Builder(this)
                 .setTitle("Gespräch verwalten: „" + shortTitle + "“ · ID " + shortId)
-                .setItems(new String[] {"Bereich ändern", "Chat löschen"},
-                        (dialog, choice) -> {
-                            if (choice == 0) moveChat(entry);
-                            else if (choice == 1) confirmDeleteChat(entry);
-                        })
+                .setItems(actions, (dialog, choice) -> {
+                    if (choice == 0) showRenameDialog(entry);
+                    else if (entry.customTitle && choice == 1) confirmRestoreOriginalTitle(entry);
+                    else if (choice == (entry.customTitle ? 2 : 1)) moveChat(entry);
+                    else confirmDeleteChat(entry);
+                })
                 .setNegativeButton("Abbrechen", null)
                 .show();
+    }
+
+    private void showRenameDialog(ChatStore.Entry entry) {
+        if (importing) return;
+        EditText titleField = new EditText(this);
+        titleField.setSingleLine(true);
+        titleField.setText(entry.title);
+        titleField.setSelectAllOnFocus(true);
+        titleField.setTextColor(Ui.TEXT);
+        titleField.setHint("Neuer Gesprächstitel");
+        titleField.setTextSize(16);
+        titleField.setFilters(new android.text.InputFilter[]{
+                new android.text.InputFilter.LengthFilter(180)
+        });
+        LinearLayout panel = Ui.column(this, 12);
+        TextView note = Ui.text(this,
+                "Nur der Titel im lokalen ChatArchiv wird geändert. "
+                + "Die originalen ChatGPT-Exportdateien bleiben unverändert.",
+                12, false);
+        panel.addView(note);
+        if (entry.customTitle) {
+            TextView source = Ui.text(this, "Originaltitel: " + entry.originalTitle, 12, false);
+            panel.addView(source);
+        }
+        panel.addView(titleField);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Gespräch umbenennen")
+                .setView(panel)
+                .setNegativeButton("Abbrechen", null)
+                .setPositiveButton("Speichern", null)
+                .create();
+        dialog.setOnShowListener(ignored -> {
+            titleField.requestFocus();
+            titleField.setSelection(titleField.length());
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
+                try {
+                    String value = ChatStore.validateLocalTitle(titleField.getText().toString());
+                    store.renameChat(entry.id, value);
+                    importSummary = "Gesprächstitel geändert: „" + value + "“.";
+                    dialog.dismiss();
+                    refresh();
+                } catch (IOException problem) {
+                    titleField.setError(problem.getMessage());
+                    status.setText("Umbenennen fehlgeschlagen: " + problem.getMessage());
+                }
+            });
+        });
+        dialog.show();
+    }
+
+    private void confirmRestoreOriginalTitle(ChatStore.Entry entry) {
+        if (importing) return;
+        new AlertDialog.Builder(this)
+                .setTitle("Originaltitel wiederherstellen?")
+                .setMessage("Das Gespräch erhält wieder seinen ursprünglichen ChatGPT-Titel:\n\n„"
+                        + entry.originalTitle + "“\n\nDer Inhalt und die Kategorie bleiben unverändert.")
+                .setNegativeButton("Abbrechen", null)
+                .setPositiveButton("Wiederherstellen", (dialog, choice) -> {
+                    try {
+                        store.restoreOriginalTitle(entry.id);
+                        importSummary = "Originaltitel wiederhergestellt.";
+                        refresh();
+                    } catch (IOException problem) {
+                        status.setText("Titel konnte nicht wiederhergestellt werden: " + problem.getMessage());
+                    }
+                }).show();
     }
 
     private void confirmDeleteChat(ChatStore.Entry entry) {
@@ -606,7 +693,7 @@ public final class MainActivity extends Activity {
         boolean deletionPending = entry.category.equals("loeschung-ausstehend");
         String[] choices = deletionPending
                 ? new String[]{"Endgültige Löschung erneut versuchen"}
-                : new String[]{"Wiederherstellen", "Endgültig löschen"};
+                : new String[]{"Wiederherstellen", "Umbenennen", "Endgültig löschen"};
         new AlertDialog.Builder(this).setTitle("Papierkorb: " + entry.title)
                 .setItems(choices, (dialog, choice) -> {
                     if (!deletionPending && choice == 0) {
@@ -617,6 +704,8 @@ public final class MainActivity extends Activity {
                         } catch (IOException error) {
                             status.setText("Wiederherstellung fehlgeschlagen: " + error.getMessage());
                         }
+                    } else if (!deletionPending && choice == 1) {
+                        showRenameDialog(entry);
                     } else {
                         confirmPermanentDelete(entry);
                     }
@@ -1465,7 +1554,7 @@ public final class MainActivity extends Activity {
         for (ChatStore.Entry entry : all) if (ChatStore.PROJECT.equals(entry.category)) project++;
         counts.setText(all.size() + " Gespräche · " + project + " UniverseLab · "
                 + (all.size() - project) + " weitere");
-        if (trashButton != null) trashButton.setText("Papierkorb (" + store.trashSnapshot().size() + ")");
+        // Papierkorbzahl wird im Archiv-Menü bei jedem Öffnen frisch gelesen.
         if (firstRunHint != null) firstRunHint.setVisibility(all.isEmpty() ? View.VISIBLE : View.GONE);
         scheduleSearch();
     }
