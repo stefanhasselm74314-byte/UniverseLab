@@ -259,13 +259,17 @@ public final class MainActivity extends Activity {
 
     private void showChatActions(ChatStore.Entry entry) {
         if (importing) return;
+        String shortTitle = entry.title.length() > 48
+                ? entry.title.substring(0, 48) + "…" : entry.title;
+        String shortId = entry.id.length() > 8 ? entry.id.substring(0, 8) : entry.id;
+        // Never combine setMessage() and setItems(): on Android 17 the message
+        // wins and both action choices disappear (reproduced on Galaxy S24 Ultra).
         new AlertDialog.Builder(this)
-                .setTitle("Gespräch verwalten")
-                .setMessage("„" + entry.title + "“")
+                .setTitle("Gespräch verwalten: „" + shortTitle + "“ · ID " + shortId)
                 .setItems(new String[] {"Bereich ändern", "Chat löschen"},
                         (dialog, choice) -> {
                             if (choice == 0) moveChat(entry);
-                            else confirmDeleteChat(entry);
+                            else if (choice == 1) confirmDeleteChat(entry);
                         })
                 .setNegativeButton("Abbrechen", null)
                 .show();

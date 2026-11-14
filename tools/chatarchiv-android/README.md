@@ -1,5 +1,15 @@
 # UniverseLab ChatArchiv — Android
 
+## Version 0.5.16 · Schaltflächen im Chat-Aktionsdialog sichtbar (Samsung Android 17)
+
+- **Reproduzierter Fehler v0.5.15:** Lange auf „New chat“ drücken öffnete einen Dialog mit Titel und Nachrichtentext, aber ohne die versprochenen Aktionen. Ursache: `AlertDialog.Builder.setMessage()` und `setItems()` wurden gemeinsam benutzt; bei Android 17 wurde die Optionsliste unterdrückt.
+- **Gezielte Korrektur:** Die Kurzfassung des Gesprächstitels sowie die ersten acht Zeichen der Chat-ID stehen nun **im Dialogtitel**; der Dialog verwendet ausschließlich `setItems()` mit „Bereich ändern“ und „Chat löschen“ plus „Abbrechen“. Die eigene nachfolgende Sicherheitsabfrage „Wollen Sie wirklich diesen Chat löschen?“ bleibt unverändert.
+- **Keine Löschung bei langem Drücken:** Ohne Auswahl von „Chat löschen“ und zusätzliche explizite Bestätigung wird kein Datensatz verschoben. Der bestehende Papierkorb mit Wiederherstellung und zweiter Sicherheitsabfrage zur endgültigen Löschung bleibt erhalten.
+- **QA-Datenschutz:** Eigene Debug-Paketkennung `de.universelab.chatarchiv.researchqa16`. Die vorhandenen v0.5.12-, v0.5.14- und v0.5.15-Installationen werden nicht überschrieben. Neue QA-App enthält von sich aus **keine 641 Chats**; ausschließlich expliziter lokaler Testimport. Öffentliche CI baut keine signaturkompatible produktive APK.
+- `versionCode 32` / `versionName 0.5.16`, keine neuen Android-Berechtigungen, kein ChatGPT-Weblogin, keine Daten auf GitHub. [OFFEN] Erneuter Android-17-Gerätetest.
+
+
+
 ## Version 0.5.15 · bestätigte Chat-Löschung mit Papierkorb und Wiederherstellung (Gerätetest offen)
 
 - Langes Drücken auf einen Chat öffnet statt direkter Kategorieänderung das Menü **Bereich ändern** / **Chat löschen**. Vor jeder Löschung erscheint eine eindeutige Sicherheitsabfrage **„Wollen Sie wirklich diesen Chat löschen?“**, mit **Abbrechen** als sichere Alternative.
