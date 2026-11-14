@@ -186,14 +186,13 @@ public final class ConversationActivity extends Activity {
                     }
                     String[] labels = new String[saved.size()];
                     for (int i = 0; i < labels.length; i++) labels[i] = saved.get(i).displayName();
-                    new AlertDialog.Builder(this)
-                            .setTitle("Gesicherte Altversionen · nur lesen")
-                            .setItems(labels, (dialog, index) -> {
+                    Ui.showFramedMenu(this, "Gesicherte Altversionen · nur lesen",
+                            labels, "Schließen", (dialog, index) -> {
                                 Intent intent = new Intent(this, ConversationActivity.class);
                                 intent.putExtra("chatId", chatId);
                                 intent.putExtra("archivedDigest", saved.get(index).digest);
                                 startActivity(intent);
-                            }).setNegativeButton("Schließen", null).show();
+                            });
                 });
             } catch (IOException exception) {
                 runOnUiThread(() -> {
@@ -259,23 +258,23 @@ public final class ConversationActivity extends Activity {
     private void showDisplayOptions() {
         String[] choices = {"Original (unverändert)", "Unicode (häufige LaTeX-Formeln)",
                 "Monospace (Quelltext)"};
-        new AlertDialog.Builder(this).setTitle("Formeldarstellung")
-                .setSingleChoiceItems(choices, displayMode, (dialog, which) -> {
+        Ui.showFramedChoices(this, "Formeldarstellung", choices, displayMode,
+                "Abbrechen", (dialog, which) -> {
                     displayMode = which;
                     getSharedPreferences(DISPLAY_PREFS, MODE_PRIVATE)
                             .edit().putInt(DISPLAY_MODE, displayMode).apply();
                     displayButton.setText(modeLabel());
                     adapter.notifyDataSetChanged();
                     dialog.dismiss();
-                }).setNegativeButton("Abbrechen", null).show();
+                });
     }
 
     private void showExportOptions() {
         ExportFormatter.Format[] formats = ExportFormatter.Format.values();
         String[] names = new String[formats.length];
         for (int i = 0; i < names.length; i++) names[i] = formats[i].label;
-        new AlertDialog.Builder(this).setTitle("Gespräch vollständig exportieren")
-                .setItems(names, (dialog, which) -> {
+        Ui.showFramedMenu(this, "Gespräch vollständig exportieren",
+                names, "Abbrechen", (dialog, which) -> {
                     pendingFormat = formats[which];
                     Intent save = new Intent(Intent.ACTION_CREATE_DOCUMENT);
                     save.addCategory(Intent.CATEGORY_OPENABLE);
@@ -283,7 +282,7 @@ public final class ConversationActivity extends Activity {
                     save.putExtra(Intent.EXTRA_TITLE, ExportFormatter.fileName(chatTitle, pendingFormat));
                     save.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     startActivityForResult(save, SAVE_CHAT);
-                }).setNegativeButton("Abbrechen", null).show();
+                });
     }
 
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {

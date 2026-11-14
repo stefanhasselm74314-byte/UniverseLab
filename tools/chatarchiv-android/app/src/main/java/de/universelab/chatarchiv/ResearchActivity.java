@@ -76,11 +76,10 @@ public final class ResearchActivity extends Activity {
         actions.addView(scanMenu, Ui.weight(1));
         actions.addView(registerButton, Ui.weight(1));
         root.addView(actions);
-        scanMenu.setOnClickListener(view -> new AlertDialog.Builder(this)
-                .setTitle("Chats für Fundstellenprüfung")
-                .setItems(new String[]{"UniverseLab prüfen", "Alle Chats prüfen"},
-                        (dialog, index) -> beginScan(index == 1))
-                .setNegativeButton("Abbrechen", null).show());
+        scanMenu.setOnClickListener(view -> Ui.showFramedMenu(this,
+                "Chats für Fundstellenprüfung",
+                new String[]{"UniverseLab prüfen", "Alle Chats prüfen"},
+                "Abbrechen", (dialog, index) -> beginScan(index == 1)));
         registerButton.setOnClickListener(view ->
                 startActivity(new Intent(this, ResearchRegisterActivity.class)));
 
@@ -97,26 +96,26 @@ public final class ResearchActivity extends Activity {
         root.addView(status);
 
         filterButton = Ui.button(this, "Hinweisart ▾");
-        filterButton.setOnClickListener(view -> new AlertDialog.Builder(this)
-                .setTitle("Hinweisarten auswählen")
-                .setSingleChoiceItems(TYPE_FILTERS, selectedFilter, (dialog, which) -> {
+        filterButton.setOnClickListener(view -> Ui.showFramedChoices(this,
+                "Hinweisarten auswählen", TYPE_FILTERS, selectedFilter, "Abbrechen",
+                (dialog, which) -> {
                     selectedFilter = which;
                     showLimit = 100;
                     filterButton.setText(selectedFilter == 0 ? "Hinweisart ▾" : TYPE_FILTERS[which] + " ▾");
                     showFilteredResults();
                     dialog.dismiss();
-                }).setNegativeButton("Abbrechen", null).show());
+                }));
 
         scopeButton = Ui.button(this, "Fachbereich ▾");
-        scopeButton.setOnClickListener(view -> new AlertDialog.Builder(this)
-                .setTitle("Heuristischen Fachbereich auswählen")
-                .setSingleChoiceItems(ResearchScope.FILTERS, selectedScope, (dialog, which) -> {
+        scopeButton.setOnClickListener(view -> Ui.showFramedChoices(this,
+                "Heuristischen Fachbereich auswählen", ResearchScope.FILTERS,
+                selectedScope, "Abbrechen", (dialog, which) -> {
                     selectedScope = which;
                     showLimit = 100;
                     scopeButton.setText(selectedScope == 0 ? "Fachbereich ▾" : ResearchScope.FILTERS[which] + " ▾");
                     showFilteredResults();
                     dialog.dismiss();
-                }).setNegativeButton("Abbrechen", null).show());
+                }));
         LinearLayout filters = Ui.row(this);
         filters.addView(filterButton, Ui.weight(1));
         filters.addView(scopeButton, Ui.weight(1));
@@ -167,13 +166,13 @@ public final class ResearchActivity extends Activity {
                         "Originalbeitrag öffnen", "Spätere Statusaussage öffnen"}
                 : new String[]{"Fundstelle ins Forschungsregister aufnehmen",
                         "Originalbeitrag öffnen"};
-        new AlertDialog.Builder(this).setTitle("Fundstelle: " + finding.kind)
-                .setItems(actions, (dialog, index) -> {
+        Ui.showFramedMenu(this, "Fundstelle: " + finding.kind,
+                actions, "Abbrechen", (dialog, index) -> {
                     if (index == 0) saveManualFinding(finding);
                     else if (index == 1) openContribution(finding.chatId, finding.messageNumber);
                     else if (hasLater) openContribution(
                             review.source.chatId, review.source.messageNumber);
-                }).setNegativeButton("Abbrechen", null).show();
+                });
     }
 
     private void saveManualFinding(ResearchFinder.Finding finding) {
@@ -456,11 +455,11 @@ public static final class ResearchRegisterActivity extends Activity {
         String[] labels = new String[ResearchRegister.STAGES.length + 1];
         labels[0] = "Alle Stufen";
         System.arraycopy(ResearchRegister.STAGES, 0, labels, 1, ResearchRegister.STAGES.length);
-        new AlertDialog.Builder(this).setTitle("Forschungsstufe")
-                .setItems(labels, (dialog, index) -> {
+        Ui.showFramedMenu(this, "Forschungsstufe", labels,
+                "Abbrechen", (dialog, index) -> {
                     stageFilter = labels[index];
                     refresh();
-                }).setNegativeButton("Abbrechen", null).show();
+                });
     }
 
     private void openSource(ResearchRegister.Record item) {
@@ -471,16 +470,14 @@ public static final class ResearchRegisterActivity extends Activity {
     }
 
     private void showActions(ResearchRegister.Record item) {
-        new AlertDialog.Builder(this)
-                .setTitle("Registereintrag verwalten")
-                .setItems(new String[]{
-                        "Originalbeitrag öffnen", "Forschungsstufe / Status / Notiz bearbeiten",
-                        "Eintrag aus Forschungsregister entfernen"
-                }, (dialog, index) -> {
+        Ui.showFramedMenu(this, "Registereintrag verwalten",
+                new String[]{"Originalbeitrag öffnen", "Forschungsstufe / Status / Notiz bearbeiten",
+                        "Eintrag aus Forschungsregister entfernen"},
+                "Abbrechen", (dialog, index) -> {
                     if (index == 0) openSource(item);
                     else if (index == 1) showEdit(item);
                     else confirmRemove(item);
-                }).setNegativeButton("Abbrechen", null).show();
+                });
     }
 
     private void showEdit(ResearchRegister.Record item) {

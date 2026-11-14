@@ -248,54 +248,47 @@ public final class MainActivity extends Activity {
     private void showArchiveMenu() {
         if (importing) return;
         int trashCount = store.trashSnapshot().size();
-        new AlertDialog.Builder(this)
-                .setTitle("Archiv")
-                .setItems(new String[]{
-                        "Chats importieren",
-                        "Alle aktiven Chats als ZIP sichern",
-                        "Papierkorb (" + trashCount + ")",
-                        "Mehrfachauswahl: aktuelle Treffer"
-                }, (dialog, which) -> {
-                    if (which == 0) showImportOptions();
-                    else if (which == 1) offerArchiveExport();
-                    else if (which == 2) showTrash();
-                    else if (which == 3) showBatchSelection();
-                })
-                .setNegativeButton("Schließen", null).show();
+        Ui.showFramedMenu(this, "Archiv", new String[]{
+                "Chats importieren",
+                "Alle aktiven Chats als ZIP sichern",
+                "Papierkorb (" + trashCount + ")",
+                "Mehrfachauswahl: aktuelle Treffer"
+        }, "Schließen", (dialog, which) -> {
+            if (which == 0) showImportOptions();
+            else if (which == 1) offerArchiveExport();
+            else if (which == 2) showTrash();
+            else if (which == 3) showBatchSelection();
+        });
     }
 
     private void showResearchMenu() {
         if (importing) return;
-        new AlertDialog.Builder(this)
-                .setTitle("Forschung")
-                .setItems(new String[]{
-                        "Forschungsnavigator · Fundstellen prüfen",
-                        "Forschungsregister · geprüfte Einträge",
-                        "Chat-Übergabe · neuen Chat vorbereiten"
-                }, (dialog, which) -> {
-                    if (which == 0) startActivity(new Intent(this, ResearchActivity.class));
-                    else if (which == 1) startActivity(new Intent(this, ResearchActivity.ResearchRegisterActivity.class));
-                    else startActivity(new Intent(this, HandoffActivity.class));
-                })
-                .setNegativeButton("Schließen", null).show();
+        Ui.showFramedMenu(this, "Forschung", new String[]{
+                "Forschungsnavigator · Fundstellen prüfen",
+                "Forschungsregister · geprüfte Einträge",
+                "Chat-Übergabe · neuen Chat vorbereiten"
+        }, "Schließen", (dialog, which) -> {
+            if (which == 0) startActivity(new Intent(this, ResearchActivity.class));
+            else if (which == 1)
+                startActivity(new Intent(this, ResearchActivity.ResearchRegisterActivity.class));
+            else startActivity(new Intent(this, HandoffActivity.class));
+        });
     }
 
     private void showArchiveTools() {
         if (importing) return;
-        new AlertDialog.Builder(this).setTitle("Werkzeuge · lokal")
-                .setItems(new String[] {
-                        "Archiv-Gesundheitsprüfung (nur lesen)",
-                        "Vollbackup mit Papierkorb, Altversionen und Register",
-                        "Vollbackup mit SHA-256 prüfen",
-                        "GitHub · öffentliches Projekt ansehen"
-                }, (dialog, which) -> {
-                    if (which == 0) startArchiveAudit();
-                    else if (which == 1) offerCompleteBackup();
-                    else if (which == 2) chooseBackupToVerify();
-                    else if (which == 3)
-                        startActivity(new Intent(this, GitHubActivity.class));
-                })
-                .setNegativeButton("Schließen", null).show();
+        Ui.showFramedMenu(this, "Werkzeuge · lokal", new String[]{
+                "Archiv-Gesundheitsprüfung (nur lesen)",
+                "Vollbackup mit Papierkorb, Altversionen und Register",
+                "Vollbackup mit SHA-256 prüfen",
+                "GitHub · öffentliches Projekt ansehen"
+        }, "Schließen", (dialog, which) -> {
+            if (which == 0) startArchiveAudit();
+            else if (which == 1) offerCompleteBackup();
+            else if (which == 2) chooseBackupToVerify();
+            else if (which == 3)
+                startActivity(new Intent(this, GitHubActivity.class));
+        });
     }
 
     private void startArchiveAudit() {
@@ -405,15 +398,14 @@ public final class MainActivity extends Activity {
 
     private void showBatchOperations(List<ChatStore.Entry> selected) {
         if (importing || selected.isEmpty()) return;
-        new AlertDialog.Builder(this)
-                .setTitle("Sammelaktion · " + selected.size() + " Chats")
-                .setItems(new String[]{"Nach UniverseLab verschieben", "Nach Weitere Chats verschieben",
+        Ui.showFramedMenu(this, "Sammelaktion · " + selected.size() + " Chats",
+                new String[]{"Nach UniverseLab verschieben", "Nach Weitere Chats verschieben",
                         "Ausgewählte Chats in Papierkorb legen"},
-                        (dialog, which) -> {
-                            String target = which == 0 ? ChatStore.PROJECT
-                                    : which == 1 ? ChatStore.OTHER : ChatStore.TRASH;
-                            confirmBatchUpdate(selected, target);
-                        }).setNegativeButton("Abbrechen", null).show();
+                "Abbrechen", (dialog, which) -> {
+                    String target = which == 0 ? ChatStore.PROJECT
+                            : which == 1 ? ChatStore.OTHER : ChatStore.TRASH;
+                    confirmBatchUpdate(selected, target);
+                });
     }
 
     private void confirmBatchUpdate(List<ChatStore.Entry> selected, String target) {
@@ -566,17 +558,14 @@ public final class MainActivity extends Activity {
         String[] actions = entry.customTitle
                 ? new String[] {"Umbenennen", "Originaltitel wiederherstellen", "Bereich ändern", "Chat löschen"}
                 : new String[] {"Umbenennen", "Bereich ändern", "Chat löschen"};
-        // Android 17: never combine setMessage and setItems.
-        new AlertDialog.Builder(this)
-                .setTitle("Gespräch verwalten: „" + shortTitle + "“ · ID " + shortId)
-                .setItems(actions, (dialog, choice) -> {
+        Ui.showFramedMenu(this,
+                "Gespräch verwalten: „" + shortTitle + "“ · ID " + shortId,
+                actions, "Abbrechen", (dialog, choice) -> {
                     if (choice == 0) showRenameDialog(entry);
                     else if (entry.customTitle && choice == 1) confirmRestoreOriginalTitle(entry);
                     else if (choice == (entry.customTitle ? 2 : 1)) moveChat(entry);
                     else confirmDeleteChat(entry);
-                })
-                .setNegativeButton("Abbrechen", null)
-                .show();
+                });
     }
 
     private void showRenameDialog(ChatStore.Entry entry) {
@@ -683,10 +672,9 @@ public final class MainActivity extends Activity {
             names[i] = title + " · " + entry.prettyDate() + " · ID " + identity
                     + (entry.category.equals("loeschung-ausstehend") ? " · Löschung wiederholen" : "");
         }
-        new AlertDialog.Builder(this)
-                .setTitle("Papierkorb · " + trashed.size() + " Chats")
-                .setItems(names, (dialog, which) -> showTrashItemActions(trashed.get(which)))
-                .setNegativeButton("Schließen", null).show();
+        Ui.showFramedMenu(this, "Papierkorb · " + trashed.size() + " Chats",
+                names, "Schließen",
+                (dialog, which) -> showTrashItemActions(trashed.get(which)));
     }
 
     private void showTrashItemActions(ChatStore.Entry entry) {
@@ -694,8 +682,8 @@ public final class MainActivity extends Activity {
         String[] choices = deletionPending
                 ? new String[]{"Endgültige Löschung erneut versuchen"}
                 : new String[]{"Wiederherstellen", "Umbenennen", "Endgültig löschen"};
-        new AlertDialog.Builder(this).setTitle("Papierkorb: " + entry.title)
-                .setItems(choices, (dialog, choice) -> {
+        Ui.showFramedMenu(this, "Papierkorb: " + entry.title,
+                choices, "Abbrechen", (dialog, choice) -> {
                     if (!deletionPending && choice == 0) {
                         try {
                             store.restoreTrash(entry.id);
@@ -709,7 +697,7 @@ public final class MainActivity extends Activity {
                     } else {
                         confirmPermanentDelete(entry);
                     }
-                }).setNegativeButton("Abbrechen", null).show();
+                });
     }
 
     private void confirmPermanentDelete(ChatStore.Entry entry) {
@@ -767,16 +755,15 @@ public final class MainActivity extends Activity {
         String[] options = saved == null
                 ? new String[] {"Rettungsordner auswählen (empfohlen)", "Nur JSON-Dateien im Ordner anzeigen", "Einzelne JSON-Dateien (Android-Dialog)", "Ältere Export-ZIPs auswählen", "Gewählten Ordner inkl. Unterordner nach Chat-JSON durchsuchen"}
                 : new String[] {"Gespeicherten Ordner aktualisieren", "Anderen Rettungsordner auswählen", "Nur JSON-Dateien im Ordner anzeigen", "Einzelne JSON-Dateien (Android-Dialog)", "Ältere Export-ZIPs auswählen", "Gewählten Ordner inkl. Unterordner nach Chat-JSON durchsuchen"};
-        new AlertDialog.Builder(this)
-                .setTitle("Chats lokal importieren · kein Upload")
-                .setItems(options, (dialog, which) -> {
+        Ui.showFramedMenu(this, "Chats lokal importieren · kein Upload",
+                options, "Abbrechen", (dialog, which) -> {
                     if (which == options.length - 1) chooseScanFolder();
                     else if (saved != null && which == 0) importFolder(Uri.parse(saved));
                     else if ((saved == null && which == 0) || (saved != null && which == 1)) chooseFolder();
                     else if (which == options.length - 2) chooseZip();
                     else if (which == options.length - 4) chooseJsonFolder();
                     else chooseJson();
-                }).setNegativeButton("Abbrechen", null).show();
+                });
     }
 
     private void offerArchiveExport() {
@@ -872,13 +859,12 @@ public final class MainActivity extends Activity {
         if (saved.size() == 1) {
             scanAllLabel += "\n" + scanRootLabel(Uri.parse(saved.iterator().next()));
         }
-        new AlertDialog.Builder(this)
-                .setTitle("Automatische Suche in freigegebenen Ordnern")
-                .setItems(new String[] {
+        Ui.showFramedMenu(this, "Automatische Suche in freigegebenen Ordnern",
+                new String[] {
                         scanAllLabel,
                         "Einen weiteren Ordner hinzufügen",
                         "Gespeicherte Ordner einzeln verwalten"
-                }, (dialog, which) -> {
+                }, "Abbrechen", (dialog, which) -> {
                     if (which == 0) {
                         List<Uri> roots = new ArrayList<>();
                         for (String value : saved) roots.add(Uri.parse(value));
@@ -888,7 +874,7 @@ public final class MainActivity extends Activity {
                     } else {
                         manageScanFolders();
                     }
-                }).setNegativeButton("Abbrechen", null).show();
+                });
     }
 
     private void manageScanFolders() {
@@ -902,21 +888,19 @@ public final class MainActivity extends Activity {
         for (int i = 0; i < saved.size(); i++) {
             labels[i] = (i + 1) + ". " + scanRootLabel(Uri.parse(saved.get(i)));
         }
-        new AlertDialog.Builder(this)
-                .setTitle("Gespeicherte Ordner verwalten")
-                .setItems(labels, (dialog, index) -> manageScanFolder(Uri.parse(saved.get(index))))
-                .setNegativeButton("Schließen", null).show();
+        Ui.showFramedMenu(this, "Gespeicherte Ordner verwalten",
+                labels, "Schließen",
+                (dialog, index) -> manageScanFolder(Uri.parse(saved.get(index))));
     }
 
     private void manageScanFolder(Uri tree) {
         String label = scanRootLabel(tree);
-        new AlertDialog.Builder(this)
-                .setTitle(label)
-                .setItems(new String[] {"Nur diesen Ordner durchsuchen", "Diese Ordnerfreigabe entfernen"},
-                        (dialog, which) -> {
-                            if (which == 0) scanSelectedTree(tree);
-                            else confirmRemoveScanFolder(tree, label);
-                        }).setNegativeButton("Zurück", (dialog, ignored) -> manageScanFolders()).show();
+        Ui.showFramedMenu(this, label,
+                new String[] {"Nur diesen Ordner durchsuchen", "Diese Ordnerfreigabe entfernen"},
+                "Zurück", (dialog, which) -> {
+                    if (which == 0) scanSelectedTree(tree);
+                    else confirmRemoveScanFolder(tree, label);
+                }, (dialog, ignored) -> manageScanFolders());
     }
 
     private void confirmRemoveScanFolder(Uri tree, String label) {

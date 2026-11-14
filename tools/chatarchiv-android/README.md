@@ -1,5 +1,17 @@
 # UniverseLab ChatArchiv — Android
 
+## Gerahmte Untermenüs – v0.5.19, kein Versionssprung
+
+Auf ausdrücklichen Nutzerwunsch bekommen die bereits kompakten Hauptmenüs und ihre Untermenüs eine **klar sichtbare hellgraue Außenumrandung** und **einzeln umrissene Menüzeilen** mit 5-dp-Zwischenraum. Jede Zeile färbt sich beim Drücken/Fokussieren in einen etwas helleren neutralen Grauton. Alle Farben bleiben echte Grautöne (R=G=B); keine blauen Akzente, kein zusätzlicher Kasten um jeden Textabschnitt.
+
+Zentrale Android-Hilfsfunktionen in bestehender `Ui.java`: `showFramedMenu(...)` und `showFramedChoices(...)`, für Menüauswahl bzw. Auswahl mit radiobuttonartiger Markierung. Der Dialog verwendet einen 2-dp-Außenrahmen und pro Auswahloption einen mindestens 52-dp hohen, 1,2-dp umrandeten Bereich. Längere Listen sind scrollbar, die Dialoghöhe wird auf 78 % des Displays begrenzt, damit die untere Abbrechen-/Schließen-Aktion erreichbar bleibt. Die bewährte Scrollfunktion und alle zugeordneten Klickaktionen bleiben erhalten.
+
+Die neue Darstellung betrifft die Untermenüs **Archiv**, **Forschung**, **Werkzeuge**, Importoptionen, Gespräche verwalten (inkl. Umbenennen), Papierkorb- und Sammelaktionen, Speicherordner-Auswahl, Forschungsnavigator-Filter, Fundstellen- und Forschungsregisteraktionen, Gesprächsexport, Formelanzeige und Chat-Übergabe. Sicherheitsabfragen zum endgültigen Löschen bleiben zusätzlich als gesonderte Bestätigung erhalten; Mehrfachauswahl-Checkboxen bleiben unverändert.
+
+Android-CI und Samsung-Gerätetest sind für die Gestaltung erforderlich. Kein neues Version-Release, keine Änderung an gespeicherten Chatdaten oder Forschungsregister, keine neuen Berechtigungen. Wegen CI-Debug-Zertifikatswechsel wird allein der neue Testbuild unter `de.universelab.chatarchiv.researchqa19submenus` installiert; bestehende produktive und QA-Archive bleiben unverändert. `main` und kritische Freigaben bleiben gesperrt.
+
+
+
 ## Kontrastkorrektur in derselben Version 0.5.19
 
 Nach Samsung-Gerätetest mit der grauen v0.5.19 wünschte der Nutzer deutlich **hellere Texte und vorhandene Umrahmungen**, ausdrücklich **ohne blaue Farbakzente und ohne separate Rahmen um jedes Wort**. Die neue zentrale Palette nutzt echte Grautöne (R=G=B): `#121212` Hintergrund, `#303030` Karten, `#FAFAFA` Haupttext, `#D2D2D2` Sekundärtext, `#E6E6E6` Auswahlakzente und `#BEBEBE` Rahmen. Bestehende Buttons haben 1,6-dp-Umrandungen; Chat-, Beitrags- und Forschungskarten 1,2-dp-Umrandungen, ohne jede Textzeile in einen eigenen Kasten zu packen. Für native Dialoge und Eingabefelder sind Haupt-, Neben- und Hinweistextfarben ebenfalls auf helles Grau gesetzt. Der Fastscroll-Griff ist heller, die Laufschiene besser sichtbar; die exportierte lokale HTML-Darstellung spiegelt die neue Palette inklusive Rahmen.
