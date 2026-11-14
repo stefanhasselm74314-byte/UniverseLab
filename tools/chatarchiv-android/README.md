@@ -6,7 +6,7 @@
 - **Alle auswählen** bzw. **Auswahl aufheben** ist als eigener feststehender Button über der Chatliste erreichbar. Auswahlzähler und Checkboxen bleiben synchron.
 - Bei langen Listen wird die Dialoghöhe auf 78 % der Displayhöhe begrenzt; die Liste scrollt unabhängig von der unteren Aktionszeile.
 - Singularmeldungen korrigiert: „1 Chat“ und „1 Gespräch aktualisiert“.
-- Kein Versionswechsel, keine neue Paketkennung, kein Datenbank-/Papierkorb-Eingriff und keine Änderung an `main`. Der bestehende Draft-PR #296 enthält die Korrektur. Android-CI und Screenshot-Gerätetest erforderlich.
+- **Signaturschutz:** Der bisherige v0.5.19-Build ist mit einem anderen einmaligen GitHub-Debugzertifikat signiert als spätere Runs. Android verhindert deshalb ein In-place-Update. Das neue Layouttest-APK erhält die eindeutige QA-Paketkennung `de.universelab.chatarchiv.researchqa19layout` und die Bezeichnung `UniverseLab Forschung QA v0.5.19 Layout`, damit weder die alte gefüllte v0.5.19 noch andere Archive überschrieben werden. Die Versionsnummer bleibt unverändert. Nur einige synthetische Testchats zum UI-Test importieren; niemals bestehende QA-Daten löschen oder deinstallieren, um eine Signaturprüfung zu umgehen. Keine Änderung an `main`; Draft-PR #296 bleibt bestehend.
 
 
 ## Sammelupdate v0.5.19 · Archivwerkzeuge (Draft, Samsung-Gerätetest offen)
