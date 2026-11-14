@@ -1,5 +1,18 @@
 # UniverseLab ChatArchiv — Android
 
+## Version 0.5.18 · ODER-Suche nach Anzahl verschiedener Trefferwörter sortieren
+
+- `chats Ui New` sucht weiterhin alle Chats mit mindestens einem der drei **verschiedenen** Wörter. Ausgabe-Reihenfolge: **3 von 3**, dann **2 von 3**, zuletzt **1 von 3** passenden Wörtern.
+- Gesuchte Ausdrücke werden je Chat und Suchterm höchstens einmal gewertet, auch wenn das Wort mehrfach vorkommt oder zugleich im Titel und im sichtbaren Nachrichtentext steht. Wiederholte identische Eingabewörter beeinflussen die Gewichtung nicht.
+- Treffer in Titel und Nachrichten werden kombiniert. Die Suche liest den privaten `.search`-Index dazu einmal stromweise pro Chat; ein früher Titeltreffer beendet die Suche **nicht** mehr vorzeitig.
+- Die bestehende Anführungszeichen-Logik bleibt: `"New Chat"` zählt als **ein** vollständiger Suchausdruck. `titel:"New Chat"` bleibt ausschließlich auf den Titel beschränkt.
+- Chats mit gleich vielen Trefferausdrücken behalten ihre bisherige Reihenfolge (wie zuvor neueste zuerst). Ohne Suchtext bleibt die bisherige Sortierung vollständig unverändert.
+- Neue JVM-Tests für 3–2–1-Reihenfolge, stabile Gleichstände, Titel-und-Inhalt-Kombination, wiederholte Wörter, Begrenzung auf passende Kategorien und Leersuche.
+- `versionCode 34`, `versionName 0.5.18`, isolierter QA-Debug-App-Name `UniverseLab Forschung QA v0.5.18` und Paketkennung `de.universelab.chatarchiv.researchqa18`. Keine Überschreibung vorhandener QA-Archive, keine Änderung an gespeicherten Chats oder Papierkorb.
+- **OFFEN:** CI-/Android-Build, Berechtigungsprüfung und Gerätestest auf Galaxy S24 Ultra. Kein neues signaturkompatibles produktives APK ohne bisherigen privaten Release-Schlüssel.
+
+
+
 ## Version 0.5.17 · flexible ODER-Suche und exakte Wortfolgen (Android-Gerätetest offen)
 
 - **Unverbundene Wörter sind Alternativen (ODER):** `New Chats` liefert alle Chats, in deren Titel oder indexierten sichtbaren Nachrichten `New` **oder** `Chats` als eigenständiges Wort vorkommt; ein Chat mit ausschließlich einem dieser Wörter zählt.

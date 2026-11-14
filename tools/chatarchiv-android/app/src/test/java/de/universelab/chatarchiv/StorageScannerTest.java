@@ -198,6 +198,64 @@ public final class StorageScannerTest {
                 "New", () -> false, index).size());
     }
 
+    @Test public void searchRanksThreeTermsBeforeTwoBeforeOneAndStabilizesTies() throws Exception {
+        File directory = temp.newFolder("rank-index");
+        // Already newest-first: preserve this exact relative order inside each score.
+        String[] titles = {"Nur Ui", "New und Chats", "Ui New Chats", "Nur Chats",
+                "Newspaper", "New und Ui", "Nur New", "Ein Treffer im Inhalt"};
+        String[] bodies = {"", "", "", "", "", "", "",
+                "Das Wort Chats erscheint nur im Gespräch."};
+        List<ChatStore.Entry> entries = new java.util.ArrayList<>();
+        for (int i = 0; i < titles.length; i++) {
+            String filename = String.format(java.util.Locale.ROOT, "rank%02d.json", i);
+            entries.add(new ChatStore.Entry("rank-" + i, titles[i], filename,
+                    100 - i, ChatStore.OTHER, ""));
+            Files.write(new File(directory, filename.replace(".json", ".search")).toPath(),
+                    bodies[i].getBytes(StandardCharsets.UTF_8));
+        }
+        List<ChatStore.Entry> result = ChatStore.search(entries, "alle",
+                "chats Ui New", () -> false, directory);
+        assertEquals(7, result.size());
+        assertEquals("Ui New Chats", result.get(0).title); // 3 distinct terms
+        assertEquals("New und Chats", result.get(1).title); // 2
+        assertEquals("New und Ui", result.get(2).title); // 2
+        assertEquals("Nur Ui", result.get(3).title); // 1 (previous order intact)
+        assertEquals("Nur Chats", result.get(4).title);
+        assertEquals("Nur New", result.get(5).title);
+        assertEquals("Ein Treffer im Inhalt", result.get(6).title);
+
+        // The same word in title and body, or repeated in the query, must not
+        // increase ranking: distinct matched search expressions, not frequency.
+        assertEquals(
+                result.stream().map(entry -> entry.id).collect(java.util.stream.Collectors.toList()),
+                ChatStore.search(entries, "alle", "chats Ui New New CHATS",
+                        () -> false, directory).stream().map(entry -> entry.id)
+                        .collect(java.util.stream.Collectors.toList()));
+        assertEquals(0, ChatStore.search(entries, ChatStore.PROJECT, "chats Ui New",
+                () -> false, directory).size());
+        assertEquals(entries.size(), ChatStore.search(entries, "alle", "", () -> false, directory).size());
+        assertEquals(entries.get(0).id, ChatStore.search(entries, "alle", "", () -> false, directory).get(0).id);
+    }
+
+    @Test public void searchCountsTitleAndMessageMatchesTogetherWithoutRepeating() throws Exception {
+        File directory = temp.newFolder("rank-title-body");
+        ChatStore.Entry first = new ChatStore.Entry("one", "Nur New", "first.json",
+                30, ChatStore.OTHER, "");
+        ChatStore.Entry second = new ChatStore.Entry("two", "Nur Chats", "second.json",
+                20, ChatStore.OTHER, "");
+        Files.write(new File(directory, "first.search").toPath(),
+                "New, New, UI; dann Chats. Und nochmals Chats.".getBytes(StandardCharsets.UTF_8));
+        Files.write(new File(directory, "second.search").toPath(),
+                "New erscheint hier als Wort.".getBytes(StandardCharsets.UTF_8));
+        List<ChatStore.Entry> matches = ChatStore.search(
+                java.util.Arrays.asList(second, first), "alle", "New Ui Chats", () -> false, directory);
+        assertEquals(2, matches.size());
+        assertEquals(first.id, matches.get(0).id); // 3
+        assertEquals(second.id, matches.get(1).id); // 2
+        assertEquals(2, ChatStore.search(java.util.Arrays.asList(second, first), "alle",
+                "\"New Ui Chats\" New", () -> false, directory).size());
+    }
+
     @Test public void sourceIndexSkipsReferencesButPreservesDistinctPossibleCopies() {
         ScanSourceIndex index = new ScanSourceIndex();
         assertTrue(index.register("media", "doc1", "conversations-005.json", 6333444L,

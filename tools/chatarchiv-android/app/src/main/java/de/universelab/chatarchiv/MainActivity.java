@@ -1197,7 +1197,7 @@ public final class MainActivity extends Activity {
                     displayed.clear();
                     displayed.addAll(matches);
                     adapter.notifyDataSetChanged();
-                    if (!phrase.trim().isEmpty()) status.setText(matches.size() + " Treffer");
+                    if (!phrase.trim().isEmpty()) status.setText(matches.size() + " Treffer · nach passenden Suchwörtern sortiert");
                     else status.setText(importSummary);
                 });
             });
