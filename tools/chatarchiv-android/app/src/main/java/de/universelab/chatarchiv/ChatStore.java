@@ -751,8 +751,19 @@ final class ChatStore {
             }
             String term = input.substring(start, i).trim();
             if (quoted && i < input.length()) i++;
-            if (!term.isEmpty()) terms.add(new SearchTerm(
-                    term.length() > 256 ? term.substring(0, 256) : term, titleOnly));
+            if (!term.isEmpty()) {
+                String normalized = (term.length() > 256 ? term.substring(0, 256) : term)
+                        .toLowerCase(Locale.ROOT);
+                // A repeated query term is still one distinct condition, not extra rank.
+                boolean duplicate = false;
+                for (SearchTerm existing : terms) {
+                    if (existing.titleOnly == titleOnly && existing.value.equals(normalized)) {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate) terms.add(new SearchTerm(normalized, titleOnly));
+            }
         }
         return terms;
     }
@@ -787,64 +798,109 @@ final class ChatStore {
         return false;
     }
 
+    /** One matching term counts once per chat, irrespective of repetitions or location. */
+    private static final class RankedEntry {
+        final Entry entry;
+        final int matchingTerms;
+        RankedEntry(Entry entry, int matchingTerms) {
+            this.entry = entry;
+            this.matchingTerms = matchingTerms;
+        }
+    }
+
     static List<Entry> search(List<Entry> items, String category, String phrase, Cancelled cancelled,
                               File privateConversationDirectory) {
         List<SearchTerm> terms = parseSearchTerms(phrase);
         boolean noQuery = phrase == null || phrase.trim().isEmpty();
-        List<SearchTerm> contentTerms = new ArrayList<>();
-        for (SearchTerm term : terms) if (!term.titleOnly) contentTerms.add(term);
-        List<Entry> matching = new ArrayList<>();
+        List<Entry> ordinary = new ArrayList<>();
+        List<RankedEntry> ranked = new ArrayList<>();
         for (Entry item : items) {
             if (cancelled.isCancelled()) break;
             if (!"alle".equals(category) && !category.equals(item.category)) continue;
             if (noQuery) {
-                matching.add(item);
+                ordinary.add(item);
                 continue;
             }
             if (terms.isEmpty()) continue;
+
+            boolean[] found = new boolean[terms.size()];
             String title = item.title.toLowerCase(Locale.ROOT);
-            if (anySearchTermMatches(title, terms, true, true)) {
-                matching.add(item);
-                continue;
+            boolean needContents = false;
+            for (int i = 0; i < terms.size(); i++) {
+                SearchTerm term = terms.get(i);
+                found[i] = containsCompleteTerm(title, term.value, true, true);
+                if (!found[i] && !term.titleOnly) needContents = true;
             }
-            if (contentTerms.isEmpty()) continue;
-            File searchable = new File(privateConversationDirectory, item.file.replace(".json", ".search"));
-            try {
-                if (fileContainsAny(searchable, contentTerms, cancelled)) matching.add(item);
-            } catch (IOException ignored) {
-                // An unreadable search index does not invalidate title matches in other chats.
+            // Previously, one title match returned early, losing additional body
+            // matches. Read the index once and mark each distinct remaining term.
+            if (needContents) {
+                File searchable = new File(privateConversationDirectory,
+                        item.file.replace(".json", ".search"));
+                try {
+                    collectContentMatches(searchable, terms, found, cancelled);
+                } catch (IOException ignored) {
+                    // Unavailable index: keep the known title hits, do not invent any.
+                }
             }
+            if (cancelled.isCancelled()) break;
+            int matched = 0;
+            for (boolean value : found) if (value) matched++;
+            if (matched > 0) ranked.add(new RankedEntry(item, matched));
         }
-        return matching;
+        if (noQuery) return ordinary;
+        // TimSort is stable: same-score chats retain their prior newest-first order.
+        ranked.sort((left, right) -> Integer.compare(right.matchingTerms, left.matchingTerms));
+        for (RankedEntry hit : ranked) ordinary.add(hit.entry);
+        return ordinary;
     }
 
     File privateConversationDirectory() { return conversations; }
 
-    private static boolean fileContainsAny(File file, List<SearchTerm> terms,
-                                           Cancelled cancelled) throws IOException {
-        if (!file.isFile()) return false;
+    private static void collectContentMatches(File file, List<SearchTerm> terms,
+                                              boolean[] found, Cancelled cancelled)
+            throws IOException {
+        if (!file.isFile()) return;
         int longest = 0;
-        for (SearchTerm term : terms) longest = Math.max(longest, term.value.length());
+        int missing = 0;
+        for (int i = 0; i < terms.size(); i++) {
+            if (!terms.get(i).titleOnly && !found[i]) {
+                missing++;
+                longest = Math.max(longest, terms.get(i).value.length());
+            }
+        }
+        if (missing == 0) return;
         try (BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8)) {
             char[] block = new char[8192];
             String suffix = "";
             int n;
             long processedChars = 0;
-            while ((n = reader.read(block)) != -1) {
-                if (cancelled.isCancelled()) return false;
+            while (missing > 0 && (n = reader.read(block)) != -1) {
+                if (cancelled.isCancelled()) return;
                 String chunk = suffix + new String(block, 0, n);
                 processedChars += n;
                 String lower = chunk.toLowerCase(Locale.ROOT);
-                // The last character needs a look-ahead: "New" at the end of a
-                // block must not match if the next block starts with "spaper".
+                // The current last character is not a proven word boundary
+                // until the next block is read.
                 boolean beginning = processedChars == n;
-                if (anySearchTermMatches(lower, terms, beginning, false)) return true;
+                for (int i = 0; i < terms.size(); i++) {
+                    if (found[i] || terms.get(i).titleOnly) continue;
+                    if (containsCompleteTerm(lower, terms.get(i).value, beginning, false)) {
+                        found[i] = true;
+                        missing--;
+                    }
+                }
                 int overlap = Math.min(chunk.length(), longest + 4);
                 suffix = chunk.substring(chunk.length() - overlap);
             }
-            if (cancelled.isCancelled()) return false;
-            return !suffix.isEmpty() && anySearchTermMatches(suffix.toLowerCase(Locale.ROOT),
-                    terms, processedChars == suffix.length(), true);
+            if (missing == 0 || cancelled.isCancelled() || suffix.isEmpty()) return;
+            String lower = suffix.toLowerCase(Locale.ROOT);
+            for (int i = 0; i < terms.size(); i++) {
+                if (!found[i] && !terms.get(i).titleOnly
+                        && containsCompleteTerm(lower, terms.get(i).value,
+                                processedChars == suffix.length(), true)) {
+                    found[i] = true;
+                }
+            }
         }
     }
 
