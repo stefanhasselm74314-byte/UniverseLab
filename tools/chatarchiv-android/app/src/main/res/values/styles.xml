@@ -7,11 +7,14 @@
 
     <style name="ChatArchivTheme" parent="android:style/Theme.Material.NoActionBar">
         <item name="android:fontFamily">sans</item>
-        <item name="android:colorAccent">#D3D3D3</item>
-        <item name="android:colorControlActivated">#D3D3D3</item>
-        <item name="android:colorControlNormal">#999999</item>
-        <item name="android:colorControlHighlight">#666666</item>
-        <item name="android:textColorHighlight">#585858</item>
+        <item name="android:textColorPrimary">#FAFAFA</item>
+        <item name="android:textColorSecondary">#D2D2D2</item>
+        <item name="android:textColorHint">#CCCCCC</item>
+        <item name="android:colorAccent">#E6E6E6</item>
+        <item name="android:colorControlActivated">#E6E6E6</item>
+        <item name="android:colorControlNormal">#BEBEBE</item>
+        <item name="android:colorControlHighlight">#888888</item>
+        <item name="android:textColorHighlight">#777777</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">#121212</item>
         <item name="android:navigationBarColor">#121212</item>

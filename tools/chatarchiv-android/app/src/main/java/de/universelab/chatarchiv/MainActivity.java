@@ -213,7 +213,7 @@ public final class MainActivity extends Activity {
                 "Ältere Export-ZIPs kannst du ebenfalls über „Chats importieren“ auswählen. " +
                 "Die Dateien verlassen dein Smartphone nicht.", 15, false);
         firstRunHint.setTextColor(Ui.TEXT);
-        firstRunHint.setBackgroundColor(Ui.SURFACE);
+        Ui.outlineSurface(this, firstRunHint);
         firstRunHint.setPadding(Ui.dp(this, 13), Ui.dp(this, 14), Ui.dp(this, 13), Ui.dp(this, 14));
         root.addView(firstRunHint);
 
@@ -1216,14 +1216,14 @@ public final class MainActivity extends Activity {
         panel.setPadding(Ui.dp(this, 16), Ui.dp(this, 12),
                 Ui.dp(this, 16), Ui.dp(this, 8));
         GradientDrawable background = new GradientDrawable();
-        background.setColor(Color.rgb(66, 66, 66));
+        background.setColor(Ui.SURFACE);
         background.setCornerRadius(Ui.dp(this, 5));
         panel.setBackground(background);
 
         TextView heading = new TextView(this);
         heading.setText(title);
         heading.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-        heading.setTextColor(Color.WHITE);
+        heading.setTextColor(Ui.TEXT);
         heading.setPadding(Ui.dp(this, 6), Ui.dp(this, 8),
                 Ui.dp(this, 6), Ui.dp(this, 12));
         panel.addView(heading, new LinearLayout.LayoutParams(
@@ -1235,7 +1235,7 @@ public final class MainActivity extends Activity {
         TextView body = new TextView(this);
         body.setText(details);
         body.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        body.setTextColor(Color.WHITE);
+        body.setTextColor(Ui.TEXT);
         body.setPadding(Ui.dp(this, 6), Ui.dp(this, 8),
                 Ui.dp(this, 6), Ui.dp(this, 12));
         report.addView(body, new ScrollView.LayoutParams(
@@ -1244,7 +1244,7 @@ public final class MainActivity extends Activity {
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
 
         View separator = new View(this);
-        separator.setBackgroundColor(Color.rgb(92, 92, 92));
+        separator.setBackgroundColor(Ui.BORDER);
         panel.addView(separator, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, Ui.dp(this, 1)));
 
@@ -1284,7 +1284,7 @@ public final class MainActivity extends Activity {
         button.setText(label);
         button.setAllCaps(false);
         button.setSingleLine(true);
-        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         button.setAutoSizeTextTypeUniformWithConfiguration(10, 12, 1,
                 TypedValue.COMPLEX_UNIT_SP);
         button.setTextColor(Ui.ACCENT);
@@ -1600,7 +1600,7 @@ public final class MainActivity extends Activity {
 
         @Override public View getView(int position, View convertView, ViewGroup parent) {
             LinearLayout box = Ui.column(MainActivity.this, 10);
-            box.setBackgroundColor(Ui.SURFACE);
+            Ui.outlineSurface(MainActivity.this, box);
             ChatStore.Entry entry = displayed.get(position);
             TextView title = Ui.text(MainActivity.this, entry.title, 16, true);
             title.setMaxLines(3);

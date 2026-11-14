@@ -15,11 +15,13 @@ import android.widget.TextView;
 
 final class Ui {
     // Pure grayscale palette: every RGB component is equal (no blue tint).
-    static final int BACKGROUND = Color.rgb(18, 18, 18);
-    static final int SURFACE = Color.rgb(38, 38, 38);
-    static final int TEXT = Color.rgb(240, 240, 240);
-    static final int MUTED = Color.rgb(176, 176, 176);
-    static final int ACCENT = Color.rgb(211, 211, 211);
+    // High-contrast neutral grayscale throughout the app (R=G=B).
+    static final int BACKGROUND = Color.rgb(18, 18, 18); // #121212
+    static final int SURFACE = Color.rgb(48, 48, 48);    // #303030
+    static final int TEXT = Color.rgb(250, 250, 250);       // #FAFAFA
+    static final int MUTED = Color.rgb(210, 210, 210);      // #D2D2D2
+    static final int ACCENT = Color.rgb(230, 230, 230);     // #E6E6E6
+    static final int BORDER = Color.rgb(190, 190, 190);     // #BEBEBE
 
     private Ui() { }
 
@@ -105,11 +107,21 @@ final class Ui {
         GradientDrawable bg = new GradientDrawable();
         bg.setColor(SURFACE);
         bg.setCornerRadius(dp(context, 9));
-        bg.setStroke(dp(context, 1), ACCENT);
+        // More visible, consistently grayscale borders on dark cards.
+        bg.setStroke(dp(context, 1.6f), BORDER);
         button.setBackground(bg);
         button.setMinHeight(dp(context, 45));
         button.setMinimumHeight(dp(context, 45));
         return button;
+    }
+
+    /** A clearly outlined panel; callers keep their original content and click behavior. */
+    static void outlineSurface(Context context, View panel) {
+        GradientDrawable background = new GradientDrawable();
+        background.setColor(SURFACE);
+        background.setCornerRadius(dp(context, 7));
+        background.setStroke(dp(context, 1.2f), BORDER);
+        panel.setBackground(background);
     }
 
     static LinearLayout.LayoutParams weight(float weight) {

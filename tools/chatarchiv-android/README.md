@@ -1,5 +1,13 @@
 # UniverseLab ChatArchiv — Android
 
+## Kontrastkorrektur in derselben Version 0.5.19
+
+Nach Samsung-Gerätetest mit der grauen v0.5.19 wünschte der Nutzer deutlich **hellere Texte und vorhandene Umrahmungen**, ausdrücklich **ohne blaue Farbakzente und ohne separate Rahmen um jedes Wort**. Die neue zentrale Palette nutzt echte Grautöne (R=G=B): `#121212` Hintergrund, `#303030` Karten, `#FAFAFA` Haupttext, `#D2D2D2` Sekundärtext, `#E6E6E6` Auswahlakzente und `#BEBEBE` Rahmen. Bestehende Buttons haben 1,6-dp-Umrandungen; Chat-, Beitrags- und Forschungskarten 1,2-dp-Umrandungen, ohne jede Textzeile in einen eigenen Kasten zu packen. Für native Dialoge und Eingabefelder sind Haupt-, Neben- und Hinweistextfarben ebenfalls auf helles Grau gesetzt. Der Fastscroll-Griff ist heller, die Laufschiene besser sichtbar; die exportierte lokale HTML-Darstellung spiegelt die neue Palette inklusive Rahmen.
+
+**Wichtig:** Eine Modal-Dialoganzeige blendet Androids Hintergrund standardmäßig ab; der Hintergrund soll absichtlich nicht genauso hell sein wie der aktive Dialog. Die bestehende Version v0.5.19 wird beibehalten; wegen unterschiedlicher CI-Debugsignaturen bekommt nur der neue Layout-Kontrasttest die separate Debug-Paketkennung `de.universelab.chatarchiv.researchqa19contrast`, damit die frühere mit Chats befüllte v0.5.19 QA-App nicht durch einen Signaturkonflikt ersetzt oder deinstalliert werden muss. `main` bleibt unverändert. Samsung-Sichtprüfung ist nach Android-CI erforderlich.
+
+
+
 ## Durchgängige Monochrom-Gestaltung – v0.5.19-Sammelupdate
 
 Die gesamte lokale App-Oberfläche verwendet ausschließlich **echte Grautöne** (R=G=B): Hintergrund `#121212`, Flächen `#262626`, Haupttext `#F0F0F0`, zurückhaltende Texte `#B0B0B0`, Bedienelemente und Hervorhebungen `#D3D3D3`. Dies gilt zentral für Menüs, Listenelemente, wissenschaftliche Fundstellen, Labels und Schaltflächen. Androids systemeigene Interaktionsfarben für Textfelder, Checkboxen und Dialog-Buttons sind ebenfalls auf Grau gesetzt; Fast-Scroll-Daumen und -Leiste verwenden Grautöne. Auch die lokal exportierte HTML-Ansicht enthält keinen blauen CSS-Wert mehr. Die öffentlich eingebundene GitHub-Webseite wird nicht verändert und behält ihr externes Design.

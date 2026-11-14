@@ -302,7 +302,7 @@ public final class ResearchActivity extends Activity {
         @Override public View getView(int position, View recycled, ViewGroup parent) {
             ResearchFinder.Finding f = findings.get(position);
             LinearLayout card = Ui.column(ResearchActivity.this, 9);
-            card.setBackgroundColor(Ui.SURFACE);
+            Ui.outlineSurface(ResearchActivity.this, card);
             TextView title = Ui.text(ResearchActivity.this,
                     f.kind + " · " + f.field + "\n" + f.chatTitle, 15, true);
             title.setTextColor(Ui.ACCENT);
@@ -403,7 +403,7 @@ public static final class ResearchRegisterActivity extends Activity {
             @Override public View getView(int pos, View convertView, ViewGroup parent) {
                 ResearchRegister.Record item = shown.get(pos);
                 LinearLayout panel = Ui.column(ResearchRegisterActivity.this, 10);
-                panel.setBackgroundColor(Ui.SURFACE);
+                Ui.outlineSurface(ResearchRegisterActivity.this, panel);
                 TextView heading = Ui.text(ResearchRegisterActivity.this,
                         item.chatTitle + "\n" + item.stage + " · " + item.state, 15, true);
                 heading.setTextColor(Ui.ACCENT);

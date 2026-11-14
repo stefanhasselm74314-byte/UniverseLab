@@ -335,7 +335,7 @@ public final class ConversationActivity extends Activity {
         @Override public View getView(int position, View existing, ViewGroup parent) {
             ConversationLogic.Message message = visible.get(position);
             LinearLayout panel = Ui.column(ConversationActivity.this, 12);
-            panel.setBackgroundColor(Ui.SURFACE);
+            Ui.outlineSurface(ConversationActivity.this, panel);
             LinearLayout bar = Ui.row(ConversationActivity.this);
             TextView role = Ui.text(ConversationActivity.this,
                     "user".equals(message.role) ? "DU" : "CHATGPT", 12, true);
