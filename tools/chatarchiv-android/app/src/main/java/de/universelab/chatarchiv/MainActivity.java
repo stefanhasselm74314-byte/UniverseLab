@@ -188,7 +188,7 @@ public final class MainActivity extends Activity {
 
         search = new EditText(this);
         search.setSingleLine(true);
-        search.setHint("Titel und Gesprächstext suchen …");
+        search.setHint("Wörter ODER · \"Wortfolge\" · Titel + Inhalt");
         search.setHintTextColor(Ui.MUTED);
         search.setTextColor(Ui.TEXT);
         search.setTextSize(15);

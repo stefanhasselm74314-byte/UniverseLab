@@ -708,22 +708,111 @@ final class ChatStore {
                 ? PROJECT : OTHER;
     }
 
+    /**
+     * Search syntax:
+     * - 'New Chats' = OR between the two complete words.
+     * - '"New Chats"' = contiguous phrase, respecting word boundaries.
+     * - 'titel:"New Chats"' = phrase restricted to chat titles.
+     * Unqualified terms search both titles and indexed visible message text.
+     */
+    private static final class SearchTerm {
+        final String value;
+        final boolean titleOnly;
+        SearchTerm(String value, boolean titleOnly) {
+            this.value = value.toLowerCase(Locale.ROOT);
+            this.titleOnly = titleOnly;
+        }
+    }
+
+    private static List<SearchTerm> parseSearchTerms(String input) {
+        List<SearchTerm> terms = new ArrayList<>();
+        if (input == null) return terms;
+        int i = 0;
+        // Bound query complexity without ever treating a nonempty query as "show all".
+        while (i < input.length() && terms.size() < 64) {
+            while (i < input.length() && Character.isWhitespace(input.charAt(i))) i++;
+            if (i >= input.length()) break;
+            boolean titleOnly = false;
+            if (input.regionMatches(true, i, "titel:", 0, 6)) {
+                titleOnly = true;
+                i += 6;
+            } else if (input.regionMatches(true, i, "title:", 0, 6)) {
+                titleOnly = true;
+                i += 6;
+            }
+            if (i >= input.length()) break;
+            boolean quoted = input.charAt(i) == '"';
+            if (quoted) i++;
+            int start = i;
+            if (quoted) {
+                while (i < input.length() && input.charAt(i) != '"') i++;
+            } else {
+                while (i < input.length() && !Character.isWhitespace(input.charAt(i))) i++;
+            }
+            String term = input.substring(start, i).trim();
+            if (quoted && i < input.length()) i++;
+            if (!term.isEmpty()) terms.add(new SearchTerm(
+                    term.length() > 256 ? term.substring(0, 256) : term, titleOnly));
+        }
+        return terms;
+    }
+
+    private static boolean wordCodePoint(int point) {
+        int kind = Character.getType(point);
+        return Character.isLetterOrDigit(point) || point == '_'
+                || kind == Character.NON_SPACING_MARK
+                || kind == Character.COMBINING_SPACING_MARK
+                || kind == Character.ENCLOSING_MARK;
+    }
+
+    private static boolean containsCompleteTerm(String lowerCaseText, String lowerCaseTerm,
+                                                boolean realBeginning, boolean realEnd) {
+        int offset = 0;
+        while ((offset = lowerCaseText.indexOf(lowerCaseTerm, offset)) >= 0) {
+            int end = offset + lowerCaseTerm.length();
+            boolean left = offset == 0 ? realBeginning
+                    : !wordCodePoint(lowerCaseText.codePointBefore(offset));
+            boolean right = end == lowerCaseText.length() ? realEnd
+                    : !wordCodePoint(lowerCaseText.codePointAt(end));
+            if (left && right) return true;
+            offset++;
+        }
+        return false;
+    }
+
+    private static boolean anySearchTermMatches(String lowerCaseText, List<SearchTerm> terms,
+                                                 boolean realBeginning, boolean realEnd) {
+        for (SearchTerm term : terms)
+            if (containsCompleteTerm(lowerCaseText, term.value, realBeginning, realEnd)) return true;
+        return false;
+    }
+
     static List<Entry> search(List<Entry> items, String category, String phrase, Cancelled cancelled,
                               File privateConversationDirectory) {
-        String query = phrase.trim().toLowerCase(Locale.ROOT);
+        List<SearchTerm> terms = parseSearchTerms(phrase);
+        boolean noQuery = phrase == null || phrase.trim().isEmpty();
+        List<SearchTerm> contentTerms = new ArrayList<>();
+        for (SearchTerm term : terms) if (!term.titleOnly) contentTerms.add(term);
         List<Entry> matching = new ArrayList<>();
         for (Entry item : items) {
             if (cancelled.isCancelled()) break;
             if (!"alle".equals(category) && !category.equals(item.category)) continue;
-            if (query.isEmpty() || item.title.toLowerCase(Locale.ROOT).contains(query)) {
+            if (noQuery) {
                 matching.add(item);
                 continue;
             }
+            if (terms.isEmpty()) continue;
+            String title = item.title.toLowerCase(Locale.ROOT);
+            if (anySearchTermMatches(title, terms, true, true)) {
+                matching.add(item);
+                continue;
+            }
+            if (contentTerms.isEmpty()) continue;
             File searchable = new File(privateConversationDirectory, item.file.replace(".json", ".search"));
             try {
-                if (fileContains(searchable, query, cancelled)) matching.add(item);
+                if (fileContainsAny(searchable, contentTerms, cancelled)) matching.add(item);
             } catch (IOException ignored) {
-                // One unavailable index file must not prevent searching remaining chats.
+                // An unreadable search index does not invalidate title matches in other chats.
             }
         }
         return matching;
@@ -731,21 +820,32 @@ final class ChatStore {
 
     File privateConversationDirectory() { return conversations; }
 
-    private static boolean fileContains(File file, String needle, Cancelled cancelled) throws IOException {
+    private static boolean fileContainsAny(File file, List<SearchTerm> terms,
+                                           Cancelled cancelled) throws IOException {
         if (!file.isFile()) return false;
+        int longest = 0;
+        for (SearchTerm term : terms) longest = Math.max(longest, term.value.length());
         try (BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8)) {
             char[] block = new char[8192];
             String suffix = "";
             int n;
+            long processedChars = 0;
             while ((n = reader.read(block)) != -1) {
                 if (cancelled.isCancelled()) return false;
                 String chunk = suffix + new String(block, 0, n);
-                if (chunk.toLowerCase(Locale.ROOT).contains(needle)) return true;
-                int overlap = Math.min(chunk.length(), needle.length() + 3);
+                processedChars += n;
+                String lower = chunk.toLowerCase(Locale.ROOT);
+                // The last character needs a look-ahead: "New" at the end of a
+                // block must not match if the next block starts with "spaper".
+                boolean beginning = processedChars == n;
+                if (anySearchTermMatches(lower, terms, beginning, false)) return true;
+                int overlap = Math.min(chunk.length(), longest + 4);
                 suffix = chunk.substring(chunk.length() - overlap);
             }
+            if (cancelled.isCancelled()) return false;
+            return !suffix.isEmpty() && anySearchTermMatches(suffix.toLowerCase(Locale.ROOT),
+                    terms, processedChars == suffix.length(), true);
         }
-        return false;
     }
 
     private synchronized void saveIndex() throws IOException {
