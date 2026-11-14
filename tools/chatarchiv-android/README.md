@@ -1,5 +1,34 @@
 # UniverseLab ChatArchiv — Android
 
+## Sammelupdate v0.5.19 · Archivwerkzeuge (Draft, Samsung-Gerätetest offen)
+
+Diese Version bündelt **drei** zusammengehörige Funktionen – ohne separate Zwischenversionen:
+
+### A. Archiv-Gesundheitsbericht (nur lesen)
+- Neuer Hauptmenü-Eintrag **„Archivwerkzeuge · Prüfen, Auswählen, Sichern“** → „Archiv-Gesundheitsprüfung“.
+- Untersucht aktive und im Papierkorb liegende Chats auf fehlende Hauptfassungen, abweichende SHA-256-Prüfsummen, unlesbare JSON-Daten, unpassende Chat-IDs, fehlende Suchindizes und 0 sichtbare Beiträge. Zeigt Anzahl gesicherter Altversionen und höchstens 16 Beispiele mit Kurz-ID.
+- Begrenzung: Chatdateien über 16 MiB werden nicht vollständig geladen; sie erscheinen als **ungeprüft**, nicht fälschlich als leer oder beschädigt. Prüflauf abbrechbar. **Kein automatisches Löschen**.
+
+### B. Mehrfachauswahl und geschützte Sammelaktionen
+- Mehrfachauswahl bezieht sich **ausschließlich auf die gerade angezeigten Suchtreffer**. Android-Auswahlliste mit Mehrfachauswahl und „Alle auswählen / Auswahl aufheben“, inklusive kurzem Chat-ID-Hinweis für identische Titel.
+- Nach erneuter expliziter Bestätigung können ausgewählte aktive Chats gesammelt **UniverseLab**, **Weitere Chats** oder dem **Papierkorb** zugeordnet werden.
+- Die Änderung wird nur nach Prüfung sämtlicher Chat-IDs in **einem gemeinsamen Index-Schreibvorgang** gespeichert; bei Schreibfehlern wird der vorherige In-Memory-Zustand zurückgesetzt. Im Stapelmodus gibt es keine endgültige Löschung und keine Änderung an Original-Exportdateien.
+
+### C. Umfangreicheres ZIP-Backup mit nachprüfbaren Prüfsummen
+- Gesonderte Funktion **„Vollbackup inklusive Papierkorb und Altversionen“**. Sicherung umfasst private Hauptfassungen (aktiv und Papierkorb), vorhandene Altversionsdateien, Suchindizes und den originalen Gesprächsindex (Kategorien, Papierkorb-Metadaten).
+- ZIP-Einträge werden speicherschonend übertragen und in `manifest.json` mit SHA-256 und Dateigröße referenziert; die unabhängige Funktion **„Vollbackup mit SHA-256 prüfen“** vergleicht sämtliche Dateien ohne Extraktion.
+- Nur die beim ChatArchiv tatsächlich lokal gespeicherten Daten sind enthalten. Medienanhänge, die bislang ausschließlich in externen ChatGPT-Exporten liegen, bleiben außerhalb dieser Sicherung. Fehlende Suchindizes werden im Manifest vermerkt.
+- Das neue Gesamtformat ist **noch nicht für eine automatische Wiederherstellung freigegeben**. Das gewohnte ZIP für aktive Hauptfassungen bleibt zusätzlich unverändert verfügbar. Bei unvollständigem Export nicht von einer erfolgreichen Sicherung ausgehen.
+- ZIP-Ausgabe nur nach Auswahl eines konkreten Ziels über Android-SAF; ein Cloud-Anbieter als Ziel könnte die Datei hochladen. Keine Daten an GitHub.
+
+### Version und Testregeln
+- `versionName 0.5.19`, `versionCode 35`; isolierter Debug-QA-Paketname `de.universelab.chatarchiv.researchqa19`.
+- Bestehende Installationen, insbesondere v0.5.12 produktiv und v0.5.16 mit Papierkorb, bleiben unangetastet. Keine neue Android-Berechtigung, kein ChatGPT-Weblogin und keine Änderung an Quell-Exportdateien.
+- Build und JVM-Testfälle für das Backup samt Prüfsummen-/Abbruchschutz sowie vorhandene Such-/Archivtests sind Voraussetzungen für die Geräteabnahme.
+- `main` bleibt unverändert. **[OFFEN]** GitHub-CI, signierte QA-APK und Gerätetest; keine automatische Freigabe.
+
+
+
 ## Version 0.5.18 · ODER-Suche nach Anzahl verschiedener Trefferwörter sortieren
 
 - `chats Ui New` sucht weiterhin alle Chats mit mindestens einem der drei **verschiedenen** Wörter. Ausgabe-Reihenfolge: **3 von 3**, dann **2 von 3**, zuletzt **1 von 3** passenden Wörtern.
