@@ -1,5 +1,14 @@
 # UniverseLab ChatArchiv — Android
 
+### QA-Nachkorrektur v0.5.19: horizontale Dialogschaltflächen
+
+- Im Mehrfachauswahldialog stehen **Weiter** und **Abbrechen** wieder nebeneinander am unteren Rand, ohne dritte native Schaltfläche.
+- **Alle auswählen** bzw. **Auswahl aufheben** ist als eigener feststehender Button über der Chatliste erreichbar. Auswahlzähler und Checkboxen bleiben synchron.
+- Bei langen Listen wird die Dialoghöhe auf 78 % der Displayhöhe begrenzt; die Liste scrollt unabhängig von der unteren Aktionszeile.
+- Singularmeldungen korrigiert: „1 Chat“ und „1 Gespräch aktualisiert“.
+- Kein Versionswechsel, keine neue Paketkennung, kein Datenbank-/Papierkorb-Eingriff und keine Änderung an `main`. Der bestehende Draft-PR #296 enthält die Korrektur. Android-CI und Screenshot-Gerätetest erforderlich.
+
+
 ## Sammelupdate v0.5.19 · Archivwerkzeuge (Draft, Samsung-Gerätetest offen)
 
 Diese Version bündelt **drei** zusammengehörige Funktionen – ohne separate Zwischenversionen:

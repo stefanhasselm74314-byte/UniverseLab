@@ -323,14 +323,25 @@ public final class MainActivity extends Activity {
             labels[i] = title + "\n" + entry.prettyDate() + " · ID "
                     + entry.id.substring(0, Math.min(entry.id.length(), 8));
         }
+        // Android 17 stacks three native dialog buttons vertically. Put the
+        // select-all control ABOVE the scrolling list, keeping only the two
+        // native actions "Abbrechen" and "Weiter" beside one another below.
+        LinearLayout heading = new LinearLayout(this);
+        heading.setOrientation(LinearLayout.VERTICAL);
+        heading.setPadding(Ui.dp(this, 22), Ui.dp(this, 12),
+                Ui.dp(this, 22), Ui.dp(this, 8));
+        TextView counter = Ui.text(this, "Chats auswählen · 0 / " + candidates.size(), 19, true);
+        heading.addView(counter);
+        Button selectAll = Ui.button(this, "Alle auswählen");
+        heading.addView(selectAll);
+
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Chats auswählen · 0 / " + candidates.size())
+                .setCustomTitle(heading)
                 .setMultiChoiceItems(labels, selected, (popup, index, checked) -> {
                     selected[index] = checked;
-                    updateBatchDialogCounter((AlertDialog) popup, selected);
+                    updateBatchDialogCounter((AlertDialog) popup, selected, counter, selectAll);
                 })
                 .setNegativeButton("Abbrechen", null)
-                .setNeutralButton("Alle auswählen", null)
                 .setPositiveButton("Weiter", null).create();
         dialog.setOnShowListener(ignore -> {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
@@ -342,7 +353,7 @@ public final class MainActivity extends Activity {
                 dialog.dismiss();
                 showBatchOperations(chosen);
             });
-            dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(view -> {
+            selectAll.setOnClickListener(view -> {
                 boolean all = true;
                 for (boolean item : selected) if (!item) { all = false; break; }
                 boolean next = !all;
@@ -350,21 +361,28 @@ public final class MainActivity extends Activity {
                     selected[i] = next;
                     dialog.getListView().setItemChecked(i, next);
                 }
-                updateBatchDialogCounter(dialog, selected);
+                updateBatchDialogCounter(dialog, selected, counter, selectAll);
             });
+            // Keep title, scrolling list, and both action buttons within the
+            // available screen; do not let a 591-chat list obscure "Abbrechen".
+            if (candidates.size() > 6 && dialog.getWindow() != null) {
+                DisplayMetrics metrics = getResources().getDisplayMetrics();
+                int width = Math.min((int) (metrics.widthPixels * 0.92f), Ui.dp(this, 560));
+                int height = (int) (metrics.heightPixels * 0.78f);
+                dialog.getWindow().setLayout(width, height);
+            }
         });
         dialog.show();
     }
 
-    private void updateBatchDialogCounter(AlertDialog dialog, boolean[] selected) {
+    private void updateBatchDialogCounter(AlertDialog dialog, boolean[] selected,
+                                          TextView counter, Button selectAll) {
         int count = 0;
         for (boolean item : selected) if (item) count++;
-        dialog.setTitle("Chats auswählen · " + count + " / " + selected.length);
+        counter.setText("Chats auswählen · " + count + " / " + selected.length);
         if (dialog.getButton(AlertDialog.BUTTON_POSITIVE) != null)
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(count > 0);
-        if (dialog.getButton(AlertDialog.BUTTON_NEUTRAL) != null)
-            dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setText(count == selected.length
-                    ? "Auswahl aufheben" : "Alle auswählen");
+        selectAll.setText(count == selected.length ? "Auswahl aufheben" : "Alle auswählen");
     }
 
     private void showBatchOperations(List<ChatStore.Entry> selected) {
@@ -396,7 +414,8 @@ public final class MainActivity extends Activity {
                 .append(selected.size() - 5).append(" weitere");
         new AlertDialog.Builder(this)
                 .setTitle("Sammelaktion bestätigen")
-                .setMessage("Wollen Sie wirklich " + selected.size() + " Chats " + label + "?"
+                .setMessage("Wollen Sie wirklich " + selected.size()
+                        + (selected.size() == 1 ? " Chat " : " Chats ") + label + "?"
                         + preview + (deleting
                         ? "\n\nDie Chats bleiben im Papierkorb wiederherstellbar. Es erfolgt "
                           + "KEINE endgültige Löschung. Originalexporte bleiben unverändert."
@@ -418,7 +437,8 @@ public final class MainActivity extends Activity {
                         runOnUiThread(() -> {
                             importing = false;
                             importSummary = failed != null ? "Sammelaktion fehlgeschlagen: " + failed
-                                    : updated + " Gespräche aktualisiert (ein gemeinsamer Speichervorgang).";
+                                    : updated + (updated == 1 ? " Gespräch aktualisiert" : " Gespräche aktualisiert")
+                                    + " (ein gemeinsamer Speichervorgang).";
                             refresh();
                         });
                     });
