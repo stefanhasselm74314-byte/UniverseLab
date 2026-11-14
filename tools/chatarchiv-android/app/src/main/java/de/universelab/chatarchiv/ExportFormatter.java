@@ -50,10 +50,10 @@ final class ExportFormatter {
                     + "<title>");
             writer.write(escapeHtml(title));
             writer.write("</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:980px;"
-                    + "margin:2rem auto;padding:0 1rem;background:#0b111a;color:#edf4fc}"
-                    + "article{background:#192330;margin:1.1rem 0;padding:1rem;border-radius:10px}"
-                    + "h2{font-size:1rem;color:#81c5ff}pre{white-space:pre-wrap;overflow-wrap:anywhere;"
-                    + "font:inherit;margin:0}small{color:#a5b9cd}"
+                    + "margin:2rem auto;padding:0 1rem;background:#121212;color:#f0f0f0}"
+                    + "article{background:#262626;margin:1.1rem 0;padding:1rem;border-radius:10px}"
+                    + "h2{font-size:1rem;color:#d3d3d3}pre{white-space:pre-wrap;overflow-wrap:anywhere;"
+                    + "font:inherit;margin:0}small{color:#b0b0b0}"
                     + "@media print{body{background:white;color:black}article{background:white;"
                     + "border:1px solid #bbb;break-inside:avoid}h2,small{color:black}}</style></head><body><h1>");
             writer.write(escapeHtml(title));

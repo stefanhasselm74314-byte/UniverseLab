@@ -274,7 +274,7 @@ public final class MainActivity extends Activity {
                         "Chat-Übergabe · neuen Chat vorbereiten"
                 }, (dialog, which) -> {
                     if (which == 0) startActivity(new Intent(this, ResearchActivity.class));
-                    else if (which == 1) startActivity(new Intent(this, ResearchRegisterActivity.class));
+                    else if (which == 1) startActivity(new Intent(this, ResearchActivity.ResearchRegisterActivity.class));
                     else startActivity(new Intent(this, HandoffActivity.class));
                 })
                 .setNegativeButton("Schließen", null).show();
@@ -1287,7 +1287,7 @@ public final class MainActivity extends Activity {
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         button.setAutoSizeTextTypeUniformWithConfiguration(10, 12, 1,
                 TypedValue.COMPLEX_UNIT_SP);
-        button.setTextColor(Color.rgb(132, 201, 255));
+        button.setTextColor(Ui.ACCENT);
         button.setPadding(Ui.dp(this, 2), 0, Ui.dp(this, 2), 0);
         button.setMinimumWidth(0);
         button.setBackgroundColor(Color.TRANSPARENT);

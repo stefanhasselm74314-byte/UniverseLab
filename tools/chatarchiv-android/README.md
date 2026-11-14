@@ -1,5 +1,13 @@
 # UniverseLab ChatArchiv — Android
 
+## Durchgängige Monochrom-Gestaltung – v0.5.19-Sammelupdate
+
+Die gesamte lokale App-Oberfläche verwendet ausschließlich **echte Grautöne** (R=G=B): Hintergrund `#121212`, Flächen `#262626`, Haupttext `#F0F0F0`, zurückhaltende Texte `#B0B0B0`, Bedienelemente und Hervorhebungen `#D3D3D3`. Dies gilt zentral für Menüs, Listenelemente, wissenschaftliche Fundstellen, Labels und Schaltflächen. Androids systemeigene Interaktionsfarben für Textfelder, Checkboxen und Dialog-Buttons sind ebenfalls auf Grau gesetzt; Fast-Scroll-Daumen und -Leiste verwenden Grautöne. Auch die lokal exportierte HTML-Ansicht enthält keinen blauen CSS-Wert mehr. Die öffentlich eingebundene GitHub-Webseite wird nicht verändert und behält ihr externes Design.
+
+Die Kontraste zwischen Hintergrund, Flächen, Sekundärtext und aktiver Markierung bleiben deutlich. Keine neue Versionsnummer und keine Änderung an privaten Chats, Import-/Löschlogik, Signatur oder Berechtigungen. Android-Gerätetest erforderlich.
+
+
+
 ## v0.5.19 Sammelupdate: Navigation, lokale Chat-Titel und Forschungsregister
 
 **Startseite als Menü statt Schaltflächenstapel:** Drei kompakte Menüs `Archiv ▾`, `Forschung ▾`, `Werkzeuge ▾`. Suchen, Bereichsfilter, Zähler und Chatliste bleiben direkt sichtbar. Archiv bietet Import, klassisches Export-ZIP, Papierkorb und Mehrfachauswahl; Forschung öffnet Finder, manuelles Forschungsregister und Chat-Übergabe; Werkzeuge bieten Audit, Vollbackup inkl. Register, unabhängige SHA-256-ZIP-Verifikation und öffentlichen GitHub-Bereich. Forschungsnavigator enthält eine gemeinsame Zeile `Chats prüfen ▾` / `Forschungsregister` sowie zwei nebeneinander angeordnete Fundstellenfilter.

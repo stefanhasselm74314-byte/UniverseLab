@@ -14,11 +14,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 final class Ui {
-    static final int BACKGROUND = Color.rgb(11, 17, 26);
-    static final int SURFACE = Color.rgb(25, 35, 48);
-    static final int TEXT = Color.rgb(237, 244, 252);
-    static final int MUTED = Color.rgb(165, 185, 205);
-    static final int ACCENT = Color.rgb(129, 197, 255);
+    // Pure grayscale palette: every RGB component is equal (no blue tint).
+    static final int BACKGROUND = Color.rgb(18, 18, 18);
+    static final int SURFACE = Color.rgb(38, 38, 38);
+    static final int TEXT = Color.rgb(240, 240, 240);
+    static final int MUTED = Color.rgb(176, 176, 176);
+    static final int ACCENT = Color.rgb(211, 211, 211);
 
     private Ui() { }
 
