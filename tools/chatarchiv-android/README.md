@@ -1,5 +1,28 @@
 # UniverseLab ChatArchiv — Android
 
+## Version 0.5.16 · Schaltflächen im Chat-Aktionsdialog sichtbar (Samsung Android 17)
+
+- **Reproduzierter Fehler v0.5.15:** Lange auf „New chat“ drücken öffnete einen Dialog mit Titel und Nachrichtentext, aber ohne die versprochenen Aktionen. Ursache: `AlertDialog.Builder.setMessage()` und `setItems()` wurden gemeinsam benutzt; bei Android 17 wurde die Optionsliste unterdrückt.
+- **Gezielte Korrektur:** Die Kurzfassung des Gesprächstitels sowie die ersten acht Zeichen der Chat-ID stehen nun **im Dialogtitel**; der Dialog verwendet ausschließlich `setItems()` mit „Bereich ändern“ und „Chat löschen“ plus „Abbrechen“. Die eigene nachfolgende Sicherheitsabfrage „Wollen Sie wirklich diesen Chat löschen?“ bleibt unverändert.
+- **Keine Löschung bei langem Drücken:** Ohne Auswahl von „Chat löschen“ und zusätzliche explizite Bestätigung wird kein Datensatz verschoben. Der bestehende Papierkorb mit Wiederherstellung und zweiter Sicherheitsabfrage zur endgültigen Löschung bleibt erhalten.
+- **QA-Datenschutz:** Eigene Debug-Paketkennung `de.universelab.chatarchiv.researchqa16`. Die vorhandenen v0.5.12-, v0.5.14- und v0.5.15-Installationen werden nicht überschrieben. Neue QA-App enthält von sich aus **keine 641 Chats**; ausschließlich expliziter lokaler Testimport. Öffentliche CI baut keine signaturkompatible produktive APK.
+- `versionCode 32` / `versionName 0.5.16`, keine neuen Android-Berechtigungen, kein ChatGPT-Weblogin, keine Daten auf GitHub. [OFFEN] Erneuter Android-17-Gerätetest.
+
+
+
+## Version 0.5.15 · bestätigte Chat-Löschung mit Papierkorb und Wiederherstellung (Gerätetest offen)
+
+- Langes Drücken auf einen Chat öffnet statt direkter Kategorieänderung das Menü **Bereich ändern** / **Chat löschen**. Vor jeder Löschung erscheint eine eindeutige Sicherheitsabfrage **„Wollen Sie wirklich diesen Chat löschen?“**, mit **Abbrechen** als sichere Alternative.
+- Das erste bestätigte Löschen legt den Chat im **lokalen Papierkorb** ab. Chat und seine zugehörigen privaten Daten bleiben wiederherstellbar; die normale Liste, Suche, Forschungsnavigator und Archiv-ZIP-Sicherung enthalten nur aktive Chats. Die Kategorie UniverseLab/Weitere Chats wird beim Wiederherstellen beibehalten.
+- Der sichtbare **Papierkorb (N)** zeigt entfernte Gespräche einschließlich kurzer ID zur Unterscheidung vieler „New chat“. Einzelne Chats können daraus **wiederhergestellt** oder nach einer **zweiten ausdrücklichen Sicherheitsabfrage endgültig gelöscht** werden. Endgültiges Löschen entfernt nur die app-internen JSON-/Suchdateien und gespeicherte Altversionen; nie die ursprünglichen ChatGPT-Exportdateien unter Downloads.
+- Crash-Sicherheit beim endgültigen Löschen: Bevor Dateien entfernt werden, wird der Zustand `loeschung-ausstehend` atomar im bestehenden Index gesichert. Bei Unterbrechung bleibt der Eintrag im Papierkorb und die Dateilöschung lässt sich erneut ausführen; die Wiederherstellung teilweise gelöschter Daten wird unterbunden. Indexänderungen werden bei Schreibfehlern im Speicher zurückgerollt.
+- **Explizit aus Papierkorb ausgeschlossene Chats werden bei späterem Massenimport nicht unbemerkt zurückgeholt.** Der Import meldet deren Anzahl gesondert als „Im Papierkorb belassen“. Nach endgültiger Löschung können bereits vorhandene externe Exporte diesen Chat bei bewusstem Re-Import erneut anlegen.
+- **0 sichtbare Beiträge ≠ nachweislich leere Originaldaten** (versteckte Zweige, Metadaten und Medien können existieren); es erfolgt keine automatische Löschung nach dem Titel „New chat“. Alle Löschvorgänge müssen bewusst vom Nutzer ausgelöst werden.
+- Zusätzlich eindeutige QA-Paketkennung `de.universelab.chatarchiv.researchqa15` und App-Anzeigename `UniverseLab Forschung QA v0.5.15`. Damit kann die Testversion unabhängig von einer bereits gefüllten QA-v0.5.14 und der produktiven App installiert werden. Für künftige Updates des neuen QA-Pakets ist weiterhin ein konstanter QA-Signierschlüssel notwendig.
+- `versionCode 31`, `versionName 0.5.15`. Keine neue Android-Berechtigung, keine ChatGPT-Webanmeldung, keine privaten Daten auf GitHub. Nur isolierter Draft-PR, CI- und Samsung-Test vor Freigabe.
+
+
+
 ## Version 0.5.14 · geschützte Ansicht bereits gesicherter Chatfassungen (Gerätetest offen)
 
 - Das Gespräch zeigt eine zusätzliche Schaltfläche **„Gesicherte Altversionen ansehen“** mit Anzahl. Ein Dialog listet ausschließlich Dateimetadaten der gespeicherten Fassungen dieses Chat-IDs, nicht die privaten JSON-Inhalte im Repository.

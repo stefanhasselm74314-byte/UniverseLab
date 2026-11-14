@@ -5,7 +5,7 @@
     <!-- Chat imports rely exclusively on user-granted document URIs (SAF). -->
 
     <application
-        android:label="@string/app_name"
+        android:label="${appTitle}"
         android:theme="@style/ChatArchivTheme"
         android:allowBackup="false"
         android:fullBackupContent="false"

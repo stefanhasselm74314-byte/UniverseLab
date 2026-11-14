@@ -79,6 +79,7 @@ public final class MainActivity extends Activity {
     private TextView firstRunHint;
     private EditText search;
     private Button cancelScanButton;
+    private Button trashButton;
     private String category = ChatStore.PROJECT;
     private String importSummary = "";
     private boolean importing;
@@ -168,6 +169,10 @@ public final class MainActivity extends Activity {
                 startActivity(new Intent(this, HandoffActivity.class)));
         root.addView(handoffButton);
 
+        trashButton = Ui.button(this, "Papierkorb (0)");
+        trashButton.setOnClickListener(view -> showTrash());
+        root.addView(trashButton);
+
         Ui.addGap(this, root, 10);
         LinearLayout tabs = Ui.row(this);
         android.widget.Button all = Ui.button(this, "Alle");
@@ -237,12 +242,12 @@ public final class MainActivity extends Activity {
             startActivity(intent);
         });
         list.setOnItemLongClickListener((parent, view, position, id) -> {
-            if (position >= 0 && position < displayed.size()) moveChat(displayed.get(position));
+            if (position >= 0 && position < displayed.size()) showChatActions(displayed.get(position));
             return true;
         });
         root.addView(list, Ui.fillRemaining());
 
-        TextView footer = Ui.text(this, "Lange auf ein Gespräch tippen: Bereich ändern · Kein Cloud-Backup", 11, false);
+        TextView footer = Ui.text(this, "Lange auf ein Gespräch tippen: Zuordnen oder Löschen · Papierkorb mit Wiederherstellung", 11, false);
         footer.setTextColor(Ui.MUTED);
         root.addView(footer);
     }
@@ -250,6 +255,121 @@ public final class MainActivity extends Activity {
     private void chooseCategory(String value) {
         category = value;
         refresh();
+    }
+
+    private void showChatActions(ChatStore.Entry entry) {
+        if (importing) return;
+        String shortTitle = entry.title.length() > 48
+                ? entry.title.substring(0, 48) + "…" : entry.title;
+        String shortId = entry.id.length() > 8 ? entry.id.substring(0, 8) : entry.id;
+        // Never combine setMessage() and setItems(): on Android 17 the message
+        // wins and both action choices disappear (reproduced on Galaxy S24 Ultra).
+        new AlertDialog.Builder(this)
+                .setTitle("Gespräch verwalten: „" + shortTitle + "“ · ID " + shortId)
+                .setItems(new String[] {"Bereich ändern", "Chat löschen"},
+                        (dialog, choice) -> {
+                            if (choice == 0) moveChat(entry);
+                            else if (choice == 1) confirmDeleteChat(entry);
+                        })
+                .setNegativeButton("Abbrechen", null)
+                .show();
+    }
+
+    private void confirmDeleteChat(ChatStore.Entry entry) {
+        if (importing) return;
+        new AlertDialog.Builder(this)
+                .setTitle("Chat löschen")
+                .setMessage("Wollen Sie wirklich diesen Chat löschen?\n\n„" + entry.title
+                        + "“ · " + entry.prettyDate() + "\nChat-ID: " + entry.id + "\n\n"
+                        + "Er wird zunächst in den lokalen Papierkorb verschoben und kann "
+                        + "dort wiederhergestellt werden. Originale ChatGPT-Exportdateien "
+                        + "bleiben unverändert. Es wird kein anderer Chat gelöscht.")
+                .setNegativeButton("Abbrechen", null)
+                .setPositiveButton("Löschen", (dialog, which) -> {
+                    try {
+                        store.moveToTrash(entry.id);
+                        importSummary = "„" + entry.title + "“ wurde in den Papierkorb verschoben.";
+                        refresh();
+                    } catch (IOException error) {
+                        status.setText("Löschen fehlgeschlagen: " + error.getMessage());
+                    }
+                }).show();
+    }
+
+    private void showTrash() {
+        if (importing) return;
+        List<ChatStore.Entry> trashed = store.trashSnapshot();
+        if (trashed.isEmpty()) {
+            new AlertDialog.Builder(this).setTitle("Papierkorb")
+                    .setMessage("Der Papierkorb ist leer. Chats werden nur nach ausdrücklicher Bestätigung entfernt.")
+                    .setPositiveButton("Schließen", null).show();
+            return;
+        }
+        String[] names = new String[trashed.size()];
+        for (int i = 0; i < names.length; i++) {
+            ChatStore.Entry entry = trashed.get(i);
+            String title = entry.title.length() > 70 ? entry.title.substring(0, 70) + "…" : entry.title;
+            String identity = entry.id.length() > 8 ? entry.id.substring(0, 8) : entry.id;
+            names[i] = title + " · " + entry.prettyDate() + " · ID " + identity
+                    + (entry.category.equals("loeschung-ausstehend") ? " · Löschung wiederholen" : "");
+        }
+        new AlertDialog.Builder(this)
+                .setTitle("Papierkorb · " + trashed.size() + " Chats")
+                .setItems(names, (dialog, which) -> showTrashItemActions(trashed.get(which)))
+                .setNegativeButton("Schließen", null).show();
+    }
+
+    private void showTrashItemActions(ChatStore.Entry entry) {
+        boolean deletionPending = entry.category.equals("loeschung-ausstehend");
+        String[] choices = deletionPending
+                ? new String[]{"Endgültige Löschung erneut versuchen"}
+                : new String[]{"Wiederherstellen", "Endgültig löschen"};
+        new AlertDialog.Builder(this).setTitle("Papierkorb: " + entry.title)
+                .setItems(choices, (dialog, choice) -> {
+                    if (!deletionPending && choice == 0) {
+                        try {
+                            store.restoreTrash(entry.id);
+                            importSummary = "„" + entry.title + "“ wurde wiederhergestellt.";
+                            refresh();
+                        } catch (IOException error) {
+                            status.setText("Wiederherstellung fehlgeschlagen: " + error.getMessage());
+                        }
+                    } else {
+                        confirmPermanentDelete(entry);
+                    }
+                }).setNegativeButton("Abbrechen", null).show();
+    }
+
+    private void confirmPermanentDelete(ChatStore.Entry entry) {
+        new AlertDialog.Builder(this)
+                .setTitle("Endgültig löschen?")
+                .setMessage("Wollen Sie diesen Chat endgültig löschen?\n\n„" + entry.title + "“\n\n"
+                        + "Die lokale Hauptfassung, der Suchindex und gespeicherte Altversionen "
+                        + "werden entfernt. Dies kann in der App nicht rückgängig gemacht werden. "
+                        + "Originale Exportdateien außerhalb der App bleiben erhalten.")
+                .setNegativeButton("Abbrechen", null)
+                .setPositiveButton("Endgültig löschen", (dialog, which) -> {
+                    if (importing) return;
+                    importing = true;
+                    status.setText("Entferne lokale Chatdateien …");
+                    importWorker.execute(() -> {
+                        String error = null;
+                        try { store.permanentlyDeleteFromTrash(entry.id); }
+                        catch (IOException failed) { error = failed.getMessage(); }
+                        final String outcome = error;
+                        runOnUiThread(() -> {
+                            if (isFinishing() || isDestroyed()) return;
+                            importing = false;
+                            if (outcome == null) {
+                                importSummary = "„" + entry.title + "“ endgültig lokal gelöscht.";
+                                refresh();
+                            } else {
+                                importSummary = "Löschung unvollständig, im Papierkorb erneut versuchen: " + outcome;
+                                refresh();
+                            }
+                        });
+                    });
+                }).show();
     }
 
     private void moveChat(ChatStore.Entry entry) {
@@ -1054,6 +1174,7 @@ public final class MainActivity extends Activity {
         for (ChatStore.Entry entry : all) if (ChatStore.PROJECT.equals(entry.category)) project++;
         counts.setText(all.size() + " Gespräche · " + project + " UniverseLab · "
                 + (all.size() - project) + " weitere");
+        if (trashButton != null) trashButton.setText("Papierkorb (" + store.trashSnapshot().size() + ")");
         if (firstRunHint != null) firstRunHint.setVisibility(all.isEmpty() ? View.VISIBLE : View.GONE);
         scheduleSearch();
     }

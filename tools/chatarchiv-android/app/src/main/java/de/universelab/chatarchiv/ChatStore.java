@@ -46,6 +46,8 @@ import java.util.zip.ZipInputStream;
 final class ChatStore {
     static final String PROJECT = "projekt";
     static final String OTHER = "andere";
+    static final String TRASH = "papierkorb";
+    private static final String PURGE_PENDING = "loeschung-ausstehend";
     private static final long MAX_ZIP_JSON_BYTES = 3L * 1024 * 1024 * 1024;
     private static final int MAX_ZIP_JSON_ENTRIES = 100;
     private static final long MAX_MANIFEST_BYTES = 2L * 1024 * 1024;
@@ -60,14 +62,43 @@ final class ChatStore {
         final long created;
         final String category;
         final String digest;
+        final String originCategory;
+        final long trashedAt;
 
         Entry(String id, String title, String file, long created, String category, String digest) {
+            this(id, title, file, created, category, digest, "", 0);
+        }
+
+        Entry(String id, String title, String file, long created, String category, String digest,
+              String originCategory, long trashedAt) {
             this.id = id;
             this.title = title;
             this.file = file;
             this.created = created;
             this.category = category;
             this.digest = digest;
+            this.originCategory = originCategory;
+            this.trashedAt = trashedAt;
+        }
+
+        boolean inTrash() {
+            return TRASH.equals(category) || PURGE_PENDING.equals(category);
+        }
+
+        Entry moveToTrash(long when) {
+            if (inTrash()) return this;
+            return new Entry(id, title, file, created, TRASH, digest, category, when);
+        }
+
+        Entry restoreFromTrash() {
+            if (!TRASH.equals(category)) throw new IllegalStateException("Chat nicht wiederherstellbar");
+            String target = PROJECT.equals(originCategory) ? PROJECT : OTHER;
+            return new Entry(id, title, file, created, target, digest);
+        }
+
+        Entry beginPermanentDeletion() {
+            if (!inTrash()) throw new IllegalStateException("Chat muss im Papierkorb liegen");
+            return new Entry(id, title, file, created, PURGE_PENDING, digest, originCategory, trashedAt);
         }
 
         String prettyDate() {
@@ -83,6 +114,10 @@ final class ChatStore {
             json.put("created", created);
             json.put("category", category);
             json.put("digest", digest);
+            if (inTrash()) {
+                json.put("origin_category", originCategory);
+                json.put("trashed_at", trashedAt);
+            }
             return json;
         }
     }
@@ -126,6 +161,7 @@ final class ChatStore {
         int updated;
         int unchanged;
         int archived;
+        int skippedTrashed;
         int failed;
         boolean cancelled;
         final Set<String> newIds = new HashSet<>();
@@ -135,6 +171,7 @@ final class ChatStore {
             String output = "Neu: " + imported + " · Geändert: " + updated
                     + " · Bereits identisch: " + unchanged;
             if (archived > 0) output += " · Ältere/abweichende Versionen gesichert: " + archived;
+            if (skippedTrashed > 0) output += " · Im Papierkorb belassen: " + skippedTrashed;
             if (failed > 0) output += " · Fehler: " + failed;
             if (cancelled) output += " · Abgebrochen (bisheriger Stand gesichert)";
             if (!errors.isEmpty()) output += "\n" + errors.get(0);
@@ -177,9 +214,15 @@ final class ChatStore {
                 String id = record.optString("id", "");
                 String file = record.optString("file", "");
                 if (id.isEmpty() || !file.matches("[0-9a-f]{64}\\.json")) continue;
+                String category = record.optString("category", OTHER);
+                if (!PROJECT.equals(category) && !OTHER.equals(category)
+                        && !TRASH.equals(category) && !PURGE_PENDING.equals(category)) category = OTHER;
+                String origin = record.optString("origin_category", "");
+                if (!PROJECT.equals(origin) && !OTHER.equals(origin)) origin = OTHER;
+                long trashedAt = Math.max(0, record.optLong("trashed_at", 0));
                 entries.put(id, new Entry(id, record.optString("title", "Ohne Titel"),
-                        file, record.optLong("created", 0), record.optString("category", OTHER),
-                        record.optString("digest", "")));
+                        file, record.optLong("created", 0), category,
+                        record.optString("digest", ""), origin, trashedAt));
             }
         } catch (JSONException exception) {
             throw new IOException("Gesprächsindex beschädigt: " + exception.getMessage(), exception);
@@ -187,14 +230,76 @@ final class ChatStore {
     }
 
     synchronized List<Entry> snapshot() {
-        ArrayList<Entry> result = new ArrayList<>(entries.values());
+        ArrayList<Entry> result = new ArrayList<>();
+        for (Entry entry : entries.values()) if (!entry.inTrash()) result.add(entry);
         result.sort(Comparator.comparingLong((Entry item) -> item.created).reversed());
         return result;
     }
 
+    synchronized List<Entry> trashSnapshot() {
+        ArrayList<Entry> result = new ArrayList<>();
+        for (Entry entry : entries.values()) if (entry.inTrash()) result.add(entry);
+        result.sort(Comparator.comparingLong((Entry item) -> item.trashedAt).reversed());
+        return result;
+    }
+
+    synchronized void moveToTrash(String id) throws IOException {
+        Entry existing = entries.get(id);
+        if (existing == null || existing.inTrash()) throw new IOException("Gespräch nicht aktiv");
+        Entry updated = existing.moveToTrash(System.currentTimeMillis() / 1000);
+        entries.put(id, updated);
+        try { saveIndex(); }
+        catch (IOException error) { entries.put(id, existing); throw error; }
+    }
+
+    synchronized void restoreTrash(String id) throws IOException {
+        Entry existing = entries.get(id);
+        if (existing == null || !TRASH.equals(existing.category))
+            throw new IOException("Gespräch nicht wiederherstellbar");
+        if (!new File(conversations, existing.file).isFile())
+            throw new IOException("Chatdatei nicht mehr vorhanden – keine Wiederherstellung");
+        entries.put(id, existing.restoreFromTrash());
+        try { saveIndex(); }
+        catch (IOException error) { entries.put(id, existing); throw error; }
+    }
+
+    /**
+     * Permanent deletion is an explicit second step. A durable pending marker
+     * remains in the index until private files and archived versions are removed.
+     * If I/O fails, retry through the trash; never silently reinstate partial data.
+     */
+    synchronized void permanentlyDeleteFromTrash(String id) throws IOException {
+        Entry current = entries.get(id);
+        if (current == null || !current.inTrash()) throw new IOException("Chat nicht im Papierkorb");
+        if (!PURGE_PENDING.equals(current.category)) {
+            Entry pending = current.beginPermanentDeletion();
+            entries.put(id, pending);
+            try { saveIndex(); }
+            catch (IOException error) { entries.put(id, current); throw error; }
+            current = pending;
+        }
+        File[] archived = versions.listFiles();
+        if (archived == null) throw new IOException("Versionsspeicher nicht lesbar – Löschung kann erneut versucht werden");
+        String chatHash = sha256(id);
+        Files.deleteIfExists(new File(conversations, current.file).toPath());
+        Files.deleteIfExists(new File(conversations, chatHash + ".search").toPath());
+        String expectedPrefix = chatHash + "-";
+        for (File file : archived) {
+            String name = file.getName();
+            if (file.isFile() && name.startsWith(expectedPrefix)
+                    && name.substring(expectedPrefix.length()).matches("[0-9a-f]{64}\\.json")) {
+                long bytes = file.length();
+                if (Files.deleteIfExists(file.toPath())) savedVersionBytes = Math.max(0, savedVersionBytes - bytes);
+            }
+        }
+        entries.remove(id);
+        try { saveIndex(); }
+        catch (IOException error) { entries.put(id, current); throw error; }
+    }
+
     synchronized void setCategory(String id, String category) throws IOException {
         Entry previous = entries.get(id);
-        if (previous == null) return;
+        if (previous == null || previous.inTrash()) return;
         if (!PROJECT.equals(category) && !OTHER.equals(category)) return;
         entries.put(id, new Entry(previous.id, previous.title, previous.file,
                 previous.created, category, previous.digest));
@@ -486,8 +591,9 @@ final class ChatStore {
             if (change == ImportChange.UNCHANGED) result.unchanged++;
             else if (change == ImportChange.UPDATED) result.updated++;
             else if (change == ImportChange.ARCHIVED) result.archived++;
+            else if (change == ImportChange.TRASHED) result.skippedTrashed++;
             else { result.imported++; result.newIds.add(id); }
-            int total = result.imported + result.updated + result.unchanged;
+            int total = result.imported + result.updated + result.unchanged + result.skippedTrashed;
             if (total % 10 == 0) progress.onProgress(result.imported, result.updated, result.unchanged);
         }
         reader.endArray();
@@ -535,7 +641,7 @@ final class ChatStore {
         }
     }
 
-    private enum ImportChange { ADDED, UPDATED, UNCHANGED, ARCHIVED }
+    private enum ImportChange { ADDED, UPDATED, UNCHANGED, ARCHIVED, TRASHED }
 
     private ImportChange upsert(JSONObject data, String id) throws IOException {
         String fileName = sha256(id) + ".json";
@@ -548,6 +654,8 @@ final class ChatStore {
         String digest = sha256(serialized);
         synchronized (this) {
             Entry previous = entries.get(id);
+            // Explicitly deleted records are not resurrected by a later bulk import.
+            if (previous != null && previous.inTrash()) return ImportChange.TRASHED;
             if (previous != null && digest.equals(previous.digest)) return ImportChange.UNCHANGED;
             File current = new File(conversations, fileName);
             if (previous != null && current.isFile()) {

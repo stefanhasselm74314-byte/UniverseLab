@@ -25,6 +25,8 @@ on:
       - app/chatarchiv-scan-actions-row-v0512
       - app/chatarchiv-local-copy-hash-v0513
       - app/chatarchiv-version-reader-v0514
+      - app/chatarchiv-safe-trash-v0515
+      - app/chatarchiv-trash-action-fix-v0516
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'
