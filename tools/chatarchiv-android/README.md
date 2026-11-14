@@ -1,5 +1,18 @@
 # UniverseLab ChatArchiv — Android
 
+## Version 0.5.17 · flexible ODER-Suche und exakte Wortfolgen (Android-Gerätetest offen)
+
+- **Unverbundene Wörter sind Alternativen (ODER):** `New Chats` liefert alle Chats, in deren Titel oder indexierten sichtbaren Nachrichten `New` **oder** `Chats` als eigenständiges Wort vorkommt; ein Chat mit ausschließlich einem dieser Wörter zählt.
+- **Anführungszeichen verbinden Wörter zu einer exakten Wortfolge:** `"New Chats"` sucht die unmittelbar zusammenhängende, vollständige Wortfolge; ein Chat mit nur `New` oder nur `Chats` ist dann **kein** Treffer.
+- **Optionaler Titelfilter:** `titel:"New Chats"` sucht nur diese Wortfolge im Titel. Ohne `titel:` werden Titel und sichtbare Nachrichten durchsucht.
+- Alle Varianten ignorieren Groß-/Kleinschreibung, befolgen Unicode-Wortgrenzen, behandeln Leerraum zwischen *nicht* zitierten Suchwörtern als ODER und verändern weder Quelltexte noch gespeicherte Chats.
+- Streaming-Volltextsuche bleibt speicherschonend, inklusive Abgleich von Treffern über Lese-Blockgrenzen hinweg; Parser berücksichtigt maximal 64 Suchausdrücke zu je 256 Zeichen.
+- Künstliche JVM-Tests belegen ODER, zusammenhängende Wortfolgen, Titelfilter, Wortgrenzen, Kategorien und Blockgrenzen. Fehlender Treffer im Suchindex bedeutet keine automatische Löschung.
+- Neue isolierte QA-Paketkennung `de.universelab.chatarchiv.researchqa17`, um bestehende Installationen mit 641 bzw. später 640 Gesprächen nicht zu überschreiben; produktive Android-Signierung bleibt gesondert geschützt. Versioncode 33 / Versionname 0.5.17.
+- Keine neuen Berechtigungen, kein ChatGPT-Kontozugriff, keine Änderung am Papierkorb oder importierten Chatdaten. `main` unverändert; CI, Signatur- und Samsung-Test erforderlich.
+
+
+
 ## Version 0.5.16 · Schaltflächen im Chat-Aktionsdialog sichtbar (Samsung Android 17)
 
 - **Reproduzierter Fehler v0.5.15:** Lange auf „New chat“ drücken öffnete einen Dialog mit Titel und Nachrichtentext, aber ohne die versprochenen Aktionen. Ursache: `AlertDialog.Builder.setMessage()` und `setItems()` wurden gemeinsam benutzt; bei Android 17 wurde die Optionsliste unterdrückt.

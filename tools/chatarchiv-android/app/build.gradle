@@ -10,17 +10,17 @@ android {
         applicationId 'de.universelab.chatarchiv'
         minSdk 26
         targetSdk 35
-        versionCode 32
-        versionName '0.5.16'
+        versionCode 33
+        versionName '0.5.17'
         manifestPlaceholders = [appTitle: 'UniverseLab ChatArchiv']
     }
 
     buildTypes {
         // Preview APK is a separate app: never replace the user's private chat archive.
         debug {
-            // Unique QA package: never replace existing v0.5.14/v0.5.15 QA archives.
-            applicationIdSuffix '.researchqa16'
-            manifestPlaceholders = [appTitle: 'UniverseLab Forschung QA v0.5.16']
+            // Unique QA package: never overwrite existing v0.5.12–v0.5.16 archives.
+            applicationIdSuffix '.researchqa17'
+            manifestPlaceholders = [appTitle: 'UniverseLab Forschung QA v0.5.17']
         }
         release {
             minifyEnabled false

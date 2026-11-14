@@ -148,6 +148,49 @@ public final class StorageScannerTest {
         }
     }
 
+    @Test public void searchUnquotedTermsAreOrAndQuotedPhrasesAreContiguous() throws Exception {
+        File index = temp.newFolder("keyword-index");
+        List<ChatStore.Entry> chats = new java.util.ArrayList<>();
+        String names[] = {"Nur New", "Nur Chats", "New Chats", "Andere Chats einbeziehen",
+                "Nur anderes Thema", "Newspaper and chattering", "New – später Chats"};
+        String bodies[] = {"leer", "leer", "leer", "enthält Wörter aus dem Thema",
+                "Hier steht ausdrücklich New Chats in einem sichtbaren Beitrag",
+                "nur newspaper und chattering", "leer"};
+        for (int i = 0; i < names.length; i++) {
+            String filename = String.format(java.util.Locale.ROOT, "entry%02d.json", i);
+            chats.add(new ChatStore.Entry("qa-" + i, names[i], filename,
+                    0L, ChatStore.OTHER, "digest-" + i));
+            Files.write(new File(index, filename.replace(".json", ".search")).toPath(),
+                    bodies[i].getBytes(StandardCharsets.UTF_8));
+        }
+        // Unquoted: OR. Every title with either word and the one body-only hit appears.
+        assertEquals(6, ChatStore.search(chats, "alle", "New Chats", () -> false, index).size());
+        // Quoted: exact contiguous phrase, in either title or visible message contents.
+        assertEquals(2, ChatStore.search(chats, "alle", "\"New Chats\"", () -> false, index).size());
+        // Title scoping must exclude the body-only phrase occurrence.
+        assertEquals(1, ChatStore.search(chats, "alle", "titel:\"New Chats\"", () -> false, index).size());
+        assertEquals(1, ChatStore.search(chats, "alle", "title:\"new chats\"", () -> false, index).size());
+        // Whole words: Newspaper or chattering must not count as New or Chats.
+        assertEquals(4, ChatStore.search(chats, "alle", "new", () -> false, index).size());
+        assertEquals(5, ChatStore.search(chats, "alle", "chats", () -> false, index).size());
+        assertEquals(0, ChatStore.search(chats, "alle", "\"news chats\"", () -> false, index).size());
+        assertEquals(0, ChatStore.search(chats, ChatStore.PROJECT, "new", () -> false, index).size());
+    }
+
+    @Test public void quotedPhraseMatchesAcrossBufferedIndexBoundary() throws Exception {
+        File index = temp.newFolder("long-index");
+        String filename = "boundary.json";
+        ChatStore.Entry chat = new ChatStore.Entry("boundary-id", "Unerwarteter Titel",
+                filename, 0, ChatStore.OTHER, "");
+        String padding = "x".repeat(8190);
+        Files.writeString(new File(index, "boundary.search").toPath(),
+                padding + " New Chats are searchable.", StandardCharsets.UTF_8);
+        assertEquals(1, ChatStore.search(java.util.Collections.singletonList(chat), "alle",
+                "\"New Chats\"", () -> false, index).size());
+        assertEquals(0, ChatStore.search(java.util.Collections.singletonList(chat), "alle",
+                "\"New Chat\"", () -> false, index).size());
+    }
+
     @Test public void sourceIndexSkipsReferencesButPreservesDistinctPossibleCopies() {
         ScanSourceIndex index = new ScanSourceIndex();
         assertTrue(index.register("media", "doc1", "conversations-005.json", 6333444L,
