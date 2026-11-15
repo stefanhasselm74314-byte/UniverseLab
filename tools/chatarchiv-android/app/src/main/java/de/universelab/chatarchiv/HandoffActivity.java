@@ -66,8 +66,10 @@ public final class HandoffActivity extends Activity {
     private Button copyButton;
     private Button saveButton;
     private Button scopeButton;
+    private Button modeButton;
     private Button chooseButton;
     private HandoffQuality.Scope currentScope = HandoffQuality.Scope.PHYSICS;
+    private HandoffBuilder.Mode currentMode = HandoffBuilder.Mode.CONTEXT_ONLY;
     private final List<ResearchFinder.Finding> approved = new ArrayList<>();
     private boolean selectionApproved;
 
@@ -113,6 +115,10 @@ public final class HandoffActivity extends Activity {
             int saved = state.getInt("scope", 0);
             HandoffQuality.Scope[] values = HandoffQuality.Scope.values();
             if (saved >= 0 && saved < values.length) currentScope = values[saved];
+            int savedMode = state.getInt("mode", 0);
+            HandoffBuilder.Mode[] modes = HandoffBuilder.Mode.values();
+            if (savedMode >= 0 && savedMode < modes.length)
+                currentMode = modes[savedMode];
         }
         LinearLayout optionsRow = Ui.row(this);
         scopeButton = Ui.button(this, "Bereich: " + currentScope.label);
@@ -123,6 +129,10 @@ public final class HandoffActivity extends Activity {
         root.addView(optionsRow);
         scopeButton.setOnClickListener(view -> selectScope());
         chooseButton.setOnClickListener(view -> selectFindings());
+
+        modeButton = Ui.button(this, "Übergabemodus: " + currentMode.label + " ▾");
+        root.addView(modeButton);
+        modeButton.setOnClickListener(view -> selectMode());
 
         LinearLayout scanRow = Ui.row(this);
         scanButton = Ui.button(this, "Übergabe neu sammeln");
@@ -291,7 +301,8 @@ public final class HandoffActivity extends Activity {
         List<ResearchFinder.Finding> visible = scopedFindings();
         HandoffBuilder.Packet packet = HandoffBuilder.buildSelected(
                 subject, snapshotTime, inspectedChats, unreadableChats,
-                visible, reviews, selectionApproved ? approved : null, currentScope.label);
+                visible, reviews, selectionApproved ? approved : null,
+                currentScope.label, currentMode);
         handoffText = packet.markdown;
         preview.setText(handoffText);
         scroll.scrollTo(0, 0);
@@ -302,7 +313,7 @@ public final class HandoffActivity extends Activity {
         });
         copyButton.setEnabled(selectionApproved);
         saveButton.setEnabled(selectionApproved);
-        status.setText((selectionApproved ? "Auswahl bestätigt"
+        status.setText(currentMode.label + " · " + (selectionApproved ? "Auswahl bestätigt"
                 : "Kompakte Vorschau · bis zu 12 Fundstellen manuell auswählbar")
                 + " · " + inspectedChats + " Projektchats · "
                 + packet.totalCandidates + " passende Hinweise · "
@@ -338,6 +349,25 @@ public final class HandoffActivity extends Activity {
                     scopeButton.setText("Bereich: " + currentScope.label);
                     revokeSelection();
                     if (ready) regeneratePreview();
+                    dialog.dismiss();
+                });
+    }
+
+    private void selectMode() {
+        HandoffBuilder.Mode[] modes = HandoffBuilder.Mode.values();
+        String[] labels = {
+                "Nur Kontext übertragen · auf neuen Auftrag warten",
+                "Arbeit fortsetzen · Prüfkandidaten aktiv bearbeiten"
+        };
+        Ui.showFramedChoices(this, "Verhalten im neuen Chat", labels,
+                currentMode.ordinal(), "Abbrechen", (dialog, which) -> {
+                    if (which >= 0 && which < modes.length && currentMode != modes[which]) {
+                        currentMode = modes[which];
+                        modeButton.setText("Übergabemodus: " + currentMode.label + " ▾");
+                        // An already approved export must not change its instructions silently.
+                        revokeSelection();
+                        if (ready) regeneratePreview();
+                    }
                     dialog.dismiss();
                 });
     }
@@ -463,7 +493,7 @@ public final class HandoffActivity extends Activity {
             return;
         }
         manager.setPrimaryClip(ClipData.newPlainText(
-                "UniverseLab Chat-Übergabe (heuristisch)", handoffText));
+                "UniverseLab Chat-Übergabe · " + currentMode.label, handoffText));
         Toast.makeText(this,
                 "Übergabepaket kopiert · in einen neuen Chat einfügen",
                 Toast.LENGTH_LONG).show();
@@ -475,7 +505,8 @@ public final class HandoffActivity extends Activity {
         Intent save = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         save.addCategory(Intent.CATEGORY_OPENABLE);
         save.setType("text/plain");
-        save.putExtra(Intent.EXTRA_TITLE, "UniverseLab_ChatUebergabe_v0.1.md");
+        save.putExtra(Intent.EXTRA_TITLE, "UniverseLab_ChatUebergabe_"
+                + currentMode.filenamePart + "_v0.2.md");
         save.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         startActivityForResult(save, SAVE_HANDOFF);
     }
@@ -513,6 +544,7 @@ public final class HandoffActivity extends Activity {
     @Override protected void onSaveInstanceState(Bundle outState) {
         outState.putString("focus", focus.getText().toString());
         outState.putInt("scope", currentScope.ordinal());
+        outState.putInt("mode", currentMode.ordinal());
         if (pendingSave != null) outState.putString("pending-save", pendingSave);
         super.onSaveInstanceState(outState);
     }
