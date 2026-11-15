@@ -29,6 +29,7 @@ on:
       - app/chatarchiv-trash-action-fix-v0516
       - app/chatarchiv-phrase-or-search-v0517
       - app/chatarchiv-search-relevance-v0518
+      - app/chatarchiv-batch-tools-v0519
     paths:
       - 'tools/chatarchiv-android/**'
       - '.github/workflows/chatarchiv-android-apk.yml'

@@ -14,6 +14,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FilterInputStream;
 import java.io.FileInputStream;
+import java.io.ByteArrayOutputStream;
+import java.util.LinkedHashSet;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -58,6 +62,8 @@ final class ChatStore {
     static final class Entry {
         final String id;
         final String title;
+        final String originalTitle;
+        final boolean customTitle;
         final String file;
         final long created;
         final String category;
@@ -66,13 +72,20 @@ final class ChatStore {
         final long trashedAt;
 
         Entry(String id, String title, String file, long created, String category, String digest) {
-            this(id, title, file, created, category, digest, "", 0);
+            this(id, title, file, created, category, digest, "", 0, title, false);
         }
 
         Entry(String id, String title, String file, long created, String category, String digest,
               String originCategory, long trashedAt) {
+            this(id, title, file, created, category, digest, originCategory, trashedAt, title, false);
+        }
+
+        Entry(String id, String title, String file, long created, String category, String digest,
+              String originCategory, long trashedAt, String originalTitle, boolean customTitle) {
             this.id = id;
             this.title = title;
+            this.originalTitle = originalTitle;
+            this.customTitle = customTitle;
             this.file = file;
             this.created = created;
             this.category = category;
@@ -85,20 +98,39 @@ final class ChatStore {
             return TRASH.equals(category) || PURGE_PENDING.equals(category);
         }
 
+        Entry withCategory(String target) {
+            return new Entry(id, title, file, created, target, digest,
+                    originCategory, trashedAt, originalTitle, customTitle);
+        }
+
+        Entry withLocalTitle(String requested) {
+            boolean changed = !originalTitle.equals(requested);
+            return new Entry(id, changed ? requested : originalTitle, file, created, category, digest,
+                    originCategory, trashedAt, originalTitle, changed);
+        }
+
+        Entry withImportedTitle(String imported, long time, String newDigest) {
+            return new Entry(id, customTitle ? title : imported, file, time, category, newDigest,
+                    originCategory, trashedAt, imported, customTitle && !title.equals(imported));
+        }
+
         Entry moveToTrash(long when) {
             if (inTrash()) return this;
-            return new Entry(id, title, file, created, TRASH, digest, category, when);
+            return new Entry(id, title, file, created, TRASH, digest,
+                    category, when, originalTitle, customTitle);
         }
 
         Entry restoreFromTrash() {
             if (!TRASH.equals(category)) throw new IllegalStateException("Chat nicht wiederherstellbar");
             String target = PROJECT.equals(originCategory) ? PROJECT : OTHER;
-            return new Entry(id, title, file, created, target, digest);
+            return new Entry(id, title, file, created, target, digest,
+                    "", 0, originalTitle, customTitle);
         }
 
         Entry beginPermanentDeletion() {
             if (!inTrash()) throw new IllegalStateException("Chat muss im Papierkorb liegen");
-            return new Entry(id, title, file, created, PURGE_PENDING, digest, originCategory, trashedAt);
+            return new Entry(id, title, file, created, PURGE_PENDING, digest,
+                    originCategory, trashedAt, originalTitle, customTitle);
         }
 
         String prettyDate() {
@@ -114,6 +146,10 @@ final class ChatStore {
             json.put("created", created);
             json.put("category", category);
             json.put("digest", digest);
+            if (customTitle) {
+                json.put("custom_title", true);
+                json.put("original_title", originalTitle);
+            }
             if (inTrash()) {
                 json.put("origin_category", originCategory);
                 json.put("trashed_at", trashedAt);
@@ -220,9 +256,12 @@ final class ChatStore {
                 String origin = record.optString("origin_category", "");
                 if (!PROJECT.equals(origin) && !OTHER.equals(origin)) origin = OTHER;
                 long trashedAt = Math.max(0, record.optLong("trashed_at", 0));
-                entries.put(id, new Entry(id, record.optString("title", "Ohne Titel"),
+                String title = record.optString("title", "Ohne Titel");
+                boolean custom = record.optBoolean("custom_title", false);
+                String original = custom ? record.optString("original_title", title) : title;
+                entries.put(id, new Entry(id, title,
                         file, record.optLong("created", 0), category,
-                        record.optString("digest", ""), origin, trashedAt));
+                        record.optString("digest", ""), origin, trashedAt, original, custom));
             }
         } catch (JSONException exception) {
             throw new IOException("Gesprächsindex beschädigt: " + exception.getMessage(), exception);
@@ -241,6 +280,41 @@ final class ChatStore {
         for (Entry entry : entries.values()) if (entry.inTrash()) result.add(entry);
         result.sort(Comparator.comparingLong((Entry item) -> item.trashedAt).reversed());
         return result;
+    }
+
+    /**
+     * Atomic batch of category assignments or recoverable trash moves.
+     * Validates every chat ID before making any change; commits one index update.
+     */
+    synchronized int batchUpdate(List<String> selectedIds, String destination) throws IOException {
+        if (!PROJECT.equals(destination) && !OTHER.equals(destination) && !TRASH.equals(destination))
+            throw new IOException("Unbekanntes Ziel");
+        if (selectedIds == null || selectedIds.isEmpty()) return 0;
+        Set<String> unique = new LinkedHashSet<>(selectedIds);
+        if (unique.size() > 2000) throw new IOException("Maximal 2000 Chats pro Sammelaktion");
+        for (String id : unique) {
+            Entry original = entries.get(id);
+            if (original == null || original.inTrash())
+                throw new IOException("Auswahl ist nicht mehr aktuell; bitte neu auswählen");
+        }
+        Map<String, Entry> originals = new LinkedHashMap<>();
+        long now = System.currentTimeMillis() / 1000;
+        for (String id : unique) {
+            Entry original = entries.get(id);
+            Entry next = TRASH.equals(destination) ? original.moveToTrash(now)
+                    : original.withCategory(destination);
+            if (original.category.equals(next.category)) continue;
+            originals.put(id, original);
+            entries.put(id, next);
+        }
+        if (originals.isEmpty()) return 0;
+        try { saveIndex(); }
+        catch (IOException error) {
+            for (Map.Entry<String, Entry> old : originals.entrySet())
+                entries.put(old.getKey(), old.getValue());
+            throw error;
+        }
+        return originals.size();
     }
 
     synchronized void moveToTrash(String id) throws IOException {
@@ -297,13 +371,52 @@ final class ChatStore {
         catch (IOException error) { entries.put(id, current); throw error; }
     }
 
+    /** Renames the LOCAL display title only. Original ChatGPT JSON and indexes remain intact. */
+    synchronized void renameChat(String id, String requested) throws IOException {
+        Entry old = entries.get(id);
+        if (old == null || PURGE_PENDING.equals(old.category))
+            throw new IOException("Gespräch nicht zum Umbenennen verfügbar");
+        String name = validateLocalTitle(requested);
+        Entry updated = old.withLocalTitle(name);
+        if (old.title.equals(updated.title) && old.customTitle == updated.customTitle) return;
+        entries.put(id, updated);
+        try { saveIndex(); }
+        catch (IOException error) { entries.put(id, old); throw error; }
+    }
+
+    static String validateLocalTitle(String value) throws IOException {
+        if (value == null) throw new IOException("Titel fehlt");
+        String title = value.trim();
+        if (title.isEmpty()) throw new IOException("Titel darf nicht leer sein");
+        if (title.length() > 180) throw new IOException("Titel darf maximal 180 Zeichen lang sein");
+        for (int i = 0; i < title.length(); i++) {
+            if (Character.isISOControl(title.charAt(i)))
+                throw new IOException("Titel darf keine Zeilenumbrüche oder Steuerzeichen enthalten");
+        }
+        return title;
+    }
+
+    synchronized Entry entryForDisplay(String id) {
+        return entries.get(id);
+    }
+
+    synchronized void restoreOriginalTitle(String id) throws IOException {
+        Entry old = entries.get(id);
+        if (old == null || PURGE_PENDING.equals(old.category))
+            throw new IOException("Gespräch nicht zum Zurücksetzen verfügbar");
+        if (!old.customTitle) return;
+        entries.put(id, old.withLocalTitle(old.originalTitle));
+        try { saveIndex(); }
+        catch (IOException error) { entries.put(id, old); throw error; }
+    }
+
     synchronized void setCategory(String id, String category) throws IOException {
         Entry previous = entries.get(id);
         if (previous == null || previous.inTrash()) return;
         if (!PROJECT.equals(category) && !OTHER.equals(category)) return;
-        entries.put(id, new Entry(previous.id, previous.title, previous.file,
-                previous.created, category, previous.digest));
-        saveIndex();
+        entries.put(id, previous.withCategory(category));
+        try { saveIndex(); }
+        catch (IOException failure) { entries.put(id, previous); throw failure; }
     }
 
     /** No modification, deletion, automatic selection or restoration of previous versions. */
@@ -470,9 +583,14 @@ final class ChatStore {
             zip.closeEntry();
 
             JSONObject categories = new JSONObject();
+            JSONObject localTitles = new JSONObject();
             JSONObject manifest = new JSONObject();
             try {
-                for (Entry record : records) categories.put(record.id, record.category);
+                for (Entry record : records) {
+                    categories.put(record.id, record.category);
+                    if (record.customTitle) localTitles.put(record.id, record.title);
+                }
+                manifest.put("title_overrides_by_id", localTitles);
                 manifest.put("format", "universelab-chatarchiv");
                 manifest.put("version", 1);
                 manifest.put("conversation_count", records.size());
@@ -606,15 +724,23 @@ final class ChatStore {
         JSONObject manifest = (JSONObject) decoded;
         if (!"universelab-chatarchiv".equals(manifest.optString("format", ""))) return;
         JSONObject map = manifest.optJSONObject("category_by_id");
-        if (map == null) return;
+        JSONObject titles = manifest.optJSONObject("title_overrides_by_id");
+        if (map == null && titles == null) return;
         synchronized (this) {
             for (String id : result.newIds) {
                 Entry previous = entries.get(id);
-                if (previous == null) continue;
-                String category = map.optString(id, "");
-                if (!PROJECT.equals(category) && !OTHER.equals(category)) continue;
-                entries.put(id, new Entry(id, previous.title, previous.file, previous.created,
-                        category, previous.digest));
+                if (previous == null || previous.inTrash()) continue;
+                Entry updated = previous;
+                if (map != null) {
+                    String category = map.optString(id, "");
+                    if (PROJECT.equals(category) || OTHER.equals(category))
+                        updated = updated.withCategory(category);
+                }
+                if (titles != null && titles.has(id) && !updated.customTitle) {
+                    try { updated = updated.withLocalTitle(validateLocalTitle(titles.optString(id, ""))); }
+                    catch (IOException ignored) { /* Ignore invalid optional title alias. */ }
+                }
+                entries.put(id, updated);
             }
         }
     }
@@ -680,7 +806,9 @@ final class ChatStore {
             writeAtomic(current, serialized);
             writeAtomic(new File(conversations, sha256(id) + ".search"), indexed);
             String category = previous != null ? previous.category : categoryFromTitle(title);
-            entries.put(id, new Entry(id, title, fileName, created, category, digest));
+            entries.put(id, previous == null
+                    ? new Entry(id, title, fileName, created, category, digest)
+                    : previous.withImportedTitle(title, created, digest));
             return previous != null ? ImportChange.UPDATED : ImportChange.ADDED;
         }
     }
@@ -904,6 +1032,131 @@ final class ChatStore {
         }
     }
 
+    static final class AuditReport {
+        int total, active, trash, checked, zeroVisible, corrupt, missing, noIndex, tooLarge, archived;
+        boolean cancelled;
+        final List<String> examples = new ArrayList<>();
+
+        void note(String message) {
+            if (examples.size() < 16) examples.add("• " + message);
+        }
+
+        String summary() {
+            StringBuilder out = new StringBuilder("Gespräche insgesamt (Index): " + total
+                    + "\nAktive Gespräche: " + active + "\nIm Papierkorb: " + trash
+                    + "\nUntersuchte Chatdateien: " + checked
+                    + "\n0 sichtbare Beiträge (nur Prüfkandidaten): " + zeroVisible
+                    + "\nFehlende Chatdateien: " + missing
+                    + "\nBeschädigt / Prüfsumme abweichend: " + corrupt
+                    + "\nFehlende Suchindizes: " + noIndex
+                    + "\nÜber 16 MiB (Inhaltsprüfung übersprungen): " + tooLarge
+                    + "\nGespeicherte Altversionsdateien: " + archived
+                    + (cancelled ? "\n\nPrüfung abgebrochen – Angaben unvollständig." : "\n\nPrüfung abgeschlossen.")
+                    + "\n0 sichtbare Beiträge bedeutet NICHT zwingend leere Quelldaten."
+                    + "\nEs wurde kein Chat geändert oder gelöscht.\n");
+            for (String message : examples) out.append("\n").append(message);
+            return out.toString();
+        }
+    }
+
+    AuditReport auditArchive(Cancelled cancelled, ExportProgress progress) {
+        AuditReport report = new AuditReport();
+        List<Entry> rows;
+        synchronized (this) { rows = new ArrayList<>(entries.values()); }
+        report.total = rows.size();
+        for (Entry item : rows) {
+            if (item.inTrash()) report.trash++;
+            else report.active++;
+        }
+        File[] saved = versions.listFiles();
+        if (saved != null) for (File file : saved)
+            if (file.isFile() && file.getName().matches("[0-9a-f]{64}-[0-9a-f]{64}\\.json"))
+                report.archived++;
+        for (int i = 0; i < rows.size(); i++) {
+            if (cancelled.isCancelled() || Thread.currentThread().isInterrupted()) {
+                report.cancelled = true;
+                break;
+            }
+            Entry item = rows.get(i);
+            File file = new File(conversations, item.file);
+            String label = item.title + " · ID " + item.id.substring(0, Math.min(8, item.id.length()));
+            if (!file.isFile()) {
+                report.missing++;
+                report.note("Fehlende Chatdatei: " + label);
+            } else if (file.length() > 16L * 1024 * 1024) {
+                report.tooLarge++;
+                report.note("Inhaltsprüfung auf 16 MiB begrenzt: " + label);
+            } else {
+                try {
+                    String serialized = new String(Files.readAllBytes(file.toPath()),
+                            StandardCharsets.UTF_8);
+                    if ((!item.digest.isEmpty() && !sha256(serialized).equals(item.digest))) {
+                        report.corrupt++;
+                        report.note("Prüfsumme abweichend: " + label);
+                    } else {
+                        JSONObject obj = new JSONObject(serialized);
+                        if (!item.id.equals(obj.optString("id", ""))) {
+                            report.corrupt++;
+                            report.note("Chat-ID stimmt nicht: " + label);
+                        } else {
+                            report.checked++;
+                            if (ConversationLogic.visibleMessages(obj).isEmpty()) {
+                                report.zeroVisible++;
+                                report.note("0 sichtbare Beiträge: " + label);
+                            }
+                        }
+                    }
+                } catch (Exception invalid) {
+                    report.corrupt++;
+                    report.note("Chatdaten nicht lesbar: " + label);
+                }
+            }
+            String name = item.file.replace(".json", ".search");
+            if (!new File(conversations, name).isFile()) report.noIndex++;
+            if (i % 8 == 0) progress.onProgress(i + 1, rows.size());
+        }
+        progress.onProgress(report.checked + report.missing + report.corrupt + report.tooLarge, rows.size());
+        return report;
+    }
+
+    /** Complete local snapshot for preservation, not yet a supported one-tap restore format. */
+    ArchiveBundle.Report exportCompleteBackup(OutputStream output,
+                           Cancelled cancelled, ExportProgress progress) throws IOException {
+        if (!index.isFile()) throw new IOException("Gesprächsindex fehlt – Backup nicht möglich");
+        List<ArchiveBundle.Item> files = new ArrayList<>();
+        files.add(new ArchiveBundle.Item("index.json", index));
+        File registerFile = new File(context.getFilesDir(), ResearchRegister.FILE_NAME);
+        if (registerFile.isFile())
+            files.add(new ArchiveBundle.Item(ResearchRegister.FILE_NAME, registerFile));
+        List<Entry> snapshot;
+        synchronized (this) { snapshot = new ArrayList<>(entries.values()); }
+        int active = 0, trashed = 0, missingSearch = 0;
+        for (Entry entry : snapshot) {
+            if (entry.inTrash()) trashed++; else active++;
+            if (!entry.file.matches("[0-9a-f]{64}\\.json"))
+                throw new IOException("Ungültige Datei im Gesprächsindex");
+            File current = new File(conversations, entry.file);
+            if (!current.isFile()) throw new IOException("Chatdatei fehlt: " + entry.file);
+            files.add(new ArchiveBundle.Item("conversations/" + entry.file, current));
+            File searchable = new File(conversations, entry.file.replace(".json", ".search"));
+            if (searchable.isFile())
+                files.add(new ArchiveBundle.Item("conversations/" + searchable.getName(), searchable));
+            else missingSearch++;
+        }
+        int older = 0;
+        File[] saved = versions.listFiles();
+        if (saved == null) throw new IOException("Versionsspeicher nicht lesbar");
+        Arrays.sort(saved, Comparator.comparing(File::getName));
+        for (File file : saved) {
+            if (!file.isFile() || !file.getName().matches("[0-9a-f]{64}-[0-9a-f]{64}\\.json"))
+                continue;
+            files.add(new ArchiveBundle.Item("conversation-versions/" + file.getName(), file));
+            older++;
+        }
+        return ArchiveBundle.create(output, files, active, trashed, older, missingSearch,
+                cancelled, progress);
+    }
+
     private synchronized void saveIndex() throws IOException {
         JSONArray array = new JSONArray();
         try {
@@ -968,3 +1221,420 @@ final class ChatStore {
         throw new IOException("Unerwartetes JSON-Token: " + token);
     }
 }
+
+/**
+ * Streamed, read-only full archive snapshot with per-file SHA-256. Verification
+ * is independent from the app's database and never extracts a ZIP entry.
+ */
+final class ArchiveBundle {
+    static final String FORMAT = "universelab-chatarchiv-full";
+    private static final int LIMIT_FILES = 30000;
+    private static final long LIMIT_TOTAL = 12L * 1024 * 1024 * 1024;
+    private static final long LIMIT_FILE = 3L * 1024 * 1024 * 1024;
+    private static final int MANIFEST_LIMIT = 8 * 1024 * 1024;
+
+    static final class Item {
+        final String name;
+        final File source;
+        Item(String name, File source) { this.name = name; this.source = source; }
+    }
+
+    static final class Report {
+        final int files, active, trash, versions, missingSearch;
+        final long bytes;
+        Report(int files, int active, int trash, int versions, int missingSearch, long bytes) {
+            this.files = files;
+            this.active = active;
+            this.trash = trash;
+            this.versions = versions;
+            this.missingSearch = missingSearch;
+            this.bytes = bytes;
+        }
+        String summary() {
+            return "Hauptfassungen aktiv: " + active + " · Papierkorb: " + trash
+                    + " · Altversionen: " + versions + "\nGesicherte Dateien: " + files
+                    + " · Nutzdaten: " + (bytes / 1024 / 1024) + " MiB"
+                    + "\nFehlende optionale Suchindizes: " + missingSearch
+                    + "\nPrüfsummen: SHA-256 je Datei. Bitte das fertige ZIP über "
+                    + "„Vollbackup prüfen“ unabhängig verifizieren."
+                    + "\nKeine Medienanhänge enthalten, die nicht im lokalen Archiv gespeichert sind."
+                    + "\nWiederherstellen aus diesem neuen Gesamtformat ist noch nicht freigegeben.";
+        }
+    }
+
+    private static boolean validName(String name) {
+        return "index.json".equals(name)
+                || ResearchRegister.FILE_NAME.equals(name)
+                || name.matches("conversations/[0-9a-f]{64}\\.(json|search)")
+                || name.matches("conversation-versions/[0-9a-f]{64}-[0-9a-f]{64}\\.json");
+    }
+
+    private static String digestHex(byte[] hash) {
+        StringBuilder hex = new StringBuilder(hash.length * 2);
+        for (byte value : hash) {
+            hex.append(Character.forDigit((value >>> 4) & 0xf, 16));
+            hex.append(Character.forDigit(value & 0xf, 16));
+        }
+        return hex.toString();
+    }
+
+    private static MessageDigest newDigest() {
+        try { return MessageDigest.getInstance("SHA-256"); }
+        catch (NoSuchAlgorithmException missing) { throw new AssertionError(missing); }
+    }
+
+    static Report create(OutputStream output, List<Item> inputs, int active, int trash,
+                         int versions, int missingSearch, ChatStore.Cancelled cancelled,
+                         ChatStore.ExportProgress progress) throws IOException {
+        if (inputs.isEmpty() || inputs.size() > LIMIT_FILES)
+            throw new IOException("Unzulässige Anzahl von Sicherungsdateien");
+        JSONArray checks = new JSONArray();
+        Set<String> seen = new HashSet<>();
+        long allBytes = 0;
+        byte[] buffer = new byte[65536];
+        try (ZipOutputStream zip = new ZipOutputStream(output, StandardCharsets.UTF_8)) {
+            for (int i = 0; i < inputs.size(); i++) {
+                if (cancelled.isCancelled() || Thread.currentThread().isInterrupted())
+                    throw new IOException("Vollbackup abgebrochen");
+                Item file = inputs.get(i);
+                if (!validName(file.name) || !seen.add(file.name))
+                    throw new IOException("Ungültiger oder doppelter Sicherungspfad");
+                if (!file.source.isFile()) throw new IOException("Sicherung benötigt fehlende Datei: " + file.name);
+                long expected = file.source.length();
+                if (expected > LIMIT_FILE || expected > LIMIT_TOTAL - allBytes)
+                    throw new IOException("Sicherungsgröße überschreitet Schutzgrenze");
+                MessageDigest digest = newDigest();
+                long counted = 0;
+                zip.putNextEntry(new ZipEntry(file.name));
+                try (InputStream input = new BufferedInputStream(new FileInputStream(file.source), 65536)) {
+                    int n;
+                    while ((n = input.read(buffer)) != -1) {
+                        if (cancelled.isCancelled() || Thread.currentThread().isInterrupted())
+                            throw new IOException("Vollbackup abgebrochen");
+                        counted += n;
+                        if (counted > LIMIT_FILE || counted > LIMIT_TOTAL - allBytes)
+                            throw new IOException("Sicherung überschreitet Größenlimit");
+                        digest.update(buffer, 0, n);
+                        zip.write(buffer, 0, n);
+                    }
+                }
+                zip.closeEntry();
+                allBytes += counted;
+                try {
+                    checks.put(new JSONObject().put("path", file.name).put("bytes", counted)
+                            .put("sha256", digestHex(digest.digest())));
+                } catch (JSONException malformed) {
+                    throw new IOException("Sicherungsmanifest nicht erstellbar", malformed);
+                }
+                progress.onProgress(i + 1, inputs.size());
+            }
+            JSONObject manifest = new JSONObject();
+            try {
+                manifest.put("format", FORMAT).put("version", 1)
+                        .put("active", active).put("trash", trash)
+                        .put("historical_versions", versions)
+                        .put("missing_search_indexes", missingSearch)
+                        .put("files", checks);
+            } catch (JSONException malformed) {
+                throw new IOException("Sicherungsmanifest nicht erstellbar", malformed);
+            }
+            byte[] metadata = manifest.toString().getBytes(StandardCharsets.UTF_8);
+            if (metadata.length > MANIFEST_LIMIT) throw new IOException("Sicherungsmanifest zu groß");
+            zip.putNextEntry(new ZipEntry("manifest.json"));
+            zip.write(metadata);
+            zip.closeEntry();
+            zip.finish();
+        }
+        return new Report(inputs.size(), active, trash, versions, missingSearch, allBytes);
+    }
+
+    static Report verify(InputStream input, ChatStore.Cancelled cancelled,
+                         ChatStore.ExportProgress progress) throws IOException {
+        Map<String, String> actual = new HashMap<>();
+        Map<String, Long> actualSizes = new HashMap<>();
+        byte[] buffer = new byte[65536];
+        byte[] manifestBytes = null;
+        long total = 0;
+        int count = 0;
+        try (ZipInputStream zip = new ZipInputStream(new BufferedInputStream(input, 65536),
+                StandardCharsets.UTF_8)) {
+            ZipEntry entry;
+            while ((entry = zip.getNextEntry()) != null) {
+                if (cancelled.isCancelled() || Thread.currentThread().isInterrupted())
+                    throw new IOException("Backup-Prüfung abgebrochen");
+                if (entry.isDirectory()) throw new IOException("Unbekannter Ordner im Backup");
+                String name = entry.getName();
+                if ("manifest.json".equals(name)) {
+                    if (manifestBytes != null) throw new IOException("Doppeltes Sicherungsmanifest");
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    int n;
+                    while ((n = zip.read(buffer)) != -1) {
+                        if (cancelled.isCancelled()) throw new IOException("Backup-Prüfung abgebrochen");
+                        if (bytes.size() + n > MANIFEST_LIMIT) throw new IOException("Manifest zu groß");
+                        bytes.write(buffer, 0, n);
+                    }
+                    manifestBytes = bytes.toByteArray();
+                    zip.closeEntry();
+                    continue;
+                }
+                if (manifestBytes != null) throw new IOException("Datei nach Manifest");
+                if (!validName(name) || actual.containsKey(name) || ++count > LIMIT_FILES)
+                    throw new IOException("Unbekannte oder doppelte Datei im Backup");
+                MessageDigest digest = newDigest();
+                long bytes = 0;
+                int n;
+                while ((n = zip.read(buffer)) != -1) {
+                    if (cancelled.isCancelled()) throw new IOException("Backup-Prüfung abgebrochen");
+                    bytes += n;
+                    if (bytes > LIMIT_FILE || bytes > LIMIT_TOTAL - total)
+                        throw new IOException("Backup-Prüfung: Größe überschritten");
+                    digest.update(buffer, 0, n);
+                }
+                zip.closeEntry();
+                total += bytes;
+                actualSizes.put(name, bytes);
+                actual.put(name, digestHex(digest.digest()));
+                progress.onProgress(count, 0);
+            }
+        }
+        if (manifestBytes == null || !actual.containsKey("index.json"))
+            throw new IOException("Sicherungsmanifest oder Index fehlt");
+        try {
+            JSONObject manifest = new JSONObject(new String(manifestBytes, StandardCharsets.UTF_8));
+            if (!FORMAT.equals(manifest.optString("format")) || manifest.optInt("version") != 1)
+                throw new IOException("Unbekanntes Sicherungsformat");
+            JSONArray expected = manifest.optJSONArray("files");
+            if (expected == null || expected.length() != actual.size())
+                throw new IOException("Dateienanzahl stimmt nicht");
+            Set<String> listed = new HashSet<>();
+            for (int i = 0; i < expected.length(); i++) {
+                JSONObject file = expected.optJSONObject(i);
+                if (file == null) throw new IOException("Manifestdatei fehlt");
+                String name = file.optString("path");
+                if (!listed.add(name) || !actual.containsKey(name)
+                        || !actual.get(name).equals(file.optString("sha256"))
+                        || actualSizes.get(name) != file.optLong("bytes", -1))
+                    throw new IOException("Prüfsumme/Dateigröße falsch: " + name);
+            }
+            return new Report(count, manifest.optInt("active"), manifest.optInt("trash"),
+                    manifest.optInt("historical_versions"),
+                    manifest.optInt("missing_search_indexes"), total);
+        } catch (JSONException malformed) {
+            throw new IOException("Ungültiges Sicherungsmanifest", malformed);
+        }
+    }
+
+    private ArchiveBundle() { }
+}
+
+
+final class ResearchRegister {
+    static final String FILE_NAME = "research-register.json";
+    static final String[] STAGES = {"Nicht zugeordnet", "HPVS", "HZT-M0", "HZT-Full", "Übergreifend"};
+    static final String[] STATES = {
+            "Unbewertet", "Offen", "In Prüfung", "Zurückgestellt", "Abgeschlossen (manuell)"
+    };
+    private static final String FORMAT = "universelab-research-register";
+    private static final int MAX_ENTRIES = 5000;
+    private static final long MAX_JSON_BYTES = 16L * 1024 * 1024;
+
+    static final class Record {
+        final String id;
+        final String chatId;
+        final String chatTitle;
+        final int messageNumber;
+        final String role;
+        final String excerpt;
+        final String kind;
+        final String stage;
+        final String state;
+        final String note;
+        final long createdAt;
+        final long updatedAt;
+
+        Record(String id, String chatId, String chatTitle, int messageNumber, String role,
+               String excerpt, String kind, String stage, String state, String note,
+               long createdAt, long updatedAt) {
+            this.id = id;
+            this.chatId = chatId;
+            this.chatTitle = chatTitle;
+            this.messageNumber = messageNumber;
+            this.role = role;
+            this.excerpt = excerpt;
+            this.kind = kind;
+            this.stage = stage;
+            this.state = state;
+            this.note = note;
+            this.createdAt = createdAt;
+            this.updatedAt = updatedAt;
+        }
+
+        Record withReview(String nextStage, String nextState, String nextNote) {
+            return new Record(id, chatId, chatTitle, messageNumber, role, excerpt, kind,
+                    nextStage, nextState, nextNote, createdAt, System.currentTimeMillis());
+        }
+
+        JSONObject toJson() throws JSONException {
+            return new JSONObject()
+                    .put("id", id).put("chat_id", chatId).put("chat_title_snapshot", chatTitle)
+                    .put("message_number", messageNumber).put("role", role)
+                    .put("excerpt", excerpt).put("kind", kind)
+                    .put("stage", stage).put("state", state).put("note", note)
+                    .put("created_at", createdAt).put("updated_at", updatedAt);
+        }
+
+        static Record fromJson(JSONObject data) throws IOException {
+            if (data == null) throw new IOException("Leerer Forschungseintrag");
+            String id = data.optString("id", "");
+            String chatId = data.optString("chat_id", "");
+            String stage = data.optString("stage", "");
+            String state = data.optString("state", "");
+            String note = data.optString("note", "");
+            int message = data.optInt("message_number", 0);
+            if (!id.matches("[0-9a-f]{64}") || chatId.isEmpty() || message <= 0
+                    || !validChoice(STAGES, stage) || !validChoice(STATES, state)
+                    || note.length() > 2000)
+                throw new IOException("Ungültiger Forschungseintrag");
+            return new Record(id, chatId, data.optString("chat_title_snapshot", ""), message,
+                    data.optString("role", ""), data.optString("excerpt", ""),
+                    data.optString("kind", ""), stage, state, note,
+                    Math.max(0, data.optLong("created_at", 0)),
+                    Math.max(0, data.optLong("updated_at", 0)));
+        }
+    }
+
+    private final File file;
+    private final Map<String, Record> records = new LinkedHashMap<>();
+
+    ResearchRegister(Context context) throws IOException {
+        file = new File(context.getFilesDir(), FILE_NAME);
+        load();
+    }
+
+    synchronized List<Record> snapshot() {
+        List<Record> result = new ArrayList<>(records.values());
+        result.sort(Comparator.comparingLong((Record r) -> r.updatedAt).reversed());
+        return result;
+    }
+
+    synchronized Record get(String id) { return records.get(id); }
+
+    synchronized Record addFinding(ResearchFinder.Finding finding, String stage,
+                                   String state, String note) throws IOException {
+        if (finding == null || finding.chatId == null || finding.chatId.isEmpty()
+                || finding.messageNumber <= 0)
+            throw new IOException("Fundstelle nicht eindeutig identifiziert");
+        validateReview(stage, state, note);
+        String id = idForFinding(finding);
+        Record former = records.get(id);
+        if (former == null && records.size() >= MAX_ENTRIES)
+            throw new IOException("Forschungsregister ist auf 5000 Einträge begrenzt");
+        long time = System.currentTimeMillis();
+        Record next = new Record(id, finding.chatId, limit(finding.chatTitle, 180),
+                finding.messageNumber, limit(finding.role, 30), limit(finding.excerpt, 700),
+                limit(finding.kind, 80), stage, state, note,
+                former == null ? time : former.createdAt, time);
+        records.put(id, next);
+        try { persist(); }
+        catch (IOException error) {
+            if (former == null) records.remove(id);
+            else records.put(id, former);
+            throw error;
+        }
+        return next;
+    }
+
+    synchronized void updateReview(String id, String stage, String state, String note) throws IOException {
+        validateReview(stage, state, note);
+        Record former = records.get(id);
+        if (former == null) throw new IOException("Registereintrag nicht gefunden");
+        records.put(id, former.withReview(stage, state, note));
+        try { persist(); }
+        catch (IOException error) { records.put(id, former); throw error; }
+    }
+
+    synchronized void remove(String id) throws IOException {
+        Record former = records.get(id);
+        if (former == null) throw new IOException("Registereintrag nicht gefunden");
+        records.remove(id);
+        try { persist(); }
+        catch (IOException error) { records.put(id, former); throw error; }
+    }
+
+    static String idForFinding(ResearchFinder.Finding finding) {
+        return fingerprint(finding.chatId + "\n" + finding.messageNumber
+                + "\n" + finding.kind + "\n" + finding.signal);
+    }
+
+    static void validateReview(String stage, String state, String note) throws IOException {
+        if (!validChoice(STAGES, stage) || !validChoice(STATES, state))
+            throw new IOException("Ungültige Forschungsstufe oder Bearbeitungsstatus");
+        if (note == null || note.length() > 2000)
+            throw new IOException("Notiz darf höchstens 2000 Zeichen lang sein");
+    }
+
+    private static boolean validChoice(String[] choices, String value) {
+        for (String choice : choices) if (choice.equals(value)) return true;
+        return false;
+    }
+
+    static String fingerprint(String content) {
+        try {
+            byte[] digest = MessageDigest.getInstance("SHA-256")
+                    .digest(content.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hex = new StringBuilder(64);
+            for (byte value : digest)
+                hex.append(String.format(java.util.Locale.ROOT, "%02x", value & 0xff));
+            return hex.toString();
+        } catch (NoSuchAlgorithmException error) { throw new AssertionError(error); }
+    }
+
+    private static String limit(String source, int length) {
+        if (source == null) return "";
+        return source.length() <= length ? source : source.substring(0, length);
+    }
+
+    private void load() throws IOException {
+        if (!file.isFile()) return;
+        if (file.length() > MAX_JSON_BYTES) throw new IOException("Forschungsregister zu groß");
+        try {
+            JSONObject root = new JSONObject(new String(Files.readAllBytes(file.toPath()),
+                    StandardCharsets.UTF_8));
+            if (!FORMAT.equals(root.optString("format")) || root.optInt("version") != 1)
+                throw new IOException("Forschungsregister: unbekanntes Format");
+            JSONArray list = root.optJSONArray("entries");
+            if (list == null || list.length() > MAX_ENTRIES)
+                throw new IOException("Forschungsregister: ungültige Eintragsanzahl");
+            for (int i = 0; i < list.length(); i++) {
+                Record record = Record.fromJson(list.optJSONObject(i));
+                if (records.put(record.id, record) != null)
+                    throw new IOException("Doppelter Registereintrag: " + record.id);
+            }
+        } catch (JSONException invalid) {
+            throw new IOException("Forschungsregister beschädigt", invalid);
+        }
+    }
+
+    private void persist() throws IOException {
+        JSONArray rows = new JSONArray();
+        try {
+            for (Record row : records.values()) rows.put(row.toJson());
+            JSONObject root = new JSONObject()
+                    .put("format", FORMAT).put("version", 1).put("entries", rows);
+            byte[] bytes = root.toString().getBytes(StandardCharsets.UTF_8);
+            if (bytes.length > MAX_JSON_BYTES)
+                throw new IOException("Forschungsregister überschreitet 16 MiB");
+            File pending = new File(file.getParentFile(), FILE_NAME + ".tmp");
+            Files.write(pending.toPath(), bytes);
+            try {
+                Files.move(pending.toPath(), file.toPath(),
+                        StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+            } catch (AtomicMoveNotSupportedException unsupported) {
+                Files.move(pending.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (JSONException malformed) {
+            throw new IOException("Registereintrag nicht serialisierbar", malformed);
+        }
+    }
+}
+

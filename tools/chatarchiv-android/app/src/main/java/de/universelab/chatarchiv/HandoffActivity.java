@@ -332,17 +332,14 @@ public final class HandoffActivity extends Activity {
         HandoffQuality.Scope[] options = HandoffQuality.Scope.values();
         String[] labels = new String[options.length];
         for (int n = 0; n < options.length; n++) labels[n] = options[n].label;
-        new AlertDialog.Builder(this)
-                .setTitle("Arbeitsbereich für die Übergabe")
-                .setSingleChoiceItems(labels, currentScope.ordinal(), (dialog, which) -> {
+        Ui.showFramedChoices(this, "Arbeitsbereich für die Übergabe",
+                labels, currentScope.ordinal(), "Abbrechen", (dialog, which) -> {
                     currentScope = options[which];
                     scopeButton.setText("Bereich: " + currentScope.label);
                     revokeSelection();
                     if (ready) regeneratePreview();
                     dialog.dismiss();
-                })
-                .setNegativeButton("Abbrechen", null)
-                .show();
+                });
     }
 
     /** A deliberate user decision before text leaves the app via clipboard or SAF. */

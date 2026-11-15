@@ -223,7 +223,7 @@ public final class GitHubActivity extends Activity {
         @Override public View getView(int position, View old, ViewGroup parent) {
             FileItem item = files.get(position);
             LinearLayout box = Ui.column(GitHubActivity.this, 9);
-            box.setBackgroundColor(Ui.SURFACE);
+            Ui.outlineSurface(GitHubActivity.this, box);
             box.addView(Ui.text(GitHubActivity.this,
                     ("dir".equals(item.type) ? "📁 " : "📄 ") + item.name, 15, true));
             TextView meta = Ui.text(GitHubActivity.this,
