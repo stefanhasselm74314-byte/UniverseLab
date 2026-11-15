@@ -284,7 +284,10 @@ public final class ResearchActivity extends Activity {
                 + findings.size() + " von " + matching + " im Filter angezeigt"
                 + " · " + linked + " spätere Statusverknüpfungen unter angezeigten Fundstellen"
                 + (unreadableChats > 0 ? " · " + unreadableChats + " nicht lesbar" : "")
-                + ". Antippen öffnet den Originalbeitrag.");
+                + (checkedChats == 0
+                        ? ". Im geprüften Bereich sind keine Chats. Die Filter lassen "
+                          + "sich auswählen, liefern aber ohne Quelle keine Fundstellen."
+                        : ". Antippen öffnet den Originalbeitrag."));
     }
 
     @Override protected void onDestroy() {

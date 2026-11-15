@@ -1,5 +1,16 @@
 # UniverseLab ChatArchiv — Android
 
+## v0.5.19: Radio-Auswahlfilter reparieren – kein Versionswechsel
+
+Nutzerbericht auf Samsung Galaxy S24 Ultra / Android 17: „Kann die nicht aktivieren“, Screenshots mit Fachbereich-/Hinweisart-Radioelementen im Forschungsnavigator, zugleich `0 Chats` und `0 manuell aufgenommene Fundstellen`. Ursachen trennen:
+- Mit `0 Chats` erscheinen keine Fundstellen; die eigentlichen Filter müssen **trotzdem auswählbar** sein.
+- Bisher erzeugte der gerahmte Dialog RadioButtons über einen gewöhnlichen `AlertDialog.Builder.setAdapter()`, der **keinen echten Einzelauswahlmodus** der Android-ListView setzt. Korrektur: echte `setSingleChoiceItems(adapter, selectedIndex, listener)`-Verknüpfung für alle Radio-Dialoge, während normale Menülisten weiter `setAdapter()` verwenden.
+- Der Forschungslauf zeigt bei `0` geprüften Chats nun ausdrücklich an, dass Filter zwar funktionieren, aber ohne Chats keine Treffer erzeugen. Keine fälschliche wissenschaftliche Evidenz.
+- Neuer separater QA-Debug-App-Name/Paket `de.universelab.chatarchiv.researchqa19filterfix`, damit unverträgliche GitHub-Debugsignaturen keine früheren gefüllten QA-Archive überschreiben. `versionName` bleibt `0.5.19`, `versionCode` bleibt `35`. `main` unverändert; keine Dateneingriffe.
+- Der Android-Build und der echte Geräteklick auf einen anderen Radioeintrag als die Vorauswahl sind noch separat zu testen. Das CI-Kompilieren allein beweist die tatsächliche Bedienbarkeit nicht.
+
+
+
 ## Gerahmte Untermenüs – v0.5.19, kein Versionssprung
 
 Auf ausdrücklichen Nutzerwunsch bekommen die bereits kompakten Hauptmenüs und ihre Untermenüs eine **klar sichtbare hellgraue Außenumrandung** und **einzeln umrissene Menüzeilen** mit 5-dp-Zwischenraum. Jede Zeile färbt sich beim Drücken/Fokussieren in einen etwas helleren neutralen Grauton. Alle Farben bleiben echte Grautöne (R=G=B); keine blauen Akzente, kein zusätzlicher Kasten um jeden Textabschnitt.

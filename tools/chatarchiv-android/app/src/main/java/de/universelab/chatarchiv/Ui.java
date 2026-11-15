@@ -180,11 +180,18 @@ final class Ui {
                 return label;
             }
         };
-        AlertDialog dialog = new AlertDialog.Builder(context)
+        // A framed radio menu is a *real* single-choice ListView.
+        // setAdapter() alone does not enable checked-item state, which made
+        // the drawn RadioButton appear inert on some Android versions.
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle(title)
-                .setAdapter(adapter, action)
-                .setNegativeButton(cancelText, cancelAction)
-                .create();
+                .setNegativeButton(cancelText, cancelAction);
+        if (currentChoice >= 0) {
+            builder.setSingleChoiceItems(adapter, currentChoice, action);
+        } else {
+            builder.setAdapter(adapter, action);
+        }
+        AlertDialog dialog = builder.create();
         dialog.show();
         Window window = dialog.getWindow();
         if (window != null) {
