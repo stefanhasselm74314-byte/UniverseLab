@@ -1,5 +1,13 @@
 # UniverseLab ChatArchiv — Android
 
+## Registerkarten: direkt sichtbare Schaltfläche „Bearbeiten“ (weiterhin v0.5.19)
+
+Nach dem Samsung-Test war „Stufe ▾“ im Forschungsregister als Bearbeitungsaktion missverständlich. Die Schaltfläche heißt jetzt **„Stufenfilter ▾“**, der Dialog **„Forschungsstufe filtern“**. Auf **jeder gespeicherten Fundstellenkarte** gibt es zusätzlich den unmittelbar erreichbaren, hellgrau umrahmten Button **„Bearbeiten“**. Ein Tipp öffnet direkt das bestehende Formular für Forschungsstufe, Bearbeitungsstatus und Prüfnotiz; der Speichervorgang nutzt unverändert die kontrollierte `ResearchRegister.updateReview`-Funktion mit Schreib-Rollback. Ein Tipp auf den übrigen Kartenteil öffnet weiterhin die Originalstelle, langes Antippen lässt die bisherigen Verwaltungsaktionen bestehen. Der Button ist nicht fokussierbar und darf den ListView-Item-Klick außerhalb seiner eigenen Fläche nicht verdrängen.
+
+**Version** bleibt `0.5.19` (Code 35). Die GitHub-CI-Signaturen sind nicht stabil zwischen Runs. Deshalb wird nur für diesen GUI-Test eine **separate QA-Paketkennung** `de.universelab.chatarchiv.researchqa19registeredit` verwendet, ohne ältere QA-Apps oder gespeicherte Gespräche zu überschreiben. Kein neuer Android-Zugriff, kein neuer Hauptbranch; `main` bleibt unverändert. CI-Build prüft Kompilierung, Gradle-Tests und Berechtigungen; ein echter Samsung-GUI-Test muss den direkten „Bearbeiten“-Klick und persistierten Status gesondert bestätigen.
+
+
+
 ## v0.5.19: Radio-Auswahlfilter reparieren – kein Versionswechsel
 
 Nutzerbericht auf Samsung Galaxy S24 Ultra / Android 17: „Kann die nicht aktivieren“, Screenshots mit Fachbereich-/Hinweisart-Radioelementen im Forschungsnavigator, zugleich `0 Chats` und `0 manuell aufgenommene Fundstellen`. Ursachen trennen:

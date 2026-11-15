@@ -378,7 +378,7 @@ public static final class ResearchRegisterActivity extends Activity {
         LinearLayout top = Ui.row(this);
         Button back = Ui.button(this, "‹ Zurück");
         back.setOnClickListener(view -> finish());
-        Button filter = Ui.button(this, "Stufe ▾");
+        Button filter = Ui.button(this, "Stufenfilter ▾");
         filter.setOnClickListener(view -> showStageFilter());
         top.addView(back, Ui.weight(1));
         top.addView(filter, Ui.weight(1));
@@ -417,10 +417,19 @@ public static final class ResearchRegisterActivity extends Activity {
                 if (!item.note.isEmpty())
                     panel.addView(Ui.text(ResearchRegisterActivity.this, "Notiz: " + item.note, 12, false));
                 TextView footer = Ui.text(ResearchRegisterActivity.this,
-                        "Manuell aufgenommen · antippen: Originalbeitrag · lange tippen: bearbeiten",
-                        11, false);
+                        "Manuell aufgenommen · Karte antippen: Originalbeitrag", 11, false);
                 footer.setTextColor(Ui.MUTED);
                 panel.addView(footer);
+
+                // Explicit editing action instead of requiring a discoverable long-press.
+                // Keep the parent ListView's short-tap navigation and long-press menu.
+                Button edit = Ui.button(ResearchRegisterActivity.this, "Bearbeiten");
+                edit.setFocusable(false);
+                edit.setFocusableInTouchMode(false);
+                edit.setContentDescription("Forschungsstufe, Status und Prüfnotiz bearbeiten: "
+                        + item.chatTitle);
+                edit.setOnClickListener(view -> showEdit(item));
+                panel.addView(edit);
                 return panel;
             }
         };
@@ -458,7 +467,7 @@ public static final class ResearchRegisterActivity extends Activity {
         String[] labels = new String[ResearchRegister.STAGES.length + 1];
         labels[0] = "Alle Stufen";
         System.arraycopy(ResearchRegister.STAGES, 0, labels, 1, ResearchRegister.STAGES.length);
-        Ui.showFramedMenu(this, "Forschungsstufe", labels,
+        Ui.showFramedMenu(this, "Forschungsstufe filtern", labels,
                 "Abbrechen", (dialog, index) -> {
                     stageFilter = labels[index];
                     refresh();
