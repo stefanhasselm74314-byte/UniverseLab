@@ -35,6 +35,47 @@ public final class HandoffBuilderTest {
         assertFalse(p.markdown.contains("ist wissenschaftlich bestätigt"));
     }
 
+    @Test public void defaultModeOnlyTransfersContextAndWaitsForUser() {
+        ResearchFinder.Finding f = candidate("c1", 42, "Governance",
+                "Offener GitHub-PR benötigt gesonderte Prüfung", 100);
+        HandoffBuilder.Packet p = HandoffBuilder.buildSelected(
+                "UniverseLab", "15.11.2026", 68, 0, List.of(f),
+                new IdentityHashMap<>(), List.of(f), "Software/UniverseLab");
+        assertTrue(p.markdown.contains("**ÜBERGABEMODUS: Nur Kontext übertragen (`CONTEXT_ONLY`)**"));
+        assertTrue(p.markdown.contains("Übergabemodus (maschinenlesbar): `CONTEXT_ONLY`"));
+        assertTrue(p.markdown.contains("Auf einen neuen ausdrücklichen Nutzerauftrag warten"));
+        assertTrue(p.markdown.contains("## C · Kontextübergabe ohne Arbeitsauftrag"));
+        assertFalse(p.markdown.contains("## C · Arbeitsauftrag an den neuen Chat"));
+        assertFalse(p.markdown.contains("Zuerst für die wichtigsten drei Kandidaten"));
+        assertEquals(1, p.includedWork);
+    }
+
+    @Test public void continueModeExplicitlyEnablesReadOnlyFollowUpButNoRelease() {
+        ResearchFinder.Finding f = candidate("c1", 42, "Mathematik",
+                "Ghostfreiheit noch nicht nachgewiesen", 100);
+        HandoffBuilder.Packet context = HandoffBuilder.buildSelected(
+                "HZT", "heute", 1, 0, List.of(f), null, List.of(f),
+                "6D-Physik", HandoffBuilder.Mode.CONTEXT_ONLY);
+        HandoffBuilder.Packet work = HandoffBuilder.buildSelected(
+                "HZT", "heute", 1, 0, List.of(f), null, List.of(f),
+                "6D-Physik", HandoffBuilder.Mode.CONTINUE_WORK);
+        assertTrue(work.markdown.contains("**ÜBERGABEMODUS: Arbeit fortsetzen (`CONTINUE_WORK`)**"));
+        assertTrue(work.markdown.contains("## C · Arbeitsauftrag an den neuen Chat"));
+        assertTrue(work.markdown.contains("schreibende, freigebende"));
+        assertTrue(work.markdown.contains("KEINE PROJEKTFREIGABE"));
+        assertEquals(context.includedWork, work.includedWork);
+        assertTrue(context.markdown.contains("Ghostfreiheit noch nicht nachgewiesen"));
+        assertTrue(work.markdown.contains("Ghostfreiheit noch nicht nachgewiesen"));
+    }
+
+    @Test public void missingModeFallsBackToContextOnly() {
+        HandoffBuilder.Packet p = HandoffBuilder.buildSelected(
+                "HZT", "heute", 0, 0, List.of(), null, null,
+                "6D-Physik", null);
+        assertTrue(p.markdown.contains("`CONTEXT_ONLY`"));
+        assertFalse(p.markdown.contains("## C · Arbeitsauftrag an den neuen Chat"));
+    }
+
     @Test public void laterClosingIsSeparatedAndNeverCalledCanonProof() {
         ResearchFinder.Finding closed = candidate(
                 "c1", 7, "Governance", "K1-D NOT RELEASED", 100);

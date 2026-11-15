@@ -1,5 +1,32 @@
 # UniverseLab ChatArchiv — Android
 
+## Chat-Übergabe: expliziter Startmodus (v0.5.19 QA)
+
+Die Chat-Übergabe hat direkt unter der Bereichsauswahl einen eigenen Modusknopf.
+**„Nur Kontext übertragen“** ist die sicher voreingestellte Variante: Die neue
+Sitzung soll die Quellauszüge lediglich aufnehmen, den begrenzten Umfang nennen
+und auf einen weiteren ausdrücklichen Nutzerauftrag warten. Der Export enthält
+in diesem Modus **keinen** Abschnitt mit aktiven Prüfanweisungen. Erst die
+bewusste Wahl von **„Arbeit fortsetzen“** versieht den Export mit dem
+Prüfauftrag für drei priorisierte Kandidaten. Dieser Modus erlaubt weiterhin
+keine automatische Repository-Änderung, Veröffentlichung oder physikalische
+Freigabe.
+
+Beide Exporte enthalten den maschinenlesbaren Modus `CONTEXT_ONLY` oder
+`CONTINUE_WORK`, eine hervorgehobene Startregel und dieselben Quellen- und
+Gültigkeitsgrenzen. Die vorgeschlagenen Dateinamen unterscheiden die Modi
+(`UniverseLab_ChatUebergabe_Kontext_v0.2.md` und
+`UniverseLab_ChatUebergabe_Fortsetzen_v0.2.md`). Ändert sich der Modus nach
+einer bestätigten Fundstellenauswahl, muss die Auswahl vor Kopieren/Speichern
+erneut bestätigt werden. Das alte Exportformat v0.1 bleibt lesbar, wird jedoch
+nicht nachträglich umgedeutet.
+
+App-Version und Code bleiben `0.5.19` / `35`, ohne Eingriff in gespeicherte
+Chats, Import, Papierkorb oder Forschungsgates. Der isolierte Debug-Build nutzt
+`de.universelab.chatarchiv.researchqa19handoffmodes`; produktive und ältere
+QA-Archive werden nicht überschrieben. CI-Unit-Tests und Samsung-Android-17-
+Bedienprüfung sind vor einer Freigabe erforderlich. `main` bleibt unverändert.
+
 ## Registerkarten: direkt sichtbare Schaltfläche „Bearbeiten“ (weiterhin v0.5.19)
 
 Nach dem Samsung-Test war „Stufe ▾“ im Forschungsregister als Bearbeitungsaktion missverständlich. Die Schaltfläche heißt jetzt **„Stufenfilter ▾“**, der Dialog **„Forschungsstufe filtern“**. Auf **jeder gespeicherten Fundstellenkarte** gibt es zusätzlich den unmittelbar erreichbaren, hellgrau umrahmten Button **„Bearbeiten“**. Ein Tipp öffnet direkt das bestehende Formular für Forschungsstufe, Bearbeitungsstatus und Prüfnotiz; der Speichervorgang nutzt unverändert die kontrollierte `ResearchRegister.updateReview`-Funktion mit Schreib-Rollback. Ein Tipp auf den übrigen Kartenteil öffnet weiterhin die Originalstelle, langes Antippen lässt die bisherigen Verwaltungsaktionen bestehen. Der Button ist nicht fokussierbar und darf den ListView-Item-Klick außerhalb seiner eigenen Fläche nicht verdrängen.

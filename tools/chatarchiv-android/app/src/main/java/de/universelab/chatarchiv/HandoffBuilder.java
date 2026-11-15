@@ -23,6 +23,22 @@ final class HandoffBuilder {
     static final int MANUAL_LIMIT = 12;
     static final int STATUS_LIMIT = 3;
 
+    /** The receiver's starting behavior is selected by the user, never inferred from quotes. */
+    enum Mode {
+        CONTEXT_ONLY("CONTEXT_ONLY", "Nur Kontext übertragen", "Kontext"),
+        CONTINUE_WORK("CONTINUE_WORK", "Arbeit fortsetzen", "Fortsetzen");
+
+        final String code;
+        final String label;
+        final String filenamePart;
+
+        Mode(String code, String label, String filenamePart) {
+            this.code = code;
+            this.label = label;
+            this.filenamePart = filenamePart;
+        }
+    }
+
     static final class Packet {
         final String markdown;
         final int includedWork;
@@ -54,6 +70,15 @@ final class HandoffBuilder {
             int unreadableChats, List<ResearchFinder.Finding> candidates,
             Map<ResearchFinder.Finding, ResearchTimeline.Review> reviews,
             List<ResearchFinder.Finding> explicitlyChosen, String scope) {
+        return buildSelected(focus, timestamp, scannedChats, unreadableChats,
+                candidates, reviews, explicitlyChosen, scope, Mode.CONTEXT_ONLY);
+    }
+
+    static Packet buildSelected(String focus, String timestamp, int scannedChats,
+            int unreadableChats, List<ResearchFinder.Finding> candidates,
+            Map<ResearchFinder.Finding, ResearchTimeline.Review> reviews,
+            List<ResearchFinder.Finding> explicitlyChosen, String scope, Mode requestedMode) {
+        Mode mode = requestedMode == null ? Mode.CONTEXT_ONLY : requestedMode;
         List<ResearchFinder.Finding> all = candidates == null
                 ? Collections.emptyList() : candidates;
         Map<ResearchFinder.Finding, ResearchTimeline.Review> check = reviews == null
@@ -91,8 +116,25 @@ final class HandoffBuilder {
         StringBuilder out = new StringBuilder(18_000);
         out.append("# UniverseLab · Übergabe für einen neuen Chat\n\n");
         out.append("**Status: [HEURISTISCH] · NUR ARBEITSENTWURF · KEINE PROJEKTFREIGABE**\n\n");
+        out.append("**ÜBERGABEMODUS: ").append(mode.label)
+                .append(" (`").append(mode.code).append("`)**\n\n");
+        if (mode == Mode.CONTEXT_ONLY) {
+            out.append("**Startregel:** Diese Datei überträgt ausschließlich Kontext. ")
+                    .append("Nach dem Einlesen den Empfang und die Grenzen kurz bestätigen, ")
+                    .append("aber **keine** Prüfung, Recherche, Dateiänderung, Repository-Aktion ")
+                    .append("oder Fortsetzung selbstständig beginnen. ")
+                    .append("Auf einen neuen ausdrücklichen Nutzerauftrag warten.\n\n");
+        } else {
+            out.append("**Startregel:** Der Nutzer hat für dieses Paket ausdrücklich ")
+                    .append("„Arbeit fortsetzen“ gewählt. Die priorisierten Prüfschritte in Abschnitt C ")
+                    .append("dürfen lesend begonnen werden; schreibende, freigebende ")
+                    .append("oder veröffentlichende Aktionen benötigen weiterhin ")
+                    .append("eine eigenständige Berechtigung.\n\n");
+        }
         out.append("- Fokus: ").append(clean(focus, 180)).append('\n');
         out.append("- Bereich: ").append(clean(scope, 80)).append('\n');
+        out.append("- Übergabemodus (maschinenlesbar): `")
+                .append(mode.code).append("`\n");
         out.append("- Fundstellen-Auswahl: ").append(explicitlyChosen == null
                 ? "Automatischer Vorschlag, **noch nicht vom Nutzer bestätigt**."
                 : "Vom Nutzer bewusst ausgewählt; **fachlich weiterhin unbestätigt**.")
@@ -105,7 +147,10 @@ final class HandoffBuilder {
                 .append(laterClosing.size())
                 .append(" mit späterer Abschluss-/Freigabeaussage im Chat.\n");
         out.append("- In diesem Paket: ").append(selectedWork.size())
-                .append(" mögliche Prüfaufträge und ").append(selectedClosures.size())
+                .append(mode == Mode.CONTEXT_ONLY
+                        ? " historische Prüfkandidaten (kein Arbeitsauftrag) und "
+                        : " mögliche Prüfaufträge und ")
+                .append(selectedClosures.size())
                 .append(" spätere Abschlussaussagen zur Statusprüfung.\n");
         if (unreadableChats > 0) out.append("- ACHTUNG: ")
                 .append(unreadableChats)
@@ -163,13 +208,23 @@ final class HandoffBuilder {
                         check.get(selectedClosures.get(i)));
         }
 
-        out.append("## C · Arbeitsauftrag an den neuen Chat\n\n");
-        out.append("1. Zuerst für die wichtigsten drei Kandidaten Originalkontext, aktuellen Status und unabhängige Belege erfragen/prüfen.\n");
-        out.append("2. Pro Kandidat: Annahmen → kleinstmöglicher Gegen-/Falsifikationstest → erforderliche Daten → überprüfbares Kriterium → Unsicherheiten.\n");
-        out.append("3. Scheinbare Abschlüsse und Widersprüche nur als zu prüfende **Behauptungen** führen. ")
-                .append("Ohne Freigabenachweis keinen Status stillschweigend ändern.\n");
-        out.append("4. Neue Ideen als **Hypothesen** kennzeichnen, mit einer klaren Messgröße oder einem mathematischen Gegenbeispiel.\n");
-        out.append("5. Ein knappes, datiertes Übergabe-Update mit Quellenankern für die nächste Sitzung erstellen.\n\n");
+        if (mode == Mode.CONTEXT_ONLY) {
+            out.append("## C · Kontextübergabe ohne Arbeitsauftrag\n\n");
+            out.append("Die Prüffragen in A und die Abschlussaussagen in B sind ")
+                    .append("**ausschließlich Kontextmaterial**. Sie sind weder ")
+                    .append("Arbeitsaufträge noch Belege für eine Freigabe. ")
+                    .append("Der neue Chat bestätigt nur, welche Teile eingelesen wurden, ")
+                    .append("benennt fehlende Originalquellen und wartet anschließend ")
+                    .append("auf die ausdrückliche Entscheidung des Nutzers.\n\n");
+        } else {
+            out.append("## C · Arbeitsauftrag an den neuen Chat\n\n");
+            out.append("1. Zuerst für die wichtigsten drei Kandidaten Originalkontext, aktuellen Status und unabhängige Belege erfragen/prüfen.\n");
+            out.append("2. Pro Kandidat: Annahmen → kleinstmöglicher Gegen-/Falsifikationstest → erforderliche Daten → überprüfbares Kriterium → Unsicherheiten.\n");
+            out.append("3. Scheinbare Abschlüsse und Widersprüche nur als zu prüfende **Behauptungen** führen. ")
+                    .append("Ohne Freigabenachweis keinen Status stillschweigend ändern.\n");
+            out.append("4. Neue Ideen als **Hypothesen** kennzeichnen, mit einer klaren Messgröße oder einem mathematischen Gegenbeispiel.\n");
+            out.append("5. Ein knappes, datiertes Übergabe-Update mit Quellenankern für die nächste Sitzung erstellen.\n\n");
+        }
 
         out.append("## Grenzen\n\n");
         out.append("Dies ist keine ChatGPT-Sitzungsübernahme und kein vollständiger Chat-Export. ")
