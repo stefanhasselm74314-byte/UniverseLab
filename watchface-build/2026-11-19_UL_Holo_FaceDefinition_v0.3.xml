@@ -26,7 +26,7 @@
         </PartImage>
 
         <!-- Depth 2: the static and animated metal gimbal move together. -->
-        <Group x="0" y="0" width="450" height="450">
+        <Group name="holo_gimbal" x="0" y="0" width="450" height="450">
             <Gyro x="0.08 * clamp([ACCELEROMETER_ANGLE_Y], -40, 40)"
                   y="0.08 * clamp([ACCELEROMETER_ANGLE_X], -40, 40)" />
             <PartImage x="75" y="111" width="300" height="300">

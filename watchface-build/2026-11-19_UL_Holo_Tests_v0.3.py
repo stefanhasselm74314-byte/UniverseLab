@@ -15,6 +15,8 @@ XML = ROOT / "holoface/src/main/res/raw/watchface.xml"
 class HoloFaceTests(unittest.TestCase):
     def test_three_independent_gyro_layers(self):
         document = ET.parse(XML)
+        for group in document.findall(".//Group"):
+            self.assertTrue(group.attrib.get("name"))
         gyros = document.findall(".//Gyro")
         self.assertEqual(len(gyros), 3)
         for gyro in gyros:

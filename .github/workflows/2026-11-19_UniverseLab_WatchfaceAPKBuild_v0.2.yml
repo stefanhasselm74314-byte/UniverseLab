@@ -54,7 +54,8 @@ jobs:
           git clone --depth=1 --filter=blob:none --sparse https://github.com/google/watchface.git "$RUNNER_TEMP/google-watchface"
           git -C "$RUNNER_TEMP/google-watchface" sparse-checkout set third_party/wff
           gradle -p "$RUNNER_TEMP/google-watchface/third_party/wff" :specification:validator:executable-jar --no-daemon
-          java -jar "$RUNNER_TEMP/google-watchface/third_party/wff/specification/validator/build/libs/wff-validator.jar" 1 build_watch_holo/watchface/src/main/res/raw/watchface.xml build_watch_holo/holoface/src/main/res/raw/watchface.xml
+          java -jar "$RUNNER_TEMP/google-watchface/third_party/wff/specification/validator/build/libs/wff-validator.jar" 1 build_watch_holo/watchface/src/main/res/raw/watchface.xml build_watch_holo/holoface/src/main/res/raw/watchface.xml 2>&1 | tee "$RUNNER_TEMP/wff-validation.log"
+          python -c 'from pathlib import Path; import os; report=(Path(os.environ["RUNNER_TEMP"])/"wff-validation.log").read_text(); assert report.count("PASSED :") == 2 and "FAILED :" not in report, "WFF XML invalid despite validator exit code 0"; print("Both WFF v1 documents: VERIFIED")'
 
       - name: Build all three Wear OS debug APKs
         run: gradle -p build_watch_holo :watchface:assembleDebug :compass:assembleDebug :holoface:assembleDebug --no-daemon --stacktrace
