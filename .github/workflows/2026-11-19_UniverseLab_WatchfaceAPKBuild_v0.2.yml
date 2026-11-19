@@ -24,19 +24,13 @@ jobs:
           python-version: '3.12'
 
       - name: Install deterministic image generator dependencies
-        run: python -m pip install 'Pillow==11.3.0' 'lxml==6.0.1'
+        run: python -m pip install 'Pillow==11.3.0'
 
       - name: Generate Android project from dated source files
         run: python watchface-build/2026-11-19_UL_Watch_Materialize_v0.2.py
 
       - name: Run structure and geometry checks
         run: python -m unittest discover -s build_watch/tests -v
-
-      - name: Check WFF v1 XML against Google's published XSD
-        run: |
-          git clone --depth=1 --filter=blob:none --sparse https://github.com/google/watchface.git "$RUNNER_TEMP/google-watchface"
-          git -C "$RUNNER_TEMP/google-watchface" sparse-checkout set third_party/wff/specification/documents/1
-          python -c 'from lxml import etree; from pathlib import Path; import os; schema=Path(os.environ["RUNNER_TEMP"])/"google-watchface/third_party/wff/specification/documents/1/watchface.xsd"; document=Path("build_watch/watchface/src/main/res/raw/watchface.xml"); etree.XMLSchema(etree.parse(str(schema))).assertValid(etree.parse(str(document))); print("WFF v1 XSD: OK")'
 
       - name: Set up Java 17
         uses: actions/setup-java@v4
@@ -54,6 +48,13 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.11.1'
+
+      - name: Validate WFF v1 with official XML Schema 1.1 validator
+        run: |
+          git clone --depth=1 --filter=blob:none --sparse https://github.com/google/watchface.git "$RUNNER_TEMP/google-watchface"
+          git -C "$RUNNER_TEMP/google-watchface" sparse-checkout set third_party/wff
+          gradle -p "$RUNNER_TEMP/google-watchface/third_party/wff" :specification:validator:executable-jar --no-daemon
+          java -jar "$RUNNER_TEMP/google-watchface/third_party/wff/specification/validator/build/libs/wff-validator.jar" 1 build_watch/watchface/src/main/res/raw/watchface.xml
 
       - name: Build both Wear OS debug APKs
         run: gradle -p build_watch :watchface:assembleDebug :compass:assembleDebug --no-daemon --stacktrace
