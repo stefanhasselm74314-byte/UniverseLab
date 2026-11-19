@@ -1,4 +1,4 @@
-name: UniverseLab Wear OS Holo-6D debug APKs
+name: UniverseLab Wear OS Holo-6D Titan-Spectrum v0.4 debug APKs
 
 on:
   pull_request:
@@ -27,7 +27,7 @@ jobs:
         run: python -m pip install 'Pillow==11.3.0'
 
       - name: Generate Android project from dated source files
-        run: python watchface-build/2026-11-19_UL_Holo_Materialize_v0.3.py
+        run: python watchface-build/2026-11-19_UL_Holo_Materialize_v0.4.py
 
       - name: Run structure and geometry checks
         run: python -m unittest discover -s build_watch_holo/tests -v
@@ -63,11 +63,11 @@ jobs:
       - name: Upload unsigned-for-release but installable debug APKs
         uses: actions/upload-artifact@v4
         with:
-          name: UniverseLab-Watch-Holo-6D-debug-APKs
+          name: UniverseLab-Watch-Holo-6D-v0.4-debug-APKs
           path: |
             build_watch_holo/watchface/build/outputs/apk/debug/*.apk
             build_watch_holo/compass/build/outputs/apk/debug/*.apk
             build_watch_holo/holoface/build/outputs/apk/debug/*.apk
-            build_watch_holo/UniverseLab_Holo_6D_Offline_v0.3.html
+            build_watch_holo/UniverseLab_Holo_6D_Offline_v0.4.html
           if-no-files-found: error
           retention-days: 14
