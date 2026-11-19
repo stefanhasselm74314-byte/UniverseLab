@@ -1,0 +1,16 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'de.universelab.compass'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'de.universelab.compass'
+        minSdk 33
+        targetSdk 36
+        versionCode 1
+        versionName '0.1.0'
+    }
+}
