@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    UniverseLab Holo-6D (WFF v1). The 2.5D illusion comes from three
+    independently translated depth layers based on accelerometer tilt.
+    The outer compass rose is STATIC; real magnetic bearing is only in
+    the separate sensor compass app. No optical hologram is projected.
+-->
+<WatchFace width="450" height="450">
+    <Scene>
+        <PartImage x="0" y="0" width="450" height="450">
+            <Image resource="watch_bg" />
+        </PartImage>
+
+        <!-- Depth 0: recessed shadow chamber, stable under tilt. -->
+        <PartImage x="0" y="0" width="450" height="450">
+            <Image resource="holo_void" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartImage>
+
+        <!-- Depth 1: virtual rear ring; opposed parallax is deliberate. -->
+        <PartImage x="0" y="0" width="450" height="450">
+            <Image resource="holo_back" />
+            <Gyro x="-0.12 * clamp([ACCELEROMETER_ANGLE_Y], -40, 40)"
+                  y="-0.12 * clamp([ACCELEROMETER_ANGLE_X], -40, 40)" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartImage>
+
+        <!-- Depth 2: the static and animated metal gimbal move together. -->
+        <Group x="0" y="0" width="450" height="450">
+            <Gyro x="0.08 * clamp([ACCELEROMETER_ANGLE_Y], -40, 40)"
+                  y="0.08 * clamp([ACCELEROMETER_ANGLE_X], -40, 40)" />
+            <PartImage x="75" y="111" width="300" height="300">
+                <Image resource="gyro_still" />
+            </PartImage>
+            <PartAnimatedImage x="75" y="111" width="300" height="300">
+                <AnimationController play="ON_VISIBLE" repeat="TRUE"
+                    resumePlayBack="FALSE" />
+                <AnimatedImage resource="gyro_anim" format="WEBP" />
+                <Thumbnail resource="gyro_still" />
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+            </PartAnimatedImage>
+        </Group>
+
+        <!-- Depth 3: scan arcs closest to the observer. -->
+        <PartImage x="0" y="0" width="450" height="450">
+            <Image resource="holo_front" />
+            <Gyro x="0.20 * clamp([ACCELEROMETER_ANGLE_Y], -40, 40)"
+                  y="0.20 * clamp([ACCELEROMETER_ANGLE_X], -40, 40)" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+        </PartImage>
+
+        <!-- Time is live and automatically uses the watch time zone. -->
+        <DigitalClock x="120" y="72" width="210" height="49">
+            <TimeText x="0" y="0" width="210" height="49"
+                format="hh:mm" hourFormat="24" align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="47" weight="BOLD"
+                    color="#e5f4ff" />
+            </TimeText>
+        </DigitalClock>
+
+        <!-- Battery, steps, heart rate, date: real WFF system sources. -->
+        <PartText x="45" y="124" width="74" height="26">
+            <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22"
+                    weight="BOLD" color="#e5f4ff"><Template><![CDATA[%d%%]]>
+                        <Parameter expression="[BATTERY_PERCENT]" />
+                    </Template></Font></Text>
+        </PartText>
+        <PartText x="333" y="124" width="70" height="26">
+            <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="17"
+                    weight="BOLD" color="#e5f4ff"><Template><![CDATA[%d]]>
+                        <Parameter expression="[STEP_COUNT]" />
+                    </Template></Font></Text>
+        </PartText>
+        <PartText x="48" y="301" width="68" height="29">
+            <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="22"
+                    weight="BOLD" color="#e5f4ff"><Template><![CDATA[%s]]>
+                        <Parameter expression="[HEART_RATE_Z]" />
+                    </Template></Font></Text>
+        </PartText>
+        <PartText x="331" y="303" width="74" height="27">
+            <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="17"
+                    weight="BOLD" color="#e5f4ff"><Template><![CDATA[%02d.%02d]]>
+                        <Parameter expression="[DAY]" />
+                        <Parameter expression="[MONTH]" />
+                    </Template></Font></Text>
+        </PartText>
+
+        <!-- Tap the bottom compass label to open the magnetic compass. -->
+        <PartText x="175" y="384" width="100" height="22">
+            <Text align="CENTER"><Font family="SYNC_TO_DEVICE"
+                size="9" color="#75bde6"><![CDATA[KOMPASS]]></Font></Text>
+            <Launch target="de.universelab.compass/de.universelab.compass.CompassActivity" />
+        </PartText>
+    </Scene>
+</WatchFace>
