@@ -1,0 +1,46 @@
+name: UniverseLab ClockDeck Android APK v0.1
+on:
+  pull_request:
+    paths:
+      - "clockdeck-build/**"
+      - ".github/workflows/2026-11-20_UniverseLab_ClockDeckAndroidBuild_v0.1.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pillow for original previews
+        run: python -m pip install "Pillow==11.3.0"
+      - name: Materialize and verify native Android project
+        run: python clockdeck-build/2026-11-20_UL_ClockDeck_Materialize_v0.1.py
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v4
+      - name: Android 36 and build tools
+        run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0'
+      - name: Gradle 8.11.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.11.1"
+      - name: Build debug APK
+        run: gradle -p build_clockdeck :app:assembleDebug --no-daemon --stacktrace
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: UniverseLab-ClockDeck-Android-v0.1-Debug-APK
+          path: build_clockdeck/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 30
