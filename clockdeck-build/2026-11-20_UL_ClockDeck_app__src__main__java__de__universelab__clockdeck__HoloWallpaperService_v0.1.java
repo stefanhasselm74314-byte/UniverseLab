@@ -91,7 +91,7 @@ public final class HoloWallpaperService extends WallpaperService {
                 for(int i=0;i<130;i++){
                     int xx=((i*1271+37)%1009)*w/1009,yy=((i*1907+103)%1543)*hh/1543;
                     p.setColor(Color.argb(30+i%6*10,124,176,224));
-                    c.drawCircle(xx+dx*.21f,yy+dy*.21f,(i%4==0?1.6f:.7f)*c.getDensity(),p);
+                    c.drawCircle(xx+dx*.21f,yy+dy*.21f,(i%4==0?1.6f:.7f)*Math.max(1f,w/1080f),p);
                 }
                 float r=Math.min(w*.465f,hh*.315f);
                 float cx=w*.50f+dx*1.15f,cy=hh*.42f+dy*.85f;

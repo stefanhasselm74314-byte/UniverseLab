@@ -96,7 +96,7 @@ public final class MainActivity extends Activity {
         choose(style);updateEnergy();
     }
     private void updateEnergy(){
-        ScrollView s=(ScrollView)findViewById(android.R.id.content).getChildAt(0);
+        ScrollView s=(ScrollView)((ViewGroup)findViewById(android.R.id.content)).getChildAt(0);
         for(View view:walk((ViewGroup)s.getChildAt(0))){
             if("energy".equals(view.getTag())&&view instanceof Button)
                 ((Button)view).setText("Animation: "+prefs.getInt("fps",18)+" FPS  ·  tippen zum Ändern");
