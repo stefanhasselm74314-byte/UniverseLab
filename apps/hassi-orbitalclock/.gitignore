@@ -4,3 +4,12 @@
 /.idea/
 *.iml
 /local.properties
+
+# Never commit private Android signing keys or credentials.
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+*.env
