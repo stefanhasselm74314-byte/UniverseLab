@@ -13,8 +13,10 @@ import android.widget.RemoteViews;
 
 /**
  * Clock artwork and TextClock overlays share one fixed-aspect art frame.
- * When Nova Launcher resizes the outer widget, the mechanism is letterboxed
- * instead of being stretched into an oval. Android 12+ RemoteViews sizing.
+ * When Nova Launcher resizes the outer widget, the artwork is centered and
+ * scaled proportionally (never fitXY). The host area is fully transparent;
+ * the clock images have alpha-rounded edges so wallpaper shows through.
+ * Android 12+ RemoteViews size updates are applied on each resize.
  */
 public abstract class BaseClockWidget extends AppWidgetProvider {
     protected abstract int layoutId();
@@ -47,8 +49,10 @@ public abstract class BaseClockWidget extends AppWidgetProvider {
                         ? AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT
                         : AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, 0);
                 if (wDp > 0 && hDp > 0) {
-                    float wAvailable = Math.max(1f, wDp - 6f);
-                    float hAvailable = Math.max(1f, hDp - 6f);
+                    // Android supplies launcher-size options in dp, excluding host-specific
+                    // margins on some launchers. 4dp guard prevents clipping.
+                    float wAvailable = Math.max(1f, wDp - 4f);
+                    float hAvailable = Math.max(1f, hDp - 4f);
                     float aspect = artworkAspectRatio();
                     float artW = Math.min(wAvailable, hAvailable * aspect);
                     float artH = artW / aspect;
@@ -58,7 +62,7 @@ public abstract class BaseClockWidget extends AppWidgetProvider {
                             TypedValue.COMPLEX_UNIT_DIP);
                     // Time text scales with the actual artwork, not the widget
                     // host's stretched bounds.
-                    float sp = Math.max(13f, Math.min(34f, artW * .132f));
+                    float sp = Math.max(10f, Math.min(39f, artW * .128f));
                     views.setTextViewTextSize(R.id.hour_clock,
                             TypedValue.COMPLEX_UNIT_SP, sp);
                     views.setTextViewTextSize(R.id.minute_clock,

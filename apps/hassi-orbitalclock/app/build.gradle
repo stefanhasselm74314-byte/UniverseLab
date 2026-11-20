@@ -1,4 +1,13 @@
 plugins { id 'com.android.application' }
+
+// Permanent release signing is intentionally only possible via PRIVATE
+// environment variables. Never put a keystore or passwords into this repo.
+def signingFile = System.getenv('ORBITAL_SIGNING_FILE')
+def signingPass = System.getenv('ORBITAL_SIGNING_PASSWORD')
+def signingAlias = System.getenv('ORBITAL_SIGNING_ALIAS')
+def signingKeyPass = System.getenv('ORBITAL_SIGNING_KEY_PASSWORD')
+def releaseSigningAvailable = signingFile && signingPass && signingAlias && signingKeyPass && file(signingFile).exists()
+
 android {
     namespace 'de.universelab.orbitalclock'
     compileSdk 35
@@ -6,8 +15,24 @@ android {
         applicationId 'de.universelab.orbitalclock'
         minSdk 26
         targetSdk 35
-        versionCode 4
-        versionName '0.4.0'
+        versionCode 5
+        versionName '0.5.0'
+    }
+    signingConfigs {
+        if (releaseSigningAvailable) {
+            orbital {
+                storeFile file(signingFile)
+                storePassword signingPass
+                keyAlias signingAlias
+                keyPassword signingKeyPass
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (releaseSigningAvailable) signingConfig signingConfigs.orbital
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

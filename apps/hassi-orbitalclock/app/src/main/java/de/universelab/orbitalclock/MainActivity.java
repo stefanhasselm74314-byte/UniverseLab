@@ -134,7 +134,7 @@ public final class MainActivity extends Activity {
         toolRow.addView(addWidgetButton, ap);
         addWidgetButton.setOnClickListener(v -> requestWidgetPin());
 
-        footer = text("Systemzeit · Offline · Android-Widget", 11, 0xff879cb7);
+        footer = text("v0.5 · Systemzeit · Offline · Transparente Widgets", 11, 0xff879cb7);
         footer.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams fp = new LinearLayout.LayoutParams(-1, dp(27));
         fp.topMargin = dp(4);
