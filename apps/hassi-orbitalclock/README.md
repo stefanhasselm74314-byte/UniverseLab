@@ -1,4 +1,4 @@
-# Hassi OrbitalClock v0.2 – native Android-App + zwei Widgets
+# Hassi OrbitalClock v0.3 – native Android-App + zwei Widgets
 
 **Status:** vollständiges Quellprojekt. Die APK erfordert einen Gradle-/GitHub-Actions-Build; keine APK wird behauptet, solange die Kompilierung nicht durchgelaufen ist.
 
@@ -28,3 +28,9 @@
 - `TextClock` wird von Android `RemoteViews` offiziell unterstützt. Die Minutenaktualisierung hängt im Widget zusätzlich von einem korrekt arbeitenden Launcher ab. App und Widgets sind bis zu einem erfolgreichen Gerätetest nicht als validiert anzusehen.
 - Bei sehr kleiner Widget-Größe können die Felder beschnitten werden; für das volle Motiv empfehlen sich 4×6 (hochkant) bzw. 4×4 (quadratisch) Zellen.
 - Die Bildquelle ist der vom Nutzer bereitgestellte Screenshot; die Grafik kann fremde Markierungen enthalten und wird hier nur für private Verwendung vorbereitet.
+
+## v0.3 Anzeige/Bedienung
+- WindowInsets für Statusleiste und Navigationsleiste auf Android 15–17.
+- Dynamische Bildhöhe; Bedienfelder folgen dem Bild ohne große Leerflächen.
+- Widget hinzufügen: nutzt Androids Launcher-Pinning für die gewählte Variante.
+- Debug-APK kann neuen Signierschlüssel verwenden: im Fall INSTALL_FAILED_UPDATE_INCOMPATIBLE erst alte Version deinstallieren, dann v0.3 installieren.

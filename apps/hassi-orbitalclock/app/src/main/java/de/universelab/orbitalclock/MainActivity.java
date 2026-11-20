@@ -3,14 +3,19 @@ package de.universelab.orbitalclock;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.graphics.Canvas;
+import android.graphics.Insets;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Build;
 import android.view.Gravity;
+import android.view.WindowInsets;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
@@ -18,10 +23,13 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /** Completely native, offline preview. No HTML viewer or JavaScript needed. */
 public final class MainActivity extends Activity {
     private static final int NAVY = Color.rgb(5, 10, 19);
+    private LinearLayout root, heading, modes, toolRow;
+    private TextView brand, foot;
     private FrameLayout stage;
     private FrameLayout face;
     private Glint glint;
@@ -34,19 +42,30 @@ public final class MainActivity extends Activity {
         super.onCreate(saved);
         getWindow().setStatusBarColor(NAVY);
         getWindow().setNavigationBarColor(Color.BLACK);
+        if (Build.VERSION.SDK_INT >= 29) getWindow().setNavigationBarContrastEnforced(false);
+        if (Build.VERSION.SDK_INT >= 30) getWindow().setDecorFitsSystemWindows(false);
 
-        LinearLayout root = new LinearLayout(this);
+        root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
         root.setPadding(dp(12), dp(14), dp(12), dp(12));
         root.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[] {0xff080e1a, 0xff03050a, 0xff05070d}));
         setContentView(root);
+        if (Build.VERSION.SDK_INT >= 30) {
+            root.setOnApplyWindowInsetsListener((view, insets) -> {
+                Insets sys = insets.getInsets(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+                root.setPadding(dp(12)+sys.left, dp(14)+sys.top,
+                        dp(12)+sys.right, dp(14)+sys.bottom);
+                return insets;
+            });
+            root.requestApplyInsets();
+        }
 
-        TextView brand = text("UNIVERSELAB  ·  ORBITAL", 11, 0xff84b8fa);
+        brand = text("UNIVERSELAB  ·  ORBITAL", 11, 0xff84b8fa);
         brand.setLetterSpacing(0.16f);
         root.addView(brand);
 
-        LinearLayout heading = new LinearLayout(this);
+        heading = new LinearLayout(this);
         heading.setGravity(Gravity.CENTER_VERTICAL);
         root.addView(heading, new LinearLayout.LayoutParams(-1, dp(45)));
         TextView title = text("Hassi OrbitalClock", 19, Color.WHITE);
@@ -60,13 +79,13 @@ public final class MainActivity extends Activity {
         heading.addView(date);
 
         stage = new FrameLayout(this);
-        root.addView(stage, new LinearLayout.LayoutParams(-1, 0, 1f));
+        root.addView(stage, new LinearLayout.LayoutParams(-1, dp(190)));
         stage.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> fitFace());
 
-        LinearLayout modes = new LinearLayout(this);
+        modes = new LinearLayout(this);
         modes.setGravity(Gravity.CENTER);
         modes.setPadding(0, dp(10), 0, 0);
-        root.addView(modes);
+        root.addView(modes, new LinearLayout.LayoutParams(-1, dp(58)));
         tallButton = button("Raumstation");
         dialButton = button("Zifferblatt");
         modes.addView(tallButton, new LinearLayout.LayoutParams(0, dp(48), 1f));
@@ -76,23 +95,29 @@ public final class MainActivity extends Activity {
         tallButton.setContentDescription("Hochkant-Uhr anzeigen");
         dialButton.setContentDescription("Quadratische Mechanikuhr anzeigen");
 
-        motionButton = button("Lichtrotation: An");
-        LinearLayout.LayoutParams m = new LinearLayout.LayoutParams(-2, dp(46));
-        m.gravity = Gravity.CENTER;
-        m.topMargin = dp(7);
-        root.addView(motionButton, m);
+        toolRow = new LinearLayout(this);
+        toolRow.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams toolParams = new LinearLayout.LayoutParams(-1, dp(44));
+        toolParams.topMargin = dp(6);
+        root.addView(toolRow, toolParams);
+        motionButton = button("Licht: An");
+        toolRow.addView(motionButton, new LinearLayout.LayoutParams(0, -1, 1f));
         motionButton.setOnClickListener(v -> {
             lightEnabled = !lightEnabled;
-            motionButton.setText(lightEnabled ? "Lichtrotation: An" : "Lichtrotation: Aus");
-            motionButton.setContentDescription(motionButton.getText());
+            motionButton.setText(lightEnabled ? "Licht: An" : "Licht: Aus");
             setLightMotion();
         });
+        Button pinButton = button("Widget hinzufügen");
+        LinearLayout.LayoutParams pinParams = new LinearLayout.LayoutParams(0, -1, 1.4f);
+        pinParams.leftMargin = dp(8);
+        toolRow.addView(pinButton, pinParams);
+        pinButton.setOnClickListener(v -> requestWidgetPin());
 
-        TextView foot = text("Lokale Gerätezeit  ·  Offline  ·  Startbildschirm-Widgets", 11,
-                0xff7c91ae);
+        foot = text("Systemzeit · Offline · Android-Widget", 11, 0xff7c91ae);
         foot.setGravity(Gravity.CENTER);
-        foot.setPadding(0, dp(8), 0, 0);
-        root.addView(foot);
+        root.addView(foot, new LinearLayout.LayoutParams(-1, dp(28)));
+        root.addView(new View(this), new LinearLayout.LayoutParams(-1, 0, 1f));
+        root.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or_, ob) -> arrangeStage());
         showFace(false);
     }
 
@@ -110,9 +135,42 @@ public final class MainActivity extends Activity {
         dialButton.setSelected(dial);
         decorateButton(tallButton, !dial);
         decorateButton(dialButton, dial);
+        arrangeStage();
         fitFace();
-        stage.post(this::fitFace);
+        stage.post(() -> { arrangeStage(); fitFace(); });
         setLightMotion();
+    }
+
+    private void requestWidgetPin() {
+        AppWidgetManager manager = AppWidgetManager.getInstance(this);
+        if (Build.VERSION.SDK_INT >= 26 && manager.isRequestPinAppWidgetSupported()) {
+            ComponentName provider = new ComponentName(this,
+                    dial ? DialClockWidget.class : TallClockWidget.class);
+            if (manager.requestPinAppWidget(provider, null, null)) {
+                Toast.makeText(this, "Widget im Startbildschirm bestätigen", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+        Toast.makeText(this, "Startbildschirm lange drücken → Widgets → Hassi OrbitalClock",
+                Toast.LENGTH_LONG).show();
+    }
+
+    private void arrangeStage() {
+        if (root == null || stage == null || root.getHeight() <= 0) return;
+        int avail = root.getHeight() - root.getPaddingTop() - root.getPaddingBottom()
+                - brand.getHeight() - heading.getHeight() - modes.getHeight()
+                - toolRow.getHeight() - foot.getHeight() - dp(8);
+        int sw = stage.getWidth();
+        if (sw <= 0) sw = root.getWidth() - root.getPaddingLeft() - root.getPaddingRight();
+        if (sw <= 0) return;
+        float aspect = dial ? 1f : 709f / 1210f;
+        int desired = Math.max(dp(120), Math.min(avail, Math.round(sw / aspect)));
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) stage.getLayoutParams();
+        if (params.height != desired) {
+            params.height = desired;
+            stage.setLayoutParams(params);
+        }
+        fitFace();
     }
 
     private void fitFace() {
@@ -122,7 +180,7 @@ public final class MainActivity extends Activity {
         float aspect = dial ? 1f : 709f / 1210f;
         int w = Math.min(sw, Math.round(sh * aspect));
         int h = Math.min(sh, Math.round(w / aspect));
-        FrameLayout.LayoutParams p = new FrameLayout.LayoutParams(w, h, Gravity.CENTER);
+        FrameLayout.LayoutParams p = new FrameLayout.LayoutParams(w, h, Gravity.TOP | Gravity.CENTER_HORIZONTAL);
         face.setLayoutParams(p);
         int diameter = Math.round(w * (dial ? .44f : .45f));
         FrameLayout.LayoutParams g = new FrameLayout.LayoutParams(diameter, diameter);
