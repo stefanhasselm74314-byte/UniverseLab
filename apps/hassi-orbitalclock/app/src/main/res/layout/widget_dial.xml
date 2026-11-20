@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#05070E">
+    <ImageView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/orbital_dial"
+        android:contentDescription="Weltraum-Uhr mit mechanischem Zifferblatt" />
+    <!-- Weight-based fractions preserve time positions across widget sizes. -->
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="22" android:text="" />
+        <LinearLayout android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="11">
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="11" android:text="" />
+<TextClock
+                android:id="@+id/hour_clock"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="22"
+                android:format24Hour="HH"
+                android:format12Hour="HH"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textSize="30sp"
+                android:textColor="#DFE8F7"
+                android:shadowColor="#E3000000"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="2" />
+<TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="33" android:text="" />
+<TextClock
+                android:id="@+id/minute_clock"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="22"
+                android:format24Hour="mm"
+                android:format12Hour="mm"
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textSize="30sp"
+                android:textColor="#DFE8F7"
+                android:shadowColor="#E3000000"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="2" />
+<TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="12" android:text="" />
+        </LinearLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="67" android:text="" />
+    </LinearLayout>
+</FrameLayout>

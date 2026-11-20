@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="app_name">Hassi OrbitalClock</string>
+<string name="widget_tall_desc">Weltraumuhr mit Raumstation, aktueller Stunde und Minute</string>
+<string name="widget_dial_desc">Mechanisches Zifferblatt mit aktueller Stunde und Minute</string>
+</resources>
