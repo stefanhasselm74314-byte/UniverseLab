@@ -8,5 +8,6 @@
     android:widgetCategory="home_screen"
     android:initialLayout="@layout/widget_dial"
     android:previewImage="@drawable/orbital_dial_preview"
+    android:previewLayout="@layout/widget_dial"
     android:description="@string/widget_dial_desc"
     android:updatePeriodMillis="0" />

@@ -8,5 +8,6 @@
     android:widgetCategory="home_screen"
     android:initialLayout="@layout/widget_tall"
     android:previewImage="@drawable/orbital_tall_preview"
+    android:previewLayout="@layout/widget_tall"
     android:description="@string/widget_tall_desc"
     android:updatePeriodMillis="0" />
