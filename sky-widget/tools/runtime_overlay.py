@@ -134,6 +134,44 @@ class OverlaySmoke(OrientationSmoke):
                         "compact_controls_observed": True}
         return None
 
+    def tap_popup_menu_item(self, description, label):
+        # Android PopupMenu handles item touches through its adapter. Its enabled
+        # row and ListView can both expose clickable=false (observed on API35).
+        # Keep the common button tap strict and target only this observed popup.
+        def find():
+            root = self.dump_ui()
+            matches = []
+            for window in root.findall("window"):
+                if window.get("title") != "Popup Window" or window.get("focused") != "true" or window.get("active") != "true":
+                    continue
+                for listing in window.iter("node"):
+                    if listing.get("class") != "android.widget.ListView" or listing.get("package") != PACKAGE or listing.get("enabled") != "true":
+                        continue
+                    for row in listing.iter("node"):
+                        if row.get("package") != PACKAGE or row.get("content-desc") != description or row.get("enabled") != "true":
+                            continue
+                        titles = [node for node in row.iter("node")
+                                  if node.get("resource-id") == "android:id/title"
+                                  and node.get("package") == PACKAGE and node.get("text") == label
+                                  and node.get("enabled") == "true"]
+                        if len(titles) != 1:
+                            continue
+                        left, top, right, bottom = bounds_of(row)
+                        wl, wt, wr, wb = bounds_of(window)
+                        if not (wl <= left < right <= wr and wt <= top < bottom <= wb):
+                            continue
+                        matches.append(row)
+            if len(matches) > 1:
+                raise TestFailure("Popup menu item is not unique")
+            return (matches[0],) if matches else None
+        row = self.poll(f"enabled popup menu row {label!r}", find)[0]
+        left, top, right, bottom = bounds_of(row)
+        self.adb("shell", "input", "tap", str((left + right) // 2), str((top + bottom) // 2))
+        self.report["compact_activity"]["popup_item_tap"] = {
+            "label": label, "description": description, "bounds": [left, top, right, bottom],
+            "method": "physical tap on enabled row in focused Popup Window/ListView; state checked afterwards",
+        }
+
     def check_compact_activity(self):
         self.launch()
         self.wait_activity(MAIN)
@@ -165,7 +203,7 @@ class OverlaySmoke(OrientationSmoke):
             self.tap(description="Fenster und Bedienung")
             self.wait_node(description="Nach Osten blicken")
             self.capture("compact-activity-menu")
-            self.tap(description="Nach Osten blicken")
+            self.tap_popup_menu_item("Nach Osten blicken", "O · Osten")
             self.expect_direction("Ost", 90)
             self.capture("compact-activity-east")
         finally:

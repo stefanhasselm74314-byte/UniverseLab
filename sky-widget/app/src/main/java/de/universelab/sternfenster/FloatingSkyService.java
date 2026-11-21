@@ -16,6 +16,7 @@ import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
 import android.graphics.Insets;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -33,6 +34,7 @@ import android.view.ContextThemeWrapper;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowManager;
@@ -165,10 +167,14 @@ public final class FloatingSkyService extends Service {
             available.set(b.left+insets.left,b.top+insets.top,b.right-insets.right,b.bottom-insets.bottom);
         }else{
             DisplayMetrics metrics=new DisplayMetrics();display.getRealMetrics(metrics);
+            Point appSize=new Point();display.getSize(appSize);
             int status=getResources().getIdentifier("status_bar_height","dimen","android");
-            int nav=getResources().getIdentifier("navigation_bar_height","dimen","android");
-            available.set(0,status==0?0:getResources().getDimensionPixelSize(status),metrics.widthPixels,
-                    metrics.heightPixels-(nav==0?0:getResources().getDimensionPixelSize(nav)));
+            int horizontalInset=Math.max(0,metrics.widthPixels-appSize.x);
+            int bottomInset=Math.max(0,metrics.heightPixels-appSize.y);
+            // Legacy three-button navigation moves right at 90 degrees and left at 270.
+            int leftInset=display.getRotation()==Surface.ROTATION_270?horizontalInset:0;
+            available.set(leftInset,status==0?0:getResources().getDimensionPixelSize(status),
+                    metrics.widthPixels-(horizontalInset-leftInset),metrics.heightPixels-bottomInset);
         }
         available.inset(dp(5),dp(5));
     }
