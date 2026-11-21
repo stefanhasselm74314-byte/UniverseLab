@@ -60,6 +60,8 @@ final class LiveSkyRenderer {
     private double cameraAz = Double.NaN, cameraAlt = Double.NaN, cameraFov = Double.NaN;
     private double siteLatitude = Double.NaN, sinLatitude, cosLatitude;
     private double centerEast, centerNorth, centerUp, minForward;
+    private final double[] lastBasis = new double[9];
+    private boolean cameraHasBasis;
 
     LiveSkyRenderer(Context context) {
         catalog = preparedCatalog(context.getApplicationContext());
@@ -93,8 +95,15 @@ final class LiveSkyRenderer {
     void draw(Canvas canvas, int requestedWidth, int requestedHeight,
               double latitude, double longitude, double azimuth, double altitude,
               double verticalFovDeg, long epochMillis, boolean labels) {
+        draw(canvas,requestedWidth,requestedHeight,latitude,longitude,azimuth,altitude,
+                verticalFovDeg,epochMillis,labels,null);
+    }
+
+    void draw(Canvas canvas, int requestedWidth, int requestedHeight,
+              double latitude, double longitude, double azimuth, double altitude,
+              double verticalFovDeg, long epochMillis, boolean labels, double[] cameraBasis) {
         if (requestedWidth <= 0 || requestedHeight <= 0) return;
-        configure(requestedWidth, requestedHeight, azimuth, altitude, verticalFovDeg);
+        configure(requestedWidth, requestedHeight, azimuth, altitude, verticalFovDeg, cameraBasis);
         double safeLatitude = Double.isFinite(latitude) ? Math.max(-90, Math.min(90, latitude)) : 51.0504;
         double safeLongitude = Double.isFinite(longitude) ? longitude : 13.7373;
         if (siteLatitude != safeLatitude) {
@@ -118,24 +127,29 @@ final class LiveSkyRenderer {
     }
 
     private void configure(int newWidth, int newHeight, double azimuth,
-                           double altitude, double verticalFovDeg) {
+                           double altitude, double verticalFovDeg, double[] basis) {
         double az = Double.isFinite(azimuth) ? SkyMath.wrap360(azimuth) : 180;
         double alt = Double.isFinite(altitude) ? Math.max(-90, Math.min(90, altitude)) : 42;
         double fov = Double.isFinite(verticalFovDeg) ? Math.max(20, Math.min(160, verticalFovDeg)) : 90;
         boolean resized = width != newWidth || height != newHeight;
-        if (!resized && cameraAz == az && cameraAlt == alt && cameraFov == fov) return;
+        boolean sameBasis=(basis!=null)==cameraHasBasis;
+        if(basis!=null&&sameBasis)for(int i=0;i<9;i++)if(lastBasis[i]!=basis[i]){sameBasis=false;break;}
+        if (!resized && cameraAz == az && cameraAlt == alt && cameraFov == fov && sameBasis) return;
         width = newWidth;
         height = newHeight;
         cameraAz = az;
         cameraAlt = alt;
         cameraFov = fov;
         // One small projection object only when the camera changes, never per star.
-        projection = new SkyProjection(width, height, az, alt, fov);
+        cameraHasBasis=basis!=null;
+        if(cameraHasBasis)System.arraycopy(basis,0,lastBasis,0,9);
+        projection = cameraHasBasis ? new SkyProjection(width,height,fov,lastBasis)
+                : new SkyProjection(width, height, az, alt, fov);
         if (resized) resizePaints();
         double azRad = Math.toRadians(az), altRad = Math.toRadians(alt);
-        centerEast = Math.cos(altRad) * Math.sin(azRad);
-        centerNorth = Math.cos(altRad) * Math.cos(azRad);
-        centerUp = Math.sin(altRad);
+        centerEast = cameraHasBasis ? lastBasis[0] : Math.cos(altRad) * Math.sin(azRad);
+        centerNorth = cameraHasBasis ? lastBasis[1] : Math.cos(altRad) * Math.cos(azRad);
+        centerUp = cameraHasBasis ? lastBasis[2] : Math.sin(altRad);
         // Circumscribed viewport cone rejects stars before the expensive acos.
         // The margin includes the largest retained halo, avoiding edge popping.
         double margin = 18 * unit;

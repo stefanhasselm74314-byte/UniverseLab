@@ -3,7 +3,7 @@ package de.universelab.sternfenster;
 /** Pure Java azimuthal-equidistant projection in local east/north/up coordinates. */
 final class SkyProjection {
     private final double centerX, centerY, scale;
-    private final double ce, cn, cu, re, rn, ue, un, uu;
+    private final double ce, cn, cu, re, rn, ru, ue, un, uu;
     float x, y;
 
     SkyProjection(int width, int height, double azimuth, double altitude, double verticalFovDeg) {
@@ -15,8 +15,19 @@ final class SkyProjection {
         scale = Math.max(1, height) / Math.toRadians(fov);
         double sa = Math.sin(az), ca = Math.cos(az), sh = Math.sin(alt), ch = Math.cos(alt);
         ce = ch * sa; cn = ch * ca; cu = sh;
-        re = ca; rn = -sa;
+        re = ca; rn = -sa; ru = 0;
         ue = -sh * sa; un = -sh * ca; uu = ch;
+    }
+
+    /** Direct orthonormal F/R/U camera basis, retaining device roll through the zenith. */
+    SkyProjection(int width, int height, double verticalFovDeg, double[] cameraBasis) {
+        centerX = Math.max(1, width) * .5;
+        centerY = Math.max(1, height) * .5;
+        double fov = Double.isFinite(verticalFovDeg) ? Math.max(20, Math.min(160, verticalFovDeg)) : 90;
+        scale = Math.max(1, height) / Math.toRadians(fov);
+        ce=cameraBasis[0]; cn=cameraBasis[1]; cu=cameraBasis[2];
+        re=cameraBasis[3]; rn=cameraBasis[4]; ru=cameraBasis[5];
+        ue=cameraBasis[6]; un=cameraBasis[7]; uu=cameraBasis[8];
     }
 
     boolean horizontal(double altitude, double azimuth) {
@@ -29,7 +40,7 @@ final class SkyProjection {
         double forward = Math.max(-1, Math.min(1, east * ce + north * cn + up * cu));
         double angle = Math.acos(forward);
         if (!Double.isFinite(angle) || angle > Math.toRadians(170)) return false;
-        double right = east * re + north * rn;
+        double right = east * re + north * rn + up * ru;
         double top = east * ue + north * un + up * uu;
         double transverse = Math.hypot(right, top);
         if (transverse < 1e-12) {

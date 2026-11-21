@@ -1,6 +1,37 @@
-# Sternfenster 0.3.0 — kontinuierliche Sternkarte und Live-Fenster
+# Sternfenster 0.3.1 — Sternkarte folgt der Handyhaltung
 
-## Was sich ändert
+## Neu in 0.3.1: Handy folgen
+
+Die Blickrichtung folgt jetzt der Achse der rückseitigen Kamera (Gerät −Z).
+Drehen, Neigen und seitliches Kippen werden in Vollansicht und sichtbarem PiP
+übernommen. Die Kamera wird dafür nicht geöffnet und es gibt keine neue
+Berechtigung. Der Modus ist beim ersten Start eingeschaltet, auch beim Öffnen
+über das Vorschau-Widget; danach bleibt die gewählte Einstellung gespeichert.
+
+- **Handy folgen** schaltet Sensorsteuerung an oder aus.
+- **N/O/S/W, Wischen, Rundblick an und Zurücksetzen** schalten auf manuelle Ansicht.
+- **Zoomtasten und Zwei-Finger-Zoom** lassen die Sensorsteuerung eingeschaltet.
+- Die Rückseite des Handys zum Himmel richten. Unter dem Horizont erscheinen
+  aufgrund der Horizontausblendung keine dort verdeckten Sterne.
+- „Warte auf Sensoren“ kennzeichnet fehlende oder seit mehr als zwei Sekunden
+  nicht mehr eintreffende Daten. „Kompass ungenau“ folgt Androids Sensorstatus.
+
+Androids Rotation-Vector-Sensor wird bevorzugt, alternativ der geomagnetische
+Rotation-Vector oder Beschleunigungs- plus Magnetfeldsensor. Die Abtastrate wird
+mit 100 Hz angefordert; die erreichte Rate bestimmt Android. Quaternionen werden
+mit einer Zeitkonstante von 25 ms geglättet. Das Rendering folgt weiterhin dem
+Displaytakt. Die direkte Kamerabasis erhält die Rollbewegung auch beim Durchgang
+durch Zenit/Nadir. Displayrotation und magnetische Deklination werden berücksichtigt.
+Die Nordkorrektur nutzt Androids GeomagneticField-Modell mit dem angezeigten Standort,
+Meereshöhe als Näherung und echter Uhrzeit, unabhängig vom gewählten Zeitraffer.
+Sie ist eine Modellschätzung; Magnetstörungen und Kompasskalibrierung begrenzen die
+Richtungsgenauigkeit. Kein Präzisionsinstrument zur Teleskopsteuerung.
+
+Listener werden bei sichtbarer Activity in onStart aktiviert und in onStop entfernt.
+Der pausierte, weiterhin sichtbare PiP-Modus behält die Sensoren. Bei fehlender
+Hardware bleibt die manuelle Karte verfügbar.
+
+## Kontinuierliche Darstellung seit 0.3.0
 
 Die bisherige Vollansicht zeichnete nur einmal pro Sekunde. Version 0.3.0
 zeichnet fortlaufend mit Androids Choreographer im Displaytakt. Die App fordert
@@ -19,9 +50,9 @@ CPU-Zeit des Zeichenaufrufs, nicht die GPU-/Compositor-Latenz.
 
 ## Benutzung
 
-1. Die signierte APK als **Aktualisierung über 0.2.0 oder 0.2.1** installieren.
+1. Die signierte APK als **Aktualisierung über 0.2.0, 0.2.1 oder 0.3.0** installieren.
    Paketname und Release-Schlüssel bleiben gleich; keine Deinstallation oder
-   Datenlöschung erforderlich. VersionCode ist jetzt 4.
+   Datenlöschung erforderlich. VersionCode ist jetzt 5.
 2. **Live-Sternkarte öffnen** startet die große Ansicht.
 3. **Schwebendes Live-Fenster starten** oder **Live-Fenster** in der Sternkarte
    wechselt in Androids Bild-im-Bild-Modus. Danach Home drücken, um das Fenster
@@ -40,6 +71,7 @@ PiP übernommen. Androids Unterstützung und Freigabe für Bild-im-Bild sind erf
 | --- | --- |
 | Wischen / zwei Finger / + und − | Blickrichtung und Sichtfeld ändern |
 | N / O / S / W | Feste Himmelsrichtung bei 42° Blickhöhe; Rundblick aus |
+| Handy folgen | Richtung, Neigung und Rollbewegung des Handys übernehmen |
 | Rundblick | Kamera schwenkt gleichmäßig mit 5° pro Sekunde |
 | Zeit | Echtzeit 1× → Zeitraffer 60× → Zeitraffer 600× → Echtzeit 1× |
 | Zurücksetzen | Süd 180°, Höhe 42°, Sichtfeld 100°, Rundblick aus, echte Uhrzeit |
@@ -94,7 +126,7 @@ Gradle 8.11.1 / Android Gradle Plugin 8.10.1. minSdk 26, targetSdk 36.
 ```bash
 python3 tools/build_local.py --sdk /pfad/zum/android-sdk \
   --signing-info /privat/signing.json \
-  --output /ausgabe/Sternfenster_Android_v0.3.0.apk
+  --output /ausgabe/Sternfenster_Android_v0.3.1.apk
 ```
 
 Ohne Signierungsdaten erzeugt das Skript ausschließlich eine `UNSIGNED`-Prüfdatei.
@@ -109,6 +141,18 @@ alten Version ist eine Deinstallation erforderlich; 0.2.0 und spätere Releases
 lassen sich direkt aktualisieren.
 
 ## Prüfung
+
+Die Sensorversion wird durch `tests/DeviceOrientationCheck.java` (bekannte Posen,
+Displayrotation, Roll, Deklination, Polübergänge und Quaternionen) sowie
+`tools/runtime_orientation.py` geprüft. Der Integrationstest injiziert konsistente
+Gravitations- und Magnetfeldwerte in echte Emulator-Sensoren und prüft die von der
+App sichtbaren Winkel, Moduswechsel, Hintergrund-Stopp und PiP. Es gibt keinen
+Testeingang für simulierte Posen in der ausgelieferten App. Ergebnisse der aktuellen
+Version stehen nach Abschluss in `VALIDATION_v0.3.1.json`. Physische Kompassgenauigkeit
+und eine garantierte Mindestbildrate auf dem Telefon sind durch den Emulator nicht
+bewiesen.
+
+### Historische 0.3.0-Prüfung
 
 Der neue Laufzeittest `tools/runtime_live60.py` prüft Start, Bedienung,
 Hintergrund-Stopp, Wiederaufnahme und fortlaufendes PiP auf dem Startbildschirm.
@@ -150,6 +194,10 @@ Darstellung beider App-Ansichten und des Vorschau-Widgets auf dem Samsung.
 
 ## Android-Primärquellen
 
+- https://developer.android.com/reference/android/hardware/SensorManager
+- https://developer.android.com/reference/android/view/Display#getRotation()
+- https://developer.android.com/reference/android/hardware/GeomagneticField
+- https://developer.android.com/develop/sensors-and-location/sensors/sensors_overview
 - https://developer.android.com/reference/android/widget/RemoteViews
 - https://developer.android.com/develop/ui/views/appwidgets/advanced
 - https://developer.android.com/develop/ui/views/picture-in-picture

@@ -11,6 +11,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.hardware.GeomagneticField;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -41,9 +43,13 @@ public final class SkyActivity extends Activity {
     private SkyView sky;
     private LinearLayout root,header,controls;
     private TextView info,location,performance;
-    private Button panButton,timeButton,windowButton;
+    private Button followButton,panButton,timeButton,windowButton;
+    private DeviceOrientationTracker orientation;
+    private final double[] cameraBasis=new double[9];
     private double latitude,longitude,azimuth=180,altitude=42,fov=100;
-    private boolean hasLocation,started,pan,pendingPip;
+    private boolean hasLocation,started,pan,pendingPip,followPhone,hasCameraPose;
+    private double declination,declinationLat=Double.NaN,declinationLon=Double.NaN;
+    private long declinationTime,lastSensorLog;
     private int timeRateIndex;
     private long simulatedAnchorMillis,elapsedAnchorMillis;
     private double renderFps=Double.NaN,drawP95Millis;
@@ -52,6 +58,10 @@ public final class SkyActivity extends Activity {
     @Override public void onCreate(Bundle saved) {
         super.onCreate(saved);
         SharedPreferences p=getSharedPreferences(SkyWidgetProvider.PREFS,MODE_PRIVATE);
+        orientation=new DeviceOrientationTracker(this);
+        followPhone=saved!=null?saved.getBoolean("followPhone",true)
+                :p.getBoolean("follow_phone",true);
+        if(!orientation.isAvailable())followPhone=false;
         if(saved!=null){
             azimuth=saved.getDouble("az",180);altitude=saved.getDouble("alt",42);fov=saved.getDouble("fov",100);
             pan=saved.getBoolean("pan",false);timeRateIndex=Math.max(0,Math.min(2,saved.getInt("timeRate",0)));
@@ -86,6 +96,7 @@ public final class SkyActivity extends Activity {
         for(int i=0;i<4;i++){
             final int direction=i;
             addControl(directions,names[i],1,descriptions[i],()->{
+                setFollowing(false);
                 pan=false;azimuth=direction*90;altitude=42;refreshInfo();
             });
         }
@@ -96,10 +107,16 @@ public final class SkyActivity extends Activity {
         addControl(zoom,"+",1,"Hineinzoomen",()->{fov/=1.22;clamp();refreshInfo();});
         controls.addView(zoom);
         LinearLayout motion=new LinearLayout(this);
-        panButton=addControl(motion,"Rundblick: aus",1,"Automatischen Rundblick umschalten",()->{pan=!pan;refreshInfo();});
+        followButton=addControl(motion,"Handy folgen: an",1,"Blickrichtung des Handys folgen",()->{
+            setFollowing(!followPhone);refreshInfo();
+        });
+        followButton.setEnabled(orientation.isAvailable());
+        panButton=addControl(motion,"Rundblick: aus",1,"Automatischen Rundblick umschalten",()->{
+            boolean enable=!pan;if(enable)setFollowing(false);pan=enable;refreshInfo();
+        });
         timeButton=addControl(motion,"Zeit: 1×",1,"Zeitraffer umschalten",this::cycleTimeRate);
         windowButton=addControl(motion,"Live-Fenster",1,"Schwebendes Live-Fenster öffnen",this::enterLiveWindow);
-        panButton.setTextSize(12);timeButton.setTextSize(12);windowButton.setTextSize(12);
+        followButton.setTextSize(11);panButton.setTextSize(11);timeButton.setTextSize(11);windowButton.setTextSize(11);
         controls.addView(motion);root.addView(controls);
         if(!getPackageManager().hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE))windowButton.setEnabled(false);
         Ui.install(this,root);
@@ -116,9 +133,23 @@ public final class SkyActivity extends Activity {
         if(!Double.isFinite(azimuth))azimuth=180;
         if(!Double.isFinite(altitude))altitude=42;
         if(!Double.isFinite(fov))fov=100;
-        azimuth=SkyMath.wrap360(azimuth);altitude=Math.max(0,Math.min(89,altitude));fov=Math.max(35,Math.min(135,fov));
+        azimuth=SkyMath.wrap360(azimuth);altitude=Math.max(followPhone?-90:0,Math.min(followPhone?90:89,altitude));fov=Math.max(35,Math.min(135,fov));
+    }
+    private void setFollowing(boolean enabled){
+        if(enabled&&!orientation.isAvailable())return;
+        followPhone=enabled;
+        if(enabled){
+            pan=false;
+            if(started&&!orientation.start()){
+                followPhone=false;
+                Toast.makeText(this,"Lagesensoren sind derzeit nicht verfügbar.",Toast.LENGTH_LONG).show();
+            }
+        }else{orientation.stop();hasCameraPose=false;}
+        getSharedPreferences(SkyWidgetProvider.PREFS,MODE_PRIVATE).edit().putBoolean("follow_phone",followPhone).apply();
+        clamp();
     }
     private void resetSky(){
+        setFollowing(false);
         pan=false;azimuth=180;altitude=42;fov=100;timeRateIndex=0;
         simulatedAnchorMillis=System.currentTimeMillis();elapsedAnchorMillis=SystemClock.elapsedRealtime();refreshInfo();
     }
@@ -134,6 +165,12 @@ public final class SkyActivity extends Activity {
     private void loadLocation(){
         SharedPreferences p=getSharedPreferences(SkyWidgetProvider.PREFS,MODE_PRIVATE);
         latitude=p.getFloat("lat",51.0504f);longitude=p.getFloat("lon",13.7373f);hasLocation=p.getBoolean("has_gps",false);
+        long now=System.currentTimeMillis();
+        if(latitude!=declinationLat||longitude!=declinationLon||Math.abs(now-declinationTime)>86_400_000L){
+            declination=new GeomagneticField((float)latitude,(float)longitude,0,now).getDeclination();
+            if(!Double.isFinite(declination))declination=0;
+            declinationLat=latitude;declinationLon=longitude;declinationTime=now;
+        }
     }
     private float displayHz(){Display display=sky==null?null:sky.getDisplay();return display==null?0:display.getRefreshRate();}
     private void requestSmoothDisplay(){
@@ -156,13 +193,27 @@ public final class SkyActivity extends Activity {
         String time=(timeRateIndex==0?clock:simulationClock).format(new Date(skyTimeMillis()));
         String rate=timeRateIndex==0?"Echtzeit 1×":"Zeitraffer "+TIME_RATES[timeRateIndex]+"×";
         pipTime=time+" · "+rate;
-        pipStats=(Double.isNaN(renderFps)?"Messung …":String.format(Locale.GERMANY,"%.1f Render-FPS",renderFps))+(pan?" · Rundblick":"");
+        String followStatus=followPhone?(orientation.hasFreshSample()?"Handy folgt":"Warte auf Sensoren"):"Manuell";
+        pipStats=(Double.isNaN(renderFps)?"Messung …":String.format(Locale.GERMANY,"%.1f Render-FPS",renderFps))
+                +(followPhone?" · "+followStatus:pan?" · Rundblick":"");
+        long now=SystemClock.elapsedRealtime();
+        if(started&&now-lastSensorLog>=900){
+            Log.i("SternfensterSensor",String.format(Locale.US,
+                    "following=%s listening=%s fresh=%s az=%.2f alt=%.2f mode=%s accuracy=%d",
+                    followPhone,orientation.isListening(),orientation.hasFreshSample(),azimuth,altitude,orientation.source(),orientation.accuracy()));
+            lastSensorLog=now;
+        }
         if(isInPictureInPictureMode())return;
         info.setText(String.format(Locale.GERMANY,"%s · %s %.0f° · Blickhöhe %.0f°",time,direction,azimuth,altitude));
-        location.setText((hasLocation?"Standort gespeichert":"Dresden · Standard")+" · "+rate);
+        String sensorHint=followPhone?" · "+followStatus:"";
+        if(followPhone&&orientation.hasFreshSample()&&orientation.accuracy()<=SensorManager.SENSOR_STATUS_ACCURACY_LOW)
+            sensorHint+=" · Kompass ungenau";
+        if(followPhone&&hasCameraPose&&altitude<0)sensorHint+=" · unter dem Horizont";
+        location.setText((hasLocation?"Standort gespeichert":"Dresden · Standard")+" · "+rate+sensorHint);
         performance.setText(Double.isNaN(renderFps)?"Render-FPS werden gemessen …":String.format(Locale.GERMANY,
                 "%.1f Render-FPS · %.0f Hz · Sichtfeld %.0f°",renderFps,displayHz(),fov));
         panButton.setText(pan?"Rundblick: an":"Rundblick: aus");
+        followButton.setText(followPhone?"Handy folgen: an":"Handy folgen: aus");
         timeButton.setText("Zeit: "+TIME_RATES[timeRateIndex]+"×");
         String description="Sternkarte nach "+direction+", Blickhöhe "+Math.round(altitude)+" Grad. Mit Richtungstasten und Zoom bedienbar.";
         if(!description.contentEquals(sky.getContentDescription()==null?"":sky.getContentDescription()))sky.setContentDescription(description);
@@ -199,6 +250,7 @@ public final class SkyActivity extends Activity {
     }
     @Override protected void onStart(){
         super.onStart();started=true;loadLocation();applyWindowMode();
+        if(followPhone)setFollowing(true);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         sky.post(this::requestSmoothDisplay);
     }
@@ -210,15 +262,17 @@ public final class SkyActivity extends Activity {
         super.onPause();
     }
     @Override protected void onStop(){
-        started=false;sky.stopFrames();getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);super.onStop();
+        started=false;orientation.stop();hasCameraPose=false;sky.stopFrames();getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);super.onStop();
     }
     @Override protected void onSaveInstanceState(Bundle out){
         out.putDouble("az",azimuth);out.putDouble("alt",altitude);out.putDouble("fov",fov);
-        out.putBoolean("pan",pan);out.putInt("timeRate",timeRateIndex);out.putLong("simulatedTime",skyTimeMillis());super.onSaveInstanceState(out);
+        out.putBoolean("pan",pan);out.putBoolean("followPhone",followPhone);out.putInt("timeRate",timeRateIndex);out.putLong("simulatedTime",skyTimeMillis());super.onSaveInstanceState(out);
     }
     @Override protected void onNewIntent(Intent intent){
         super.onNewIntent(intent);setIntent(intent);
         if(intent.hasExtra("direction")){
+            // A widget's sector is the initial/manual view, not an implicit opt-out
+            // from the user's sensor-follow preference.
             pan=false;azimuth=Math.floorMod(intent.getIntExtra("direction",2),4)*90;altitude=42;fov=100;
         }
         pendingPip=intent.getBooleanExtra("open_pip",false)&&!isInPictureInPictureMode();loadLocation();refreshInfo();
@@ -246,6 +300,7 @@ public final class SkyActivity extends Activity {
                 @Override public boolean onDown(MotionEvent event){return true;}
                 @Override public boolean onScroll(MotionEvent first,MotionEvent current,float dx,float dy){
                     if(scale.isInProgress()||current.getPointerCount()>1)return true;
+                    if(followPhone)setFollowing(false);
                     pan=false;double degrees=fov/Math.max(1,getHeight());azimuth+=dx*degrees;altitude-=dy*degrees;clamp();return true;
                 }
                 @Override public boolean onSingleTapUp(MotionEvent event){performClick();return true;}
@@ -262,6 +317,14 @@ public final class SkyActivity extends Activity {
         void resetStatistics(){statisticsStart=System.nanoTime();drawnFrames=0;durationCount=0;renderFps=Double.NaN;}
         @Override public void doFrame(long frameTimeNanos){
             if(!active)return;
+            if(followPhone){
+                Display display=getDisplay();
+                if(orientation.cameraBasis(frameTimeNanos,display==null?0:display.getRotation(),declination,cameraBasis)){
+                    hasCameraPose=true;
+                    azimuth=DeviceOrientationMath.azimuth(cameraBasis,azimuth);
+                    altitude=DeviceOrientationMath.altitude(cameraBasis);
+                }
+            }
             if(previousFrame!=0&&pan){
                 double seconds=Math.max(0,Math.min(.1,(frameTimeNanos-previousFrame)/1_000_000_000.0));
                 azimuth=SkyMath.wrap360(azimuth+seconds*5.0);
@@ -271,7 +334,8 @@ public final class SkyActivity extends Activity {
         @Override protected void onDraw(Canvas canvas){
             super.onDraw(canvas);if(getWidth()<=0||getHeight()<=0)return;
             long start=System.nanoTime();
-            renderer.draw(canvas,getWidth(),getHeight(),latitude,longitude,azimuth,altitude,fov,skyTimeMillis(),true);
+            renderer.draw(canvas,getWidth(),getHeight(),latitude,longitude,azimuth,altitude,fov,skyTimeMillis(),true,
+                    followPhone&&hasCameraPose?cameraBasis:null);
             boolean pip=isInPictureInPictureMode();
             if(pip){
                 float font=Math.max(8,Math.min(14*getResources().getDisplayMetrics().density,getWidth()*.045f));

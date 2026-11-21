@@ -41,11 +41,12 @@ public class MainActivity extends Activity {
         scroll.addView(panel);
         TextView title=Ui.text(this,"STERNFENSTER",27,0xffb9dcf4);
         title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);panel.addView(title);
-        TextView version=Ui.text(this,"0.3.0 · Kontinuierliches Live-Sternfenster",14,Ui.MUTED);
+        TextView version=Ui.text(this,"0.3.1 · Sternfenster folgt deinem Handy",14,Ui.MUTED);
         version.setPadding(0,Ui.dp(this,8),0,Ui.dp(this,18));panel.addView(version);
         Ui.addButton(this,panel,"Live-Sternkarte öffnen",()->startActivity(new Intent(this,SkyActivity.class)));
         Ui.addButton(this,panel,"Schwebendes Live-Fenster starten",()->startActivity(new Intent(this,SkyActivity.class).putExtra("open_pip",true)));
-        panel.addView(Ui.text(this,"Die Sternkarte wird fortlaufend im Displaytakt gezeichnet. Im Live-Fenster läuft sie auch über dem Startbildschirm weiter. Die Anzeige misst die tatsächlich gezeichneten Render-FPS.",15,Ui.MUTED));
+        panel.addView(Ui.text(this,"„Handy folgen“ übernimmt die Richtung der rückseitigen Kamera: Drehe, neige oder kippe das Handy, und die Sternkarte bewegt sich mit. Beim ersten Start ist dieser Modus eingeschaltet. Die Karte wird fortlaufend im Displaytakt gezeichnet und läuft im schwebenden Fenster über dem Startbildschirm weiter.",15,Ui.MUTED));
+        panel.addView(Ui.text(this,"Richte die Rückseite des Handys zum Himmel. „Handy folgen“ schaltet die Sensorsteuerung um. Wischen, N/O/S/W, Zurücksetzen und Rundblick wechseln zur manuellen Ansicht; Zoomen lässt die Sensorsteuerung eingeschaltet. Bei „Kompass ungenau“ das Handy langsam in verschiedenen Richtungen bewegen und Abstand von Magneten halten. Für die Himmelsrichtung wird die Nordkorrektur aus dem unten angezeigten Standort geschätzt.",13,Ui.MUTED));
         Ui.heading(this,panel,"Standort");
         status=Ui.text(this,locationText(),15,Ui.TEXT);panel.addView(status);
         Ui.addButton(this,panel,"Standort ermitteln",this::requestLocation);

@@ -1,0 +1,80 @@
+name: Sternfenster 0.3.1 device orientation integration
+
+on:
+  push:
+    branches: ['fix/sternfenster-native-sky-v0.2']
+    paths:
+      - 'sky-widget/app/**'
+      - 'sky-widget/tools/runtime_orientation.py'
+      - 'sky-widget/tools/runtime_smoke.py'
+      - 'sky-widget/tools/runtime_live60.py'
+      - 'sky-widget/tools/build_ui_probe.py'
+      - 'sky-widget/tools/ui_probe/**'
+      - '.github/workflows/2026-11-21_sternfenster_orientation_v031.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  orientation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: ''
+          log-accepted-android-sdk-licenses: false
+      - name: Install compiler SDK
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools"
+      - name: Check orientation geometry and projection independently of Android
+        run: |
+          mkdir -p "$RUNNER_TEMP/orientation-math"
+          javac -d "$RUNNER_TEMP/orientation-math" sky-widget/app/src/main/java/de/universelab/sternfenster/DeviceOrientationMath.java sky-widget/app/src/main/java/de/universelab/sternfenster/SkyProjection.java sky-widget/tests/DeviceOrientationCheck.java sky-widget/tests/ProjectionCheck.java
+          java -cp "$RUNNER_TEMP/orientation-math" de.universelab.sternfenster.DeviceOrientationCheck
+          java -cp "$RUNNER_TEMP/orientation-math" de.universelab.sternfenster.ProjectionCheck
+      - name: Build candidate and independent accessibility probe
+        run: |
+          python3 sky-widget/tools/build_local.py --sdk "$ANDROID_HOME" --output "$RUNNER_TEMP/candidate.apk"
+          python3 sky-widget/tools/build_ui_probe.py --sdk "$ANDROID_HOME" --output "$RUNNER_TEMP/ui-probe-UNSIGNED.apk"
+      - name: Sign with disposable CI key
+        run: |
+          keytool -genkeypair -keystore "$RUNNER_TEMP/orientation-test.p12" -storetype PKCS12 -storepass android -keypass android -alias runtime -keyalg RSA -keysize 2048 -validity 1 -dname "CN=Disposable Orientation Integration Test"
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" sign --ks "$RUNNER_TEMP/orientation-test.p12" --ks-key-alias runtime --ks-pass pass:android --key-pass pass:android --out "$RUNNER_TEMP/candidate-signed.apk" "$RUNNER_TEMP/candidate-UNSIGNED.apk"
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose "$RUNNER_TEMP/candidate-signed.apk"
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" sign --ks "$RUNNER_TEMP/orientation-test.p12" --ks-key-alias runtime --ks-pass pass:android --key-pass pass:android --out "$RUNNER_TEMP/ui-probe-signed.apk" "$RUNNER_TEMP/ui-probe-UNSIGNED.apk"
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Inject physical sensor values and verify real app following
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          disable-spellchecker: true
+          emulator-boot-timeout: 600
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back none
+          script: |
+            adb install -r -t "$RUNNER_TEMP/ui-probe-signed.apk"
+            STERNFENSTER_UI_PROBE=1 python3 sky-widget/tools/runtime_orientation.py --candidate "$RUNNER_TEMP/candidate-signed.apk" --output-dir "$GITHUB_WORKSPACE/orientation-results"
+      - name: Upload sensor integration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sternfenster-0.3.1-API35-orientation-evidence
+          path: orientation-results/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Remove disposable signing material
+        if: always()
+        run: rm -f "$RUNNER_TEMP/orientation-test.p12"

@@ -315,6 +315,9 @@ class RuntimeSmoke:
 
         with self.step("open-live-sky"):
             self.open_sky()
+            # New releases initially follow the phone. Exercise the explicit
+            # manual reset before asserting the historical fixed south view.
+            self.tap(description="Blick nach Süden zurücksetzen")
             self.expect_direction("Süd", 180)
             self.capture("candidate-sky")
 
