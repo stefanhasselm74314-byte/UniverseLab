@@ -51,7 +51,10 @@ public final class SnapshotInstrumentation extends Instrumentation {
             do {
                 if (allWindows) {
                     windows = automation.getWindows();
-                    if (windows != null && !windows.isEmpty()) break;
+                    // A new automation connection may initially receive only
+                    // SystemUI bars. Wait for window/root availability, not for
+                    // rendering or animation idleness, before taking a snapshot.
+                    if (hasVisibleInteractiveRoot(windows)) break;
                     recycleWindows(windows);
                     windows = null;
                 } else {
@@ -63,7 +66,7 @@ public final class SnapshotInstrumentation extends Instrumentation {
             } while (SystemClock.uptimeMillis() < deadline);
             if (!allWindows && root == null) throw new IllegalStateException("No visible active-window accessibility root");
             if (allWindows && (windows == null || windows.isEmpty())) {
-                throw new IllegalStateException("No interactive accessibility windows");
+                throw new IllegalStateException("No active/focused window with a visible accessibility root");
             }
 
             Display display = getContext().getSystemService(DisplayManager.class).getDisplay(Display.DEFAULT_DISPLAY);
@@ -135,6 +138,18 @@ public final class SnapshotInstrumentation extends Instrumentation {
     private static void recycleWindows(List<AccessibilityWindowInfo> windows) {
         if (windows == null) return;
         for (AccessibilityWindowInfo window : windows) window.recycle();
+    }
+
+    private static boolean hasVisibleInteractiveRoot(List<AccessibilityWindowInfo> windows) {
+        if (windows == null) return false;
+        for (AccessibilityWindowInfo window : windows) {
+            if (!window.isActive() && !window.isFocused()) continue;
+            AccessibilityNodeInfo root = window.getRoot();
+            if (root == null) continue;
+            try { if (root.isVisibleToUser()) return true; }
+            finally { root.recycle(); }
+        }
+        return false;
     }
 
     private void writeNode(XmlSerializer xml, AccessibilityNodeInfo node, int index, int depth) throws Exception {
