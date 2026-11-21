@@ -1,4 +1,4 @@
-name: Sternfenster 0.2 unsigned build
+name: Sternfenster unsigned build
 on:
   push:
     branches: ['fix/sternfenster-native-sky-v0.2']
@@ -28,6 +28,6 @@ jobs:
         run: python3 tools/build_local.py --sdk "$ANDROID_HOME"
       - uses: actions/upload-artifact@v4
         with:
-          name: Sternfenster-0.2.0-UNSIGNED-build-check
-          path: sky-widget/build-manual/Sternfenster_Android_v0.2.0-UNSIGNED.apk
+          name: Sternfenster-0.2.1-UNSIGNED-build-check
+          path: sky-widget/build-manual/Sternfenster_Android_v*-UNSIGNED.apk
           if-no-files-found: error

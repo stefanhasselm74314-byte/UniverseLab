@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Offline build using an installed Android SDK. Never creates a disposable signing key."""
-import argparse, hashlib, json, os, shutil, subprocess, sys, zipfile
+import argparse, hashlib, json, os, re, shutil, subprocess, sys, zipfile
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
@@ -10,6 +10,9 @@ parser.add_argument("--signing-info",type=Path)
 parser.add_argument("--output",type=Path)
 args=parser.parse_args()
 root=Path(__file__).resolve().parents[1]
+gradle=(root/"app/build.gradle").read_text(encoding="utf-8")
+version_code=re.search(r"\bversionCode\s+(\d+)",gradle).group(1)
+version_name=re.search(r"\bversionName\s+['\"]([^'\"]+)['\"]",gradle).group(1)
 build=root/"build-manual"
 if build.exists(): shutil.rmtree(build)
 for name in ("gen","classes","dex"): (build/name).mkdir(parents=True,exist_ok=True)
@@ -32,8 +35,8 @@ def run(command,env=None):
 run([tools/"aapt2","compile","--dir",root/"app/src/main/res","-o",build/"resources.zip"])
 run([tools/"aapt2","link","-o",build/"resources.apk","-I",android,
      "--manifest",build/"AndroidManifest.xml","--java",build/"gen",
-     "--min-sdk-version","26","--target-sdk-version","36","--version-code","2",
-     "--version-name","0.2.0","-A",root/"app/src/main/assets",build/"resources.zip"])
+     "--min-sdk-version","26","--target-sdk-version","36","--version-code",version_code,
+     "--version-name",version_name,"-A",root/"app/src/main/assets",build/"resources.zip"])
 sources=sorted((root/"app/src/main/java").rglob("*.java"))+sorted((build/"gen").rglob("*.java"))
 javac=shutil.which("javac")
 compiler=[javac] if javac else [shutil.which("java"),"-m","jdk.compiler/com.sun.tools.javac.Main"]
@@ -45,7 +48,7 @@ shutil.copyfile(build/"resources.apk",build/"unsigned.apk")
 with zipfile.ZipFile(build/"unsigned.apk","a",zipfile.ZIP_DEFLATED) as archive:
     for dex in sorted((build/"dex").glob("*.dex")): archive.write(dex,dex.name)
 run([tools/"zipalign","-f","-p","4",build/"unsigned.apk",build/"aligned.apk"])
-output=args.output or build/"Sternfenster_Android_v0.2.0.apk"
+output=args.output or build/f"Sternfenster_Android_v{version_name}.apk"
 output.parent.mkdir(parents=True,exist_ok=True)
 if args.signing_info:
     signing=json.loads(args.signing_info.read_text())

@@ -1,4 +1,20 @@
-# Sternfenster 0.2.0 — eigene Android-Sternkarte
+# Sternfenster 0.2.1 — eigene Android-Sternkarte
+
+## Korrektur des Startabsturzes in 0.2.1
+
+Version 0.2.0 griff in `Ui.install` auf den InsetsController des Fensters zu,
+bevor `setContentView` die interne DecorView erzeugte. Bei einem Kaltstart
+konnte dies MainActivity und SkyActivity mit einer NullPointerException beenden.
+Das Startbildschirm-Widget war davon nicht betroffen.
+
+0.2.1 installiert zuerst die Ansicht. Der Zugriff auf den InsetsController
+erfolgt anschließend über die angehängte View mit Nullprüfung.
+Die Abstände zu Systemleisten und Bildschirmaussparungen bleiben erhalten.
+
+**Update von 0.2.0:** Die APK direkt als Aktualisierung installieren.
+Paketname und Release-Signatur sind identisch, der VersionCode steigt von 2 auf 3.
+Eine Deinstallation oder das Löschen der App-Daten ist nicht erforderlich.
+Widget und gespeicherte Einstellungen bleiben dadurch erhalten.
 
 ## Änderungen
 
@@ -18,7 +34,8 @@ Version 0.1.0 wurde mit einem temporären Android-Debugzertifikat ausgeliefert.
 Dessen privater Schlüssel liegt für diesen Build nicht vor.
 Version 0.2.0 verwendet einen privat gesicherten, dauerhaften Release-Schlüssel.
 
-Daher kann 0.2.0 die bisherige Installation nicht direkt überschreiben:
+Daher können 0.2.0 und 0.2.1 eine Installation von 0.1.0 nicht direkt überschreiben.
+Nur für diesen alten Versionswechsel gelten folgende Schritte:
 
 1. Die neue APK herunterladen.
 2. Die alte App **Sternfenster** deinstallieren. Dadurch verschwinden ihr Widget und ihre lokalen Einstellungen.
@@ -68,17 +85,19 @@ Overlay-, Speicher- oder Benachrichtigungsberechtigung.
 ## Build
 
 Android Studio/Gradle: JDK 17, Gradle 8.11.1, Android Gradle Plugin 8.10.1,
-SDK Platform 36. minSdk 26, targetSdk 36, VersionCode 2.
+SDK Platform 36. minSdk 26, targetSdk 36, VersionCode 3.
 
 Alternativ ohne Gradle-Abhängigkeiten:
 
-python3 tools/build_local.py --sdk /pfad/zum/android-sdk --signing-info /privat/signing.json --output /ausgabe/Sternfenster_Android_v0.2.0.apk
+python3 tools/build_local.py --sdk /pfad/zum/android-sdk --signing-info /privat/signing.json --output /ausgabe/Sternfenster_Android_v0.2.1.apk
 
 Benötigt: SDK Platform 36, Build Tools 36.0.0 und ein JDK mit Java-Compiler.
 signing.json enthält keystore, alias und password; der Keystorepfad kann relativ
 zu signing.json sein. Ohne --signing-info entsteht nur eine mit UNSIGNED
 bezeichnete Prüfdatei, keine installierbare Release.
-GitHub Actions baut absichtlich eine unsignierte Prüf-APK und speichert keinen privaten Schlüssel.
+Der Build-Workflow erzeugt eine unsignierte Prüf-APK. Der Laufzeittest signiert
+seine APKs ausschließlich mit einem vorübergehenden CI-Testschlüssel.
+Der private Release-Schlüssel wird nicht an GitHub übertragen.
 
 ## Validierung
 
@@ -87,8 +106,12 @@ GitHub Actions baut absichtlich eine unsignierte Prüf-APK und speichert keinen 
   Antipoden, endliche Ergebnisse und isotrope Skalierung.
 - Statische Zweitprüfung von Activity-Lebenszyklus, Standortberechtigungen,
   Widget-PendingIntents und Systemleistenabständen.
-- Installation und sichtbare Karte von **0.1.0** sind durch Nutzerscreenshots bestätigt.
-- **0.2.0 wurde nicht auf Smartphone oder Android-Emulator ausgeführt.**
-  Der Gerätetest folgt nach Installation.
+- Die Widget-Anzeige von **0.2.0** ist durch Nutzerscreenshots bestätigt.
+  Diese Screenshots zeigen zugleich den Absturz beim Öffnen der App.
+- Der neue Laufzeittest prüft zuerst den Startfehler der unveränderten 0.2.0,
+  danach Kaltstart, eigene Vollansicht, Bedienung, Wiederaufnahme, Rotation
+  und Prozessneustart mit 0.2.1. Das konkrete Ergebnis wird im CI-Protokoll
+  und nach erfolgreichem Lauf im Validierungsbericht festgehalten.
+- Ein Test von **0.2.1 auf Stefans Samsung-Gerät** steht noch aus.
 
 Code-Lizenz: MIT. Keine Code- oder Grafikbestandteile der Fremd-App übernommen.

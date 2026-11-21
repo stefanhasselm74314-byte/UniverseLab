@@ -1,5 +1,6 @@
 Projektpfad im Repository: sky-widget
 Aktiver Änderungszweig: fix/sternfenster-native-sky-v0.2
-CI baut nur eine unsignierte Prüf-APK.
+Der Build-Workflow erzeugt eine unsignierte Prüf-APK.
+Der Runtime-Workflow prüft Baseline und Fix auf API35 mit einem temporären Testschlüssel.
 Installierbare Builds mit tools/build_local.py und dem gesicherten privaten Release-Schlüssel erstellen.
 Gradle 8.11.1 / AGP 8.10.1 / SDK 36 / JDK 17.

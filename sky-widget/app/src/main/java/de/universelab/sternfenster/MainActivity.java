@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
         scroll.addView(panel);
         TextView title=Ui.text(this,"STERNFENSTER",27,0xffb9dcf4);
         title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);panel.addView(title);
-        TextView version=Ui.text(this,"0.2.0 · Deine eigene Sternkarte",14,Ui.MUTED);
+        TextView version=Ui.text(this,"0.2.1 · Deine eigene Sternkarte",14,Ui.MUTED);
         version.setPadding(0,Ui.dp(this,8),0,Ui.dp(this,18));panel.addView(version);
         Ui.addButton(this,panel,"Live-Sternkarte öffnen",()->startActivity(new Intent(this,SkyActivity.class)));
         panel.addView(Ui.text(this,"Die Vollansicht folgt der aktuellen Uhrzeit. Wische über den Himmel oder ändere den Zoom.",15,Ui.MUTED));

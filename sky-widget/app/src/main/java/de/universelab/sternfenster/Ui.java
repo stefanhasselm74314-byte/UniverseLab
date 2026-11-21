@@ -42,17 +42,24 @@ final class Ui {
     static void install(Activity a,View root) {
         a.getWindow().setStatusBarColor(BG);a.getWindow().setNavigationBarColor(BG);
         root.setBackgroundColor(BG);
-        if(android.os.Build.VERSION.SDK_INT>=30) {
+        if(Build.VERSION.SDK_INT>=30) {
             a.getWindow().setDecorFitsSystemWindows(false);
             int l=root.getPaddingLeft(),t=root.getPaddingTop(),r=root.getPaddingRight(),b=root.getPaddingBottom();
             root.setOnApplyWindowInsetsListener((v,insets)->{
                 Insets i=insets.getInsets(WindowInsets.Type.systemBars()|WindowInsets.Type.displayCutout());
                 v.setPadding(l+i.left,t+i.top,r+i.right,b+i.bottom);return insets;
             });
-            WindowInsetsController c=a.getWindow().getInsetsController();
-            if(c!=null)c.setSystemBarsAppearance(0,WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-                    |WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS);
         }
-        a.setContentView(root);root.requestApplyInsets();
+        // A fresh Activity has no DecorView until setContentView installs it.
+        // Query the attached View, never Window.getInsetsController before that.
+        a.setContentView(root);
+        root.post(()->{
+            if(Build.VERSION.SDK_INT>=30) {
+                WindowInsetsController c=root.getWindowInsetsController();
+                if(c!=null)c.setSystemBarsAppearance(0,WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                        |WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS);
+            }
+            root.requestApplyInsets();
+        });
     }
 }
