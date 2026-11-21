@@ -270,6 +270,7 @@ Die Quantendaten auf der linken Seite sind **nicht** bereits als fundamentaler T
 5. Araújo-Regado, G.; Thavanesan, A.; Wall, A. C. (2026): *Holographic cosmology at finite time*, JHEP 04, 121. https://doi.org/10.1007/JHEP04(2026)121
 6. Craig, W.; Weinstein, S. (2009): *On determinism and well-posedness in multiple time dimensions*, arXiv:0812.0210. https://arxiv.org/abs/0812.0210
 7. Hubeny, V. E.; Rangamani, M.; Takayanagi, T. (2007): *A Covariant Holographic Entanglement Entropy Proposal*, JHEP 07, 062. https://arxiv.org/abs/0705.0016
+8. Casini, H.; Huerta, M.; Myers, R. C. (2011): *Towards a derivation of holographic entanglement entropy*, JHEP 05, 036. https://doi.org/10.1007/JHEP05(2011)036
 
 **Projektquellen, `main` über GitHub-Zugriff gelesen:**
 
