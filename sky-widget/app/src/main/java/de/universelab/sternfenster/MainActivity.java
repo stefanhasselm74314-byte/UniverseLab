@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
         p.addView(v);return v;
     }
     private void button(LinearLayout p,String name,Runnable r){
-        Button b=new Button(this);b.setText(name);b.setTextAllCaps(false);
+        Button b=new Button(this);b.setText(name);
         b.setTextColor(Color.WHITE);b.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xff24507b));
         LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(56));lp.setMargins(0,0,0,dp(10));
         p.addView(b,lp);b.setOnClickListener(v->r.run());
