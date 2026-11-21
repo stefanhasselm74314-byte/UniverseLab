@@ -1,0 +1,141 @@
+{
+  "version": "0.2.1",
+  "version_code": 3,
+  "package": "de.universelab.sternfenster",
+  "apk_sha256": "e60a8afe616aa7d55eb26f1653186730913dd75792c85ab1b8db7852f9987127",
+  "apk_bytes": 246520,
+  "certificate_sha256": "88ea977a6afba06d2211611bde63fc496ee6c2f3d2e5c8027f1c2a444ffd8180",
+  "same_signer_as_v0_2_0": true,
+  "source_commit": "be1a85fbcd2db9393cc85efb1818679a5918ee89",
+  "validation": [
+    "Android resource compile/link",
+    "Java compile API36",
+    "DEX generation minAPI26",
+    "APK v2/v3 signature verification",
+    "ZIP CRC integrity",
+    "Embedded catalogue unchanged",
+    "Independent static review of corrected Activity window setup",
+    "Portrait and landscape runtime screenshots visually reviewed"
+  ],
+  "ci_build": {
+    "status": "PASSED",
+    "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44882716216"
+  },
+  "android_emulator_test": {
+    "status": "PASSED",
+    "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44883174039",
+    "artifact_id": 14699126317,
+    "artifact_sha256": "a000c9ac0377946537fd25faa90c89e4e16ea76f27f493b817c52e3c7d3bfb57",
+    "report": {
+      "status": "passed",
+      "checks": [
+        {
+          "name": "device-ready",
+          "status": "passed",
+          "seconds": 0.48
+        },
+        {
+          "name": "baseline-exact-crash",
+          "status": "passed",
+          "matched_stack_tokens": [
+            "Process: de.universelab.sternfenster",
+            "FATAL EXCEPTION",
+            "java.lang.NullPointerException",
+            "PhoneWindow.getInsetsController",
+            "Ui.install"
+          ],
+          "expected_failure_reproduced": true,
+          "seconds": 6.23
+        },
+        {
+          "name": "candidate-cold-start",
+          "status": "passed",
+          "seconds": 10.75
+        },
+        {
+          "name": "open-live-sky",
+          "status": "passed",
+          "seconds": 15.22
+        },
+        {
+          "name": "visible-controls-and-clock",
+          "status": "passed",
+          "clock_before": "08:08:26 · Ost 90° · Blickhöhe 42°",
+          "clock_after": "08:08:30 · Ost 90° · Blickhöhe 42°",
+          "seconds": 67.38
+        },
+        {
+          "name": "home-and-resume-same-activity",
+          "status": "passed",
+          "seconds": 7.07
+        },
+        {
+          "name": "rotate-and-restore-state",
+          "status": "passed",
+          "seconds": 23.81
+        },
+        {
+          "name": "process-cold-restart",
+          "status": "passed",
+          "old_pid": "2416",
+          "new_pid": "5237",
+          "seconds": 14.01
+        },
+        {
+          "name": "back-and-reopen",
+          "status": "passed",
+          "seconds": 15.04
+        },
+        {
+          "name": "no-candidate-crash-or-anr",
+          "status": "passed",
+          "seconds": 0.28
+        }
+      ],
+      "environment": {
+        "sdk": 35,
+        "release": "15",
+        "model": "sdk_gphone64_x86_64"
+      },
+      "baseline_sha256": "1eb4eb5df9e3b0cf2afdb2d7721bf1067ae284dc1d8bc15b77ac643cea407a8d",
+      "candidate_sha256": "1640ee19627bc1d26963328c9b2e3bc3319408f2e473f751f7b042d5101d02e4"
+    },
+    "test_build_note": "Same app sources, rebuilt in CI and signed with a disposable test key. Release signing credentials stayed private."
+  },
+  "user_device_test": "NOT_PERFORMED",
+  "migration": "Install as update over v0.2.0. Same package and release key; versionCode increases from 2 to 3. No uninstall or data clearing required.",
+  "runtime_test_commit": "2f0c36b83f4e258b4dd3b9ab1b8ede585f37bf25",
+  "first_emulator_attempt": {
+    "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44882716314",
+    "result": "Baseline crash reproduced; candidate MainActivity displayed. An unrelated Pixel Launcher ANR dialog blocked UI automation. The subsequent full run passed without needing dialog recovery."
+  },
+  "baseline_crash_evidence": [
+    "--------- beginning of crash",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: FATAL EXCEPTION: main",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: Process: de.universelab.sternfenster, PID: 2103",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: java.lang.RuntimeException: Unable to start activity ComponentInfo{de.universelab.sternfenster/de.universelab.sternfenster.MainActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'android.view.WindowInsetsController com.android.internal.policy.DecorView.getWindowInsetsController()' on a null object reference",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4048)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4235)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:112)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:174)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:109)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:81)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.ActivityThread$H.handleMessage(ActivityThread.java:2636)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.os.Handler.dispatchMessage(Handler.java:107)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.os.Looper.loopOnce(Looper.java:232)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.os.Looper.loop(Looper.java:317)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.ActivityThread.main(ActivityThread.java:8705)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat java.lang.reflect.Method.invoke(Native Method)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'android.view.WindowInsetsController com.android.internal.policy.DecorView.getWindowInsetsController()' on a null object reference",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat com.android.internal.policy.PhoneWindow.getInsetsController(PhoneWindow.java:4092)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat de.universelab.sternfenster.Ui.install(Ui.java:52)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat de.universelab.sternfenster.MainActivity.onCreate(MainActivity.java:63)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.Activity.performCreate(Activity.java:9002)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.Activity.performCreate(Activity.java:8980)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1526)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \tat android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4030)",
+    "11-21 08:06:56.927  2103  2103 E AndroidRuntime: \t... 13 more"
+  ]
+}

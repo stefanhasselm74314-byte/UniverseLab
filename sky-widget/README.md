@@ -108,10 +108,20 @@ Der private Release-Schlüssel wird nicht an GitHub übertragen.
   Widget-PendingIntents und Systemleistenabständen.
 - Die Widget-Anzeige von **0.2.0** ist durch Nutzerscreenshots bestätigt.
   Diese Screenshots zeigen zugleich den Absturz beim Öffnen der App.
-- Der neue Laufzeittest prüft zuerst den Startfehler der unveränderten 0.2.0,
-  danach Kaltstart, eigene Vollansicht, Bedienung, Wiederaufnahme, Rotation
-  und Prozessneustart mit 0.2.1. Das konkrete Ergebnis wird im CI-Protokoll
-  und nach erfolgreichem Lauf im Validierungsbericht festgehalten.
+- **Android-15-Emulatortest (API 35) bestanden:** Der unveränderte Stand 0.2.0
+  reproduziert die NullPointerException in PhoneWindow.getInsetsController / Ui.install.
+  0.2.1 besteht Installation als Update ohne erneutes Löschen der Daten, Kaltstart,
+  eigene Vollansicht, Richtungstasten, Zoom-Bedienung, laufende Uhr, Home/Resume,
+  Quer-/Hochformat mit erhaltenem Zustand, Prozessneustart und erneutes Öffnen.
+  Keine Sternfenster-Crash- oder ANR-Einträge im erfolgreichen Lauf.
+- Laufzeitbilder in Hoch- und Querformat visuell geprüft.
+- CI-Nachweis: https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44883174039
+  Vollständiger Prüfstand inklusive Baseline-Stacktrace: VALIDATION_v0.2.1.json.
+  Der Emulator prüft dieselben App-Quellen mit einem temporären CI-Testschlüssel;
+  die private Release-Signatur und die fertige Release-APK wurden separat geprüft.
+- Ein erster CI-Versuch wurde durch einen fremden Pixel-Launcher-Dialog blockiert.
+  Der anschließende vollständige Lauf bestand ohne Dialog-Recovery.
+  VALIDATION_v0.2.0.json dokumentiert den historischen Stand der früheren Auslieferung.
 - Ein Test von **0.2.1 auf Stefans Samsung-Gerät** steht noch aus.
 
 Code-Lizenz: MIT. Keine Code- oder Grafikbestandteile der Fremd-App übernommen.
