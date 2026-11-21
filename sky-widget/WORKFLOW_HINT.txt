@@ -1,6 +1,7 @@
 Projektpfad im Repository: sky-widget
 Aktiver Änderungszweig: fix/sternfenster-native-sky-v0.2
-Der Build-Workflow erzeugt eine unsignierte Prüf-APK.
-Der Runtime-Workflow prüft Baseline und Fix auf API35 mit einem temporären Testschlüssel.
+Build-Workflow: unsignierte Prüf-APK.
+Live-Workflow: API35, kontinuierliche Zeichenrate und PiP, getrennte Funktions- und Leistungsbewertung.
+Historischer Insets-Regressionsworkflow bleibt für Änderungen am gemeinsamen Fensterstart erhalten.
 Installierbare Builds mit tools/build_local.py und dem gesicherten privaten Release-Schlüssel erstellen.
-Gradle 8.11.1 / AGP 8.10.1 / SDK 36 / JDK 17.
+Gradle 8.11.1 / AGP 8.10.1 / SDK 36 / JDK17.

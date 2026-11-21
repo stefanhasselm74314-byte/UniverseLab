@@ -9,14 +9,16 @@
 
     <application android:label="Sternfenster" android:icon="@drawable/app_icon"
         android:theme="@android:style/Theme.Material.NoActionBar" android:allowBackup="false"
-        android:supportsRtl="true">
+        android:supportsRtl="true" android:hardwareAccelerated="true">
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SkyActivity" android:exported="false" android:launchMode="singleTop"/>
+        <activity android:name=".SkyActivity" android:exported="false" android:launchMode="singleTask"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"/>
         <receiver android:name=".SkyWidgetProvider" android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>

@@ -1,127 +1,137 @@
-# Sternfenster 0.2.1 — eigene Android-Sternkarte
+# Sternfenster 0.3.0 — kontinuierliche Sternkarte und Live-Fenster
 
-## Korrektur des Startabsturzes in 0.2.1
+## Was sich ändert
 
-Version 0.2.0 griff in `Ui.install` auf den InsetsController des Fensters zu,
-bevor `setContentView` die interne DecorView erzeugte. Bei einem Kaltstart
-konnte dies MainActivity und SkyActivity mit einer NullPointerException beenden.
-Das Startbildschirm-Widget war davon nicht betroffen.
+Die bisherige Vollansicht zeichnete nur einmal pro Sekunde. Version 0.3.0
+zeichnet fortlaufend mit Androids Choreographer im Displaytakt. Die App fordert
+mindestens 60 Hz beziehungsweise den höchsten angebotenen Bildmodus bei gleicher
+Auflösung an. Der dauerhafte Renderer berechnet die Sternpositionen für jeden
+Framezeitpunkt, verwendet vorberechnete Katalogdaten und bündelt schwächere Sterne
+in wenigen Zeichenaufrufen.
 
-0.2.1 installiert zuerst die Ansicht. Der Zugriff auf den InsetsController
-erfolgt anschließend über die angehängte View mit Nullprüfung.
-Die Abstände zu Systemleisten und Bildschirmaussparungen bleiben erhalten.
+**60 FPS sind das Leistungsziel, keine zugesicherte Untergrenze auf jedem Gerät.**
+Die Anzeige **Render-FPS** zählt ausgeführte `SkyView.onDraw`-Aufrufe je verstrichener
+Zeit. Daneben werden die Display-Hz angezeigt. Ein Display mit 60 Hz beweist keine
+60 gerenderten oder tatsächlich präsentierten Bilder pro Sekunde. Android,
+Energiesparmodus, andere sichtbare Fenster und thermische Grenzen können die
+verfügbare Bildrate beeinflussen. `draw_p95_ms` im Diagnoseprotokoll misst nur die
+CPU-Zeit des Zeichenaufrufs, nicht die GPU-/Compositor-Latenz.
 
-**Update von 0.2.0:** Die APK direkt als Aktualisierung installieren.
-Paketname und Release-Signatur sind identisch, der VersionCode steigt von 2 auf 3.
-Eine Deinstallation oder das Löschen der App-Daten ist nicht erforderlich.
-Widget und gespeicherte Einstellungen bleiben dadurch erhalten.
+## Benutzung
 
-## Änderungen
+1. Die signierte APK als **Aktualisierung über 0.2.0 oder 0.2.1** installieren.
+   Paketname und Release-Schlüssel bleiben gleich; keine Deinstallation oder
+   Datenlöschung erforderlich. VersionCode ist jetzt 4.
+2. **Live-Sternkarte öffnen** startet die große Ansicht.
+3. **Schwebendes Live-Fenster starten** oder **Live-Fenster** in der Sternkarte
+   wechselt in Androids Bild-im-Bild-Modus. Danach Home drücken, um das Fenster
+   über dem Startbildschirm zu sehen.
+4. Das schwebende Fenster lässt sich über Android verschieben, vergrößern,
+   zur Vollansicht zurückholen und schließen. Es ist kein fest in ein
+   Launcher-Raster eingebettetes AppWidget.
 
-- Antippen des Widgets öffnet die eigene Live-Sternkarte.
-- Universe Star Finder ist eine ausdrücklich gewählte Zusatzaktion in den Einstellungen.
-- Die Vollansicht berechnet den Himmel jede Sekunde, solange sie sichtbar ist. Beim Verlassen stoppt der Zeitgeber.
-- Wischen ändert die Blickrichtung. Zwei Finger sowie +/− ändern den Zoom. N/O/S/W und Zurücksetzen sind direkt bedienbar.
-- Winkel und Zoom bleiben bei Rotation erhalten.
-- Native Widget-Kopfzeilen und drei beschriftete Bedienflächen: Neu, Öffnen, Richtung.
-- Karte und Schrift werden nicht mehr unabhängig in Breite und Höhe gestreckt.
-- Fensterabstände berücksichtigen Systemleisten und Bildschirmaussparungen.
-- Standortanforderungen laufen nach Knopfdruck bei geöffneter App maximal 20 Sekunden.
+Bild-im-Bild nutzt eine sichtbare Activity und benötigt keine Overlay-Berechtigung.
+Der Zeichenzyklus beginnt in `onStart` und endet in `onStop`; er läuft während des
+bei PiP eintretenden `onPause` weiter. Unsichtbar im Hintergrund läuft kein
+Zeichendienst. Ein neues Standortergebnis aus den Einstellungen wird auch während
+PiP übernommen. Androids Unterstützung und Freigabe für Bild-im-Bild sind erforderlich.
 
-## Installation und einmaliger Wechsel von 0.1.0
+| Bedienung | Wirkung |
+| --- | --- |
+| Wischen / zwei Finger / + und − | Blickrichtung und Sichtfeld ändern |
+| N / O / S / W | Feste Himmelsrichtung bei 42° Blickhöhe; Rundblick aus |
+| Rundblick | Kamera schwenkt gleichmäßig mit 5° pro Sekunde |
+| Zeit | Echtzeit 1× → Zeitraffer 60× → Zeitraffer 600× → Echtzeit 1× |
+| Zurücksetzen | Süd 180°, Höhe 42°, Sichtfeld 100°, Rundblick aus, echte Uhrzeit |
+| Live-Fenster | Schwebende Bild-im-Bild-Ansicht mit Uhrzeit, Zeitmodus und Render-FPS |
 
-Version 0.1.0 wurde mit einem temporären Android-Debugzertifikat ausgeliefert.
-Dessen privater Schlüssel liegt für diesen Build nicht vor.
-Version 0.2.0 verwendet einen privat gesicherten, dauerhaften Release-Schlüssel.
+**Bildrate und Zeitmaßstab sind getrennt.** In Echtzeit ist die natürliche
+Himmelsbewegung langsam. Rundblick bewegt die virtuelle Blickrichtung;
+Zeitraffer beschleunigt die berechnete astronomische Zeit und wird ausdrücklich
+als solcher angezeigt. Es gibt keine zufälligen Ersatzsterne oder erfundene
+Himmelsbewegung. Sonne, Mond und Planeten sind weiterhin nicht enthalten.
 
-Daher können 0.2.0 und 0.2.1 eine Installation von 0.1.0 nicht direkt überschreiben.
-Nur für diesen alten Versionswechsel gelten folgende Schritte:
+## Vorhandenes Vorschau-Widget
 
-1. Die neue APK herunterladen.
-2. Die alte App **Sternfenster** deinstallieren. Dadurch verschwinden ihr Widget und ihre lokalen Einstellungen.
-3. Die neue APK installieren und Sternfenster öffnen.
-4. Standort erneut ermitteln und das Widget neu hinzufügen.
-5. Empfohlene Widget-Größe: 4 × 3 Felder.
+Das normale Startbildschirm-Widget bleibt ein statisches Vorschaubild mit einem
+Systemintervall von 30 Minuten sowie manueller Aktualisierung über **Neu**.
+Energiesparen kann Systemaktualisierungen verzögern. **Richtung** wählt den
+Himmelsausschnitt, **Öffnen** startet die eigene Vollansicht. Für fortlaufende
+Animation ist das schwebende Live-Fenster zu verwenden.
 
-Universe Star Finder gehört nicht zu diesem Versionswechsel.
-Unsere eigene Sternkarte funktioniert ohne diese andere App.
-
-Zertifikat SHA-256 für 0.2.0 und künftige kompatible Builds:
-88ea977a6afba06d2211611bde63fc496ee6c2f3d2e5c8027f1c2a444ffd8180
-
-Den privaten Schlüssel niemals in dieses öffentliche Repository aufnehmen.
-Das private Wiederherstellungspaket heißt Sternfenster_Signierung_PRIVAT_ab_v0.2.zip.
-Es enthält den KeyStore und seine Zugangsdaten. Für weitere Releases denselben Schlüssel verwenden.
+Ein `RemoteViews`-AppWidget kann keine eigene Canvas- oder SurfaceView enthalten.
+Das 30-Minuten-Limit betrifft `updatePeriodMillis`, nicht jeden möglichen
+manuellen Update-Aufruf. Häufige Bitmap-Updates sind hier kein Ersatz für eine
+Vsync-Zeichenfläche.
 
 ## Wissenschaftliche Bedeutung
 
-Die Darstellung verwendet die eingebetteten 9.096 Datensätze des zuvor ausgelieferten
-Yale-Bright-Star-Katalogs. Der Renderer wählt Sterne mit Magnitude ≤ 6,3.
-SHA-256 der unveränderten Katalogdatei:
+Die eingebettete unveränderte Datei enthält 9.096 Datensätze des zuvor verwendeten
+Yale-Bright-Star-Katalogexports. Der Renderer verwendet die ausgewählten Sterne
+mit Magnitude ≤ 6,3. Schwächere Sterne werden für die Zeichnung in Helligkeits-/
+Farbgruppen zusammengefasst; ihre Positionen werden nicht gerastert.
+
+Katalogdatei SHA-256:
 8b36f9e06f7ab275506213cb6ed61ea75570dbfb19725c31ca189fee9196133b
 
-Quelle des Katalogexports: https://github.com/isene/starmap, data/stars.csv.
-Die in 0.1.0 eingebetteten Daten werden wiederverwendet; zur Laufzeit gibt es keinen Download.
+Quelle des übernommenen Katalogexports: https://github.com/isene/starmap,
+`data/stars.csv`. Keine Katalogdownloads zur Laufzeit.
 
-Es sind berechnete Katalogpositionen, keine Kameraaufnahme. Auch bei Tageslicht
-werden die geometrisch oberhalb des Horizonts stehenden Sterne gezeigt.
-Wetter, Tageshelligkeit, Berge, Gebäude und Lichtverschmutzung werden nicht modelliert.
-J2000-Koordinaten werden ohne Präzession, Nutation, Eigenbewegung und Refraktion
-in das lokale Horizontsystem umgerechnet. Eine orientierende Sternkarte,
-keine präzise Teleskopsteuerung. Sonne, Mond und Planeten sind nicht enthalten.
+Die Karte zeigt berechnete Positionen, keine Kameraaufnahme. Auch tagsüber werden
+geometrisch über dem Horizont stehende Sterne gezeigt. Tageslicht, Wetter, Gebäude
+und Lichtverschmutzung werden nicht modelliert. J2000-Katalogkoordinaten ohne
+Präzession, Nutation, Eigenbewegung und Refraktion: eine orientierende Sternkarte,
+keine Teleskopsteuerung.
 
 Nur optionale Standortberechtigungen. Keine Internet-, Hintergrundstandort-,
 Overlay-, Speicher- oder Benachrichtigungsberechtigung.
 
-## Widget und Vollansicht
+## Build und Signierung
 
-- **Startbildschirm:** Android-AppWidget, Systemintervall 30 Minuten und manuelles Aktualisieren.
-  Energiesparen kann Systemaktualisierungen verzögern.
-- **Vollansicht:** Neuberechnung jede Sekunde, während die Activity sichtbar ist.
-  Beim App-Wechsel läuft kein Hintergrunddienst weiter.
-- **Externe App:** Der optionale Star-Finder-Start repariert dessen GPU-Engine nicht.
-  Der Fehler engine_view_recreated gehört nicht zu unserer Zeichenengine.
+Android SDK Platform 36, Build Tools 36.0.0, JDK 17; Gradle optional mit
+Gradle 8.11.1 / Android Gradle Plugin 8.10.1. minSdk 26, targetSdk 36.
 
-## Build
+```bash
+python3 tools/build_local.py --sdk /pfad/zum/android-sdk \
+  --signing-info /privat/signing.json \
+  --output /ausgabe/Sternfenster_Android_v0.3.0.apk
+```
 
-Android Studio/Gradle: JDK 17, Gradle 8.11.1, Android Gradle Plugin 8.10.1,
-SDK Platform 36. minSdk 26, targetSdk 36, VersionCode 3.
+Ohne Signierungsdaten erzeugt das Skript ausschließlich eine `UNSIGNED`-Prüfdatei.
+CI baut mit einem kurzlebigen eigenen Testschlüssel; der private Release-Schlüssel
+wird nicht an das öffentliche Repository oder CI übertragen.
 
-Alternativ ohne Gradle-Abhängigkeiten:
+Release-Zertifikat SHA-256 seit 0.2.0:
+88ea977a6afba06d2211611bde63fc496ee6c2f3d2e5c8027f1c2a444ffd8180
 
-python3 tools/build_local.py --sdk /pfad/zum/android-sdk --signing-info /privat/signing.json --output /ausgabe/Sternfenster_Android_v0.2.1.apk
+Version 0.1.0 hatte einen anderen temporären Schlüssel. Nur beim Wechsel von dieser
+alten Version ist eine Deinstallation erforderlich; 0.2.0 und spätere Releases
+lassen sich direkt aktualisieren.
 
-Benötigt: SDK Platform 36, Build Tools 36.0.0 und ein JDK mit Java-Compiler.
-signing.json enthält keystore, alias und password; der Keystorepfad kann relativ
-zu signing.json sein. Ohne --signing-info entsteht nur eine mit UNSIGNED
-bezeichnete Prüfdatei, keine installierbare Release.
-Der Build-Workflow erzeugt eine unsignierte Prüf-APK. Der Laufzeittest signiert
-seine APKs ausschließlich mit einem vorübergehenden CI-Testschlüssel.
-Der private Release-Schlüssel wird nicht an GitHub übertragen.
+## Prüfung
 
-## Validierung
+Der neue Laufzeittest `tools/runtime_live60.py` prüft Start, Bedienung,
+Hintergrund-Stopp, Wiederaufnahme und fortlaufendes PiP auf dem Startbildschirm.
+Bei aktivem Rundblick misst er 10 Sekunden Vollansicht und 8 Sekunden PiP.
+Appseitige Renderzähler und Android-`gfxinfo` werden separat gesichert.
 
-- Android-Ressourcen/Java-Build, DEX, ZIP-Struktur und APK-Signatur geprüft.
-- 7.484 reine Java-Projektions- und Größenprüfungen bestanden: Achsen, Grenzen,
-  Antipoden, endliche Ergebnisse und isotrope Skalierung.
-- Statische Zweitprüfung von Activity-Lebenszyklus, Standortberechtigungen,
-  Widget-PendingIntents und Systemleistenabständen.
-- Die Widget-Anzeige von **0.2.0** ist durch Nutzerscreenshots bestätigt.
-  Diese Screenshots zeigen zugleich den Absturz beim Öffnen der App.
-- **Android-15-Emulatortest (API 35) bestanden:** Der unveränderte Stand 0.2.0
-  reproduziert die NullPointerException in PhoneWindow.getInsetsController / Ui.install.
-  0.2.1 besteht Installation als Update ohne erneutes Löschen der Daten, Kaltstart,
-  eigene Vollansicht, Richtungstasten, Zoom-Bedienung, laufende Uhr, Home/Resume,
-  Quer-/Hochformat mit erhaltenem Zustand, Prozessneustart und erneutes Öffnen.
-  Keine Sternfenster-Crash- oder ANR-Einträge im erfolgreichen Lauf.
-- Laufzeitbilder in Hoch- und Querformat visuell geprüft.
-- CI-Nachweis: https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44883174039
-  Vollständiger Prüfstand inklusive Baseline-Stacktrace: VALIDATION_v0.2.1.json.
-  Der Emulator prüft dieselben App-Quellen mit einem temporären CI-Testschlüssel;
-  die private Release-Signatur und die fertige Release-APK wurden separat geprüft.
-- Ein erster CI-Versuch wurde durch einen fremden Pixel-Launcher-Dialog blockiert.
-  Der anschließende vollständige Lauf bestand ohne Dialog-Recovery.
-  VALIDATION_v0.2.0.json dokumentiert den historischen Stand der früheren Auslieferung.
-- Ein Test von **0.2.1 auf Stefans Samsung-Gerät** steht noch aus.
+Ein erfolgreicher Funktionslauf belegt keine pauschale 60-FPS-Untergrenze. Der
+Bericht weist Messwerte und Leistungsbewertung gesondert aus. Ein Emulator ersetzt
+keine Messung auf Stefans Samsung. Die konkrete Auslieferungsprüfung steht im
+zugehörigen `VALIDATION_v0.3.0.json`, sobald der Lauf abgeschlossen ist.
+
+Die historischen Berichte `VALIDATION_v0.2.0.json` und `VALIDATION_v0.2.1.json`
+dokumentieren frühere Releases. Der dort behobene Startfehler beim zu frühen
+Fensterzugriff bleibt korrigiert. Die Nutzerscreenshots von 0.2.1 bestätigen die
+Darstellung beider App-Ansichten und des Vorschau-Widgets auf dem Samsung.
+
+## Android-Primärquellen
+
+- https://developer.android.com/reference/android/widget/RemoteViews
+- https://developer.android.com/develop/ui/views/appwidgets/advanced
+- https://developer.android.com/develop/ui/views/picture-in-picture
+- https://developer.android.com/reference/android/view/Choreographer
+- https://developer.android.com/reference/android/view/View#setRequestedFrameRate(float)
+- https://developer.android.com/media/optimize/performance/frame-rate
 
 Code-Lizenz: MIT. Keine Code- oder Grafikbestandteile der Fremd-App übernommen.

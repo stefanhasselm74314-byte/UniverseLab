@@ -41,15 +41,16 @@ public class MainActivity extends Activity {
         scroll.addView(panel);
         TextView title=Ui.text(this,"STERNFENSTER",27,0xffb9dcf4);
         title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);panel.addView(title);
-        TextView version=Ui.text(this,"0.2.1 · Deine eigene Sternkarte",14,Ui.MUTED);
+        TextView version=Ui.text(this,"0.3.0 · Kontinuierliches Live-Sternfenster",14,Ui.MUTED);
         version.setPadding(0,Ui.dp(this,8),0,Ui.dp(this,18));panel.addView(version);
         Ui.addButton(this,panel,"Live-Sternkarte öffnen",()->startActivity(new Intent(this,SkyActivity.class)));
-        panel.addView(Ui.text(this,"Die Vollansicht folgt der aktuellen Uhrzeit. Wische über den Himmel oder ändere den Zoom.",15,Ui.MUTED));
+        Ui.addButton(this,panel,"Schwebendes Live-Fenster starten",()->startActivity(new Intent(this,SkyActivity.class).putExtra("open_pip",true)));
+        panel.addView(Ui.text(this,"Die Sternkarte wird fortlaufend im Displaytakt gezeichnet. Im Live-Fenster läuft sie auch über dem Startbildschirm weiter. Die Anzeige misst die tatsächlich gezeichneten Render-FPS.",15,Ui.MUTED));
         Ui.heading(this,panel,"Standort");
         status=Ui.text(this,locationText(),15,Ui.TEXT);panel.addView(status);
         Ui.addButton(this,panel,"Standort ermitteln",this::requestLocation);
         panel.addView(Ui.text(this,"Die Position wird gespeichert und nur auf Knopfdruck neu ermittelt. Sie bleibt auf deinem Gerät.",13,Ui.MUTED));
-        Ui.heading(this,panel,"Startbildschirm");
+        Ui.heading(this,panel,"Startbildschirm · Vorschau-Widget");
         Ui.addButton(this,panel,"Widget hinzufügen",this::pinWidget);
         Ui.addButton(this,panel,"Alle Widgets jetzt aktualisieren",()->{
             SkyWidgetProvider.updateAll(this);status.setText("Widgets aktualisiert.\n"+locationText());
@@ -59,7 +60,7 @@ public class MainActivity extends Activity {
         Ui.addButton(this,panel,"Universe Star Finder öffnen",this::openStarFinder);
         panel.addView(Ui.text(this,"Diese optionale Schaltfläche startet die andere App. Bei deren Meldung „engine_view_recreated“ die App über ihre App-Info beenden und direkt neu starten.",13,Ui.MUTED));
         Ui.heading(this,panel,"Darstellung und Aktualisierung");
-        panel.addView(Ui.text(this,"Die Vollansicht berechnet den Himmel jede Sekunde, solange sie sichtbar ist. Das Startbildschirm-Widget wird ungefähr alle 30 Minuten durch Android aktualisiert; Energiesparen kann das verzögern.\n\nDie Karte zeigt Sternpositionen auch am Tag. Sie berücksichtigt weder Tageslicht, Wetter noch Gebäude. Katalogkoordinaten: J2000, ohne Präzession, Eigenbewegung und Refraktion. Keine Teleskop-Navigation. Sonne, Mond und Planeten sind noch nicht enthalten.",13,Ui.MUTED));
+        panel.addView(Ui.text(this,"Vollansicht und schwebendes Live-Fenster zeichnen kontinuierlich im Displaytakt mit einem Ziel von mindestens 60 FPS. Die erreichte Render-Rate wird gemessen; Android entscheidet über die verfügbare Bildrate. „Rundblick“ schwenkt die Blickrichtung gleichmäßig. „Zeit“ wechselt zwischen echter Uhrzeit (1×) und deutlich gekennzeichnetem Zeitraffer (60× / 600×). „Zurücksetzen“ stellt echte Uhrzeit und den Blick nach Süden wieder her. Das Vorschau-Widget bleibt ein gelegentlich aktualisiertes Bild; für fortlaufende Bewegung das schwebende Live-Fenster starten.\n\nDie Karte zeigt Sternpositionen auch am Tag. Sie berücksichtigt weder Tageslicht, Wetter noch Gebäude. Katalogkoordinaten: J2000, ohne Präzession, Eigenbewegung und Refraktion. Keine Teleskop-Navigation. Sonne, Mond und Planeten sind noch nicht enthalten.",13,Ui.MUTED));
         Ui.install(this,scroll);
     }
     @Override protected void onResume() {
