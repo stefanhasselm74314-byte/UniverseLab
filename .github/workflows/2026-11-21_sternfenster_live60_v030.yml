@@ -4,7 +4,12 @@ on:
   push:
     branches: ['fix/sternfenster-native-sky-v0.2']
     paths:
-      - 'sky-widget/**'
+      - 'sky-widget/app/**'
+      - 'sky-widget/tools/runtime_live60.py'
+      - 'sky-widget/tools/runtime_smoke.py'
+      - 'sky-widget/tools/build_local.py'
+      - 'sky-widget/tools/build_ui_probe.py'
+      - 'sky-widget/tools/ui_probe/**'
       - '.github/workflows/2026-11-21_sternfenster_live60_v030.yml'
   workflow_dispatch:
 

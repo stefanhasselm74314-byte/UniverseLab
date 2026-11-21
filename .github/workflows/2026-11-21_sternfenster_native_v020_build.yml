@@ -3,7 +3,8 @@ on:
   push:
     branches: ['fix/sternfenster-native-sky-v0.2']
     paths:
-      - 'sky-widget/**'
+      - 'sky-widget/app/**'
+      - 'sky-widget/tools/build_local.py'
       - '.github/workflows/2026-11-21_sternfenster_native_v020_build.yml'
   workflow_dispatch:
 permissions:

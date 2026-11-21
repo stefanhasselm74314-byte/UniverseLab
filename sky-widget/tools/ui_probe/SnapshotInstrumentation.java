@@ -13,23 +13,28 @@ import android.util.Base64;
 import android.util.Xml;
 import android.view.Display;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityWindowInfo;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import org.xmlpull.v1.XmlSerializer;
 
 /** CI-only cross-app accessibility snapshot. Never waits for UI/render idleness. */
 public final class SnapshotInstrumentation extends Instrumentation {
     private int nodes;
+    private boolean allWindows;
     private final Rect screen = new Rect();
 
     @Override public void onCreate(Bundle arguments) {
         super.onCreate(arguments);
+        allWindows = arguments != null && "true".equals(arguments.getString("all_windows"));
         start();
     }
 
     @Override public void onStart() {
         Bundle result = new Bundle();
         AccessibilityNodeInfo root = null;
+        List<AccessibilityWindowInfo> windows = null;
         try {
             UiAutomation automation = getUiAutomation();
             if (automation == null) throw new IllegalStateException("UiAutomation unavailable");
@@ -37,18 +42,29 @@ public final class SnapshotInstrumentation extends Instrumentation {
             if (info == null) throw new IllegalStateException("Accessibility service not connected");
             info.flags |= AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS
                     | AccessibilityServiceInfo.FLAG_INCLUDE_NOT_IMPORTANT_VIEWS;
+            if (allWindows) info.flags |= AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS;
             automation.setServiceInfo(info);
 
             // Connection/window availability is different from UI idleness. The
             // animation keeps running while this bounded root-availability poll runs.
             long deadline = SystemClock.uptimeMillis() + 5000;
             do {
-                root = automation.getRootInActiveWindow();
-                if (root != null && root.isVisibleToUser()) break;
-                if (root != null) { root.recycle(); root = null; }
+                if (allWindows) {
+                    windows = automation.getWindows();
+                    if (windows != null && !windows.isEmpty()) break;
+                    recycleWindows(windows);
+                    windows = null;
+                } else {
+                    root = automation.getRootInActiveWindow();
+                    if (root != null && root.isVisibleToUser()) break;
+                    if (root != null) { root.recycle(); root = null; }
+                }
                 SystemClock.sleep(50);
             } while (SystemClock.uptimeMillis() < deadline);
-            if (root == null) throw new IllegalStateException("No visible active-window accessibility root");
+            if (!allWindows && root == null) throw new IllegalStateException("No visible active-window accessibility root");
+            if (allWindows && (windows == null || windows.isEmpty())) {
+                throw new IllegalStateException("No interactive accessibility windows");
+            }
 
             Display display = getContext().getSystemService(DisplayManager.class).getDisplay(Display.DEFAULT_DISPLAY);
             int rotation = display == null ? 0 : display.getRotation();
@@ -63,9 +79,18 @@ public final class SnapshotInstrumentation extends Instrumentation {
             xml.startDocument("UTF-8", true);
             xml.startTag(null, "hierarchy");
             xml.attribute(null, "rotation", Integer.toString(rotation));
-            xml.attribute(null, "source", "UiAutomation-no-idle-snapshot");
+            xml.attribute(null, "source", allWindows ? "UiAutomation-no-idle-all-windows" : "UiAutomation-no-idle-snapshot");
+            if (allWindows) {
+                xml.attribute(null, "screen-width", Integer.toString(screen.width()));
+                xml.attribute(null, "screen-height", Integer.toString(screen.height()));
+            }
             nodes = 0;
-            writeNode(xml, root, 0, 0);
+            if (allWindows) {
+                for (AccessibilityWindowInfo window : windows) writeWindow(xml, window);
+                if (nodes == 0) throw new IllegalStateException("Interactive windows have no visible accessibility nodes");
+            } else {
+                writeNode(xml, root, 0, 0);
+            }
             xml.endTag(null, "hierarchy");
             xml.endDocument();
             byte[] bytes = output.toString().getBytes(StandardCharsets.UTF_8);
@@ -80,7 +105,36 @@ public final class SnapshotInstrumentation extends Instrumentation {
             finish(Activity.RESULT_CANCELED, result);
         } finally {
             if (root != null) root.recycle();
+            recycleWindows(windows);
         }
+    }
+
+    private void writeWindow(XmlSerializer xml, AccessibilityWindowInfo window) throws Exception {
+        AccessibilityNodeInfo root = window.getRoot();
+        if (root == null) return;
+        try {
+            if (!root.isVisibleToUser()) return;
+            Rect bounds = new Rect();
+            window.getBoundsInScreen(bounds);
+            xml.startTag(null, "window");
+            attribute(xml, "id", Integer.toString(window.getId()));
+            attribute(xml, "type", Integer.toString(window.getType()));
+            attribute(xml, "layer", Integer.toString(window.getLayer()));
+            attribute(xml, "title", safe(window.getTitle()));
+            attribute(xml, "active", Boolean.toString(window.isActive()));
+            attribute(xml, "focused", Boolean.toString(window.isFocused()));
+            // Keep the window rectangle un-clipped so the overlay test can
+            // detect a window placed partly outside the display. Node bounds
+            // below retain the historical visible-screen clipping behavior.
+            attribute(xml, "bounds", "[" + bounds.left + "," + bounds.top + "][" + bounds.right + "," + bounds.bottom + "]");
+            writeNode(xml, root, 0, 0);
+            xml.endTag(null, "window");
+        } finally { root.recycle(); }
+    }
+
+    private static void recycleWindows(List<AccessibilityWindowInfo> windows) {
+        if (windows == null) return;
+        for (AccessibilityWindowInfo window : windows) window.recycle();
     }
 
     private void writeNode(XmlSerializer xml, AccessibilityNodeInfo node, int index, int depth) throws Exception {

@@ -16,17 +16,20 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Rational;
 import android.view.Choreographer;
 import android.view.Display;
 import android.view.GestureDetector;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
@@ -42,12 +45,13 @@ public final class SkyActivity extends Activity {
     private final SimpleDateFormat simulationClock=new SimpleDateFormat("dd.MM. HH:mm:ss",Locale.GERMANY);
     private SkyView sky;
     private LinearLayout root,header,controls;
-    private TextView info,location,performance;
-    private Button followButton,panButton,timeButton,windowButton;
+    private TextView title,info,location,performance;
+    private Button followButton,panButton,timeButton,windowButton,menuButton;
     private DeviceOrientationTracker orientation;
     private final double[] cameraBasis=new double[9];
     private double latitude,longitude,azimuth=180,altitude=42,fov=100;
     private boolean hasLocation,started,pan,pendingPip,followPhone,hasCameraPose;
+    private boolean compactWindow,windowLayoutApplied,appliedPip;
     private double declination,declinationLat=Double.NaN,declinationLon=Double.NaN;
     private long declinationTime,lastSensorLog;
     private int timeRateIndex;
@@ -81,8 +85,13 @@ public final class SkyActivity extends Activity {
         LinearLayout top=new LinearLayout(this);top.setGravity(android.view.Gravity.CENTER_VERTICAL);
         Button back=Ui.button(this,"‹",this::finish);back.setContentDescription("Zurück");
         top.addView(back,new LinearLayout.LayoutParams(Ui.dp(this,44),Ui.dp(this,44)));
-        TextView title=Ui.text(this,"  Sternfenster · Live",19,0xffc1e5fa);title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
-        top.addView(title,new LinearLayout.LayoutParams(0,-2,1));header.addView(top);
+        title=Ui.text(this,"  Sternfenster · Live",19,0xffc1e5fa);title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
+        title.setSingleLine(true);title.setEllipsize(TextUtils.TruncateAt.END);
+        top.addView(title,new LinearLayout.LayoutParams(0,-2,1));
+        menuButton=Ui.button(this,"⋮",this::showControlsMenu);
+        menuButton.setContentDescription("Fenster und Bedienung");menuButton.setTextSize(23);
+        top.addView(menuButton,new LinearLayout.LayoutParams(Ui.dp(this,44),Ui.dp(this,44)));
+        header.addView(top);
         info=Ui.text(this,"",13,Ui.TEXT);info.setPadding(0,Ui.dp(this,5),0,0);header.addView(info);
         location=Ui.text(this,"",12,Ui.MUTED);header.addView(location);
         performance=Ui.text(this,"Render-FPS werden gemessen …",12,0xffa9d7eb);header.addView(performance);
@@ -122,7 +131,12 @@ public final class SkyActivity extends Activity {
         followButton.setTextSize(11);panButton.setTextSize(11);timeButton.setTextSize(11);windowButton.setTextSize(11);
         controls.addView(motion);root.addView(controls);
         if(!getPackageManager().hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE))windowButton.setEnabled(false);
+        // Root bounds include the actual split-screen/freeform window, not the
+        // display size. This listener only adjusts layout; it never restarts the
+        // sensor, time anchor or Vsync callback during a resize.
+        root.addOnLayoutChangeListener((v,left,topEdge,right,bottom,oldLeft,oldTop,oldRight,oldBottom)->updateResponsiveLayout());
         Ui.install(this,root);
+        updateResponsiveLayout();root.post(this::updateResponsiveLayout);
         refreshInfo();
     }
 
@@ -131,6 +145,71 @@ public final class SkyActivity extends Activity {
         button.setMinHeight(Ui.dp(this,46));button.setMinimumHeight(Ui.dp(this,46));
         LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(0,-2,weight);
         lp.setMargins(Ui.dp(this,3),Ui.dp(this,3),Ui.dp(this,3),0);row.addView(button,lp);return button;
+    }
+    private MenuItem addMenuControl(PopupMenu menu,String label,String description,Runnable action){
+        MenuItem item=menu.getMenu().add(label);item.setContentDescription(description);
+        item.setOnMenuItemClickListener(selected->{action.run();return true;});return item;
+    }
+    private void showControlsMenu(){
+        PopupMenu menu=new PopupMenu(this,menuButton);
+        addMenuControl(menu,"Freies Live-Fenster starten","Freies Live-Fenster starten",this::startFloatingWindow);
+        String[] names={"N · Norden","O · Osten","S · Süden","W · Westen"};
+        String[] descriptions={"Nach Norden blicken","Nach Osten blicken","Nach Süden blicken","Nach Westen blicken"};
+        for(int i=0;i<names.length;i++){
+            final int direction=i;
+            addMenuControl(menu,names[i],descriptions[i],()->{
+                setFollowing(false);pan=false;azimuth=direction*90;altitude=42;refreshInfo();
+            });
+        }
+        addMenuControl(menu,"−  Herauszoomen","Herauszoomen",()->{fov*=1.22;clamp();refreshInfo();});
+        addMenuControl(menu,"+  Hineinzoomen","Hineinzoomen",()->{fov/=1.22;clamp();refreshInfo();});
+        addMenuControl(menu,"Zurücksetzen","Blick nach Süden zurücksetzen",this::resetSky);
+        addMenuControl(menu,"Handy folgen","Blickrichtung des Handys folgen",()->{
+            setFollowing(!followPhone);refreshInfo();
+        }).setCheckable(true).setChecked(followPhone).setEnabled(orientation.isAvailable());
+        addMenuControl(menu,"Rundblick","Automatischen Rundblick umschalten",()->{
+            boolean enable=!pan;if(enable)setFollowing(false);pan=enable;refreshInfo();
+        }).setCheckable(true).setChecked(pan);
+        addMenuControl(menu,"Zeit: "+TIME_RATES[timeRateIndex]+"× · umschalten","Zeitraffer umschalten",this::cycleTimeRate);
+        addMenuControl(menu,"Bild-im-Bild öffnen","Schwebendes Live-Fenster öffnen",this::enterLiveWindow)
+                .setEnabled(getPackageManager().hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE));
+        menu.show();
+    }
+    private void startFloatingWindow(){
+        clamp();
+        Intent intent=new Intent(this,FloatingSkyService.class).setAction(FloatingSkyService.ACTION_SHOW)
+                .putExtra("az",azimuth).putExtra("alt",altitude).putExtra("fov",fov)
+                .putExtra("follow",followPhone).putExtra("pan",pan)
+                .putExtra("timeRate",TIME_RATES[timeRateIndex]).putExtra("skyTime",skyTimeMillis());
+        OverlaySetupActivity.launch(this,intent);
+    }
+    private void updateResponsiveLayout(){
+        if(root==null||sky==null)return;
+        boolean pip=isInPictureInPictureMode();
+        int width=root.getWidth()-root.getPaddingLeft()-root.getPaddingRight();
+        int height=root.getHeight()-root.getPaddingTop()-root.getPaddingBottom();
+        boolean compact=compactWindow;
+        if(width>0&&height>0){
+            compact=height<Ui.dp(this,550)||width<Ui.dp(this,330)||width>height;
+        }else if(!windowLayoutApplied){
+            // The first layout and some transition frames have zero-sized
+            // bounds. Use only valid configuration dimensions, never 0 dp.
+            Configuration c=getResources().getConfiguration();
+            compact=(c.screenHeightDp>0&&c.screenHeightDp<550)
+                    ||(c.screenWidthDp>0&&c.screenWidthDp<330)
+                    ||c.orientation==Configuration.ORIENTATION_LANDSCAPE;
+        }
+        if(windowLayoutApplied&&appliedPip==pip&&compactWindow==compact)return;
+        windowLayoutApplied=true;appliedPip=pip;compactWindow=compact;
+        header.setVisibility(pip?View.GONE:View.VISIBLE);
+        controls.setVisibility(pip||compact?View.GONE:View.VISIBLE);
+        location.setVisibility(compact?View.GONE:View.VISIBLE);
+        performance.setVisibility(compact?View.GONE:View.VISIBLE);
+        header.setPadding(Ui.dp(this,compact?8:12),Ui.dp(this,compact?2:5),
+                Ui.dp(this,compact?8:12),Ui.dp(this,compact?3:6));
+        title.setTextSize(compact?16:19);info.setTextSize(compact?12:13);
+        info.setMaxLines(compact?2:Integer.MAX_VALUE);
+        sky.invalidate();
     }
     private void clamp(){
         if(!Double.isFinite(azimuth))azimuth=180;
@@ -241,7 +320,7 @@ public final class SkyActivity extends Activity {
     private void applyWindowMode(){
         boolean pip=isInPictureInPictureMode();
         if(pip)pendingPip=false;
-        header.setVisibility(pip?View.GONE:View.VISIBLE);controls.setVisibility(pip?View.GONE:View.VISIBLE);
+        updateResponsiveLayout();
         root.requestApplyInsets();sky.resetStatistics();refreshInfo();
         if(started)sky.startFrames();
     }
@@ -340,7 +419,7 @@ public final class SkyActivity extends Activity {
             renderer.draw(canvas,getWidth(),getHeight(),latitude,longitude,azimuth,altitude,fov,skyTimeMillis(),true,
                     followPhone&&hasCameraPose?cameraBasis:null);
             boolean pip=isInPictureInPictureMode();
-            if(pip){
+            if(pip||compactWindow){
                 float font=Math.max(8,Math.min(14*getResources().getDisplayMetrics().density,getWidth()*.045f));
                 hudPaint.setTextSize(font);hudPaint.setStyle(Paint.Style.FILL);hudPaint.setColor(0xbb08121e);
                 float pad=font*.5f;canvas.drawRect(0,0,getWidth(),font*3.2f,hudPaint);

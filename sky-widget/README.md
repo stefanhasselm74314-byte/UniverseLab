@@ -1,4 +1,45 @@
-# Sternfenster 0.3.1 — Sternkarte folgt der Handyhaltung
+# Sternfenster 0.4.0 — Freies Live-Fenster und kleine Taskfenster
+
+## Neu in 0.4.0
+
+**Freies Live-Fenster starten** öffnet eine eigenständige, verschiebbare und
+vergrößerbare Sternkarte über anderen Apps. Die Titelleiste dient zum Verschieben,
+der Griff unten rechts zum Vergrößern oder Verkleinern. **×** und die Aktion
+**Fenster schließen** in der laufenden Benachrichtigung schließen es ausdrücklich.
+Das Fenster bleibt bei Home, Appwechsel, Zurück in der Hauptansicht und beim
+Entfernen der Hauptansicht aus der Taskliste unabhängig von deren Activity bestehen.
+
+Einmalig muss Android **Über anderen Apps anzeigen** für Sternfenster erlauben.
+Die App führt zu dieser Systemeinstellung und prüft die Freigabe bei der Rückkehr.
+Die Benachrichtigungsfreigabe ist optional; ihre Ablehnung verhindert den Dienst
+nicht. Das Fenster startet ausschließlich nach einer Aktion in einer sichtbaren
+Activity. Kein Autostart beim Gerätestart, kein Alarm zum Wiederöffnen und keine
+Accessibility-Berechtigung.
+
+Technisch läuft eine begrenzte `TYPE_APPLICATION_OVERLAY`-Fläche in einem eigenen
+ForegroundService vom Typ `specialUse`, mit eigenem Renderer und Sensorlistener.
+`stopWithTask=false` erhält den Dienst beim Entfernen der Activity. `START_STICKY`
+erlaubt Android eine Wiederherstellung nach gewöhnlichem Prozessverlust, sofern
+das Fenster vom Nutzer aktiv gelassen wurde; es ist keine Wiederstartgarantie.
+Vor einem ausdrücklichen Schließen wird diese Absicht gelöscht. Bei ausgeschaltetem
+oder gesperrtem Bildschirm pausieren Sensoren und Vsync-Callbacks ohne Wake-Lock.
+Position und Größe werden gespeichert und nach Größen- oder Rotationsänderungen
+auf die nutzbare Bildschirmfläche begrenzt. Berührungen außerhalb des Fensters
+gehen an die darunterliegende App.
+
+**Samsung-Taskfenster bleiben verfügbar:** Die Live-Sternkarte unterstützt weiterhin
+geteilten Bildschirm, Pop-up-Ansicht und Android-Bild-im-Bild. Bei weniger als
+550 dp nutzbarer Höhe, weniger als 330 dp Breite oder Querformat blendet sie die
+großen Bedienreihen aus. Richtung, Zoom, Handy folgen, Rundblick, Zeit und Fenster
+bleiben im **⋮**-Menü erreichbar; Uhrzeit/Winkel sowie ein Karten-HUD bleiben sichtbar.
+Fenstergrößenwechsel setzen weder Blickrichtung noch Zeitmodus zurück.
+
+Ein Overlay liegt über anderen Apps; es wird nicht in deren Inhalt eingebettet.
+Das Einrasten in Samsungs Taskaufteilung erfolgt weiterhin über die normale
+Live-Sternkarte und Samsungs Fenstersteuerung. **Android kann Apps zwangsweise
+beenden oder bei Ressourcenmangel schließen.** Sicherheitsrelevante Ansichten
+können fremde Overlays ausblenden. Diese Systementscheidungen werden respektiert;
+„kann sich niemals schließen“ wird nicht zugesichert.
 
 ## Neu in 0.3.1: Handy folgen
 
@@ -50,21 +91,22 @@ CPU-Zeit des Zeichenaufrufs, nicht die GPU-/Compositor-Latenz.
 
 ## Benutzung
 
-1. Die signierte APK als **Aktualisierung über 0.2.0, 0.2.1 oder 0.3.0** installieren.
+1. Die signierte APK als **Aktualisierung über 0.2.0 bis 0.3.1** installieren.
    Paketname und Release-Schlüssel bleiben gleich; keine Deinstallation oder
-   Datenlöschung erforderlich. VersionCode ist jetzt 5.
+   Datenlöschung erforderlich. VersionCode ist jetzt 6.
 2. **Live-Sternkarte öffnen** startet die große Ansicht.
-3. **Schwebendes Live-Fenster starten** oder **Live-Fenster** in der Sternkarte
-   wechselt in Androids Bild-im-Bild-Modus. Danach Home drücken, um das Fenster
-   über dem Startbildschirm zu sehen.
-4. Das schwebende Fenster lässt sich über Android verschieben, vergrößern,
-   zur Vollansicht zurückholen und schließen. Es ist kein fest in ein
-   Launcher-Raster eingebettetes AppWidget.
+3. **Freies Live-Fenster starten** öffnet das unabhängige Fenster. Die einmalige
+   Freigabe erteilen, zu Sternfenster zurückkehren und anschließend eine andere App
+   öffnen. Titelleiste ziehen; Größe am Griff unten rechts ändern.
+4. Für ein geteiltes Taskfenster **Live-Sternkarte öffnen** und Samsungs
+   Fenstersteuerung benutzen. Die kompakte Ansicht bietet die Bedienung unter **⋮**.
+5. **Bild-im-Bild starten**, **Live-Fenster** in der großen Sternkarte oder
+   **⋮ → Bild-im-Bild öffnen** verwenden den bisherigen Android-PiP-Modus.
 
 Bild-im-Bild nutzt eine sichtbare Activity und benötigt keine Overlay-Berechtigung.
 Der Zeichenzyklus beginnt in `onStart` und endet in `onStop`; er läuft während des
-bei PiP eintretenden `onPause` weiter. Unsichtbar im Hintergrund läuft kein
-Zeichendienst. Ein neues Standortergebnis aus den Einstellungen wird auch während
+bei PiP eintretenden `onPause` weiter. Ohne das separat gestartete freie Fenster
+läuft kein Zeichendienst. Ein neues Standortergebnis aus den Einstellungen wird auch während
 PiP übernommen. Androids Unterstützung und Freigabe für Bild-im-Bild sind erforderlich.
 
 | Bedienung | Wirkung |
@@ -76,6 +118,8 @@ PiP übernommen. Androids Unterstützung und Freigabe für Bild-im-Bild sind erf
 | Zeit | Echtzeit 1× → Zeitraffer 60× → Zeitraffer 600× → Echtzeit 1× |
 | Zurücksetzen | Süd 180°, Höhe 42°, Sichtfeld 100°, Rundblick aus, echte Uhrzeit |
 | Live-Fenster | Schwebende Bild-im-Bild-Ansicht mit Uhrzeit, Zeitmodus und Render-FPS |
+| Freies Live-Fenster starten | Unabhängiges Fenster über anderen Apps |
+| ⋮ | Alle Bedienaktionen auch in kleinen Taskfenstern |
 
 **Bildrate und Zeitmaßstab sind getrennt.** In Echtzeit ist die natürliche
 Himmelsbewegung langsam. Rundblick bewegt die virtuelle Blickrichtung;
@@ -115,8 +159,10 @@ und Lichtverschmutzung werden nicht modelliert. J2000-Katalogkoordinaten ohne
 Präzession, Nutation, Eigenbewegung und Refraktion: eine orientierende Sternkarte,
 keine Teleskopsteuerung.
 
-Nur optionale Standortberechtigungen. Keine Internet-, Hintergrundstandort-,
-Overlay-, Speicher- oder Benachrichtigungsberechtigung.
+Optionale Standortberechtigungen; für das freie Fenster Overlayfreigabe und ein
+deklarierter ForegroundService mit optionaler Benachrichtigungsfreigabe.
+Keine Internet-, Kamera-, Hintergrundstandort-, Speicher- oder
+Accessibility-Berechtigung.
 
 ## Build und Signierung
 
@@ -126,7 +172,7 @@ Gradle 8.11.1 / Android Gradle Plugin 8.10.1. minSdk 26, targetSdk 36.
 ```bash
 python3 tools/build_local.py --sdk /pfad/zum/android-sdk \
   --signing-info /privat/signing.json \
-  --output /ausgabe/Sternfenster_Android_v0.3.1.apk
+  --output /ausgabe/Sternfenster_Android_v0.4.0.apk
 ```
 
 Ohne Signierungsdaten erzeugt das Skript ausschließlich eine `UNSIGNED`-Prüfdatei.
@@ -141,6 +187,18 @@ alten Version ist eine Deinstallation erforderlich; 0.2.0 und spätere Releases
 lassen sich direkt aktualisieren.
 
 ## Prüfung
+
+Für 0.4.0 prüft `tools/runtime_overlay.py` das tatsächlich sichtbare Android-Overlay:
+Start aus der Oberfläche, WindowManager-Typ und Grenzen, Ziehen, Vergrößern,
+Home, Wechsel zu Einstellungen, Entfernen des beobachteten App-Tasks,
+fortgesetzte Sensorsteuerung/Renderzähler sowie ausdrückliches Schließen ohne
+selbstständiges Wiederöffnen. Der separate Accessibility-Probe erhält einen
+opt-in-Modus für alle interaktiven Fenster; die vorhandenen Tests behalten ihren
+bisherigen Standardmodus. Die konkrete Auslieferungsprüfung wird in
+`VALIDATION_v0.4.0.json` dokumentiert. Ein API-35-Emulator bestätigt weder
+Samsungs Taskverwaltung noch physische Kompassgenauigkeit oder 60 präsentierte FPS.
+
+### Historische 0.3.1-Prüfung
 
 Die Sensorversion wird durch `tests/DeviceOrientationCheck.java` (bekannte Posen,
 Displayrotation, Roll, Deklination, Polübergänge und Quaternionen) sowie
@@ -210,5 +268,10 @@ Darstellung beider App-Ansichten und des Vorschau-Widgets auf dem Samsung.
 - https://developer.android.com/reference/android/view/Choreographer
 - https://developer.android.com/reference/android/view/View#setRequestedFrameRate(float)
 - https://developer.android.com/media/optimize/performance/frame-rate
+- https://developer.android.com/reference/android/view/WindowManager.LayoutParams#TYPE_APPLICATION_OVERLAY
+- https://developer.android.com/develop/background-work/services/fgs/service-types
+- https://developer.android.com/reference/android/provider/Settings#ACTION_MANAGE_OVERLAY_PERMISSION
+- https://developer.android.com/develop/background-work/services/fgs/handle-user-stopping
+- https://developer.android.com/about/versions/12/features#hide-application-overlay-windows
 
 Code-Lizenz: MIT. Keine Code- oder Grafikbestandteile der Fremd-App übernommen.
