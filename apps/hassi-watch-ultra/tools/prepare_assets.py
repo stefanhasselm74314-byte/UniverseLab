@@ -41,7 +41,7 @@ station=src.crop((0,5,709,714)).resize((S,S),Image.Resampling.LANCZOS)
 station=vignette(station,.50).convert('RGBA')
 veil=Image.new('RGBA',(S,S));p=veil.load()
 for y in range(int(S*.67),S):
-    a=int(180*((y-S*.67)/(S*.33))**1.12)
+    a=int(180*(max(0.0,(y-S*.67)/(S*.33))**1.12))
     for x in range(S): p[x,y]=(2,6,14,max(0,min(255,a)))
 station=Image.alpha_composite(station,veil).convert('RGB')
 save_face('watchface-station',round_crop(station))
