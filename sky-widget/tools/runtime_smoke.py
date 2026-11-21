@@ -138,7 +138,48 @@ class RuntimeSmoke:
         raw = self.adb("exec-out", "cat", remote)
         root = ET.fromstring(raw[raw.index("<?xml"):]) if "<?xml" in raw else ET.fromstring(raw)
         self.last_xml = raw
+        if self.recover_pixel_launcher_anr(root):
+            # Closing an unrelated emulator dialog does not establish app health.
+            # Return a fresh hierarchy; all normal app assertions still apply.
+            return self.dump_ui()
         return root
+
+    def recover_pixel_launcher_anr(self, root):
+        # Observed on the API-35 emulator during launcher startup. Match only
+        # this exact system dialog; never dismiss a Sternfenster error dialog.
+        def exact(resource, text):
+            return [node for node in root.iter("node")
+                    if node.get("package") == "android"
+                    and node.get("resource-id") == resource
+                    and node.get("text") == text]
+        title = "Pixel Launcher isn't responding"
+        if len(exact("android:id/alertTitle", title)) != 1:
+            return False
+        close = exact("android:id/aerr_close", "Close app")
+        if len(close) != 1 or len(exact("android:id/aerr_wait", "Wait")) != 1:
+            return False
+        button = close[0]
+        if button.get("enabled") != "true" or button.get("clickable") != "true":
+            return False
+        bounds = re.fullmatch(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]", button.get("bounds", ""))
+        if not bounds:
+            return False
+        left, top, right, bottom = map(int, bounds.groups())
+        if right <= left or bottom <= top:
+            return False
+        events = self.report.setdefault("emulator_recoveries", [])
+        if len(events) >= 2:
+            raise TestFailure("Pixel Launcher ANR recovery limit reached (2); emulator remains unhealthy")
+        self.assert_no_app_crash()
+        evidence = f"pixel-launcher-anr-{len(events) + 1}"
+        self.capture(evidence)
+        event = {"phase": self.phase, "dialog_title": title, "action": "Close app",
+                 "button_bounds": button.get("bounds"), "evidence_prefix": evidence}
+        events.append(event)
+        self.save_report()
+        print(f"EMULATOR RECOVERY: {title}; evidence: {evidence}", flush=True)
+        self.adb("shell", "input", "tap", str((left + right) // 2), str((top + bottom) // 2))
+        return True
 
     @staticmethod
     def node(root, *, text=None, description=None):
