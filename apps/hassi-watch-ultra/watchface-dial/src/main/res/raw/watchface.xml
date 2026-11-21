@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450">
+  <Scene>
+    <PartImage x="0" y="0" width="450" height="450" name="OrbitalArtwork">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <Image resource="background" />
+    </PartImage>
+    <DigitalClock x="52" y="102" width="102" height="62">
+      <TimeText x="0" y="0" width="102" height="62" format="hh" hourFormat="24" align="CENTER">
+        <Variant mode="AMBIENT" target="alpha" value="0" />
+        <Font family="SYNC_TO_DEVICE" size="48" weight="BOLD" color="#EFF6FF" />
+      </TimeText>
+    </DigitalClock>
+    <DigitalClock x="296" y="102" width="102" height="62">
+      <TimeText x="0" y="0" width="102" height="62" format="mm" hourFormat="24" align="CENTER">
+        <Variant mode="AMBIENT" target="alpha" value="0" />
+        <Font family="SYNC_TO_DEVICE" size="48" weight="BOLD" color="#EFF6FF" />
+      </TimeText>
+    </DigitalClock>
+    <DigitalClock x="90" y="195" width="270" height="70">
+      <TimeText x="0" y="0" width="270" height="70" format="hh:mm" hourFormat="24" align="CENTER" alpha="0">
+        <Variant mode="AMBIENT" target="alpha" value="255" />
+        <Font family="SYNC_TO_DEVICE" size="55" weight="BOLD" color="#FFFFFF" />
+      </TimeText>
+    </DigitalClock>
+  </Scene>
+</WatchFace>

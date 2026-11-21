@@ -1,0 +1,39 @@
+name: Hassi Watch Ultra · WFF APKs
+on:
+  push:
+    branches: [feature/hassi-watch-ultra-wff-v01-20261121]
+    paths:
+      - 'apps/hassi-watch-ultra/**'
+      - '.github/workflows/hassi-watch-ultra-wff.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build 2 Wear OS Watch Face Format debug APKs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v4
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+      - name: Prepare existing orbital artwork for Galaxy Watch
+        run: |
+          python -m pip install --quiet Pillow
+          python apps/hassi-watch-ultra/tools/prepare_assets.py
+      - name: Build native WFF APKs
+        working-directory: apps/hassi-watch-ultra
+        run: gradle --no-daemon :watchface-dial:assembleDebug :watchface-station:assembleDebug --stacktrace
+      - name: Upload both watch APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Hassi-WatchUltra-WFF-v1-APKs
+          path: |
+            apps/hassi-watch-ultra/watchface-dial/build/outputs/apk/debug/*.apk
+            apps/hassi-watch-ultra/watchface-station/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
