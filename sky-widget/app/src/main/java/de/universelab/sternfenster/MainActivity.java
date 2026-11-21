@@ -2,126 +2,152 @@ package de.universelab.sternfenster;
 
 import android.Manifest;
 import android.app.Activity;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.Button;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.view.View;
-import android.view.Gravity;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-/** Einfaches Konfigurationsfenster, keine Werbung, kein Netzwerk. */
+/** Settings and optional foreground-only location acquisition. */
 public class MainActivity extends Activity {
+    private static final int LOCATION_REQUEST=81;
+    private final Handler handler=new Handler(Looper.getMainLooper());
     private TextView status;
-    private LocationManager lm;
+    private LocationManager locationManager;
     private LocationListener locationListener;
-    private static final int REQ_LOCATION=81;
-    @Override public void onCreate(Bundle b){
-        super.onCreate(b);
-        getWindow().setStatusBarColor(0xff050d1b);
-        getWindow().setNavigationBarColor(0xff050d1b);
-        ScrollView outer=new ScrollView(this); outer.setBackgroundColor(0xff061225);
+    private boolean locating;
+    private final Runnable timeout=()->{
+        stopLocation();status.setText("Keine neue Position erhalten.\n"+locationText());
+    };
+    @Override public void onCreate(Bundle state) {
+        super.onCreate(state);
+        ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);
         LinearLayout panel=new LinearLayout(this);panel.setOrientation(LinearLayout.VERTICAL);
-        panel.setPadding(dp(22),dp(28),dp(22),dp(28));outer.addView(panel);
-        text(panel,"STERNFENSTER",26,0xffb9dcff,true);
-        text(panel,"Astronomische Sternkarte für deinen Android-Startbildschirm",16,0xffe8f4ff,false);
-        text(panel,"Der angezeigte Himmelsausschnitt wird aus Sternkatalog, Uhrzeit und Standort berechnet – nicht aus dem Bild der Star-Finder-App gespiegelt.",14,0xffaebed4,false);
-        status=text(panel,"",15,0xffdce7fa,false); updateStatus();
-        button(panel,"1 · Standort ermitteln",()->requestLocation());
-        button(panel,"2 · Sternkarte jetzt aktualisieren",()->{
-            SkyWidgetProvider.updateAll(this);
-            status.setText("Sternkarte aktualisiert.\n"+currentLocationText());
+        panel.setPadding(Ui.dp(this,20),Ui.dp(this,20),Ui.dp(this,20),Ui.dp(this,24));
+        scroll.addView(panel);
+        TextView title=Ui.text(this,"STERNFENSTER",27,0xffb9dcf4);
+        title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);panel.addView(title);
+        TextView version=Ui.text(this,"0.2.0 · Deine eigene Sternkarte",14,Ui.MUTED);
+        version.setPadding(0,Ui.dp(this,8),0,Ui.dp(this,18));panel.addView(version);
+        Ui.addButton(this,panel,"Live-Sternkarte öffnen",()->startActivity(new Intent(this,SkyActivity.class)));
+        panel.addView(Ui.text(this,"Die Vollansicht folgt der aktuellen Uhrzeit. Wische über den Himmel oder ändere den Zoom.",15,Ui.MUTED));
+        Ui.heading(this,panel,"Standort");
+        status=Ui.text(this,locationText(),15,Ui.TEXT);panel.addView(status);
+        Ui.addButton(this,panel,"Standort ermitteln",this::requestLocation);
+        panel.addView(Ui.text(this,"Die Position wird gespeichert und nur auf Knopfdruck neu ermittelt. Sie bleibt auf deinem Gerät.",13,Ui.MUTED));
+        Ui.heading(this,panel,"Startbildschirm");
+        Ui.addButton(this,panel,"Widget hinzufügen",this::pinWidget);
+        Ui.addButton(this,panel,"Alle Widgets jetzt aktualisieren",()->{
+            SkyWidgetProvider.updateAll(this);status.setText("Widgets aktualisiert.\n"+locationText());
         });
-        button(panel,"3 · Universe Star Finder öffnen",()->{
-            Intent i=new Intent(Intent.ACTION_MAIN);
-            i.setClassName("com.youvendo.international_space_registry","com.youvendo.star_finder.MainActivity");
-            try{startActivity(i);}catch(Exception ex){status.setText("Universe Star Finder nicht gefunden.\n"+currentLocationText());}
-        });
-        text(panel,"WIDGET EINFÜGEN",19,0xff8ebdeb,true);
-        text(panel,"Halte eine freie Stelle auf dem Startbildschirm gedrückt → Widgets → Sternfenster → hinzufügen.\n\nTippe auf die Sternkarte, um Universe Star Finder zu öffnen. Mit ↻ rechts die Blickrichtung wechseln; ⟳ links aktualisieren.",15,0xffd6e5f8,false);
-        text(panel,"Aktualisierung: systemgesteuert ungefähr alle 30 Minuten (Verzögerungen im Energiesparmodus möglich). Positionen der Sterne sind echte Katalogdaten (J2000), ohne Refraktions- und Präzessionskorrektur.",13,0xff8b9fb8,false);
-        setContentView(outer);
+        panel.addView(Ui.text(this,"Alternativ: Startbildschirm lange drücken → Widgets → Sternfenster. Eine Größe von 4 × 3 Feldern bietet Platz für Karte und Beschriftung.\n\nEin Tipp auf die Karte öffnet unsere eigene Vollansicht. „Neu“ aktualisiert das Widget; „Richtung“ wechselt den Himmelsausschnitt.",14,Ui.MUTED));
+        Ui.heading(this,panel,"Zusätzliche App");
+        Ui.addButton(this,panel,"Universe Star Finder öffnen",this::openStarFinder);
+        panel.addView(Ui.text(this,"Diese optionale Schaltfläche startet die andere App. Bei deren Meldung „engine_view_recreated“ die App über ihre App-Info beenden und direkt neu starten.",13,Ui.MUTED));
+        Ui.heading(this,panel,"Darstellung und Aktualisierung");
+        panel.addView(Ui.text(this,"Die Vollansicht berechnet den Himmel jede Sekunde, solange sie sichtbar ist. Das Startbildschirm-Widget wird ungefähr alle 30 Minuten durch Android aktualisiert; Energiesparen kann das verzögern.\n\nDie Karte zeigt Sternpositionen auch am Tag. Sie berücksichtigt weder Tageslicht, Wetter noch Gebäude. Katalogkoordinaten: J2000, ohne Präzession, Eigenbewegung und Refraktion. Keine Teleskop-Navigation. Sonne, Mond und Planeten sind noch nicht enthalten.",13,Ui.MUTED));
+        Ui.install(this,scroll);
     }
-    private int dp(float v){return Math.round(v*getResources().getDisplayMetrics().density);}
-    private TextView text(LinearLayout p,String value,int sp,int color,boolean bold){
-        TextView v=new TextView(this);v.setText(value);v.setTextSize(sp);v.setTextColor(color);
-        v.setLineSpacing(dp(3),1);v.setPadding(0,dp(9),0,dp(14));
-        if(bold)v.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
-        p.addView(v);return v;
-    }
-    private void button(LinearLayout p,String name,Runnable r){
-        Button b=new Button(this);b.setText(name);
-        b.setTextColor(Color.WHITE);b.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xff24507b));
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,dp(56));lp.setMargins(0,0,0,dp(10));
-        p.addView(b,lp);b.setOnClickListener(v->r.run());
-    }
-    private String currentLocationText(){
-        android.content.SharedPreferences pr=getSharedPreferences(SkyWidgetProvider.PREFS,MODE_PRIVATE);
-        return pr.getBoolean("has_gps",false)?
-                String.format(java.util.Locale.GERMANY,"GPS: %.4f° N, %.4f° O",pr.getFloat("lat",0f),pr.getFloat("lon",0f)):
-                "Standort: Dresden (Standardwert, noch keine GPS-Position)";
-    }
-    private void updateStatus(){status.setText(currentLocationText());}
-    private void requestLocation(){
-        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED
-            && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},REQ_LOCATION);
-            return;
-        }
-        locateNow();
-    }
-    @Override public void onRequestPermissionsResult(int req,String[] p,int[] results){
-        super.onRequestPermissionsResult(req,p,results);
-        if(req==REQ_LOCATION){
-            if(checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED
-               ||checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED)locateNow();
-            else status.setText("Standortfreigabe nicht erteilt. Es bleibt beim Standardstandort Dresden.");
-        }
-    }
-    @SuppressWarnings("MissingPermission") private void locateNow(){
-        lm=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        if(lm==null){status.setText("Standortdienst nicht verfügbar.");return;}
-        Location best=null;
-        for(String provider : lm.getProviders(true)){
-            try{ Location l=lm.getLastKnownLocation(provider);
-                if(l!=null&&(best==null||l.getTime()>best.getTime()))best=l;
-            }catch(SecurityException ignored){}
-        }
-        if(best!=null) saveLocation(best);
-        status.setText("GPS-/Netzwerkposition wird abgefragt …\n"+currentLocationText());
-        locationListener=new LocationListener(){
-            @Override public void onLocationChanged(Location l){
-                saveLocation(l); status.setText(currentLocationText());
-                try{lm.removeUpdates(this);}catch(Exception ignored){}
-            }
-            @Override public void onProviderEnabled(String p){}
-            @Override public void onProviderDisabled(String p){}
-        };
-        try{
-            boolean requested=false;
-            if(lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-                lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,locationListener);requested=true;}
-            if(lm.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-                lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);requested=true;}
-            if(!requested)status.setText("Standortdienste ausschalten? Bitte in den Android-Einstellungen aktivieren.");
-        }catch(Exception e){status.setText("Standortabfrage nicht möglich: "+e.getMessage());}
-    }
-    private void saveLocation(Location l){
-        getSharedPreferences(SkyWidgetProvider.PREFS,MODE_PRIVATE).edit()
-            .putFloat("lat",(float)l.getLatitude()).putFloat("lon",(float)l.getLongitude())
-            .putBoolean("has_gps",true).apply();
+    @Override protected void onResume() {
+        super.onResume();
+        if(status!=null&&!locating)status.setText(locationText());
         SkyWidgetProvider.updateAll(this);
     }
-    @Override protected void onStop(){super.onStop();
-        if(lm!=null&&locationListener!=null)try{lm.removeUpdates(locationListener);}catch(Exception ignored){}
+    private String locationText() {
+        SharedPreferences p=getSharedPreferences(SkyWidgetProvider.PREFS,MODE_PRIVATE);
+        if(!p.getBoolean("has_gps",false))return "Dresden · Standardstandort\nNoch keine eigene Position gespeichert.";
+        double lat=p.getFloat("lat",51.0504f),lon=p.getFloat("lon",13.7373f);
+        String label=String.format(Locale.GERMANY,"Gespeicherter Standort: %.4f° %s, %.4f° %s",
+                Math.abs(lat),lat>=0?"N":"S",Math.abs(lon),lon>=0?"O":"W");
+        long time=p.getLong("location_time",0);
+        if(time>0)label+="\nErmittelt: "+DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT,Locale.GERMANY).format(new Date(time));
+        return label;
     }
+    private void pinWidget() {
+        AppWidgetManager manager=AppWidgetManager.getInstance(this);
+        if(manager.isRequestPinAppWidgetSupported()) {
+            boolean sent=manager.requestPinAppWidget(new ComponentName(this,SkyWidgetProvider.class),null,null);
+            if(!sent)status.setText("Bitte über den Startbildschirm hinzufügen: lange drücken → Widgets → Sternfenster.");
+        } else status.setText("Über den Startbildschirm hinzufügen: lange drücken → Widgets → Sternfenster.");
+    }
+    private void openStarFinder() {
+        Intent launch=getPackageManager().getLaunchIntentForPackage("com.youvendo.international_space_registry");
+        if(launch==null){status.setText("Universe Star Finder ist nicht verfügbar. Unsere Live-Sternkarte kannst du oben öffnen.");return;}
+        try{startActivity(launch);}
+        catch(RuntimeException e){status.setText("Die andere App konnte nicht geöffnet werden. Unsere Sternkarte bleibt verfügbar.");}
+    }
+    private boolean hasLocationPermission() {
+        return checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED
+                ||checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED;
+    }
+    private void requestLocation() {
+        if(!hasLocationPermission())requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION},LOCATION_REQUEST);
+        else locate();
+    }
+    @Override public void onRequestPermissionsResult(int request,String[] permissions,int[] results) {
+        super.onRequestPermissionsResult(request,permissions,results);
+        if(request!=LOCATION_REQUEST)return;
+        if(hasLocationPermission())locate();
+        else status.setText("Standortfreigabe nicht erteilt.\n"+locationText());
+    }
+    @SuppressWarnings("MissingPermission") private void locate() {
+        stopLocation();
+        locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        if(locationManager==null){status.setText("Standortdienst nicht verfügbar.\n"+locationText());return;}
+        Location cached=null;
+        for(String provider:new String[]{LocationManager.NETWORK_PROVIDER,LocationManager.GPS_PROVIDER}) {
+            try{
+                Location l=locationManager.getLastKnownLocation(provider);
+                if(l!=null&&(cached==null||l.getTime()>cached.getTime()))cached=l;
+            }catch(RuntimeException ignored){}
+        }
+        if(cached!=null&&cached.getTime()>=getSharedPreferences(SkyWidgetProvider.PREFS,MODE_PRIVATE).getLong("location_time",0))saveLocation(cached);
+        locationListener=new LocationListener(){
+            @Override public void onLocationChanged(Location l){saveLocation(l);stopLocation();status.setText(locationText());}
+            @Override public void onProviderEnabled(String provider){}
+            @Override public void onProviderDisabled(String provider){}
+            @Override public void onStatusChanged(String provider,int value,Bundle extras){}
+        };
+        boolean requested=false;
+        for(String provider:new String[]{LocationManager.NETWORK_PROVIDER,LocationManager.GPS_PROVIDER}) {
+            try{
+                if(locationManager.isProviderEnabled(provider)){
+                    locationManager.requestLocationUpdates(provider,1000,0,locationListener);requested=true;
+                }
+            }catch(RuntimeException ignored){}
+        }
+        locating=requested;
+        if(requested){status.setText("Standort wird ermittelt …\n"+locationText());handler.postDelayed(timeout,20000);}
+        else{stopLocation();status.setText("Keine nutzbare Standortquelle. Prüfe Standortdienste und Standortfreigabe.\n"+locationText());}
+    }
+    private void saveLocation(Location l) {
+        if(!Double.isFinite(l.getLatitude())||!Double.isFinite(l.getLongitude()))return;
+        getSharedPreferences(SkyWidgetProvider.PREFS,MODE_PRIVATE).edit()
+                .putFloat("lat",(float)l.getLatitude()).putFloat("lon",(float)l.getLongitude())
+                .putBoolean("has_gps",true).putLong("location_time",l.getTime()).apply();
+        SkyWidgetProvider.updateAll(this);
+    }
+    private void stopLocation() {
+        handler.removeCallbacks(timeout);
+        if(locationManager!=null&&locationListener!=null){
+            try{locationManager.removeUpdates(locationListener);}catch(RuntimeException ignored){}
+        }
+        locationListener=null;locating=false;
+    }
+    @Override protected void onStop(){stopLocation();super.onStop();}
 }

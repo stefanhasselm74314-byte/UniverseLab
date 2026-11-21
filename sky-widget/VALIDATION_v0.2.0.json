@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "package": "de.universelab.sternfenster",
+  "apk_sha256": "99283b6400f827a4db809391a8103d9495edc4b1db944b79bb98f2c7cf1ce02a",
+  "apk_bytes": 246520,
+  "certificate_sha256": "88ea977a6afba06d2211611bde63fc496ee6c2f3d2e5c8027f1c2a444ffd8180",
+  "validation": [
+    "Android resource compile/link",
+    "Java compile API36",
+    "DEX generation minAPI26",
+    "APK v2/v3 signature verification",
+    "ZIP CRC integrity",
+    "Embedded catalogue unchanged",
+    "7484 pure-Java projection checks",
+    "Independent static activity/navigation review"
+  ],
+  "device_test": "NOT_PERFORMED",
+  "android_emulator_test": "NOT_PERFORMED",
+  "migration": "Uninstall v0.1.0 before installing v0.2.0; certificate changed."
+}

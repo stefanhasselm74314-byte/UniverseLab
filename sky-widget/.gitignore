@@ -1,0 +1,9 @@
+build-manual/
+app/build/
+.gradle/
+local.properties
+*.keystore
+*.p12
+*.jks
+signing.json
+*.apk

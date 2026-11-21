@@ -1,18 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#030a17">
-    <ImageView android:id="@+id/sky_image" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:contentDescription="Aktuelle Sternkarte"
-        android:scaleType="fitXY" />
-    <TextView android:id="@+id/dir_button" android:layout_width="44dp"
-        android:layout_height="37dp" android:layout_gravity="bottom|right"
-        android:text="↻" android:textSize="24sp" android:gravity="center"
-        android:textColor="#D8EBFF" android:background="#334C6E9B"
-        android:contentDescription="Himmelsrichtung wechseln" />
-    <TextView android:id="@+id/refresh_button" android:layout_width="43dp"
-        android:layout_height="37dp" android:layout_gravity="bottom|left"
-        android:text="⟳" android:textSize="23sp" android:gravity="center"
-        android:textColor="#D8EBFF" android:background="#334C6E9B"
-        android:contentDescription="Sternkarte aktualisieren" />
-</FrameLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/widget_background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/widget_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="STERNFENSTER"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#B9DEFF"
+            android:maxLines="1"
+            android:ellipsize="end" />
+        <TextView
+            android:id="@+id/widget_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="Sternkarte wird geladen …"
+            android:textSize="10sp"
+            android:textColor="#B3C0D0"
+            android:maxLines="2"
+            android:ellipsize="end" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/sky_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#061121"
+        android:contentDescription="Sternkarte. Eigene Live-Sternkarte öffnen."
+        android:scaleType="fitCenter" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:background="#142638">
+        <TextView
+            android:id="@+id/refresh_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Neu"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="#D8EBFF"
+            android:contentDescription="Sternkarte jetzt aktualisieren" />
+        <TextView
+            android:id="@+id/open_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Öffnen"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#B9DEFF"
+            android:contentDescription="Eigene Live-Sternkarte in Vollansicht öffnen" />
+        <TextView
+            android:id="@+id/dir_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Richtung"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="#D8EBFF"
+            android:contentDescription="Zur nächsten Himmelsrichtung wechseln" />
+    </LinearLayout>
+</LinearLayout>

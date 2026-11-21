@@ -1,4 +1,5 @@
-Der CI-Workflow unter .github/workflows/build-apk.yml ist für einen separaten
-Projektzweig feature/sternfenster-v0.1 vorbereitet. Beim Einchecken in ein
-anderes Repository den Pfad `sky-widget` und Branchfilter ggf. anpassen.
-Für die Nutzung in Android Studio ist GitHub nicht erforderlich.
+Projektpfad im Repository: sky-widget
+Aktiver Änderungszweig: fix/sternfenster-native-sky-v0.2
+CI baut nur eine unsignierte Prüf-APK.
+Installierbare Builds mit tools/build_local.py und dem gesicherten privaten Release-Schlüssel erstellen.
+Gradle 8.11.1 / AGP 8.10.1 / SDK 36 / JDK 17.

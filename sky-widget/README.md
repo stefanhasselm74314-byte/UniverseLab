@@ -1,65 +1,94 @@
-# Sternfenster – Android-Himmelswidget v0.1.0
+# Sternfenster 0.2.0 — eigene Android-Sternkarte
 
-Eigenständiges Homescreen-Widget für Android 8+; ausgelegt für Samsung Galaxy S24 Ultra.
+## Änderungen
 
-## Funktionen
+- Antippen des Widgets öffnet die eigene Live-Sternkarte.
+- Universe Star Finder ist eine ausdrücklich gewählte Zusatzaktion in den Einstellungen.
+- Die Vollansicht berechnet den Himmel jede Sekunde, solange sie sichtbar ist. Beim Verlassen stoppt der Zeitgeber.
+- Wischen ändert die Blickrichtung. Zwei Finger sowie +/− ändern den Zoom. N/O/S/W und Zurücksetzen sind direkt bedienbar.
+- Winkel und Zoom bleiben bei Rotation erhalten.
+- Native Widget-Kopfzeilen und drei beschriftete Bedienflächen: Neu, Öffnen, Richtung.
+- Karte und Schrift werden nicht mehr unabhängig in Breite und Höhe gestreckt.
+- Fensterabstände berücksichtigen Systemleisten und Bildschirmaussparungen.
+- Standortanforderungen laufen nach Knopfdruck bei geöffneter App maximal 20 Sekunden.
 
-- Standort und aktuelle Uhrzeit steuern Sternpositionen (offline).
-- Echte Sternpositionen und Helligkeiten, nicht zufällige Dekoration.
-- Vier Blickrichtungen N/O/S/W (↻), manuelles Aktualisieren (⟳).
-- Tippen auf den Himmel öffnet die vorhandene **Universe Star Finder v4.0.0** App
-  (`com.youvendo.international_space_registry`, Activity `com.youvendo.star_finder.MainActivity`);
-  wenn nicht installiert, öffnet sich die Widget-App.
-- Automatische Aktualisierung durch Android ungefähr alle **30 Minuten**,
-  mit möglichen Verzögerungen durch Energiesparrichtlinien.
-- Kein Internetzugriff und keine Telemetrie; Standort lokal im App-Speicher.
+## Installation und einmaliger Wechsel von 0.1.0
 
-## Installation (nach Build)
+Version 0.1.0 wurde mit einem temporären Android-Debugzertifikat ausgeliefert.
+Dessen privater Schlüssel liegt für diesen Build nicht vor.
+Version 0.2.0 verwendet einen privat gesicherten, dauerhaften Release-Schlüssel.
 
-1. Installiere `app-debug.apk` auf dem Android-Gerät (aus Android-Dateien).
-2. Öffne **Sternfenster** einmal, tippe **Standort ermitteln** und erteile optional
-   die Berechtigung. Ohne Berechtigung verwendet die App einen klar gekennzeichneten
-   Standardwert für Dresden.
-3. Auf freie Stelle des Startbildschirms lange drücken → **Widgets** →
-   **Sternfenster** → hinzufügen; mindestens ca. 4×2 Felder sind empfehlenswert.
-4. Auf die Sternkarte tippen = Star Finder öffnen. ↻ und ⟳ steuern das Widget.
+Daher kann 0.2.0 die bisherige Installation nicht direkt überschreiben:
 
-## Bauen
+1. Die neue APK herunterladen.
+2. Die alte App **Sternfenster** deinstallieren. Dadurch verschwinden ihr Widget und ihre lokalen Einstellungen.
+3. Die neue APK installieren und Sternfenster öffnen.
+4. Standort erneut ermitteln und das Widget neu hinzufügen.
+5. Empfohlene Widget-Größe: 4 × 3 Felder.
 
-Dieses ZIP ist ein Android-Gradle-Projekt. Android Studio: Ordner öffnen,
-JDK 17 und Android SDK Platform 35 bereitstellen, **Build APK(s)** ausführen.
-Alternativ: `gradle assembleDebug` mit Gradle 8.10.2 (Android Gradle Plugin 8.8.2).
+Universe Star Finder gehört nicht zu diesem Versionswechsel.
+Unsere eigene Sternkarte funktioniert ohne diese andere App.
 
-Die enthaltene kleine Sternliste dient nur als **Offline-Fallback** für den Source-Build.
-Für vollständige Genauigkeit den öffentlichen Yale Bright Star Catalog hinzufügen:
+Zertifikat SHA-256 für 0.2.0 und künftige kompatible Builds:
+88ea977a6afba06d2211611bde63fc496ee6c2f3d2e5c8027f1c2a444ffd8180
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/isene/starmap/master/data/stars.csv \
-  -o app/src/main/assets/stars.csv
-```
+Den privaten Schlüssel niemals in dieses öffentliche Repository aufnehmen.
+Das private Wiederherstellungspaket heißt Sternfenster_Signierung_PRIVAT_ab_v0.2.zip.
+Es enthält den KeyStore und seine Zugangsdaten. Für weitere Releases denselben Schlüssel verwenden.
 
-Das vorbereitete GitHub-Actions-Workflow lädt diesen Katalog vor dem Build automatisch.
+## Wissenschaftliche Bedeutung
 
-## Wissenschaftliche und technische Grenzen
+Die Darstellung verwendet die eingebetteten 9.096 Datensätze des zuvor ausgelieferten
+Yale-Bright-Star-Katalogs. Der Renderer wählt Sterne mit Magnitude ≤ 6,3.
+SHA-256 der unveränderten Katalogdatei:
+8b36f9e06f7ab275506213cb6ed61ea75570dbfb19725c31ca189fee9196133b
 
-- Himmelspositionen: J2000 → lokale horizontale Koordinaten mit Greenwich Mean
-  Sidereal Time (GMST), keine Präzession, Nutation, Eigenbewegung, Parallaxe oder
-  Refraktion – für ein dekorativ-informatives Homescreen-Widget geeignet, aber
-  **nicht** für präzise Teleskop-Ausrichtung.
-- Alle Sterne unter dem mathematischen Horizont sind ausgeblendet; lokale Berge,
-  Gebäude, Lichtverschmutzung und Wetter werden nicht modelliert.
-- Blickrichtung ist vom Nutzer über ↻ wählbar, **nicht** per Gyroskop/Kompass
-  automatisch geführt (Homescreen-Widgets besitzen keinen fortlaufenden Sensordatenstream).
-- Widget ≠ Fernanzeige des Star-Finder-Grafikfensters. Die APK enthält keine
-  öffentliche Widget-API oder deklarierte Sternkarten-ContentProvider-Schnittstelle.
-- Android-AppWidgets haben systembedingte Updates/Bitmap-Größenbegrenzungen;
-  daher kein kontinuierlicher 30/60-fps-Stream.
-- Der APK-Build wurde in der aktuellen lokalen Umgebung **nicht** verifiziert,
-  da dort keine Android-SDK-/Gradle-Buildwerkzeuge installiert sind.
+Quelle des Katalogexports: https://github.com/isene/starmap, data/stars.csv.
+Die in 0.1.0 eingebetteten Daten werden wiederverwendet; zur Laufzeit gibt es keinen Download.
 
-## Herkunft / Lizenz
+Es sind berechnete Katalogpositionen, keine Kameraaufnahme. Auch bei Tageslicht
+werden die geometrisch oberhalb des Horizonts stehenden Sterne gezeigt.
+Wetter, Tageshelligkeit, Berge, Gebäude und Lichtverschmutzung werden nicht modelliert.
+J2000-Koordinaten werden ohne Präzession, Nutation, Eigenbewegung und Refraktion
+in das lokale Horizontsystem umgerechnet. Eine orientierende Sternkarte,
+keine präzise Teleskopsteuerung. Sonne, Mond und Planeten sind nicht enthalten.
 
-Yale Bright Star Catalogue, 5th Revised Edition (Hoffleit & Warren 1991),
-public domain, bereitgestellt via https://github.com/isene/starmap (`data/stars.csv`).
-Code: MIT-Lizenz, von Grund auf neu geschrieben. Es wurden keine Assets/Code aus
-Universe Star Finder extrahiert oder übernommen.
+Nur optionale Standortberechtigungen. Keine Internet-, Hintergrundstandort-,
+Overlay-, Speicher- oder Benachrichtigungsberechtigung.
+
+## Widget und Vollansicht
+
+- **Startbildschirm:** Android-AppWidget, Systemintervall 30 Minuten und manuelles Aktualisieren.
+  Energiesparen kann Systemaktualisierungen verzögern.
+- **Vollansicht:** Neuberechnung jede Sekunde, während die Activity sichtbar ist.
+  Beim App-Wechsel läuft kein Hintergrunddienst weiter.
+- **Externe App:** Der optionale Star-Finder-Start repariert dessen GPU-Engine nicht.
+  Der Fehler engine_view_recreated gehört nicht zu unserer Zeichenengine.
+
+## Build
+
+Android Studio/Gradle: JDK 17, Gradle 8.11.1, Android Gradle Plugin 8.10.1,
+SDK Platform 36. minSdk 26, targetSdk 36, VersionCode 2.
+
+Alternativ ohne Gradle-Abhängigkeiten:
+
+python3 tools/build_local.py --sdk /pfad/zum/android-sdk --signing-info /privat/signing.json --output /ausgabe/Sternfenster_Android_v0.2.0.apk
+
+Benötigt: SDK Platform 36, Build Tools 36.0.0 und ein JDK mit Java-Compiler.
+signing.json enthält keystore, alias und password; der Keystorepfad kann relativ
+zu signing.json sein. Ohne --signing-info entsteht nur eine mit UNSIGNED
+bezeichnete Prüfdatei, keine installierbare Release.
+GitHub Actions baut absichtlich eine unsignierte Prüf-APK und speichert keinen privaten Schlüssel.
+
+## Validierung
+
+- Android-Ressourcen/Java-Build, DEX, ZIP-Struktur und APK-Signatur geprüft.
+- 7.484 reine Java-Projektions- und Größenprüfungen bestanden: Achsen, Grenzen,
+  Antipoden, endliche Ergebnisse und isotrope Skalierung.
+- Statische Zweitprüfung von Activity-Lebenszyklus, Standortberechtigungen,
+  Widget-PendingIntents und Systemleistenabständen.
+- Installation und sichtbare Karte von **0.1.0** sind durch Nutzerscreenshots bestätigt.
+- **0.2.0 wurde nicht auf Smartphone oder Android-Emulator ausgeführt.**
+  Der Gerätetest folgt nach Installation.
+
+Code-Lizenz: MIT. Keine Code- oder Grafikbestandteile der Fremd-App übernommen.

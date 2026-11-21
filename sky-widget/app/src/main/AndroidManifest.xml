@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <receiver android:name=".SkyWidgetProvider" android:exported="true">
+        <activity android:name=".SkyActivity" android:exported="false" android:launchMode="singleTop"/>
+        <receiver android:name=".SkyWidgetProvider" android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
