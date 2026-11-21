@@ -1,0 +1,314 @@
+{
+  "status": "sensor_follow_integration_passed",
+  "checks": [
+    {
+      "name": "device-and-real-sensor-overrides",
+      "status": "passed",
+      "seconds": 3.28
+    },
+    {
+      "name": "default-follow-and-north-up-pose",
+      "status": "passed",
+      "seconds": 15.98
+    },
+    {
+      "name": "changing-phone-direction-and-elevation",
+      "status": "passed",
+      "seconds": 6.24
+    },
+    {
+      "name": "zoom-preserves-follow-mode",
+      "status": "passed",
+      "seconds": 16.39
+    },
+    {
+      "name": "manual-direction-disables-follow",
+      "status": "passed",
+      "seconds": 20.24
+    },
+    {
+      "name": "reenable-follow-and-display-rotation",
+      "status": "passed",
+      "seconds": 21.46
+    },
+    {
+      "name": "pan-disables-follow-and-reset-is-manual",
+      "status": "passed",
+      "seconds": 17.11
+    },
+    {
+      "name": "hidden-stops-sensors-and-resume-restarts",
+      "status": "passed",
+      "seconds": 11.36
+    },
+    {
+      "name": "sensor-follow-continues-in-pip-on-home",
+      "status": "passed",
+      "seconds": 9.9
+    },
+    {
+      "name": "no-app-crash-or-anr",
+      "status": "passed",
+      "seconds": 0.93
+    }
+  ],
+  "environment": {
+    "sdk": 35,
+    "release": "15",
+    "model": "sdk_gphone64_x86_64",
+    "sensor_input": "Android emulator raw acceleration/magnetic-field/gyroscope overrides"
+  },
+  "test": "Sternfenster device orientation integration",
+  "performance": {},
+  "user_device_test": "NOT_PERFORMED",
+  "minimum_60_fps_guarantee": "NOT_ESTABLISHED",
+  "sensor_inputs": [
+    {
+      "label": "initial-north",
+      "magnetic_camera_azimuth": 0,
+      "camera_altitude": 25,
+      "readback": {
+        "acceleration": [
+          0.0,
+          8.88784,
+          -4.14447
+        ],
+        "magnetic-field": [
+          -0.0,
+          -39.2571,
+          -36.863
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    },
+    {
+      "label": "turn-east-tilt-up",
+      "magnetic_camera_azimuth": 90,
+      "camera_altitude": 55,
+      "readback": {
+        "acceleration": [
+          0.0,
+          5.62486,
+          -8.03314
+        ],
+        "magnetic-field": [
+          -50.0,
+          -11.4715,
+          16.383
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    },
+    {
+      "label": "manual-view-new-phone-pose",
+      "magnetic_camera_azimuth": 270,
+      "camera_altitude": 35,
+      "readback": {
+        "acceleration": [
+          0.0,
+          8.03314,
+          -5.62486
+        ],
+        "magnetic-field": [
+          50.0,
+          -16.383,
+          11.4715
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    },
+    {
+      "label": "phone-moved-while-hidden",
+      "magnetic_camera_azimuth": 180,
+      "camera_altitude": 60,
+      "readback": {
+        "acceleration": [
+          0.0,
+          4.90333,
+          -8.49281
+        ],
+        "magnetic-field": [
+          -0.0,
+          33.3013,
+          42.3205
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    },
+    {
+      "label": "pip-phone-moved",
+      "magnetic_camera_azimuth": 45,
+      "camera_altitude": 15,
+      "readback": {
+        "acceleration": [
+          0.0,
+          9.4725,
+          -2.53815
+        ],
+        "magnetic-field": [
+          -35.3553,
+          -28.4692,
+          -28.9743
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    }
+  ],
+  "observed_poses": [
+    {
+      "phase": "default-follow-and-north-up-pose",
+      "expected_magnetic_azimuth": 0,
+      "expected_altitude": 25,
+      "observed": {
+        "ui": {
+          "az": 5.0,
+          "alt": 25.0,
+          "text": "11:58:13 · Nord 5° · Blickhöhe 25°"
+        },
+        "telemetry": {
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 5.33,
+          "alt": 25.02,
+          "mode": "rotation_vector",
+          "log_line": "         1795262290.594  2204  2204 I SternfensterSensor: following=true listening=true fresh=true az=5.33 alt=25.02 mode=rotation_vector accuracy=3"
+        }
+      }
+    },
+    {
+      "phase": "changing-phone-direction-and-elevation",
+      "expected_magnetic_azimuth": 90,
+      "expected_altitude": 55,
+      "observed": {
+        "ui": {
+          "az": 95.0,
+          "alt": 55.0,
+          "text": "11:58:19 · Ost 95° · Blickhöhe 55°"
+        },
+        "telemetry": {
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 92.07,
+          "alt": 54.28,
+          "mode": "rotation_vector",
+          "log_line": "         1795262297.903  2204  2204 I SternfensterSensor: following=true listening=true fresh=true az=92.07 alt=54.28 mode=rotation_vector accuracy=3"
+        }
+      }
+    },
+    {
+      "phase": "zoom-preserves-follow-mode",
+      "expected_magnetic_azimuth": 90,
+      "expected_altitude": 55,
+      "observed": {
+        "ui": {
+          "az": 95.0,
+          "alt": 55.0,
+          "text": "11:58:31 · Ost 95° · Blickhöhe 55°"
+        },
+        "telemetry": {
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 95.29,
+          "alt": 55.02,
+          "mode": "rotation_vector",
+          "log_line": "         1795262309.271  2204  2204 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3"
+        }
+      }
+    },
+    {
+      "phase": "reenable-follow-and-display-rotation",
+      "expected_magnetic_azimuth": 270,
+      "expected_altitude": 35,
+      "observed": {
+        "ui": {
+          "az": 275.0,
+          "alt": 35.0,
+          "text": "11:59:07 · West 275° · Blickhöhe 35°"
+        },
+        "telemetry": {
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 275.31,
+          "alt": 35.02,
+          "mode": "rotation_vector",
+          "log_line": "         1795262345.361  2204  2204 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3"
+        }
+      }
+    },
+    {
+      "phase": "reenable-follow-and-display-rotation",
+      "expected_magnetic_azimuth": 270,
+      "expected_altitude": 35,
+      "observed": {
+        "ui": {
+          "az": 275.0,
+          "alt": 35.0,
+          "text": "11:59:13 · West 275° · Blickhöhe 35°"
+        },
+        "telemetry": {
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 275.31,
+          "alt": 35.02,
+          "mode": "rotation_vector",
+          "log_line": "         1795262351.435  2204  2204 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3"
+        }
+      }
+    },
+    {
+      "phase": "hidden-stops-sensors-and-resume-restarts",
+      "expected_magnetic_azimuth": 180,
+      "expected_altitude": 60,
+      "observed": {
+        "ui": {
+          "az": 185.0,
+          "alt": 60.0,
+          "text": "11:59:46 · Süd 185° · Blickhöhe 60°"
+        },
+        "telemetry": {
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 185.34,
+          "alt": 60.02,
+          "mode": "rotation_vector",
+          "log_line": "         1795262385.339  2204  2204 I SternfensterSensor: following=true listening=true fresh=true az=185.34 alt=60.02 mode=rotation_vector accuracy=3"
+        }
+      }
+    },
+    {
+      "phase": "sensor-follow-continues-in-pip-on-home",
+      "expected_magnetic_azimuth": 45,
+      "expected_altitude": 15,
+      "observed": {
+        "ui": {
+          "az": 50.76,
+          "alt": 15.06,
+          "source": "visible PiP sensor telemetry"
+        },
+        "telemetry": {
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 50.76,
+          "alt": 15.06,
+          "mode": "rotation_vector",
+          "log_line": "         1795262395.178  2204  2204 I SternfensterSensor: following=true listening=true fresh=true az=50.76 alt=15.06 mode=rotation_vector accuracy=3"
+        }
+      }
+    }
+  ],
+  "physical_compass_accuracy": "NOT_MEASURED",
+  "performance_status": "NOT_A_PERFORMANCE_BENCHMARK",
+  "sources": [
+    "https://developer.android.com/studio/run/emulator-console",
+    "https://developer.android.com/reference/android/hardware/SensorManager#getRotationMatrix(float[],%20float[],%20float[],%20float[])",
+    "https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android/android-emu/android/console.cpp"
+  ],
+  "apk_sha256": "1e28bb40e802309b1904cd194f22b42ff24388e9ad4c6306acc3b14b678b5a0e"
+}

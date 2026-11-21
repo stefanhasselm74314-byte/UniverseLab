@@ -1,0 +1,1210 @@
+{
+  "status": "overlay_integration_passed",
+  "checks": [
+    {
+      "name": "emulator-install-and-system-permission-setup",
+      "status": "passed",
+      "seconds": 4.95
+    },
+    {
+      "name": "compact-activity-map-space-menu-and-direction-preservation",
+      "status": "passed",
+      "seconds": 50.81
+    },
+    {
+      "name": "visible-main-button-starts-foreground-overlay",
+      "status": "passed",
+      "seconds": 17.63
+    },
+    {
+      "name": "header-drag-and-real-resize-handle",
+      "status": "passed",
+      "drag": {
+        "description": "Live-Fenster verschieben",
+        "from": [
+          351,
+          356
+        ],
+        "to": [
+          459,
+          764
+        ]
+      },
+      "resize": {
+        "description": "Live-Fenstergröße ändern",
+        "from": [
+          807,
+          1514
+        ],
+        "to": [
+          667,
+          1338
+        ]
+      },
+      "seconds": 17.46
+    },
+    {
+      "name": "drag-constrains-window-to-display",
+      "status": "passed",
+      "drag": {
+        "description": "Live-Fenster verschieben",
+        "from": [
+          383,
+          722
+        ],
+        "to": [
+          1078,
+          2398
+        ]
+      },
+      "seconds": 8.18
+    },
+    {
+      "name": "home-keeps-overlay-sensors-and-renderer-alive",
+      "status": "passed",
+      "seconds": 14.93
+    },
+    {
+      "name": "switching-to-ordinary-foreign-app-keeps-overlay-live",
+      "status": "passed",
+      "package": "com.android.chrome",
+      "resolved_component": "com.android.chrome/com.google.android.apps.chrome.Main",
+      "resumed_component": "com.android.chrome/org.chromium.chrome.browser.firstrun.FirstRunActivity",
+      "interaction": "Launcher activity only; unmodified welcome page; no web navigation",
+      "seconds": 16.57
+    },
+    {
+      "name": "removing-main-task-keeps-foreground-overlay-live",
+      "status": "passed",
+      "task_id": 8,
+      "before_pid": "2974",
+      "after_pid": "2974",
+      "method": "adb shell am stack remove observedTaskId; ActivityTaskManager.removeTask; not force-stop",
+      "seconds": 13.86
+    },
+    {
+      "name": "explicit-close-releases-service-sensors-and-frames",
+      "status": "passed",
+      "seconds": 9.04
+    },
+    {
+      "name": "reopen-preserves-position-and-size-without-auto-reopening",
+      "status": "passed",
+      "before": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "after": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "seconds": 17.06
+    },
+    {
+      "name": "no-sternfenster-crash-or-anr",
+      "status": "passed",
+      "seconds": 0.15
+    }
+  ],
+  "environment": {
+    "sdk": 35,
+    "release": "15",
+    "model": "sdk_gphone64_x86_64",
+    "renderer": "Android emulator with SwiftShader; not a physical-device benchmark",
+    "permission_setup": "SYSTEM_ALERT_WINDOW appops allow; POST_NOTIFICATIONS runtime grant",
+    "sensor_input": "Android emulator physical acceleration/magnetic-field/gyroscope overrides",
+    "display_condition": "interactive display; emulator power stay-on enabled for the observation",
+    "app_uid": 10210
+  },
+  "test": "Sternfenster movable overlay persistence integration",
+  "performance": {
+    "initial-overlay": {
+      "sample_count": 6,
+      "drawn_frames_in_reported_windows": 118,
+      "render_fps_min": 15.67,
+      "render_fps_median": 19.83,
+      "render_fps_weighted_mean": 19.102,
+      "render_fps_max": 20.99,
+      "maximum_reported_draw_p95_ms": 7.114,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "samples": [
+        {
+          "mode": "overlay",
+          "frames": 16,
+          "fps": 15.67,
+          "draw_p95_ms": 7.114,
+          "display_hz": 60.0,
+          "log_line": "         1795264193.228  2974  2974 I SternfensterPerf: mode=overlay frames=16 fps=15.67 draw_p95_ms=7.114 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 22,
+          "fps": 20.99,
+          "draw_p95_ms": 5.524,
+          "display_hz": 60.0,
+          "log_line": "         1795264194.276  2974  2974 I SternfensterPerf: mode=overlay frames=22 fps=20.99 draw_p95_ms=5.524 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 21,
+          "fps": 20.17,
+          "draw_p95_ms": 1.917,
+          "display_hz": 60.0,
+          "log_line": "         1795264195.318  2974  2974 I SternfensterPerf: mode=overlay frames=21 fps=20.17 draw_p95_ms=1.917 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 18,
+          "fps": 17.68,
+          "draw_p95_ms": 6.91,
+          "display_hz": 60.0,
+          "log_line": "         1795264196.336  2974  2974 I SternfensterPerf: mode=overlay frames=18 fps=17.68 draw_p95_ms=6.910 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 20,
+          "fps": 19.49,
+          "draw_p95_ms": 3.666,
+          "display_hz": 60.0,
+          "log_line": "         1795264197.362  2974  2974 I SternfensterPerf: mode=overlay frames=20 fps=19.49 draw_p95_ms=3.666 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 21,
+          "fps": 20.53,
+          "draw_p95_ms": 3.739,
+          "display_hz": 60.0,
+          "log_line": "         1795264198.385  2974  2974 I SternfensterPerf: mode=overlay frames=21 fps=20.53 draw_p95_ms=3.739 hz=60.0 pan=false"
+        }
+      ],
+      "requested_observation_seconds": 6,
+      "workload": "visible overlay with live clock and enabled physical-sensor following",
+      "android_gfxinfo_total_frames": 123
+    },
+    "home-overlay": {
+      "sample_count": 6,
+      "drawn_frames_in_reported_windows": 118,
+      "render_fps_min": 18.51,
+      "render_fps_median": 18.9,
+      "render_fps_weighted_mean": 19.129,
+      "render_fps_max": 20.34,
+      "maximum_reported_draw_p95_ms": 14.638,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "samples": [
+        {
+          "mode": "overlay",
+          "frames": 20,
+          "fps": 19.15,
+          "draw_p95_ms": 5.286,
+          "display_hz": 60.0,
+          "log_line": "         1795264232.421  2974  2974 I SternfensterPerf: mode=overlay frames=20 fps=19.15 draw_p95_ms=5.286 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 21,
+          "fps": 20.34,
+          "draw_p95_ms": 4.926,
+          "display_hz": 60.0,
+          "log_line": "         1795264233.453  2974  2974 I SternfensterPerf: mode=overlay frames=21 fps=20.34 draw_p95_ms=4.926 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 20,
+          "fps": 19.52,
+          "draw_p95_ms": 2.886,
+          "display_hz": 60.0,
+          "log_line": "         1795264234.478  2974  2974 I SternfensterPerf: mode=overlay frames=20 fps=19.52 draw_p95_ms=2.886 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 19,
+          "fps": 18.59,
+          "draw_p95_ms": 11.02,
+          "display_hz": 60.0,
+          "log_line": "         1795264235.500  2974  2974 I SternfensterPerf: mode=overlay frames=19 fps=18.59 draw_p95_ms=11.020 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 19,
+          "fps": 18.51,
+          "draw_p95_ms": 3.557,
+          "display_hz": 60.0,
+          "log_line": "         1795264236.527  2974  2974 I SternfensterPerf: mode=overlay frames=19 fps=18.51 draw_p95_ms=3.557 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 19,
+          "fps": 18.65,
+          "draw_p95_ms": 14.638,
+          "display_hz": 60.0,
+          "log_line": "         1795264237.545  2974  2974 I SternfensterPerf: mode=overlay frames=19 fps=18.65 draw_p95_ms=14.638 hz=60.0 pan=false"
+        }
+      ],
+      "requested_observation_seconds": 6,
+      "workload": "visible overlay with live clock and enabled physical-sensor following",
+      "android_gfxinfo_total_frames": 121
+    },
+    "foreign-app-overlay": {
+      "sample_count": 6,
+      "drawn_frames_in_reported_windows": 170,
+      "render_fps_min": 24.33,
+      "render_fps_median": 28.345,
+      "render_fps_weighted_mean": 27.825,
+      "render_fps_max": 29.85,
+      "maximum_reported_draw_p95_ms": 4.409,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "samples": [
+        {
+          "mode": "overlay",
+          "frames": 28,
+          "fps": 27.03,
+          "draw_p95_ms": 1.47,
+          "display_hz": 60.0,
+          "log_line": "         1795264250.209  2974  2974 I SternfensterPerf: mode=overlay frames=28 fps=27.03 draw_p95_ms=1.470 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 30,
+          "fps": 29.85,
+          "draw_p95_ms": 1.869,
+          "display_hz": 60.0,
+          "log_line": "         1795264251.214  2974  2974 I SternfensterPerf: mode=overlay frames=30 fps=29.85 draw_p95_ms=1.869 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 30,
+          "fps": 29.66,
+          "draw_p95_ms": 4.409,
+          "display_hz": 60.0,
+          "log_line": "         1795264252.226  2974  2974 I SternfensterPerf: mode=overlay frames=30 fps=29.66 draw_p95_ms=4.409 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 30,
+          "fps": 29.85,
+          "draw_p95_ms": 0.617,
+          "display_hz": 60.0,
+          "log_line": "         1795264253.230  2974  2974 I SternfensterPerf: mode=overlay frames=30 fps=29.85 draw_p95_ms=0.617 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 27,
+          "fps": 26.35,
+          "draw_p95_ms": 0.98,
+          "display_hz": 60.0,
+          "log_line": "         1795264254.255  2974  2974 I SternfensterPerf: mode=overlay frames=27 fps=26.35 draw_p95_ms=0.980 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 25,
+          "fps": 24.33,
+          "draw_p95_ms": 2.659,
+          "display_hz": 60.0,
+          "log_line": "         1795264255.283  2974  2974 I SternfensterPerf: mode=overlay frames=25 fps=24.33 draw_p95_ms=2.659 hz=60.0 pan=false"
+        }
+      ],
+      "requested_observation_seconds": 6,
+      "workload": "visible overlay with live clock and enabled physical-sensor following",
+      "android_gfxinfo_total_frames": 175
+    },
+    "task-removed-overlay": {
+      "sample_count": 6,
+      "drawn_frames_in_reported_windows": 174,
+      "render_fps_min": 26.92,
+      "render_fps_median": 27.985,
+      "render_fps_weighted_mean": 28.21,
+      "render_fps_max": 29.69,
+      "maximum_reported_draw_p95_ms": 1.963,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "samples": [
+        {
+          "mode": "overlay",
+          "frames": 28,
+          "fps": 26.92,
+          "draw_p95_ms": 1.424,
+          "display_hz": 60.0,
+          "log_line": "         1795264263.482  2974  2974 I SternfensterPerf: mode=overlay frames=28 fps=26.92 draw_p95_ms=1.424 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 28,
+          "fps": 27.51,
+          "draw_p95_ms": 0.684,
+          "display_hz": 60.0,
+          "log_line": "         1795264264.507  2974  2974 I SternfensterPerf: mode=overlay frames=28 fps=27.51 draw_p95_ms=0.684 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 29,
+          "fps": 27.74,
+          "draw_p95_ms": 1.864,
+          "display_hz": 60.0,
+          "log_line": "         1795264265.545  2974  2974 I SternfensterPerf: mode=overlay frames=29 fps=27.74 draw_p95_ms=1.864 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 30,
+          "fps": 29.69,
+          "draw_p95_ms": 0.667,
+          "display_hz": 60.0,
+          "log_line": "         1795264266.556  2974  2974 I SternfensterPerf: mode=overlay frames=30 fps=29.69 draw_p95_ms=0.667 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 29,
+          "fps": 28.23,
+          "draw_p95_ms": 0.773,
+          "display_hz": 60.0,
+          "log_line": "         1795264267.583  2974  2974 I SternfensterPerf: mode=overlay frames=29 fps=28.23 draw_p95_ms=0.773 hz=60.0 pan=false"
+        },
+        {
+          "mode": "overlay",
+          "frames": 30,
+          "fps": 29.21,
+          "draw_p95_ms": 1.963,
+          "display_hz": 60.0,
+          "log_line": "         1795264268.610  2974  2974 I SternfensterPerf: mode=overlay frames=30 fps=29.21 draw_p95_ms=1.963 hz=60.0 pan=false"
+        }
+      ],
+      "requested_observation_seconds": 6,
+      "workload": "visible overlay with live clock and enabled physical-sensor following",
+      "android_gfxinfo_total_frames": 179
+    }
+  },
+  "user_device_test": "NOT_PERFORMED",
+  "minimum_60_fps_guarantee": "NOT_ESTABLISHED",
+  "sensor_inputs": [
+    {
+      "label": "compact-activity-initial-north",
+      "magnetic_camera_azimuth": 0,
+      "camera_altitude": 25,
+      "readback": {
+        "acceleration": [
+          0.0,
+          8.88784,
+          -4.14447
+        ],
+        "magnetic-field": [
+          -0.0,
+          -39.2571,
+          -36.863
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    },
+    {
+      "label": "overlay-initial-north",
+      "magnetic_camera_azimuth": 0,
+      "camera_altitude": 25,
+      "readback": {
+        "acceleration": [
+          0.0,
+          8.88784,
+          -4.14447
+        ],
+        "magnetic-field": [
+          -0.0,
+          -39.2571,
+          -36.863
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    },
+    {
+      "label": "overlay-home-east",
+      "magnetic_camera_azimuth": 90,
+      "camera_altitude": 55,
+      "readback": {
+        "acceleration": [
+          0.0,
+          5.62486,
+          -8.03314
+        ],
+        "magnetic-field": [
+          -50.0,
+          -11.4715,
+          16.383
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    },
+    {
+      "label": "overlay-foreign-app-west",
+      "magnetic_camera_azimuth": 270,
+      "camera_altitude": 35,
+      "readback": {
+        "acceleration": [
+          0.0,
+          8.03314,
+          -5.62486
+        ],
+        "magnetic-field": [
+          50.0,
+          -16.383,
+          11.4715
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    },
+    {
+      "label": "overlay-main-task-removed",
+      "magnetic_camera_azimuth": 45,
+      "camera_altitude": 15,
+      "readback": {
+        "acceleration": [
+          0.0,
+          9.4725,
+          -2.53815
+        ],
+        "magnetic-field": [
+          -35.3553,
+          -28.4692,
+          -28.9743
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    },
+    {
+      "label": "overlay-reopened-south",
+      "magnetic_camera_azimuth": 180,
+      "camera_altitude": 40,
+      "readback": {
+        "acceleration": [
+          0.0,
+          7.51233,
+          -6.30359
+        ],
+        "magnetic-field": [
+          -0.0,
+          16.8185,
+          51.158
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    }
+  ],
+  "observed_poses": [
+    {
+      "phase": "visible-main-button-starts-foreground-overlay",
+      "expected_magnetic_azimuth": 0,
+      "expected_altitude": 25,
+      "observed": {
+        "ui": {
+          "az": 5.34,
+          "alt": 25.02,
+          "source": "visible overlay sensor telemetry"
+        },
+        "telemetry": {
+          "mode": "overlay",
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 5.34,
+          "alt": 25.02,
+          "log_line": "         1795264189.197  2974  2974 I SternfensterSensor: mode=overlay following=true listening=true fresh=true az=5.34 alt=25.02 source=rotation_vector accuracy=3"
+        }
+      }
+    },
+    {
+      "phase": "home-keeps-overlay-sensors-and-renderer-alive",
+      "expected_magnetic_azimuth": 90,
+      "expected_altitude": 55,
+      "observed": {
+        "ui": {
+          "az": 95.13,
+          "alt": 54.99,
+          "source": "visible overlay sensor telemetry"
+        },
+        "telemetry": {
+          "mode": "overlay",
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 95.13,
+          "alt": 54.99,
+          "log_line": "         1795264229.464  2974  2974 I SternfensterSensor: mode=overlay following=true listening=true fresh=true az=95.13 alt=54.99 source=rotation_vector accuracy=3"
+        }
+      }
+    },
+    {
+      "phase": "switching-to-ordinary-foreign-app-keeps-overlay-live",
+      "expected_magnetic_azimuth": 270,
+      "expected_altitude": 35,
+      "observed": {
+        "ui": {
+          "az": 277.56,
+          "alt": 35.02,
+          "source": "visible overlay sensor telemetry"
+        },
+        "telemetry": {
+          "mode": "overlay",
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 277.56,
+          "alt": 35.02,
+          "log_line": "         1795264247.144  2974  2974 I SternfensterSensor: mode=overlay following=true listening=true fresh=true az=277.56 alt=35.02 source=rotation_vector accuracy=3"
+        }
+      }
+    },
+    {
+      "phase": "removing-main-task-keeps-foreground-overlay-live",
+      "expected_magnetic_azimuth": 45,
+      "expected_altitude": 15,
+      "observed": {
+        "ui": {
+          "az": 48.54,
+          "alt": 15.09,
+          "source": "visible overlay sensor telemetry"
+        },
+        "telemetry": {
+          "mode": "overlay",
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 48.54,
+          "alt": 15.09,
+          "log_line": "         1795264260.449  2974  2974 I SternfensterSensor: mode=overlay following=true listening=true fresh=true az=48.54 alt=15.09 source=rotation_vector accuracy=3"
+        }
+      }
+    },
+    {
+      "phase": "reopen-preserves-position-and-size-without-auto-reopening",
+      "expected_magnetic_azimuth": 180,
+      "expected_altitude": 40,
+      "observed": {
+        "ui": {
+          "az": 184.12,
+          "alt": 39.92,
+          "source": "visible overlay sensor telemetry"
+        },
+        "telemetry": {
+          "mode": "overlay",
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 184.12,
+          "alt": 39.92,
+          "log_line": "         1795264286.341  2974  2974 I SternfensterSensor: mode=overlay following=true listening=true fresh=true az=184.12 alt=39.92 source=rotation_vector accuracy=3"
+        }
+      }
+    }
+  ],
+  "physical_compass_accuracy": "NOT_MEASURED",
+  "performance_status": "RENDER_COUNTER_OBSERVATIONS_ONLY_NOT_PRESENTED_FPS",
+  "sources": [
+    "https://developer.android.com/studio/run/emulator-console",
+    "https://developer.android.com/reference/android/hardware/SensorManager#getRotationMatrix(float[],%20float[],%20float[],%20float[])",
+    "https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android/android-emu/android/console.cpp",
+    "https://developer.android.com/reference/android/app/UiAutomation#getWindows()",
+    "https://developer.android.com/reference/android/view/WindowManager.LayoutParams#TYPE_APPLICATION_OVERLAY",
+    "https://android.googlesource.com/platform/frameworks/base/+/21f8b0e94160bb3615a569cc454c5c7ffc12221d/services/core/java/com/android/server/am/ActivityManagerShellCommand.java"
+  ],
+  "overlay_observations": [
+    {
+      "phase": "visible-main-button-starts-foreground-overlay",
+      "label": "overlay-started",
+      "bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "wm_bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "238",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": true,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "visible-main-button-starts-foreground-overlay",
+      "label": "visible-main-button-starts-foreground-overlay-pose",
+      "bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "wm_bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "249",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "header-drag-and-real-resize-handle",
+      "label": "before-drag",
+      "bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "wm_bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "260",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": true,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "header-drag-and-real-resize-handle",
+      "label": "overlay-dragged-and-resized",
+      "bounds": [
+        136,
+        659,
+        741,
+        1419
+      ],
+      "wm_bounds": [
+        136,
+        659,
+        741,
+        1419
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "316",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": true,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "drag-constrains-window-to-display",
+      "label": "before-boundary-drag",
+      "bounds": [
+        136,
+        659,
+        741,
+        1419
+      ],
+      "wm_bounds": [
+        136,
+        659,
+        741,
+        1419
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "327",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": true,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "drag-constrains-window-to-display",
+      "label": "overlay-at-display-boundary",
+      "bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "343",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": true,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "home-keeps-overlay-sensors-and-renderer-alive",
+      "label": "home-keeps-overlay-sensors-and-renderer-alive-pose",
+      "bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "360",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "switching-to-ordinary-foreign-app-keeps-overlay-live",
+      "label": "switching-to-ordinary-foreign-app-keeps-overlay-live-pose",
+      "bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "371",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "removing-main-task-keeps-foreground-overlay-live",
+      "label": "removing-main-task-keeps-foreground-overlay-live-pose",
+      "bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": null,
+      "window_id": null,
+      "accessibility_overlay_present": false,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "removing-main-task-keeps-foreground-overlay-live",
+      "label": "overlay-after-main-task-removal",
+      "bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": null,
+      "window_id": null,
+      "accessibility_overlay_present": false,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "explicit-close-releases-service-sensors-and-frames",
+      "label": "first-explicit-close-before-close",
+      "bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": null,
+      "window_id": null,
+      "accessibility_overlay_present": false,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "reopen-preserves-position-and-size-without-auto-reopening",
+      "label": "overlay-reopened",
+      "bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "439",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": true,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "reopen-preserves-position-and-size-without-auto-reopening",
+      "label": "reopen-preserves-position-and-size-without-auto-reopening-pose",
+      "bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "451",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "reopen-preserves-position-and-size-without-auto-reopening",
+      "label": "final-explicit-close-before-close",
+      "bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "463",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    }
+  ],
+  "task_removals": [
+    {
+      "task_id": 8,
+      "before_pid": "2974",
+      "after_pid": "2974",
+      "method": "adb shell am stack remove observedTaskId; ActivityTaskManager.removeTask; not force-stop"
+    }
+  ],
+  "functional_status": "PASSED",
+  "process_death_survival": "NOT_TESTED",
+  "samsung_multiwindow_behavior": "NOT_TESTED",
+  "observation_limits": [
+    "On this API35 emulator, UiAutomation sometimes omits the visible nonfocusable overlay, especially over the launcher. Persistence requires the app-owned visible WindowManager surface plus sensor/frame telemetry. Start, drag and resize still require accessibility controls.",
+    "Android Settings intentionally hides non-system overlays through HideNonSystemOverlayMixin. The ordinary foreign-task test therefore uses the installed Chrome launcher activity; protected Settings screens are not used as a positive overlay-visibility target."
+  ],
+  "apk_sha256": "6e0c8f7d3ef8c14ab9b86737740f9d0d9799e6b736e459a8792b6f3cced145a7",
+  "emulator_recoveries": [
+    {
+      "phase": "compact-activity-map-space-menu-and-direction-preservation",
+      "dialog_title": "Pixel Launcher isn't responding",
+      "action": "Close app",
+      "button_bounds": "[70,1170][1010,1296]",
+      "evidence_prefix": "pixel-launcher-anr-1"
+    }
+  ],
+  "compact_activity": {
+    "method": "Android shell wm size; compact display configuration, not Samsung split-screen",
+    "original_size": [
+      1080,
+      2400
+    ],
+    "requested_size": [
+      1080,
+      1296
+    ],
+    "restore_argument": "reset",
+    "sky_bounds": [
+      0,
+      254,
+      1080,
+      1233
+    ],
+    "window_bounds": [
+      0,
+      0,
+      1080,
+      1296
+    ],
+    "sky_fraction_of_window_height": 0.7554,
+    "minimum_required_fraction": 0.6,
+    "menu_bounds": [
+      943,
+      74,
+      1059,
+      190
+    ],
+    "compact_controls_observed": true,
+    "popup_item_tap": {
+      "label": "O · Osten",
+      "description": "Nach Osten blicken",
+      "bounds": [
+        504,
+        379,
+        1080,
+        505
+      ],
+      "method": "physical tap on enabled row in focused Popup Window/ListView; state checked afterwards"
+    },
+    "direction_preserved_after_restore": "Ost 90°, Blickhöhe 42°"
+  },
+  "foreign_app": {
+    "name": "switching-to-ordinary-foreign-app-keeps-overlay-live",
+    "status": "running",
+    "package": "com.android.chrome",
+    "resolved_component": "com.android.chrome/com.google.android.apps.chrome.Main",
+    "resumed_component": "com.android.chrome/org.chromium.chrome.browser.firstrun.FirstRunActivity",
+    "interaction": "Launcher activity only; unmodified welcome page; no web navigation"
+  },
+  "close_actions": [
+    {
+      "phase": "explicit-close-releases-service-sensors-and-frames",
+      "label": "first-explicit-close",
+      "source": "previously observed enabled close button, unchanged size, translated to current visible WindowManager frame",
+      "point": [
+        1001,
+        1627
+      ],
+      "current_wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "previous_accessibility_geometry": {
+        "window_bounds": [
+          462,
+          1564,
+          1067,
+          2324
+        ],
+        "control_bounds": [
+          946,
+          1575,
+          1056,
+          1680
+        ],
+        "phase": "drag-constrains-window-to-display",
+        "label": "overlay-at-display-boundary",
+        "enabled": true,
+        "clickable": true
+      }
+    },
+    {
+      "phase": "reopen-preserves-position-and-size-without-auto-reopening",
+      "label": "final-explicit-close",
+      "source": "current enabled accessibility close button and visible WindowManager frame",
+      "point": [
+        1001,
+        1627
+      ],
+      "current_wm_bounds": [
+        462,
+        1564,
+        1067,
+        2324
+      ],
+      "previous_accessibility_geometry": null
+    }
+  ]
+}

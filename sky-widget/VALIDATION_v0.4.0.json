@@ -1,0 +1,539 @@
+{
+  "release": "0.4.0",
+  "version_code": 6,
+  "application_id": "de.universelab.sternfenster",
+  "code_commit": "b0b70dc79289c53231373635e03b56e3f2557100",
+  "status": "functional_validation_passed",
+  "source_sha256": {
+    "sky-widget/README.md": "df88207472d10bced7e8695f6978a8a8626fd68427d4d80033887dab2ce3da79",
+    "sky-widget/app/build.gradle": "2eeaf8d14ba5c94765e76f7df00b628f1545c51664552d0d09981dbaeb75fccc",
+    "sky-widget/app/src/main/AndroidManifest.xml": "8c3ee6c921510e2c954a40f2ae98702df607e062157b7ec793fff60efbf858bc",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/MainActivity.java": "ee7b7019005a2e95e2bfbeff84cd9f0081f395dfe21674d8c538588a0a77cc90",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/SkyActivity.java": "92e4849fa7633c125ffaeab1ab218eeb90a1787278cfb5aa62e6631c486f2633",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/OverlaySetupActivity.java": "3884e17656738556a35cbba06058186aafd0bd814d3ff25bd97e1f42f5d59bd4",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/FloatingSkyService.java": "99bb3935068cc3414d7292f5d074aa4aceb91105fe24d301b3d35600ba76cf5a",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/OverlaySkyView.java": "51a515bef29aab576494cd5cf09edf7ee6d9a618eeb84382c1daa8ba93e73e0b",
+    "sky-widget/tools/runtime_overlay.py": "474a13c9d2ce738921b272b7867057e180996888b21e11f9a309b14171c0d6cc",
+    "sky-widget/tools/ui_probe/SnapshotInstrumentation.java": "a990f9d185a46d657b933b5ee15b9ad29aee64a4ed1e5e984823b75ca1a8cf6d",
+    ".github/workflows/2026-11-21_sternfenster_overlay_v040.yml": "c898a9d440bf8c8ecd66e6e001f1716daf1b9f6ee925769f151c360c3db1dbf3",
+    ".github/workflows/2026-11-21_sternfenster_live60_v030.yml": "fe27e25ad6e0aa65c7189b3c03471ac78cd82d89af020aac61e2a01b3a74842a",
+    ".github/workflows/2026-11-21_sternfenster_native_v020_build.yml": "1025dfd06ef4b0ecd7933995f84c35096a99cc8d068fd0b9ddf0d05f7864c671"
+  },
+  "build": {
+    "min_sdk": 26,
+    "target_sdk": 36,
+    "compile_sdk": 36,
+    "build_tools": "36.0.0",
+    "java_source": 17,
+    "certificate_sha256": "88ea977a6afba06d2211611bde63fc496ee6c2f3d2e5c8027f1c2a444ffd8180",
+    "ci_signing": "Disposable CI key; the private retained release key is not sent to CI. CI and delivered APK are distinct builds from the same app sources.",
+    "application_sources_unchanged_after_final_build": true
+  },
+  "requirements": {
+    "independent_window": "User-started TYPE_APPLICATION_OVERLAY owned by a specialUse foreground service; drag header and resize grip.",
+    "main_task_removal": "stopWithTask=false; onTaskRemoved persists state without stopping window.",
+    "close": "Explicit close clears user-active state, removes window/notification, stops Choreographer and sensor listeners.",
+    "compact_task_view": "Below 550 dp usable height, below 330 dp width, or landscape: controls move to menu; camera and time remain unchanged.",
+    "os_control": "Force-stop, user stopping active apps, memory pressure and system overlay hiding remain possible and are not bypassed.",
+    "screen_off": "Code pauses rendering/sensors while screen off or keyguard locked; no wake lock.",
+    "performance": "Vsync-driven rendering requesting at least 60 Hz / best equal-resolution display mode; actual onDraw rate reported separately."
+  },
+  "user_recording_review": {
+    "observation": "Native PiP already transitions into Samsung split screen; old large controls compress the map to a narrow strip.",
+    "disappearance_cause": "No spontaneous close or crash conclusively established from this recording.",
+    "physical_device_test_of_v040": "NOT_PERFORMED",
+    "video_privacy": "User recording and personal screenshots not included in repository."
+  },
+  "runtime_runs": {
+    "overlay": {
+      "run_id": 44903940891,
+      "job_id": 136845443769,
+      "artifact_id": 14707546053,
+      "status": "success",
+      "commit": "b0b70dc79289c53231373635e03b56e3f2557100",
+      "checks_passed": 11,
+      "raw_report": "validation/v0.4.0/overlay-report.json",
+      "raw_report_sha256": "442775a349be155c32807015fde01dadcf67b26751de0ae4feda0060bbf19240",
+      "tested_ci_apk_sha256": "6e0c8f7d3ef8c14ab9b86737740f9d0d9799e6b736e459a8792b6f3cced145a7",
+      "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44903940891"
+    },
+    "orientation": {
+      "run_id": 44901412846,
+      "job_id": 136837908984,
+      "artifact_id": 14705359082,
+      "status": "success",
+      "commit": "fdb4f7e7d45fca20a0b8289556699ddb984066f0",
+      "checks_passed": 10,
+      "raw_report": "validation/v0.4.0/orientation-report.json",
+      "raw_report_sha256": "23f0570133840496cd7eb45a9b3abaa36b2d3858f8c5edbfca64c3486355c4c6",
+      "tested_ci_apk_sha256": "1e28bb40e802309b1904cd194f22b42ff24388e9ad4c6306acc3b14b678b5a0e",
+      "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44901412846"
+    },
+    "live_pip": {
+      "run_id": 44901412891,
+      "job_id": 136837909197,
+      "artifact_id": 14706515756,
+      "status": "success",
+      "commit": "fdb4f7e7d45fca20a0b8289556699ddb984066f0",
+      "checks_passed": 7,
+      "raw_report": "validation/v0.4.0/live-pip-report.json",
+      "raw_report_sha256": "f2b6e805556159a53c00a35b9b90b409651cb53d2fd10c5dd684e2eb62ef3884",
+      "tested_ci_apk_sha256": "378e34a706c74f203b0b24bddcce02f89a2172370d9acd4160b9603e2041aaba",
+      "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44901412891"
+    },
+    "unsigned_build": {
+      "run_id": 44901412826,
+      "status": "success",
+      "commit": "fdb4f7e7d45fca20a0b8289556699ddb984066f0"
+    }
+  },
+  "application_source_commit": "fdb4f7e7d45fca20a0b8289556699ddb984066f0",
+  "apk": {
+    "filename": "Sternfenster_Android_v0.4.0.apk",
+    "bytes": 279288,
+    "sha256": "fa9d9691d6fe7da567665b8fe9ed590e1095309346b45abae6120e0c4b37ac20",
+    "signature_verification": "v2 and v3 signatures verified; retained release certificate matches v0.2.0 onward"
+  },
+  "harness_corrections": [
+    {
+      "run_id": 44900918234,
+      "issue": "Native PopupMenu adapter row was enabled and visible but reported clickable=false.",
+      "correction": "Tap only the identified focused PopupWindow adapter row, then retain the resulting Ost 90°/42° direction assertion."
+    },
+    {
+      "run_id": 44901412862,
+      "issue": "The first all-window accessibility list sometimes contained only the status bar.",
+      "correction": "Use the existing five-second availability budget to wait for a focused/active visible root. Default probe mode unchanged."
+    },
+    {
+      "run_id": 44901858678,
+      "issue": "An extra unguarded snapshot after successful UI/WindowManager verification temporarily omitted a live overlay.",
+      "correction": "Return the successful observation from the existing poll. No change to timeout, geometry, sensor, lifecycle or performance criteria.",
+      "confirmed_before_failure": [
+        "compact layout",
+        "menu action and direction restore",
+        "foreground overlay start",
+        "sensor following",
+        "drag and resize"
+      ],
+      "underlying_overlay_remained_running": true
+    },
+    {
+      "run_id": 44902397527,
+      "issue": "Non-focused overlay over Home was omitted from accessibility while the actual WindowManager surface, service, sensors and rendering continued.",
+      "correction": "Require strict owned TYPE_APPLICATION_OVERLAY surface visibility/drawn state and display bounds. Preserve semantic accessibility requirements for initial start/drag/resize. Explicit close can use previously observed enabled X geometry only at unchanged window dimensions with a freshly verified window frame. Negative fixtures for hidden surface, wrong owner and changed size were rejected.",
+      "checks_passed_before_failure": 5
+    },
+    {
+      "run_id": 44903530347,
+      "issue": "Android 15 SettingsHomepageActivity deliberately hides non-system overlays. WindowManager recorded mForceHideNonSystemOverlayWindow=true, mPolicyVisibility=false, shown=false and isVisible=false while the window and foreground service still existed.",
+      "correction": "Use the installed Chrome launcher activity as the positive ordinary-foreign-app visibility fixture. Retain the same surface, lifecycle, sensor and performance assertions. Document the protected-window limit; no system protection was bypassed.",
+      "checks_passed_before_failure": 6
+    },
+    {
+      "run_id": 44903940891,
+      "result": "All eleven overlay integration checks passed. No subsequent app changes or runtime test changes."
+    }
+  ],
+  "limits": {
+    "physical_samsung_v040": "NOT_PERFORMED",
+    "samsung_split_screen_ui": "User recording established pre-existing docking; new compact layout is tested with wm size, not a Samsung emulator.",
+    "minimum_60_presented_fps": "NOT_ESTABLISHED; emulator functional success is separate from its measured render performance.",
+    "permission_grant_ui": "Static flow/API review; CI grants overlay and notifications for deterministic setup.",
+    "process_kill_recovery": "START_STICKY best effort is implemented; process-death restoration not tested.",
+    "legacy_android_26_29": "Side navigation correction compiled and statically reviewed; no API 26–29 runtime run.",
+    "screen_lock_pause": "Lifecycle implementation reviewed; no additional dedicated screen-lock runtime check.",
+    "test_duration": "Short deterministic integration observations, not a long-duration endurance test. Continued motion/frame collection was six seconds per overlay phase; explicit close was followed by six seconds of quiet observation.",
+    "actual_foreign_task_embedding": "Overlay sits above apps and is not embedded in another app’s task. Native SkyActivity remains the path for Samsung split-screen/pop-up docking."
+  },
+  "application_file_sha256": {
+    "app/build.gradle": "2eeaf8d14ba5c94765e76f7df00b628f1545c51664552d0d09981dbaeb75fccc",
+    "app/src/main/AndroidManifest.xml": "8c3ee6c921510e2c954a40f2ae98702df607e062157b7ec793fff60efbf858bc",
+    "app/src/main/assets/stars.csv": "8b36f9e06f7ab275506213cb6ed61ea75570dbfb19725c31ca189fee9196133b",
+    "app/src/main/java/de/universelab/sternfenster/DeviceOrientationMath.java": "0945dfb8d92f4cc334ffa0469749a0dcbcd0f9308cd136c4af02dee20ec63100",
+    "app/src/main/java/de/universelab/sternfenster/DeviceOrientationTracker.java": "2e9f1b533391af343b2855c77efb82f47e2dff95f0d311005d908fd0e88cc029",
+    "app/src/main/java/de/universelab/sternfenster/FloatingSkyService.java": "99bb3935068cc3414d7292f5d074aa4aceb91105fe24d301b3d35600ba76cf5a",
+    "app/src/main/java/de/universelab/sternfenster/LiveSkyRenderer.java": "7ae5ad959d702aa56248be125a08cd9212c1ec6a646a4785225885fd5a3af45b",
+    "app/src/main/java/de/universelab/sternfenster/MainActivity.java": "ee7b7019005a2e95e2bfbeff84cd9f0081f395dfe21674d8c538588a0a77cc90",
+    "app/src/main/java/de/universelab/sternfenster/OverlaySetupActivity.java": "3884e17656738556a35cbba06058186aafd0bd814d3ff25bd97e1f42f5d59bd4",
+    "app/src/main/java/de/universelab/sternfenster/OverlaySkyView.java": "51a515bef29aab576494cd5cf09edf7ee6d9a618eeb84382c1daa8ba93e73e0b",
+    "app/src/main/java/de/universelab/sternfenster/SkyActivity.java": "92e4849fa7633c125ffaeab1ab218eeb90a1787278cfb5aa62e6631c486f2633",
+    "app/src/main/java/de/universelab/sternfenster/SkyMath.java": "cffe45cbfe3f8ff9e45367b53432e50ab8e50726f974d48609415011dd8e31c0",
+    "app/src/main/java/de/universelab/sternfenster/SkyProjection.java": "f0c2fb3ad7be3dab0d040f3d05e5c4923100f93d4b636d15a0026e9af2835e17",
+    "app/src/main/java/de/universelab/sternfenster/SkyRenderer.java": "40ab1f59c3d147f51a19176841ff330db6af1b8bdaa894d8c75b371701f9e372",
+    "app/src/main/java/de/universelab/sternfenster/SkyWidgetProvider.java": "3b9ff0d036379f7d2af7962d5faee95ac99c335cc7f47bede60887d290ec9cd6",
+    "app/src/main/java/de/universelab/sternfenster/StarCatalog.java": "cbf5931da9a1f9ba75f43dcd3f053040e982f939c18acd75ebd2c9a82fc2d624",
+    "app/src/main/java/de/universelab/sternfenster/Ui.java": "e03b31a9e13a2bcb5eb3de47dd1bda03d54b1a3a11ee123f0b8c85715992a066",
+    "app/src/main/res/drawable/app_icon.xml": "2ffe85a976343f1ed2335dbf127b6300c266992a825b139a35506bc31780aa92",
+    "app/src/main/res/drawable/widget_background.xml": "d50d6d36e4eebfaae5c1ccf448d3a8e4fb0e1627a07d07d8a42055146a143e1c",
+    "app/src/main/res/layout/widget_sky.xml": "0f5c8c312e287d5649ce665d812a90701a92ad5f89a80eb7da8d235052744d70",
+    "app/src/main/res/xml/sky_widget_info.xml": "4563484a9a7a4b790618403c0446bfe1f7d92cfad0d0233f539829b6689b7523"
+  },
+  "validation_date": "2026-11-21",
+  "functional_evidence": {
+    "overlay_checks": [
+      {
+        "name": "emulator-install-and-system-permission-setup",
+        "status": "passed",
+        "seconds": 4.95
+      },
+      {
+        "name": "compact-activity-map-space-menu-and-direction-preservation",
+        "status": "passed",
+        "seconds": 50.81
+      },
+      {
+        "name": "visible-main-button-starts-foreground-overlay",
+        "status": "passed",
+        "seconds": 17.63
+      },
+      {
+        "name": "header-drag-and-real-resize-handle",
+        "status": "passed",
+        "drag": {
+          "description": "Live-Fenster verschieben",
+          "from": [
+            351,
+            356
+          ],
+          "to": [
+            459,
+            764
+          ]
+        },
+        "resize": {
+          "description": "Live-Fenstergröße ändern",
+          "from": [
+            807,
+            1514
+          ],
+          "to": [
+            667,
+            1338
+          ]
+        },
+        "seconds": 17.46
+      },
+      {
+        "name": "drag-constrains-window-to-display",
+        "status": "passed",
+        "drag": {
+          "description": "Live-Fenster verschieben",
+          "from": [
+            383,
+            722
+          ],
+          "to": [
+            1078,
+            2398
+          ]
+        },
+        "seconds": 8.18
+      },
+      {
+        "name": "home-keeps-overlay-sensors-and-renderer-alive",
+        "status": "passed",
+        "seconds": 14.93
+      },
+      {
+        "name": "switching-to-ordinary-foreign-app-keeps-overlay-live",
+        "status": "passed",
+        "package": "com.android.chrome",
+        "resolved_component": "com.android.chrome/com.google.android.apps.chrome.Main",
+        "resumed_component": "com.android.chrome/org.chromium.chrome.browser.firstrun.FirstRunActivity",
+        "interaction": "Launcher activity only; unmodified welcome page; no web navigation",
+        "seconds": 16.57
+      },
+      {
+        "name": "removing-main-task-keeps-foreground-overlay-live",
+        "status": "passed",
+        "task_id": 8,
+        "before_pid": "2974",
+        "after_pid": "2974",
+        "method": "adb shell am stack remove observedTaskId; ActivityTaskManager.removeTask; not force-stop",
+        "seconds": 13.86
+      },
+      {
+        "name": "explicit-close-releases-service-sensors-and-frames",
+        "status": "passed",
+        "seconds": 9.04
+      },
+      {
+        "name": "reopen-preserves-position-and-size-without-auto-reopening",
+        "status": "passed",
+        "before": [
+          462,
+          1564,
+          1067,
+          2324
+        ],
+        "after": [
+          462,
+          1564,
+          1067,
+          2324
+        ],
+        "seconds": 17.06
+      },
+      {
+        "name": "no-sternfenster-crash-or-anr",
+        "status": "passed",
+        "seconds": 0.15
+      }
+    ],
+    "compact_activity": {
+      "method": "Android shell wm size; compact display configuration, not Samsung split-screen",
+      "original_size": [
+        1080,
+        2400
+      ],
+      "requested_size": [
+        1080,
+        1296
+      ],
+      "restore_argument": "reset",
+      "sky_bounds": [
+        0,
+        254,
+        1080,
+        1233
+      ],
+      "window_bounds": [
+        0,
+        0,
+        1080,
+        1296
+      ],
+      "sky_fraction_of_window_height": 0.7554,
+      "minimum_required_fraction": 0.6,
+      "menu_bounds": [
+        943,
+        74,
+        1059,
+        190
+      ],
+      "compact_controls_observed": true,
+      "popup_item_tap": {
+        "label": "O · Osten",
+        "description": "Nach Osten blicken",
+        "bounds": [
+          504,
+          379,
+          1080,
+          505
+        ],
+        "method": "physical tap on enabled row in focused Popup Window/ListView; state checked afterwards"
+      },
+      "direction_preserved_after_restore": "Ost 90°, Blickhöhe 42°"
+    },
+    "foreign_app": {
+      "package": "com.android.chrome",
+      "resumed_component": "com.android.chrome/org.chromium.chrome.browser.firstrun.FirstRunActivity",
+      "interaction": "Unmodified welcome page; no navigation, authentication or consent interaction"
+    },
+    "window_visibility": "WindowManager owning UID/package, TYPE_APPLICATION_OVERLAY, shown/drawn surface, isOnScreen/isVisible, unobscured state and in-display bounds. Foreground service and continuing sensor/frame telemetry checked separately.",
+    "close_actions": [
+      {
+        "phase": "explicit-close-releases-service-sensors-and-frames",
+        "label": "first-explicit-close",
+        "source": "previously observed enabled close button, unchanged size, translated to current visible WindowManager frame",
+        "point": [
+          1001,
+          1627
+        ],
+        "current_wm_bounds": [
+          462,
+          1564,
+          1067,
+          2324
+        ],
+        "previous_accessibility_geometry": {
+          "window_bounds": [
+            462,
+            1564,
+            1067,
+            2324
+          ],
+          "control_bounds": [
+            946,
+            1575,
+            1056,
+            1680
+          ],
+          "phase": "drag-constrains-window-to-display",
+          "label": "overlay-at-display-boundary",
+          "enabled": true,
+          "clickable": true
+        }
+      },
+      {
+        "phase": "reopen-preserves-position-and-size-without-auto-reopening",
+        "label": "final-explicit-close",
+        "source": "current enabled accessibility close button and visible WindowManager frame",
+        "point": [
+          1001,
+          1627
+        ],
+        "current_wm_bounds": [
+          462,
+          1564,
+          1067,
+          2324
+        ],
+        "previous_accessibility_geometry": null
+      }
+    ],
+    "task_removals": [
+      {
+        "task_id": 8,
+        "before_pid": "2974",
+        "after_pid": "2974",
+        "method": "adb shell am stack remove observedTaskId; ActivityTaskManager.removeTask; not force-stop"
+      }
+    ],
+    "emulator_recoveries": [
+      {
+        "phase": "compact-activity-map-space-menu-and-direction-preservation",
+        "dialog_title": "Pixel Launcher isn't responding",
+        "action": "Close app",
+        "button_bounds": "[70,1170][1010,1296]",
+        "evidence_prefix": "pixel-launcher-anr-1"
+      }
+    ],
+    "raw_report_metadata_caveat": "foreign_app.status in the unchanged overlay raw report is the copied intermediate value running. Its authoritative checks entry and both overall status fields show the completed passed result."
+  },
+  "performance": {
+    "status": "MINIMUM_60_PRESENTED_FPS_NOT_ESTABLISHED",
+    "environment": "Android 15 API 35 x86_64 emulator with SwiftShader, not the physical Samsung",
+    "overlay": {
+      "initial-overlay": {
+        "sample_count": 6,
+        "drawn_frames_in_reported_windows": 118,
+        "render_fps_min": 15.67,
+        "render_fps_median": 19.83,
+        "render_fps_weighted_mean": 19.102,
+        "render_fps_max": 20.99,
+        "maximum_reported_draw_p95_ms": 7.114,
+        "display_hz_min": 60.0,
+        "display_hz_max": 60.0,
+        "nominal_60_render_target_observed": false,
+        "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+        "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+        "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+        "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+        "requested_observation_seconds": 6,
+        "workload": "visible overlay with live clock and enabled physical-sensor following",
+        "android_gfxinfo_total_frames": 123
+      },
+      "home-overlay": {
+        "sample_count": 6,
+        "drawn_frames_in_reported_windows": 118,
+        "render_fps_min": 18.51,
+        "render_fps_median": 18.9,
+        "render_fps_weighted_mean": 19.129,
+        "render_fps_max": 20.34,
+        "maximum_reported_draw_p95_ms": 14.638,
+        "display_hz_min": 60.0,
+        "display_hz_max": 60.0,
+        "nominal_60_render_target_observed": false,
+        "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+        "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+        "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+        "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+        "requested_observation_seconds": 6,
+        "workload": "visible overlay with live clock and enabled physical-sensor following",
+        "android_gfxinfo_total_frames": 121
+      },
+      "foreign-app-overlay": {
+        "sample_count": 6,
+        "drawn_frames_in_reported_windows": 170,
+        "render_fps_min": 24.33,
+        "render_fps_median": 28.345,
+        "render_fps_weighted_mean": 27.825,
+        "render_fps_max": 29.85,
+        "maximum_reported_draw_p95_ms": 4.409,
+        "display_hz_min": 60.0,
+        "display_hz_max": 60.0,
+        "nominal_60_render_target_observed": false,
+        "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+        "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+        "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+        "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+        "requested_observation_seconds": 6,
+        "workload": "visible overlay with live clock and enabled physical-sensor following",
+        "android_gfxinfo_total_frames": 175
+      },
+      "task-removed-overlay": {
+        "sample_count": 6,
+        "drawn_frames_in_reported_windows": 174,
+        "render_fps_min": 26.92,
+        "render_fps_median": 27.985,
+        "render_fps_weighted_mean": 28.21,
+        "render_fps_max": 29.69,
+        "maximum_reported_draw_p95_ms": 1.963,
+        "display_hz_min": 60.0,
+        "display_hz_max": 60.0,
+        "nominal_60_render_target_observed": false,
+        "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+        "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+        "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+        "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+        "requested_observation_seconds": 6,
+        "workload": "visible overlay with live clock and enabled physical-sensor following",
+        "android_gfxinfo_total_frames": 179
+      }
+    },
+    "live_pip": {
+      "fullscreen": {
+        "sample_count": 10,
+        "drawn_frames_in_reported_windows": 207,
+        "render_fps_min": 18.75,
+        "render_fps_median": 20.215,
+        "render_fps_weighted_mean": 20.153,
+        "render_fps_max": 22.17,
+        "maximum_reported_draw_p95_ms": 11.855,
+        "display_hz_min": 60.0,
+        "display_hz_max": 60.0,
+        "nominal_60_render_target_observed": false,
+        "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+        "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+        "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+        "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+        "requested_observation_seconds": 10,
+        "pan_telemetry_available": true,
+        "android_gfxinfo_total_frames": 209
+      },
+      "pip": {
+        "sample_count": 8,
+        "drawn_frames_in_reported_windows": 125,
+        "render_fps_min": 11.52,
+        "render_fps_median": 14.395,
+        "render_fps_weighted_mean": 15.089,
+        "render_fps_max": 18.62,
+        "maximum_reported_draw_p95_ms": 33.862,
+        "display_hz_min": 60.0,
+        "display_hz_max": 60.0,
+        "nominal_60_render_target_observed": false,
+        "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+        "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+        "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+        "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+        "requested_observation_seconds": 8,
+        "pan_telemetry_available": true,
+        "android_gfxinfo_total_frames": 126
+      }
+    },
+    "interpretation": "Functional test success is separate from performance. No phase confirmed nominal 60 render FPS. onDraw counts and draw CPU duration do not establish compositor-presented FPS. These software-emulator rates cannot be transferred to the phone; v0.4.0 physical-device benchmark was not performed."
+  },
+  "protected_window_diagnosis": {
+    "run_id": 44903530347,
+    "activity": "AOSP Android 15 SettingsHomepageActivity",
+    "outcome": "Service/window remained alive; actual surface was intentionally hidden by system overlay policy.",
+    "scope": "Does not assert every Settings page or vendor Settings variant uses the same policy.",
+    "sources": [
+      "https://developer.android.com/about/versions/12/features#hide-application-overlay-windows",
+      "https://android.googlesource.com/platform/packages/apps/Settings/+/refs/tags/android-15.0.0_r5/src/com/android/settings/homepage/SettingsHomepageActivity.java",
+      "https://android.googlesource.com/platform/frameworks/base/+/1e577bb281ff5a27ff8bf5beaabb2b8679d6d084/packages/SettingsLib/src/com/android/settingslib/core/lifecycle/HideNonSystemOverlayMixin.java"
+    ]
+  }
+}

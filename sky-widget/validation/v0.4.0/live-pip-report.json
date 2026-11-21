@@ -1,0 +1,261 @@
+{
+  "status": "functional_checks_passed",
+  "checks": [
+    {
+      "name": "device-and-install",
+      "status": "passed",
+      "seconds": 5.54
+    },
+    {
+      "name": "cold-start-and-live-controls",
+      "status": "passed",
+      "seconds": 51.78
+    },
+    {
+      "name": "fullscreen-continuous-rendering",
+      "status": "passed",
+      "performance_key": "fullscreen",
+      "seconds": 14.84
+    },
+    {
+      "name": "background-stop-and-resume",
+      "status": "passed",
+      "seconds": 17.8
+    },
+    {
+      "name": "picture-in-picture-on-home",
+      "status": "passed",
+      "windowing_mode": 2,
+      "mode_name": "pinned",
+      "pid": "2376",
+      "seconds": 21.9
+    },
+    {
+      "name": "dismiss-pip-and-process-restart",
+      "status": "passed",
+      "seconds": 7.37
+    },
+    {
+      "name": "no-app-crash-or-anr",
+      "status": "passed",
+      "seconds": 0.93
+    }
+  ],
+  "environment": {
+    "sdk": 35,
+    "release": "15",
+    "model": "sdk_gphone64_x86_64",
+    "renderer": "Android emulator with SwiftShader; not a Samsung device benchmark"
+  },
+  "test": "Sternfenster live renderer and PiP",
+  "performance": {
+    "fullscreen": {
+      "sample_count": 10,
+      "drawn_frames_in_reported_windows": 207,
+      "render_fps_min": 18.75,
+      "render_fps_median": 20.215,
+      "render_fps_weighted_mean": 20.153,
+      "render_fps_max": 22.17,
+      "maximum_reported_draw_p95_ms": 11.855,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "samples": [
+        {
+          "mode": "fullscreen",
+          "frames": 21,
+          "fps": 20.98,
+          "draw_p95_ms": 1.528,
+          "display_hz": 60.0,
+          "log_line": "         1795262319.604  2376  2376 I SternfensterPerf: mode=fullscreen frames=21 fps=20.98 draw_p95_ms=1.528 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "fullscreen",
+          "frames": 21,
+          "fps": 20.63,
+          "draw_p95_ms": 2.304,
+          "display_hz": 60.0,
+          "log_line": "         1795262320.622  2376  2376 I SternfensterPerf: mode=fullscreen frames=21 fps=20.63 draw_p95_ms=2.304 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "fullscreen",
+          "frames": 19,
+          "fps": 18.86,
+          "draw_p95_ms": 8.605,
+          "display_hz": 60.0,
+          "log_line": "         1795262321.631  2376  2376 I SternfensterPerf: mode=fullscreen frames=19 fps=18.86 draw_p95_ms=8.605 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "fullscreen",
+          "frames": 20,
+          "fps": 19.8,
+          "draw_p95_ms": 10.786,
+          "display_hz": 60.0,
+          "log_line": "         1795262322.639  2376  2376 I SternfensterPerf: mode=fullscreen frames=20 fps=19.80 draw_p95_ms=10.786 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "fullscreen",
+          "frames": 21,
+          "fps": 19.71,
+          "draw_p95_ms": 2.963,
+          "display_hz": 60.0,
+          "log_line": "         1795262323.704  2376  2376 I SternfensterPerf: mode=fullscreen frames=21 fps=19.71 draw_p95_ms=2.963 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "fullscreen",
+          "frames": 23,
+          "fps": 22.17,
+          "draw_p95_ms": 2.415,
+          "display_hz": 60.0,
+          "log_line": "         1795262324.742  2376  2376 I SternfensterPerf: mode=fullscreen frames=23 fps=22.17 draw_p95_ms=2.415 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "fullscreen",
+          "frames": 22,
+          "fps": 20.98,
+          "draw_p95_ms": 1.991,
+          "display_hz": 60.0,
+          "log_line": "         1795262325.790  2376  2376 I SternfensterPerf: mode=fullscreen frames=22 fps=20.98 draw_p95_ms=1.991 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "fullscreen",
+          "frames": 22,
+          "fps": 20.74,
+          "draw_p95_ms": 2.711,
+          "display_hz": 60.0,
+          "log_line": "         1795262326.851  2376  2376 I SternfensterPerf: mode=fullscreen frames=22 fps=20.74 draw_p95_ms=2.711 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "fullscreen",
+          "frames": 19,
+          "fps": 18.75,
+          "draw_p95_ms": 11.855,
+          "display_hz": 60.0,
+          "log_line": "         1795262327.864  2376  2376 I SternfensterPerf: mode=fullscreen frames=19 fps=18.75 draw_p95_ms=11.855 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "fullscreen",
+          "frames": 19,
+          "fps": 18.82,
+          "draw_p95_ms": 6.515,
+          "display_hz": 60.0,
+          "log_line": "         1795262328.874  2376  2376 I SternfensterPerf: mode=fullscreen frames=19 fps=18.82 draw_p95_ms=6.515 hz=60.0 pan=true",
+          "pan_active": true
+        }
+      ],
+      "requested_observation_seconds": 10,
+      "pan_telemetry_available": true,
+      "android_gfxinfo_total_frames": 209
+    },
+    "pip": {
+      "sample_count": 8,
+      "drawn_frames_in_reported_windows": 125,
+      "render_fps_min": 11.52,
+      "render_fps_median": 14.395,
+      "render_fps_weighted_mean": 15.089,
+      "render_fps_max": 18.62,
+      "maximum_reported_draw_p95_ms": 33.862,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "samples": [
+        {
+          "mode": "pip",
+          "frames": 14,
+          "fps": 13.86,
+          "draw_p95_ms": 5.43,
+          "display_hz": 60.0,
+          "log_line": "         1795262359.854  2376  2376 I SternfensterPerf: mode=pip frames=14 fps=13.86 draw_p95_ms=5.430 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "pip",
+          "frames": 13,
+          "fps": 11.52,
+          "draw_p95_ms": 1.456,
+          "display_hz": 60.0,
+          "log_line": "         1795262360.982  2376  2376 I SternfensterPerf: mode=pip frames=13 fps=11.52 draw_p95_ms=1.456 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "pip",
+          "frames": 15,
+          "fps": 14.93,
+          "draw_p95_ms": 6.873,
+          "display_hz": 60.0,
+          "log_line": "         1795262361.987  2376  2376 I SternfensterPerf: mode=pip frames=15 fps=14.93 draw_p95_ms=6.873 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "pip",
+          "frames": 13,
+          "fps": 12.61,
+          "draw_p95_ms": 24.609,
+          "display_hz": 60.0,
+          "log_line": "         1795262363.025  2376  2376 I SternfensterPerf: mode=pip frames=13 fps=12.61 draw_p95_ms=24.609 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "pip",
+          "frames": 19,
+          "fps": 18.21,
+          "draw_p95_ms": 5.013,
+          "display_hz": 60.0,
+          "log_line": "         1795262364.061  2376  2376 I SternfensterPerf: mode=pip frames=19 fps=18.21 draw_p95_ms=5.013 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "pip",
+          "frames": 14,
+          "fps": 13.46,
+          "draw_p95_ms": 20.195,
+          "display_hz": 60.0,
+          "log_line": "         1795262365.102  2376  2376 I SternfensterPerf: mode=pip frames=14 fps=13.46 draw_p95_ms=20.195 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "pip",
+          "frames": 18,
+          "fps": 17.89,
+          "draw_p95_ms": 33.862,
+          "display_hz": 60.0,
+          "log_line": "         1795262366.107  2376  2376 I SternfensterPerf: mode=pip frames=18 fps=17.89 draw_p95_ms=33.862 hz=60.0 pan=true",
+          "pan_active": true
+        },
+        {
+          "mode": "pip",
+          "frames": 19,
+          "fps": 18.62,
+          "draw_p95_ms": 21.737,
+          "display_hz": 60.0,
+          "log_line": "         1795262367.128  2376  2376 I SternfensterPerf: mode=pip frames=19 fps=18.62 draw_p95_ms=21.737 hz=60.0 pan=true",
+          "pan_active": true
+        }
+      ],
+      "requested_observation_seconds": 8,
+      "pan_telemetry_available": true,
+      "android_gfxinfo_total_frames": 126
+    }
+  },
+  "user_device_test": "NOT_PERFORMED",
+  "minimum_60_fps_guarantee": "NOT_ESTABLISHED",
+  "apk_sha256": "378e34a706c74f203b0b24bddcce02f89a2172370d9acd4160b9603e2041aaba",
+  "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED_IN_ALL_WINDOWS"
+}

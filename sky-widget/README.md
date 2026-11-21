@@ -190,13 +190,47 @@ lassen sich direkt aktualisieren.
 
 Für 0.4.0 prüft `tools/runtime_overlay.py` das tatsächlich sichtbare Android-Overlay:
 Start aus der Oberfläche, WindowManager-Typ und Grenzen, Ziehen, Vergrößern,
-Home, Wechsel zu Einstellungen, Entfernen des beobachteten App-Tasks,
+Home, Wechsel zu Chrome, Entfernen des beobachteten App-Tasks,
 fortgesetzte Sensorsteuerung/Renderzähler sowie ausdrückliches Schließen ohne
 selbstständiges Wiederöffnen. Der separate Accessibility-Probe erhält einen
 opt-in-Modus für alle interaktiven Fenster; die vorhandenen Tests behalten ihren
-bisherigen Standardmodus. Die konkrete Auslieferungsprüfung wird in
-`VALIDATION_v0.4.0.json` dokumentiert. Ein API-35-Emulator bestätigt weder
-Samsungs Taskverwaltung noch physische Kompassgenauigkeit oder 60 präsentierte FPS.
+bisherigen Standardmodus. Wenn Android das nicht fokussierte Overlay im
+Accessibility-Baum auslässt, werden Paketbesitz, UID, Fenstertyp, sichtbare und
+gezeichnete WindowManager-Surface sowie Bildschirmgrenzen geprüft. Ein bloß
+weiterlaufender Dienst gilt nicht als sichtbares Fenster.
+
+**Auslieferungsprüfung bestanden:** elf Overlay-/Fensterprüfungen, zehn
+Sensorprüfungen und sieben bestehende Live-/PiP-Prüfungen auf Android 15 / API 35.
+Nach Entfernung des tatsächlich beobachteten Haupttasks blieb der Prozess mit
+derselben PID aktiv; das sichtbare Fenster zeichnete weiter und reagierte auf
+geänderte Sensorsignale. Ausdrückliches Schließen entfernte Fenster, Dienst und
+Sensorlistener ohne Wiederauftauchen während der anschließenden Beobachtung.
+Erneutes Öffnen stellte Position und Größe exakt wieder her. Die kompakte Ansicht
+verwendete im Test mit verkleinerter Bildschirmhöhe 75,54 % der Höhe für die Karte;
+Menüaktionen und Blickrichtung blieben erhalten. Kein Sternfenster-Absturz oder
+Sternfenster-ANR wurde beobachtet.
+
+Die unveränderte Chrome-Willkommensseite diente als andere App; keine Anmeldung
+oder Webnavigation. Ein vorheriger Lauf mit der Android-15-Einstellungshauptseite
+zeigte eine beabsichtigte Systemgrenze: Diese blendet fremde Overlays mit
+`HIDE_NON_SYSTEM_OVERLAY_WINDOWS` aus, obwohl Fenster und Dienst weiter existieren.
+Für solche geschützten Ansichten bleibt die normale Activity mit Android-PiP oder
+geteilter Taskansicht verfügbar. Die Schutzfunktion wird nicht umgangen.
+
+Die gemessenen gewichteten Overlay-Raten lagen im SwiftShader-Emulator je Phase
+zwischen 19,102 und 28,210 Render-FPS; die Live-/PiP-Prüfung erreichte 20,153 bzw.
+15,089 Render-FPS. **Diese Läufe bestätigen keine 60-FPS-Untergrenze.** Eine Messung
+von 0.4.0 auf Stefans Telefon und von tatsächlich präsentierten Frames steht aus.
+Samsungs Fensterverwaltung, physische Kompassgenauigkeit und Wiederherstellung nach
+systembedingtem Prozessverlust wurden nicht im Emulator nachgewiesen. Die
+Freigabedialoge wurden statisch geprüft; CI erteilt die Berechtigungen vor dem Test.
+
+Alle Ergebnisse, Grenzen, APK-Prüfsumme und CI-Läufe stehen in
+`VALIDATION_v0.4.0.json`. Die unveränderten Rohberichte liegen unter
+`validation/v0.4.0/`. Der Appcode ist seit Commit
+`fdb4f7e7d45fca20a0b8289556699ddb984066f0` unverändert; nachfolgende Commits betreffen
+Prüfwerkzeuge und Dokumentation. CI verwendet einen eigenen Testschlüssel und
+baut aus denselben Appquellen wie die ausgelieferte signierte APK.
 
 ### Historische 0.3.1-Prüfung
 
@@ -205,7 +239,7 @@ Displayrotation, Roll, Deklination, Polübergänge und Quaternionen) sowie
 `tools/runtime_orientation.py` geprüft. Der Integrationstest injiziert konsistente
 Gravitations- und Magnetfeldwerte in echte Emulator-Sensoren und prüft die von der
 App sichtbaren Winkel, Moduswechsel, Hintergrund-Stopp und PiP. Es gibt keinen
-Testeingang für simulierte Posen in der ausgelieferten App. Ergebnisse der aktuellen
+Testeingang für simulierte Posen in der ausgelieferten App. Ergebnisse dieser
 Version stehen in `VALIDATION_v0.3.1.json`. Alle zehn Sensorprüfungen, sieben
 Live-/PiP-Funktionsprüfungen und zehn historischen Regressionstests bestanden.
 96.346 Orientierungs-/Projektionsprüfungen sowie 7.484 bestehende
