@@ -117,8 +117,31 @@ Appseitige Renderzähler und Android-`gfxinfo` werden separat gesichert.
 
 Ein erfolgreicher Funktionslauf belegt keine pauschale 60-FPS-Untergrenze. Der
 Bericht weist Messwerte und Leistungsbewertung gesondert aus. Ein Emulator ersetzt
-keine Messung auf Stefans Samsung. Die konkrete Auslieferungsprüfung steht im
-zugehörigen `VALIDATION_v0.3.0.json`, sobald der Lauf abgeschlossen ist.
+keine Messung auf Stefans Samsung. Die konkrete Auslieferungsprüfung steht in
+`VALIDATION_v0.3.0.json`.
+
+Der erste API-35-Lauf bestand alle sieben Funktionsprüfungen, einschließlich
+animierter PiP-Ansicht über dem Launcher. Mit SwiftShader bei 1080 × 2400 Pixeln
+wurden im bewegten Vollbild gewichtet 15,391 Render-FPS und im PiP 17,149 Render-FPS
+gemessen. **Der Lauf bestätigt daher keine 60 FPS.** Die aufgezeichneten
+Frame-Metriken zeigen lange Wartezeiten vor dem RenderThread; eine Übertragung
+dieser virtuellen Leistung auf das physische Telefon ist nicht gerechtfertigt.
+Die Auswertung mit Formeln und Datenqualitätsgrenzen steht in
+`PERF_ANALYSIS_v0.3.0.json`; die zugrunde liegenden Frame-Zeitstempel bleiben unter
+`validation/v0.3.0/` im Projekt erhalten.
+
+Für die laufend animierte Oberfläche verwendet CI ein separates, kurzlebiges
+Test-APK für Accessibility-Snapshots ohne Warten auf UI-Ruhe. Es instrumentiert
+ausschließlich sein eigenes Paket und ist weder Teil der Release-APK noch eine
+zusätzliche Berechtigung der App. Die eigentlichen UI-, Absturz- und
+Leistungsprüfungen bleiben unverändert.
+
+Auch der abschließende Lauf mit diesem Probe bestand alle sieben Live-/PiP-
+Funktionsprüfungen und alle zehn historischen Regressionstests. Die wiederholte
+Leistungsmessung erreichte gewichtet 14,907 Render-FPS im Vollbild und 15,108 im
+PiP. Ein gesonderter Pixel-Launcher-ANR des Emulators wurde erkannt und geschlossen;
+im Sternfenster-Prozess trat kein Absturz oder ANR auf. Der Leistungsnachweis von
+mindestens 60 FPS auf dem physischen Telefon bleibt offen.
 
 Die historischen Berichte `VALIDATION_v0.2.0.json` und `VALIDATION_v0.2.1.json`
 dokumentieren frühere Releases. Der dort behobene Startfehler beim zu frühen

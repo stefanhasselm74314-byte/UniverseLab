@@ -1,0 +1,216 @@
+{
+  "version": "0.3.0",
+  "scope": "Read-only analysis of the existing Android API 35 emulator run; no tuning or new benchmark performed.",
+  "ci_run": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44885455082",
+  "environment": {
+    "sdk": 35,
+    "release": "15",
+    "model": "sdk_gphone64_x86_64",
+    "renderer": "Android emulator with SwiftShader; not a Samsung device benchmark"
+  },
+  "user_device_test": "NOT_PERFORMED",
+  "minimum_60_fps_guarantee": "NOT_ESTABLISHED",
+  "method": {
+    "source_rows": "Parse every CSV block between paired ---PROFILEDATA--- delimiters. Retain rows with Flags == 0, IntendedVsync > 0 and FrameCompleted > 0. Each active SkyActivity ring buffer contains the latest 120 rows; this is not the complete original measurement window.",
+    "timestamp_units": "nanoseconds; each derived duration is (end_column - start_column) / 1_000_000.",
+    "valid_pair_rule": "For each metric separately, exclude negative differences and differences >=10_000_000_000ns. All rejected differences in this source are negative completion timestamps; no positive >=10 s differences occurred.",
+    "median": "statistics.median(sorted_valid_values): average of the two central values for even sample counts.",
+    "p95": "sorted_valid_values[floor(0.95 * (n - 1))], an empirical lower 95th percentile.",
+    "rounding": "Milliseconds rounded to 3 decimal places after computing statistics.",
+    "cadence": "Positive successive differences in the Vsync column / 1_000_000, in retained CSV row order.",
+    "counters": "Render FPS values below are copied from the runtime report; they count onDraw calls, not compositor-presented frames."
+  },
+  "samples": {
+    "fullscreen": {
+      "source_file": "validation/v0.3.0/fullscreen-gfxinfo.txt",
+      "source_sha256": "2facd8cc1cb489b9aee154531a4598e84d05f3e017e2b80fc6d5acede4a2ee1c",
+      "retained_rows": 120,
+      "android_total_frames": 168,
+      "onDraw_fps_weighted_mean": 15.391,
+      "onDraw_fps_median": 15.43,
+      "display_hz": 60.0,
+      "metrics": {
+        "vsync_adjustment": {
+          "formula": "(Vsync - IntendedVsync) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 50.0,
+          "p95_ms": 66.667,
+          "maximum_ms": 83.333
+        },
+        "vsync_to_input_handler": {
+          "formula": "(HandleInputStart - Vsync) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 9.622,
+          "p95_ms": 15.435,
+          "maximum_ms": 16.421
+        },
+        "traversal_before_draw": {
+          "formula": "(DrawStart - PerformTraversalsStart) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 0.03,
+          "p95_ms": 0.092,
+          "maximum_ms": 1.073
+        },
+        "display_list_recording": {
+          "formula": "(SyncQueued - DrawStart) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 0.632,
+          "p95_ms": 3.801,
+          "maximum_ms": 17.903
+        },
+        "render_thread_queue_wait": {
+          "formula": "(SyncStart - SyncQueued) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 59.798,
+          "p95_ms": 81.539,
+          "maximum_ms": 87.714
+        },
+        "issue_commands_to_swap": {
+          "formula": "(SwapBuffers - IssueDrawCommandsStart) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 19.04,
+          "p95_ms": 37.927,
+          "maximum_ms": 58.137
+        },
+        "swap_to_recorded_frame_completion": {
+          "formula": "(FrameCompleted - SwapBuffers) / 1_000_000",
+          "n": 117,
+          "excluded_negative": 3,
+          "excluded_at_least10s": 0,
+          "median_ms": 47.097,
+          "p95_ms": 67.949,
+          "maximum_ms": 77.15
+        },
+        "submission_to_recorded_gpu_completion": {
+          "formula": "(GpuCompleted - CommandSubmissionCompleted) / 1_000_000",
+          "n": 117,
+          "excluded_negative": 3,
+          "excluded_at_least10s": 0,
+          "median_ms": 45.743,
+          "p95_ms": 67.247,
+          "maximum_ms": 76.503
+        }
+      },
+      "vsync_cadence": {
+        "n": 119,
+        "median_ms": 66.667,
+        "p95_ms": 83.333
+      }
+    },
+    "pip": {
+      "source_file": "validation/v0.3.0/pip-gfxinfo.txt",
+      "source_sha256": "ce7c33005444490711131e423523346fa725bdfcccb574815aa49cfbc553c285",
+      "retained_rows": 120,
+      "android_total_frames": 149,
+      "onDraw_fps_weighted_mean": 17.149,
+      "onDraw_fps_median": 18.96,
+      "display_hz": 60.0,
+      "metrics": {
+        "vsync_adjustment": {
+          "formula": "(Vsync - IntendedVsync) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 33.333,
+          "p95_ms": 83.333,
+          "maximum_ms": 166.667
+        },
+        "vsync_to_input_handler": {
+          "formula": "(HandleInputStart - Vsync) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 10.307,
+          "p95_ms": 16.383,
+          "maximum_ms": 16.636
+        },
+        "traversal_before_draw": {
+          "formula": "(DrawStart - PerformTraversalsStart) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 0.033,
+          "p95_ms": 0.13,
+          "maximum_ms": 18.133
+        },
+        "display_list_recording": {
+          "formula": "(SyncQueued - DrawStart) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 0.793,
+          "p95_ms": 6.088,
+          "maximum_ms": 30.746
+        },
+        "render_thread_queue_wait": {
+          "formula": "(SyncStart - SyncQueued) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 41.826,
+          "p95_ms": 91.647,
+          "maximum_ms": 192.91
+        },
+        "issue_commands_to_swap": {
+          "formula": "(SwapBuffers - IssueDrawCommandsStart) / 1_000_000",
+          "n": 120,
+          "excluded_negative": 0,
+          "excluded_at_least10s": 0,
+          "median_ms": 22.171,
+          "p95_ms": 84.303,
+          "maximum_ms": 164.111
+        },
+        "swap_to_recorded_frame_completion": {
+          "formula": "(FrameCompleted - SwapBuffers) / 1_000_000",
+          "n": 119,
+          "excluded_negative": 1,
+          "excluded_at_least10s": 0,
+          "median_ms": 29.394,
+          "p95_ms": 44.876,
+          "maximum_ms": 101.708
+        },
+        "submission_to_recorded_gpu_completion": {
+          "formula": "(GpuCompleted - CommandSubmissionCompleted) / 1_000_000",
+          "n": 119,
+          "excluded_negative": 1,
+          "excluded_at_least10s": 0,
+          "median_ms": 28.189,
+          "p95_ms": 43.193,
+          "maximum_ms": 101.708
+        }
+      },
+      "vsync_cadence": {
+        "n": 119,
+        "median_ms": 50.0,
+        "p95_ms": 100.0
+      }
+    }
+  },
+  "code_review": {
+    "SkyActivity.java_sha256": "6fa08c62e85b82b838fc6942d2ec8fed1861a84680774cf743e5debfcebe8c41",
+    "LiveSkyRenderer.java_sha256": "8cf7d6518ec51143cdee8dc04db4511fa27a7c3cf743ce839f973aa135a043d5",
+    "scheduling": "Choreographer.FrameCallback -> invalidate() -> postFrameCallback(this), without a delayed Handler, sleep, frame divisor or 20 Hz timer.",
+    "movement": "The .1-second clamp limits only the simulated pan step after a stall; it does not sleep or throttle rendering.",
+    "text_updates": "Header/status refresh is posted approximately once per second, not once per frame. The measured pre-draw traversal medians are below 0.04 ms in both modes.",
+    "cpu_counter_limit": "draw_p95_ms brackets the application onDraw recording work. It excludes later RenderThread synchronization and asynchronous composition; a short draw duration alone cannot establish 60 FPS."
+  },
+  "conclusion": {
+    "observed": "The emulator does not reach the requested 60 FPS. Both onDraw telemetry and Android frame counts show substantial dropped/missed frame opportunities.",
+    "inference": "Sub-millisecond median display-list recording alongside 42–60 ms median delay before RenderThread work starts strongly supports renderer-backend/queue/scheduling backpressure as the dominant observed bottleneck. It does not prove a single GPU-only cause.",
+    "not_found": "No fixed 20 Hz cap was found in the reviewed render loop.",
+    "timestamp_caveat": "Some FrameCompleted/GpuCompleted timestamps precede command submission by seconds. The GPU histogram is mostly in its highest 4950 ms bucket. Derived completion differences must not be described as pure GPU execution time or relied on as a device GPU benchmark.",
+    "decision": "No speculative timer rewrite, quality reduction, resolution reduction or performance-threshold relaxation is justified by these data. Hardware-device performance remains unmeasured."
+  }
+}
