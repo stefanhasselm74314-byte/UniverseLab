@@ -54,7 +54,7 @@ final class LiveSkyRenderer {
     private final float[] directionWidth = new float[8];
     private final boolean[] directionVisible = new boolean[8];
 
-    private SkyProjection projection;
+    private final SkyProjection projection = new SkyProjection(1, 1, 180, 42, 90);
     private int width, height, gridCount, horizonCount, occupiedCount;
     private float unit, labelAscent, labelDescent, directionAscent, directionDescent;
     private double cameraAz = Double.NaN, cameraAlt = Double.NaN, cameraFov = Double.NaN;
@@ -132,6 +132,7 @@ final class LiveSkyRenderer {
         double alt = Double.isFinite(altitude) ? Math.max(-90, Math.min(90, altitude)) : 42;
         double fov = Double.isFinite(verticalFovDeg) ? Math.max(20, Math.min(160, verticalFovDeg)) : 90;
         boolean resized = width != newWidth || height != newHeight;
+        boolean viewportChanged = resized || cameraFov != fov;
         boolean sameBasis=(basis!=null)==cameraHasBasis;
         if(basis!=null&&sameBasis)for(int i=0;i<9;i++)if(lastBasis[i]!=basis[i]){sameBasis=false;break;}
         if (!resized && cameraAz == az && cameraAlt == alt && cameraFov == fov && sameBasis) return;
@@ -140,11 +141,12 @@ final class LiveSkyRenderer {
         cameraAz = az;
         cameraAlt = alt;
         cameraFov = fov;
-        // One small projection object only when the camera changes, never per star.
+        // Sensor following changes the camera on most frames. Reuse the projection
+        // rather than allocating one for every such update.
         cameraHasBasis=basis!=null;
         if(cameraHasBasis)System.arraycopy(basis,0,lastBasis,0,9);
-        projection = cameraHasBasis ? new SkyProjection(width,height,fov,lastBasis)
-                : new SkyProjection(width, height, az, alt, fov);
+        if(cameraHasBasis)projection.configure(width,height,fov,lastBasis);
+        else projection.configure(width,height,az,alt,fov);
         if (resized) resizePaints();
         double azRad = Math.toRadians(az), altRad = Math.toRadians(alt);
         centerEast = cameraHasBasis ? lastBasis[0] : Math.cos(altRad) * Math.sin(azRad);
@@ -152,10 +154,12 @@ final class LiveSkyRenderer {
         centerUp = cameraHasBasis ? lastBasis[2] : Math.sin(altRad);
         // Circumscribed viewport cone rejects stars before the expensive acos.
         // The margin includes the largest retained halo, avoiding edge popping.
-        double margin = 18 * unit;
-        double diagonal = Math.hypot(width * .5 + margin, height * .5 + margin);
-        double maximumAngle = Math.min(Math.toRadians(170), diagonal * Math.toRadians(fov) / height);
-        minForward = Math.cos(maximumAngle);
+        if (viewportChanged) {
+            double margin = 18 * unit;
+            double diagonal = Math.hypot(width * .5 + margin, height * .5 + margin);
+            double maximumAngle = Math.min(Math.toRadians(170), diagonal * Math.toRadians(fov) / height);
+            minForward = Math.cos(maximumAngle);
+        }
         gridCount = projectGrid(GRID_VECTORS, gridLines);
         horizonCount = projectGrid(HORIZON_VECTORS, horizonLines);
         for (int i = 0; i < 8; i++) {

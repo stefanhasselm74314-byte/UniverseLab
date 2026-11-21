@@ -41,11 +41,12 @@ public class MainActivity extends Activity {
         scroll.addView(panel);
         TextView title=Ui.text(this,"STERNFENSTER",27,0xffb9dcf4);
         title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);panel.addView(title);
-        TextView version=Ui.text(this,"0.4.0 · Freies Fenster und geteilte Ansicht",14,Ui.MUTED);
+        TextView version=Ui.text(this,"0.4.1 · Live-Fenster mit Bildratenmessung",14,Ui.MUTED);
         version.setPadding(0,Ui.dp(this,8),0,Ui.dp(this,18));panel.addView(version);
         Ui.addButton(this,panel,"Live-Sternkarte öffnen",()->startActivity(new Intent(this,SkyActivity.class)));
         Ui.addButton(this,panel,"Freies Live-Fenster starten",()->OverlaySetupActivity.launch(this,new Intent(this,FloatingSkyService.class).setAction(FloatingSkyService.ACTION_SHOW)));
         Ui.addButton(this,panel,"Bild-im-Bild starten",()->startActivity(new Intent(this,SkyActivity.class).putExtra("open_pip",true)));
+        Ui.addButton(this,panel,"Bildrate prüfen",()->startActivity(new Intent(this,PerformanceActivity.class)));
         panel.addView(Ui.text(this,"Das freie Live-Fenster lässt sich an seiner Titelleiste über andere Apps ziehen. Der Griff unten rechts ändert die Größe. Es läuft auch nach dem Entfernen der Hauptansicht aus der Taskliste weiter; × oder „Fenster schließen“ in der Benachrichtigung beendet es.",15,Ui.MUTED));
         panel.addView(Ui.text(this,"Für Samsungs geteilten Bildschirm oder die Pop-up-Ansicht öffne die Live-Sternkarte und nutze die Fenstersteuerung deines Handys. In kleinen Taskfenstern liegen die Bedienelemente unter ⋮. Die Sternkarte behält dadurch Platz. „Bild-im-Bild“ bleibt als zusätzlicher Android-Fenstermodus verfügbar.",14,Ui.MUTED));
         panel.addView(Ui.text(this,"„Handy folgen“ übernimmt die Richtung der rückseitigen Kamera: Drehe, neige oder kippe das Handy, und die Sternkarte bewegt sich mit. Beim ersten Start ist dieser Modus eingeschaltet. Die Karte wird fortlaufend im Displaytakt gezeichnet.",15,Ui.MUTED));

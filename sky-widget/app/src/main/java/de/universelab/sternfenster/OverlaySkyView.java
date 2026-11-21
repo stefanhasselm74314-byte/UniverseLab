@@ -24,6 +24,7 @@ final class OverlaySkyView extends View implements Choreographer.FrameCallback {
     private final SharedPreferences preferences;
     private final LiveSkyRenderer renderer;
     private final DeviceOrientationTracker orientation;
+    private final PerformanceSession measurement;
     private final ScaleGestureDetector scale;
     private final GestureDetector gestures;
     private final Paint hudPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -39,11 +40,12 @@ final class OverlaySkyView extends View implements Choreographer.FrameCallback {
     private long previousFrame,statisticsStart,declinationTime,lastSensorLog;
     private long simulatedAnchor,elapsedAnchor;
     private int timeRate=1,drawnFrames,durationCount;
-    private String hudTime="",hudState="Render-FPS werden gemessen";
+    private String hudTime="",hudState="Render-FPS werden gemessen",measurementProgress="";
 
     OverlaySkyView(Context context,SharedPreferences preferences,Intent intent){
         super(context);this.preferences=preferences;
         renderer=new LiveSkyRenderer(context);orientation=new DeviceOrientationTracker(context);
+        measurement=new PerformanceSession(context,"Freies Live-Fenster",()->active,this::refreshStatus);
         setClickable(true);setContentDescription("Live-Sternkarte; wischen und mit zwei Fingern zoomen");
         scale=new ScaleGestureDetector(context,new ScaleGestureDetector.SimpleOnScaleGestureListener(){
             @Override public boolean onScaleBegin(ScaleGestureDetector detector){pan=false;return true;}
@@ -87,7 +89,9 @@ final class OverlaySkyView extends View implements Choreographer.FrameCallback {
         elapsedAnchor=elapsed;hasCameraPose=false;clamp();loadLocation();
         if(active){if(following)orientation.start();else orientation.stop();}
         persistState();refreshStatus();invalidate();
+        if(intent!=null&&intent.getBooleanExtra(PerformanceSession.EXTRA_MEASURE,false))startMeasurement();
     }
+    void startMeasurement(){measurement.request();}
     private static double number(Intent intent,String name,double fallback){
         double value=intent==null?fallback:intent.getDoubleExtra(name,fallback);
         return Double.isFinite(value)?value:fallback;
@@ -111,12 +115,12 @@ final class OverlaySkyView extends View implements Choreographer.FrameCallback {
             Log.i("SternfensterPerf","rendering_started mode=overlay");
         }else{
             Choreographer.getInstance().removeFrameCallback(this);removeCallbacks(statusRefresh);
-            orientation.stop();hasCameraPose=false;
+            orientation.stop();hasCameraPose=false;measurement.cancel("Live-Fenster angehalten oder geschlossen");
             Log.i("SternfensterPerf","rendering_stopped mode=overlay");
             Log.i("SternfensterSensor","mode=overlay listening_stopped");
         }
     }
-    void dispose(){persistState();disposed=true;screenUsable=false;syncRunning();orientation.stop();removeCallbacks(statusRefresh);}
+    void dispose(){persistState();disposed=true;screenUsable=false;syncRunning();measurement.cancel("Live-Fenster geschlossen");orientation.stop();removeCallbacks(statusRefresh);}
     @Override protected void onAttachedToWindow(){super.onAttachedToWindow();syncRunning();}
     @Override protected void onDetachedFromWindow(){
         boolean permitted=screenUsable;screenUsable=false;syncRunning();screenUsable=permitted;super.onDetachedFromWindow();
@@ -154,6 +158,7 @@ final class OverlaySkyView extends View implements Choreographer.FrameCallback {
         String mode=following?(orientation.hasFreshSample()?"Handy folgt":"Warte auf Sensoren"):pan?"Rundblick":"Manuell";
         hudTime=clock.format(new Date(skyTime()))+(timeRate==1?" · Echtzeit":" · Zeitraffer "+timeRate+"×");
         hudState=(Double.isNaN(fps)?"Messung …":String.format(Locale.GERMANY,"%.1f Render-FPS",fps))+" · "+mode;
+        measurementProgress=measurement.progressText();
         long now=SystemClock.elapsedRealtime();
         if(active&&now-lastSensorLog>=900){
             Log.i("SternfensterSensor",String.format(Locale.US,
@@ -185,9 +190,11 @@ final class OverlaySkyView extends View implements Choreographer.FrameCallback {
                 following&&hasCameraPose?cameraBasis:null);
         float font=Math.max(8,Math.min(11*getResources().getDisplayMetrics().density,getWidth()*.043f));
         hudPaint.setTextSize(font);hudPaint.setColor(0xc508121e);
-        canvas.drawRect(0,0,getWidth(),font*3.1f,hudPaint);hudPaint.setColor(0xffd6eaf5);
+        canvas.drawRect(0,0,getWidth(),font*(measurementProgress.isEmpty()?3.1f:4.5f),hudPaint);hudPaint.setColor(0xffd6eaf5);
         canvas.drawText(hudTime,font*.55f,font*1.2f,hudPaint);canvas.drawText(hudState,font*.55f,font*2.6f,hudPaint);
+        if(!measurementProgress.isEmpty())canvas.drawText(measurementProgress,font*.55f,font*4f,hudPaint);
         long end=System.nanoTime();
+        if(measurement.isCollecting())measurement.recordDraw(begin,end,displayHz(),getWidth(),getHeight(),canvas.isHardwareAccelerated(),following,PerformanceSession.OVERLAY);
         if(!active)return;
         drawnFrames++;if(durationCount<drawDurations.length)drawDurations[durationCount++]=end-begin;
         long elapsed=end-statisticsStart;

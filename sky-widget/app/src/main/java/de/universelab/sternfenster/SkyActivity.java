@@ -57,7 +57,7 @@ public final class SkyActivity extends Activity {
     private int timeRateIndex;
     private long simulatedAnchorMillis,elapsedAnchorMillis;
     private double renderFps=Double.NaN,drawP95Millis;
-    private String pipTime="",pipStats="Render-FPS werden gemessen";
+    private String pipTime="",pipStats="Render-FPS werden gemessen",measurementProgress="";
 
     @Override public void onCreate(Bundle saved) {
         super.onCreate(saved);
@@ -285,6 +285,7 @@ public final class SkyActivity extends Activity {
                     followPhone,orientation.isListening(),orientation.hasFreshSample(),azimuth,altitude,orientation.source(),orientation.accuracy()));
             lastSensorLog=now;
         }
+        measurementProgress=sky.measurement.progressText();
         if(isInPictureInPictureMode())return;
         info.setText(String.format(Locale.GERMANY,"%s · %s %.0f° · Blickhöhe %.0f°",time,direction,azimuth,altitude));
         String sensorHint=followPhone?" · "+followStatus:"";
@@ -292,11 +293,14 @@ public final class SkyActivity extends Activity {
             sensorHint+=" · Kompass ungenau";
         if(followPhone&&hasCameraPose&&altitude<0)sensorHint+=" · unter dem Horizont";
         location.setText((hasLocation?"Standort gespeichert":"Dresden · Standard")+" · "+rate+sensorHint);
-        performance.setText(Double.isNaN(renderFps)?"Render-FPS werden gemessen …":String.format(Locale.GERMANY,
-                "%.1f Render-FPS · %.0f Hz · Sichtfeld %.0f°",renderFps,displayHz(),fov));
-        panButton.setText(pan?"Rundblick: an":"Rundblick: aus");
-        followButton.setText(followPhone?"Handy folgen: an":"Handy folgen: aus");
-        timeButton.setText("Zeit: "+TIME_RATES[timeRateIndex]+"×");
+        String performanceText=Double.isNaN(renderFps)?"Render-FPS werden gemessen …":String.format(Locale.GERMANY,
+                "%.1f Render-FPS · %.0f Hz · Sichtfeld %.0f°",renderFps,displayHz(),fov);
+        String progress=sky.measurement.progressText();
+        if(!progress.isEmpty())performanceText+="\n"+progress;
+        textIfChanged(performance,performanceText);
+        textIfChanged(panButton,pan?"Rundblick: an":"Rundblick: aus");
+        textIfChanged(followButton,followPhone?"Handy folgen: an":"Handy folgen: aus");
+        textIfChanged(timeButton,"Zeit: "+TIME_RATES[timeRateIndex]+"×");
         String description="Sternkarte nach "+direction+", Blickhöhe "+Math.round(altitude)+" Grad. Mit Richtungstasten und Zoom bedienbar.";
         if(!description.contentEquals(sky.getContentDescription()==null?"":sky.getContentDescription()))sky.setContentDescription(description);
     }
@@ -334,7 +338,7 @@ public final class SkyActivity extends Activity {
         super.onStart();started=true;loadLocation();applyWindowMode();
         if(followPhone)setFollowing(true);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        sky.post(this::requestSmoothDisplay);
+        sky.post(this::requestSmoothDisplay);consumeMeasurementRequest();
     }
     @Override protected void onResume(){super.onResume();loadLocation();refreshInfo();}
     @Override protected void onPause(){
@@ -358,10 +362,21 @@ public final class SkyActivity extends Activity {
             pan=false;azimuth=Math.floorMod(intent.getIntExtra("direction",2),4)*90;altitude=42;fov=100;
         }
         pendingPip=intent.getBooleanExtra("open_pip",false)&&!isInPictureInPictureMode();loadLocation();refreshInfo();
+        if(started)consumeMeasurementRequest();
+    }
+
+    private void consumeMeasurementRequest(){
+        if(getIntent().getBooleanExtra(PerformanceSession.EXTRA_MEASURE,false)){
+            getIntent().removeExtra(PerformanceSession.EXTRA_MEASURE);sky.measurement.request();
+        }
+    }
+    private static void textIfChanged(TextView view,String value){
+        if(!value.contentEquals(view.getText()))view.setText(value);
     }
 
     private final class SkyView extends View implements Choreographer.FrameCallback {
         private final LiveSkyRenderer renderer;
+        private final PerformanceSession measurement;
         private final GestureDetector gestures;
         private final ScaleGestureDetector scale;
         private final Paint hudPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -372,6 +387,7 @@ public final class SkyActivity extends Activity {
         SkyView(Context context){
             super(context);setFocusable(true);setClickable(true);
             renderer=new LiveSkyRenderer(context);
+            measurement=new PerformanceSession(context,"Live-Sternkarte",()->active,SkyActivity.this::refreshInfo);
             scale=new ScaleGestureDetector(context,new ScaleGestureDetector.SimpleOnScaleGestureListener(){
                 @Override public boolean onScaleBegin(ScaleGestureDetector detector){pan=false;return true;}
                 @Override public boolean onScale(ScaleGestureDetector detector){
@@ -394,6 +410,7 @@ public final class SkyActivity extends Activity {
         }
         void stopFrames(){
             active=false;previousFrame=0;Choreographer.getInstance().removeFrameCallback(this);
+            measurement.cancel("Live-Sternkarte nicht mehr sichtbar");
             Log.i("SternfensterPerf","rendering_stopped");
         }
         void resetStatistics(){statisticsStart=System.nanoTime();drawnFrames=0;durationCount=0;renderFps=Double.NaN;}
@@ -422,11 +439,14 @@ public final class SkyActivity extends Activity {
             if(pip||compactWindow){
                 float font=Math.max(8,Math.min(14*getResources().getDisplayMetrics().density,getWidth()*.045f));
                 hudPaint.setTextSize(font);hudPaint.setStyle(Paint.Style.FILL);hudPaint.setColor(0xbb08121e);
-                float pad=font*.5f;canvas.drawRect(0,0,getWidth(),font*3.2f,hudPaint);
+                String progress=measurementProgress;
+                float pad=font*.5f;canvas.drawRect(0,0,getWidth(),font*(progress.isEmpty()?3.2f:4.5f),hudPaint);
                 hudPaint.setColor(0xffd6eaf5);canvas.drawText(pipTime,pad,font*1.25f,hudPaint);
                 canvas.drawText(pipStats,pad,font*2.65f,hudPaint);
+                if(!progress.isEmpty())canvas.drawText(progress,pad,font*3.95f,hudPaint);
             }
             long end=System.nanoTime();
+            if(measurement.isCollecting())measurement.recordDraw(start,end,displayHz(),getWidth(),getHeight(),canvas.isHardwareAccelerated(),followPhone,pip?PerformanceSession.PIP:PerformanceSession.FULLSCREEN);
             if(active){
                 drawnFrames++;if(durationCount<drawDurations.length)drawDurations[durationCount++]=end-start;
                 long elapsed=end-statisticsStart;

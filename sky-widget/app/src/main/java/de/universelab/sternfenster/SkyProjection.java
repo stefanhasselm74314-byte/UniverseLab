@@ -1,12 +1,21 @@
 package de.universelab.sternfenster;
 
-/** Pure Java azimuthal-equidistant projection in local east/north/up coordinates. */
+/**
+ * Pure Java azimuthal-equidistant projection in local east/north/up coordinates.
+ * A live renderer may reconfigure its own instance between frames. Instances
+ * remain confined to their owner thread; reconfiguration never retains a basis.
+ */
 final class SkyProjection {
-    private final double centerX, centerY, scale;
-    private final double ce, cn, cu, re, rn, ru, ue, un, uu;
+    private double centerX, centerY, scale;
+    private double ce, cn, cu, re, rn, ru, ue, un, uu;
     float x, y;
 
     SkyProjection(int width, int height, double azimuth, double altitude, double verticalFovDeg) {
+        configure(width, height, azimuth, altitude, verticalFovDeg);
+    }
+
+    /** Updates the camera without replacing this projection or changing its formula. */
+    void configure(int width, int height, double azimuth, double altitude, double verticalFovDeg) {
         centerX = Math.max(1, width) * .5;
         centerY = Math.max(1, height) * .5;
         double az = Math.toRadians(Double.isFinite(azimuth) ? azimuth : 180);
@@ -21,6 +30,11 @@ final class SkyProjection {
 
     /** Direct orthonormal F/R/U camera basis, retaining device roll through the zenith. */
     SkyProjection(int width, int height, double verticalFovDeg, double[] cameraBasis) {
+        configure(width, height, verticalFovDeg, cameraBasis);
+    }
+
+    /** Copies all nine basis values, so a caller can reuse its sensor array. */
+    void configure(int width, int height, double verticalFovDeg, double[] cameraBasis) {
         centerX = Math.max(1, width) * .5;
         centerY = Math.max(1, height) * .5;
         double fov = Double.isFinite(verticalFovDeg) ? Math.max(20, Math.min(160, verticalFovDeg)) : 90;

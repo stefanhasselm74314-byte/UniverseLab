@@ -91,7 +91,11 @@ public final class FloatingSkyService extends Service {
         if(!Settings.canDrawOverlays(this)){closeWindow();return START_NOT_STICKY;}
         try{
             promoteForeground();
-            if(root==null)createWindow(intent);else if(requested)sky.applyIntent(intent);
+            if(root==null)createWindow(intent);
+            else if(requested){
+                if(intent.getBooleanExtra(PerformanceSession.EXTRA_MEASURE,false))sky.startMeasurement();
+                else sky.applyIntent(intent);
+            }
             preferences.edit().putBoolean(ACTIVE,true).apply();updateScreenState();
             return START_STICKY;
         }catch(RuntimeException e){
@@ -138,7 +142,10 @@ public final class FloatingSkyService extends Service {
         LinearLayout controls=new LinearLayout(windowContext);controls.setGravity(Gravity.CENTER_VERTICAL);controls.setBaselineAligned(false);
         Button follow=button("Handy folgen","Handy im Live-Fenster folgen",()->sky.setFollowing(!sky.isFollowing()));
         controls.addView(follow,new LinearLayout.LayoutParams(0,-1,1));
-        sky.setControlsChanged(()->{follow.setEnabled(sky.hasSensors());follow.setText(sky.isFollowing()?"Handy: an":"Handy: aus");});
+        sky.setControlsChanged(()->{
+            boolean enabled=sky.hasSensors();if(follow.isEnabled()!=enabled)follow.setEnabled(enabled);
+            String text=sky.isFollowing()?"Handy: an":"Handy: aus";if(!text.contentEquals(follow.getText()))follow.setText(text);
+        });
         controls.addView(button("−","Im Live-Fenster herauszoomen",()->sky.zoom(1.22)),new LinearLayout.LayoutParams(dp(36),-1));
         controls.addView(button("+","Im Live-Fenster hineinzoomen",()->sky.zoom(1/1.22)),new LinearLayout.LayoutParams(dp(36),-1));
         TextView resize=new TextView(windowContext);resize.setText("↘");resize.setTextSize(25);resize.setTextColor(0xffbbd5e5);
