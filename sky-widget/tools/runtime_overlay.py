@@ -36,6 +36,7 @@ DRAG = "Live-Fenster verschieben"
 CLOSE = "Live-Fenster schließen"
 RESIZE = "Live-Fenstergröße ändern"
 WINDOW_TITLE = "Sternfenster Live-Fenster"
+FOREIGN_PACKAGE = "com.android.chrome"
 BOUNDS = re.compile(r"\[(-?\d+),(-?\d+)\]\[(-?\d+),(-?\d+)\]")
 OVERLAY_PERF = re.compile(
     r"mode=overlay\s+frames=(\d+)\s+fps=([\d.]+)\s+"
@@ -84,6 +85,9 @@ class OverlaySmoke(OrientationSmoke):
             "On this API35 emulator, UiAutomation sometimes omits the visible nonfocusable overlay, "
             "especially over the launcher. Persistence requires the app-owned visible WindowManager "
             "surface plus sensor/frame telemetry. Start, drag and resize still require accessibility controls.",
+            "Android Settings intentionally hides non-system overlays through HideNonSystemOverlayMixin. "
+            "The ordinary foreign-task test therefore uses the installed Chrome launcher activity; "
+            "protected Settings screens are not used as a positive overlay-visibility target.",
         ]
         self.close_geometry = None
         self.app_uid = None
@@ -566,13 +570,33 @@ class OverlaySmoke(OrientationSmoke):
             self.measure_overlay("home-overlay")
             self.capture("overlay-over-home")
 
-        with self.step("switching-to-settings-keeps-overlay-live"):
-            self.adb("shell", "am", "start", "-W", "-a", "android.settings.SETTINGS")
-            self.poll("Settings resumed behind the overlay", lambda: self.resumed_component().startswith("com.android.settings/"))
-            marker = self.set_pose(270, 35, "overlay-settings-west")
+        with self.step("switching-to-ordinary-foreign-app-keeps-overlay-live") as result:
+            # SettingsHomepageActivity hides non-system overlays deliberately.
+            # Resolve an actually installed ordinary launcher target instead;
+            # its unmodified welcome page is sufficient for this task switch.
+            resolved = self.adb("shell", "cmd", "package", "resolve-activity", "--brief",
+                                "-a", "android.intent.action.MAIN",
+                                "-c", "android.intent.category.LAUNCHER", "-p", FOREIGN_PACKAGE)
+            (self.out / "foreign-app-resolution.txt").write_text(resolved)
+            components = re.findall(r"(?m)^\s*(" + re.escape(FOREIGN_PACKAGE) + r"/[A-Za-z0-9_.$]+)\s*$", resolved)
+            if len(components) != 1:
+                raise TestFailure(f"Cannot resolve one installed Chrome launcher activity: {resolved}")
+            component = components[0]
+            launch = self.adb("shell", "am", "start", "-W", "-a", "android.intent.action.MAIN",
+                              "-c", "android.intent.category.LAUNCHER", "-n", component)
+            (self.out / "foreign-app-launch.txt").write_text(launch)
+            if "Error:" in launch or "Exception" in launch:
+                raise TestFailure(f"Android rejected the ordinary foreign-app launch: {launch}")
+            self.poll("Chrome resumed behind the overlay",
+                      lambda: self.resumed_component().startswith(FOREIGN_PACKAGE + "/"))
+            result.update(package=FOREIGN_PACKAGE, resolved_component=component,
+                          resumed_component=self.resumed_component(),
+                          interaction="Launcher activity only; unmodified welcome page; no web navigation")
+            self.report["foreign_app"] = dict(result)
+            marker = self.set_pose(270, 35, "overlay-foreign-app-west")
             self.wait_overlay_pose(marker, 270, 35)
-            self.measure_overlay("settings-overlay")
-            self.capture("overlay-over-settings")
+            self.measure_overlay("foreign-app-overlay")
+            self.capture("overlay-over-foreign-app")
 
         with self.step("removing-main-task-keeps-foreground-overlay-live") as result:
             task_id = self.main_task_id()
