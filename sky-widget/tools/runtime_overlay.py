@@ -289,12 +289,14 @@ class OverlaySmoke(OrientationSmoke):
         return observed
 
     def wait_overlay(self, label):
-        self.poll("visible, bounded application overlay", self.observe_overlay)
-        self.poll("foreground overlay service", self.foreground_service_running)
-        result = self.observe_overlay(label)
-        if result is None:
-            raise TestFailure("Overlay disappeared after becoming visible")
-        return result
+        def observed():
+            if not self.foreground_service_running():
+                return None
+            return self.observe_overlay(label)
+        # A fresh accessibility connection can report the focused Activity
+        # before its nonfocusable overlay. Keep the successful UI/WM observation
+        # from this bounded poll; a redundant one-shot read can be partial again.
+        return self.poll("visible, bounded application overlay with foreground service", observed)
 
     def drag_control(self, description, dx, dy):
         node = self.wait_node(description=description)
