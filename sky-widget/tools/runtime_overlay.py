@@ -80,6 +80,13 @@ class OverlaySmoke(OrientationSmoke):
             "https://android.googlesource.com/platform/frameworks/base/+/21f8b0e94160bb3615a569cc454c5c7ffc12221d/services/core/java/com/android/server/am/ActivityManagerShellCommand.java",
         ]
         self.report["performance_status"] = "RENDER_COUNTER_OBSERVATIONS_ONLY_NOT_PRESENTED_FPS"
+        self.report["observation_limits"] = [
+            "On this API35 emulator, UiAutomation sometimes omits the visible nonfocusable overlay, "
+            "especially over the launcher. Persistence requires the app-owned visible WindowManager "
+            "surface plus sensor/frame telemetry. Start, drag and resize still require accessibility controls.",
+        ]
+        self.close_geometry = None
+        self.app_uid = None
 
     def dump_ui(self):
         result = self.adb("shell", "am", "instrument", "-w", "-e", "snapshot", "true",
@@ -241,10 +248,12 @@ class OverlaySmoke(OrientationSmoke):
             raise TestFailure(f"Duplicate live overlays: {len(found)} accessibility windows")
         return found[0] if found else None
 
-    def window_manager_record(self):
+    def window_manager_record(self, *, allow_absent=False):
         raw = self.adb("shell", "dumpsys", "window", "windows")
         pattern = r"(?m)^\s*Window #\d+ Window\{[^\n]*" + re.escape(WINDOW_TITLE) + r"[^\n]*"
         matches = list(re.finditer(pattern, raw))
+        if not matches and allow_absent:
+            return ""
         if len(matches) != 1:
             raise TestFailure(f"Expected one named WindowManager overlay, found {len(matches)}")
         match = matches[0]
@@ -252,35 +261,60 @@ class OverlaySmoke(OrientationSmoke):
         end = re.search(r"(?m)^\s*Window #\d+ Window\{", tail)
         return match.group() + (tail[:end.start()] if end else tail)
 
-    def observe_overlay(self, label=None):
+    def observe_overlay(self, label=None, *, require_controls=True):
         root = self.dump_ui()
         window = self.overlay_window(root)
-        if window is None:
+        if window is None and require_controls:
             return None
-        for description in (DRAG, CLOSE, RESIZE):
-            control = self.node(window, description=description)
-            if control is None or control.get("enabled") != "true":
-                raise TestFailure(f"Overlay control missing or disabled: {description}")
-            bounds_of(control)
         width, height = int(root.get("screen-width", "0")), int(root.get("screen-height", "0"))
         if width <= 0 or height <= 0:
             raise TestFailure("Probe did not report usable display dimensions")
-        bounds = bounds_of(window)
-        if not (0 <= bounds[0] < bounds[2] <= width and 0 <= bounds[1] < bounds[3] <= height):
-            raise TestFailure(f"Overlay is outside the display: {bounds}, display={width}x{height}")
         wm = self.window_manager_record()
         if not re.search(r"\bty=(?:APPLICATION_OVERLAY|2038)\b|\btype=2038\b", wm):
             raise TestFailure("Named window is not TYPE_APPLICATION_OVERLAY")
+        if not re.search(r"\bpackage=" + re.escape(PACKAGE) + r"\b", wm):
+            raise TestFailure("Named overlay window is not owned by Sternfenster")
+        if self.app_uid is None or not re.search(r"\bmOwnerUid=" + str(self.app_uid) + r"\b", wm):
+            raise TestFailure("Overlay WindowManager owner UID does not match the installed package")
+        for evidence in (r"\bmHasSurface=true\b", r"\bSurface:\s*shown=true\b", r"\bmDrawState=HAS_DRAWN\b",
+                         r"\bisOnScreen=true\b", r"\bisVisible=true\b", r"\bmObscured=false\b"):
+            if not re.search(evidence, wm):
+                raise TestFailure(f"Overlay lacks required visible, drawn surface evidence: {evidence}")
         frame = re.search(r"(?:\bmFrame=|\bframe=)(\[-?\d+,-?\d+\]\[-?\d+,-?\d+\])", wm)
         if not frame:
             raise TestFailure("No independently observed WindowManager frame for the overlay")
         wm_bounds = tuple(map(int, BOUNDS.fullmatch(frame.group(1)).groups()))
         if not (0 <= wm_bounds[0] < wm_bounds[2] <= width and 0 <= wm_bounds[1] < wm_bounds[3] <= height):
             raise TestFailure(f"WindowManager placed the overlay outside the display: {wm_bounds}")
+        bounds = wm_bounds
+        if require_controls:
+            bounds = bounds_of(window)
+            if not (0 <= bounds[0] < bounds[2] <= width and 0 <= bounds[1] < bounds[3] <= height):
+                raise TestFailure(f"Overlay accessibility window is outside the display: {bounds}")
+            for description in (DRAG, CLOSE, RESIZE):
+                control = self.node(window, description=description)
+                if control is None or control.get("enabled") != "true":
+                    raise TestFailure(f"Overlay control missing or disabled: {description}")
+                control_bounds = bounds_of(control)
+                if not (bounds[0] <= control_bounds[0] < control_bounds[2] <= bounds[2]
+                        and bounds[1] <= control_bounds[1] < control_bounds[3] <= bounds[3]):
+                    raise TestFailure(f"Overlay control lies outside its window: {description}")
+                if description == CLOSE:
+                    if control.get("clickable") != "true":
+                        raise TestFailure("Observed overlay close button is not clickable")
+                    self.close_geometry = {"window_bounds": bounds, "control_bounds": control_bounds,
+                                           "phase": self.phase, "label": label,
+                                           "enabled": True, "clickable": True}
         observed = {"phase": self.phase, "label": label, "bounds": bounds,
                     "wm_bounds": wm_bounds, "display_size": [width, height],
-                    "window_title": window.get("title"), "window_id": window.get("id"),
-                    "window_type_confirmed": "TYPE_APPLICATION_OVERLAY"}
+                    "window_title": window.get("title") if window is not None else None,
+                    "window_id": window.get("id") if window is not None else None,
+                    "accessibility_overlay_present": window is not None,
+                    "accessibility_controls_required": require_controls,
+                    "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+                    "owner_uid": self.app_uid, "surface_shown": True, "has_drawn": True,
+                    "is_visible": True, "is_on_screen": True, "obscured": False,
+                    "visibility_source": "WindowManager app-owned surface and screen bounds"}
         if label:
             self.report["overlay_observations"].append(observed)
             (self.out / f"{label}-window-manager.txt").write_text(wm)
@@ -288,11 +322,11 @@ class OverlaySmoke(OrientationSmoke):
             self.save_report()
         return observed
 
-    def wait_overlay(self, label):
+    def wait_overlay(self, label, *, require_controls=True):
         def observed():
             if not self.foreground_service_running():
                 return None
-            return self.observe_overlay(label)
+            return self.observe_overlay(label, require_controls=require_controls)
         # A fresh accessibility connection can report the focused Activity
         # before its nonfocusable overlay. Keep the successful UI/WM observation
         # from this bounded poll; a redundant one-shot read can be partial again.
@@ -339,7 +373,7 @@ class OverlaySmoke(OrientationSmoke):
         return summary
 
     def wait_overlay_pose(self, marker, azimuth, altitude):
-        self.wait_overlay(self.phase + "-pose")
+        self.wait_overlay(self.phase + "-pose", require_controls=False)
         # The compact Activity check has ended. Sensor samples are additionally
         # scoped to mode=overlay so Activity telemetry cannot satisfy this check.
         result = self.wait_pose(marker, azimuth, altitude, ui=False)
@@ -367,12 +401,43 @@ class OverlaySmoke(OrientationSmoke):
         return True
 
     def overlay_absent(self):
-        return self.overlay_window(self.dump_ui()) is None and not self.service_record()
+        return not self.service_record() and not self.window_manager_record(allow_absent=True)
+
+    def tap_overlay_close(self, label):
+        current = self.observe_overlay(label + "-before-close", require_controls=False)
+        frame = current["wm_bounds"]
+        root = ET.fromstring(self.last_xml)
+        window = self.overlay_window(root)
+        control = self.node(window, description=CLOSE) if window is not None else None
+        if control is not None and control.get("enabled") == "true" and control.get("clickable") == "true":
+            bounds = bounds_of(control)
+            x, y = (bounds[0] + bounds[2]) // 2, (bounds[1] + bounds[3]) // 2
+            source = "current enabled accessibility close button and visible WindowManager frame"
+            reference = None
+        else:
+            reference = self.close_geometry
+            if not reference or not reference["enabled"] or not reference["clickable"]:
+                raise TestFailure("No previously observed enabled close-button geometry for a physical tap")
+            old = reference["window_bounds"]
+            if (frame[2] - frame[0], frame[3] - frame[1]) != (old[2] - old[0], old[3] - old[1]):
+                raise TestFailure("Overlay size changed; previously observed close-button geometry cannot be reused")
+            cb = reference["control_bounds"]
+            x = frame[0] + (cb[0] + cb[2]) // 2 - old[0]
+            y = frame[1] + (cb[1] + cb[3]) // 2 - old[1]
+            source = "previously observed enabled close button, unchanged size, translated to current visible WindowManager frame"
+        if not (frame[0] <= x < frame[2] and frame[1] <= y < frame[3]):
+            raise TestFailure("Observed close-button tap would fall outside the current overlay frame")
+        self.report.setdefault("close_actions", []).append({
+            "phase": self.phase, "label": label, "source": source, "point": [x, y],
+            "current_wm_bounds": frame, "previous_accessibility_geometry": reference,
+        })
+        self.save_report()
+        self.adb("shell", "input", "tap", str(x), str(y))
 
     def close_overlay(self, label):
         sensor_marker = self.mark_sensor_window(label + "-close")
         perf_marker = self.mark_window(label + "-close")
-        self.tap(description=CLOSE)
+        self.tap_overlay_close(label)
         self.poll("explicit close removed overlay window and service", self.overlay_absent)
         self.poll("overlay sensor listener released",
                   lambda: "listening_stopped" in self.sensor_since(sensor_marker))
@@ -429,6 +494,13 @@ class OverlaySmoke(OrientationSmoke):
             self.adb("shell", "settings", "put", "system", "user_rotation", "0")
             self.adb("install", "-r", str(self.args.candidate.resolve()), timeout=90)
             self.adb("shell", "pm", "clear", PACKAGE)
+            package_uid = self.adb("shell", "dumpsys", "package", PACKAGE)
+            match = re.search(r"(?m)^\s*(?:appId|userId)=(\d+)\s*$", package_uid)
+            current_user = self.adb("shell", "am", "get-current-user").strip()
+            if not match or current_user != "0":
+                raise TestFailure("Cannot observe Sternfenster app ID on the disposable emulator's primary user")
+            self.app_uid = int(match.group(1))
+            self.report["environment"]["app_uid"] = self.app_uid
             self.adb("shell", "appops", "set", PACKAGE, "SYSTEM_ALERT_WINDOW", "allow")
             self.adb("shell", "pm", "grant", PACKAGE, "android.permission.POST_NOTIFICATIONS")
             permission = self.adb("shell", "appops", "get", PACKAGE, "SYSTEM_ALERT_WINDOW")
@@ -518,7 +590,7 @@ class OverlaySmoke(OrientationSmoke):
             after_pid = self.adb("shell", "pidof", PACKAGE).strip()
             if after_pid != before_pid:
                 raise TestFailure("Main-task removal unexpectedly replaced the running foreground-service process")
-            observation = self.wait_overlay("overlay-after-main-task-removal")
+            observation = self.wait_overlay("overlay-after-main-task-removal", require_controls=False)
             self.persisted_bounds = observation["bounds"]
             result.update(task_id=task_id, before_pid=before_pid, after_pid=after_pid,
                           method="adb shell am stack remove observedTaskId; ActivityTaskManager.removeTask; not force-stop")
