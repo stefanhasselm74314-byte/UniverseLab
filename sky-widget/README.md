@@ -148,7 +148,13 @@ Displayrotation, Roll, Deklination, Polübergänge und Quaternionen) sowie
 Gravitations- und Magnetfeldwerte in echte Emulator-Sensoren und prüft die von der
 App sichtbaren Winkel, Moduswechsel, Hintergrund-Stopp und PiP. Es gibt keinen
 Testeingang für simulierte Posen in der ausgelieferten App. Ergebnisse der aktuellen
-Version stehen nach Abschluss in `VALIDATION_v0.3.1.json`. Physische Kompassgenauigkeit
+Version stehen in `VALIDATION_v0.3.1.json`. Alle zehn Sensorprüfungen, sieben
+Live-/PiP-Funktionsprüfungen und zehn historischen Regressionstests bestanden.
+96.346 Orientierungs-/Projektionsprüfungen sowie 7.484 bestehende
+Projektionsprüfungen bestanden ebenfalls. Nach den Laufzeittests wurde nur noch
+die vertikale Ausrichtung der vier Bewegungsschaltflächen korrigiert und die APK
+neu gebaut/signaturgeprüft; dieser kleine Layoutnachtrag wurde nicht erneut im
+Emulator ausgeführt. Physische Kompassgenauigkeit
 und eine garantierte Mindestbildrate auf dem Telefon sind durch den Emulator nicht
 bewiesen.
 

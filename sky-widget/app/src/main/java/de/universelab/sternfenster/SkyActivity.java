@@ -107,6 +107,9 @@ public final class SkyActivity extends Activity {
         addControl(zoom,"+",1,"Hineinzoomen",()->{fov/=1.22;clamp();refreshInfo();});
         controls.addView(zoom);
         LinearLayout motion=new LinearLayout(this);
+        // Mixed one/two-line captions must not shift taller buttons below the row.
+        motion.setBaselineAligned(false);
+        motion.setGravity(android.view.Gravity.CENTER_VERTICAL);
         followButton=addControl(motion,"Handy folgen: an",1,"Blickrichtung des Handys folgen",()->{
             setFollowing(!followPhone);refreshInfo();
         });

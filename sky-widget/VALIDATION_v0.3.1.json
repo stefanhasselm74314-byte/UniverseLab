@@ -1,0 +1,756 @@
+{
+  "release": "0.3.1",
+  "versionCode": 5,
+  "apk": {
+    "filename": "Sternfenster_Android_v0.3.1.apk",
+    "bytes": 267000,
+    "sha256": "dbccca37ec207b874c191e8e25d2c7f6463c5c1e2d0babb5ced0e1c678bdc8e0",
+    "signer_certificate_sha256": "88ea977a6afba06d2211611bde63fc496ee6c2f3d2e5c8027f1c2a444ffd8180",
+    "signature_verification": "apksigner v2 and v3 passed; same release certificate as v0.3.0"
+  },
+  "build": {
+    "local": "passed",
+    "compile_sdk": 36,
+    "target_sdk": 36,
+    "minimum_sdk": 26,
+    "ci_run_url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44890244341",
+    "ci_status": "passed"
+  },
+  "geometry": {
+    "device_orientation_and_basis_projection_checks": 96346,
+    "existing_projection_checks": 7484,
+    "status": "passed",
+    "coverage": [
+      "Independent Rodrigues rotations and quaternion roundtrips",
+      "Camera axis -device Z",
+      "East-positive magnetic declination",
+      "Display rotations 0/90/180/270",
+      "Roll and zenith/nadir passage",
+      "Projection center, four edges, four corners and antipode",
+      "Quaternion sign ambiguity, aliasing and invalid inputs"
+    ]
+  },
+  "sensor_contract": {
+    "default": "Following enabled on first open, including widget opening; thereafter preference retained",
+    "manual_actions": [
+      "N/O/S/W",
+      "single-finger pan",
+      "automatic-pan enabled",
+      "reset"
+    ],
+    "zoom_preserves_follow": true,
+    "camera_axis": "rear-camera -device Z; camera is not opened",
+    "sampling_request_hz": 100,
+    "filter": "Quaternion shortest-path nlerp with per-frame alpha=1-exp(-dt/0.025)",
+    "declination": "Android GeomagneticField with real clock and saved/default site; zero altitude approximation",
+    "visible_lifecycle": "start in onStart; keep in paused visible PiP; unregister in onStop",
+    "freshness": "<2 seconds; both raw fallback streams checked independently"
+  },
+  "runtime": {
+    "orientation": {
+      "run_url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44890244445",
+      "status": "sensor_follow_integration_passed",
+      "artifact_id": 14701777125,
+      "artifact_sha256": "eec73edcacdca3ff12971cf01318461e4d00ca13892fb138967216ac4cbb8b7c",
+      "report": {
+        "status": "sensor_follow_integration_passed",
+        "checks": [
+          {
+            "name": "device-and-real-sensor-overrides",
+            "status": "passed",
+            "seconds": 2.42
+          },
+          {
+            "name": "default-follow-and-north-up-pose",
+            "status": "passed",
+            "seconds": 15.17
+          },
+          {
+            "name": "changing-phone-direction-and-elevation",
+            "status": "passed",
+            "seconds": 8.18
+          },
+          {
+            "name": "zoom-preserves-follow-mode",
+            "status": "passed",
+            "seconds": 18.7
+          },
+          {
+            "name": "manual-direction-disables-follow",
+            "status": "passed",
+            "seconds": 20.07
+          },
+          {
+            "name": "reenable-follow-and-display-rotation",
+            "status": "passed",
+            "seconds": 17.58
+          },
+          {
+            "name": "pan-disables-follow-and-reset-is-manual",
+            "status": "passed",
+            "seconds": 17.37
+          },
+          {
+            "name": "hidden-stops-sensors-and-resume-restarts",
+            "status": "passed",
+            "seconds": 8.89
+          },
+          {
+            "name": "sensor-follow-continues-in-pip-on-home",
+            "status": "passed",
+            "seconds": 9.6
+          },
+          {
+            "name": "no-app-crash-or-anr",
+            "status": "passed",
+            "seconds": 0.72
+          }
+        ],
+        "environment": {
+          "sdk": 35,
+          "release": "15",
+          "model": "sdk_gphone64_x86_64",
+          "sensor_input": "Android emulator raw acceleration/magnetic-field/gyroscope overrides"
+        },
+        "test": "Sternfenster device orientation integration",
+        "performance": {},
+        "user_device_test": "NOT_PERFORMED",
+        "minimum_60_fps_guarantee": "NOT_ESTABLISHED",
+        "sensor_inputs": [
+          {
+            "label": "initial-north",
+            "magnetic_camera_azimuth": 0,
+            "camera_altitude": 25,
+            "readback": {
+              "acceleration": [
+                0.0,
+                8.88784,
+                -4.14447
+              ],
+              "magnetic-field": [
+                -0.0,
+                -39.2571,
+                -36.863
+              ]
+            },
+            "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+          },
+          {
+            "label": "turn-east-tilt-up",
+            "magnetic_camera_azimuth": 90,
+            "camera_altitude": 55,
+            "readback": {
+              "acceleration": [
+                0.0,
+                5.62486,
+                -8.03314
+              ],
+              "magnetic-field": [
+                -50.0,
+                -11.4715,
+                16.383
+              ]
+            },
+            "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+          },
+          {
+            "label": "manual-view-new-phone-pose",
+            "magnetic_camera_azimuth": 270,
+            "camera_altitude": 35,
+            "readback": {
+              "acceleration": [
+                0.0,
+                8.03314,
+                -5.62486
+              ],
+              "magnetic-field": [
+                50.0,
+                -16.383,
+                11.4715
+              ]
+            },
+            "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+          },
+          {
+            "label": "phone-moved-while-hidden",
+            "magnetic_camera_azimuth": 180,
+            "camera_altitude": 60,
+            "readback": {
+              "acceleration": [
+                0.0,
+                4.90333,
+                -8.49281
+              ],
+              "magnetic-field": [
+                -0.0,
+                33.3013,
+                42.3205
+              ]
+            },
+            "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+          },
+          {
+            "label": "pip-phone-moved",
+            "magnetic_camera_azimuth": 45,
+            "camera_altitude": 15,
+            "readback": {
+              "acceleration": [
+                0.0,
+                9.4725,
+                -2.53815
+              ],
+              "magnetic-field": [
+                -35.3553,
+                -28.4692,
+                -28.9743
+              ]
+            },
+            "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+          }
+        ],
+        "observed_poses": [
+          {
+            "phase": "default-follow-and-north-up-pose",
+            "expected_magnetic_azimuth": 0,
+            "expected_altitude": 25,
+            "observed": {
+              "ui": {
+                "az": 5.0,
+                "alt": 25.0,
+                "text": "09:37:07 · Nord 5° · Blickhöhe 25°"
+              },
+              "telemetry": {
+                "following": "true",
+                "listening": "true",
+                "fresh": "true",
+                "az": 5.33,
+                "alt": 25.02,
+                "mode": "rotation_vector",
+                "log_line": "         1795253825.926  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=5.33 alt=25.02 mode=rotation_vector accuracy=3"
+              }
+            }
+          },
+          {
+            "phase": "changing-phone-direction-and-elevation",
+            "expected_magnetic_azimuth": 90,
+            "expected_altitude": 55,
+            "observed": {
+              "ui": {
+                "az": 95.0,
+                "alt": 55.0,
+                "text": "09:37:16 · Ost 95° · Blickhöhe 55°"
+              },
+              "telemetry": {
+                "following": "true",
+                "listening": "true",
+                "fresh": "true",
+                "az": 93.77,
+                "alt": 54.71,
+                "mode": "rotation_vector",
+                "log_line": "         1795253833.219  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=93.77 alt=54.71 mode=rotation_vector accuracy=3"
+              }
+            }
+          },
+          {
+            "phase": "zoom-preserves-follow-mode",
+            "expected_magnetic_azimuth": 90,
+            "expected_altitude": 55,
+            "observed": {
+              "ui": {
+                "az": 95.0,
+                "alt": 55.0,
+                "text": "09:37:29 · Ost 95° · Blickhöhe 55°"
+              },
+              "telemetry": {
+                "following": "true",
+                "listening": "true",
+                "fresh": "true",
+                "az": 95.3,
+                "alt": 55.02,
+                "mode": "rotation_vector",
+                "log_line": "         1795253846.608  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.30 alt=55.02 mode=rotation_vector accuracy=3"
+              }
+            }
+          },
+          {
+            "phase": "reenable-follow-and-display-rotation",
+            "expected_magnetic_azimuth": 270,
+            "expected_altitude": 35,
+            "observed": {
+              "ui": {
+                "az": 275.0,
+                "alt": 35.0,
+                "text": "09:38:04 · West 275° · Blickhöhe 35°"
+              },
+              "telemetry": {
+                "following": "true",
+                "listening": "true",
+                "fresh": "true",
+                "az": 275.31,
+                "alt": 35.02,
+                "mode": "rotation_vector",
+                "log_line": "         1795253883.678  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3"
+              }
+            }
+          },
+          {
+            "phase": "reenable-follow-and-display-rotation",
+            "expected_magnetic_azimuth": 270,
+            "expected_altitude": 35,
+            "observed": {
+              "ui": {
+                "az": 275.0,
+                "alt": 35.0,
+                "text": "09:38:09 · West 275° · Blickhöhe 35°"
+              },
+              "telemetry": {
+                "following": "true",
+                "listening": "true",
+                "fresh": "true",
+                "az": 275.31,
+                "alt": 35.02,
+                "mode": "rotation_vector",
+                "log_line": "         1795253887.997  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3"
+              }
+            }
+          },
+          {
+            "phase": "hidden-stops-sensors-and-resume-restarts",
+            "expected_magnetic_azimuth": 180,
+            "expected_altitude": 60,
+            "observed": {
+              "ui": {
+                "az": 185.0,
+                "alt": 60.0,
+                "text": "09:38:39 · Süd 185° · Blickhöhe 60°"
+              },
+              "telemetry": {
+                "following": "true",
+                "listening": "true",
+                "fresh": "true",
+                "az": 185.34,
+                "alt": 60.02,
+                "mode": "rotation_vector",
+                "log_line": "         1795253918.096  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=185.34 alt=60.02 mode=rotation_vector accuracy=3"
+              }
+            }
+          },
+          {
+            "phase": "sensor-follow-continues-in-pip-on-home",
+            "expected_magnetic_azimuth": 45,
+            "expected_altitude": 15,
+            "observed": {
+              "ui": {
+                "az": 52.94,
+                "alt": 15.33,
+                "source": "visible PiP sensor telemetry"
+              },
+              "telemetry": {
+                "following": "true",
+                "listening": "true",
+                "fresh": "true",
+                "az": 52.94,
+                "alt": 15.33,
+                "mode": "rotation_vector",
+                "log_line": "         1795253927.383  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=52.94 alt=15.33 mode=rotation_vector accuracy=3"
+              }
+            }
+          }
+        ],
+        "physical_compass_accuracy": "NOT_MEASURED",
+        "performance_status": "NOT_A_PERFORMANCE_BENCHMARK",
+        "sources": [
+          "https://developer.android.com/studio/run/emulator-console",
+          "https://developer.android.com/reference/android/hardware/SensorManager#getRotationMatrix(float[],%20float[],%20float[],%20float[])",
+          "https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android/android-emu/android/console.cpp"
+        ],
+        "apk_sha256": "e65c57db7235dd2d29ed38c6e376b21b355bb3217c309c8d5fb8af3c5774235c"
+      }
+    },
+    "live_pip": {
+      "run_url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44890244337",
+      "status": "functional_checks_passed",
+      "artifact_id": 14701433228,
+      "artifact_sha256": "cffff3b7ca44882d0e100fe8d8363c7e5c1ac713a6f85bccc2ce774bceceaa44",
+      "report": {
+        "status": "functional_checks_passed",
+        "checks": [
+          {
+            "name": "device-and-install",
+            "status": "passed",
+            "seconds": 3.18
+          },
+          {
+            "name": "cold-start-and-live-controls",
+            "status": "passed",
+            "seconds": 46.35
+          },
+          {
+            "name": "fullscreen-continuous-rendering",
+            "status": "passed",
+            "performance_key": "fullscreen",
+            "seconds": 14.7
+          },
+          {
+            "name": "background-stop-and-resume",
+            "status": "passed",
+            "seconds": 17.78
+          },
+          {
+            "name": "picture-in-picture-on-home",
+            "status": "passed",
+            "windowing_mode": 2,
+            "mode_name": "pinned",
+            "pid": "2399",
+            "seconds": 21.88
+          },
+          {
+            "name": "dismiss-pip-and-process-restart",
+            "status": "passed",
+            "seconds": 7.32
+          },
+          {
+            "name": "no-app-crash-or-anr",
+            "status": "passed",
+            "seconds": 0.96
+          }
+        ],
+        "environment": {
+          "sdk": 35,
+          "release": "15",
+          "model": "sdk_gphone64_x86_64",
+          "renderer": "Android emulator with SwiftShader; not a Samsung device benchmark"
+        },
+        "test": "Sternfenster live renderer and PiP",
+        "performance": {
+          "fullscreen": {
+            "sample_count": 10,
+            "drawn_frames_in_reported_windows": 198,
+            "render_fps_min": 18.1,
+            "render_fps_median": 18.95,
+            "render_fps_weighted_mean": 19.115,
+            "render_fps_max": 20.45,
+            "maximum_reported_draw_p95_ms": 24.823,
+            "display_hz_min": 60.0,
+            "display_hz_max": 60.0,
+            "nominal_60_render_target_observed": false,
+            "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+            "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+            "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+            "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+            "samples": [
+              {
+                "mode": "fullscreen",
+                "frames": 19,
+                "fps": 18.38,
+                "draw_p95_ms": 15.239,
+                "display_hz": 60.0,
+                "log_line": "         1795253873.931  2399  2399 I SternfensterPerf: mode=fullscreen frames=19 fps=18.38 draw_p95_ms=15.239 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "fullscreen",
+                "frames": 19,
+                "fps": 18.88,
+                "draw_p95_ms": 24.823,
+                "display_hz": 60.0,
+                "log_line": "         1795253874.938  2399  2399 I SternfensterPerf: mode=fullscreen frames=19 fps=18.88 draw_p95_ms=24.823 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "fullscreen",
+                "frames": 19,
+                "fps": 18.1,
+                "draw_p95_ms": 3.638,
+                "display_hz": 60.0,
+                "log_line": "         1795253875.987  2399  2399 I SternfensterPerf: mode=fullscreen frames=19 fps=18.10 draw_p95_ms=3.638 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "fullscreen",
+                "frames": 21,
+                "fps": 20.45,
+                "draw_p95_ms": 2.822,
+                "display_hz": 60.0,
+                "log_line": "         1795253877.014  2399  2399 I SternfensterPerf: mode=fullscreen frames=21 fps=20.45 draw_p95_ms=2.822 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "fullscreen",
+                "frames": 21,
+                "fps": 20.05,
+                "draw_p95_ms": 0.744,
+                "display_hz": 60.0,
+                "log_line": "         1795253878.062  2399  2399 I SternfensterPerf: mode=fullscreen frames=21 fps=20.05 draw_p95_ms=0.744 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "fullscreen",
+                "frames": 19,
+                "fps": 18.71,
+                "draw_p95_ms": 8.287,
+                "display_hz": 60.0,
+                "log_line": "         1795253879.077  2399  2399 I SternfensterPerf: mode=fullscreen frames=19 fps=18.71 draw_p95_ms=8.287 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "fullscreen",
+                "frames": 20,
+                "fps": 18.63,
+                "draw_p95_ms": 0.855,
+                "display_hz": 60.0,
+                "log_line": "         1795253880.151  2399  2399 I SternfensterPerf: mode=fullscreen frames=20 fps=18.63 draw_p95_ms=0.855 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "fullscreen",
+                "frames": 20,
+                "fps": 19.64,
+                "draw_p95_ms": 2.77,
+                "display_hz": 60.0,
+                "log_line": "         1795253881.169  2399  2399 I SternfensterPerf: mode=fullscreen frames=20 fps=19.64 draw_p95_ms=2.770 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "fullscreen",
+                "frames": 20,
+                "fps": 19.02,
+                "draw_p95_ms": 2.932,
+                "display_hz": 60.0,
+                "log_line": "         1795253882.221  2399  2399 I SternfensterPerf: mode=fullscreen frames=20 fps=19.02 draw_p95_ms=2.932 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "fullscreen",
+                "frames": 20,
+                "fps": 19.32,
+                "draw_p95_ms": 6.869,
+                "display_hz": 60.0,
+                "log_line": "         1795253883.256  2399  2399 I SternfensterPerf: mode=fullscreen frames=20 fps=19.32 draw_p95_ms=6.869 hz=60.0 pan=true",
+                "pan_active": true
+              }
+            ],
+            "requested_observation_seconds": 10,
+            "pan_telemetry_available": true,
+            "android_gfxinfo_total_frames": 196
+          },
+          "pip": {
+            "sample_count": 8,
+            "drawn_frames_in_reported_windows": 116,
+            "render_fps_min": 11.78,
+            "render_fps_median": 13.530000000000001,
+            "render_fps_weighted_mean": 13.481,
+            "render_fps_max": 15.62,
+            "maximum_reported_draw_p95_ms": 24.51,
+            "display_hz_min": 60.0,
+            "display_hz_max": 60.0,
+            "nominal_60_render_target_observed": false,
+            "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+            "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+            "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+            "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+            "samples": [
+              {
+                "mode": "pip",
+                "frames": 14,
+                "fps": 13.59,
+                "draw_p95_ms": 7.277,
+                "display_hz": 60.0,
+                "log_line": "         1795253914.032  2399  2399 I SternfensterPerf: mode=pip frames=14 fps=13.59 draw_p95_ms=7.277 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "pip",
+                "frames": 13,
+                "fps": 12.03,
+                "draw_p95_ms": 24.51,
+                "display_hz": 60.0,
+                "log_line": "         1795253915.112  2399  2399 I SternfensterPerf: mode=pip frames=13 fps=12.03 draw_p95_ms=24.510 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "pip",
+                "frames": 15,
+                "fps": 14.6,
+                "draw_p95_ms": 18.394,
+                "display_hz": 60.0,
+                "log_line": "         1795253916.140  2399  2399 I SternfensterPerf: mode=pip frames=15 fps=14.60 draw_p95_ms=18.394 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "pip",
+                "frames": 15,
+                "fps": 12.27,
+                "draw_p95_ms": 0.962,
+                "display_hz": 60.0,
+                "log_line": "         1795253917.426  2399  2399 I SternfensterPerf: mode=pip frames=15 fps=12.27 draw_p95_ms=0.962 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "pip",
+                "frames": 15,
+                "fps": 14.96,
+                "draw_p95_ms": 21.596,
+                "display_hz": 60.0,
+                "log_line": "         1795253918.365  2399  2399 I SternfensterPerf: mode=pip frames=15 fps=14.96 draw_p95_ms=21.596 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "pip",
+                "frames": 15,
+                "fps": 13.47,
+                "draw_p95_ms": 14.797,
+                "display_hz": 60.0,
+                "log_line": "         1795253919.478  2399  2399 I SternfensterPerf: mode=pip frames=15 fps=13.47 draw_p95_ms=14.797 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "pip",
+                "frames": 13,
+                "fps": 11.78,
+                "draw_p95_ms": 3.598,
+                "display_hz": 60.0,
+                "log_line": "         1795253920.582  2399  2399 I SternfensterPerf: mode=pip frames=13 fps=11.78 draw_p95_ms=3.598 hz=60.0 pan=true",
+                "pan_active": true
+              },
+              {
+                "mode": "pip",
+                "frames": 16,
+                "fps": 15.62,
+                "draw_p95_ms": 7.23,
+                "display_hz": 60.0,
+                "log_line": "         1795253921.607  2399  2399 I SternfensterPerf: mode=pip frames=16 fps=15.62 draw_p95_ms=7.230 hz=60.0 pan=true",
+                "pan_active": true
+              }
+            ],
+            "requested_observation_seconds": 8,
+            "pan_telemetry_available": true,
+            "android_gfxinfo_total_frames": 116
+          }
+        },
+        "user_device_test": "NOT_PERFORMED",
+        "minimum_60_fps_guarantee": "NOT_ESTABLISHED",
+        "apk_sha256": "cb22e626ff87272015957fe49deb42b09a5c9b21d187ae18624d29c434141888",
+        "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED_IN_ALL_WINDOWS"
+      }
+    },
+    "regression": {
+      "run_url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44890244276",
+      "status": "passed",
+      "artifact_id": 14701673910,
+      "artifact_sha256": "5ab961dec83dc495364de3c514e083d30342bad3e12842fe642ad2551adcd4f3",
+      "report": {
+        "status": "passed",
+        "checks": [
+          {
+            "name": "device-ready",
+            "status": "passed",
+            "seconds": 0.31
+          },
+          {
+            "name": "baseline-exact-crash",
+            "status": "passed",
+            "matched_stack_tokens": [
+              "Process: de.universelab.sternfenster",
+              "FATAL EXCEPTION",
+              "java.lang.NullPointerException",
+              "PhoneWindow.getInsetsController",
+              "Ui.install"
+            ],
+            "expected_failure_reproduced": true,
+            "seconds": 8.45
+          },
+          {
+            "name": "candidate-cold-start",
+            "status": "passed",
+            "seconds": 8.68
+          },
+          {
+            "name": "open-live-sky",
+            "status": "passed",
+            "seconds": 21.4
+          },
+          {
+            "name": "visible-controls-and-clock",
+            "status": "passed",
+            "clock_before": "09:38:24 · Ost 90° · Blickhöhe 42°",
+            "clock_after": "09:38:26 · Ost 90° · Blickhöhe 42°",
+            "seconds": 59.08
+          },
+          {
+            "name": "home-and-resume-same-activity",
+            "status": "passed",
+            "seconds": 9.44
+          },
+          {
+            "name": "rotate-and-restore-state",
+            "status": "passed",
+            "seconds": 18.86
+          },
+          {
+            "name": "process-cold-restart",
+            "status": "passed",
+            "old_pid": "2878",
+            "new_pid": "5373",
+            "seconds": 12.63
+          },
+          {
+            "name": "back-and-reopen",
+            "status": "passed",
+            "seconds": 13.6
+          },
+          {
+            "name": "no-candidate-crash-or-anr",
+            "status": "passed",
+            "seconds": 1.09
+          }
+        ],
+        "environment": {
+          "sdk": 35,
+          "release": "15",
+          "model": "sdk_gphone64_x86_64"
+        },
+        "baseline_sha256": "413e37c3b42123f2905113649acad7a6f47cc6e10cb85715eedece568f889c38",
+        "candidate_sha256": "dcaacf77320cfd49c7d14517006322cffd66b20bdc9df0d67e186d76a22130cb"
+      }
+    }
+  },
+  "physical_device_orientation_accuracy": "NOT_MEASURED",
+  "v031_physical_device_frame_rate": "NOT_MEASURED",
+  "limits": [
+    "Emulator sensor injection checks integration, not physical compass calibration or field accuracy.",
+    "Displayed render FPS counts onDraw calls, not guaranteed compositor presentations.",
+    "No universal minimum 60 FPS guarantee.",
+    "No camera image, Sun/Moon/planets, precession, nutation or refraction model."
+  ],
+  "runtime_tested_application_source_commit": "05b5360162ccf6809d8e91c987f076990518d8d9",
+  "post_runtime_layout_adjustment": {
+    "file": "app/src/main/java/de/universelab/sternfenster/SkyActivity.java",
+    "change": "Motion-button row disables baseline alignment and centers children vertically so mixed one/two-line button captions remain inside the row.",
+    "scope": "Two layout setter calls and a comment; no sensor, rendering, permission, lifecycle or geometry change.",
+    "verification": "Rebuilt and apksigner verification passed. No second emulator run after this small layout adjustment."
+  },
+  "final_application_source_sha256": {
+    "app/src/main/AndroidManifest.xml": "a00d70666d55e2397e7d3753a7ff4ebb40bc6c4a6d1b0419ee86b68f8fb0f827",
+    "app/src/main/assets/stars.csv": "8b36f9e06f7ab275506213cb6ed61ea75570dbfb19725c31ca189fee9196133b",
+    "app/src/main/java/de/universelab/sternfenster/DeviceOrientationMath.java": "0945dfb8d92f4cc334ffa0469749a0dcbcd0f9308cd136c4af02dee20ec63100",
+    "app/src/main/java/de/universelab/sternfenster/DeviceOrientationTracker.java": "2e9f1b533391af343b2855c77efb82f47e2dff95f0d311005d908fd0e88cc029",
+    "app/src/main/java/de/universelab/sternfenster/LiveSkyRenderer.java": "7ae5ad959d702aa56248be125a08cd9212c1ec6a646a4785225885fd5a3af45b",
+    "app/src/main/java/de/universelab/sternfenster/MainActivity.java": "9ee5eabb8157a54b3793543fd97f96328cdf9943ceab5a559eed386e9919d34f",
+    "app/src/main/java/de/universelab/sternfenster/SkyActivity.java": "a80ea25c9659f19e3ad8fd8eabee354d69d4fcb4c57336b6a93238e5c1290e85",
+    "app/src/main/java/de/universelab/sternfenster/SkyMath.java": "cffe45cbfe3f8ff9e45367b53432e50ab8e50726f974d48609415011dd8e31c0",
+    "app/src/main/java/de/universelab/sternfenster/SkyProjection.java": "f0c2fb3ad7be3dab0d040f3d05e5c4923100f93d4b636d15a0026e9af2835e17",
+    "app/src/main/java/de/universelab/sternfenster/SkyRenderer.java": "40ab1f59c3d147f51a19176841ff330db6af1b8bdaa894d8c75b371701f9e372",
+    "app/src/main/java/de/universelab/sternfenster/SkyWidgetProvider.java": "3b9ff0d036379f7d2af7962d5faee95ac99c335cc7f47bede60887d290ec9cd6",
+    "app/src/main/java/de/universelab/sternfenster/StarCatalog.java": "cbf5931da9a1f9ba75f43dcd3f053040e982f939c18acd75ebd2c9a82fc2d624",
+    "app/src/main/java/de/universelab/sternfenster/Ui.java": "e03b31a9e13a2bcb5eb3de47dd1bda03d54b1a3a11ee123f0b8c85715992a066",
+    "app/src/main/res/drawable/app_icon.xml": "2ffe85a976343f1ed2335dbf127b6300c266992a825b139a35506bc31780aa92",
+    "app/src/main/res/drawable/widget_background.xml": "d50d6d36e4eebfaae5c1ccf448d3a8e4fb0e1627a07d07d8a42055146a143e1c",
+    "app/src/main/res/layout/widget_sky.xml": "0f5c8c312e287d5649ce665d812a90701a92ad5f89a80eb7da8d235052744d70",
+    "app/src/main/res/xml/sky_widget_info.xml": "4563484a9a7a4b790618403c0446bfe1f7d92cfad0d0233f539829b6689b7523"
+  },
+  "visual_review": {
+    "screenshots": "Actual orientation test screenshots: east55, PiP on launcher, landscape",
+    "result": "Map and sensor status visible; multiline button baseline clipping found and corrected in the final layout adjustment."
+  }
+}

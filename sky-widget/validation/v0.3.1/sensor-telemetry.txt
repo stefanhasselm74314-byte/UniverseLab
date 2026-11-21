@@ -1,0 +1,122 @@
+--------- beginning of main
+         1795253815.364  2607  2607 I SternfensterSensorTestWindow: initial-north-156311940576
+         1795253821.641  2632  2632 I SternfensterSensor: following=true listening=false fresh=false az=180.00 alt=42.00 mode=keine Sensoren accuracy=0
+         1795253821.646  2632  2632 I SternfensterSensor: listening_started mode=rotation_vector
+         1795253822.822  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=5.33 alt=25.02 mode=rotation_vector accuracy=3
+         1795253823.934  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=5.33 alt=25.02 mode=rotation_vector accuracy=3
+         1795253824.896  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=5.33 alt=25.02 mode=rotation_vector accuracy=3
+         1795253825.926  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=5.33 alt=25.02 mode=rotation_vector accuracy=3
+         1795253826.924  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=5.33 alt=25.02 mode=rotation_vector accuracy=3
+         1795253827.994  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=5.34 alt=25.02 mode=rotation_vector accuracy=3
+         1795253829.050  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=5.33 alt=25.02 mode=rotation_vector accuracy=3
+         1795253830.113  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=5.33 alt=25.02 mode=rotation_vector accuracy=3
+         1795253830.594  3312  3312 I SternfensterSensorTestWindow: turn-east-tilt-up-171517574991
+         1795253831.136  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=41.18 alt=38.89 mode=rotation_vector accuracy=3
+         1795253832.188  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=85.93 alt=52.64 mode=rotation_vector accuracy=3
+         1795253833.219  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=93.77 alt=54.71 mode=rotation_vector accuracy=3
+         1795253834.270  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.02 alt=54.97 mode=rotation_vector accuracy=3
+         1795253835.303  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.25 alt=55.01 mode=rotation_vector accuracy=3
+         1795253836.297  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.28 alt=55.02 mode=rotation_vector accuracy=3
+         1795253837.339  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253838.361  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253838.763  3556  3556 I SternfensterSensorTestWindow: zoom-179699038652
+         1795253839.380  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253840.485  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253841.526  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253842.523  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253843.564  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253844.585  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253845.675  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253846.608  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.30 alt=55.02 mode=rotation_vector accuracy=3
+         1795253847.620  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.30 alt=55.02 mode=rotation_vector accuracy=3
+         1795253848.726  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253849.749  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.30 alt=55.02 mode=rotation_vector accuracy=3
+         1795253850.673  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.30 alt=55.02 mode=rotation_vector accuracy=3
+         1795253851.774  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.30 alt=55.02 mode=rotation_vector accuracy=3
+         1795253852.724  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.30 alt=55.02 mode=rotation_vector accuracy=3
+         1795253853.793  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.01 mode=rotation_vector accuracy=3
+         1795253854.796  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253855.852  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253856.906  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253857.924  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253858.963  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253859.992  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=95.29 alt=55.02 mode=rotation_vector accuracy=3
+         1795253860.400  2632  2632 I SternfensterSensor: listening_stopped
+         1795253861.032  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253862.065  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253863.121  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253864.141  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253865.147  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253866.196  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253867.277  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253868.274  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253869.245  4295  4295 I SternfensterSensorTestWindow: manual-view-new-phone-pose-210172598468
+         1795253869.369  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253870.368  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253871.399  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253872.416  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253873.451  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253874.495  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253875.515  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253876.522  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253877.559  4458  4458 I SternfensterSensorTestWindow: reenable-follow-218468715184
+         1795253877.560  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253878.527  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253879.556  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253880.599  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253881.600  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=90.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253882.267  2632  2632 I SternfensterSensor: listening_started mode=rotation_vector
+         1795253882.629  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.30 alt=35.02 mode=rotation_vector accuracy=3
+         1795253883.678  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253884.729  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253885.416  4634  4634 I SternfensterSensorTestWindow: landscape-226356143780
+         1795253885.844  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253887.046  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253887.997  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253889.039  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253890.111  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253891.154  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.01 mode=rotation_vector accuracy=3
+         1795253892.371  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253893.432  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253894.496  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.01 mode=rotation_vector accuracy=3
+         1795253895.446  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253896.454  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253897.229  2632  2632 I SternfensterSensor: listening_stopped
+         1795253897.495  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=277.06 alt=35.02 mode=rotation_vector accuracy=3
+         1795253898.589  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=282.14 alt=35.02 mode=rotation_vector accuracy=3
+         1795253899.578  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=287.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253900.622  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=292.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253901.637  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=297.56 alt=35.02 mode=rotation_vector accuracy=3
+         1795253902.695  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=302.73 alt=35.02 mode=rotation_vector accuracy=3
+         1795253903.722  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=180.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253904.742  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=180.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253905.777  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=180.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253906.810  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=180.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253907.825  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=180.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253908.941  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=180.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253909.921  2632  2632 I SternfensterSensor: following=false listening=false fresh=false az=180.00 alt=42.00 mode=rotation_vector accuracy=3
+         1795253910.261  2632  2632 I SternfensterSensor: listening_started mode=rotation_vector
+         1795253910.961  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253912.009  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253912.588  5311  5311 I SternfensterSensorTestWindow: home-stop-253527626260
+         1795253913.049  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=275.31 alt=35.02 mode=rotation_vector accuracy=3
+         1795253914.092  2632  2632 I SternfensterSensor: listening_stopped
+         1795253914.901  5359  5359 I SternfensterSensorTestWindow: phone-moved-while-hidden-255856663767
+         1795253914.983  2632  2632 I SternfensterSensor: following=true listening=false fresh=false az=275.31 alt=35.01 mode=rotation_vector accuracy=3
+         1795253914.993  2632  2632 I SternfensterSensor: listening_started mode=rotation_vector
+         1795253916.048  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=185.33 alt=60.01 mode=rotation_vector accuracy=3
+         1795253917.111  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=185.33 alt=60.02 mode=rotation_vector accuracy=3
+         1795253918.096  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=185.34 alt=60.02 mode=rotation_vector accuracy=3
+         1795253919.142  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=185.34 alt=60.02 mode=rotation_vector accuracy=3
+         1795253920.212  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=185.34 alt=60.02 mode=rotation_vector accuracy=3
+         1795253921.250  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=185.34 alt=60.02 mode=rotation_vector accuracy=3
+         1795253922.246  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=185.34 alt=60.02 mode=rotation_vector accuracy=3
+         1795253923.603  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=185.34 alt=60.02 mode=rotation_vector accuracy=3
+         1795253924.446  5628  5628 I SternfensterSensorTestWindow: pip-phone-moved-265385644972
+         1795253925.447  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=108.87 alt=26.34 mode=rotation_vector accuracy=3
+         1795253926.447  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=61.61 alt=16.53 mode=rotation_vector accuracy=3
+         1795253927.383  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=52.94 alt=15.33 mode=rotation_vector accuracy=3
+         1795253928.442  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=50.81 alt=15.07 mode=rotation_vector accuracy=3
+         1795253929.428  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=50.41 alt=15.02 mode=rotation_vector accuracy=3
+         1795253930.499  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=50.33 alt=15.01 mode=rotation_vector accuracy=3
+         1795253931.596  2632  2632 I SternfensterSensor: following=true listening=true fresh=true az=50.32 alt=15.01 mode=rotation_vector accuracy=3
