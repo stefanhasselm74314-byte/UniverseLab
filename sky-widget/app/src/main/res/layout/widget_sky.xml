@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#030a17">
+    <ImageView android:id="@+id/sky_image" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:contentDescription="Aktuelle Sternkarte"
+        android:scaleType="fitXY" />
+    <TextView android:id="@+id/dir_button" android:layout_width="44dp"
+        android:layout_height="37dp" android:layout_gravity="bottom|right"
+        android:text="↻" android:textSize="24sp" android:gravity="center"
+        android:textColor="#D8EBFF" android:background="#334C6E9B"
+        android:contentDescription="Himmelsrichtung wechseln" />
+    <TextView android:id="@+id/refresh_button" android:layout_width="43dp"
+        android:layout_height="37dp" android:layout_gravity="bottom|left"
+        android:text="⟳" android:textSize="23sp" android:gravity="center"
+        android:textColor="#D8EBFF" android:background="#334C6E9B"
+        android:contentDescription="Sternkarte aktualisieren" />
+</FrameLayout>
