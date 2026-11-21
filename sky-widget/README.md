@@ -1,4 +1,67 @@
-# Sternfenster 0.4.0 — Freies Live-Fenster und kleine Taskfenster
+# Sternfenster 0.4.1 — Bildrate auf dem eigenen Handy prüfen
+
+## Neu in 0.4.1
+
+**Bildrate prüfen** öffnet einen lokalen Bericht und startet auf Wunsch eine
+20-Sekunden-Messung im freien Live-Fenster oder in der Live-Sternkarte. Nach zwei
+Sekunden Aufwärmen werden tatsächliche Zeichenaufrufe und deren Zeitabstände
+gezählt. Das freie Fenster bleibt nach Messende geöffnet; die Messergebnisse
+werden gespeichert und lassen sich mit **Ergebnis kopieren** übernehmen.
+
+1. 0.4.1 als Aktualisierung über die vorhandene Version ab 0.2.0 installieren.
+2. **Bildrate prüfen → Im freien Fenster messen (20 s)** wählen.
+3. Das Fenster sichtbar halten und das Handy wie gewohnt bewegen. Eine andere
+   App kann währenddessen geöffnet werden. Der Fortschritt steht in der Karte.
+4. Nach dem Messende zu **Bildrate prüfen** zurückkehren. Das freie Fenster kann
+   bei Bedarf verschoben oder über × geschlossen werden, um den Bericht zu lesen.
+5. **Ergebnis kopieren** übernimmt den vollständigen Text in die Zwischenablage.
+
+Der Bericht enthält Mittelwert der Render-FPS, Anzahl der Draw-Aufrufe,
+Bildabstände (p95 und Maximum), Anzahl der Abstände über 20 ms, Dauer des
+Zeichenaufrufs, beobachtete Display-Hz, Kartengröße und Gerätemodell. Es werden
+keine Standortdaten in den Bericht geschrieben und nichts automatisch übertragen.
+Ein Abbruch, etwa durch Schließen oder Unsichtbarwerden der gemessenen Ansicht,
+ersetzt kein vorheriges Ergebnis. Eine neue Messung beendet eine bereits laufende.
+Die Messung eines vorhandenen freien Fensters verändert dessen Blickrichtung,
+Zoom, Fenstergröße, Rundblick oder Zeitmodus nicht.
+
+**Render-FPS sind Zeichenaufrufe pro tatsächlicher verstrichener Messzeit.**
+Für N Draw-Aufrufe liegen N−1 aufeinanderfolgende Bildabstände vor. Der zusätzliche
+Intervallwert im JSON verwendet deren echte erste-bis-letzte Zeitspanne. p95 ist
+der nächste Rang ceil(0,95 × Stichprobenzahl). Die 20-ms-Grenze ist ein fester
+Diagnosewert; sie bezeichnet weder verlorene Bilder noch eine an die aktuelle
+Displayrate angepasste Jank-Quote. Nicht verfügbare Werte bleiben ausdrücklich
+fehlend. Quantile werden bei Überschreiten der Puffergrenze nicht aus einem
+abgeschnittenen Präfix behauptet.
+
+Die Messdauer des Zeichenaufrufs ist verstrichene Zeit innerhalb von `onDraw`,
+keine reine CPU-Rechenzeit. Sie kann Unterbrechungen des Threads enthalten, erfasst
+aber nicht die nachfolgende GPU-/Compositor-Arbeit. Die eigene Messung zählt keine
+tatsächlich am Bildschirm präsentierten Frames. **Auch ein Durchschnitt ab 60 FPS
+belegt keine durchgehende Mindestbildrate.** Der API-35-Emulator ersetzt weiterhin
+keinen Lauf auf Stefans Samsung.
+
+Der Renderpfad verwendet seine Projektion jetzt dauerhaft wieder und berechnet
+von der Blickrichtung unabhängige Viewport-Grenzen nur bei Größen-/Sichtfeldwechsel.
+Unveränderte Beschriftungen der Steuerknöpfe werden nicht jede Sekunde neu gesetzt.
+Sternkatalog, Projektionsformeln, Detailgrad, Sensorfolge und Bildtakt bleiben
+unverändert. Das beseitigt vermeidbare Arbeit; eine konkrete Geschwindigkeitssteigerung
+auf dem Telefon wird ohne dortige Messung nicht behauptet.
+
+Die deterministischen Prüfungen umfassen 57 Messarithmetikfälle, 132.192 bitgenaue
+Projektionsvergleiche mit der eingefrorenen 0.4.0-Formel sowie die bestehenden
+96.346 Orientierungs- und 7.484 Projektionsprüfungen. Alle 35 Android-Testschritte bestanden: sieben neue Prüfungen für Messung/Bericht/Abbruch,
+elf Overlay-, zehn Sensor- und sieben Live-/PiP-Prüfungen. Die neue Messfunktion
+zeichnete im Test 141 Draw-Aufrufe in 20,664 Sekunden auf (6,823 Render-FPS);
+der Test umfasst Navigation, Sensoränderung und UI-Automation im Software-Emulator.
+Er bestätigt die Messarithmetik und den gespeicherten Bericht, keine 60 FPS.
+Die separaten Live-/PiP-Abschnitte erreichten gewichtet 19,864 beziehungsweise
+21,721 Render-FPS; auch sie bestätigen das Leistungsziel nicht.
+
+Eine unterbrochene Messung blieb auch nach dem ursprünglichen Endtermin abgebrochen
+und erhielt das vorherige Ergebnis. Das freie Fenster lief nach Messende weiter.
+APK, Signatur, unveränderte Appquellen, CI-Läufe und Grenzen stehen in
+`VALIDATION_v0.4.1.json`; unveränderte Rohberichte liegen unter `validation/v0.4.1/`.
 
 ## Neu in 0.4.0
 
@@ -87,13 +150,13 @@ Zeit. Daneben werden die Display-Hz angezeigt. Ein Display mit 60 Hz beweist kei
 60 gerenderten oder tatsächlich präsentierten Bilder pro Sekunde. Android,
 Energiesparmodus, andere sichtbare Fenster und thermische Grenzen können die
 verfügbare Bildrate beeinflussen. `draw_p95_ms` im Diagnoseprotokoll misst nur die
-CPU-Zeit des Zeichenaufrufs, nicht die GPU-/Compositor-Latenz.
+verstrichene Zeit des Zeichenaufrufs, nicht reine CPU-Rechenzeit und nicht die nachfolgende GPU-/Compositor-Latenz.
 
 ## Benutzung
 
-1. Die signierte APK als **Aktualisierung über 0.2.0 bis 0.3.1** installieren.
+1. Die signierte APK als **Aktualisierung über 0.2.0 bis 0.4.0** installieren.
    Paketname und Release-Schlüssel bleiben gleich; keine Deinstallation oder
-   Datenlöschung erforderlich. VersionCode ist jetzt 6.
+   Datenlöschung erforderlich. VersionCode ist jetzt 7.
 2. **Live-Sternkarte öffnen** startet die große Ansicht.
 3. **Freies Live-Fenster starten** öffnet das unabhängige Fenster. Die einmalige
    Freigabe erteilen, zu Sternfenster zurückkehren und anschließend eine andere App
@@ -172,7 +235,7 @@ Gradle 8.11.1 / Android Gradle Plugin 8.10.1. minSdk 26, targetSdk 36.
 ```bash
 python3 tools/build_local.py --sdk /pfad/zum/android-sdk \
   --signing-info /privat/signing.json \
-  --output /ausgabe/Sternfenster_Android_v0.4.0.apk
+  --output /ausgabe/Sternfenster_Android_v0.4.1.apk
 ```
 
 Ohne Signierungsdaten erzeugt das Skript ausschließlich eine `UNSIGNED`-Prüfdatei.
@@ -186,7 +249,7 @@ Version 0.1.0 hatte einen anderen temporären Schlüssel. Nur beim Wechsel von d
 alten Version ist eine Deinstallation erforderlich; 0.2.0 und spätere Releases
 lassen sich direkt aktualisieren.
 
-## Prüfung
+## Historische Prüfung von 0.4.0
 
 Für 0.4.0 prüft `tools/runtime_overlay.py` das tatsächlich sichtbare Android-Overlay:
 Start aus der Oberfläche, WindowManager-Typ und Grenzen, Ziehen, Vergrößern,
@@ -227,9 +290,9 @@ Freigabedialoge wurden statisch geprüft; CI erteilt die Berechtigungen vor dem 
 
 Alle Ergebnisse, Grenzen, APK-Prüfsumme und CI-Läufe stehen in
 `VALIDATION_v0.4.0.json`. Die unveränderten Rohberichte liegen unter
-`validation/v0.4.0/`. Der Appcode ist seit Commit
-`fdb4f7e7d45fca20a0b8289556699ddb984066f0` unverändert; nachfolgende Commits betreffen
-Prüfwerkzeuge und Dokumentation. CI verwendet einen eigenen Testschlüssel und
+`validation/v0.4.0/`. Der Appcode der 0.4.0-Auslieferung entspricht Commit
+`fdb4f7e7d45fca20a0b8289556699ddb984066f0`; nachfolgende Commits bis zur
+0.4.0-Dokumentation betreffen Prüfwerkzeuge und Dokumentation. CI verwendet einen eigenen Testschlüssel und
 baut aus denselben Appquellen wie die ausgelieferte signierte APK.
 
 ### Historische 0.3.1-Prüfung

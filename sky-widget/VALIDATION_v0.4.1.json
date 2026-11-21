@@ -1,0 +1,527 @@
+{
+  "release": "0.4.1",
+  "version_code": 7,
+  "application_id": "de.universelab.sternfenster",
+  "status": "functional_validation_passed",
+  "code_commit": "a0f08e5f37a60c34c26e7746044189b793737bb8",
+  "source_sha256": {
+    "sky-widget/app/build.gradle": "e23c9363a7b90b481f565df1a7ecbe156daf511e664cd93f28ad0579830d0455",
+    "sky-widget/app/src/main/AndroidManifest.xml": "a850bce986e66b9ac88d524b95e6f01af3339938558408fc8649dbbc2bb8688f",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/MainActivity.java": "f2aee4780ee4c29e400d93c31517203d31f27adedc06bd56671019e73b185fec",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/SkyActivity.java": "ba630cf00c665054a6ec5976243b0bf36b02be2328877198b87b42831a876de5",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/FloatingSkyService.java": "4254aa6a65b3f6453d876c4165266c3b47aee69678fa0498c8c587c7ca9070e2",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/OverlaySkyView.java": "17571e925f36337e2339df86cb292ae2864ba1a6b7fcf0883e15ae504fa88a9a",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/SkyProjection.java": "25ff93f69216ae4c8e0a31a80a6f037f86bfb7b0e305ae6fcf86d43980930298",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/LiveSkyRenderer.java": "2e18415a29161a18314bebbef0a2207880dc28a8d188267c2d54decf39bfe7e8",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/FramePacingStats.java": "d1353c890938361a2e7faeca6ed20daae4c492d5acbb0676b9bbaf47dce05c7c",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/PerformanceSession.java": "02adad95a6f42c9903eced252b0fab237b1d5a17daef5d581d791dbbaea296dd",
+    "sky-widget/app/src/main/java/de/universelab/sternfenster/PerformanceActivity.java": "e199eb9c2b06a374086c5f707f1b5ad348e0a7f82b4955da413419adcd57f7a5",
+    "sky-widget/tests/FramePacingStatsCheck.java": "adccf50723ac5d3be076701467cd3963e6cc020cd8ed1df4ef58e091aab649c2",
+    "sky-widget/tests/ProjectionReuseCheck.java": "e77cfb83efaf2d9e521a99e787a76b2529ef4c4861a5753bdd8a2e83cd29f423",
+    "sky-widget/tools/runtime_frame_pacing.py": "375d66ae99bc1dae487dddc937099261bc6801854b02a43b9567e5926b2a3d9d",
+    ".github/workflows/2026-11-21_sternfenster_pacing_v041.yml": "89665184604c37b8d2fd5b1d3c97f46a0f7b806618e31943ac3a591111aa0716"
+  },
+  "application_file_sha256": {
+    "app/build.gradle": "e23c9363a7b90b481f565df1a7ecbe156daf511e664cd93f28ad0579830d0455",
+    "app/src/main/AndroidManifest.xml": "a850bce986e66b9ac88d524b95e6f01af3339938558408fc8649dbbc2bb8688f",
+    "app/src/main/assets/stars.csv": "8b36f9e06f7ab275506213cb6ed61ea75570dbfb19725c31ca189fee9196133b",
+    "app/src/main/java/de/universelab/sternfenster/DeviceOrientationMath.java": "0945dfb8d92f4cc334ffa0469749a0dcbcd0f9308cd136c4af02dee20ec63100",
+    "app/src/main/java/de/universelab/sternfenster/DeviceOrientationTracker.java": "2e9f1b533391af343b2855c77efb82f47e2dff95f0d311005d908fd0e88cc029",
+    "app/src/main/java/de/universelab/sternfenster/FloatingSkyService.java": "4254aa6a65b3f6453d876c4165266c3b47aee69678fa0498c8c587c7ca9070e2",
+    "app/src/main/java/de/universelab/sternfenster/FramePacingStats.java": "d1353c890938361a2e7faeca6ed20daae4c492d5acbb0676b9bbaf47dce05c7c",
+    "app/src/main/java/de/universelab/sternfenster/LiveSkyRenderer.java": "2e18415a29161a18314bebbef0a2207880dc28a8d188267c2d54decf39bfe7e8",
+    "app/src/main/java/de/universelab/sternfenster/MainActivity.java": "f2aee4780ee4c29e400d93c31517203d31f27adedc06bd56671019e73b185fec",
+    "app/src/main/java/de/universelab/sternfenster/OverlaySetupActivity.java": "3884e17656738556a35cbba06058186aafd0bd814d3ff25bd97e1f42f5d59bd4",
+    "app/src/main/java/de/universelab/sternfenster/OverlaySkyView.java": "17571e925f36337e2339df86cb292ae2864ba1a6b7fcf0883e15ae504fa88a9a",
+    "app/src/main/java/de/universelab/sternfenster/PerformanceActivity.java": "e199eb9c2b06a374086c5f707f1b5ad348e0a7f82b4955da413419adcd57f7a5",
+    "app/src/main/java/de/universelab/sternfenster/PerformanceSession.java": "02adad95a6f42c9903eced252b0fab237b1d5a17daef5d581d791dbbaea296dd",
+    "app/src/main/java/de/universelab/sternfenster/SkyActivity.java": "ba630cf00c665054a6ec5976243b0bf36b02be2328877198b87b42831a876de5",
+    "app/src/main/java/de/universelab/sternfenster/SkyMath.java": "cffe45cbfe3f8ff9e45367b53432e50ab8e50726f974d48609415011dd8e31c0",
+    "app/src/main/java/de/universelab/sternfenster/SkyProjection.java": "25ff93f69216ae4c8e0a31a80a6f037f86bfb7b0e305ae6fcf86d43980930298",
+    "app/src/main/java/de/universelab/sternfenster/SkyRenderer.java": "40ab1f59c3d147f51a19176841ff330db6af1b8bdaa894d8c75b371701f9e372",
+    "app/src/main/java/de/universelab/sternfenster/SkyWidgetProvider.java": "3b9ff0d036379f7d2af7962d5faee95ac99c335cc7f47bede60887d290ec9cd6",
+    "app/src/main/java/de/universelab/sternfenster/StarCatalog.java": "cbf5931da9a1f9ba75f43dcd3f053040e982f939c18acd75ebd2c9a82fc2d624",
+    "app/src/main/java/de/universelab/sternfenster/Ui.java": "e03b31a9e13a2bcb5eb3de47dd1bda03d54b1a3a11ee123f0b8c85715992a066",
+    "app/src/main/res/drawable/app_icon.xml": "2ffe85a976343f1ed2335dbf127b6300c266992a825b139a35506bc31780aa92",
+    "app/src/main/res/drawable/widget_background.xml": "d50d6d36e4eebfaae5c1ccf448d3a8e4fb0e1627a07d07d8a42055146a143e1c",
+    "app/src/main/res/layout/widget_sky.xml": "0f5c8c312e287d5649ce665d812a90701a92ad5f89a80eb7da8d235052744d70",
+    "app/src/main/res/xml/sky_widget_info.xml": "4563484a9a7a4b790618403c0446bfe1f7d92cfad0d0233f539829b6689b7523"
+  },
+  "apk": {
+    "bytes": 291576,
+    "sha256": "c51d07976536cc3b61096c63b74ac97d2b5f1c3a601cfb3113532a464dfbaebb",
+    "certificate_sha256": "88ea977a6afba06d2211611bde63fc496ee6c2f3d2e5c8027f1c2a444ffd8180",
+    "version_name": "0.4.1",
+    "version_code": 7,
+    "filename": "Sternfenster_Android_v0.4.1.apk"
+  },
+  "runtime_runs": {
+    "pacing": {
+      "run_id": 44905943079,
+      "job_id": 136851414164,
+      "artifact_id": 14707992479,
+      "status": "success",
+      "commit": "a0f08e5f37a60c34c26e7746044189b793737bb8",
+      "checks_passed": 7,
+      "raw_report": "validation/v0.4.1/pacing-report.json",
+      "raw_report_sha256": "60093e7f51c31cd6c153eec665ebaf5df47159e2453e94c1f2aa83a7ee55b41d",
+      "ci_apk_sha256": "3fea818c07eca69a504cb46ffa1d2468da35fb9c0470f0cef43b068c965324e2",
+      "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44905943079"
+    },
+    "orientation": {
+      "run_id": 44905942961,
+      "job_id": 136851413574,
+      "artifact_id": 14708090659,
+      "status": "success",
+      "commit": "a0f08e5f37a60c34c26e7746044189b793737bb8",
+      "checks_passed": 10,
+      "raw_report": "validation/v0.4.1/orientation-report.json",
+      "raw_report_sha256": "c505225d83e234252966e47aaf04b18375b4c9b7672d9769887d5a2474d1c1cc",
+      "ci_apk_sha256": "e43da7a561b200dd9088f9162333ce49bd935e6cba6aa9006972ee3c06667c64",
+      "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44905942961"
+    },
+    "live_pip": {
+      "run_id": 44905942967,
+      "job_id": 136851413464,
+      "artifact_id": 14707508149,
+      "status": "success",
+      "commit": "a0f08e5f37a60c34c26e7746044189b793737bb8",
+      "checks_passed": 7,
+      "raw_report": "validation/v0.4.1/live-pip-report.json",
+      "raw_report_sha256": "4e60ced0e8aec70b5171b8161e9fc17c70403c7479daf1a282959d6f0834a7d0",
+      "ci_apk_sha256": "67da7cac4ea2d23ad3f6399561774b88160aa1bd2f6a430c25da6b2d6bdb299f",
+      "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44905942967"
+    },
+    "overlay": {
+      "run_id": 44905942972,
+      "job_id": 136851413645,
+      "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44905942972",
+      "status": "success",
+      "commit": "a0f08e5f37a60c34c26e7746044189b793737bb8",
+      "artifact_id": 14708245778,
+      "checks_passed": 11,
+      "raw_report": "validation/v0.4.1/overlay-report.json",
+      "raw_report_sha256": "1a0e568ae34973de679835145b591517f9d334c2b0360a79777f10b8a6656b9a",
+      "ci_apk_sha256": "f2358e0c27a6dd8d208d1f82398a15be079bb5d0a719bad2102cab884ae63ab2"
+    },
+    "unsigned_build": {
+      "run_id": 44905942962,
+      "job_id": 136851413518,
+      "status": "success",
+      "url": "https://github.com/stefanhasselm74314-byte/UniverseLab/actions/runs/44905942962"
+    }
+  },
+  "deterministic_checks": {
+    "frame_pacing": 57,
+    "projection_reuse_bit_exact": 132192,
+    "projection_reuse_configurations": 1296,
+    "existing_projection": 7484,
+    "existing_orientation": 96346
+  },
+  "limits": {
+    "physical_samsung": "NOT_PERFORMED",
+    "minimum_60_presented_fps": "NOT_ESTABLISHED; draw-callback measurement does not observe actual presentation",
+    "speedup_on_phone": "NOT_MEASURED; exact same sky rendering formula and catalogue; avoids per-camera-change projection allocation and repeated unchanged control updates",
+    "screen_visibility": "User must keep test window visible. A renderer-active flag does not prove compositor presentation or lack of occlusion.",
+    "permissions": "No added permission; CI system grants existing overlay/notification rights; actual permission UI not retested.",
+    "actual_samsung_docking": "No Samsung-specific window manager runtime; existing docking path and API35 compact layout tested separately.",
+    "endurance": "Short integration observations; no long-duration or physical-thermal endurance benchmark.",
+    "compositor_fps": "No exact presented frames observed. Different workloads/runs cannot establish a speedup from changes.",
+    "pacing_report_copy_button": "Visible copy button implemented through Android ClipboardManager; actual clipboard paste was not separately automated."
+  },
+  "build": {
+    "min_sdk": 26,
+    "compile_sdk": 36,
+    "target_sdk": 36,
+    "build_tools": "36.0.0",
+    "java_source": 17,
+    "ci_signing": "Disposable test keys; release retains same certificate as v0.2.0 onward. Same app sources, separate builds.",
+    "release_signature": "v2 and v3 verified",
+    "ci_build_run": 44905942962,
+    "ci_build_status": "success",
+    "application_sources_unchanged_after_signed_build": true
+  },
+  "changes": [
+    "Reuse one camera projection per live renderer; identical formulas and catalogue.",
+    "Cache viewport-only culling cone until size/FOV changes.",
+    "Avoid assigning unchanged control captions and enabled state.",
+    "User-initiated20s pacing measurement after2s warmup; actual draw timestamps, interval p95/max and fixed20ms diagnostic count.",
+    "Saved local report and explicit copy action, no location or network upload.",
+    "Cancellation preserves the previous completed result; completed measurement leaves overlay running.",
+    "Existing overlay measurement does not reset pose/zoom/window/time mode."
+  ],
+  "measurement_semantics": {
+    "render_fps": "draw_count*1e9/actual_monotonic_duration_ns",
+    "intervals": "For N accepted draws, N-1 successive draw-start intervals; interval_fps=(N-1)*1e9/(last_start-first_start).",
+    "p95": "nearest rank ceil(0.95*N); absent if sample stream is empty or truncated by32768-entry limit.",
+    "duration_of_draw": "Elapsed time in onDraw, not pure CPU execution time; downstream GPU/compositor work not included.",
+    "above20ms": "Strictly greater than20ms; fixed diagnostic count, not dropped-frame count or display-adaptive jank fraction.",
+    "scope": "No proof of physical visibility or presented-frame throughput; keep test window visible."
+  },
+  "permissions": "No new permission in0.4.1; report activity not exported.",
+  "device_data": "Copied report contains manufacturer/model, Android version, timestamp, window geometry and rendering measurements; no location or unique device identifier.",
+  "references": [
+    "https://developer.android.com/reference/android/view/FrameMetrics",
+    "https://developer.android.com/reference/android/view/Choreographer.FrameCallback",
+    "https://developer.android.com/topic/performance/issues/render"
+  ],
+  "device_measurement_integration": {
+    "measurement": {
+      "version": "0.4.1",
+      "measurement": "onDraw callbacks; not compositor-presented frames",
+      "mode": "Freies Live-Fenster",
+      "window_modes": 4,
+      "completed_at_ms": 1795265639912,
+      "warmup_ms": 2000,
+      "requested_duration_ms": 20000,
+      "frames": 141,
+      "duration_ns": 20664027518,
+      "render_fps": 6.823452005044896,
+      "interval_count": 140,
+      "interval_min_ns": 10719788,
+      "interval_mean_ns": 147234713.97857141,
+      "interval_p95_ns": 468522942,
+      "interval_max_ns": 1125441568,
+      "interval_fps": 6.791876541734174,
+      "draw_p95_ns": 17233989,
+      "intervals_above_20_ms": 136,
+      "display_hz_min": 60.000003814697266,
+      "display_hz_max": 60.000003814697266,
+      "samples_overflowed": false,
+      "invalid_events": 0,
+      "unknown_hz_samples": 0,
+      "complete": true,
+      "cancelled": false,
+      "width_min_px": 713,
+      "width_max_px": 713,
+      "height_min_px": 681,
+      "height_max_px": 681,
+      "hardware_canvas_seen": true,
+      "software_canvas_seen": false,
+      "phone_follow_seen": true,
+      "manual_view_seen": false,
+      "device": "Google sdk_gphone64_x86_64",
+      "android_sdk": 35,
+      "minimum_60_presented_fps": "NOT_ESTABLISHED_BY_THIS_MEASUREMENT"
+    },
+    "checks": [
+      {
+        "name": "install-and-observed-system-permissions",
+        "status": "passed",
+        "seconds": 6.23
+      },
+      {
+        "name": "visible-main-navigation-to-device-report",
+        "status": "passed",
+        "seconds": 13.24
+      },
+      {
+        "name": "user-started-overlay-measurement-completes-from-real-draws",
+        "status": "passed",
+        "mode": "Freies Live-Fenster",
+        "frames": 141,
+        "duration_ns": 20664027518,
+        "render_fps": 6.823452005044896,
+        "interval_count": 140,
+        "interval_p95_ns": 468522942,
+        "minimum_60_presented_fps": "NOT_ESTABLISHED_BY_THIS_MEASUREMENT",
+        "seconds": 26.03
+      },
+      {
+        "name": "measurement-completion-keeps-live-overlay-running",
+        "status": "passed",
+        "seconds": 26.06
+      },
+      {
+        "name": "saved-user-report-matches-completed-measurement",
+        "status": "passed",
+        "seconds": 5.14
+      },
+      {
+        "name": "interrupted-fullscreen-measurement-preserves-prior-result",
+        "status": "passed",
+        "previous_completed_result_preserved": true,
+        "observation": "Beyond the original twenty-second completion deadline",
+        "seconds": 33.47
+      },
+      {
+        "name": "no-sternfenster-crash-or-anr",
+        "status": "passed",
+        "seconds": 0.34
+      }
+    ],
+    "interpretation": "The20.664-second software-emulator observation includes Home navigation, sensor change and UI automation. It validates accounting and report persistence, not steady-state throughput or Samsung performance. No measured60FPS or speedup claim."
+  },
+  "live_pip_emulator_performance": {
+    "fullscreen": {
+      "sample_count": 10,
+      "drawn_frames_in_reported_windows": 203,
+      "render_fps_min": 16.98,
+      "render_fps_median": 20.310000000000002,
+      "render_fps_weighted_mean": 19.864,
+      "render_fps_max": 21.09,
+      "maximum_reported_draw_p95_ms": 5.181,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "requested_observation_seconds": 10,
+      "pan_telemetry_available": true,
+      "android_gfxinfo_total_frames": 202
+    },
+    "pip": {
+      "sample_count": 8,
+      "drawn_frames_in_reported_windows": 177,
+      "render_fps_min": 17.27,
+      "render_fps_median": 22.25,
+      "render_fps_weighted_mean": 21.721,
+      "render_fps_max": 25.06,
+      "maximum_reported_draw_p95_ms": 20.949,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "requested_observation_seconds": 8,
+      "pan_telemetry_available": true,
+      "android_gfxinfo_total_frames": 178
+    }
+  },
+  "overlay_emulator_performance": {
+    "initial-overlay": {
+      "sample_count": 6,
+      "drawn_frames_in_reported_windows": 124,
+      "render_fps_min": 19.1,
+      "render_fps_median": 20.2,
+      "render_fps_weighted_mean": 20.16,
+      "render_fps_max": 20.82,
+      "maximum_reported_draw_p95_ms": 1.891,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "requested_observation_seconds": 6,
+      "workload": "visible overlay with live clock and enabled physical-sensor following",
+      "android_gfxinfo_total_frames": 130
+    },
+    "home-overlay": {
+      "sample_count": 6,
+      "drawn_frames_in_reported_windows": 78,
+      "render_fps_min": 11.38,
+      "render_fps_median": 12.655000000000001,
+      "render_fps_weighted_mean": 12.6,
+      "render_fps_max": 13.99,
+      "maximum_reported_draw_p95_ms": 31.446,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "requested_observation_seconds": 6,
+      "workload": "visible overlay with live clock and enabled physical-sensor following",
+      "android_gfxinfo_total_frames": 82
+    },
+    "foreign-app-overlay": {
+      "sample_count": 6,
+      "drawn_frames_in_reported_windows": 141,
+      "render_fps_min": 16.22,
+      "render_fps_median": 23.990000000000002,
+      "render_fps_weighted_mean": 22.813,
+      "render_fps_max": 24.89,
+      "maximum_reported_draw_p95_ms": 13.844,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "requested_observation_seconds": 6,
+      "workload": "visible overlay with live clock and enabled physical-sensor following",
+      "android_gfxinfo_total_frames": 141
+    },
+    "task-removed-overlay": {
+      "sample_count": 6,
+      "drawn_frames_in_reported_windows": 169,
+      "render_fps_min": 26.55,
+      "render_fps_median": 27.604999999999997,
+      "render_fps_weighted_mean": 27.516,
+      "render_fps_max": 28.47,
+      "maximum_reported_draw_p95_ms": 6.345,
+      "display_hz_min": 60.0,
+      "display_hz_max": 60.0,
+      "nominal_60_render_target_observed": false,
+      "performance_status": "NOMINAL_60_RENDER_TARGET_NOT_CONFIRMED",
+      "nominal_observation_rule": "Every captured window >=59 render FPS; draw p95 <=16.667ms; display >=59Hz.",
+      "strict_minimum_60_presented_fps": "NOT_PROVEN_BY_RENDER_COUNTERS",
+      "measurement_limits": "onDraw counts and CPU draw duration are not compositor-presented frame counts; an emulator is not the user's phone.",
+      "requested_observation_seconds": 6,
+      "workload": "visible overlay with live clock and enabled physical-sensor following",
+      "android_gfxinfo_total_frames": 176
+    }
+  },
+  "overlay_regression_evidence": {
+    "checks": [
+      {
+        "name": "emulator-install-and-system-permission-setup",
+        "status": "passed",
+        "seconds": 5.77
+      },
+      {
+        "name": "compact-activity-map-space-menu-and-direction-preservation",
+        "status": "passed",
+        "seconds": 66.28
+      },
+      {
+        "name": "visible-main-button-starts-foreground-overlay",
+        "status": "passed",
+        "seconds": 19.86
+      },
+      {
+        "name": "header-drag-and-real-resize-handle",
+        "status": "passed",
+        "drag": {
+          "description": "Live-Fenster verschieben",
+          "from": [
+            351,
+            356
+          ],
+          "to": [
+            459,
+            764
+          ]
+        },
+        "resize": {
+          "description": "Live-Fenstergröße ändern",
+          "from": [
+            805,
+            1509
+          ],
+          "to": [
+            665,
+            1333
+          ]
+        },
+        "seconds": 23.44
+      },
+      {
+        "name": "drag-constrains-window-to-display",
+        "status": "passed",
+        "drag": {
+          "description": "Live-Fenster verschieben",
+          "from": [
+            380,
+            717
+          ],
+          "to": [
+            1078,
+            2398
+          ]
+        },
+        "seconds": 9.77
+      },
+      {
+        "name": "home-keeps-overlay-sensors-and-renderer-alive",
+        "status": "passed",
+        "seconds": 17.51
+      },
+      {
+        "name": "switching-to-ordinary-foreign-app-keeps-overlay-live",
+        "status": "passed",
+        "package": "com.android.chrome",
+        "resolved_component": "com.android.chrome/com.google.android.apps.chrome.Main",
+        "resumed_component": "com.android.chrome/org.chromium.chrome.browser.firstrun.FirstRunActivity",
+        "interaction": "Launcher activity only; unmodified welcome page; no web navigation",
+        "seconds": 17.37
+      },
+      {
+        "name": "removing-main-task-keeps-foreground-overlay-live",
+        "status": "passed",
+        "task_id": 8,
+        "before_pid": "2861",
+        "after_pid": "2861",
+        "method": "adb shell am stack remove observedTaskId; ActivityTaskManager.removeTask; not force-stop",
+        "seconds": 14.42
+      },
+      {
+        "name": "explicit-close-releases-service-sensors-and-frames",
+        "status": "passed",
+        "seconds": 9.31
+      },
+      {
+        "name": "reopen-preserves-position-and-size-without-auto-reopening",
+        "status": "passed",
+        "before": [
+          464,
+          1566,
+          1067,
+          2324
+        ],
+        "after": [
+          464,
+          1566,
+          1067,
+          2324
+        ],
+        "seconds": 19.24
+      },
+      {
+        "name": "no-sternfenster-crash-or-anr",
+        "status": "passed",
+        "seconds": 0.21
+      }
+    ],
+    "task_removals": [
+      {
+        "task_id": 8,
+        "before_pid": "2861",
+        "after_pid": "2861",
+        "method": "adb shell am stack remove observedTaskId; ActivityTaskManager.removeTask; not force-stop"
+      }
+    ],
+    "emulator_recoveries": [
+      {
+        "phase": "compact-activity-map-space-menu-and-direction-preservation",
+        "dialog_title": "Pixel Launcher isn't responding",
+        "action": "Close app",
+        "button_bounds": "[70,1170][1010,1296]",
+        "evidence_prefix": "pixel-launcher-anr-1"
+      }
+    ],
+    "raw_report_metadata_caveat": "foreign_app.status preserves an intermediate running value. The authoritative named check and both overall status fields passed. Raw report unchanged.",
+    "compact_height_note": "Raw bounds ratio80.4% includes bottom pixels covered by system navigation. Screenshot-visible map height is approximately75.5% of full window. No layout improvement against0.4.0 is inferred."
+  },
+  "functional_status": "PASSED",
+  "validation_date": "2026-11-21",
+  "android_checks_passed": 35,
+  "no_app_changes_after_test_commit": true,
+  "artifact_zip_sha256": {
+    "pacing": "5a4f63d4e2e201273456811a4c18606e546bab0bd32db6f3cb639f17fa044136",
+    "orientation": "55194f69c5ca6497ed346503708e47b3fee37c950b7b380d8cd224d247da36a2",
+    "live_pip": "c2ab1498a06ccb8e5a8689447bff79cc3c344f2ba46406b4695e5b24396a245d",
+    "overlay": "9cc63d06d3f78910388dacbbfc2d3648a55f87c575923470bd20e43c9be5ecac"
+  },
+  "retained_evidence_sha256": {
+    "validation/v0.4.1/completed-overlay-measurement.json": "a30a0e308c8822994e00acbfbc599dccf838f14fe0610f160014ce3907634ded",
+    "validation/v0.4.1/live-pip-report.json": "4e60ced0e8aec70b5171b8161e9fc17c70403c7479daf1a282959d6f0834a7d0",
+    "validation/v0.4.1/orientation-report.json": "c505225d83e234252966e47aaf04b18375b4c9b7672d9769887d5a2474d1c1cc",
+    "validation/v0.4.1/overlay-report.json": "1a0e568ae34973de679835145b591517f9d334c2b0360a79777f10b8a6656b9a",
+    "validation/v0.4.1/pacing-report.json": "60093e7f51c31cd6c153eec665ebaf5df47159e2453e94c1f2aa83a7ee55b41d",
+    "validation/v0.4.1/saved-user-report.txt": "b6881956a1fc2bd4b82a736d300283dbcdeb351a78b9592d2dde0f72bcaf4771"
+  },
+  "visual_review": {
+    "pacing_report": "Root inspected the saved report screenshot; legible values and measured counts match JSON.",
+    "pacing_overlay": "Independent reviewer inspected countdown, sensor following, persistent overlay after completion and interrupted report preserving prior result.",
+    "overlay_regression": "Independent reviewer inspected compact activity and overlay over Chrome after task removal; controls remain reachable."
+  }
+}

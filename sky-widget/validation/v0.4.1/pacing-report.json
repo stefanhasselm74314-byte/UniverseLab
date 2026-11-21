@@ -1,0 +1,380 @@
+{
+  "status": "frame_pacing_measurement_integration_passed",
+  "checks": [
+    {
+      "name": "install-and-observed-system-permissions",
+      "status": "passed",
+      "seconds": 6.23
+    },
+    {
+      "name": "visible-main-navigation-to-device-report",
+      "status": "passed",
+      "seconds": 13.24
+    },
+    {
+      "name": "user-started-overlay-measurement-completes-from-real-draws",
+      "status": "passed",
+      "mode": "Freies Live-Fenster",
+      "frames": 141,
+      "duration_ns": 20664027518,
+      "render_fps": 6.823452005044896,
+      "interval_count": 140,
+      "interval_p95_ns": 468522942,
+      "minimum_60_presented_fps": "NOT_ESTABLISHED_BY_THIS_MEASUREMENT",
+      "seconds": 26.03
+    },
+    {
+      "name": "measurement-completion-keeps-live-overlay-running",
+      "status": "passed",
+      "seconds": 26.06
+    },
+    {
+      "name": "saved-user-report-matches-completed-measurement",
+      "status": "passed",
+      "seconds": 5.14
+    },
+    {
+      "name": "interrupted-fullscreen-measurement-preserves-prior-result",
+      "status": "passed",
+      "previous_completed_result_preserved": true,
+      "observation": "Beyond the original twenty-second completion deadline",
+      "seconds": 33.47
+    },
+    {
+      "name": "no-sternfenster-crash-or-anr",
+      "status": "passed",
+      "seconds": 0.34
+    }
+  ],
+  "environment": {
+    "sdk": 35,
+    "release": "15",
+    "model": "sdk_gphone64_x86_64",
+    "renderer": "API35 emulator with SwiftShader; not a physical Samsung benchmark",
+    "permission_setup": "SYSTEM_ALERT_WINDOW appops allow; POST_NOTIFICATIONS runtime grant",
+    "observation": "Independent accessibility probe, WindowManager surface, logcat and visible saved report",
+    "app_uid": 10210
+  },
+  "test": "Sternfenster user-started device pacing report",
+  "performance": {},
+  "user_device_test": "NOT_PERFORMED",
+  "minimum_60_fps_guarantee": "NOT_ESTABLISHED",
+  "sensor_inputs": [
+    {
+      "label": "pacing-initial-north",
+      "magnetic_camera_azimuth": 0,
+      "camera_altitude": 25,
+      "readback": {
+        "acceleration": [
+          0.0,
+          8.88784,
+          -4.14447
+        ],
+        "magnetic-field": [
+          -0.0,
+          -39.2571,
+          -36.863
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    },
+    {
+      "label": "pacing-home-east",
+      "magnetic_camera_azimuth": 90,
+      "camera_altitude": 55,
+      "readback": {
+        "acceleration": [
+          0.0,
+          5.62486,
+          -8.03314
+        ],
+        "magnetic-field": [
+          -50.0,
+          -11.4715,
+          16.383
+        ]
+      },
+      "method": "adb emulator raw sensor overrides; gyroscope held at zero while stationary"
+    }
+  ],
+  "observed_poses": [
+    {
+      "phase": "user-started-overlay-measurement-completes-from-real-draws",
+      "expected_magnetic_azimuth": 90,
+      "expected_altitude": 55,
+      "observed": {
+        "ui": {
+          "az": 95.27,
+          "alt": 55.02,
+          "source": "visible overlay sensor telemetry"
+        },
+        "telemetry": {
+          "mode": "overlay",
+          "following": "true",
+          "listening": "true",
+          "fresh": "true",
+          "az": 95.27,
+          "alt": 55.02,
+          "log_line": "         1795265631.623  2458  2458 I SternfensterSensor: mode=overlay following=true listening=true fresh=true az=95.27 alt=55.02 source=rotation_vector accuracy=3"
+        }
+      }
+    }
+  ],
+  "physical_compass_accuracy": "NOT_MEASURED",
+  "performance_status": "DRAW_CALLBACK_MEASUREMENT_ONLY_NOT_A_PRESENTED_FPS_TEST",
+  "sources": [
+    "https://developer.android.com/studio/run/emulator-console",
+    "https://developer.android.com/reference/android/hardware/SensorManager#getRotationMatrix(float[],%20float[],%20float[],%20float[])",
+    "https://android.googlesource.com/platform/external/qemu/+/emu-master-dev/android/android-emu/android/console.cpp",
+    "https://developer.android.com/reference/android/app/UiAutomation#getWindows()",
+    "https://developer.android.com/reference/android/view/WindowManager.LayoutParams#TYPE_APPLICATION_OVERLAY",
+    "https://android.googlesource.com/platform/frameworks/base/+/21f8b0e94160bb3615a569cc454c5c7ffc12221d/services/core/java/com/android/server/am/ActivityManagerShellCommand.java"
+  ],
+  "overlay_observations": [
+    {
+      "phase": "user-started-overlay-measurement-completes-from-real-draws",
+      "label": "measurement-overlay-started",
+      "bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "wm_bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": "",
+      "window_id": "59",
+      "accessibility_overlay_present": true,
+      "accessibility_controls_required": true,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "user-started-overlay-measurement-completes-from-real-draws",
+      "label": "user-started-overlay-measurement-completes-from-real-draws-pose",
+      "bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "wm_bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": null,
+      "window_id": null,
+      "accessibility_overlay_present": false,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "measurement-completion-keeps-live-overlay-running",
+      "label": "overlay-after-measurement-completed",
+      "bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "wm_bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": null,
+      "window_id": null,
+      "accessibility_overlay_present": false,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "measurement-completion-keeps-live-overlay-running",
+      "label": "overlay-still-running-after-measurement",
+      "bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "wm_bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": null,
+      "window_id": null,
+      "accessibility_overlay_present": false,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    },
+    {
+      "phase": "measurement-completion-keeps-live-overlay-running",
+      "label": "measurement-explicit-close-before-close",
+      "bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "wm_bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "display_size": [
+        1080,
+        2400
+      ],
+      "window_title": null,
+      "window_id": null,
+      "accessibility_overlay_present": false,
+      "accessibility_controls_required": false,
+      "window_type_confirmed": "TYPE_APPLICATION_OVERLAY",
+      "owner_uid": 10210,
+      "surface_shown": true,
+      "has_drawn": true,
+      "is_visible": true,
+      "is_on_screen": true,
+      "obscured": false,
+      "visibility_source": "WindowManager app-owned surface and screen bounds"
+    }
+  ],
+  "task_removals": [],
+  "functional_status": "PASSED",
+  "process_death_survival": "NOT_TESTED",
+  "samsung_multiwindow_behavior": "NOT_TESTED",
+  "observation_limits": [
+    "On this API35 emulator, UiAutomation sometimes omits the visible nonfocusable overlay, especially over the launcher. Persistence requires the app-owned visible WindowManager surface plus sensor/frame telemetry. Start, drag and resize still require accessibility controls.",
+    "Android Settings intentionally hides non-system overlays through HideNonSystemOverlayMixin. The ordinary foreign-task test therefore uses the installed Chrome launcher activity; protected Settings screens are not used as a positive overlay-visibility target."
+  ],
+  "completed_measurements": [
+    {
+      "version": "0.4.1",
+      "measurement": "onDraw callbacks; not compositor-presented frames",
+      "mode": "Freies Live-Fenster",
+      "window_modes": 4,
+      "completed_at_ms": 1795265639912,
+      "warmup_ms": 2000,
+      "requested_duration_ms": 20000,
+      "frames": 141,
+      "duration_ns": 20664027518,
+      "render_fps": 6.823452005044896,
+      "interval_count": 140,
+      "interval_min_ns": 10719788,
+      "interval_mean_ns": 147234713.97857141,
+      "interval_p95_ns": 468522942,
+      "interval_max_ns": 1125441568,
+      "interval_fps": 6.791876541734174,
+      "draw_p95_ns": 17233989,
+      "intervals_above_20_ms": 136,
+      "display_hz_min": 60.000003814697266,
+      "display_hz_max": 60.000003814697266,
+      "samples_overflowed": false,
+      "invalid_events": 0,
+      "unknown_hz_samples": 0,
+      "complete": true,
+      "cancelled": false,
+      "width_min_px": 713,
+      "width_max_px": 713,
+      "height_min_px": 681,
+      "height_max_px": 681,
+      "hardware_canvas_seen": true,
+      "software_canvas_seen": false,
+      "phone_follow_seen": true,
+      "manual_view_seen": false,
+      "device": "Google sdk_gphone64_x86_64",
+      "android_sdk": 35,
+      "minimum_60_presented_fps": "NOT_ESTABLISHED_BY_THIS_MEASUREMENT"
+    }
+  ],
+  "apk_sha256": "3fea818c07eca69a504cb46ffa1d2468da35fb9c0470f0cef43b068c965324e2",
+  "close_actions": [
+    {
+      "phase": "measurement-completion-keeps-live-overlay-running",
+      "label": "measurement-explicit-close",
+      "source": "previously observed enabled close button, unchanged size, translated to current visible WindowManager frame",
+      "point": [
+        708,
+        356
+      ],
+      "current_wm_bounds": [
+        39,
+        293,
+        774,
+        1217
+      ],
+      "previous_accessibility_geometry": {
+        "window_bounds": [
+          39,
+          293,
+          774,
+          1217
+        ],
+        "control_bounds": [
+          653,
+          304,
+          763,
+          409
+        ],
+        "phase": "user-started-overlay-measurement-completes-from-real-draws",
+        "label": "measurement-overlay-started",
+        "enabled": true,
+        "clickable": true
+      }
+    }
+  ],
+  "saved_report_text": "STERNFENSTER 0.4.1 · BILDRATENMESSUNG\n21.11.26 12:53:59\nFreies Live-Fenster\nGoogle sdk_gphone64_x86_64 · Android 15\n\nDauer: 20,66 s nach 2 s Aufwärmen\nZeichenaufrufe: 141\nØ Render-FPS: 6,82\nDisplay: 60,0–60,0 Hz\nZeichenaufrufe ohne Display-Hz: 0\n\nBildabstände: 140\n95 % höchstens: 468,52 ms\nGrößter Abstand: 1125,44 ms\nAbstände über 20 ms: 136 (97,1 %)\nDauer des Zeichenaufrufs, 95 % höchstens: 17,23 ms\n\nKartenfläche: 713–713 × 681–681 px\nHardware-Canvas: ja\nHandy folgen: an\nMessung abgeschlossen\n\nGemessen werden die Zeichenaufrufe und ihre Zeitabstände. Die Dauer des Zeichenaufrufs enthält keine anschließende GPU- oder Bildschirmausgabe; Wartezeiten innerhalb des Aufrufs können enthalten sein. Bei 60 FPS beträgt der regelmäßige Bildabstand 16,67 ms, bei 120 FPS 8,33 ms. Die Grenze von 20 ms ist ein Diagnosewert. Ein Mittelwert ab 60 beweist keine durchgehenden 60 FPS. Tatsächlich am Bildschirm präsentierte Bilder werden hier nicht gezählt."
+}

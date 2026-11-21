@@ -1,0 +1,23 @@
+STERNFENSTER 0.4.1 · BILDRATENMESSUNG
+21.11.26 12:53:59
+Freies Live-Fenster
+Google sdk_gphone64_x86_64 · Android 15
+
+Dauer: 20,66 s nach 2 s Aufwärmen
+Zeichenaufrufe: 141
+Ø Render-FPS: 6,82
+Display: 60,0–60,0 Hz
+Zeichenaufrufe ohne Display-Hz: 0
+
+Bildabstände: 140
+95 % höchstens: 468,52 ms
+Größter Abstand: 1125,44 ms
+Abstände über 20 ms: 136 (97,1 %)
+Dauer des Zeichenaufrufs, 95 % höchstens: 17,23 ms
+
+Kartenfläche: 713–713 × 681–681 px
+Hardware-Canvas: ja
+Handy folgen: an
+Messung abgeschlossen
+
+Gemessen werden die Zeichenaufrufe und ihre Zeitabstände. Die Dauer des Zeichenaufrufs enthält keine anschließende GPU- oder Bildschirmausgabe; Wartezeiten innerhalb des Aufrufs können enthalten sein. Bei 60 FPS beträgt der regelmäßige Bildabstand 16,67 ms, bei 120 FPS 8,33 ms. Die Grenze von 20 ms ist ein Diagnosewert. Ein Mittelwert ab 60 beweist keine durchgehenden 60 FPS. Tatsächlich am Bildschirm präsentierte Bilder werden hier nicht gezählt.
