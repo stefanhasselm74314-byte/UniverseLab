@@ -29,11 +29,14 @@ jobs:
         run: sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools"
       - name: Build candidate without release signing credentials
         run: python3 sky-widget/tools/build_local.py --sdk "$ANDROID_HOME" --output "$RUNNER_TEMP/candidate.apk"
+      - name: Build separate no-idle accessibility test probe
+        run: python3 sky-widget/tools/build_ui_probe.py --sdk "$ANDROID_HOME" --output "$RUNNER_TEMP/ui-probe-UNSIGNED.apk"
       - name: Sign candidate with disposable CI key
         run: |
           keytool -genkeypair -keystore "$RUNNER_TEMP/live-render-test.p12" -storetype PKCS12 -storepass android -keypass android -alias runtime -keyalg RSA -keysize 2048 -validity 1 -dname "CN=Disposable Live Rendering Test"
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" sign --ks "$RUNNER_TEMP/live-render-test.p12" --ks-key-alias runtime --ks-pass pass:android --key-pass pass:android --out "$RUNNER_TEMP/candidate-signed.apk" "$RUNNER_TEMP/candidate-UNSIGNED.apk"
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose "$RUNNER_TEMP/candidate-signed.apk"
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" sign --ks "$RUNNER_TEMP/live-render-test.p12" --ks-key-alias runtime --ks-pass pass:android --key-pass pass:android --out "$RUNNER_TEMP/ui-probe-signed.apk" "$RUNNER_TEMP/ui-probe-UNSIGNED.apk"
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -50,7 +53,9 @@ jobs:
           disable-spellchecker: true
           emulator-boot-timeout: 600
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back none
-          script: python3 sky-widget/tools/runtime_live60.py --candidate "$RUNNER_TEMP/candidate-signed.apk" --output-dir "$GITHUB_WORKSPACE/live60-results"
+          script: |
+            adb install -r -t "$RUNNER_TEMP/ui-probe-signed.apk"
+            STERNFENSTER_UI_PROBE=1 python3 sky-widget/tools/runtime_live60.py --candidate "$RUNNER_TEMP/candidate-signed.apk" --output-dir "$GITHUB_WORKSPACE/live60-results"
       - name: Upload functional and performance evidence
         if: always()
         uses: actions/upload-artifact@v4

@@ -15,9 +15,11 @@ Only a disposable emulator should be used: this clears the app's test data.
 """
 
 import argparse
+import base64
 import contextlib
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -130,12 +132,25 @@ class RuntimeSmoke:
                          lambda: self.resumed_component() in (component, full))
 
     def dump_ui(self):
-        remote = "/sdcard/sternfenster-runtime.xml"
-        self.adb("shell", "rm", "-f", remote)
-        # On the live screen text changes once/second. Retrying a bounded dump
-        # tolerates the platform tool occasionally timing out waiting for idle.
-        self.adb("shell", "uiautomator", "dump", "--compressed", remote, timeout=18)
-        raw = self.adb("exec-out", "cat", remote)
+        if os.environ.get("STERNFENSTER_UI_PROBE") == "1":
+            # The independent CI test APK snapshots actual accessibility nodes
+            # without waitForIdle, so continuous rendering does not block input.
+            result = self.adb("shell", "am", "instrument", "-w", "-e", "snapshot", "true",
+                              "de.universelab.sternfenster.probe/.SnapshotInstrumentation", timeout=20)
+            encoded = re.search(r"(?m)^INSTRUMENTATION_RESULT: snapshot_xml_base64=([A-Za-z0-9+/=]+)\s*$", result)
+            if not encoded or not re.search(r"(?m)^INSTRUMENTATION_CODE:\s*-1\s*$", result):
+                (self.out / "ui-probe-failure.txt").write_text(result, encoding="utf-8")
+                raise TestFailure("No successful no-idle UI snapshot; see ui-probe-failure.txt")
+            try:
+                raw = base64.b64decode(encoded.group(1), validate=True).decode("utf-8")
+            except (ValueError, UnicodeError) as exc:
+                raise TestFailure(f"Invalid no-idle UI snapshot encoding: {exc}") from exc
+        else:
+            remote = "/sdcard/sternfenster-runtime.xml"
+            self.adb("shell", "rm", "-f", remote)
+            # Legacy fallback for runs without the separate CI instrumentation APK.
+            self.adb("shell", "uiautomator", "dump", "--compressed", remote, timeout=18)
+            raw = self.adb("exec-out", "cat", remote)
         root = ET.fromstring(raw[raw.index("<?xml"):]) if "<?xml" in raw else ET.fromstring(raw)
         self.last_xml = raw
         if self.recover_pixel_launcher_anr(root):
