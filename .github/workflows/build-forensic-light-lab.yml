@@ -1,0 +1,29 @@
+name: Build Forensic Light Lab APK
+on:
+  push:
+    branches:
+      - 'app/forensic-lightlab-395-v01'
+  workflow_dispatch:
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+      - name: Build debug APK
+        run: gradle -p apps/forensiclightlab395 :app:assembleDebug --no-daemon --stacktrace
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ForensicLightLab_395_v0.1.0_APK
+          path: apps/forensiclightlab395/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
