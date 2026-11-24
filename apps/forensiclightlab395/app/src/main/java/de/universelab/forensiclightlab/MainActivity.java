@@ -130,7 +130,7 @@ public final class MainActivity extends Activity {
                 if(!dataUrl.startsWith("data:image/png;base64,")) throw new SecurityException("Only PNG accepted");
                 byte[] bytes = Base64.getDecoder().decode(dataUrl.substring("data:image/png;base64,".length()));
                 if(bytes.length>32_000_000) throw new SecurityException("Image exceeds 32 MB");
-                String safe=filename.replaceAll("[^a-zA-Z0-9_\-.]","_");
+                String safe=filename.replaceAll("[^a-zA-Z0-9_.-]","_");
                 if(!safe.toLowerCase(java.util.Locale.ROOT).endsWith(".png"))safe+=".png";
                 ContentValues values=new ContentValues();
                 values.put(MediaStore.Images.Media.DISPLAY_NAME,safe);
